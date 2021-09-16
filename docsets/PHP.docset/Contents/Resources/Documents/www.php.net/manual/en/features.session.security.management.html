@@ -1,0 +1,671 @@
+<html><!-- Mirrored from www.php.net/manual/en/features.session.security.management.php by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 11 Sep 2021 06:55:33 GMT --><!-- Added by HTTrack --><head><meta http-equiv="content-type" content="text/html;charset=utf-8"><!-- /Added by HTTrack -->
+
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Session Management Basics</title>
+
+ <link rel="shortcut icon" href="../../favicon.ico">
+ <link rel="search" type="application/opensearchdescription+xml" href="http://php.net/phpnetimprovedsearch.src" title="Add PHP.net search">
+ <link rel="alternate" type="application/atom+xml" href="https://www.php.net/releases/feed.php" title="PHP Release feed">
+ <link rel="alternate" type="application/atom+xml" href="https://www.php.net/feed.atom" title="PHP: Hypertext Preprocessor">
+
+ <link rel="canonical" href="features.session.security.management.html">
+ <link rel="shorturl" href="https://www.php.net/session.security.management">
+ <link rel="alternate" href="https://www.php.net/session.security.management" hreflang="x-default">
+
+ <link rel="contents" href="index-2.html">
+ <link rel="index" href="session.security.html">
+ <link rel="prev" href="session.security.html">
+ <link rel="next" href="session.security.ini.html">
+
+ <link rel="alternate" href="features.session.security.management.html" hreflang="en">
+ <link rel="alternate" href="https://www.php.net/manual/pt_BR/features.session.security.management.php" hreflang="pt_BR">
+ <link rel="alternate" href="https://www.php.net/manual/zh/features.session.security.management.php" hreflang="zh">
+ <link rel="alternate" href="https://www.php.net/manual/fr/features.session.security.management.php" hreflang="fr">
+ <link rel="alternate" href="https://www.php.net/manual/de/features.session.security.management.php" hreflang="de">
+ <link rel="alternate" href="https://www.php.net/manual/ja/features.session.security.management.php" hreflang="ja">
+ <link rel="alternate" href="https://www.php.net/manual/ro/features.session.security.management.php" hreflang="ro">
+ <link rel="alternate" href="https://www.php.net/manual/ru/features.session.security.management.php" hreflang="ru">
+ <link rel="alternate" href="https://www.php.net/manual/es/features.session.security.management.php" hreflang="es">
+ <link rel="alternate" href="https://www.php.net/manual/tr/features.session.security.management.php" hreflang="tr">
+
+<link rel="stylesheet" type="text/css" href="../../cached0aba.css?t=1539771603&amp;f=/fonts/Fira/fira.css" media="screen">
+<link rel="stylesheet" type="text/css" href="../../cached2ecf.css?t=1539765004&amp;f=/fonts/Font-Awesome/css/fontello.css" media="screen">
+<link rel="stylesheet" type="text/css" href="../../cachedba57.css?t=1606338002&amp;f=/styles/theme-base.css" media="screen">
+<link rel="stylesheet" type="text/css" href="../../cached3afa.css?t=1627831203&amp;f=/styles/theme-medium.css" media="screen">
+
+ <!--[if lte IE 7]>
+ <link rel="stylesheet" type="text/css" href="https://www.php.net/styles/workarounds.ie7.css" media="screen">
+ <![endif]-->
+
+ <!--[if lte IE 8]>
+ <script>
+  window.brokenIE = true;
+ </script>
+ <![endif]-->
+
+ <!--[if lte IE 9]>
+ <link rel="stylesheet" type="text/css" href="https://www.php.net/styles/workarounds.ie9.css" media="screen">
+ <![endif]-->
+
+ <!--[if IE]>
+ <script src="https://www.php.net/js/ext/html5.js"></script>
+ <![endif]-->
+
+ <base>
+
+
+</head>
+<body class="docs " style="">
+
+
+<div class="headsup"><a href="https://www.php.net/conferences/index.php#id2021-09-08-1">Longhorn PHP 2021</a></div>
+<nav id="trick"><div><dl>
+<dt><a href="getting-started.html">Getting Started</a></dt>
+	<dd><a href="introduction.html">Introduction</a></dd>
+	<dd><a href="tutorial.html">A simple tutorial</a></dd>
+<dt><a href="langref.html">Language Reference</a></dt>
+	<dd><a href="language.basic-syntax.html">Basic syntax</a></dd>
+	<dd><a href="language.types.html">Types</a></dd>
+	<dd><a href="language.variables.html">Variables</a></dd>
+	<dd><a href="language.constants.html">Constants</a></dd>
+	<dd><a href="language.expressions.html">Expressions</a></dd>
+	<dd><a href="language.operators.html">Operators</a></dd>
+	<dd><a href="language.control-structures.html">Control Structures</a></dd>
+	<dd><a href="language.functions.html">Functions</a></dd>
+	<dd><a href="language.oop5.html">Classes and Objects</a></dd>
+	<dd><a href="language.namespaces.html">Namespaces</a></dd>
+	<dd><a href="language.errors.html">Errors</a></dd>
+	<dd><a href="language.exceptions.html">Exceptions</a></dd>
+	<dd><a href="language.generators.html">Generators</a></dd>
+	<dd><a href="language.attributes.html">Attributes</a></dd>
+	<dd><a href="language.references.html">References Explained</a></dd>
+	<dd><a href="reserved.variables.html">Predefined Variables</a></dd>
+	<dd><a href="reserved.exceptions.html">Predefined Exceptions</a></dd>
+	<dd><a href="reserved.interfaces.html">Predefined Interfaces and Classes</a></dd>
+	<dd><a href="context.html">Context options and parameters</a></dd>
+	<dd><a href="wrappers.html">Supported Protocols and Wrappers</a></dd>
+</dl>
+<dl>
+<dt><a href="security.html">Security</a></dt>
+	<dd><a href="security.intro.html">Introduction</a></dd>
+	<dd><a href="security.general.html">General considerations</a></dd>
+	<dd><a href="security.cgi-bin.html">Installed as CGI binary</a></dd>
+	<dd><a href="security.apache.html">Installed as an Apache module</a></dd>
+	<dd><a href="security.sessions.html">Session Security</a></dd>
+	<dd><a href="security.filesystem.html">Filesystem Security</a></dd>
+	<dd><a href="security.database.html">Database Security</a></dd>
+	<dd><a href="security.errors.html">Error Reporting</a></dd>
+	<dd><a href="security.variables.html">User Submitted Data</a></dd>
+	<dd><a href="security.hiding.html">Hiding PHP</a></dd>
+	<dd><a href="security.current.html">Keeping Current</a></dd>
+<dt><a href="features.html">Features</a></dt>
+	<dd><a href="features.http-auth.html">HTTP authentication with PHP</a></dd>
+	<dd><a href="features.cookies.html">Cookies</a></dd>
+	<dd><a href="features.sessions.html">Sessions</a></dd>
+	<dd><a href="features.xforms.html">Dealing with XForms</a></dd>
+	<dd><a href="features.file-upload.html">Handling file uploads</a></dd>
+	<dd><a href="features.remote-files.html">Using remote files</a></dd>
+	<dd><a href="features.connection-handling.html">Connection handling</a></dd>
+	<dd><a href="features.persistent-connections.html">Persistent Database Connections</a></dd>
+	<dd><a href="features.commandline.html">Command line usage</a></dd>
+	<dd><a href="features.gc.html">Garbage Collection</a></dd>
+	<dd><a href="features.dtrace.html">DTrace Dynamic Tracing</a></dd>
+</dl>
+<dl>
+<dt><a href="funcref.html">Function Reference</a></dt>
+	<dd><a href="refs.basic.php.html">Affecting PHP's Behaviour</a></dd>
+	<dd><a href="refs.utilspec.audio.html">Audio Formats Manipulation</a></dd>
+	<dd><a href="refs.remote.auth.html">Authentication Services</a></dd>
+	<dd><a href="refs.utilspec.cmdline.html">Command Line Specific Extensions</a></dd>
+	<dd><a href="refs.compression.html">Compression and Archive Extensions</a></dd>
+	<dd><a href="refs.crypto.html">Cryptography Extensions</a></dd>
+	<dd><a href="refs.database.html">Database Extensions</a></dd>
+	<dd><a href="refs.calendar.html">Date and Time Related Extensions</a></dd>
+	<dd><a href="refs.fileprocess.file.html">File System Related Extensions</a></dd>
+	<dd><a href="refs.international.html">Human Language and Character Encoding Support</a></dd>
+	<dd><a href="refs.utilspec.image.html">Image Processing and Generation</a></dd>
+	<dd><a href="refs.remote.mail.html">Mail Related Extensions</a></dd>
+	<dd><a href="refs.math.html">Mathematical Extensions</a></dd>
+	<dd><a href="refs.utilspec.nontext.html">Non-Text MIME Output</a></dd>
+	<dd><a href="refs.fileprocess.process.html">Process Control Extensions</a></dd>
+	<dd><a href="refs.basic.other.html">Other Basic Extensions</a></dd>
+	<dd><a href="refs.remote.other.html">Other Services</a></dd>
+	<dd><a href="refs.search.html">Search Engine Extensions</a></dd>
+	<dd><a href="refs.utilspec.server.html">Server Specific Extensions</a></dd>
+	<dd><a href="refs.basic.session.html">Session Extensions</a></dd>
+	<dd><a href="refs.basic.text.html">Text Processing</a></dd>
+	<dd><a href="refs.basic.vartype.html">Variable and Type Related Extensions</a></dd>
+	<dd><a href="refs.webservice.html">Web Services</a></dd>
+	<dd><a href="refs.utilspec.windows.html">Windows Only Extensions</a></dd>
+	<dd><a href="refs.xml.html">XML Manipulation</a></dd>
+	<dd><a href="refs.ui.html">GUI Extensions</a></dd>
+</dl>
+<dl>
+<dt>Keyboard Shortcuts</dt><dt>?</dt>
+<dd>This help</dd>
+<dt>j</dt>
+<dd>Next menu item</dd>
+<dt>k</dt>
+<dd>Previous menu item</dd>
+<dt>g p</dt>
+<dd>Previous man page</dd>
+<dt>g n</dt>
+<dd>Next man page</dd>
+<dt>G</dt>
+<dd>Scroll to bottom</dd>
+<dt>g g</dt>
+<dd>Scroll to top</dd>
+<dt>g h</dt>
+<dd>Goto homepage</dd>
+<dt>g s</dt>
+<dd>Goto search<br>(current page)</dd>
+<dt>/</dt>
+<dd>Focus search box</dd>
+</dl></div></nav>
+<div id="goto">
+    <div class="search">
+         <div class="text"></div>
+         <div class="results"><ul></ul></div>
+   </div>
+</div>
+
+  <div id="breadcrumbs" class="row-fluid">
+    <div id="breadcrumbs-inner">
+          
+              
+          <ul>
+            <li><a href="index-2.html">PHP Manual</a></li>      <li><a href="funcref.html">Function Reference</a></li>      <li><a href="refs.basic.session.html">Session Extensions</a></li>      <li><a href="book.session.html">Sessions</a></li>      <li><a href="session.security.html">Sessions and Security</a></li>      </ul>
+    </div>
+  </div>
+
+
+
+
+<div id="layout" class="clearfix">
+  <section id="layout-content">
+  <div id="features.session.security.management" class="sect1">
+   <h2 class="title">Session Management Basics</h2>
+
+   <div class="sect2" id="features.session.security.management.basic">
+    <h3 class="title">Session Security</h3>
+
+    <p class="para">
+     The session module can not guarantee that the information stored
+     in a session is only viewed by the user who created the session.
+     Additional measures are needed to protect the confidentiality
+     of the session, depending on the value associated with it.
+    </p>
+
+    <p class="para">
+     The importance of the data carried in the session needs to be
+     assessed and further protection may be deployed; this typically
+     comes at a price, such as reduced convenience for the user.
+     For example, to protect users from a simple social engineering
+     tactic, <code class="literal">session.use_only_cookies</code>
+     needs to be enabled. In that case, cookies must be enabled
+     unconditionally on the client side, or sessions will not work.
+    </p>
+
+    <p class="para">
+     There are several ways to leak an existing session ID to third
+     parties. E.g. JavaScript injections, session IDs in URLs,
+     packet sniffing, physical access to the device, etc.
+     A leaked session ID enables the third party to access all
+     resources associated with a specific ID. First, URLs carrying
+     session IDs. If there are links to an external site or resource,
+     the URL including the session ID might be stored in the external
+     site's referrer logs. Second, a more active attacker might listen
+     to network traffic. If it is unencrypted, session IDs will flow
+     in plain text over the network. The solution is to implement
+     SSL/TLS on the server and make it mandatory for users.
+     HSTS should be used for improved security.
+   </p>
+
+   <blockquote class="note"><p><strong class="note">Note</strong>: 
+    <span class="simpara">
+     Even HTTPS can not protect confidential data at all times.
+     For example the CRIME and Beast vulnerabilities may enable an
+     attacker to read the data. Also, note that many networks employ
+     HTTPS MITM proxies for audit purposes.
+     Attackers may also set up such a proxy.
+    </span>
+   </p></blockquote>
+
+  </div>
+
+  <div class="sect2" id="features.session.security.management.non-adaptive-session">
+   <h3 class="title">Nonadaptive Session Management</h3>
+
+   <p class="para">
+    PHP's session manager is adaptive by default currently.
+    An adaptive session manager bears additional risks.
+   </p>
+
+   <p class="para">
+    When <a href="session.configuration.html#ini.session.use-strict-mode" class="link">session.use_strict_mode</a> is enabled, 
+    and the session save handler supports it,
+    an uninitialized session ID is rejected and a new one is created.
+    This prevents an attack that forces users to use a known session ID.
+    An attacker may paste links or send emails that contains the session ID.
+    E.g. <code class="literal">http://example.com/page.php?PHPSESSID=123456789</code> if
+    <a href="session.configuration.html#ini.session.use-trans-sid" class="link">session.use_trans_sid</a>
+    is enabled, the victim will start a session using the session ID provided
+    by the attacker.
+    <a href="session.configuration.html#ini.session.use-strict-mode" class="link">session.use_strict_mode</a>
+    mitigate this risk.
+   </p>
+
+   <div class="warning"><strong class="warning">Warning</strong>
+    <p class="simpara">
+     User defined save handlers can also support strict session mode by
+     implementing session ID validation. All user defined save handlers
+     should implement session ID validation.
+    </p>
+   </div>
+
+   <p class="para">
+    The session ID cookie may be set with the domain, path, httponly,
+    secure and, as of PHP 7.3, SameSite attributes.
+    
+    There is precedence defined by browsers.
+    By using the precedence, an attacker can set session ID that
+    could be used permanently. Use of
+    <a href="session.configuration.html#ini.session.use-only-cookies" class="link">session.use_only_cookies</a>
+    will not solve this issue.
+    <a href="session.configuration.html#ini.session.use-strict-mode" class="link">session.use_strict_mode</a>
+    mitigates this risk. With
+    <a href="session.configuration.html#ini.session.use-strict-mode" class="link">session.use_strict_mode</a>=On,
+    the uninitialized session ID will be refused.
+   </p>
+
+   <blockquote class="note"><p><strong class="note">Note</strong>: 
+    <span class="simpara">
+     Even though
+     <a href="session.configuration.html#ini.session.use-strict-mode" class="link">session.use_strict_mode</a>
+     mitigates the risk of adaptive session management, an attacker can force
+     users to use an initialized session ID which has been created by an attacker.
+     E.g. JavaScript injection.
+     This attack can be mitigated by this manual's recommendations.
+    </span>
+
+    <span class="simpara">
+     By following this manual, developers should enable,
+     <a href="session.configuration.html#ini.session.use-strict-mode" class="link">session.use_strict_mode</a>,
+     use timestamp based session management, and regenerate session IDs using
+     <span class="function"><a href="function.session-regenerate-id.html" class="function">session_regenerate_id()</a></span> with recommended procedures.
+     If developers follow all of the above, an attacker generated session ID
+     will eventually be deleted.
+    </span>
+
+    <span class="simpara">
+     When an access to an obsolete session occurs, developers should save all
+     active session data of the user. As this information will be relevant
+     for an ensuing investigation. The user should be forcefully logged out
+     of all sessions, i.e. require them to reauthenticate.
+     This prevents attackers from abusing stolen sessions.
+    </span>
+   </p></blockquote>
+
+   <div class="warning"><strong class="warning">Warning</strong>
+    <p class="simpara">
+     Access to an obsolete session does not necessarily suggest an attack.
+     An unstable network and/or immediate deletion of the active session
+     will result in legitimate users using obsolete sessions.
+    </p>
+   </div>
+
+   <p class="para">
+    As of PHP 7.1.0, <span class="function"><a href="function.session-create-id.html" class="function">session_create_id()</a></span> has been added.
+    This function may be operated to access all active sessions of a user
+    efficiently by prefixing the session IDs with the user ID. Enabling
+    <a href="session.configuration.html#ini.session.use-strict-mode" class="link">session.use_strict_mode</a>
+    is vital with this setup. Otherwise, malicious users can set
+    malicious session ID for other users.
+   </p>
+
+   <blockquote class="note"><p><strong class="note">Note</strong>: 
+    <span class="simpara">
+     Users prior to PHP 7.1.0 SHOULD use CSPRNG, e.g. /dev/urandom, or
+     <span class="function"><a href="function.random-bytes.html" class="function">random_bytes()</a></span> and hash functions to generate
+     a new session ID. <span class="function"><a href="function.session-create-id.html" class="function">session_create_id()</a></span> has
+     collision detection and generates a session ID according to the
+     session's INI settings.
+     Use of <span class="function"><a href="function.session-create-id.html" class="function">session_create_id()</a></span> is preferred.
+    </span>
+   </p></blockquote>
+
+  </div>
+
+  <div class="sect2" id="features.session.security.management.session-id-regeneration">
+   <h3 class="title">Session ID Regeneration</h3>
+
+   <p class="para">
+    <a href="session.configuration.html#ini.session.use-strict-mode" class="link">session.use_strict_mode</a>
+    is a good mitigation, however not sufficient. Developers must equally use
+    <span class="function"><a href="function.session-regenerate-id.html" class="function">session_regenerate_id()</a></span> for session security.
+   </p>
+
+   <p class="para">
+    Session ID regeneration reduces the risk of stolen session IDs, thus
+    <span class="function"><a href="function.session-regenerate-id.html" class="function">session_regenerate_id()</a></span> must be called periodically.
+    E.g. Regenerate the session ID every 15 minutes for security sensitive content.
+    Even in the case that a session ID is stolen, both the legitimate
+    user's and the attacker's session will expire.
+    In other words access by the user or the attacker will
+    generate an obsolete session access error.
+   </p>
+
+   <p class="para">
+    Session IDs <em class="emphasis">must</em> be regenerated when user privileges
+    are elevated, such as after authenticating.
+    <span class="function"><a href="function.session-regenerate-id.html" class="function">session_regenerate_id()</a></span> must be called prior to
+    setting the authentication information to $_SESSION. 
+    (<span class="function"><a href="function.session-regenerate-id.html" class="function">session_regenerate_id()</a></span> saves the current session data
+    automatically in order to save timestamp/etc. to the current session.)
+    Ensure only the new session contains the authenticated flag.
+   </p>
+
+   <p class="para">
+    Developers <em class="emphasis">must not</em> rely on session ID expiration by
+    <a href="session.configuration.html#ini.session.gc-maxlifetime" class="link">session.gc_maxlifetime</a>.
+    Attackers may access a victim's session ID periodically to prevent its
+    expiration and keep exploiting it, including an authenticated session.
+   </p>
+
+   <p class="para">
+     Instead, developers must implement timestamp based session data management.
+   </p>
+
+   <div class="warning"><strong class="warning">Warning</strong>
+    <p class="simpara">
+     Although the session manager can manage timestamps transparently,
+     this feature is not implemented. Old session data must be kept until GC.
+     Simultaneously, developers must assure themselves obsolete session data
+     is removed. However, developers must not remove active session data immediately.
+     I.e. <code class="literal">session_regenerate_id(true);</code> and
+     <span class="function"><a href="function.session-destroy.html" class="function">session_destroy()</a></span> must never be called together for an active session.
+     This may sound contradictory, but this is a mandatory requirement.
+    </p>
+   </div>
+
+   <p class="para">
+    <span class="function"><a href="function.session-regenerate-id.html" class="function">session_regenerate_id()</a></span> does <em class="emphasis">not</em>
+    delete outdated sessions by default.
+    Obsolete authenticated sessions may be present for use.
+    Developers must prevent outdated sessions to be consumed by anyone.
+    They must prohibit access to obsolete session data by themselves using timestamps.
+   </p>
+
+   <div class="warning"><strong class="warning">Warning</strong>
+    <p class="simpara">
+     The sudden removal of an active session produces undesirable side effects.
+     Sessions can vanish when there are concurrent connections to the web
+     application and/or the network is unstable.
+    </p>
+    <p class="simpara">
+     Potential malicious access is undetectable with the sudden removal of active sessions.
+    </p>
+    <p class="simpara">
+     Instead of deleting outdated sessions immediately, developers must set a
+     short-term expiration time (timestamp) in $_SESSION,
+     and prohibit access to the session data by themselves.
+    </p>
+    <p class="simpara">
+     Developers must not prohibit access to old session data immediately after
+     <span class="function"><a href="function.session-regenerate-id.html" class="function">session_regenerate_id()</a></span>. It must be prohibited at a
+     later stage. E.g. a few seconds later for stable networks, like a wired network,
+     and a few minutes later for unstable networks such as cell phones or Wi-Fi.
+    </p>
+    <p class="simpara">
+     If a user accesses an obsolete session (expired session), access to it should be denied.
+     It is also recommended to remove the authenticated status from all of the user's
+     sessions to as it is likely to represent an attack.
+    </p>
+   </div>
+
+   <p class="para">
+    Proper use of <a href="session.configuration.html#ini.session.use-only-cookies" class="link">session.use_only_cookies</a>
+    and <span class="function"><a href="function.session-regenerate-id.html" class="function">session_regenerate_id()</a></span> can cause personal DoS with
+    undeletable cookies set by attackers. In this case, developers may invite users
+    to remove cookies and advise them they may be affected by a security issue.
+    Attackers may set malicious cookies via a vulnerable web application,
+    an exposed/vicious browser plugin, a physically compromised device, etc.
+   </p>
+
+   <div class="warning"><strong class="warning">Warning</strong>
+    <p class="simpara">
+     Do not misunderstand the DoS risk. <code class="literal">use_strict_mode=On</code>
+     is mandatory for general session ID security! All sites are advised
+     to enable <code class="literal">use_strict_mode</code>.
+    </p>
+    <p class="simpara">
+     DoS can only happen when the account is under attack. A JavaScript injection
+     vulnerability in an application represents the most common cause.
+    </p>
+   </div>
+
+  </div>
+
+  <div class="sect2" id="features.session.security.management.session-data-deletion">
+   <h3 class="title">Session Data Deletion</h3>
+
+   <p class="para">
+    Obsolete session data must be inaccessible and deleted.
+    The current session module does not handle this well.
+   </p>
+
+   <p class="para">
+    Obsolete session data should be removed as soon as possible.
+    However, active sessions must not be removed instantly.
+    To satisfy those requirements, developers must implement timestamp
+    based session data management by themselves.
+   </p>
+
+   <p class="para">
+    Set and manage expiration timestamp in $_SESSION.
+    Prohibit access to outdated session data.
+    When access to obsolete session data is detected, it is advised to remove all 
+    authenticated status from the user's sessions and force them to re-authenticate.
+    Access to obsolete session data can represent an attack.
+    To achieve this, developers must keep track of all active sessions of every user.
+   </p>
+
+   <blockquote class="note"><p><strong class="note">Note</strong>: 
+    <span class="simpara">
+     Access to an obsolete session can also happen because of an unstable network
+     and/or concurrent access to the web site.
+     E.g the server tried to set a new session ID via a cookie, but the Set-Cookie
+     packet may not have reached the client due to loss of connection.
+     One connection may issue a new session ID by <span class="function"><a href="function.session-regenerate-id.html" class="function">session_regenerate_id()</a></span>,
+     but another concurrent connection may not have received the new session ID yet.
+     Therefore, developers must prohibit access to obsolete session at a later stage.
+     I.e. timestamp based session management is mandatory.
+    </span>
+   </p></blockquote>
+
+   <p class="para">
+    In summary, session data must not be destroyed with
+    <span class="function"><a href="function.session-regenerate-id.html" class="function">session_regenerate_id()</a></span> nor <span class="function"><a href="function.session-destroy.html" class="function">session_destroy()</a></span>,
+    but timestamps must be used to control access to session data.
+    Let <span class="function"><a href="function.session-gc.html" class="function">session_gc()</a></span> remove obsolete data from the session data storage.
+   </p>
+
+  </div>
+
+  <div class="sect2" id="features.session.security.management.session-locking">
+   <h3 class="title">Session and Locking</h3>
+
+   <p class="para">
+    Session data is locked to avoid race conditions by default.
+    Locking is mandatory to keep session data consistent across requests.
+   </p>
+
+   <p class="para">
+    However, session-locking can be abused by attackers to perform DoS attacks.
+    To mitigate the risk of a DoS attack by session-locking, minimize locks.
+    Use read only sessions when session data does not need to be updated.
+    Use the 'read_and_close' option with <span class="function"><a href="function.session-start.html" class="function">session_start()</a></span>.
+    <code class="literal">session_start(['read_and_close'=&gt;1]);</code>
+    Close the session as soon as possible after updating $_SESSION by
+    using <span class="function"><a href="function.session-commit.html" class="function">session_commit()</a></span>.
+   </p>
+
+   <p class="para">
+    The current session module does <em class="emphasis">not</em>
+    detect any modification of $_SESSION when the session is inactive.
+    It is the developer's responsibility not to modify $_SESSION when
+    the session is inactive.
+   </p>
+
+  </div>
+
+  <div class="sect2" id="features.session.security.management.active-sessions">
+   <h3 class="title">Active Sessions</h3>
+
+   <p class="para">
+    Developers should keep track of all active sessions for every user.
+    And notify them of how many active sessions, from which IP (and area),
+    how long it has been active, etc.
+    PHP does not keep track of these. Developers are supposed to do so.
+   </p>
+
+   <p class="para">
+    Various ways to implement this exist.
+    One possible implementation is setting up a database that keeps track
+    of the required data and stores any relevant information.
+    Since session data is GCed, developers must take care of the GCed data
+    to maintain the active session database consistency.
+   </p>
+
+   <p class="para">
+    One of the simplest implementations is "User ID prefixed session ID"
+    and store the required information in $_SESSION.
+    Many databases posses good performance for selecting string prefix.
+    Developers MAY use <span class="function"><a href="function.session-regenerate-id.html" class="function">session_regenerate_id()</a></span> and
+    <span class="function"><a href="function.session-create-id.html" class="function">session_create_id()</a></span> for this.
+   </p>
+
+   <div class="warning"><strong class="warning">Warning</strong>
+    <p class="simpara">
+     Never employ confidential data as a prefix.
+     If the user ID is confidential, consider using
+     <span class="function"><a href="function.hash-hmac.html" class="function">hash_hmac()</a></span>.
+    </p>
+   </div>
+
+   <div class="warning"><strong class="warning">Warning</strong>
+    <p class="simpara">
+     Enabling <a href="session.configuration.html#ini.session.use-strict-mode" class="link">session.use_strict_mode</a>
+     is mandatory for this setup. Ensure it is enabled.
+     Otherwise the active session database can be compromised.
+    </p>
+   </div>
+
+   <p class="para">
+    Timestamp based session management is mandatory to detect access to obsolete sessions.
+    When access to an obsolete session is detected, authentication flags should
+    be removed from all active sessions of the user.
+    This prevents attackers to keep exploiting stolen sessions.
+   </p>
+
+  </div>
+
+  <div class="sect2" id="features.session.security.management.session-and-autologin">
+   <h3 class="title">Session and Auto-login</h3>
+
+   <p class="para">
+    Developers must not use long life session IDs for auto-login because it
+    increases the risk of stolen sessions.
+    An auto-login feature should be implemented by the developer.
+   </p>
+
+   <p class="para">
+    Use a secure one time hash key as an auto-login key using
+    <span class="function"><a href="function.setcookie.html" class="function">setcookie()</a></span>. Use a secure hash stronger than SHA-2.
+    E.g. SHA-256 or greater with random data from <span class="function"><a href="function.random-bytes.html" class="function">random_bytes()</a></span>
+    or /dev/urandom.
+   </p>
+
+   <p class="para">
+    If the user is unauthenticated, check whether the one-time auto-login key is valid or not.
+    In the case it is valid, authenticate the user and set a new secure one-time hash key.
+    An auto-login key must only be used once, i.e. never reuse an auto-login key,
+    always generate a new one.
+   </p>
+
+   <p class="para">
+    An auto-login key is a long life authentication key,
+    it should be protected as much as possible.
+    Use path/httponly/secure/SameSite cookie attributes to secure it.
+    I.e. never transmit the auto-login key unless required.
+   </p>
+
+   <p class="para">
+    Developer must implement the features that disables
+    auto-login and removes unneeded auto-login key cookie.
+   </p>
+
+  </div>
+
+  <div class="sect2" id="features.session.security.management.csrf">
+   <h3 class="title">CSRF (Cross-Site Request Forgeries) attacks</h3>
+
+   <p class="para">
+    Sessions and authentication do not protect against CSRF attacks.
+    Developers must implement CSRF protection by themselves.
+   </p>
+
+   <p class="para">
+    <span class="function"><a href="function.output-add-rewrite-var.html" class="function">output_add_rewrite_var()</a></span> can be used for CSRF protection.
+    Refer to the manual page for more details.
+   </p>
+
+   <blockquote class="note"><p><strong class="note">Note</strong>: 
+    <span class="simpara">
+     PHP prior to 7.2.0 uses the same output buffer and INI setting as trans sid.
+     Therefore, use of <span class="function"><a href="function.output-add-rewrite-var.html" class="function">output_add_rewrite_var()</a></span>
+     with PHP prior to version 7.2.0 is not advised.
+    </span>
+   </p></blockquote>
+
+   <p class="para">
+    Most web application frameworks support CSRF protection.
+    Refer to the web application framework manual for more details.
+   </p>
+
+   <p class="para">
+    As of PHP 7.3 the SameSite attribute for the session cookie can be set.
+    This is an additional measure which can mitigate CSRF vulnerabilities.
+   </p>
+  </div>
+ </div>
+<section id="usernotes">
+ <div class="head"><h3 class="title">User Contributed Notes</h3></div>
+ <div class="note">There are no user contributed notes for this page.</div></section>    </section><!-- layout-content -->
+        
+
+
+  </div><!-- layout -->
+
+  
+
+    
+ <!-- External and third party libraries. -->
+ 
+
+
+
+
+
+
+
+<a id="toTop" href="javascript:;"><span id="toTopHover"></span><img width="40" height="40" alt="To Top" src="../../images/to-top%402x.png"></a>
+
+
+
+<!-- Mirrored from www.php.net/manual/en/features.session.security.management.php by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 11 Sep 2021 06:55:33 GMT -->
+
+</body></html>

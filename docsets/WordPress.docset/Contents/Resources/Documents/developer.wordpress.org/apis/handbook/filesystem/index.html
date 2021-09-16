@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+
+<!-- Mirrored from developer.wordpress.org/apis/handbook/filesystem/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 31 Aug 2021 16:22:01 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<!--
+<meta property="fb:page_id" content="6427302910" />
+-->
+<meta name="google-site-verification" content="7VWES_-rcHBcmaQis9mSYamPfNwE03f4vyTj4pfuAw0" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Filesystem</title>
+<meta name="referrer" content="always">
+
+		<link href='../../../../fonts.googleapis.com/css.css?family=Open+Sans:300italic,400italic,600italic,400,300,600&amp;subset=latin,cyrillic-ext,greek-ext,greek,vietnamese,latin-ext,cyrillic' rel='stylesheet' type='text/css'>
+
+		<link rel="stylesheet" href="../../../../s.w.org/style/wp4.css?95" />
+
+<link rel="shortcut icon" href="../../../../s.w.org/favicon.ico?2" type="image/x-icon" />
+<link rel="pingback" href="../../../xmlrpc.php" /><meta name='robots' content='max-image-preview:large' />
+<link rel='dns-prefetch' href='../../../../fonts.googleapis.com/index.html' />
+<link rel='dns-prefetch' href='http://s.w.org/' />
+<link rel='dns-prefetch' href='http://www.googletagmanager.com/' />
+<link rel='dns-prefetch' href='http://fonts.gstatic.com/' />
+<link rel="alternate" type="application/rss+xml" title="WordPress Developer Resources &raquo; Feed" href="../../../feed/index.html" />
+<link rel="alternate" type="application/rss+xml" title="WordPress Developer Resources &raquo; Comments Feed" href="../../../comments/feed/index.html" />
+<meta property="og:title" content="Filesystem | Common APIs Handbook | WordPress Developer Resources" />
+<meta property="og:site_name" content="WordPress Developer Resources" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="../../../index.html" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@WordPress" />
+<meta name="description" content="Overview The Filesystem API, added in WordPress 2.6, was originally created for WordPress&#039; own automatic updates feature. The Filesystem&hellip;" />
+<meta property="og:description" content="Overview The Filesystem API, added in WordPress 2.6, was originally created for WordPress&#039; own automatic updates feature. The Filesystem&hellip;" />
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'../../../../www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P24PF4B');</script>
+			<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/developer.wordpress.org\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.9-alpha-51701"}};
+			!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([10084,65039,8205,55357,56613],[10084,65039,8203,55357,56613])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel='stylesheet' id='dashicons-css'  href='../../../wp-includes/css/dashicons.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='admin-bar-css'  href='../../../wp-includes/css/admin-bar.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-block-library-css'  href='../../../wp-includes/css/dist/block-library/style.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='wporg-handbook-css-css'  href='../../../wp-content/plugins/handbook/stylesheets/callout-boxes.css?ver=20200121' type='text/css' media='all' />
+<link rel='stylesheet' id='open-sans-css'  href='../../../../fonts.googleapis.com/css-2.css?family=Open+Sans%3A300italic%2C400italic%2C600italic%2C300%2C400%2C600&amp;subset=latin%2Clatin-ext&amp;display=fallback&amp;ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='wporg-developer-style-css'  href='../../../wp-content/themes/pub/wporg-developer/style.css?ver=3' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-dev-sass-compiled-css'  href='../../../wp-content/themes/pub/wporg-developer/stylesheets/main.css?ver=20200713' type='text/css' media='all' />
+<link rel='stylesheet' id='awesomplete-css-css'  href='../../../wp-content/themes/pub/wporg-developer/stylesheets/awesomplete.css?ver=20160114' type='text/css' media='all' />
+<link rel='stylesheet' id='autocomplete-css-css'  href='../../../wp-content/themes/pub/wporg-developer/stylesheets/autocomplete.css?ver=20171220' type='text/css' media='all' />
+<link rel='stylesheet' id='syntaxhighlighter-core-css'  href='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shCore.css?ver=3.0.9b' type='text/css' media='all' />
+<link rel='stylesheet' id='syntaxhighlighter-theme-default-css'  href='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shThemeDefault.css?ver=3.0.9b' type='text/css' media='all' />
+<script type='text/javascript' src='../../../wp-includes/js/jquery/jquery.min.js?ver=3.6.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='../../../wp-content/plugins/handbook/scripts/handbook.js?ver=20150930' id='wporg-handbook-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/chapters.js?ver=20190603' id='wporg-developer-chapters-js'></script>
+<script type='text/javascript' src='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shCore.js?ver=3.0.9b' id='syntaxhighlighter-core-js'></script>
+<script type='text/javascript' src='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushPhp.js?ver=3.0.9b' id='syntaxhighlighter-brush-php-js'></script>
+<link rel="https://api.w.org/" href="https://developer.wordpress.org/wp-json/" /><link rel="alternate" type="application/json" href="https://developer.wordpress.org/wp-json/wp/v2/apis-handbook/125642" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="../../../xmlrpc-2.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="../../../wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 5.9-alpha-51701" />
+<link rel='shortlink' href='https://developer.wordpress.org/?p=125642' />
+<link rel="alternate" type="application/json+oembed" href="https://developer.wordpress.org/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fdeveloper.wordpress.org%2Fapis%2Fhandbook%2Ffilesystem%2F" />
+<link rel="alternate" type="text/xml+oembed" href="https://developer.wordpress.org/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fdeveloper.wordpress.org%2Fapis%2Fhandbook%2Ffilesystem%2F&amp;format=xml" />
+<link rel="canonical" href="index.html">
+<!-- Stream WordPress user activity plugin v3.6.2 -->
+	<style>
+		@media screen and (max-width: 782px) {
+			#wpadminbar li#wp-admin-bar-log-in,
+			#wpadminbar li#wp-admin-bar-register {
+				display: block;
+			}
+
+			#wpadminbar li#wp-admin-bar-log-in a,
+			#wpadminbar li#wp-admin-bar-register a {
+				padding: 0 8px;
+			}
+		}
+	</style>
+		<style>
+			a.github-edit {
+				margin-left: .5em;
+				font-size: .5em;
+				vertical-align: top;
+				display: inline-block;
+				border: 1px solid #eeeeee;
+				border-radius: 2px;
+				background: #eeeeee;
+				padding: .5em .6em .4em;
+				color: black;
+				margin-top: 0.1em;
+			}
+			a.github-edit > * {
+				opacity: 0.6;
+			}
+			a.github-edit:hover > * {
+				opacity: 1;
+				color: black;
+			}
+			a.github-edit img {
+				height: .8em;
+			}
+		</style>
+		
+	<script type="text/javascript">
+		jQuery( '<style>.hide-if-js { display: none; }</style>' ).appendTo( 'head' );
+		jQuery( function($) {
+			$( 'body' ).addClass('js');
+		} );
+	</script>
+<style type="text/css" media="print">#wpadminbar { display:none; }</style>
+	<style type="text/css" media="screen">
+	</style>
+	<script>document.cookie='devicePixelRatio='+((window.devicePixelRatio === undefined) ? 1 : window.devicePixelRatio)+'; path=/';</script>
+
+</head>
+
+
+<body id="wordpress-org" class="apis-handbook-template-default single single-apis-handbook postid-125642 admin-bar no-customize-support single-handbook">
+		<div id="wpadminbar" class="nojq nojs">
+						<div class="quicklinks" id="wp-toolbar" role="navigation" aria-label="Toolbar">
+				<ul id='wp-admin-bar-root-default' class="ab-top-menu"><li id='wp-admin-bar-wp-logo' class="menupop"><a class='ab-item' aria-haspopup="true" href='https://wordpress.org/about/'><span class="ab-icon" aria-hidden="true"></span><span class="screen-reader-text">About WordPress</span></a><div class="ab-sub-wrapper"><ul id='wp-admin-bar-wp-logo-default' class="ab-submenu"><li id='wp-admin-bar-about'><a class='ab-item' href='https://wordpress.org/about/'>About WordPress</a></li></ul><ul id='wp-admin-bar-wp-logo-external' class="ab-sub-secondary ab-submenu"><li id='wp-admin-bar-wporg'><a class='ab-item' href='https://wordpress.org/'>WordPress.org</a></li><li id='wp-admin-bar-documentation'><a class='ab-item' href='https://wordpress.org/support/'>Documentation</a></li><li id='wp-admin-bar-support-forums'><a class='ab-item' href='https://wordpress.org/support/forums/'>Support</a></li><li id='wp-admin-bar-feedback'><a class='ab-item' href='https://wordpress.org/support/forum/requests-and-feedback'>Feedback</a></li></ul></div></li></ul><ul id='wp-admin-bar-top-secondary' class="ab-top-secondary ab-top-menu"><li id='wp-admin-bar-search' class="admin-bar-search"><div class="ab-item ab-empty-item" tabindex="-1"><form action="https://developer.wordpress.org/" method="get" id="adminbarsearch"><input class="adminbar-input" name="s" id="adminbar-search" type="text" value="" maxlength="150" /><label for="adminbar-search" class="screen-reader-text">Search</label><input type="submit" class="adminbar-button" value="Search" /></form></div></li><li id='wp-admin-bar-log-in'><a class='ab-item' href='https://login.wordpress.org/?locale=en_US'>Log In</a></li><li id='wp-admin-bar-register'><a class='ab-item' href='https://login.wordpress.org/register?locale=en_US'>Register</a></li></ul>			</div>
+					</div>
+
+		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P24PF4B" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<div id="wporg-header">
+	<div class="wrapper">
+	<h1><a href="http://wordpress.org/">WordPress.org</a></h1>				<div id="head-search">
+		<form action="http://wordpress.org/search/do-search.php" method="get">
+			<label for="global-search" class="screen-reader-text">Search WordPress.org for:</label>
+			<input id="global-search" class="text" name="search" type="text" value="" maxlength="150" placeholder="Search WordPress.org" />
+			<button type="submit" class="button"><span class="screen-reader-text">Submit</span></button>
+		</form>
+		</div>
+				<div style="clear:both"></div>
+		<button id="mobile-menu-button" aria-expanded="false"><span class="screen-reader-text">Toggle Menu</span></button>
+		
+<nav aria-label="Main Menu">
+<ul id="wporg-header-menu">
+<li class="menu-item"><a href='http://wordpress.org/showcase/' data-title='See some of the sites built on WordPress.'>Showcase</a></li>
+<li class="menu-item"><a href='http://learn.wordpress.org/' data-title='Resources to help you learn more about WordPress and teach it to others.'>Learn</a></li>
+<li class="menu-item"><a href='http://wordpress.org/themes/' data-title='Find just the right look for your website.'>Themes</a></li>
+<li class="menu-item"><a href='http://wordpress.org/plugins/' data-title='Plugins can extend WordPress to do almost anything you can imagine.'>Plugins</a></li>
+<li class="menu-item"><a href='http://wordpress.org/mobile/' data-title='Take your website on the go!'>Mobile</a></li>
+<li class="menu-item"><a href='http://wordpress.org/support/' data-title='Forums, documentation, help.'>Support</a><ul class="nav-submenu"><li><a href='http://wordpress.org/support/' title='Documentation, tutorials, best practices.'>Documentation</a></li><li><a href='http://wordpress.org/support/forums/' title='Support and discussion forums.'>Forums</a></li></ul><div class="uparrow"></div></li>
+<li class="menu-item"><a href='http://make.wordpress.org/' data-title='Contribute your knowledge.'>Get Involved</a><ul class="nav-submenu"><li><a href='http://wordpress.org/five-for-the-future/' title='How five percent is powering the next generation of the web'>Five for the Future</a></li></ul><div class="uparrow"></div></li>
+<li class="menu-item"><a href='http://wordpress.org/about/' data-title='About the WordPress Organization, and where we&#039;re going.'>About</a></li>
+<li class="menu-item"><a href='http://wordpress.org/news/' data-title='Come here for the latest scoop.'>Blog</a></li>
+<li class="menu-item"><a href='http://wordpress.org/hosting/' data-title='Find a home for your blog.'>Hosting</a></li>
+<li id="download" class="button download-button menu-item"><a href='http://wordpress.org/download/' data-title='Get it. Got it? Good.'>Get WordPress</a></li>
+</ul>
+</nav>
+		<div style="clear:both"></div>
+	</div>
+</div>
+
+
+
+<header id="masthead" class="site-header" role="banner">
+			<a href="#" id="secondary-toggle" onclick="return false;"><strong>Menu</strong></a>
+		<div class="site-branding">
+		<h1 class="site-title">
+			<a href="../../../index.html" rel="home">Common APIs Handbook</a>
+		</h1>
+
+		
+		<nav id="site-navigation" class="main-navigation" role="navigation">
+			<button class="menu-toggle dashicons dashicons-arrow-down-alt2" aria-controls="primary-menu" aria-expanded="false" aria-label="Primary Menu"></button>
+					</nav>
+	</div>
+</header><!-- #masthead -->
+
+<div id="page" class="hfeed site devhub-wrap">
+	<a href="#main" class="screen-reader-text">Skip to content</a>
+
+			<div id="content" class="site-content">
+
+
+	<div id="secondary" class="widget-area" role="complementary">
+		<a href="#" id="secondary-toggle"></a>
+		<div id="secondary-content">
+						<aside id="search-8" class="widget widget_search"><div class="search-section section clear hide-if-js">
+
+
+	
+	<form role="search" method="get" class="searchform searchform-handbook" action="https://developer.wordpress.org/apis/">
+		<label for="search-field" class="screen-reader-text">Search for:</label>
+		<input type="text" id="search-field" class="search-field" placeholder="Search &hellip;" value="" name="s">
+		<button class="button button-primary button-search"><i class="dashicons dashicons-search"></i><span class="screen-reader-text">Search plugins</span></button>
+	
+	</form>
+
+</div><!-- /search-guide -->
+</aside><aside id="handbook_pages-4" class="widget widget_wporg_handbook_pages"><h2 class="widget-title">Sections</h2>
+<div class="menu-table-of-contents-container">
+
+			<ul>
+				<li class="page_item page-item-125334 page_item_has_children current_page_ancestor current_page_parent current-menu-ancestor current-menu-parent menu-item menu-item-has-children"><a href="../../index.html">Common APIs Handbook</a>
+<ul class='children'>
+	<li class="page_item page-item-132071 menu-item"><a href="../responsive-images/index.html">Responsive Images</a></li>
+	<li class="page_item page-item-125636 page_item_has_children menu-item menu-item-has-children"><a href="../dashboard-widgets/index.html">Dashboard widgets API</a>
+	<ul class='children'>
+		<li class="page_item page-item-125763 menu-item"><a href="../dashboard-widgets/example-dashboard-widget/index.html">Example Dashboard widget</a></li>
+	</ul>
+</li>
+	<li class="page_item page-item-125638 menu-item"><a href="../database/index.html">Database API</a></li>
+	<li class="page_item page-item-126023 page_item_has_children menu-item menu-item-has-children"><a href="../internationalization/index.html">Internationalization</a>
+	<ul class='children'>
+		<li class="page_item page-item-126122 menu-item"><a href="../internationalization/internationalization-functions/index.html">Internationalization Functions</a></li>
+		<li class="page_item page-item-126126 menu-item"><a href="../internationalization/internationalization-guidelines/index.html">Internationalization Guidelines</a></li>
+		<li class="page_item page-item-126152 menu-item"><a href="../internationalization/localization/index.html">Localization</a></li>
+	</ul>
+</li>
+	<li class="page_item page-item-125642 current_page_item current-menu-item menu-item"><a href="index.html" aria-current="page">Filesystem</a></li>
+	<li class="page_item page-item-125644 menu-item"><a href="../global-variables/index.html">Global Variables</a></li>
+	<li class="page_item page-item-125646 menu-item"><a href="../metadata/index.html">Metadata</a></li>
+	<li class="page_item page-item-125648 menu-item"><a href="../options/index.html">Options</a></li>
+	<li class="page_item page-item-125650 menu-item"><a href="../plugins/index.html">Plugins</a></li>
+	<li class="page_item page-item-129278 page_item_has_children menu-item menu-item-has-children"><a href="../making-http-requests/index.html">Making HTTP requests</a>
+	<ul class='children'>
+		<li class="page_item page-item-129272 menu-item"><a href="../making-http-requests/getting-data-from-an-external-service/index.html">GETting data from an external service</a></li>
+		<li class="page_item page-item-129270 menu-item"><a href="../making-http-requests/posting-data-to-an-external-service/index.html">POSTing data to an external service</a></li>
+		<li class="page_item page-item-129268 menu-item"><a href="../making-http-requests/performance/index.html">Performance</a></li>
+		<li class="page_item page-item-129274 menu-item"><a href="../making-http-requests/advanced/index.html">Advanced</a></li>
+		<li class="page_item page-item-129276 menu-item"><a href="../making-http-requests/authentication/index.html">Authentication</a></li>
+	</ul>
+</li>
+	<li class="page_item page-item-125652 menu-item"><a href="../quicktags/index.html">Quicktags</a></li>
+	<li class="page_item page-item-125654 menu-item"><a href="../rest/index.html">REST</a></li>
+	<li class="page_item page-item-125656 menu-item"><a href="../rewrite/index.html">Rewrite</a></li>
+	<li class="page_item page-item-125658 menu-item"><a href="../settings/index.html">Settings</a></li>
+	<li class="page_item page-item-125660 menu-item"><a href="../shortcode/index.html">Shortcode</a></li>
+	<li class="page_item page-item-136532 menu-item"><a href="../site-health/index.html">Site Health</a></li>
+	<li class="page_item page-item-125662 menu-item"><a href="../theme/index.html">Theme</a></li>
+	<li class="page_item page-item-125664 menu-item"><a href="../transients/index.html">Transients</a></li>
+	<li class="page_item page-item-125666 menu-item"><a href="../xml-rpc/index.html">XML-RPC</a></li>
+</ul>
+</li>
+			</ul>
+
+			</div>		</div>
+	</div><!-- #secondary -->
+
+
+		<main id="primary" class="site-main post-125642 apis-handbook type-apis-handbook status-publish hentry type-handbook" role="main">
+
+		
+		<div class="breadcrumb-trail breadcrumbs" itemprop="breadcrumb">
+			<span class="trail-browse">Browse:</span> 
+			<span class="trail-begin"><a href="../../../index.html" title="WordPress Developer Resources" rel="home">Home</a></span> <span class="sep">&#47;</span> 
+			<span class="trail-inner"><a href="../../index.html">Common APIs Handbook</a></span> <span class="sep">&#47;</span> 
+			<span class="trail-inner"><a href="../../index.html" title="Common APIs Handbook">Common APIs Handbook</a></span> <span class="sep">&#47;</span> <span class="trail-end">Filesystem</span>
+		</div>
+		
+			
+<h1>Filesystem</h1>
+
+
+<style> .toc-jump { text-align: right; font-size: 12px; } .page .toc-heading { margin-top: -50px; padding-top: 50px !important; }</style><div class="table-of-contents"><h2>Topics</h2><ul class="items"><li><a href="#overview">Overview</a></li>
+<li><a href="#purpose">Purpose</a></li>
+<li><a href="#filesystem-api-class-reference">Filesystem API Class Reference</a></li>
+<li><a href="#getting-credentials">Getting Credentials</a></li>
+<li><a href="#initializing-wp_filesystem_base">Initializing <a href="../../../reference/classes/wp_filesystem_base/index.html">WP_Filesystem_Base</a></a></li>
+<li><a href="#using-the-wp_filesystem_base-class">Using the <a href="../../../reference/classes/wp_filesystem_base/index.html">WP_Filesystem_Base</a> Class</a></li>
+<li><a href="#tips-and-tricks">Tips and Tricks</a></li>
+<li><a href="#external-references">External references</a></ul>
+</div>
+
+<h2 class="toc-heading" id="overview" tabindex="-1">Overview <a href="#overview" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Overview</span></a></h2>
+
+
+
+<p>The <strong>Filesystem API</strong>, added in <a href="../../../support/wordpress-version/version-2.html">WordPress 2.6</a>, was originally created for WordPress&#8217; own automatic updates feature. </p>
+
+
+
+<p>The Filesystem API abstracts out the functionality needed for reading and writing local files to the filesystem to be done securely, on a variety of host types.</p>
+
+
+
+<p>It does this through the <a href="../../../reference/classes/wp_filesystem_base/index.html">WP_Filesystem_Base</a> class, and several subclasses which implement different ways of connecting to the local filesystem, depending on individual host support. </p>
+
+
+
+<p>Any theme or plugin that needs to write files locally should do so using the <code>WP_Filesystem</code> family of classes.</p>
+
+
+
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="purpose" tabindex="-1">Purpose <a href="#purpose" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Purpose</span></a></h2>
+
+
+
+<p>Different hosting systems have different limitations in the way that their webservers are configured.</p>
+
+
+
+<p>In particular, many hosting systems have the webserver running as a different user than the owner of the WordPress files. When this is the case, a process writing files from the webserver user will have the resulting files owned by the webserver&#8217;s user account instead of the actual user&#8217;s account. This can lead to a security problem in shared hosting situations, where multiple users are sharing the same webserver for different sites.</p>
+
+
+
+<p><code>WP_Filesystem</code> is capable of detecting when the users for written files will not match, and switches to a method using FTP or similar instead. Depending on the available PHP libraries, WP_Filesystem supports three different methods of using FTP (via extension, sockets, or over-SSH) and will automatically choose the correct method.</p>
+
+
+
+<p>In such a case, the plugin or theme implementing this code needs to request FTP credentials from the user. Functions have been added to make this easy to do and to standardize the look and feel of the credentials entry form.</p>
+
+
+
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="filesystem-api-class-reference" tabindex="-1">Filesystem API Class Reference <a href="#filesystem-api-class-reference" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Filesystem API Class Reference</span></a></h2>
+
+
+
+<ul><li>Class: <a href="../../../reference/classes/wp_filesystem_base/index.html">WP_Filesystem_Base</a></li><li>Class: <a href="../../../reference/classes/wp_filesystem_direct/index.html">WP_Filesystem_Direct</a></li><li>Class: <a href="../../../reference/classes/wp_filesystem_ftpext/index.html">WP_Filesystem_FTPext</a></li><li>Class: <a href="../../../reference/classes/wp_filesystem_ftpsockets/index.html">WP_Filesystem_ftpsocket</a></li><li>Class: <a href="../../../reference/classes/wp_filesystem_ssh2/index.html">WP_Filesystem_SSH2</a></li><li>Function: <a href="../../../reference/functions/request_filesystem_credentials/index.html">request_filesystem_credentials()</a></li></ul>
+
+
+
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="getting-credentials" tabindex="-1">Getting Credentials <a href="#getting-credentials" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Getting Credentials</span></a></h2>
+
+
+
+<p>The first step in using the WP_Filesystem is requesting credentials from the user. The normal way this is accomplished is at the time when you&#8217;re saving the results of a form input, or you have otherwise determined that you need to write to a file.</p>
+
+
+
+<p>The credentials form can be displayed onto an admin page by using the following code:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><pre class="brush: php; title: ; notranslate" title="">
+$url = wp_nonce_url( 'themes.php?page=example', 'example-theme-options' );
+if ( false === ( $creds = request_filesystem_credentials( $url, '', false, false, null ) ) ) {
+	return; // stop processing here
+}
+</pre></div>
+
+
+<p>The <a href="../../../reference/functions/request_filesystem_credentials/index.html">request_filesystem_credentials()</a> call takes five arguments.</p>
+
+
+
+<ul><li>The URL to which the form should be submitted (a nonced URL to a theme page was used in the example above)</li><li>A method override (normally you should leave this as the empty string: &#8220;&#8221;)</li><li>An error flag (normally false unless an error is detected, see below)</li><li>A context directory (false, or a specific directory path that you want to test for access)</li><li>Form fields (an array of form field names from your previous form that you wish to &#8220;pass-through&#8221; the resulting credentials form, or null if there are none)</li></ul>
+
+
+
+<p>The <code>request_filesystem_credentials</code> call will test to see if it is capable of writing to the local filesystem directly without credentials first. If this is the case, then it will return true and not do anything. Your code can then proceed to use the <code>WP_Filesystem</code> class.</p>
+
+
+
+<p>The <code>request_filesystem_credentials</code> call also takes into account hardcoded information, such as hostname or username or password, which has been inserted into the <code>wp-config.php</code> file using defines. If these are pre-defined in that file, then this call will return that information instead of displaying a form, bypassing the form for the user.</p>
+
+
+
+<p>If it does need credentials from the user, then it will output the FTP information form and return false. In this case, you should stop processing further, in order to allow the user to input credentials. Any form fields names you specified will be included in the resulting form as hidden inputs, and will be returned when the user resubmits the form, this time with FTP credentials.</p>
+
+
+
+<p>Note: Do not use the reserved names of <code>hostname</code>, <code>username</code>, <code>password</code>, <code>public_key</code>, or <code>private_key</code> for your own inputs. These are used by the credentials form itself. Alternatively, if you do use them, the <code>request_filesystem_credentials</code> function will assume that they are the incoming FTP credentials.</p>
+
+
+
+<p>When the credentials form is submitted, it will look in the incoming POST data for these fields, and if found, it will return them in an array suitable for passing to WP_Filesystem, which is the next step.</p>
+
+
+
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="initializing-wp_filesystem_base" tabindex="-1">Initializing <a href="../../../reference/classes/wp_filesystem_base/index.html">WP_Filesystem_Base</a> <a href="#initializing-wp_filesystem_base" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Initializing <a href="../../../reference/classes/wp_filesystem_base/index.html">WP_Filesystem_Base</a></span></a></h2>
+
+
+
+<p>Before the WP_Filesystem can be used, it must be initialized with the proper credentials. This can be done like so:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><pre class="brush: php; title: ; notranslate" title="">
+if ( ! WP_Filesystem( $creds ) ) {
+	request_filesystem_credentials( $url, '', true, false, null );
+	return;
+}
+</pre></div>
+
+
+<p>First you call the <code>WP_Filesystem</code> function, passing it the credentials from before. It will then attempt to verify the credentials. If they are good, then it will return true. If not, then it will return false.</p>
+
+
+
+<p>In the case of bad credentials, the above code then makes another call to <code>request_filesystem_credentials()</code>, but this time with the error flag set to true. This forces the function to display the form again, this time with an error message for the user saying that their information was incorrect. The user can then re-enter their information and try again.</p>
+
+
+
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="using-the-wp_filesystem_base-class" tabindex="-1">Using the <a href="../../../reference/classes/wp_filesystem_base/index.html">WP_Filesystem_Base</a> Class <a href="#using-the-wp_filesystem_base-class" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Using the <a href="../../../reference/classes/wp_filesystem_base/index.html">WP_Filesystem_Base</a> Class</span></a></h2>
+
+
+
+<p>Once the class has been initialized, then the global <code>$wp_filesystem</code> variable becomes defined and available for you to use. The <code>WP_Filesystem_Base</code> class defines several methods you can use to read and write local files. For example, to write a file, you could do this:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><pre class="brush: php; title: ; notranslate" title="">
+global $wp_filesystem;
+$wp_filesystem-&gt;put_contents(
+  '/tmp/example.txt',
+  'Example contents of a file',
+  FS_CHMOD_FILE // predefined mode settings for WP files
+);
+</pre></div>
+
+
+<p>Other available methods include <code>get_contents()</code> and <code>get_contents_array()</code> to read files; <code>wp_content_dir()</code>, <code>wp_plugins_dir()</code>, and <code>wp_themes_dir()</code> which will return the filesystem paths to those directories; <code>mkdir()</code> and <code>rmdir()</code> to make and remove directories; along with several other handy filesystem related functions.</p>
+
+
+
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="tips-and-tricks" tabindex="-1">Tips and Tricks <a href="#tips-and-tricks" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Tips and Tricks</span></a></h2>
+
+
+
+<p><strong>When can you call <code>request_filesystem_credentials()</code>?</strong><br>One of the initial challenges for developers using the WP Filesystem API is you cannot initialize it just anywhere. The <code>request_filesystem_credentials()</code> function isn&#8217;t available until AFTER the <code>wp_loaded</code> action hook, and is only included in the admin area. One of the earliest hooks you can utilize is admin_init.</p>
+
+
+
+<p><strong>The WP Filesystem API Methodology</strong><br>Another problem with calling <code>request_filesystem_credentials()</code> directly is you cannot determine if you will have direct access to the file system or if the user will be prompted for credentials. From a UX standpoint this becomes problematic if you want to make changes to files when a plugin is activated. Just imagine, a user goes to install your plugin via their admin area, enters their FTP details, completes the installation and activates your plugin. But as soon as they do, they are prompted to enter their FTP details again and are left scratching their head as to why.</p>
+
+
+
+<p>A better solution is to add a notice (using admin_notice for instance) that explains to the user that your plugin needs to write to the file system to complete the installation. Along with that notice, you would add a button or link which triggers your function call to <code>request_filesystem_credentials()</code>.</p>
+
+
+
+<p>But let&#8217;s expand on this scenario further and say this plugin needs to access the file system every time the plugin updated. If you&#8217;re regularly releasing updates and bug fixes, it soon becomes tenuous for users to click your actionable button every time they upgrade. What would be nice is to determine if we have direct write access before calling <code>request_filesystem_credentials()</code> and silently do the installation. That&#8217;s where the <code>get_filesystem_method()</code> function comes into play.</p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><section class="source-content"><div class="source-code-container"><pre class="brush: php; title: ; notranslate" title="">
+$access_type = get_filesystem_method();
+if ( $access_type === 'direct' )
+{
+	/* you can safely run request_filesystem_credentials() without any issues and don't need to worry about passing in a URL */
+	$creds = request_filesystem_credentials( site_url() . '/wp-admin/', '', false, false, array() );
+
+	/* initialize the API */
+	if ( ! WP_Filesystem( $creds ) ) {
+		/* any problems and we exit */
+		return false;
+	}	
+
+	global $wp_filesystem;
+	/* do our file manipulations below */
+}	
+else
+{
+	/* don't have direct write access. Prompt user with our notice */
+	add_action( 'admin_notices', 'you_admin_notice_function' ); 	
+}
+</pre></div><p class="source-code-links"><span><a href="#" class="show-complete-source">Expand full source code</a><a href="#" class="less-complete-source">Collapse full source code</a></span></p></section></div>
+
+
+<p>This approach works well for all involved. Users who don&#8217;t have direct write permissions get prompted to make changes to the file system, while the plugin goes unnoticed (in a good way) on sites who can directly write to the file system.</p>
+
+
+
+<p><strong>Working with Paths</strong><br>WordPress developers worth their salt should be familiar with setting up constants or variables to access their plugin&#8217;s path. It usually looks like this:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><pre class="brush: php; title: ; notranslate" title="">
+define( 'MY_PLUGIN_DIR', plugin_dir_path( __FILE__ ) ); 
+</pre></div>
+
+
+<p>What you need to take into consideration when working with the Filesystem API is the path to the files won&#8217;t always be the same. When using the direct method you can safely use the <code>MY_PLUGIN_DIR</code> constant, but if you tried to do the same when the FTP or SSH method is used then you can run into problems. This is because FTP and SSH are usually rooted to a directory somewhere along the absolute path. Now, the Filesystem API gives us ways of overcoming this problem with methods like <code>$wp_filesystem-&gt;wp_content_dir()</code> and <code>$wp_filesystem-&gt;wp_plugins_dir()</code>, but it isn&#8217;t practical to define the path to your plugin twice.</p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><pre class="brush: php; title: ; notranslate" title="">
+/* replace the 'direct' absolute path with the Filesystem API path */
+ $plugin_path = str_replace( ABSPATH, $wp_filesystem-&gt;abspath(), MY_PLUGIN_DIR );
+
+/* Now we can use $plugin_path in all our Filesystem API method calls */
+if ( ! $wp_filesystem-&gt;is_dir( $plugin_path . '/config/' ) ) {
+	/* directory didn't exist, so let's create it */
+	$wp_filesystem-&gt;mkdir( $plugin_path . '/config/' );
+}
+</pre></div>
+
+
+<p><strong><code>unzip_file($file, $to);</code></strong></p>
+
+
+
+<p>While this function requires the Filesystem API to be initialized, it isn&#8217;t a method of the <code>$wp_filesystem</code> object, which might be why its arguments are at odds with each other. The first parameter, <code>$file</code>, needs to be the absolute &#8216;direct&#8217; path to the file, while the <code>$toparameter</code> needs to point to the absolute path of the Filesystem.</p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><section class="source-content"><div class="source-code-container"><pre class="brush: php; title: ; notranslate" title="">
+define( 'MY_PLUGIN_DIR', plugin_dir_path( __FILE__ ) ); 
+
+global $wp_filesystem; // already initialised the Filesystem API previously
+
+$plugin_path = str_replace( ABSPATH, $wp_filesystem-&gt;abspath(), MY_PLUGIN_DIR ); // get remote system absolute path
+
+/* Acceptable way to use the function */
+$file = MY_PLUGIN_DIR . '/plugin-file.zip'; 
+$to = $plugin_path;
+
+$result = unzip_file( $file, $to ); 
+
+if ( $result !== true ) {
+	// unzip failed. Handle Error
+}
+
+/* Not acceptable */
+$file = MY_PLUGIN_DIR . '/plugin-file.zip';
+$to = MY_PLUGIN_DIR; // $to cannot be the 'direct' absolute path to the folder otherwise FTP and SSH methods are left in the cold
+
+unzip_file( $file, $to ); 
+
+$file = $plugin_path . '/plugin-file.zip'; // If $file isn't the 'direct' absolute path then users not using FTP and SSH methods are left in the cold
+$to = $plugin_path;
+
+unzip_file( $file, $to );
+</pre></div><p class="source-code-links"><span><a href="#" class="show-complete-source">Expand full source code</a><a href="#" class="less-complete-source">Collapse full source code</a></span></p></section></div>
+
+
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="external-references" tabindex="-1">External references <a href="#external-references" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">External references</span></a></h2>
+
+
+
+<ul><li><a href="http://ottopress.com/2011/tutorial-using-the-wp_filesystem/">Tutorial: Using the WP_Filesystem</a>&nbsp;by Otto</li><li><a href="https://github.com/eventespresso/filesystem-debug-helper">Filesystem Debug Helper Plugin</a></li></ul>
+
+
+<div class="bottom-of-entry">&nbsp;</div>
+
+			
+		<nav class="handbook-navigation" role="navigation">
+			<h1 class="screen-reader-text">Handbook navigation</h1>
+			<div class="nav-links">
+
+			<a href="../internationalization/index.html" rel="previous"><span class="meta-nav">&larr;</span> Internationalization</a><a href="../global-variables/index.html" rel="next">Global Variables <span class="meta-nav">&rarr;</span></a>
+			</div>
+			<!-- .nav-links -->
+		</nav><!-- .navigation -->
+	
+		
+		</main><!-- #main -->
+
+	</div><!-- #content -->
+
+</div><!-- #page -->
+
+
+<div id="wporg-footer">
+	<div class="wrapper">
+		<ul>
+			<li><a href="http://wordpress.org/about/" title="An introduction to the WordPress project">About</a></li>
+			<li><a href="http://wordpress.org/news/" title="News and Updates">Blog</a></li>
+			<li><a href="http://wordpress.org/hosting/" title="Recommended web hosting providers">Hosting</a></li>
+			<li><a href="https://wordpressfoundation.org/donate/" title="Donate to the WordPress Foundation">Donate</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://wordpress.org/support/" title="Forums, documentation, and other resources">Support</a></li>
+			<li><a href="../../../index.html" title="Resources for WordPress developers">Developers</a></li>
+			<li><a href="http://make.wordpress.org/" title="Give back to WordPress through code, support, translation and more">Get Involved</a></li>
+			<li><a href="http://learn.wordpress.org/" title="Workshops and training materials">Learn</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://wordpress.org/showcase/" title="Some of the best WordPress sites on the Web">Showcase</a></li>
+			<li><a href="http://wordpress.org/plugins/" title="Add extra functionality to WordPress">Plugins</a></li>
+			<li><a href="http://wordpress.org/themes/" title="Make your WordPress pretty">Themes</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://central.wordcamp.org/" title="Find a WordPress event near you">WordCamp</a></li>
+			<li><a href="http://wordpress.tv/" title="Videos, tutorials, and WordCamp sessions">WordPress.TV</a></li>
+			<li><a href="http://buddypress.org/" title="A set of plugins to transform your WordPress into a social network">BuddyPress</a></li>
+			<li><a href="http://bbpress.org/" title="Fast, slick forums built on WordPress">bbPress</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://wordpress.com/?ref=wporg-footer" title="Hassle-free WordPress hosting">WordPress.com</a></li>
+			<li><a href="http://ma.tt/" title="Co-founder of WordPress, an example of what WordPress can do">Matt</a></li>
+			<li><a href="http://wordpress.org/about/privacy/" title="WordPress.org Privacy Policy">Privacy</a></li>
+			<li><a href="https://publiccode.eu/" target="_blank">Public Code</a></li>
+		</ul>
+
+		<ul class="social-media-links">
+			<li><span class="dashicons dashicons-twitter"></span><a href="https://twitter.com/WordPress" title="Follow @WordPress on Twitter">@WordPress</a></li>
+			<li><span class="dashicons dashicons-facebook"></span><a href="https://www.facebook.com/WordPress/" title="Like WordPress on Facebook">WordPress</a></li>
+		</ul>
+	</div>
+
+		<p class="cip cip-image">Code is Poetry.</p>
+</div>
+
+<script src="../../../../s.w.org/style/js/navigation.min.js?20190128"></script>
+
+<script type='text/javascript'>
+	(function(){
+		var corecss = document.createElement('link');
+		var themecss = document.createElement('link');
+		var corecssurl = "../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shCore.css?ver=3.0.9b";
+		if ( corecss.setAttribute ) {
+				corecss.setAttribute( "rel", "stylesheet" );
+				corecss.setAttribute( "type", "text/css" );
+				corecss.setAttribute( "href", corecssurl );
+		} else {
+				corecss.rel = "stylesheet";
+				corecss.href = corecssurl;
+		}
+		document.head.appendChild( corecss );
+		var themecssurl = "../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shThemeDefault.css?ver=3.0.9b";
+		if ( themecss.setAttribute ) {
+				themecss.setAttribute( "rel", "stylesheet" );
+				themecss.setAttribute( "type", "text/css" );
+				themecss.setAttribute( "href", themecssurl );
+		} else {
+				themecss.rel = "stylesheet";
+				themecss.href = themecssurl;
+		}
+		document.head.appendChild( themecss );
+	})();
+	SyntaxHighlighter.config.strings.expandSource = '+ expand source';
+	SyntaxHighlighter.config.strings.help = '?';
+	SyntaxHighlighter.config.strings.alert = 'SyntaxHighlighter\n\n';
+	SyntaxHighlighter.config.strings.noBrush = 'Can\'t find brush for: ';
+	SyntaxHighlighter.config.strings.brushNotHtmlScript = 'Brush wasn\'t configured for html-script option: ';
+	SyntaxHighlighter.defaults['pad-line-numbers'] = false;
+	SyntaxHighlighter.defaults['toolbar'] = false;
+	SyntaxHighlighter.all();
+
+	// Infinite scroll support
+	if ( typeof( jQuery ) !== 'undefined' ) {
+		jQuery( function( $ ) {
+			$( document.body ).on( 'post-load', function() {
+				SyntaxHighlighter.highlight();
+			} );
+		} );
+	}
+</script>
+<script type='text/javascript' src='../../../wp-includes/js/hoverintent-js.min.js?ver=2.2.1' id='hoverintent-js-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/admin-bar.min.js?ver=5.9-alpha-51701' id='admin-bar-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/navigation.js?ver=20181209' id='wporg-developer-navigation-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/skip-link-focus-fix.js?ver=20130115' id='wporg-developer-skip-link-focus-fix-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/search.js?ver=20150430' id='wporg-developer-search-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/menu.js?ver=20180201' id='wporg-developer-menu-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/awesomplete.min.js?ver=20160322' id='awesomplete-js'></script>
+<script type='text/javascript' id='autocomplete-js-extra'>
+/* <![CDATA[ */
+var autocomplete = {"ajaxurl":"https:\/\/developer.wordpress.org\/wp-admin\/admin-ajax.php","nonce":"8a60f70c4b"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/autocomplete.js?ver=20160524' id='autocomplete-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/function-reference.js?ver=20180724' id='wporg-developer-function-reference-js'></script>
+<script type='text/javascript' id='quicktags-js-extra'>
+/* <![CDATA[ */
+var quicktagsL10n = {"closeAllOpenTags":"Close all open tags","closeTags":"close tags","enterURL":"Enter the URL","enterImageURL":"Enter the URL of the image","enterImageDescription":"Enter a description of the image","textdirection":"text direction","toggleTextdirection":"Toggle Editor Text Direction","dfw":"Distraction-free writing mode","strong":"Bold","strongClose":"Close bold tag","em":"Italic","emClose":"Close italic tag","link":"Insert link","blockquote":"Blockquote","blockquoteClose":"Close blockquote tag","del":"Deleted text (strikethrough)","delClose":"Close deleted text tag","ins":"Inserted text","insClose":"Close inserted text tag","image":"Insert image","ul":"Bulleted list","ulClose":"Close bulleted list tag","ol":"Numbered list","olClose":"Close numbered list tag","li":"List item","liClose":"Close list item tag","code":"Code","codeClose":"Close code tag","more":"Insert Read More tag"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-includes/js/quicktags.min.js?ver=5.9-alpha-51701' id='quicktags-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/user-notes.js?ver=20200110' id='wporg-developer-user-notes-js'></script>
+<script type='text/javascript' id='wporg-developer-user-notes-feedback-js-extra'>
+/* <![CDATA[ */
+var wporg_note_feedback = {"show":"Show Feedback","hide":"Hide Feedback"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/user-notes-feedback.js?ver=20181023' id='wporg-developer-user-notes-feedback-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/tabs.js?ver=20160824' id='wporg-developer-tabs-js'></script>
+<script type='text/javascript' id='wporg-developer-preview-js-extra'>
+/* <![CDATA[ */
+var wporg_note_preview = {"ajaxurl":"https:\/\/developer.wordpress.org\/wp-admin\/admin-ajax.php","nonce":"504933b60e","preview":"preview note","preview_empty":"Nothing to preview","is_admin":""};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/user-notes-preview.js?ver=20200111' id='wporg-developer-preview-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/wp-embed.min.js?ver=5.9-alpha-51701' id='wp-embed-js'></script>
+</body>
+
+<!-- Mirrored from developer.wordpress.org/apis/handbook/filesystem/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 31 Aug 2021 16:22:02 GMT -->
+</html>

@@ -1,0 +1,622 @@
+<html><!-- Mirrored from www.php.net/manual/en/class.ds-vector.php by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 11 Sep 2021 05:31:52 GMT --><!-- Added by HTTrack --><head><meta http-equiv="content-type" content="text/html;charset=utf-8"><!-- /Added by HTTrack -->
+
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Vector</title>
+
+ <link rel="shortcut icon" href="../../favicon.ico">
+ <link rel="search" type="application/opensearchdescription+xml" href="http://php.net/phpnetimprovedsearch.src" title="Add PHP.net search">
+ <link rel="alternate" type="application/atom+xml" href="https://www.php.net/releases/feed.php" title="PHP Release feed">
+ <link rel="alternate" type="application/atom+xml" href="https://www.php.net/feed.atom" title="PHP: Hypertext Preprocessor">
+
+ <link rel="canonical" href="class.ds-vector.html">
+ <link rel="shorturl" href="https://www.php.net/ds-vector">
+ <link rel="alternate" href="https://www.php.net/ds-vector" hreflang="x-default">
+
+ <link rel="contents" href="index-2.html">
+ <link rel="index" href="book.ds.html">
+ <link rel="prev" href="ds-sequence.unshift.html">
+ <link rel="next" href="ds-vector.allocate.html">
+
+ <link rel="alternate" href="class.ds-vector.html" hreflang="en">
+ <link rel="alternate" href="https://www.php.net/manual/pt_BR/class.ds-vector.php" hreflang="pt_BR">
+ <link rel="alternate" href="https://www.php.net/manual/zh/class.ds-vector.php" hreflang="zh">
+ <link rel="alternate" href="https://www.php.net/manual/fr/class.ds-vector.php" hreflang="fr">
+ <link rel="alternate" href="https://www.php.net/manual/de/class.ds-vector.php" hreflang="de">
+ <link rel="alternate" href="https://www.php.net/manual/ja/class.ds-vector.php" hreflang="ja">
+ <link rel="alternate" href="https://www.php.net/manual/ro/class.ds-vector.php" hreflang="ro">
+ <link rel="alternate" href="https://www.php.net/manual/ru/class.ds-vector.php" hreflang="ru">
+ <link rel="alternate" href="https://www.php.net/manual/es/class.ds-vector.php" hreflang="es">
+ <link rel="alternate" href="https://www.php.net/manual/tr/class.ds-vector.php" hreflang="tr">
+
+<link rel="stylesheet" type="text/css" href="../../cached0aba.css?t=1539771603&amp;f=/fonts/Fira/fira.css" media="screen">
+<link rel="stylesheet" type="text/css" href="../../cached2ecf.css?t=1539765004&amp;f=/fonts/Font-Awesome/css/fontello.css" media="screen">
+<link rel="stylesheet" type="text/css" href="../../cachedba57.css?t=1606338002&amp;f=/styles/theme-base.css" media="screen">
+<link rel="stylesheet" type="text/css" href="../../cached3afa.css?t=1627831203&amp;f=/styles/theme-medium.css" media="screen">
+
+ <!--[if lte IE 7]>
+ <link rel="stylesheet" type="text/css" href="https://www.php.net/styles/workarounds.ie7.css" media="screen">
+ <![endif]-->
+
+ <!--[if lte IE 8]>
+ <script>
+  window.brokenIE = true;
+ </script>
+ <![endif]-->
+
+ <!--[if lte IE 9]>
+ <link rel="stylesheet" type="text/css" href="https://www.php.net/styles/workarounds.ie9.css" media="screen">
+ <![endif]-->
+
+ <!--[if IE]>
+ <script src="https://www.php.net/js/ext/html5.js"></script>
+ <![endif]-->
+
+ <base>
+
+
+</head>
+<body class="docs " style="">
+
+
+<div class="headsup"><a href="https://www.php.net/conferences/index.php#id2021-09-08-1">Longhorn PHP 2021</a></div>
+<nav id="trick"><div><dl>
+<dt><a href="getting-started.html">Getting Started</a></dt>
+	<dd><a href="introduction.html">Introduction</a></dd>
+	<dd><a href="tutorial.html">A simple tutorial</a></dd>
+<dt><a href="langref.html">Language Reference</a></dt>
+	<dd><a href="language.basic-syntax.html">Basic syntax</a></dd>
+	<dd><a href="language.types.html">Types</a></dd>
+	<dd><a href="language.variables.html">Variables</a></dd>
+	<dd><a href="language.constants.html">Constants</a></dd>
+	<dd><a href="language.expressions.html">Expressions</a></dd>
+	<dd><a href="language.operators.html">Operators</a></dd>
+	<dd><a href="language.control-structures.html">Control Structures</a></dd>
+	<dd><a href="language.functions.html">Functions</a></dd>
+	<dd><a href="language.oop5.html">Classes and Objects</a></dd>
+	<dd><a href="language.namespaces.html">Namespaces</a></dd>
+	<dd><a href="language.errors.html">Errors</a></dd>
+	<dd><a href="language.exceptions.html">Exceptions</a></dd>
+	<dd><a href="language.generators.html">Generators</a></dd>
+	<dd><a href="language.attributes.html">Attributes</a></dd>
+	<dd><a href="language.references.html">References Explained</a></dd>
+	<dd><a href="reserved.variables.html">Predefined Variables</a></dd>
+	<dd><a href="reserved.exceptions.html">Predefined Exceptions</a></dd>
+	<dd><a href="reserved.interfaces.html">Predefined Interfaces and Classes</a></dd>
+	<dd><a href="context.html">Context options and parameters</a></dd>
+	<dd><a href="wrappers.html">Supported Protocols and Wrappers</a></dd>
+</dl>
+<dl>
+<dt><a href="security.html">Security</a></dt>
+	<dd><a href="security.intro.html">Introduction</a></dd>
+	<dd><a href="security.general.html">General considerations</a></dd>
+	<dd><a href="security.cgi-bin.html">Installed as CGI binary</a></dd>
+	<dd><a href="security.apache.html">Installed as an Apache module</a></dd>
+	<dd><a href="security.sessions.html">Session Security</a></dd>
+	<dd><a href="security.filesystem.html">Filesystem Security</a></dd>
+	<dd><a href="security.database.html">Database Security</a></dd>
+	<dd><a href="security.errors.html">Error Reporting</a></dd>
+	<dd><a href="security.variables.html">User Submitted Data</a></dd>
+	<dd><a href="security.hiding.html">Hiding PHP</a></dd>
+	<dd><a href="security.current.html">Keeping Current</a></dd>
+<dt><a href="features.html">Features</a></dt>
+	<dd><a href="features.http-auth.html">HTTP authentication with PHP</a></dd>
+	<dd><a href="features.cookies.html">Cookies</a></dd>
+	<dd><a href="features.sessions.html">Sessions</a></dd>
+	<dd><a href="features.xforms.html">Dealing with XForms</a></dd>
+	<dd><a href="features.file-upload.html">Handling file uploads</a></dd>
+	<dd><a href="features.remote-files.html">Using remote files</a></dd>
+	<dd><a href="features.connection-handling.html">Connection handling</a></dd>
+	<dd><a href="features.persistent-connections.html">Persistent Database Connections</a></dd>
+	<dd><a href="features.commandline.html">Command line usage</a></dd>
+	<dd><a href="features.gc.html">Garbage Collection</a></dd>
+	<dd><a href="features.dtrace.html">DTrace Dynamic Tracing</a></dd>
+</dl>
+<dl>
+<dt><a href="funcref.html">Function Reference</a></dt>
+	<dd><a href="refs.basic.php.html">Affecting PHP's Behaviour</a></dd>
+	<dd><a href="refs.utilspec.audio.html">Audio Formats Manipulation</a></dd>
+	<dd><a href="refs.remote.auth.html">Authentication Services</a></dd>
+	<dd><a href="refs.utilspec.cmdline.html">Command Line Specific Extensions</a></dd>
+	<dd><a href="refs.compression.html">Compression and Archive Extensions</a></dd>
+	<dd><a href="refs.crypto.html">Cryptography Extensions</a></dd>
+	<dd><a href="refs.database.html">Database Extensions</a></dd>
+	<dd><a href="refs.calendar.html">Date and Time Related Extensions</a></dd>
+	<dd><a href="refs.fileprocess.file.html">File System Related Extensions</a></dd>
+	<dd><a href="refs.international.html">Human Language and Character Encoding Support</a></dd>
+	<dd><a href="refs.utilspec.image.html">Image Processing and Generation</a></dd>
+	<dd><a href="refs.remote.mail.html">Mail Related Extensions</a></dd>
+	<dd><a href="refs.math.html">Mathematical Extensions</a></dd>
+	<dd><a href="refs.utilspec.nontext.html">Non-Text MIME Output</a></dd>
+	<dd><a href="refs.fileprocess.process.html">Process Control Extensions</a></dd>
+	<dd><a href="refs.basic.other.html">Other Basic Extensions</a></dd>
+	<dd><a href="refs.remote.other.html">Other Services</a></dd>
+	<dd><a href="refs.search.html">Search Engine Extensions</a></dd>
+	<dd><a href="refs.utilspec.server.html">Server Specific Extensions</a></dd>
+	<dd><a href="refs.basic.session.html">Session Extensions</a></dd>
+	<dd><a href="refs.basic.text.html">Text Processing</a></dd>
+	<dd><a href="refs.basic.vartype.html">Variable and Type Related Extensions</a></dd>
+	<dd><a href="refs.webservice.html">Web Services</a></dd>
+	<dd><a href="refs.utilspec.windows.html">Windows Only Extensions</a></dd>
+	<dd><a href="refs.xml.html">XML Manipulation</a></dd>
+	<dd><a href="refs.ui.html">GUI Extensions</a></dd>
+</dl>
+<dl>
+<dt>Keyboard Shortcuts</dt><dt>?</dt>
+<dd>This help</dd>
+<dt>j</dt>
+<dd>Next menu item</dd>
+<dt>k</dt>
+<dd>Previous menu item</dd>
+<dt>g p</dt>
+<dd>Previous man page</dd>
+<dt>g n</dt>
+<dd>Next man page</dd>
+<dt>G</dt>
+<dd>Scroll to bottom</dd>
+<dt>g g</dt>
+<dd>Scroll to top</dd>
+<dt>g h</dt>
+<dd>Goto homepage</dd>
+<dt>g s</dt>
+<dd>Goto search<br>(current page)</dd>
+<dt>/</dt>
+<dd>Focus search box</dd>
+</dl></div></nav>
+<div id="goto">
+    <div class="search">
+         <div class="text"></div>
+         <div class="results"><ul></ul></div>
+   </div>
+</div>
+
+  <div id="breadcrumbs" class="row-fluid">
+    <div id="breadcrumbs-inner">
+          
+              
+          <ul>
+            <li><a href="index-2.html">PHP Manual</a></li>      <li><a href="funcref.html">Function Reference</a></li>      <li><a href="refs.basic.other.html">Other Basic Extensions</a></li>      <li><a href="book.ds.html">Data Structures</a></li>      </ul>
+    </div>
+  </div>
+
+
+
+
+<div id="layout" class="clearfix">
+  <section id="layout-content">
+  <div id="class.ds-vector" class="reference">
+
+ <h1 class="title">The Vector class</h1>
+ 
+
+ <div class="partintro"><p class="verinfo">(No version information available, might only be in Git)</p>
+
+
+  <div class="section" id="ds-vector.intro">
+   <h2 class="title">Introduction</h2>
+   <p class="para">
+    A Vector is a sequence of values in a contiguous buffer that grows and
+    shrinks automatically. It’s the most efficient sequential structure because
+    a value’s index is a direct mapping to its index in the buffer, and the
+    growth factor isn't bound to a specific multiple or exponent.
+   </p>
+  </div>
+
+
+
+<div class="section" id="ds-vector.strengths">
+    <h2 class="title">Strengths</h2>
+    <p class="para">
+        </p><ul class="simplelist">
+            <li class="member">Supports array syntax (square brackets).</li>
+            <li class="member">Uses less overall memory than an <span class="type">array</span> for the same number of values.</li>
+            <li class="member">Automatically frees allocated memory when its size drops low enough.</li>
+            <li class="member">Capacity does not have to be a power of 2.</li>
+            <li class="member">
+                <span class="function"><strong>get()</strong></span>,
+                <span class="function"><strong>set()</strong></span>,
+                <span class="function"><strong>push()</strong></span>,
+                <span class="function"><strong>pop()</strong></span> are all O(1).
+            </li>
+        </ul>
+   <p></p>
+</div>
+
+<div class="section" id="ds-vector.weaknesses">
+    <h2 class="title">Weaknesses</h2>
+    <p class="para">
+        </p><ul class="simplelist">
+            <li class="member">
+                <span class="function"><strong>shift()</strong></span>,
+                <span class="function"><strong>unshift()</strong></span>,
+                <span class="function"><strong>insert()</strong></span> and
+                <span class="function"><strong>remove()</strong></span> are all O(n).
+            </li>
+        </ul>
+   <p></p>
+</div>
+
+  <div class="section" id="ds-vector.synopsis">
+   <h2 class="title">Class synopsis</h2>
+
+
+   <div class="classsynopsis">
+    <div class="ooclass">
+        
+    </div>
+
+
+    <div class="classsynopsisinfo">
+
+    <span class="ooclass"><span class="modifier">class</span> <strong class="classname">Ds\Vector</strong></span>
+    <span class="oointerface"><span class="modifier">implements</span>  <strong class="interfacename">Ds\Sequence</strong></span><span class="oointerface">,  <a href="class.arrayaccess.html" class="interfacename">ArrayAccess</a></span> {</div>
+
+    <div class="classsynopsisinfo classsynopsisinfo_comment">/* Constants */</div>
+    <div class="fieldsynopsis">
+     <span class="modifier">const</span>
+     <span class="type">int</span>
+      <var class="fieldsynopsis_varname"><a href="class.ds-vector.html#ds-vector.constants.min-capacity"><var class="varname">MIN_CAPACITY</var></a></var><span class="initializer"> = 10</span>;</div>
+
+
+    <div class="classsynopsisinfo classsynopsisinfo_comment">/* Methods */</div>
+    <div class="methodsynopsis dc-description">
+   <span class="modifier">public</span> <span class="methodname"><a href="ds-vector.allocate.html" class="methodname">allocate</a></span>(<span class="methodparam"><span class="type">int</span> <code class="parameter">$capacity</code></span>): <span class="type"><span class="type void">void</span></span></div>
+<div class="methodsynopsis dc-description"><span class="modifier">public</span> <span class="methodname"><a href="ds-vector.apply.html" class="methodname">apply</a></span>(<span class="methodparam"><span class="type"><a href="language.types.callable.html" class="type callable">callable</a></span> <code class="parameter">$callback</code></span>): <span class="type"><span class="type void">void</span></span></div>
+<div class="methodsynopsis dc-description"><span class="modifier">public</span> <span class="methodname"><a href="ds-vector.capacity.html" class="methodname">capacity</a></span>(): <span class="type">int</span></div>
+<div class="methodsynopsis dc-description"><span class="modifier">public</span> <span class="methodname"><a href="ds-vector.clear.html" class="methodname">clear</a></span>(): <span class="type"><span class="type void">void</span></span></div>
+<div class="methodsynopsis dc-description"><span class="modifier">public</span> <span class="methodname"><a href="ds-vector.contains.html" class="methodname">contains</a></span>(<span class="methodparam"><span class="type"><a href="language.types.declarations.html#language.types.declarations.mixed" class="type mixed">mixed</a></span> <code class="parameter">...$values</code></span>): <span class="type">bool</span></div>
+<div class="methodsynopsis dc-description"><span class="modifier">public</span> <span class="methodname"><a href="ds-vector.copy.html" class="methodname">copy</a></span>(): <span class="type"><a href="class.ds-vector.html" class="type Ds\Vector">Ds\Vector</a></span></div>
+<div class="methodsynopsis dc-description"><span class="modifier">public</span> <span class="methodname"><a href="ds-vector.filter.html" class="methodname">filter</a></span>(<span class="methodparam"><span class="type"><a href="language.types.callable.html" class="type callable">callable</a></span> <code class="parameter">$callback</code><span class="initializer"> = ?</span></span>): <span class="type"><a href="class.ds-vector.html" class="type Ds\Vector">Ds\Vector</a></span></div>
+<div class="methodsynopsis dc-description"><span class="modifier">public</span> <span class="methodname"><a href="ds-vector.find.html" class="methodname">find</a></span>(<span class="methodparam"><span class="type"><a href="language.types.declarations.html#language.types.declarations.mixed" class="type mixed">mixed</a></span> <code class="parameter">$value</code></span>): <span class="type"><a href="language.types.declarations.html#language.types.declarations.mixed" class="type mixed">mixed</a></span></div>
+<div class="methodsynopsis dc-description"><span class="modifier">public</span> <span class="methodname"><a href="ds-vector.first.html" class="methodname">first</a></span>(): <span class="type"><a href="language.types.declarations.html#language.types.declarations.mixed" class="type mixed">mixed</a></span></div>
+<div class="methodsynopsis dc-description"><span class="modifier">public</span> <span class="methodname"><a href="ds-vector.get.html" class="methodname">get</a></span>(<span class="methodparam"><span class="type">int</span> <code class="parameter">$index</code></span>): <span class="type"><a href="language.types.declarations.html#language.types.declarations.mixed" class="type mixed">mixed</a></span></div>
+<div class="methodsynopsis dc-description"><span class="modifier">public</span> <span class="methodname"><a href="ds-vector.insert.html" class="methodname">insert</a></span>(<span class="methodparam"><span class="type">int</span> <code class="parameter">$index</code></span>, <span class="methodparam"><span class="type"><a href="language.types.declarations.html#language.types.declarations.mixed" class="type mixed">mixed</a></span> <code class="parameter">...$values</code></span>): <span class="type"><span class="type void">void</span></span></div>
+<div class="methodsynopsis dc-description"><span class="modifier">public</span> <span class="methodname"><a href="ds-vector.isempty.html" class="methodname">isEmpty</a></span>(): <span class="type">bool</span></div>
+<div class="methodsynopsis dc-description"><span class="modifier">public</span> <span class="methodname"><a href="ds-vector.join.html" class="methodname">join</a></span>(<span class="methodparam"><span class="type">string</span> <code class="parameter">$glue</code><span class="initializer"> = ?</span></span>): <span class="type">string</span></div>
+<div class="methodsynopsis dc-description"><span class="modifier">public</span> <span class="methodname"><a href="ds-vector.last.html" class="methodname">last</a></span>(): <span class="type"><a href="language.types.declarations.html#language.types.declarations.mixed" class="type mixed">mixed</a></span></div>
+<div class="methodsynopsis dc-description"><span class="modifier">public</span> <span class="methodname"><a href="ds-vector.map.html" class="methodname">map</a></span>(<span class="methodparam"><span class="type"><a href="language.types.callable.html" class="type callable">callable</a></span> <code class="parameter">$callback</code></span>): <span class="type"><a href="class.ds-vector.html" class="type Ds\Vector">Ds\Vector</a></span></div>
+<div class="methodsynopsis dc-description"><span class="modifier">public</span> <span class="methodname"><a href="ds-vector.merge.html" class="methodname">merge</a></span>(<span class="methodparam"><span class="type"><a href="language.types.declarations.html#language.types.declarations.mixed" class="type mixed">mixed</a></span> <code class="parameter">$values</code></span>): <span class="type"><a href="class.ds-vector.html" class="type Ds\Vector">Ds\Vector</a></span></div>
+<div class="methodsynopsis dc-description"><span class="modifier">public</span> <span class="methodname"><a href="ds-vector.pop.html" class="methodname">pop</a></span>(): <span class="type"><a href="language.types.declarations.html#language.types.declarations.mixed" class="type mixed">mixed</a></span></div>
+<div class="methodsynopsis dc-description"><span class="modifier">public</span> <span class="methodname"><a href="ds-vector.push.html" class="methodname">push</a></span>(<span class="methodparam"><span class="type"><a href="language.types.declarations.html#language.types.declarations.mixed" class="type mixed">mixed</a></span> <code class="parameter">...$values</code></span>): <span class="type"><span class="type void">void</span></span></div>
+<div class="methodsynopsis dc-description"><span class="modifier">public</span> <span class="methodname"><a href="ds-vector.reduce.html" class="methodname">reduce</a></span>(<span class="methodparam"><span class="type"><a href="language.types.callable.html" class="type callable">callable</a></span> <code class="parameter">$callback</code></span>, <span class="methodparam"><span class="type"><a href="language.types.declarations.html#language.types.declarations.mixed" class="type mixed">mixed</a></span> <code class="parameter">$initial</code><span class="initializer"> = ?</span></span>): <span class="type"><a href="language.types.declarations.html#language.types.declarations.mixed" class="type mixed">mixed</a></span></div>
+<div class="methodsynopsis dc-description"><span class="modifier">public</span> <span class="methodname"><a href="ds-vector.remove.html" class="methodname">remove</a></span>(<span class="methodparam"><span class="type">int</span> <code class="parameter">$index</code></span>): <span class="type"><a href="language.types.declarations.html#language.types.declarations.mixed" class="type mixed">mixed</a></span></div>
+<div class="methodsynopsis dc-description"><span class="modifier">public</span> <span class="methodname"><a href="ds-vector.reverse.html" class="methodname">reverse</a></span>(): <span class="type"><span class="type void">void</span></span></div>
+<div class="methodsynopsis dc-description"><span class="modifier">public</span> <span class="methodname"><a href="ds-vector.reversed.html" class="methodname">reversed</a></span>(): <span class="type"><a href="class.ds-vector.html" class="type Ds\Vector">Ds\Vector</a></span></div>
+<div class="methodsynopsis dc-description"><span class="modifier">public</span> <span class="methodname"><a href="ds-vector.rotate.html" class="methodname">rotate</a></span>(<span class="methodparam"><span class="type">int</span> <code class="parameter">$rotations</code></span>): <span class="type"><span class="type void">void</span></span></div>
+<div class="methodsynopsis dc-description"><span class="modifier">public</span> <span class="methodname"><a href="ds-vector.set.html" class="methodname">set</a></span>(<span class="methodparam"><span class="type">int</span> <code class="parameter">$index</code></span>, <span class="methodparam"><span class="type"><a href="language.types.declarations.html#language.types.declarations.mixed" class="type mixed">mixed</a></span> <code class="parameter">$value</code></span>): <span class="type"><span class="type void">void</span></span></div>
+<div class="methodsynopsis dc-description"><span class="modifier">public</span> <span class="methodname"><a href="ds-vector.shift.html" class="methodname">shift</a></span>(): <span class="type"><a href="language.types.declarations.html#language.types.declarations.mixed" class="type mixed">mixed</a></span></div>
+<div class="methodsynopsis dc-description"><span class="modifier">public</span> <span class="methodname"><a href="ds-vector.slice.html" class="methodname">slice</a></span>(<span class="methodparam"><span class="type">int</span> <code class="parameter">$index</code></span>, <span class="methodparam"><span class="type">int</span> <code class="parameter">$length</code><span class="initializer"> = ?</span></span>): <span class="type"><a href="class.ds-vector.html" class="type Ds\Vector">Ds\Vector</a></span></div>
+<div class="methodsynopsis dc-description"><span class="modifier">public</span> <span class="methodname"><a href="ds-vector.sort.html" class="methodname">sort</a></span>(<span class="methodparam"><span class="type"><a href="language.types.callable.html" class="type callable">callable</a></span> <code class="parameter">$comparator</code><span class="initializer"> = ?</span></span>): <span class="type"><span class="type void">void</span></span></div>
+<div class="methodsynopsis dc-description"><span class="modifier">public</span> <span class="methodname"><a href="ds-vector.sorted.html" class="methodname">sorted</a></span>(<span class="methodparam"><span class="type"><a href="language.types.callable.html" class="type callable">callable</a></span> <code class="parameter">$comparator</code><span class="initializer"> = ?</span></span>): <span class="type"><a href="class.ds-vector.html" class="type Ds\Vector">Ds\Vector</a></span></div>
+<div class="methodsynopsis dc-description"><span class="modifier">public</span> <span class="methodname"><a href="ds-vector.sum.html" class="methodname">sum</a></span>(): <span class="type"><span class="type">int</span>|<span class="type">float</span></span></div>
+<div class="methodsynopsis dc-description"><span class="modifier">public</span> <span class="methodname"><a href="ds-vector.toarray.html" class="methodname">toArray</a></span>(): <span class="type">array</span></div>
+<div class="methodsynopsis dc-description"><span class="modifier">public</span> <span class="methodname"><a href="ds-vector.unshift.html" class="methodname">unshift</a></span>(<span class="methodparam"><span class="type"><a href="language.types.declarations.html#language.types.declarations.mixed" class="type mixed">mixed</a></span> <code class="parameter">$values</code><span class="initializer"> = ?</span></span>): <span class="type"><span class="type void">void</span></span></div>
+
+   }</div>
+
+
+  </div>
+
+
+  <div class="section" id="ds-vector.constants">
+   <h2 class="title">Predefined Constants</h2>
+   <dl>
+
+    
+     <dt id="ds-vector.constants.min-capacity"><strong><code>Ds\Vector::MIN_CAPACITY</code></strong></dt>
+
+     <dd>
+
+      <p class="para">
+     </p></dd>
+
+    
+
+   </dl>
+
+  </div>
+
+
+  <div class="section">
+   <h2 class="title">Changelog</h2>
+   <p class="para">
+    </p><table class="doctable informaltable">
+     
+      <thead>
+       <tr>
+        <th>Version</th>
+        <th>Description</th>
+       </tr>
+
+      </thead>
+
+      <tbody class="tbody">
+       <tr>
+        <td>PECL ds 1.3.0</td>
+        <td>
+         The class now implements <span class="classname"><a href="class.arrayaccess.html" class="classname">ArrayAccess</a></span>.
+        </td>
+       </tr>
+
+      </tbody>
+     
+    </table>
+
+   <p></p>
+  </div>
+
+ </div>
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Table of Contents</h2><ul class="chunklist chunklist_reference"><li><a href="ds-vector.allocate.html">Ds\Vector::allocate</a> — Allocates enough memory for a required capacity</li><li><a href="ds-vector.apply.html">Ds\Vector::apply</a> — Updates all values by applying a callback function to each value</li><li><a href="ds-vector.capacity.html">Ds\Vector::capacity</a> — Returns the current capacity</li><li><a href="ds-vector.clear.html">Ds\Vector::clear</a> — Removes all values</li><li><a href="ds-vector.construct.html">Ds\Vector::__construct</a> — Creates a new instance</li><li><a href="ds-vector.contains.html">Ds\Vector::contains</a> — Determines if the vector contains given values</li><li><a href="ds-vector.copy.html">Ds\Vector::copy</a> — Returns a shallow copy of the vector</li><li><a href="ds-vector.count.html">Ds\Vector::count</a> — Returns the number of values in the collection</li><li><a href="ds-vector.filter.html">Ds\Vector::filter</a> — Creates a new vector using a callable to
+    determine which values to include</li><li><a href="ds-vector.find.html">Ds\Vector::find</a> — Attempts to find a value's index</li><li><a href="ds-vector.first.html">Ds\Vector::first</a> — Returns the first value in the vector</li><li><a href="ds-vector.get.html">Ds\Vector::get</a> — Returns the value at a given index</li><li><a href="ds-vector.insert.html">Ds\Vector::insert</a> — Inserts values at a given index</li><li><a href="ds-vector.isempty.html">Ds\Vector::isEmpty</a> — Returns whether the vector is empty</li><li><a href="ds-vector.join.html">Ds\Vector::join</a> — Joins all values together as a string</li><li><a href="ds-vector.jsonserialize.html">Ds\Vector::jsonSerialize</a> — Returns a representation that can be converted to JSON</li><li><a href="ds-vector.last.html">Ds\Vector::last</a> — Returns the last value</li><li><a href="ds-vector.map.html">Ds\Vector::map</a> — Returns the result of applying a callback to each value</li><li><a href="ds-vector.merge.html">Ds\Vector::merge</a> — Returns the result of adding all given values to the vector</li><li><a href="ds-vector.pop.html">Ds\Vector::pop</a> — Removes and returns the last value</li><li><a href="ds-vector.push.html">Ds\Vector::push</a> — Adds values to the end of the vector</li><li><a href="ds-vector.reduce.html">Ds\Vector::reduce</a> — Reduces the vector to a single value using a callback function</li><li><a href="ds-vector.remove.html">Ds\Vector::remove</a> — Removes and returns a value by index</li><li><a href="ds-vector.reverse.html">Ds\Vector::reverse</a> — Reverses the vector in-place</li><li><a href="ds-vector.reversed.html">Ds\Vector::reversed</a> — Returns a reversed copy</li><li><a href="ds-vector.rotate.html">Ds\Vector::rotate</a> — Rotates the vector by a given number of rotations</li><li><a href="ds-vector.set.html">Ds\Vector::set</a> — Updates a value at a given index</li><li><a href="ds-vector.shift.html">Ds\Vector::shift</a> — Removes and returns the first value</li><li><a href="ds-vector.slice.html">Ds\Vector::slice</a> — Returns a sub-vector of a given range</li><li><a href="ds-vector.sort.html">Ds\Vector::sort</a> — Sorts the vector in-place</li><li><a href="ds-vector.sorted.html">Ds\Vector::sorted</a> — Returns a sorted copy</li><li><a href="ds-vector.sum.html">Ds\Vector::sum</a> — Returns the sum of all values in the vector</li><li><a href="ds-vector.toarray.html">Ds\Vector::toArray</a> — Converts the vector to an array</li><li><a href="ds-vector.unshift.html">Ds\Vector::unshift</a> — Adds values to the front of the vector</li></ul>
+</div>
+
+<section id="usernotes">
+ <div class="head"><h3 class="title">User Contributed Notes</h3></div>
+ <div class="note">There are no user contributed notes for this page.</div></section>    </section><!-- layout-content -->
+        
+
+
+  </div><!-- layout -->
+
+  
+
+    
+ <!-- External and third party libraries. -->
+ 
+
+
+
+
+
+
+
+<a id="toTop" href="javascript:;"><span id="toTopHover"></span><img width="40" height="40" alt="To Top" src="../../images/to-top%402x.png"></a>
+
+
+
+<!-- Mirrored from www.php.net/manual/en/class.ds-vector.php by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 11 Sep 2021 05:31:52 GMT -->
+
+</body></html>

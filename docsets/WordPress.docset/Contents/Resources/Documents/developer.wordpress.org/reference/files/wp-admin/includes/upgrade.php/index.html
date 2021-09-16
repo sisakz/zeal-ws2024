@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+
+<!-- Mirrored from developer.wordpress.org/reference/files/wp-admin/includes/upgrade.php/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 31 Aug 2021 17:18:13 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<!--
+<meta property="fb:page_id" content="6427302910" />
+-->
+<meta name="google-site-verification" content="7VWES_-rcHBcmaQis9mSYamPfNwE03f4vyTj4pfuAw0" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>wp-admin/includes/upgrade.php</title>
+<meta name="referrer" content="always">
+
+		<link href='../../../../../../fonts.googleapis.com/css.css?family=Open+Sans:300italic,400italic,600italic,400,300,600&amp;subset=latin,cyrillic-ext,greek-ext,greek,vietnamese,latin-ext,cyrillic' rel='stylesheet' type='text/css'>
+
+		<link rel="stylesheet" href="../../../../../../s.w.org/style/wp4.css?95" />
+
+<link rel="shortcut icon" href="../../../../../../s.w.org/favicon.ico?2" type="image/x-icon" />
+<link rel="pingback" href="../../../../../xmlrpc.php" /><meta name='robots' content='max-image-preview:large' />
+<link rel='dns-prefetch' href='../../../../../../fonts.googleapis.com/index.html' />
+<link rel='dns-prefetch' href='http://s.w.org/' />
+<link rel='dns-prefetch' href='http://www.googletagmanager.com/' />
+<link rel='dns-prefetch' href='http://fonts.gstatic.com/' />
+<link rel="alternate" type="application/rss+xml" title="WordPress Developer Resources &raquo; Feed" href="../../../../../feed/index.html" />
+<link rel="alternate" type="application/rss+xml" title="WordPress Developer Resources &raquo; Comments Feed" href="../../../../../comments/feed/index.html" />
+<meta property="og:title" content="wp-admin/includes/upgrade.php | WordPress Developer Resources" />
+<meta property="og:site_name" content="WordPress Developer Resources" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="../../../../../index.html" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@WordPress" />
+<link rel="alternate" type="application/rss+xml" title="WordPress Developer Resources &raquo; wp-admin/includes/upgrade.php File Feed" href="https://developer.wordpress.org/reference/files/wp-admin/includes/upgrade.php/feed/" />
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'../../../../../../www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P24PF4B');</script>
+			<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/developer.wordpress.org\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.9-alpha-51701"}};
+			!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([10084,65039,8205,55357,56613],[10084,65039,8203,55357,56613])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel='stylesheet' id='dashicons-css'  href='../../../../../wp-includes/css/dashicons.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='admin-bar-css'  href='../../../../../wp-includes/css/admin-bar.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-block-library-css'  href='../../../../../wp-includes/css/dist/block-library/style.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='wporg-handbook-css-css'  href='../../../../../wp-content/plugins/handbook/stylesheets/callout-boxes.css?ver=20200121' type='text/css' media='all' />
+<link rel='stylesheet' id='open-sans-css'  href='../../../../../../fonts.googleapis.com/css-2.css?family=Open+Sans%3A300italic%2C400italic%2C600italic%2C300%2C400%2C600&amp;subset=latin%2Clatin-ext&amp;display=fallback&amp;ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='wporg-developer-style-css'  href='../../../../../wp-content/themes/pub/wporg-developer/style.css?ver=3' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-dev-sass-compiled-css'  href='../../../../../wp-content/themes/pub/wporg-developer/stylesheets/main.css?ver=20200713' type='text/css' media='all' />
+<link rel='stylesheet' id='awesomplete-css-css'  href='../../../../../wp-content/themes/pub/wporg-developer/stylesheets/awesomplete.css?ver=20160114' type='text/css' media='all' />
+<link rel='stylesheet' id='autocomplete-css-css'  href='../../../../../wp-content/themes/pub/wporg-developer/stylesheets/autocomplete.css?ver=20171220' type='text/css' media='all' />
+<script type='text/javascript' src='../../../../../wp-includes/js/jquery/jquery.min.js?ver=3.6.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='../../../../../wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='../../../../../wp-content/plugins/handbook/scripts/handbook.js?ver=20150930' id='wporg-handbook-js'></script>
+<script type='text/javascript' src='../../../../../wp-content/themes/pub/wporg-developer/js/chapters.js?ver=20190603' id='wporg-developer-chapters-js'></script>
+<link rel="https://api.w.org/" href="https://developer.wordpress.org/wp-json/" /><link rel="alternate" type="application/json" href="https://developer.wordpress.org/wp-json/wp/v2/wp-parser-source-file/355" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="../../../../../xmlrpc-2.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="../../../../../wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 5.9-alpha-51701" />
+<link rel="canonical" href="index.html">
+<link rel="next" href="page/2/index.html">
+<!-- Stream WordPress user activity plugin v3.6.2 -->
+	<style>
+		@media screen and (max-width: 782px) {
+			#wpadminbar li#wp-admin-bar-log-in,
+			#wpadminbar li#wp-admin-bar-register {
+				display: block;
+			}
+
+			#wpadminbar li#wp-admin-bar-log-in a,
+			#wpadminbar li#wp-admin-bar-register a {
+				padding: 0 8px;
+			}
+		}
+	</style>
+		<style>
+			a.github-edit {
+				margin-left: .5em;
+				font-size: .5em;
+				vertical-align: top;
+				display: inline-block;
+				border: 1px solid #eeeeee;
+				border-radius: 2px;
+				background: #eeeeee;
+				padding: .5em .6em .4em;
+				color: black;
+				margin-top: 0.1em;
+			}
+			a.github-edit > * {
+				opacity: 0.6;
+			}
+			a.github-edit:hover > * {
+				opacity: 1;
+				color: black;
+			}
+			a.github-edit img {
+				height: .8em;
+			}
+		</style>
+		
+	<script type="text/javascript">
+		jQuery( '<style>.hide-if-js { display: none; }</style>' ).appendTo( 'head' );
+		jQuery( function($) {
+			$( 'body' ).addClass('js');
+		} );
+	</script>
+<style type="text/css" media="print">#wpadminbar { display:none; }</style>
+	<style type="text/css" media="screen">
+	</style>
+	<script>document.cookie='devicePixelRatio='+((window.devicePixelRatio === undefined) ? 1 : window.devicePixelRatio)+'; path=/';</script>
+
+</head>
+
+
+<body id="wordpress-org" class="archive tax-wp-parser-source-file term-wp-admin_includes_upgrade-php term-355 admin-bar no-customize-support">
+		<div id="wpadminbar" class="nojq nojs">
+						<div class="quicklinks" id="wp-toolbar" role="navigation" aria-label="Toolbar">
+				<ul id='wp-admin-bar-root-default' class="ab-top-menu"><li id='wp-admin-bar-wp-logo' class="menupop"><a class='ab-item' aria-haspopup="true" href='https://wordpress.org/about/'><span class="ab-icon" aria-hidden="true"></span><span class="screen-reader-text">About WordPress</span></a><div class="ab-sub-wrapper"><ul id='wp-admin-bar-wp-logo-default' class="ab-submenu"><li id='wp-admin-bar-about'><a class='ab-item' href='https://wordpress.org/about/'>About WordPress</a></li></ul><ul id='wp-admin-bar-wp-logo-external' class="ab-sub-secondary ab-submenu"><li id='wp-admin-bar-wporg'><a class='ab-item' href='https://wordpress.org/'>WordPress.org</a></li><li id='wp-admin-bar-documentation'><a class='ab-item' href='https://wordpress.org/support/'>Documentation</a></li><li id='wp-admin-bar-support-forums'><a class='ab-item' href='https://wordpress.org/support/forums/'>Support</a></li><li id='wp-admin-bar-feedback'><a class='ab-item' href='https://wordpress.org/support/forum/requests-and-feedback'>Feedback</a></li></ul></div></li></ul><ul id='wp-admin-bar-top-secondary' class="ab-top-secondary ab-top-menu"><li id='wp-admin-bar-search' class="admin-bar-search"><div class="ab-item ab-empty-item" tabindex="-1"><form action="https://developer.wordpress.org/" method="get" id="adminbarsearch"><input class="adminbar-input" name="s" id="adminbar-search" type="text" value="" maxlength="150" /><label for="adminbar-search" class="screen-reader-text">Search</label><input type="submit" class="adminbar-button" value="Search" /></form></div></li><li id='wp-admin-bar-log-in'><a class='ab-item' href='https://login.wordpress.org/?locale=en_US'>Log In</a></li><li id='wp-admin-bar-register'><a class='ab-item' href='https://login.wordpress.org/register?locale=en_US'>Register</a></li></ul>			</div>
+					</div>
+
+		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P24PF4B" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<div id="wporg-header">
+	<div class="wrapper">
+	<h1><a href="http://wordpress.org/">WordPress.org</a></h1>				<div id="head-search">
+		<form action="http://wordpress.org/search/do-search.php" method="get">
+			<label for="global-search" class="screen-reader-text">Search WordPress.org for:</label>
+			<input id="global-search" class="text" name="search" type="text" value="" maxlength="150" placeholder="Search WordPress.org" />
+			<button type="submit" class="button"><span class="screen-reader-text">Submit</span></button>
+		</form>
+		</div>
+				<div style="clear:both"></div>
+		<button id="mobile-menu-button" aria-expanded="false"><span class="screen-reader-text">Toggle Menu</span></button>
+		
+<nav aria-label="Main Menu">
+<ul id="wporg-header-menu">
+<li class="menu-item"><a href='http://wordpress.org/showcase/' data-title='See some of the sites built on WordPress.'>Showcase</a></li>
+<li class="menu-item"><a href='http://learn.wordpress.org/' data-title='Resources to help you learn more about WordPress and teach it to others.'>Learn</a></li>
+<li class="menu-item"><a href='http://wordpress.org/themes/' data-title='Find just the right look for your website.'>Themes</a></li>
+<li class="menu-item"><a href='http://wordpress.org/plugins/' data-title='Plugins can extend WordPress to do almost anything you can imagine.'>Plugins</a></li>
+<li class="menu-item"><a href='http://wordpress.org/mobile/' data-title='Take your website on the go!'>Mobile</a></li>
+<li class="menu-item"><a href='http://wordpress.org/support/' data-title='Forums, documentation, help.'>Support</a><ul class="nav-submenu"><li><a href='http://wordpress.org/support/' title='Documentation, tutorials, best practices.'>Documentation</a></li><li><a href='http://wordpress.org/support/forums/' title='Support and discussion forums.'>Forums</a></li></ul><div class="uparrow"></div></li>
+<li class="menu-item"><a href='http://make.wordpress.org/' data-title='Contribute your knowledge.'>Get Involved</a><ul class="nav-submenu"><li><a href='http://wordpress.org/five-for-the-future/' title='How five percent is powering the next generation of the web'>Five for the Future</a></li></ul><div class="uparrow"></div></li>
+<li class="menu-item"><a href='http://wordpress.org/about/' data-title='About the WordPress Organization, and where we&#039;re going.'>About</a></li>
+<li class="menu-item"><a href='http://wordpress.org/news/' data-title='Come here for the latest scoop.'>Blog</a></li>
+<li class="menu-item"><a href='http://wordpress.org/hosting/' data-title='Find a home for your blog.'>Hosting</a></li>
+<li id="download" class="button download-button menu-item"><a href='http://wordpress.org/download/' data-title='Get it. Got it? Good.'>Get WordPress</a></li>
+</ul>
+</nav>
+		<div style="clear:both"></div>
+	</div>
+</div>
+
+
+
+<header id="masthead" class="site-header" role="banner">
+		<div class="site-branding">
+		<h1 class="site-title">
+			<a href="../../../../index.html" rel="home">Code Reference</a>
+		</h1>
+
+		
+		<nav id="site-navigation" class="main-navigation" role="navigation">
+			<button class="menu-toggle dashicons dashicons-arrow-down-alt2" aria-controls="primary-menu" aria-expanded="false" aria-label="Primary Menu"></button>
+					</nav>
+	</div>
+</header><!-- #masthead -->
+
+<div id="page" class="hfeed site devhub-wrap">
+	<a href="#main" class="screen-reader-text">Skip to content</a>
+
+				<div id="inner-search">
+			<div class="search-section section clear hide-if-js">
+
+
+	
+	<form role="search" method="get" class="searchform searchform-filtered" action="https://developer.wordpress.org/">
+		<label for="search-field" class="screen-reader-text">Search for:</label>
+		<input type="text" id="search-field" class="search-field" placeholder="Search &hellip;" value="" name="s">
+		<button class="button button-primary button-search"><i class="dashicons dashicons-search"></i><span class="screen-reader-text">Search plugins</span></button>
+	
+		<div class="search-post-type">
+			<span>Filter by type:</span>
+									<label><input type="checkbox" name="post_type[]" value="wp-parser-function"
+						 /> Functions</label>
+									<label><input type="checkbox" name="post_type[]" value="wp-parser-hook"
+						 /> Hooks</label>
+									<label><input type="checkbox" name="post_type[]" value="wp-parser-class"
+						 /> Classes</label>
+									<label><input type="checkbox" name="post_type[]" value="wp-parser-method"
+						 /> Methods</label>
+					</div>
+
+	
+	</form>
+
+</div><!-- /search-guide -->
+			<div id="inner-search-icon-container">
+				<div id="inner-search-icon">
+					<div class="dashicons dashicons-search"><span class="screen-reader-text">Search</span></div>
+				</div>
+			</div>
+		</div>
+
+		<div id="content" class="site-content">
+
+	<div id="content-area">
+
+		
+		<div class="breadcrumb-trail breadcrumbs" itemprop="breadcrumb">
+			<span class="trail-browse">Browse:</span> 
+			<span class="trail-begin"><a href="../../../../../index.html" title="WordPress Developer Resources" rel="home">Home</a></span> <span class="sep">&#47;</span> 
+			<span class="trail-inner"><a href="../../../../index.html" title="Reference">Reference</a></span> <span class="sep">&#47;</span> <span class="trail-end">wp-admin/includes/upgrade.php</span>
+		</div>
+		<main id="main" class="site-main" role="main">
+
+			<form method='get' class='archive-filter-form' action='#'><label for='archive-filter'>Filter by type: <select name="post_type[]" id="archive-filter">
+	<option selected='selected' value='any'>Any type</option>
+	<option value='wp-parser-class'>Classes</option>
+	<option value='wp-parser-function'>Functions</option>
+	<option value='wp-parser-hook'>Hooks</option>
+	<option value='wp-parser-method'>Methods</option></select></label><input class='shiny-blue' type='submit' value='Filter' /></form>
+			
+
+								
+					
+<article id="post-133226" class="post-133226 wp-parser-hook type-wp-parser-hook status-publish hentry wp-parser-source-file-wp-admin_includes_upgrade-php wp-parser-package-administration wp-parser-package-wordpress wp-parser-since-5-6-0">
+
+	<h1><a href="../../../../hooks/wp_installed_email/index.html">wp_installed_email</a></h1>
+
+	<div class="description">
+		<p><b>Filter Hook: </b>Filters the contents of the email sent to the site administrator when WordPress is installed.</p>
+	</div>
+	<div class="sourcefile">
+		<p>Source: wp-admin/includes/upgrade.php:613</p>
+	</div>
+
+
+		<div class="meta">
+		Used by <a href="../../../../hooks/wp_installed_email/index.html#used-by">1 function</a>		|
+		Uses <a href="../../../../hooks/wp_installed_email/index.html#uses">0 functions</a>	</div>
+
+	
+</article>
+
+				
+					
+<article id="post-19364" class="post-19364 wp-parser-function type-wp-parser-function status-publish hentry wp-parser-source-file-wp-admin_includes_upgrade-php wp-parser-package-administration wp-parser-package-wordpress wp-parser-since-4-4-0">
+
+	<h1><a href="../../../../functions/upgrade_440/index.html">upgrade_440()</a></h1>
+
+	<div class="description">
+		<p><b>Function: </b>Executes changes made in WordPress 4.4.0.</p>
+	</div>
+	<div class="sourcefile">
+		<p>Source: wp-admin/includes/upgrade.php:1616</p>
+	</div>
+
+
+		<div class="meta">
+		Used by <a href="../../../../functions/upgrade_440/index.html#used-by">0 functions</a>		|
+		Uses <a href="../../../../functions/upgrade_440/index.html#uses">0 functions</a>	</div>
+
+	
+</article>
+
+				
+					
+<article id="post-19093" class="post-19093 wp-parser-function type-wp-parser-function status-publish hentry wp-parser-source-file-wp-admin_includes_upgrade-php wp-parser-package-administration wp-parser-package-wordpress wp-parser-since-4-3-1">
+
+	<h1><a href="../../../../functions/upgrade_431/index.html">upgrade_431()</a></h1>
+
+	<div class="description">
+		<p><b>Function: </b>Executes changes made in WordPress 4.3.1.</p>
+	</div>
+	<div class="sourcefile">
+		<p>Source: wp-admin/includes/upgrade.php:1599</p>
+	</div>
+
+
+		<div class="meta">
+		Used by <a href="../../../../functions/upgrade_431/index.html#used-by">0 functions</a>		|
+		Uses <a href="../../../../functions/upgrade_431/index.html#uses">0 functions</a>	</div>
+
+	
+</article>
+
+				
+					
+<article id="post-18149" class="post-18149 wp-parser-function type-wp-parser-function status-publish hentry wp-parser-source-file-wp-admin_includes_upgrade-php wp-parser-package-administration wp-parser-package-wordpress wp-parser-since-4-3-0">
+
+	<h1><a href="../../../../functions/wp_should_upgrade_global_tables/index.html">wp_should_upgrade_global_tables()</a></h1>
+
+	<div class="description">
+		<p><b>Function: </b>Determine if global tables should be upgraded.</p>
+	</div>
+	<div class="sourcefile">
+		<p>Source: wp-admin/includes/upgrade.php:3482</p>
+	</div>
+
+
+		<div class="meta">
+		Used by <a href="../../../../functions/wp_should_upgrade_global_tables/index.html#used-by">3 functions</a>		|
+		Uses <a href="../../../../functions/wp_should_upgrade_global_tables/index.html#uses">4 functions</a>	</div>
+
+	
+</article>
+
+				
+					
+<article id="post-18150" class="post-18150 wp-parser-hook type-wp-parser-hook status-publish hentry wp-parser-source-file-wp-admin_includes_upgrade-php wp-parser-package-administration wp-parser-package-wordpress wp-parser-since-4-3-0">
+
+	<h1><a href="../../../../hooks/wp_should_upgrade_global_tables/index.html">wp_should_upgrade_global_tables</a></h1>
+
+	<div class="description">
+		<p><b>Filter Hook: </b>Filters if upgrade routines should be run on global tables.</p>
+	</div>
+	<div class="sourcefile">
+		<p>Source: wp-admin/includes/upgrade.php:3509</p>
+	</div>
+
+
+		<div class="meta">
+		Used by <a href="../../../../hooks/wp_should_upgrade_global_tables/index.html#used-by">1 function</a>		|
+		Uses <a href="../../../../hooks/wp_should_upgrade_global_tables/index.html#uses">0 functions</a>	</div>
+
+	
+</article>
+
+				
+					
+<article id="post-18147" class="post-18147 wp-parser-function type-wp-parser-function status-publish hentry wp-parser-source-file-wp-admin_includes_upgrade-php wp-parser-package-administration wp-parser-package-wordpress wp-parser-since-4-3-0">
+
+	<h1><a href="../../../../functions/upgrade_430/index.html">upgrade_430()</a></h1>
+
+	<div class="description">
+		<p><b>Function: </b>Executes changes made in WordPress 4.3.0.</p>
+	</div>
+	<div class="sourcefile">
+		<p>Source: wp-admin/includes/upgrade.php:1515</p>
+	</div>
+
+
+		<div class="meta">
+		Used by <a href="../../../../functions/upgrade_430/index.html#used-by">0 functions</a>		|
+		Uses <a href="../../../../functions/upgrade_430/index.html#uses">0 functions</a>	</div>
+
+	
+</article>
+
+				
+					
+<article id="post-18148" class="post-18148 wp-parser-function type-wp-parser-function status-publish hentry wp-parser-source-file-wp-admin_includes_upgrade-php wp-parser-package-administration wp-parser-package-wordpress wp-parser-since-4-3-0">
+
+	<h1><a href="../../../../functions/upgrade_430_fix_comments/index.html">upgrade_430_fix_comments()</a></h1>
+
+	<div class="description">
+		<p><b>Function: </b>Executes comments changes made in WordPress 4.3.0.</p>
+	</div>
+	<div class="sourcefile">
+		<p>Source: wp-admin/includes/upgrade.php:1553</p>
+	</div>
+
+
+		<div class="meta">
+		Used by <a href="../../../../functions/upgrade_430_fix_comments/index.html#used-by">0 functions</a>		|
+		Uses <a href="../../../../functions/upgrade_430_fix_comments/index.html#uses">0 functions</a>	</div>
+
+	
+</article>
+
+				
+					
+<article id="post-17943" class="post-17943 wp-parser-function type-wp-parser-function status-publish hentry wp-parser-source-file-wp-admin_includes_upgrade-php wp-parser-package-administration wp-parser-package-wordpress wp-parser-since-4-2-3">
+
+	<h1><a href="../../../../functions/upgrade_423/index.html">upgrade_423()</a></h1>
+
+	<div class="description">
+		<p><b>Function: </b>Execute changes made in WordPress 4.2.0.</p>
+	</div>
+	<div class="sourcefile">
+		<p>Source: wp-admin/includes/upgrade.php:1489</p>
+	</div>
+
+
+		<div class="meta">
+		Used by <a href="../../../../functions/upgrade_423/index.html#used-by">0 functions</a>		|
+		Uses <a href="../../../../functions/upgrade_423/index.html#uses">0 functions</a>	</div>
+
+	
+</article>
+
+				
+					
+<article id="post-17142" class="post-17142 wp-parser-function type-wp-parser-function status-publish hentry wp-parser-source-file-wp-admin_includes_upgrade-php wp-parser-package-administration wp-parser-package-wordpress wp-parser-since-4-2-2">
+
+	<h1><a href="../../../../functions/upgrade_422/index.html">upgrade_422()</a></h1>
+
+	<div class="description">
+		<p><b>Function: </b>Execute changes made in WordPress 4.2.2.</p>
+	</div>
+	<div class="sourcefile">
+		<p>Source: wp-admin/includes/upgrade.php:1441</p>
+	</div>
+
+
+		<div class="meta">
+		Used by <a href="../../../../functions/upgrade_422/index.html#used-by">0 functions</a>		|
+		Uses <a href="../../../../functions/upgrade_422/index.html#uses">0 functions</a>	</div>
+
+	
+</article>
+
+				
+					
+<article id="post-17042" class="post-17042 wp-parser-function type-wp-parser-function status-publish hentry wp-parser-source-file-wp-admin_includes_upgrade-php wp-parser-package-administration wp-parser-package-wordpress wp-parser-since-4-2-1">
+
+	<h1><a href="../../../../functions/upgrade_421/index.html">upgrade_421()</a></h1>
+
+	<div class="description">
+		<p><b>Function: </b>Execute changes made in WordPress 4.2.1.</p>
+	</div>
+	<div class="sourcefile">
+		<p>Source: wp-admin/includes/upgrade.php:1433</p>
+	</div>
+
+
+		<div class="meta">
+		Used by <a href="../../../../functions/upgrade_421/index.html#used-by">0 functions</a>		|
+		Uses <a href="../../../../functions/upgrade_421/index.html#uses">0 functions</a>	</div>
+
+	
+</article>
+
+				
+					
+<article id="post-15470" class="post-15470 wp-parser-function type-wp-parser-function status-publish hentry wp-parser-source-file-wp-admin_includes_upgrade-php wp-parser-package-administration wp-parser-package-wordpress wp-parser-since-4-2-0">
+
+	<h1><a href="../../../../functions/upgrade_420/index.html">upgrade_420()</a></h1>
+
+	<div class="description">
+		<p><b>Function: </b>Execute changes made in WordPress 4.2.0.</p>
+	</div>
+	<div class="sourcefile">
+		<p>Source: wp-admin/includes/upgrade.php:1505</p>
+	</div>
+
+
+		<div class="meta">
+		Used by <a href="../../../../functions/upgrade_420/index.html#used-by">0 functions</a>		|
+		Uses <a href="../../../../functions/upgrade_420/index.html#uses">0 functions</a>	</div>
+
+	
+</article>
+
+				
+					
+<article id="post-15473" class="post-15473 wp-parser-function type-wp-parser-function status-publish hentry wp-parser-source-file-wp-admin_includes_upgrade-php wp-parser-package-administration wp-parser-package-wordpress wp-parser-since-4-2-0">
+
+	<h1><a href="../../../../functions/maybe_convert_table_to_utf8mb4/index.html">maybe_convert_table_to_utf8mb4()</a></h1>
+
+	<div class="description">
+		<p><b>Function: </b>If a table only contains utf8 or utf8mb4 columns, convert it to utf8mb4.</p>
+	</div>
+	<div class="sourcefile">
+		<p>Source: wp-admin/includes/upgrade.php:2534</p>
+	</div>
+
+
+		<div class="meta">
+		Used by <a href="../../../../functions/maybe_convert_table_to_utf8mb4/index.html#used-by">2 functions</a>		|
+		Uses <a href="../../../../functions/maybe_convert_table_to_utf8mb4/index.html#uses">3 functions</a>	</div>
+
+	
+</article>
+
+				
+					
+<article id="post-15466" class="post-15466 wp-parser-function type-wp-parser-function status-publish hentry wp-parser-source-file-wp-admin_includes_upgrade-php wp-parser-package-administration wp-parser-package-wordpress wp-parser-since-4-2-0">
+
+	<h1><a href="../../../../functions/wp_install_maybe_enable_pretty_permalinks/index.html">wp_install_maybe_enable_pretty_permalinks()</a></h1>
+
+	<div class="description">
+		<p><b>Function: </b>Maybe enable pretty permalinks on installation.</p>
+	</div>
+	<div class="sourcefile">
+		<p>Source: wp-admin/includes/upgrade.php:477</p>
+	</div>
+
+
+		<div class="meta">
+		Used by <a href="../../../../functions/wp_install_maybe_enable_pretty_permalinks/index.html#used-by">1 function</a>		|
+		Uses <a href="../../../../functions/wp_install_maybe_enable_pretty_permalinks/index.html#uses">10 functions</a>	</div>
+
+	
+</article>
+
+				
+					
+<article id="post-6392" class="post-6392 wp-parser-function type-wp-parser-function status-publish hentry wp-parser-source-file-wp-admin_includes_upgrade-php wp-parser-package-administration wp-parser-package-wordpress wp-parser-since-4-0-0">
+
+	<h1><a href="../../../../functions/upgrade_400/index.html">upgrade_400()</a></h1>
+
+	<div class="description">
+		<p><b>Function: </b>Execute changes made in WordPress 4.0.0.</p>
+	</div>
+	<div class="sourcefile">
+		<p>Source: wp-admin/includes/upgrade.php:1484</p>
+	</div>
+
+
+		<div class="meta">
+		Used by <a href="../../../../functions/upgrade_400/index.html#used-by">0 functions</a>		|
+		Uses <a href="../../../../functions/upgrade_400/index.html#uses">0 functions</a>	</div>
+
+	
+</article>
+
+				
+					
+<article id="post-4841" class="post-4841 wp-parser-function type-wp-parser-function status-publish hentry wp-parser-source-file-wp-admin_includes_upgrade-php wp-parser-package-administration wp-parser-package-wordpress wp-parser-since-1-5-0">
+
+	<h1><a href="../../../../functions/make_site_theme_from_oldschool/index.html">make_site_theme_from_oldschool()</a></h1>
+
+	<div class="description">
+		<p><b>Function: </b>Creates a site theme from an existing theme.</p>
+	</div>
+	<div class="sourcefile">
+		<p>Source: wp-admin/includes/upgrade.php:3087</p>
+	</div>
+
+
+		<div class="meta">
+		Used by <a href="../../../../functions/make_site_theme_from_oldschool/index.html#used-by">1 function</a>		|
+		Uses <a href="../../../../functions/make_site_theme_from_oldschool/index.html#uses">1 function</a>	</div>
+
+	
+</article>
+
+				
+					
+<article id="post-4842" class="post-4842 wp-parser-function type-wp-parser-function status-publish hentry wp-parser-source-file-wp-admin_includes_upgrade-php wp-parser-package-administration wp-parser-package-wordpress wp-parser-since-1-5-0">
+
+	<h1><a href="../../../../functions/make_site_theme_from_default/index.html">make_site_theme_from_default()</a></h1>
+
+	<div class="description">
+		<p><b>Function: </b>Creates a site theme from the default theme.</p>
+	</div>
+	<div class="sourcefile">
+		<p>Source: wp-admin/includes/upgrade.php:3180</p>
+	</div>
+
+
+		<div class="meta">
+		Used by <a href="../../../../functions/make_site_theme_from_default/index.html#used-by">1 function</a>		|
+		Uses <a href="../../../../functions/make_site_theme_from_default/index.html#uses">0 functions</a>	</div>
+
+	
+</article>
+
+				
+					
+<article id="post-4843" class="post-4843 wp-parser-function type-wp-parser-function status-publish hentry wp-parser-source-file-wp-admin_includes_upgrade-php wp-parser-package-administration wp-parser-package-wordpress wp-parser-since-1-5-0">
+
+	<h1><a href="../../../../functions/make_site_theme/index.html">make_site_theme()</a></h1>
+
+	<div class="description">
+		<p><b>Function: </b>Creates a site theme.</p>
+	</div>
+	<div class="sourcefile">
+		<p>Source: wp-admin/includes/upgrade.php:3255</p>
+	</div>
+
+
+		<div class="meta">
+		Used by <a href="../../../../functions/make_site_theme/index.html#used-by">0 functions</a>		|
+		Uses <a href="../../../../functions/make_site_theme/index.html#uses">4 functions</a>	</div>
+
+	
+</article>
+
+				
+					
+<article id="post-4844" class="post-4844 wp-parser-function type-wp-parser-function status-publish hentry wp-parser-source-file-wp-admin_includes_upgrade-php wp-parser-package-administration wp-parser-package-wordpress wp-parser-since-2-0-0">
+
+	<h1><a href="../../../../functions/translate_level_to_role/index.html">translate_level_to_role()</a></h1>
+
+	<div class="description">
+		<p><b>Function: </b>Translate user level to user role name.</p>
+	</div>
+	<div class="sourcefile">
+		<p>Source: wp-admin/includes/upgrade.php:3305</p>
+	</div>
+
+
+		<div class="meta">
+		Used by <a href="../../../../functions/translate_level_to_role/index.html#used-by">0 functions</a>		|
+		Uses <a href="../../../../functions/translate_level_to_role/index.html#uses">0 functions</a>	</div>
+
+	
+</article>
+
+				
+					
+<article id="post-4845" class="post-4845 wp-parser-function type-wp-parser-function status-publish hentry wp-parser-source-file-wp-admin_includes_upgrade-php wp-parser-package-administration wp-parser-package-wordpress wp-parser-since-2-1-0">
+
+	<h1><a href="../../../../functions/wp_check_mysql_version/index.html">wp_check_mysql_version()</a></h1>
+
+	<div class="description">
+		<p><b>Function: </b>Checks the version of the installed MySQL binary.</p>
+	</div>
+	<div class="sourcefile">
+		<p>Source: wp-admin/includes/upgrade.php:3334</p>
+	</div>
+
+
+		<div class="meta">
+		Used by <a href="../../../../functions/wp_check_mysql_version/index.html#used-by">2 functions</a>		|
+		Uses <a href="../../../../functions/wp_check_mysql_version/index.html#uses">3 functions</a>	</div>
+
+	
+</article>
+
+				
+					
+<article id="post-4846" class="post-4846 wp-parser-function type-wp-parser-function status-publish hentry wp-parser-source-file-wp-admin_includes_upgrade-php wp-parser-package-administration wp-parser-package-wordpress wp-parser-since-2-2-0">
+
+	<h1><a href="../../../../functions/maybe_disable_automattic_widgets/index.html">maybe_disable_automattic_widgets()</a></h1>
+
+	<div class="description">
+		<p><b>Function: </b>Disables the Automattic widgets plugin, which was merged into core.</p>
+	</div>
+	<div class="sourcefile">
+		<p>Source: wp-admin/includes/upgrade.php:3347</p>
+	</div>
+
+
+		<div class="meta">
+		Used by <a href="../../../../functions/maybe_disable_automattic_widgets/index.html#used-by">0 functions</a>		|
+		Uses <a href="../../../../functions/maybe_disable_automattic_widgets/index.html#uses">1 function</a>	</div>
+
+	
+</article>
+
+				
+					
+<article id="post-4847" class="post-4847 wp-parser-function type-wp-parser-function status-publish hentry wp-parser-source-file-wp-admin_includes_upgrade-php wp-parser-package-administration wp-parser-package-wordpress wp-parser-since-3-5-0">
+
+	<h1><a href="../../../../functions/maybe_disable_link_manager/index.html">maybe_disable_link_manager()</a></h1>
+
+	<div class="description">
+		<p><b>Function: </b>Disables the Link Manager on upgrade if, at the time of upgrade, no links exist in the DB.</p>
+	</div>
+	<div class="sourcefile">
+		<p>Source: wp-admin/includes/upgrade.php:3367</p>
+	</div>
+
+
+		<div class="meta">
+		Used by <a href="../../../../functions/maybe_disable_link_manager/index.html#used-by">0 functions</a>		|
+		Uses <a href="../../../../functions/maybe_disable_link_manager/index.html#uses">3 functions</a>	</div>
+
+	
+</article>
+
+				
+					
+<article id="post-4837" class="post-4837 wp-parser-hook type-wp-parser-hook status-publish hentry wp-parser-source-file-wp-admin_includes_upgrade-php wp-parser-package-administration wp-parser-package-wordpress wp-parser-since-3-3-0">
+
+	<h1><a href="../../../../hooks/dbdelta_create_queries/index.html">dbdelta_create_queries</a></h1>
+
+	<div class="description">
+		<p><b>Filter Hook: </b>Filters the dbDelta SQL queries for creating tables and/or databases.</p>
+	</div>
+	<div class="sourcefile">
+		<p>Source: wp-admin/includes/upgrade.php:2723</p>
+	</div>
+
+
+		<div class="meta">
+		Used by <a href="../../../../hooks/dbdelta_create_queries/index.html#used-by">1 function</a>		|
+		Uses <a href="../../../../hooks/dbdelta_create_queries/index.html#uses">0 functions</a>	</div>
+
+	
+</article>
+
+				
+					
+<article id="post-4848" class="post-4848 wp-parser-function type-wp-parser-function status-publish hentry wp-parser-source-file-wp-admin_includes_upgrade-php wp-parser-package-administration wp-parser-package-wordpress wp-parser-since-2-9-0">
+
+	<h1><a href="../../../../functions/pre_schema_upgrade/index.html">pre_schema_upgrade()</a></h1>
+
+	<div class="description">
+		<p><b>Function: </b>Runs before the schema is upgraded.</p>
+	</div>
+	<div class="sourcefile">
+		<p>Source: wp-admin/includes/upgrade.php:3383</p>
+	</div>
+
+
+		<div class="meta">
+		Used by <a href="../../../../functions/pre_schema_upgrade/index.html#used-by">1 function</a>		|
+		Uses <a href="../../../../functions/pre_schema_upgrade/index.html#uses">6 functions</a>	</div>
+
+	
+</article>
+
+				
+					
+<article id="post-4838" class="post-4838 wp-parser-hook type-wp-parser-hook status-publish hentry wp-parser-source-file-wp-admin_includes_upgrade-php wp-parser-package-administration wp-parser-package-wordpress wp-parser-since-3-3-0">
+
+	<h1><a href="../../../../hooks/dbdelta_insert_queries/index.html">dbdelta_insert_queries</a></h1>
+
+	<div class="description">
+		<p><b>Filter Hook: </b>Filters the dbDelta SQL queries for inserting or updating.</p>
+	</div>
+	<div class="sourcefile">
+		<p>Source: wp-admin/includes/upgrade.php:2734</p>
+	</div>
+
+
+		<div class="meta">
+		Used by <a href="../../../../hooks/dbdelta_insert_queries/index.html#used-by">1 function</a>		|
+		Uses <a href="../../../../hooks/dbdelta_insert_queries/index.html#uses">0 functions</a>	</div>
+
+	
+</article>
+
+				
+					
+<article id="post-4849" class="post-4849 wp-parser-function type-wp-parser-function status-publish hentry wp-parser-source-file-wp-admin_includes_upgrade-php wp-parser-package-administration wp-parser-package-wordpress wp-parser-since-3-0-0">
+
+	<h1><a href="../../../../functions/install_global_terms/index.html">install_global_terms()</a></h1>
+
+	<div class="description">
+		<p><b>Function: </b>Install global terms.</p>
+	</div>
+	<div class="sourcefile">
+		<p>Source: wp-admin/includes/upgrade.php:3446</p>
+	</div>
+
+
+		<div class="meta">
+		Used by <a href="../../../../functions/install_global_terms/index.html#used-by">0 functions</a>		|
+		Uses <a href="../../../../functions/install_global_terms/index.html#uses">1 function</a>	</div>
+
+	
+</article>
+
+				
+					
+<article id="post-4839" class="post-4839 wp-parser-function type-wp-parser-function status-publish hentry wp-parser-source-file-wp-admin_includes_upgrade-php wp-parser-package-administration wp-parser-package-wordpress wp-parser-since-1-5-0">
+
+	<h1><a href="../../../../functions/make_db_current/index.html">make_db_current()</a></h1>
+
+	<div class="description">
+		<p><b>Function: </b>Updates the database tables to a new schema.</p>
+	</div>
+	<div class="sourcefile">
+		<p>Source: wp-admin/includes/upgrade.php:3051</p>
+	</div>
+
+
+		<div class="meta">
+		Used by <a href="../../../../functions/make_db_current/index.html#used-by">0 functions</a>		|
+		Uses <a href="../../../../functions/make_db_current/index.html#uses">1 function</a>	</div>
+
+	
+</article>
+
+				
+					
+<article id="post-4840" class="post-4840 wp-parser-function type-wp-parser-function status-publish hentry wp-parser-source-file-wp-admin_includes_upgrade-php wp-parser-package-administration wp-parser-package-wordpress wp-parser-since-1-5-0">
+
+	<h1><a href="../../../../functions/make_db_current_silent/index.html">make_db_current_silent()</a></h1>
+
+	<div class="description">
+		<p><b>Function: </b>Updates the database tables to a new schema, but without displaying results.</p>
+	</div>
+	<div class="sourcefile">
+		<p>Source: wp-admin/includes/upgrade.php:3072</p>
+	</div>
+
+
+		<div class="meta">
+		Used by <a href="../../../../functions/make_db_current_silent/index.html#used-by">4 functions</a>		|
+		Uses <a href="../../../../functions/make_db_current_silent/index.html#uses">1 function</a>	</div>
+
+	
+</article>
+
+				
+					
+<article id="post-4830" class="post-4830 wp-parser-function type-wp-parser-function status-publish hentry wp-parser-source-file-wp-admin_includes_upgrade-php wp-parser-package-administration wp-parser-package-wordpress wp-parser-since-1-0-1">
+
+	<h1><a href="../../../../functions/add_clean_index/index.html">add_clean_index()</a></h1>
+
+	<div class="description">
+		<p><b>Function: </b>Adds an index to a specified table.</p>
+	</div>
+	<div class="sourcefile">
+		<p>Source: wp-admin/includes/upgrade.php:2481</p>
+	</div>
+
+
+		<div class="meta">
+		Used by <a href="../../../../functions/add_clean_index/index.html#used-by">0 functions</a>		|
+		Uses <a href="../../../../functions/add_clean_index/index.html#uses">2 functions</a>	</div>
+
+	
+</article>
+
+				
+					
+<article id="post-4820" class="post-4820 wp-parser-function type-wp-parser-function status-publish hentry wp-parser-source-file-wp-admin_includes_upgrade-php wp-parser-package-administration wp-parser-package-wordpress wp-parser-since-3-0-0">
+
+	<h1><a href="../../../../functions/upgrade_300/index.html">upgrade_300()</a></h1>
+
+	<div class="description">
+		<p><b>Function: </b>Execute changes made in WordPress 3.0.</p>
+	</div>
+	<div class="sourcefile">
+		<p>Source: wp-admin/includes/upgrade.php:1259</p>
+	</div>
+
+
+		<div class="meta">
+		Used by <a href="../../../../functions/upgrade_300/index.html#used-by">0 functions</a>		|
+		Uses <a href="../../../../functions/upgrade_300/index.html#uses">0 functions</a>	</div>
+
+	
+</article>
+
+				
+					
+<article id="post-4831" class="post-4831 wp-parser-function type-wp-parser-function status-publish hentry wp-parser-source-file-wp-admin_includes_upgrade-php wp-parser-package-administration wp-parser-package-wordpress wp-parser-since-1-0-0 wp-parser-since-1-3-0">
+
+	<h1><a href="../../../../functions/maybe_add_column/index.html">maybe_add_column()</a></h1>
+
+	<div class="description">
+		<p><b>Function: </b>Adds column to a database table, if it doesn&#8217;t already exist.</p>
+	</div>
+	<div class="sourcefile">
+		<p>Source: wp-admin/includes/upgrade.php:2502</p>
+	</div>
+
+
+		<div class="meta">
+		Used by <a href="../../../../functions/maybe_add_column/index.html#used-by">0 functions</a>		|
+		Uses <a href="../../../../functions/maybe_add_column/index.html#uses">2 functions</a>	</div>
+
+	
+</article>
+
+				
+				
+						<nav class="pagination loop-pagination"><span aria-current="page" class="page-numbers current">1</span>
+<a class="page-numbers" href="page/2/index.html">2</a>
+<a class="page-numbers" href="page/3/index.html">3</a>
+<a class="next page-numbers" href="page/2/index.html">Next &raquo;</a></nav>		</main>
+		<!-- /wrapper -->
+	</div><!-- /pagebody -->
+
+	</div><!-- #content -->
+
+</div><!-- #page -->
+
+
+<div id="wporg-footer">
+	<div class="wrapper">
+		<ul>
+			<li><a href="http://wordpress.org/about/" title="An introduction to the WordPress project">About</a></li>
+			<li><a href="http://wordpress.org/news/" title="News and Updates">Blog</a></li>
+			<li><a href="http://wordpress.org/hosting/" title="Recommended web hosting providers">Hosting</a></li>
+			<li><a href="https://wordpressfoundation.org/donate/" title="Donate to the WordPress Foundation">Donate</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://wordpress.org/support/" title="Forums, documentation, and other resources">Support</a></li>
+			<li><a href="../../../../../index.html" title="Resources for WordPress developers">Developers</a></li>
+			<li><a href="http://make.wordpress.org/" title="Give back to WordPress through code, support, translation and more">Get Involved</a></li>
+			<li><a href="http://learn.wordpress.org/" title="Workshops and training materials">Learn</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://wordpress.org/showcase/" title="Some of the best WordPress sites on the Web">Showcase</a></li>
+			<li><a href="http://wordpress.org/plugins/" title="Add extra functionality to WordPress">Plugins</a></li>
+			<li><a href="http://wordpress.org/themes/" title="Make your WordPress pretty">Themes</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://central.wordcamp.org/" title="Find a WordPress event near you">WordCamp</a></li>
+			<li><a href="http://wordpress.tv/" title="Videos, tutorials, and WordCamp sessions">WordPress.TV</a></li>
+			<li><a href="http://buddypress.org/" title="A set of plugins to transform your WordPress into a social network">BuddyPress</a></li>
+			<li><a href="http://bbpress.org/" title="Fast, slick forums built on WordPress">bbPress</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://wordpress.com/?ref=wporg-footer" title="Hassle-free WordPress hosting">WordPress.com</a></li>
+			<li><a href="http://ma.tt/" title="Co-founder of WordPress, an example of what WordPress can do">Matt</a></li>
+			<li><a href="http://wordpress.org/about/privacy/" title="WordPress.org Privacy Policy">Privacy</a></li>
+			<li><a href="https://publiccode.eu/" target="_blank">Public Code</a></li>
+		</ul>
+
+		<ul class="social-media-links">
+			<li><span class="dashicons dashicons-twitter"></span><a href="https://twitter.com/WordPress" title="Follow @WordPress on Twitter">@WordPress</a></li>
+			<li><span class="dashicons dashicons-facebook"></span><a href="https://www.facebook.com/WordPress/" title="Like WordPress on Facebook">WordPress</a></li>
+		</ul>
+	</div>
+
+		<p class="cip cip-image">Code is Poetry.</p>
+</div>
+
+<script src="../../../../../../s.w.org/style/js/navigation.min.js?20190128"></script>
+
+<script type='text/javascript' src='../../../../../wp-includes/js/hoverintent-js.min.js?ver=2.2.1' id='hoverintent-js-js'></script>
+<script type='text/javascript' src='../../../../../wp-includes/js/admin-bar.min.js?ver=5.9-alpha-51701' id='admin-bar-js'></script>
+<script type='text/javascript' src='../../../../../wp-content/themes/pub/wporg-developer/js/navigation.js?ver=20181209' id='wporg-developer-navigation-js'></script>
+<script type='text/javascript' src='../../../../../wp-content/themes/pub/wporg-developer/js/skip-link-focus-fix.js?ver=20130115' id='wporg-developer-skip-link-focus-fix-js'></script>
+<script type='text/javascript' src='../../../../../wp-content/themes/pub/wporg-developer/js/search.js?ver=20150430' id='wporg-developer-search-js'></script>
+<script type='text/javascript' src='../../../../../wp-content/themes/pub/wporg-developer/js/menu.js?ver=20180201' id='wporg-developer-menu-js'></script>
+<script type='text/javascript' src='../../../../../wp-content/themes/pub/wporg-developer/js/awesomplete.min.js?ver=20160322' id='awesomplete-js'></script>
+<script type='text/javascript' id='autocomplete-js-extra'>
+/* <![CDATA[ */
+var autocomplete = {"ajaxurl":"https:\/\/developer.wordpress.org\/wp-admin\/admin-ajax.php","nonce":"8a60f70c4b"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../../../wp-content/themes/pub/wporg-developer/js/autocomplete.js?ver=20160524' id='autocomplete-js'></script>
+<script type='text/javascript' src='../../../../../wp-includes/js/wp-embed.min.js?ver=5.9-alpha-51701' id='wp-embed-js'></script>
+</body>
+
+<!-- Mirrored from developer.wordpress.org/reference/files/wp-admin/includes/upgrade.php/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 31 Aug 2021 17:18:13 GMT -->
+</html>

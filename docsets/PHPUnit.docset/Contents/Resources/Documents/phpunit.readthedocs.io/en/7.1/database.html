@@ -1,0 +1,1838 @@
+<html><!--<![endif]--><!-- Mirrored from phpunit.readthedocs.io/en/7.1/database.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 14 Jul 2018 16:54:09 GMT --><head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>8. Database Testing</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css">
+  <link rel="stylesheet" href="../../../media.readthedocs.org/css/sphinx_rtd_theme.css" type="text/css">
+    <link rel="index" title="Index" href="genindex.html">
+    <link rel="search" title="Search" href="search.html">
+    <link rel="copyright" title="Copyright" href="copyright.html">
+    <link rel="next" title="9. Test Doubles" href="test-doubles.html">
+    <link rel="prev" title="7. Incomplete and Skipped Tests" href="incomplete-and-skipped-tests.html"> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+
+<!-- RTD Extra Head -->
+
+<!-- 
+Always link to the latest version, as canonical.
+http://docs.readthedocs.org/en/latest/canonical.html
+-->
+<link rel="canonical" href="database.html">
+
+<link rel="stylesheet" href="../../../media.readthedocs.org/css/readthedocs-doc-embed.css" type="text/css">
+
+<script type="text/javascript" src="_static/readthedocs-data.js"></script>
+
+<!-- Add page-specific data, which must exist in the page js, not global -->
+<script type="text/javascript">
+READTHEDOCS_DATA['page'] = 'database'
+READTHEDOCS_DATA['source_suffix'] = '.rst'
+</script>
+
+<script type="text/javascript" src="../../../media.readthedocs.org/javascript/readthedocs-analytics.js"></script>
+
+<!-- end RTD <extrahead> -->
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index-2.html" class="icon icon-home"> PHPUnit
+          
+
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="https://phpunit.readthedocs.io/en/7.1/search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs">
+    <input type="hidden" name="check_keywords" value="yes">
+    <input type="hidden" name="area" value="default">
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">1. Installing PHPUnit</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#php-archive-phar">PHP Archive (PHAR)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="installation.html#windows">Windows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="installation.html#verifying-phpunit-phar-releases">Verifying PHPUnit PHAR Releases</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#composer">Composer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#optional-packages">Optional packages</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="writing-tests-for-phpunit.html">2. Writing Tests for PHPUnit</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="writing-tests-for-phpunit.html#test-dependencies">Test Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writing-tests-for-phpunit.html#data-providers">Data Providers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writing-tests-for-phpunit.html#testing-exceptions">Testing Exceptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writing-tests-for-phpunit.html#testing-php-errors">Testing PHP Errors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writing-tests-for-phpunit.html#testing-output">Testing Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writing-tests-for-phpunit.html#error-output">Error output</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="writing-tests-for-phpunit.html#edge-cases">Edge cases</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="textui.html">3. The Command-Line Test Runner</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="textui.html#command-line-options">Command-Line Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="textui.html#testdox">TestDox</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="fixtures.html">4. Fixtures</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="fixtures.html#more-setup-than-teardown">More setUp() than tearDown()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fixtures.html#variations">Variations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fixtures.html#sharing-fixture">Sharing Fixture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fixtures.html#global-state">Global State</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="organizing-tests.html">5. Organizing Tests</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="organizing-tests.html#composing-a-test-suite-using-the-filesystem">Composing a Test Suite Using the Filesystem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="organizing-tests.html#composing-a-test-suite-using-xml-configuration">Composing a Test Suite Using XML Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="risky-tests.html">6. Risky Tests</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="risky-tests.html#useless-tests">Useless Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="risky-tests.html#unintentionally-covered-code">Unintentionally Covered Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="risky-tests.html#output-during-test-execution">Output During Test Execution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="risky-tests.html#test-execution-timeout">Test Execution Timeout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="risky-tests.html#global-state-manipulation">Global State Manipulation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="incomplete-and-skipped-tests.html">7. Incomplete and Skipped Tests</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="incomplete-and-skipped-tests.html#incomplete-tests">Incomplete Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="incomplete-and-skipped-tests.html#skipping-tests">Skipping Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="incomplete-and-skipped-tests.html#skipping-tests-using-requires">Skipping Tests using @requires</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">8. Database Testing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#supported-vendors-for-database-testing">Supported Vendors for Database Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#difficulties-in-database-testing">Difficulties in Database Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#the-four-stages-of-a-database-test">The four stages of a database test</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#clean-up-database">1. Clean-Up Database</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#set-up-fixture">2. Set up fixture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#run-test-verify-outcome-and-teardown">3–5. Run Test, Verify outcome and Teardown</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#configuration-of-a-phpunit-database-testcase">Configuration of a PHPUnit Database TestCase</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#implementing-getconnection">Implementing getConnection()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#implementing-getdataset">Implementing getDataSet()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#what-about-the-database-schema-ddl">What about the Database Schema (DDL)?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tip-use-your-own-abstract-database-testcase">Tip: Use your own Abstract Database TestCase</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#understanding-datasets-and-datatables">Understanding DataSets and DataTables</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#available-implementations">Available Implementations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#flat-xml-dataset">Flat XML DataSet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#xml-dataset">XML DataSet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mysql-xml-dataset">MySQL XML DataSet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#yaml-dataset">YAML DataSet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#csv-dataset">CSV DataSet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#array-dataset">Array DataSet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#query-sql-dataset">Query (SQL) DataSet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#database-db-dataset">Database (DB) Dataset</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#replacement-dataset">Replacement DataSet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataset-filter">DataSet Filter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#composite-dataset">Composite DataSet</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#beware-of-foreign-keys">Beware of Foreign Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#implementing-your-own-datasets-datatables">Implementing your own DataSets/DataTables</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#using-the-database-connection-api">Using the Database Connection API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#database-assertions-api">Database Assertions API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#asserting-the-row-count-of-a-table">Asserting the Row-Count of a Table</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#asserting-the-state-of-a-table">Asserting the State of a Table</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#asserting-the-result-of-a-query">Asserting the Result of a Query</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#asserting-the-state-of-multiple-tables">Asserting the State of Multiple Tables</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#frequently-asked-questions">Frequently Asked Questions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#will-phpunit-re-create-the-database-schema-for-each-test">Will PHPUnit (re-)create the database schema for each test?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#am-i-required-to-use-pdo-in-my-application-for-the-database-extension-to-work">Am I required to use PDO in my application for the Database Extension to work?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#what-can-i-do-when-i-get-a-too-much-connections-error">What can I do, when I get a “Too much Connections“ Error?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-to-handle-null-with-flat-xml-csv-datasets">How to handle NULL with Flat XML / CSV Datasets?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="test-doubles.html">9. Test Doubles</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="test-doubles.html#stubs">Stubs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="test-doubles.html#mock-objects">Mock Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="test-doubles.html#prophecy">Prophecy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="test-doubles.html#mocking-traits-and-abstract-classes">Mocking Traits and Abstract Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="test-doubles.html#stubbing-and-mocking-web-services">Stubbing and Mocking Web Services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="test-doubles.html#mocking-the-filesystem">Mocking the Filesystem</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="code-coverage-analysis.html">10. Code Coverage Analysis</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="code-coverage-analysis.html#software-metrics-for-code-coverage">Software Metrics for Code Coverage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code-coverage-analysis.html#whitelisting-files">Whitelisting Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code-coverage-analysis.html#ignoring-code-blocks">Ignoring Code Blocks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code-coverage-analysis.html#specifying-covered-methods">Specifying Covered Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code-coverage-analysis.html#edge-cases">Edge Cases</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="logging.html">11. Logging</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="logging.html#test-results-xml">Test Results (XML)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="logging.html#code-coverage-xml">Code Coverage (XML)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="logging.html#code-coverage-text">Code Coverage (TEXT)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="extending-phpunit.html">12. Extending PHPUnit</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="extending-phpunit.html#subclass-phpunit-framework-testcase">Subclass PHPUnit\Framework\TestCase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="extending-phpunit.html#write-custom-assertions">Write custom assertions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="extending-phpunit.html#implement-phpunit-framework-testlistener">Implement PHPUnit\Framework\TestListener</a></li>
+<li class="toctree-l2"><a class="reference internal" href="extending-phpunit.html#implement-phpunitframeworktest">Implement PHPUnitFrameworkTest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="extending-phpunit.html#extending-the-testrunner">Extending the TestRunner</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="extending-phpunit.html#available-hook-interfaces">Available Hook Interfaces</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="assertions.html">1. Assertions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#static-vs-non-static-usage-of-assertion-methods">Static vs. Non-Static Usage of Assertion Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertarrayhaskey">assertArrayHasKey()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertclasshasattribute">assertClassHasAttribute()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertarraysubset">assertArraySubset()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertclasshasstaticattribute">assertClassHasStaticAttribute()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertcontains">assertContains()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertcontainsonly">assertContainsOnly()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertcontainsonlyinstancesof">assertContainsOnlyInstancesOf()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertcount">assertCount()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertdirectoryexists">assertDirectoryExists()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertdirectoryisreadable">assertDirectoryIsReadable()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertdirectoryiswritable">assertDirectoryIsWritable()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertempty">assertEmpty()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertequalxmlstructure">assertEqualXMLStructure()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertequals">assertEquals()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertfalse">assertFalse()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertfileequals">assertFileEquals()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertfileexists">assertFileExists()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertfileisreadable">assertFileIsReadable()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertfileiswritable">assertFileIsWritable()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertgreaterthan">assertGreaterThan()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertgreaterthanorequal">assertGreaterThanOrEqual()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertinfinite">assertInfinite()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertinstanceof">assertInstanceOf()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertinternaltype">assertInternalType()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertisreadable">assertIsReadable()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertiswritable">assertIsWritable()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertjsonfileequalsjsonfile">assertJsonFileEqualsJsonFile()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertjsonstringequalsjsonfile">assertJsonStringEqualsJsonFile()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertjsonstringequalsjsonstring">assertJsonStringEqualsJsonString()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertlessthan">assertLessThan()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertlessthanorequal">assertLessThanOrEqual()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertnan">assertNan()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertnull">assertNull()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertobjecthasattribute">assertObjectHasAttribute()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertregexp">assertRegExp()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertstringmatchesformat">assertStringMatchesFormat()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertstringmatchesformatfile">assertStringMatchesFormatFile()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertsame">assertSame()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertstringendswith">assertStringEndsWith()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertstringequalsfile">assertStringEqualsFile()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertstringstartswith">assertStringStartsWith()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertthat">assertThat()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#asserttrue">assertTrue()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertxmlfileequalsxmlfile">assertXmlFileEqualsXmlFile()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertxmlstringequalsxmlfile">assertXmlStringEqualsXmlFile()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertxmlstringequalsxmlstring">assertXmlStringEqualsXmlString()</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="annotations.html">2. Annotations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#author">@author</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#after">@after</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#afterclass">@afterClass</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#backupglobals">@backupGlobals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#backupstaticattributes">@backupStaticAttributes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#before">@before</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#beforeclass">@beforeClass</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#codecoverageignore">@codeCoverageIgnore*</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#covers">@covers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#coversdefaultclass">@coversDefaultClass</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#coversnothing">@coversNothing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#dataprovider">@dataProvider</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#depends">@depends</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#doesnotperformassertions">@doesNotPerformAssertions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#expectedexception">@expectedException</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#expectedexceptioncode">@expectedExceptionCode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#expectedexceptionmessage">@expectedExceptionMessage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#expectedexceptionmessageregexp">@expectedExceptionMessageRegExp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#group">@group</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#large">@large</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#medium">@medium</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#preserveglobalstate">@preserveGlobalState</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#requires">@requires</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#runtestsinseparateprocesses">@runTestsInSeparateProcesses</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#runinseparateprocess">@runInSeparateProcess</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#small">@small</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#test">@test</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#testdox">@testdox</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#testwith">@testWith</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#ticket">@ticket</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#uses">@uses</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">3. The XML Configuration File</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#phpunit">PHPUnit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#test-suites">Test Suites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#groups">Groups</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#whitelisting-files-for-code-coverage">Whitelisting Files for Code Coverage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#logging">Logging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#test-listeners">Test Listeners</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#registering-testrunner-extensions">Registering TestRunner Extensions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#setting-php-ini-settings-constants-and-global-variables">Setting PHP INI settings, Constants and Global Variables</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">4. Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="copyright.html">5. Copyright</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index-2.html">PHPUnit</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index-2.html">Docs</a> »</li>
+        
+      <li>8. Database Testing</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/sebastianbergmann/phpunit-documentation-english//7.1/src/database.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="database-testing">
+<span id="database"></span><h1>8. Database Testing</h1>
+<p>Many beginner and intermediate unit testing examples in any programming
+language suggest that it is perfectly easy to test your application’s logic with
+simple tests. For database-centric applications this is far away from the
+reality. Start using WordPress, TYPO3 or Symfony with Doctrine or Propel,
+for example, and you will easily experience considerable problems with
+PHPUnit: just because the database is so tightly coupled to these libraries.</p>
+<div class="admonition-note admonition">
+<p class="first admonition-title">Note</p>
+<p class="last">Make sure you have the PHP extension <code class="docutils literal"><span class="pre">pdo</span></code> and database
+specific extensions such as <code class="docutils literal"><span class="pre">pdo_mysql</span></code> installed.
+Otherwise the examples shown below will not work.</p>
+</div>
+<p>You probably know this scenario from your daily work and projects,
+where you want to put your fresh or experienced PHPUnit skills to
+work and get stuck by one of the following problems:</p>
+<ol class="arabic simple">
+<li>The method you want to test executes a rather large JOIN operation and
+uses the data to calculate some important results.</li>
+<li>Your business logic performs a mix of SELECT, INSERT, UPDATE and
+DELETE statements.</li>
+<li>You need to setup test data in (possibly much) more than two tables
+to get reasonable initial data for the methods you want to test.</li>
+</ol>
+<p>The DbUnit extension considerably simplifies the setup of a database for
+testing purposes and allows you to verify the contents of a database after
+performing a series of operations.</p>
+<div class="section" id="supported-vendors-for-database-testing">
+<a class="dashAnchor" name="//apple_ref/Section/Supported%20Vendors%20for%20Database%20Testing"></a><span id="database-supported-vendors-for-database-testing"></span><h2>Supported Vendors for Database Testing</h2>
+<p>DbUnit currently supports MySQL, PostgreSQL, Oracle and SQLite. Through
+<a class="reference external" href="http://framework.zend.com/">Zend Framework</a> or
+<a class="reference external" href="http://www.doctrine-project.org/">Doctrine 2</a>
+integrations it has access to other database systems such as IBM DB2 or
+Microsoft SQL Server.</p>
+</div>
+<div class="section" id="difficulties-in-database-testing">
+<a class="dashAnchor" name="//apple_ref/Section/Difficulties%20in%20Database%20Testing"></a><span id="database-difficulties-in-database-testing"></span><h2>Difficulties in Database Testing</h2>
+<p>There is a good reason why all the examples on unit testing do not include
+interactions with the database: these kind of tests are both complex to
+setup and maintain. While testing against your database you need to take
+care of the following variables:</p>
+<ul class="simple">
+<li>The database schema and tables</li>
+<li>Inserting the rows required for the test into these tables</li>
+<li>Verifying the state of the database after your test has run</li>
+<li>Cleanup the database for each new test</li>
+</ul>
+<p>Because many database APIs such as PDO, MySQLi or OCI8 are cumbersome to
+use and verbose in writing doing these steps manually is an absolute
+nightmare.</p>
+<p>Test code should be as short and precise as possible for several reasons:</p>
+<ul class="simple">
+<li>You do not want to modify considerable amount of test code for little
+changes in your production code.</li>
+<li>You want to be able to read and understand the test code easily,
+even months after writing it.</li>
+</ul>
+<p>Additionally you have to realize that the database is essentially a
+global input variable to your code. Two tests in your test suite
+could run against the same database, possibly reusing data multiple
+times. Failures in one test can easily affect the result of the
+following tests making your testing experience very difficult. The
+previously mentioned cleanup step is of major importance
+to solve the “database is a global input“ problem.</p>
+<p>DbUnit helps to simplify all these problems with database testing in an
+elegant way.</p>
+<p>What PHPUnit cannot help you with is the fact that database tests
+are very slow compared to tests not using the database. Depending
+on how large the interactions with your database are your tests
+could run a considerable amount of time. However, if you keep the amount of
+data used for each test small and try to test as much code using
+non-database tests you can easily get away in under a minute even
+for large test suites.</p>
+<p>The <a class="reference external" href="http://www.doctrine-project.org/">Doctrine 2
+project</a>’s test suite, for example, currently has a test suite of
+about 1000 tests where nearly half of them accesses the database
+and still runs in 15 seconds against a MySQL database on a standard
+desktop computer.</p>
+</div>
+<div class="section" id="the-four-stages-of-a-database-test">
+<a class="dashAnchor" name="//apple_ref/Section/The%20four%20stages%20of%20a%20database%20test"></a><span id="database-the-four-stages-of-a-database-test"></span><h2>The four stages of a database test</h2>
+<p>In his book on xUnit Test Patterns Gerard Meszaros lists the four
+stages of a unit-test:</p>
+<ol class="arabic">
+<li><p class="first">Set up fixture</p>
+</li>
+<li><p class="first">Exercise System Under Test</p>
+</li>
+<li><p class="first">Verify outcome</p>
+</li>
+<li><p class="first">Teardown</p>
+<blockquote>
+<div><p><em>What is a Fixture?</em></p>
+<p>A fixture describes the initial state your application and database
+are in when you execute a test.</p>
+</div></blockquote>
+</li>
+</ol>
+<p>Testing the database requires you to hook into at least the
+setup and teardown to clean-up and write the required fixture data
+into your tables. However, the database extension has good reason to
+revert the four stages in a database test to resemble the following
+workflow that is executed for each single test:</p>
+<div class="section" id="clean-up-database">
+<a class="dashAnchor" name="//apple_ref/Section/1.%20Clean-Up%20Database"></a><span id="database-clean-up-database"></span><h3>1. Clean-Up Database</h3>
+<p>Since there is always a first test that runs against the database
+you do not know exactly if there is already data in the tables.
+PHPUnit will execute a TRUNCATE against all the tables you
+specified to reset their status to empty.</p>
+</div>
+<div class="section" id="set-up-fixture">
+<a class="dashAnchor" name="//apple_ref/Section/2.%20Set%20up%20fixture"></a><span id="database-set-up-fixture"></span><h3>2. Set up fixture</h3>
+<p>PHPUnit will then iterate over all the fixture rows specified and
+insert them into their respective tables.</p>
+</div>
+<div class="section" id="run-test-verify-outcome-and-teardown">
+<a class="dashAnchor" name="//apple_ref/Section/3%E2%80%935.%20Run%20Test,%20Verify%20outcome%20and%20Teardown"></a><span id="database-run-test-verify-outcome-and-teardown"></span><h3>3–5. Run Test, Verify outcome and Teardown</h3>
+<p>After the database is reset and loaded with its initial state the
+actual test is executed by PHPUnit. This part of the test code does
+not require awareness of the Database Extension at all, you can
+go on and test whatever you like with your code.</p>
+<p>In your test use a special assertion called
+<code class="docutils literal"><span class="pre">assertDataSetsEqual()</span></code> for verification purposes,
+however, this is entirely optional. This feature will be explained
+in the section “Database Assertions“.</p>
+</div>
+</div>
+<div class="section" id="configuration-of-a-phpunit-database-testcase">
+<a class="dashAnchor" name="//apple_ref/Section/Configuration%20of%20a%20PHPUnit%20Database%20TestCase"></a><span id="database-configuration-of-a-phpunit-database-testcase"></span><h2>Configuration of a PHPUnit Database TestCase</h2>
+<p>Usually when using PHPUnit your testcases would extend the
+<code class="docutils literal"><span class="pre">PHPUnit\Framework\TestCase</span></code> class in the
+following way:</p>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="k">use</span> <span class="nx">PHPUnit\Framework\TestCase</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">MyTest</span> <span class="k">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testCalculate</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertSame</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>If you want to test code that works with the Database Extension the
+setup is a bit more complex and you have to extend a different
+abstract TestCase requiring you to implement two abstract methods
+<code class="docutils literal"><span class="pre">getConnection()</span></code> and
+<code class="docutils literal"><span class="pre">getDataSet()</span></code>:</p>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="k">use</span> <span class="nx">PHPUnit\Framework\TestCase</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">PHPUnit\DbUnit\TestCaseTrait</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">MyGuestbookTest</span> <span class="k">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="k">use</span> <span class="nx">TestCaseTrait</span><span class="p">;</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * @return PHPUnit\DbUnit\Database\Connection</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getConnection</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$pdo</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PDO</span><span class="p">(</span><span class="s1">'sqlite::memory:'</span><span class="p">);</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">createDefaultDBConnection</span><span class="p">(</span><span class="nv">$pdo</span><span class="p">,</span> <span class="s1">':memory:'</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * @return PHPUnit\DbUnit\DataSet\IDataSet</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getDataSet</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">createFlatXMLDataSet</span><span class="p">(</span><span class="nb">dirname</span><span class="p">(</span><span class="no">__FILE__</span><span class="p">)</span><span class="o">.</span><span class="s1">'/_files/guestbook-seed.xml'</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="section" id="implementing-getconnection">
+<a class="dashAnchor" name="//apple_ref/Section/Implementing%20getConnection()"></a><span id="database-implementing-getconnection"></span><h3>Implementing getConnection()</h3>
+<p>To allow the clean-up and fixture loading functionalities to work
+the PHPUnit Database Extension requires access to a database
+connection abstracted across vendors through the PDO library. It
+is important to note that your application does not need to be
+based on PDO to use PHPUnit’s database extension, the connection is
+merely used for the clean-up and fixture setup.</p>
+<p>In the previous example we create an in-memory Sqlite connection
+and pass it to the <code class="docutils literal"><span class="pre">createDefaultDBConnection</span></code>
+method which wraps the PDO instance and the second parameter (the
+database-name) in a very simple abstraction layer for database
+connections of the type
+<code class="docutils literal"><span class="pre">PHPUnit\DbUnit\Database\Connection</span></code>.</p>
+<p>The section “Using the Database Connection API“ explains
+the API of this interface and how you can make the best use of it.</p>
+</div>
+<div class="section" id="implementing-getdataset">
+<a class="dashAnchor" name="//apple_ref/Section/Implementing%20getDataSet()"></a><span id="database-implementing-getdataset"></span><h3>Implementing getDataSet()</h3>
+<p>The <code class="docutils literal"><span class="pre">getDataSet()</span></code> method defines how the initial
+state of the database should look before each test is
+executed. The state of a database is abstracted through the
+concepts DataSet and DataTable both being represented by the
+interfaces
+<code class="docutils literal"><span class="pre">PHPUnit\DbUnit\DataSet\IDataSet</span></code> and
+<code class="docutils literal"><span class="pre">PHPUnit\DbUnit\DataSet\IDataTable</span></code>.
+The next section will describe in detail how these concepts work
+and what the benefits are for using them in database testing.</p>
+<p>For the implementation we only need to know that the
+<code class="docutils literal"><span class="pre">getDataSet()</span></code> method is called once during
+<code class="docutils literal"><span class="pre">setUp()</span></code> to retrieve the fixture data-set and
+insert it into the database. In the example we are using a factory
+method <code class="docutils literal"><span class="pre">createFlatXMLDataSet($filename)</span></code> that
+represents a data-set through an XML representation.</p>
+</div>
+<div class="section" id="what-about-the-database-schema-ddl">
+<a class="dashAnchor" name="//apple_ref/Section/What%20about%20the%20Database%20Schema%20(DDL)?"></a><span id="database-what-about-the-database-schema-ddl"></span><h3>What about the Database Schema (DDL)?</h3>
+<p>PHPUnit assumes that the database schema with all its tables,
+triggers, sequences and views is created before a test is run. This
+means you as developer have to make sure that the database is
+correctly setup before running the suite.</p>
+<p>There are several means to achieve this pre-condition to database
+testing.</p>
+<ol class="arabic simple">
+<li>If you are using a persistent database (not SQLite In-Memory) you can
+easily setup the database once with tools such as phpMyAdmin for
+MySQL and re-use the database for every test-run.</li>
+<li>If you are using libraries such as
+<a class="reference external" href="http://www.doctrine-project.org/">Doctrine 2</a> or
+<a class="reference external" href="http://www.propelorm.org/">Propel</a>
+you can use their APIs to create the database schema you
+need once before you run the tests. You can utilize
+<a class="reference external" href="textui.html">PHPUnit’s Bootstrap and Configuration</a>
+capabilities to execute this code whenever your tests are run.</li>
+</ol>
+</div>
+<div class="section" id="tip-use-your-own-abstract-database-testcase">
+<a class="dashAnchor" name="//apple_ref/Section/Tip:%20Use%20your%20own%20Abstract%20Database%20TestCase"></a><span id="database-tip-use-your-own-abstract-database-testcase"></span><h3>Tip: Use your own Abstract Database TestCase</h3>
+<p>From the previous implementation example you can easily see that
+<code class="docutils literal"><span class="pre">getConnection()</span></code> method is pretty static and
+could be re-used in different database test-cases. Additionally to
+keep performance of your tests good and database overhead low you
+can refactor the code a little bit to get a generic abstract test
+case for your application, which still allows you to specify a
+different data-fixture for each test case:</p>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="k">use</span> <span class="nx">PHPUnit\Framework\TestCase</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">PHPUnit\DbUnit\TestCaseTrait</span><span class="p">;</span>
+
+<span class="k">abstract</span> <span class="k">class</span> <span class="nc">MyApp_Tests_DatabaseTestCase</span> <span class="k">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="k">use</span> <span class="nx">TestCaseTrait</span><span class="p">;</span>
+
+    <span class="c1">// only instantiate pdo once for test clean-up/fixture load</span>
+    <span class="k">static</span> <span class="k">private</span> <span class="nv">$pdo</span> <span class="o">=</span> <span class="k">null</span><span class="p">;</span>
+
+    <span class="c1">// only instantiate PHPUnit\DbUnit\Database\Connection once per test</span>
+    <span class="k">private</span> <span class="nv">$conn</span> <span class="o">=</span> <span class="k">null</span><span class="p">;</span>
+
+    <span class="k">final</span> <span class="k">public</span> <span class="k">function</span> <span class="nf">getConnection</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">conn</span> <span class="o">===</span> <span class="k">null</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">self</span><span class="o">::</span><span class="nv">$pdo</span> <span class="o">==</span> <span class="k">null</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">self</span><span class="o">::</span><span class="nv">$pdo</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PDO</span><span class="p">(</span><span class="s1">'sqlite::memory:'</span><span class="p">);</span>
+            <span class="p">}</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">conn</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">createDefaultDBConnection</span><span class="p">(</span><span class="nx">self</span><span class="o">::</span><span class="nv">$pdo</span><span class="p">,</span> <span class="s1">':memory:'</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">conn</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This has the database connection hardcoded in the PDO connection
+though. PHPUnit has another awesome feature that could make this
+testcase even more generic. If you use the
+<a class="reference external" href="appendixes.configuration.html#appendixes.configuration.php-ini-constants-variables">XML Configuration</a>
+you could make the database connection configurable per test-run.
+First let’s create a “phpunit.xml“ file in our tests/
+directory of the application that looks like:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>&lt;?xml <span class="nv">version</span><span class="o">=</span><span class="s2">"1.0"</span> <span class="nv">encoding</span><span class="o">=</span><span class="s2">"UTF-8"</span> ?&gt;
+&lt;phpunit&gt;
+    &lt;php&gt;
+        &lt;var <span class="nv">name</span><span class="o">=</span><span class="s2">"DB_DSN"</span> <span class="nv">value</span><span class="o">=</span><span class="s2">"mysql:dbname=myguestbook;host=localhost"</span> /&gt;
+        &lt;var <span class="nv">name</span><span class="o">=</span><span class="s2">"DB_USER"</span> <span class="nv">value</span><span class="o">=</span><span class="s2">"user"</span> /&gt;
+        &lt;var <span class="nv">name</span><span class="o">=</span><span class="s2">"DB_PASSWD"</span> <span class="nv">value</span><span class="o">=</span><span class="s2">"passwd"</span> /&gt;
+        &lt;var <span class="nv">name</span><span class="o">=</span><span class="s2">"DB_DBNAME"</span> <span class="nv">value</span><span class="o">=</span><span class="s2">"myguestbook"</span> /&gt;
+    &lt;/php&gt;
+&lt;/phpunit&gt;
+</pre></div>
+</div>
+<p>We can now modify our test-case to look like:</p>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="k">use</span> <span class="nx">PHPUnit\Framework\TestCase</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">PHPUnit\DbUnit\TestCaseTrait</span><span class="p">;</span>
+
+<span class="k">abstract</span> <span class="k">class</span> <span class="nc">Generic_Tests_DatabaseTestCase</span> <span class="k">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="k">use</span> <span class="nx">TestCaseTrait</span><span class="p">;</span>
+
+    <span class="c1">// only instantiate pdo once for test clean-up/fixture load</span>
+    <span class="k">static</span> <span class="k">private</span> <span class="nv">$pdo</span> <span class="o">=</span> <span class="k">null</span><span class="p">;</span>
+
+    <span class="c1">// only instantiate PHPUnit\DbUnit\Database\Connection once per test</span>
+    <span class="k">private</span> <span class="nv">$conn</span> <span class="o">=</span> <span class="k">null</span><span class="p">;</span>
+
+    <span class="k">final</span> <span class="k">public</span> <span class="k">function</span> <span class="nf">getConnection</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">conn</span> <span class="o">===</span> <span class="k">null</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">self</span><span class="o">::</span><span class="nv">$pdo</span> <span class="o">==</span> <span class="k">null</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">self</span><span class="o">::</span><span class="nv">$pdo</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PDO</span><span class="p">(</span> <span class="nv">$GLOBALS</span><span class="p">[</span><span class="s1">'DB_DSN'</span><span class="p">],</span> <span class="nv">$GLOBALS</span><span class="p">[</span><span class="s1">'DB_USER'</span><span class="p">],</span> <span class="nv">$GLOBALS</span><span class="p">[</span><span class="s1">'DB_PASSWD'</span><span class="p">]</span> <span class="p">);</span>
+            <span class="p">}</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">conn</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">createDefaultDBConnection</span><span class="p">(</span><span class="nx">self</span><span class="o">::</span><span class="nv">$pdo</span><span class="p">,</span> <span class="nv">$GLOBALS</span><span class="p">[</span><span class="s1">'DB_DBNAME'</span><span class="p">]);</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">conn</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>We can now run the database test suite using different
+configurations from the command-line interface:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ user@desktop&gt; phpunit --configuration developer-a.xml MyTests/
+$ user@desktop&gt; phpunit --configuration developer-b.xml MyTests/
+</pre></div>
+</div>
+<p>The possibility to run the database tests against different
+database targets easily is very important if you are developing on
+the development machine. If several developers run the database
+tests against the same database connection you can easily
+experience test-failures because of race-conditions.</p>
+</div>
+</div>
+<div class="section" id="understanding-datasets-and-datatables">
+<a class="dashAnchor" name="//apple_ref/Section/Understanding%20DataSets%20and%20DataTables"></a><span id="database-understanding-datasets-and-datatables"></span><h2>Understanding DataSets and DataTables</h2>
+<p>A central concept of PHPUnit’s Database Extension are DataSets and
+DataTables. You should try to understand this simple concept to
+master database testing with PHPUnit. The DataSet and DataTable are
+an abstraction layer around your database tables, rows and
+columns. A simple API hides the underlying database contents in an
+object structure, which can also be implemented by other
+non-database sources.</p>
+<p>This abstraction is necessary to compare the actual contents of a
+database against the expected contents. Expectations can be
+represented as XML, YAML, CSV files or PHP array for example. The
+DataSet and DataTable interfaces enable the comparison of these
+conceptually different sources, emulating relational database
+storage in a semantically similar approach.</p>
+<p>A workflow for database assertions in your tests then consists of
+three simple steps:</p>
+<ul class="simple">
+<li>Specify one or more tables in your database by table name (actual
+dataset)</li>
+<li>Specify the expected dataset in your preferred format (YAML, XML,
+..)</li>
+<li>Assert that both dataset representations equal each other.</li>
+</ul>
+<p>Assertions are not the only use-case for the DataSet and DataTable
+in PHPUnit’s Database Extension. As shown in the previous section
+they also describe the initial contents of a database. You are
+forced to define a fixture dataset by the Database TestCase, which
+is then used to:</p>
+<ul class="simple">
+<li>Delete all the rows from the tables specified in the dataset.</li>
+<li>Write all the rows in the data-tables into the database.</li>
+</ul>
+<div class="section" id="available-implementations">
+<a class="dashAnchor" name="//apple_ref/Section/Available%20Implementations"></a><span id="database-available-implementations"></span><h3>Available Implementations</h3>
+<p>There are three different types of datasets/datatables:</p>
+<ul class="simple">
+<li>File-Based DataSets and DataTables</li>
+<li>Query-Based DataSet and DataTable</li>
+<li>Filter and Composition DataSets and DataTables</li>
+</ul>
+<p>The file-based datasets and tables are generally used for the
+initial fixture and to describe the expected state of the database.</p>
+<div class="section" id="flat-xml-dataset">
+<a class="dashAnchor" name="//apple_ref/Section/Flat%20XML%20DataSet"></a><span id="database-flat-xml-dataset"></span><h4>Flat XML DataSet</h4>
+<p>The most common dataset is called Flat XML. It is a very simple XML
+format where a tag inside the root node
+<code class="docutils literal"><span class="pre">&lt;dataset&gt;</span></code> represents exactly one row in the
+database. The tags name equals the table to insert the row into and
+an attribute represents the column. An example for a simple guestbook
+application could look like this:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>&lt;?xml <span class="nv">version</span><span class="o">=</span><span class="s2">"1.0"</span> ?&gt;
+&lt;dataset&gt;
+    &lt;guestbook <span class="nv">id</span><span class="o">=</span><span class="s2">"1"</span> <span class="nv">content</span><span class="o">=</span><span class="s2">"Hello buddy!"</span> <span class="nv">user</span><span class="o">=</span><span class="s2">"joe"</span> <span class="nv">created</span><span class="o">=</span><span class="s2">"2010-04-24 17:15:23"</span> /&gt;
+    &lt;guestbook <span class="nv">id</span><span class="o">=</span><span class="s2">"2"</span> <span class="nv">content</span><span class="o">=</span><span class="s2">"I like it!"</span> <span class="nv">user</span><span class="o">=</span><span class="s2">"nancy"</span> <span class="nv">created</span><span class="o">=</span><span class="s2">"2010-04-26 12:14:20"</span> /&gt;
+&lt;/dataset&gt;
+</pre></div>
+</div>
+<p>This is obviously easy to write. Here
+<code class="docutils literal"><span class="pre">&lt;guestbook&gt;</span></code> is the table name where two rows
+are inserted into each with four columns “id“,
+“content“, “user“ and
+“created“ with their respective values.</p>
+<p>However, this simplicity comes at a cost.</p>
+<p>From the previous example it isn’t obvious how you would specify an
+empty table. You can insert a tag with no attributes with the name
+of the empty table. A flat XML file for an empty guestbook table
+would then look like:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>&lt;?xml <span class="nv">version</span><span class="o">=</span><span class="s2">"1.0"</span> ?&gt;
+&lt;dataset&gt;
+    &lt;guestbook /&gt;
+&lt;/dataset&gt;
+</pre></div>
+</div>
+<p>The handling of NULL values with the flat XML dataset is tedious. A
+NULL value is different than an empty string value in almost any
+database (Oracle being an exception), something that is difficult
+to describe in the flat XML format. You can represent a NULL’s value
+by omitting the attribute from the row specification. If our
+guestbook would allow anonymous entries represented by a NULL value
+in the user column, a hypothetical state of the guestbook table
+could look like:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>&lt;?xml <span class="nv">version</span><span class="o">=</span><span class="s2">"1.0"</span> ?&gt;
+&lt;dataset&gt;
+    &lt;guestbook <span class="nv">id</span><span class="o">=</span><span class="s2">"1"</span> <span class="nv">content</span><span class="o">=</span><span class="s2">"Hello buddy!"</span> <span class="nv">user</span><span class="o">=</span><span class="s2">"joe"</span> <span class="nv">created</span><span class="o">=</span><span class="s2">"2010-04-24 17:15:23"</span> /&gt;
+    &lt;guestbook <span class="nv">id</span><span class="o">=</span><span class="s2">"2"</span> <span class="nv">content</span><span class="o">=</span><span class="s2">"I like it!"</span> <span class="nv">created</span><span class="o">=</span><span class="s2">"2010-04-26 12:14:20"</span> /&gt;
+&lt;/dataset&gt;
+</pre></div>
+</div>
+<p>In this case the second entry is posted anonymously. However, this
+leads to a serious problem with column recognition. During dataset
+equality assertions each dataset has to specify what columns a
+table holds. If an attribute is NULL for all the rows of a
+data-table, how would the Database Extension know that the column
+should be part of the table?</p>
+<p>The flat XML dataset makes a crucial assumption now, defining that
+the attributes on the first defined row of a table define the
+columns of this table. In the previous example this would mean
+“id“, “content“, “user“ and
+“created“ are columns of the guestbook table. For the
+second row where “user“ is not defined a NULL would be
+inserted into the database.</p>
+<p>When the first guestbook entry is deleted from the dataset only
+“id“, “content“ and
+“created“ would be columns of the guestbook table,
+since “user“ is not specified.</p>
+<p>To use the Flat XML dataset effectively when NULL values are
+relevant the first row of each table must not contain any NULL
+value and only successive rows are allowed to omit attributes. This
+can be awkward, since the order of the rows is a relevant factor
+for database assertions.</p>
+<p>In turn, if you specify only a subset of the table columns in the
+Flat XML dataset all the omitted values are set to their default
+values. This will lead to errors if one of the omitted columns is
+defined as “NOT NULL DEFAULT NULL“.</p>
+<p>In conclusion I can only advise using the Flat XML datasets if you
+do not need NULL values.</p>
+<p>You can create a flat XML dataset instance from within your
+Database TestCase by calling the
+<code class="docutils literal"><span class="pre">createFlatXmlDataSet($filename)</span></code> method:</p>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="k">use</span> <span class="nx">PHPUnit\Framework\TestCase</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">PHPUnit\DbUnit\TestCaseTrait</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">MyTestCase</span> <span class="k">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="k">use</span> <span class="nx">TestCaseTrait</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getDataSet</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">createFlatXmlDataSet</span><span class="p">(</span><span class="s1">'myFlatXmlFixture.xml'</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="xml-dataset">
+<a class="dashAnchor" name="//apple_ref/Section/XML%20DataSet"></a><span id="database-xml-dataset"></span><h4>XML DataSet</h4>
+<p>There is another more structured XML dataset, which is a bit more
+verbose to write but avoids the NULL problems of the Flat XML
+dataset. Inside the root node <code class="docutils literal"><span class="pre">&lt;dataset&gt;</span></code> you
+can specify <code class="docutils literal"><span class="pre">&lt;table&gt;</span></code>,
+<code class="docutils literal"><span class="pre">&lt;column&gt;</span></code>, <code class="docutils literal"><span class="pre">&lt;row&gt;</span></code>,
+<code class="docutils literal"><span class="pre">&lt;value&gt;</span></code> and
+<code class="docutils literal"><span class="pre">&lt;null</span> <span class="pre">/&gt;</span></code> tags. An equivalent dataset to the
+previously defined Guestbook Flat XML looks like:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>&lt;?xml <span class="nv">version</span><span class="o">=</span><span class="s2">"1.0"</span> ?&gt;
+&lt;dataset&gt;
+    &lt;table <span class="nv">name</span><span class="o">=</span><span class="s2">"guestbook"</span>&gt;
+        &lt;column&gt;id&lt;/column&gt;
+        &lt;column&gt;content&lt;/column&gt;
+        &lt;column&gt;user&lt;/column&gt;
+        &lt;column&gt;created&lt;/column&gt;
+        &lt;row&gt;
+            &lt;value&gt;1&lt;/value&gt;
+            &lt;value&gt;Hello buddy!&lt;/value&gt;
+            &lt;value&gt;joe&lt;/value&gt;
+            &lt;value&gt;2010-04-24 <span class="m">17</span>:15:23&lt;/value&gt;
+        &lt;/row&gt;
+        &lt;row&gt;
+            &lt;value&gt;2&lt;/value&gt;
+            &lt;value&gt;I like it!&lt;/value&gt;
+            &lt;null /&gt;
+            &lt;value&gt;2010-04-26 <span class="m">12</span>:14:20&lt;/value&gt;
+        &lt;/row&gt;
+    &lt;/table&gt;
+&lt;/dataset&gt;
+</pre></div>
+</div>
+<p>Any defined <code class="docutils literal"><span class="pre">&lt;table&gt;</span></code> has a name and requires
+a definition of all the columns with their names. It can contain zero
+or any positive number of nested <code class="docutils literal"><span class="pre">&lt;row&gt;</span></code>
+elements. Defining no <code class="docutils literal"><span class="pre">&lt;row&gt;</span></code> element means
+the table is empty. The <code class="docutils literal"><span class="pre">&lt;value&gt;</span></code> and
+<code class="docutils literal"><span class="pre">&lt;null</span> <span class="pre">/&gt;</span></code> tags have to be specified in the
+order of the previously given <code class="docutils literal"><span class="pre">&lt;column&gt;</span></code>
+elements. The <code class="docutils literal"><span class="pre">&lt;null</span> <span class="pre">/&gt;</span></code> tag obviously means
+that the value is NULL.</p>
+<p>You can create a XML dataset instance from within your
+Database TestCase by calling the
+<code class="docutils literal"><span class="pre">createXmlDataSet($filename)</span></code> method:</p>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="k">use</span> <span class="nx">PHPUnit\Framework\TestCase</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">PHPUnit\DbUnit\TestCaseTrait</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">MyTestCase</span> <span class="k">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="k">use</span> <span class="nx">TestCaseTrait</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getDataSet</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">createXMLDataSet</span><span class="p">(</span><span class="s1">'myXmlFixture.xml'</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="mysql-xml-dataset">
+<a class="dashAnchor" name="//apple_ref/Section/MySQL%20XML%20DataSet"></a><span id="database-mysql-xml-dataset"></span><h4>MySQL XML DataSet</h4>
+<p>This new XML format is specific to the
+<a class="reference external" href="http://www.mysql.com/">MySQL database server</a>.
+Support for it was added in PHPUnit 3.5. Files in this format can
+be generated using the
+<a class="reference external" href="http://dev.mysql.com/doc/refman/5.0/en/mysqldump.html">mysqldump</a>
+utility. Unlike CSV datasets, which <code class="docutils literal"><span class="pre">mysqldump</span></code>
+also supports, a single file in this XML format can contain data
+for multiple tables. You can create a file in this format by
+invoking <code class="docutils literal"><span class="pre">mysqldump</span></code> like so:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ mysqldump --xml -t -u <span class="o">[</span>username<span class="o">]</span> --password<span class="o">=[</span>password<span class="o">]</span> <span class="o">[</span>database<span class="o">]</span> &gt; /path/to/file.xml
+</pre></div>
+</div>
+<p>This file can be used in your Database TestCase by calling the
+<code class="docutils literal"><span class="pre">createMySQLXMLDataSet($filename)</span></code> method:</p>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="k">use</span> <span class="nx">PHPUnit\Framework\TestCase</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">PHPUnit\DbUnit\TestCaseTrait</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">MyTestCase</span> <span class="k">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="k">use</span> <span class="nx">TestCaseTrait</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getDataSet</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">createMySQLXMLDataSet</span><span class="p">(</span><span class="s1">'/path/to/file.xml'</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="yaml-dataset">
+<a class="dashAnchor" name="//apple_ref/Section/YAML%20DataSet"></a><span id="database-yaml-dataset"></span><h4>YAML DataSet</h4>
+<p>Alternatively, you can use YAML dataset for the guestbook example:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>guestbook:
+  -
+    id: <span class="m">1</span>
+    content: <span class="s2">"Hello buddy!"</span>
+    user: <span class="s2">"joe"</span>
+    created: <span class="m">2010</span>-04-24 <span class="m">17</span>:15:23
+  -
+    id: <span class="m">2</span>
+    content: <span class="s2">"I like it!"</span>
+    user:
+    created: <span class="m">2010</span>-04-26 <span class="m">12</span>:14:20
+</pre></div>
+</div>
+<p>This is simple, convient AND it solves the NULL issue that the
+similar Flat XML dataset has. A NULL in YAML is just the column
+name without no value specified. An empty string is specified as
+<code class="docutils literal"><span class="pre">column1:</span> <span class="pre">""</span></code>.</p>
+<p>The YAML Dataset has no factory method on the Database TestCase
+currently, so you have to instantiate it manually:</p>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="k">use</span> <span class="nx">PHPUnit\Framework\TestCase</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">PHPUnit\DbUnit\TestCaseTrait</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">PHPUnit\DbUnit\DataSet\YamlDataSet</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">YamlGuestbookTest</span> <span class="k">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="k">use</span> <span class="nx">TestCaseTrait</span><span class="p">;</span>
+
+    <span class="k">protected</span> <span class="k">function</span> <span class="nf">getDataSet</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nx">YamlDataSet</span><span class="p">(</span><span class="nb">dirname</span><span class="p">(</span><span class="no">__FILE__</span><span class="p">)</span><span class="o">.</span><span class="s2">"/_files/guestbook.yml"</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="csv-dataset">
+<a class="dashAnchor" name="//apple_ref/Section/CSV%20DataSet"></a><span id="database-csv-dataset"></span><h4>CSV DataSet</h4>
+<p>Another file-based dataset is based on CSV files. Each table of the
+dataset is represented as a single CSV file. For our guestbook
+example we would define a guestbook-table.csv file:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>id,content,user,created
+<span class="m">1</span>,<span class="s2">"Hello buddy!"</span>,<span class="s2">"joe"</span>,<span class="s2">"2010-04-24 17:15:23"</span>
+<span class="m">2</span>,<span class="s2">"I like it!"</span>,<span class="s2">"nancy"</span>,<span class="s2">"2010-04-26 12:14:20"</span>
+</pre></div>
+</div>
+<p>While this is very convenient for editing with Excel or OpenOffice,
+you cannot specify NULL values with the CSV dataset. An empty
+column will lead to the database default empty value being inserted
+into the column.</p>
+<p>You can create a CSV DataSet by calling:</p>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="k">use</span> <span class="nx">PHPUnit\Framework\TestCase</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">PHPUnit\DbUnit\TestCaseTrait</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">PHPUnit\DbUnit\DataSet\CsvDataSet</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">CsvGuestbookTest</span> <span class="k">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="k">use</span> <span class="nx">TestCaseTrait</span><span class="p">;</span>
+
+    <span class="k">protected</span> <span class="k">function</span> <span class="nf">getDataSet</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$dataSet</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">CsvDataSet</span><span class="p">();</span>
+        <span class="nv">$dataSet</span><span class="o">-&gt;</span><span class="na">addTable</span><span class="p">(</span><span class="s1">'guestbook'</span><span class="p">,</span> <span class="nb">dirname</span><span class="p">(</span><span class="no">__FILE__</span><span class="p">)</span><span class="o">.</span><span class="s2">"/_files/guestbook.csv"</span><span class="p">);</span>
+        <span class="k">return</span> <span class="nv">$dataSet</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="array-dataset">
+<a class="dashAnchor" name="//apple_ref/Section/Array%20DataSet"></a><span id="database-array-dataset"></span><h4>Array DataSet</h4>
+<p>There is no Array based DataSet in PHPUnit’s Database Extension
+(yet), but we can implement our own easily. Our guestbook example
+should look like:</p>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="k">use</span> <span class="nx">PHPUnit\Framework\TestCase</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">PHPUnit\DbUnit\TestCaseTrait</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">ArrayGuestbookTest</span> <span class="k">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="k">use</span> <span class="nx">TestCaseTrait</span><span class="p">;</span>
+
+    <span class="k">protected</span> <span class="k">function</span> <span class="nf">getDataSet</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nx">MyApp_DbUnit_ArrayDataSet</span><span class="p">(</span>
+            <span class="p">[</span>
+                <span class="s1">'guestbook'</span> <span class="o">=&gt;</span> <span class="p">[</span>
+                    <span class="p">[</span>
+                        <span class="s1">'id'</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
+                        <span class="s1">'content'</span> <span class="o">=&gt;</span> <span class="s1">'Hello buddy!'</span><span class="p">,</span>
+                        <span class="s1">'user'</span> <span class="o">=&gt;</span> <span class="s1">'joe'</span><span class="p">,</span>
+                        <span class="s1">'created'</span> <span class="o">=&gt;</span> <span class="s1">'2010-04-24 17:15:23'</span>
+                    <span class="p">],</span>
+                    <span class="p">[</span>
+                        <span class="s1">'id'</span> <span class="o">=&gt;</span> <span class="mi">2</span><span class="p">,</span>
+                        <span class="s1">'content'</span> <span class="o">=&gt;</span> <span class="s1">'I like it!'</span><span class="p">,</span>
+                        <span class="s1">'user'</span> <span class="o">=&gt;</span> <span class="k">null</span><span class="p">,</span>
+                        <span class="s1">'created'</span> <span class="o">=&gt;</span> <span class="s1">'2010-04-26 12:14:20'</span>
+                    <span class="p">],</span>
+                <span class="p">],</span>
+            <span class="p">]</span>
+        <span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>A PHP DataSet has obvious advantages over all the other file-based
+datasets:</p>
+<ul class="simple">
+<li>PHP Arrays can obviously handle <code class="docutils literal"><span class="pre">NULL</span></code> values.</li>
+<li>You won’t need additional files for assertions and can specify them
+directly in the TestCase.</li>
+</ul>
+<p>For this dataset like the Flat XML, CSV and YAML DataSets the keys
+of the first specified row define the table’s column names, in the
+previous case this would be “id“,
+“content“, “user“ and
+“created“.</p>
+<p>The implementation for this Array DataSet is simple and
+straightforward:</p>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
+
+<span class="k">use</span> <span class="nx">PHPUnit\DbUnit\DataSet\AbstractDataSet</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">PHPUnit\DbUnit\DataSet\DefaultTableMetaData</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">PHPUnit\DbUnit\DataSet\DefaultTable</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">PHPUnit\DbUnit\DataSet\DefaultTableIterator</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">MyApp_DbUnit_ArrayDataSet</span> <span class="k">extends</span> <span class="nx">AbstractDataSet</span>
+<span class="p">{</span>
+    <span class="sd">/**</span>
+<span class="sd">     * @var array</span>
+<span class="sd">     */</span>
+    <span class="k">protected</span> <span class="nv">$tables</span> <span class="o">=</span> <span class="p">[];</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * @param array $data</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span><span class="k">array</span> <span class="nv">$data</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">foreach</span> <span class="p">(</span><span class="nv">$data</span> <span class="k">AS</span> <span class="nv">$tableName</span> <span class="o">=&gt;</span> <span class="nv">$rows</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$columns</span> <span class="o">=</span> <span class="p">[];</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$rows</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span> <span class="p">{</span>
+                <span class="nv">$columns</span> <span class="o">=</span> <span class="nb">array_keys</span><span class="p">(</span><span class="nv">$rows</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+            <span class="p">}</span>
+
+            <span class="nv">$metaData</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DefaultTableMetaData</span><span class="p">(</span><span class="nv">$tableName</span><span class="p">,</span> <span class="nv">$columns</span><span class="p">);</span>
+            <span class="nv">$table</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DefaultTable</span><span class="p">(</span><span class="nv">$metaData</span><span class="p">);</span>
+
+            <span class="k">foreach</span> <span class="p">(</span><span class="nv">$rows</span> <span class="k">as</span> <span class="nv">$row</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nv">$table</span><span class="o">-&gt;</span><span class="na">addRow</span><span class="p">(</span><span class="nv">$row</span><span class="p">);</span>
+            <span class="p">}</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">tables</span><span class="p">[</span><span class="nv">$tableName</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$table</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">protected</span> <span class="k">function</span> <span class="nf">createIterator</span><span class="p">(</span><span class="nv">$reverse</span> <span class="o">=</span> <span class="k">false</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nx">DefaultTableIterator</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">tables</span><span class="p">,</span> <span class="nv">$reverse</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getTable</span><span class="p">(</span><span class="nv">$tableName</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">tables</span><span class="p">[</span><span class="nv">$tableName</span><span class="p">]))</span> <span class="p">{</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nx">InvalidArgumentException</span><span class="p">(</span><span class="s2">"</span><span class="si">$tableName</span><span class="s2"> is not a table in the current database."</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">tables</span><span class="p">[</span><span class="nv">$tableName</span><span class="p">];</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="query-sql-dataset">
+<a class="dashAnchor" name="//apple_ref/Section/Query%20(SQL)%20DataSet"></a><span id="database-query-sql-dataset"></span><h4>Query (SQL) DataSet</h4>
+<p>For database assertions you do not only need the file-based datasets
+but also a Query/SQL based Dataset that contains the actual
+contents of the database. This is where the Query DataSet shines:</p>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="nv">$ds</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PHPUnit\DbUnit\DataSet\QueryDataSet</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getConnection</span><span class="p">());</span>
+<span class="nv">$ds</span><span class="o">-&gt;</span><span class="na">addTable</span><span class="p">(</span><span class="s1">'guestbook'</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Adding a table just by name is an implicit way to define the
+data-table with the following query:</p>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="nv">$ds</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PHPUnit\DbUnit\DataSet\QueryDataSet</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getConnection</span><span class="p">());</span>
+<span class="nv">$ds</span><span class="o">-&gt;</span><span class="na">addTable</span><span class="p">(</span><span class="s1">'guestbook'</span><span class="p">,</span> <span class="s1">'SELECT * FROM guestbook'</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>You can make use of this by specifying arbitrary queries for your
+tables, for example restricting rows, column or adding
+<code class="docutils literal"><span class="pre">ORDER</span> <span class="pre">BY</span></code> clauses:</p>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="nv">$ds</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PHPUnit\DbUnit\DataSet\QueryDataSet</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getConnection</span><span class="p">());</span>
+<span class="nv">$ds</span><span class="o">-&gt;</span><span class="na">addTable</span><span class="p">(</span><span class="s1">'guestbook'</span><span class="p">,</span> <span class="s1">'SELECT id, content FROM guestbook ORDER BY created DESC'</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The section on Database Assertions will show some more details on
+how to make use of the Query DataSet.</p>
+</div>
+<div class="section" id="database-db-dataset">
+<a class="dashAnchor" name="//apple_ref/Section/Database%20(DB)%20Dataset"></a><span id="database-database-db-dataset"></span><h4>Database (DB) Dataset</h4>
+<p>Accessing the Test Connection you can automatically create a
+DataSet that consists of all the tables with their content in the
+database specified as second parameter to the Connections Factory
+method.</p>
+<p>You can either create a dataset for the complete database as shown
+in <code class="docutils literal"><span class="pre">testGuestbook()</span></code>, or restrict it to a set of
+specified table names with a whitelist as shown in
+<code class="docutils literal"><span class="pre">testFilteredGuestbook()</span></code> method.</p>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="k">use</span> <span class="nx">PHPUnit\Framework\TestCase</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">PHPUnit\DbUnit\TestCaseTrait</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">MySqlGuestbookTest</span> <span class="k">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="k">use</span> <span class="nx">TestCaseTrait</span><span class="p">;</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * @return PHPUnit\DbUnit\Database\Connection</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getConnection</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$database</span> <span class="o">=</span> <span class="s1">'my_database'</span><span class="p">;</span>
+        <span class="nv">$user</span> <span class="o">=</span> <span class="s1">'my_user'</span><span class="p">;</span>
+        <span class="nv">$password</span> <span class="o">=</span> <span class="s1">'my_password'</span><span class="p">;</span>
+        <span class="nv">$pdo</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PDO</span><span class="p">(</span><span class="s1">'mysql:...'</span><span class="p">,</span> <span class="nv">$user</span><span class="p">,</span> <span class="nv">$password</span><span class="p">);</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">createDefaultDBConnection</span><span class="p">(</span><span class="nv">$pdo</span><span class="p">,</span> <span class="nv">$database</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testGuestbook</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$dataSet</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getConnection</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">createDataSet</span><span class="p">();</span>
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testFilteredGuestbook</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$tableNames</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'guestbook'</span><span class="p">];</span>
+        <span class="nv">$dataSet</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getConnection</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">createDataSet</span><span class="p">(</span><span class="nv">$tableNames</span><span class="p">);</span>
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="replacement-dataset">
+<a class="dashAnchor" name="//apple_ref/Section/Replacement%20DataSet"></a><span id="database-replacement-dataset"></span><h4>Replacement DataSet</h4>
+<p>I have been talking about NULL problems with the Flat XML and CSV
+DataSet, but there is a slightly complicated workaround to get both
+types of datasets working with NULLs.</p>
+<p>The Replacement DataSet is a decorator for an existing dataset and
+allows you to replace values in any column of the dataset by another
+replacement value. To get our guestbook example working with NULL
+values we specify the file like:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>&lt;?xml <span class="nv">version</span><span class="o">=</span><span class="s2">"1.0"</span> ?&gt;
+&lt;dataset&gt;
+    &lt;guestbook <span class="nv">id</span><span class="o">=</span><span class="s2">"1"</span> <span class="nv">content</span><span class="o">=</span><span class="s2">"Hello buddy!"</span> <span class="nv">user</span><span class="o">=</span><span class="s2">"joe"</span> <span class="nv">created</span><span class="o">=</span><span class="s2">"2010-04-24 17:15:23"</span> /&gt;
+    &lt;guestbook <span class="nv">id</span><span class="o">=</span><span class="s2">"2"</span> <span class="nv">content</span><span class="o">=</span><span class="s2">"I like it!"</span> <span class="nv">user</span><span class="o">=</span><span class="s2">"##NULL##"</span> <span class="nv">created</span><span class="o">=</span><span class="s2">"2010-04-26 12:14:20"</span> /&gt;
+&lt;/dataset&gt;
+</pre></div>
+</div>
+<p>We then wrap the Flat XML DataSet into a Replacement DataSet:</p>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="k">use</span> <span class="nx">PHPUnit\Framework\TestCase</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">PHPUnit\DbUnit\TestCaseTrait</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">ReplacementTest</span> <span class="k">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="k">use</span> <span class="nx">TestCaseTrait</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getDataSet</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$ds</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">createFlatXmlDataSet</span><span class="p">(</span><span class="s1">'myFlatXmlFixture.xml'</span><span class="p">);</span>
+        <span class="nv">$rds</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PHPUnit\DbUnit\DataSet\ReplacementDataSet</span><span class="p">(</span><span class="nv">$ds</span><span class="p">);</span>
+        <span class="nv">$rds</span><span class="o">-&gt;</span><span class="na">addFullReplacement</span><span class="p">(</span><span class="s1">'##NULL##'</span><span class="p">,</span> <span class="k">null</span><span class="p">);</span>
+        <span class="k">return</span> <span class="nv">$rds</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="dataset-filter">
+<a class="dashAnchor" name="//apple_ref/Section/DataSet%20Filter"></a><span id="database-dataset-filter"></span><h4>DataSet Filter</h4>
+<p>If you have a large fixture file you can use the DataSet Filter for
+white- and blacklisting of tables and columns that should be
+contained in a sub-dataset. This is especially handy in combination
+with the DB DataSet to filter the columns of the datasets.</p>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="k">use</span> <span class="nx">PHPUnit\Framework\TestCase</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">PHPUnit\DbUnit\TestCaseTrait</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">DataSetFilterTest</span> <span class="k">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="k">use</span> <span class="nx">TestCaseTrait</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testIncludeFilteredGuestbook</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$tableNames</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'guestbook'</span><span class="p">];</span>
+        <span class="nv">$dataSet</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getConnection</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">createDataSet</span><span class="p">();</span>
+
+        <span class="nv">$filterDataSet</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PHPUnit\DbUnit\DataSet\DataSetFilter</span><span class="p">(</span><span class="nv">$dataSet</span><span class="p">);</span>
+        <span class="nv">$filterDataSet</span><span class="o">-&gt;</span><span class="na">addIncludeTables</span><span class="p">([</span><span class="s1">'guestbook'</span><span class="p">]);</span>
+        <span class="nv">$filterDataSet</span><span class="o">-&gt;</span><span class="na">setIncludeColumnsForTable</span><span class="p">(</span><span class="s1">'guestbook'</span><span class="p">,</span> <span class="p">[</span><span class="s1">'id'</span><span class="p">,</span> <span class="s1">'content'</span><span class="p">]);</span>
+        <span class="c1">// ..</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testExcludeFilteredGuestbook</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$tableNames</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'guestbook'</span><span class="p">];</span>
+        <span class="nv">$dataSet</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getConnection</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">createDataSet</span><span class="p">();</span>
+
+        <span class="nv">$filterDataSet</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PHPUnit\DbUnit\DataSet\DataSetFilter</span><span class="p">(</span><span class="nv">$dataSet</span><span class="p">);</span>
+        <span class="nv">$filterDataSet</span><span class="o">-&gt;</span><span class="na">addExcludeTables</span><span class="p">([</span><span class="s1">'foo'</span><span class="p">,</span> <span class="s1">'bar'</span><span class="p">,</span> <span class="s1">'baz'</span><span class="p">]);</span> <span class="c1">// only keep the guestbook table!</span>
+        <span class="nv">$filterDataSet</span><span class="o">-&gt;</span><span class="na">setExcludeColumnsForTable</span><span class="p">(</span><span class="s1">'guestbook'</span><span class="p">,</span> <span class="p">[</span><span class="s1">'user'</span><span class="p">,</span> <span class="s1">'created'</span><span class="p">]);</span>
+        <span class="c1">// ..</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition-note admonition">
+<p class="first admonition-title">Note</p>
+<p class="last">You cannot use both exclude and include column filtering on the same table,
+only on different ones. Plus it is only possible to either white- or blacklist
+tables, not both of them.</p>
+</div>
+</div>
+<div class="section" id="composite-dataset">
+<a class="dashAnchor" name="//apple_ref/Section/Composite%20DataSet"></a><span id="database-composite-dataset"></span><h4>Composite DataSet</h4>
+<p>The composite DataSet is very useful for aggregating several
+already existing datasets into a single dataset. When several
+datasets contain the same table the rows are appended in the
+specified order. For example if we have two datasets
+<em>fixture1.xml</em>:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>&lt;?xml <span class="nv">version</span><span class="o">=</span><span class="s2">"1.0"</span> ?&gt;
+&lt;dataset&gt;
+    &lt;guestbook <span class="nv">id</span><span class="o">=</span><span class="s2">"1"</span> <span class="nv">content</span><span class="o">=</span><span class="s2">"Hello buddy!"</span> <span class="nv">user</span><span class="o">=</span><span class="s2">"joe"</span> <span class="nv">created</span><span class="o">=</span><span class="s2">"2010-04-24 17:15:23"</span> /&gt;
+&lt;/dataset&gt;
+</pre></div>
+</div>
+<p>and <em>fixture2.xml</em>:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>&lt;?xml <span class="nv">version</span><span class="o">=</span><span class="s2">"1.0"</span> ?&gt;
+&lt;dataset&gt;
+    &lt;guestbook <span class="nv">id</span><span class="o">=</span><span class="s2">"2"</span> <span class="nv">content</span><span class="o">=</span><span class="s2">"I like it!"</span> <span class="nv">user</span><span class="o">=</span><span class="s2">"##NULL##"</span> <span class="nv">created</span><span class="o">=</span><span class="s2">"2010-04-26 12:14:20"</span> /&gt;
+&lt;/dataset&gt;
+</pre></div>
+</div>
+<p>Using the Composite DataSet we can aggregate both fixture files:</p>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="k">use</span> <span class="nx">PHPUnit\Framework\TestCase</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">PHPUnit\DbUnit\TestCaseTrait</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">CompositeTest</span> <span class="k">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="k">use</span> <span class="nx">TestCaseTrait</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getDataSet</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$ds1</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">createFlatXmlDataSet</span><span class="p">(</span><span class="s1">'fixture1.xml'</span><span class="p">);</span>
+        <span class="nv">$ds2</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">createFlatXmlDataSet</span><span class="p">(</span><span class="s1">'fixture2.xml'</span><span class="p">);</span>
+
+        <span class="nv">$compositeDs</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PHPUnit\DbUnit\DataSet\CompositeDataSet</span><span class="p">();</span>
+        <span class="nv">$compositeDs</span><span class="o">-&gt;</span><span class="na">addDataSet</span><span class="p">(</span><span class="nv">$ds1</span><span class="p">);</span>
+        <span class="nv">$compositeDs</span><span class="o">-&gt;</span><span class="na">addDataSet</span><span class="p">(</span><span class="nv">$ds2</span><span class="p">);</span>
+
+        <span class="k">return</span> <span class="nv">$compositeDs</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="beware-of-foreign-keys">
+<a class="dashAnchor" name="//apple_ref/Section/Beware%20of%20Foreign%20Keys"></a><span id="database-beware-of-foreign-keys"></span><h3>Beware of Foreign Keys</h3>
+<p>During Fixture SetUp PHPUnit’s Database Extension inserts the rows
+into the database in the order they are specified in your fixture.
+If your database schema uses foreign keys this means you have to
+specify the tables in an order that does not cause foreign key
+constraints to fail.</p>
+</div>
+<div class="section" id="implementing-your-own-datasets-datatables">
+<a class="dashAnchor" name="//apple_ref/Section/Implementing%20your%20own%20DataSets%2FDataTables"></a><span id="database-implementing-your-own-datasetsdatatables"></span><h3>Implementing your own DataSets/DataTables</h3>
+<p>To understand the internals of DataSets and DataTables, lets have a
+look at the interface of a DataSet. You can skip this part if you
+do not plan to implement your own DataSet or DataTable.</p>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="k">namespace</span> <span class="nx">PHPUnit\DbUnit\DataSet</span><span class="p">;</span>
+
+<span class="k">interface</span> <span class="nx">IDataSet</span> <span class="k">extends</span> <span class="nx">IteratorAggregate</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getTableNames</span><span class="p">();</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getTableMetaData</span><span class="p">(</span><span class="nv">$tableName</span><span class="p">);</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getTable</span><span class="p">(</span><span class="nv">$tableName</span><span class="p">);</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">assertEquals</span><span class="p">(</span><span class="nx">IDataSet</span> <span class="nv">$other</span><span class="p">);</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getReverseIterator</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The public interface is used internally by the
+<code class="docutils literal"><span class="pre">assertDataSetsEqual()</span></code> assertion on the Database
+TestCase to check for dataset quality. From the
+<code class="docutils literal"><span class="pre">IteratorAggregate</span></code> interface the IDataSet
+inherits the <code class="docutils literal"><span class="pre">getIterator()</span></code> method to iterate
+over all tables of the dataset. The reverse iterator allows PHPUnit to
+truncate tables opposite the order they were created to satisfy foreign
+key constraints.</p>
+<p>Depending on the implementation different approaches are taken to
+add table instances to a dataset. For example, tables are added
+internally during construction from the source file in all
+file-based datasets such as <code class="docutils literal"><span class="pre">YamlDataSet</span></code>,
+<code class="docutils literal"><span class="pre">XmlDataSet</span></code> or <code class="docutils literal"><span class="pre">FlatXmlDataSet</span></code>.</p>
+<p>A table is also represented by the following interface:</p>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="k">namespace</span> <span class="nx">PHPUnit\DbUnit\DataSet</span><span class="p">;</span>
+
+<span class="k">interface</span> <span class="nx">ITable</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getTableMetaData</span><span class="p">();</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getRowCount</span><span class="p">();</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getValue</span><span class="p">(</span><span class="nv">$row</span><span class="p">,</span> <span class="nv">$column</span><span class="p">);</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getRow</span><span class="p">(</span><span class="nv">$row</span><span class="p">);</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">assertEquals</span><span class="p">(</span><span class="nx">ITable</span> <span class="nv">$other</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Except the <code class="docutils literal"><span class="pre">getTableMetaData()</span></code> method it is
+pretty self-explainatory. The used methods are all required for
+the different assertions of the Database Extension that are
+explained in the next chapter. The
+<code class="docutils literal"><span class="pre">getTableMetaData()</span></code> method has to return an
+implementation of the
+<code class="docutils literal"><span class="pre">PHPUnit\DbUnit\DataSet\ITableMetaData</span></code>
+interface, which describes the structure of the table. It holds
+information on:</p>
+<ul class="simple">
+<li>The table name</li>
+<li>An array of column-names of the table, ordered by their appearance
+in the result-set.</li>
+<li>An array of the primary-key columns.</li>
+</ul>
+<p>This interface also has an assertion that checks if two instances
+of Table Metadata equal each other, which is used by the data-set
+equality assertion.</p>
+</div>
+</div>
+<div class="section" id="using-the-database-connection-api">
+<a class="dashAnchor" name="//apple_ref/Section/Using%20the%20Database%20Connection%20API"></a><span id="database-the-connection-api"></span><h2>Using the Database Connection API</h2>
+<p>There are three interesting methods on the Connection interface
+which has to be returned from the
+<code class="docutils literal"><span class="pre">getConnection()</span></code> method on the Database TestCase:</p>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="k">namespace</span> <span class="nx">PHPUnit\DbUnit\Database</span><span class="p">;</span>
+
+<span class="k">interface</span> <span class="nx">Connection</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">createDataSet</span><span class="p">(</span><span class="k">array</span> <span class="nv">$tableNames</span> <span class="o">=</span> <span class="k">null</span><span class="p">);</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">createQueryTable</span><span class="p">(</span><span class="nv">$resultName</span><span class="p">,</span> <span class="nv">$sql</span><span class="p">);</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getRowCount</span><span class="p">(</span><span class="nv">$tableName</span><span class="p">,</span> <span class="nv">$whereClause</span> <span class="o">=</span> <span class="k">null</span><span class="p">);</span>
+
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ol class="arabic">
+<li><p class="first">The <code class="docutils literal"><span class="pre">createDataSet()</span></code> method creates a Database
+(DB) DataSet as described in the DataSet implementations section.</p>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="k">use</span> <span class="nx">PHPUnit\Framework\TestCase</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">PHPUnit\DbUnit\TestCaseTrait</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">ConnectionTest</span> <span class="k">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="k">use</span> <span class="nx">TestCaseTrait</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testCreateDataSet</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$tableNames</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'guestbook'</span><span class="p">];</span>
+        <span class="nv">$dataSet</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getConnection</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">createDataSet</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">The <code class="docutils literal"><span class="pre">createQueryTable()</span></code> method can be used to
+create instances of a QueryTable, give them a result name and SQL
+query. This is a handy method when it comes to result/table
+assertions as will be shown in the next section on the Database
+Assertions API.</p>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="k">use</span> <span class="nx">PHPUnit\Framework\TestCase</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">PHPUnit\DbUnit\TestCaseTrait</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">ConnectionTest</span> <span class="k">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="k">use</span> <span class="nx">TestCaseTrait</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testCreateQueryTable</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$tableNames</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'guestbook'</span><span class="p">];</span>
+        <span class="nv">$queryTable</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getConnection</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">createQueryTable</span><span class="p">(</span><span class="s1">'guestbook'</span><span class="p">,</span> <span class="s1">'SELECT * FROM guestbook'</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">The <code class="docutils literal"><span class="pre">getRowCount()</span></code> method is a convenient way to
+access the number of rows in a table, optionally filtered by an
+additional where clause. This can be used with a simple equality
+assertion:</p>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="k">use</span> <span class="nx">PHPUnit\Framework\TestCase</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">PHPUnit\DbUnit\TestCaseTrait</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">ConnectionTest</span> <span class="k">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="k">use</span> <span class="nx">TestCaseTrait</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testGetRowCount</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertSame</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getConnection</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">getRowCount</span><span class="p">(</span><span class="s1">'guestbook'</span><span class="p">));</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="database-assertions-api">
+<a class="dashAnchor" name="//apple_ref/Section/Database%20Assertions%20API"></a><span id="database-database-assertions-api"></span><h2>Database Assertions API</h2>
+<p>For a testing tool the Database Extension surely provides some
+assertions that you can use to verify the current state of the
+database, tables and the row-count of tables. This section
+describes this functionality in detail:</p>
+<div class="section" id="asserting-the-row-count-of-a-table">
+<a class="dashAnchor" name="//apple_ref/Section/Asserting%20the%20Row-Count%20of%20a%20Table"></a><span id="database-asserting-the-row-count-of-a-table"></span><h3>Asserting the Row-Count of a Table</h3>
+<p>It is often helpful to check if a table contains a specific amount
+of rows. You can easily achieve this without additional glue code
+using the Connection API. Say we wanted to check that after
+insertion of a row into our guestbook we not only have the two
+initial entries that have accompanied us in all the previous
+examples, but a third one:</p>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="k">use</span> <span class="nx">PHPUnit\Framework\TestCase</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">PHPUnit\DbUnit\TestCaseTrait</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">GuestbookTest</span> <span class="k">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="k">use</span> <span class="nx">TestCaseTrait</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testAddEntry</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertSame</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getConnection</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">getRowCount</span><span class="p">(</span><span class="s1">'guestbook'</span><span class="p">),</span> <span class="s2">"Pre-Condition"</span><span class="p">);</span>
+
+        <span class="nv">$guestbook</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Guestbook</span><span class="p">();</span>
+        <span class="nv">$guestbook</span><span class="o">-&gt;</span><span class="na">addEntry</span><span class="p">(</span><span class="s2">"suzy"</span><span class="p">,</span> <span class="s2">"Hello world!"</span><span class="p">);</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertSame</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getConnection</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">getRowCount</span><span class="p">(</span><span class="s1">'guestbook'</span><span class="p">),</span> <span class="s2">"Inserting failed"</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="asserting-the-state-of-a-table">
+<a class="dashAnchor" name="//apple_ref/Section/Asserting%20the%20State%20of%20a%20Table"></a><span id="database-asserting-the-state-of-a-table"></span><h3>Asserting the State of a Table</h3>
+<p>The previous assertion is helpful, but we surely want to check the
+actual contents of the table to verify that all the values were
+written into the correct columns. This can be achieved by a table
+assertion.</p>
+<p>For this we would define a Query Table instance which derives its
+content from a table name and SQL query and compare it to a
+File/Array Based Data Set:</p>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="k">use</span> <span class="nx">PHPUnit\Framework\TestCase</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">PHPUnit\DbUnit\TestCaseTrait</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">GuestbookTest</span> <span class="k">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="k">use</span> <span class="nx">TestCaseTrait</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testAddEntry</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$guestbook</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Guestbook</span><span class="p">();</span>
+        <span class="nv">$guestbook</span><span class="o">-&gt;</span><span class="na">addEntry</span><span class="p">(</span><span class="s2">"suzy"</span><span class="p">,</span> <span class="s2">"Hello world!"</span><span class="p">);</span>
+
+        <span class="nv">$queryTable</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getConnection</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">createQueryTable</span><span class="p">(</span>
+            <span class="s1">'guestbook'</span><span class="p">,</span> <span class="s1">'SELECT * FROM guestbook'</span>
+        <span class="p">);</span>
+        <span class="nv">$expectedTable</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">createFlatXmlDataSet</span><span class="p">(</span><span class="s2">"expectedBook.xml"</span><span class="p">)</span>
+                              <span class="o">-&gt;</span><span class="na">getTable</span><span class="p">(</span><span class="s2">"guestbook"</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertTablesEqual</span><span class="p">(</span><span class="nv">$expectedTable</span><span class="p">,</span> <span class="nv">$queryTable</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Now we have to write the <em>expectedBook.xml</em> Flat
+XML file for this assertion:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>&lt;?xml <span class="nv">version</span><span class="o">=</span><span class="s2">"1.0"</span> ?&gt;
+&lt;dataset&gt;
+    &lt;guestbook <span class="nv">id</span><span class="o">=</span><span class="s2">"1"</span> <span class="nv">content</span><span class="o">=</span><span class="s2">"Hello buddy!"</span> <span class="nv">user</span><span class="o">=</span><span class="s2">"joe"</span> <span class="nv">created</span><span class="o">=</span><span class="s2">"2010-04-24 17:15:23"</span> /&gt;
+    &lt;guestbook <span class="nv">id</span><span class="o">=</span><span class="s2">"2"</span> <span class="nv">content</span><span class="o">=</span><span class="s2">"I like it!"</span> <span class="nv">user</span><span class="o">=</span><span class="s2">"nancy"</span> <span class="nv">created</span><span class="o">=</span><span class="s2">"2010-04-26 12:14:20"</span> /&gt;
+    &lt;guestbook <span class="nv">id</span><span class="o">=</span><span class="s2">"3"</span> <span class="nv">content</span><span class="o">=</span><span class="s2">"Hello world!"</span> <span class="nv">user</span><span class="o">=</span><span class="s2">"suzy"</span> <span class="nv">created</span><span class="o">=</span><span class="s2">"2010-05-01 21:47:08"</span> /&gt;
+&lt;/dataset&gt;
+</pre></div>
+</div>
+<p>This assertion would only pass on exactly one second of the
+universe though, on <em>2010–05–01 21:47:08</em>. Dates
+pose a special problem to database testing and we can circumvent
+the failure by omitting the “created“ column from the
+assertion.</p>
+<p>The adjusted <em>expectedBook.xml</em> Flat XML file
+would probably have to look like the following to make the
+assertion pass:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>&lt;?xml <span class="nv">version</span><span class="o">=</span><span class="s2">"1.0"</span> ?&gt;
+&lt;dataset&gt;
+    &lt;guestbook <span class="nv">id</span><span class="o">=</span><span class="s2">"1"</span> <span class="nv">content</span><span class="o">=</span><span class="s2">"Hello buddy!"</span> <span class="nv">user</span><span class="o">=</span><span class="s2">"joe"</span> /&gt;
+    &lt;guestbook <span class="nv">id</span><span class="o">=</span><span class="s2">"2"</span> <span class="nv">content</span><span class="o">=</span><span class="s2">"I like it!"</span> <span class="nv">user</span><span class="o">=</span><span class="s2">"nancy"</span> /&gt;
+    &lt;guestbook <span class="nv">id</span><span class="o">=</span><span class="s2">"3"</span> <span class="nv">content</span><span class="o">=</span><span class="s2">"Hello world!"</span> <span class="nv">user</span><span class="o">=</span><span class="s2">"suzy"</span> /&gt;
+&lt;/dataset&gt;
+</pre></div>
+</div>
+<p>We have to fix up the Query Table call:</p>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="nv">$queryTable</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getConnection</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">createQueryTable</span><span class="p">(</span>
+    <span class="s1">'guestbook'</span><span class="p">,</span> <span class="s1">'SELECT id, content, user FROM guestbook'</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="asserting-the-result-of-a-query">
+<a class="dashAnchor" name="//apple_ref/Section/Asserting%20the%20Result%20of%20a%20Query"></a><span id="database-asserting-the-result-of-a-query"></span><h3>Asserting the Result of a Query</h3>
+<p>You can also assert the result of complex queries with the Query
+Table approach, just specify a result name with a query and
+compare it to a dataset:</p>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="k">use</span> <span class="nx">PHPUnit\Framework\TestCase</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">PHPUnit\DbUnit\TestCaseTrait</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">ComplexQueryTest</span> <span class="k">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="k">use</span> <span class="nx">TestCaseTrait</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testComplexQuery</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$queryTable</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getConnection</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">createQueryTable</span><span class="p">(</span>
+            <span class="s1">'myComplexQuery'</span><span class="p">,</span> <span class="s1">'SELECT complexQuery...'</span>
+        <span class="p">);</span>
+        <span class="nv">$expectedTable</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">createFlatXmlDataSet</span><span class="p">(</span><span class="s2">"complexQueryAssertion.xml"</span><span class="p">)</span>
+                              <span class="o">-&gt;</span><span class="na">getTable</span><span class="p">(</span><span class="s2">"myComplexQuery"</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertTablesEqual</span><span class="p">(</span><span class="nv">$expectedTable</span><span class="p">,</span> <span class="nv">$queryTable</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="asserting-the-state-of-multiple-tables">
+<a class="dashAnchor" name="//apple_ref/Section/Asserting%20the%20State%20of%20Multiple%20Tables"></a><span id="database-asserting-the-state-of-multiple-tables"></span><h3>Asserting the State of Multiple Tables</h3>
+<p>For sure you can assert the state of multiple tables at once and
+compare a query dataset against a file based dataset. There are two
+different ways for DataSet assertions.</p>
+<ol class="arabic">
+<li><p class="first">You can use the Database (DB) DataSet from the Connection and
+compare it to a File-Based DataSet.</p>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="k">use</span> <span class="nx">PHPUnit\Framework\TestCase</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">PHPUnit\DbUnit\TestCaseTrait</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">DataSetAssertionsTest</span> <span class="k">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="k">use</span> <span class="nx">TestCaseTrait</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testCreateDataSetAssertion</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$dataSet</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getConnection</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">createDataSet</span><span class="p">([</span><span class="s1">'guestbook'</span><span class="p">]);</span>
+        <span class="nv">$expectedDataSet</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">createFlatXmlDataSet</span><span class="p">(</span><span class="s1">'guestbook.xml'</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertDataSetsEqual</span><span class="p">(</span><span class="nv">$expectedDataSet</span><span class="p">,</span> <span class="nv">$dataSet</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">You can construct the DataSet on your own:</p>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="k">use</span> <span class="nx">PHPUnit\Framework\TestCase</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">PHPUnit\DbUnit\TestCaseTrait</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">PHPUnit\DbUnit\DataSet\QueryDataSet</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">DataSetAssertionsTest</span> <span class="k">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="k">use</span> <span class="nx">TestCaseTrait</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testManualDataSetAssertion</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$dataSet</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">QueryDataSet</span><span class="p">();</span>
+        <span class="nv">$dataSet</span><span class="o">-&gt;</span><span class="na">addTable</span><span class="p">(</span><span class="s1">'guestbook'</span><span class="p">,</span> <span class="s1">'SELECT id, content, user FROM guestbook'</span><span class="p">);</span> <span class="c1">// additional tables</span>
+        <span class="nv">$expectedDataSet</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">createFlatXmlDataSet</span><span class="p">(</span><span class="s1">'guestbook.xml'</span><span class="p">);</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertDataSetsEqual</span><span class="p">(</span><span class="nv">$expectedDataSet</span><span class="p">,</span> <span class="nv">$dataSet</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" id="frequently-asked-questions">
+<a class="dashAnchor" name="//apple_ref/Section/Frequently%20Asked%20Questions"></a><span id="database-frequently-asked-questions"></span><h2>Frequently Asked Questions</h2>
+<div class="section" id="will-phpunit-re-create-the-database-schema-for-each-test">
+<a class="dashAnchor" name="//apple_ref/Section/Will%20PHPUnit%20(re-)create%20the%20database%20schema%20for%20each%20test?"></a><span id="database-will-phpunit-re-create-the-database-schema-for-each-test"></span><h3>Will PHPUnit (re-)create the database schema for each test?</h3>
+<p>No, PHPUnit requires all database objects to be available when the
+suite is started. The Database, tables, sequences, triggers and
+views have to be created before you run the test suite.</p>
+<p><a class="reference external" href="http://www.doctrine-project.org/">Doctrine 2</a> or
+<a class="reference external" href="http://www.ezcomponents.org/">eZ Components</a> have
+powerful tools that allow you to create the database schema from
+pre-defined datastructures. However, these have to be hooked into
+the PHPUnit extension to allow an automatic database re-creation
+before the complete test-suite is run.</p>
+<p>Since each test completely cleans the database you are not even
+required to re-create the database for each test-run. A permanently
+available database works perfectly.</p>
+</div>
+<div class="section" id="am-i-required-to-use-pdo-in-my-application-for-the-database-extension-to-work">
+<a class="dashAnchor" name="//apple_ref/Section/Am%20I%20required%20to%20use%20PDO%20in%20my%20application%20for%20the%20Database%20Extension%20to%20work?"></a><span id="database-am-i-required-to-use-pdo-in-my-application-for-the-database-extension-to-work"></span><h3>Am I required to use PDO in my application for the Database Extension to work?</h3>
+<p>No, PDO is only required for the fixture clean- and set-up and for
+assertions. You can use whatever database abstraction you want
+inside your own code.</p>
+</div>
+<div class="section" id="what-can-i-do-when-i-get-a-too-much-connections-error">
+<a class="dashAnchor" name="//apple_ref/Section/What%20can%20I%20do,%20when%20I%20get%20a%20%E2%80%9CToo%20much%20Connections%E2%80%9C%20Error?"></a><span id="database-what-can-i-do-when-i-get-a-too-much-connections-error"></span><h3>What can I do, when I get a “Too much Connections“ Error?</h3>
+<p>If you do not cache the PDO instance that is created from the
+TestCase <code class="docutils literal"><span class="pre">getConnection()</span></code> method the number of
+connections to the database is increasing by one or more with each
+database test. With default configuration MySql only allows 100
+concurrent connections other vendors also have maximum connection
+limits.</p>
+<p>The SubSection
+“Use your own Abstract Database TestCase“ shows how
+you can prevent this error from happening by using a single cached
+PDO instance in all your tests.</p>
+</div>
+<div class="section" id="how-to-handle-null-with-flat-xml-csv-datasets">
+<a class="dashAnchor" name="//apple_ref/Section/How%20to%20handle%20NULL%20with%20Flat%20XML%20%2F%20CSV%20Datasets?"></a><span id="database-how-to-handle-null-with-flat-xml-csv-datasets"></span><h3>How to handle NULL with Flat XML / CSV Datasets?</h3>
+<p>Do not do this. Instead, you should use either the XML or the YAML
+DataSets.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="test-doubles.html" class="btn btn-neutral float-right" title="9. Test Doubles" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="incomplete-and-skipped-tests.html" class="btn btn-neutral" title="7. Incomplete and Skipped Tests" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr>
+
+  <div role="contentinfo">
+    <p>
+        © <a href="copyright.html">Copyright</a> 2018, Sebastian Bergmann.
+      
+        <span class="commit">
+          Revision <code>25b86e5f</code>.
+        </span>
+      
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Read the Docs</span>
+      v: 7.1
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt>Versions</dt>
+        
+          <dd><a href="https://phpunit.readthedocs.io/en/latest/">latest</a></dd>
+        
+          <dd><a href="index.html">7.1</a></dd>
+        
+          <dd><a href="https://phpunit.readthedocs.io/en/7.0/">7.0</a></dd>
+        
+          <dd><a href="https://phpunit.readthedocs.io/en/master/">master</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>Downloads</dt>
+        
+          <dd><a href="http://readthedocs.org/projects/phpunit/downloads/pdf/7.1/">pdf</a></dd>
+        
+          <dd><a href="http://readthedocs.org/projects/phpunit/downloads/htmlzip/7.1/">htmlzip</a></dd>
+        
+          <dd><a href="http://readthedocs.org/projects/phpunit/downloads/epub/7.1/">epub</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>On Read the Docs</dt>
+          <dd>
+            <a href="http://readthedocs.org/projects/phpunit/?fromdocs=phpunit">Project Home</a>
+          </dd>
+          <dd>
+            <a href="http://readthedocs.org/builds/phpunit/?fromdocs=phpunit">Builds</a>
+          </dd>
+      </dl>
+      <hr>
+      Free document hosting provided by <a href="http://www.readthedocs.org/">Read the Docs</a>.
+
+    </div>
+  </div>
+
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'7.1',
+            LANGUAGE:'en',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../media.readthedocs.org/javascript/jquery/jquery-2.0.3.min.js"></script>
+      <script type="text/javascript" src="../../../media.readthedocs.org/javascript/jquery/jquery-migrate-1.2.1.min.js"></script>
+      <script type="text/javascript" src="../../../media.readthedocs.org/javascript/underscore.js"></script>
+      <script type="text/javascript" src="../../../media.readthedocs.org/javascript/doctools.js"></script>
+      <script type="text/javascript" src="../../../media.readthedocs.org/javascript/readthedocs-doc-embed.js"></script>
+
+  
+
+  
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          
+          SphinxRtdTheme.Navigation.enableSticky();
+          
+      });
+  </script> 
+
+
+
+<!-- Mirrored from phpunit.readthedocs.io/en/7.1/database.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 14 Jul 2018 16:54:09 GMT -->
+</body></html>

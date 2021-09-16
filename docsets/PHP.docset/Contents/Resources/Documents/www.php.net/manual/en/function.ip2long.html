@@ -1,0 +1,819 @@
+<html><!-- Mirrored from www.php.net/manual/en/function.ip2long.php by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 11 Sep 2021 06:57:15 GMT --><!-- Added by HTTrack --><head><meta http-equiv="content-type" content="text/html;charset=utf-8"><!-- /Added by HTTrack -->
+
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>ip2long</title>
+
+ <link rel="shortcut icon" href="../../favicon.ico">
+ <link rel="search" type="application/opensearchdescription+xml" href="http://php.net/phpnetimprovedsearch.src" title="Add PHP.net search">
+ <link rel="alternate" type="application/atom+xml" href="https://www.php.net/releases/feed.php" title="PHP Release feed">
+ <link rel="alternate" type="application/atom+xml" href="https://www.php.net/feed.atom" title="PHP: Hypertext Preprocessor">
+
+ <link rel="canonical" href="function.ip2long.html">
+ <link rel="shorturl" href="https://www.php.net/ip2long">
+ <link rel="alternate" href="https://www.php.net/ip2long" hreflang="x-default">
+
+ <link rel="contents" href="index-2.html">
+ <link rel="index" href="ref.network.html">
+ <link rel="prev" href="function.inet-pton.html">
+ <link rel="next" href="function.long2ip.html">
+
+ <link rel="alternate" href="function.ip2long.html" hreflang="en">
+ <link rel="alternate" href="https://www.php.net/manual/pt_BR/function.ip2long.php" hreflang="pt_BR">
+ <link rel="alternate" href="https://www.php.net/manual/zh/function.ip2long.php" hreflang="zh">
+ <link rel="alternate" href="https://www.php.net/manual/fr/function.ip2long.php" hreflang="fr">
+ <link rel="alternate" href="https://www.php.net/manual/de/function.ip2long.php" hreflang="de">
+ <link rel="alternate" href="https://www.php.net/manual/ja/function.ip2long.php" hreflang="ja">
+ <link rel="alternate" href="https://www.php.net/manual/ro/function.ip2long.php" hreflang="ro">
+ <link rel="alternate" href="https://www.php.net/manual/ru/function.ip2long.php" hreflang="ru">
+ <link rel="alternate" href="https://www.php.net/manual/es/function.ip2long.php" hreflang="es">
+ <link rel="alternate" href="https://www.php.net/manual/tr/function.ip2long.php" hreflang="tr">
+
+<link rel="stylesheet" type="text/css" href="../../cached0aba.css?t=1539771603&amp;f=/fonts/Fira/fira.css" media="screen">
+<link rel="stylesheet" type="text/css" href="../../cached2ecf.css?t=1539765004&amp;f=/fonts/Font-Awesome/css/fontello.css" media="screen">
+<link rel="stylesheet" type="text/css" href="../../cachedba57.css?t=1606338002&amp;f=/styles/theme-base.css" media="screen">
+<link rel="stylesheet" type="text/css" href="../../cached3afa.css?t=1627831203&amp;f=/styles/theme-medium.css" media="screen">
+
+ <!--[if lte IE 7]>
+ <link rel="stylesheet" type="text/css" href="https://www.php.net/styles/workarounds.ie7.css" media="screen">
+ <![endif]-->
+
+ <!--[if lte IE 8]>
+ <script>
+  window.brokenIE = true;
+ </script>
+ <![endif]-->
+
+ <!--[if lte IE 9]>
+ <link rel="stylesheet" type="text/css" href="https://www.php.net/styles/workarounds.ie9.css" media="screen">
+ <![endif]-->
+
+ <!--[if IE]>
+ <script src="https://www.php.net/js/ext/html5.js"></script>
+ <![endif]-->
+
+ <base>
+
+
+</head>
+<body class="docs " style="">
+
+
+<div class="headsup"><a href="https://www.php.net/conferences/index.php#id2021-09-08-1">Longhorn PHP 2021</a></div>
+<nav id="trick"><div><dl>
+<dt><a href="getting-started.html">Getting Started</a></dt>
+	<dd><a href="introduction.html">Introduction</a></dd>
+	<dd><a href="tutorial.html">A simple tutorial</a></dd>
+<dt><a href="langref.html">Language Reference</a></dt>
+	<dd><a href="language.basic-syntax.html">Basic syntax</a></dd>
+	<dd><a href="language.types.html">Types</a></dd>
+	<dd><a href="language.variables.html">Variables</a></dd>
+	<dd><a href="language.constants.html">Constants</a></dd>
+	<dd><a href="language.expressions.html">Expressions</a></dd>
+	<dd><a href="language.operators.html">Operators</a></dd>
+	<dd><a href="language.control-structures.html">Control Structures</a></dd>
+	<dd><a href="language.functions.html">Functions</a></dd>
+	<dd><a href="language.oop5.html">Classes and Objects</a></dd>
+	<dd><a href="language.namespaces.html">Namespaces</a></dd>
+	<dd><a href="language.errors.html">Errors</a></dd>
+	<dd><a href="language.exceptions.html">Exceptions</a></dd>
+	<dd><a href="language.generators.html">Generators</a></dd>
+	<dd><a href="language.attributes.html">Attributes</a></dd>
+	<dd><a href="language.references.html">References Explained</a></dd>
+	<dd><a href="reserved.variables.html">Predefined Variables</a></dd>
+	<dd><a href="reserved.exceptions.html">Predefined Exceptions</a></dd>
+	<dd><a href="reserved.interfaces.html">Predefined Interfaces and Classes</a></dd>
+	<dd><a href="context.html">Context options and parameters</a></dd>
+	<dd><a href="wrappers.html">Supported Protocols and Wrappers</a></dd>
+</dl>
+<dl>
+<dt><a href="security.html">Security</a></dt>
+	<dd><a href="security.intro.html">Introduction</a></dd>
+	<dd><a href="security.general.html">General considerations</a></dd>
+	<dd><a href="security.cgi-bin.html">Installed as CGI binary</a></dd>
+	<dd><a href="security.apache.html">Installed as an Apache module</a></dd>
+	<dd><a href="security.sessions.html">Session Security</a></dd>
+	<dd><a href="security.filesystem.html">Filesystem Security</a></dd>
+	<dd><a href="security.database.html">Database Security</a></dd>
+	<dd><a href="security.errors.html">Error Reporting</a></dd>
+	<dd><a href="security.variables.html">User Submitted Data</a></dd>
+	<dd><a href="security.hiding.html">Hiding PHP</a></dd>
+	<dd><a href="security.current.html">Keeping Current</a></dd>
+<dt><a href="features.html">Features</a></dt>
+	<dd><a href="features.http-auth.html">HTTP authentication with PHP</a></dd>
+	<dd><a href="features.cookies.html">Cookies</a></dd>
+	<dd><a href="features.sessions.html">Sessions</a></dd>
+	<dd><a href="features.xforms.html">Dealing with XForms</a></dd>
+	<dd><a href="features.file-upload.html">Handling file uploads</a></dd>
+	<dd><a href="features.remote-files.html">Using remote files</a></dd>
+	<dd><a href="features.connection-handling.html">Connection handling</a></dd>
+	<dd><a href="features.persistent-connections.html">Persistent Database Connections</a></dd>
+	<dd><a href="features.commandline.html">Command line usage</a></dd>
+	<dd><a href="features.gc.html">Garbage Collection</a></dd>
+	<dd><a href="features.dtrace.html">DTrace Dynamic Tracing</a></dd>
+</dl>
+<dl>
+<dt><a href="funcref.html">Function Reference</a></dt>
+	<dd><a href="refs.basic.php.html">Affecting PHP's Behaviour</a></dd>
+	<dd><a href="refs.utilspec.audio.html">Audio Formats Manipulation</a></dd>
+	<dd><a href="refs.remote.auth.html">Authentication Services</a></dd>
+	<dd><a href="refs.utilspec.cmdline.html">Command Line Specific Extensions</a></dd>
+	<dd><a href="refs.compression.html">Compression and Archive Extensions</a></dd>
+	<dd><a href="refs.crypto.html">Cryptography Extensions</a></dd>
+	<dd><a href="refs.database.html">Database Extensions</a></dd>
+	<dd><a href="refs.calendar.html">Date and Time Related Extensions</a></dd>
+	<dd><a href="refs.fileprocess.file.html">File System Related Extensions</a></dd>
+	<dd><a href="refs.international.html">Human Language and Character Encoding Support</a></dd>
+	<dd><a href="refs.utilspec.image.html">Image Processing and Generation</a></dd>
+	<dd><a href="refs.remote.mail.html">Mail Related Extensions</a></dd>
+	<dd><a href="refs.math.html">Mathematical Extensions</a></dd>
+	<dd><a href="refs.utilspec.nontext.html">Non-Text MIME Output</a></dd>
+	<dd><a href="refs.fileprocess.process.html">Process Control Extensions</a></dd>
+	<dd><a href="refs.basic.other.html">Other Basic Extensions</a></dd>
+	<dd><a href="refs.remote.other.html">Other Services</a></dd>
+	<dd><a href="refs.search.html">Search Engine Extensions</a></dd>
+	<dd><a href="refs.utilspec.server.html">Server Specific Extensions</a></dd>
+	<dd><a href="refs.basic.session.html">Session Extensions</a></dd>
+	<dd><a href="refs.basic.text.html">Text Processing</a></dd>
+	<dd><a href="refs.basic.vartype.html">Variable and Type Related Extensions</a></dd>
+	<dd><a href="refs.webservice.html">Web Services</a></dd>
+	<dd><a href="refs.utilspec.windows.html">Windows Only Extensions</a></dd>
+	<dd><a href="refs.xml.html">XML Manipulation</a></dd>
+	<dd><a href="refs.ui.html">GUI Extensions</a></dd>
+</dl>
+<dl>
+<dt>Keyboard Shortcuts</dt><dt>?</dt>
+<dd>This help</dd>
+<dt>j</dt>
+<dd>Next menu item</dd>
+<dt>k</dt>
+<dd>Previous menu item</dd>
+<dt>g p</dt>
+<dd>Previous man page</dd>
+<dt>g n</dt>
+<dd>Next man page</dd>
+<dt>G</dt>
+<dd>Scroll to bottom</dd>
+<dt>g g</dt>
+<dd>Scroll to top</dd>
+<dt>g h</dt>
+<dd>Goto homepage</dd>
+<dt>g s</dt>
+<dd>Goto search<br>(current page)</dd>
+<dt>/</dt>
+<dd>Focus search box</dd>
+</dl></div></nav>
+<div id="goto">
+    <div class="search">
+         <div class="text"></div>
+         <div class="results"><ul></ul></div>
+   </div>
+</div>
+
+  <div id="breadcrumbs" class="row-fluid">
+    <div id="breadcrumbs-inner">
+          
+              
+          <ul>
+            <li><a href="index-2.html">PHP Manual</a></li>      <li><a href="funcref.html">Function Reference</a></li>      <li><a href="refs.remote.other.html">Other Services</a></li>      <li><a href="book.network.html">Network</a></li>      <li><a href="ref.network.html">Network Functions</a></li>      </ul>
+    </div>
+  </div>
+
+
+
+
+<div id="layout" class="clearfix">
+  <section id="layout-content">
+  <div id="function.ip2long" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">ip2long</h1>
+  <p class="verinfo">(PHP 4, PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">ip2long</span> — <span class="dc-title">Converts a string containing an (IPv4) Internet Protocol dotted address into a long integer</span></p>
+
+ </div>
+ 
+ <div class="refsect1 description" id="refsect1-function.ip2long-description">
+  <h3 class="title">Description</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>ip2long</strong></span>(<span class="methodparam"><span class="type">string</span> <code class="parameter">$ip</code></span>): <span class="type"><span class="type">int</span>|<span class="type"><span class="type false">false</span></span></span></div>
+
+  <p class="para rdfs-comment">
+   The function <span class="function"><strong>ip2long()</strong></span> generates a long integer
+   representation of IPv4 Internet network address from its Internet
+   standard format (dotted string) representation. 
+  </p>
+  <p class="para">
+   <span class="function"><strong>ip2long()</strong></span> will also work with non-complete IP
+   addresses. Read <a href="http://publibn.boulder.ibm.com/doc_link/en_US/a_doc_lib/libs/commtrf2/inet_addr.htm" class="link external">»&nbsp;http://publibn.boulder.ibm.com/doc_link/en_US/a_doc_lib/libs/commtrf2/inet_addr.htm</a>
+   for more info.
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-function.ip2long-parameters">
+  <h3 class="title">Parameters</h3>
+  <p class="para">
+   </p><dl>
+    
+     <dt>
+<code class="parameter">ip</code></dt>
+
+     <dd>
+
+      <p class="para">
+       A standard format address.
+      </p>
+     </dd>
+
+    
+   </dl>
+
+  <p></p>
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-function.ip2long-returnvalues">
+  <h3 class="title">Return Values</h3>
+  <p class="para">
+   Returns the long integer or <strong><code>false</code></strong> if <code class="parameter">ip</code>
+   is invalid.
+  </p>
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-function.ip2long-examples">
+  <h3 class="title">Examples</h3>
+  <p class="para">
+   </p><div class="example" id="example-4416">
+    <p><strong>Example #1 <span class="function"><strong>ip2long()</strong></span> Example</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br>$ip&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">gethostbyname</span><span style="color: #007700">(</span><span style="color: #DD0000">'www.example.com'</span><span style="color: #007700">);<br></span><span style="color: #0000BB">$out&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">"The&nbsp;following&nbsp;URLs&nbsp;are&nbsp;equivalent:&lt;br&nbsp;/&gt;\n"</span><span style="color: #007700">;<br></span><span style="color: #0000BB">$out&nbsp;</span><span style="color: #007700">.=&nbsp;</span><span style="color: #DD0000">'http://www.example.com/,&nbsp;http://'&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$ip&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #DD0000">'/,&nbsp;and&nbsp;http://'&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">sprintf</span><span style="color: #007700">(</span><span style="color: #DD0000">"%u"</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">ip2long</span><span style="color: #007700">(</span><span style="color: #0000BB">$ip</span><span style="color: #007700">))&nbsp;.&nbsp;</span><span style="color: #DD0000">"/&lt;br&nbsp;/&gt;\n"</span><span style="color: #007700">;<br>echo&nbsp;</span><span style="color: #0000BB">$out</span><span style="color: #007700">;<br></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+  <p></p>
+  <p class="para">
+   </p><div class="example" id="example-4417">
+    <p><strong>Example #2 Displaying an IP address</strong></p>
+    <div class="example-contents"><p>
+     This second example shows how to print a converted address with the
+     <span class="function"><a href="function.printf.html" class="function">printf()</a></span> function:
+    </p></div>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br>$ip&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">gethostbyname</span><span style="color: #007700">(</span><span style="color: #DD0000">'www.example.com'</span><span style="color: #007700">);<br></span><span style="color: #0000BB">$long&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">ip2long</span><span style="color: #007700">(</span><span style="color: #0000BB">$ip</span><span style="color: #007700">);<br><br>if&nbsp;(</span><span style="color: #0000BB">$long&nbsp;</span><span style="color: #007700">==&nbsp;-</span><span style="color: #0000BB">1&nbsp;</span><span style="color: #007700">||&nbsp;</span><span style="color: #0000BB">$long&nbsp;</span><span style="color: #007700">===&nbsp;</span><span style="color: #0000BB">FALSE</span><span style="color: #007700">)&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">'Invalid&nbsp;IP,&nbsp;please&nbsp;try&nbsp;again'</span><span style="color: #007700">;<br>}&nbsp;else&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #0000BB">$ip&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;192.0.34.166<br>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">echo&nbsp;</span><span style="color: #0000BB">$long&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;3221234342&nbsp;(-1073732954&nbsp;on&nbsp;32-bit&nbsp;systems,&nbsp;due&nbsp;to&nbsp;integer&nbsp;overflow)<br>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">printf</span><span style="color: #007700">(</span><span style="color: #DD0000">"%u\n"</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">ip2long</span><span style="color: #007700">(</span><span style="color: #0000BB">$ip</span><span style="color: #007700">));&nbsp;</span><span style="color: #FF8000">//&nbsp;3221234342<br></span><span style="color: #007700">}<br></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+  <p></p>
+ </div>
+
+
+ <div class="refsect1 notes" id="refsect1-function.ip2long-notes">
+  <h3 class="title">Notes</h3>
+  <blockquote class="note"><p><strong class="note">Note</strong>: 
+   </p><p class="para">
+    Because PHP's <span class="type">int</span> type is signed, and many IP addresses
+    will result in negative integers on 32-bit architectures, you need to use
+    the "%u" formatter of <span class="function"><a href="function.sprintf.html" class="function">sprintf()</a></span> or
+    <span class="function"><a href="function.printf.html" class="function">printf()</a></span> to get the string representation of the
+    unsigned IP address.
+   </p>
+  <p></p></blockquote>
+  <blockquote class="note"><p><strong class="note">Note</strong>: 
+   </p><p class="para">
+    <span class="function"><strong>ip2long()</strong></span> will return <code class="literal">-1</code> for the IP
+    <code class="literal">255.255.255.255</code> on 32-bit systems due to the integer value overflowing.
+   </p>
+  <p></p></blockquote>
+ </div>
+
+
+ <div class="refsect1 seealso" id="refsect1-function.ip2long-seealso">
+  <h3 class="title">See Also</h3>
+  <p class="para">
+   </p><ul class="simplelist">
+    <li class="member"><span class="function"><a href="function.long2ip.html" class="function" rel="rdfs-seeAlso">long2ip()</a> - Converts an long integer address into a string in (IPv4) Internet standard dotted format</span></li>
+    <li class="member"><span class="function"><a href="function.sprintf.html" class="function" rel="rdfs-seeAlso">sprintf()</a> - Return a formatted string</span></li>
+   </ul>
+  <p></p>
+ </div>
+
+
+</div>
+<section id="usernotes">
+ <div class="head"><h3 class="title">User Contributed Notes</h3></div><div id="allnotes">
+  <div class="note" id="94787">  
+  <a class="name">
+  <strong class="user"><em>joe at joeceresini dot com</em></strong></a><div class="date" title="2009-11-24 05:45"><strong>11 years ago</strong></div>
+  <div class="text" id="Hcom94787">
+<div class="phpcode"><code><span class="html">
+A quick method to convert a netmask (ex: 255.255.255.240) to a cidr mask (ex: /28):<br><br><span class="default">&lt;?php<br></span><span class="keyword">function </span><span class="default">mask2cidr</span><span class="keyword">(</span><span class="default">$mask</span><span class="keyword">){<br>&nbsp; </span><span class="default">$long </span><span class="keyword">= </span><span class="default">ip2long</span><span class="keyword">(</span><span class="default">$mask</span><span class="keyword">);<br>&nbsp; </span><span class="default">$base </span><span class="keyword">= </span><span class="default">ip2long</span><span class="keyword">(</span><span class="string">'255.255.255.255'</span><span class="keyword">);<br>&nbsp; return </span><span class="default">32</span><span class="keyword">-</span><span class="default">log</span><span class="keyword">((</span><span class="default">$long </span><span class="keyword">^ </span><span class="default">$base</span><span class="keyword">)+</span><span class="default">1</span><span class="keyword">,</span><span class="default">2</span><span class="keyword">);<br><br>&nbsp; </span><span class="comment">/* xor-ing will give you the inverse mask,<br>&nbsp; &nbsp; &nbsp; log base 2 of that +1 will return the number<br>&nbsp; &nbsp; &nbsp; of bits that are off in the mask and subtracting<br>&nbsp; &nbsp; &nbsp; from 32 gets you the cidr notation */<br>&nbsp; &nbsp; &nbsp; &nbsp; <br></span><span class="keyword">}<br></span><span class="default">?&gt;</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="121755">  
+  <a class="name">
+  <strong class="user"><em>Mike B</em></strong></a><div class="date" title="2017-10-14 12:16"><strong>3 years ago</strong></div>
+  <div class="text" id="Hcom121755">
+<div class="phpcode"><code><span class="html">
+<span class="default">&lt;?php<br></span><span class="comment">/*<br>&nbsp; &nbsp;&nbsp; Given an IP address and Subnet Mask, <br>&nbsp; &nbsp;&nbsp; determine the subnet address, broadcast address, and wildcard mask<br>&nbsp; &nbsp;&nbsp; by using bitwise operators<br><br>&nbsp; &nbsp;&nbsp; ref:&nbsp; <a rel="nofollow" target="_blank">http://php.net/manual/en/language.operators.bitwise.php</a><br>*/<br><br></span><span class="default">$ip</span><span class="keyword">=</span><span class="string">'10.10.10.7'</span><span class="keyword">;<br></span><span class="default">$mask</span><span class="keyword">=</span><span class="string">'255.255.255.0'</span><span class="keyword">;<br></span><span class="default">$wcmask</span><span class="keyword">=</span><span class="default">long2ip</span><span class="keyword">( ~</span><span class="default">ip2long</span><span class="keyword">(</span><span class="default">$mask</span><span class="keyword">) );<br></span><span class="default">$subnet</span><span class="keyword">=</span><span class="default">long2ip</span><span class="keyword">( </span><span class="default">ip2long</span><span class="keyword">(</span><span class="default">$ip</span><span class="keyword">) &amp; </span><span class="default">ip2long</span><span class="keyword">(</span><span class="default">$mask</span><span class="keyword">) );<br></span><span class="default">$bcast</span><span class="keyword">=</span><span class="default">long2ip</span><span class="keyword">( </span><span class="default">ip2long</span><span class="keyword">(</span><span class="default">$ip</span><span class="keyword">) | </span><span class="default">ip2long</span><span class="keyword">(</span><span class="default">$wcmask</span><span class="keyword">) );<br>echo </span><span class="string">"Given address </span><span class="default">$ip</span><span class="string"> and mask </span><span class="default">$mask</span><span class="string">, \n" </span><span class="keyword">. <br></span><span class="string">"the subnet is </span><span class="default">$subnet</span><span class="string"> and broadcast is </span><span class="default">$bcast</span><span class="string"> \n" </span><span class="keyword">. <br></span><span class="string">"with a wildcard mask of </span><span class="default">$wcmask</span><span class="string">"</span><span class="keyword">;<br><br></span><span class="comment">/*<br>Given address 10.10.10.7 and mask 255.255.255.0, <br>the subnet is 10.10.10.0 and broadcast is 10.10.10.255 <br>with a wildcard mask of 0.0.0.255<br>*/<br><br></span><span class="default">?&gt;</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="82219">  
+  <a class="name">
+  <strong class="user"><em>php dot net at kenman dot net</em></strong></a><div class="date" title="2008-04-01 10:02"><strong>13 years ago</strong></div>
+  <div class="text" id="Hcom82219">
+<div class="phpcode"><code><span class="html">
+To nate, who advises that there is no reason to use an unsigned version of the IP in a MySQL DB:<br><br>I think it would depend on your application, but personally, I find it useful to store IP's as unsigneds since MySQL has 2 native functions, INET_ATON() and INET_NTOA(), which work the same as ip2long()/long2ip() _except_ that they generate the unsigned counterpart. So if you want, you could do:<br><br>-- IANA Class-B reserved/private<br>SELECT * FROM `servers` <br>WHERE `ip` &gt;= INET_ATON('192.168.0.0') <br>AND `ip` &lt;= INET_ATON('192.168.255.255');<br><br>In my current application, I find it easier to use the MySQL built-ins than the PHP counter-parts. <br><br>In case you're curious as to the names ATON and NTOA:<br><br>ATON = address to number aka. ip2long<br>NTOA = number to address aka. long2ip</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="78643">  
+  <a class="name">
+  <strong class="user"><em>ir on ir id is at gm ai ld ot co m</em></strong></a><div class="date" title="2007-10-20 11:54"><strong>13 years ago</strong></div>
+  <div class="text" id="Hcom78643">
+<div class="phpcode"><code><span class="html">
+Keep in mind that storing IP addresses inside of your database as integers (rather than 15 character strings in decimal format, or 8 character strings in hex format) is hundreds of times faster.<br><br>Take the typical case of a MySQL database doing a search for an IP address on thousands (or millions!) of rows; you're either doing a string compare for each entry, or an integer equation. If you do your indexes correctly, your lookups should be literally 100x faster using an INT rather than a VARCHAR.<br><br>Also note that an integer doesn't need to be escaped when passed to a database. :)</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="94290">  
+  <a class="name">
+  <strong class="user"><em>david dot schueler at tel-billig dot de</em></strong></a><div class="date" title="2009-10-27 06:41"><strong>11 years ago</strong></div>
+  <div class="text" id="Hcom94290">
+<div class="phpcode"><code><span class="html">
+To get the network adress out of the broadcast adress and netmask just to an AND on it:<br><br><span class="default">&lt;?php<br></span><span class="comment">// simple example<br></span><span class="default">$bcast </span><span class="keyword">= </span><span class="default">ip2long</span><span class="keyword">(</span><span class="string">"192.168.178.255"</span><span class="keyword">);<br></span><span class="default">$smask </span><span class="keyword">= </span><span class="default">ip2long</span><span class="keyword">(</span><span class="string">"255.255.255.0"</span><span class="keyword">);<br></span><span class="default">$nmask </span><span class="keyword">= </span><span class="default">$bcast </span><span class="keyword">&amp; </span><span class="default">$smask</span><span class="keyword">;<br>echo </span><span class="default">long2ip</span><span class="keyword">(</span><span class="default">$nmask</span><span class="keyword">); </span><span class="comment">// Will give 192.168.178.0<br></span><span class="default">?&gt;<br></span><br>With this example you are able to check if a given host is in your own local net or not (on linux):<br><br><span class="default">&lt;?php<br></span><span class="comment">/**<br> * Check if a client IP is in our Server subnet<br> *<br> * @param string $client_ip<br> * @param string $server_ip<br> * @return boolean<br> */<br></span><span class="keyword">function </span><span class="default">clientInSameSubnet</span><span class="keyword">(</span><span class="default">$client_ip</span><span class="keyword">=</span><span class="default">false</span><span class="keyword">,</span><span class="default">$server_ip</span><span class="keyword">=</span><span class="default">false</span><span class="keyword">) {<br>&nbsp; &nbsp; if (!</span><span class="default">$client_ip</span><span class="keyword">)<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$client_ip </span><span class="keyword">= </span><span class="default">$_SERVER</span><span class="keyword">[</span><span class="string">'REMOTE_ADDR'</span><span class="keyword">];<br>&nbsp; &nbsp; if (!</span><span class="default">$server_ip</span><span class="keyword">)<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$server_ip </span><span class="keyword">= </span><span class="default">$_SERVER</span><span class="keyword">[</span><span class="string">'SERVER_ADDR'</span><span class="keyword">];<br>&nbsp; &nbsp; </span><span class="comment">// Extract broadcast and netmask from ifconfig<br>&nbsp; &nbsp; </span><span class="keyword">if (!(</span><span class="default">$p </span><span class="keyword">= </span><span class="default">popen</span><span class="keyword">(</span><span class="string">"ifconfig"</span><span class="keyword">,</span><span class="string">"r"</span><span class="keyword">))) return </span><span class="default">false</span><span class="keyword">;<br>&nbsp; &nbsp; </span><span class="default">$out </span><span class="keyword">= </span><span class="string">""</span><span class="keyword">;<br>&nbsp; &nbsp; while(!</span><span class="default">feof</span><span class="keyword">(</span><span class="default">$p</span><span class="keyword">))<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$out </span><span class="keyword">.= </span><span class="default">fread</span><span class="keyword">(</span><span class="default">$p</span><span class="keyword">,</span><span class="default">1024</span><span class="keyword">);<br>&nbsp; &nbsp; </span><span class="default">fclose</span><span class="keyword">(</span><span class="default">$p</span><span class="keyword">);<br>&nbsp; &nbsp; </span><span class="comment">// This is because the php.net comment function does not<br>&nbsp; &nbsp; // allow long lines.<br>&nbsp; &nbsp; </span><span class="default">$match&nbsp; </span><span class="keyword">= </span><span class="string">"/^.*"</span><span class="keyword">.</span><span class="default">$server_ip</span><span class="keyword">;<br>&nbsp; &nbsp; </span><span class="default">$match </span><span class="keyword">.= </span><span class="string">".*Bcast:(\d{1,3}\.\d{1,3}i\.\d{1,3}\.\d{1,3}).*"</span><span class="keyword">;<br>&nbsp; &nbsp; </span><span class="default">$match </span><span class="keyword">.= </span><span class="string">"Mask:(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})$/im"</span><span class="keyword">;<br>&nbsp; &nbsp; if (!</span><span class="default">preg_match</span><span class="keyword">(</span><span class="default">$match</span><span class="keyword">,</span><span class="default">$out</span><span class="keyword">,</span><span class="default">$regs</span><span class="keyword">))<br>&nbsp; &nbsp; &nbsp; &nbsp; return </span><span class="default">false</span><span class="keyword">;<br>&nbsp; &nbsp; </span><span class="default">$bcast </span><span class="keyword">= </span><span class="default">ip2long</span><span class="keyword">(</span><span class="default">$regs</span><span class="keyword">[</span><span class="default">1</span><span class="keyword">]);<br>&nbsp; &nbsp; </span><span class="default">$smask </span><span class="keyword">= </span><span class="default">ip2long</span><span class="keyword">(</span><span class="default">$regs</span><span class="keyword">[</span><span class="default">2</span><span class="keyword">]);<br>&nbsp; &nbsp; </span><span class="default">$ipadr </span><span class="keyword">= </span><span class="default">ip2long</span><span class="keyword">(</span><span class="default">$client_ip</span><span class="keyword">);<br>&nbsp; &nbsp; </span><span class="default">$nmask </span><span class="keyword">= </span><span class="default">$bcast </span><span class="keyword">&amp; </span><span class="default">$smask</span><span class="keyword">;<br>&nbsp; &nbsp; return ((</span><span class="default">$ipadr </span><span class="keyword">&amp; </span><span class="default">$smask</span><span class="keyword">) == (</span><span class="default">$nmask </span><span class="keyword">&amp; </span><span class="default">$smask</span><span class="keyword">));<br>}<br></span><span class="default">?&gt;</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="108812">  
+  <a class="name">
+  <strong class="user"><em>replay111 at tlen dot pl</em></strong></a><div class="date" title="2012-05-26 01:28"><strong>9 years ago</strong></div>
+  <div class="text" id="Hcom108812">
+<div class="phpcode"><code><span class="html">
+Hi,
+<br>based on examples above I have mixed class IPFilter with netMatch function wich gives me complete class for IP4 check including CIDR IP format:
+<br>
+<br><span class="default">&lt;?php
+<br></span><span class="keyword">class </span><span class="default">IP4Filter </span><span class="keyword">{
+<br>
+<br>&nbsp; &nbsp; private static </span><span class="default">$_IP_TYPE_SINGLE </span><span class="keyword">= </span><span class="string">'single'</span><span class="keyword">;
+<br>&nbsp; &nbsp; private static </span><span class="default">$_IP_TYPE_WILDCARD </span><span class="keyword">= </span><span class="string">'wildcard'</span><span class="keyword">;
+<br>&nbsp; &nbsp; private static </span><span class="default">$_IP_TYPE_MASK </span><span class="keyword">= </span><span class="string">'mask'</span><span class="keyword">;
+<br>&nbsp; &nbsp; private static </span><span class="default">$_IP_TYPE_CIDR </span><span class="keyword">= </span><span class="string">'CIDR'</span><span class="keyword">;
+<br>&nbsp; &nbsp; private static </span><span class="default">$_IP_TYPE_SECTION </span><span class="keyword">= </span><span class="string">'section'</span><span class="keyword">;
+<br>&nbsp; &nbsp; private </span><span class="default">$_allowed_ips </span><span class="keyword">= array();
+<br>
+<br>&nbsp; &nbsp; public function </span><span class="default">__construct</span><span class="keyword">(</span><span class="default">$allowed_ips</span><span class="keyword">) {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">_allowed_ips </span><span class="keyword">= </span><span class="default">$allowed_ips</span><span class="keyword">;
+<br>&nbsp; &nbsp; }
+<br>
+<br>&nbsp; &nbsp; public function </span><span class="default">check</span><span class="keyword">(</span><span class="default">$ip</span><span class="keyword">, </span><span class="default">$allowed_ips </span><span class="keyword">= </span><span class="default">null</span><span class="keyword">) {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$allowed_ips </span><span class="keyword">= </span><span class="default">$allowed_ips </span><span class="keyword">? </span><span class="default">$allowed_ips </span><span class="keyword">: </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">_allowed_ips</span><span class="keyword">;
+<br>
+<br>&nbsp; &nbsp; &nbsp; &nbsp; foreach (</span><span class="default">$allowed_ips </span><span class="keyword">as </span><span class="default">$allowed_ip</span><span class="keyword">) {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$type </span><span class="keyword">= </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">_judge_ip_type</span><span class="keyword">(</span><span class="default">$allowed_ip</span><span class="keyword">);
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$sub_rst </span><span class="keyword">= </span><span class="default">call_user_func</span><span class="keyword">(array(</span><span class="default">$this</span><span class="keyword">, </span><span class="string">'_sub_checker_' </span><span class="keyword">. </span><span class="default">$type</span><span class="keyword">), </span><span class="default">$allowed_ip</span><span class="keyword">, </span><span class="default">$ip</span><span class="keyword">);
+<br>
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (</span><span class="default">$sub_rst</span><span class="keyword">) {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return </span><span class="default">true</span><span class="keyword">;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }
+<br>&nbsp; &nbsp; &nbsp; &nbsp; }
+<br>
+<br>&nbsp; &nbsp; &nbsp; &nbsp; return </span><span class="default">false</span><span class="keyword">;
+<br>&nbsp; &nbsp; }
+<br>
+<br>&nbsp; &nbsp; private function </span><span class="default">_judge_ip_type</span><span class="keyword">(</span><span class="default">$ip</span><span class="keyword">) {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; if (</span><span class="default">strpos</span><span class="keyword">(</span><span class="default">$ip</span><span class="keyword">, </span><span class="string">'*'</span><span class="keyword">)) {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return </span><span class="default">self </span><span class="keyword">:: </span><span class="default">$_IP_TYPE_WILDCARD</span><span class="keyword">;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; }
+<br>
+<br>&nbsp; &nbsp; &nbsp; &nbsp; if (</span><span class="default">strpos</span><span class="keyword">(</span><span class="default">$ip</span><span class="keyword">, </span><span class="string">'/'</span><span class="keyword">)) {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$tmp </span><span class="keyword">= </span><span class="default">explode</span><span class="keyword">(</span><span class="string">'/'</span><span class="keyword">, </span><span class="default">$ip</span><span class="keyword">);
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (</span><span class="default">strpos</span><span class="keyword">(</span><span class="default">$tmp</span><span class="keyword">[</span><span class="default">1</span><span class="keyword">], </span><span class="string">'.'</span><span class="keyword">)) {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return </span><span class="default">self </span><span class="keyword">:: </span><span class="default">$_IP_TYPE_MASK</span><span class="keyword">;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; } else {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return </span><span class="default">self </span><span class="keyword">:: </span><span class="default">$_IP_TYPE_CIDR</span><span class="keyword">;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }
+<br>&nbsp; &nbsp; &nbsp; &nbsp; }
+<br>
+<br>&nbsp; &nbsp; &nbsp; &nbsp; if (</span><span class="default">strpos</span><span class="keyword">(</span><span class="default">$ip</span><span class="keyword">, </span><span class="string">'-'</span><span class="keyword">)) {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return </span><span class="default">self </span><span class="keyword">:: </span><span class="default">$_IP_TYPE_SECTION</span><span class="keyword">;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; }
+<br>
+<br>&nbsp; &nbsp; &nbsp; &nbsp; if (</span><span class="default">ip2long</span><span class="keyword">(</span><span class="default">$ip</span><span class="keyword">)) {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return </span><span class="default">self </span><span class="keyword">:: </span><span class="default">$_IP_TYPE_SINGLE</span><span class="keyword">;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; }
+<br>
+<br>&nbsp; &nbsp; &nbsp; &nbsp; return </span><span class="default">false</span><span class="keyword">;
+<br>&nbsp; &nbsp; }
+<br>
+<br>&nbsp; &nbsp; private function </span><span class="default">_sub_checker_single</span><span class="keyword">(</span><span class="default">$allowed_ip</span><span class="keyword">, </span><span class="default">$ip</span><span class="keyword">) {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; return (</span><span class="default">ip2long</span><span class="keyword">(</span><span class="default">$allowed_ip</span><span class="keyword">) == </span><span class="default">ip2long</span><span class="keyword">(</span><span class="default">$ip</span><span class="keyword">));
+<br>&nbsp; &nbsp; }
+<br>
+<br>&nbsp; &nbsp; private function </span><span class="default">_sub_checker_wildcard</span><span class="keyword">(</span><span class="default">$allowed_ip</span><span class="keyword">, </span><span class="default">$ip</span><span class="keyword">) {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$allowed_ip_arr </span><span class="keyword">= </span><span class="default">explode</span><span class="keyword">(</span><span class="string">'.'</span><span class="keyword">, </span><span class="default">$allowed_ip</span><span class="keyword">);
+<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$ip_arr </span><span class="keyword">= </span><span class="default">explode</span><span class="keyword">(</span><span class="string">'.'</span><span class="keyword">, </span><span class="default">$ip</span><span class="keyword">);
+<br>&nbsp; &nbsp; &nbsp; &nbsp; for (</span><span class="default">$i </span><span class="keyword">= </span><span class="default">0</span><span class="keyword">; </span><span class="default">$i </span><span class="keyword">&lt; </span><span class="default">count</span><span class="keyword">(</span><span class="default">$allowed_ip_arr</span><span class="keyword">); </span><span class="default">$i</span><span class="keyword">++) {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (</span><span class="default">$allowed_ip_arr</span><span class="keyword">[</span><span class="default">$i</span><span class="keyword">] == </span><span class="string">'*'</span><span class="keyword">) {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return </span><span class="default">true</span><span class="keyword">;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; } else {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (</span><span class="default">false </span><span class="keyword">== (</span><span class="default">$allowed_ip_arr</span><span class="keyword">[</span><span class="default">$i</span><span class="keyword">] == </span><span class="default">$ip_arr</span><span class="keyword">[</span><span class="default">$i</span><span class="keyword">])) {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return </span><span class="default">false</span><span class="keyword">;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }
+<br>&nbsp; &nbsp; &nbsp; &nbsp; }
+<br>&nbsp; &nbsp; }
+<br>
+<br>&nbsp; &nbsp; private function </span><span class="default">_sub_checker_mask</span><span class="keyword">(</span><span class="default">$allowed_ip</span><span class="keyword">, </span><span class="default">$ip</span><span class="keyword">) {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; list(</span><span class="default">$allowed_ip_ip</span><span class="keyword">, </span><span class="default">$allowed_ip_mask</span><span class="keyword">) = </span><span class="default">explode</span><span class="keyword">(</span><span class="string">'/'</span><span class="keyword">, </span><span class="default">$allowed_ip</span><span class="keyword">);
+<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$begin </span><span class="keyword">= (</span><span class="default">ip2long</span><span class="keyword">(</span><span class="default">$allowed_ip_ip</span><span class="keyword">) &amp; </span><span class="default">ip2long</span><span class="keyword">(</span><span class="default">$allowed_ip_mask</span><span class="keyword">)) + </span><span class="default">1</span><span class="keyword">;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$end </span><span class="keyword">= (</span><span class="default">ip2long</span><span class="keyword">(</span><span class="default">$allowed_ip_ip</span><span class="keyword">) | (~ </span><span class="default">ip2long</span><span class="keyword">(</span><span class="default">$allowed_ip_mask</span><span class="keyword">))) + </span><span class="default">1</span><span class="keyword">;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$ip </span><span class="keyword">= </span><span class="default">ip2long</span><span class="keyword">(</span><span class="default">$ip</span><span class="keyword">);
+<br>&nbsp; &nbsp; &nbsp; &nbsp; return (</span><span class="default">$ip </span><span class="keyword">&gt;= </span><span class="default">$begin </span><span class="keyword">&amp;&amp; </span><span class="default">$ip </span><span class="keyword">&lt;= </span><span class="default">$end</span><span class="keyword">);
+<br>&nbsp; &nbsp; }
+<br>
+<br>&nbsp; &nbsp; private function </span><span class="default">_sub_checker_section</span><span class="keyword">(</span><span class="default">$allowed_ip</span><span class="keyword">, </span><span class="default">$ip</span><span class="keyword">) {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; list(</span><span class="default">$begin</span><span class="keyword">, </span><span class="default">$end</span><span class="keyword">) = </span><span class="default">explode</span><span class="keyword">(</span><span class="string">'-'</span><span class="keyword">, </span><span class="default">$allowed_ip</span><span class="keyword">);
+<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$begin </span><span class="keyword">= </span><span class="default">ip2long</span><span class="keyword">(</span><span class="default">$begin</span><span class="keyword">);
+<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$end </span><span class="keyword">= </span><span class="default">ip2long</span><span class="keyword">(</span><span class="default">$end</span><span class="keyword">);
+<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$ip </span><span class="keyword">= </span><span class="default">ip2long</span><span class="keyword">(</span><span class="default">$ip</span><span class="keyword">);
+<br>&nbsp; &nbsp; &nbsp; &nbsp; return (</span><span class="default">$ip </span><span class="keyword">&gt;= </span><span class="default">$begin </span><span class="keyword">&amp;&amp; </span><span class="default">$ip </span><span class="keyword">&lt;= </span><span class="default">$end</span><span class="keyword">);
+<br>&nbsp; &nbsp; }
+<br>
+<br>&nbsp; &nbsp; private function </span><span class="default">_sub_checker_CIDR</span><span class="keyword">(</span><span class="default">$CIDR</span><span class="keyword">, </span><span class="default">$IP</span><span class="keyword">) {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; list (</span><span class="default">$net</span><span class="keyword">, </span><span class="default">$mask</span><span class="keyword">) = </span><span class="default">explode</span><span class="keyword">(</span><span class="string">'/'</span><span class="keyword">, </span><span class="default">$CIDR</span><span class="keyword">);
+<br>&nbsp; &nbsp; &nbsp; &nbsp; return ( </span><span class="default">ip2long</span><span class="keyword">(</span><span class="default">$IP</span><span class="keyword">) &amp; ~((</span><span class="default">1 </span><span class="keyword">&lt;&lt; (</span><span class="default">32 </span><span class="keyword">- </span><span class="default">$mask</span><span class="keyword">)) - </span><span class="default">1</span><span class="keyword">) ) == </span><span class="default">ip2long</span><span class="keyword">(</span><span class="default">$net</span><span class="keyword">);
+<br>&nbsp; &nbsp; }
+<br>
+<br>}
+<br></span><span class="default">?&gt;
+<br></span>
+<br>For me this code works great, so I wanna thank to all You guys!!!</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="108567">  
+  <a class="name">
+  <strong class="user"><em>Aleksey Kuznetsov</em></strong></a><div class="date" title="2012-05-07 05:30"><strong>9 years ago</strong></div>
+  <div class="text" id="Hcom108567">
+<div class="phpcode"><code><span class="html">
+Unfortunately sprintf('%u', ...) is low and returns string representation of integer value instead of integer.<br>Here is a function I use to convert IP to mySQL-compatible signed integer:<br><br>function ip2int($ip) {<br>&nbsp; if (!$r = ip2long($ip)) return 0; // we want 0 instead of false, even in case of bad IP<br>&nbsp; if ($r &gt; 2147483647)<br>&nbsp; &nbsp; &nbsp; $r-= 4294967296;<br>&nbsp; return $r; // ok<br>}</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="115761">  
+  <a class="name">
+  <strong class="user"><em>Karl Rixon</em></strong></a><div class="date" title="2014-09-18 02:01"><strong>6 years ago</strong></div>
+  <div class="text" id="Hcom115761">
+<div class="phpcode"><code><span class="html">
+The manual states that "ip2long() will also work with non-complete IP addresses", however this is system-dependant so cannot be relied upon. For example, on my system ip2long() will return FALSE for incomplete addresses:<br><br><span class="default">&lt;?php<br>var_dump</span><span class="keyword">(</span><span class="default">ip2long</span><span class="keyword">(</span><span class="string">"255.255"</span><span class="keyword">)); </span><span class="comment">// bool(false)<br></span><span class="default">?&gt;<br></span><br>This is because ip2long will use inet_pton if available, which does not support non-complete addresses. If inet_pton is not available on your system, inet_addr will be used and incomplete addresses will work as stated.</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="114064">  
+  <a class="name">
+  <strong class="user"><em>oo dot para at gmail dot com</em></strong></a><div class="date" title="2014-01-08 10:30"><strong>7 years ago</strong></div>
+  <div class="text" id="Hcom114064">
+<div class="phpcode"><code><span class="html">
+If you want to validate IPs using this function, please be careful:<br>The function filter_var should be used instead for validating IPs.<br><br><span class="default">&lt;?php<br>$ip </span><span class="keyword">= </span><span class="string">'192.168.0355.24'</span><span class="keyword">;<br></span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">ip2long</span><span class="keyword">(</span><span class="default">$ip</span><span class="keyword">) !== </span><span class="default">false</span><span class="keyword">); </span><span class="comment">// true (expected false)<br></span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">filter_var</span><span class="keyword">(</span><span class="default">$ip</span><span class="keyword">, </span><span class="default">FILTER_VALIDATE_IP</span><span class="keyword">) !== </span><span class="default">false</span><span class="keyword">); </span><span class="comment">// false<br><br></span><span class="default">$ip </span><span class="keyword">= </span><span class="string">'192.168.355.24'</span><span class="keyword">;<br></span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">ip2long</span><span class="keyword">(</span><span class="default">$ip</span><span class="keyword">) !== </span><span class="default">false</span><span class="keyword">); </span><span class="comment">// false<br></span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">filter_var</span><span class="keyword">(</span><span class="default">$ip</span><span class="keyword">, </span><span class="default">FILTER_VALIDATE_IP</span><span class="keyword">) !== </span><span class="default">false</span><span class="keyword">); </span><span class="comment">// false<br></span><span class="default">?&gt;</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="71939">  
+  <a class="name">
+  <strong class="user"><em>Ian B</em></strong></a><div class="date" title="2006-12-24 04:22"><strong>14 years ago</strong></div>
+  <div class="text" id="Hcom71939">
+<div class="phpcode"><code><span class="html">
+NOTE: ip2long() should NOT be used for CIDR calculation. <br>Instead, you should use something like the following:<br><br><span class="default">&lt;?php<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="comment">/* get the base and the bits from the ban in the database */<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="keyword">list(</span><span class="default">$base</span><span class="keyword">, </span><span class="default">$bits</span><span class="keyword">) = </span><span class="default">explode</span><span class="keyword">(</span><span class="string">'/'</span><span class="keyword">, </span><span class="default">$CIDR</span><span class="keyword">);<br><br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="comment">/* now split it up into it's classes */<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="keyword">list(</span><span class="default">$a</span><span class="keyword">, </span><span class="default">$b</span><span class="keyword">, </span><span class="default">$c</span><span class="keyword">, </span><span class="default">$d</span><span class="keyword">) = </span><span class="default">explode</span><span class="keyword">(</span><span class="string">'.'</span><span class="keyword">, </span><span class="default">$base</span><span class="keyword">);<br><br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="comment">/* now do some bit shfiting/switching to convert to ints */<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$i </span><span class="keyword">= (</span><span class="default">$a </span><span class="keyword">&lt;&lt; </span><span class="default">24</span><span class="keyword">) + (</span><span class="default">$b </span><span class="keyword">&lt;&lt; </span><span class="default">16</span><span class="keyword">) + (</span><span class="default">$c </span><span class="keyword">&lt;&lt; </span><span class="default">8</span><span class="keyword">) + </span><span class="default">$d</span><span class="keyword">;<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$mask </span><span class="keyword">= </span><span class="default">$bits </span><span class="keyword">== </span><span class="default">0 </span><span class="keyword">? </span><span class="default">0 </span><span class="keyword">: (~</span><span class="default">0 </span><span class="keyword">&lt;&lt; (</span><span class="default">32 </span><span class="keyword">- </span><span class="default">$bits</span><span class="keyword">));<br><br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="comment">/* here's our lowest int */<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$low </span><span class="keyword">= </span><span class="default">$i </span><span class="keyword">&amp; </span><span class="default">$mask</span><span class="keyword">;<br><br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="comment">/* here's our highest int */<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$high </span><span class="keyword">= </span><span class="default">$i </span><span class="keyword">| (~</span><span class="default">$mask </span><span class="keyword">&amp; </span><span class="default">0xFFFFFFFF</span><span class="keyword">);<br><br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="comment">/* now split the ip were checking against up into classes */<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="keyword">list(</span><span class="default">$a</span><span class="keyword">, </span><span class="default">$b</span><span class="keyword">, </span><span class="default">$c</span><span class="keyword">, </span><span class="default">$d</span><span class="keyword">) = </span><span class="default">explode</span><span class="keyword">(</span><span class="string">'.'</span><span class="keyword">, </span><span class="default">$iptocheck</span><span class="keyword">);<br><br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="comment">/* now convert the ip we're checking against to an int */<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$check </span><span class="keyword">= (</span><span class="default">$a </span><span class="keyword">&lt;&lt; </span><span class="default">24</span><span class="keyword">) + (</span><span class="default">$b </span><span class="keyword">&lt;&lt; </span><span class="default">16</span><span class="keyword">) + (</span><span class="default">$c </span><span class="keyword">&lt;&lt; </span><span class="default">8</span><span class="keyword">) + </span><span class="default">$d</span><span class="keyword">;<br><br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="comment">/* if the ip is within the range, including <br>&nbsp; &nbsp; &nbsp; highest/lowest values, then it's witin the CIDR range */<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="keyword">if (</span><span class="default">$check </span><span class="keyword">&gt;= </span><span class="default">$low </span><span class="keyword">&amp;&amp; </span><span class="default">$check </span><span class="keyword">&lt;= </span><span class="default">$high</span><span class="keyword">)<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return </span><span class="default">1</span><span class="keyword">;<br>&nbsp; &nbsp; &nbsp;&nbsp; else<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return </span><span class="default">0</span><span class="keyword">;<br></span><span class="default">?&gt;<br></span><br>This means that you should check to see if the IP<br>address is of the correct format each time.</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="92544">  
+  <a class="name">
+  <strong class="user"><em>jwadhams1 at yahoo dot com</em></strong></a><div class="date" title="2009-07-28 03:41"><strong>12 years ago</strong></div>
+  <div class="text" id="Hcom92544">
+<div class="phpcode"><code><span class="html">
+I wanted to build on what kaputt and spinyn contributed in a way that I think is a little more intuitive (e.g., let sprintf do all the binary conversion and padding, and let substr_compare do the trimming and comparing):
+<br>
+<br><span class="default">&lt;?php
+<br></span><span class="keyword">function </span><span class="default">ip_in_network</span><span class="keyword">(</span><span class="default">$ip</span><span class="keyword">, </span><span class="default">$net_addr</span><span class="keyword">, </span><span class="default">$net_mask</span><span class="keyword">){
+<br>&nbsp; &nbsp; if(</span><span class="default">$net_mask </span><span class="keyword">&lt;= </span><span class="default">0</span><span class="keyword">){ return </span><span class="default">false</span><span class="keyword">; }
+<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$ip_binary_string </span><span class="keyword">= </span><span class="default">sprintf</span><span class="keyword">(</span><span class="string">"%032b"</span><span class="keyword">,</span><span class="default">ip2long</span><span class="keyword">(</span><span class="default">$ip</span><span class="keyword">));
+<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$net_binary_string </span><span class="keyword">= </span><span class="default">sprintf</span><span class="keyword">(</span><span class="string">"%032b"</span><span class="keyword">,</span><span class="default">ip2long</span><span class="keyword">(</span><span class="default">$net_addr</span><span class="keyword">));
+<br>&nbsp; &nbsp; &nbsp; &nbsp; return (</span><span class="default">substr_compare</span><span class="keyword">(</span><span class="default">$ip_binary_string</span><span class="keyword">,</span><span class="default">$net_binary_string</span><span class="keyword">,</span><span class="default">0</span><span class="keyword">,</span><span class="default">$net_mask</span><span class="keyword">) === </span><span class="default">0</span><span class="keyword">);
+<br>}
+<br>
+<br></span><span class="default">ip_in_network</span><span class="keyword">(</span><span class="string">"192.168.2.1"</span><span class="keyword">,</span><span class="string">"192.168.2.0"</span><span class="keyword">,</span><span class="default">24</span><span class="keyword">); </span><span class="comment">//true
+<br></span><span class="default">ip_in_network</span><span class="keyword">(</span><span class="string">"192.168.6.93"</span><span class="keyword">,</span><span class="string">"192.168.0.0"</span><span class="keyword">,</span><span class="default">16</span><span class="keyword">); </span><span class="comment">//true
+<br></span><span class="default">ip_in_network</span><span class="keyword">(</span><span class="string">"1.6.6.6"</span><span class="keyword">,</span><span class="string">"128.168.2.0"</span><span class="keyword">,</span><span class="default">1</span><span class="keyword">); </span><span class="comment">//false
+<br></span><span class="default">?&gt;</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="108436">  
+  <a class="name">
+  <strong class="user"><em>pink at pink dot art dot pl</em></strong></a><div class="date" title="2012-04-26 01:09"><strong>9 years ago</strong></div>
+  <div class="text" id="Hcom108436">
+<div class="phpcode"><code><span class="html">
+Be aware when you're running 64bit system, ip2long will result 64 bit integer which doesn't fit in MySQL INT, you can use BIGINT or INT UNSIGNED because on 64bit systems ip2long will never return negative integer. See also <a rel="nofollow" target="_blank">https://bugs.php.net/bug.php?id=54338</a></span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="94477">  
+  <a class="name">
+  <strong class="user"><em>f dot wiessner at smart-weblications dot net</em></strong></a><div class="date" title="2009-11-07 06:12"><strong>11 years ago</strong></div>
+  <div class="text" id="Hcom94477">
+<div class="phpcode"><code><span class="html">
+Here some working ip2long6 and long2ip6 functions - keep in mind that this needs php gmp-lib:
+<br>
+<br><span class="default">&lt;?php
+<br>
+<br>$ipv6 </span><span class="keyword">= </span><span class="string">"2001:4860:a005::68"</span><span class="keyword">;
+<br>
+<br>function </span><span class="default">ip2long6</span><span class="keyword">(</span><span class="default">$ipv6</span><span class="keyword">) {
+<br>&nbsp; </span><span class="default">$ip_n </span><span class="keyword">= </span><span class="default">inet_pton</span><span class="keyword">(</span><span class="default">$ipv6</span><span class="keyword">);
+<br>&nbsp; </span><span class="default">$bits </span><span class="keyword">= </span><span class="default">15</span><span class="keyword">; </span><span class="comment">// 16 x 8 bit = 128bit
+<br>&nbsp; </span><span class="keyword">while (</span><span class="default">$bits </span><span class="keyword">&gt;= </span><span class="default">0</span><span class="keyword">) {
+<br>&nbsp; &nbsp; </span><span class="default">$bin </span><span class="keyword">= </span><span class="default">sprintf</span><span class="keyword">(</span><span class="string">"%08b"</span><span class="keyword">,(</span><span class="default">ord</span><span class="keyword">(</span><span class="default">$ip_n</span><span class="keyword">[</span><span class="default">$bits</span><span class="keyword">])));
+<br>&nbsp; &nbsp; </span><span class="default">$ipv6long </span><span class="keyword">= </span><span class="default">$bin</span><span class="keyword">.</span><span class="default">$ipv6long</span><span class="keyword">;
+<br>&nbsp; &nbsp; </span><span class="default">$bits</span><span class="keyword">--;
+<br>&nbsp; }
+<br>&nbsp; return </span><span class="default">gmp_strval</span><span class="keyword">(</span><span class="default">gmp_init</span><span class="keyword">(</span><span class="default">$ipv6long</span><span class="keyword">,</span><span class="default">2</span><span class="keyword">),</span><span class="default">10</span><span class="keyword">);
+<br>}
+<br>
+<br>function </span><span class="default">long2ip6</span><span class="keyword">(</span><span class="default">$ipv6long</span><span class="keyword">) {
+<br>
+<br>&nbsp; </span><span class="default">$bin </span><span class="keyword">= </span><span class="default">gmp_strval</span><span class="keyword">(</span><span class="default">gmp_init</span><span class="keyword">(</span><span class="default">$ipv6long</span><span class="keyword">,</span><span class="default">10</span><span class="keyword">),</span><span class="default">2</span><span class="keyword">);
+<br>&nbsp; if (</span><span class="default">strlen</span><span class="keyword">(</span><span class="default">$bin</span><span class="keyword">) &lt; </span><span class="default">128</span><span class="keyword">) {
+<br>&nbsp; &nbsp; </span><span class="default">$pad </span><span class="keyword">= </span><span class="default">128 </span><span class="keyword">- </span><span class="default">strlen</span><span class="keyword">(</span><span class="default">$bin</span><span class="keyword">);
+<br>&nbsp; &nbsp; for (</span><span class="default">$i </span><span class="keyword">= </span><span class="default">1</span><span class="keyword">; </span><span class="default">$i </span><span class="keyword">&lt;= </span><span class="default">$pad</span><span class="keyword">; </span><span class="default">$i</span><span class="keyword">++) {
+<br>&nbsp; &nbsp; </span><span class="default">$bin </span><span class="keyword">= </span><span class="string">"0"</span><span class="keyword">.</span><span class="default">$bin</span><span class="keyword">;
+<br>&nbsp; &nbsp; }
+<br>&nbsp; }
+<br>&nbsp; </span><span class="default">$bits </span><span class="keyword">= </span><span class="default">0</span><span class="keyword">;
+<br>&nbsp; while (</span><span class="default">$bits </span><span class="keyword">&lt;= </span><span class="default">7</span><span class="keyword">) {
+<br>&nbsp; &nbsp; </span><span class="default">$bin_part </span><span class="keyword">= </span><span class="default">substr</span><span class="keyword">(</span><span class="default">$bin</span><span class="keyword">,(</span><span class="default">$bits</span><span class="keyword">*</span><span class="default">16</span><span class="keyword">),</span><span class="default">16</span><span class="keyword">);
+<br>&nbsp; &nbsp; </span><span class="default">$ipv6 </span><span class="keyword">.= </span><span class="default">dechex</span><span class="keyword">(</span><span class="default">bindec</span><span class="keyword">(</span><span class="default">$bin_part</span><span class="keyword">)).</span><span class="string">":"</span><span class="keyword">;
+<br>&nbsp; &nbsp; </span><span class="default">$bits</span><span class="keyword">++;
+<br>&nbsp; }
+<br>&nbsp; </span><span class="comment">// compress
+<br>
+<br>&nbsp; </span><span class="keyword">return </span><span class="default">inet_ntop</span><span class="keyword">(</span><span class="default">inet_pton</span><span class="keyword">(</span><span class="default">substr</span><span class="keyword">(</span><span class="default">$ipv6</span><span class="keyword">,</span><span class="default">0</span><span class="keyword">,-</span><span class="default">1</span><span class="keyword">)));
+<br>}
+<br>
+<br>print </span><span class="default">$ipv6long </span><span class="keyword">=&nbsp; </span><span class="default">ip2long6</span><span class="keyword">(</span><span class="default">$ipv6</span><span class="keyword">).</span><span class="string">"\n"</span><span class="keyword">;
+<br>print </span><span class="default">$ipv6 </span><span class="keyword">= </span><span class="default">long2ip6</span><span class="keyword">(</span><span class="default">$ipv6long</span><span class="keyword">).</span><span class="string">"\n"</span><span class="keyword">;
+<br>
+<br></span><span class="default">?&gt;
+<br></span>
+<br>outputs:
+<br>
+<br>42541956150894553250710573749450571880
+<br>2001:4860:a005::68</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="109298">  
+  <a class="name">
+  <strong class="user"><em>admin at wudimei dot com</em></strong></a><div class="date" title="2012-07-04 02:42"><strong>9 years ago</strong></div>
+  <div class="text" id="Hcom109298">
+<div class="phpcode"><code><span class="html">
+<span class="default">&lt;?php<br><br></span><span class="comment">/**<br>&nbsp; *<br>&nbsp; *get the first ip and last ip from cidr(network id and mask length)<br>&nbsp; * i will integrate this function into "Rong Framework" :)<br>&nbsp; * @author admin@wudimei.com<br>&nbsp; * @param string $cidr 56.15.0.6/16 , [network id]/[mask length]<br>&nbsp; * @return array $ipArray = array( 0 =&gt;"first ip of the network", 1=&gt;"last ip of the network" );<br>&nbsp; *&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; Each element of $ipArray's type is long int,use long2ip( $ipArray[0] ) to convert it into ip string.<br>&nbsp; * example:<br>&nbsp; * list( $long_startIp , $long_endIp) = getIpRange( "56.15.0.6/16" );<br>&nbsp; * echo "start ip:" . long2ip( $long_startIp );<br>&nbsp; * echo "&lt;br /&gt;";<br>&nbsp; * echo "end ip:" . long2ip( $long_endIp );<br>&nbsp; */<br><br>&nbsp; </span><span class="keyword">function </span><span class="default">getIpRang</span><span class="keyword">(&nbsp; </span><span class="default">$cidr</span><span class="keyword">) {<br><br>&nbsp;&nbsp; list(</span><span class="default">$ip</span><span class="keyword">, </span><span class="default">$mask</span><span class="keyword">) = </span><span class="default">explode</span><span class="keyword">(</span><span class="string">'/'</span><span class="keyword">, </span><span class="default">$cidr</span><span class="keyword">);<br> <br>&nbsp;&nbsp; </span><span class="default">$maskBinStr </span><span class="keyword">=</span><span class="default">str_repeat</span><span class="keyword">(</span><span class="string">"1"</span><span class="keyword">, </span><span class="default">$mask </span><span class="keyword">) . </span><span class="default">str_repeat</span><span class="keyword">(</span><span class="string">"0"</span><span class="keyword">, </span><span class="default">32</span><span class="keyword">-</span><span class="default">$mask </span><span class="keyword">);&nbsp; &nbsp; &nbsp; </span><span class="comment">//net mask binary string<br>&nbsp;&nbsp; </span><span class="default">$inverseMaskBinStr </span><span class="keyword">= </span><span class="default">str_repeat</span><span class="keyword">(</span><span class="string">"0"</span><span class="keyword">, </span><span class="default">$mask </span><span class="keyword">) . </span><span class="default">str_repeat</span><span class="keyword">(</span><span class="string">"1"</span><span class="keyword">,&nbsp; </span><span class="default">32</span><span class="keyword">-</span><span class="default">$mask </span><span class="keyword">); </span><span class="comment">//inverse mask<br>&nbsp;&nbsp; <br>&nbsp;&nbsp; </span><span class="default">$ipLong </span><span class="keyword">= </span><span class="default">ip2long</span><span class="keyword">( </span><span class="default">$ip </span><span class="keyword">);<br>&nbsp;&nbsp; </span><span class="default">$ipMaskLong </span><span class="keyword">= </span><span class="default">bindec</span><span class="keyword">( </span><span class="default">$maskBinStr </span><span class="keyword">);<br>&nbsp;&nbsp; </span><span class="default">$inverseIpMaskLong </span><span class="keyword">= </span><span class="default">bindec</span><span class="keyword">( </span><span class="default">$inverseMaskBinStr </span><span class="keyword">);<br>&nbsp;&nbsp; </span><span class="default">$netWork </span><span class="keyword">= </span><span class="default">$ipLong </span><span class="keyword">&amp; </span><span class="default">$ipMaskLong</span><span class="keyword">;&nbsp; <br><br>&nbsp;&nbsp; </span><span class="default">$start </span><span class="keyword">= </span><span class="default">$netWork</span><span class="keyword">+</span><span class="default">1</span><span class="keyword">;</span><span class="comment">//去掉网络号 ,ignore network ID(eg: 192.168.1.0)<br>&nbsp; <br>&nbsp;&nbsp; </span><span class="default">$end </span><span class="keyword">= (</span><span class="default">$netWork </span><span class="keyword">| </span><span class="default">$inverseIpMaskLong</span><span class="keyword">) -</span><span class="default">1 </span><span class="keyword">; </span><span class="comment">//去掉广播地址 ignore brocast IP(eg: 192.168.1.255)<br>&nbsp;&nbsp; </span><span class="keyword">return array( </span><span class="default">$start</span><span class="keyword">, </span><span class="default">$end </span><span class="keyword">);<br>}<br></span><span class="default">?&gt;</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="113080">  
+  <a class="name">
+  <strong class="user"><em>rasmus at mindplay dot dk</em></strong></a><div class="date" title="2013-08-27 02:54"><strong>8 years ago</strong></div>
+  <div class="text" id="Hcom113080">
+<div class="phpcode"><code><span class="html">
+As pointed out by others, this function's return value is not consistent on 32 and 64-bit platforms.<br><br>Your best bet for consistent behavior across 32/64-bit platforms (and Windows) is the lowest common denominator: force the return value of ip2long() into a signed 32-bit integer, e.g.:<br><br>&nbsp; &nbsp; var_dump(unpack('l', pack('l', ip2long('255.255.255.0'))));<br><br>This looks idiotic, but it gives you a consistent signed integer value on all platforms.<br><br>(the arguments to both pack() and unpack() are the lower-case letter "L", not the number "1", in case it looks that way on your screen...)</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="119883">  
+  <a class="name">
+  <strong class="user"><em>alex at alex-at dot ru</em></strong></a><div class="date" title="2016-09-14 08:52"><strong>4 years ago</strong></div>
+  <div class="text" id="Hcom119883">
+<div class="phpcode"><code><span class="html">
+Here are my versions of prefix to mask and mask to prefix conversions. You can remove first lines with if/preg of each function if you don't want sanity precheck.<br><br>&nbsp; &nbsp; function prefix2Mask($prefix)<br>&nbsp; &nbsp; {<br>&nbsp; &nbsp; &nbsp; &nbsp; if (!preg_match('#^(?:0*[0-2]?[0-9]|3[0-2])$#', $prefix)) return false; # wrong prefix<br>&nbsp; &nbsp; &nbsp; &nbsp; return long2ip(0xffffffff &lt;&lt; (32 - $prefix));<br>&nbsp; &nbsp; }<br>&nbsp; &nbsp; <br>&nbsp; &nbsp; function mask2Prefix($mask)<br>&nbsp; &nbsp; {<br>&nbsp; &nbsp; &nbsp; &nbsp; if (!preg_match('#^(?:(?:[0-1][0-9][0-9]|2[0-4][0-9]|25[0-5]|[0-9][0-9]|[0-9])\.){3}'.<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; '(?:[0-1][0-9][0-9]|2[0-4][0-9]|25[0-5]|[0-9][0-9]|[0-9])$#', $mask))<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return false; # wrong mask<br>&nbsp; &nbsp; &nbsp; &nbsp; $m2p = str_pad(substr(decbin(ip2long($mask)), -32, 32), 32, '0', STR_PAD_LEFT);<br>&nbsp; &nbsp; &nbsp; &nbsp; if (!preg_match('#^(1*)0*$#', $m2p, $m)) return false; # wrong mask<br>&nbsp; &nbsp; &nbsp; &nbsp; return strlen($m[1]);<br>&nbsp; &nbsp; }</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="90344">  
+  <a class="name">
+  <strong class="user"><em>spinyn at gmail dot com</em></strong></a><div class="date" title="2009-04-16 07:51"><strong>12 years ago</strong></div>
+  <div class="text" id="Hcom90344">
+<div class="phpcode"><code><span class="html">
+Just want to add a comment to kaputt's valuable contribution to the task of matching hosts to ip ranges, efficiently.&nbsp; The script works fine if the binary representation of the ip involves no leading zeros.&nbsp; Unfortunately, the way decbin() seems to work, leading zeros in the binary representation of the first ip quad get dropped.&nbsp; That is a serious matter if you're trying to match all possible candidates in the checklist.&nbsp; In those cases the leading zeros need to be added back to get accurate matches for values in the first quad between 0-127 (or the binary equivalent, 0-01111111).
+<br>
+<br>The solution I came up with to address this issue was the following function:
+<br>
+<br><span class="default">&lt;?php
+<br></span><span class="keyword">function </span><span class="default">addLeadingZero</span><span class="keyword">(</span><span class="default">$ip</span><span class="keyword">) {
+<br>&nbsp;&nbsp; if ((</span><span class="default">$result </span><span class="keyword">= (</span><span class="default">32 </span><span class="keyword">- </span><span class="default">strlen</span><span class="keyword">(</span><span class="default">$ip</span><span class="keyword">))) &gt; </span><span class="default">0</span><span class="keyword">)
+<br>&nbsp; &nbsp; &nbsp; return </span><span class="default">str_repeat</span><span class="keyword">(</span><span class="string">"0"</span><span class="keyword">, </span><span class="default">$result</span><span class="keyword">).</span><span class="default">$ip</span><span class="keyword">;
+<br>}
+<br></span><span class="default">?&gt;</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="83548">  
+  <a class="name">
+  <strong class="user"><em>chrisp-phpnet at inventivedingo dot com</em></strong></a><div class="date" title="2008-05-30 07:36"><strong>13 years ago</strong></div>
+  <div class="text" id="Hcom83548">
+<div class="phpcode"><code><span class="html">
+I had a problem with calling this function with REMOTE_ADDR on my lighttpd web server. Turned out that IPv6 was installed on this server, so even though REMOTE_ADDR was an IPv4 address, it was being formatted using IPv6's IPv4 compatibility mode. For example, 10.0.0.1 was becoming ::ffff:10.0.0.1, which caused iplong to report the address as invalid instead of parsing it correctly.
+<br>
+<br>The correct fix would of course be to update my infrastructure so that it's properly IPv6-compatible; but in the context of my particular situation, this would involve a lot of re-engineering. So in the meantime, I worked around the issue using this quick and dirty hack:
+<br>
+<br><span class="default">&lt;?php
+<br>&nbsp; &nbsp; $ip </span><span class="keyword">= </span><span class="default">htmlspecialchars</span><span class="keyword">(</span><span class="default">$_SERVER</span><span class="keyword">[</span><span class="string">'REMOTE_ADDR'</span><span class="keyword">]);
+<br>&nbsp; &nbsp; if (</span><span class="default">strpos</span><span class="keyword">(</span><span class="default">$ip</span><span class="keyword">, </span><span class="string">'::'</span><span class="keyword">) === </span><span class="default">0</span><span class="keyword">) {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$ip </span><span class="keyword">= </span><span class="default">substr</span><span class="keyword">(</span><span class="default">$ip</span><span class="keyword">, </span><span class="default">strrpos</span><span class="keyword">(</span><span class="default">$ip</span><span class="keyword">, </span><span class="string">':'</span><span class="keyword">)+</span><span class="default">1</span><span class="keyword">);
+<br>&nbsp; &nbsp; }
+<br>&nbsp; &nbsp; </span><span class="default">$host </span><span class="keyword">= </span><span class="default">ip2long</span><span class="keyword">(</span><span class="default">$ip</span><span class="keyword">);
+<br></span><span class="default">?&gt;
+<br></span>
+<br>Ugly but functional.</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="83320">  
+  <a class="name">
+  <strong class="user"><em>jpmarcotte at gmail dot com</em></strong></a><div class="date" title="2008-05-20 03:10"><strong>13 years ago</strong></div>
+  <div class="text" id="Hcom83320">
+<div class="phpcode"><code><span class="html">
+In using a combination of jbothe's code below and some of the "$mask = 0xFFFFFFFF &lt;&lt; (32 - $bits)" type code, I ran into an error with some later calculations on a 64 bit machine.<br><br>Keep in mind that when you're analyzing numbers meant to be treated as 32 bits wide (such as IP addresses), you may want to truncate them. Without relying on other libraries, it was simple enough to follow any calculations that may end with different results on a 64 bit machine with " &amp; 0xFFFFFFFF"<br><br>Though in many cases, it seems like it might be simpler to just use "~0 &lt;&lt; ..." for initial shifting to create the network mask instead of "0xFFFFFFFF &lt;&lt; ...". I don't know that it guarantees further operations to work as expected though.</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="74264">  
+  <a class="name">
+  <strong class="user"><em>one tiger one at gee mail dot comm</em></strong></a><div class="date" title="2007-04-02 07:49"><strong>14 years ago</strong></div>
+  <div class="text" id="Hcom74264">
+<div class="phpcode"><code><span class="html">
+I wrote a small function to validate a netmask (We have a form where the netmask of a given server is entered in, and I wanted to make sure it was valid). Hope this is useful.
+<br>
+<br><span class="default">&lt;?php
+<br></span><span class="comment">// Netmask Validator //
+<br></span><span class="keyword">function </span><span class="default">checkNetmask</span><span class="keyword">(</span><span class="default">$ip</span><span class="keyword">) {
+<br> if (!</span><span class="default">ip2long</span><span class="keyword">(</span><span class="default">$ip</span><span class="keyword">)) {
+<br>&nbsp; return </span><span class="default">false</span><span class="keyword">;
+<br> } elseif(</span><span class="default">strlen</span><span class="keyword">(</span><span class="default">decbin</span><span class="keyword">(</span><span class="default">ip2long</span><span class="keyword">(</span><span class="default">$ip</span><span class="keyword">))) != </span><span class="default">32 </span><span class="keyword">&amp;&amp; </span><span class="default">ip2long</span><span class="keyword">(</span><span class="default">$ip</span><span class="keyword">) != </span><span class="default">0</span><span class="keyword">) {
+<br>&nbsp; return </span><span class="default">false</span><span class="keyword">;
+<br> } elseif(</span><span class="default">ereg</span><span class="keyword">(</span><span class="string">'01'</span><span class="keyword">,</span><span class="default">decbin</span><span class="keyword">(</span><span class="default">ip2long</span><span class="keyword">(</span><span class="default">$ip</span><span class="keyword">))) || !</span><span class="default">ereg</span><span class="keyword">(</span><span class="string">'0'</span><span class="keyword">,</span><span class="default">decbin</span><span class="keyword">(</span><span class="default">ip2long</span><span class="keyword">(</span><span class="default">$ip</span><span class="keyword">)))) {
+<br>&nbsp; return </span><span class="default">false</span><span class="keyword">;
+<br> } else {
+<br>&nbsp; return </span><span class="default">true</span><span class="keyword">;
+<br> }
+<br>}
+<br></span><span class="default">?&gt;</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="56373">  
+  <a class="name">
+  <strong class="user"><em>ken at expitrans dot com</em></strong></a><div class="date" title="2005-08-31 03:31"><strong>16 years ago</strong></div>
+  <div class="text" id="Hcom56373">
+<div class="phpcode"><code><span class="html">
+Below is a merged form of all various notes, and a better (and correct) network matching function.<br><br><span class="default">&lt;?php<br><br></span><span class="keyword">function </span><span class="default">net_match</span><span class="keyword">(</span><span class="default">$network</span><span class="keyword">, </span><span class="default">$ip</span><span class="keyword">) {<br>&nbsp; &nbsp; &nbsp; </span><span class="comment">// determines if a network in the form of 192.168.17.1/16 or<br>&nbsp; &nbsp; &nbsp; // 127.0.0.1/255.255.255.255 or 10.0.0.1 matches a given ip<br>&nbsp; &nbsp; &nbsp; </span><span class="default">$ip_arr </span><span class="keyword">= </span><span class="default">explode</span><span class="keyword">(</span><span class="string">'/'</span><span class="keyword">, </span><span class="default">$network</span><span class="keyword">);<br>&nbsp; &nbsp; &nbsp; </span><span class="default">$network_long </span><span class="keyword">= </span><span class="default">ip2long</span><span class="keyword">(</span><span class="default">$ip_arr</span><span class="keyword">[</span><span class="default">0</span><span class="keyword">]);<br><br>&nbsp; &nbsp; &nbsp; </span><span class="default">$x </span><span class="keyword">= </span><span class="default">ip2long</span><span class="keyword">(</span><span class="default">$ip_arr</span><span class="keyword">[</span><span class="default">1</span><span class="keyword">]);<br>&nbsp; &nbsp; &nbsp; </span><span class="default">$mask </span><span class="keyword">=&nbsp; </span><span class="default">long2ip</span><span class="keyword">(</span><span class="default">$x</span><span class="keyword">) == </span><span class="default">$ip_arr</span><span class="keyword">[</span><span class="default">1</span><span class="keyword">] ? </span><span class="default">$x </span><span class="keyword">: </span><span class="default">0xffffffff </span><span class="keyword">&lt;&lt; (</span><span class="default">32 </span><span class="keyword">- </span><span class="default">$ip_arr</span><span class="keyword">[</span><span class="default">1</span><span class="keyword">]);<br>&nbsp; &nbsp; &nbsp; </span><span class="default">$ip_long </span><span class="keyword">= </span><span class="default">ip2long</span><span class="keyword">(</span><span class="default">$ip</span><span class="keyword">);<br><br>&nbsp; &nbsp; &nbsp; </span><span class="comment">// echo "&gt;".$ip_arr[1]."&gt; ".decbin($mask)."\n";<br>&nbsp; &nbsp; &nbsp; </span><span class="keyword">return (</span><span class="default">$ip_long </span><span class="keyword">&amp; </span><span class="default">$mask</span><span class="keyword">) == (</span><span class="default">$network_long </span><span class="keyword">&amp; </span><span class="default">$mask</span><span class="keyword">);<br>}<br><br>echo </span><span class="default">net_match</span><span class="keyword">(</span><span class="string">'192.168.17.1/16'</span><span class="keyword">, </span><span class="string">'192.168.15.1'</span><span class="keyword">).</span><span class="string">"\n"</span><span class="keyword">; </span><span class="comment">// returns true<br></span><span class="keyword">echo </span><span class="default">net_match</span><span class="keyword">(</span><span class="string">'127.0.0.1/255.255.255.255'</span><span class="keyword">, </span><span class="string">'127.0.0.2'</span><span class="keyword">).</span><span class="string">"\n"</span><span class="keyword">; </span><span class="comment">// returns false<br></span><span class="keyword">echo </span><span class="default">net_match</span><span class="keyword">(</span><span class="string">'10.0.0.1'</span><span class="keyword">, </span><span class="string">'10.0.0.1'</span><span class="keyword">).</span><span class="string">"\n"</span><span class="keyword">; </span><span class="comment">// returns true<br><br></span><span class="default">?&gt;</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="123840">  
+  <a class="name">
+  <strong class="user"><em>schat</em></strong></a><div class="date" title="2019-05-10 11:20"><strong>2 years ago</strong></div>
+  <div class="text" id="Hcom123840">
+<div class="phpcode"><code><span class="html">
+sorry i just wrote wrong, sorry. this is the right one. thanks.
+<br>
+<br><span class="default">&lt;?php
+<br></span><span class="comment">/**
+<br> * convert cidr to ip range
+<br> * From: &lt;<a rel="nofollow" target="_blank">https://github.com/www-schat-top&gt;</a>
+<br> * @param&nbsp; string $cidr "192.168.0.0/23"
+<br> * @return array&nbsp; ["192.168.0.0", "192.168.1.255"]
+<br> */
+<br></span><span class="keyword">function </span><span class="default">cidr2range</span><span class="keyword">(</span><span class="default">$cidr</span><span class="keyword">){
+<br>&nbsp;&nbsp; list( </span><span class="default">$subnet</span><span class="keyword">, </span><span class="default">$mask </span><span class="keyword">) = </span><span class="default">explode</span><span class="keyword">( </span><span class="string">'/'</span><span class="keyword">, </span><span class="default">$cidr </span><span class="keyword">);
+<br>&nbsp;&nbsp; return [</span><span class="default">$subnet</span><span class="keyword">, </span><span class="default">long2ip</span><span class="keyword">(</span><span class="default">ip2long</span><span class="keyword">( </span><span class="default">$subnet </span><span class="keyword">) | (</span><span class="default">pow</span><span class="keyword">(</span><span class="default">2</span><span class="keyword">,( </span><span class="default">32 </span><span class="keyword">- </span><span class="default">$mask </span><span class="keyword">))-</span><span class="default">1</span><span class="keyword">))];
+<br>}
+<br></span><span class="default">?&gt;</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="47814">  
+  <a class="name"><strong class="user"><em>Anonymous</em></strong></a><div class="date" title="2004-12-01 06:06"><strong>16 years ago</strong></div>
+  <div class="text" id="Hcom47814">
+<div class="phpcode"><code><span class="html">
+I re-wrote the functions from jbothe at hotmail dot com as a little exercise in OO and added a couple of extra functions.<br><br><span class="default">&lt;?php<br><br> </span><span class="comment">//--------------<br>// IPv4 class<br></span><span class="keyword">class </span><span class="default">ipv4<br></span><span class="keyword">{<br>&nbsp; var </span><span class="default">$address</span><span class="keyword">;<br>&nbsp; var </span><span class="default">$netbits</span><span class="keyword">;<br><br>&nbsp;&nbsp; </span><span class="comment">//--------------<br>&nbsp; // Create new class<br>&nbsp; </span><span class="keyword">function </span><span class="default">ipv4</span><span class="keyword">(</span><span class="default">$address</span><span class="keyword">,</span><span class="default">$netbits</span><span class="keyword">)<br>&nbsp; {<br>&nbsp; &nbsp; </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">address </span><span class="keyword">= </span><span class="default">$address</span><span class="keyword">;<br>&nbsp; &nbsp; </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">netbits </span><span class="keyword">= </span><span class="default">$netbits</span><span class="keyword">;<br>&nbsp; }<br><br>&nbsp;&nbsp; </span><span class="comment">//--------------<br>&nbsp; // Return the IP address<br>&nbsp; </span><span class="keyword">function </span><span class="default">address</span><span class="keyword">() { return (</span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">address</span><span class="keyword">); }<br><br>&nbsp;&nbsp; </span><span class="comment">//--------------<br>&nbsp; // Return the netbits<br>&nbsp; </span><span class="keyword">function </span><span class="default">netbits</span><span class="keyword">() { return (</span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">netbits</span><span class="keyword">); }<br><br>&nbsp;&nbsp; </span><span class="comment">//--------------<br>&nbsp; // Return the netmask<br>&nbsp; </span><span class="keyword">function </span><span class="default">netmask</span><span class="keyword">()<br>&nbsp; {<br>&nbsp; &nbsp; return (</span><span class="default">long2ip</span><span class="keyword">(</span><span class="default">ip2long</span><span class="keyword">(</span><span class="string">"255.255.255.255"</span><span class="keyword">)<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &lt;&lt; (</span><span class="default">32</span><span class="keyword">-</span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">netbits</span><span class="keyword">)));<br>&nbsp; }<br><br>&nbsp;&nbsp; </span><span class="comment">//--------------<br>&nbsp; // Return the network that the address sits in<br>&nbsp; </span><span class="keyword">function </span><span class="default">network</span><span class="keyword">()<br>&nbsp; {<br>&nbsp; &nbsp; return (</span><span class="default">long2ip</span><span class="keyword">((</span><span class="default">ip2long</span><span class="keyword">(</span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">address</span><span class="keyword">))<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &amp; (</span><span class="default">ip2long</span><span class="keyword">(</span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">netmask</span><span class="keyword">()))));<br>&nbsp; }<br><br>&nbsp;&nbsp; </span><span class="comment">//--------------<br>&nbsp; // Return the broadcast that the address sits in<br>&nbsp; </span><span class="keyword">function </span><span class="default">broadcast</span><span class="keyword">()<br>&nbsp; {<br>&nbsp; &nbsp; return (</span><span class="default">long2ip</span><span class="keyword">(</span><span class="default">ip2long</span><span class="keyword">(</span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">network</span><span class="keyword">())<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; | (~(</span><span class="default">ip2long</span><span class="keyword">(</span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">netmask</span><span class="keyword">())))));<br>&nbsp; }<br><br>&nbsp;&nbsp; </span><span class="comment">//--------------<br>&nbsp; // Return the inverse mask of the netmask<br>&nbsp; </span><span class="keyword">function </span><span class="default">inverse</span><span class="keyword">()<br>&nbsp; {<br>&nbsp; &nbsp; return (</span><span class="default">long2ip</span><span class="keyword">(~(</span><span class="default">ip2long</span><span class="keyword">(</span><span class="string">"255.255.255.255"</span><span class="keyword">)<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &lt;&lt; (</span><span class="default">32</span><span class="keyword">-</span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">netbits</span><span class="keyword">))));<br>&nbsp; }<br><br>}<br><br>&nbsp; </span><span class="default">$ip </span><span class="keyword">= new </span><span class="default">ipv4</span><span class="keyword">(</span><span class="string">"192.168.2.1"</span><span class="keyword">,</span><span class="default">24</span><span class="keyword">);<br>&nbsp; print </span><span class="string">"Address: </span><span class="default">$ip</span><span class="keyword">-&gt;</span><span class="default">address</span><span class="string">()\n"</span><span class="keyword">;<br>&nbsp; print </span><span class="string">"Netbits: </span><span class="default">$ip</span><span class="keyword">-&gt;</span><span class="default">netbits</span><span class="string">()\n"</span><span class="keyword">;<br>&nbsp; print </span><span class="string">"Netmask: </span><span class="default">$ip</span><span class="keyword">-&gt;</span><span class="default">netmask</span><span class="string">()\n"</span><span class="keyword">;<br>&nbsp; print </span><span class="string">"Inverse: </span><span class="default">$ip</span><span class="keyword">-&gt;</span><span class="default">inverse</span><span class="string">()\n"</span><span class="keyword">;<br>&nbsp; print </span><span class="string">"Network: </span><span class="default">$ip</span><span class="keyword">-&gt;</span><span class="default">network</span><span class="string">()\n"</span><span class="keyword">;<br>&nbsp; print </span><span class="string">"Broadcast: </span><span class="default">$ip</span><span class="keyword">-&gt;</span><span class="default">broadcast</span><span class="string">()\n"</span><span class="keyword">;<br></span><span class="default">?&gt;</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="73288">  
+  <a class="name">
+  <strong class="user"><em>laacz at php dot net</em></strong></a><div class="date" title="2007-02-16 01:06"><strong>14 years ago</strong></div>
+  <div class="text" id="Hcom73288">
+<div class="phpcode"><code><span class="html">
+Just to save you some time.<br><br>Beware that octets in IP address are being treated as numbers. So, '10.0.0.11' is not equal to '10.0.0.011'. '011' is octal number (base 8), so it converts to '9'. You can even go further and see that '10.0.0.0xa' also works (equals to '10.0.0.16'). <br><br>This is not PHP issue, though.</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="106749">  
+  <a class="name">
+  <strong class="user"><em>PandoraBox2007 at gmail dot com</em></strong></a><div class="date" title="2011-12-03 07:06"><strong>9 years ago</strong></div>
+  <div class="text" id="Hcom106749">
+<div class="phpcode"><code><span class="html">
+Universal ip4/ip6
+<br>
+<br><span class="default">&lt;?php
+<br></span><span class="comment">// encoded --
+<br></span><span class="keyword">function </span><span class="default">encode_ip </span><span class="keyword">(</span><span class="default">$ip</span><span class="keyword">)
+<br>{
+<br>&nbsp; &nbsp; </span><span class="default">$d </span><span class="keyword">= </span><span class="default">explode</span><span class="keyword">(</span><span class="string">'.'</span><span class="keyword">, </span><span class="default">$ip</span><span class="keyword">);
+<br>&nbsp; &nbsp; if (</span><span class="default">count</span><span class="keyword">(</span><span class="default">$d</span><span class="keyword">) == </span><span class="default">4</span><span class="keyword">) return </span><span class="default">sprintf</span><span class="keyword">(</span><span class="string">'%02x%02x%02x%02x'</span><span class="keyword">, </span><span class="default">$d</span><span class="keyword">[</span><span class="default">0</span><span class="keyword">], </span><span class="default">$d</span><span class="keyword">[</span><span class="default">1</span><span class="keyword">], </span><span class="default">$d</span><span class="keyword">[</span><span class="default">2</span><span class="keyword">], </span><span class="default">$d</span><span class="keyword">[</span><span class="default">3</span><span class="keyword">]);
+<br> 
+<br>&nbsp; &nbsp; </span><span class="default">$d </span><span class="keyword">= </span><span class="default">explode</span><span class="keyword">(</span><span class="string">':'</span><span class="keyword">, </span><span class="default">preg_replace</span><span class="keyword">(</span><span class="string">'/(^:)|(:$)/'</span><span class="keyword">, </span><span class="string">''</span><span class="keyword">, </span><span class="default">$ip</span><span class="keyword">));
+<br>&nbsp; &nbsp; </span><span class="default">$res </span><span class="keyword">= </span><span class="string">''</span><span class="keyword">;
+<br>&nbsp; &nbsp; foreach (</span><span class="default">$d </span><span class="keyword">as </span><span class="default">$x</span><span class="keyword">)
+<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$res </span><span class="keyword">.= </span><span class="default">sprintf</span><span class="keyword">(</span><span class="string">'%0'</span><span class="keyword">. (</span><span class="default">$x </span><span class="keyword">== </span><span class="string">'' </span><span class="keyword">? (</span><span class="default">9 </span><span class="keyword">- </span><span class="default">count</span><span class="keyword">(</span><span class="default">$d</span><span class="keyword">)) * </span><span class="default">4 </span><span class="keyword">: </span><span class="default">4</span><span class="keyword">) .</span><span class="string">'s'</span><span class="keyword">, </span><span class="default">$x</span><span class="keyword">);
+<br>&nbsp; &nbsp; return </span><span class="default">$res</span><span class="keyword">;
+<br>}
+<br>
+<br></span><span class="comment">// decoded
+<br></span><span class="keyword">function </span><span class="default">decode_ip</span><span class="keyword">(</span><span class="default">$int_ip</span><span class="keyword">)
+<br>{
+<br>&nbsp; &nbsp; function </span><span class="default">hexhex</span><span class="keyword">(</span><span class="default">$value</span><span class="keyword">) { return </span><span class="default">dechex</span><span class="keyword">(</span><span class="default">hexdec</span><span class="keyword">(</span><span class="default">$value</span><span class="keyword">)); };
+<br> 
+<br>&nbsp; &nbsp; if (</span><span class="default">strlen</span><span class="keyword">(</span><span class="default">$int_ip</span><span class="keyword">) == </span><span class="default">32</span><span class="keyword">) {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$int_ip </span><span class="keyword">= </span><span class="default">substr</span><span class="keyword">(</span><span class="default">chunk_split</span><span class="keyword">(</span><span class="default">$int_ip</span><span class="keyword">, </span><span class="default">4</span><span class="keyword">, </span><span class="string">':'</span><span class="keyword">), </span><span class="default">0</span><span class="keyword">, </span><span class="default">39</span><span class="keyword">);
+<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$int_ip </span><span class="keyword">= </span><span class="string">':'</span><span class="keyword">. </span><span class="default">implode</span><span class="keyword">(</span><span class="string">':'</span><span class="keyword">, </span><span class="default">array_map</span><span class="keyword">(</span><span class="string">"hexhex"</span><span class="keyword">, </span><span class="default">explode</span><span class="keyword">(</span><span class="string">':'</span><span class="keyword">,</span><span class="default">$int_ip</span><span class="keyword">))) .</span><span class="string">':'</span><span class="keyword">;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">preg_match_all</span><span class="keyword">(</span><span class="string">"/(:0)+/"</span><span class="keyword">, </span><span class="default">$int_ip</span><span class="keyword">, </span><span class="default">$zeros</span><span class="keyword">);
+<br>&nbsp; &nbsp; &nbsp; &nbsp; if (</span><span class="default">count</span><span class="keyword">(</span><span class="default">$zeros</span><span class="keyword">[</span><span class="default">0</span><span class="keyword">]) &gt; </span><span class="default">0</span><span class="keyword">) {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$match </span><span class="keyword">= </span><span class="string">''</span><span class="keyword">;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; foreach(</span><span class="default">$zeros</span><span class="keyword">[</span><span class="default">0</span><span class="keyword">] as </span><span class="default">$zero</span><span class="keyword">)
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (</span><span class="default">strlen</span><span class="keyword">(</span><span class="default">$zero</span><span class="keyword">) &gt; </span><span class="default">strlen</span><span class="keyword">(</span><span class="default">$match</span><span class="keyword">))
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$match </span><span class="keyword">= </span><span class="default">$zero</span><span class="keyword">;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$int_ip </span><span class="keyword">= </span><span class="default">preg_replace</span><span class="keyword">(</span><span class="string">'/'</span><span class="keyword">. </span><span class="default">$match </span><span class="keyword">.</span><span class="string">'/'</span><span class="keyword">, </span><span class="string">':'</span><span class="keyword">, </span><span class="default">$int_ip</span><span class="keyword">, </span><span class="default">1</span><span class="keyword">);
+<br>&nbsp; &nbsp; &nbsp; &nbsp; }
+<br>&nbsp; &nbsp; &nbsp; &nbsp; return </span><span class="default">preg_replace</span><span class="keyword">(</span><span class="string">'/(^:([^:]))|(([^:]):$)/'</span><span class="keyword">, </span><span class="string">'$2$4'</span><span class="keyword">, </span><span class="default">$int_ip</span><span class="keyword">);
+<br>&nbsp; &nbsp; }
+<br>&nbsp; &nbsp; </span><span class="default">$hexipbang </span><span class="keyword">= </span><span class="default">explode</span><span class="keyword">(</span><span class="string">'.'</span><span class="keyword">, </span><span class="default">chunk_split</span><span class="keyword">(</span><span class="default">$int_ip</span><span class="keyword">, </span><span class="default">2</span><span class="keyword">, </span><span class="string">'.'</span><span class="keyword">));
+<br>&nbsp; &nbsp; return </span><span class="default">hexdec</span><span class="keyword">(</span><span class="default">$hexipbang</span><span class="keyword">[</span><span class="default">0</span><span class="keyword">]). </span><span class="string">'.' </span><span class="keyword">. </span><span class="default">hexdec</span><span class="keyword">(</span><span class="default">$hexipbang</span><span class="keyword">[</span><span class="default">1</span><span class="keyword">]) . </span><span class="string">'.' </span><span class="keyword">. </span><span class="default">hexdec</span><span class="keyword">(</span><span class="default">$hexipbang</span><span class="keyword">[</span><span class="default">2</span><span class="keyword">]) . </span><span class="string">'.' </span><span class="keyword">. </span><span class="default">hexdec</span><span class="keyword">(</span><span class="default">$hexipbang</span><span class="keyword">[</span><span class="default">3</span><span class="keyword">]);
+<br>}
+<br></span><span class="default">?&gt;
+<br></span>
+<br>DB:
+<br>`user_ip` varchar(32) DEFAULT NULL</span>
+</code></div>
+  </div>
+ </div></div>
+
+ 
+</section>    </section><!-- layout-content -->
+        
+
+
+  </div><!-- layout -->
+
+  
+
+    
+ <!-- External and third party libraries. -->
+ 
+
+
+
+
+
+
+
+<a id="toTop" href="javascript:;"><span id="toTopHover"></span><img width="40" height="40" alt="To Top" src="../../images/to-top%402x.png"></a>
+
+
+
+<!-- Mirrored from www.php.net/manual/en/function.ip2long.php by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 11 Sep 2021 06:57:15 GMT -->
+
+</body></html>

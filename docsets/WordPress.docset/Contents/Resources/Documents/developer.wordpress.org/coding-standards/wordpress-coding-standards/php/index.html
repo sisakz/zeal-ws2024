@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+
+<!-- Mirrored from developer.wordpress.org/coding-standards/wordpress-coding-standards/php/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 31 Aug 2021 17:07:54 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<!--
+<meta property="fb:page_id" content="6427302910" />
+-->
+<meta name="google-site-verification" content="7VWES_-rcHBcmaQis9mSYamPfNwE03f4vyTj4pfuAw0" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PHP Coding Standards</title>
+<meta name="referrer" content="always">
+
+		<link href='../../../../fonts.googleapis.com/css.css?family=Open+Sans:300italic,400italic,600italic,400,300,600&amp;subset=latin,cyrillic-ext,greek-ext,greek,vietnamese,latin-ext,cyrillic' rel='stylesheet' type='text/css'>
+
+		<link rel="stylesheet" href="../../../../s.w.org/style/wp4.css?95" />
+
+<link rel="shortcut icon" href="../../../../s.w.org/favicon.ico?2" type="image/x-icon" />
+<link rel="pingback" href="../../../xmlrpc.php" /><meta name='robots' content='max-image-preview:large' />
+<link rel='dns-prefetch' href='../../../../fonts.googleapis.com/index.html' />
+<link rel='dns-prefetch' href='http://s.w.org/' />
+<link rel='dns-prefetch' href='http://www.googletagmanager.com/' />
+<link rel='dns-prefetch' href='http://fonts.gstatic.com/' />
+<link rel="alternate" type="application/rss+xml" title="WordPress Developer Resources &raquo; Feed" href="../../../feed/index.html" />
+<link rel="alternate" type="application/rss+xml" title="WordPress Developer Resources &raquo; Comments Feed" href="../../../comments/feed/index.html" />
+<meta property="og:title" content="PHP Coding Standards | Coding Standards Handbook | WordPress Developer Resources" />
+<meta property="og:site_name" content="WordPress Developer Resources" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="../../../index.html" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@WordPress" />
+<meta name="description" content="Some parts of the WordPress code structure for PHP markup are inconsistent in their style. WordPress is working to gradually improve this by&hellip;" />
+<meta property="og:description" content="Some parts of the WordPress code structure for PHP markup are inconsistent in their style. WordPress is working to gradually improve this by&hellip;" />
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'../../../../www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P24PF4B');</script>
+			<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/developer.wordpress.org\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.9-alpha-51701"}};
+			!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([10084,65039,8205,55357,56613],[10084,65039,8203,55357,56613])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel='stylesheet' id='dashicons-css'  href='../../../wp-includes/css/dashicons.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='admin-bar-css'  href='../../../wp-includes/css/admin-bar.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-block-library-css'  href='../../../wp-includes/css/dist/block-library/style.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='wporg-handbook-css-css'  href='../../../wp-content/plugins/handbook/stylesheets/callout-boxes.css?ver=20200121' type='text/css' media='all' />
+<link rel='stylesheet' id='open-sans-css'  href='../../../../fonts.googleapis.com/css-2.css?family=Open+Sans%3A300italic%2C400italic%2C600italic%2C300%2C400%2C600&amp;subset=latin%2Clatin-ext&amp;display=fallback&amp;ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='wporg-developer-style-css'  href='../../../wp-content/themes/pub/wporg-developer/style.css?ver=3' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-dev-sass-compiled-css'  href='../../../wp-content/themes/pub/wporg-developer/stylesheets/main.css?ver=20200713' type='text/css' media='all' />
+<link rel='stylesheet' id='awesomplete-css-css'  href='../../../wp-content/themes/pub/wporg-developer/stylesheets/awesomplete.css?ver=20160114' type='text/css' media='all' />
+<link rel='stylesheet' id='autocomplete-css-css'  href='../../../wp-content/themes/pub/wporg-developer/stylesheets/autocomplete.css?ver=20171220' type='text/css' media='all' />
+<link rel='stylesheet' id='syntaxhighlighter-core-css'  href='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shCore.css?ver=3.0.9b' type='text/css' media='all' />
+<link rel='stylesheet' id='syntaxhighlighter-theme-default-css'  href='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shThemeDefault.css?ver=3.0.9b' type='text/css' media='all' />
+<script type='text/javascript' src='../../../wp-includes/js/jquery/jquery.min.js?ver=3.6.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='../../../wp-content/plugins/handbook/scripts/handbook.js?ver=20150930' id='wporg-handbook-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/chapters.js?ver=20190603' id='wporg-developer-chapters-js'></script>
+<script type='text/javascript' src='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shCore.js?ver=3.0.9b' id='syntaxhighlighter-core-js'></script>
+<script type='text/javascript' src='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushPhp.js?ver=3.0.9b' id='syntaxhighlighter-brush-php-js'></script>
+<link rel="https://api.w.org/" href="https://developer.wordpress.org/wp-json/" /><link rel="alternate" type="application/json" href="https://developer.wordpress.org/wp-json/wp/v2/wpcs-handbook/41431" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="../../../xmlrpc-2.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="../../../wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 5.9-alpha-51701" />
+<link rel='shortlink' href='https://developer.wordpress.org/?p=41431' />
+<link rel="alternate" type="application/json+oembed" href="https://developer.wordpress.org/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fdeveloper.wordpress.org%2Fcoding-standards%2Fwordpress-coding-standards%2Fphp%2F" />
+<link rel="alternate" type="text/xml+oembed" href="https://developer.wordpress.org/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fdeveloper.wordpress.org%2Fcoding-standards%2Fwordpress-coding-standards%2Fphp%2F&amp;format=xml" />
+<link rel="canonical" href="index.html">
+<!-- Stream WordPress user activity plugin v3.6.2 -->
+	<style>
+		@media screen and (max-width: 782px) {
+			#wpadminbar li#wp-admin-bar-log-in,
+			#wpadminbar li#wp-admin-bar-register {
+				display: block;
+			}
+
+			#wpadminbar li#wp-admin-bar-log-in a,
+			#wpadminbar li#wp-admin-bar-register a {
+				padding: 0 8px;
+			}
+		}
+	</style>
+		<style>
+			a.github-edit {
+				margin-left: .5em;
+				font-size: .5em;
+				vertical-align: top;
+				display: inline-block;
+				border: 1px solid #eeeeee;
+				border-radius: 2px;
+				background: #eeeeee;
+				padding: .5em .6em .4em;
+				color: black;
+				margin-top: 0.1em;
+			}
+			a.github-edit > * {
+				opacity: 0.6;
+			}
+			a.github-edit:hover > * {
+				opacity: 1;
+				color: black;
+			}
+			a.github-edit img {
+				height: .8em;
+			}
+		</style>
+		
+	<script type="text/javascript">
+		jQuery( '<style>.hide-if-js { display: none; }</style>' ).appendTo( 'head' );
+		jQuery( function($) {
+			$( 'body' ).addClass('js');
+		} );
+	</script>
+<style type="text/css" media="print">#wpadminbar { display:none; }</style>
+	<style type="text/css" media="screen">
+	</style>
+	<script>document.cookie='devicePixelRatio='+((window.devicePixelRatio === undefined) ? 1 : window.devicePixelRatio)+'; path=/';</script>
+
+</head>
+
+
+<body id="wordpress-org" class="wpcs-handbook-template-default single single-wpcs-handbook postid-41431 admin-bar no-customize-support single-handbook">
+		<div id="wpadminbar" class="nojq nojs">
+						<div class="quicklinks" id="wp-toolbar" role="navigation" aria-label="Toolbar">
+				<ul id='wp-admin-bar-root-default' class="ab-top-menu"><li id='wp-admin-bar-wp-logo' class="menupop"><a class='ab-item' aria-haspopup="true" href='https://wordpress.org/about/'><span class="ab-icon" aria-hidden="true"></span><span class="screen-reader-text">About WordPress</span></a><div class="ab-sub-wrapper"><ul id='wp-admin-bar-wp-logo-default' class="ab-submenu"><li id='wp-admin-bar-about'><a class='ab-item' href='https://wordpress.org/about/'>About WordPress</a></li></ul><ul id='wp-admin-bar-wp-logo-external' class="ab-sub-secondary ab-submenu"><li id='wp-admin-bar-wporg'><a class='ab-item' href='https://wordpress.org/'>WordPress.org</a></li><li id='wp-admin-bar-documentation'><a class='ab-item' href='https://wordpress.org/support/'>Documentation</a></li><li id='wp-admin-bar-support-forums'><a class='ab-item' href='https://wordpress.org/support/forums/'>Support</a></li><li id='wp-admin-bar-feedback'><a class='ab-item' href='https://wordpress.org/support/forum/requests-and-feedback'>Feedback</a></li></ul></div></li></ul><ul id='wp-admin-bar-top-secondary' class="ab-top-secondary ab-top-menu"><li id='wp-admin-bar-search' class="admin-bar-search"><div class="ab-item ab-empty-item" tabindex="-1"><form action="https://developer.wordpress.org/" method="get" id="adminbarsearch"><input class="adminbar-input" name="s" id="adminbar-search" type="text" value="" maxlength="150" /><label for="adminbar-search" class="screen-reader-text">Search</label><input type="submit" class="adminbar-button" value="Search" /></form></div></li><li id='wp-admin-bar-log-in'><a class='ab-item' href='https://login.wordpress.org/?locale=en_US'>Log In</a></li><li id='wp-admin-bar-register'><a class='ab-item' href='https://login.wordpress.org/register?locale=en_US'>Register</a></li></ul>			</div>
+					</div>
+
+		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P24PF4B" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<div id="wporg-header">
+	<div class="wrapper">
+	<h1><a href="http://wordpress.org/">WordPress.org</a></h1>				<div id="head-search">
+		<form action="http://wordpress.org/search/do-search.php" method="get">
+			<label for="global-search" class="screen-reader-text">Search WordPress.org for:</label>
+			<input id="global-search" class="text" name="search" type="text" value="" maxlength="150" placeholder="Search WordPress.org" />
+			<button type="submit" class="button"><span class="screen-reader-text">Submit</span></button>
+		</form>
+		</div>
+				<div style="clear:both"></div>
+		<button id="mobile-menu-button" aria-expanded="false"><span class="screen-reader-text">Toggle Menu</span></button>
+		
+<nav aria-label="Main Menu">
+<ul id="wporg-header-menu">
+<li class="menu-item"><a href='http://wordpress.org/showcase/' data-title='See some of the sites built on WordPress.'>Showcase</a></li>
+<li class="menu-item"><a href='http://learn.wordpress.org/' data-title='Resources to help you learn more about WordPress and teach it to others.'>Learn</a></li>
+<li class="menu-item"><a href='http://wordpress.org/themes/' data-title='Find just the right look for your website.'>Themes</a></li>
+<li class="menu-item"><a href='http://wordpress.org/plugins/' data-title='Plugins can extend WordPress to do almost anything you can imagine.'>Plugins</a></li>
+<li class="menu-item"><a href='http://wordpress.org/mobile/' data-title='Take your website on the go!'>Mobile</a></li>
+<li class="menu-item"><a href='http://wordpress.org/support/' data-title='Forums, documentation, help.'>Support</a><ul class="nav-submenu"><li><a href='http://wordpress.org/support/' title='Documentation, tutorials, best practices.'>Documentation</a></li><li><a href='http://wordpress.org/support/forums/' title='Support and discussion forums.'>Forums</a></li></ul><div class="uparrow"></div></li>
+<li class="menu-item"><a href='http://make.wordpress.org/' data-title='Contribute your knowledge.'>Get Involved</a><ul class="nav-submenu"><li><a href='http://wordpress.org/five-for-the-future/' title='How five percent is powering the next generation of the web'>Five for the Future</a></li></ul><div class="uparrow"></div></li>
+<li class="menu-item"><a href='http://wordpress.org/about/' data-title='About the WordPress Organization, and where we&#039;re going.'>About</a></li>
+<li class="menu-item"><a href='http://wordpress.org/news/' data-title='Come here for the latest scoop.'>Blog</a></li>
+<li class="menu-item"><a href='http://wordpress.org/hosting/' data-title='Find a home for your blog.'>Hosting</a></li>
+<li id="download" class="button download-button menu-item"><a href='http://wordpress.org/download/' data-title='Get it. Got it? Good.'>Get WordPress</a></li>
+</ul>
+</nav>
+		<div style="clear:both"></div>
+	</div>
+</div>
+
+
+
+<header id="masthead" class="site-header" role="banner">
+			<a href="#" id="secondary-toggle" onclick="return false;"><strong>Menu</strong></a>
+		<div class="site-branding">
+		<h1 class="site-title">
+			<a href="../../../index.html" rel="home">Coding Standards Handbook</a>
+		</h1>
+
+		
+		<nav id="site-navigation" class="main-navigation" role="navigation">
+			<button class="menu-toggle dashicons dashicons-arrow-down-alt2" aria-controls="primary-menu" aria-expanded="false" aria-label="Primary Menu"></button>
+					</nav>
+	</div>
+</header><!-- #masthead -->
+
+<div id="page" class="hfeed site devhub-wrap">
+	<a href="#main" class="screen-reader-text">Skip to content</a>
+
+			<div id="content" class="site-content">
+
+
+	<div id="secondary" class="widget-area" role="complementary">
+		<a href="#" id="secondary-toggle"></a>
+		<div id="secondary-content">
+						<aside id="search-6" class="widget widget_search"><div class="search-section section clear hide-if-js">
+
+
+	
+	<form role="search" method="get" class="searchform searchform-handbook" action="https://developer.wordpress.org/coding-standards/">
+		<label for="search-field" class="screen-reader-text">Search for:</label>
+		<input type="text" id="search-field" class="search-field" placeholder="Search &hellip;" value="" name="s">
+		<button class="button button-primary button-search"><i class="dashicons dashicons-search"></i><span class="screen-reader-text">Search plugins</span></button>
+	
+	</form>
+
+</div><!-- /search-guide -->
+</aside><aside id="handbook_pages-2" class="widget widget_wporg_handbook_pages"><h2 class="widget-title">Chapters</h2>
+<div class="menu-table-of-contents-container">
+
+			<ul>
+				<li class="page_item page-item-41426 page_item_has_children current_page_ancestor current_page_parent current-menu-ancestor current-menu-parent menu-item menu-item-has-children"><a href="../index.html">WordPress Coding Standards</a>
+<ul class='children'>
+	<li class="page_item page-item-41427 menu-item"><a href="../accessibility/index.html">Accessibility Coding Standards</a></li>
+	<li class="page_item page-item-41428 menu-item"><a href="../css/index.html">CSS Coding Standards</a></li>
+	<li class="page_item page-item-41429 menu-item"><a href="../html/index.html">HTML Coding Standards</a></li>
+	<li class="page_item page-item-41430 menu-item"><a href="../javascript/index.html">JavaScript Coding Standards</a></li>
+	<li class="page_item page-item-41431 current_page_item current-menu-item menu-item"><a href="index.html" aria-current="page">PHP Coding Standards</a></li>
+</ul>
+</li>
+<li class="page_item page-item-41432 page_item_has_children menu-item menu-item-has-children"><a href="../../inline-documentation-standards/index.html">Inline Documentation Standards</a>
+<ul class='children'>
+	<li class="page_item page-item-41433 menu-item"><a href="../../inline-documentation-standards/javascript/index.html">JavaScript Documentation Standards</a></li>
+	<li class="page_item page-item-41434 menu-item"><a href="../../inline-documentation-standards/php/index.html">PHP Documentation Standards</a></li>
+</ul>
+</li>
+<li class="page_item page-item-41435 menu-item"><a href="../../changelog/index.html">Changelog</a></li>
+<li class="page_item page-item-126759 menu-item"><a href="../../styleguide/index.html">Markdown Style Guide</a></li>
+			</ul>
+
+			</div>		</div>
+	</div><!-- #secondary -->
+
+
+		<main id="primary" class="site-main post-41431 wpcs-handbook type-wpcs-handbook status-publish hentry type-handbook" role="main">
+
+		
+		<div class="breadcrumb-trail breadcrumbs" itemprop="breadcrumb">
+			<span class="trail-browse">Browse:</span> 
+			<span class="trail-begin"><a href="../../../index.html" title="WordPress Developer Resources" rel="home">Home</a></span> <span class="sep">&#47;</span> 
+			<span class="trail-inner"><a href="../../index.html">Coding Standards Handbook</a></span> <span class="sep">&#47;</span> 
+			<span class="trail-inner"><a href="../index.html" title="WordPress Coding Standards">WordPress Coding Standards</a></span> <span class="sep">&#47;</span> <span class="trail-end">PHP Coding Standards</span>
+		</div>
+		
+			
+<h1>PHP Coding Standards <a class="github-edit" href="https://github.com/WordPress/wpcs-docs/edit/master/wordpress-coding-standards/php.md"><img src="../../../wp-content/plugins/wporg-cli/assets/images/github-mark.svg"> <span>Edit</span></a></h1>
+
+
+<style> .toc-jump { text-align: right; font-size: 12px; } .page .toc-heading { margin-top: -50px; padding-top: 50px !important; }</style><div class="table-of-contents"><h2>Topics</h2><ul class="items"><li><a href="#php">PHP</a>
+<ul>
+<li><a href="#single-and-double-quotes">Single and Double Quotes</a></li>
+<li><a href="#indentation">Indentation</a></li>
+<li><a href="#brace-style">Brace Style</a></li>
+<li><a href="#use-elseif-not-else-if">Use <code>elseif</code>, not <code>else if</code></a></li>
+<li><a href="#declaring-arrays">Declaring Arrays</a></li>
+<li><a href="#closures-anonymous-functions">Closures (Anonymous Functions)</a></li>
+<li><a href="#multiline-function-calls">Multiline Function Calls</a></li>
+<li><a href="#regular-expressions">Regular Expressions</a></li>
+<li><a href="#opening-and-closing-php-tags">Opening and Closing PHP Tags</a></li>
+<li><a href="#no-shorthand-php-tags">No Shorthand PHP Tags</a></li>
+<li><a href="#remove-trailing-spaces">Remove Trailing Spaces</a></li>
+<li><a href="#space-usage">Space Usage</a></li>
+<li><a href="#formatting-sql-statements">Formatting SQL statements</a></li>
+<li><a href="#database-queries">Database Queries</a></li>
+<li><a href="#naming-conventions">Naming Conventions</a></li>
+<li><a href="#only-one-object-structure-class-interface-trait-should-be-declared-per-file">Only one object structure (class/interface/trait) should be declared per file</a></li>
+<li><a href="#self-explanatory-flag-values-for-function-arguments">Self-Explanatory Flag Values for Function Arguments</a></li>
+<li><a href="#interpolation-for-naming-dynamic-hooks">Interpolation for Naming Dynamic Hooks</a></li>
+<li><a href="#ternary-operator">Ternary Operator</a></li>
+<li><a href="#yoda-conditions">Yoda Conditions</a></li>
+<li><a href="#clever-code">Clever Code</a></li>
+<li><a href="#error-control-operator">Error Control Operator <code>@</code></a></li>
+<li><a href="#dont-extract">Don&#8217;t <code>extract()</code></a>
+</ul></li>
+<li><a href="#credits">Credits</a>
+<ul>
+<li><a href="#major-changes">Major Changes</a></ul>
+</div>
+<p>Some parts of the WordPress code structure for PHP markup are inconsistent in their style. WordPress is working to gradually improve this by helping users maintain a consistent style so the code can become clean and easy to read at a glance.</p>
+<p>Keep the following points in mind when writing PHP code for WordPress, whether for core programming code, plugins, or themes. The guidelines are similar to <a href="http://pear.php.net/manual/en/standards.php">Pear standards</a> in many ways, but differ in some key respects.</p>
+<p>See also: <a href="../../inline-documentation-standards/php/index.html">PHP Documentation Standards</a>.</p>
+<h2 class="toc-heading" id="php" tabindex="-1">PHP <a href="#php" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">PHP</span></a></h2>
+<h3 class="toc-heading" id="single-and-double-quotes" tabindex="-1">Single and Double Quotes <a href="#single-and-double-quotes" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Single and Double Quotes</span></a></h3>
+<p>Use single and double quotes when appropriate. If you&#8217;re not evaluating anything in the string, use single quotes. You should almost never have to escape quotes in a string, because you can just alternate your quoting style, like so:</p>
+<pre class="brush: php; title: ; notranslate" title="">
+echo &#039;&lt;a href=&quot;/static/link&quot; title=&quot;Yeah yeah!&quot;&gt;Link name&lt;/a&gt;&#039;;
+echo &quot;&lt;a href=&#039;$link&#039; title=&#039;$linktitle&#039;&gt;$linkname&lt;/a&gt;&quot;;
+</pre>
+<p>Text that goes into attributes should be run through <code>esc_attr()</code> so that single or double quotes do not end the attribute value and invalidate the HTML and cause a security issue. See <a href="../../../../codex.wordpress.org/Data_Validation.html">Data Validation</a> in the Codex for further details.</p>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="indentation" tabindex="-1">Indentation <a href="#indentation" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Indentation</span></a></h3>
+<p>Your indentation should always reflect logical structure. Use <strong>real tabs</strong> and <strong>not spaces</strong>, as this allows the most flexibility across clients.</p>
+<p>Exception: if you have a block of code that would be more readable if things are aligned, use spaces:</p>
+<pre class="brush: php; title: ; notranslate" title="">
+[tab]$foo   = &#039;somevalue&#039;;
+[tab]$foo2  = &#039;somevalue2&#039;;
+[tab]$foo34 = &#039;somevalue3&#039;;
+[tab]$foo5  = &#039;somevalue4&#039;;
+</pre>
+<p>For associative arrays, <em>each item</em> should start on a new line when the array contains more than one item:</p>
+<pre class="brush: php; title: ; notranslate" title="">
+$query = new WP_Query( array( &#039;ID&#039; =&gt; 123 ) );
+</pre>
+<pre class="brush: php; title: ; notranslate" title="">
+$args = array(
+[tab]&#039;post_type&#039;   =&gt; &#039;page&#039;,
+[tab]&#039;post_author&#039; =&gt; 123,
+[tab]&#039;post_status&#039; =&gt; &#039;publish&#039;,
+);
+
+$query = new WP_Query( $args );
+</pre>
+<p>Note the comma after the last array item: this is recommended because it makes it easier to change the order of the array, and makes for cleaner diffs when new items are added.</p>
+<pre class="brush: php; title: ; notranslate" title="">
+$my_array = array(
+[tab]&#039;foo&#039;   =&gt; &#039;somevalue&#039;,
+[tab]&#039;foo2&#039;  =&gt; &#039;somevalue2&#039;,
+[tab]&#039;foo3&#039;  =&gt; &#039;somevalue3&#039;,
+[tab]&#039;foo34&#039; =&gt; &#039;somevalue3&#039;,
+);
+</pre>
+<p>For <code>switch</code> structures <code>case</code> should indent one tab from the <code>switch</code> statement and <code>break</code> one tab from the <code>case</code> statement.</p>
+<pre class="brush: php; title: ; notranslate" title="">
+switch ( $type ) {
+[tab]case &#039;foo&#039;:
+[tab][tab]some_function();
+[tab][tab]break;
+[tab]case &#039;bar&#039;:
+[tab][tab]some_function();
+[tab][tab]break;
+}
+</pre>
+<p><strong>Rule of thumb:</strong> Tabs should be used at the beginning of the line for indentation, while spaces can be used mid-line for alignment.</p>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="brace-style" tabindex="-1">Brace Style <a href="#brace-style" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Brace Style</span></a></h3>
+<p>Braces shall be used for all blocks in the style shown here:</p>
+<pre class="brush: php; title: ; notranslate" title="">
+if ( condition ) {
+    action1();
+    action2();
+} elseif ( condition2 &amp;&amp; condition3 ) {
+    action3();
+    action4();
+} else {
+    defaultaction();
+}
+</pre>
+<p>If you have a really long block, consider whether it can be broken into two or more shorter blocks, functions, or methods, to reduce complexity, improve ease of testing, and increase readability.</p>
+<p>Braces should always be used, even when they are not required:</p>
+<section class="source-content">
+<div class="source-code-container">
+<pre class="brush: php; title: ; notranslate" title="">
+if ( condition ) {
+    action0();
+}
+
+if ( condition ) {
+    action1();
+} elseif ( condition2 ) {
+    action2a();
+    action2b();
+}
+
+foreach ( $items as $item ) {
+    process_item( $item );
+}
+</pre>
+</div>
+<p class="source-code-links"><span><a href="#" class="show-complete-source">Expand full source code</a><a href="#" class="less-complete-source">Collapse full source code</a></span></p>
+</section>
+<p>Note that requiring the use of braces just means that <em>single-statement inline control structures</em> are prohibited. You are free to use the <a href="http://php.net/manual/en/control-structures.alternative-syntax.php" rel="nofollow">alternative syntax for control structures</a> (e.g. <code>if</code>/<code>endif</code>, <code>while</code>/<code>endwhile</code>)—especially in your templates where PHP code is embedded within HTML, for instance:</p>
+<pre class="brush: php; title: ; notranslate" title="">
+&lt;?php if ( have_posts() ) : ?&gt;
+    &lt;div class=&quot;hfeed&quot;&gt;
+        &lt;?php while ( have_posts() ) : the_post(); ?&gt;
+            &lt;article id=&quot;post-&lt;?php the_ID() ?&gt;&quot; class=&quot;&lt;?php post_class() ?&gt;&quot;&gt;
+                &lt;!-- ... --&gt;
+            &lt;/article&gt;
+        &lt;?php endwhile; ?&gt;
+    &lt;/div&gt;
+&lt;?php endif; ?&gt;
+</pre>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="use-elseif-not-else-if" tabindex="-1">Use <code>elseif</code>, not <code>else if</code> <a href="#use-elseif-not-else-if" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Use <code>elseif</code>, not <code>else if</code></span></a></h3>
+<p><code>else if</code> is not compatible with the colon syntax for <code>if|elseif</code> blocks. For this reason, use <code>elseif</code> for conditionals.</p>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="declaring-arrays" tabindex="-1">Declaring Arrays <a href="#declaring-arrays" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Declaring Arrays</span></a></h3>
+<p>Using long array syntax ( <code>array( 1, 2, 3 )</code> ) for declaring arrays is generally more readable than short array syntax ( <code>[ 1, 2, 3 ]</code> ), particularly for those with vision difficulties. Additionally, it&#8217;s much more descriptive for beginners.</p>
+<p>Arrays must be declared using long array syntax.</p>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="closures-anonymous-functions" tabindex="-1">Closures (Anonymous Functions) <a href="#closures-anonymous-functions" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Closures (Anonymous Functions)</span></a></h3>
+<p>Where appropriate, closures may be used as an alternative to creating new functions to pass as callbacks. For example:</p>
+<pre class="brush: php; title: ; notranslate" title="">
+$caption = preg_replace_callback(
+    &#039;/&lt;[a-zA-Z0-9]+(?: [^&lt;&gt;]+&gt;)*/&#039;,
+    function ( $matches ) {
+        return preg_replace( &#039;/[\r\n\t]+/&#039;, &#039; &#039;, $matches[0] );
+    },
+    $caption
+);
+</pre>
+<p>Closures must not be passed as filter or action callbacks, as they cannot be removed by <code>remove_action()</code> / <code>remove_filter()</code> (see <a href="https://core.trac.wordpress.org/ticket/46635">#46635</a> for a proposal to address this).</p>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="multiline-function-calls" tabindex="-1">Multiline Function Calls <a href="#multiline-function-calls" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Multiline Function Calls</span></a></h3>
+<p>When splitting a function call over multiple lines, each parameter must be on a separate line. Single line inline comments can take up their own line.</p>
+<p>Each parameter must take up no more than a single line. Multi-line parameter values must be assigned to a variable and then that variable should be passed to the function call.</p>
+<section class="source-content">
+<div class="source-code-container">
+<pre class="brush: php; title: ; notranslate" title="">
+$bar = array(
+    &#039;use_this&#039; =&gt; true,
+    &#039;meta_key&#039; =&gt; &#039;field_name&#039;,
+);
+$baz = sprintf(
+    /* translators: %s: Friend&#039;s name */
+    esc_html__( &#039;Hello, %s!&#039;, &#039;yourtextdomain&#039; ),
+    $friend_name
+);
+
+$a = foo(
+    $bar,
+    $baz,
+    /* translators: %s: cat */
+    sprintf( __( &#039;The best pet is a %s.&#039; ), &#039;cat&#039; )
+);
+</pre>
+</div>
+<p class="source-code-links"><span><a href="#" class="show-complete-source">Expand full source code</a><a href="#" class="less-complete-source">Collapse full source code</a></span></p>
+</section>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="regular-expressions" tabindex="-1">Regular Expressions <a href="#regular-expressions" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Regular Expressions</span></a></h3>
+<p>Perl compatible regular expressions (<a href="http://php.net/pcre">PCRE</a>, <code>preg_</code> functions) should be used in preference to their POSIX counterparts. Never use the <code>/e</code> switch, use <code>preg_replace_callback</code> instead.</p>
+<p>It&#8217;s most convenient to use single-quoted strings for regular expressions since, contrary to double-quoted strings, they have only two metasequences: <code>\'</code> and <code>\\</code>.</p>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="opening-and-closing-php-tags" tabindex="-1">Opening and Closing PHP Tags <a href="#opening-and-closing-php-tags" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Opening and Closing PHP Tags</span></a></h3>
+<p>When embedding multi-line PHP snippets within an HTML block, the PHP open and close tags must be on a line by themselves.</p>
+<p>Correct (Multiline):</p>
+<pre class="brush: php; title: ; notranslate" title="">
+function foo() {
+    ?&gt;
+    &lt;div&gt;
+        &lt;?php
+        echo bar(
+            $baz,
+            $bat
+        );
+        ?&gt;
+    &lt;/div&gt;
+    &lt;?php
+}
+</pre>
+<p>Correct (Single Line):</p>
+<pre class="brush: php; title: ; notranslate" title="">
+&lt;input name=&quot;&lt;?php echo esc_attr( $name ); ?&gt;&quot; /&gt;
+</pre>
+<p>Incorrect:</p>
+<pre class="brush: php; title: ; notranslate" title="">
+if ( $a === $b ) { ?&gt;
+&lt;some html&gt;
+&lt;?php }
+</pre>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="no-shorthand-php-tags" tabindex="-1">No Shorthand PHP Tags <a href="#no-shorthand-php-tags" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">No Shorthand PHP Tags</span></a></h3>
+<p><strong>Important:</strong> Never use shorthand PHP start tags. Always use full PHP tags.</p>
+<p>Correct:</p>
+<pre class="brush: php; title: ; notranslate" title="">
+&lt;?php ... ?&gt;
+&lt;?php echo $var; ?&gt;
+</pre>
+<p>Incorrect:</p>
+<pre class="brush: php; title: ; notranslate" title="">
+&lt;? ... ?&gt;
+&lt;?= $var ?&gt;
+</pre>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="remove-trailing-spaces" tabindex="-1">Remove Trailing Spaces <a href="#remove-trailing-spaces" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Remove Trailing Spaces</span></a></h3>
+<p>Remove trailing whitespace at the end of each line of code. Omitting the closing PHP tag at the end of a file is preferred. If you use the tag, make sure you remove trailing whitespace.</p>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="space-usage" tabindex="-1">Space Usage <a href="#space-usage" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Space Usage</span></a></h3>
+<p>Always put spaces after commas, and on both sides of logical, comparison, string and assignment operators.</p>
+<pre class="brush: php; title: ; notranslate" title="">
+x === 23
+foo &amp;&amp; bar
+! foo
+array( 1, 2, 3 )
+$baz . &#039;-5&#039;
+$term .= &#039;X&#039;
+</pre>
+<p>Put spaces on both sides of the opening and closing parentheses of <code>if</code>, <code>elseif</code>, <code>foreach</code>, <code>for</code>, and <code>switch</code> blocks.</p>
+<pre class="brush: php; title: ; notranslate" title="">
+foreach ( $foo as $bar ) { ...
+</pre>
+<p>When defining a function, do it like so:</p>
+<pre class="brush: php; title: ; notranslate" title="">
+function my_function( $param1 = &#039;foo&#039;, $param2 = &#039;bar&#039; ) { ...
+
+function my_other_function() { ...
+</pre>
+<p>When calling a function, do it like so:</p>
+<pre class="brush: php; title: ; notranslate" title="">
+my_function( $param1, func_param( $param2 ) );
+my_other_function();
+</pre>
+<p>When performing logical comparisons, do it like so:</p>
+<pre class="brush: php; title: ; notranslate" title="">
+if ( ! $foo ) { ...
+</pre>
+<p><a title="type casting" href="http://www.php.net/manual/en/language.types.type-juggling.php#language.types.typecasting" target="_blank" rel="noopener">Type casts</a> must be lowercase. Always prefer the short form of type casts, <code>(int)</code> instead of <code>(integer)</code> and <code>(bool)</code> rather than <code>(boolean)</code>. For float casts use <code>(float)</code>.:</p>
+<pre class="brush: php; title: ; notranslate" title="">
+foreach ( (array) $foo as $bar ) { ...
+
+$foo = (bool) $bar;
+</pre>
+<p>When referring to array items, only include a space around the index if it is a variable, for example:</p>
+<pre class="brush: php; title: ; notranslate" title="">
+$x = $foo[&#039;bar&#039;]; // correct
+$x = $foo[ &#039;bar&#039; ]; // incorrect
+
+$x = $foo[0]; // correct
+$x = $foo[ 0 ]; // incorrect
+
+$x = $foo[ $bar ]; // correct
+$x = $foo[$bar]; // incorrect
+</pre>
+<p>In a <code>switch</code> block, there must be no space before the colon for a case statement.</p>
+<pre class="brush: php; title: ; notranslate" title="">
+switch ( $foo ) {
+    case &#039;bar&#039;: // correct
+    case &#039;ba&#039; : // incorrect
+}
+</pre>
+<p>Similarly, there should be no space before the colon on return type declarations.</p>
+<pre class="brush: php; title: ; notranslate" title="">
+function sum( $a, $b ): float {
+    return $a + $b;
+}
+</pre>
+<p>Unless otherwise specified, parentheses should have spaces inside of them.</p>
+<pre class="brush: php; title: ; notranslate" title="">
+if ( $foo &amp;&amp; ( $bar || $baz ) ) { ...
+
+my_function( ( $x - 1 ) * 5, $y );
+</pre>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="formatting-sql-statements" tabindex="-1">Formatting SQL statements <a href="#formatting-sql-statements" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Formatting SQL statements</span></a></h3>
+<p>When formatting SQL statements you may break it into several lines and indent if it is sufficiently complex to warrant it. Most statements work well as one line though. Always capitalize the SQL parts of the statement like <code>UPDATE</code> or <code>WHERE</code>.</p>
+<p>Functions that update the database should expect their parameters to lack SQL slash escaping when passed. Escaping should be done as close to the time of the query as possible, preferably by using <code>$wpdb-&gt;prepare()</code></p>
+<p><code>$wpdb-&gt;prepare()</code> is a method that handles escaping, quoting, and int-casting for SQL queries. It uses a subset of the <code>sprintf()</code> style of formatting. Example :</p>
+<pre class="brush: php; title: ; notranslate" title="">
+$var = &quot;dangerous&#039;&quot;; // raw data that may or may not need to be escaped
+$id = some_foo_number(); // data we expect to be an integer, but we&#039;re not certain
+
+$wpdb-&gt;query( $wpdb-&gt;prepare( &quot;UPDATE $wpdb-&gt;posts SET post_title = %s WHERE ID = %d&quot;, $var, $id ) );
+</pre>
+<p><code>%s</code> is used for string placeholders and <code>%d</code> is used for integer placeholders. Note that they are not &#8216;quoted&#8217;! <code>$wpdb-&gt;prepare()</code> will take care of escaping and quoting for us. The benefit of this is that we don&#8217;t have to remember to manually use <code><a href="../../../reference/functions/esc_sql/index.html">esc_sql</a>()</code>, and also that it is easy to see at a glance whether something has been escaped or not, because it happens right when the query happens.</p>
+<p>See <a title="Data Validation" href="../../../../codex.wordpress.org/Data_Validation.html" target="_blank" rel="noopener">Data Validation</a> in the Codex for more information.</p>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="database-queries" tabindex="-1">Database Queries <a href="#database-queries" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Database Queries</span></a></h3>
+<p>Avoid touching the database directly. If there is a defined function that can get the data you need, use it. Database abstraction (using functions instead of queries) helps keep your code forward-compatible and, in cases where results are cached in memory, it can be many times faster.</p>
+<p>If you must touch the database, get in touch with some developers by posting a message to the <a title="wp-hackers mailing list" href="../../../../codex.wordpress.org/Mailing_Lists.html#Hackers" target="_blank" rel="noopener">wp-hackers mailing list</a>. They may want to consider creating a function for the next WordPress version to cover the functionality you wanted.</p>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="naming-conventions" tabindex="-1">Naming Conventions <a href="#naming-conventions" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Naming Conventions</span></a></h3>
+<p>Use lowercase letters in variable, action/filter, and function names (never <code>camelCase</code>). Separate words via underscores. Don&#8217;t abbreviate variable names unnecessarily; let the code be unambiguous and self-documenting.</p>
+<pre class="brush: php; title: ; notranslate" title="">
+function some_name( $some_variable ) { [...] }
+</pre>
+<p>Class names should use capitalized words separated by underscores. Any acronyms should be all upper case.</p>
+<pre class="brush: php; title: ; notranslate" title="">
+class Walker_Category extends Walker { [...] }
+class WP_HTTP { [...] }
+</pre>
+<p>Constants should be in all upper-case with underscores separating words:</p>
+<pre class="brush: php; title: ; notranslate" title="">
+define( &#039;DOING_AJAX&#039;, true );
+</pre>
+<p>Files should be named descriptively using lowercase letters. Hyphens should separate words.</p>
+<pre class="brush: php; title: ; notranslate" title="">
+my-plugin-name.php
+</pre>
+<p>Class file names should be based on the class name with <code>class-</code> prepended and the underscores in the class name replaced with hyphens, for example <code>WP_Error</code> becomes:</p>
+<pre class="brush: php; title: ; notranslate" title="">
+class-wp-error.php
+</pre>
+<p>This file-naming standard is for all current and new files with classes. There is one exception for three files that contain code that got ported into BackPress: class.wp-dependencies.php, class.wp-scripts.php, class.wp-styles.php. Those files are prepended with <code>class.</code>, a dot after the word class instead of a hyphen.</p>
+<p>Files containing template tags in <code>wp-includes</code> should have <code>-template</code> appended to the end of the name so that they are obvious.</p>
+<pre class="brush: php; title: ; notranslate" title="">
+general-template.php
+</pre>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="only-one-object-structure-class-interface-trait-should-be-declared-per-file" tabindex="-1">Only one object structure (class/interface/trait) should be declared per file <a href="#only-one-object-structure-class-interface-trait-should-be-declared-per-file" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Only one object structure (class/interface/trait) should be declared per file</span></a></h3>
+<p>For instance, if we have a file called <code>class-example-class.php</code> it can only contain one class in that file.</p>
+<pre class="brush: php; title: ; notranslate" title="">
+// Incorrect: file class-example-class.php.
+class Example_Class { [...] }
+
+class Example_Class_Extended { [...] }
+</pre>
+<p>The second class should be in its own file called <code>class-example-class-extended.php</code>.</p>
+<pre class="brush: php; title: ; notranslate" title="">
+// Correct: file class-example-class.php.
+class Example_Class { [...] }
+</pre>
+<pre class="brush: php; title: ; notranslate" title="">
+// Correct: file class-example-class-extended.php.
+class Example_Class_Extended { [...] }
+</pre>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="self-explanatory-flag-values-for-function-arguments" tabindex="-1">Self-Explanatory Flag Values for Function Arguments <a href="#self-explanatory-flag-values-for-function-arguments" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Self-Explanatory Flag Values for Function Arguments</span></a></h3>
+<p>Prefer string values to just <code>true</code> and <code>false</code> when calling functions.</p>
+<pre class="brush: php; title: ; notranslate" title="">
+// Incorrect
+function eat( $what, $slowly = true ) {
+...
+}
+eat( &#039;mushrooms&#039; );
+eat( &#039;mushrooms&#039;, true ); // what does true mean?
+eat( &#039;dogfood&#039;, false ); // what does false mean? The opposite of true?
+</pre>
+<p>Since PHP doesn&#8217;t support named arguments, the values of the flags are meaningless, and each time we come across a function call like the examples above, we have to search for the function definition. The code can be made more readable by using descriptive string values, instead of booleans.</p>
+<pre class="brush: php; title: ; notranslate" title="">
+// Correct
+function eat( $what, $speed = &#039;slowly&#039; ) {
+...
+}
+eat( &#039;mushrooms&#039; );
+eat( &#039;mushrooms&#039;, &#039;slowly&#039; );
+eat( &#039;dogfood&#039;, &#039;quickly&#039; );
+</pre>
+<p>When more words are needed to describe the function parameters, an <code>$args</code> array may be a better pattern.</p>
+<pre class="brush: php; title: ; notranslate" title="">
+// Even Better
+function eat( $what, $args ) {
+...
+}
+eat ( &#039;noodles&#039;, array( &#039;speed&#039; =&gt; &#039;moderate&#039; ) );
+</pre>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="interpolation-for-naming-dynamic-hooks" tabindex="-1">Interpolation for Naming Dynamic Hooks <a href="#interpolation-for-naming-dynamic-hooks" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Interpolation for Naming Dynamic Hooks</span></a></h3>
+<p>Dynamic hooks should be named using interpolation rather than concatenation for readability and discoverability purposes.</p>
+<p>Dynamic hooks are hooks that include dynamic values in their tag name, e.g. <code>{$new_status}_{$post-&gt;post_type}</code> (publish_post).</p>
+<p>Variables used in hook tags should be wrapped in curly braces <code>{</code> and <code>}</code>, with the complete outer tag name wrapped in double quotes. This is to ensure PHP can correctly parse the given variables&#8217; types within the interpolated string.</p>
+<pre class="brush: php; title: ; notranslate" title="">
+do_action( &quot;{$new_status}_{$post-&gt;post_type}&quot;, $post-&gt;ID, $post );
+</pre>
+<p>Where possible, dynamic values in tag names should also be as succinct and to the point as possible. <code>$user_id</code> is much more self-documenting than, say, <code>$this-&gt;id</code>.</p>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="ternary-operator" tabindex="-1">Ternary Operator <a href="#ternary-operator" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Ternary Operator</span></a></h3>
+<p><a title="Ternary" href="http://en.wikipedia.org/wiki/Ternary_operation" target="_blank" rel="noopener">Ternary</a> operators are fine, but always have them test if the statement is true, not false. Otherwise, it just gets confusing. (An exception would be using <code>! empty()</code>, as testing for false here is generally more intuitive.)</p>
+<p>The short ternary operator must not be used.</p>
+<p>For example:</p>
+<pre class="brush: php; title: ; notranslate" title="">
+// (if statement is true) ? (do this) : (else, do this);
+$musictype = ( &#039;jazz&#039; === $music ) ? &#039;cool&#039; : &#039;blah&#039;;
+// (if field is not empty ) ? (do this) : (else, do this);
+</pre>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="yoda-conditions" tabindex="-1">Yoda Conditions <a href="#yoda-conditions" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Yoda Conditions</span></a></h3>
+<pre class="brush: php; title: ; notranslate" title="">
+if ( true === $the_force ) {
+    $victorious = you_will( $be );
+}
+</pre>
+<p>When doing logical comparisons involving variables, always put the variable on the right side and put constants, literals, or function calls on the left side. If neither side is a variable, the order is not important. (In <a href="https://en.wikipedia.org/wiki/Value_(computer_science)#Assignment:_l-values_and_r-values">computer science terms</a>, in comparisons always try to put l-values on the right and r-values on the left.)</p>
+<p>In the above example, if you omit an equals sign (admit it, it happens even to the most seasoned of us), you&#8217;ll get a parse error, because you can&#8217;t assign to a constant like <code>true</code>. If the statement were the other way around <code>( $the_force = true )</code>, the assignment would be perfectly valid, returning <code>1</code>, causing the if statement to evaluate to <code>true</code>, and you could be chasing that bug for a while.</p>
+<p>A little bizarre, it is, to read. Get used to it, you will.</p>
+<p>This applies to ==, !=, ===, and !==. Yoda conditions for &lt;, &gt;, &lt;= or &gt;= are significantly more difficult to read and are best avoided.</p>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="clever-code" tabindex="-1">Clever Code <a href="#clever-code" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Clever Code</span></a></h3>
+<p>In general, readability is more important than cleverness or brevity.</p>
+<pre class="brush: php; title: ; notranslate" title="">
+isset( $var ) || $var = some_function();
+</pre>
+<p>Although the above line is clever, it takes a while to grok if you&#8217;re not familiar with it. So, just write it like this:</p>
+<pre class="brush: php; title: ; notranslate" title="">
+if ( ! isset( $var ) ) {
+    $var = some_function();
+}
+</pre>
+<p>Unless absolutely necessary, loose comparisons should not be used, as their behaviour can be misleading.</p>
+<p>Correct:</p>
+<pre class="brush: php; title: ; notranslate" title="">
+if ( 0 === strpos( &#039;WordPress&#039;, &#039;foo&#039; ) ) {
+    echo __( &#039;Yay WordPress!&#039; );
+}
+</pre>
+<p>Incorrect:</p>
+<pre class="brush: php; title: ; notranslate" title="">
+if ( 0 == strpos( &#039;WordPress&#039;, &#039;foo&#039; ) ) {
+    echo __( &#039;Yay WordPress!&#039; );
+}
+</pre>
+<p>Assignments must not be placed in conditionals.</p>
+<p>Correct:</p>
+<pre class="brush: php; title: ; notranslate" title="">
+$data = $wpdb-&gt;get_var( &#039;...&#039; );
+if ( $data ) {
+    // Use $data
+}
+</pre>
+<p>Incorrect:</p>
+<pre class="brush: php; title: ; notranslate" title="">
+if ( $data = $wpdb-&gt;get_var( &#039;...&#039; ) ) {
+    // Use $data
+}
+</pre>
+<p>In a <code>switch</code> statement, it&#8217;s okay to have multiple empty cases fall through to a common block. If a case contains a block, then falls through to the next block, however, this must be explicitly commented.</p>
+<section class="source-content">
+<div class="source-code-container">
+<pre class="brush: php; title: ; notranslate" title="">
+switch ( $foo ) {
+    case &#039;bar&#039;:       // Correct, an empty case can fall through without comment.
+    case &#039;baz&#039;:
+        echo $foo;    // Incorrect, a case with a block must break, return, or have a comment.
+    case &#039;cat&#039;:
+        echo &#039;mouse&#039;;
+        break;        // Correct, a case with a break does not require a comment.
+    case &#039;dog&#039;:
+        echo &#039;horse&#039;;
+        // no break   // Correct, a case can have a comment to explicitly mention the fall through.
+    case &#039;fish&#039;:
+        echo &#039;bird&#039;;
+        break;
+}
+</pre>
+</div>
+<p class="source-code-links"><span><a href="#" class="show-complete-source">Expand full source code</a><a href="#" class="less-complete-source">Collapse full source code</a></span></p>
+</section>
+<p>The <code>goto</code> statement must never be used.</p>
+<p>The <code>eval()</code> construct is <em>very dangerous</em>, and is impossible to secure. Additionally, the <code>create_function()</code> function, which internally performs an <code>eval()</code>, is deprecated in PHP 7.2. Both of these must not be used.</p>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="error-control-operator" tabindex="-1">Error Control Operator <code>@</code> <a href="#error-control-operator" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Error Control Operator <code>@</code></span></a></h3>
+<p>As noted in the <a href="http://www.php.net//manual/en/language.operators.errorcontrol.php">PHP docs</a>:</p>
+<blockquote><p>PHP supports one error control operator: the at sign (@). When prepended to an expression in PHP, any error messages that might be generated by that expression will be ignored.</p></blockquote>
+<p>While this operator does exist in Core, it is often used lazily instead of doing proper error checking. Its use is highly discouraged, as even the PHP docs also state:</p>
+<blockquote><p>Warning: Currently the &#8220;@&#8221; error-control operator prefix will even disable error reporting for critical errors that will terminate script execution. Among other things, this means that if you use &#8220;@&#8221; to suppress errors from a certain function and either it isn&#8217;t available or has been mistyped, the script will die right there with no indication as to why.</p></blockquote>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="dont-extract" tabindex="-1">Don&#8217;t <code>extract()</code> <a href="#dont-extract" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Don&#8217;t <code>extract()</code></span></a></h3>
+<p>Per <a title="Remove all, or at least most, uses of extract() within WordPress" href="https://core.trac.wordpress.org/ticket/22400">#22400</a>:</p>
+<blockquote><p><code>extract()</code> is a terrible function that makes code harder to debug and harder to understand. We should discourage it&#8217;s [sic] use and remove all of our uses of it.</p>
+<p>Joseph Scott has <a class="ext-link" href="https://blog.josephscott.org/archives/2009/02/i-dont-like-phps-extract-function/">a good write-up of why it&#8217;s bad</a>.</p></blockquote>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="credits" tabindex="-1">Credits <a href="#credits" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Credits</span></a></h2>
+<ul>
+<li>PHP standards: <a href="http://pear.php.net/manual/en/standards.php" target="_blank" rel="noopener">Pear standards</a></li>
+</ul>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="major-changes" tabindex="-1">Major Changes <a href="#major-changes" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Major Changes</span></a></h3>
+<ul>
+<li>November 13, 2013: <a href="https://make.wordpress.org/core/2013/11/13/proposed-coding-standards-change-always-require-braces/">Braces should always be used, even when they are optional</a></li>
+<li>June 20, 2014: Add <a href="#error-control-operator">section</a> to discourage use of the <a href="http://www.php.net//manual/en/language.operators.errorcontrol.php">error control operator</a> (<code>@</code>). See <a href="https://irclogs.wordpress.org/chanlog.php?channel=wordpress-dev&amp;day=2014-06-20&amp;sort=asc#m873356">#wordpress-dev</a>.</li>
+<li>October 20, 2014: Update brace usage to indicate that the alternate syntax for control structures is allowed, even encouraged. It is single-line inline control structures that are forbidden.</li>
+<li>January 21, 2014: Add section to forbid extract().</li>
+</ul>
+
+
+<div class="bottom-of-entry">&nbsp;</div>
+
+			
+		<nav class="handbook-navigation" role="navigation">
+			<h1 class="screen-reader-text">Handbook navigation</h1>
+			<div class="nav-links">
+
+			<a href="../javascript/index.html" rel="previous"><span class="meta-nav">&larr;</span> JavaScript Coding Standards</a><a href="../../inline-documentation-standards/index.html" rel="next">Inline Documentation Standards <span class="meta-nav">&rarr;</span></a>
+			</div>
+			<!-- .nav-links -->
+		</nav><!-- .navigation -->
+	
+		
+		</main><!-- #main -->
+
+	</div><!-- #content -->
+
+</div><!-- #page -->
+
+
+<div id="wporg-footer">
+	<div class="wrapper">
+		<ul>
+			<li><a href="http://wordpress.org/about/" title="An introduction to the WordPress project">About</a></li>
+			<li><a href="http://wordpress.org/news/" title="News and Updates">Blog</a></li>
+			<li><a href="http://wordpress.org/hosting/" title="Recommended web hosting providers">Hosting</a></li>
+			<li><a href="https://wordpressfoundation.org/donate/" title="Donate to the WordPress Foundation">Donate</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://wordpress.org/support/" title="Forums, documentation, and other resources">Support</a></li>
+			<li><a href="../../../index.html" title="Resources for WordPress developers">Developers</a></li>
+			<li><a href="http://make.wordpress.org/" title="Give back to WordPress through code, support, translation and more">Get Involved</a></li>
+			<li><a href="http://learn.wordpress.org/" title="Workshops and training materials">Learn</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://wordpress.org/showcase/" title="Some of the best WordPress sites on the Web">Showcase</a></li>
+			<li><a href="http://wordpress.org/plugins/" title="Add extra functionality to WordPress">Plugins</a></li>
+			<li><a href="http://wordpress.org/themes/" title="Make your WordPress pretty">Themes</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://central.wordcamp.org/" title="Find a WordPress event near you">WordCamp</a></li>
+			<li><a href="http://wordpress.tv/" title="Videos, tutorials, and WordCamp sessions">WordPress.TV</a></li>
+			<li><a href="http://buddypress.org/" title="A set of plugins to transform your WordPress into a social network">BuddyPress</a></li>
+			<li><a href="http://bbpress.org/" title="Fast, slick forums built on WordPress">bbPress</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://wordpress.com/?ref=wporg-footer" title="Hassle-free WordPress hosting">WordPress.com</a></li>
+			<li><a href="http://ma.tt/" title="Co-founder of WordPress, an example of what WordPress can do">Matt</a></li>
+			<li><a href="http://wordpress.org/about/privacy/" title="WordPress.org Privacy Policy">Privacy</a></li>
+			<li><a href="https://publiccode.eu/" target="_blank">Public Code</a></li>
+		</ul>
+
+		<ul class="social-media-links">
+			<li><span class="dashicons dashicons-twitter"></span><a href="https://twitter.com/WordPress" title="Follow @WordPress on Twitter">@WordPress</a></li>
+			<li><span class="dashicons dashicons-facebook"></span><a href="https://www.facebook.com/WordPress/" title="Like WordPress on Facebook">WordPress</a></li>
+		</ul>
+	</div>
+
+		<p class="cip cip-image">Code is Poetry.</p>
+</div>
+
+<script src="../../../../s.w.org/style/js/navigation.min.js?20190128"></script>
+
+<script type='text/javascript'>
+	(function(){
+		var corecss = document.createElement('link');
+		var themecss = document.createElement('link');
+		var corecssurl = "../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shCore.css?ver=3.0.9b";
+		if ( corecss.setAttribute ) {
+				corecss.setAttribute( "rel", "stylesheet" );
+				corecss.setAttribute( "type", "text/css" );
+				corecss.setAttribute( "href", corecssurl );
+		} else {
+				corecss.rel = "stylesheet";
+				corecss.href = corecssurl;
+		}
+		document.head.appendChild( corecss );
+		var themecssurl = "../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shThemeDefault.css?ver=3.0.9b";
+		if ( themecss.setAttribute ) {
+				themecss.setAttribute( "rel", "stylesheet" );
+				themecss.setAttribute( "type", "text/css" );
+				themecss.setAttribute( "href", themecssurl );
+		} else {
+				themecss.rel = "stylesheet";
+				themecss.href = themecssurl;
+		}
+		document.head.appendChild( themecss );
+	})();
+	SyntaxHighlighter.config.strings.expandSource = '+ expand source';
+	SyntaxHighlighter.config.strings.help = '?';
+	SyntaxHighlighter.config.strings.alert = 'SyntaxHighlighter\n\n';
+	SyntaxHighlighter.config.strings.noBrush = 'Can\'t find brush for: ';
+	SyntaxHighlighter.config.strings.brushNotHtmlScript = 'Brush wasn\'t configured for html-script option: ';
+	SyntaxHighlighter.defaults['pad-line-numbers'] = false;
+	SyntaxHighlighter.defaults['toolbar'] = false;
+	SyntaxHighlighter.all();
+
+	// Infinite scroll support
+	if ( typeof( jQuery ) !== 'undefined' ) {
+		jQuery( function( $ ) {
+			$( document.body ).on( 'post-load', function() {
+				SyntaxHighlighter.highlight();
+			} );
+		} );
+	}
+</script>
+<script type='text/javascript' src='../../../wp-includes/js/hoverintent-js.min.js?ver=2.2.1' id='hoverintent-js-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/admin-bar.min.js?ver=5.9-alpha-51701' id='admin-bar-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/navigation.js?ver=20181209' id='wporg-developer-navigation-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/skip-link-focus-fix.js?ver=20130115' id='wporg-developer-skip-link-focus-fix-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/search.js?ver=20150430' id='wporg-developer-search-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/menu.js?ver=20180201' id='wporg-developer-menu-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/awesomplete.min.js?ver=20160322' id='awesomplete-js'></script>
+<script type='text/javascript' id='autocomplete-js-extra'>
+/* <![CDATA[ */
+var autocomplete = {"ajaxurl":"https:\/\/developer.wordpress.org\/wp-admin\/admin-ajax.php","nonce":"8a60f70c4b"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/autocomplete.js?ver=20160524' id='autocomplete-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/function-reference.js?ver=20180724' id='wporg-developer-function-reference-js'></script>
+<script type='text/javascript' id='quicktags-js-extra'>
+/* <![CDATA[ */
+var quicktagsL10n = {"closeAllOpenTags":"Close all open tags","closeTags":"close tags","enterURL":"Enter the URL","enterImageURL":"Enter the URL of the image","enterImageDescription":"Enter a description of the image","textdirection":"text direction","toggleTextdirection":"Toggle Editor Text Direction","dfw":"Distraction-free writing mode","strong":"Bold","strongClose":"Close bold tag","em":"Italic","emClose":"Close italic tag","link":"Insert link","blockquote":"Blockquote","blockquoteClose":"Close blockquote tag","del":"Deleted text (strikethrough)","delClose":"Close deleted text tag","ins":"Inserted text","insClose":"Close inserted text tag","image":"Insert image","ul":"Bulleted list","ulClose":"Close bulleted list tag","ol":"Numbered list","olClose":"Close numbered list tag","li":"List item","liClose":"Close list item tag","code":"Code","codeClose":"Close code tag","more":"Insert Read More tag"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-includes/js/quicktags.min.js?ver=5.9-alpha-51701' id='quicktags-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/user-notes.js?ver=20200110' id='wporg-developer-user-notes-js'></script>
+<script type='text/javascript' id='wporg-developer-user-notes-feedback-js-extra'>
+/* <![CDATA[ */
+var wporg_note_feedback = {"show":"Show Feedback","hide":"Hide Feedback"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/user-notes-feedback.js?ver=20181023' id='wporg-developer-user-notes-feedback-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/tabs.js?ver=20160824' id='wporg-developer-tabs-js'></script>
+<script type='text/javascript' id='wporg-developer-preview-js-extra'>
+/* <![CDATA[ */
+var wporg_note_preview = {"ajaxurl":"https:\/\/developer.wordpress.org\/wp-admin\/admin-ajax.php","nonce":"504933b60e","preview":"preview note","preview_empty":"Nothing to preview","is_admin":""};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/user-notes-preview.js?ver=20200111' id='wporg-developer-preview-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/wp-embed.min.js?ver=5.9-alpha-51701' id='wp-embed-js'></script>
+</body>
+
+<!-- Mirrored from developer.wordpress.org/coding-standards/wordpress-coding-standards/php/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 31 Aug 2021 17:07:54 GMT -->
+</html>

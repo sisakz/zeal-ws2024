@@ -1,0 +1,2686 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+
+<!-- Mirrored from developer.wordpress.org/reference/functions/register_post_type/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 31 Aug 2021 16:49:36 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<!--
+<meta property="fb:page_id" content="6427302910" />
+-->
+<meta name="google-site-verification" content="7VWES_-rcHBcmaQis9mSYamPfNwE03f4vyTj4pfuAw0" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>register_post_type()</title>
+<meta name="referrer" content="always">
+
+		<link href='../../../../fonts.googleapis.com/css.css?family=Open+Sans:300italic,400italic,600italic,400,300,600&amp;subset=latin,cyrillic-ext,greek-ext,greek,vietnamese,latin-ext,cyrillic' rel='stylesheet' type='text/css'>
+
+		<link rel="stylesheet" href="../../../../s.w.org/style/wp4.css?95" />
+
+<link rel="shortcut icon" href="../../../../s.w.org/favicon.ico?2" type="image/x-icon" />
+<link rel="pingback" href="../../../xmlrpc.php" /><meta name='robots' content='max-image-preview:large' />
+<link rel='dns-prefetch' href='../../../../fonts.googleapis.com/index.html' />
+<link rel='dns-prefetch' href='http://s.w.org/' />
+<link rel='dns-prefetch' href='http://www.googletagmanager.com/' />
+<link rel='dns-prefetch' href='http://fonts.gstatic.com/' />
+<link rel="alternate" type="application/rss+xml" title="WordPress Developer Resources &raquo; Feed" href="../../../feed/index.html" />
+<link rel="alternate" type="application/rss+xml" title="WordPress Developer Resources &raquo; Comments Feed" href="../../../comments/feed/index.html" />
+<meta property="og:title" content="register_post_type() | Function | WordPress Developer Resources" />
+<meta property="og:site_name" content="WordPress Developer Resources" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="../../../index.html" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@WordPress" />
+<meta name="description" content="Registers a post type." />
+<meta property="og:description" content="Registers a post type." />
+<link rel="alternate" type="application/rss+xml" title="WordPress Developer Resources &raquo; register_post_type Comments Feed" href="https://developer.wordpress.org/reference/functions/register_post_type/feed/" />
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'../../../../www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P24PF4B');</script>
+			<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/developer.wordpress.org\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.9-alpha-51701"}};
+			!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([10084,65039,8205,55357,56613],[10084,65039,8203,55357,56613])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel='stylesheet' id='dashicons-css'  href='../../../wp-includes/css/dashicons.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='admin-bar-css'  href='../../../wp-includes/css/admin-bar.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-block-library-css'  href='../../../wp-includes/css/dist/block-library/style.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='wporg-handbook-css-css'  href='../../../wp-content/plugins/handbook/stylesheets/callout-boxes.css?ver=20200121' type='text/css' media='all' />
+<link rel='stylesheet' id='open-sans-css'  href='../../../../fonts.googleapis.com/css-2.css?family=Open+Sans%3A300italic%2C400italic%2C600italic%2C300%2C400%2C600&amp;subset=latin%2Clatin-ext&amp;display=fallback&amp;ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='wporg-developer-style-css'  href='../../../wp-content/themes/pub/wporg-developer/style.css?ver=3' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-dev-sass-compiled-css'  href='../../../wp-content/themes/pub/wporg-developer/stylesheets/main.css?ver=20200713' type='text/css' media='all' />
+<link rel='stylesheet' id='awesomplete-css-css'  href='../../../wp-content/themes/pub/wporg-developer/stylesheets/awesomplete.css?ver=20160114' type='text/css' media='all' />
+<link rel='stylesheet' id='autocomplete-css-css'  href='../../../wp-content/themes/pub/wporg-developer/stylesheets/autocomplete.css?ver=20171220' type='text/css' media='all' />
+<link rel='stylesheet' id='syntaxhighlighter-core-css'  href='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shCore.css?ver=3.0.9b' type='text/css' media='all' />
+<link rel='stylesheet' id='syntaxhighlighter-theme-default-css'  href='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shThemeDefault.css?ver=3.0.9b' type='text/css' media='all' />
+<script type='text/javascript' src='../../../wp-includes/js/jquery/jquery.min.js?ver=3.6.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='../../../wp-content/plugins/handbook/scripts/handbook.js?ver=20150930' id='wporg-handbook-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/chapters.js?ver=20190603' id='wporg-developer-chapters-js'></script>
+<script type='text/javascript' src='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shCore.js?ver=3.0.9b' id='syntaxhighlighter-core-js'></script>
+<script type='text/javascript' src='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushPhp.js?ver=3.0.9b' id='syntaxhighlighter-brush-php-js'></script>
+<link rel="https://api.w.org/" href="https://developer.wordpress.org/wp-json/" /><link rel="alternate" type="application/json" href="https://developer.wordpress.org/wp-json/wp/v2/wp-parser-function/1107" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="../../../xmlrpc-2.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="../../../wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 5.9-alpha-51701" />
+<link rel='shortlink' href='https://developer.wordpress.org/?p=1107' />
+<link rel="alternate" type="application/json+oembed" href="https://developer.wordpress.org/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fregister_post_type%2F" />
+<link rel="alternate" type="text/xml+oembed" href="https://developer.wordpress.org/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fregister_post_type%2F&amp;format=xml" />
+<link rel="canonical" href="index.html">
+<!-- Stream WordPress user activity plugin v3.6.2 -->
+	<style>
+		@media screen and (max-width: 782px) {
+			#wpadminbar li#wp-admin-bar-log-in,
+			#wpadminbar li#wp-admin-bar-register {
+				display: block;
+			}
+
+			#wpadminbar li#wp-admin-bar-log-in a,
+			#wpadminbar li#wp-admin-bar-register a {
+				padding: 0 8px;
+			}
+		}
+	</style>
+		<style>
+			a.github-edit {
+				margin-left: .5em;
+				font-size: .5em;
+				vertical-align: top;
+				display: inline-block;
+				border: 1px solid #eeeeee;
+				border-radius: 2px;
+				background: #eeeeee;
+				padding: .5em .6em .4em;
+				color: black;
+				margin-top: 0.1em;
+			}
+			a.github-edit > * {
+				opacity: 0.6;
+			}
+			a.github-edit:hover > * {
+				opacity: 1;
+				color: black;
+			}
+			a.github-edit img {
+				height: .8em;
+			}
+		</style>
+		
+	<script type="text/javascript">
+		jQuery( '<style>.hide-if-js { display: none; }</style>' ).appendTo( 'head' );
+		jQuery( function($) {
+			$( 'body' ).addClass('js');
+		} );
+	</script>
+<style type="text/css" media="print">#wpadminbar { display:none; }</style>
+	<style type="text/css" media="screen">
+	</style>
+	<script>document.cookie='devicePixelRatio='+((window.devicePixelRatio === undefined) ? 1 : window.devicePixelRatio)+'; path=/';</script>
+
+</head>
+
+
+<body id="wordpress-org" class="wp-parser-function-template-default single single-wp-parser-function postid-1107 admin-bar no-customize-support">
+		<div id="wpadminbar" class="nojq nojs">
+						<div class="quicklinks" id="wp-toolbar" role="navigation" aria-label="Toolbar">
+				<ul id='wp-admin-bar-root-default' class="ab-top-menu"><li id='wp-admin-bar-wp-logo' class="menupop"><a class='ab-item' aria-haspopup="true" href='https://wordpress.org/about/'><span class="ab-icon" aria-hidden="true"></span><span class="screen-reader-text">About WordPress</span></a><div class="ab-sub-wrapper"><ul id='wp-admin-bar-wp-logo-default' class="ab-submenu"><li id='wp-admin-bar-about'><a class='ab-item' href='https://wordpress.org/about/'>About WordPress</a></li></ul><ul id='wp-admin-bar-wp-logo-external' class="ab-sub-secondary ab-submenu"><li id='wp-admin-bar-wporg'><a class='ab-item' href='https://wordpress.org/'>WordPress.org</a></li><li id='wp-admin-bar-documentation'><a class='ab-item' href='https://wordpress.org/support/'>Documentation</a></li><li id='wp-admin-bar-support-forums'><a class='ab-item' href='https://wordpress.org/support/forums/'>Support</a></li><li id='wp-admin-bar-feedback'><a class='ab-item' href='https://wordpress.org/support/forum/requests-and-feedback'>Feedback</a></li></ul></div></li></ul><ul id='wp-admin-bar-top-secondary' class="ab-top-secondary ab-top-menu"><li id='wp-admin-bar-search' class="admin-bar-search"><div class="ab-item ab-empty-item" tabindex="-1"><form action="https://developer.wordpress.org/" method="get" id="adminbarsearch"><input class="adminbar-input" name="s" id="adminbar-search" type="text" value="" maxlength="150" /><label for="adminbar-search" class="screen-reader-text">Search</label><input type="submit" class="adminbar-button" value="Search" /></form></div></li><li id='wp-admin-bar-log-in'><a class='ab-item' href='https://login.wordpress.org/?locale=en_US'>Log In</a></li><li id='wp-admin-bar-register'><a class='ab-item' href='https://login.wordpress.org/register?locale=en_US'>Register</a></li></ul>			</div>
+					</div>
+
+		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P24PF4B" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<div id="wporg-header">
+	<div class="wrapper">
+	<h1><a href="http://wordpress.org/">WordPress.org</a></h1>				<div id="head-search">
+		<form action="http://wordpress.org/search/do-search.php" method="get">
+			<label for="global-search" class="screen-reader-text">Search WordPress.org for:</label>
+			<input id="global-search" class="text" name="search" type="text" value="" maxlength="150" placeholder="Search WordPress.org" />
+			<button type="submit" class="button"><span class="screen-reader-text">Submit</span></button>
+		</form>
+		</div>
+				<div style="clear:both"></div>
+		<button id="mobile-menu-button" aria-expanded="false"><span class="screen-reader-text">Toggle Menu</span></button>
+		
+<nav aria-label="Main Menu">
+<ul id="wporg-header-menu">
+<li class="menu-item"><a href='http://wordpress.org/showcase/' data-title='See some of the sites built on WordPress.'>Showcase</a></li>
+<li class="menu-item"><a href='http://learn.wordpress.org/' data-title='Resources to help you learn more about WordPress and teach it to others.'>Learn</a></li>
+<li class="menu-item"><a href='http://wordpress.org/themes/' data-title='Find just the right look for your website.'>Themes</a></li>
+<li class="menu-item"><a href='http://wordpress.org/plugins/' data-title='Plugins can extend WordPress to do almost anything you can imagine.'>Plugins</a></li>
+<li class="menu-item"><a href='http://wordpress.org/mobile/' data-title='Take your website on the go!'>Mobile</a></li>
+<li class="menu-item"><a href='http://wordpress.org/support/' data-title='Forums, documentation, help.'>Support</a><ul class="nav-submenu"><li><a href='http://wordpress.org/support/' title='Documentation, tutorials, best practices.'>Documentation</a></li><li><a href='http://wordpress.org/support/forums/' title='Support and discussion forums.'>Forums</a></li></ul><div class="uparrow"></div></li>
+<li class="menu-item"><a href='http://make.wordpress.org/' data-title='Contribute your knowledge.'>Get Involved</a><ul class="nav-submenu"><li><a href='http://wordpress.org/five-for-the-future/' title='How five percent is powering the next generation of the web'>Five for the Future</a></li></ul><div class="uparrow"></div></li>
+<li class="menu-item"><a href='http://wordpress.org/about/' data-title='About the WordPress Organization, and where we&#039;re going.'>About</a></li>
+<li class="menu-item"><a href='http://wordpress.org/news/' data-title='Come here for the latest scoop.'>Blog</a></li>
+<li class="menu-item"><a href='http://wordpress.org/hosting/' data-title='Find a home for your blog.'>Hosting</a></li>
+<li id="download" class="button download-button menu-item"><a href='http://wordpress.org/download/' data-title='Get it. Got it? Good.'>Get WordPress</a></li>
+</ul>
+</nav>
+		<div style="clear:both"></div>
+	</div>
+</div>
+
+
+
+<header id="masthead" class="site-header" role="banner">
+		<div class="site-branding">
+		<h1 class="site-title">
+			<a href="../../index.html" rel="home">Code Reference</a>
+		</h1>
+
+		
+		<nav id="site-navigation" class="main-navigation" role="navigation">
+			<button class="menu-toggle dashicons dashicons-arrow-down-alt2" aria-controls="primary-menu" aria-expanded="false" aria-label="Primary Menu"></button>
+					</nav>
+	</div>
+</header><!-- #masthead -->
+
+<div id="page" class="hfeed site devhub-wrap">
+	<a href="#main" class="screen-reader-text">Skip to content</a>
+
+				<div id="inner-search">
+			<div class="search-section section clear hide-if-js">
+
+
+	
+	<form role="search" method="get" class="searchform searchform-filtered" action="https://developer.wordpress.org/">
+		<label for="search-field" class="screen-reader-text">Search for:</label>
+		<input type="text" id="search-field" class="search-field" placeholder="Search &hellip;" value="" name="s">
+		<button class="button button-primary button-search"><i class="dashicons dashicons-search"></i><span class="screen-reader-text">Search plugins</span></button>
+	
+		<div class="search-post-type">
+			<span>Filter by type:</span>
+									<label><input type="checkbox" name="post_type[]" value="wp-parser-function"
+						 /> Functions</label>
+									<label><input type="checkbox" name="post_type[]" value="wp-parser-hook"
+						 /> Hooks</label>
+									<label><input type="checkbox" name="post_type[]" value="wp-parser-class"
+						 /> Classes</label>
+									<label><input type="checkbox" name="post_type[]" value="wp-parser-method"
+						 /> Methods</label>
+					</div>
+
+	
+	</form>
+
+</div><!-- /search-guide -->
+			<div id="inner-search-icon-container">
+				<div id="inner-search-icon">
+					<div class="dashicons dashicons-search"><span class="screen-reader-text">Search</span></div>
+				</div>
+			</div>
+		</div>
+
+		<div id="content" class="site-content">
+
+	<div id="content-area" class="wp-parser-function-template-default single single-wp-parser-function postid-1107 admin-bar no-customize-support code-reference">
+
+		
+		<div class="breadcrumb-trail breadcrumbs" itemprop="breadcrumb">
+			<span class="trail-browse">Browse:</span> 
+			<span class="trail-begin"><a href="../../../index.html" title="WordPress Developer Resources" rel="home">Home</a></span> <span class="sep">&#47;</span> 
+			<span class="trail-inner"><a href="../../index.html" title="Reference">Reference</a></span> <span class="sep">&#47;</span> 
+			<span class="trail-inner"><a href="../index.html">Functions</a></span> <span class="sep">&#47;</span> <span class="trail-end">register_post_type()</span>
+		</div>
+		<main id="main" class="site-main" role="main">
+
+		
+			
+<article id="post-1107" class="post-1107 wp-parser-function type-wp-parser-function status-publish hentry wp-parser-source-file-wp-includes_post-php wp-parser-package-post wp-parser-package-wordpress wp-parser-since-2-9-0 wp-parser-since-3-0-0 wp-parser-since-4-4-0 wp-parser-since-4-6-0 wp-parser-since-4-7-0 wp-parser-since-5-0-0 wp-parser-since-5-3-0">
+
+	
+	
+	<h1>register_post_type( <span class="arg-type">string</span>&nbsp;<span class="arg-name">$post_type</span>,  <span class="arg-type">array|string</span>&nbsp;<span class="arg-name">$args</span>&nbsp;=&nbsp;<span class="arg-default">array()</span>&nbsp;)</h1>
+
+	<section class="summary">
+		<p>Registers a post type.</p>
+	</section>
+
+
+	
+	<div class="content-toc"><style> .toc-jump { text-align: right; font-size: 12px; } .page .toc-heading { margin-top: -50px; padding-top: 50px !important; }</style><div class="table-of-contents"><h2>Contents</h2><ul class="items"><li><a href="#description">Description</a></li>
+<li><a href="#parameters">Parameters</a></li>
+<li><a href="#return">Return</a></li>
+<li><a href="#more-information">More Information</a>
+<ul>
+<li><a href="#taxonomies">Taxonomies</a>
+<ul>
+<li><a href="#reserved-post-types">Reserved Post Types</a>
+</ul></li>
+<li><a href="#parameter-detail-information">Parameter detail information</a>
+<ul>
+<li><a href="#description-2"><tt>description</tt></a></li>
+<li><a href="#public"><tt>public</tt></a></li>
+<li><a href="#exclude_from_search"><tt>exclude_from_search</tt></a></li>
+<li><a href="#publicly_queryable"><tt>publicly_queryable</tt></a></li>
+<li><a href="#show_ui"><tt>show_ui</tt></a></li>
+<li><a href="#show_in_nav_menus"><tt>show_in_nav_menus</tt></a></li>
+<li><a href="#show_in_menu"><tt>show_in_menu</tt></a></li>
+<li><a href="#show_in_admin_bar"><tt>show_in_admin_bar</tt></a></li>
+<li><a href="#menu_position"><tt>menu_position</tt></a></li>
+<li><a href="#menu_icon"><tt>menu_icon</tt></a></li>
+<li><a href="#capability_type"><tt>capability_type</tt></a></li>
+<li><a href="#capabilities"><tt>capabilities</tt></a></li>
+<li><a href="#map_meta_cap"><tt>map_meta_cap</tt></a></li>
+<li><a href="#hierarchical"><tt>hierarchical</tt></a></li>
+<li><a href="#supports"><tt>supports</tt></a></li>
+<li><a href="#register_meta_box_cb"><tt>register_meta_box_cb</tt></a></li>
+<li><a href="#taxonomies-2"><tt>taxonomies</tt></a></li>
+<li><a href="#has_archive"><tt>has_archive</tt></a></li>
+<li><a href="#rewrite"><tt>rewrite</tt></a></li>
+<li><a href="#permalink_epmask"><tt>permalink_epmask</tt></a></li>
+<li><a href="#query_var"><tt>query_var</tt></a></li>
+<li><a href="#can_export"><tt>can_export</tt></a></li>
+<li><a href="#delete_with_user"><tt>delete_with_user</tt></a></li>
+<li><a href="#show_in_rest"><tt>show_in_rest</tt></a></li>
+<li><a href="#rest_base"><tt>rest_base</tt></a></li>
+<li><a href="#rest_controller_class"><tt>rest_controller_class</tt></a></li>
+<li><a href="#_builtin"><tt>_builtin</tt></a></li>
+<li><a href="#_edit_link"><tt>_edit_link</tt></a>
+</ul></li>
+<li><a href="#flushing-rewrite-on-activation">Flushing Rewrite on Activation</a>
+</ul></li>
+<li><a href="#source">Source</a></li>
+<li><a href="#related">Related</a>
+<ul>
+<li><a href="#uses">Uses</a></li>
+<li><a href="#used-by">Used By</a>
+</ul></li>
+<li><a href="#changelog">Changelog</a></li>
+<li><a href="#user-contributed-notes">User Contributed Notes</a></ul>
+</div>
+
+<hr />
+<section class="description">
+	<h2 class="toc-heading" id="description" tabindex="-1">Description <a href="#description" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Description</span></a></h2>
+	<p>Note: Post type registrations should not be hooked before the <a href="../../hooks/init/index.html">&#8216;init&#8217;</a> action. Also, any taxonomy connections should be registered via the <code>$taxonomies</code> argument to ensure consistency when hooks such as <a href="../../hooks/parse_query/index.html">&#8216;parse_query&#8217;</a> or <a href="../../hooks/pre_get_posts/index.html">&#8216;pre_get_posts&#8217;</a> are used.</p>
+<p>Post types can support any number of built-in core features such as meta boxes, custom fields, post thumbnails, post statuses, comments, and more. See the <code>$supports</code> argument for a complete list of supported features.</p>
+
+	</section>
+
+	<hr />
+	<section class="parameters">
+		<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="parameters" tabindex="-1">Parameters <a href="#parameters" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Parameters</span></a></h2>
+		<dl>
+												<dt>$post_type</dt>
+								<dd>
+					<p class="desc">
+													<span class="type">(<span class="string">string</span>)</span>
+																			<span class="required">(Required)</span>
+																			<span class="description">Post type key. Must not exceed 20 characters and may                                only contain lowercase alphanumeric characters, dashes,                                and underscores. See <a href="../sanitize_key/index.html">sanitize_key()</a>.</span>
+											</p>
+									</dd>
+												<dt>$args</dt>
+								<dd>
+					<p class="desc">
+													<span class="type">(<span class="array">array</span>|<span class="string">string</span>)</span>
+																			<span class="required">(Optional)</span>
+																			<span class="description">Array or string of arguments for registering a post type. <ul class="param-hash"><li><b>'label'</b><br /><i><span class='type'>(string)</span></i> Name of the post type shown in the menu. Usually plural. Default is value of $labels['name'].</li>
+<li><b>'labels'</b><br /><i><span class='type'>(string[])</span></i> An array of labels for this post type. If not set, post labels are inherited for non-hierarchical types and page labels for hierarchical ones. See <a href="../get_post_type_labels/index.html">get_post_type_labels()</a> for a full list of supported labels.</li>
+<li><b>'description'</b><br /><i><span class='type'>(string)</span></i> A short descriptive summary of what the post type is. </li>
+<li><b>'public'</b><br /><i><span class='type'>(bool)</span></i> Whether a post type is intended for use publicly either via the admin interface or by front-end users. While the default settings of $exclude_from_search, $publicly_queryable, $show_ui, and $show_in_nav_menus are inherited from public, each does not rely on this relationship and controls a very specific intention. Default false.</li>
+<li><b>'hierarchical'</b><br /><i><span class='type'>(bool)</span></i> Whether the post type is hierarchical (e.g. page). Default false.</li>
+<li><b>'exclude_from_search'</b><br /><i><span class='type'>(bool)</span></i> Whether to exclude posts with this post type from front end search results. Default is the opposite value of $public.</li>
+<li><b>'publicly_queryable'</b><br /><i><span class='type'>(bool)</span></i> Whether queries can be performed on the front end for the post type as part of parse_request(). Endpoints would include:
+<ul><li>?post_type={post_type_key}</li>
+
+<li>?{post_type_key}={single_post_slug}</li>
+
+<li>?{post_type_query_var}={single_post_slug} If not set, the default is inherited from $public.</li></ul></li>
+
+<li><b>'show_ui'</b><br /><i><span class='type'>(bool)</span></i> Whether to generate and allow a UI for managing this post type in the admin. Default is value of $public.</li>
+<li><b>'show_in_menu'</b><br /><i><span class='type'>(bool|string)</span></i> Where to show the post type in the admin menu. To work, $show_ui must be true. If true, the post type is shown in its own top level menu. If false, no menu is shown. If a string of an existing top level menu (eg. 'tools.php' or 'edit.php?post_type=page'), the post type will be placed as a sub-menu of that. Default is value of $show_ui.</li>
+<li><b>'show_in_nav_menus'</b><br /><i><span class='type'>(bool)</span></i> Makes this post type available for selection in navigation menus. Default is value of $public.</li>
+<li><b>'show_in_admin_bar'</b><br /><i><span class='type'>(bool)</span></i> Makes this post type available via the admin bar. Default is value of $show_in_menu.</li>
+<li><b>'show_in_rest'</b><br /><i><span class='type'>(bool)</span></i> Whether to include the post type in the REST API. Set this to true for the post type to be available in the block editor.</li>
+<li><b>'rest_base'</b><br /><i><span class='type'>(string)</span></i> To change the base url of REST API route. Default is $post_type.</li>
+<li><b>'rest_controller_class'</b><br /><i><span class='type'>(string)</span></i> REST API Controller class name. Default is '<a href="../../classes/wp_rest_posts_controller/index.html">WP_REST_Posts_Controller</a>'.</li>
+<li><b>'menu_position'</b><br /><i><span class='type'>(int)</span></i> The position in the menu order the post type should appear. To work, $show_in_menu must be true. Default null (at the bottom).</li>
+<li><b>'menu_icon'</b><br /><i><span class='type'>(string)</span></i> The url to the icon to be used for this menu. Pass a base64-encoded SVG using a data URI, which will be colored to match the color scheme -- this should begin with 'data:image/svg+xml;base64,'. Pass the name of a Dashicons helper class to use a font icon, e.g. 'dashicons-chart-pie'. Pass 'none' to leave div.wp-menu-image empty so an icon can be added via CSS. Defaults to use the posts icon.</li>
+<li><b>'capability_type'</b><br /><i><span class='type'>(string)</span></i> The string to use to build the read, edit, and delete capabilities. May be passed as an array to allow for alternative plurals when using this argument as a base to construct the capabilities, e.g. array('story', 'stories'). Default 'post'.</li>
+<li><b>'capabilities'</b><br /><i><span class='type'>(string[])</span></i> Array of capabilities for this post type. $capability_type is used as a base to construct capabilities by default. See <a href="../get_post_type_capabilities/index.html">get_post_type_capabilities()</a>.</li>
+<li><b>'map_meta_cap'</b><br /><i><span class='type'>(bool)</span></i> Whether to use the internal default meta capability handling. Default false.</li>
+<li><b>'supports'</b><br /><i><span class='type'>(array)</span></i> Core feature(s) the post type supports. Serves as an alias for calling <a href="../add_post_type_support/index.html">add_post_type_support()</a> directly. Core features include 'title', 'editor', 'comments', 'revisions', 'trackbacks', 'author', 'excerpt', 'page-attributes', 'thumbnail', 'custom-fields', and 'post-formats'. Additionally, the 'revisions' feature dictates whether the post type will store revisions, and the 'comments' feature dictates whether the comments count will show on the edit screen. A feature can also be specified as an array of arguments to provide additional information about supporting that feature. Example: <code>array( 'my_feature', array( 'field' =&gt; 'value' ) )</code>. Default is an array containing 'title' and 'editor'.</li>
+<li><b>'register_meta_box_cb'</b><br /><i><span class='type'>(callable)</span></i> Provide a callback function that sets up the meta boxes for the edit form. Do <a href="../remove_meta_box/index.html">remove_meta_box()</a> and <a href="../add_meta_box/index.html">add_meta_box()</a> calls in the callback. Default null.</li>
+<li><b>'taxonomies'</b><br /><i><span class='type'>(string[])</span></i> An array of taxonomy identifiers that will be registered for the post type. Taxonomies can be registered later with <a href="../register_taxonomy/index.html">register_taxonomy()</a> or <a href="../register_taxonomy_for_object_type/index.html">register_taxonomy_for_object_type()</a>. </li>
+<li><b>'has_archive'</b><br /><i><span class='type'>(bool|string)</span></i> Whether there should be post type archives, or if a string, the archive slug to use. Will generate the proper rewrite rules if $rewrite is enabled. Default false.</li>
+<li><b>'rewrite'</b><br /><i><span class='type'>(bool|array)</span></i>  Triggers the handling of rewrites for this post type. To prevent rewrite, set to false. Defaults to true, using $post_type as slug. To specify rewrite rules, an array can be passed with any of these keys:<ul class="param-hash">
+<li><b>'slug'</b><br /><i><span class='type'>(string)</span></i> Customize the permastruct slug. Defaults to $post_type key.</li>
+<li><b>'with_front'</b><br /><i><span class='type'>(bool)</span></i> Whether the permastruct should be prepended with WP_Rewrite::$front. Default true.</li>
+<li><b>'feeds'</b><br /><i><span class='type'>(bool)</span></i> Whether the feed permastruct should be built for this post type. Default is value of $has_archive.</li>
+<li><b>'pages'</b><br /><i><span class='type'>(bool)</span></i> Whether the permastruct should provide for pagination. Default true.</li>
+<li><b>'ep_mask'</b><br /><i><span class='type'>(int)</span></i> Endpoint mask to assign. If not specified and permalink_epmask is set, inherits from $permalink_epmask. If not specified and permalink_epmask is not set, defaults to EP_PERMALINK. </li></ul>
+</li>
+<li><b>'query_var'</b><br /><i><span class='type'>(string|bool)</span></i> Sets the query_var key for this post type. Defaults to $post_type key. If false, a post type cannot be loaded at ?{query_var}={post_slug}. If specified as a string, the query ?{query_var_string}={post_slug} will be valid.</li>
+<li><b>'can_export'</b><br /><i><span class='type'>(bool)</span></i> Whether to allow this post type to be exported. Default true.</li>
+<li><b>'delete_with_user'</b><br /><i><span class='type'>(bool)</span></i> Whether to delete posts of this type when deleting a user.
+<li>If true, posts of this type belonging to the user will be moved to Trash when the user is deleted.</li>
+
+<li>If false, posts of this type belonging to the user will *not* be trashed or deleted.</li>
+
+<li>If not set (the default), posts are trashed if post type supports the 'author' feature. Otherwise posts are not trashed or deleted. Default null.</li></ul></li>
+
+<li><b>'template'</b><br /><i><span class='type'>(array)</span></i> Array of blocks to use as the default initial state for an editor session. Each item should be an array containing block name and optional attributes. </li>
+<li><b>'template_lock'</b><br /><i><span class='type'>(string|false)</span></i> Whether the block template should be locked if $template is set.
+<li>If set to 'all', the user is unable to insert new blocks, move existing blocks and delete blocks.</li>
+
+<li>If set to 'insert', the user is able to move existing blocks but is unable to insert new blocks and delete blocks. Default false.</li></ul></li>
+
+<li><b>'_builtin'</b><br /><i><span class='type'>(bool)</span></i> FOR INTERNAL USE ONLY! True if this post type is a native or &quot;built-in&quot; post_type. Default false.</li>
+<li><b>'_edit_link'</b><br /><i><span class='type'>(string)</span></i> FOR INTERNAL USE ONLY! URL segment to use for edit link of this post type. Default 'post.php?post=%d'.</li></ul>
+</li></ul></span>
+											</p>
+											<p class="default">Default value: array()</p>
+									</dd>
+					</dl>
+	</section>
+	<hr />
+	<section class="return">
+		<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="return" tabindex="-1">Return <a href="#return" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Return</span></a></h2>
+		<p><span class='return-type'>(<a href="../../classes/wp_post_type/index.html">WP_Post_Type</a>|<a href="../../classes/wp_error/index.html">WP_Error</a>)</span> The registered post type object on success,                               <a href="../../classes/wp_error/index.html">WP_Error</a> object on failure.</p>
+	</section>
+	<hr />
+	<section class="explanation">
+		<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="more-information" tabindex="-1">More Information <a href="#more-information" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">More Information</span></a></h2>
+
+		<p>You can use this function in themes and plugins. However, if you use it in a theme, your post type will disappear from the admin if a user switches away from your theme. See <a title="Must Use Plugins" href="https://wordpress.org/support/article/must-use-plugins/">Must Use Plugins</a> If you want to keep your changes e.g. post type, even if you switch between your themes.</p>
+<h3 class="toc-heading" id="taxonomies" tabindex="-1">Taxonomies <a href="#taxonomies" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Taxonomies</span></a></h3>
+<p>When registering a post type, always register your taxonomies using the <code>taxonomies</code> argument. If you do not, the taxonomies and post type will not be recognized as connected when using filters such as <code>parse_query</code> or <code>pre_get_posts</code>. This can lead to unexpected results and failures.</p>
+<p>Even if you register a taxonomy while creating the post type, you must still explicitly register and define the taxonomy using <a title="Function Reference/register taxonomy" href="../register_taxonomy/index.html">register_taxonomy()</a>.</p>
+<h4 class="toc-heading" id="reserved-post-types" tabindex="-1">Reserved Post Types <a href="#reserved-post-types" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Reserved Post Types</span></a></h4>
+<p>The following post types are reserved and are already used by WordPress.</p>
+<ul>
+<li>post</li>
+<li>page</li>
+<li>attachment</li>
+<li>revision</li>
+<li>nav_menu_item</li>
+<li>custom_css</li>
+<li>customize_changeset</li>
+<li>oembed_cache</li>
+<li>user_request</li>
+<li>wp_block</li>
+</ul>
+<p>In addition, the following post types should not be used as they interfere with other WordPress functions.</p>
+<ul>
+<li>action</li>
+<li>author</li>
+<li>order</li>
+<li>theme</li>
+</ul>
+<p>In general, you should always prefix your post types, or specify a custom `query_var`, to avoid conflicting with existing WordPress query variables.</p>
+<p>More information: <a title="Post Types" href="https://wordpress.org/support/article/post-types/">Post Types</a>.</p>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="parameter-detail-information" tabindex="-1">Parameter detail information <a href="#parameter-detail-information" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Parameter detail information</span></a></h3>
+<div>
+<dl>
+<dt>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h4 class="toc-heading" id="description-2" tabindex="-1"><tt>description</tt> <a href="#description-2" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text"><tt>description</tt></span></a></h4>
+</dt>
+<dd>(<i>string</i>) (<i>optional</i>) A short descriptive summary of what the post type is.</p>
+<dl>
+<dd>Default: blank</dd>
+</dl>
+</dd>
+</dl>
+<p>The only way to read that field is using this code:</p>
+<pre>$obj = get_post_type_object( 'your_post_type_name' ); 
+echo esc_html( $obj-&gt;description );</pre>
+</div>
+<div>
+<dl>
+<dt>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h4 class="toc-heading" id="public" tabindex="-1"><tt>public</tt> <a href="#public" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text"><tt>public</tt></span></a></h4>
+</dt>
+<dd>(<i>boolean</i>) (<i>optional</i>) Controls how the type is visible to authors (<code>show_in_nav_menus</code>, <code>show_ui</code>) and readers (<code>exclude_from_search</code>, <code>publicly_queryable</code>).</p>
+<dl>
+<dd>Default: false</dd>
+</dl>
+<ul>
+<li>&#8216;<b>true&#8217;</b> &#8211; Implies <code>exclude_from_search: false</code>, <code>publicly_queryable: true</code>, <code>show_in_nav_menus: true</code>, and <code>show_ui:true</code>. The built-in types <i>attachment</i>, <i>page</i>, and <i>post</i> are similar to this.</li>
+<li>&#8216;<b>false&#8217;</b> &#8211; Implies <code>exclude_from_search: true</code>, <code>publicly_queryable: false</code>, <code>show_in_nav_menus: false</code>, and <code>show_ui: false</code>. The built-in types <i>nav_menu_item</i> and <i>revision</i> are similar to this. Best used if you&#8217;ll provide your own editing and viewing interfaces (or none at all).</li>
+</ul>
+</dd>
+<dd>If no value is specified for <code>exclude_from_search</code>, <code>publicly_queryable</code>, <code>show_in_nav_menus</code>, or <code>show_ui</code>, they inherit their values from <code>public</code>.</dd>
+</dl>
+</div>
+<div>
+<dl>
+<dt>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h4 class="toc-heading" id="exclude_from_search" tabindex="-1"><tt>exclude_from_search</tt> <a href="#exclude_from_search" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text"><tt>exclude_from_search</tt></span></a></h4>
+</dt>
+<dd>(<i>boolean</i>) (<i>importance</i>) Whether to exclude posts with this post type from front end search results.</p>
+<dl>
+<dd>Default: value of the <b>opposite</b> of <i>public</i> argument</dd>
+</dl>
+<ul>
+<li>&#8216;true&#8217; &#8211; site/?s=search-term will <b>not</b> include posts of this post type.</li>
+<li>&#8216;false&#8217; &#8211; site/?s=search-term will include posts of this post type.</li>
+</ul>
+</dd>
+<dd></dd>
+<dd><b>Note:</b> If you want to show the posts&#8217;s list that are associated to taxonomy&#8217;s terms, you must set exclude_from_search to false (ie : for call site_domaine/?taxonomy_slug=term_slug or site_domaine/taxonomy_slug/term_slug). If you set to true, on the taxonomy page (ex: taxonomy.php) WordPress will not find your posts and/or pagination will make 404 error&#8230;</dd>
+</dl>
+</div>
+<div>
+<dl>
+<dt>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h4 class="toc-heading" id="publicly_queryable" tabindex="-1"><tt>publicly_queryable</tt> <a href="#publicly_queryable" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text"><tt>publicly_queryable</tt></span></a></h4>
+</dt>
+<dd>(<i>boolean</i>) (<i>optional</i>) Whether queries can be performed on the front end as part of parse_request().</p>
+<dl>
+<dd>Default: value of <i>public</i> argument</dd>
+</dl>
+</dd>
+<dd><b>Note:</b> The queries affected include the following (also initiated when rewrites are handled)</p>
+<ul>
+<li> ?post_type={post_type_key}</li>
+<li> ?{post_type_key}={single_post_slug}</li>
+<li> ?{post_type_query_var}={single_post_slug}</li>
+</ul>
+</dd>
+</dl>
+<dl>
+<dd><b>Note:</b> If query_var is empty, null, or a boolean FALSE, WordPress will still attempt to interpret it (4.2.2) and previews/views of your custom post will return 404s.</dd>
+</dl>
+</div>
+<div>
+<dl>
+<dt>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h4 class="toc-heading" id="show_ui" tabindex="-1"><tt>show_ui</tt> <a href="#show_ui" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text"><tt>show_ui</tt></span></a></h4>
+</dt>
+<dd>(<i>boolean</i>) (<i>optional</i>) Whether to generate a default UI for managing this post type in the admin.</p>
+<dl>
+<dd>Default: value of <i>public</i> argument</dd>
+</dl>
+<ul>
+<li>&#8216;false&#8217; &#8211; do not display a user-interface for this post type</li>
+<li>&#8216;true&#8217; &#8211; display a user-interface (admin panel) for this post type</li>
+</ul>
+</dd>
+<dd>Note: <tt>_built-in</tt> post types, such as post and page, are intentionally set to false.</dd>
+</dl>
+</div>
+<div>
+<dl>
+<dt>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h4 class="toc-heading" id="show_in_nav_menus" tabindex="-1"><tt>show_in_nav_menus</tt> <a href="#show_in_nav_menus" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text"><tt>show_in_nav_menus</tt></span></a></h4>
+</dt>
+<dd>(<i>boolean</i>) (<i>optional</i>) Whether post_type is available for selection in navigation menus.</p>
+<dl>
+<dd>Default: value of <i>public</i> argument</dd>
+</dl>
+</dd>
+</dl>
+</div>
+<div>
+<dl>
+<dt>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h4 class="toc-heading" id="show_in_menu" tabindex="-1"><tt>show_in_menu</tt> <a href="#show_in_menu" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text"><tt>show_in_menu</tt></span></a></h4>
+</dt>
+<dd>(<i>boolean or string</i>) (<i>optional</i>) Where to show the post type in the admin menu. <tt>show_ui</tt> must be <tt>true</tt>.</p>
+<dl>
+<dd>Default: value of show_ui argument</dd>
+</dl>
+<ul>
+<li>&#8216;false&#8217; &#8211; do not display in the admin menu</li>
+<li>&#8216;true&#8217; &#8211; display as a top level menu</li>
+<li>&#8216;some string&#8217; &#8211; If an existing top level page such as &#8216;tools.php&#8217; or &#8216;edit.php?post_type=page&#8217;, the post type will be placed as a sub menu of that.</li>
+</ul>
+</dd>
+<dd>Note: When using &#8216;some string&#8217; to show as a submenu of a menu page created by a plugin, this item will become the first submenu item, and replace the location of the top-level link. If this isn&#8217;t desired, the plugin that creates the menu page needs to set the add_action priority for admin_menu to 9 or lower.</dd>
+<dd>Note: As this one inherits its value from <tt>show_ui</tt>, which inherits its value from <tt>public</tt>, it seems to be the most reliable property to determine, if a post type is meant to be publicly useable. At least this works for <tt>_builtin</tt> post types and only gives back <tt>post</tt> and <tt>page</tt>.</dd>
+</dl>
+</div>
+<div>
+<dl>
+<dt>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h4 class="toc-heading" id="show_in_admin_bar" tabindex="-1"><tt>show_in_admin_bar</tt> <a href="#show_in_admin_bar" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text"><tt>show_in_admin_bar</tt></span></a></h4>
+</dt>
+<dd>(<i>boolean</i>) (<i>optional</i>) Whether to make this post type available in the WordPress admin bar.</p>
+<dl>
+<dd>Default: value of the show_in_menu argument</dd>
+</dl>
+</dd>
+</dl>
+</div>
+<div>
+<dl>
+<dt>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h4 class="toc-heading" id="menu_position" tabindex="-1"><tt>menu_position</tt> <a href="#menu_position" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text"><tt>menu_position</tt></span></a></h4>
+</dt>
+<dd>(<i>integer</i>) (<i>optional</i>) The position in the menu order the post type should appear. <tt>show_in_menu</tt> must be <tt>true</tt>.</p>
+<dl>
+<dd>Default: null &#8211; defaults to below Comments</dd>
+</dl>
+<ul>
+<li>5 &#8211; below Posts</li>
+<li>10 &#8211; below Media</li>
+<li>15 &#8211; below Links</li>
+<li>20 &#8211; below Pages</li>
+<li>25 &#8211; below comments</li>
+<li>60 &#8211; below first separator</li>
+<li>65 &#8211; below Plugins</li>
+<li>70 &#8211; below Users</li>
+<li>75 &#8211; below Tools</li>
+<li>80 &#8211; below Settings</li>
+<li>100 &#8211; below second separator</li>
+</ul>
+</dd>
+</dl>
+</div>
+<div>
+<dl>
+<dt>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h4 class="toc-heading" id="menu_icon" tabindex="-1"><tt>menu_icon</tt> <a href="#menu_icon" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text"><tt>menu_icon</tt></span></a></h4>
+</dt>
+<dd>(<i>string</i>) (<i>optional</i>) The url to the icon to be used for this menu or the name of the icon from the iconfont <a class="external autonumber" href="https://github.com/WordPress/dashicons" rel="nofollow">[1]</a></p>
+<dl>
+<dd>Default: null &#8211; defaults to the posts icon</dd>
+</dl>
+</dd>
+</dl>
+<dl>
+<dd>Examples</p>
+<ul>
+<li>&#8216;dashicons-video-alt&#8217; (Uses the video icon from Dashicons<a class="external autonumber" href="../../../resource/dashicons/index.html" rel="nofollow">[2]</a>)</li>
+<li>&#8216;<a href="../get_template_directory_uri/index.html">get_template_directory_uri()</a> . &#8220;/images/cutom-posttype-icon.png&#8221;&#8216; (Use a image located in the current theme)</li>
+<li>&#8216;data:image/svg+xml;base64,&#8217; . base64_encode( &#8220;&lt;svg version=&#8221;1.1&#8243; xmlns=&#8221;<a class="external free" href="http://www.w3.org/2000/svg" rel="nofollow">http://www.w3.org/2000/svg</a>&#8221; xmlns:xlink=&#8221;<a class="external free" href="http://www.w3.org/1999/xlink" rel="nofollow">http://www.w3.org/1999/xlink</a>&#8221; x=&#8221;0px&#8221; y=&#8221;0px&#8221; width=&#8221;20px&#8221; height=&#8221;20px&#8221; viewBox=&#8221;0 0 459 459&#8243;&gt; &lt;path fill=&#8221;black&#8221; d=&#8221;POINTS&#8221;/&gt;&lt;/svg&gt;&#8221; )&#8217; (directly embedding a svg with &#8216;fill=&#8221;black&#8221;&#8216; will allow correct colors. Also see <a class="external autonumber" href="https://stackoverflow.com/a/42265057/933065" rel="nofollow">[3]</a>)</li>
+</ul>
+</dd>
+</dl>
+</div>
+<div>
+<dl>
+<dt>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h4 class="toc-heading" id="capability_type" tabindex="-1"><tt>capability_type</tt> <a href="#capability_type" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text"><tt>capability_type</tt></span></a></h4>
+</dt>
+<dd>(<i>string or array</i>) (<i>optional</i>) The string to use to build the read, edit, and delete capabilities. May be passed as an array to allow for alternative plurals when using this argument as a base to construct the capabilities, e.g. array(&#8216;story&#8217;, &#8216;stories&#8217;) the first array element will be used for the singular capabilities and the second array element for the plural capabilities, this is instead of the auto generated version if no array is given which would be &#8220;storys&#8221;. The &#8216;capability_type&#8217; parameter is used as a base to construct capabilities unless they are explicitly set with the &#8216;capabilities&#8217; parameter. It seems that `map_meta_cap` needs to be set to false or null, to make this work (see note 2 below).</p>
+<dl>
+<dd>Default: &#8220;post&#8221;</dd>
+</dl>
+</dd>
+</dl>
+<dl>
+<dd><b>Example</b> with &#8220;book&#8221; or &#8220;array( &#8216;book&#8217;, &#8216;books&#8217; )&#8221; value, it will generate the 7 capabilities equal to set capabilities parameter to this :</dd>
+</dl>
+<pre>'capabilities' =&gt; array(
+  'edit_post'          =&gt; 'edit_book', 
+  'read_post'          =&gt; 'read_book', 
+  'delete_post'        =&gt; 'delete_book', 
+  'edit_posts'         =&gt; 'edit_books', 
+  'edit_others_posts'  =&gt; 'edit_others_books', 
+  'publish_posts'      =&gt; 'publish_books',       
+  'read_private_posts' =&gt; 'read_private_books', 
+  'create_posts'       =&gt; 'edit_books', 
+),
+</pre>
+<dl>
+<dd><b>Note 1:</b> The &#8220;create_posts&#8221; capability correspond to &#8220;edit_books&#8221; so it become equal to &#8220;edit_posts&#8221;.</dd>
+<dd><b>Note 2:</b> See capabilities note 2 about meta capabilities mapping for custom post type.</dd>
+</dl>
+<dl>
+<dd>You can take a look into the <tt>$GLOBALS['wp_post_types']['your_cpt_name']</tt> array, then you&#8217;ll see the following:</dd>
+</dl>
+<pre>[cap] =&gt; stdClass Object
+	(
+		// Meta capabilities
+		[edit_post] =&gt; edit_book
+		[read_post] =&gt; read_book
+		[delete_post] =&gt; delete_book
+
+		// Primitive capabilities used outside of map_meta_cap():
+		[edit_posts] =&gt; edit_books
+		[edit_others_posts] =&gt; edit_others_books
+		[publish_posts] =&gt; publish_books
+		[read_private_posts] =&gt; read_private_books
+
+		// Primitive capabilities used within map_meta_cap():
+		[create_posts] =&gt; edit_books
+	)
+</pre>
+<dl>
+<dd>Some of the capability types that can be used (probably not exhaustive list):</p>
+<ul>
+<li>post (default)</li>
+<li>page</li>
+</ul>
+</dd>
+</dl>
+<dl>
+<dd>These built-in types cannot be used:</p>
+<ul>
+<li>attachment</li>
+<li>mediapage</li>
+</ul>
+</dd>
+</dl>
+<dl>
+<dd><b>Note 3:</b> If you use capabilities parameter, capability_type complete your capabilities.</dd>
+</dl>
+</div>
+<div>
+<dl>
+<dt>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h4 class="toc-heading" id="capabilities" tabindex="-1"><tt>capabilities</tt> <a href="#capabilities" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text"><tt>capabilities</tt></span></a></h4>
+</dt>
+<dd>(<i>array</i>) (<i>optional</i>) An array of the capabilities for this post type.</p>
+<dl>
+<dd>Default: capability_type is used to construct</dd>
+</dl>
+</dd>
+<dd>By default, seven keys are accepted as part of the capabilities array:</p>
+<ul>
+<li>edit_post, read_post, and delete_post &#8211; These three are <b>meta capabilities</b>, which are then generally mapped to corresponding <b>primitive capabilities</b> depending on the context, for example the post being edited/read/deleted and the user or role being checked. Thus these capabilities would generally not be granted directly to users or roles.</li>
+<li>edit_posts &#8211; Controls whether objects of this post type can be edited.</li>
+<li>edit_others_posts &#8211; Controls whether objects of this type owned by other users can be edited. If the post type does not support an author, then this will behave like edit_posts.</li>
+<li>publish_posts &#8211; Controls publishing objects of this post type.</li>
+<li>read_private_posts &#8211; Controls whether private objects can be read.</li>
+</ul>
+</dd>
+<dd><b>Note:</b> those last four <b>primitive capabilities</b> are checked in core in various locations.</dd>
+</dl>
+<dl>
+<dd>There are also eight other <b>primitive capabilities</b> which are not referenced directly in core, except in <a href="../map_meta_cap/index.html">map_meta_cap()</a>, which takes the three aforementioned <b>meta capabilities</b> and translates them into one or more <b>primitive capabilities</b> that must then be checked against the user or role, depending on the context. These additional capabilities are only used in <a href="../map_meta_cap/index.html">map_meta_cap()</a>. Thus, they are only assigned by default if the post type is registered with <b>the &#8216;map_meta_cap&#8217; argument set to true</b> (default is false).</p>
+<ul>
+<li>read &#8211; Controls whether objects of this post type can be read.</li>
+<li>delete_posts &#8211; Controls whether objects of this post type can be deleted.</li>
+<li>delete_private_posts &#8211; Controls whether private objects can be deleted.</li>
+<li>delete_published_posts &#8211; Controls whether published objects can be deleted.</li>
+<li>delete_others_posts &#8211; Controls whether objects owned by other users can be can be deleted. If the post type does not support an author, then this will behave like delete_posts.</li>
+<li>edit_private_posts &#8211; Controls whether private objects can be edited.</li>
+<li>edit_published_posts &#8211; Controls whether published objects can be edited.</li>
+<li>create_posts &#8211; Controls whether new objects can be created</li>
+</ul>
+</dd>
+</dl>
+<p>If you assign a <tt>'capability_type'</tt> and then take a look into the <tt>$GLOBALS['wp_post_types']['your_cpt_name']</tt> array, then you&#8217;ll see the following:</p>
+<pre>[cap] =&gt; stdClass Object
+(
+	// Meta capabilities
+
+	[edit_post]		 =&gt; "edit_{$capability_type}"
+	[read_post]		 =&gt; "read_{$capability_type}"
+	[delete_post]		 =&gt; "delete_{$capability_type}"
+
+	// Primitive capabilities used outside of map_meta_cap():
+
+	[edit_posts]		 =&gt; "edit_{$capability_type}s"
+	[edit_others_posts]	 =&gt; "edit_others_{$capability_type}s"
+	[publish_posts]		 =&gt; "publish_{$capability_type}s"
+	[read_private_posts]	 =&gt; "read_private_{$capability_type}s"
+
+	// Primitive capabilities used within map_meta_cap():
+
+	[read]                   =&gt; "read",
+	[delete_posts]           =&gt; "delete_{$capability_type}s"
+	[delete_private_posts]   =&gt; "delete_private_{$capability_type}s"
+	[delete_published_posts] =&gt; "delete_published_{$capability_type}s"
+	[delete_others_posts]    =&gt; "delete_others_{$capability_type}s"
+	[edit_private_posts]     =&gt; "edit_private_{$capability_type}s"
+	[edit_published_posts]   =&gt; "edit_published_{$capability_type}s"
+	[create_posts]           =&gt; "edit_{$capability_type}s"
+)
+</pre>
+<p><i>Note the &#8220;s&#8221; at the end of plural capabilities.</i></p>
+</div>
+<div>
+<dl>
+<dt>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h4 class="toc-heading" id="map_meta_cap" tabindex="-1"><tt>map_meta_cap</tt> <a href="#map_meta_cap" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text"><tt>map_meta_cap</tt></span></a></h4>
+</dt>
+<dd>(<i>boolean</i>) (<i>optional</i>) Whether to use the internal default meta capability handling.</p>
+<dl>
+<dd>Default: null</dd>
+</dl>
+</dd>
+</dl>
+<dl>
+<dd><b>Note:</b> If set it to false then standard admin role can&#8217;t edit the posts types. Then the edit_post capability must be added to all roles to add or edit the posts types.</dd>
+</dl>
+</div>
+<div id="hierarchical">
+<dl>
+<dt>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h4 class="toc-heading" id="hierarchical" tabindex="-1"><tt>hierarchical</tt> <a href="#hierarchical" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text"><tt>hierarchical</tt></span></a></h4>
+</dt>
+<dd>(<i>boolean</i>) (<i>optional</i>) Whether the post type is hierarchical (e.g. page). Allows Parent to be specified. The &#8216;supports&#8217; parameter should contain &#8216;page-attributes&#8217; to show the parent select box on the editor page.</p>
+<dl>
+<dd>Default: false</dd>
+</dl>
+</dd>
+</dl>
+<dl>
+<dd><b>Note:</b> this parameter was intended for <a title="Pages" href="../../../../codex.wordpress.org/Pages.html">Pages</a>. Be careful when choosing it for your custom post type &#8211; if you are planning to have very many entries (say &#8211; over 2-3 thousand), you will run into load time issues. With this parameter set to <i>true</i> WordPress will fetch all IDs of that particular post type on each administration page load for your post type. Servers with limited memory resources may also be challenged by this parameter being set to <i>true</i>.</dd>
+</dl>
+</div>
+<div>
+<dl>
+<dt>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h4 class="toc-heading" id="supports" tabindex="-1"><tt>supports</tt> <a href="#supports" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text"><tt>supports</tt></span></a></h4>
+</dt>
+<dd>(<i>array/boolean</i>) (<i>optional</i>) An alias for calling <a title="Function Reference/add post type support" href="../../../../codex.wordpress.org/Function_Reference/add_post_type_support.html">add_post_type_support()</a> directly. As of <a title="Version 3.5" href="https://wordpress.org/support/wordpress-version/version-3-5/">3.5</a>, boolean <strong>false</strong> can be passed as value instead of an array to prevent default (title and editor) behavior.</p>
+<dl>
+<dd>Default: title and editor</dd>
+</dl>
+<ul>
+<li>&#8216;title&#8217;</li>
+<li>&#8216;editor&#8217; (content)</li>
+<li>&#8216;author&#8217;</li>
+<li>&#8216;thumbnail&#8217; (featured image, current theme must also support <a title="Post Thumbnails" href="../../../../codex.wordpress.org/Post_Thumbnails.html">post-thumbnails</a>)</li>
+<li>&#8216;excerpt&#8217;</li>
+<li>&#8216;trackbacks&#8217;</li>
+<li>&#8216;custom-fields&#8217;</li>
+<li>&#8216;comments&#8217; (also will see comment count balloon on edit screen)</li>
+<li>&#8216;revisions&#8217; (will store revisions)</li>
+<li>&#8216;page-attributes&#8217; (menu order, hierarchical must be true to show Parent option)</li>
+<li>&#8216;post-formats&#8217; add post formats, see <a title="Post Formats" href="../../../../codex.wordpress.org/Post_Formats.html">Post Formats</a></li>
+</ul>
+</dd>
+</dl>
+<dl>
+<dd><b>Note:</b> When you use custom post type that use thumbnails remember to check that the theme also supports thumbnails or use <a class="mw-redirect" title="add theme support" href="../add_theme_support/index.html">add_theme_support</a> function.</dd>
+</dl>
+</div>
+<div>
+<dl>
+<dt>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h4 class="toc-heading" id="register_meta_box_cb" tabindex="-1"><tt>register_meta_box_cb</tt> <a href="#register_meta_box_cb" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text"><tt>register_meta_box_cb</tt></span></a></h4>
+</dt>
+<dd>(<i>callback </i>) (<i>optional</i>) Provide a callback function that will be called when setting up the meta boxes for the edit form. The callback function takes one argument <tt>$post</tt>, which contains the <tt><a href="../../classes/wp_post/index.html">WP_Post</a></tt> object for the currently edited post. Do <a title="Function Reference/remove meta box" href="../remove_meta_box/index.html">remove_meta_box()</a> and <a title="Function Reference/add meta box" href="../add_meta_box/index.html">add_meta_box()</a> calls in the callback.</p>
+<dl>
+<dd>Default: <i>None</i></dd>
+</dl>
+</dd>
+</dl>
+</div>
+<div>
+<dl>
+<dt>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h4 class="toc-heading" id="taxonomies-2" tabindex="-1"><tt>taxonomies</tt> <a href="#taxonomies-2" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text"><tt>taxonomies</tt></span></a></h4>
+</dt>
+<dd>(<i>array</i>) (<i>optional</i>) An array of registered taxonomies like <code>category</code> or <code>post_tag</code> that will be used with this post type. This can be used in lieu of calling <a title="Function Reference/register taxonomy for object type" href="../register_taxonomy_for_object_type/index.html">register_taxonomy_for_object_type()</a> directly. Custom taxonomies still need to be registered with <a title="Function Reference/register taxonomy" href="../register_taxonomy/index.html">register_taxonomy()</a>.</p>
+<dl>
+<dd>Default: no taxonomies</dd>
+</dl>
+</dd>
+</dl>
+</div>
+<div>
+<dl>
+<dt>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h4 class="toc-heading" id="has_archive" tabindex="-1"><tt>has_archive</tt> <a href="#has_archive" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text"><tt>has_archive</tt></span></a></h4>
+</dt>
+<dd>(<i>boolean or string</i>) (<i>optional</i>) Enables post type archives. Will use <tt>$post_type</tt> as archive slug by default.</p>
+<dl>
+<dd>Default: false</dd>
+</dl>
+</dd>
+<dd>Note: Will generate the proper rewrite rules if <tt>rewrite</tt> is enabled. Also use <tt>rewrite</tt> to change the slug used. If string, it should be translatable.</dd>
+</dl>
+</div>
+<div>
+<dl>
+<dt>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h4 class="toc-heading" id="rewrite" tabindex="-1"><tt>rewrite</tt> <a href="#rewrite" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text"><tt>rewrite</tt></span></a></h4>
+</dt>
+<dd>(<i>boolean or array</i>) (<i>optional</i>) Triggers the handling of rewrites for this post type. To prevent rewrites, set to false.</p>
+<dl>
+<dd>Default: true and use $post_type as slug</dd>
+</dl>
+</dd>
+<dd>$args array</p>
+<ul>
+<li><tt>'slug' =&gt; string</tt> Customize the permalink structure slug. Defaults to the <tt>$post_type</tt> value. Should be translatable.</li>
+<li><tt>'with_front' =&gt; bool</tt> Should the permalink structure be prepended with the front base. (example: if your permalink structure is /blog/, then your links will be: false-&gt;/news/, true-&gt;/blog/news/). Defaults to true</li>
+<li><tt>'feeds' =&gt; bool</tt> Should a feed permalink structure be built for this post type. Defaults to <tt>has_archive</tt> value.</li>
+<li><tt>'pages' =&gt; bool</tt> Should the permalink structure provide for pagination. Defaults to true</li>
+<li><tt>'ep_mask' =&gt; const</tt> <i>As of 3.4</i> Assign an endpoint mask for this post type. For more info see <a title="Rewrite API/add rewrite endpoint" href="../add_rewrite_endpoint/index.html">Rewrite API/add_rewrite_endpoint</a>, and <a class="external text" href="https://make.wordpress.org/plugins/2012/06/07/rewrite-endpoints-api/" rel="nofollow">Make WordPress Plugins summary of endpoints</a>.
+<ul>
+<li>If not specified, then it inherits from <tt>permalink_epmask</tt>(if <tt>permalink_epmask</tt> is set), otherwise defaults to <tt>EP_PERMALINK</tt>.</li>
+</ul>
+</li>
+</ul>
+</dd>
+<dd><b>Note:</b> If registering a post type inside of a plugin, call <a title="Function Reference/flush rewrite rules" href="../../../../codex.wordpress.org/Function_Reference/flush_rewrite_rules.html">flush_rewrite_rules()</a> in your activation and deactivation hook (see Flushing Rewrite on Activation below). If <a href="../flush_rewrite_rules/index.html">flush_rewrite_rules()</a> is not used, then you will have to manually go to Settings &gt; Permalinks and refresh your permalink structure before your custom post type will show the correct structure.</dd>
+</dl>
+</div>
+<div>
+<dl>
+<dt>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h4 class="toc-heading" id="permalink_epmask" tabindex="-1"><tt>permalink_epmask</tt> <a href="#permalink_epmask" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text"><tt>permalink_epmask</tt></span></a></h4>
+</dt>
+<dd>(<i>string</i>) (<i>optional</i>) The default rewrite endpoint bitmasks. For more info see <a class="external text" href="https://core.trac.wordpress.org/ticket/12605" rel="nofollow">Trac Ticket 12605</a> and this &#8211; <a class="external text" href="https://make.wordpress.org/plugins/2012/06/07/rewrite-endpoints-api/" rel="nofollow">Make WordPress Plugins summary of endpoints</a>.</p>
+<dl>
+<dd>Default: EP_PERMALINK</dd>
+</dl>
+</dd>
+<dd><b>Note:</b> In 3.4, this argument is effectively replaced by the <tt>'ep_mask'</tt> argument under <tt>rewrite</tt>.</dd>
+</dl>
+</div>
+<div>
+<dl>
+<dt>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h4 class="toc-heading" id="query_var" tabindex="-1"><tt>query_var</tt> <a href="#query_var" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text"><tt>query_var</tt></span></a></h4>
+</dt>
+<dd>(<i>boolean or string</i>) (<i>optional</i>) Sets the <tt>query_var</tt> key for this post type.</p>
+<dl>
+<dd>Default: true &#8211; set to $post_type</dd>
+</dl>
+<ul>
+<li>&#8216;false&#8217; &#8211; Disables <tt>query_var</tt> key use. A post type cannot be loaded at /?{query_var}={single_post_slug}</li>
+<li>&#8216;string&#8217; &#8211; /?{query_var_string}={single_post_slug} will work as intended.</li>
+</ul>
+</dd>
+</dl>
+<dl>
+<dd><b>Note:</b> The query_var parameter has no effect if the ‘publicly_queryable’ parameter is set to false. query_var adds the custom post type’s query var to the built-in query_vars array so that WordPress will recognize it. WordPress removes any query var not included in that array.</dd>
+</dl>
+<dl>
+<dd>If set to true it allows you to request a custom posts type (book) using this: example.com/?book=life-of-pi</dd>
+<dd>If set to a string rather than true (for example ‘publication’), you can do: example.com/?publication=life-of-pi</dd>
+</dl>
+</div>
+<div>
+<dl>
+<dt>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h4 class="toc-heading" id="can_export" tabindex="-1"><tt>can_export</tt> <a href="#can_export" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text"><tt>can_export</tt></span></a></h4>
+</dt>
+<dd>(<i>boolean</i>) (<i>optional</i>) Can this post_type be exported.</p>
+<dl>
+<dd>Default: true</dd>
+</dl>
+</dd>
+</dl>
+</div>
+<div>
+<dl>
+<dt>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h4 class="toc-heading" id="delete_with_user" tabindex="-1"><tt>delete_with_user</tt> <a href="#delete_with_user" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text"><tt>delete_with_user</tt></span></a></h4>
+</dt>
+<dd>(<i>boolean</i>) (<i>optional</i>) Whether to delete posts of this type when deleting a user. If true, posts of this type belonging to the user will be moved to trash when then user is deleted. If false, posts of this type belonging to the user will <b>not</b> be trashed or deleted. If not set (the default), posts are trashed if <tt>post_type_supports('author')</tt>. Otherwise posts are not trashed or deleted.</p>
+<dl>
+<dd>Default: null</dd>
+</dl>
+</dd>
+</dl>
+</div>
+<div>
+<dl>
+<dt>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h4 class="toc-heading" id="show_in_rest" tabindex="-1"><tt>show_in_rest</tt> <a href="#show_in_rest" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text"><tt>show_in_rest</tt></span></a></h4>
+</dt>
+<dd>(<i>boolean</i>) (<i>optional</i>) Whether to expose this post type in the REST API. Must be true to enable the Gutenberg editor.</p>
+<dl>
+<dd>Default: false</dd>
+</dl>
+</dd>
+</dl>
+</div>
+<div>
+<dl>
+<dt>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h4 class="toc-heading" id="rest_base" tabindex="-1"><tt>rest_base</tt> <a href="#rest_base" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text"><tt>rest_base</tt></span></a></h4>
+</dt>
+<dd>(<i>string</i>) (<i>optional</i>) The base slug that this post type will use when accessed using the REST API.</p>
+<dl>
+<dd>Default: $post_type</dd>
+</dl>
+</dd>
+</dl>
+</div>
+<div>
+<dl>
+<dt>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h4 class="toc-heading" id="rest_controller_class" tabindex="-1"><tt>rest_controller_class</tt> <a href="#rest_controller_class" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text"><tt>rest_controller_class</tt></span></a></h4>
+</dt>
+<dd>(<i>string</i>) (<i>optional</i>) An optional custom controller to use instead of <a href="../../classes/wp_rest_posts_controller/index.html">WP_REST_Posts_Controller</a>. Must be a subclass of <a href="../../classes/wp_rest_controller/index.html">WP_REST_Controller</a>.</p>
+<dl>
+<dd>Default: <a href="../../classes/wp_rest_posts_controller/index.html">WP_REST_Posts_Controller</a></dd>
+</dl>
+</dd>
+</dl>
+</div>
+<div>
+<dl>
+<dt>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h4 class="toc-heading" id="_builtin" tabindex="-1"><tt>_builtin</tt> <a href="#_builtin" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text"><tt>_builtin</tt></span></a></h4>
+</dt>
+<dd>(<i>boolean</i>) (<i>not for general use</i>) Whether this post type is a native or &#8220;built-in&#8221; post_type. <b>Note: this entry is for documentation &#8211; core developers recommend you don&#8217;t use this when registering your own post type</b></p>
+<dl>
+<dd>Default: false</dd>
+</dl>
+<ul>
+<li>&#8216;false&#8217; &#8211; default this is a custom post type</li>
+<li>&#8216;true&#8217; &#8211; this is a built-in native post type (post, page, attachment, revision, nav_menu_item)</li>
+</ul>
+</dd>
+</dl>
+</div>
+<div>
+<dl>
+<dt>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h4 class="toc-heading" id="_edit_link" tabindex="-1"><tt>_edit_link</tt> <a href="#_edit_link" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text"><tt>_edit_link</tt></span></a></h4>
+</dt>
+<dd>(<i>boolean</i>) (<i>not for general use</i>) Link to edit an entry with this post type. <b>Note: this entry is for documentation &#8211; core developers recommend you don&#8217;t use this when registering your own post type</b></p>
+<dl>
+<dd>Default:</dd>
+</dl>
+<ul>
+<li>&#8216;post.php?post=%d&#8217;</li>
+</ul>
+</dd>
+</dl>
+</div>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="flushing-rewrite-on-activation" tabindex="-1">Flushing Rewrite on Activation <a href="#flushing-rewrite-on-activation" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Flushing Rewrite on Activation</span></a></h3>
+<p>To get permalinks to work when you activate the plugin use the following example, paying attention to how <code>my_cpt_init()</code> is called in the register_activation_hook callback:</p>
+<section class="source-content">
+<div class="source-code-container">
+<pre class="brush: php; title: ; notranslate" title="">
+add_action( 'init', 'my_cpt_init' );
+function my_cpt_init() {
+    register_post_type( ... );
+}
+
+register_activation_hook( __FILE__, 'my_rewrite_flush' );
+function my_rewrite_flush() {
+    // First, we &quot;add&quot; the custom post type via the above written function.
+    // Note: &quot;add&quot; is written with quotes, as CPTs don't get added to the DB,
+    // They are only referenced in the post_type column with a post entry, 
+    // when you add a post of this CPT.
+    my_cpt_init();
+
+    // ATTENTION: This is *only* done during plugin activation hook in this example!
+    // You should *NEVER EVER* do this on every page load!!
+    flush_rewrite_rules();
+}
+</pre>
+</div>
+<p class="source-code-links"><span><a href="#" class="show-complete-source">Expand full source code</a><a href="#" class="less-complete-source">Collapse full source code</a></span></p>
+</section>
+<p>For themes, you&#8217;ll need to use the <code>after_switch_theme</code> hook instead. Like so:</p>
+<pre class="brush: php; title: ; notranslate" title="">
+add_action( 'init', 'my_cpt_init' );
+function my_cpt_init() {
+    register_post_type( ... );
+}
+
+add_action( 'after_switch_theme', 'my_rewrite_flush' );
+function my_rewrite_flush() {
+    my_cpt_init();
+    flush_rewrite_rules();
+}
+</pre>
+<p>&nbsp;</p>
+<p>Note that although the <b>$public</b> attribute is optional, the inputs passed to the <b><a href="index.html">register_post_type()</a></b> function are <i>exactly</i> what is queried by the <tt><a title="Function Reference/get post types" href="../get_post_types/index.html"> <a href="../get_post_types/index.html">get_post_types()</a></a></tt> function. So if you verbosely set the equivalent options for <b>publicly_queriable</b>, <b>show_ui</b>, <b>show_in_nav_menus</b>, and <b>exclude_from_search</b>, this will not be handled the same as if you had set the <b>$public</b> attribute. See <a class="external text" href="https://core.trac.wordpress.org/ticket/18950" rel="nofollow">bug 18950</a>.</p>
+	</section>
+	<hr />
+	<section class="source-content">
+		<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="source" tabindex="-1">Source <a href="#source" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Source</span></a></h2>
+		<p>
+			File: <a href="../../files/wp-includes/post.php/index.html">wp-includes/post.php</a>		</p>
+
+					<div class="source-code-container">
+				<pre class="brush: php; toolbar: false; first-line: 1505">function register_post_type( $post_type, $args = array() ) {
+	global $wp_post_types;
+
+	if ( ! is_array( $wp_post_types ) ) {
+		$wp_post_types = array();
+	}
+
+	// Sanitize post type name.
+	$post_type = sanitize_key( $post_type );
+
+	if ( empty( $post_type ) || strlen( $post_type ) &gt; 20 ) {
+		_doing_it_wrong( __FUNCTION__, __( 'Post type names must be between 1 and 20 characters in length.' ), '4.2.0' );
+		return new WP_Error( 'post_type_length_invalid', __( 'Post type names must be between 1 and 20 characters in length.' ) );
+	}
+
+	$post_type_object = new WP_Post_Type( $post_type, $args );
+	$post_type_object-&gt;add_supports();
+	$post_type_object-&gt;add_rewrite_rules();
+	$post_type_object-&gt;register_meta_boxes();
+
+	$wp_post_types[ $post_type ] = $post_type_object;
+
+	$post_type_object-&gt;add_hooks();
+	$post_type_object-&gt;register_taxonomies();
+
+	/**
+	 * Fires after a post type is registered.
+	 *
+	 * @since 3.3.0
+	 * @since 4.6.0 Converted the `$post_type` parameter to accept a `WP_Post_Type` object.
+	 *
+	 * @param string       $post_type        Post type.
+	 * @param WP_Post_Type $post_type_object Arguments used to register the post type.
+	 */
+	do_action( 'registered_post_type', $post_type, $post_type_object );
+
+	return $post_type_object;
+}
+</pre>
+			</div>
+			<p class="source-code-links">
+				<span>
+					<a href="#" class="show-complete-source">Expand full source code</a>
+					<a href="#" class="less-complete-source">Collapse full source code</a>
+				</span>
+				<span><a href="https://core.trac.wordpress.org/browser/tags/5.8/src/wp-includes/post.php#L1505">View on Trac</a></span>
+			</p>
+			</section>
+	<hr />
+	<section class="related">
+		<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="related" tabindex="-1">Related <a href="#related" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Related</span></a></h2>
+
+					<article class="uses">
+				<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="uses" tabindex="-1">Uses <a href="#uses" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Uses</span></a></h3>
+				<table id="uses-table">
+					<caption class="screen-reader-text">Uses</caption>
+					<thead>
+						<tr>
+							<th>Uses</th>
+							<th class="related-desc">Description</th>
+						</tr>
+					</thead>
+					<tbody>
+												<tr>
+							<td>
+								<span>wp-includes/class-wp-post-type.php:</span>
+								<a href="../../classes/wp_post_type/__construct/index.html">WP_Post_Type::__construct()</a>
+							</td>
+							<td class="related-desc">
+								<p>Constructor.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/l10n.php:</span>
+								<a href="../__/index.html">__()</a>
+							</td>
+							<td class="related-desc">
+								<p>Retrieve the translation of $text.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/formatting.php:</span>
+								<a href="../sanitize_key/index.html">sanitize_key()</a>
+							</td>
+							<td class="related-desc">
+								<p>Sanitizes a string key.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/functions.php:</span>
+								<a href="../_doing_it_wrong/index.html">_doing_it_wrong()</a>
+							</td>
+							<td class="related-desc">
+								<p>Mark something as being incorrectly called.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/plugin.php:</span>
+								<a href="../do_action/index.html">do_action()</a>
+							</td>
+							<td class="related-desc">
+								<p>Calls the callback functions that have been added to an action hook.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/post.php:</span>
+								<a href="../../hooks/registered_post_type/index.html">registered_post_type</a>
+							</td>
+							<td class="related-desc">
+								<p>Fires after a post type is registered.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/class-wp-error.php:</span>
+								<a href="../../classes/wp_error/__construct/index.html">WP_Error::__construct()</a>
+							</td>
+							<td class="related-desc">
+								<p>Initializes the error.</p>
+							</td>
+						</tr>
+											<tbody>
+				</table>
+
+								<a href="#" class="show-more">Show 2 more uses</a>
+				<a href="#" class="hide-more">Hide more uses</a>
+							</article>
+		
+					<hr />
+			<article class="used-by">
+				<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="used-by" tabindex="-1">Used By <a href="#used-by" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Used By</span></a></h3>
+				<table id="used-by-table">
+					<caption class="screen-reader-text">Used By</caption>
+					<thead>
+						<tr>
+							<th>Used By</th>
+							<th class="related-desc">Description</th>
+						</tr>
+					</thead>
+					<tbody>
+												<tr>
+							<td>
+								<span>wp-includes/post.php:</span>
+								<a href="../create_initial_post_types/index.html">create_initial_post_types()</a>
+							</td>
+							<td class="related-desc">
+								<p>Creates the initial post types when &#8216;init&#8217; action is fired.</p>
+							</td>
+						</tr>
+											<tbody>
+				</table>
+
+							</article>
+			</section>
+		<hr />
+	<section class="changelog">
+		<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="changelog" tabindex="-1">Changelog <a href="#changelog" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Changelog</span></a></h2>
+
+		<table>
+			<caption class="screen-reader-text">Changelog</caption>
+			<thead>
+				<tr>
+					<th class="changelog-version">Version</th>
+					<th class="changelog-desc">Description</th>
+				</tr>
+			</thead>
+
+			<tbody>
+									
+					<tr>
+						<td><a href="../../since/5.3.0/index.html" alt="WordPress 5.3.0">5.3.0</a></td>
+						<td><span class="since-description">The <code>supports</code> argument will now accept an array of arguments for a feature.</span></td>
+					</tr>
+									
+					<tr>
+						<td><a href="../../since/5.0.0/index.html" alt="WordPress 5.0.0">5.0.0</a></td>
+						<td><span class="since-description">The <code>template</code> and <code>template_lock</code> arguments were added.</span></td>
+					</tr>
+									
+					<tr>
+						<td><a href="../../since/4.7.0/index.html" alt="WordPress 4.7.0">4.7.0</a></td>
+						<td><span class="since-description">Introduced <code>show_in_rest</code>, <code>rest_base</code> and <code>rest_controller_class</code>              arguments to register the post type in REST API.</span></td>
+					</tr>
+									
+					<tr>
+						<td><a href="../../since/4.6.0/index.html" alt="WordPress 4.6.0">4.6.0</a></td>
+						<td><span class="since-description">Post type object returned is now an instance of <code>WP_Post_Type</code>.</span></td>
+					</tr>
+									
+					<tr>
+						<td><a href="../../since/4.4.0/index.html" alt="WordPress 4.4.0">4.4.0</a></td>
+						<td><span class="since-description">The <code>show_ui</code> argument is now enforced on the post type listing              screen and post editing screen.</span></td>
+					</tr>
+									
+					<tr>
+						<td><a href="../../since/3.0.0/index.html" alt="WordPress 3.0.0">3.0.0</a></td>
+						<td><span class="since-description">The <code>show_ui</code> argument is now enforced on the new post screen.</span></td>
+					</tr>
+									
+					<tr>
+						<td><a href="../../since/2.9.0/index.html" alt="WordPress 2.9.0">2.9.0</a></td>
+						<td>Introduced.</td>
+					</tr>
+							</tbody>
+		</table>
+	</section>
+
+	<hr />
+	<section class="user-notes">
+		<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="user-contributed-notes" tabindex="-1">User Contributed Notes <a href="#user-contributed-notes" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">User Contributed Notes</span></a></h2>
+		
+<div id="comments" class="comments-area">
+
+			
+		<ol class="comment-list">
+						<li id="comment-351" data-comment-id="351" class="comment byuser comment-author-codex even thread-even depth-1">
+			<article id="div-comment-351" class="comment-body">
+
+							<a href="#comment-content-351" class="screen-reader-text">Skip to note 1 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="c8aaced15f"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="351" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fregister_post_type%2F%23comment-351"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="91% like this"><span class="screen-reader-text">Vote results for this note: </span>26</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="351" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fregister_post_type%2F%23comment-351"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/688ab6934b21bca68e0fe4fc54a66805?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/688ab6934b21bca68e0fe4fc54a66805?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/codex/" rel="external nofollow" class="url">Codex</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-351">
+							<time datetime="2015-06-30T16:56:44+00:00">
+							6 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-351">
+				<p><strong>Register a &#8216;book&#8217; post type, using new labels introduced in 4.3 and 4.4.</strong></p>
+<section class="source-content">
+<div class="source-code-container">
+<pre class="brush: php; title: ; notranslate" title="">
+/**
+ * Register a custom post type called &quot;book&quot;.
+ *
+ * @see get_post_type_labels() for label keys.
+ */
+function wpdocs_codex_book_init() {
+	$labels = array(
+		'name'                  =&gt; _x( 'Books', 'Post type general name', 'textdomain' ),
+		'singular_name'         =&gt; _x( 'Book', 'Post type singular name', 'textdomain' ),
+		'menu_name'             =&gt; _x( 'Books', 'Admin Menu text', 'textdomain' ),
+		'name_admin_bar'        =&gt; _x( 'Book', 'Add New on Toolbar', 'textdomain' ),
+		'add_new'               =&gt; __( 'Add New', 'textdomain' ),
+		'add_new_item'          =&gt; __( 'Add New Book', 'textdomain' ),
+		'new_item'              =&gt; __( 'New Book', 'textdomain' ),
+		'edit_item'             =&gt; __( 'Edit Book', 'textdomain' ),
+		'view_item'             =&gt; __( 'View Book', 'textdomain' ),
+		'all_items'             =&gt; __( 'All Books', 'textdomain' ),
+		'search_items'          =&gt; __( 'Search Books', 'textdomain' ),
+		'parent_item_colon'     =&gt; __( 'Parent Books:', 'textdomain' ),
+		'not_found'             =&gt; __( 'No books found.', 'textdomain' ),
+		'not_found_in_trash'    =&gt; __( 'No books found in Trash.', 'textdomain' ),
+		'featured_image'        =&gt; _x( 'Book Cover Image', 'Overrides the “Featured Image” phrase for this post type. Added in 4.3', 'textdomain' ),
+		'set_featured_image'    =&gt; _x( 'Set cover image', 'Overrides the “Set featured image” phrase for this post type. Added in 4.3', 'textdomain' ),
+		'remove_featured_image' =&gt; _x( 'Remove cover image', 'Overrides the “Remove featured image” phrase for this post type. Added in 4.3', 'textdomain' ),
+		'use_featured_image'    =&gt; _x( 'Use as cover image', 'Overrides the “Use as featured image” phrase for this post type. Added in 4.3', 'textdomain' ),
+		'archives'              =&gt; _x( 'Book archives', 'The post type archive label used in nav menus. Default “Post Archives”. Added in 4.4', 'textdomain' ),
+		'insert_into_item'      =&gt; _x( 'Insert into book', 'Overrides the “Insert into post”/”Insert into page” phrase (used when inserting media into a post). Added in 4.4', 'textdomain' ),
+		'uploaded_to_this_item' =&gt; _x( 'Uploaded to this book', 'Overrides the “Uploaded to this post”/”Uploaded to this page” phrase (used when viewing media attached to a post). Added in 4.4', 'textdomain' ),
+		'filter_items_list'     =&gt; _x( 'Filter books list', 'Screen reader text for the filter links heading on the post type listing screen. Default “Filter posts list”/”Filter pages list”. Added in 4.4', 'textdomain' ),
+		'items_list_navigation' =&gt; _x( 'Books list navigation', 'Screen reader text for the pagination heading on the post type listing screen. Default “Posts list navigation”/”Pages list navigation”. Added in 4.4', 'textdomain' ),
+		'items_list'            =&gt; _x( 'Books list', 'Screen reader text for the items list heading on the post type listing screen. Default “Posts list”/”Pages list”. Added in 4.4', 'textdomain' ),
+	);
+
+	$args = array(
+		'labels'             =&gt; $labels,
+		'public'             =&gt; true,
+		'publicly_queryable' =&gt; true,
+		'show_ui'            =&gt; true,
+		'show_in_menu'       =&gt; true,
+		'query_var'          =&gt; true,
+		'rewrite'            =&gt; array( 'slug' =&gt; 'book' ),
+		'capability_type'    =&gt; 'post',
+		'has_archive'        =&gt; true,
+		'hierarchical'       =&gt; false,
+		'menu_position'      =&gt; null,
+		'supports'           =&gt; array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments' ),
+	);
+
+	register_post_type( 'book', $args );
+}
+
+add_action( 'init', 'wpdocs_codex_book_init' );
+</pre>
+</div>
+<p class="source-code-links"><span><a href="#" class="show-complete-source">Expand full source code</a><a href="#" class="less-complete-source">Collapse full source code</a></span></p>
+</section>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-351' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fregister_post_type%2F%3Freplytocom%3D351%23feedback-editor-351" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-3847" data-comment-id="3847" class="comment byuser comment-author-kantbtrue odd alt thread-odd thread-alt depth-1">
+			<article id="div-comment-3847" class="comment-body">
+
+							<a href="#comment-content-3847" class="screen-reader-text">Skip to note 2 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="6e8d40e5b2"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="3847" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fregister_post_type%2F%23comment-3847"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="100% like this"><span class="screen-reader-text">Vote results for this note: </span>12</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="3847" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fregister_post_type%2F%23comment-3847"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/296084560a6e9168cc26a3a017028927?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/296084560a6e9168cc26a3a017028927?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/kantbtrue/" rel="external nofollow" class="url">kantbtrue</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-3847">
+							<time datetime="2020-05-08T08:04:36+00:00">
+							1 year ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-3847">
+				<p>To add <strong>Gutenberg compatibility</strong> in your custom post type, it require two things<br />
+1. <code>supports</code> must have <code>editor</code> in it<br />
+2. <code>show_in_rest</code> set to true</p>
+<section class="source-content">
+<div class="source-code-container">
+<pre class="brush: php; title: ; notranslate" title="">function wpdocs_kantbtrue_init() {
+    $labels = array(
+        'name'                  =&gt; _x( 'Recipes', 'Post type general name', 'recipe' ),
+        'singular_name'         =&gt; _x( 'Recipe', 'Post type singular name', 'recipe' ),
+        'menu_name'             =&gt; _x( 'Recipes', 'Admin Menu text', 'recipe' ),
+        'name_admin_bar'        =&gt; _x( 'Recipe', 'Add New on Toolbar', 'recipe' ),
+        'add_new'               =&gt; __( 'Add New', 'recipe' ),
+        'add_new_item'          =&gt; __( 'Add New recipe', 'recipe' ),
+        'new_item'              =&gt; __( 'New recipe', 'recipe' ),
+        'edit_item'             =&gt; __( 'Edit recipe', 'recipe' ),
+        'view_item'             =&gt; __( 'View recipe', 'recipe' ),
+        'all_items'             =&gt; __( 'All recipes', 'recipe' ),
+        'search_items'          =&gt; __( 'Search recipes', 'recipe' ),
+        'parent_item_colon'     =&gt; __( 'Parent recipes:', 'recipe' ),
+        'not_found'             =&gt; __( 'No recipes found.', 'recipe' ),
+        'not_found_in_trash'    =&gt; __( 'No recipes found in Trash.', 'recipe' ),
+        'featured_image'        =&gt; _x( 'Recipe Cover Image', 'Overrides the “Featured Image” phrase for this post type. Added in 4.3', 'recipe' ),
+        'set_featured_image'    =&gt; _x( 'Set cover image', 'Overrides the “Set featured image” phrase for this post type. Added in 4.3', 'recipe' ),
+        'remove_featured_image' =&gt; _x( 'Remove cover image', 'Overrides the “Remove featured image” phrase for this post type. Added in 4.3', 'recipe' ),
+        'use_featured_image'    =&gt; _x( 'Use as cover image', 'Overrides the “Use as featured image” phrase for this post type. Added in 4.3', 'recipe' ),
+        'archives'              =&gt; _x( 'Recipe archives', 'The post type archive label used in nav menus. Default “Post Archives”. Added in 4.4', 'recipe' ),
+        'insert_into_item'      =&gt; _x( 'Insert into recipe', 'Overrides the “Insert into post”/”Insert into page” phrase (used when inserting media into a post). Added in 4.4', 'recipe' ),
+        'uploaded_to_this_item' =&gt; _x( 'Uploaded to this recipe', 'Overrides the “Uploaded to this post”/”Uploaded to this page” phrase (used when viewing media attached to a post). Added in 4.4', 'recipe' ),
+        'filter_items_list'     =&gt; _x( 'Filter recipes list', 'Screen reader text for the filter links heading on the post type listing screen. Default “Filter posts list”/”Filter pages list”. Added in 4.4', 'recipe' ),
+        'items_list_navigation' =&gt; _x( 'Recipes list navigation', 'Screen reader text for the pagination heading on the post type listing screen. Default “Posts list navigation”/”Pages list navigation”. Added in 4.4', 'recipe' ),
+        'items_list'            =&gt; _x( 'Recipes list', 'Screen reader text for the items list heading on the post type listing screen. Default “Posts list”/”Pages list”. Added in 4.4', 'recipe' ),
+    );     
+    $args = array(
+        'labels'             =&gt; $labels,
+        'description'        =&gt; 'Recipe custom post type.',
+        'public'             =&gt; true,
+        'publicly_queryable' =&gt; true,
+        'show_ui'            =&gt; true,
+        'show_in_menu'       =&gt; true,
+        'query_var'          =&gt; true,
+        'rewrite'            =&gt; array( 'slug' =&gt; 'recipe' ),
+        'capability_type'    =&gt; 'post',
+        'has_archive'        =&gt; true,
+        'hierarchical'       =&gt; false,
+        'menu_position'      =&gt; 20,
+        'supports'           =&gt; array( 'title', 'editor', 'author', 'thumbnail' ),
+        'taxonomies'         =&gt; array( 'category', 'post_tag' ),
+        'show_in_rest'       =&gt; true
+    );
+     
+    register_post_type( 'Recipe', $args );
+}
+add_action( 'init', 'wpdocs_kantbtrue_init' );</pre>
+</div>
+<p class="source-code-links"><span><a href="#" class="show-complete-source">Expand full source code</a><a href="#" class="less-complete-source">Collapse full source code</a></span></p>
+</section>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-3847' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fregister_post_type%2F%3Freplytocom%3D3847%23feedback-editor-3847" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-3361" data-comment-id="3361" class="comment byuser comment-author-johnnya23 even thread-even depth-1">
+			<article id="div-comment-3361" class="comment-body">
+
+							<a href="#comment-content-3361" class="screen-reader-text">Skip to note 3 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="129cf10d37"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="3361" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fregister_post_type%2F%23comment-3361"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="100% like this"><span class="screen-reader-text">Vote results for this note: </span>8</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="3361" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fregister_post_type%2F%23comment-3361"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/4409d2dba1bdc2c11dc0d3428fc99e9d?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/4409d2dba1bdc2c11dc0d3428fc99e9d?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/johnnya23/" rel="external nofollow" class="url">John Antonacci</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-3361">
+							<time datetime="2019-08-31T21:54:00+00:00">
+							2 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-3361">
+				<p>use <code>'show_in_rest' =&gt; true,</code><br />
+to enable blocks in your custom post type.</p>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-3361' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fregister_post_type%2F%3Freplytocom%3D3361%23feedback-editor-3361" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-991" data-comment-id="991" class="comment byuser comment-author-braad odd alt thread-odd thread-alt depth-1">
+			<article id="div-comment-991" class="comment-body">
+
+							<a href="#comment-content-991" class="screen-reader-text">Skip to note 4 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="14844a50d3"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="991" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fregister_post_type%2F%23comment-991"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="88% like this"><span class="screen-reader-text">Vote results for this note: </span>6</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="991" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fregister_post_type%2F%23comment-991"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/eddcc089bc94be57b4c6ebeb92b3a4f9?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/eddcc089bc94be57b4c6ebeb92b3a4f9?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/braad/" rel="external nofollow" class="url">Braad</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-991">
+							<time datetime="2015-12-11T19:50:19+00:00">
+							6 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-991">
+				<p>As of WordPress 4.3 and 4.4, a number of new labels have been added.</p>
+<p>Introduced in 4.3:<br />
+<code>featured_image</code> &#8211; defaults to &#8220;Featured Image&#8221;<br />
+<code>set_featured_image</code> &#8211; defaults to &#8220;Set featured image&#8221;<br />
+<code>remove_featured_image</code> &#8211; defaults to &#8220;Remove featured image&#8221;<br />
+<code>use_featured_image</code> &#8211; defaults to &#8220;Use as featured image&#8221;</p>
+<p>Introduced in 4.4:<br />
+<code>archives</code> &#8211; defaults to &#8220;Post Archives&#8221; or &#8220;Page Archives&#8221;<br />
+<code>insert_into_item</code> &#8211; defaults to &#8220;Insert into post&#8221; or &#8220;Insert into page&#8221;<br />
+<code>uploaded_to_this_item</code> &#8211; defaults to &#8220;Uploaded to this post&#8221; or &#8220;Uploaded to this page&#8221;<br />
+<code>filter_items_list</code> &#8211; defaults to &#8220;Filter posts list&#8221; or &#8220;Filter pages list&#8221;<br />
+<code>items_list_navigation</code> &#8211; defaults to &#8220;Posts list navigation&#8221; or &#8220;Pages list navigation&#8221;<br />
+<code>items_list</code> &#8211; defaults to &#8220;Posts list&#8221; or &#8220;Pages list&#8221;</p>
+<p>See <a href="https://make.wordpress.org/core/2015/12/11/additional-labels-for-custom-post-types-and-custom-taxonomies/" rel="nofollow ugc">https://make.wordpress.org/core/2015/12/11/additional-labels-for-custom-post-types-and-custom-taxonomies/</a> for more information.</p>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-991' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fregister_post_type%2F%3Freplytocom%3D991%23feedback-editor-991" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-352" data-comment-id="352" class="comment byuser comment-author-codex even thread-even depth-1">
+			<article id="div-comment-352" class="comment-body">
+
+							<a href="#comment-content-352" class="screen-reader-text">Skip to note 5 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="c56999960c"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="352" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fregister_post_type%2F%23comment-352"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="86% like this"><span class="screen-reader-text">Vote results for this note: </span>5</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="352" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fregister_post_type%2F%23comment-352"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/688ab6934b21bca68e0fe4fc54a66805?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/688ab6934b21bca68e0fe4fc54a66805?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/codex/" rel="external nofollow" class="url">Codex</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-352">
+							<time datetime="2015-06-30T19:48:33+00:00">
+							6 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-352">
+				<p><strong>Customize the post update messages of the &#8216;book&#8217; custom post type:</strong></p>
+<section class="source-content">
+<div class="source-code-container">
+<pre class="brush: php; title: ; notranslate" title="">
+/**
+ * Book-specific update messages.
+ *
+ * @see /wp-admin/edit-form-advanced.php
+ *
+ * @param array $messages Existing post update messages.
+ * @return array Amended post update messages with new CPT update messages.
+ */
+function wpdocs_codex_book_updated_messages( $messages ) {
+	$post             = get_post();
+	$post_type        = get_post_type( $post );
+	$post_type_object = get_post_type_object( $post_type );
+
+	$messages['book'] = array(
+		0  =&gt; '', // Unused. Messages start at index 1.
+		1  =&gt; __( 'Book updated.', 'textdomain' ),
+		2  =&gt; __( 'Custom field updated.', 'textdomain' ),
+		3  =&gt; __( 'Custom field deleted.', 'textdomain' ),
+		4  =&gt; __( 'Book updated.', 'textdomain' ),
+		/* translators: %s: date and time of the revision */
+		5  =&gt; isset( $_GET['revision'] ) ? sprintf( __( 'Book restored to revision from %s', 'textdomain' ), wp_post_revision_title( (int) $_GET['revision'], false ) ) : false,
+		6  =&gt; __( 'Book published.', 'textdomain' ),
+		7  =&gt; __( 'Book saved.', 'textdomain' ),
+		8  =&gt; __( 'Book submitted.', 'textdomain' ),
+		9  =&gt; sprintf(
+			__( 'Book scheduled for: &lt;strong&gt;%1$s&lt;/strong&gt;.', 'textdomain' ),
+			// translators: Publish box date format, see http://php.net/date
+			date_i18n( __( 'M j, Y @ G:i', 'textdomain' ), strtotime( $post-&gt;post_date ) )
+		),
+		10 =&gt; __( 'Book draft updated.', 'textdomain' ),
+	);
+
+	if ( $post_type_object-&gt;publicly_queryable ) {
+		$permalink = get_permalink( $post-&gt;ID );
+
+		$view_link = sprintf( ' &lt;a href=&quot;%s&quot;&gt;%s&lt;/a&gt;', esc_url( $permalink ), __( 'View book', 'textdomain' ) );
+		$messages['book'][1] .= $view_link;
+		$messages['book'][6] .= $view_link;
+		$messages['book'][9] .= $view_link;
+
+		$preview_permalink = add_query_arg( 'preview', 'true', $permalink );
+		$preview_link      = sprintf( '&lt;a target=&quot;_blank&quot; href=&quot;%s&quot;&gt;%s&lt;/a&gt;', esc_url( $preview_permalink ), __( 'Preview book', 'textdomain' ) );
+		$messages[ $post_type ][8] .= $preview_link;
+		$messages[ $post_type ][10] .= $preview_link;
+	}
+
+	return $messages;
+}
+
+add_filter( 'post_updated_messages', 'wpdocs_codex_book_updated_messages' );
+</pre>
+</div>
+<p class="source-code-links"><span><a href="#" class="show-complete-source">Expand full source code</a><a href="#" class="less-complete-source">Collapse full source code</a></span></p>
+</section>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-352' class='feedback hide-if-js'>
+<h4 class='feedback-title'>Feedback</h4>
+<ul class='children'>
+			<li id="comment-4089" data-comment-id="4089" class="comment byuser comment-author-deadpixl odd alt depth-2">
+			<article id="div-comment-4089" class="comment-body">
+
+			
+				<div class="comment-content" id="comment-content-4089">
+				<p>These filter hooks are no longer needed since 5.0. New labels were added that update these messages. See <a href="../get_post_type_labels/index.html" rel="nofollow ugc">https://developer.wordpress.org/reference/functions/get_post_type_labels/</a> and <a href="https://make.wordpress.org/core/2018/12/05/new-post-type-labels-in-5-0/" rel="nofollow ugc">https://make.wordpress.org/core/2018/12/05/new-post-type-labels-in-5-0/</a> for more info. Edit: The new labels that were added in <a href="https://core.trac.wordpress.org/changeset/44110" rel="nofollow ugc">[44110]</a> only apply to the transformation messages shown by the REST API, i.e. only when using the Gutenberg editor. The messages for the classic editor still need to be updated via the filter hook in this note. &mdash; By <cite class="fn"><a href="https://profiles.wordpress.org/deadpixl/" rel="external nofollow" class="url">deadpixl</a></cite> &mdash;  <a class="comment-date" href="index.html#comment-4089"><time datetime="2020-07-28T01:08:37+00:00">1 year ago</time></a></p>
+				</div><!-- .comment-content -->
+
+						</article>
+			</li>
+					</ul>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fregister_post_type%2F%3Freplytocom%3D352%23feedback-editor-352" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-1262" data-comment-id="1262" class="comment byuser comment-author-christinablust even thread-odd thread-alt depth-1">
+			<article id="div-comment-1262" class="comment-body">
+
+							<a href="#comment-content-1262" class="screen-reader-text">Skip to note 6 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="63258a06c1"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="1262" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fregister_post_type%2F%23comment-1262"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="86% like this"><span class="screen-reader-text">Vote results for this note: </span>5</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="1262" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fregister_post_type%2F%23comment-1262"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/a088a5ad4765e13cc07bb9efd2b32764?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/a088a5ad4765e13cc07bb9efd2b32764?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/christinablust/" rel="external nofollow" class="url">Christina Blust</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-1262">
+							<time datetime="2016-02-23T01:15:50+00:00">
+							6 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-1262">
+				<p><strong>Using Dashicons for a custom menu icon</strong></p>
+<p>To use one of the existing Dashicons for your custom post type in the menu (instead of the push-pin default), go to <a href="../../../resource/dashicons/index.html">Developer Resources: Dashicons</a> and click on your favorite icon. The class name will show up top — just copy and use. So for, instance, for your custom post type &#8220;Book,&#8221; you might use <code>dashicons-book</code>.</p>
+<pre class="brush: php; title: ; notranslate" title="">
+function book_setup_post_type() {
+    $args = array(
+        'public'    =&gt; true,
+        'label'     =&gt; __( 'Books', 'textdomain' ),
+        'menu_icon' =&gt; 'dashicons-book',
+    );
+    register_post_type( 'book', $args );
+}
+add_action( 'init', 'book_setup_post_type' );
+</pre>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-1262' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fregister_post_type%2F%3Freplytocom%3D1262%23feedback-editor-1262" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-2021" data-comment-id="2021" class="comment byuser comment-author-marale odd alt thread-even depth-1">
+			<article id="div-comment-2021" class="comment-body">
+
+							<a href="#comment-content-2021" class="screen-reader-text">Skip to note 7 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="c638610310"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="2021" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fregister_post_type%2F%23comment-2021"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="100% like this"><span class="screen-reader-text">Vote results for this note: </span>4</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="2021" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fregister_post_type%2F%23comment-2021"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/a00fdb4219094e42c2f1d1aadd974ea3?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/a00fdb4219094e42c2f1d1aadd974ea3?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/marale/" rel="external nofollow" class="url">marale</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-2021">
+							<time datetime="2016-12-29T16:18:21+00:00">
+							5 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-2021">
+				<p>This function doesn&#8217;t check if </p>
+<pre class="brush: php; title: ; notranslate" title="">$post_type</pre>
+<p> key is unique. If the post type with existing key is registered it overwrites </p>
+<pre class="brush: php; title: ; notranslate" title="">$wp_post_types</pre>
+<p> global array element without calling </p>
+<pre class="brush: php; title: ; notranslate" title="">unregister_post_type()</pre>
+<p> function. It still resides in memory, rewrite rules, and hooks are not removed. Function </p>
+<pre class="brush: php; title: ; notranslate" title="">unregister_post_type()</pre>
+<p> doesn&#8217;t allow to unregister builtin post types, but </p>
+<pre class="brush: php; title: ; notranslate" title="">register_post_type()</pre>
+<p> allows to register them more than once.</p>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-2021' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fregister_post_type%2F%3Freplytocom%3D2021%23feedback-editor-2021" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-2244" data-comment-id="2244" class="comment byuser comment-author-janwoostendorp even thread-odd thread-alt depth-1">
+			<article id="div-comment-2244" class="comment-body">
+
+							<a href="#comment-content-2244" class="screen-reader-text">Skip to note 8 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="1001916527"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="2244" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fregister_post_type%2F%23comment-2244"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="100% like this"><span class="screen-reader-text">Vote results for this note: </span>4</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="2244" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fregister_post_type%2F%23comment-2244"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/a0259b3a1bd1d9affc7f75fc5480fd82?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/a0259b3a1bd1d9affc7f75fc5480fd82?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/janwoostendorp/" rel="external nofollow" class="url">janw.oostendorp</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-2244">
+							<time datetime="2017-06-02T08:48:28+00:00">
+							4 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-2244">
+				<p>To use an svg which colors are always correct embed it inline like:</p>
+<pre class="brush: php; title: ; notranslate" title="">register_post_type('labs', [
+        // ect
+        'menu_icon' =&gt; 'data:image/svg+xml;base64,' . base64_encode('&lt;svg width=&quot;20&quot; height=&quot;20&quot; viewBox=&quot;0 0 1792 1792&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;&gt;&lt;path fill=&quot;black&quot; d=&quot;M1591 1448q56 89 21.5 152.5t-140.5 63.5h-1152q-106 0-140.5-63.5t21.5-152.5l503-793v-399h-64q-26 0-45-19t-19-45 19-45 45-19h512q26 0 45 19t19 45-19 45-45 19h-64v399zm-779-725l-272 429h712l-272-429-20-31v-436h-128v436z&quot;/&gt;&lt;/svg&gt;')
+     ]);</pre>
+<p>The <code>fill="black"</code> is important.<br />
+Source: <a href="https://stackoverflow.com/a/42265057/933065" rel="nofollow ugc">https://stackoverflow.com/a/42265057/933065</a></p>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-2244' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fregister_post_type%2F%3Freplytocom%3D2244%23feedback-editor-2244" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-4302" data-comment-id="4302" class="comment byuser comment-author-eatbuildplay odd alt thread-even depth-1">
+			<article id="div-comment-4302" class="comment-body">
+
+							<a href="#comment-content-4302" class="screen-reader-text">Skip to note 9 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="d3c49feac1"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="4302" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fregister_post_type%2F%23comment-4302"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="100% like this"><span class="screen-reader-text">Vote results for this note: </span>4</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="4302" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fregister_post_type%2F%23comment-4302"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/21af0d5c46801f56e94243a14a035e5a?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/21af0d5c46801f56e94243a14a035e5a?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/eatbuildplay/" rel="external nofollow" class="url">eatbuildplay</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-4302">
+							<time datetime="2020-09-25T20:33:31+00:00">
+							11 months ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-4302">
+				<p>This documentation is currently missing the &#8220;template&#8221; and &#8220;template_lock&#8221; arguments which I&#8217;ve seen used in some projects. The purpose of which is to automatically load a certain block or block template into the Gutenberg editor, or to lock the usage of blocks.</p>
+<p>The documentation for these arguments can be found in this doc section about Gutenberg blocks at <a href="../../../block-editor/developers/block-api/block-templates/index.html">Block Editor Handbook &gt; Templates</a></p>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-4302' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fregister_post_type%2F%3Freplytocom%3D4302%23feedback-editor-4302" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-1792" data-comment-id="1792" class="comment byuser comment-author-kevinwhoffman even thread-odd thread-alt depth-1">
+			<article id="div-comment-1792" class="comment-body">
+
+							<a href="#comment-content-1792" class="screen-reader-text">Skip to note 10 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="2b183359cc"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="1792" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fregister_post_type%2F%23comment-1792"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="80% like this"><span class="screen-reader-text">Vote results for this note: </span>3</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="1792" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fregister_post_type%2F%23comment-1792"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/1bf1a27fafbcbac571df8a4ec0373301?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/1bf1a27fafbcbac571df8a4ec0373301?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/kevinwhoffman/" rel="external nofollow" class="url">Kevin Hoffman</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-1792">
+							<time datetime="2016-08-30T03:18:31+00:00">
+							5 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-1792">
+				<p>The following guidelines ensure consistency with the default post types and help to avoid conflict with post types registered by other developers.</p>
+<ul>
+<li>Set the value of <code>$post_type</code> to a singular noun (e.g. <code>testimonial</code>, <code>portfolio</code>, <code>event</code>). Remember you can always use the plural form for other parameters that affect the labels and rewrite slug.</li>
+<li>Separate words with underscores (e.g. <code>sports_team</code>, <code>video_game</code>).</li>
+<li>Prefix your post type with 3-4 characters followed by an underscore to prevent conflict with other post types (e.g. <code>kwh_testimonial</code>).
+</li>
+</ul>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-1792' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fregister_post_type%2F%3Freplytocom%3D1792%23feedback-editor-1792" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-1914" data-comment-id="1914" class="comment byuser comment-author-jsphpl odd alt thread-even depth-1">
+			<article id="div-comment-1914" class="comment-body">
+
+							<a href="#comment-content-1914" class="screen-reader-text">Skip to note 11 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="ffd775721a"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="1914" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fregister_post_type%2F%23comment-1914"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="100% like this"><span class="screen-reader-text">Vote results for this note: </span>3</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="1914" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fregister_post_type%2F%23comment-1914"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/c61ede07ed0fc47642a0ac8914ca9a43?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/c61ede07ed0fc47642a0ac8914ca9a43?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/jsphpl/" rel="external nofollow" class="url">Joseph Paul</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-1914">
+							<time datetime="2016-11-15T12:35:44+00:00">
+							5 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-1914">
+				<p><strong>Never create a custom post type &#8220;author&#8221;</strong></p>
+<p>The archive page and posts pages will conflict with wordpress&#8217; builtin <code>/author/{username}</code> routes.<br />
+Even if you <code>'rewrite' =&gt; ['slug' =&gt; 'writer']</code>, there will be some confusion and your custom author posts will not be accessible.</p>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-1914' class='feedback hide-if-js'>
+<h4 class='feedback-title'>Feedback</h4>
+<ul class='children'>
+			<li id="comment-2625" data-comment-id="2625" class="comment byuser comment-author-_smartik_ even depth-2">
+			<article id="div-comment-2625" class="comment-body">
+
+			
+				<div class="comment-content" id="comment-content-2625">
+				<p>This is not the only case. Here is the full list of reserved keywords: <a href="../../../../codex.wordpress.org/Reserved_Terms.html" rel="nofollow ugc">https://codex.wordpress.org/Reserved_Terms</a> &mdash; By <cite class="fn"><a href="https://profiles.wordpress.org/_smartik_/" rel="external nofollow" class="url">Andrei Surdu</a></cite> &mdash;  <a class="comment-date" href="index.html#comment-2625"><time datetime="2018-03-30T07:37:47+00:00">3 years ago</time></a></p>
+				</div><!-- .comment-content -->
+
+						</article>
+			</li>
+					</ul>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fregister_post_type%2F%3Freplytocom%3D1914%23feedback-editor-1914" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-364" data-comment-id="364" class="comment byuser comment-author-codex odd alt thread-odd thread-alt depth-1">
+			<article id="div-comment-364" class="comment-body">
+
+							<a href="#comment-content-364" class="screen-reader-text">Skip to note 12 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="2d20ab6cbc"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="364" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fregister_post_type%2F%23comment-364"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="75% like this"><span class="screen-reader-text">Vote results for this note: </span>2</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="364" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fregister_post_type%2F%23comment-364"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/688ab6934b21bca68e0fe4fc54a66805?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/688ab6934b21bca68e0fe4fc54a66805?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/codex/" rel="external nofollow" class="url">Codex</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-364">
+							<time datetime="2015-07-01T11:09:01+00:00">
+							6 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-364">
+				<p>This is example adds contextual help to the &#8216;book&#8217; post type.</p>
+<section class="source-content">
+<div class="source-code-container">
+<pre class="brush: php; title: ; notranslate" title="">
+add_action( 'contextual_help', 'wpdocs_codex_add_help_text', 10, 3 );
+/**
+ * Display contextual help for the Book post type
+ */
+function wpdocs_codex_add_help_text( $contextual_help, $screen_id, $screen ) {
+
+	// $contextual_help .= var_dump( $screen ); // use this to help determine $screen-&gt;id
+	if ( 'book' == $screen-&gt;id ) {
+		$contextual_help =
+			'&lt;p&gt;' . __('Things to remember when adding or editing a book:', 'your_text_domain') . '&lt;/p&gt;' .
+			'&lt;ul&gt;' .
+				'&lt;li&gt;' . __('Specify the correct genre such as Mystery, or Historic.', 'your_text_domain') . '&lt;/li&gt;' .
+				'&lt;li&gt;' . __('Specify the correct writer of the book.  Remember that the Author module refers to you, the author of this book review.', 'your_text_domain') . '&lt;/li&gt;' .
+			'&lt;/ul&gt;' .
+			'&lt;p&gt;' . __('If you want to schedule the book review to be published in the future:', 'your_text_domain') . '&lt;/p&gt;' .
+			'&lt;ul&gt;' .
+				'&lt;li&gt;' . __('Under the Publish module, click on the Edit link next to Publish.', 'your_text_domain') . '&lt;/li&gt;' .
+				'&lt;li&gt;' . __('Change the date to the date to actual publish this article, then click on Ok.', 'your_text_domain') . '&lt;/li&gt;' .
+			'&lt;/ul&gt;' .
+			'&lt;p&gt;&lt;strong&gt;' . __('For more information:', 'your_text_domain') . '&lt;/strong&gt;&lt;/p&gt;' .
+			'&lt;p&gt;' . __('&lt;a href=&quot;https://codex.wordpress.org/Posts_Edit_SubPanel&quot; target=&quot;_blank&quot;&gt;Edit Posts Documentation&lt;/a&gt;', 'your_text_domain') . '&lt;/p&gt;' .
+			'&lt;p&gt;' . __('&lt;a href=&quot;https://wordpress.org/support/&quot; target=&quot;_blank&quot;&gt;Support Forums&lt;/a&gt;', 'your_text_domain') . '&lt;/p&gt;' ;
+	} elseif ( 'edit-book' == $screen-&gt;id ) {
+		$contextual_help = '&lt;p&gt;' . __('This is the help screen displaying the table of books blah blah blah.', 'your_text_domain') . '&lt;/p&gt;';
+	}
+	
+	return $contextual_help;
+}
+</pre>
+</div>
+<p class="source-code-links"><span><a href="#" class="show-complete-source">Expand full source code</a><a href="#" class="less-complete-source">Collapse full source code</a></span></p>
+</section>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-364' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fregister_post_type%2F%3Freplytocom%3D364%23feedback-editor-364" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-365" data-comment-id="365" class="comment byuser comment-author-codex even thread-even depth-1">
+			<article id="div-comment-365" class="comment-body">
+
+							<a href="#comment-content-365" class="screen-reader-text">Skip to note 13 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="491e15e392"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="365" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fregister_post_type%2F%23comment-365"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="75% like this"><span class="screen-reader-text">Vote results for this note: </span>2</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="365" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fregister_post_type%2F%23comment-365"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/688ab6934b21bca68e0fe4fc54a66805?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/688ab6934b21bca68e0fe4fc54a66805?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/codex/" rel="external nofollow" class="url">Codex</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-365">
+							<time datetime="2015-07-01T11:15:50+00:00">
+							6 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-365">
+				<p>This example adds WordPress 3.3+ Help Tab to the &#8216;book&#8217; post type.</p>
+<section class="source-content">
+<div class="source-code-container">
+<pre class="brush: php; title: ; notranslate" title="">
+add_action( 'admin_head', 'wpdocs_codex_custom_help_tab' );
+/**
+ * Add Help Tab to Book post type.
+ */
+function wpdocs_codex_custom_help_tab() {
+
+	$screen = get_current_screen();
+
+	// Return early if we're not on the book post type.
+	if ( 'book' != $screen-&gt;post_type ) {
+		return;
+	}
+
+	// Setup help tab args.
+	$args = array(
+		'id'      =&gt; 'your_custom_id', // Unique id for the tab.
+		'title'   =&gt; __( 'Custom Help', 'textdomain' ), // Unique visible title for the tab.
+		'content' =&gt; '&lt;h3&gt;Help Title&lt;/h3&gt;&lt;p&gt;Help content&lt;/p&gt;', // Actual help text.
+	);
+
+	// Add the help tab.
+	$screen-&gt;add_help_tab( $args );
+
+}
+</pre>
+</div>
+<p class="source-code-links"><span><a href="#" class="show-complete-source">Expand full source code</a><a href="#" class="less-complete-source">Collapse full source code</a></span></p>
+</section>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-365' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fregister_post_type%2F%3Freplytocom%3D365%23feedback-editor-365" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-1900" data-comment-id="1900" class="comment byuser comment-author-natewr odd alt thread-odd thread-alt depth-1">
+			<article id="div-comment-1900" class="comment-body">
+
+							<a href="#comment-content-1900" class="screen-reader-text">Skip to note 14 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="730ee21066"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="1900" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fregister_post_type%2F%23comment-1900"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="100% like this"><span class="screen-reader-text">Vote results for this note: </span>2</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="1900" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fregister_post_type%2F%23comment-1900"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/154471b2aa048e7b2190c53303217ec4?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/154471b2aa048e7b2190c53303217ec4?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/natewr/" rel="external nofollow" class="url">NateWr</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-1900">
+							<time datetime="2016-10-26T09:31:45+00:00">
+							5 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-1900">
+				<p>When using a base64-encoded SVG for the <code>menu_icon</code> argument, your SVG must have a <code>fill</code> attribute. Without the <code>fill</code> attribute, WordPress won&#8217;t be able to match the admin color scheme.</p>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-1900' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fregister_post_type%2F%3Freplytocom%3D1900%23feedback-editor-1900" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-2624" data-comment-id="2624" class="comment byuser comment-author-_smartik_ even thread-even depth-1">
+			<article id="div-comment-2624" class="comment-body">
+
+							<a href="#comment-content-2624" class="screen-reader-text">Skip to note 15 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="02ac19bdb2"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="2624" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fregister_post_type%2F%23comment-2624"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="100% like this"><span class="screen-reader-text">Vote results for this note: </span>2</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="2624" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fregister_post_type%2F%23comment-2624"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/7f20efa57653fb7402e9c37783248e49?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/7f20efa57653fb7402e9c37783248e49?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/_smartik_/" rel="external nofollow" class="url">Andrei Surdu</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-2624">
+							<time datetime="2018-03-30T07:34:59+00:00">
+							3 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-2624">
+				<p>These are the built-in post types:</p>
+<pre class="brush: php; title: ; notranslate" title="">
+'post',
+'page',
+'attachment',
+'revision',
+'nav_menu_item',
+'custom_css',
+'customize_changeset',
+'oembed_cache',
+'user_request',
+</pre>
+<p>If you want to view the info for all built-in and or custom post types, you can get it from <code>$wp_post_types</code> global variable.<br />
+Example:</p>
+<pre class="brush: php; title: ; notranslate" title="">
+add_action( 'admin_notices', function () {
+	global $wp_post_types;
+	var_dump( $wp_post_types );
+});
+</pre>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-2624' class='feedback hide-if-js'>
+<h4 class='feedback-title'>Feedback</h4>
+<ul class='children'>
+			<li id="comment-3431" data-comment-id="3431" class="comment byuser comment-author-_smartik_ odd alt depth-2">
+			<article id="div-comment-3431" class="comment-body">
+
+			
+				<div class="comment-content" id="comment-content-3431">
+				<p>Also in WordPress 5.0+ is added another post type for the new editor. It&#8217;s <code>wp_block</code> &mdash; By <cite class="fn"><a href="https://profiles.wordpress.org/_smartik_/" rel="external nofollow" class="url">Andrei Surdu</a></cite> &mdash;  <a class="comment-date" href="index.html#comment-3431"><time datetime="2019-10-23T08:43:59+00:00">2 years ago</time></a></p>
+				</div><!-- .comment-content -->
+
+						</article>
+			</li>
+					</ul>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fregister_post_type%2F%3Freplytocom%3D2624%23feedback-editor-2624" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-3832" data-comment-id="3832" class="comment byuser comment-author-simongcc even thread-odd thread-alt depth-1">
+			<article id="div-comment-3832" class="comment-body">
+
+							<a href="#comment-content-3832" class="screen-reader-text">Skip to note 16 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="52776a514e"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="3832" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fregister_post_type%2F%23comment-3832"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="100% like this"><span class="screen-reader-text">Vote results for this note: </span>2</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="3832" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fregister_post_type%2F%23comment-3832"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/52b752660072401e4a971105206d44a0?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/52b752660072401e4a971105206d44a0?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/simongcc/" rel="external nofollow" class="url">simongcc</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-3832">
+							<time datetime="2020-05-02T07:02:42+00:00">
+							1 year ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-3832">
+				<p>The argument &#8216;with_front&#8217; in <a href="../../../../codex.wordpress.org/Function_Reference/register_post_type.html#Arguments" rel="nofollow ugc">old Codex</a> is more clearly explained with example. </p>
+<p><strong>&#8216;with_front&#8217; =&gt; bool Should the permalink structure be prepended with the front base.<br />
+(example: if your permalink structure is /blog/, then your links will be: false-&gt;/news/, true-&gt;/blog/news/). Defaults to true</strong></p>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-3832' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fregister_post_type%2F%3Freplytocom%3D3832%23feedback-editor-3832" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-3035" data-comment-id="3035" class="comment byuser comment-author-eddr odd alt thread-even depth-1">
+			<article id="div-comment-3035" class="comment-body">
+
+							<a href="#comment-content-3035" class="screen-reader-text">Skip to note 17 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="372d4b37a6"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="3035" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fregister_post_type%2F%23comment-3035"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="100% like this"><span class="screen-reader-text">Vote results for this note: </span>1</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="3035" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fregister_post_type%2F%23comment-3035"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/5c2bad17add569ec592c0796708c9834?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/5c2bad17add569ec592c0796708c9834?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/eddr/" rel="external nofollow" class="url">eddr</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-3035">
+							<time datetime="2019-01-10T16:14:25+00:00">
+							3 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-3035">
+				<p>about hierarchical post type performance issues note : &#8221; With this parameter set to true WordPress will fetch all IDs of that particular post type on each administration page load for your post type. &#8221;</p>
+<p>The phrasing is a little bit confusing. WP will fetch all the child IDs of this particular post of this post type and not &#8220;all IDs&#8221; of &#8220;the post type&#8221; which is a term describing the type of a post and not a specific post.</p>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-3035' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fregister_post_type%2F%3Freplytocom%3D3035%23feedback-editor-3035" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-3340" data-comment-id="3340" class="comment byuser comment-author-mumbomedia even thread-odd thread-alt depth-1">
+			<article id="div-comment-3340" class="comment-body">
+
+							<a href="#comment-content-3340" class="screen-reader-text">Skip to note 18 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="bb9a96a46e"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="3340" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fregister_post_type%2F%23comment-3340"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="100% like this"><span class="screen-reader-text">Vote results for this note: </span>1</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="3340" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fregister_post_type%2F%23comment-3340"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/f4becfcc134cec36d229600c3ec73bf2?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/f4becfcc134cec36d229600c3ec73bf2?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/mumbomedia/" rel="external nofollow" class="url">mumbomedia</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-3340">
+							<time datetime="2019-08-16T13:13:30+00:00">
+							2 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-3340">
+				<p>There is a mistake in this document.<br />
+The param supports also accept the boolean value false.<br />
+When supports is set to false  the post type don&#8217;t use any of the build in feature like editor.<br />
+Only the submit metabox is automatically registered.</p>
+<p>So I would really appreticate if someone could update the info so other developers could benefit from my research.</p>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-3340' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fregister_post_type%2F%3Freplytocom%3D3340%23feedback-editor-3340" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-295" data-comment-id="295" class="comment byuser comment-author-drewapicture odd alt thread-even depth-1">
+			<article id="div-comment-295" class="comment-body">
+
+							<a href="#comment-content-295" class="screen-reader-text">Skip to note 19 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="8090175912"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="295" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fregister_post_type%2F%23comment-295"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title=""><span class="screen-reader-text">Vote results for this note: </span>0</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="295" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fregister_post_type%2F%23comment-295"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/95c934fa2c3362794bf62ff8c59ada08?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/95c934fa2c3362794bf62ff8c59ada08?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/drewapicture/" rel="external nofollow" class="url">Drew Jaynes</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-295">
+							<time datetime="2015-06-28T15:47:23+00:00">
+							6 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-295">
+				<p>This basic example registers a &#8216;book&#8217; post type.</p>
+<pre class="brush: php; title: ; notranslate" title="">
+/**
+ * Register a book post type.
+ */
+function wpdocs_codex_custom_init() {
+	$args = array(
+		'public' =&gt; true,
+		'label'  =&gt; __( 'Books', 'textdomain' ),
+	);
+	register_post_type( 'book', $args );
+}
+add_action( 'init', 'wpdocs_codex_custom_init' );
+</pre>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-295' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fregister_post_type%2F%3Freplytocom%3D295%23feedback-editor-295" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-3395" data-comment-id="3395" class="comment byuser comment-author-juliobox even thread-odd thread-alt depth-1">
+			<article id="div-comment-3395" class="comment-body">
+
+							<a href="#comment-content-3395" class="screen-reader-text">Skip to note 20 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="0506d05ed0"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="3395" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fregister_post_type%2F%23comment-3395"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title=""><span class="screen-reader-text">Vote results for this note: </span>0</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="3395" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fregister_post_type%2F%23comment-3395"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/8291a6fac33a60afe74432b2ef728cf6?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/8291a6fac33a60afe74432b2ef728cf6?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/juliobox/" rel="external nofollow" class="url">Julio Potier</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-3395">
+							<time datetime="2019-09-25T21:31:34+00:00">
+							2 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-3395">
+				<p>Note that although the <code>$public</code> attribute is optional, the inputs passed to the <code>register_post_type()</code> function are exactly what is queried by the <code>get_post_types()</code> function. So if you verbosely set the equivalent options for <code>publicly_queriable</code>, <code>show_ui</code>, <code>show_in_nav_menus</code>, and <code>exclude_from_search</code>, this will not be handled the same as if you had set the <code>$public</code> attribute. See bug <a href="https://core.trac.wordpress.org/ticket/18950" rel="nofollow ugc">https://core.trac.wordpress.org/ticket/18950</a></p>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-3395' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fregister_post_type%2F%3Freplytocom%3D3395%23feedback-editor-3395" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-4242" data-comment-id="4242" class="comment byuser comment-author-huskyr odd alt thread-even depth-1">
+			<article id="div-comment-4242" class="comment-body">
+
+							<a href="#comment-content-4242" class="screen-reader-text">Skip to note 21 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="b95eaf7a70"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="4242" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fregister_post_type%2F%23comment-4242"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title=""><span class="screen-reader-text">Vote results for this note: </span>0</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="4242" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fregister_post_type%2F%23comment-4242"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/46f6dc70088702cdb542062d382bed29?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/46f6dc70088702cdb542062d382bed29?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/huskyr/" rel="external nofollow" class="url">Hay</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-4242">
+							<time datetime="2020-09-10T13:41:16+00:00">
+							12 months ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-4242">
+				<p>If for some reason your pages with a custom post type give a 404 on the frontend, you might need to flush your rewrite rules. You can do this manually by going to Settings &#8211;&gt; Permalinks and hitting &#8216;Save Changes&#8217; or by calling <code>        flush_rewrite_rules()</code>. Note that you shouldn&#8217;t call <code>flush_rewrite_rules()</code> because it&#8217;s expensive. Only run it on plugin activation. See the <a href="#flushing-rewrite-on-activation" rel="nofollow ugc">section above</a>.</p>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-4242' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fregister_post_type%2F%3Freplytocom%3D4242%23feedback-editor-4242" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-5056" data-comment-id="5056" class="comment byuser comment-author-souri even thread-odd thread-alt depth-1">
+			<article id="div-comment-5056" class="comment-body">
+
+							<a href="#comment-content-5056" class="screen-reader-text">Skip to note 22 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="1976960046"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="5056" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fregister_post_type%2F%23comment-5056"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title=""><span class="screen-reader-text">Vote results for this note: </span>0</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="5056" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fregister_post_type%2F%23comment-5056"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/b16a3ec3274066738c66ddaa27dbcda9?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/b16a3ec3274066738c66ddaa27dbcda9?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/souri/" rel="external nofollow" class="url">souri</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-5056">
+							<time datetime="2021-05-17T12:47:49+00:00">
+							4 months ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-5056">
+				<p>Post type as <strong>submenu</strong> is possible.<br />
+You can put a custom post type in the menu of another CPT!<br />
+The documentation isn&#8217;t that obvious!<br />
+But it is perfectly possible to make a post type a <strong>submenu</strong> of another post type!<br />
+The option &#8220;<strong>show_in_menu</strong>&#8221; is the key to accomplish that. (Other than the suggested <strong>menu_position</strong> parameter)</p>
+<p>You only have to give &#8220;<strong>show_in_menu</strong>&#8221; this parameter: &#8220;<strong>edit.php?post_type=page</strong>&#8221;<br />
+Where &#8220;<strong>page</strong>&#8221; could be a built in post type or any post type you create!</p>
+<p>Here is an example code snippet</p>
+<pre class="brush: php; title: ; notranslate" title="">
+   	$books_args = array(
+        'label'     		=&gt; __( 'Books', 'textdomain' ),
+        'show_in_menu'    	=&gt; 'edit.php?post_type=page',
+    );
+    register_post_type( 'book', $books_args );
+</pre>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-5056' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fregister_post_type%2F%3Freplytocom%3D5056%23feedback-editor-5056" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-2148" data-comment-id="2148" class="comment byuser comment-author-tripflex odd alt thread-even depth-1 bad-note">
+			<article id="div-comment-2148" class="comment-body">
+
+							<a href="#comment-content-2148" class="screen-reader-text">Skip to note 23 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="ef23c474ea"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="2148" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fregister_post_type%2F%23comment-2148"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="17% like this"><span class="screen-reader-text">Vote results for this note: </span>-4</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="2148" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fregister_post_type%2F%23comment-2148"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/61250077d89926933e5a694f1bb4f4a6?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/61250077d89926933e5a694f1bb4f4a6?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/tripflex/" rel="external nofollow" class="url">tripflex</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-2148">
+							<time datetime="2017-03-15T23:22:06+00:00">
+							4 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-2148">
+				<p>To use a custom SVG in <code>menu_icon</code> find or create the SVG you want to use, and then you can use a site like <a href="https://www.base64-image.de/" rel="nofollow ugc">https://www.base64-image.de/</a> to convert it to base64 code.</p>
+<p>In order for the SVG icon to match the admin color scheme, it <strong>must</strong> have the <code>fill</code> attribute set in any <code>path</code> elements in the SVG file.</p>
+<p>Edit the SVG file with an editor and add fill attribute to any `path` elements before converting to base64.</p>
+<pre class="brush: php; title: ; notranslate" title="">&lt;path d=&quot;...</pre>
+<p>should be</p>
+<pre class="brush: php; title: ; notranslate" title="">&lt;path fill=&quot;#9da3a8&quot; d=&quot;...</pre>
+<p>You can use any color you want, including using <code>none</code> instead of a color, as WordPress will automatically update it to match the color scheme.</p>
+<p><a href="https://css-tricks.com/almanac/properties/f/fill/" rel="nofollow ugc">https://css-tricks.com/almanac/properties/f/fill/</a></p>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-2148' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fregister_post_type%2F%3Freplytocom%3D2148%23feedback-editor-2148" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-925" data-comment-id="925" class="comment even thread-odd thread-alt depth-1 bad-note">
+			<article id="div-comment-925" class="comment-body">
+
+							<a href="#comment-content-925" class="screen-reader-text">Skip to note 24 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="82094b661b"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="925" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fregister_post_type%2F%23comment-925"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="8% like this"><span class="screen-reader-text">Vote results for this note: </span>-10</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="925" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fregister_post_type%2F%23comment-925"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/547aafe372d62923ea55f5d56fba5187?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/547aafe372d62923ea55f5d56fba5187?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="http://www.sennza.com.au/" rel="external nofollow" class="url">Bronson Quick</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-925">
+							<time datetime="2015-10-30T04:26:55+00:00">
+							6 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-925">
+				<p>When you register a new Custom Post Type I&#8217;d highly recommend setting <code>with_front =&gt; true</code> as it&#8217;s false by default in core. This change to your CPT registration will be helpful if a user/client ever changes their permalinks to <code>/blog/%category%/%postname%/</code> because all your registered CPTs will have <code>/blog/your-cpt</code></p>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-925' class='feedback hide-if-js'>
+<h4 class='feedback-title'>Feedback</h4>
+<ul class='children'>
+			<li id="comment-4730" data-comment-id="4730" class="comment byuser comment-author-karan4word odd alt depth-2">
+			<article id="div-comment-4730" class="comment-body">
+
+			
+				<div class="comment-content" id="comment-content-4730">
+				<p>its true by default not false &mdash; By <cite class="fn"><a href="https://profiles.wordpress.org/karan4word/" rel="external nofollow" class="url">karan4official</a></cite> &mdash;  <a class="comment-date" href="index.html#comment-4730"><time datetime="2021-01-06T15:41:59+00:00">8 months ago</time></a></p>
+				</div><!-- .comment-content -->
+
+						</article>
+			</li>
+					</ul>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fregister_post_type%2F%3Freplytocom%3D925%23feedback-editor-925" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+		</ol><!-- .comment-list -->
+
+		
+	
+	
+			<div id="respond" class="comment-respond">
+		<h3 id="reply-title" class="comment-reply-title"> <small></small></h3><p>You must <a href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fregister_post_type%2F%23comments">log in</a> before being able to contribute a note or feedback.</p>	</div><!-- #respond -->
+		
+	
+</div><!-- #comments -->
+	</section>
+</div>
+
+</article>
+
+			
+		
+		</main><!-- #main -->
+	</div><!-- #primary -->
+	</div><!-- #content -->
+
+</div><!-- #page -->
+
+
+<div id="wporg-footer">
+	<div class="wrapper">
+		<ul>
+			<li><a href="http://wordpress.org/about/" title="An introduction to the WordPress project">About</a></li>
+			<li><a href="http://wordpress.org/news/" title="News and Updates">Blog</a></li>
+			<li><a href="http://wordpress.org/hosting/" title="Recommended web hosting providers">Hosting</a></li>
+			<li><a href="https://wordpressfoundation.org/donate/" title="Donate to the WordPress Foundation">Donate</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://wordpress.org/support/" title="Forums, documentation, and other resources">Support</a></li>
+			<li><a href="../../../index.html" title="Resources for WordPress developers">Developers</a></li>
+			<li><a href="http://make.wordpress.org/" title="Give back to WordPress through code, support, translation and more">Get Involved</a></li>
+			<li><a href="http://learn.wordpress.org/" title="Workshops and training materials">Learn</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://wordpress.org/showcase/" title="Some of the best WordPress sites on the Web">Showcase</a></li>
+			<li><a href="http://wordpress.org/plugins/" title="Add extra functionality to WordPress">Plugins</a></li>
+			<li><a href="http://wordpress.org/themes/" title="Make your WordPress pretty">Themes</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://central.wordcamp.org/" title="Find a WordPress event near you">WordCamp</a></li>
+			<li><a href="http://wordpress.tv/" title="Videos, tutorials, and WordCamp sessions">WordPress.TV</a></li>
+			<li><a href="http://buddypress.org/" title="A set of plugins to transform your WordPress into a social network">BuddyPress</a></li>
+			<li><a href="http://bbpress.org/" title="Fast, slick forums built on WordPress">bbPress</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://wordpress.com/?ref=wporg-footer" title="Hassle-free WordPress hosting">WordPress.com</a></li>
+			<li><a href="http://ma.tt/" title="Co-founder of WordPress, an example of what WordPress can do">Matt</a></li>
+			<li><a href="http://wordpress.org/about/privacy/" title="WordPress.org Privacy Policy">Privacy</a></li>
+			<li><a href="https://publiccode.eu/" target="_blank">Public Code</a></li>
+		</ul>
+
+		<ul class="social-media-links">
+			<li><span class="dashicons dashicons-twitter"></span><a href="https://twitter.com/WordPress" title="Follow @WordPress on Twitter">@WordPress</a></li>
+			<li><span class="dashicons dashicons-facebook"></span><a href="https://www.facebook.com/WordPress/" title="Like WordPress on Facebook">WordPress</a></li>
+		</ul>
+	</div>
+
+		<p class="cip cip-image">Code is Poetry.</p>
+</div>
+
+<script src="../../../../s.w.org/style/js/navigation.min.js?20190128"></script>
+
+<script type='text/javascript'>
+	(function(){
+		var corecss = document.createElement('link');
+		var themecss = document.createElement('link');
+		var corecssurl = "../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shCore.css?ver=3.0.9b";
+		if ( corecss.setAttribute ) {
+				corecss.setAttribute( "rel", "stylesheet" );
+				corecss.setAttribute( "type", "text/css" );
+				corecss.setAttribute( "href", corecssurl );
+		} else {
+				corecss.rel = "stylesheet";
+				corecss.href = corecssurl;
+		}
+		document.head.appendChild( corecss );
+		var themecssurl = "../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shThemeDefault.css?ver=3.0.9b";
+		if ( themecss.setAttribute ) {
+				themecss.setAttribute( "rel", "stylesheet" );
+				themecss.setAttribute( "type", "text/css" );
+				themecss.setAttribute( "href", themecssurl );
+		} else {
+				themecss.rel = "stylesheet";
+				themecss.href = themecssurl;
+		}
+		document.head.appendChild( themecss );
+	})();
+	SyntaxHighlighter.config.strings.expandSource = '+ expand source';
+	SyntaxHighlighter.config.strings.help = '?';
+	SyntaxHighlighter.config.strings.alert = 'SyntaxHighlighter\n\n';
+	SyntaxHighlighter.config.strings.noBrush = 'Can\'t find brush for: ';
+	SyntaxHighlighter.config.strings.brushNotHtmlScript = 'Brush wasn\'t configured for html-script option: ';
+	SyntaxHighlighter.defaults['pad-line-numbers'] = false;
+	SyntaxHighlighter.defaults['toolbar'] = false;
+	SyntaxHighlighter.all();
+
+	// Infinite scroll support
+	if ( typeof( jQuery ) !== 'undefined' ) {
+		jQuery( function( $ ) {
+			$( document.body ).on( 'post-load', function() {
+				SyntaxHighlighter.highlight();
+			} );
+		} );
+	}
+</script>
+<link rel='stylesheet' id='buttons-css'  href='../../../wp-includes/css/buttons.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<script type='text/javascript' src='../../../wp-includes/js/hoverintent-js.min.js?ver=2.2.1' id='hoverintent-js-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/admin-bar.min.js?ver=5.9-alpha-51701' id='admin-bar-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/navigation.js?ver=20181209' id='wporg-developer-navigation-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/skip-link-focus-fix.js?ver=20130115' id='wporg-developer-skip-link-focus-fix-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/search.js?ver=20150430' id='wporg-developer-search-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/menu.js?ver=20180201' id='wporg-developer-menu-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/awesomplete.min.js?ver=20160322' id='awesomplete-js'></script>
+<script type='text/javascript' id='autocomplete-js-extra'>
+/* <![CDATA[ */
+var autocomplete = {"ajaxurl":"https:\/\/developer.wordpress.org\/wp-admin\/admin-ajax.php","nonce":"8a60f70c4b"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/autocomplete.js?ver=20160524' id='autocomplete-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/function-reference.js?ver=20180724' id='wporg-developer-function-reference-js'></script>
+<script type='text/javascript' id='quicktags-js-extra'>
+/* <![CDATA[ */
+var quicktagsL10n = {"closeAllOpenTags":"Close all open tags","closeTags":"close tags","enterURL":"Enter the URL","enterImageURL":"Enter the URL of the image","enterImageDescription":"Enter a description of the image","textdirection":"text direction","toggleTextdirection":"Toggle Editor Text Direction","dfw":"Distraction-free writing mode","strong":"Bold","strongClose":"Close bold tag","em":"Italic","emClose":"Close italic tag","link":"Insert link","blockquote":"Blockquote","blockquoteClose":"Close blockquote tag","del":"Deleted text (strikethrough)","delClose":"Close deleted text tag","ins":"Inserted text","insClose":"Close inserted text tag","image":"Insert image","ul":"Bulleted list","ulClose":"Close bulleted list tag","ol":"Numbered list","olClose":"Close numbered list tag","li":"List item","liClose":"Close list item tag","code":"Code","codeClose":"Close code tag","more":"Insert Read More tag"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-includes/js/quicktags.min.js?ver=5.9-alpha-51701' id='quicktags-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/user-notes.js?ver=20200110' id='wporg-developer-user-notes-js'></script>
+<script type='text/javascript' id='wporg-developer-user-notes-feedback-js-extra'>
+/* <![CDATA[ */
+var wporg_note_feedback = {"show":"Show Feedback","hide":"Hide Feedback"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/user-notes-feedback.js?ver=20181023' id='wporg-developer-user-notes-feedback-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/tabs.js?ver=20160824' id='wporg-developer-tabs-js'></script>
+<script type='text/javascript' id='wporg-developer-preview-js-extra'>
+/* <![CDATA[ */
+var wporg_note_preview = {"ajaxurl":"https:\/\/developer.wordpress.org\/wp-admin\/admin-ajax.php","nonce":"504933b60e","preview":"preview note","preview_empty":"Nothing to preview","is_admin":""};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/user-notes-preview.js?ver=20200111' id='wporg-developer-preview-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/wp-embed.min.js?ver=5.9-alpha-51701' id='wp-embed-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/vendor/regenerator-runtime.min.js?ver=0.13.7' id='regenerator-runtime-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/vendor/wp-polyfill.min.js?ver=3.15.0' id='wp-polyfill-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/dom-ready.min.js?ver=71883072590656bf22c74c7b887df3dd' id='wp-dom-ready-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/hooks.min.js?ver=a7edae857aab69d69fa10d5aef23a5de' id='wp-hooks-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/i18n.min.js?ver=5f1269854226b4dd90450db411a12b79' id='wp-i18n-js'></script>
+<script type='text/javascript' id='wp-i18n-js-after'>
+wp.i18n.setLocaleData( { 'text direction\u0004ltr': [ 'ltr' ] } );
+</script>
+<script type='text/javascript' id='wp-a11y-js-translations'>
+( function( domain, translations ) {
+	var localeData = translations.locale_data[ domain ] || translations.locale_data.messages;
+	localeData[""].domain = domain;
+	wp.i18n.setLocaleData( localeData, domain );
+} )( "default", { "locale_data": { "messages": { "": {} } } } );
+</script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/a11y.min.js?ver=0ac8327cc1c40dcfdf29716affd7ac63' id='wp-a11y-js'></script>
+<script type='text/javascript' id='wplink-js-extra'>
+/* <![CDATA[ */
+var wpLinkL10n = {"title":"Insert\/edit link","update":"Update","save":"Add Link","noTitle":"(no title)","noMatchesFound":"No results found.","linkSelected":"Link selected.","linkInserted":"Link inserted.","minInputLength":"3"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-includes/js/wplink.min.js?ver=5.9-alpha-51701' id='wplink-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/jquery/ui/core.min.js?ver=1.12.1' id='jquery-ui-core-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/jquery/ui/menu.min.js?ver=1.12.1' id='jquery-ui-menu-js'></script>
+<script type='text/javascript' id='jquery-ui-autocomplete-js-extra'>
+/* <![CDATA[ */
+var uiAutocompleteL10n = {"noResults":"No results found.","oneResult":"1 result found. Use up and down arrow keys to navigate.","manyResults":"%d results found. Use up and down arrow keys to navigate.","itemSelected":"Item selected."};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-includes/js/jquery/ui/autocomplete.min.js?ver=1.12.1' id='jquery-ui-autocomplete-js'></script>
+
+		<script type="text/javascript">
+		tinyMCEPreInit = {
+			baseURL: "https://developer.wordpress.org/wp-includes/js/tinymce",
+			suffix: ".min",
+						mceInit: {},
+			qtInit: {'comment':{id:"comment",buttons:"strong,em,ul,ol,li,link"}},
+			ref: {plugins:"",theme:"modern",language:""},
+			load_ext: function(url,lang){var sl=tinymce.ScriptLoader;sl.markDone(url+'/langs/'+lang+'.js');sl.markDone(url+'/langs/'+lang+'_dlg.js');}
+		};
+		</script>
+				<script type="text/javascript">
+		var ajaxurl = "../../../wp-admin/admin-ajax.html";
+		( function() {
+			var initialized = [];
+			var initialize  = function() {
+				var init, id, inPostbox, $wrap;
+				var readyState = document.readyState;
+
+				if ( readyState !== 'complete' && readyState !== 'interactive' ) {
+					return;
+				}
+
+				for ( id in tinyMCEPreInit.mceInit ) {
+					if ( initialized.indexOf( id ) > -1 ) {
+						continue;
+					}
+
+					init      = tinyMCEPreInit.mceInit[id];
+					$wrap     = tinymce.$( '#wp-' + id + '-wrap' );
+					inPostbox = $wrap.parents( '.postbox' ).length > 0;
+
+					if (
+						! init.wp_skip_init &&
+						( $wrap.hasClass( 'tmce-active' ) || ! tinyMCEPreInit.qtInit.hasOwnProperty( id ) ) &&
+						( readyState === 'complete' || ( ! inPostbox && readyState === 'interactive' ) )
+					) {
+						tinymce.init( init );
+						initialized.push( id );
+
+						if ( ! window.wpActiveEditor ) {
+							window.wpActiveEditor = id;
+						}
+					}
+				}
+			}
+
+			if ( typeof tinymce !== 'undefined' ) {
+				if ( tinymce.Env.ie && tinymce.Env.ie < 11 ) {
+					tinymce.$( '.wp-editor-wrap ' ).removeClass( 'tmce-active' ).addClass( 'html-active' );
+				} else {
+					if ( document.readyState === 'complete' ) {
+						initialize();
+					} else {
+						document.addEventListener( 'readystatechange', initialize );
+					}
+				}
+			}
+
+			if ( typeof quicktags !== 'undefined' ) {
+				for ( id in tinyMCEPreInit.qtInit ) {
+					quicktags( tinyMCEPreInit.qtInit[id] );
+
+					if ( ! window.wpActiveEditor ) {
+						window.wpActiveEditor = id;
+					}
+				}
+			}
+		}());
+		</script>
+				<div id="wp-link-backdrop" style="display: none"></div>
+		<div id="wp-link-wrap" class="wp-core-ui" style="display: none" role="dialog" aria-labelledby="link-modal-title">
+		<form id="wp-link" tabindex="-1">
+		<input type="hidden" id="_ajax_linking_nonce" name="_ajax_linking_nonce" value="86f5a0a85d" />		<h1 id="link-modal-title">Insert/edit link</h1>
+		<button type="button" id="wp-link-close"><span class="screen-reader-text">Close</span></button>
+		<div id="link-selector">
+			<div id="link-options">
+				<p class="howto" id="wplink-enter-url">Enter the destination URL</p>
+				<div>
+					<label><span>URL</span>
+					<input id="wp-link-url" type="text" aria-describedby="wplink-enter-url" /></label>
+				</div>
+				<div class="wp-link-text-field">
+					<label><span>Link Text</span>
+					<input id="wp-link-text" type="text" /></label>
+				</div>
+				<div class="link-target">
+					<label><span></span>
+					<input type="checkbox" id="wp-link-target" /> Open link in a new tab</label>
+				</div>
+			</div>
+			<p class="howto" id="wplink-link-existing-content">Or link to existing content</p>
+			<div id="search-panel">
+				<div class="link-search-wrapper">
+					<label>
+						<span class="search-label">Search</span>
+						<input type="search" id="wp-link-search" class="link-search-field" autocomplete="off" aria-describedby="wplink-link-existing-content" />
+						<span class="spinner"></span>
+					</label>
+				</div>
+				<div id="search-results" class="query-results" tabindex="0">
+					<ul></ul>
+					<div class="river-waiting">
+						<span class="spinner"></span>
+					</div>
+				</div>
+				<div id="most-recent-results" class="query-results" tabindex="0">
+					<div class="query-notice" id="query-notice-message">
+						<em class="query-notice-default">No search term specified. Showing recent items.</em>
+						<em class="query-notice-hint screen-reader-text">Search or use up and down arrow keys to select an item.</em>
+					</div>
+					<ul></ul>
+					<div class="river-waiting">
+						<span class="spinner"></span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="submitbox">
+			<div id="wp-link-cancel">
+				<button type="button" class="button">Cancel</button>
+			</div>
+			<div id="wp-link-update">
+				<input type="submit" value="Add Link" class="button button-primary" id="wp-link-submit" name="wp-link-submit">
+			</div>
+		</div>
+		</form>
+		</div>
+		</body>
+
+<!-- Mirrored from developer.wordpress.org/reference/functions/register_post_type/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 31 Aug 2021 16:49:37 GMT -->
+</html>

@@ -1,0 +1,2965 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+
+<!-- Mirrored from developer.wordpress.org/reference/functions/wp_enqueue_script/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 31 Aug 2021 16:40:21 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<!--
+<meta property="fb:page_id" content="6427302910" />
+-->
+<meta name="google-site-verification" content="7VWES_-rcHBcmaQis9mSYamPfNwE03f4vyTj4pfuAw0" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>wp_enqueue_script()</title>
+<meta name="referrer" content="always">
+
+		<link href='../../../../fonts.googleapis.com/css.css?family=Open+Sans:300italic,400italic,600italic,400,300,600&amp;subset=latin,cyrillic-ext,greek-ext,greek,vietnamese,latin-ext,cyrillic' rel='stylesheet' type='text/css'>
+
+		<link rel="stylesheet" href="../../../../s.w.org/style/wp4.css?95" />
+
+<link rel="shortcut icon" href="../../../../s.w.org/favicon.ico?2" type="image/x-icon" />
+<link rel="pingback" href="../../../xmlrpc.php" /><meta name='robots' content='max-image-preview:large' />
+<link rel='dns-prefetch' href='../../../../fonts.googleapis.com/index.html' />
+<link rel='dns-prefetch' href='http://s.w.org/' />
+<link rel='dns-prefetch' href='http://www.googletagmanager.com/' />
+<link rel='dns-prefetch' href='http://fonts.gstatic.com/' />
+<link rel="alternate" type="application/rss+xml" title="WordPress Developer Resources &raquo; Feed" href="../../../feed/index.html" />
+<link rel="alternate" type="application/rss+xml" title="WordPress Developer Resources &raquo; Comments Feed" href="../../../comments/feed/index.html" />
+<meta property="og:title" content="wp_enqueue_script() | Function | WordPress Developer Resources" />
+<meta property="og:site_name" content="WordPress Developer Resources" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="../../../index.html" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@WordPress" />
+<meta name="description" content="Enqueue a script." />
+<meta property="og:description" content="Enqueue a script." />
+<link rel="alternate" type="application/rss+xml" title="WordPress Developer Resources &raquo; wp_enqueue_script Comments Feed" href="https://developer.wordpress.org/reference/functions/wp_enqueue_script/feed/" />
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'../../../../www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P24PF4B');</script>
+			<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/developer.wordpress.org\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.9-alpha-51701"}};
+			!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([10084,65039,8205,55357,56613],[10084,65039,8203,55357,56613])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel='stylesheet' id='dashicons-css'  href='../../../wp-includes/css/dashicons.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='admin-bar-css'  href='../../../wp-includes/css/admin-bar.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-block-library-css'  href='../../../wp-includes/css/dist/block-library/style.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='wporg-handbook-css-css'  href='../../../wp-content/plugins/handbook/stylesheets/callout-boxes.css?ver=20200121' type='text/css' media='all' />
+<link rel='stylesheet' id='open-sans-css'  href='../../../../fonts.googleapis.com/css-2.css?family=Open+Sans%3A300italic%2C400italic%2C600italic%2C300%2C400%2C600&amp;subset=latin%2Clatin-ext&amp;display=fallback&amp;ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='wporg-developer-style-css'  href='../../../wp-content/themes/pub/wporg-developer/style.css?ver=3' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-dev-sass-compiled-css'  href='../../../wp-content/themes/pub/wporg-developer/stylesheets/main.css?ver=20200713' type='text/css' media='all' />
+<link rel='stylesheet' id='awesomplete-css-css'  href='../../../wp-content/themes/pub/wporg-developer/stylesheets/awesomplete.css?ver=20160114' type='text/css' media='all' />
+<link rel='stylesheet' id='autocomplete-css-css'  href='../../../wp-content/themes/pub/wporg-developer/stylesheets/autocomplete.css?ver=20171220' type='text/css' media='all' />
+<link rel='stylesheet' id='syntaxhighlighter-core-css'  href='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shCore.css?ver=3.0.9b' type='text/css' media='all' />
+<link rel='stylesheet' id='syntaxhighlighter-theme-default-css'  href='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shThemeDefault.css?ver=3.0.9b' type='text/css' media='all' />
+<script type='text/javascript' src='../../../wp-includes/js/jquery/jquery.min.js?ver=3.6.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='../../../wp-content/plugins/handbook/scripts/handbook.js?ver=20150930' id='wporg-handbook-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/chapters.js?ver=20190603' id='wporg-developer-chapters-js'></script>
+<script type='text/javascript' src='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shCore.js?ver=3.0.9b' id='syntaxhighlighter-core-js'></script>
+<script type='text/javascript' src='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushPhp.js?ver=3.0.9b' id='syntaxhighlighter-brush-php-js'></script>
+<link rel="https://api.w.org/" href="https://developer.wordpress.org/wp-json/" /><link rel="alternate" type="application/json" href="https://developer.wordpress.org/wp-json/wp/v2/wp-parser-function/2667" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="../../../xmlrpc-2.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="../../../wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 5.9-alpha-51701" />
+<link rel='shortlink' href='https://developer.wordpress.org/?p=2667' />
+<link rel="alternate" type="application/json+oembed" href="https://developer.wordpress.org/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_enqueue_script%2F" />
+<link rel="alternate" type="text/xml+oembed" href="https://developer.wordpress.org/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_enqueue_script%2F&amp;format=xml" />
+<link rel="canonical" href="index.html">
+<!-- Stream WordPress user activity plugin v3.6.2 -->
+	<style>
+		@media screen and (max-width: 782px) {
+			#wpadminbar li#wp-admin-bar-log-in,
+			#wpadminbar li#wp-admin-bar-register {
+				display: block;
+			}
+
+			#wpadminbar li#wp-admin-bar-log-in a,
+			#wpadminbar li#wp-admin-bar-register a {
+				padding: 0 8px;
+			}
+		}
+	</style>
+		<style>
+			a.github-edit {
+				margin-left: .5em;
+				font-size: .5em;
+				vertical-align: top;
+				display: inline-block;
+				border: 1px solid #eeeeee;
+				border-radius: 2px;
+				background: #eeeeee;
+				padding: .5em .6em .4em;
+				color: black;
+				margin-top: 0.1em;
+			}
+			a.github-edit > * {
+				opacity: 0.6;
+			}
+			a.github-edit:hover > * {
+				opacity: 1;
+				color: black;
+			}
+			a.github-edit img {
+				height: .8em;
+			}
+		</style>
+		
+	<script type="text/javascript">
+		jQuery( '<style>.hide-if-js { display: none; }</style>' ).appendTo( 'head' );
+		jQuery( function($) {
+			$( 'body' ).addClass('js');
+		} );
+	</script>
+<style type="text/css" media="print">#wpadminbar { display:none; }</style>
+	<style type="text/css" media="screen">
+	</style>
+	<script>document.cookie='devicePixelRatio='+((window.devicePixelRatio === undefined) ? 1 : window.devicePixelRatio)+'; path=/';</script>
+
+</head>
+
+
+<body id="wordpress-org" class="wp-parser-function-template-default single single-wp-parser-function postid-2667 admin-bar no-customize-support">
+		<div id="wpadminbar" class="nojq nojs">
+						<div class="quicklinks" id="wp-toolbar" role="navigation" aria-label="Toolbar">
+				<ul id='wp-admin-bar-root-default' class="ab-top-menu"><li id='wp-admin-bar-wp-logo' class="menupop"><a class='ab-item' aria-haspopup="true" href='https://wordpress.org/about/'><span class="ab-icon" aria-hidden="true"></span><span class="screen-reader-text">About WordPress</span></a><div class="ab-sub-wrapper"><ul id='wp-admin-bar-wp-logo-default' class="ab-submenu"><li id='wp-admin-bar-about'><a class='ab-item' href='https://wordpress.org/about/'>About WordPress</a></li></ul><ul id='wp-admin-bar-wp-logo-external' class="ab-sub-secondary ab-submenu"><li id='wp-admin-bar-wporg'><a class='ab-item' href='https://wordpress.org/'>WordPress.org</a></li><li id='wp-admin-bar-documentation'><a class='ab-item' href='https://wordpress.org/support/'>Documentation</a></li><li id='wp-admin-bar-support-forums'><a class='ab-item' href='https://wordpress.org/support/forums/'>Support</a></li><li id='wp-admin-bar-feedback'><a class='ab-item' href='https://wordpress.org/support/forum/requests-and-feedback'>Feedback</a></li></ul></div></li></ul><ul id='wp-admin-bar-top-secondary' class="ab-top-secondary ab-top-menu"><li id='wp-admin-bar-search' class="admin-bar-search"><div class="ab-item ab-empty-item" tabindex="-1"><form action="https://developer.wordpress.org/" method="get" id="adminbarsearch"><input class="adminbar-input" name="s" id="adminbar-search" type="text" value="" maxlength="150" /><label for="adminbar-search" class="screen-reader-text">Search</label><input type="submit" class="adminbar-button" value="Search" /></form></div></li><li id='wp-admin-bar-log-in'><a class='ab-item' href='https://login.wordpress.org/?locale=en_US'>Log In</a></li><li id='wp-admin-bar-register'><a class='ab-item' href='https://login.wordpress.org/register?locale=en_US'>Register</a></li></ul>			</div>
+					</div>
+
+		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P24PF4B" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<div id="wporg-header">
+	<div class="wrapper">
+	<h1><a href="http://wordpress.org/">WordPress.org</a></h1>				<div id="head-search">
+		<form action="http://wordpress.org/search/do-search.php" method="get">
+			<label for="global-search" class="screen-reader-text">Search WordPress.org for:</label>
+			<input id="global-search" class="text" name="search" type="text" value="" maxlength="150" placeholder="Search WordPress.org" />
+			<button type="submit" class="button"><span class="screen-reader-text">Submit</span></button>
+		</form>
+		</div>
+				<div style="clear:both"></div>
+		<button id="mobile-menu-button" aria-expanded="false"><span class="screen-reader-text">Toggle Menu</span></button>
+		
+<nav aria-label="Main Menu">
+<ul id="wporg-header-menu">
+<li class="menu-item"><a href='http://wordpress.org/showcase/' data-title='See some of the sites built on WordPress.'>Showcase</a></li>
+<li class="menu-item"><a href='http://learn.wordpress.org/' data-title='Resources to help you learn more about WordPress and teach it to others.'>Learn</a></li>
+<li class="menu-item"><a href='http://wordpress.org/themes/' data-title='Find just the right look for your website.'>Themes</a></li>
+<li class="menu-item"><a href='http://wordpress.org/plugins/' data-title='Plugins can extend WordPress to do almost anything you can imagine.'>Plugins</a></li>
+<li class="menu-item"><a href='http://wordpress.org/mobile/' data-title='Take your website on the go!'>Mobile</a></li>
+<li class="menu-item"><a href='http://wordpress.org/support/' data-title='Forums, documentation, help.'>Support</a><ul class="nav-submenu"><li><a href='http://wordpress.org/support/' title='Documentation, tutorials, best practices.'>Documentation</a></li><li><a href='http://wordpress.org/support/forums/' title='Support and discussion forums.'>Forums</a></li></ul><div class="uparrow"></div></li>
+<li class="menu-item"><a href='http://make.wordpress.org/' data-title='Contribute your knowledge.'>Get Involved</a><ul class="nav-submenu"><li><a href='http://wordpress.org/five-for-the-future/' title='How five percent is powering the next generation of the web'>Five for the Future</a></li></ul><div class="uparrow"></div></li>
+<li class="menu-item"><a href='http://wordpress.org/about/' data-title='About the WordPress Organization, and where we&#039;re going.'>About</a></li>
+<li class="menu-item"><a href='http://wordpress.org/news/' data-title='Come here for the latest scoop.'>Blog</a></li>
+<li class="menu-item"><a href='http://wordpress.org/hosting/' data-title='Find a home for your blog.'>Hosting</a></li>
+<li id="download" class="button download-button menu-item"><a href='http://wordpress.org/download/' data-title='Get it. Got it? Good.'>Get WordPress</a></li>
+</ul>
+</nav>
+		<div style="clear:both"></div>
+	</div>
+</div>
+
+
+
+<header id="masthead" class="site-header" role="banner">
+		<div class="site-branding">
+		<h1 class="site-title">
+			<a href="../../index.html" rel="home">Code Reference</a>
+		</h1>
+
+		
+		<nav id="site-navigation" class="main-navigation" role="navigation">
+			<button class="menu-toggle dashicons dashicons-arrow-down-alt2" aria-controls="primary-menu" aria-expanded="false" aria-label="Primary Menu"></button>
+					</nav>
+	</div>
+</header><!-- #masthead -->
+
+<div id="page" class="hfeed site devhub-wrap">
+	<a href="#main" class="screen-reader-text">Skip to content</a>
+
+				<div id="inner-search">
+			<div class="search-section section clear hide-if-js">
+
+
+	
+	<form role="search" method="get" class="searchform searchform-filtered" action="https://developer.wordpress.org/">
+		<label for="search-field" class="screen-reader-text">Search for:</label>
+		<input type="text" id="search-field" class="search-field" placeholder="Search &hellip;" value="" name="s">
+		<button class="button button-primary button-search"><i class="dashicons dashicons-search"></i><span class="screen-reader-text">Search plugins</span></button>
+	
+		<div class="search-post-type">
+			<span>Filter by type:</span>
+									<label><input type="checkbox" name="post_type[]" value="wp-parser-function"
+						 /> Functions</label>
+									<label><input type="checkbox" name="post_type[]" value="wp-parser-hook"
+						 /> Hooks</label>
+									<label><input type="checkbox" name="post_type[]" value="wp-parser-class"
+						 /> Classes</label>
+									<label><input type="checkbox" name="post_type[]" value="wp-parser-method"
+						 /> Methods</label>
+					</div>
+
+	
+	</form>
+
+</div><!-- /search-guide -->
+			<div id="inner-search-icon-container">
+				<div id="inner-search-icon">
+					<div class="dashicons dashicons-search"><span class="screen-reader-text">Search</span></div>
+				</div>
+			</div>
+		</div>
+
+		<div id="content" class="site-content">
+
+	<div id="content-area" class="wp-parser-function-template-default single single-wp-parser-function postid-2667 admin-bar no-customize-support code-reference">
+
+		
+		<div class="breadcrumb-trail breadcrumbs" itemprop="breadcrumb">
+			<span class="trail-browse">Browse:</span> 
+			<span class="trail-begin"><a href="../../../index.html" title="WordPress Developer Resources" rel="home">Home</a></span> <span class="sep">&#47;</span> 
+			<span class="trail-inner"><a href="../../index.html" title="Reference">Reference</a></span> <span class="sep">&#47;</span> 
+			<span class="trail-inner"><a href="../index.html">Functions</a></span> <span class="sep">&#47;</span> <span class="trail-end">wp_enqueue_script()</span>
+		</div>
+		<main id="main" class="site-main" role="main">
+
+		
+			
+<article id="post-2667" class="post-2667 wp-parser-function type-wp-parser-function status-publish hentry wp-parser-source-file-wp-includes_functions-wp-scripts-php wp-parser-package-dependencies wp-parser-package-wordpress wp-parser-since-2-1-0 wp-parser-since-2-6-0">
+
+	
+	
+	<h1>wp_enqueue_script( <span class="arg-type">string</span>&nbsp;<span class="arg-name">$handle</span>,  <span class="arg-type">string</span>&nbsp;<span class="arg-name">$src</span>&nbsp;=&nbsp;<span class="arg-default">''</span>,  <span class="arg-type">string[]</span>&nbsp;<span class="arg-name">$deps</span>&nbsp;=&nbsp;<span class="arg-default">array()</span>,  <span class="arg-type">string|bool|null</span>&nbsp;<span class="arg-name">$ver</span>&nbsp;=&nbsp;<span class="arg-default">false</span>,  <span class="arg-type">bool</span>&nbsp;<span class="arg-name">$in_footer</span>&nbsp;=&nbsp;<span class="arg-default">false</span>&nbsp;)</h1>
+
+	<section class="summary">
+		<p>Enqueue a script.</p>
+	</section>
+
+
+	
+	<div class="content-toc"><style> .toc-jump { text-align: right; font-size: 12px; } .page .toc-heading { margin-top: -50px; padding-top: 50px !important; }</style><div class="table-of-contents"><h2>Contents</h2><ul class="items"><li><a href="#description">Description</a>
+<ul>
+<li><a href="#see-also">See also</a>
+</ul></li>
+<li><a href="#parameters">Parameters</a></li>
+<li><a href="#more-information">More Information</a>
+<ul>
+<li><a href="#usage">Usage</a></li>
+<li><a href="#notes">Notes</a></li>
+<li><a href="#default-scripts-and-js-libraries-included-and-registered-by-wordpress">Default Scripts and JS Libraries Included and Registered by WordPress</a>
+</ul></li>
+<li><a href="#source">Source</a></li>
+<li><a href="#related">Related</a>
+<ul>
+<li><a href="#uses">Uses</a></li>
+<li><a href="#used-by">Used By</a>
+</ul></li>
+<li><a href="#changelog">Changelog</a></li>
+<li><a href="#user-contributed-notes">User Contributed Notes</a></ul>
+</div>
+
+<hr />
+<section class="description">
+	<h2 class="toc-heading" id="description" tabindex="-1">Description <a href="#description" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Description</span></a></h2>
+	<p>Registers the script if $src provided (does NOT overwrite), and enqueues it.</p>
+
+		<h3 class="toc-heading" id="see-also" tabindex="-1">See also <a href="#see-also" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">See also</span></a></h3>
+
+	<ul>
+	<li><a href="../../classes/WP_Dependencies/add/index.html">WP_Dependencies::add()</a></li>
+<li><a href="../../classes/WP_Dependencies/add_data/index.html">WP_Dependencies::add_data()</a></li>
+<li><a href="../../classes/WP_Dependencies/enqueue/index.html">WP_Dependencies::enqueue()</a></li>
+	</ul>
+	</section>
+
+	<hr />
+	<section class="parameters">
+		<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="parameters" tabindex="-1">Parameters <a href="#parameters" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Parameters</span></a></h2>
+		<dl>
+												<dt>$handle</dt>
+								<dd>
+					<p class="desc">
+													<span class="type">(<span class="string">string</span>)</span>
+																			<span class="required">(Required)</span>
+																			<span class="description">Name of the script. Should be unique.</span>
+											</p>
+									</dd>
+												<dt>$src</dt>
+								<dd>
+					<p class="desc">
+													<span class="type">(<span class="string">string</span>)</span>
+																			<span class="required">(Optional)</span>
+																			<span class="description">Full URL of the script, or path of the script relative to the WordPress root directory.                                    </span>
+											</p>
+											<p class="default">Default value: ''</p>
+									</dd>
+												<dt>$deps</dt>
+								<dd>
+					<p class="desc">
+													<span class="type">(<span class="string[]">string[]</span>)</span>
+																			<span class="required">(Optional)</span>
+																			<span class="description"> An array of registered script handles this script depends on. </span>
+											</p>
+											<p class="default">Default value: array()</p>
+									</dd>
+												<dt>$ver</dt>
+								<dd>
+					<p class="desc">
+													<span class="type">(<span class="string">string</span>|<span class="bool">bool</span>|<span class="null">null</span>)</span>
+																			<span class="required">(Optional)</span>
+																			<span class="description"> String specifying script version number, if it has one, which is added to the URL                                    as a query string for cache busting purposes. If version is set to false, a version                                    number is automatically added equal to current installed WordPress version.                                    If set to null, no version is added.</span>
+											</p>
+											<p class="default">Default value: false</p>
+									</dd>
+												<dt>$in_footer</dt>
+								<dd>
+					<p class="desc">
+													<span class="type">(<span class="bool">bool</span>)</span>
+																			<span class="required">(Optional)</span>
+																			<span class="description"> Whether to enqueue the script before &lt;/body&gt; instead of in the &lt;head&gt;.                                    Default 'false'.</span>
+											</p>
+											<p class="default">Default value: false</p>
+									</dd>
+					</dl>
+	</section>
+	<hr />
+	<section class="explanation">
+		<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="more-information" tabindex="-1">More Information <a href="#more-information" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">More Information</span></a></h2>
+
+		<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="usage" tabindex="-1">Usage <a href="#usage" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Usage</span></a></h3>
+<pre class="brush: php; title: ; notranslate" title="">
+wp_enqueue_script( $handle, $src, $deps, $ver, $in_footer );
+</pre>
+<p>Links a script file to the generated page at the right time according to the script dependencies, if the script has not been already included and if all the dependencies have been registered. You could either link a script with a handle previously registered using the <tt><a title="Function Reference/wp register script" href="../wp_register_script/index.html">wp_register_script()</a></tt> function, or provide this function with all the parameters necessary to link a script.</p>
+<p>This is the recommended method of linking JavaScript to a WordPress generated page.</p>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="notes" tabindex="-1">Notes <a href="#notes" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Notes</span></a></h3>
+<ul>
+<li>The function should be called using the <a title="Plugin API/Action Reference/wp enqueue scripts" href="../../hooks/wp_enqueue_scripts/index.html">wp_enqueue_scripts</a> action hook if you want to call it on the front-end of the site, like in the examples above. To call it on the administration screens, use the <a title="Plugin API/Action Reference/admin enqueue scripts" href="../../hooks/admin_enqueue_scripts/index.html">admin_enqueue_scripts</a> action hook. For the login screen, use the <a title="Plugin API/Action Reference/login enqueue scripts" href="../../hooks/login_enqueue_scripts/index.html">login_enqueue_scripts</a> action hook. Calling it outside of an action hook can lead to problems, see the <a class="external text" href="https://core.trac.wordpress.org/ticket/11526">ticket #11526</a> for details.</li>
+<li>If you try to register or enqueue an already registered handle with different parameters, the new parameters will be ignored. Instead, use <tt><a title="Function Reference/wp deregister script" href="../wp_deregister_script/index.html">wp_deregister_script()</a></tt> and register the script again with the new parameters.</li>
+<li>jQuery UI Effects is <b>not</b> included with the <i>jquery-ui-core</i> handle.</li>
+<li>This function relies on the use of <tt><a title="Function Reference/wp head" href="../wp_head/index.html">wp_head()</a></tt> and <tt><a title="Function Reference/wp footer" href="../wp_footer/index.html">wp_footer()</a></tt> by the active theme. This means that it may not work with a few very old themes that do not call these functions. This is useful to keep in mind when debugging ancient themes.</li>
+<li>Uses: <tt>WP_Scripts::add()</tt>, <tt>WP_Scripts::add_data()</tt> and <tt>WP_Scripts::enqueue()</tt>.</li>
+<li>Uses global: (<tt>unknown type</tt>) <tt>$wp_scripts</tt>.</li>
+</ul>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="default-scripts-and-js-libraries-included-and-registered-by-wordpress" tabindex="-1">Default Scripts and JS Libraries Included and Registered by WordPress <a href="#default-scripts-and-js-libraries-included-and-registered-by-wordpress" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Default Scripts and JS Libraries Included and Registered by WordPress</span></a></h3>
+<p>By default, WordPress installation includes many popular javascript libraries and scripts commonly used by web developers besides the scripts used by WordPress itself. Some of them are listed in the table below.</p>
+<p>For a detailed list of names that can be used in place of the <code>$handle</code> parameter, see <a title="Function Reference/wp register script" href="../wp_register_script/index.html">wp_register_script()</a>.</p>
+<p>&nbsp;</p>
+<table class="wikitable">
+<tbody>
+<tr>
+<th width="20%"><b>Script Name<br />
+</b></th>
+<th width="20%"><b>Handle<br />
+</b></th>
+<th width="20%"><b>Needed Dependency *<br />
+</b></th>
+<th width="20%"><b>Script version<br />
+</b></th>
+<th width="20%"><b>License<br />
+</b></th>
+</tr>
+<tr>
+<td><a class="external text" href="https://www.defusion.org.uk/">Image Cropper</a></td>
+<td>Image cropper (not used in core, see jcrop)</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a class="external text" href="https://deepliquid.com/content/Jcrop.html">Jcrop</a></td>
+<td>jcrop</td>
+<td></td>
+<td>0.9.12</td>
+<td>MIT</td>
+</tr>
+<tr>
+<td><a class="external text" href="https://code.google.com/p/swfobject/">SWFObject</a></td>
+<td>swfobject</td>
+<td></td>
+<td>2.2-20120417</td>
+<td>MIT</td>
+</tr>
+<tr>
+<td><a class="external text" href="https://swfupload.org/">SWFUpload</a></td>
+<td>swfupload</td>
+<td></td>
+<td>2201-20110113</td>
+<td>MIT</td>
+</tr>
+<tr>
+<td><a class="external text" href="https://swfupload.org/">SWFUpload Degrade</a></td>
+<td>swfupload-degrade</td>
+<td></td>
+<td>2201</td>
+<td>MIT</td>
+</tr>
+<tr>
+<td><a class="external text" href="https://swfupload.org/">SWFUpload Queue</a></td>
+<td>swfupload-queue</td>
+<td></td>
+<td>2201</td>
+<td>MIT</td>
+</tr>
+<tr>
+<td><a class="external text" href="https://swfupload.org/">SWFUpload Handlers</a></td>
+<td>swfupload-handlers</td>
+<td></td>
+<td>2201-20110524</td>
+<td>MIT</td>
+</tr>
+<tr>
+<td><a class="external text" href="https://jquery.com/">jQuery</a></td>
+<td>jquery</td>
+<td>json2 (for AJAX calls)</td>
+<td>1.12.4</td>
+<td>MIT + (MIT OR BSD)</td>
+</tr>
+<tr>
+<td><a class="external text" href="https://plugins.jquery.com/project/form/">jQuery Form</a></td>
+<td>jquery-form</td>
+<td>jquery</td>
+<td>4.2.1</td>
+<td>MIT OR LGPLv3</td>
+</tr>
+<tr>
+<td><a class="external text" href="https://plugins.jquery.com/project/color/">jQuery Color</a></td>
+<td>jquery-color</td>
+<td>jquery</td>
+<td>2.1.2</td>
+<td>MIT+CC0 + (MIT OR GPLv2)</td>
+</tr>
+<tr>
+<td><a class="external text" href="https://masonry.desandro.com/">jQuery Masonry</a></td>
+<td>jquery-masonry</td>
+<td>jquery</td>
+<td>3.1.2b</td>
+<td>MIT</td>
+</tr>
+<tr>
+<td><a class="external text" href="https://masonry.desandro.com/">Masonry (native Javascript)</a></td>
+<td>masonry</td>
+<td>imagesloaded</td>
+<td>3.1.2b</td>
+<td>MIT</td>
+</tr>
+<tr>
+<td><a class="external text" href="https://jqueryui.com/">jQuery UI Core</a></td>
+<td>jquery-ui-core</td>
+<td>jquery</td>
+<td>1.11.4</td>
+<td>MIT + CC0 + (MIT OR GPLv2)</td>
+</tr>
+<tr>
+<td><a class="external text" href="https://jqueryui.com/widget/">jQuery UI Widget</a></td>
+<td>jquery-ui-widget</td>
+<td>jquery</td>
+<td>1.11.4</td>
+<td>MIT + CC0 + (MIT OR GPLv2)</td>
+</tr>
+<tr>
+<td><a class="external text" href="https://jqueryui.com/demos/accordion/">jQuery UI Accordion</a></td>
+<td>jquery-ui-accordion</td>
+<td>jquery</td>
+<td>1.11.4</td>
+<td>MIT + CC0 + (MIT OR GPLv2)</td>
+</tr>
+<tr>
+<td><a class="external text" href="https://jqueryui.com/demos/autocomplete/">jQuery UI Autocomplete</a></td>
+<td>jquery-ui-autocomplete</td>
+<td>jquery</td>
+<td>1.11.4</td>
+<td>MIT + CC0 + (MIT OR GPLv2)</td>
+</tr>
+<tr>
+<td><a class="external text" href="https://jqueryui.com/demos/button/">jQuery UI Button</a></td>
+<td>jquery-ui-button</td>
+<td>jquery</td>
+<td>1.11.4</td>
+<td>MIT + CC0 + (MIT OR GPLv2)</td>
+</tr>
+<tr>
+<td><a class="external text" href="https://jqueryui.com/demos/datepicker/">jQuery UI Datepicker</a></td>
+<td>jquery-ui-datepicker</td>
+<td>jquery</td>
+<td>1.11.4</td>
+<td>MIT + CC0 + (MIT OR GPLv2)</td>
+</tr>
+<tr>
+<td><a class="external text" href="https://jqueryui.com/demos/dialog/">jQuery UI Dialog</a></td>
+<td>jquery-ui-dialog</td>
+<td>jquery</td>
+<td>1.11.4</td>
+<td>MIT + CC0 + (MIT OR GPLv2)</td>
+</tr>
+<tr>
+<td><a class="external text" href="https://jqueryui.com/demos/draggable/">jQuery UI Draggable</a></td>
+<td>jquery-ui-draggable</td>
+<td>jquery</td>
+<td>1.11.4</td>
+<td>MIT + CC0 + (MIT OR GPLv2)</td>
+</tr>
+<tr>
+<td><a class="external text" href="https://jqueryui.com/demos/droppable/">jQuery UI Droppable</a></td>
+<td>jquery-ui-droppable</td>
+<td>jquery</td>
+<td>1.11.4</td>
+<td>MIT + CC0 + (MIT OR GPLv2)</td>
+</tr>
+<tr>
+<td><a class="external text" href="https://jqueryui.com/menu/">jQuery UI Menu</a></td>
+<td>jquery-ui-menu</td>
+<td>jquery</td>
+<td>1.11.4</td>
+<td>MIT + CC0 + (MIT OR GPLv2)</td>
+</tr>
+<tr>
+<td><a class="external text" href="https://api.jqueryui.com/mouse/">jQuery UI Mouse</a></td>
+<td>jquery-ui-mouse</td>
+<td>jquery</td>
+<td>1.11.4</td>
+<td>MIT + CC0 + (MIT OR GPLv2)</td>
+</tr>
+<tr>
+<td><a class="external text" href="https://jqueryui.com/demos/position/">jQuery UI Position</a></td>
+<td>jquery-ui-position</td>
+<td>jquery</td>
+<td>1.11.4</td>
+<td>MIT + CC0 + (MIT OR GPLv2)</td>
+</tr>
+<tr>
+<td><a class="external text" href="https://jqueryui.com/demos/progressbar/">jQuery UI Progressbar</a></td>
+<td>jquery-ui-progressbar</td>
+<td>jquery</td>
+<td>1.11.4</td>
+<td>MIT + CC0 + (MIT OR GPLv2)</td>
+</tr>
+<tr>
+<td><a class="external text" href="https://jqueryui.com/demos/selectable/">jQuery UI Selectable</a></td>
+<td>jquery-ui-selectable</td>
+<td>jquery</td>
+<td>1.11.4</td>
+<td>MIT + CC0 + (MIT OR GPLv2)</td>
+</tr>
+<tr>
+<td><a class="external text" href="https://jqueryui.com/demos/resizable/">jQuery UI Resizable</a></td>
+<td>jquery-ui-resizable</td>
+<td>jquery</td>
+<td>1.11.4</td>
+<td>MIT + CC0 + (MIT OR GPLv2)</td>
+</tr>
+<tr>
+<td><a class="external text" href="https://jqueryui.com/selectmenu/">jQuery UI Selectmenu</a></td>
+<td>jquery-ui-selectmenu</td>
+<td>jquery</td>
+<td>1.11.4</td>
+<td>MIT + CC0 + (MIT OR GPLv2)</td>
+</tr>
+<tr>
+<td><a class="external text" href="https://jqueryui.com/demos/sortable/">jQuery UI Sortable</a></td>
+<td>jquery-ui-sortable</td>
+<td>jquery</td>
+<td>1.11.4</td>
+<td>MIT + CC0 + (MIT OR GPLv2)</td>
+</tr>
+<tr>
+<td><a class="external text" href="https://jqueryui.com/demos/slider/">jQuery UI Slider</a></td>
+<td>jquery-ui-slider</td>
+<td>jquery</td>
+<td>1.11.4</td>
+<td>MIT + CC0 + (MIT OR GPLv2)</td>
+</tr>
+<tr>
+<td><a class="external text" href="https://jqueryui.com/demos/spinner/">jQuery UI Spinner</a></td>
+<td>jquery-ui-spinner</td>
+<td>jquery</td>
+<td>1.11.4</td>
+<td>MIT + CC0 + (MIT OR GPLv2)</td>
+</tr>
+<tr>
+<td><a class="external text" href="https://jqueryui.com/demos/tooltip/">jQuery UI Tooltips</a></td>
+<td>jquery-ui-tooltip</td>
+<td>jquery</td>
+<td>1.11.4</td>
+<td>MIT + CC0 + (MIT OR GPLv2)</td>
+</tr>
+<tr>
+<td><a class="external text" href="https://jqueryui.com/demos/tabs/">jQuery UI Tabs</a></td>
+<td>jquery-ui-tabs</td>
+<td>jquery</td>
+<td>1.11.4</td>
+<td>MIT + CC0 + (MIT OR GPLv2)</td>
+</tr>
+<tr>
+<td><a class="external text" href="https://jqueryui.com/effect/">jQuery UI Effects</a></td>
+<td>jquery-effects-core</td>
+<td>jquery</td>
+<td>1.11.4</td>
+<td>MIT + CC0 + (MIT OR GPLv2)</td>
+</tr>
+<tr>
+<td><a class="external text" href="https://jqueryui.com/effect/">jQuery UI Effects &#8211; Blind</a></td>
+<td>jquery-effects-blind</td>
+<td>jquery-effects-core</td>
+<td>1.11.4</td>
+<td>MIT + CC0 + (MIT OR GPLv2)</td>
+</tr>
+<tr>
+<td><a class="external text" href="https://jqueryui.com/effect/">jQuery UI Effects &#8211; Bounce</a></td>
+<td>jquery-effects-bounce</td>
+<td>jquery-effects-core</td>
+<td>1.11.4</td>
+<td>MIT + CC0 + (MIT OR GPLv2)</td>
+</tr>
+<tr>
+<td><a class="external text" href="https://jqueryui.com/effect/">jQuery UI Effects &#8211; Clip</a></td>
+<td>jquery-effects-clip</td>
+<td>jquery-effects-core</td>
+<td>1.11.4</td>
+<td>MIT + CC0 + (MIT OR GPLv2)</td>
+</tr>
+<tr>
+<td><a class="external text" href="https://jqueryui.com/effect/">jQuery UI Effects &#8211; Drop</a></td>
+<td>jquery-effects-drop</td>
+<td>jquery-effects-core</td>
+<td>1.11.4</td>
+<td>MIT + CC0 + (MIT OR GPLv2)</td>
+</tr>
+<tr>
+<td><a class="external text" href="https://jqueryui.com/effect/">jQuery UI Effects &#8211; Explode</a></td>
+<td>jquery-effects-explode</td>
+<td>jquery-effects-core</td>
+<td>1.11.4</td>
+<td>MIT + CC0 + (MIT OR GPLv2)</td>
+</tr>
+<tr>
+<td><a class="external text" href="https://jqueryui.com/effect/">jQuery UI Effects &#8211; Fade</a></td>
+<td>jquery-effects-fade</td>
+<td>jquery-effects-core</td>
+<td>1.11.4</td>
+<td>MIT + CC0 + (MIT OR GPLv2)</td>
+</tr>
+<tr>
+<td><a class="external text" href="https://jqueryui.com/effect/">jQuery UI Effects &#8211; Fold</a></td>
+<td>jquery-effects-fold</td>
+<td>jquery-effects-core</td>
+<td>1.11.4</td>
+<td>MIT + CC0 + (MIT OR GPLv2)</td>
+</tr>
+<tr>
+<td><a class="external text" href="https://jqueryui.com/effect/">jQuery UI Effects &#8211; Highlight</a></td>
+<td>jquery-effects-highlight</td>
+<td>jquery-effects-core</td>
+<td>1.11.4</td>
+<td>MIT + CC0 + (MIT OR GPLv2)</td>
+</tr>
+<tr>
+<td><a class="external text" href="https://jqueryui.com/effect/">jQuery UI Effects &#8211; Pulsate</a></td>
+<td>jquery-effects-pulsate</td>
+<td>jquery-effects-core</td>
+<td>1.11.4</td>
+<td>MIT + CC0 + (MIT OR GPLv2)</td>
+</tr>
+<tr>
+<td><a class="external text" href="https://jqueryui.com/effect/">jQuery UI Effects &#8211; Scale</a></td>
+<td>jquery-effects-scale</td>
+<td>jquery-effects-core</td>
+<td>1.11.4</td>
+<td>MIT + CC0 + (MIT OR GPLv2)</td>
+</tr>
+<tr>
+<td><a class="external text" href="https://jqueryui.com/effect/">jQuery UI Effects &#8211; Shake</a></td>
+<td>jquery-effects-shake</td>
+<td>jquery-effects-core</td>
+<td>1.11.4</td>
+<td>MIT + CC0 + (MIT OR GPLv2)</td>
+</tr>
+<tr>
+<td><a class="external text" href="https://jqueryui.com/effect/">jQuery UI Effects &#8211; Slide</a></td>
+<td>jquery-effects-slide</td>
+<td>jquery-effects-core</td>
+<td>1.11.4</td>
+<td>MIT + CC0 + (MIT OR GPLv2)</td>
+</tr>
+<tr>
+<td><a class="external text" href="https://jqueryui.com/effect/">jQuery UI Effects &#8211; Transfer</a></td>
+<td>jquery-effects-transfer</td>
+<td>jquery-effects-core</td>
+<td>1.11.4</td>
+<td>MIT + CC0 + (MIT OR GPLv2)</td>
+</tr>
+<tr>
+<td><a class="external text" href="https://mediaelementjs.com/">MediaElement.js (WP 3.6+)</a></td>
+<td>wp-mediaelement</td>
+<td>jquery</td>
+<td>4.2.6-78496d1</td>
+<td>MIT</td>
+</tr>
+<tr>
+<td><a class="external text" href="https://trainofthoughts.org/blog/2007/02/15/jquery-plugin-scheduler/">jQuery Schedule</a></td>
+<td>schedule</td>
+<td>jquery</td>
+<td>20m/1.0.1</td>
+<td>MIT</td>
+</tr>
+<tr>
+<td><a class="external text" href="https://web.archive.org/web/20111017233444/https://plugins.jquery.com/project/suggest">jQuery Suggest</a></td>
+<td>suggest</td>
+<td>jquery</td>
+<td>1.1-20110113</td>
+<td>Public domain</td>
+</tr>
+<tr>
+<td><a class="external text" href="../../../../codex.wordpress.org/ThickBox.html">ThickBox</a></td>
+<td>thickbox</td>
+<td></td>
+<td>3.1-20121105</td>
+<td>MIT OR GPLv3</td>
+</tr>
+<tr>
+<td><a class="external text" href="https://cherne.net/brian/resources/jquery.hoverIntent.html">jQuery HoverIntent</a></td>
+<td>hoverIntent</td>
+<td>jquery</td>
+<td>1.8.1</td>
+<td>MIT</td>
+</tr>
+<tr>
+<td><a class="external text" href="https://plugins.jquery.com/project/hotkeys">jQuery Hotkeys</a></td>
+<td>jquery-hotkeys</td>
+<td>jquery</td>
+<td>0.2.0</td>
+<td>MIT OR GPLv2</td>
+</tr>
+<tr>
+<td><a class="external text" href="https://code.google.com/p/tw-sack/">Simple AJAX Code-Kit</a></td>
+<td>sack</td>
+<td></td>
+<td>1.6.1</td>
+<td>X11 License</td>
+</tr>
+<tr>
+<td><a class="external text" href="https://www.alexking.org/">QuickTags</a></td>
+<td>quicktags</td>
+<td></td>
+<td>1.3</td>
+<td>LGPL2.1</td>
+</tr>
+<tr>
+<td><a class="external text" href="https://github.com/automattic/Iris">Iris (Colour picker)</a></td>
+<td>iris</td>
+<td>jquery</td>
+<td>1.0.7</td>
+<td>GPLv2</td>
+</tr>
+<tr>
+<td><a class="external text" href="https://acko.net/dev/farbtastic">Farbtastic (deprecated)</a></td>
+<td>farbtastic</td>
+<td>jquery</td>
+<td>1.2</td>
+<td>GPLv3</td>
+</tr>
+<tr>
+<td><a class="external text" href="https://mattkruse.com/">ColorPicker (deprecated)</a></td>
+<td>colorpicker</td>
+<td>jquery</td>
+<td>v2</td>
+<td>Author&#8217;s own copyright</td>
+</tr>
+<tr>
+<td><a class="external text" href="https://tinymce.moxiecode.com/">Tiny MCE</a></td>
+<td>wp-tinymce</td>
+<td></td>
+<td>4.9.4</td>
+<td>LGPL2.1</td>
+</tr>
+<tr>
+<td>Autosave</td>
+<td>autosave</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>WordPress AJAX Response</td>
+<td>wp-ajax-response</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>List Manipulation</td>
+<td>wp-lists</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>WP Common</td>
+<td>common</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>WP Editor</td>
+<td>editorremov</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>WP Editor Functions</td>
+<td>editor-functions</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>AJAX Cat</td>
+<td>ajaxcat</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Admin Categories</td>
+<td>admin-categories</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Admin Tags</td>
+<td>admin-tags</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Admin custom fields</td>
+<td>admin-custom-fields</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Password Strength Meter</td>
+<td>password-strength-meter</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Admin Comments</td>
+<td>admin-comments</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Admin Users</td>
+<td>admin-users</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Admin Forms</td>
+<td>admin-forms</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>XFN</td>
+<td>xfn</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Upload</td>
+<td>upload</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>PostBox</td>
+<td>postbox</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Slug</td>
+<td>slug</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Post</td>
+<td>post</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Page</td>
+<td>page</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Link</td>
+<td>link</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Comment</td>
+<td>comment</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Threaded Comments</td>
+<td>comment-reply</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Admin Gallery</td>
+<td>admin-gallery</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Media Upload</td>
+<td>media-upload</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Admin widgets</td>
+<td>admin-widgets</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Word Count</td>
+<td>word-count</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Theme Preview</td>
+<td>theme-preview</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a class="external text" href="https://github.com/douglascrockford/JSON-js">JSON for JS</a></td>
+<td>json2</td>
+<td></td>
+<td>2015-05-03</td>
+<td>Public domain</td>
+</tr>
+<tr>
+<td><a class="external text" href="https://www.plupload.com/">Plupload Core</a></td>
+<td>plupload</td>
+<td></td>
+<td>2.1.9</td>
+<td>GPLv2</td>
+</tr>
+<tr>
+<td><a class="external text" href="https://www.plupload.com/example_all_runtimes.php">Plupload All Runtimes</a></td>
+<td>plupload-all</td>
+<td></td>
+<td>2.1.1</td>
+<td>GPLv2</td>
+</tr>
+<tr>
+<td><a class="external text" href="https://www.plupload.com/example_all_runtimes.php">Plupload HTML4</a></td>
+<td>plupload-html4</td>
+<td></td>
+<td>2.1.1</td>
+<td>GPLv2</td>
+</tr>
+<tr>
+<td><a class="external text" href="https://www.plupload.com/example_all_runtimes.php">Plupload HTML5</a></td>
+<td>plupload-html5</td>
+<td></td>
+<td>2.1.1</td>
+<td>GPLv2</td>
+</tr>
+<tr>
+<td><a class="external text" href="https://www.plupload.com/example_all_runtimes.php">Plupload Flash</a></td>
+<td>plupload-flash</td>
+<td></td>
+<td>2.1.1</td>
+<td>GPLv2</td>
+</tr>
+<tr>
+<td><a class="external text" href="https://www.plupload.com/example_all_runtimes.php">Plupload Silverlight</a></td>
+<td>plupload-silverlight</td>
+<td></td>
+<td>2.1.1</td>
+<td>GPLv2</td>
+</tr>
+<tr>
+<td><a class="external text" href="https://underscorejs.org/">Underscore js</a></td>
+<td>underscore</td>
+<td></td>
+<td>1.8.3</td>
+<td>MIT</td>
+</tr>
+<tr>
+<td><a class="external text" href="https://backbonejs.org/">Backbone js</a></td>
+<td>backbone</td>
+<td>jquery, underscore</td>
+<td>1.4.0</td>
+<td>MIT</td>
+</tr>
+<tr>
+<td><a class="external text" href="https://imagesloaded.desandro.com/">imagesLoaded</a></td>
+<td>imagesloaded</td>
+<td></td>
+<td>3.2.0</td>
+<td>MIT</td>
+</tr>
+<tr>
+<td><a class="external text" href="https://github.com/codemirror/CodeMirror">CodeMirror</a></td>
+<td>wp-codemirror</td>
+<td></td>
+<td>5.29.1-alpha-ee20357</td>
+<td>MIT</td>
+</tr>
+<tr>
+<td><a class="external text" href="http://odyniec.net/projects/imgareaselect/">imgAreaSelect</a></td>
+<td>imgareaselect</td>
+<td>jquery</td>
+<td>0.9.8</td>
+<td>MIT AND GPL</td>
+</tr>
+</tbody>
+</table>
+<table class="wikitable">
+<tbody>
+<tr>
+<th colspan="4"><b>Removed from Core</b></th>
+</tr>
+<tr>
+<th width="25%"><b>Script Name</b></th>
+<th width="30%"><b>Handle</b></th>
+<th width="20%"><b>Removed Version</b></th>
+<th width="25%"><b>Replaced With</b></th>
+</tr>
+<tr>
+<td><a class="external text" href="http://script.aculo.us/">Scriptaculous Root</a></td>
+<td>scriptaculous-root</td>
+<td>WP 3.5</td>
+<td>Google Version</td>
+</tr>
+<tr>
+<td><a class="external text" href="http://script.aculo.us/">Scriptaculous Builder</a></td>
+<td>scriptaculous-builder</td>
+<td>WP 3.5</td>
+<td>Google Version</td>
+</tr>
+<tr>
+<td><a class="external text" href="http://script.aculo.us/">Scriptaculous Drag &amp; Drop</a></td>
+<td>scriptaculous-dragdrop</td>
+<td>WP 3.5</td>
+<td>Google Version</td>
+</tr>
+<tr>
+<td><a class="external text" href="http://script.aculo.us/">Scriptaculous Effects</a></td>
+<td>scriptaculous-effects</td>
+<td>WP 3.5</td>
+<td>Google Version</td>
+</tr>
+<tr>
+<td><a class="external text" href="http://script.aculo.us/">Scriptaculous Slider</a></td>
+<td>scriptaculous-slider</td>
+<td>WP 3.5</td>
+<td>Google Version</td>
+</tr>
+<tr>
+<td><a class="external text" href="http://script.aculo.us/">Scriptaculous</a> Sound</td>
+<td>scriptaculous-sound</td>
+<td>WP 3.5</td>
+<td>Google Version</td>
+</tr>
+<tr>
+<td><a class="external text" href="http://script.aculo.us/">Scriptaculous Controls</a></td>
+<td>scriptaculous-controls</td>
+<td>WP 3.5</td>
+<td>Google Version</td>
+</tr>
+<tr>
+<td><a class="external text" href="http://script.aculo.us/">Scriptaculous</a></td>
+<td>scriptaculous</td>
+<td>WP 3.5</td>
+<td>Google Version</td>
+</tr>
+<tr>
+<td><a class="external text" href="http://www.prototypejs.org/">Prototype Framework</a></td>
+<td>prototype</td>
+<td>WP 3.5</td>
+<td>Google Version</td>
+</tr>
+</tbody>
+</table>
+<p><b>The list is far from complete.</b> For a complete list of registered files inspect <tt>$GLOBALS['wp_scripts']</tt> in the admin UI. Registered scripts might change per requested page.</p>
+<hr />
+<p><i>* The listed dependencies are not complete.</i></p>
+	</section>
+	<hr />
+	<section class="source-content">
+		<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="source" tabindex="-1">Source <a href="#source" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Source</span></a></h2>
+		<p>
+			File: <a href="../../files/wp-includes/functions-wp-scripts.php/index.html">wp-includes/functions.wp-scripts.php</a>		</p>
+
+					<div class="source-code-container">
+				<pre class="brush: php; toolbar: false; first-line: 346">function wp_enqueue_script( $handle, $src = '', $deps = array(), $ver = false, $in_footer = false ) {
+	_wp_scripts_maybe_doing_it_wrong( __FUNCTION__, $handle );
+
+	$wp_scripts = wp_scripts();
+
+	if ( $src || $in_footer ) {
+		$_handle = explode( '?', $handle );
+
+		if ( $src ) {
+			$wp_scripts-&gt;add( $_handle[0], $src, $deps, $ver );
+		}
+
+		if ( $in_footer ) {
+			$wp_scripts-&gt;add_data( $_handle[0], 'group', 1 );
+		}
+	}
+
+	$wp_scripts-&gt;enqueue( $handle );
+}
+</pre>
+			</div>
+			<p class="source-code-links">
+				<span>
+					<a href="#" class="show-complete-source">Expand full source code</a>
+					<a href="#" class="less-complete-source">Collapse full source code</a>
+				</span>
+				<span><a href="https://core.trac.wordpress.org/browser/tags/5.8/src/wp-includes/functions.wp-scripts.php#L346">View on Trac</a></span>
+			</p>
+			</section>
+	<hr />
+	<section class="related">
+		<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="related" tabindex="-1">Related <a href="#related" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Related</span></a></h2>
+
+					<article class="uses">
+				<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="uses" tabindex="-1">Uses <a href="#uses" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Uses</span></a></h3>
+				<table id="uses-table">
+					<caption class="screen-reader-text">Uses</caption>
+					<thead>
+						<tr>
+							<th>Uses</th>
+							<th class="related-desc">Description</th>
+						</tr>
+					</thead>
+					<tbody>
+												<tr>
+							<td>
+								<span>wp-includes/functions.wp-scripts.php:</span>
+								<a href="../wp_scripts/index.html">wp_scripts()</a>
+							</td>
+							<td class="related-desc">
+								<p>Initialize $wp_scripts if it has not been set.</p>
+							</td>
+						</tr>
+											<tbody>
+				</table>
+
+							</article>
+		
+					
+			<article class="used-by">
+				<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="used-by" tabindex="-1">Used By <a href="#used-by" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Used By</span></a></h3>
+				<table id="used-by-table">
+					<caption class="screen-reader-text">Used By</caption>
+					<thead>
+						<tr>
+							<th>Used By</th>
+							<th class="related-desc">Description</th>
+						</tr>
+					</thead>
+					<tbody>
+												<tr>
+							<td>
+								<span>wp-includes/script-loader.php:</span>
+								<a href="../wp_enqueue_editor_format_library_assets/index.html">wp_enqueue_editor_format_library_assets()</a>
+							</td>
+							<td class="related-desc">
+								<p>Enqueues the assets required for the format library within the block editor.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/class-wp-block.php:</span>
+								<a href="../../classes/wp_block/render/index.html">WP_Block::render()</a>
+							</td>
+							<td class="related-desc">
+								<p>Generates the render output for the block.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/script-loader.php:</span>
+								<a href="../wp_enqueue_editor_block_directory_assets/index.html">wp_enqueue_editor_block_directory_assets()</a>
+							</td>
+							<td class="related-desc">
+								<p>Enqueues the assets required for the block directory within the block editor.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/script-loader.php:</span>
+								<a href="../enqueue_editor_block_styles_assets/index.html">enqueue_editor_block_styles_assets()</a>
+							</td>
+							<td class="related-desc">
+								<p>Function responsible for enqueuing the assets required for block styles functionality on the editor.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/script-loader.php:</span>
+								<a href="../wp_enqueue_registered_block_scripts_and_styles/index.html">wp_enqueue_registered_block_scripts_and_styles()</a>
+							</td>
+							<td class="related-desc">
+								<p>Enqueues registered block scripts and styles, depending on current rendered context (only enqueuing editor scripts while in context of the editor).</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-admin/includes/post.php:</span>
+								<a href="../the_block_editor_meta_boxes/index.html">the_block_editor_meta_boxes()</a>
+							</td>
+							<td class="related-desc">
+								<p>Renders the meta boxes forms.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-admin/includes/meta-boxes.php:</span>
+								<a href="../register_and_do_post_meta_boxes/index.html">register_and_do_post_meta_boxes()</a>
+							</td>
+							<td class="related-desc">
+								<p>Registers the default post meta boxes, and runs the <code>do_meta_boxes</code> actions.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-admin/includes/class-wp-privacy-policy-content.php:</span>
+								<a href="../../classes/wp_privacy_policy_content/notice/index.html">WP_Privacy_Policy_Content::notice()</a>
+							</td>
+							<td class="related-desc">
+								<p>Add a notice with a link to the guide when editing the privacy policy page.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/general-template.php:</span>
+								<a href="../wp_enqueue_code_editor/index.html">wp_enqueue_code_editor()</a>
+							</td>
+							<td class="related-desc">
+								<p>Enqueue assets needed by the code editor for the given settings.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/widgets/class-wp-widget-media-gallery.php:</span>
+								<a href="../../classes/wp_widget_media_gallery/enqueue_admin_scripts/index.html">WP_Widget_Media_Gallery::enqueue_admin_scripts()</a>
+							</td>
+							<td class="related-desc">
+								<p>Loads the required media files for the media manager and scripts for media widgets.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/widgets/class-wp-widget-custom-html.php:</span>
+								<a href="../../classes/wp_widget_custom_html/enqueue_admin_scripts/index.html">WP_Widget_Custom_HTML::enqueue_admin_scripts()</a>
+							</td>
+							<td class="related-desc">
+								<p>Loads the required scripts and styles for the widget control.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/widgets/class-wp-widget-text.php:</span>
+								<a href="../../classes/wp_widget_text/enqueue_admin_scripts/index.html">WP_Widget_Text::enqueue_admin_scripts()</a>
+							</td>
+							<td class="related-desc">
+								<p>Loads the required scripts and styles for the widget control.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/widgets/class-wp-widget-media-audio.php:</span>
+								<a href="../../classes/wp_widget_media_audio/enqueue_admin_scripts/index.html">WP_Widget_Media_Audio::enqueue_admin_scripts()</a>
+							</td>
+							<td class="related-desc">
+								<p>Loads the required media files for the media manager and scripts for media widgets.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/widgets/class-wp-widget-media-audio.php:</span>
+								<a href="../../classes/wp_widget_media_audio/enqueue_preview_scripts/index.html">WP_Widget_Media_Audio::enqueue_preview_scripts()</a>
+							</td>
+							<td class="related-desc">
+								<p>Enqueue preview scripts.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/widgets/class-wp-widget-media-video.php:</span>
+								<a href="../../classes/wp_widget_media_video/enqueue_preview_scripts/index.html">WP_Widget_Media_Video::enqueue_preview_scripts()</a>
+							</td>
+							<td class="related-desc">
+								<p>Enqueue preview scripts.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/widgets/class-wp-widget-media-video.php:</span>
+								<a href="../../classes/wp_widget_media_video/enqueue_admin_scripts/index.html">WP_Widget_Media_Video::enqueue_admin_scripts()</a>
+							</td>
+							<td class="related-desc">
+								<p>Loads the required scripts and styles for the widget control.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/widgets/class-wp-widget-media.php:</span>
+								<a href="../../classes/wp_widget_media/enqueue_admin_scripts/index.html">WP_Widget_Media::enqueue_admin_scripts()</a>
+							</td>
+							<td class="related-desc">
+								<p>Loads the required scripts and styles for the widget control.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/widgets/class-wp-widget-media-image.php:</span>
+								<a href="../../classes/wp_widget_media_image/enqueue_admin_scripts/index.html">WP_Widget_Media_Image::enqueue_admin_scripts()</a>
+							</td>
+							<td class="related-desc">
+								<p>Loads the required media files for the media manager and scripts for media widgets.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/theme.php:</span>
+								<a href="../the_custom_header_markup/index.html">the_custom_header_markup()</a>
+							</td>
+							<td class="related-desc">
+								<p>Prints the markup for a custom header.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/customize/class-wp-customize-selective-refresh.php:</span>
+								<a href="../../classes/wp_customize_selective_refresh/enqueue_preview_scripts/index.html">WP_Customize_Selective_Refresh::enqueue_preview_scripts()</a>
+							</td>
+							<td class="related-desc">
+								<p>Enqueues preview scripts.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/embed.php:</span>
+								<a href="../wp_oembed_add_host_js/index.html">wp_oembed_add_host_js()</a>
+							</td>
+							<td class="related-desc">
+								<p>Adds the necessary JavaScript to communicate with the embedded iframes.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/customize/class-wp-customize-cropped-image-control.php:</span>
+								<a href="../../classes/wp_customize_cropped_image_control/enqueue/index.html">WP_Customize_Cropped_Image_Control::enqueue()</a>
+							</td>
+							<td class="related-desc">
+								<p>Enqueue control related scripts/styles.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/class-wp-customize-nav-menus.php:</span>
+								<a href="../../classes/wp_customize_nav_menus/customize_preview_enqueue_deps/index.html">WP_Customize_Nav_Menus::customize_preview_enqueue_deps()</a>
+							</td>
+							<td class="related-desc">
+								<p>Enqueue scripts for the Customizer preview.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/class-wp-customize-nav-menus.php:</span>
+								<a href="../../classes/wp_customize_nav_menus/enqueue_scripts/index.html">WP_Customize_Nav_Menus::enqueue_scripts()</a>
+							</td>
+							<td class="related-desc">
+								<p>Enqueue scripts and styles for Customizer pane.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-admin/includes/dashboard.php:</span>
+								<a href="../wp_dashboard_setup/index.html">wp_dashboard_setup()</a>
+							</td>
+							<td class="related-desc">
+								<p>Registers dashboard widgets.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-admin/includes/class-wp-internal-pointers.php:</span>
+								<a href="../../classes/wp_internal_pointers/enqueue_scripts/index.html">WP_Internal_Pointers::enqueue_scripts()</a>
+							</td>
+							<td class="related-desc">
+								<p>Initializes the new feature pointers.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-admin/includes/template.php:</span>
+								<a href="../do_accordion_sections/index.html">do_accordion_sections()</a>
+							</td>
+							<td class="related-desc">
+								<p>Meta Box Accordion Template Function.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-admin/includes/media.php:</span>
+								<a href="../wp_media_upload_handler/index.html">wp_media_upload_handler()</a>
+							</td>
+							<td class="related-desc">
+								<p>Handles the process of uploading media.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-admin/includes/media.php:</span>
+								<a href="../media_upload_gallery/index.html">media_upload_gallery()</a>
+							</td>
+							<td class="related-desc">
+								<p>Retrieves the legacy media uploader form in an iframe.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-admin/includes/comment.php:</span>
+								<a href="../enqueue_comment_hotkeys_js/index.html">enqueue_comment_hotkeys_js()</a>
+							</td>
+							<td class="related-desc">
+															</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-admin/includes/class-custom-image-header.php:</span>
+								<a href="../../classes/custom_image_header/js_includes/index.html">Custom_Image_Header::js_includes()</a>
+							</td>
+							<td class="related-desc">
+								<p>Set up the enqueue for the JavaScript files.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-admin/includes/class-custom-background.php:</span>
+								<a href="../../classes/custom_background/admin_load/index.html">Custom_Background::admin_load()</a>
+							</td>
+							<td class="related-desc">
+								<p>Set up the enqueue for the CSS &amp; JavaScript files.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/class-wp-customize-manager.php:</span>
+								<a href="../../classes/wp_customize_manager/enqueue_control_scripts/index.html">WP_Customize_Manager::enqueue_control_scripts()</a>
+							</td>
+							<td class="related-desc">
+								<p>Enqueue scripts for customize controls.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/class-wp-customize-manager.php:</span>
+								<a href="../../classes/wp_customize_manager/customize_preview_init/index.html">WP_Customize_Manager::customize_preview_init()</a>
+							</td>
+							<td class="related-desc">
+								<p>Print JavaScript settings.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/general-template.php:</span>
+								<a href="../add_thickbox/index.html">add_thickbox()</a>
+							</td>
+							<td class="related-desc">
+								<p>Enqueues the default ThickBox js and css.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/functions.php:</span>
+								<a href="../wp_auth_check_load/index.html">wp_auth_check_load()</a>
+							</td>
+							<td class="related-desc">
+								<p>Load the auth check for monitoring whether the user is still logged in.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/class-wp-admin-bar.php:</span>
+								<a href="../../classes/wp_admin_bar/initialize/index.html">WP_Admin_Bar::initialize()</a>
+							</td>
+							<td class="related-desc">
+															</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/media.php:</span>
+								<a href="../wp_enqueue_media/index.html">wp_enqueue_media()</a>
+							</td>
+							<td class="related-desc">
+								<p>Enqueues all scripts, styles, settings, and templates necessary to use all media JS APIs.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/media.php:</span>
+								<a href="../wp_video_shortcode/index.html">wp_video_shortcode()</a>
+							</td>
+							<td class="related-desc">
+								<p>Builds the Video shortcode output.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/media.php:</span>
+								<a href="../wp_playlist_scripts/index.html">wp_playlist_scripts()</a>
+							</td>
+							<td class="related-desc">
+								<p>Outputs and enqueue default scripts and styles for playlists.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/media.php:</span>
+								<a href="../wp_audio_shortcode/index.html">wp_audio_shortcode()</a>
+							</td>
+							<td class="related-desc">
+								<p>Builds the Audio shortcode output.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/customize/class-wp-customize-header-image-control.php:</span>
+								<a href="../../classes/wp_customize_header_image_control/enqueue/index.html">WP_Customize_Header_Image_Control::enqueue()</a>
+							</td>
+							<td class="related-desc">
+															</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/customize/class-wp-customize-color-control.php:</span>
+								<a href="../../classes/wp_customize_color_control/enqueue/index.html">WP_Customize_Color_Control::enqueue()</a>
+							</td>
+							<td class="related-desc">
+								<p>Enqueue scripts/styles for the color picker.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/class-wp-customize-widgets.php:</span>
+								<a href="../../classes/wp_customize_widgets/enqueue_scripts/index.html">WP_Customize_Widgets::enqueue_scripts()</a>
+							</td>
+							<td class="related-desc">
+								<p>Enqueues scripts and styles for Customizer panel and export data to JavaScript.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/class-wp-customize-widgets.php:</span>
+								<a href="../../classes/wp_customize_widgets/customize_preview_enqueue/index.html">WP_Customize_Widgets::customize_preview_enqueue()</a>
+							</td>
+							<td class="related-desc">
+								<p>Enqueues scripts for the Customizer preview.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/class-wp-editor.php:</span>
+								<a href="../../classes/_wp_editors/enqueue_scripts/index.html">_WP_Editors::enqueue_scripts()</a>
+							</td>
+							<td class="related-desc">
+															</td>
+						</tr>
+											<tbody>
+				</table>
+
+								<a href="#" class="show-more">Show 41 more used by</a>
+				<a href="#" class="hide-more">Hide more used by</a>
+							</article>
+			</section>
+		<hr />
+	<section class="changelog">
+		<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="changelog" tabindex="-1">Changelog <a href="#changelog" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Changelog</span></a></h2>
+
+		<table>
+			<caption class="screen-reader-text">Changelog</caption>
+			<thead>
+				<tr>
+					<th class="changelog-version">Version</th>
+					<th class="changelog-desc">Description</th>
+				</tr>
+			</thead>
+
+			<tbody>
+									
+					<tr>
+						<td><a href="../../since/2.1.0/index.html" alt="WordPress 2.1.0">2.1.0</a></td>
+						<td>Introduced.</td>
+					</tr>
+							</tbody>
+		</table>
+	</section>
+
+	<hr />
+	<section class="user-notes">
+		<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="user-contributed-notes" tabindex="-1">User Contributed Notes <a href="#user-contributed-notes" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">User Contributed Notes</span></a></h2>
+		
+<div id="comments" class="comments-area">
+
+			
+		<ol class="comment-list">
+						<li id="comment-1558" data-comment-id="1558" class="comment byuser comment-author-andrija even thread-even depth-1">
+			<article id="div-comment-1558" class="comment-body">
+
+							<a href="#comment-content-1558" class="screen-reader-text">Skip to note 1 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="92d99fc32c"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="1558" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_enqueue_script%2F%23comment-1558"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="98% like this"><span class="screen-reader-text">Vote results for this note: </span>51</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="1558" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_enqueue_script%2F%23comment-1558"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/de8a9735ad45865f91dec546bc4d4cb4?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/de8a9735ad45865f91dec546bc4d4cb4?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/andrija/" rel="external nofollow" class="url">Andrija Naglic</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-1558">
+							<time datetime="2016-04-01T00:58:51+00:00">
+							5 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-1558">
+				<p><strong>Never worry about cache again!</strong></p>
+<p>This is a little trick I&#8217;ve picked up along the way.<br />
+The version of the .js and .css files is made from the time of it&#8217;s last update.</p>
+<section class="source-content">
+<div class="source-code-container">
+<pre class="brush: php; title: ; notranslate" title="">/**
+ * Never worry about cache again!
+ */
+function my_load_scripts($hook) {
+
+	// create my own version codes
+	$my_js_ver  = date(&quot;ymd-Gis&quot;, filemtime( plugin_dir_path( __FILE__ ) . 'js/custom.js' ));
+	$my_css_ver = date(&quot;ymd-Gis&quot;, filemtime( plugin_dir_path( __FILE__ ) . 'style.css' ));
+	
+	// 
+	wp_enqueue_script( 'custom_js', plugins_url( 'js/custom.js', __FILE__ ), array(), $my_js_ver );
+	wp_register_style( 'my_css', 	plugins_url( 'style.css', 	 __FILE__ ), false,   $my_css_ver );
+	wp_enqueue_style ( 'my_css' );
+
+}
+add_action('wp_enqueue_scripts', 'my_load_scripts');
+</pre>
+</div>
+<p class="source-code-links"><span><a href="#" class="show-complete-source">Expand full source code</a><a href="#" class="less-complete-source">Collapse full source code</a></span></p>
+</section>
+<p>That way, you will always use the cached versions, except in case the files were changed in the meanwhile, which is the most optimum scenario.</p>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-1558' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_enqueue_script%2F%3Freplytocom%3D1558%23feedback-editor-1558" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-1473" data-comment-id="1473" class="comment byuser comment-author-bcworkz odd alt thread-odd thread-alt depth-1">
+			<article id="div-comment-1473" class="comment-body">
+
+							<a href="#comment-content-1473" class="screen-reader-text">Skip to note 2 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="3348ee362d"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="1473" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_enqueue_script%2F%23comment-1473"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="92% like this"><span class="screen-reader-text">Vote results for this note: </span>31</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="1473" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_enqueue_script%2F%23comment-1473"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/c15c1a2374607e86bfb4fc4c8a5734a2?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/c15c1a2374607e86bfb4fc4c8a5734a2?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/bcworkz/" rel="external nofollow" class="url">bcworkz</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-1473">
+							<time datetime="2016-03-25T16:25:04+00:00">
+							5 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-1473">
+				<p>When you enqueue script that is dependent on jQuery, note that the jQuery in WordPress runs in noConflict mode, which means you cannot use the common <code>$</code> alias. You must use the full <code>jQuery</code> instead. Alternately, place your code using the <code>$</code> shortcut inside a noConflict wrapper.</p>
+<pre class="brush: jscript; title: ; notranslate" title="">
+jQuery( document ).ready( function( $ ) {
+    // $() will work as an alias for jQuery() inside of this function
+    [ your code goes here ]
+} );</pre>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-1473' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_enqueue_script%2F%3Freplytocom%3D1473%23feedback-editor-1473" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-274" data-comment-id="274" class="comment byuser comment-author-bford2here even thread-even depth-1">
+			<article id="div-comment-274" class="comment-body">
+
+							<a href="#comment-content-274" class="screen-reader-text">Skip to note 3 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="1da4df860c"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="274" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_enqueue_script%2F%23comment-274"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="96% like this"><span class="screen-reader-text">Vote results for this note: </span>25</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="274" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_enqueue_script%2F%23comment-274"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/5b59419c0db6a4b739f0a4f145e93fa1?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/5b59419c0db6a4b739f0a4f145e93fa1?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/bford2here/" rel="external nofollow" class="url">Barbara Ford</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-274">
+							<time datetime="2015-05-17T21:01:15+00:00">
+							6 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-274">
+				<p><strong>Using a Hook</strong></p>
+<p>Enqueue both scripts and styles from a single action hook.</p>
+<pre class="brush: php; title: ; notranslate" title="">
+/**
+ * Proper way to enqueue scripts and styles.
+ */
+function wpdocs_theme_name_scripts() {
+	wp_enqueue_style( 'style-name', get_stylesheet_uri() );
+	wp_enqueue_script( 'script-name', get_template_directory_uri() . '/js/example.js', array(), '1.0.0', true );
+}
+add_action( 'wp_enqueue_scripts', 'wpdocs_theme_name_scripts' );
+</pre>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-274' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_enqueue_script%2F%3Freplytocom%3D274%23feedback-editor-274" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-276" data-comment-id="276" class="comment byuser comment-author-bford2here odd alt thread-odd thread-alt depth-1">
+			<article id="div-comment-276" class="comment-body">
+
+							<a href="#comment-content-276" class="screen-reader-text">Skip to note 4 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="26448b9e94"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="276" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_enqueue_script%2F%23comment-276"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="100% like this"><span class="screen-reader-text">Vote results for this note: </span>18</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="276" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_enqueue_script%2F%23comment-276"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/5b59419c0db6a4b739f0a4f145e93fa1?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/5b59419c0db6a4b739f0a4f145e93fa1?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/bford2here/" rel="external nofollow" class="url">Barbara Ford</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-276">
+							<time datetime="2015-05-17T21:07:29+00:00">
+							6 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-276">
+				<p><strong>Link a Theme Script Which Depends on jQuery</strong></p>
+<p>JavaScript files included in themes often require another JavaScript file to be loaded in advance to use its functions or variables. Using the $deps parameter, the wp_enqueue_script() and <a href="../wp_register_script/index.html" rel="nofollow">wp_register_script</a>() functions allows you to mark dependencies when registering a new script. This will cause WordPress to automatically link these dependencies to the HTML page before the new script is linked. If the handles of these dependencies are not registered, WordPress will not link the new script. This example requires the jQuery library for the custom_script.js theme script:</p>
+<pre class="brush: php; title: ; notranslate" title="">
+/**
+ * Enqueue a script with jQuery as a dependency.
+ */
+function wpdocs_scripts_method() {
+	wp_enqueue_script( 'custom-script', get_stylesheet_directory_uri() . '/js/custom_script.js', array( 'jquery' ) );
+}
+add_action( 'wp_enqueue_scripts', 'wpdocs_scripts_method' );
+</pre>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-276' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_enqueue_script%2F%3Freplytocom%3D276%23feedback-editor-276" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-1831" data-comment-id="1831" class="comment byuser comment-author-_smartik_ even thread-even depth-1">
+			<article id="div-comment-1831" class="comment-body">
+
+							<a href="#comment-content-1831" class="screen-reader-text">Skip to note 5 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="6b643f1e1a"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="1831" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_enqueue_script%2F%23comment-1831"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="100% like this"><span class="screen-reader-text">Vote results for this note: </span>14</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="1831" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_enqueue_script%2F%23comment-1831"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/7f20efa57653fb7402e9c37783248e49?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/7f20efa57653fb7402e9c37783248e49?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/_smartik_/" rel="external nofollow" class="url">Andrei Surdu</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-1831">
+							<time datetime="2016-09-16T13:09:37+00:00">
+							5 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-1831">
+				<p>I want to add a note to <a href="index.html#comment-1473"> bcworkz</a> comment. When using jquery, in general, this is how the code in a file should be formatted:</p>
+<pre class="brush: jscript; title: ; notranslate" title="">
+(function( $ ) {
+
+	&quot;use strict&quot;;
+	
+	// javascript code here. i.e.: $(document).ready( function(){} ); 
+
+})(jQuery);
+</pre>
+<p>It&#8217;s a common practice that ensures jQuery runs in no conflict mode and in strict mode.<br />
+<strong><br />
+Strict mode helps out in a couple ways:</strong></p>
+<ul>
+<li>It catches some common coding bloopers, throwing exceptions.</li>
+<li>It prevents, or throws errors, when relatively &#8220;unsafe&#8221; actions are taken (such as gaining access to the global object).</li>
+<li>It disables features that are confusing or poorly thought out.</li>
+</ul>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-1831' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_enqueue_script%2F%3Freplytocom%3D1831%23feedback-editor-1831" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-275" data-comment-id="275" class="comment byuser comment-author-bford2here odd alt thread-odd thread-alt depth-1">
+			<article id="div-comment-275" class="comment-body">
+
+							<a href="#comment-content-275" class="screen-reader-text">Skip to note 6 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="d8d27e5688"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="275" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_enqueue_script%2F%23comment-275"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="90% like this"><span class="screen-reader-text">Vote results for this note: </span>8</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="275" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_enqueue_script%2F%23comment-275"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/5b59419c0db6a4b739f0a4f145e93fa1?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/5b59419c0db6a4b739f0a4f145e93fa1?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/bford2here/" rel="external nofollow" class="url">Barbara Ford</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-275">
+							<time datetime="2015-05-17T21:02:05+00:00">
+							6 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-275">
+				<p><strong>Link the script.aculo.us Library</strong></p>
+<p>The following is an example of basic usage which links the script.aculo.us library already included and registered by WordPress with the scriptaculous handle.</p>
+<pre class="brush: php; title: ; notranslate" title="">
+/**
+ * Enqueue script.aculo.us.
+ *
+ * Tha callback is hooked to 'wp_enqueue_script' to ensure the script is only enqueued on the front-end.
+ */
+function my_scripts_method() {
+    wp_enqueue_script( 'scriptaculous' );
+}
+add_action( 'wp_enqueue_scripts', 'my_scripts_method' );
+</pre>
+<p>The above example links the script.aculo.us library only on the front-end. If the library was needed within the administration screens, you could use the <a href="../../hooks/admin_enqueue_scripts/index.html" rel="nofollow">admin_enqueue_scripts</a> action hook instead, however, this would enqueue it on all the administration screens, which often leads to plugin/core conflicts, ultimately breaking the WordPress administration screens experience. Instead, you should only link it on the individual screens you need it, see the Link Scripts Only on a Plugin Administration Screen section for an example of that. </p>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-275' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_enqueue_script%2F%3Freplytocom%3D275%23feedback-editor-275" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-2236" data-comment-id="2236" class="comment byuser comment-author-pratikshrestha even thread-even depth-1">
+			<article id="div-comment-2236" class="comment-body">
+
+							<a href="#comment-content-2236" class="screen-reader-text">Skip to note 7 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="42551a08ad"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="2236" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_enqueue_script%2F%23comment-2236"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="100% like this"><span class="screen-reader-text">Vote results for this note: </span>4</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="2236" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_enqueue_script%2F%23comment-2236"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/447bfcdfd3bc05dc545407575e98d534?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/447bfcdfd3bc05dc545407575e98d534?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/pratikshrestha/" rel="external nofollow" class="url">Pratik Shrestha</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-2236">
+							<time datetime="2017-05-25T07:59:40+00:00">
+							4 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-2236">
+				<p>When registering and enqueueing scripts, you don&#8217;t need to call <code>wp_register_script()</code> and <code>wp_enqueue_script()</code>. Just call <code>wp_enqueue_script()</code>.<br />
+This:</p>
+<pre class="brush: php; title: ; notranslate" title="">
+wp_register_script ( 'custom-script', get_template_directory_uri() . '/js/custom-script.js' );
+wp_enqueue_script ( 'custom-script' );
+</pre>
+<p>Should simply be:</p>
+<pre class="brush: php; title: ; notranslate" title="">
+wp_enqueue_script ( 'custom-script', get_template_directory_uri() . '/js/custom-script.js' );
+</pre>
+<p>Only register if you don&#8217;t know if you&#8217;re going to load it immediately.</p>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-2236' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_enqueue_script%2F%3Freplytocom%3D2236%23feedback-editor-2236" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-1602" data-comment-id="1602" class="comment byuser comment-author-mnelson4 odd alt thread-odd thread-alt depth-1">
+			<article id="div-comment-1602" class="comment-body">
+
+							<a href="#comment-content-1602" class="screen-reader-text">Skip to note 8 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="e99887e072"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="1602" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_enqueue_script%2F%23comment-1602"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="80% like this"><span class="screen-reader-text">Vote results for this note: </span>3</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="1602" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_enqueue_script%2F%23comment-1602"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/c3f104c7c0fbf002b1ea896dc81608ec?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/c3f104c7c0fbf002b1ea896dc81608ec?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/mnelson4/" rel="external nofollow" class="url">Michael Nelson</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-1602">
+							<time datetime="2016-05-02T18:08:40+00:00">
+							5 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-1602">
+				<p>Because of the work on <a href="https://core.trac.wordpress.org/ticket/9346" rel="nofollow ugc">https://core.trac.wordpress.org/ticket/9346</a>, it&#8217;s actually safe to call </p>
+<pre class="brush: php; title: ; notranslate" title="">wp_enqueue_script</pre>
+<p> after the hook &#8220;wp_enqueue_scripts&#8221; and before the footer, eg when rendering shortcodes or rendering a post&#8217;s body.<br />
+Enqueueing stylesheets (css) in this same method has some issues though.<br />
+Scribu gave an example of a shortcode enqueueing a script here: <a href="http://scribu.net/wordpress/conditional-script-loading-revisited.html" rel="nofollow ugc">http://scribu.net/wordpress/conditional-script-loading-revisited.html</a></p>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-1602' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_enqueue_script%2F%3Freplytocom%3D1602%23feedback-editor-1602" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-1749" data-comment-id="1749" class="comment byuser comment-author-xedinunknown even thread-even depth-1">
+			<article id="div-comment-1749" class="comment-body">
+
+							<a href="#comment-content-1749" class="screen-reader-text">Skip to note 9 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="2736d0250f"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="1749" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_enqueue_script%2F%23comment-1749"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="80% like this"><span class="screen-reader-text">Vote results for this note: </span>3</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="1749" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_enqueue_script%2F%23comment-1749"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/d3110961c54afee6e0421f6b2489ce65?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/d3110961c54afee6e0421f6b2489ce65?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/xedinunknown/" rel="external nofollow" class="url">Xedin Unknown</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-1749">
+							<time datetime="2016-08-01T10:36:48+00:00">
+							5 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-1749">
+				<p>This is not documented, but calling this function with <code>$in_footer</code> being `false` actually <a href="https://github.com/WordPress/WordPress/blob/master/wp-includes/functions.wp-scripts.php" rel="nofollow">registers the script in general</a> as a dependency that should be resolved and output, not just for header. Then, when outputting scripts enqueued for the footer, <a href="https://github.com/WordPress/WordPress/blob/master/wp-includes/class.wp-dependencies.php#L107" rel="nofollow">only the scripts that have not been included yet</a> will be output. This leads to behaviour where a script that is enqueued supposedly in the header will appear in the footer if enqueued after the header has already been process. Therefore, <code>$in_footer</code> should actually read and be understood as <code>$in_footer_only</code>.</p>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-1749' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_enqueue_script%2F%3Freplytocom%3D1749%23feedback-editor-1749" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-1925" data-comment-id="1925" class="comment byuser comment-author-funkatronic odd alt thread-odd thread-alt depth-1">
+			<article id="div-comment-1925" class="comment-body">
+
+							<a href="#comment-content-1925" class="screen-reader-text">Skip to note 10 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="65217c3f4e"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="1925" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_enqueue_script%2F%23comment-1925"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="100% like this"><span class="screen-reader-text">Vote results for this note: </span>3</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="1925" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_enqueue_script%2F%23comment-1925"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/281d234ca83251614a66121a05cb8fad?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/281d234ca83251614a66121a05cb8fad?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/funkatronic/" rel="external nofollow" class="url">Manny Fleurmond</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-1925">
+							<time datetime="2016-11-23T15:59:46+00:00">
+							5 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-1925">
+				<p>Because this and <code>wp_enqueue_style</code> uses<code> WP_Scripts::enqueue()</code>, which can take an array of handles as it&#8217;s first argument, you can also pass an array of handles into <code>wp_enqueue_script/style</code>:</p>
+<pre class="brush: php; title: ; notranslate" title="">
+/**
+ * Enqueue multiple handles
+ */
+function enqueue_multiple() {
+    wp_enqueue_script( array( 'backbone', 'jquery', 'iris' ) );
+}
+add_action( 'wp_enqueue_scripts', 'enqueue_multiple' );
+</pre>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-1925' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_enqueue_script%2F%3Freplytocom%3D1925%23feedback-editor-1925" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-3002" data-comment-id="3002" class="comment byuser comment-author-cgastrell even thread-even depth-1">
+			<article id="div-comment-3002" class="comment-body">
+
+							<a href="#comment-content-3002" class="screen-reader-text">Skip to note 11 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="0f3960cd45"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="3002" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_enqueue_script%2F%23comment-3002"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="100% like this"><span class="screen-reader-text">Vote results for this note: </span>3</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="3002" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_enqueue_script%2F%23comment-3002"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/5eeed1a8b1d5aa7e93e3d5333acdf4db?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/5eeed1a8b1d5aa7e93e3d5333acdf4db?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/cgastrell/" rel="external nofollow" class="url">cgastrell</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-3002">
+							<time datetime="2018-12-11T18:58:41+00:00">
+							3 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-3002">
+				<p><strong>Unmet dependencies will *NOT* be warned</strong></p>
+<p>If dependencies (3rd argument) are not met, the script tag is just not printed and <strong>no warnings nor errors are shown</strong>.</p>
+<p>This doesn&#8217;t seem like a bug, just expected behavior. A mention about this on the docs would suffice to prevent misunderstandings.</p>
+<p>This example will never load <code>/js/example.js</code></p>
+<section class="source-content">
+<div class="source-code-container">
+<pre class="brush: php; title: ; notranslate" title="">
+/**
+ * ... enqueue plugin scripts.
+ */
+function load_plugin_scripts() {
+    wp_enqueue_script(
+		'script-name',
+		plugin_dir_url( __FILE__ ) . '/js/example.js',
+		array('not-existant'),
+		'1.0.0',
+		true
+	);
+}
+add_action( 'wp_enqueue_scripts', 'load_plugin_scripts' );
+</pre>
+</div>
+<p class="source-code-links"><span><a href="#" class="show-complete-source">Expand full source code</a><a href="#" class="less-complete-source">Collapse full source code</a></span></p>
+</section>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-3002' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_enqueue_script%2F%3Freplytocom%3D3002%23feedback-editor-3002" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-4246" data-comment-id="4246" class="comment byuser comment-author-bink19th odd alt thread-odd thread-alt depth-1">
+			<article id="div-comment-4246" class="comment-body">
+
+							<a href="#comment-content-4246" class="screen-reader-text">Skip to note 12 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="2d1714b452"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="4246" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_enqueue_script%2F%23comment-4246"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="100% like this"><span class="screen-reader-text">Vote results for this note: </span>3</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="4246" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_enqueue_script%2F%23comment-4246"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/6b02585c78b912dace35ecfe84bdd34e?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/6b02585c78b912dace35ecfe84bdd34e?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/bink19th/" rel="external nofollow" class="url">Bink</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-4246">
+							<time datetime="2020-09-11T07:21:47+00:00">
+							12 months ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-4246">
+				<p>An example of how to enqueue multiple styles and scripts which include the SRI (sub-resource integrity) tag.  This is loosely based on <a href="https://snippets.webaware.com.au/howto/subresource-integrity-wordpress-scripts-stylesheets/" rel="nofollow ugc">this article</a>, but I&#8217;ve tried to simplify the code somewhat, particularly given I may want to include and manage many scripts/styles.</p>
+<p>The important thing to note, is the handle specified when enqueuing a style/script, needs to match the handle referenced in the <code>my_add_sri</code> function.  Also note, aside from the obvious SRI tag difference, the <code>str_replace</code> method used on scripts in the <code>my_add_sri</code> function, is different to that used on styles.</p>
+<section class="source-content">
+<div class="source-code-container">
+<pre class="brush: php; title: ; notranslate" title="">/**
+* Load custom CSS and JavaScript.
+*/
+add_action( 'wp_enqueue_scripts', 'wpdocs_my_enqueue_scripts' );
+function wpdocs_my_enqueue_scripts() : void {
+    // Enqueue my styles.
+    wp_enqueue_style( 'wpdocs-bootstrap-style', 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css' );
+    wp_enqueue_style( 'wpdocs-datatables-bootstrap-style', 'https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/css/dataTables.bootstrap4.min.css' );
+    
+    // Enqueue my scripts.
+    wp_enqueue_script( 'wpdocs-bootstrap-bundle-script', 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.bundle.min.js', array(), null, true );
+    wp_enqueue_script( 'wpdocs-datatables-bootstrap-script', 'https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/dataTables.bootstrap4.min.js', array(), null, true );
+    wp_enqueue_script( 'wpdocs-jquery-datatables-script', 'https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js', array(), null, true );    
+    
+    // Add filters to catch and modify the styles and scripts as they're loaded.
+    add_filter( 'style_loader_tag', __NAMESPACE__ . '\wpdocs_my_add_sri', 10, 2 );
+    add_filter( 'script_loader_tag', __NAMESPACE__ . '\wpdocs_my_add_sri', 10, 2 );
+}
+
+/**
+* Add SRI attributes based on defined script/style handles.
+*/
+function wpdocs_my_add_sri( $html, $handle ) : string {
+    switch( $handle ) {
+        case 'wpdocs-bootstrap-style':
+            $html = str_replace( ' /&gt;', ' integrity=&quot;sha512-MoRNloxbStBcD8z3M/2BmnT+rg4IsMxPkXaGh2zD6LGNNFE80W3onsAhRcMAMrSoyWL9xD7Ert0men7vR8LUZg==&quot; crossorigin=&quot;anonymous&quot; /&gt;', $html );
+            break;
+        case 'wpdocs-datatables-bootstrap-style':
+            $html = str_replace( ' /&gt;', ' integrity=&quot;sha512-PT0RvABaDhDQugEbpNMwgYBCnGCiTZMh9yOzUsJHDgl/dMhD9yjHAwoumnUk3JydV3QTcIkNDuN40CJxik5+WQ==&quot; crossorigin=&quot;anonymous&quot; /&gt;', $html );
+            break;
+        case 'wpdocs-bootstrap-bundle-script':
+            $html = str_replace( '&gt;&lt;/script&gt;', ' integrity=&quot;sha512-kBFfSXuTKZcABVouRYGnUo35KKa1FBrYgwG4PAx7Z2Heroknm0ca2Fm2TosdrrI356EDHMW383S3ISrwKcVPUw==&quot; crossorigin=&quot;anonymous&quot;&gt;&lt;/script&gt;', $html );
+            break;
+        case 'wpdocs-datatables-bootstrap-script':
+            $html = str_replace( '&gt;&lt;/script&gt;', ' integrity=&quot;sha512-OQlawZneA7zzfI6B1n1tjUuo3C5mtYuAWpQdg+iI9mkDoo7iFzTqnQHf+K5ThOWNJ9AbXL4+ZDwH7ykySPQc+A==&quot; crossorigin=&quot;anonymous&quot;&gt;&lt;/script&gt;', $html );
+            break;
+        case 'wpdocs-jquery-datatables-script':
+            $html = str_replace( '&gt;&lt;/script&gt;', ' integrity=&quot;sha512-BkpSL20WETFylMrcirBahHfSnY++H2O1W+UnEEO4yNIl+jI2+zowyoGJpbtk6bx97fBXf++WJHSSK2MV4ghPcg==&quot; crossorigin=&quot;anonymous&quot;&gt;&lt;/script&gt;', $html );
+            break;
+    } 
+    return $html;
+}</pre>
+</div>
+<p class="source-code-links"><span><a href="#" class="show-complete-source">Expand full source code</a><a href="#" class="less-complete-source">Collapse full source code</a></span></p>
+</section>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-4246' class='feedback hide-if-js'>
+<h4 class='feedback-title'>Feedback</h4>
+<ul class='children'>
+			<li id="comment-4508" data-comment-id="4508" class="comment byuser comment-author-gwynethllewelyn even depth-2">
+			<article id="div-comment-4508" class="comment-body">
+
+			
+				<div class="comment-content" id="comment-content-4508">
+				<p>As I was trying to use the &#8216;new&#8217; recommended CDN for Bootstrap 4.5.X (jsDelivr) and stumbled upon how exactly to figure out how to add the SRI tag, I can only commend your solution and the simplification you did to the original code. Thank you! &mdash; By <cite class="fn"><a href="https://profiles.wordpress.org/gwynethllewelyn/" rel="external nofollow" class="url">Gwyneth Llewelyn</a></cite> &mdash;  <a class="comment-date" href="index.html#comment-4508"><time datetime="2020-11-06T20:21:53+00:00">10 months ago</time></a></p>
+				</div><!-- .comment-content -->
+
+						</article>
+			</li>
+					</ul>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_enqueue_script%2F%3Freplytocom%3D4246%23feedback-editor-4246" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-2162" data-comment-id="2162" class="comment byuser comment-author-ahortin odd alt thread-even depth-1">
+			<article id="div-comment-2162" class="comment-body">
+
+							<a href="#comment-content-2162" class="screen-reader-text">Skip to note 13 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="138152527e"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="2162" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_enqueue_script%2F%23comment-2162"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="100% like this"><span class="screen-reader-text">Vote results for this note: </span>1</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="2162" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_enqueue_script%2F%23comment-2162"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/685a185234185f6d1242d48097c83f37?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/685a185234185f6d1242d48097c83f37?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/ahortin/" rel="external nofollow" class="url">Anthony Hortin</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-2162">
+							<time datetime="2017-03-22T02:31:02+00:00">
+							4 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-2162">
+				<p>See Also:</p>
+<p><a href="../wp_enqueue_style/index.html">wp_enqueue_style</a></p>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-2162' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_enqueue_script%2F%3Freplytocom%3D2162%23feedback-editor-2162" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-2545" data-comment-id="2545" class="comment byuser comment-author-mariovalney even thread-odd thread-alt depth-1">
+			<article id="div-comment-2545" class="comment-body">
+
+							<a href="#comment-content-2545" class="screen-reader-text">Skip to note 14 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="d0fa122f52"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="2545" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_enqueue_script%2F%23comment-2545"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="67% like this"><span class="screen-reader-text">Vote results for this note: </span>1</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="2545" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_enqueue_script%2F%23comment-2545"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/7a81fe6c33c49b5e86ed02d51e251669?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/7a81fe6c33c49b5e86ed02d51e251669?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/mariovalney/" rel="external nofollow" class="url">Mario Valney</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-2545">
+							<time datetime="2018-01-19T18:20:42+00:00">
+							4 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-2545">
+				<p>For who have the same question of @damiankaelgreen:</p>
+<p>In this case <strong>script</strong> is the file called in one <strong>HTML tag script</strong> which is used to define a client-side script (JavaScript).</p>
+<p>For include PHP files, please use <a href="../get_template_part/index.html">get_template_part()</a>.</p>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-2545' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_enqueue_script%2F%3Freplytocom%3D2545%23feedback-editor-2545" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-2881" data-comment-id="2881" class="comment byuser comment-author-mynameisrabby odd alt thread-even depth-1">
+			<article id="div-comment-2881" class="comment-body">
+
+							<a href="#comment-content-2881" class="screen-reader-text">Skip to note 15 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="5d8a9a9657"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="2881" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_enqueue_script%2F%23comment-2881"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="100% like this"><span class="screen-reader-text">Vote results for this note: </span>1</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="2881" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_enqueue_script%2F%23comment-2881"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/688975390510c0a0cdd7096b614fdf75?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/688975390510c0a0cdd7096b614fdf75?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/mynameisrabby/" rel="external nofollow" class="url">Rabby</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-2881">
+							<time datetime="2018-09-25T09:31:03+00:00">
+							3 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-2881">
+				<p>This example link of custom stylesheet and script with file version version</p>
+<pre class="brush: php; title: ; notranslate" title="">function custom_enqueue(){
+    //wp_enqueue_style('string $handle', mixed $src, array $deps, mixed $ver, string $meida );
+    wp_enqueue_style('customstyle', get_template_directory_uri() . '/css/fatblog.css', array(), '1.0.0', 'all' );
+    //wp_enqueue_style('string $handle', mixed $src, array $deps, mixed $ver, bol $in_footer );
+    wp_enqueue_script('customjs', get_template_directory_uri() . '/js/fatblog.js', array(), '1.0.0', 'true' );
+}
+add_action('wp_enqueue_scripts', 'custom_enqueue');</pre>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-2881' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_enqueue_script%2F%3Freplytocom%3D2881%23feedback-editor-2881" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-4653" data-comment-id="4653" class="comment byuser comment-author-turnipforest even thread-odd thread-alt depth-1">
+			<article id="div-comment-4653" class="comment-body">
+
+							<a href="#comment-content-4653" class="screen-reader-text">Skip to note 16 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="76e9e57c71"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="4653" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_enqueue_script%2F%23comment-4653"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="100% like this"><span class="screen-reader-text">Vote results for this note: </span>1</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="4653" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_enqueue_script%2F%23comment-4653"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/b6bc15ac16f9295eef493025a93f8b4d?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/b6bc15ac16f9295eef493025a93f8b4d?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/turnipforest/" rel="external nofollow" class="url">turnipforest</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-4653">
+							<time datetime="2020-12-12T22:38:37+00:00">
+							9 months ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-4653">
+				<p>The required CSS for <code>jquery-ui-dialog</code> does not come automatically!</p>
+<p>You must separately call <code>wp_enqueue_style()</code> with the registered handle &#8220;wp-jquery-ui-dialog&#8221;.</p>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-4653' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_enqueue_script%2F%3Freplytocom%3D4653%23feedback-editor-4653" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-277" data-comment-id="277" class="comment byuser comment-author-bford2here odd alt thread-even depth-1">
+			<article id="div-comment-277" class="comment-body">
+
+							<a href="#comment-content-277" class="screen-reader-text">Skip to note 17 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="04b1dd371e"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="277" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_enqueue_script%2F%23comment-277"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="50% like this"><span class="screen-reader-text">Vote results for this note: </span>0</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="277" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_enqueue_script%2F%23comment-277"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/5b59419c0db6a4b739f0a4f145e93fa1?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/5b59419c0db6a4b739f0a4f145e93fa1?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/bford2here/" rel="external nofollow" class="url">Barbara Ford</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-277">
+							<time datetime="2015-05-17T21:09:08+00:00">
+							6 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-277">
+				<p><strong>Link a Plugin Script That Depends on script.aculo.us</strong></p>
+<p>This example is intended to be used within a plugin file to register and link a new plugin script that depends on the script.aculo.us library. See the example above for information about dependencies.</p>
+<pre class="brush: php; title: ; notranslate" title="">
+/**
+ * Enqueue script with script.aculo.us as a dependency.
+ */
+function my_scripts_method() {
+	wp_enqueue_script( 'newscript', plugins_url( '/js/newscript.js' , __FILE__ ), array( 'scriptaculous' ) );
+}
+add_action( 'wp_enqueue_scripts', 'my_scripts_method' );
+</pre>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-277' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_enqueue_script%2F%3Freplytocom%3D277%23feedback-editor-277" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-278" data-comment-id="278" class="comment byuser comment-author-bford2here even thread-odd thread-alt depth-1">
+			<article id="div-comment-278" class="comment-body">
+
+							<a href="#comment-content-278" class="screen-reader-text">Skip to note 18 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="211e600018"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="278" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_enqueue_script%2F%23comment-278"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="50% like this"><span class="screen-reader-text">Vote results for this note: </span>0</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="278" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_enqueue_script%2F%23comment-278"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/5b59419c0db6a4b739f0a4f145e93fa1?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/5b59419c0db6a4b739f0a4f145e93fa1?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/bford2here/" rel="external nofollow" class="url">Barbara Ford</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-278">
+							<time datetime="2015-05-17T21:10:24+00:00">
+							6 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-278">
+				<p><strong>Link Scripts Only on a Plugin Administration Screen</strong></p>
+<p>This example links a script only on a specific administration screen, as opposed to the scenario described in the paragraph below the code of the first example.</p>
+<section class="source-content">
+<div class="source-code-container">
+<pre class="brush: php; title: ; notranslate" title="">
+&lt;?php
+/**
+ * Register the plugin script.
+ */
+function wpdocs_plugin_admin_init() {
+    // Register our script.
+    wp_register_script( 'my-plugin-script', plugins_url( '/script.js', __FILE__ ) );
+}
+add_action( 'admin_init', 'wpdocs_plugin_admin_init' );
+
+/**
+ * Add Administration screen for the plugin.
+ */
+function wpdocs_plugin_admin_menu() {
+    /* Add our plugin submenu and administration screen */
+    $page_hook_suffix = add_submenu_page( 'edit.php',	// The parent page of this submenu.
+		__( 'My Plugin', 'my-textdomain' ),				// The submenu title.
+		__( 'My Plugin', 'my-textdomain' ),				// The screen title.
+		'manage_options', 								// The capability required for access to this submenu.
+		'my_plugin-options', 							// The slug to use in the URL of the screen.
+		'wpdocs_plugin_manage_menu' 					// The function to call to display the screen.
+	);
+
+    /*
+	 * Use the retrieved $page_hook_suffix to hook the function that links our script.
+	 * This hook invokes the function only on our plugin administration screen,
+	 * see: https://developer.wordpress.org/reference/hooks/admin_print_scripts-hook_suffix/
+	 */
+    add_action( &quot;admin_print_scripts-{$page_hook_suffix}&quot;, 'wpdocs_plugin_admin_scripts');
+}
+add_action( 'admin_menu', 'wpdocs_plugin_admin_menu' );
+
+/**
+ * Enqueue registered script in the admin.
+ */
+function wpdocs_plugin_admin_scripts() {
+    // Link our already registered script to a page.
+    wp_enqueue_script( 'my-plugin-script' );
+}
+
+/**
+ * Display callback for the plugin Administration screen.
+ */
+function wpdocs_plugin_manage_menu() {
+    // Display our administration screen.
+}
+</pre>
+</div>
+<p class="source-code-links"><span><a href="#" class="show-complete-source">Expand full source code</a><a href="#" class="less-complete-source">Collapse full source code</a></span></p>
+</section>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-278' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_enqueue_script%2F%3Freplytocom%3D278%23feedback-editor-278" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-2305" data-comment-id="2305" class="comment byuser comment-author-damiankaelgreen odd alt thread-even depth-1">
+			<article id="div-comment-2305" class="comment-body">
+
+							<a href="#comment-content-2305" class="screen-reader-text">Skip to note 19 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="ad826e3ba1"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="2305" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_enqueue_script%2F%23comment-2305"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="50% like this"><span class="screen-reader-text">Vote results for this note: </span>0</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="2305" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_enqueue_script%2F%23comment-2305"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/e5a320d8d0e7ed695b35c2959db52e66?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/e5a320d8d0e7ed695b35c2959db52e66?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/damiankaelgreen/" rel="external nofollow" class="url">damiankaelgreen</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-2305">
+							<time datetime="2017-07-21T05:10:27+00:00">
+							4 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-2305">
+				<p>This documentation should really do a better job defining what a &#8220;script&#8221; is&#8230; Because: is this function meant for enqueueing a .php or html script? No!  </p>
+<p>That may seem obvious to a lot of developers, but if you are looking at this documentation, you should be getting some clarity as to what this function should be used for, so I&#8217;m writing this to help.</p>
+<p>Apparently, in this case, the term &#8220;script&#8221; is being used as a program that is not being evaluated by the server, but rather a program that needs to be passed to the client (and evaluated by the browser). Thus in this case, a PHP file that is expected to be evaluated by the server would not be considered a script (even though a lot of people might call it one) and thus it should not be included with wp_enqueue_script(), but included using require_once() or possibly include_once() instead.</p>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-2305' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_enqueue_script%2F%3Freplytocom%3D2305%23feedback-editor-2305" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-3145" data-comment-id="3145" class="comment byuser comment-author-mmtr86 even thread-odd thread-alt depth-1">
+			<article id="div-comment-3145" class="comment-body">
+
+							<a href="#comment-content-3145" class="screen-reader-text">Skip to note 20 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="13e083458e"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="3145" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_enqueue_script%2F%23comment-3145"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title=""><span class="screen-reader-text">Vote results for this note: </span>0</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="3145" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_enqueue_script%2F%23comment-3145"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/36cfd09e61993d9753c388f9754e6928?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/36cfd09e61993d9753c388f9754e6928?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/mmtr86/" rel="external nofollow" class="url">Miguel Torres</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-3145">
+							<time datetime="2019-04-12T01:39:32+00:00">
+							2 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-3145">
+				<p>Not sure if this is the place to report it, but I believe that the Tiny MCE handle that appears on the &#8220;Default Scripts Included and Registered by WordPress&#8221; table is incorrect. It says <code>tiny_mce</code>, but according to the code that registers the Tiny MCE scripts (<a href="https://core.trac.wordpress.org/browser/trunk/src/wp-includes/script-loader.php?rev=45138#L56-L64" rel="nofollow ugc">https://core.trac.wordpress.org/browser/trunk/src/wp-includes/script-loader.php?rev=45138#L56-L64</a>) should be <code>wp-tinymce</code>.</p>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-3145' class='feedback hide-if-js'>
+<h4 class='feedback-title'>Feedback</h4>
+<ul class='children'>
+			<li id="comment-3337" data-comment-id="3337" class="comment byuser comment-author-audrasjb odd alt depth-2">
+			<article id="div-comment-3337" class="comment-body">
+
+			
+				<div class="comment-content" id="comment-content-3337">
+				<p>Hi @mmtr86, Thanks, fixed! &mdash; By <cite class="fn"><a href="https://profiles.wordpress.org/audrasjb/" rel="external nofollow" class="url">Jb Audras</a></cite> &mdash;  <a class="comment-date" href="index.html#comment-3337"><time datetime="2019-08-14T13:56:37+00:00">2 years ago</time></a></p>
+				</div><!-- .comment-content -->
+
+						</article>
+			</li>
+					</ul>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_enqueue_script%2F%3Freplytocom%3D3145%23feedback-editor-3145" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-3599" data-comment-id="3599" class="comment byuser comment-author-ilovecats7 even thread-even depth-1">
+			<article id="div-comment-3599" class="comment-body">
+
+							<a href="#comment-content-3599" class="screen-reader-text">Skip to note 21 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="d3730a471b"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="3599" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_enqueue_script%2F%23comment-3599"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="33% like this"><span class="screen-reader-text">Vote results for this note: </span>-1</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="3599" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_enqueue_script%2F%23comment-3599"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/01a7256c57f1a2ec7cd44660a58e94cf?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/01a7256c57f1a2ec7cd44660a58e94cf?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/ilovecats7/" rel="external nofollow" class="url">ilovecats7</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-3599">
+							<time datetime="2020-01-26T17:53:57+00:00">
+							2 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-3599">
+				<p>The action hook used for loading scripts (wp_enqueue_scripts) is called in the head section of the document, so in order for the script to be loaded on the page, you MUST include the following on your page template:</p>
+<pre class="brush: php; title: ; notranslate" title="">get_header();</pre>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-3599' class='feedback hide-if-js'>
+<h4 class='feedback-title'>Feedback</h4>
+<ul class='children'>
+			<li id="comment-4092" data-comment-id="4092" class="comment byuser comment-author-devdavi odd alt depth-2">
+			<article id="div-comment-4092" class="comment-body">
+
+			
+				<div class="comment-content" id="comment-content-4092">
+				<p>This comment on the action hook stating you must include: </p>
+<pre class="brush: php; title: ; notranslate" title="">get_header();</pre>
+<p> This is inaccurate. This code fetches the header.php file. What must actually be included in the template is: </p>
+<pre class="brush: php; title: ; notranslate" title="">wp_head();</pre>
+<p> The confusion here is that most header files contain the <code>wp_head();</code> hook. &mdash; By <cite class="fn"><a href="https://profiles.wordpress.org/devdavi/" rel="external nofollow" class="url">devdavi</a></cite> &mdash;  <a class="comment-date" href="index.html#comment-4092"><time datetime="2020-07-28T22:21:16+00:00">1 year ago</time></a></p>
+				</div><!-- .comment-content -->
+
+						</article>
+			</li>
+					</ul>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_enqueue_script%2F%3Freplytocom%3D3599%23feedback-editor-3599" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-5192" data-comment-id="5192" class="comment byuser comment-author-uriahs-victor even thread-odd thread-alt depth-1">
+			<article id="div-comment-5192" class="comment-body">
+
+							<a href="#comment-content-5192" class="screen-reader-text">Skip to note 22 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="2750ae6477"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="5192" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_enqueue_script%2F%23comment-5192"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="0% like this"><span class="screen-reader-text">Vote results for this note: </span>-1</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="5192" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_enqueue_script%2F%23comment-5192"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/2107316376424ab2850c514bba9fd39a?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/2107316376424ab2850c514bba9fd39a?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/uriahs-victor/" rel="external nofollow" class="url">Uriahs Victor</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-5192">
+							<time datetime="2021-07-03T19:52:15+00:00">
+							2 months ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-5192">
+				<p>When enqueuing a custom script file that you later want to add some inline JS to using wp_add_inline_script(). It&#8217;s always best that you have the custom script enqueuing in the footer by setting the last parameter in the function to <code>true</code></p>
+<p>wp_enqueue_script( $handle, $src, $deps, $ver, <code>true</code> );</p>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-5192' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_enqueue_script%2F%3Freplytocom%3D5192%23feedback-editor-5192" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-1782" data-comment-id="1782" class="comment byuser comment-author-drewapicture odd alt thread-even depth-1 bad-note">
+			<article id="div-comment-1782" class="comment-body">
+
+							<a href="#comment-content-1782" class="screen-reader-text">Skip to note 23 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="748713d38b"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="1782" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_enqueue_script%2F%23comment-1782"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="0% like this"><span class="screen-reader-text">Vote results for this note: </span>-4</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="1782" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_enqueue_script%2F%23comment-1782"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/95c934fa2c3362794bf62ff8c59ada08?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/95c934fa2c3362794bf62ff8c59ada08?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/drewapicture/" rel="external nofollow" class="url">Drew Jaynes</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-1782">
+							<time datetime="2016-08-23T13:22:08+00:00">
+							5 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-1782">
+				<p>This is the place to report it. I&#8217;ve updated the table with your changes. Thanks!</p>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-1782' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_enqueue_script%2F%3Freplytocom%3D1782%23feedback-editor-1782" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+		</ol><!-- .comment-list -->
+
+		
+	
+	
+			<div id="respond" class="comment-respond">
+		<h3 id="reply-title" class="comment-reply-title"> <small></small></h3><p>You must <a href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_enqueue_script%2F%23comments">log in</a> before being able to contribute a note or feedback.</p>	</div><!-- #respond -->
+		
+	
+</div><!-- #comments -->
+	</section>
+</div>
+
+</article>
+
+			
+		
+		</main><!-- #main -->
+	</div><!-- #primary -->
+	</div><!-- #content -->
+
+</div><!-- #page -->
+
+
+<div id="wporg-footer">
+	<div class="wrapper">
+		<ul>
+			<li><a href="http://wordpress.org/about/" title="An introduction to the WordPress project">About</a></li>
+			<li><a href="http://wordpress.org/news/" title="News and Updates">Blog</a></li>
+			<li><a href="http://wordpress.org/hosting/" title="Recommended web hosting providers">Hosting</a></li>
+			<li><a href="https://wordpressfoundation.org/donate/" title="Donate to the WordPress Foundation">Donate</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://wordpress.org/support/" title="Forums, documentation, and other resources">Support</a></li>
+			<li><a href="../../../index.html" title="Resources for WordPress developers">Developers</a></li>
+			<li><a href="http://make.wordpress.org/" title="Give back to WordPress through code, support, translation and more">Get Involved</a></li>
+			<li><a href="http://learn.wordpress.org/" title="Workshops and training materials">Learn</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://wordpress.org/showcase/" title="Some of the best WordPress sites on the Web">Showcase</a></li>
+			<li><a href="http://wordpress.org/plugins/" title="Add extra functionality to WordPress">Plugins</a></li>
+			<li><a href="http://wordpress.org/themes/" title="Make your WordPress pretty">Themes</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://central.wordcamp.org/" title="Find a WordPress event near you">WordCamp</a></li>
+			<li><a href="http://wordpress.tv/" title="Videos, tutorials, and WordCamp sessions">WordPress.TV</a></li>
+			<li><a href="http://buddypress.org/" title="A set of plugins to transform your WordPress into a social network">BuddyPress</a></li>
+			<li><a href="http://bbpress.org/" title="Fast, slick forums built on WordPress">bbPress</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://wordpress.com/?ref=wporg-footer" title="Hassle-free WordPress hosting">WordPress.com</a></li>
+			<li><a href="http://ma.tt/" title="Co-founder of WordPress, an example of what WordPress can do">Matt</a></li>
+			<li><a href="http://wordpress.org/about/privacy/" title="WordPress.org Privacy Policy">Privacy</a></li>
+			<li><a href="https://publiccode.eu/" target="_blank">Public Code</a></li>
+		</ul>
+
+		<ul class="social-media-links">
+			<li><span class="dashicons dashicons-twitter"></span><a href="https://twitter.com/WordPress" title="Follow @WordPress on Twitter">@WordPress</a></li>
+			<li><span class="dashicons dashicons-facebook"></span><a href="https://www.facebook.com/WordPress/" title="Like WordPress on Facebook">WordPress</a></li>
+		</ul>
+	</div>
+
+		<p class="cip cip-image">Code is Poetry.</p>
+</div>
+
+<script src="../../../../s.w.org/style/js/navigation.min.js?20190128"></script>
+
+<script type='text/javascript' src='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushJScript.js?ver=3.0.9b' id='syntaxhighlighter-brush-jscript-js'></script>
+<script type='text/javascript'>
+	(function(){
+		var corecss = document.createElement('link');
+		var themecss = document.createElement('link');
+		var corecssurl = "../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shCore.css?ver=3.0.9b";
+		if ( corecss.setAttribute ) {
+				corecss.setAttribute( "rel", "stylesheet" );
+				corecss.setAttribute( "type", "text/css" );
+				corecss.setAttribute( "href", corecssurl );
+		} else {
+				corecss.rel = "stylesheet";
+				corecss.href = corecssurl;
+		}
+		document.head.appendChild( corecss );
+		var themecssurl = "../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shThemeDefault.css?ver=3.0.9b";
+		if ( themecss.setAttribute ) {
+				themecss.setAttribute( "rel", "stylesheet" );
+				themecss.setAttribute( "type", "text/css" );
+				themecss.setAttribute( "href", themecssurl );
+		} else {
+				themecss.rel = "stylesheet";
+				themecss.href = themecssurl;
+		}
+		document.head.appendChild( themecss );
+	})();
+	SyntaxHighlighter.config.strings.expandSource = '+ expand source';
+	SyntaxHighlighter.config.strings.help = '?';
+	SyntaxHighlighter.config.strings.alert = 'SyntaxHighlighter\n\n';
+	SyntaxHighlighter.config.strings.noBrush = 'Can\'t find brush for: ';
+	SyntaxHighlighter.config.strings.brushNotHtmlScript = 'Brush wasn\'t configured for html-script option: ';
+	SyntaxHighlighter.defaults['pad-line-numbers'] = false;
+	SyntaxHighlighter.defaults['toolbar'] = false;
+	SyntaxHighlighter.all();
+
+	// Infinite scroll support
+	if ( typeof( jQuery ) !== 'undefined' ) {
+		jQuery( function( $ ) {
+			$( document.body ).on( 'post-load', function() {
+				SyntaxHighlighter.highlight();
+			} );
+		} );
+	}
+</script>
+<link rel='stylesheet' id='buttons-css'  href='../../../wp-includes/css/buttons.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<script type='text/javascript' src='../../../wp-includes/js/hoverintent-js.min.js?ver=2.2.1' id='hoverintent-js-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/admin-bar.min.js?ver=5.9-alpha-51701' id='admin-bar-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/navigation.js?ver=20181209' id='wporg-developer-navigation-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/skip-link-focus-fix.js?ver=20130115' id='wporg-developer-skip-link-focus-fix-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/search.js?ver=20150430' id='wporg-developer-search-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/menu.js?ver=20180201' id='wporg-developer-menu-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/awesomplete.min.js?ver=20160322' id='awesomplete-js'></script>
+<script type='text/javascript' id='autocomplete-js-extra'>
+/* <![CDATA[ */
+var autocomplete = {"ajaxurl":"https:\/\/developer.wordpress.org\/wp-admin\/admin-ajax.php","nonce":"8a60f70c4b"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/autocomplete.js?ver=20160524' id='autocomplete-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/function-reference.js?ver=20180724' id='wporg-developer-function-reference-js'></script>
+<script type='text/javascript' id='quicktags-js-extra'>
+/* <![CDATA[ */
+var quicktagsL10n = {"closeAllOpenTags":"Close all open tags","closeTags":"close tags","enterURL":"Enter the URL","enterImageURL":"Enter the URL of the image","enterImageDescription":"Enter a description of the image","textdirection":"text direction","toggleTextdirection":"Toggle Editor Text Direction","dfw":"Distraction-free writing mode","strong":"Bold","strongClose":"Close bold tag","em":"Italic","emClose":"Close italic tag","link":"Insert link","blockquote":"Blockquote","blockquoteClose":"Close blockquote tag","del":"Deleted text (strikethrough)","delClose":"Close deleted text tag","ins":"Inserted text","insClose":"Close inserted text tag","image":"Insert image","ul":"Bulleted list","ulClose":"Close bulleted list tag","ol":"Numbered list","olClose":"Close numbered list tag","li":"List item","liClose":"Close list item tag","code":"Code","codeClose":"Close code tag","more":"Insert Read More tag"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-includes/js/quicktags.min.js?ver=5.9-alpha-51701' id='quicktags-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/user-notes.js?ver=20200110' id='wporg-developer-user-notes-js'></script>
+<script type='text/javascript' id='wporg-developer-user-notes-feedback-js-extra'>
+/* <![CDATA[ */
+var wporg_note_feedback = {"show":"Show Feedback","hide":"Hide Feedback"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/user-notes-feedback.js?ver=20181023' id='wporg-developer-user-notes-feedback-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/tabs.js?ver=20160824' id='wporg-developer-tabs-js'></script>
+<script type='text/javascript' id='wporg-developer-preview-js-extra'>
+/* <![CDATA[ */
+var wporg_note_preview = {"ajaxurl":"https:\/\/developer.wordpress.org\/wp-admin\/admin-ajax.php","nonce":"504933b60e","preview":"preview note","preview_empty":"Nothing to preview","is_admin":""};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/user-notes-preview.js?ver=20200111' id='wporg-developer-preview-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/wp-embed.min.js?ver=5.9-alpha-51701' id='wp-embed-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/vendor/regenerator-runtime.min.js?ver=0.13.7' id='regenerator-runtime-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/vendor/wp-polyfill.min.js?ver=3.15.0' id='wp-polyfill-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/dom-ready.min.js?ver=71883072590656bf22c74c7b887df3dd' id='wp-dom-ready-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/hooks.min.js?ver=a7edae857aab69d69fa10d5aef23a5de' id='wp-hooks-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/i18n.min.js?ver=5f1269854226b4dd90450db411a12b79' id='wp-i18n-js'></script>
+<script type='text/javascript' id='wp-i18n-js-after'>
+wp.i18n.setLocaleData( { 'text direction\u0004ltr': [ 'ltr' ] } );
+</script>
+<script type='text/javascript' id='wp-a11y-js-translations'>
+( function( domain, translations ) {
+	var localeData = translations.locale_data[ domain ] || translations.locale_data.messages;
+	localeData[""].domain = domain;
+	wp.i18n.setLocaleData( localeData, domain );
+} )( "default", { "locale_data": { "messages": { "": {} } } } );
+</script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/a11y.min.js?ver=0ac8327cc1c40dcfdf29716affd7ac63' id='wp-a11y-js'></script>
+<script type='text/javascript' id='wplink-js-extra'>
+/* <![CDATA[ */
+var wpLinkL10n = {"title":"Insert\/edit link","update":"Update","save":"Add Link","noTitle":"(no title)","noMatchesFound":"No results found.","linkSelected":"Link selected.","linkInserted":"Link inserted.","minInputLength":"3"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-includes/js/wplink.min.js?ver=5.9-alpha-51701' id='wplink-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/jquery/ui/core.min.js?ver=1.12.1' id='jquery-ui-core-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/jquery/ui/menu.min.js?ver=1.12.1' id='jquery-ui-menu-js'></script>
+<script type='text/javascript' id='jquery-ui-autocomplete-js-extra'>
+/* <![CDATA[ */
+var uiAutocompleteL10n = {"noResults":"No results found.","oneResult":"1 result found. Use up and down arrow keys to navigate.","manyResults":"%d results found. Use up and down arrow keys to navigate.","itemSelected":"Item selected."};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-includes/js/jquery/ui/autocomplete.min.js?ver=1.12.1' id='jquery-ui-autocomplete-js'></script>
+
+		<script type="text/javascript">
+		tinyMCEPreInit = {
+			baseURL: "https://developer.wordpress.org/wp-includes/js/tinymce",
+			suffix: ".min",
+						mceInit: {},
+			qtInit: {'comment':{id:"comment",buttons:"strong,em,ul,ol,li,link"}},
+			ref: {plugins:"",theme:"modern",language:""},
+			load_ext: function(url,lang){var sl=tinymce.ScriptLoader;sl.markDone(url+'/langs/'+lang+'.js');sl.markDone(url+'/langs/'+lang+'_dlg.js');}
+		};
+		</script>
+				<script type="text/javascript">
+		var ajaxurl = "../../../wp-admin/admin-ajax.html";
+		( function() {
+			var initialized = [];
+			var initialize  = function() {
+				var init, id, inPostbox, $wrap;
+				var readyState = document.readyState;
+
+				if ( readyState !== 'complete' && readyState !== 'interactive' ) {
+					return;
+				}
+
+				for ( id in tinyMCEPreInit.mceInit ) {
+					if ( initialized.indexOf( id ) > -1 ) {
+						continue;
+					}
+
+					init      = tinyMCEPreInit.mceInit[id];
+					$wrap     = tinymce.$( '#wp-' + id + '-wrap' );
+					inPostbox = $wrap.parents( '.postbox' ).length > 0;
+
+					if (
+						! init.wp_skip_init &&
+						( $wrap.hasClass( 'tmce-active' ) || ! tinyMCEPreInit.qtInit.hasOwnProperty( id ) ) &&
+						( readyState === 'complete' || ( ! inPostbox && readyState === 'interactive' ) )
+					) {
+						tinymce.init( init );
+						initialized.push( id );
+
+						if ( ! window.wpActiveEditor ) {
+							window.wpActiveEditor = id;
+						}
+					}
+				}
+			}
+
+			if ( typeof tinymce !== 'undefined' ) {
+				if ( tinymce.Env.ie && tinymce.Env.ie < 11 ) {
+					tinymce.$( '.wp-editor-wrap ' ).removeClass( 'tmce-active' ).addClass( 'html-active' );
+				} else {
+					if ( document.readyState === 'complete' ) {
+						initialize();
+					} else {
+						document.addEventListener( 'readystatechange', initialize );
+					}
+				}
+			}
+
+			if ( typeof quicktags !== 'undefined' ) {
+				for ( id in tinyMCEPreInit.qtInit ) {
+					quicktags( tinyMCEPreInit.qtInit[id] );
+
+					if ( ! window.wpActiveEditor ) {
+						window.wpActiveEditor = id;
+					}
+				}
+			}
+		}());
+		</script>
+				<div id="wp-link-backdrop" style="display: none"></div>
+		<div id="wp-link-wrap" class="wp-core-ui" style="display: none" role="dialog" aria-labelledby="link-modal-title">
+		<form id="wp-link" tabindex="-1">
+		<input type="hidden" id="_ajax_linking_nonce" name="_ajax_linking_nonce" value="86f5a0a85d" />		<h1 id="link-modal-title">Insert/edit link</h1>
+		<button type="button" id="wp-link-close"><span class="screen-reader-text">Close</span></button>
+		<div id="link-selector">
+			<div id="link-options">
+				<p class="howto" id="wplink-enter-url">Enter the destination URL</p>
+				<div>
+					<label><span>URL</span>
+					<input id="wp-link-url" type="text" aria-describedby="wplink-enter-url" /></label>
+				</div>
+				<div class="wp-link-text-field">
+					<label><span>Link Text</span>
+					<input id="wp-link-text" type="text" /></label>
+				</div>
+				<div class="link-target">
+					<label><span></span>
+					<input type="checkbox" id="wp-link-target" /> Open link in a new tab</label>
+				</div>
+			</div>
+			<p class="howto" id="wplink-link-existing-content">Or link to existing content</p>
+			<div id="search-panel">
+				<div class="link-search-wrapper">
+					<label>
+						<span class="search-label">Search</span>
+						<input type="search" id="wp-link-search" class="link-search-field" autocomplete="off" aria-describedby="wplink-link-existing-content" />
+						<span class="spinner"></span>
+					</label>
+				</div>
+				<div id="search-results" class="query-results" tabindex="0">
+					<ul></ul>
+					<div class="river-waiting">
+						<span class="spinner"></span>
+					</div>
+				</div>
+				<div id="most-recent-results" class="query-results" tabindex="0">
+					<div class="query-notice" id="query-notice-message">
+						<em class="query-notice-default">No search term specified. Showing recent items.</em>
+						<em class="query-notice-hint screen-reader-text">Search or use up and down arrow keys to select an item.</em>
+					</div>
+					<ul></ul>
+					<div class="river-waiting">
+						<span class="spinner"></span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="submitbox">
+			<div id="wp-link-cancel">
+				<button type="button" class="button">Cancel</button>
+			</div>
+			<div id="wp-link-update">
+				<input type="submit" value="Add Link" class="button button-primary" id="wp-link-submit" name="wp-link-submit">
+			</div>
+		</div>
+		</form>
+		</div>
+		</body>
+
+<!-- Mirrored from developer.wordpress.org/reference/functions/wp_enqueue_script/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 31 Aug 2021 16:40:24 GMT -->
+</html>

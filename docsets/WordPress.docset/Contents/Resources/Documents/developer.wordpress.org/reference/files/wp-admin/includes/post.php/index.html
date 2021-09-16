@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+
+<!-- Mirrored from developer.wordpress.org/reference/files/wp-admin/includes/post.php/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 31 Aug 2021 17:18:21 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<!--
+<meta property="fb:page_id" content="6427302910" />
+-->
+<meta name="google-site-verification" content="7VWES_-rcHBcmaQis9mSYamPfNwE03f4vyTj4pfuAw0" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>wp-admin/includes/post.php</title>
+<meta name="referrer" content="always">
+
+		<link href='../../../../../../fonts.googleapis.com/css.css?family=Open+Sans:300italic,400italic,600italic,400,300,600&amp;subset=latin,cyrillic-ext,greek-ext,greek,vietnamese,latin-ext,cyrillic' rel='stylesheet' type='text/css'>
+
+		<link rel="stylesheet" href="../../../../../../s.w.org/style/wp4.css?95" />
+
+<link rel="shortcut icon" href="../../../../../../s.w.org/favicon.ico?2" type="image/x-icon" />
+<link rel="pingback" href="../../../../../xmlrpc.php" /><meta name='robots' content='max-image-preview:large' />
+<link rel='dns-prefetch' href='../../../../../../fonts.googleapis.com/index.html' />
+<link rel='dns-prefetch' href='http://s.w.org/' />
+<link rel='dns-prefetch' href='http://www.googletagmanager.com/' />
+<link rel='dns-prefetch' href='http://fonts.gstatic.com/' />
+<link rel="alternate" type="application/rss+xml" title="WordPress Developer Resources &raquo; Feed" href="../../../../../feed/index.html" />
+<link rel="alternate" type="application/rss+xml" title="WordPress Developer Resources &raquo; Comments Feed" href="../../../../../comments/feed/index.html" />
+<meta property="og:title" content="wp-admin/includes/post.php | WordPress Developer Resources" />
+<meta property="og:site_name" content="WordPress Developer Resources" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="../../../../../index.html" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@WordPress" />
+<link rel="alternate" type="application/rss+xml" title="WordPress Developer Resources &raquo; wp-admin/includes/post.php File Feed" href="https://developer.wordpress.org/reference/files/wp-admin/includes/post.php/feed/" />
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'../../../../../../www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P24PF4B');</script>
+			<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/developer.wordpress.org\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.9-alpha-51701"}};
+			!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([10084,65039,8205,55357,56613],[10084,65039,8203,55357,56613])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel='stylesheet' id='dashicons-css'  href='../../../../../wp-includes/css/dashicons.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='admin-bar-css'  href='../../../../../wp-includes/css/admin-bar.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-block-library-css'  href='../../../../../wp-includes/css/dist/block-library/style.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='wporg-handbook-css-css'  href='../../../../../wp-content/plugins/handbook/stylesheets/callout-boxes.css?ver=20200121' type='text/css' media='all' />
+<link rel='stylesheet' id='open-sans-css'  href='../../../../../../fonts.googleapis.com/css-2.css?family=Open+Sans%3A300italic%2C400italic%2C600italic%2C300%2C400%2C600&amp;subset=latin%2Clatin-ext&amp;display=fallback&amp;ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='wporg-developer-style-css'  href='../../../../../wp-content/themes/pub/wporg-developer/style.css?ver=3' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-dev-sass-compiled-css'  href='../../../../../wp-content/themes/pub/wporg-developer/stylesheets/main.css?ver=20200713' type='text/css' media='all' />
+<link rel='stylesheet' id='awesomplete-css-css'  href='../../../../../wp-content/themes/pub/wporg-developer/stylesheets/awesomplete.css?ver=20160114' type='text/css' media='all' />
+<link rel='stylesheet' id='autocomplete-css-css'  href='../../../../../wp-content/themes/pub/wporg-developer/stylesheets/autocomplete.css?ver=20171220' type='text/css' media='all' />
+<script type='text/javascript' src='../../../../../wp-includes/js/jquery/jquery.min.js?ver=3.6.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='../../../../../wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='../../../../../wp-content/plugins/handbook/scripts/handbook.js?ver=20150930' id='wporg-handbook-js'></script>
+<script type='text/javascript' src='../../../../../wp-content/themes/pub/wporg-developer/js/chapters.js?ver=20190603' id='wporg-developer-chapters-js'></script>
+<link rel="https://api.w.org/" href="https://developer.wordpress.org/wp-json/" /><link rel="alternate" type="application/json" href="https://developer.wordpress.org/wp-json/wp/v2/wp-parser-source-file/343" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="../../../../../xmlrpc-2.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="../../../../../wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 5.9-alpha-51701" />
+<link rel="canonical" href="index.html">
+<link rel="next" href="page/2/index.html">
+<!-- Stream WordPress user activity plugin v3.6.2 -->
+	<style>
+		@media screen and (max-width: 782px) {
+			#wpadminbar li#wp-admin-bar-log-in,
+			#wpadminbar li#wp-admin-bar-register {
+				display: block;
+			}
+
+			#wpadminbar li#wp-admin-bar-log-in a,
+			#wpadminbar li#wp-admin-bar-register a {
+				padding: 0 8px;
+			}
+		}
+	</style>
+		<style>
+			a.github-edit {
+				margin-left: .5em;
+				font-size: .5em;
+				vertical-align: top;
+				display: inline-block;
+				border: 1px solid #eeeeee;
+				border-radius: 2px;
+				background: #eeeeee;
+				padding: .5em .6em .4em;
+				color: black;
+				margin-top: 0.1em;
+			}
+			a.github-edit > * {
+				opacity: 0.6;
+			}
+			a.github-edit:hover > * {
+				opacity: 1;
+				color: black;
+			}
+			a.github-edit img {
+				height: .8em;
+			}
+		</style>
+		
+	<script type="text/javascript">
+		jQuery( '<style>.hide-if-js { display: none; }</style>' ).appendTo( 'head' );
+		jQuery( function($) {
+			$( 'body' ).addClass('js');
+		} );
+	</script>
+<style type="text/css" media="print">#wpadminbar { display:none; }</style>
+	<style type="text/css" media="screen">
+	</style>
+	<script>document.cookie='devicePixelRatio='+((window.devicePixelRatio === undefined) ? 1 : window.devicePixelRatio)+'; path=/';</script>
+
+</head>
+
+
+<body id="wordpress-org" class="archive tax-wp-parser-source-file term-wp-admin_includes_post-php term-343 admin-bar no-customize-support">
+		<div id="wpadminbar" class="nojq nojs">
+						<div class="quicklinks" id="wp-toolbar" role="navigation" aria-label="Toolbar">
+				<ul id='wp-admin-bar-root-default' class="ab-top-menu"><li id='wp-admin-bar-wp-logo' class="menupop"><a class='ab-item' aria-haspopup="true" href='https://wordpress.org/about/'><span class="ab-icon" aria-hidden="true"></span><span class="screen-reader-text">About WordPress</span></a><div class="ab-sub-wrapper"><ul id='wp-admin-bar-wp-logo-default' class="ab-submenu"><li id='wp-admin-bar-about'><a class='ab-item' href='https://wordpress.org/about/'>About WordPress</a></li></ul><ul id='wp-admin-bar-wp-logo-external' class="ab-sub-secondary ab-submenu"><li id='wp-admin-bar-wporg'><a class='ab-item' href='https://wordpress.org/'>WordPress.org</a></li><li id='wp-admin-bar-documentation'><a class='ab-item' href='https://wordpress.org/support/'>Documentation</a></li><li id='wp-admin-bar-support-forums'><a class='ab-item' href='https://wordpress.org/support/forums/'>Support</a></li><li id='wp-admin-bar-feedback'><a class='ab-item' href='https://wordpress.org/support/forum/requests-and-feedback'>Feedback</a></li></ul></div></li></ul><ul id='wp-admin-bar-top-secondary' class="ab-top-secondary ab-top-menu"><li id='wp-admin-bar-search' class="admin-bar-search"><div class="ab-item ab-empty-item" tabindex="-1"><form action="https://developer.wordpress.org/" method="get" id="adminbarsearch"><input class="adminbar-input" name="s" id="adminbar-search" type="text" value="" maxlength="150" /><label for="adminbar-search" class="screen-reader-text">Search</label><input type="submit" class="adminbar-button" value="Search" /></form></div></li><li id='wp-admin-bar-log-in'><a class='ab-item' href='https://login.wordpress.org/?locale=en_US'>Log In</a></li><li id='wp-admin-bar-register'><a class='ab-item' href='https://login.wordpress.org/register?locale=en_US'>Register</a></li></ul>			</div>
+					</div>
+
+		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P24PF4B" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<div id="wporg-header">
+	<div class="wrapper">
+	<h1><a href="http://wordpress.org/">WordPress.org</a></h1>				<div id="head-search">
+		<form action="http://wordpress.org/search/do-search.php" method="get">
+			<label for="global-search" class="screen-reader-text">Search WordPress.org for:</label>
+			<input id="global-search" class="text" name="search" type="text" value="" maxlength="150" placeholder="Search WordPress.org" />
+			<button type="submit" class="button"><span class="screen-reader-text">Submit</span></button>
+		</form>
+		</div>
+				<div style="clear:both"></div>
+		<button id="mobile-menu-button" aria-expanded="false"><span class="screen-reader-text">Toggle Menu</span></button>
+		
+<nav aria-label="Main Menu">
+<ul id="wporg-header-menu">
+<li class="menu-item"><a href='http://wordpress.org/showcase/' data-title='See some of the sites built on WordPress.'>Showcase</a></li>
+<li class="menu-item"><a href='http://learn.wordpress.org/' data-title='Resources to help you learn more about WordPress and teach it to others.'>Learn</a></li>
+<li class="menu-item"><a href='http://wordpress.org/themes/' data-title='Find just the right look for your website.'>Themes</a></li>
+<li class="menu-item"><a href='http://wordpress.org/plugins/' data-title='Plugins can extend WordPress to do almost anything you can imagine.'>Plugins</a></li>
+<li class="menu-item"><a href='http://wordpress.org/mobile/' data-title='Take your website on the go!'>Mobile</a></li>
+<li class="menu-item"><a href='http://wordpress.org/support/' data-title='Forums, documentation, help.'>Support</a><ul class="nav-submenu"><li><a href='http://wordpress.org/support/' title='Documentation, tutorials, best practices.'>Documentation</a></li><li><a href='http://wordpress.org/support/forums/' title='Support and discussion forums.'>Forums</a></li></ul><div class="uparrow"></div></li>
+<li class="menu-item"><a href='http://make.wordpress.org/' data-title='Contribute your knowledge.'>Get Involved</a><ul class="nav-submenu"><li><a href='http://wordpress.org/five-for-the-future/' title='How five percent is powering the next generation of the web'>Five for the Future</a></li></ul><div class="uparrow"></div></li>
+<li class="menu-item"><a href='http://wordpress.org/about/' data-title='About the WordPress Organization, and where we&#039;re going.'>About</a></li>
+<li class="menu-item"><a href='http://wordpress.org/news/' data-title='Come here for the latest scoop.'>Blog</a></li>
+<li class="menu-item"><a href='http://wordpress.org/hosting/' data-title='Find a home for your blog.'>Hosting</a></li>
+<li id="download" class="button download-button menu-item"><a href='http://wordpress.org/download/' data-title='Get it. Got it? Good.'>Get WordPress</a></li>
+</ul>
+</nav>
+		<div style="clear:both"></div>
+	</div>
+</div>
+
+
+
+<header id="masthead" class="site-header" role="banner">
+		<div class="site-branding">
+		<h1 class="site-title">
+			<a href="../../../../index.html" rel="home">Code Reference</a>
+		</h1>
+
+		
+		<nav id="site-navigation" class="main-navigation" role="navigation">
+			<button class="menu-toggle dashicons dashicons-arrow-down-alt2" aria-controls="primary-menu" aria-expanded="false" aria-label="Primary Menu"></button>
+					</nav>
+	</div>
+</header><!-- #masthead -->
+
+<div id="page" class="hfeed site devhub-wrap">
+	<a href="#main" class="screen-reader-text">Skip to content</a>
+
+				<div id="inner-search">
+			<div class="search-section section clear hide-if-js">
+
+
+	
+	<form role="search" method="get" class="searchform searchform-filtered" action="https://developer.wordpress.org/">
+		<label for="search-field" class="screen-reader-text">Search for:</label>
+		<input type="text" id="search-field" class="search-field" placeholder="Search &hellip;" value="" name="s">
+		<button class="button button-primary button-search"><i class="dashicons dashicons-search"></i><span class="screen-reader-text">Search plugins</span></button>
+	
+		<div class="search-post-type">
+			<span>Filter by type:</span>
+									<label><input type="checkbox" name="post_type[]" value="wp-parser-function"
+						 /> Functions</label>
+									<label><input type="checkbox" name="post_type[]" value="wp-parser-hook"
+						 /> Hooks</label>
+									<label><input type="checkbox" name="post_type[]" value="wp-parser-class"
+						 /> Classes</label>
+									<label><input type="checkbox" name="post_type[]" value="wp-parser-method"
+						 /> Methods</label>
+					</div>
+
+	
+	</form>
+
+</div><!-- /search-guide -->
+			<div id="inner-search-icon-container">
+				<div id="inner-search-icon">
+					<div class="dashicons dashicons-search"><span class="screen-reader-text">Search</span></div>
+				</div>
+			</div>
+		</div>
+
+		<div id="content" class="site-content">
+
+	<div id="content-area">
+
+		
+		<div class="breadcrumb-trail breadcrumbs" itemprop="breadcrumb">
+			<span class="trail-browse">Browse:</span> 
+			<span class="trail-begin"><a href="../../../../../index.html" title="WordPress Developer Resources" rel="home">Home</a></span> <span class="sep">&#47;</span> 
+			<span class="trail-inner"><a href="../../../../index.html" title="Reference">Reference</a></span> <span class="sep">&#47;</span> <span class="trail-end">wp-admin/includes/post.php</span>
+		</div>
+		<main id="main" class="site-main" role="main">
+
+			<form method='get' class='archive-filter-form' action='#'><label for='archive-filter'>Filter by type: <select name="post_type[]" id="archive-filter">
+	<option selected='selected' value='any'>Any type</option>
+	<option value='wp-parser-class'>Classes</option>
+	<option value='wp-parser-function'>Functions</option>
+	<option value='wp-parser-hook'>Hooks</option>
+	<option value='wp-parser-method'>Methods</option></select></label><input class='shiny-blue' type='submit' value='Filter' /></form>
+			
+
+								
+					
+<article id="post-122846" class="post-122846 wp-parser-hook type-wp-parser-hook status-publish hentry wp-parser-source-file-wp-admin_includes_post-php wp-parser-package-administration wp-parser-package-wordpress wp-parser-since-3-2-0">
+
+	<h1><a href="../../../../hooks/postbox_classes_screen_id_box_id/index.html">postbox_classes_{$screen_id}_{$box_id}</a></h1>
+
+	<div class="description">
+		<p><b>Filter Hook: </b>Filters the postbox classes for a specific screen and box ID combo.</p>
+	</div>
+	<div class="sourcefile">
+		<p>Source: wp-admin/includes/post.php:1344</p>
+	</div>
+
+
+		<div class="meta">
+		Used by <a href="../../../../hooks/postbox_classes_screen_id_box_id/index.html#used-by">1 function</a>		|
+		Uses <a href="../../../../hooks/postbox_classes_screen_id_box_id/index.html#uses">0 functions</a>	</div>
+
+	
+</article>
+
+				
+					
+<article id="post-40676" class="post-40676 wp-parser-function type-wp-parser-function status-publish hentry wp-parser-source-file-wp-admin_includes_post-php wp-parser-package-administration wp-parser-package-wordpress wp-parser-since-5-1-0">
+
+	<h1><a href="../../../../functions/taxonomy_meta_box_sanitize_cb_checkboxes/index.html">taxonomy_meta_box_sanitize_cb_checkboxes()</a></h1>
+
+	<div class="description">
+		<p><b>Function: </b>Sanitizes POST values from a checkbox taxonomy metabox.</p>
+	</div>
+	<div class="sourcefile">
+		<p>Source: wp-admin/includes/post.php:2062</p>
+	</div>
+
+
+		<div class="meta">
+		Used by <a href="../../../../functions/taxonomy_meta_box_sanitize_cb_checkboxes/index.html#used-by">0 functions</a>		|
+		Uses <a href="../../../../functions/taxonomy_meta_box_sanitize_cb_checkboxes/index.html#uses">0 functions</a>	</div>
+
+	
+</article>
+
+				
+					
+<article id="post-40677" class="post-40677 wp-parser-function type-wp-parser-function status-publish hentry wp-parser-source-file-wp-admin_includes_post-php wp-parser-package-administration wp-parser-package-wordpress wp-parser-since-5-1-0">
+
+	<h1><a href="../../../../functions/taxonomy_meta_box_sanitize_cb_input/index.html">taxonomy_meta_box_sanitize_cb_input()</a></h1>
+
+	<div class="description">
+		<p><b>Function: </b>Sanitizes POST values from an input taxonomy metabox.</p>
+	</div>
+	<div class="sourcefile">
+		<p>Source: wp-admin/includes/post.php:2075</p>
+	</div>
+
+
+		<div class="meta">
+		Used by <a href="../../../../functions/taxonomy_meta_box_sanitize_cb_input/index.html#used-by">0 functions</a>		|
+		Uses <a href="../../../../functions/taxonomy_meta_box_sanitize_cb_input/index.html#uses">2 functions</a>	</div>
+
+	
+</article>
+
+				
+					
+<article id="post-40505" class="post-40505 wp-parser-function type-wp-parser-function status-publish hentry wp-parser-source-file-wp-admin_includes_post-php wp-parser-package-administration wp-parser-package-wordpress wp-parser-since-4-9-9 wp-parser-since-5-0-1">
+
+	<h1><a href="../../../../functions/_wp_get_allowed_postdata/index.html">_wp_get_allowed_postdata()</a></h1>
+
+	<div class="description">
+		<p><b>Function: </b>Returns only allowed post data fields</p>
+	</div>
+	<div class="sourcefile">
+		<p>Source: wp-admin/includes/post.php:214</p>
+	</div>
+
+
+		<div class="meta">
+		Used by <a href="../../../../functions/_wp_get_allowed_postdata/index.html#used-by">5 functions</a>		|
+		Uses <a href="../../../../functions/_wp_get_allowed_postdata/index.html#uses">1 function</a>	</div>
+
+	
+</article>
+
+				
+					
+<article id="post-39822" class="post-39822 wp-parser-hook type-wp-parser-hook status-publish hentry wp-parser-source-file-wp-admin_includes_post-php wp-parser-package-administration wp-parser-package-wordpress wp-parser-since-5-0-0">
+
+	<h1><a href="../../../../hooks/use_block_editor_for_post_type/index.html">use_block_editor_for_post_type</a></h1>
+
+	<div class="description">
+		<p><b>Filter Hook: </b>Filters whether a post is able to be edited in the block editor.</p>
+	</div>
+	<div class="sourcefile">
+		<p>Source: wp-admin/includes/post.php:2183</p>
+	</div>
+
+
+		<div class="meta">
+		Used by <a href="../../../../hooks/use_block_editor_for_post_type/index.html#used-by">1 function</a>		|
+		Uses <a href="../../../../hooks/use_block_editor_for_post_type/index.html#uses">0 functions</a>	</div>
+
+	
+</article>
+
+				
+					
+<article id="post-39825" class="post-39825 wp-parser-function type-wp-parser-function status-publish hentry wp-parser-source-file-wp-admin_includes_post-php wp-parser-package-administration wp-parser-package-wordpress wp-parser-since-5-0-0">
+
+	<h1><a href="../../../../functions/get_block_editor_server_block_settings/index.html">get_block_editor_server_block_settings()</a></h1>
+
+	<div class="description">
+		<p><b>Function: </b>Prepares server-registered blocks for the block editor.</p>
+	</div>
+	<div class="sourcefile">
+		<p>Source: wp-admin/includes/post.php:2196</p>
+	</div>
+
+
+		<div class="meta">
+		Used by <a href="../../../../functions/get_block_editor_server_block_settings/index.html#used-by">1 function</a>		|
+		Uses <a href="../../../../functions/get_block_editor_server_block_settings/index.html#uses">1 function</a>	</div>
+
+	
+</article>
+
+				
+					
+<article id="post-39826" class="post-39826 wp-parser-function type-wp-parser-function status-publish hentry wp-parser-source-file-wp-admin_includes_post-php wp-parser-package-administration wp-parser-package-wordpress wp-parser-since-5-0-0">
+
+	<h1><a href="../../../../functions/the_block_editor_meta_boxes/index.html">the_block_editor_meta_boxes()</a></h1>
+
+	<div class="description">
+		<p><b>Function: </b>Renders the meta boxes forms.</p>
+	</div>
+	<div class="sourcefile">
+		<p>Source: wp-admin/includes/post.php:2239</p>
+	</div>
+
+
+		<div class="meta">
+		Used by <a href="../../../../functions/the_block_editor_meta_boxes/index.html#used-by">0 functions</a>		|
+		Uses <a href="../../../../functions/the_block_editor_meta_boxes/index.html#uses">14 functions</a>	</div>
+
+	
+</article>
+
+				
+					
+<article id="post-39827" class="post-39827 wp-parser-hook type-wp-parser-hook status-publish hentry wp-parser-source-file-wp-admin_includes_post-php wp-parser-package-administration wp-parser-package-wordpress wp-parser-since-5-0-0">
+
+	<h1><a href="../../../../hooks/filter_block_editor_meta_boxes/index.html">filter_block_editor_meta_boxes</a></h1>
+
+	<div class="description">
+		<p><b>Filter Hook: </b>Fires right before the meta boxes are rendered.</p>
+	</div>
+	<div class="sourcefile">
+		<p>Source: wp-admin/includes/post.php:2255</p>
+	</div>
+
+
+		<div class="meta">
+		Used by <a href="../../../../hooks/filter_block_editor_meta_boxes/index.html#used-by">1 function</a>		|
+		Uses <a href="../../../../hooks/filter_block_editor_meta_boxes/index.html#uses">0 functions</a>	</div>
+
+	
+</article>
+
+				
+					
+<article id="post-39828" class="post-39828 wp-parser-function type-wp-parser-function status-publish hentry wp-parser-source-file-wp-admin_includes_post-php wp-parser-package-administration wp-parser-package-wordpress wp-parser-since-5-0-0">
+
+	<h1><a href="../../../../functions/the_block_editor_meta_box_post_form_hidden_fields/index.html">the_block_editor_meta_box_post_form_hidden_fields()</a></h1>
+
+	<div class="description">
+		<p><b>Function: </b>Renders the hidden form required for the meta boxes form.</p>
+	</div>
+	<div class="sourcefile">
+		<p>Source: wp-admin/includes/post.php:2372</p>
+	</div>
+
+
+		<div class="meta">
+		Used by <a href="../../../../functions/the_block_editor_meta_box_post_form_hidden_fields/index.html#used-by">1 function</a>		|
+		Uses <a href="../../../../functions/the_block_editor_meta_box_post_form_hidden_fields/index.html#uses">12 functions</a>	</div>
+
+	
+</article>
+
+				
+					
+<article id="post-39830" class="post-39830 wp-parser-hook type-wp-parser-hook status-publish hentry wp-parser-source-file-wp-admin_includes_post-php wp-parser-package-administration wp-parser-package-wordpress wp-parser-since-5-0-0">
+
+	<h1><a href="../../../../hooks/block_editor_meta_box_hidden_fields/index.html">block_editor_meta_box_hidden_fields</a></h1>
+
+	<div class="description">
+		<p><b>Action Hook: </b>Add hidden input fields to the meta box save form.</p>
+	</div>
+	<div class="sourcefile">
+		<p>Source: wp-admin/includes/post.php:2435</p>
+	</div>
+
+
+		<div class="meta">
+		Used by <a href="../../../../hooks/block_editor_meta_box_hidden_fields/index.html#used-by">1 function</a>		|
+		Uses <a href="../../../../hooks/block_editor_meta_box_hidden_fields/index.html#uses">0 functions</a>	</div>
+
+	
+</article>
+
+				
+					
+<article id="post-39820" class="post-39820 wp-parser-hook type-wp-parser-hook status-publish hentry wp-parser-source-file-wp-admin_includes_post-php wp-parser-package-administration wp-parser-package-wordpress wp-parser-since-5-0-0">
+
+	<h1><a href="../../../../hooks/use_block_editor_for_post/index.html">use_block_editor_for_post</a></h1>
+
+	<div class="description">
+		<p><b>Filter Hook: </b>Filters whether a post is able to be edited in the block editor.</p>
+	</div>
+	<div class="sourcefile">
+		<p>Source: wp-admin/includes/post.php:2147</p>
+	</div>
+
+
+		<div class="meta">
+		Used by <a href="../../../../hooks/use_block_editor_for_post/index.html#used-by">1 function</a>		|
+		Uses <a href="../../../../hooks/use_block_editor_for_post/index.html#uses">0 functions</a>	</div>
+
+	
+</article>
+
+				
+					
+<article id="post-39821" class="post-39821 wp-parser-function type-wp-parser-function status-publish hentry wp-parser-source-file-wp-admin_includes_post-php wp-parser-package-administration wp-parser-package-wordpress wp-parser-since-5-0-0">
+
+	<h1><a href="../../../../functions/use_block_editor_for_post_type/index.html">use_block_editor_for_post_type()</a></h1>
+
+	<div class="description">
+		<p><b>Function: </b>Return whether a post type is compatible with the block editor.</p>
+	</div>
+	<div class="sourcefile">
+		<p>Source: wp-admin/includes/post.php:2161</p>
+	</div>
+
+
+		<div class="meta">
+		Used by <a href="../../../../functions/use_block_editor_for_post_type/index.html#used-by">2 functions</a>		|
+		Uses <a href="../../../../functions/use_block_editor_for_post_type/index.html#uses">5 functions</a>	</div>
+
+	
+</article>
+
+				
+					
+<article id="post-39819" class="post-39819 wp-parser-function type-wp-parser-function status-publish hentry wp-parser-source-file-wp-admin_includes_post-php wp-parser-package-administration wp-parser-package-wordpress wp-parser-since-5-0-0">
+
+	<h1><a href="../../../../functions/use_block_editor_for_post/index.html">use_block_editor_for_post()</a></h1>
+
+	<div class="description">
+		<p><b>Function: </b>Return whether the post can be edited in the block editor.</p>
+	</div>
+	<div class="sourcefile">
+		<p>Source: wp-admin/includes/post.php:2124</p>
+	</div>
+
+
+		<div class="meta">
+		Used by <a href="../../../../functions/use_block_editor_for_post/index.html#used-by">1 function</a>		|
+		Uses <a href="../../../../functions/use_block_editor_for_post/index.html#uses">5 functions</a>	</div>
+
+	
+</article>
+
+				
+					
+<article id="post-19367" class="post-19367 wp-parser-hook type-wp-parser-hook status-publish hentry wp-parser-source-file-wp-admin_includes_post-php wp-parser-package-administration wp-parser-package-wordpress wp-parser-since-4-4-0">
+
+	<h1><a href="../../../../hooks/admin_post_thumbnail_size/index.html">admin_post_thumbnail_size</a></h1>
+
+	<div class="description">
+		<p><b>Filter Hook: </b>Filters the size used to display the post thumbnail image in the &#8216;Featured image&#8217; meta box.</p>
+	</div>
+	<div class="sourcefile">
+		<p>Source: wp-admin/includes/post.php:1566</p>
+	</div>
+
+
+		<div class="meta">
+		Used by <a href="../../../../hooks/admin_post_thumbnail_size/index.html#used-by">1 function</a>		|
+		Uses <a href="../../../../hooks/admin_post_thumbnail_size/index.html#uses">0 functions</a>	</div>
+
+	
+</article>
+
+				
+					
+<article id="post-19366" class="post-19366 wp-parser-hook type-wp-parser-hook status-publish hentry wp-parser-source-file-wp-admin_includes_post-php wp-parser-package-administration wp-parser-package-wordpress wp-parser-since-4-4-0">
+
+	<h1><a href="../../../../hooks/get_sample_permalink/index.html">get_sample_permalink</a></h1>
+
+	<div class="description">
+		<p><b>Filter Hook: </b>Filters the sample permalink.</p>
+	</div>
+	<div class="sourcefile">
+		<p>Source: wp-admin/includes/post.php:1436</p>
+	</div>
+
+
+		<div class="meta">
+		Used by <a href="../../../../hooks/get_sample_permalink/index.html#used-by">1 function</a>		|
+		Uses <a href="../../../../hooks/get_sample_permalink/index.html#uses">0 functions</a>	</div>
+
+	
+</article>
+
+				
+					
+<article id="post-15487" class="post-15487 wp-parser-function type-wp-parser-function status-publish hentry wp-parser-source-file-wp-admin_includes_post-php wp-parser-package-administration wp-parser-package-wordpress wp-parser-since-4-2-0">
+
+	<h1><a href="../../../../functions/wp_edit_attachments_query_vars/index.html">wp_edit_attachments_query_vars()</a></h1>
+
+	<div class="description">
+		<p><b>Function: </b>Get the query variables for the current attachments request.</p>
+	</div>
+	<div class="sourcefile">
+		<p>Source: wp-admin/includes/post.php:1235</p>
+	</div>
+
+
+		<div class="meta">
+		Used by <a href="../../../../functions/wp_edit_attachments_query_vars/index.html#used-by">1 function</a>		|
+		Uses <a href="../../../../functions/wp_edit_attachments_query_vars/index.html#uses">8 functions</a>	</div>
+
+	
+</article>
+
+				
+					
+<article id="post-12345" class="post-12345 wp-parser-hook type-wp-parser-hook status-publish hentry wp-parser-source-file-wp-admin_includes_post-php wp-parser-package-administration wp-parser-package-wordpress wp-parser-since-4-1-0">
+
+	<h1><a href="../../../../hooks/wp_creating_autosave/index.html">wp_creating_autosave</a></h1>
+
+	<div class="description">
+		<p><b>Action Hook: </b>Fires before an autosave is stored.</p>
+	</div>
+	<div class="sourcefile">
+		<p>Source: wp-admin/includes/post.php:1880</p>
+	</div>
+
+
+		<div class="meta">
+		Used by <a href="../../../../hooks/wp_creating_autosave/index.html#used-by">2 functions</a>		|
+		Uses <a href="../../../../hooks/wp_creating_autosave/index.html#uses">0 functions</a>	</div>
+
+	
+</article>
+
+				
+					
+<article id="post-6433" class="post-6433 wp-parser-hook type-wp-parser-hook status-publish hentry wp-parser-source-file-wp-admin_includes_post-php wp-parser-package-administration wp-parser-package-wordpress wp-parser-since-3-0-0">
+
+	<h1><a href="../../../../hooks/edit_post_type_per_page/index.html">edit_{$post_type}_per_page</a></h1>
+
+	<div class="description">
+		<p><b>Filter Hook: </b>Filters the number of items per page to show for a specific &#8216;per_page&#8217; type.</p>
+	</div>
+	<div class="sourcefile">
+		<p>Source: wp-admin/includes/post.php:1194</p>
+	</div>
+
+
+		<div class="meta">
+		Used by <a href="../../../../hooks/edit_post_type_per_page/index.html#used-by">1 function</a>		|
+		Uses <a href="../../../../hooks/edit_post_type_per_page/index.html#uses">0 functions</a>	</div>
+
+	
+</article>
+
+				
+					
+<article id="post-5665" class="post-5665 wp-parser-hook type-wp-parser-hook status-publish hentry wp-parser-source-file-wp-admin_includes_post-php wp-parser-package-administration wp-parser-package-wordpress wp-parser-since-2-6-0">
+
+	<h1><a href="../../../../hooks/action/index.html">{$action}</a></h1>
+
+	<div class="description">
+		<p><b>Action Hook (deprecated): </b>If the &#8216;postcustom&#8217; meta box is enabled, then we need to perform some extra initialization on it.</p>
+	</div>
+	<div class="sourcefile">
+		<p>Source: wp-admin/includes/post.php:2200</p>
+	</div>
+
+
+		<div class="meta">
+		Used by <a href="../../../../hooks/action/index.html#used-by">0 functions</a>		|
+		Uses <a href="../../../../hooks/action/index.html#uses">0 functions</a>	</div>
+
+	
+</article>
+
+				
+					
+<article id="post-4513" class="post-4513 wp-parser-function type-wp-parser-function status-publish hentry wp-parser-source-file-wp-admin_includes_post-php wp-parser-package-administration wp-parser-package-wordpress wp-parser-since-2-7-0">
+
+	<h1><a href="../../../../functions/post_preview/index.html">post_preview()</a></h1>
+
+	<div class="description">
+		<p><b>Function: </b>Saves a draft or manually autosaves for the purpose of showing a post preview.</p>
+	</div>
+	<div class="sourcefile">
+		<p>Source: wp-admin/includes/post.php:1899</p>
+	</div>
+
+
+		<div class="meta">
+		Used by <a href="../../../../functions/post_preview/index.html#used-by">0 functions</a>		|
+		Uses <a href="../../../../functions/post_preview/index.html#uses">12 functions</a>	</div>
+
+	
+</article>
+
+				
+					
+<article id="post-4503" class="post-4503 wp-parser-function type-wp-parser-function status-publish hentry wp-parser-source-file-wp-admin_includes_post-php wp-parser-package-administration wp-parser-package-wordpress wp-parser-since-2-9-0">
+
+	<h1><a href="../../../../functions/_wp_post_thumbnail_html/index.html">_wp_post_thumbnail_html()</a></h1>
+
+	<div class="description">
+		<p><b>Function: </b>Returns HTML for the post thumbnail meta box.</p>
+	</div>
+	<div class="sourcefile">
+		<p>Source: wp-admin/includes/post.php:1534</p>
+	</div>
+
+
+		<div class="meta">
+		Used by <a href="../../../../functions/_wp_post_thumbnail_html/index.html#used-by">3 functions</a>		|
+		Uses <a href="../../../../functions/_wp_post_thumbnail_html/index.html#uses">12 functions</a>	</div>
+
+	
+</article>
+
+				
+					
+<article id="post-4514" class="post-4514 wp-parser-function type-wp-parser-function status-publish hentry wp-parser-source-file-wp-admin_includes_post-php wp-parser-package-administration wp-parser-package-wordpress wp-parser-since-3-9-0">
+
+	<h1><a href="../../../../functions/wp_autosave/index.html">wp_autosave()</a></h1>
+
+	<div class="description">
+		<p><b>Function: </b>Save a post submitted with XHR</p>
+	</div>
+	<div class="sourcefile">
+		<p>Source: wp-admin/includes/post.php:1962</p>
+	</div>
+
+
+		<div class="meta">
+		Used by <a href="../../../../functions/wp_autosave/index.html#used-by">1 function</a>		|
+		Uses <a href="../../../../functions/wp_autosave/index.html#uses">10 functions</a>	</div>
+
+	
+</article>
+
+				
+					
+<article id="post-4504" class="post-4504 wp-parser-hook type-wp-parser-hook status-publish hentry wp-parser-source-file-wp-admin_includes_post-php wp-parser-package-administration wp-parser-package-wordpress wp-parser-since-2-9-0 wp-parser-since-3-5-0 wp-parser-since-4-6-0">
+
+	<h1><a href="../../../../hooks/admin_post_thumbnail_html/index.html">admin_post_thumbnail_html</a></h1>
+
+	<div class="description">
+		<p><b>Filter Hook: </b>Filters the admin post thumbnail HTML markup to return.</p>
+	</div>
+	<div class="sourcefile">
+		<p>Source: wp-admin/includes/post.php:1595</p>
+	</div>
+
+
+		<div class="meta">
+		Used by <a href="../../../../hooks/admin_post_thumbnail_html/index.html#used-by">1 function</a>		|
+		Uses <a href="../../../../hooks/admin_post_thumbnail_html/index.html#uses">0 functions</a>	</div>
+
+	
+</article>
+
+				
+					
+<article id="post-4505" class="post-4505 wp-parser-function type-wp-parser-function status-publish hentry wp-parser-source-file-wp-admin_includes_post-php wp-parser-package-administration wp-parser-package-wordpress wp-parser-since-2-5-0">
+
+	<h1><a href="../../../../functions/wp_check_post_lock/index.html">wp_check_post_lock()</a></h1>
+
+	<div class="description">
+		<p><b>Function: </b>Check to see if the post is currently being edited by another user.</p>
+	</div>
+	<div class="sourcefile">
+		<p>Source: wp-admin/includes/post.php:1607</p>
+	</div>
+
+
+		<div class="meta">
+		Used by <a href="../../../../functions/wp_check_post_lock/index.html#used-by">14 functions</a>		|
+		Uses <a href="../../../../functions/wp_check_post_lock/index.html#uses">6 functions</a>	</div>
+
+	
+</article>
+
+				
+					
+<article id="post-4506" class="post-4506 wp-parser-function type-wp-parser-function status-publish hentry wp-parser-source-file-wp-admin_includes_post-php wp-parser-package-administration wp-parser-package-wordpress wp-parser-since-2-5-0">
+
+	<h1><a href="../../../../functions/wp_set_post_lock/index.html">wp_set_post_lock()</a></h1>
+
+	<div class="description">
+		<p><b>Function: </b>Mark the post as currently being edited by the current user</p>
+	</div>
+	<div class="sourcefile">
+		<p>Source: wp-admin/includes/post.php:1645</p>
+	</div>
+
+
+		<div class="meta">
+		Used by <a href="../../../../functions/wp_set_post_lock/index.html#used-by">3 functions</a>		|
+		Uses <a href="../../../../functions/wp_set_post_lock/index.html#uses">3 functions</a>	</div>
+
+	
+</article>
+
+				
+					
+<article id="post-4507" class="post-4507 wp-parser-function type-wp-parser-function status-publish hentry wp-parser-source-file-wp-admin_includes_post-php wp-parser-package-administration wp-parser-package-wordpress wp-parser-since-2-8-5">
+
+	<h1><a href="../../../../functions/_admin_notice_post_locked/index.html">_admin_notice_post_locked()</a></h1>
+
+	<div class="description">
+		<p><b>Function: </b>Outputs the HTML for the notice to say that someone else is editing or has taken over editing of this post.</p>
+	</div>
+	<div class="sourcefile">
+		<p>Source: wp-admin/includes/post.php:1669</p>
+	</div>
+
+
+		<div class="meta">
+		Used by <a href="../../../../functions/_admin_notice_post_locked/index.html#used-by">0 functions</a>		|
+		Uses <a href="../../../../functions/_admin_notice_post_locked/index.html#uses">22 functions</a>	</div>
+
+	
+</article>
+
+				
+					
+<article id="post-4508" class="post-4508 wp-parser-hook type-wp-parser-hook status-publish hentry wp-parser-source-file-wp-admin_includes_post-php wp-parser-package-administration wp-parser-package-wordpress wp-parser-since-3-6-0">
+
+	<h1><a href="../../../../hooks/show_post_locked_dialog/index.html">show_post_locked_dialog</a></h1>
+
+	<div class="description">
+		<p><b>Filter Hook: </b>Filters whether to show the post locked dialog.</p>
+	</div>
+	<div class="sourcefile">
+		<p>Source: wp-admin/includes/post.php:1693</p>
+	</div>
+
+
+		<div class="meta">
+		Used by <a href="../../../../hooks/show_post_locked_dialog/index.html#used-by">1 function</a>		|
+		Uses <a href="../../../../hooks/show_post_locked_dialog/index.html#uses">0 functions</a>	</div>
+
+	
+</article>
+
+				
+					
+<article id="post-4509" class="post-4509 wp-parser-hook type-wp-parser-hook status-publish hentry wp-parser-source-file-wp-admin_includes_post-php wp-parser-package-administration wp-parser-package-wordpress wp-parser-since-3-6-0">
+
+	<h1><a href="../../../../hooks/override_post_lock/index.html">override_post_lock</a></h1>
+
+	<div class="description">
+		<p><b>Filter Hook: </b>Filters whether to allow the post lock to be overridden.</p>
+	</div>
+	<div class="sourcefile">
+		<p>Source: wp-admin/includes/post.php:1749</p>
+	</div>
+
+
+		<div class="meta">
+		Used by <a href="../../../../hooks/override_post_lock/index.html#used-by">1 function</a>		|
+		Uses <a href="../../../../hooks/override_post_lock/index.html#uses">0 functions</a>	</div>
+
+	
+</article>
+
+				
+					
+<article id="post-4510" class="post-4510 wp-parser-hook type-wp-parser-hook status-publish hentry wp-parser-source-file-wp-admin_includes_post-php wp-parser-package-administration wp-parser-package-wordpress wp-parser-since-3-6-0 wp-parser-since-5-4-0">
+
+	<h1><a href="../../../../hooks/post_locked_dialog/index.html">post_locked_dialog</a></h1>
+
+	<div class="description">
+		<p><b>Action Hook: </b>Fires inside the post locked dialog before the buttons are displayed.</p>
+	</div>
+	<div class="sourcefile">
+		<p>Source: wp-admin/includes/post.php:1776</p>
+	</div>
+
+
+		<div class="meta">
+		Used by <a href="../../../../hooks/post_locked_dialog/index.html#used-by">1 function</a>		|
+		Uses <a href="../../../../hooks/post_locked_dialog/index.html#uses">0 functions</a>	</div>
+
+	
+</article>
+
+				
+					
+<article id="post-4511" class="post-4511 wp-parser-hook type-wp-parser-hook status-publish hentry wp-parser-source-file-wp-admin_includes_post-php wp-parser-package-administration wp-parser-package-wordpress wp-parser-since-3-6-0">
+
+	<h1><a href="../../../../hooks/post_lock_lost_dialog/index.html">post_lock_lost_dialog</a></h1>
+
+	<div class="description">
+		<p><b>Action Hook: </b>Fires inside the dialog displayed when a user has lost the post lock.</p>
+	</div>
+	<div class="sourcefile">
+		<p>Source: wp-admin/includes/post.php:1813</p>
+	</div>
+
+
+		<div class="meta">
+		Used by <a href="../../../../hooks/post_lock_lost_dialog/index.html#used-by">1 function</a>		|
+		Uses <a href="../../../../hooks/post_lock_lost_dialog/index.html#uses">0 functions</a>	</div>
+
+	
+</article>
+
+				
+				
+						<nav class="pagination loop-pagination"><span aria-current="page" class="page-numbers current">1</span>
+<a class="page-numbers" href="page/2/index.html">2</a>
+<a class="next page-numbers" href="page/2/index.html">Next &raquo;</a></nav>		</main>
+		<!-- /wrapper -->
+	</div><!-- /pagebody -->
+
+	</div><!-- #content -->
+
+</div><!-- #page -->
+
+
+<div id="wporg-footer">
+	<div class="wrapper">
+		<ul>
+			<li><a href="http://wordpress.org/about/" title="An introduction to the WordPress project">About</a></li>
+			<li><a href="http://wordpress.org/news/" title="News and Updates">Blog</a></li>
+			<li><a href="http://wordpress.org/hosting/" title="Recommended web hosting providers">Hosting</a></li>
+			<li><a href="https://wordpressfoundation.org/donate/" title="Donate to the WordPress Foundation">Donate</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://wordpress.org/support/" title="Forums, documentation, and other resources">Support</a></li>
+			<li><a href="../../../../../index.html" title="Resources for WordPress developers">Developers</a></li>
+			<li><a href="http://make.wordpress.org/" title="Give back to WordPress through code, support, translation and more">Get Involved</a></li>
+			<li><a href="http://learn.wordpress.org/" title="Workshops and training materials">Learn</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://wordpress.org/showcase/" title="Some of the best WordPress sites on the Web">Showcase</a></li>
+			<li><a href="http://wordpress.org/plugins/" title="Add extra functionality to WordPress">Plugins</a></li>
+			<li><a href="http://wordpress.org/themes/" title="Make your WordPress pretty">Themes</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://central.wordcamp.org/" title="Find a WordPress event near you">WordCamp</a></li>
+			<li><a href="http://wordpress.tv/" title="Videos, tutorials, and WordCamp sessions">WordPress.TV</a></li>
+			<li><a href="http://buddypress.org/" title="A set of plugins to transform your WordPress into a social network">BuddyPress</a></li>
+			<li><a href="http://bbpress.org/" title="Fast, slick forums built on WordPress">bbPress</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://wordpress.com/?ref=wporg-footer" title="Hassle-free WordPress hosting">WordPress.com</a></li>
+			<li><a href="http://ma.tt/" title="Co-founder of WordPress, an example of what WordPress can do">Matt</a></li>
+			<li><a href="http://wordpress.org/about/privacy/" title="WordPress.org Privacy Policy">Privacy</a></li>
+			<li><a href="https://publiccode.eu/" target="_blank">Public Code</a></li>
+		</ul>
+
+		<ul class="social-media-links">
+			<li><span class="dashicons dashicons-twitter"></span><a href="https://twitter.com/WordPress" title="Follow @WordPress on Twitter">@WordPress</a></li>
+			<li><span class="dashicons dashicons-facebook"></span><a href="https://www.facebook.com/WordPress/" title="Like WordPress on Facebook">WordPress</a></li>
+		</ul>
+	</div>
+
+		<p class="cip cip-image">Code is Poetry.</p>
+</div>
+
+<script src="../../../../../../s.w.org/style/js/navigation.min.js?20190128"></script>
+
+<script type='text/javascript' src='../../../../../wp-includes/js/hoverintent-js.min.js?ver=2.2.1' id='hoverintent-js-js'></script>
+<script type='text/javascript' src='../../../../../wp-includes/js/admin-bar.min.js?ver=5.9-alpha-51701' id='admin-bar-js'></script>
+<script type='text/javascript' src='../../../../../wp-content/themes/pub/wporg-developer/js/navigation.js?ver=20181209' id='wporg-developer-navigation-js'></script>
+<script type='text/javascript' src='../../../../../wp-content/themes/pub/wporg-developer/js/skip-link-focus-fix.js?ver=20130115' id='wporg-developer-skip-link-focus-fix-js'></script>
+<script type='text/javascript' src='../../../../../wp-content/themes/pub/wporg-developer/js/search.js?ver=20150430' id='wporg-developer-search-js'></script>
+<script type='text/javascript' src='../../../../../wp-content/themes/pub/wporg-developer/js/menu.js?ver=20180201' id='wporg-developer-menu-js'></script>
+<script type='text/javascript' src='../../../../../wp-content/themes/pub/wporg-developer/js/awesomplete.min.js?ver=20160322' id='awesomplete-js'></script>
+<script type='text/javascript' id='autocomplete-js-extra'>
+/* <![CDATA[ */
+var autocomplete = {"ajaxurl":"https:\/\/developer.wordpress.org\/wp-admin\/admin-ajax.php","nonce":"8a60f70c4b"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../../../wp-content/themes/pub/wporg-developer/js/autocomplete.js?ver=20160524' id='autocomplete-js'></script>
+<script type='text/javascript' src='../../../../../wp-includes/js/wp-embed.min.js?ver=5.9-alpha-51701' id='wp-embed-js'></script>
+</body>
+
+<!-- Mirrored from developer.wordpress.org/reference/files/wp-admin/includes/post.php/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 31 Aug 2021 17:18:21 GMT -->
+</html>

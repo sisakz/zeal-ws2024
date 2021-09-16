@@ -1,0 +1,844 @@
+<html><!-- Mirrored from www.php.net/manual/en/function.str-getcsv.php by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 11 Sep 2021 06:44:31 GMT --><!-- Added by HTTrack --><head><meta http-equiv="content-type" content="text/html;charset=utf-8"><!-- /Added by HTTrack -->
+
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>str_getcsv</title>
+
+ <link rel="shortcut icon" href="../../favicon.ico">
+ <link rel="search" type="application/opensearchdescription+xml" href="http://php.net/phpnetimprovedsearch.src" title="Add PHP.net search">
+ <link rel="alternate" type="application/atom+xml" href="https://www.php.net/releases/feed.php" title="PHP Release feed">
+ <link rel="alternate" type="application/atom+xml" href="https://www.php.net/feed.atom" title="PHP: Hypertext Preprocessor">
+
+ <link rel="canonical" href="function.str-getcsv.html">
+ <link rel="shorturl" href="https://www.php.net/str-getcsv">
+ <link rel="alternate" href="https://www.php.net/str-getcsv" hreflang="x-default">
+
+ <link rel="contents" href="index-2.html">
+ <link rel="index" href="ref.strings.html">
+ <link rel="prev" href="function.str-ends-with.html">
+ <link rel="next" href="function.str-ireplace.html">
+
+ <link rel="alternate" href="function.str-getcsv.html" hreflang="en">
+ <link rel="alternate" href="https://www.php.net/manual/pt_BR/function.str-getcsv.php" hreflang="pt_BR">
+ <link rel="alternate" href="https://www.php.net/manual/zh/function.str-getcsv.php" hreflang="zh">
+ <link rel="alternate" href="https://www.php.net/manual/fr/function.str-getcsv.php" hreflang="fr">
+ <link rel="alternate" href="https://www.php.net/manual/de/function.str-getcsv.php" hreflang="de">
+ <link rel="alternate" href="https://www.php.net/manual/ja/function.str-getcsv.php" hreflang="ja">
+ <link rel="alternate" href="https://www.php.net/manual/ro/function.str-getcsv.php" hreflang="ro">
+ <link rel="alternate" href="https://www.php.net/manual/ru/function.str-getcsv.php" hreflang="ru">
+ <link rel="alternate" href="https://www.php.net/manual/es/function.str-getcsv.php" hreflang="es">
+ <link rel="alternate" href="https://www.php.net/manual/tr/function.str-getcsv.php" hreflang="tr">
+
+<link rel="stylesheet" type="text/css" href="../../cached0aba.css?t=1539771603&amp;f=/fonts/Fira/fira.css" media="screen">
+<link rel="stylesheet" type="text/css" href="../../cached2ecf.css?t=1539765004&amp;f=/fonts/Font-Awesome/css/fontello.css" media="screen">
+<link rel="stylesheet" type="text/css" href="../../cachedba57.css?t=1606338002&amp;f=/styles/theme-base.css" media="screen">
+<link rel="stylesheet" type="text/css" href="../../cached3afa.css?t=1627831203&amp;f=/styles/theme-medium.css" media="screen">
+
+ <!--[if lte IE 7]>
+ <link rel="stylesheet" type="text/css" href="https://www.php.net/styles/workarounds.ie7.css" media="screen">
+ <![endif]-->
+
+ <!--[if lte IE 8]>
+ <script>
+  window.brokenIE = true;
+ </script>
+ <![endif]-->
+
+ <!--[if lte IE 9]>
+ <link rel="stylesheet" type="text/css" href="https://www.php.net/styles/workarounds.ie9.css" media="screen">
+ <![endif]-->
+
+ <!--[if IE]>
+ <script src="https://www.php.net/js/ext/html5.js"></script>
+ <![endif]-->
+
+ <base>
+
+
+</head>
+<body class="docs " style="">
+
+
+<div class="headsup"><a href="https://www.php.net/conferences/index.php#id2021-09-08-1">Longhorn PHP 2021</a></div>
+<nav id="trick"><div><dl>
+<dt><a href="getting-started.html">Getting Started</a></dt>
+	<dd><a href="introduction.html">Introduction</a></dd>
+	<dd><a href="tutorial.html">A simple tutorial</a></dd>
+<dt><a href="langref.html">Language Reference</a></dt>
+	<dd><a href="language.basic-syntax.html">Basic syntax</a></dd>
+	<dd><a href="language.types.html">Types</a></dd>
+	<dd><a href="language.variables.html">Variables</a></dd>
+	<dd><a href="language.constants.html">Constants</a></dd>
+	<dd><a href="language.expressions.html">Expressions</a></dd>
+	<dd><a href="language.operators.html">Operators</a></dd>
+	<dd><a href="language.control-structures.html">Control Structures</a></dd>
+	<dd><a href="language.functions.html">Functions</a></dd>
+	<dd><a href="language.oop5.html">Classes and Objects</a></dd>
+	<dd><a href="language.namespaces.html">Namespaces</a></dd>
+	<dd><a href="language.errors.html">Errors</a></dd>
+	<dd><a href="language.exceptions.html">Exceptions</a></dd>
+	<dd><a href="language.generators.html">Generators</a></dd>
+	<dd><a href="language.attributes.html">Attributes</a></dd>
+	<dd><a href="language.references.html">References Explained</a></dd>
+	<dd><a href="reserved.variables.html">Predefined Variables</a></dd>
+	<dd><a href="reserved.exceptions.html">Predefined Exceptions</a></dd>
+	<dd><a href="reserved.interfaces.html">Predefined Interfaces and Classes</a></dd>
+	<dd><a href="context.html">Context options and parameters</a></dd>
+	<dd><a href="wrappers.html">Supported Protocols and Wrappers</a></dd>
+</dl>
+<dl>
+<dt><a href="security.html">Security</a></dt>
+	<dd><a href="security.intro.html">Introduction</a></dd>
+	<dd><a href="security.general.html">General considerations</a></dd>
+	<dd><a href="security.cgi-bin.html">Installed as CGI binary</a></dd>
+	<dd><a href="security.apache.html">Installed as an Apache module</a></dd>
+	<dd><a href="security.sessions.html">Session Security</a></dd>
+	<dd><a href="security.filesystem.html">Filesystem Security</a></dd>
+	<dd><a href="security.database.html">Database Security</a></dd>
+	<dd><a href="security.errors.html">Error Reporting</a></dd>
+	<dd><a href="security.variables.html">User Submitted Data</a></dd>
+	<dd><a href="security.hiding.html">Hiding PHP</a></dd>
+	<dd><a href="security.current.html">Keeping Current</a></dd>
+<dt><a href="features.html">Features</a></dt>
+	<dd><a href="features.http-auth.html">HTTP authentication with PHP</a></dd>
+	<dd><a href="features.cookies.html">Cookies</a></dd>
+	<dd><a href="features.sessions.html">Sessions</a></dd>
+	<dd><a href="features.xforms.html">Dealing with XForms</a></dd>
+	<dd><a href="features.file-upload.html">Handling file uploads</a></dd>
+	<dd><a href="features.remote-files.html">Using remote files</a></dd>
+	<dd><a href="features.connection-handling.html">Connection handling</a></dd>
+	<dd><a href="features.persistent-connections.html">Persistent Database Connections</a></dd>
+	<dd><a href="features.commandline.html">Command line usage</a></dd>
+	<dd><a href="features.gc.html">Garbage Collection</a></dd>
+	<dd><a href="features.dtrace.html">DTrace Dynamic Tracing</a></dd>
+</dl>
+<dl>
+<dt><a href="funcref.html">Function Reference</a></dt>
+	<dd><a href="refs.basic.php.html">Affecting PHP's Behaviour</a></dd>
+	<dd><a href="refs.utilspec.audio.html">Audio Formats Manipulation</a></dd>
+	<dd><a href="refs.remote.auth.html">Authentication Services</a></dd>
+	<dd><a href="refs.utilspec.cmdline.html">Command Line Specific Extensions</a></dd>
+	<dd><a href="refs.compression.html">Compression and Archive Extensions</a></dd>
+	<dd><a href="refs.crypto.html">Cryptography Extensions</a></dd>
+	<dd><a href="refs.database.html">Database Extensions</a></dd>
+	<dd><a href="refs.calendar.html">Date and Time Related Extensions</a></dd>
+	<dd><a href="refs.fileprocess.file.html">File System Related Extensions</a></dd>
+	<dd><a href="refs.international.html">Human Language and Character Encoding Support</a></dd>
+	<dd><a href="refs.utilspec.image.html">Image Processing and Generation</a></dd>
+	<dd><a href="refs.remote.mail.html">Mail Related Extensions</a></dd>
+	<dd><a href="refs.math.html">Mathematical Extensions</a></dd>
+	<dd><a href="refs.utilspec.nontext.html">Non-Text MIME Output</a></dd>
+	<dd><a href="refs.fileprocess.process.html">Process Control Extensions</a></dd>
+	<dd><a href="refs.basic.other.html">Other Basic Extensions</a></dd>
+	<dd><a href="refs.remote.other.html">Other Services</a></dd>
+	<dd><a href="refs.search.html">Search Engine Extensions</a></dd>
+	<dd><a href="refs.utilspec.server.html">Server Specific Extensions</a></dd>
+	<dd><a href="refs.basic.session.html">Session Extensions</a></dd>
+	<dd><a href="refs.basic.text.html">Text Processing</a></dd>
+	<dd><a href="refs.basic.vartype.html">Variable and Type Related Extensions</a></dd>
+	<dd><a href="refs.webservice.html">Web Services</a></dd>
+	<dd><a href="refs.utilspec.windows.html">Windows Only Extensions</a></dd>
+	<dd><a href="refs.xml.html">XML Manipulation</a></dd>
+	<dd><a href="refs.ui.html">GUI Extensions</a></dd>
+</dl>
+<dl>
+<dt>Keyboard Shortcuts</dt><dt>?</dt>
+<dd>This help</dd>
+<dt>j</dt>
+<dd>Next menu item</dd>
+<dt>k</dt>
+<dd>Previous menu item</dd>
+<dt>g p</dt>
+<dd>Previous man page</dd>
+<dt>g n</dt>
+<dd>Next man page</dd>
+<dt>G</dt>
+<dd>Scroll to bottom</dd>
+<dt>g g</dt>
+<dd>Scroll to top</dd>
+<dt>g h</dt>
+<dd>Goto homepage</dd>
+<dt>g s</dt>
+<dd>Goto search<br>(current page)</dd>
+<dt>/</dt>
+<dd>Focus search box</dd>
+</dl></div></nav>
+<div id="goto">
+    <div class="search">
+         <div class="text"></div>
+         <div class="results"><ul></ul></div>
+   </div>
+</div>
+
+  <div id="breadcrumbs" class="row-fluid">
+    <div id="breadcrumbs-inner">
+          
+              
+          <ul>
+            <li><a href="index-2.html">PHP Manual</a></li>      <li><a href="funcref.html">Function Reference</a></li>      <li><a href="refs.basic.text.html">Text Processing</a></li>      <li><a href="book.strings.html">Strings</a></li>      <li><a href="ref.strings.html">String Functions</a></li>      </ul>
+    </div>
+  </div>
+
+
+
+
+<div id="layout" class="clearfix">
+  <section id="layout-content">
+  <div id="function.str-getcsv" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">str_getcsv</h1>
+  <p class="verinfo">(PHP 5 &gt;= 5.3.0, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">str_getcsv</span> — <span class="dc-title">
+   Parse a CSV string into an array
+  </span></p>
+
+ </div>
+
+ <div class="refsect1 description" id="refsect1-function.str-getcsv-description">
+  <h3 class="title">Description</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>str_getcsv</strong></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">string</span> <code class="parameter">$string</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">string</span> <code class="parameter">$separator</code><span class="initializer"> = ","</span></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">string</span> <code class="parameter">$enclosure</code><span class="initializer"> = "\""</span></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">string</span> <code class="parameter">$escape</code><span class="initializer"> = '\\'</span></span><br>): <span class="type">array</span></div>
+
+  <p class="para rdfs-comment">
+   Parses a string input for fields in <acronym title="Comma Separated Value">CSV</acronym> format
+   and returns an array containing the fields read.
+  </p>
+  <blockquote class="note"><p><strong class="note">Note</strong>: 
+   </p><p class="para">
+    The locale settings are taken into account by this function. If
+    <code class="literal">LC_CTYPE</code> is e.g. <code class="literal">en_US.UTF-8</code>, strings in
+    one-byte encodings may be read wrongly by this function.
+   </p>
+  <p></p></blockquote>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-function.str-getcsv-parameters">
+  <h3 class="title">Parameters</h3>
+  <p class="para">
+   </p><dl>
+    
+     <dt>
+<code class="parameter">string</code></dt>
+
+     <dd>
+
+      <p class="para">
+       The string to parse.
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">separator</code></dt>
+
+     <dd>
+
+      <p class="para">
+       Set the field delimiter (one single-byte character only).
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">enclosure</code></dt>
+
+     <dd>
+
+      <p class="para">
+       Set the field enclosure character (one single-byte character only).
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">escape</code></dt>
+
+     <dd>
+
+      <p class="para">
+       Set the escape character (at most one single-byte character). Defaults as a backslash
+       (<code class="literal">\</code>)
+       An empty string (<code class="literal">""</code>) disables the proprietary escape mechanism.
+      </p>
+      <blockquote class="note"><p><strong class="note">Note</strong>: 
+       <span class="simpara">
+        Usually an <code class="parameter">enclosure</code> character is escaped inside
+        a field by doubling it; however, the <code class="parameter">escape</code>
+        character can be used as an alternative. So for the default parameter
+        values <code class="literal">""</code> and <code class="literal">\"</code> have the same
+        meaning. Other than allowing to escape the
+        <code class="parameter">enclosure</code> character the
+        <code class="parameter">escape</code> character has no special meaning; it isn't
+        even meant to escape itself.
+       </span>
+      </p></blockquote>
+     </dd>
+
+    
+   </dl>
+
+  <p></p>
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-function.str-getcsv-returnvalues">
+  <h3 class="title">Return Values</h3>
+  <p class="para">
+   Returns an indexed array containing the fields read.
+  </p>
+ </div>
+
+
+ <div class="refsect1 changelog" id="refsect1-function.str-getcsv-changelog">
+  <h3 class="title">Changelog</h3>
+  <p class="para">
+   </p><table class="doctable informaltable">
+    
+     <thead>
+      <tr>
+       <th>Version</th>
+       <th>Description</th>
+      </tr>
+
+     </thead>
+
+     <tbody class="tbody">
+      <tr>
+       <td>7.4.0</td>
+       <td>
+        The <code class="parameter">escape</code> parameter now interprets an empty
+        string as signal to disable the proprietary escape mechanism. Formerly,
+        an empty string was treated like the default parameter value.
+       </td>
+      </tr>
+
+     </tbody>
+    
+   </table>
+
+  <p></p>
+ </div>
+
+
+ <div class="refsect1 seealso" id="refsect1-function.str-getcsv-seealso">
+  <h3 class="title">See Also</h3>
+  <p class="para">
+   </p><ul class="simplelist">
+    <li class="member"><span class="function"><a href="function.fgetcsv.html" class="function" rel="rdfs-seeAlso">fgetcsv()</a> - Gets line from file pointer and parse for CSV fields</span></li>
+   </ul>
+  <p></p>
+ </div>
+
+</div>
+<section id="usernotes">
+ <div class="head"><h3 class="title">User Contributed Notes</h3></div><div id="allnotes">
+  <div class="note" id="114764">  
+  <a class="name">
+  <strong class="user"><em>james at moss dot io</em></strong></a><div class="date" title="2014-04-03 10:24"><strong>7 years ago</strong></div>
+  <div class="text" id="Hcom114764">
+<div class="phpcode"><code><span class="html">
+[Editor's Note (cmb): that does not produce the desired results, if fields contain linebreaks.]
+<br>
+<br>Handy one liner to parse a CSV file into an array
+<br>
+<br><span class="default">&lt;?php
+<br>
+<br>$csv </span><span class="keyword">= </span><span class="default">array_map</span><span class="keyword">(</span><span class="string">'str_getcsv'</span><span class="keyword">, </span><span class="default">file</span><span class="keyword">(</span><span class="string">'data.csv'</span><span class="keyword">));
+<br>
+<br></span><span class="default">?&gt;</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="117692">  
+  <a class="name">
+  <strong class="user"><em>starrychloe at oliveyou dot net</em></strong></a><div class="date" title="2015-07-23 06:12"><strong>6 years ago</strong></div>
+  <div class="text" id="Hcom117692">
+<div class="phpcode"><code><span class="html">
+Based on James' line, this will create an array of associative arrays with the first row column headers as the keys.<br><br><span class="default">&lt;?php<br>&nbsp; &nbsp; $csv </span><span class="keyword">= </span><span class="default">array_map</span><span class="keyword">(</span><span class="string">'str_getcsv'</span><span class="keyword">, </span><span class="default">file</span><span class="keyword">(</span><span class="default">$file</span><span class="keyword">));<br>&nbsp; &nbsp; </span><span class="default">array_walk</span><span class="keyword">(</span><span class="default">$csv</span><span class="keyword">, function(&amp;</span><span class="default">$a</span><span class="keyword">) use (</span><span class="default">$csv</span><span class="keyword">) {<br>&nbsp; &nbsp; &nbsp; </span><span class="default">$a </span><span class="keyword">= </span><span class="default">array_combine</span><span class="keyword">(</span><span class="default">$csv</span><span class="keyword">[</span><span class="default">0</span><span class="keyword">], </span><span class="default">$a</span><span class="keyword">);<br>&nbsp; &nbsp; });<br>&nbsp; &nbsp; </span><span class="default">array_shift</span><span class="keyword">(</span><span class="default">$csv</span><span class="keyword">); </span><span class="comment"># remove column header<br></span><span class="default">?&gt;</span> <br><br>This will yield something like<br>&nbsp; &nbsp; [2] =&gt; Array<br>&nbsp; &nbsp; &nbsp; &nbsp; (<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; [Campaign ID] =&gt; 295095038<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; [Ad group ID] =&gt; 22460178158<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; [Keyword ID] =&gt; 3993587178</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="101888">  
+  <a class="name">
+  <strong class="user"><em>durik at 3ilab dot net</em></strong></a><div class="date" title="2011-01-16 11:39"><strong>10 years ago</strong></div>
+  <div class="text" id="Hcom101888">
+<div class="phpcode"><code><span class="html">
+As the str_getcsv(), unlike to fgetcsv(), does not parse the rows in CSV string, I have found following easy workaround:
+<br>
+<br><span class="default">&lt;?php
+<br>$Data </span><span class="keyword">= </span><span class="default">str_getcsv</span><span class="keyword">(</span><span class="default">$CsvString</span><span class="keyword">, </span><span class="string">"\n"</span><span class="keyword">); </span><span class="comment">//parse the rows
+<br></span><span class="keyword">foreach(</span><span class="default">$Data </span><span class="keyword">as &amp;</span><span class="default">$Row</span><span class="keyword">) </span><span class="default">$Row </span><span class="keyword">= </span><span class="default">str_getcsv</span><span class="keyword">(</span><span class="default">$Row</span><span class="keyword">, </span><span class="string">";"</span><span class="keyword">); </span><span class="comment">//parse the items in rows
+<br></span><span class="default">?&gt;
+<br></span>
+<br>Why not use explode() instead of str_getcsv() to parse rows? Because explode() would not treat possible enclosured parts of string or escaped characters correctly.</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="99323">  
+  <a class="name">
+  <strong class="user"><em>Jay Williams</em></strong></a><div class="date" title="2010-08-10 01:50"><strong>11 years ago</strong></div>
+  <div class="text" id="Hcom99323">
+<div class="phpcode"><code><span class="html">
+Here is a quick and easy way to convert a CSV file to an associated array:<br><br><span class="default">&lt;?php<br></span><span class="comment">/**<br> * @link <a rel="nofollow" target="_blank">http://gist.github.com/385876</a><br> */<br></span><span class="keyword">function </span><span class="default">csv_to_array</span><span class="keyword">(</span><span class="default">$filename</span><span class="keyword">=</span><span class="string">''</span><span class="keyword">, </span><span class="default">$delimiter</span><span class="keyword">=</span><span class="string">','</span><span class="keyword">)<br>{<br>&nbsp; &nbsp; if(!</span><span class="default">file_exists</span><span class="keyword">(</span><span class="default">$filename</span><span class="keyword">) || !</span><span class="default">is_readable</span><span class="keyword">(</span><span class="default">$filename</span><span class="keyword">))<br>&nbsp; &nbsp; &nbsp; &nbsp; return </span><span class="default">FALSE</span><span class="keyword">;<br><br>&nbsp; &nbsp; </span><span class="default">$header </span><span class="keyword">= </span><span class="default">NULL</span><span class="keyword">;<br>&nbsp; &nbsp; </span><span class="default">$data </span><span class="keyword">= array();<br>&nbsp; &nbsp; if ((</span><span class="default">$handle </span><span class="keyword">= </span><span class="default">fopen</span><span class="keyword">(</span><span class="default">$filename</span><span class="keyword">, </span><span class="string">'r'</span><span class="keyword">)) !== </span><span class="default">FALSE</span><span class="keyword">)<br>&nbsp; &nbsp; {<br>&nbsp; &nbsp; &nbsp; &nbsp; while ((</span><span class="default">$row </span><span class="keyword">= </span><span class="default">fgetcsv</span><span class="keyword">(</span><span class="default">$handle</span><span class="keyword">, </span><span class="default">1000</span><span class="keyword">, </span><span class="default">$delimiter</span><span class="keyword">)) !== </span><span class="default">FALSE</span><span class="keyword">)<br>&nbsp; &nbsp; &nbsp; &nbsp; {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if(!</span><span class="default">$header</span><span class="keyword">)<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$header </span><span class="keyword">= </span><span class="default">$row</span><span class="keyword">;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; else<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$data</span><span class="keyword">[] = </span><span class="default">array_combine</span><span class="keyword">(</span><span class="default">$header</span><span class="keyword">, </span><span class="default">$row</span><span class="keyword">);<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">fclose</span><span class="keyword">(</span><span class="default">$handle</span><span class="keyword">);<br>&nbsp; &nbsp; }<br>&nbsp; &nbsp; return </span><span class="default">$data</span><span class="keyword">;<br>}<br><br></span><span class="default">?&gt;</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="115776">  
+  <a class="name">
+  <strong class="user"><em>dejiakala at gmail dot com</em></strong></a><div class="date" title="2014-09-21 06:06"><strong>6 years ago</strong></div>
+  <div class="text" id="Hcom115776">
+<div class="phpcode"><code><span class="html">
+I wanted the best of the 2 solutions by james at moss dot io and Jay Williams (csv_to_array()) - create associative array from a CSV file with a header row.<br><br><span class="default">&lt;?php<br><br>$array </span><span class="keyword">= </span><span class="default">array_map</span><span class="keyword">(</span><span class="string">'str_getcsv'</span><span class="keyword">, </span><span class="default">file</span><span class="keyword">(</span><span class="string">'data.csv'</span><span class="keyword">));<br><br></span><span class="default">$header </span><span class="keyword">= </span><span class="default">array_shift</span><span class="keyword">(</span><span class="default">$array</span><span class="keyword">);<br><br></span><span class="default">array_walk</span><span class="keyword">(</span><span class="default">$array</span><span class="keyword">, </span><span class="string">'_combine_array'</span><span class="keyword">, </span><span class="default">$header</span><span class="keyword">);<br><br>function </span><span class="default">_combine_array</span><span class="keyword">(&amp;</span><span class="default">$row</span><span class="keyword">, </span><span class="default">$key</span><span class="keyword">, </span><span class="default">$header</span><span class="keyword">) {<br>&nbsp; </span><span class="default">$row </span><span class="keyword">= </span><span class="default">array_combine</span><span class="keyword">(</span><span class="default">$header</span><span class="keyword">, </span><span class="default">$row</span><span class="keyword">);<br>}<br><br></span><span class="default">?&gt;<br></span><br>Then I thought why not try some benchmarking? I grabbed a sample CSV file with 50,000 rows (10 columns each) and Vulcan Logic Disassembler (VLD) which hooks into the Zend Engine and dumps all the opcodes (execution units) of a script - see <a rel="nofollow" target="_blank">http://pecl.php.net/package/vld</a> and example here: <a rel="nofollow" target="_blank">http://fabien.potencier.org/article/8/print-vs-echo-which-one-is-faster</a><br><br>Result: <br><br>array_walk() and array_map() - 39 opcodes<br>csv_to_array() - 69 opcodes</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="116763">  
+  <a class="name">
+  <strong class="user"><em>sven at e7o dot de</em></strong></a><div class="date" title="2015-02-24 02:53"><strong>6 years ago</strong></div>
+  <div class="text" id="Hcom116763">
+<div class="phpcode"><code><span class="html">
+PHP is failing when parsing UTF-8 with Byte Order Mark. Strip it with this one from string before passing it to csv parser:<br><br><span class="default">&lt;?php<br>&nbsp; &nbsp; &nbsp; &nbsp; $bom </span><span class="keyword">= </span><span class="default">pack</span><span class="keyword">(</span><span class="string">'CCC'</span><span class="keyword">, </span><span class="default">0xEF</span><span class="keyword">, </span><span class="default">0xBB</span><span class="keyword">, </span><span class="default">0xBF</span><span class="keyword">);<br>&nbsp; &nbsp; &nbsp; &nbsp; if (</span><span class="default">strncmp</span><span class="keyword">(</span><span class="default">$yourString</span><span class="keyword">, </span><span class="default">$bom</span><span class="keyword">, </span><span class="default">3</span><span class="keyword">) === </span><span class="default">0</span><span class="keyword">) {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$body </span><span class="keyword">= </span><span class="default">substr</span><span class="keyword">(</span><span class="default">$yourString</span><span class="keyword">, </span><span class="default">3</span><span class="keyword">);<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br></span><span class="default">?&gt;</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="111665">  
+  <a class="name">
+  <strong class="user"><em>normadize -a- gmail -d- com</em></strong></a><div class="date" title="2013-03-13 11:19"><strong>8 years ago</strong></div>
+  <div class="text" id="Hcom111665">
+<div class="phpcode"><code><span class="html">
+Like some other users here noted, str_getcsv() cannot be used if you want to comply with either the RFC or with most spreadsheet tools like Excel or Google Docs.<br><br>These tools do not escape commas or new lines, but instead place double-quotes (") around the field. If there are any double-quotes in the field, these are escaped with another double-quote (" becomes ""). All this may look odd, but it is what the RFC and most tools do ... <br><br>For instance, try exporting as .csv a Google Docs spreadsheet (File &gt; Download as &gt; .csv) which has new lines and commas as part of the field values and see how the .csv content looks, then try to parse it using str_getcsv() ... it will spectacularly regardless of the arguments you pass to it.<br><br>Here is a function that can handle everything correctly, and more:<br><br>- doesn't use any for or while loops,<br>- it allows for any separator (any string of any length),<br>- option to skip empty lines,<br>- option to trim fields,<br>- can handle UTF8 data too (although .csv files are likely non-unicode).<br><br>Here is the more human readable version of the function:<br><br><span class="default">&lt;?php<br><br></span><span class="comment">// returns a two-dimensional array or rows and fields<br><br></span><span class="keyword">function </span><span class="default">parse_csv </span><span class="keyword">(</span><span class="default">$csv_string</span><span class="keyword">, </span><span class="default">$delimiter </span><span class="keyword">= </span><span class="string">","</span><span class="keyword">, </span><span class="default">$skip_empty_lines </span><span class="keyword">= </span><span class="default">true</span><span class="keyword">, </span><span class="default">$trim_fields </span><span class="keyword">= </span><span class="default">true</span><span class="keyword">)<br>{<br>&nbsp; &nbsp; </span><span class="default">$enc </span><span class="keyword">= </span><span class="default">preg_replace</span><span class="keyword">(</span><span class="string">'/(?&lt;!")""/'</span><span class="keyword">, </span><span class="string">'!!Q!!'</span><span class="keyword">, </span><span class="default">$csv_string</span><span class="keyword">);<br>&nbsp; &nbsp; </span><span class="default">$enc </span><span class="keyword">= </span><span class="default">preg_replace_callback</span><span class="keyword">(<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="string">'/"(.*?)"/s'</span><span class="keyword">,<br>&nbsp; &nbsp; &nbsp; &nbsp; function (</span><span class="default">$field</span><span class="keyword">) {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return </span><span class="default">urlencode</span><span class="keyword">(</span><span class="default">utf8_encode</span><span class="keyword">(</span><span class="default">$field</span><span class="keyword">[</span><span class="default">1</span><span class="keyword">]));<br>&nbsp; &nbsp; &nbsp; &nbsp; },<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$enc<br>&nbsp; &nbsp; </span><span class="keyword">);<br>&nbsp; &nbsp; </span><span class="default">$lines </span><span class="keyword">= </span><span class="default">preg_split</span><span class="keyword">(</span><span class="default">$skip_empty_lines </span><span class="keyword">? (</span><span class="default">$trim_fields </span><span class="keyword">? </span><span class="string">'/( *\R)+/s' </span><span class="keyword">: </span><span class="string">'/\R+/s'</span><span class="keyword">) : </span><span class="string">'/\R/s'</span><span class="keyword">, </span><span class="default">$enc</span><span class="keyword">);<br>&nbsp; &nbsp; return </span><span class="default">array_map</span><span class="keyword">(<br>&nbsp; &nbsp; &nbsp; &nbsp; function (</span><span class="default">$line</span><span class="keyword">) use (</span><span class="default">$delimiter</span><span class="keyword">, </span><span class="default">$trim_fields</span><span class="keyword">) {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$fields </span><span class="keyword">= </span><span class="default">$trim_fields </span><span class="keyword">? </span><span class="default">array_map</span><span class="keyword">(</span><span class="string">'trim'</span><span class="keyword">, </span><span class="default">explode</span><span class="keyword">(</span><span class="default">$delimiter</span><span class="keyword">, </span><span class="default">$line</span><span class="keyword">)) : </span><span class="default">explode</span><span class="keyword">(</span><span class="default">$delimiter</span><span class="keyword">, </span><span class="default">$line</span><span class="keyword">);<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return </span><span class="default">array_map</span><span class="keyword">(<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; function (</span><span class="default">$field</span><span class="keyword">) {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return </span><span class="default">str_replace</span><span class="keyword">(</span><span class="string">'!!Q!!'</span><span class="keyword">, </span><span class="string">'"'</span><span class="keyword">, </span><span class="default">utf8_decode</span><span class="keyword">(</span><span class="default">urldecode</span><span class="keyword">(</span><span class="default">$field</span><span class="keyword">)));<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; },<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$fields<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="keyword">);<br>&nbsp; &nbsp; &nbsp; &nbsp; },<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$lines<br>&nbsp; &nbsp; </span><span class="keyword">);<br>}<br><br></span><span class="default">?&gt;<br></span><br>Since this is not using any loops, you can actually write it as a one-line statement (one-liner).<br><br>Here's the function using just one line of code for the function body, formatted nicely though:<br><br><span class="default">&lt;?php<br><br></span><span class="comment">// returns the same two-dimensional array as above, but with a one-liner code<br><br></span><span class="keyword">function </span><span class="default">parse_csv </span><span class="keyword">(</span><span class="default">$csv_string</span><span class="keyword">, </span><span class="default">$delimiter </span><span class="keyword">= </span><span class="string">","</span><span class="keyword">, </span><span class="default">$skip_empty_lines </span><span class="keyword">= </span><span class="default">true</span><span class="keyword">, </span><span class="default">$trim_fields </span><span class="keyword">= </span><span class="default">true</span><span class="keyword">)<br>{<br>&nbsp; &nbsp; return </span><span class="default">array_map</span><span class="keyword">(<br>&nbsp; &nbsp; &nbsp; &nbsp; function (</span><span class="default">$line</span><span class="keyword">) use (</span><span class="default">$delimiter</span><span class="keyword">, </span><span class="default">$trim_fields</span><span class="keyword">) {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return </span><span class="default">array_map</span><span class="keyword">(<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; function (</span><span class="default">$field</span><span class="keyword">) {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return </span><span class="default">str_replace</span><span class="keyword">(</span><span class="string">'!!Q!!'</span><span class="keyword">, </span><span class="string">'"'</span><span class="keyword">, </span><span class="default">utf8_decode</span><span class="keyword">(</span><span class="default">urldecode</span><span class="keyword">(</span><span class="default">$field</span><span class="keyword">)));<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; },<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$trim_fields </span><span class="keyword">? </span><span class="default">array_map</span><span class="keyword">(</span><span class="string">'trim'</span><span class="keyword">, </span><span class="default">explode</span><span class="keyword">(</span><span class="default">$delimiter</span><span class="keyword">, </span><span class="default">$line</span><span class="keyword">)) : </span><span class="default">explode</span><span class="keyword">(</span><span class="default">$delimiter</span><span class="keyword">, </span><span class="default">$line</span><span class="keyword">)<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; );<br>&nbsp; &nbsp; &nbsp; &nbsp; },<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">preg_split</span><span class="keyword">(<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$skip_empty_lines </span><span class="keyword">? (</span><span class="default">$trim_fields </span><span class="keyword">? </span><span class="string">'/( *\R)+/s' </span><span class="keyword">: </span><span class="string">'/\R+/s'</span><span class="keyword">) : </span><span class="string">'/\R/s'</span><span class="keyword">,<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">preg_replace_callback</span><span class="keyword">(<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="string">'/"(.*?)"/s'</span><span class="keyword">,<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; function (</span><span class="default">$field</span><span class="keyword">) {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return </span><span class="default">urlencode</span><span class="keyword">(</span><span class="default">utf8_encode</span><span class="keyword">(</span><span class="default">$field</span><span class="keyword">[</span><span class="default">1</span><span class="keyword">]));<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; },<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$enc </span><span class="keyword">= </span><span class="default">preg_replace</span><span class="keyword">(</span><span class="string">'/(?&lt;!")""/'</span><span class="keyword">, </span><span class="string">'!!Q!!'</span><span class="keyword">, </span><span class="default">$csv_string</span><span class="keyword">)<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; )<br>&nbsp; &nbsp; &nbsp; &nbsp; )<br>&nbsp; &nbsp; );<br>}<br><br></span><span class="default">?&gt;<br></span><br>Replace !!Q!! with another placeholder if you wish.<br><br>Have fun.</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="113220">  
+  <a class="name">
+  <strong class="user"><em>Ryan Rubley</em></strong></a><div class="date" title="2013-09-13 08:00"><strong>7 years ago</strong></div>
+  <div class="text" id="Hcom113220">
+<div class="phpcode"><code><span class="html">
+@normadize - that is a nice start, but it fails on situations where a field is empty but quoted (returning a string with one double quote instead of an empty string) and cases like """""foo""""" that should result in ""foo"" but instead return "foo". I also get a row with 1 empty field at the end because of the final CRLF in the CSV. Plus, I don't really like the !!Q!! magic or urlencoding to get around things. Also, \R doesn't work in pcre on any of my php installations.<br><br>Here is my take on this, without anonymous functions (so it works on PHP &lt; 5.3), and without your options (because I believe the only correct way to parse according to the RFC would be $skip_empty_lines = false and $trim_fields = false).<br><br>//parse a CSV file into a two-dimensional array<br>//this seems as simple as splitting a string by lines and commas, but this only works if tricks are performed<br>//to ensure that you do NOT split on lines and commas that are inside of double quotes.<br>function parse_csv($str)<br>{<br>&nbsp; &nbsp; //match all the non-quoted text and one series of quoted text (or the end of the string)<br>&nbsp; &nbsp; //each group of matches will be parsed with the callback, with $matches[1] containing all the non-quoted text,<br>&nbsp; &nbsp; //and $matches[3] containing everything inside the quotes<br>&nbsp; &nbsp; $str = preg_replace_callback('/([^"]*)("((""|[^"])*)"|$)/s', 'parse_csv_quotes', $str);<br><br>&nbsp; &nbsp; //remove the very last newline to prevent a 0-field array for the last line<br>&nbsp; &nbsp; $str = preg_replace('/\n$/', '', $str);<br><br>&nbsp; &nbsp; //split on LF and parse each line with a callback<br>&nbsp; &nbsp; return array_map('parse_csv_line', explode("\n", $str));<br>}<br><br>//replace all the csv-special characters inside double quotes with markers using an escape sequence<br>function parse_csv_quotes($matches)<br>{<br>&nbsp; &nbsp; //anything inside the quotes that might be used to split the string into lines and fields later,<br>&nbsp; &nbsp; //needs to be quoted. The only character we can guarantee as safe to use, because it will never appear in the unquoted text, is a CR<br>&nbsp; &nbsp; //So we're going to use CR as a marker to make escape sequences for CR, LF, Quotes, and Commas.<br>&nbsp; &nbsp; $str = str_replace("\r", "\rR", $matches[3]);<br>&nbsp; &nbsp; $str = str_replace("\n", "\rN", $str);<br>&nbsp; &nbsp; $str = str_replace('""', "\rQ", $str);<br>&nbsp; &nbsp; $str = str_replace(',', "\rC", $str);<br><br>&nbsp; &nbsp; //The unquoted text is where commas and newlines are allowed, and where the splits will happen<br>&nbsp; &nbsp; //We're going to remove all CRs from the unquoted text, by normalizing all line endings to just LF<br>&nbsp; &nbsp; //This ensures us that the only place CR is used, is as the escape sequences for quoted text<br>&nbsp; &nbsp; return preg_replace('/\r\n?/', "\n", $matches[1]) . $str;<br>}<br><br>//split on comma and parse each field with a callback<br>function parse_csv_line($line)<br>{<br>&nbsp; &nbsp; return array_map('parse_csv_field', explode(',', $line));<br>}<br><br>//restore any csv-special characters that are part of the data<br>function parse_csv_field($field) {<br>&nbsp; &nbsp; $field = str_replace("\rC", ',', $field);<br>&nbsp; &nbsp; $field = str_replace("\rQ", '"', $field);<br>&nbsp; &nbsp; $field = str_replace("\rN", "\n", $field);<br>&nbsp; &nbsp; $field = str_replace("\rR", "\r", $field);<br>&nbsp; &nbsp; return $field;<br>}</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="98088">  
+  <a class="name">
+  <strong class="user"><em>hpartidas at deuz dot net</em></strong></a><div class="date" title="2010-05-25 09:50"><strong>11 years ago</strong></div>
+  <div class="text" id="Hcom98088">
+<div class="phpcode"><code><span class="html">
+I found myself wanting to parse a CSV and didn't have access to str_getcsv, so I wrote substitute for PHP &lt; 5.3, hope it helps someone out there stuck in the same situation.
+<br>
+<br><span class="default">&lt;?php
+<br></span><span class="keyword">if (!</span><span class="default">function_exists</span><span class="keyword">(</span><span class="string">'str_getcsv'</span><span class="keyword">)) { 
+<br>&nbsp; &nbsp; function </span><span class="default">str_getcsv</span><span class="keyword">(</span><span class="default">$input</span><span class="keyword">, </span><span class="default">$delimiter </span><span class="keyword">= </span><span class="string">','</span><span class="keyword">, </span><span class="default">$enclosure </span><span class="keyword">= </span><span class="string">'"'</span><span class="keyword">, </span><span class="default">$escape </span><span class="keyword">= </span><span class="string">'\\'</span><span class="keyword">, </span><span class="default">$eol </span><span class="keyword">= </span><span class="string">'\n'</span><span class="keyword">) { 
+<br>&nbsp; &nbsp; &nbsp; &nbsp; if (</span><span class="default">is_string</span><span class="keyword">(</span><span class="default">$input</span><span class="keyword">) &amp;&amp; !empty(</span><span class="default">$input</span><span class="keyword">)) { 
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$output </span><span class="keyword">= array(); 
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$tmp&nbsp; &nbsp; </span><span class="keyword">= </span><span class="default">preg_split</span><span class="keyword">(</span><span class="string">"/"</span><span class="keyword">.</span><span class="default">$eol</span><span class="keyword">.</span><span class="string">"/"</span><span class="keyword">,</span><span class="default">$input</span><span class="keyword">); 
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (</span><span class="default">is_array</span><span class="keyword">(</span><span class="default">$tmp</span><span class="keyword">) &amp;&amp; !empty(</span><span class="default">$tmp</span><span class="keyword">)) { 
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; while (list(</span><span class="default">$line_num</span><span class="keyword">, </span><span class="default">$line</span><span class="keyword">) = </span><span class="default">each</span><span class="keyword">(</span><span class="default">$tmp</span><span class="keyword">)) { 
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (</span><span class="default">preg_match</span><span class="keyword">(</span><span class="string">"/"</span><span class="keyword">.</span><span class="default">$escape</span><span class="keyword">.</span><span class="default">$enclosure</span><span class="keyword">.</span><span class="string">"/"</span><span class="keyword">,</span><span class="default">$line</span><span class="keyword">)) {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; while (</span><span class="default">$strlen </span><span class="keyword">= </span><span class="default">strlen</span><span class="keyword">(</span><span class="default">$line</span><span class="keyword">)) { 
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$pos_delimiter&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="keyword">= </span><span class="default">strpos</span><span class="keyword">(</span><span class="default">$line</span><span class="keyword">,</span><span class="default">$delimiter</span><span class="keyword">); 
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$pos_enclosure_start </span><span class="keyword">= </span><span class="default">strpos</span><span class="keyword">(</span><span class="default">$line</span><span class="keyword">,</span><span class="default">$enclosure</span><span class="keyword">); 
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">is_int</span><span class="keyword">(</span><span class="default">$pos_delimiter</span><span class="keyword">) &amp;&amp; </span><span class="default">is_int</span><span class="keyword">(</span><span class="default">$pos_enclosure_start</span><span class="keyword">) 
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &amp;&amp; (</span><span class="default">$pos_enclosure_start </span><span class="keyword">&lt; </span><span class="default">$pos_delimiter</span><span class="keyword">)
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ) {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$enclosed_str </span><span class="keyword">= </span><span class="default">substr</span><span class="keyword">(</span><span class="default">$line</span><span class="keyword">,</span><span class="default">1</span><span class="keyword">); 
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$pos_enclosure_end </span><span class="keyword">= </span><span class="default">strpos</span><span class="keyword">(</span><span class="default">$enclosed_str</span><span class="keyword">,</span><span class="default">$enclosure</span><span class="keyword">); 
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$enclosed_str </span><span class="keyword">= </span><span class="default">substr</span><span class="keyword">(</span><span class="default">$enclosed_str</span><span class="keyword">,</span><span class="default">0</span><span class="keyword">,</span><span class="default">$pos_enclosure_end</span><span class="keyword">); 
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$output</span><span class="keyword">[</span><span class="default">$line_num</span><span class="keyword">][] = </span><span class="default">$enclosed_str</span><span class="keyword">; 
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$offset </span><span class="keyword">= </span><span class="default">$pos_enclosure_end</span><span class="keyword">+</span><span class="default">3</span><span class="keyword">; 
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; } else {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (empty(</span><span class="default">$pos_delimiter</span><span class="keyword">) &amp;&amp; empty(</span><span class="default">$pos_enclosure_start</span><span class="keyword">)) {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$output</span><span class="keyword">[</span><span class="default">$line_num</span><span class="keyword">][] = </span><span class="default">substr</span><span class="keyword">(</span><span class="default">$line</span><span class="keyword">,</span><span class="default">0</span><span class="keyword">);
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$offset </span><span class="keyword">= </span><span class="default">strlen</span><span class="keyword">(</span><span class="default">$line</span><span class="keyword">);
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; } else {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$output</span><span class="keyword">[</span><span class="default">$line_num</span><span class="keyword">][] = </span><span class="default">substr</span><span class="keyword">(</span><span class="default">$line</span><span class="keyword">,</span><span class="default">0</span><span class="keyword">,</span><span class="default">$pos_delimiter</span><span class="keyword">);
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$offset </span><span class="keyword">= (
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; !empty(</span><span class="default">$pos_enclosure_start</span><span class="keyword">) 
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &amp;&amp; (</span><span class="default">$pos_enclosure_start </span><span class="keyword">&lt; </span><span class="default">$pos_delimiter</span><span class="keyword">)
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; )
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ?</span><span class="default">$pos_enclosure_start
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="keyword">:</span><span class="default">$pos_delimiter</span><span class="keyword">+</span><span class="default">1</span><span class="keyword">; 
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; } 
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; } 
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$line </span><span class="keyword">= </span><span class="default">substr</span><span class="keyword">(</span><span class="default">$line</span><span class="keyword">,</span><span class="default">$offset</span><span class="keyword">); 
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; } 
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; } else { 
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$line </span><span class="keyword">= </span><span class="default">preg_split</span><span class="keyword">(</span><span class="string">"/"</span><span class="keyword">.</span><span class="default">$delimiter</span><span class="keyword">.</span><span class="string">"/"</span><span class="keyword">,</span><span class="default">$line</span><span class="keyword">);
+<br>&nbsp; &nbsp; 
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="comment">/*
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; * Validating against pesky extra line breaks creating false rows.
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; */
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="keyword">if (</span><span class="default">is_array</span><span class="keyword">(</span><span class="default">$line</span><span class="keyword">) &amp;&amp; !empty(</span><span class="default">$line</span><span class="keyword">[</span><span class="default">0</span><span class="keyword">])) {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$output</span><span class="keyword">[</span><span class="default">$line_num</span><span class="keyword">] = </span><span class="default">$line</span><span class="keyword">;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }&nbsp; 
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; } 
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; } 
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return </span><span class="default">$output</span><span class="keyword">; 
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; } else { 
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return </span><span class="default">false</span><span class="keyword">; 
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; } 
+<br>&nbsp; &nbsp; &nbsp; &nbsp; } else { 
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return </span><span class="default">false</span><span class="keyword">; 
+<br>&nbsp; &nbsp; &nbsp; &nbsp; } 
+<br>&nbsp; &nbsp; }
+<br>}
+<br></span><span class="default">?&gt;</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="111579">  
+  <a class="name">
+  <strong class="user"><em>V.Krishn</em></strong></a><div class="date" title="2013-03-06 01:31"><strong>8 years ago</strong></div>
+  <div class="text" id="Hcom111579">
+<div class="phpcode"><code><span class="html">
+<span class="default">&lt;?php<br>Note</span><span class="keyword">: </span><span class="default">The </span><span class="keyword">function </span><span class="default">trims all values unlike&nbsp; str_getcsv </span><span class="keyword">(</span><span class="default">v5.3</span><span class="keyword">).<br></span><span class="comment">/**<br>&nbsp; * @link <a rel="nofollow" target="_blank">https://github.com/insteps/phputils</a> (for updated code)<br>&nbsp; * Parse a CSV string into an array for php 4+.<br>&nbsp; * @param string $input String<br>&nbsp; * @param string $delimiter String<br>&nbsp; * @param string $enclosure String<br>&nbsp; * @return array<br>&nbsp; */<br></span><span class="keyword">function </span><span class="default">str_getcsv4</span><span class="keyword">(</span><span class="default">$input</span><span class="keyword">, </span><span class="default">$delimiter </span><span class="keyword">= </span><span class="string">','</span><span class="keyword">, </span><span class="default">$enclosure </span><span class="keyword">= </span><span class="string">'"'</span><span class="keyword">) {<br><br>&nbsp; &nbsp; if( ! </span><span class="default">preg_match</span><span class="keyword">(</span><span class="string">"/[</span><span class="default">$enclosure</span><span class="string">]/"</span><span class="keyword">, </span><span class="default">$input</span><span class="keyword">) ) {<br>&nbsp; &nbsp; &nbsp; return (array)</span><span class="default">preg_replace</span><span class="keyword">(array(</span><span class="string">"/^\\s*/"</span><span class="keyword">, </span><span class="string">"/\\s*$/"</span><span class="keyword">), </span><span class="string">''</span><span class="keyword">, </span><span class="default">explode</span><span class="keyword">(</span><span class="default">$delimiter</span><span class="keyword">, </span><span class="default">$input</span><span class="keyword">));<br>&nbsp; &nbsp; }<br><br>&nbsp; &nbsp; </span><span class="default">$token </span><span class="keyword">= </span><span class="string">"##"</span><span class="keyword">; </span><span class="default">$token2 </span><span class="keyword">= </span><span class="string">"::"</span><span class="keyword">;<br>&nbsp; &nbsp; </span><span class="comment">//alternate tokens "\034\034", "\035\035", "%%";<br>&nbsp; &nbsp; </span><span class="default">$t1 </span><span class="keyword">= </span><span class="default">preg_replace</span><span class="keyword">(array(</span><span class="string">"/\\\[</span><span class="default">$enclosure</span><span class="string">]/"</span><span class="keyword">, </span><span class="string">"/</span><span class="default">$enclosure</span><span class="string">{2}/"</span><span class="keyword">,<br>&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">"/[</span><span class="default">$enclosure</span><span class="string">]\\s*[</span><span class="default">$delimiter</span><span class="string">]\\s*[</span><span class="default">$enclosure</span><span class="string">]\\s*/"</span><span class="keyword">, </span><span class="string">"/\\s*[</span><span class="default">$enclosure</span><span class="string">]\\s*/"</span><span class="keyword">),<br>&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; array(</span><span class="default">$token2</span><span class="keyword">, </span><span class="default">$token2</span><span class="keyword">, </span><span class="default">$token</span><span class="keyword">, </span><span class="default">$token</span><span class="keyword">), </span><span class="default">trim</span><span class="keyword">(</span><span class="default">trim</span><span class="keyword">(</span><span class="default">trim</span><span class="keyword">(</span><span class="default">$input</span><span class="keyword">), </span><span class="default">$enclosure</span><span class="keyword">)));<br><br>&nbsp; &nbsp; </span><span class="default">$a </span><span class="keyword">= </span><span class="default">explode</span><span class="keyword">(</span><span class="default">$token</span><span class="keyword">, </span><span class="default">$t1</span><span class="keyword">);<br>&nbsp; &nbsp; foreach(</span><span class="default">$a </span><span class="keyword">as </span><span class="default">$k</span><span class="keyword">=&gt;</span><span class="default">$v</span><span class="keyword">) {<br>&nbsp; &nbsp; &nbsp; &nbsp; if ( </span><span class="default">preg_match</span><span class="keyword">(</span><span class="string">"/^</span><span class="keyword">{</span><span class="default">$delimiter</span><span class="keyword">}</span><span class="string">/"</span><span class="keyword">, </span><span class="default">$v</span><span class="keyword">) || </span><span class="default">preg_match</span><span class="keyword">(</span><span class="string">"/</span><span class="keyword">{</span><span class="default">$delimiter</span><span class="keyword">}</span><span class="string">$/"</span><span class="keyword">, </span><span class="default">$v</span><span class="keyword">) ) {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$a</span><span class="keyword">[</span><span class="default">$k</span><span class="keyword">] = </span><span class="default">trim</span><span class="keyword">(</span><span class="default">$v</span><span class="keyword">, </span><span class="default">$delimiter</span><span class="keyword">); </span><span class="default">$a</span><span class="keyword">[</span><span class="default">$k</span><span class="keyword">] = </span><span class="default">preg_replace</span><span class="keyword">(</span><span class="string">"/</span><span class="default">$delimiter</span><span class="string">/"</span><span class="keyword">, </span><span class="string">"</span><span class="default">$token</span><span class="string">"</span><span class="keyword">, </span><span class="default">$a</span><span class="keyword">[</span><span class="default">$k</span><span class="keyword">]); }<br>&nbsp; &nbsp; }<br>&nbsp; &nbsp; </span><span class="default">$a </span><span class="keyword">= </span><span class="default">explode</span><span class="keyword">(</span><span class="default">$token</span><span class="keyword">, </span><span class="default">implode</span><span class="keyword">(</span><span class="default">$token</span><span class="keyword">, </span><span class="default">$a</span><span class="keyword">));<br>&nbsp; &nbsp; return (array)</span><span class="default">preg_replace</span><span class="keyword">(array(</span><span class="string">"/^\\s/"</span><span class="keyword">, </span><span class="string">"/\\s$/"</span><span class="keyword">, </span><span class="string">"/</span><span class="default">$token2</span><span class="string">/"</span><span class="keyword">), array(</span><span class="string">''</span><span class="keyword">, </span><span class="string">''</span><span class="keyword">, </span><span class="default">$enclosure</span><span class="keyword">), </span><span class="default">$a</span><span class="keyword">);<br><br>}<br><br>if ( ! </span><span class="default">function_exists</span><span class="keyword">(</span><span class="string">'str_getcsv'</span><span class="keyword">)) {<br>&nbsp; function </span><span class="default">str_getcsv</span><span class="keyword">(</span><span class="default">$input</span><span class="keyword">, </span><span class="default">$delimiter </span><span class="keyword">= </span><span class="string">','</span><span class="keyword">, </span><span class="default">$enclosure </span><span class="keyword">= </span><span class="string">'"'</span><span class="keyword">) {<br>&nbsp; &nbsp; return </span><span class="default">str_getcsv4</span><span class="keyword">(</span><span class="default">$input</span><span class="keyword">, </span><span class="default">$delimiter</span><span class="keyword">, </span><span class="default">$enclosure</span><span class="keyword">);<br>&nbsp; }<br>}<br></span><span class="default">?&gt;</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="88353">  
+  <a class="name">
+  <strong class="user"><em>Jeremy</em></strong></a><div class="date" title="2009-01-20 05:20"><strong>12 years ago</strong></div>
+  <div class="text" id="Hcom88353">
+<div class="phpcode"><code><span class="html">
+After using several methods in the past to create CSV strings without using files (disk IO sucks), I finally decided it's time to write a function to handle it all. This function could use some cleanup, and the variable type test might be overkill for what is needed, I haven't thought about it too much.
+<br>
+<br>Also, I took the liberty of replacing fields with certain data types with strings which I find much easier to work with. Some of you may not agree with those. Also, please note that the type "double" or float has been coded specifically for two digit precision because if I am using a float, it's most likely for currency.
+<br>
+<br>I am sure some of you out there would appreciate this function.
+<br>
+<br><span class="default">&lt;?php
+<br>&nbsp; &nbsp; </span><span class="keyword">function </span><span class="default">str_putcsv</span><span class="keyword">(</span><span class="default">$array</span><span class="keyword">, </span><span class="default">$delimiter </span><span class="keyword">= </span><span class="string">','</span><span class="keyword">, </span><span class="default">$enclosure </span><span class="keyword">= </span><span class="string">'"'</span><span class="keyword">, </span><span class="default">$terminator </span><span class="keyword">= </span><span class="string">"\n"</span><span class="keyword">) {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="comment"># First convert associative array to numeric indexed array
+<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="keyword">foreach (</span><span class="default">$array </span><span class="keyword">as </span><span class="default">$key </span><span class="keyword">=&gt; </span><span class="default">$value</span><span class="keyword">) </span><span class="default">$workArray</span><span class="keyword">[] = </span><span class="default">$value</span><span class="keyword">;
+<br>
+<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$returnString </span><span class="keyword">= </span><span class="string">''</span><span class="keyword">;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="comment"># Initialize return string
+<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$arraySize </span><span class="keyword">= </span><span class="default">count</span><span class="keyword">(</span><span class="default">$workArray</span><span class="keyword">);&nbsp; &nbsp;&nbsp; </span><span class="comment"># Get size of array
+<br>&nbsp; &nbsp; &nbsp; &nbsp; 
+<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="keyword">for (</span><span class="default">$i</span><span class="keyword">=</span><span class="default">0</span><span class="keyword">; </span><span class="default">$i</span><span class="keyword">&lt;</span><span class="default">$arraySize</span><span class="keyword">; </span><span class="default">$i</span><span class="keyword">++) {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="comment"># Nested array, process nest item
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="keyword">if (</span><span class="default">is_array</span><span class="keyword">(</span><span class="default">$workArray</span><span class="keyword">[</span><span class="default">$i</span><span class="keyword">])) {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$returnString </span><span class="keyword">.= </span><span class="default">str_putcsv</span><span class="keyword">(</span><span class="default">$workArray</span><span class="keyword">[</span><span class="default">$i</span><span class="keyword">], </span><span class="default">$delimiter</span><span class="keyword">, </span><span class="default">$enclosure</span><span class="keyword">, </span><span class="default">$terminator</span><span class="keyword">);
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; } else {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; switch (</span><span class="default">gettype</span><span class="keyword">(</span><span class="default">$workArray</span><span class="keyword">[</span><span class="default">$i</span><span class="keyword">])) {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="comment"># Manually set some strings
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="keyword">case </span><span class="string">"NULL"</span><span class="keyword">:&nbsp; &nbsp;&nbsp; </span><span class="default">$_spFormat </span><span class="keyword">= </span><span class="string">''</span><span class="keyword">; break;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; case </span><span class="string">"boolean"</span><span class="keyword">:&nbsp; </span><span class="default">$_spFormat </span><span class="keyword">= (</span><span class="default">$workArray</span><span class="keyword">[</span><span class="default">$i</span><span class="keyword">] == </span><span class="default">true</span><span class="keyword">) ? </span><span class="string">'true'</span><span class="keyword">: </span><span class="string">'false'</span><span class="keyword">; break;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="comment"># Make sure sprintf has a good datatype to work with
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="keyword">case </span><span class="string">"integer"</span><span class="keyword">:&nbsp; </span><span class="default">$_spFormat </span><span class="keyword">= </span><span class="string">'%i'</span><span class="keyword">; break;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; case </span><span class="string">"double"</span><span class="keyword">:&nbsp;&nbsp; </span><span class="default">$_spFormat </span><span class="keyword">= </span><span class="string">'%0.2f'</span><span class="keyword">; break;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; case </span><span class="string">"string"</span><span class="keyword">:&nbsp;&nbsp; </span><span class="default">$_spFormat </span><span class="keyword">= </span><span class="string">'%s'</span><span class="keyword">; break;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="comment"># Unknown or invalid items for a csv - note: the datatype of array is already handled above, assuming the data is nested
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="keyword">case </span><span class="string">"object"</span><span class="keyword">:
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; case </span><span class="string">"resource"</span><span class="keyword">:
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; default:&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$_spFormat </span><span class="keyword">= </span><span class="string">''</span><span class="keyword">; break;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$returnString </span><span class="keyword">.= </span><span class="default">sprintf</span><span class="keyword">(</span><span class="string">'%2$s'</span><span class="keyword">.</span><span class="default">$_spFormat</span><span class="keyword">.</span><span class="string">'%2$s'</span><span class="keyword">, </span><span class="default">$workArray</span><span class="keyword">[</span><span class="default">$i</span><span class="keyword">], </span><span class="default">$enclosure</span><span class="keyword">);
+<br></span><span class="default">$returnString </span><span class="keyword">.= (</span><span class="default">$i </span><span class="keyword">&lt; (</span><span class="default">$arraySize</span><span class="keyword">-</span><span class="default">1</span><span class="keyword">)) ? </span><span class="default">$delimiter </span><span class="keyword">: </span><span class="default">$terminator</span><span class="keyword">;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }
+<br>&nbsp; &nbsp; &nbsp; &nbsp; }
+<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="comment"># Done the workload, return the output information
+<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="keyword">return </span><span class="default">$returnString</span><span class="keyword">;
+<br>&nbsp; &nbsp; }
+<br>
+<br></span><span class="default">?&gt;</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="88311">  
+  <a class="name">
+  <strong class="user"><em>daniel dot oconnor at gmail dot com</em></strong></a><div class="date" title="2009-01-19 04:48"><strong>12 years ago</strong></div>
+  <div class="text" id="Hcom88311">
+<div class="phpcode"><code><span class="html">
+Don't have this? Ask fgetcsv() to do it for you.
+<br>
+<br>5.1.0+
+<br>
+<br><span class="default">&lt;?php
+<br></span><span class="keyword">if (!</span><span class="default">function_exists</span><span class="keyword">(</span><span class="string">'str_getcsv'</span><span class="keyword">)) {
+<br>&nbsp; &nbsp; function </span><span class="default">str_getcsv</span><span class="keyword">(</span><span class="default">$input</span><span class="keyword">, </span><span class="default">$delimiter </span><span class="keyword">= </span><span class="string">","</span><span class="keyword">, </span><span class="default">$enclosure </span><span class="keyword">= </span><span class="string">'"'</span><span class="keyword">, </span><span class="default">$escape </span><span class="keyword">= </span><span class="string">"\\"</span><span class="keyword">) {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$fiveMBs </span><span class="keyword">= </span><span class="default">5 </span><span class="keyword">* </span><span class="default">1024 </span><span class="keyword">* </span><span class="default">1024</span><span class="keyword">;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$fp </span><span class="keyword">= </span><span class="default">fopen</span><span class="keyword">(</span><span class="string">"php://temp/maxmemory:</span><span class="default">$fiveMBs</span><span class="string">"</span><span class="keyword">, </span><span class="string">'r+'</span><span class="keyword">);
+<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">fputs</span><span class="keyword">(</span><span class="default">$fp</span><span class="keyword">, </span><span class="default">$input</span><span class="keyword">);
+<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">rewind</span><span class="keyword">(</span><span class="default">$fp</span><span class="keyword">);
+<br>
+<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$data </span><span class="keyword">= </span><span class="default">fgetcsv</span><span class="keyword">(</span><span class="default">$fp</span><span class="keyword">, </span><span class="default">1000</span><span class="keyword">, </span><span class="default">$delimiter</span><span class="keyword">, </span><span class="default">$enclosure</span><span class="keyword">); </span><span class="comment">//&nbsp; $escape only got added in 5.3.0
+<br>
+<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">fclose</span><span class="keyword">(</span><span class="default">$fp</span><span class="keyword">);
+<br>&nbsp; &nbsp; &nbsp; &nbsp; return </span><span class="default">$data</span><span class="keyword">;
+<br>&nbsp; &nbsp; }
+<br>}
+<br></span><span class="default">?&gt;</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="82995">  
+  <a class="name">
+  <strong class="user"><em>csv at rfc dot org</em></strong></a><div class="date" title="2008-05-05 01:15"><strong>13 years ago</strong></div>
+  <div class="text" id="Hcom82995">
+<div class="phpcode"><code><span class="html">
+RFC 4180 which deals with CSVs states the escape character is supposed to be a double quotation mark: (page 2)<br>&nbsp;&nbsp; 7.&nbsp; If double-quotes are used to enclose fields, then a double-quote<br>&nbsp; &nbsp; &nbsp;&nbsp; appearing inside a field must be escaped by preceding it with<br>&nbsp; &nbsp; &nbsp;&nbsp; another double quote.&nbsp; For example:<br><br>&nbsp; &nbsp; &nbsp;&nbsp; "aaa","b""bb","ccc"</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="117585">  
+  <a class="name">
+  <strong class="user"><em>peter dot mlich at volny dot cz</em></strong></a><div class="date" title="2015-07-02 10:21"><strong>6 years ago</strong></div>
+  <div class="text" id="Hcom117585">
+<div class="phpcode"><code><span class="html">
+&gt; 49 durik at 3ilab dot net /&nbsp; 4 years ago<br>$rows = str_getcsv($csv_data, "\n");<br>- bug, data in csv can have "\n"<br>'aaa','bb<br>b','ccc'</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="85733">  
+  <a class="name">
+  <strong class="user"><em>keananda at gmail dot com</em></strong></a><div class="date" title="2008-09-15 04:29"><strong>12 years ago</strong></div>
+  <div class="text" id="Hcom85733">
+<div class="phpcode"><code><span class="html">
+For those who need this function but not yet installed in their environment, you can use my function bellow.<br><br>You can parse your csv file into an associative array (by default) for each lines, or into an object.<br><span class="default">&lt;?php<br></span><span class="keyword">function </span><span class="default">parse_csv</span><span class="keyword">(</span><span class="default">$file</span><span class="keyword">, </span><span class="default">$options </span><span class="keyword">= </span><span class="default">null</span><span class="keyword">) {<br>&nbsp; &nbsp; </span><span class="default">$delimiter </span><span class="keyword">= empty(</span><span class="default">$options</span><span class="keyword">[</span><span class="string">'delimiter'</span><span class="keyword">]) ? </span><span class="string">"," </span><span class="keyword">: </span><span class="default">$options</span><span class="keyword">[</span><span class="string">'delimiter'</span><span class="keyword">];<br>&nbsp; &nbsp; </span><span class="default">$to_object </span><span class="keyword">= empty(</span><span class="default">$options</span><span class="keyword">[</span><span class="string">'to_object'</span><span class="keyword">]) ? </span><span class="default">false </span><span class="keyword">: </span><span class="default">true</span><span class="keyword">;<br>&nbsp; &nbsp; </span><span class="default">$str </span><span class="keyword">= </span><span class="default">file_get_contents</span><span class="keyword">(</span><span class="default">$file</span><span class="keyword">);<br>&nbsp; &nbsp; </span><span class="default">$lines </span><span class="keyword">= </span><span class="default">explode</span><span class="keyword">(</span><span class="string">"\n"</span><span class="keyword">, </span><span class="default">$str</span><span class="keyword">);<br>&nbsp; &nbsp; </span><span class="default">pr</span><span class="keyword">(</span><span class="default">$lines</span><span class="keyword">);<br>&nbsp; &nbsp; </span><span class="default">$field_names </span><span class="keyword">= </span><span class="default">explode</span><span class="keyword">(</span><span class="default">$delimiter</span><span class="keyword">, </span><span class="default">array_shift</span><span class="keyword">(</span><span class="default">$lines</span><span class="keyword">));<br>&nbsp; &nbsp; foreach (</span><span class="default">$lines </span><span class="keyword">as </span><span class="default">$line</span><span class="keyword">) {<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="comment">// Skip the empty line<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="keyword">if (empty(</span><span class="default">$line</span><span class="keyword">)) continue;<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$fields </span><span class="keyword">= </span><span class="default">explode</span><span class="keyword">(</span><span class="default">$delimiter</span><span class="keyword">, </span><span class="default">$line</span><span class="keyword">);<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$_res </span><span class="keyword">= </span><span class="default">$to_object </span><span class="keyword">? new </span><span class="default">stdClass </span><span class="keyword">: array();<br>&nbsp; &nbsp; &nbsp; &nbsp; foreach (</span><span class="default">$field_names </span><span class="keyword">as </span><span class="default">$key </span><span class="keyword">=&gt; </span><span class="default">$f</span><span class="keyword">) {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (</span><span class="default">$to_object</span><span class="keyword">) {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$_res</span><span class="keyword">-&gt;{</span><span class="default">$f</span><span class="keyword">} = </span><span class="default">$fields</span><span class="keyword">[</span><span class="default">$key</span><span class="keyword">];<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; } else {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$_res</span><span class="keyword">[</span><span class="default">$f</span><span class="keyword">] = </span><span class="default">$fields</span><span class="keyword">[</span><span class="default">$key</span><span class="keyword">];<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$res</span><span class="keyword">[] = </span><span class="default">$_res</span><span class="keyword">;<br>&nbsp; &nbsp; }<br>&nbsp; &nbsp; return </span><span class="default">$res</span><span class="keyword">;<br>}<br></span><span class="default">?&gt;<br></span><br>NOTE:<br>Line number 1 of the csv file will be considered as header (field names).<br><br>TODO:<br>- Enclosure handling<br>- Escape character handling<br>- Other features/enhancements as you need<br><br>EXAMPLE USE:<br>Content of /path/to/file.csv:<br>CODE,COUNTRY<br>AD,Andorra<br>AE,United Arab Emirates<br>AF,Afghanistan<br>AG,Antigua and Barbuda<br><br><span class="default">&lt;?php<br>$arr_csv </span><span class="keyword">= </span><span class="default">parse_csv</span><span class="keyword">(</span><span class="string">"/path/to/file.csv"</span><span class="keyword">);<br></span><span class="default">print_r</span><span class="keyword">(</span><span class="default">$arr_csv</span><span class="keyword">);<br></span><span class="default">?&gt;<br></span>// Output:<br>Array<br>(<br>&nbsp; &nbsp; [0] =&gt; Array<br>&nbsp; &nbsp; &nbsp; &nbsp; (<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; [CODE] =&gt; AD<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; [COUNTRY] =&gt; Andorra<br>&nbsp; &nbsp; &nbsp; &nbsp; )<br>&nbsp; &nbsp; [1] =&gt; Array<br>&nbsp; &nbsp; &nbsp; &nbsp; (<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; [CODE] =&gt; AE<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; [COUNTRY] =&gt; United Arab Emirates<br>&nbsp; &nbsp; &nbsp; &nbsp; )<br>&nbsp; &nbsp; [2] =&gt; Array<br>&nbsp; &nbsp; &nbsp; &nbsp; (<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; [CODE] =&gt; AF<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; [COUNTRY] =&gt; Afghanistan<br>&nbsp; &nbsp; &nbsp; &nbsp; )<br>&nbsp; &nbsp; [3] =&gt; Array<br>&nbsp; &nbsp; &nbsp; &nbsp; (<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; [CODE] =&gt; AG<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; [COUNTRY] =&gt; Antigua and Barbuda<br>&nbsp; &nbsp; &nbsp; &nbsp; )<br>)<br><br><span class="default">&lt;?php<br>$obj_csv </span><span class="keyword">= </span><span class="default">parse_csv</span><span class="keyword">(</span><span class="string">"/path/to/file.csv"</span><span class="keyword">, array(</span><span class="string">"to_object" </span><span class="keyword">=&gt; </span><span class="default">true</span><span class="keyword">));<br></span><span class="default">print_r</span><span class="keyword">(</span><span class="default">$obj_csv</span><span class="keyword">);<br></span><span class="default">?&gt;<br></span>// Output:<br>Array<br>(<br>&nbsp; &nbsp; [0] =&gt; stdClass Object<br>&nbsp; &nbsp; &nbsp; &nbsp; (<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; [CODE] =&gt; AD<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; [COUNTRY] =&gt; Andorra&nbsp; &nbsp;&nbsp; <br>&nbsp; &nbsp; &nbsp; &nbsp; )<br>&nbsp; &nbsp; [1] =&gt; stdClass Object<br>&nbsp; &nbsp; &nbsp; &nbsp; (<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; [CODE] =&gt; AE<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; [COUNTRY] =&gt; United Arab Emirates&nbsp; &nbsp;&nbsp; <br>&nbsp; &nbsp; &nbsp; &nbsp; )<br>&nbsp; &nbsp; [2] =&gt; stdClass Object<br>&nbsp; &nbsp; &nbsp; &nbsp; (<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; [CODE] =&gt; AF<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; [COUNTRY] =&gt; Afghanistan&nbsp; &nbsp;&nbsp; <br>&nbsp; &nbsp; &nbsp; &nbsp; )<br>&nbsp; &nbsp; [3] =&gt; stdClass Object<br>&nbsp; &nbsp; &nbsp; &nbsp; (<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; [CODE] =&gt; AG<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; [COUNTRY] =&gt; Antigua and Barbuda&nbsp; &nbsp;&nbsp; <br>&nbsp; &nbsp; &nbsp; &nbsp; )<br>&nbsp; &nbsp; [4] =&gt; stdClass Object<br>&nbsp; &nbsp; &nbsp; &nbsp; (<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; [CODE] =&gt; <br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; [COUNTRY] =&gt; <br>&nbsp; &nbsp; &nbsp; &nbsp; )<br>)<br><br>// If you use character | (pipe) as delimiter in your csv file, use:<br><span class="default">&lt;?php<br>$arr_csv </span><span class="keyword">= </span><span class="default">parse_csv</span><span class="keyword">(</span><span class="string">"/path/to/file.csv"</span><span class="keyword">, array(</span><span class="string">"delimiter"</span><span class="keyword">=&gt;</span><span class="string">"|"</span><span class="keyword">));<br></span><span class="default">?&gt;<br></span><br>==NSD==</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="88773">  
+  <a class="name">
+  <strong class="user"><em>dave_walter at NOSPAM dot yahoo dot com</em></strong></a><div class="date" title="2009-02-06 03:32"><strong>12 years ago</strong></div>
+  <div class="text" id="Hcom88773">
+<div class="phpcode"><code><span class="html">
+Drawing inspiration from daniel dot oconnor at gmail dot com, here's an alternative str_putcsv() that leverages existing PHP core functionality (5.1.0+) to avoid re-inventing the wheel.<br><br><span class="default">&lt;?php<br></span><span class="keyword">if(!</span><span class="default">function_exists</span><span class="keyword">(</span><span class="string">'str_putcsv'</span><span class="keyword">)) {<br>&nbsp; &nbsp; function </span><span class="default">str_putcsv</span><span class="keyword">(</span><span class="default">$input</span><span class="keyword">, </span><span class="default">$delimiter </span><span class="keyword">= </span><span class="string">','</span><span class="keyword">, </span><span class="default">$enclosure </span><span class="keyword">= </span><span class="string">'"'</span><span class="keyword">) {<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="comment">// Open a memory "file" for read/write...<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$fp </span><span class="keyword">= </span><span class="default">fopen</span><span class="keyword">(</span><span class="string">'php://temp'</span><span class="keyword">, </span><span class="string">'r+'</span><span class="keyword">);<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="comment">// ... write the $input array to the "file" using fputcsv()...<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">fputcsv</span><span class="keyword">(</span><span class="default">$fp</span><span class="keyword">, </span><span class="default">$input</span><span class="keyword">, </span><span class="default">$delimiter</span><span class="keyword">, </span><span class="default">$enclosure</span><span class="keyword">);<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="comment">// ... rewind the "file" so we can read what we just wrote...<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">rewind</span><span class="keyword">(</span><span class="default">$fp</span><span class="keyword">);<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="comment">// ... read the entire line into a variable...<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$data </span><span class="keyword">= </span><span class="default">fgets</span><span class="keyword">(</span><span class="default">$fp</span><span class="keyword">);<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="comment">// ... close the "file"...<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">fclose</span><span class="keyword">(</span><span class="default">$fp</span><span class="keyword">);<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="comment">// ... and return the $data to the caller, with the trailing newline from fgets() removed.<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="keyword">return </span><span class="default">rtrim</span><span class="keyword">( </span><span class="default">$data</span><span class="keyword">, </span><span class="string">"\n" </span><span class="keyword">);<br>&nbsp; &nbsp; }<br>}<br></span><span class="default">?&gt;</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="125941">  
+  <a class="name">
+  <strong class="user"><em>ivijan dot stefan at gmail dot com</em></strong></a><div class="date" title="2021-03-18 10:43"><strong>5 months ago</strong></div>
+  <div class="text" id="Hcom125941">
+<div class="phpcode"><code><span class="html">
+Imagine a situation where you need a function that works with both URL and comma delimited text.<br><br>This is exactly the function that works like that using str_getcsv(). Just simply insert a CSV URL or comma separated text and it work nicely.<br><br><span class="default">&lt;?php<br></span><span class="keyword">function </span><span class="default">parse_csv</span><span class="keyword">( </span><span class="default">$filename_or_text</span><span class="keyword">, </span><span class="default">$delimiter</span><span class="keyword">=</span><span class="string">','</span><span class="keyword">, </span><span class="default">$enclosure</span><span class="keyword">=</span><span class="string">'"'</span><span class="keyword">, </span><span class="default">$linebreak</span><span class="keyword">=</span><span class="string">"\n" </span><span class="keyword">)<br>{<br>&nbsp; &nbsp; </span><span class="default">$return </span><span class="keyword">= array();<br>&nbsp; &nbsp; <br>&nbsp; &nbsp; if(</span><span class="default">false </span><span class="keyword">!== (</span><span class="default">$csv </span><span class="keyword">= (</span><span class="default">filter_var</span><span class="keyword">(</span><span class="default">$filename_or_text</span><span class="keyword">, </span><span class="default">FILTER_VALIDATE_URL</span><span class="keyword">) ? </span><span class="default">file_get_contents</span><span class="keyword">(</span><span class="default">$filename_or_text</span><span class="keyword">) : </span><span class="default">$filename_or_text</span><span class="keyword">)))<br>&nbsp; &nbsp; {<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$csv </span><span class="keyword">= </span><span class="default">trim</span><span class="keyword">(</span><span class="default">$csv</span><span class="keyword">);<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$csv </span><span class="keyword">= </span><span class="default">mb_convert_encoding</span><span class="keyword">(</span><span class="default">$csv</span><span class="keyword">, </span><span class="string">'UTF-16LE'</span><span class="keyword">);&nbsp;&nbsp; <br>&nbsp; &nbsp; &nbsp; &nbsp; <br>&nbsp; &nbsp; &nbsp; &nbsp; foreach(</span><span class="default">str_getcsv</span><span class="keyword">(</span><span class="default">$csv</span><span class="keyword">, </span><span class="default">$linebreak</span><span class="keyword">, </span><span class="default">$enclosure</span><span class="keyword">) as </span><span class="default">$row</span><span class="keyword">){<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$col </span><span class="keyword">= </span><span class="default">str_getcsv</span><span class="keyword">(</span><span class="default">$row</span><span class="keyword">, </span><span class="default">$delimiter</span><span class="keyword">, </span><span class="default">$enclosure</span><span class="keyword">);<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$col </span><span class="keyword">= </span><span class="default">array_map</span><span class="keyword">(</span><span class="string">'trim'</span><span class="keyword">, </span><span class="default">$col</span><span class="keyword">);<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$return</span><span class="keyword">[] = </span><span class="default">$col</span><span class="keyword">;<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; }<br>&nbsp; &nbsp; else<br>&nbsp; &nbsp; {<br>&nbsp; &nbsp; &nbsp; &nbsp; throw new \</span><span class="default">Exception</span><span class="keyword">(</span><span class="string">'Can not open the file.'</span><span class="keyword">);<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$return </span><span class="keyword">= </span><span class="default">false</span><span class="keyword">;<br>&nbsp; &nbsp; }<br>&nbsp; &nbsp; <br>&nbsp; &nbsp; return </span><span class="default">$return</span><span class="keyword">;<br>}<br></span><span class="default">?&gt;</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="125719">  
+  <a class="name">
+  <strong class="user"><em>txxllm at hotmail dot com</em></strong></a><div class="date" title="2021-01-25 06:05"><strong>7 months ago</strong></div>
+  <div class="text" id="Hcom125719">
+<div class="phpcode"><code><span class="html">
+Sometimes the enclosure parameter of the str_getcsv function doesn't work, so I wrote a function that is equivalent to the function<br><br><span class="default">&lt;?php<br></span><span class="comment">/**<br>&nbsp; &nbsp;&nbsp; * @param string $input<br>&nbsp; &nbsp;&nbsp; * @param string $delimiter<br>&nbsp; &nbsp;&nbsp; * @param string $enclosure<br>&nbsp; &nbsp;&nbsp; * @param string $escape<br>&nbsp; &nbsp;&nbsp; * @return array<br>&nbsp; &nbsp;&nbsp; * @author TXX<br>&nbsp; &nbsp;&nbsp; * @date&nbsp;&nbsp; 2021/1/25 15:03<br>&nbsp; &nbsp;&nbsp; */<br>&nbsp; &nbsp; </span><span class="keyword">function </span><span class="default">my_str_getcsv</span><span class="keyword">(</span><span class="default">$input</span><span class="keyword">, </span><span class="default">$delimiter </span><span class="keyword">= </span><span class="string">','</span><span class="keyword">, </span><span class="default">$enclosure </span><span class="keyword">= </span><span class="string">'"'</span><span class="keyword">, </span><span class="default">$escape </span><span class="keyword">= </span><span class="string">'\\'</span><span class="keyword">) {<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$output </span><span class="keyword">= array();<br><br>&nbsp; &nbsp; &nbsp; &nbsp; if (empty(</span><span class="default">$input</span><span class="keyword">) || !</span><span class="default">is_string</span><span class="keyword">(</span><span class="default">$input</span><span class="keyword">)) {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return </span><span class="default">$output</span><span class="keyword">;<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br><br>&nbsp; &nbsp; &nbsp; &nbsp; if (</span><span class="default">preg_match</span><span class="keyword">(</span><span class="string">"/"</span><span class="keyword">. </span><span class="default">$escape </span><span class="keyword">. </span><span class="default">$enclosure </span><span class="keyword">.</span><span class="string">"/"</span><span class="keyword">, </span><span class="default">$input</span><span class="keyword">)) {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; while (</span><span class="default">$strlen </span><span class="keyword">= </span><span class="default">strlen</span><span class="keyword">(</span><span class="default">$input</span><span class="keyword">)) {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$pos_delimiter&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="keyword">= </span><span class="default">strpos</span><span class="keyword">(</span><span class="default">$input</span><span class="keyword">, </span><span class="default">$delimiter</span><span class="keyword">);&nbsp; &nbsp; </span><span class="comment">//分隔符出现位置<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$pos_enclosure_start </span><span class="keyword">= </span><span class="default">strpos</span><span class="keyword">(</span><span class="default">$input</span><span class="keyword">, </span><span class="default">$enclosure</span><span class="keyword">);&nbsp; &nbsp; </span><span class="comment">//封闭符-开始出现位置<br><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; //有封闭符并封闭符在分隔符之前<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="keyword">if (</span><span class="default">is_int</span><span class="keyword">(</span><span class="default">$pos_delimiter</span><span class="keyword">) &amp;&amp; </span><span class="default">is_int</span><span class="keyword">(</span><span class="default">$pos_enclosure_start</span><span class="keyword">) &amp;&amp; </span><span class="default">$pos_enclosure_start </span><span class="keyword">&lt; </span><span class="default">$pos_delimiter</span><span class="keyword">) {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$pos_enclosure_start </span><span class="keyword">+= </span><span class="default">1</span><span class="keyword">;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$enclosed_str </span><span class="keyword">= </span><span class="default">substr</span><span class="keyword">(</span><span class="default">$input</span><span class="keyword">, </span><span class="default">$pos_enclosure_start</span><span class="keyword">);&nbsp; &nbsp; </span><span class="comment">//封闭字符串-开始<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$pos_enclosure_end </span><span class="keyword">= </span><span class="default">strpos</span><span class="keyword">(</span><span class="default">$enclosed_str</span><span class="keyword">, </span><span class="default">$enclosure</span><span class="keyword">);&nbsp; &nbsp; </span><span class="comment">//封闭符-结尾封闭字符串-开始中出现位置<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$pos_enclosure_end </span><span class="keyword">+= </span><span class="default">$pos_enclosure_start</span><span class="keyword">;&nbsp; &nbsp; </span><span class="comment">//封闭符-结尾在原始数据中出现位置<br><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="keyword">if (</span><span class="default">$pos_enclosure_end </span><span class="keyword">&lt;&nbsp; </span><span class="default">$pos_delimiter</span><span class="keyword">) {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="comment">//封闭符-结束在分隔符之前,无需进行封闭<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$output</span><span class="keyword">[] = </span><span class="default">substr</span><span class="keyword">(</span><span class="default">$input</span><span class="keyword">, </span><span class="default">0</span><span class="keyword">, </span><span class="default">$pos_delimiter</span><span class="keyword">);<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$offset </span><span class="keyword">= </span><span class="default">$pos_delimiter </span><span class="keyword">+ </span><span class="default">1</span><span class="keyword">;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; } else {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="comment">//封闭符-结束在分隔符之后,需要封闭<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$pos_enclosure_end </span><span class="keyword">+= </span><span class="default">1</span><span class="keyword">;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$before_enclosed_str </span><span class="keyword">= </span><span class="default">substr</span><span class="keyword">(</span><span class="default">$input</span><span class="keyword">, </span><span class="default">0</span><span class="keyword">, </span><span class="default">$pos_enclosure_end</span><span class="keyword">);<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$enclosed_str </span><span class="keyword">= </span><span class="default">substr</span><span class="keyword">(</span><span class="default">$input</span><span class="keyword">, </span><span class="default">$pos_enclosure_end</span><span class="keyword">);&nbsp; &nbsp; </span><span class="comment">//封闭字符串之后的字符串<br><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$enclosed_arr </span><span class="keyword">= </span><span class="default">my_str_getcsv</span><span class="keyword">(</span><span class="default">$enclosed_str</span><span class="keyword">, </span><span class="default">$delimiter</span><span class="keyword">, </span><span class="default">$enclosure</span><span class="keyword">);&nbsp; &nbsp; </span><span class="comment">//将封闭之后的字符串执行自身<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$enclosed_arr</span><span class="keyword">[</span><span class="default">0</span><span class="keyword">] = </span><span class="default">$before_enclosed_str </span><span class="keyword">. </span><span class="default">$enclosed_arr</span><span class="keyword">[</span><span class="default">0</span><span class="keyword">];<br><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$output </span><span class="keyword">= </span><span class="default">array_merge</span><span class="keyword">(</span><span class="default">$output</span><span class="keyword">, </span><span class="default">$enclosed_arr</span><span class="keyword">);<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$offset </span><span class="keyword">= </span><span class="default">strlen</span><span class="keyword">(</span><span class="default">$input</span><span class="keyword">);&nbsp; &nbsp; </span><span class="comment">//光标移至结尾<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="keyword">}<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; } else {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="comment">//无封闭<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="keyword">if (!</span><span class="default">is_int</span><span class="keyword">(</span><span class="default">$pos_delimiter</span><span class="keyword">)) {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="comment">//无分隔符,直接将字符串加入输出数组<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$output</span><span class="keyword">[] = </span><span class="default">$input</span><span class="keyword">;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="comment">//光标移至结尾<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$offset </span><span class="keyword">= </span><span class="default">strlen</span><span class="keyword">(</span><span class="default">$input</span><span class="keyword">);<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; } else if (</span><span class="default">$input </span><span class="keyword">== </span><span class="default">$delimiter</span><span class="keyword">) {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="comment">//如果字符串只剩下分隔符,需保存'',''<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$output </span><span class="keyword">= </span><span class="default">array_merge</span><span class="keyword">(</span><span class="default">$output</span><span class="keyword">, [</span><span class="string">''</span><span class="keyword">,</span><span class="string">''</span><span class="keyword">]);<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$offset </span><span class="keyword">= </span><span class="default">$pos_delimiter</span><span class="keyword">+</span><span class="default">1</span><span class="keyword">;&nbsp; &nbsp; </span><span class="comment">//光标移至分隔符后一位<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="keyword">} else {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$output</span><span class="keyword">[] = </span><span class="default">substr</span><span class="keyword">(</span><span class="default">$input</span><span class="keyword">, </span><span class="default">0</span><span class="keyword">, </span><span class="default">$pos_delimiter</span><span class="keyword">);&nbsp; &nbsp; </span><span class="comment">//将分割符之前的数据<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$offset </span><span class="keyword">= </span><span class="default">$pos_delimiter</span><span class="keyword">+</span><span class="default">1</span><span class="keyword">;&nbsp; &nbsp; </span><span class="comment">//光标移至分隔符后一位<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="keyword">}<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="comment">//将字符串更新至光标位置<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$input </span><span class="keyword">= </span><span class="default">substr</span><span class="keyword">(</span><span class="default">$input</span><span class="keyword">,</span><span class="default">$offset</span><span class="keyword">);<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; &nbsp; &nbsp; } else {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="comment">//字符串中不存在封闭符,直接通过分隔符分割<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$input </span><span class="keyword">= </span><span class="default">preg_split</span><span class="keyword">(</span><span class="string">"/"</span><span class="keyword">. </span><span class="default">$escape </span><span class="keyword">. </span><span class="default">$delimiter </span><span class="keyword">.</span><span class="string">"/"</span><span class="keyword">, </span><span class="default">$input</span><span class="keyword">);<br><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (</span><span class="default">is_array</span><span class="keyword">(</span><span class="default">$input</span><span class="keyword">)) {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$output </span><span class="keyword">= </span><span class="default">$input</span><span class="keyword">;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br><br>&nbsp; &nbsp; &nbsp; &nbsp; return </span><span class="default">$output</span><span class="keyword">;<br>&nbsp; &nbsp; }<br><br></span><span class="default">?&gt;</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="124893">  
+  <a class="name">
+  <strong class="user"><em>Anonymous</em></strong></a><div class="date" title="2020-04-09 06:58"><strong>1 year ago</strong></div>
+  <div class="text" id="Hcom124893">
+<div class="phpcode"><code><span class="html">
+Note that the function does NOT remove the escaping characters. If you do<br><br><span class="default">&lt;?php<br>str_getcsv</span><span class="keyword">(</span><span class="string">'"abc\"abc"'</span><span class="keyword">)<br></span><span class="default">?&gt;<br></span><br>you'll get an array with a string(8) "abc\"abc", the \ will stay.</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="120361">  
+  <a class="name">
+  <strong class="user"><em>Xkang</em></strong></a><div class="date" title="2016-12-21 01:25"><strong>4 years ago</strong></div>
+  <div class="text" id="Hcom120361">
+<div class="phpcode"><code><span class="html">
+how to solve the UTF-8 BOM's problem<br>如何处理UTF-8编码的CSV文件中的BOM问题<br>$bom =( chr(0xEF) . chr(0xBB) . chr(0xBF) ); //define bom<br>$f = file_get_contents('a.csv'); //open the CSV file<br>#$csv = str_getcsv($f); //it will have bom&nbsp; 这样会出现bom的问题<br>$csv = str_getcsv(str_replace($bom,'',$f)); //replace the bom 替换掉bom<br>var_dump($csv);&nbsp; //dump 输出</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="121412">  
+  <a class="name">
+  <strong class="user"><em>Anonymous</em></strong></a><div class="date" title="2017-07-21 05:46"><strong>4 years ago</strong></div>
+  <div class="text" id="Hcom121412">
+<div class="phpcode"><code><span class="html">
+public function csv_to_array($filename = '', $delimiter = ',', $boolean_include_title_row = false, $field_names = array()){<br><br>&nbsp; &nbsp; &nbsp; &nbsp; try {<br><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (!file_exists($filename) || !is_readable($filename)) {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return false;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (is_array($field_names) &amp;&amp; !empty($field_names)) {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $header = $field_names;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; } elseif (is_string($field_names) &amp;&amp; (strlen($field_names) &gt; 0)) {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $header = explode(",", $field_names);<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; } else {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $header = null;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $csv = array_map('str_getcsv', file($filename));<br><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $data = array();<br><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; foreach ($csv as $key =&gt; $row) {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $data[] = array_combine($header, $row);<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (!$boolean_include_title_row) {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; unset($data[0]);<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $data = array_values($data);<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return $data;<br><br>&nbsp; &nbsp; &nbsp; &nbsp; } catch (Exception $e) {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return false;<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br><br>&nbsp; &nbsp; }</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="117366">  
+  <a class="name">
+  <strong class="user"><em>pasmanik at gmail dot com</em></strong></a><div class="date" title="2015-05-28 08:08"><strong>6 years ago</strong></div>
+  <div class="text" id="Hcom117366">
+<div class="phpcode"><code><span class="html">
+I prepared some better function for parsing CSV string.<br><br>function csv_to_array($string='', $row_delimiter=PHP_EOL, $delimiter = "," , $enclosure = '"' , $escape = "\\" )<br>{<br>&nbsp; &nbsp; $rows = array_filter(explode($row_delimiter, $string));<br>&nbsp; &nbsp; $header = NULL;<br>&nbsp; &nbsp; $data = array();<br><br>&nbsp; &nbsp; foreach($rows as $row)<br>&nbsp; &nbsp; {<br>&nbsp; &nbsp; &nbsp; &nbsp; $row = str_getcsv ($row, $delimiter, $enclosure , $escape);<br><br>&nbsp; &nbsp; &nbsp; &nbsp; if(!$header)<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $header = $row;<br>&nbsp; &nbsp; &nbsp; &nbsp; else<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $data[] = array_combine($header, $row);<br>&nbsp; &nbsp; }<br><br>&nbsp; &nbsp; return $data;<br>}</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="114684">  
+  <a class="name">
+  <strong class="user"><em>peter at icb dot at</em></strong></a><div class="date" title="2014-03-21 05:11"><strong>7 years ago</strong></div>
+  <div class="text" id="Hcom114684">
+<div class="phpcode"><code><span class="html">
+Optimized JayWilliams function a little bit:<br><br><span class="default">&lt;?php<br></span><span class="keyword">function </span><span class="default">csv_to_array</span><span class="keyword">(</span><span class="default">$filename</span><span class="keyword">, </span><span class="default">$delimiter</span><span class="keyword">=</span><span class="string">','</span><span class="keyword">, </span><span class="default">$enclosure</span><span class="keyword">=</span><span class="string">'"'</span><span class="keyword">, </span><span class="default">$escape </span><span class="keyword">= </span><span class="string">'\\'</span><span class="keyword">)<br>{<br>&nbsp; if(!</span><span class="default">file_exists</span><span class="keyword">(</span><span class="default">$filename</span><span class="keyword">) || !</span><span class="default">is_readable</span><span class="keyword">(</span><span class="default">$filename</span><span class="keyword">)) return </span><span class="default">false</span><span class="keyword">;<br><br>&nbsp; </span><span class="default">$header </span><span class="keyword">= </span><span class="default">null</span><span class="keyword">;<br>&nbsp; </span><span class="default">$data </span><span class="keyword">= array();<br>&nbsp; </span><span class="default">$lines </span><span class="keyword">= </span><span class="default">file</span><span class="keyword">(</span><span class="default">$filename</span><span class="keyword">);<br><br>&nbsp; foreach(</span><span class="default">$lines </span><span class="keyword">as </span><span class="default">$line</span><span class="keyword">) {<br>&nbsp; &nbsp; </span><span class="default">$values </span><span class="keyword">= </span><span class="default">str_getcsv</span><span class="keyword">(</span><span class="default">$line</span><span class="keyword">, </span><span class="default">$delimiter</span><span class="keyword">, </span><span class="default">$enclosure</span><span class="keyword">, </span><span class="default">$escape</span><span class="keyword">);<br>&nbsp; &nbsp; if(!</span><span class="default">$header</span><span class="keyword">) </span><span class="default">$header </span><span class="keyword">= </span><span class="default">$values</span><span class="keyword">;<br>&nbsp; &nbsp; else </span><span class="default">$data</span><span class="keyword">[] = </span><span class="default">array_combine</span><span class="keyword">(</span><span class="default">$header</span><span class="keyword">, </span><span class="default">$values</span><span class="keyword">);<br>&nbsp; }<br><br>&nbsp; return </span><span class="default">$data</span><span class="keyword">;<br>}<br></span><span class="default">?&gt;</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="114345">  
+  <a class="name">
+  <strong class="user"><em>lewis</em></strong></a><div class="date" title="2014-02-11 01:51"><strong>7 years ago</strong></div>
+  <div class="text" id="Hcom114345">
+<div class="phpcode"><code><span class="html">
+str_getcsv can be really fussy about trailing spaces - it will not necessarily recognise a final element in a quote delimited set of strings with a space following the final string for example. Using trim() before str_getcsv() quickly fixes this.</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="111577">  
+  <a class="name">
+  <strong class="user"><em>V.Krishn</em></strong></a><div class="date" title="2013-03-06 01:20"><strong>8 years ago</strong></div>
+  <div class="text" id="Hcom111577">
+<div class="phpcode"><code><span class="html">
+Note: The function trims all values unlike&nbsp; str_getcsv (v5.3).<br>/**<br>&nbsp; * @link <a rel="nofollow" target="_blank">https://github.com/insteps/phputils</a> (for updated code)<br>&nbsp; * Parse a CSV string into an array for php 4+.<br>&nbsp; * @param string $input String<br>&nbsp; * @param string $delimiter String<br>&nbsp; * @param string $enclosure String<br>&nbsp; * @return array<br>&nbsp; */<br>function str_getcsv4($input, $delimiter = ',', $enclosure = '"') {<br><br>&nbsp; &nbsp; if( ! preg_match("/[$enclosure]/", $input) ) {<br>&nbsp; &nbsp; &nbsp; return (array)preg_replace(array("/^\\s*/", "/\\s*$/"), '', explode($delimiter, $input));<br>&nbsp; &nbsp; }<br><br>&nbsp; &nbsp; $token = "##"; $token2 = "::";<br>&nbsp; &nbsp; //alternate tokens "\034\034", "\035\035", "%%";<br>&nbsp; &nbsp; $t1 = preg_replace(array("/\\\[$enclosure]/", "/$enclosure{2}/",<br>&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; "/[$enclosure]\\s*[$delimiter]\\s*[$enclosure]\\s*/", "/\\s*[$enclosure]\\s*/"),<br>&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; array($token2, $token2, $token, $token), trim(trim(trim($input), $enclosure)));<br><br>&nbsp; &nbsp; $a = explode($token, $t1);<br>&nbsp; &nbsp; foreach($a as $k=&gt;$v) {<br>&nbsp; &nbsp; &nbsp; &nbsp; if ( preg_match("/^{$delimiter}/", $v) || preg_match("/{$delimiter}$/", $v) ) {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $a[$k] = trim($v, $delimiter); $a[$k] = preg_replace("/$delimiter/", "$token", $a[$k]); }<br>&nbsp; &nbsp; }<br>&nbsp; &nbsp; $a = explode($token, implode($token, $a));<br>&nbsp; &nbsp; return (array)preg_replace(array("/^\\s/", "/\\s$/", "/$token2/"), array('', '', $enclosure), $a);<br><br>}<br><br>if ( ! function_exists('str_getcsv')) {<br>&nbsp; function str_getcsv($input, $delimiter = ',', $enclosure = '"') {<br>&nbsp; &nbsp; return str_getcsv4($input, $delimiter, $enclosure);<br>&nbsp; }<br>}</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="109948">  
+  <a class="name">
+  <strong class="user"><em>khelibert at gmail dot com</em></strong></a><div class="date" title="2012-09-04 04:42"><strong>9 years ago</strong></div>
+  <div class="text" id="Hcom109948">
+<div class="phpcode"><code><span class="html">
+I've written this to handle :<br>- fields with or without enclosure;<br>- escape and enclosure characters using the same character (ie &lt;&lt;"&gt;&gt; in Excel) <br><br><span class="default">&lt;?php<br></span><span class="comment">/**<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; * Converts a csv file into an array of lines and columns.<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; * khelibert@gmail.com<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; * @param $fileContent String<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; * @param string $escape String<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; * @param string $enclosure String<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; * @param string $delimiter String<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; * @return array<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; */<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="keyword">function </span><span class="default">csvToArray</span><span class="keyword">(</span><span class="default">$fileContent</span><span class="keyword">,</span><span class="default">$escape </span><span class="keyword">= </span><span class="string">'\\'</span><span class="keyword">, </span><span class="default">$enclosure </span><span class="keyword">= </span><span class="string">'"'</span><span class="keyword">, </span><span class="default">$delimiter </span><span class="keyword">= </span><span class="string">';'</span><span class="keyword">)<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$lines </span><span class="keyword">= array();<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$fields </span><span class="keyword">= array();<br><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if(</span><span class="default">$escape </span><span class="keyword">== </span><span class="default">$enclosure</span><span class="keyword">)<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$escape </span><span class="keyword">= </span><span class="string">'\\'</span><span class="keyword">;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$fileContent </span><span class="keyword">= </span><span class="default">str_replace</span><span class="keyword">(array(</span><span class="string">'\\'</span><span class="keyword">,</span><span class="default">$enclosure</span><span class="keyword">.</span><span class="default">$enclosure</span><span class="keyword">,</span><span class="string">"\r\n"</span><span class="keyword">,</span><span class="string">"\r"</span><span class="keyword">),<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; array(</span><span class="string">'\\\\'</span><span class="keyword">,</span><span class="default">$escape</span><span class="keyword">.</span><span class="default">$enclosure</span><span class="keyword">,</span><span class="string">"\\n"</span><span class="keyword">,</span><span class="string">"\\n"</span><span class="keyword">),</span><span class="default">$fileContent</span><span class="keyword">);<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; else<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$fileContent </span><span class="keyword">= </span><span class="default">str_replace</span><span class="keyword">(array(</span><span class="string">"\r\n"</span><span class="keyword">,</span><span class="string">"\r"</span><span class="keyword">),array(</span><span class="string">"\\n"</span><span class="keyword">,</span><span class="string">"\\n"</span><span class="keyword">),</span><span class="default">$fileContent</span><span class="keyword">);<br><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$nb </span><span class="keyword">= </span><span class="default">strlen</span><span class="keyword">(</span><span class="default">$fileContent</span><span class="keyword">);<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$field </span><span class="keyword">= </span><span class="string">''</span><span class="keyword">;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$inEnclosure </span><span class="keyword">= </span><span class="default">false</span><span class="keyword">;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$previous </span><span class="keyword">= </span><span class="string">''</span><span class="keyword">;<br><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; for(</span><span class="default">$i </span><span class="keyword">= </span><span class="default">0</span><span class="keyword">;</span><span class="default">$i</span><span class="keyword">&lt;</span><span class="default">$nb</span><span class="keyword">; </span><span class="default">$i</span><span class="keyword">++)<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$c </span><span class="keyword">= </span><span class="default">$fileContent</span><span class="keyword">[</span><span class="default">$i</span><span class="keyword">];<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if(</span><span class="default">$c </span><span class="keyword">=== </span><span class="default">$enclosure</span><span class="keyword">)<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if(</span><span class="default">$previous </span><span class="keyword">!== </span><span class="default">$escape</span><span class="keyword">)<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$inEnclosure </span><span class="keyword">^= </span><span class="default">true</span><span class="keyword">;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; else<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$field </span><span class="keyword">.= </span><span class="default">$enclosure</span><span class="keyword">;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; else if(</span><span class="default">$c </span><span class="keyword">=== </span><span class="default">$escape</span><span class="keyword">)<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$next </span><span class="keyword">= </span><span class="default">$fileContent</span><span class="keyword">[</span><span class="default">$i</span><span class="keyword">+</span><span class="default">1</span><span class="keyword">];<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if(</span><span class="default">$next </span><span class="keyword">!= </span><span class="default">$enclosure </span><span class="keyword">&amp;&amp; </span><span class="default">$next </span><span class="keyword">!= </span><span class="default">$escape</span><span class="keyword">)<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$field </span><span class="keyword">.= </span><span class="default">$escape</span><span class="keyword">;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; else if(</span><span class="default">$c </span><span class="keyword">=== </span><span class="default">$delimiter</span><span class="keyword">)<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if(</span><span class="default">$inEnclosure</span><span class="keyword">)<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$field </span><span class="keyword">.= </span><span class="default">$delimiter</span><span class="keyword">;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; else<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="comment">//end of the field<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$fields</span><span class="keyword">[] = </span><span class="default">$field</span><span class="keyword">;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$field </span><span class="keyword">= </span><span class="string">''</span><span class="keyword">;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; else if(</span><span class="default">$c </span><span class="keyword">=== </span><span class="string">"\n"</span><span class="keyword">)<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$fields</span><span class="keyword">[] = </span><span class="default">$field</span><span class="keyword">;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$field </span><span class="keyword">= </span><span class="string">''</span><span class="keyword">;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$lines</span><span class="keyword">[] = </span><span class="default">$fields</span><span class="keyword">;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$fields </span><span class="keyword">= array();<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; else<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$field </span><span class="keyword">.= </span><span class="default">$c</span><span class="keyword">;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$previous </span><span class="keyword">= </span><span class="default">$c</span><span class="keyword">;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="comment">//we add the last element<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="keyword">if(</span><span class="default">true </span><span class="keyword">|| </span><span class="default">$field </span><span class="keyword">!== </span><span class="string">''</span><span class="keyword">)<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$fields</span><span class="keyword">[] = </span><span class="default">$field</span><span class="keyword">;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$lines</span><span class="keyword">[] = </span><span class="default">$fields</span><span class="keyword">;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return </span><span class="default">$lines</span><span class="keyword">;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br></span><span class="default">?&gt;</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="106674">  
+  <a class="name">
+  <strong class="user"><em>xoneca at gmail dot com</em></strong></a><div class="date" title="2011-11-27 04:26"><strong>9 years ago</strong></div>
+  <div class="text" id="Hcom106674">
+<div class="phpcode"><code><span class="html">
+Note that this function can also be used to parse other types of constructions. For example, I have used to parse .htaccess AddDescription lines:<br><br>&nbsp; &nbsp; AddDescription "My description to the file." filename.jpg<br><br>Those lines can be parsed like this:<br><br><span class="default">&lt;?php<br><br>$line </span><span class="keyword">= </span><span class="string">'AddDescription "My description to the file." filename.jpg'</span><span class="keyword">;<br><br></span><span class="default">$parsed </span><span class="keyword">= </span><span class="default">str_getcsv</span><span class="keyword">(<br>&nbsp; &nbsp; </span><span class="default">$line</span><span class="keyword">, </span><span class="comment"># Input line<br>&nbsp; &nbsp; </span><span class="string">' '</span><span class="keyword">,&nbsp;&nbsp; </span><span class="comment"># Delimiter<br>&nbsp; &nbsp; </span><span class="string">'"'</span><span class="keyword">,&nbsp;&nbsp; </span><span class="comment"># Enclosure<br>&nbsp; &nbsp; </span><span class="string">'\\'&nbsp;&nbsp; </span><span class="comment"># Escape char<br></span><span class="keyword">);<br><br></span><span class="default">var_dump</span><span class="keyword">( </span><span class="default">$parsed </span><span class="keyword">);<br><br></span><span class="default">?&gt;<br></span><br>The output:<br><br>array(3) {<br>&nbsp; [0]=&gt;<br>&nbsp; string(14) "AddDescription"<br>&nbsp; [1]=&gt;<br>&nbsp; string(27) "My description to the file."<br>&nbsp; [2]=&gt;<br>&nbsp; string(12) "filename.jpg"<br>}</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="89619">  
+  <a class="name">
+  <strong class="user"><em>Anonymous</em></strong></a><div class="date" title="2009-03-16 10:02"><strong>12 years ago</strong></div>
+  <div class="text" id="Hcom89619">
+<div class="phpcode"><code><span class="html">
+For some reason o'connor's code only reads one line of a csv for me... I had to replace the line <br><br>&nbsp; &nbsp; &nbsp; $data = fgetcsv($fp, 1000, $delimiter, $enclosure); //&nbsp; $escape only got added in 5.3.0 <br><br>with this:<br><br>&nbsp; &nbsp; &nbsp; $data;<br>&nbsp; &nbsp; &nbsp; while (!feof($fp))<br>&nbsp; &nbsp; &nbsp; {<br>&nbsp; &nbsp; &nbsp; &nbsp; $data[] = fgetcsv($fp, 0, $delimiter, $enclosure); //&nbsp; $escape only got added in 5.3.0<br>&nbsp; &nbsp; &nbsp; }<br><br>...to get all of the data out of my string (some post data pasted into a textbox and processed only with stripslashes).</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="85799">  
+  <a class="name">
+  <strong class="user"><em>william dot j dot weir at gmail dot com</em></strong></a><div class="date" title="2008-09-18 03:19"><strong>12 years ago</strong></div>
+  <div class="text" id="Hcom85799">
+<div class="phpcode"><code><span class="html">
+If your happy enough having just a multi-dimensional array, this should work fine. I had wanted to use the one provided by keananda but it was choking on pr($lines).<br><br><span class="default">&lt;?php<br></span><span class="keyword">function </span><span class="default">f_parse_csv</span><span class="keyword">(</span><span class="default">$file</span><span class="keyword">, </span><span class="default">$longest</span><span class="keyword">, </span><span class="default">$delimiter</span><span class="keyword">) {<br>&nbsp; </span><span class="default">$mdarray </span><span class="keyword">= array();<br>&nbsp; </span><span class="default">$file&nbsp; &nbsp; </span><span class="keyword">= </span><span class="default">fopen</span><span class="keyword">(</span><span class="default">$file</span><span class="keyword">, </span><span class="string">"r"</span><span class="keyword">);<br>&nbsp; while (</span><span class="default">$line </span><span class="keyword">= </span><span class="default">fgetcsv</span><span class="keyword">(</span><span class="default">$file</span><span class="keyword">, </span><span class="default">$longest</span><span class="keyword">, </span><span class="default">$delimiter</span><span class="keyword">)) {<br>&nbsp; &nbsp; </span><span class="default">array_push</span><span class="keyword">(</span><span class="default">$mdarray</span><span class="keyword">, </span><span class="default">$line</span><span class="keyword">);<br>&nbsp; &nbsp; }<br>&nbsp; </span><span class="default">fclose</span><span class="keyword">(</span><span class="default">$file</span><span class="keyword">);<br>&nbsp; return </span><span class="default">$mdarray</span><span class="keyword">;<br>&nbsp; }<br></span><span class="default">?&gt;<br></span><br>$longest is a number that represents the longest line in the csv file as required by fgetcsv().&nbsp; The page for fgetcsv() said that the longest line could be set to 0 or left out, but I couldn't get it to work without. I just made it extra large when I had to use it.</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="115656">  
+  <a class="name">
+  <strong class="user"><em>enmanuelcorvo at gmail dot com</em></strong></a><div class="date" title="2014-09-02 08:49"><strong>7 years ago</strong></div>
+  <div class="text" id="Hcom115656">
+<div class="phpcode"><code><span class="html">
+I always use this:<br><br>function convert_to_csv($input_array, $output_file_name, $delimiter)<br>{<br>&nbsp; &nbsp; /** open raw memory as file, no need for temp files */<br>&nbsp; &nbsp; $temp_memory = fopen('php://memory', 'w');<br>&nbsp; &nbsp; /** loop through array */<br>&nbsp; &nbsp; foreach ($input_array as $line) {<br>&nbsp; &nbsp; &nbsp; &nbsp; /** default php csv handler **/<br>&nbsp; &nbsp; &nbsp; &nbsp; fputcsv($temp_memory, $line, $delimiter);<br>&nbsp; &nbsp; }<br>&nbsp; &nbsp; /** rewrind the "file" with the csv lines **/<br>&nbsp; &nbsp; fseek($temp_memory, 0);<br>&nbsp; &nbsp; /** modify header to be downloadable csv file **/<br>&nbsp; &nbsp; header('Content-Type: application/csv');<br>&nbsp; &nbsp; header('Content-Disposition: attachement; filename="' . $output_file_name . '";');<br>&nbsp; &nbsp; /** Send file to browser for download */<br>&nbsp; &nbsp; fpassthru($temp_memory);<br>}<br><br>/** Array to convert to csv */<br>$array_to_csv = Array(Array(12566, 'Enmanuel', 'Corvo'), Array(56544, 'John', 'Doe'), Array(78550, 'Mark', 'Smith'));<br>convert_to_csv($array_to_csv, 'report.csv', ',');<br><br>you can read the full post here:<br><br>&lt;a href="<a rel="nofollow" target="_blank">http://webtricksandtreats.com/export-to-csv-php/</a>"&gt;PHP to CSV&nbsp; Download &lt;/a&gt;</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="95132">  
+  <a class="name">
+  <strong class="user"><em>Raymond</em></strong></a><div class="date" title="2009-12-14 05:49"><strong>11 years ago</strong></div>
+  <div class="text" id="Hcom95132">
+<div class="phpcode"><code><span class="html">
+Here's a little function to convert a multi-line CSV string to an array:
+<br>
+<br><span class="default">&lt;?php
+<br></span><span class="keyword">function </span><span class="default">csv_to_array</span><span class="keyword">(</span><span class="default">$csv</span><span class="keyword">, </span><span class="default">$delimiter </span><span class="keyword">= </span><span class="string">','</span><span class="keyword">, </span><span class="default">$enclosure </span><span class="keyword">= </span><span class="string">'"'</span><span class="keyword">, </span><span class="default">$escape </span><span class="keyword">= </span><span class="string">'\\'</span><span class="keyword">, </span><span class="default">$terminator </span><span class="keyword">= </span><span class="string">"\n"</span><span class="keyword">) {
+<br>&nbsp; &nbsp; </span><span class="default">$r </span><span class="keyword">= array();
+<br>&nbsp; &nbsp; </span><span class="default">$rows </span><span class="keyword">= </span><span class="default">explode</span><span class="keyword">(</span><span class="default">$terminator</span><span class="keyword">,</span><span class="default">trim</span><span class="keyword">(</span><span class="default">$csv</span><span class="keyword">));
+<br>&nbsp; &nbsp; </span><span class="default">$names </span><span class="keyword">= </span><span class="default">array_shift</span><span class="keyword">(</span><span class="default">$rows</span><span class="keyword">);
+<br>&nbsp; &nbsp; </span><span class="default">$names </span><span class="keyword">= </span><span class="default">str_getcsv</span><span class="keyword">(</span><span class="default">$names</span><span class="keyword">,</span><span class="default">$delimiter</span><span class="keyword">,</span><span class="default">$enclosure</span><span class="keyword">,</span><span class="default">$escape</span><span class="keyword">);
+<br>&nbsp; &nbsp; </span><span class="default">$nc </span><span class="keyword">= </span><span class="default">count</span><span class="keyword">(</span><span class="default">$names</span><span class="keyword">);
+<br>&nbsp; &nbsp; foreach (</span><span class="default">$rows </span><span class="keyword">as </span><span class="default">$row</span><span class="keyword">) {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; if (</span><span class="default">trim</span><span class="keyword">(</span><span class="default">$row</span><span class="keyword">)) {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$values </span><span class="keyword">= </span><span class="default">str_getcsv</span><span class="keyword">(</span><span class="default">$row</span><span class="keyword">,</span><span class="default">$delimiter</span><span class="keyword">,</span><span class="default">$enclosure</span><span class="keyword">,</span><span class="default">$escape</span><span class="keyword">);
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (!</span><span class="default">$values</span><span class="keyword">) </span><span class="default">$values </span><span class="keyword">= </span><span class="default">array_fill</span><span class="keyword">(</span><span class="default">0</span><span class="keyword">,</span><span class="default">$nc</span><span class="keyword">,</span><span class="default">null</span><span class="keyword">);
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$r</span><span class="keyword">[] = </span><span class="default">array_combine</span><span class="keyword">(</span><span class="default">$names</span><span class="keyword">,</span><span class="default">$values</span><span class="keyword">);
+<br>&nbsp; &nbsp; &nbsp; &nbsp; }
+<br>&nbsp; &nbsp; }
+<br>&nbsp; &nbsp; return </span><span class="default">$r</span><span class="keyword">;
+<br>}
+<br></span><span class="default">?&gt;</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="116688">  
+  <a class="name">
+  <strong class="user"><em>okonomiyaki3000 at gmail dot com</em></strong></a><div class="date" title="2015-02-12 10:58"><strong>6 years ago</strong></div>
+  <div class="text" id="Hcom116688">
+<div class="phpcode"><code><span class="html">
+`durik at 3ilab dot net` brings up a good point but the solution provided may fail in certain (very rare) edge cases. I believe a more perfect solution is as follows:<br><br><span class="default">&lt;?php<br></span><span class="comment">// Use an I/O stream instead of an actual file.<br></span><span class="default">$handle </span><span class="keyword">= </span><span class="default">fopen</span><span class="keyword">(</span><span class="string">'php://temp/myCSV'</span><span class="keyword">, </span><span class="string">'w+b'</span><span class="keyword">);<br><br></span><span class="comment">// Write all the data to it<br></span><span class="default">fwrite</span><span class="keyword">(</span><span class="default">$handle</span><span class="keyword">, </span><span class="default">$CSVString</span><span class="keyword">);<br><br></span><span class="comment">// Rewind for reading<br></span><span class="default">rewind</span><span class="keyword">(</span><span class="default">$handle</span><span class="keyword">);<br><br></span><span class="comment">// use fgetcsv which tends to work better than str_getcsv in some cases<br></span><span class="default">$rows </span><span class="keyword">= array();<br>while (</span><span class="default">$row </span><span class="keyword">= </span><span class="default">fgetcsv</span><span class="keyword">(</span><span class="default">$handle</span><span class="keyword">)) </span><span class="default">$rows</span><span class="keyword">[] = </span><span class="default">$row</span><span class="keyword">;<br></span><span class="default">?&gt;<br></span><br>A variation on this technique can also be used to implement an 'str_putcsv' which PHP lacks.</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="124237">  
+  <a class="name">
+  <strong class="user"><em>r dot borjovsky at gmail dot com</em></strong></a><div class="date" title="2019-09-26 11:15"><strong>1 year ago</strong></div>
+  <div class="text" id="Hcom124237">
+<div class="phpcode"><code><span class="html">
+Improving James' line, now allowing to set the delimiter.<br><br>$csv = array_map(function($v){return str_getcsv($v, ';');}, file('data.csv'));</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="117230">  
+  <a class="name">
+  <strong class="user"><em>csver at phper dot com</em></strong></a><div class="date" title="2015-05-06 10:02"><strong>6 years ago</strong></div>
+  <div class="text" id="Hcom117230">
+<div class="phpcode"><code><span class="html">
+Quick and proper way:<br><br>&nbsp; &nbsp; $temp = fopen('php://temp', 'r+');<br>&nbsp; &nbsp; fputs($csvString, $temp);<br>&nbsp; &nbsp; rewind($temp);<br><br>&nbsp; &nbsp; $csvArray = array();<br><br>&nbsp; &nbsp; while( $csvRow = fgetcsv($temp) )<br>&nbsp; &nbsp; &nbsp; &nbsp; $csvArray[] = $csvRow;<br>&nbsp; &nbsp; fclose($temp);</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="123029">  
+  <a class="name">
+  <strong class="user"><em>sunilp dot coderevolts at gmail dot com</em></strong></a><div class="date" title="2018-08-14 08:09"><strong>3 years ago</strong></div>
+  <div class="text" id="Hcom123029">
+<div class="phpcode"><code><span class="html">
+Hello,<br><br>I want to set formula in csv file using php code . When I download csv file formula should be inserted (data from databse) and when we put column values then values should be calculated as per the formula.<br><br>Anyone help me.<br><br>Thanks.</span>
+</code></div>
+  </div>
+ </div></div>
+
+ 
+</section>    </section><!-- layout-content -->
+        
+
+
+  </div><!-- layout -->
+
+  
+
+    
+ <!-- External and third party libraries. -->
+ 
+
+
+
+
+
+
+
+<a id="toTop" href="javascript:;"><span id="toTopHover"></span><img width="40" height="40" alt="To Top" src="../../images/to-top%402x.png"></a>
+
+
+
+<!-- Mirrored from www.php.net/manual/en/function.str-getcsv.php by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 11 Sep 2021 06:44:32 GMT -->
+
+</body></html>

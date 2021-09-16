@@ -1,0 +1,185 @@
+<html><!-- Online page at https://rx-angular.io/web/state/howtos/rx-state-as-global-state --><head><meta charset="utf-8"><title>Use RxState as Global State</title><link rel="stylesheet" href="../../../../angular.io/css_36.css" type="text/css"><link rel="stylesheet" href="../../../../angular.io/css_37.css" type="text/css"><link rel="stylesheet" href="../../../../angular.io/css_38.css" type="text/css"><link rel="stylesheet" href="../../../../angular.io/css_39.css" type="text/css"><link rel="stylesheet" href="../../../../angular.io/css_40.css" type="text/css"><link rel="stylesheet" href="../../../../angular.io/css_41.css" type="text/css"><script type="text/javascript" src="../../../../angular.io/js_1.js"></script><script type="text/javascript" src="../../../../angular.io/js_21.js"></script><script type="text/javascript" src="../../../../angular.io/js_22.js"></script><script type="text/javascript" src="../../../../angular.io/js_23.js"></script><script type="text/javascript" src="../../../../angular.io/js_24.js"></script><script type="text/javascript" src="../../../../angular.io/js_25.js"></script><script type="text/javascript" src="../../../../angular.io/js_26.js"></script><script type="text/javascript" src="../../../../angular.io/js_27.js"></script><script type="text/javascript" src="../../../../angular.io/js_28.js"></script></head><body data-page="/web/state/howtos/rx-state-as-global-state.md" class="ready">
+    <section class="cover" style="background: linear-gradient(to left bottom, hsl(136, 100%, 85%) 0%,hsl(96, 100%, 85%) 100%)"><div class="mask"></div><div class="cover-main"><!--cover--></div></section><main><button class="sidebar-toggle" aria-label="Menu"><div class="sidebar-toggle-button"><span></span><span></span><span></span></div></button><aside class="sidebar"><div class="search"><div class="input-wrap">
+      <input type="search" value="" aria-label="Search text" placeholder="Type to search">
+      <div class="clear-button">
+        <svg width="26" height="24">
+          <circle cx="12" cy="12" r="11" fill="#ccc"></circle>
+          <path stroke="white" stroke-width="2" d="M8.25,8.25,15.75,15.75"></path>
+          <path stroke="white" stroke-width="2" d="M8.25,15.75,15.75,8.25"></path>
+        </svg>
+      </div>
+    </div>
+    <div class="results-panel"></div>
+    </div><h1 class="app-name"><a class="app-name-link" data-nosearch="" href="./rx-state-as-global-state.html">@rx-angular</a></h1><div class="sidebar-nav"><!-- - @rx-angular/template [BETA]
+
+  - Getting started
+
+    - [Overview](/template/overview.md)
+    - [Setup](/template/basic-setup.md)
+
+  - Theory
+
+    - [Rendering issues in Angular](/template/theory/rendering-issues.md)
+    - [Concepts](/template/theory/concepts.md)
+
+  - Features
+
+    - [LetDirective](/template/features/let.md)
+    - [PushPipe](/template/features/push.md)
+    - [RenderStrategies](/template/features/render-strategies.md)
+
+  - Experimental
+
+    - [Unpatch directive](/template/experimental/unpatch.md) -->
+
+<ul><li><p><strong>@rx-angular/state</strong></p><ul><li><p>Getting started</p><ul><li><a href="../general/overview.html" title="Overview">Overview</a></li><li><a href="../general/basic-setup.html" title="Setup">Setup</a></li></ul></li><li><p>API</p><ul><li><a href="../api/rx-state.html" title="RxState">RxState</a></li><li><a href="../api/rxjs-operators.html" title="RxJS Operators">RxJS Operators</a></li><li><a href="../api/transformation-helpers.html" title="Transformation helpers">Transformation helpers</a></li><li><a href="../api/interfaces.html" title="Interfaces">Interfaces</a></li></ul></li><li><p>Tutorials</p><ul><li><a href="../tutorials/basic-tutorial.html" title="Basic tutorial">Basic tutorial</a></li><li><a href="../tutorials/incrementing-value.html" title="Incrementing a value">Incrementing a value</a></li><li><a href="../tutorials/from-imperative-to-reactive.html" title="Migrating to RxState">Migrating to RxState</a></li><li><a href="../tutorials/passing-observables.html" title="Passing observables directly">Passing observables directly</a></li></ul></li><li><p>Recipes</p><ul><li><a href="./determine-state.html" title="Determine state type">Determine state type</a></li><li><a href="./manage-viewmodel.html" title="Manage ViewModel">Manage ViewModel</a></li><li><a href="./partial-updates.html" title="Run partial updates">Run partial updates</a></li><li><a href="./load-data-on-route-change.html" title="Load data on route change">Load data on route change</a></li><li><a href="./hostbindings.html" title="Work with HostBindings">Work with HostBindings</a></li><li class="active"><a href="./rx-state-as-global-state.html" title="Use RxState as Global State">Use RxState as Global State</a><ul class="app-sub-sidebar"><li><a class="section-link" href="./rx-state-as-global-state.html" title="Example">Example</a></li></ul></li></ul></li><li><p>Integrations</p><ul><li><a href="../integrations/compose-state-using-ngrx-selectors.html" title="Reuse ngrx selectors to compose state">Reuse ngrx selectors to compose state</a></li><li><a href="../integrations/manage-entities-ngrx.html" title="Manage entities using @ngrx/entity">Manage entities using <code>@ngrx/entity</code></a></li></ul></li></ul></li></ul><hr>
+<ul><li><p><strong>Links</strong></p></li><li><p><a href="https://github.com/rx-angular/rx-angular" target="_blank" rel="noopener" title=" Github"><img src="../../../../icongr.am/simple/github.svg" data-origin="https://icongr.am/simple/github.svg?color=808080&amp;size=24" alt="Github"> Github</a></p></li><li><p><a href="https://discord.com/invite/XWWGZsQ" target="_blank" rel="noopener" title=" Discord"><img src="../../../../icongr.am/material/discord.svg" data-origin="https://icongr.am/material/discord.svg?size=24&amp;color=7289da" alt="Discord"> Discord</a></p></li></ul></div></aside><section class="content"><article class="markdown-section" id="main"><p><em>Author: <a href="https://github.com/Phhansen" target="_blank" rel="noopener">@Phhansen</a></em></p><h1 id="how-to-manage-global-state"><a href="./rx-state-as-global-state.html" data-id="how-to-manage-global-state" class="anchor"><span>How to manage global state</span></a></h1><p>For an explainer on how to easily identify what should be global state and what should local state, please read: <a href="https://github.com/rx-angular/rx-angular/tree/master/libs/state/docs/snippets/global-state-vs-local-state.md" target="_blank" rel="noopener">Difference between Global and Local state</a>.</p><h2 id="example"><a href="./rx-state-as-global-state.html" data-id="example" class="anchor"><span>Example</span></a></h2><p>As with the global/local state snippet, we'll be doing the same example to-do app with 2 views.</p><h3 id="to-do"><a href="./rx-state-as-global-state.html" data-id="to-do" class="anchor"><span>To do</span></a></h3><ul><li>Renders a list of <code>tasks</code> that must be completed and a <code>counter</code> that shows how many tasks left to do.</li><li>The list can be expanded or collapsed and has property <code>isExpanded</code>.</li><li>Gets tasks array from endpoint <em>tasks/get</em> and filters out tasks that already answered.</li></ul><pre v-pre="" data-lang="typescript"><code class="lang-typescript"><span class="token keyword">interface</span> <span class="token class-name">TodosState</span> <span class="token punctuation">{</span>
+    tasks<span class="token operator">:</span> Task<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    isExpanded<span class="token operator">:</span> <span class="token builtin">boolean</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+@<span class="token function">Component</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    selector<span class="token operator">:</span> <span class="token string">"todos"</span><span class="token punctuation">,</span>
+    templateUrl<span class="token operator">:</span> <span class="token string">"./todo.component.html"</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">TodoComponent</span> <span class="token keyword">extends</span> <span class="token class-name">RxState<span class="token operator">&lt;</span>TodosState<span class="token operator">&gt;</span></span> <span class="token punctuation">{</span>
+    <span class="token keyword">readonly</span> tasks$ <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">select</span><span class="token punctuation">(</span><span class="token string">"tasks"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">readonly</span> counter$ <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">select</span><span class="token punctuation">(</span><span class="token function">pluck</span><span class="token punctuation">(</span><span class="token string">"tasks"</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">map</span><span class="token punctuation">(</span>tasks <span class="token operator">=&gt;</span> tasks<span class="token punctuation">.</span>length<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">readonly</span> isExpanded$ <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">select</span><span class="token punctuation">(</span><span class="token string">"isExpanded"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="token keyword">private</span> tasksService<span class="token operator">:</span> TasksService<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">super</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">/* Filter out tasks that are done */</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">connect</span><span class="token punctuation">(</span><span class="token string">"tasks"</span><span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">.</span>tasksService<span class="token punctuation">.</span><span class="token function">fetchTasks</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">pipe</span><span class="token punctuation">(</span><span class="token function">filter</span><span class="token punctuation">(</span>tasks <span class="token operator">=&gt;</span> tasks<span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span>task <span class="token operator">=&gt;</span> <span class="token operator">!</span>task<span class="token punctuation">.</span>done<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code><button class="docsify-copy-code-button"><span class="label">Copy to clipboard</span><span class="error">Error</span><span class="success">Copied</span></button></pre><h3 id="setup"><a href="./rx-state-as-global-state.html" data-id="setup" class="anchor"><span>Setup</span></a></h3><ul><li>Renders a list of all existing <code>tasks</code> and a <code>counter</code> that shows the total amount of tasks.</li><li>The list can be expanded or collapsed and has property <code>isExpanded</code>.</li><li>Gets tasks as array from endpoint <em>tasks/get</em>.</li></ul><pre v-pre="" data-lang="typescript"><code class="lang-typescript"><span class="token keyword">interface</span> <span class="token class-name">AllTodosState</span> <span class="token punctuation">{</span>
+    tasks<span class="token operator">:</span> Task<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    isExpanded<span class="token operator">:</span> <span class="token builtin">boolean</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+@<span class="token function">Component</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    selector<span class="token operator">:</span> <span class="token string">"all-tasks"</span><span class="token punctuation">,</span>
+    templateUrl<span class="token operator">:</span> <span class="token string">"./all-tasks.component.html"</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">AllTasksComponent</span> <span class="token keyword">extends</span> <span class="token class-name">RxState<span class="token operator">&lt;</span>AllTodosState<span class="token operator">&gt;</span></span><span class="token punctuation">{</span>
+    <span class="token keyword">readonly</span> tasks$ <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">select</span><span class="token punctuation">(</span><span class="token string">"tasks"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">readonly</span> counter$ <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">select</span><span class="token punctuation">(</span><span class="token function">pluck</span><span class="token punctuation">(</span><span class="token string">"tasks"</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">map</span><span class="token punctuation">(</span>tasks <span class="token operator">=&gt;</span> tasks<span class="token punctuation">.</span>length<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">readonly</span> isExpanded$ <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">select</span><span class="token punctuation">(</span><span class="token string">"isExpanded"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="token keyword">private</span> tasksService<span class="token operator">:</span> TasksService<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">super</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">/* Fetch tasks from backend */</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">connect</span><span class="token punctuation">(</span><span class="token string">"tasks"</span><span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">.</span>tasksService<span class="token punctuation">.</span><span class="token function">fetchTasks</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code><button class="docsify-copy-code-button"><span class="label">Copy to clipboard</span><span class="error">Error</span><span class="success">Copied</span></button></pre><h3 id="what-is-global-and-what-is-local"><a href="./rx-state-as-global-state.html" data-id="what-is-global-and-what-is-local" class="anchor"><span>What is global and what is local?</span></a></h3><p>Looking at the above examples, let us see what is <strong>local</strong> and what is <strong>global</strong>! </p><ul><li><code>counter</code> property is a part of <strong>local</strong> state of each view. The counter value is specific for each view.</li><li><code>isExpanded</code> property is also part of <strong>local</strong> state. Both lists can be expanded/collapsed but this status isn't shared between them and they don't care about this status of each other.</li><li><code>tasks</code> array is a part of our app <strong>global</strong> state. This array needed for each view and received from the same endpoint. We don't need to load it twice. It is time to introduce a global layer to our application and move tasks array and retrieving logic there.</li></ul><h3 id="moving-the-tasks-array-to-our-global-state"><a href="./rx-state-as-global-state.html" data-id="moving-the-tasks-array-to-our-global-state" class="anchor"><span>Moving the <code>tasks</code> array to our <strong>global</strong> state</span></a></h3><p>We can handle <strong>global</strong> state in different ways, but for this snippet we´re going to use an <code>injectionToken</code>.</p><pre v-pre="" data-lang="typescript"><code class="lang-typescript"><span class="token keyword">import</span> <span class="token punctuation">{</span> InjectionToken <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"@angular/core"</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> RxState <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"@rx-angular/state"</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">interface</span> <span class="token class-name">Task</span> <span class="token punctuation">{</span>
+    id<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span>
+    label<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
+    done<span class="token operator">:</span> <span class="token builtin">boolean</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">export</span> <span class="token keyword">interface</span> <span class="token class-name">GlobalState</span> <span class="token punctuation">{</span>
+    tasks<span class="token operator">:</span> Task<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">export</span> <span class="token keyword">const</span> <span class="token constant">GLOBAL_RX_STATE</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">InjectionToken<span class="token operator">&lt;</span>RxState<span class="token operator">&lt;</span>GlobalState<span class="token operator">&gt;&gt;</span></span><span class="token punctuation">(</span><span class="token string">'GLOBAL_RX_STATE'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code><button class="docsify-copy-code-button"><span class="label">Copy to clipboard</span><span class="error">Error</span><span class="success">Copied</span></button></pre><p>We then <em>provide</em> the <code>injectionToken</code> in our <code>app.module.ts</code>.</p><pre v-pre="" data-lang="typescript"><code class="lang-typescript"><span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token constant">GLOBAL_RX_STATE</span><span class="token punctuation">,</span> GlobalState <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"./rx-state"</span><span class="token punctuation">;</span>
+<span class="token operator">...</span>
+
+@<span class="token function">NgModule</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    imports<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token operator">...</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    declarations<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token operator">...</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    providers<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span>
+        provide<span class="token operator">:</span> <span class="token constant">GLOBAL_RX_STATE</span><span class="token punctuation">,</span> <span class="token function-variable function">useFactory</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">new</span> <span class="token class-name">RxState<span class="token operator">&lt;</span>GlobalState<span class="token operator">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    bootstrap<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token operator">...</span><span class="token punctuation">]</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">AppModule</span> <span class="token punctuation">{</span><span class="token punctuation">}</span></code><button class="docsify-copy-code-button"><span class="label">Copy to clipboard</span><span class="error">Error</span><span class="success">Copied</span></button></pre><p>We can then load the <code>tasks</code> in the <code>AppComponent</code> via our <code>tasksService.fetchTasks()</code> and just have our <code>TodoComponent</code> and <code>AllTasksComponent</code> connect to the global state.</p><pre v-pre="" data-lang="typescript"><code class="lang-typescript"><span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token constant">GLOBAL_RX_STATE</span> <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'./rx-state'</span><span class="token punctuation">;</span>
+
+@<span class="token function">Component</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  selector<span class="token operator">:</span> <span class="token string">'my-app'</span><span class="token punctuation">,</span>
+  templateUrl<span class="token operator">:</span> <span class="token string">'./app.component.html'</span><span class="token punctuation">,</span>
+  styleUrls<span class="token operator">:</span> <span class="token punctuation">[</span> <span class="token string">'./app.component.css'</span> <span class="token punctuation">]</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">AppComponent</span>  <span class="token punctuation">{</span>
+<span class="token keyword">constructor</span><span class="token punctuation">(</span>@<span class="token function">Inject</span><span class="token punctuation">(</span><span class="token constant">GLOBAL_RX_STATE</span><span class="token punctuation">)</span> <span class="token keyword">private</span> state<span class="token punctuation">,</span> <span class="token keyword">private</span> tasksService<span class="token operator">:</span> TasksService<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">/* Fetch tasks from backend */</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">.</span><span class="token function">connect</span><span class="token punctuation">(</span><span class="token string">"tasks"</span><span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">.</span>tasksService<span class="token punctuation">.</span><span class="token function">fetchTasks</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code><button class="docsify-copy-code-button"><span class="label">Copy to clipboard</span><span class="error">Error</span><span class="success">Copied</span></button></pre><p>And our updated <code>TodoComponent</code></p><pre v-pre="" data-lang="typescript"><code class="lang-typescript"><span class="token keyword">interface</span> <span class="token class-name">TodosState</span> <span class="token punctuation">{</span>
+    tasks<span class="token operator">:</span> Task<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    isExpanded<span class="token operator">:</span> <span class="token builtin">boolean</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+@<span class="token function">Component</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    selector<span class="token operator">:</span> <span class="token string">"todos"</span><span class="token punctuation">,</span>
+    templateUrl<span class="token operator">:</span> <span class="token string">"./todo.component.html"</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">TodoComponent</span> <span class="token keyword">extends</span> <span class="token class-name">RxState<span class="token operator">&lt;</span>TodosState<span class="token operator">&gt;</span></span> <span class="token punctuation">{</span>
+    <span class="token keyword">readonly</span> tasks$ <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">select</span><span class="token punctuation">(</span><span class="token string">"tasks"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">readonly</span> counter$ <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">select</span><span class="token punctuation">(</span><span class="token function">pluck</span><span class="token punctuation">(</span><span class="token string">"tasks"</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">map</span><span class="token punctuation">(</span>tasks <span class="token operator">=&gt;</span> tasks<span class="token punctuation">.</span>length<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">readonly</span> isExpanded$ <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">select</span><span class="token punctuation">(</span><span class="token string">"isExpanded"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">constructor</span><span class="token punctuation">(</span>@<span class="token function">Inject</span><span class="token punctuation">(</span><span class="token constant">GLOBAL_RX_STATE</span><span class="token punctuation">)</span> <span class="token keyword">private</span> globalState<span class="token operator">:</span> RxState<span class="token operator">&lt;</span>GlobalState<span class="token operator">&gt;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">super</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">/* Connect to global state and filter out already completed tasks */</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">connect</span><span class="token punctuation">(</span><span class="token string">"tasks"</span><span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">.</span>globalState<span class="token punctuation">.</span><span class="token function">select</span><span class="token punctuation">(</span><span class="token string">"tasks"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">pipe</span><span class="token punctuation">(</span>
+            <span class="token function">map</span><span class="token punctuation">(</span>tasks <span class="token operator">=&gt;</span> tasks<span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span>task <span class="token operator">=&gt;</span> <span class="token operator">!</span>task<span class="token punctuation">.</span>done<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code><button class="docsify-copy-code-button"><span class="label">Copy to clipboard</span><span class="error">Error</span><span class="success">Copied</span></button></pre><p>Here we <code>connect</code> to the global state instance and filter out the already completed tasks.</p><p>Our <code>AllTasksComponent</code> is slightly different in that it doesn´t actually need to filter anything, and thus it only needs to manage the <strong>local</strong> <code>isExpanded</code> value, and just have the <code>tasks</code> and <code>counter</code> values come directly from the <strong>global</strong> state.</p><pre v-pre="" data-lang="typescript"><code class="lang-typescript"><span class="token keyword">interface</span> <span class="token class-name">AllTodosState</span> <span class="token punctuation">{</span>
+    isExpanded<span class="token operator">:</span> <span class="token builtin">boolean</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+@<span class="token function">Component</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    selector<span class="token operator">:</span> <span class="token string">"all-tasks"</span><span class="token punctuation">,</span>
+    templateUrl<span class="token operator">:</span> <span class="token string">"./all-tasks.component.html"</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">AllTasksComponent</span> <span class="token keyword">extends</span> <span class="token class-name">RxState<span class="token operator">&lt;</span>AllTodosState<span class="token operator">&gt;</span></span><span class="token punctuation">{</span>
+    <span class="token keyword">readonly</span> tasks$ <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>globalState<span class="token punctuation">.</span><span class="token function">select</span><span class="token punctuation">(</span><span class="token string">"tasks"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">readonly</span> counter$ <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>globalState<span class="token punctuation">.</span><span class="token function">select</span><span class="token punctuation">(</span><span class="token function">pluck</span><span class="token punctuation">(</span><span class="token string">"tasks"</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">map</span><span class="token punctuation">(</span>tasks <span class="token operator">=&gt;</span> tasks<span class="token punctuation">.</span>length<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">readonly</span> isExpanded$ <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">select</span><span class="token punctuation">(</span><span class="token string">"isExpanded"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">constructor</span><span class="token punctuation">(</span>@<span class="token function">Inject</span><span class="token punctuation">(</span><span class="token constant">GLOBAL_RX_STATE</span><span class="token punctuation">)</span> <span class="token keyword">private</span> globalState<span class="token operator">:</span> RxState<span class="token operator">&lt;</span>GlobalState<span class="token operator">&gt;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">super</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code><button class="docsify-copy-code-button"><span class="label">Copy to clipboard</span><span class="error">Error</span><span class="success">Copied</span></button></pre></article></section></main>
+    <!-- Settings -->
+    <script>
+      window.$docsify = {
+        search: 'auto',
+        // Name that will be displayed in sidebar
+        name: '@rx-angular',
+        // Takes only # & ## as sidebar links
+        subMaxLevel: 2,
+        // Show sidebar
+        loadSidebar: true,
+        // Coverpage url
+        coverpage: './web/partials/_coverpage.md',
+        // Prevents multiple downloads of sidebar
+        alias: {
+          '/.*/_sidebar.md': './web/partials/_sidebar.md',
+          '/_sidebar.md': './web/partials/_sidebar.md',
+        },
+        routerMode: 'history',
+        // Autoscroll content to the top when changing page
+        auto2top: true,
+        relativePath: true,
+      };
+    </script>
+    <!-- Main script -->
+    <script src="../../../../cdn.jsdelivr.net/npm/docsify/lib/docsify.min.js"></script>
+    <!-- Typescript highlight -->
+    <script src="../../../../cdn.jsdelivr.net/npm/prismjs@1.21.0/components/prism-typescript.min.js"></script>
+    <!-- Search -->
+    <script src="../../../../cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
+    <!-- Zoom image -->
+    <script src="../../../../cdn.jsdelivr.net/npm/docsify/lib/plugins/zoom-image.min.js"></script>
+    <!-- Copy code plugin -->
+    <script src="https://unpkg.com/docsify-copy-code@2"></script>
+  
+
+<div class="progress" style="opacity: 0; width: 0%;"></div></body></html>

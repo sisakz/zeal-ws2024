@@ -1,0 +1,1572 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+
+<!-- Mirrored from developer.wordpress.org/reference/functions/wp_list_categories/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 31 Aug 2021 16:58:56 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<!--
+<meta property="fb:page_id" content="6427302910" />
+-->
+<meta name="google-site-verification" content="7VWES_-rcHBcmaQis9mSYamPfNwE03f4vyTj4pfuAw0" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>wp_list_categories()</title>
+<meta name="referrer" content="always">
+
+		<link href='../../../../fonts.googleapis.com/css.css?family=Open+Sans:300italic,400italic,600italic,400,300,600&amp;subset=latin,cyrillic-ext,greek-ext,greek,vietnamese,latin-ext,cyrillic' rel='stylesheet' type='text/css'>
+
+		<link rel="stylesheet" href="../../../../s.w.org/style/wp4.css?95" />
+
+<link rel="shortcut icon" href="../../../../s.w.org/favicon.ico?2" type="image/x-icon" />
+<link rel="pingback" href="../../../xmlrpc.php" /><meta name='robots' content='max-image-preview:large' />
+<link rel='dns-prefetch' href='../../../../fonts.googleapis.com/index.html' />
+<link rel='dns-prefetch' href='http://s.w.org/' />
+<link rel='dns-prefetch' href='http://www.googletagmanager.com/' />
+<link rel='dns-prefetch' href='http://fonts.gstatic.com/' />
+<link rel="alternate" type="application/rss+xml" title="WordPress Developer Resources &raquo; Feed" href="../../../feed/index.html" />
+<link rel="alternate" type="application/rss+xml" title="WordPress Developer Resources &raquo; Comments Feed" href="../../../comments/feed/index.html" />
+<meta property="og:title" content="wp_list_categories() | Function | WordPress Developer Resources" />
+<meta property="og:site_name" content="WordPress Developer Resources" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="../../../index.html" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@WordPress" />
+<meta name="description" content="Displays or retrieves the HTML list of categories." />
+<meta property="og:description" content="Displays or retrieves the HTML list of categories." />
+<link rel="alternate" type="application/rss+xml" title="WordPress Developer Resources &raquo; wp_list_categories Comments Feed" href="https://developer.wordpress.org/reference/functions/wp_list_categories/feed/" />
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'../../../../www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P24PF4B');</script>
+			<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/developer.wordpress.org\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.9-alpha-51701"}};
+			!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([10084,65039,8205,55357,56613],[10084,65039,8203,55357,56613])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel='stylesheet' id='dashicons-css'  href='../../../wp-includes/css/dashicons.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='admin-bar-css'  href='../../../wp-includes/css/admin-bar.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-block-library-css'  href='../../../wp-includes/css/dist/block-library/style.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='wporg-handbook-css-css'  href='../../../wp-content/plugins/handbook/stylesheets/callout-boxes.css?ver=20200121' type='text/css' media='all' />
+<link rel='stylesheet' id='open-sans-css'  href='../../../../fonts.googleapis.com/css-2.css?family=Open+Sans%3A300italic%2C400italic%2C600italic%2C300%2C400%2C600&amp;subset=latin%2Clatin-ext&amp;display=fallback&amp;ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='wporg-developer-style-css'  href='../../../wp-content/themes/pub/wporg-developer/style.css?ver=3' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-dev-sass-compiled-css'  href='../../../wp-content/themes/pub/wporg-developer/stylesheets/main.css?ver=20200713' type='text/css' media='all' />
+<link rel='stylesheet' id='awesomplete-css-css'  href='../../../wp-content/themes/pub/wporg-developer/stylesheets/awesomplete.css?ver=20160114' type='text/css' media='all' />
+<link rel='stylesheet' id='autocomplete-css-css'  href='../../../wp-content/themes/pub/wporg-developer/stylesheets/autocomplete.css?ver=20171220' type='text/css' media='all' />
+<link rel='stylesheet' id='syntaxhighlighter-core-css'  href='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shCore.css?ver=3.0.9b' type='text/css' media='all' />
+<link rel='stylesheet' id='syntaxhighlighter-theme-default-css'  href='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shThemeDefault.css?ver=3.0.9b' type='text/css' media='all' />
+<script type='text/javascript' src='../../../wp-includes/js/jquery/jquery.min.js?ver=3.6.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='../../../wp-content/plugins/handbook/scripts/handbook.js?ver=20150930' id='wporg-handbook-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/chapters.js?ver=20190603' id='wporg-developer-chapters-js'></script>
+<script type='text/javascript' src='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shCore.js?ver=3.0.9b' id='syntaxhighlighter-core-js'></script>
+<script type='text/javascript' src='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushPhp.js?ver=3.0.9b' id='syntaxhighlighter-brush-php-js'></script>
+<link rel="https://api.w.org/" href="https://developer.wordpress.org/wp-json/" /><link rel="alternate" type="application/json" href="https://developer.wordpress.org/wp-json/wp/v2/wp-parser-function/3684" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="../../../xmlrpc-2.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="../../../wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 5.9-alpha-51701" />
+<link rel='shortlink' href='https://developer.wordpress.org/?p=3684' />
+<link rel="alternate" type="application/json+oembed" href="https://developer.wordpress.org/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_list_categories%2F" />
+<link rel="alternate" type="text/xml+oembed" href="https://developer.wordpress.org/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_list_categories%2F&amp;format=xml" />
+<link rel="canonical" href="index.html">
+<!-- Stream WordPress user activity plugin v3.6.2 -->
+	<style>
+		@media screen and (max-width: 782px) {
+			#wpadminbar li#wp-admin-bar-log-in,
+			#wpadminbar li#wp-admin-bar-register {
+				display: block;
+			}
+
+			#wpadminbar li#wp-admin-bar-log-in a,
+			#wpadminbar li#wp-admin-bar-register a {
+				padding: 0 8px;
+			}
+		}
+	</style>
+		<style>
+			a.github-edit {
+				margin-left: .5em;
+				font-size: .5em;
+				vertical-align: top;
+				display: inline-block;
+				border: 1px solid #eeeeee;
+				border-radius: 2px;
+				background: #eeeeee;
+				padding: .5em .6em .4em;
+				color: black;
+				margin-top: 0.1em;
+			}
+			a.github-edit > * {
+				opacity: 0.6;
+			}
+			a.github-edit:hover > * {
+				opacity: 1;
+				color: black;
+			}
+			a.github-edit img {
+				height: .8em;
+			}
+		</style>
+		
+	<script type="text/javascript">
+		jQuery( '<style>.hide-if-js { display: none; }</style>' ).appendTo( 'head' );
+		jQuery( function($) {
+			$( 'body' ).addClass('js');
+		} );
+	</script>
+<style type="text/css" media="print">#wpadminbar { display:none; }</style>
+	<style type="text/css" media="screen">
+	</style>
+	<script>document.cookie='devicePixelRatio='+((window.devicePixelRatio === undefined) ? 1 : window.devicePixelRatio)+'; path=/';</script>
+
+</head>
+
+
+<body id="wordpress-org" class="wp-parser-function-template-default single single-wp-parser-function postid-3684 admin-bar no-customize-support">
+		<div id="wpadminbar" class="nojq nojs">
+						<div class="quicklinks" id="wp-toolbar" role="navigation" aria-label="Toolbar">
+				<ul id='wp-admin-bar-root-default' class="ab-top-menu"><li id='wp-admin-bar-wp-logo' class="menupop"><a class='ab-item' aria-haspopup="true" href='https://wordpress.org/about/'><span class="ab-icon" aria-hidden="true"></span><span class="screen-reader-text">About WordPress</span></a><div class="ab-sub-wrapper"><ul id='wp-admin-bar-wp-logo-default' class="ab-submenu"><li id='wp-admin-bar-about'><a class='ab-item' href='https://wordpress.org/about/'>About WordPress</a></li></ul><ul id='wp-admin-bar-wp-logo-external' class="ab-sub-secondary ab-submenu"><li id='wp-admin-bar-wporg'><a class='ab-item' href='https://wordpress.org/'>WordPress.org</a></li><li id='wp-admin-bar-documentation'><a class='ab-item' href='https://wordpress.org/support/'>Documentation</a></li><li id='wp-admin-bar-support-forums'><a class='ab-item' href='https://wordpress.org/support/forums/'>Support</a></li><li id='wp-admin-bar-feedback'><a class='ab-item' href='https://wordpress.org/support/forum/requests-and-feedback'>Feedback</a></li></ul></div></li></ul><ul id='wp-admin-bar-top-secondary' class="ab-top-secondary ab-top-menu"><li id='wp-admin-bar-search' class="admin-bar-search"><div class="ab-item ab-empty-item" tabindex="-1"><form action="https://developer.wordpress.org/" method="get" id="adminbarsearch"><input class="adminbar-input" name="s" id="adminbar-search" type="text" value="" maxlength="150" /><label for="adminbar-search" class="screen-reader-text">Search</label><input type="submit" class="adminbar-button" value="Search" /></form></div></li><li id='wp-admin-bar-log-in'><a class='ab-item' href='https://login.wordpress.org/?locale=en_US'>Log In</a></li><li id='wp-admin-bar-register'><a class='ab-item' href='https://login.wordpress.org/register?locale=en_US'>Register</a></li></ul>			</div>
+					</div>
+
+		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P24PF4B" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<div id="wporg-header">
+	<div class="wrapper">
+	<h1><a href="http://wordpress.org/">WordPress.org</a></h1>				<div id="head-search">
+		<form action="http://wordpress.org/search/do-search.php" method="get">
+			<label for="global-search" class="screen-reader-text">Search WordPress.org for:</label>
+			<input id="global-search" class="text" name="search" type="text" value="" maxlength="150" placeholder="Search WordPress.org" />
+			<button type="submit" class="button"><span class="screen-reader-text">Submit</span></button>
+		</form>
+		</div>
+				<div style="clear:both"></div>
+		<button id="mobile-menu-button" aria-expanded="false"><span class="screen-reader-text">Toggle Menu</span></button>
+		
+<nav aria-label="Main Menu">
+<ul id="wporg-header-menu">
+<li class="menu-item"><a href='http://wordpress.org/showcase/' data-title='See some of the sites built on WordPress.'>Showcase</a></li>
+<li class="menu-item"><a href='http://learn.wordpress.org/' data-title='Resources to help you learn more about WordPress and teach it to others.'>Learn</a></li>
+<li class="menu-item"><a href='http://wordpress.org/themes/' data-title='Find just the right look for your website.'>Themes</a></li>
+<li class="menu-item"><a href='http://wordpress.org/plugins/' data-title='Plugins can extend WordPress to do almost anything you can imagine.'>Plugins</a></li>
+<li class="menu-item"><a href='http://wordpress.org/mobile/' data-title='Take your website on the go!'>Mobile</a></li>
+<li class="menu-item"><a href='http://wordpress.org/support/' data-title='Forums, documentation, help.'>Support</a><ul class="nav-submenu"><li><a href='http://wordpress.org/support/' title='Documentation, tutorials, best practices.'>Documentation</a></li><li><a href='http://wordpress.org/support/forums/' title='Support and discussion forums.'>Forums</a></li></ul><div class="uparrow"></div></li>
+<li class="menu-item"><a href='http://make.wordpress.org/' data-title='Contribute your knowledge.'>Get Involved</a><ul class="nav-submenu"><li><a href='http://wordpress.org/five-for-the-future/' title='How five percent is powering the next generation of the web'>Five for the Future</a></li></ul><div class="uparrow"></div></li>
+<li class="menu-item"><a href='http://wordpress.org/about/' data-title='About the WordPress Organization, and where we&#039;re going.'>About</a></li>
+<li class="menu-item"><a href='http://wordpress.org/news/' data-title='Come here for the latest scoop.'>Blog</a></li>
+<li class="menu-item"><a href='http://wordpress.org/hosting/' data-title='Find a home for your blog.'>Hosting</a></li>
+<li id="download" class="button download-button menu-item"><a href='http://wordpress.org/download/' data-title='Get it. Got it? Good.'>Get WordPress</a></li>
+</ul>
+</nav>
+		<div style="clear:both"></div>
+	</div>
+</div>
+
+
+
+<header id="masthead" class="site-header" role="banner">
+		<div class="site-branding">
+		<h1 class="site-title">
+			<a href="../../index.html" rel="home">Code Reference</a>
+		</h1>
+
+		
+		<nav id="site-navigation" class="main-navigation" role="navigation">
+			<button class="menu-toggle dashicons dashicons-arrow-down-alt2" aria-controls="primary-menu" aria-expanded="false" aria-label="Primary Menu"></button>
+					</nav>
+	</div>
+</header><!-- #masthead -->
+
+<div id="page" class="hfeed site devhub-wrap">
+	<a href="#main" class="screen-reader-text">Skip to content</a>
+
+				<div id="inner-search">
+			<div class="search-section section clear hide-if-js">
+
+
+	
+	<form role="search" method="get" class="searchform searchform-filtered" action="https://developer.wordpress.org/">
+		<label for="search-field" class="screen-reader-text">Search for:</label>
+		<input type="text" id="search-field" class="search-field" placeholder="Search &hellip;" value="" name="s">
+		<button class="button button-primary button-search"><i class="dashicons dashicons-search"></i><span class="screen-reader-text">Search plugins</span></button>
+	
+		<div class="search-post-type">
+			<span>Filter by type:</span>
+									<label><input type="checkbox" name="post_type[]" value="wp-parser-function"
+						 /> Functions</label>
+									<label><input type="checkbox" name="post_type[]" value="wp-parser-hook"
+						 /> Hooks</label>
+									<label><input type="checkbox" name="post_type[]" value="wp-parser-class"
+						 /> Classes</label>
+									<label><input type="checkbox" name="post_type[]" value="wp-parser-method"
+						 /> Methods</label>
+					</div>
+
+	
+	</form>
+
+</div><!-- /search-guide -->
+			<div id="inner-search-icon-container">
+				<div id="inner-search-icon">
+					<div class="dashicons dashicons-search"><span class="screen-reader-text">Search</span></div>
+				</div>
+			</div>
+		</div>
+
+		<div id="content" class="site-content">
+
+	<div id="content-area" class="wp-parser-function-template-default single single-wp-parser-function postid-3684 admin-bar no-customize-support code-reference">
+
+		
+		<div class="breadcrumb-trail breadcrumbs" itemprop="breadcrumb">
+			<span class="trail-browse">Browse:</span> 
+			<span class="trail-begin"><a href="../../../index.html" title="WordPress Developer Resources" rel="home">Home</a></span> <span class="sep">&#47;</span> 
+			<span class="trail-inner"><a href="../../index.html" title="Reference">Reference</a></span> <span class="sep">&#47;</span> 
+			<span class="trail-inner"><a href="../index.html">Functions</a></span> <span class="sep">&#47;</span> <span class="trail-end">wp_list_categories()</span>
+		</div>
+		<main id="main" class="site-main" role="main">
+
+		
+			
+<article id="post-3684" class="post-3684 wp-parser-function type-wp-parser-function status-publish hentry wp-parser-source-file-wp-includes_category-template-php wp-parser-package-template wp-parser-package-wordpress wp-parser-since-2-1-0 wp-parser-since-4-4-0">
+
+	
+	
+	<h1>wp_list_categories( <span class="arg-type">array|string</span>&nbsp;<span class="arg-name">$args</span>&nbsp;=&nbsp;<span class="arg-default">''</span>&nbsp;)</h1>
+
+	<section class="summary">
+		<p>Displays or retrieves the HTML list of categories.</p>
+	</section>
+
+
+	
+	<div class="content-toc"><style> .toc-jump { text-align: right; font-size: 12px; } .page .toc-heading { margin-top: -50px; padding-top: 50px !important; }</style><div class="table-of-contents"><h2>Contents</h2><ul class="items"><li><a href="#parameters">Parameters</a></li>
+<li><a href="#return">Return</a></li>
+<li><a href="#more-information">More Information</a>
+<ul>
+<li><a href="#usage">Usage</a>
+</ul></li>
+<li><a href="#source">Source</a></li>
+<li><a href="#related">Related</a>
+<ul>
+<li><a href="#uses">Uses</a></li>
+<li><a href="#used-by">Used By</a>
+</ul></li>
+<li><a href="#changelog">Changelog</a></li>
+<li><a href="#user-contributed-notes">User Contributed Notes</a></ul>
+</div>
+	<hr />
+	<section class="parameters">
+		<h2 class="toc-heading" id="parameters" tabindex="-1">Parameters <a href="#parameters" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Parameters</span></a></h2>
+		<dl>
+												<dt>$args</dt>
+								<dd>
+					<p class="desc">
+													<span class="type">(<span class="array">array</span>|<span class="string">string</span>)</span>
+																			<span class="required">(Optional)</span>
+																			<span class="description">Array of optional arguments. See <a href="../get_categories/index.html">get_categories()</a>, <a href="../get_terms/index.html">get_terms()</a>, and <a href="../../classes/wp_term_query/__construct/index.html">WP_Term_Query::__construct()</a> for information on additional accepted arguments. <ul class="param-hash"><li><b>'current_category'</b><br /><i><span class='type'>(int|int[])</span></i> ID of category, or array of IDs of categories, that should get the 'current-cat' class. Default 0.</li>
+<li><b>'depth'</b><br /><i><span class='type'>(int)</span></i> Category depth. Used for tab indentation. Default 0.</li>
+<li><b>'echo'</b><br /><i><span class='type'>(bool|int)</span></i> Whether to echo or return the generated markup. Accepts 0, 1, or their bool equivalents. Default 1.</li>
+<li><b>'exclude'</b><br /><i><span class='type'>(int[]|string)</span></i> Array or comma/space-separated string of term IDs to exclude. If <code>$hierarchical</code> is true, descendants of <code>$exclude</code> terms will also be excluded; see <code>$exclude_tree</code>. See <a href="../get_terms/index.html">get_terms()</a>. </li>
+<li><b>'exclude_tree'</b><br /><i><span class='type'>(int[]|string)</span></i> Array or comma/space-separated string of term IDs to exclude, along with their descendants. See <a href="../get_terms/index.html">get_terms()</a>. </li>
+<li><b>'feed'</b><br /><i><span class='type'>(string)</span></i> Text to use for the feed link. Default 'Feed for all posts filed under [cat name]'.</li>
+<li><b>'feed_image'</b><br /><i><span class='type'>(string)</span></i> URL of an image to use for the feed link. </li>
+<li><b>'feed_type'</b><br /><i><span class='type'>(string)</span></i> Feed type. Used to build feed link. See <a href="../get_term_feed_link/index.html">get_term_feed_link()</a>. Default empty string (default feed).</li>
+<li><b>'hide_title_if_empty'</b><br /><i><span class='type'>(bool)</span></i> Whether to hide the <code>$title_li</code> element if there are no terms in the list. Default false (title will always be shown).</li>
+<li><b>'separator'</b><br /><i><span class='type'>(string)</span></i> Separator between links. Default <code>&lt;br /&gt;</code>.</li>
+<li><b>'show_count'</b><br /><i><span class='type'>(bool|int)</span></i> Whether to include post counts. Accepts 0, 1, or their bool equivalents. Default 0.</li>
+<li><b>'show_option_all'</b><br /><i><span class='type'>(string)</span></i> Text to display for showing all categories. </li>
+<li><b>'show_option_none'</b><br /><i><span class='type'>(string)</span></i> Text to display for the 'no categories' option. Default 'No categories'.</li>
+<li><b>'style'</b><br /><i><span class='type'>(string)</span></i> The style used to display the categories list. If 'list', categories will be output as an unordered list. If left empty or another value, categories will be output separated by <code>&lt;br&gt;</code> tags. Default 'list'.</li>
+<li><b>'taxonomy'</b><br /><i><span class='type'>(string)</span></i> Name of the taxonomy to retrieve. Default 'category'.</li>
+<li><b>'title_li'</b><br /><i><span class='type'>(string)</span></i> Text to use for the list title <code>&lt;li&gt;</code> element. Pass an empty string to disable. Default 'Categories'.</li>
+<li><b>'use_desc_for_title'</b><br /><i><span class='type'>(bool|int)</span></i> Whether to use the category description as the title attribute. Accepts 0, 1, or their bool equivalents. Default 1.</li>
+</li></ul>
+</span>
+											</p>
+											<p class="default">Default value: ''</p>
+									</dd>
+					</dl>
+	</section>
+	<hr />
+	<section class="return">
+		<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="return" tabindex="-1">Return <a href="#return" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Return</span></a></h2>
+		<p><span class='return-type'>(void|string|false)</span> Void if 'echo' argument is true, HTML list of categories if 'echo' is false.                           False if the taxonomy does not exist.</p>
+	</section>
+	<hr />
+	<section class="explanation">
+		<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="more-information" tabindex="-1">More Information <a href="#more-information" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">More Information</span></a></h2>
+
+		<p>If you need a function that does not format the results, try <a href="../get_categories/index.html">get_categories()</a>.</p>
+<h3 class="toc-heading" id="usage" tabindex="-1">Usage <a href="#usage" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Usage</span></a></h3>
+<p>By default, <a href="index.html">wp_list_categories()</a> displays:</p>
+<ul>
+<li>No link to all categories</li>
+<li>Sorts the list of Categories by the Category name in ascending order</li>
+<li>Displayed in an unordered list style</li>
+<li>Does not show the post count</li>
+<li>Displays only Categories with posts</li>
+<li>Sets the title attribute to the Category Description</li>
+<li>Is not restricted to the child_of any Category</li>
+<li>No feed or feed image used</li>
+<li>Does not exclude any Category and includes all Categories</li>
+<li>Displays the active Category with the CSS Class-Suffix &#8216; current-cat&#8217;</li>
+<li>Shows the Categories in hierarchical indented fashion</li>
+<li>Display Category as the heading over the list</li>
+<li>No SQL LIMIT is imposed (&#8216;number&#8217; =&gt; 0 is not shown above)</li>
+<li>Displays (echos) the categories</li>
+<li>No limit to depth</li>
+<li>All categories.</li>
+<li>The list is rendered using a new walker object of the the <a href="../../classes/walker_category/index.html">Walker_Category</a> class</li>
+</ul>
+	</section>
+	<hr />
+	<section class="source-content">
+		<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="source" tabindex="-1">Source <a href="#source" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Source</span></a></h2>
+		<p>
+			File: <a href="../../files/wp-includes/category-template.php/index.html">wp-includes/category-template.php</a>		</p>
+
+					<div class="source-code-container">
+				<pre class="brush: php; toolbar: false; first-line: 525">function wp_list_categories( $args = '' ) {
+	$defaults = array(
+		'child_of'            =&gt; 0,
+		'current_category'    =&gt; 0,
+		'depth'               =&gt; 0,
+		'echo'                =&gt; 1,
+		'exclude'             =&gt; '',
+		'exclude_tree'        =&gt; '',
+		'feed'                =&gt; '',
+		'feed_image'          =&gt; '',
+		'feed_type'           =&gt; '',
+		'hide_empty'          =&gt; 1,
+		'hide_title_if_empty' =&gt; false,
+		'hierarchical'        =&gt; true,
+		'order'               =&gt; 'ASC',
+		'orderby'             =&gt; 'name',
+		'separator'           =&gt; '&lt;br /&gt;',
+		'show_count'          =&gt; 0,
+		'show_option_all'     =&gt; '',
+		'show_option_none'    =&gt; __( 'No categories' ),
+		'style'               =&gt; 'list',
+		'taxonomy'            =&gt; 'category',
+		'title_li'            =&gt; __( 'Categories' ),
+		'use_desc_for_title'  =&gt; 1,
+	);
+
+	$parsed_args = wp_parse_args( $args, $defaults );
+
+	if ( ! isset( $parsed_args['pad_counts'] ) &amp;&amp; $parsed_args['show_count'] &amp;&amp; $parsed_args['hierarchical'] ) {
+		$parsed_args['pad_counts'] = true;
+	}
+
+	// Descendants of exclusions should be excluded too.
+	if ( true == $parsed_args['hierarchical'] ) {
+		$exclude_tree = array();
+
+		if ( $parsed_args['exclude_tree'] ) {
+			$exclude_tree = array_merge( $exclude_tree, wp_parse_id_list( $parsed_args['exclude_tree'] ) );
+		}
+
+		if ( $parsed_args['exclude'] ) {
+			$exclude_tree = array_merge( $exclude_tree, wp_parse_id_list( $parsed_args['exclude'] ) );
+		}
+
+		$parsed_args['exclude_tree'] = $exclude_tree;
+		$parsed_args['exclude']      = '';
+	}
+
+	if ( ! isset( $parsed_args['class'] ) ) {
+		$parsed_args['class'] = ( 'category' === $parsed_args['taxonomy'] ) ? 'categories' : $parsed_args['taxonomy'];
+	}
+
+	if ( ! taxonomy_exists( $parsed_args['taxonomy'] ) ) {
+		return false;
+	}
+
+	$show_option_all  = $parsed_args['show_option_all'];
+	$show_option_none = $parsed_args['show_option_none'];
+
+	$categories = get_categories( $parsed_args );
+
+	$output = '';
+
+	if ( $parsed_args['title_li'] &amp;&amp; 'list' === $parsed_args['style']
+		&amp;&amp; ( ! empty( $categories ) || ! $parsed_args['hide_title_if_empty'] )
+	) {
+		$output = '&lt;li class=&quot;' . esc_attr( $parsed_args['class'] ) . '&quot;&gt;' . $parsed_args['title_li'] . '&lt;ul&gt;';
+	}
+
+	if ( empty( $categories ) ) {
+		if ( ! empty( $show_option_none ) ) {
+			if ( 'list' === $parsed_args['style'] ) {
+				$output .= '&lt;li class=&quot;cat-item-none&quot;&gt;' . $show_option_none . '&lt;/li&gt;';
+			} else {
+				$output .= $show_option_none;
+			}
+		}
+	} else {
+		if ( ! empty( $show_option_all ) ) {
+
+			$posts_page = '';
+
+			// For taxonomies that belong only to custom post types, point to a valid archive.
+			$taxonomy_object = get_taxonomy( $parsed_args['taxonomy'] );
+			if ( ! in_array( 'post', $taxonomy_object-&gt;object_type, true ) &amp;&amp; ! in_array( 'page', $taxonomy_object-&gt;object_type, true ) ) {
+				foreach ( $taxonomy_object-&gt;object_type as $object_type ) {
+					$_object_type = get_post_type_object( $object_type );
+
+					// Grab the first one.
+					if ( ! empty( $_object_type-&gt;has_archive ) ) {
+						$posts_page = get_post_type_archive_link( $object_type );
+						break;
+					}
+				}
+			}
+
+			// Fallback for the 'All' link is the posts page.
+			if ( ! $posts_page ) {
+				if ( 'page' === get_option( 'show_on_front' ) &amp;&amp; get_option( 'page_for_posts' ) ) {
+					$posts_page = get_permalink( get_option( 'page_for_posts' ) );
+				} else {
+					$posts_page = home_url( '/' );
+				}
+			}
+
+			$posts_page = esc_url( $posts_page );
+			if ( 'list' === $parsed_args['style'] ) {
+				$output .= &quot;&lt;li class='cat-item-all'&gt;&lt;a href='$posts_page'&gt;$show_option_all&lt;/a&gt;&lt;/li&gt;&quot;;
+			} else {
+				$output .= &quot;&lt;a href='$posts_page'&gt;$show_option_all&lt;/a&gt;&quot;;
+			}
+		}
+
+		if ( empty( $parsed_args['current_category'] ) &amp;&amp; ( is_category() || is_tax() || is_tag() ) ) {
+			$current_term_object = get_queried_object();
+			if ( $current_term_object &amp;&amp; $parsed_args['taxonomy'] === $current_term_object-&gt;taxonomy ) {
+				$parsed_args['current_category'] = get_queried_object_id();
+			}
+		}
+
+		if ( $parsed_args['hierarchical'] ) {
+			$depth = $parsed_args['depth'];
+		} else {
+			$depth = -1; // Flat.
+		}
+		$output .= walk_category_tree( $categories, $depth, $parsed_args );
+	}
+
+	if ( $parsed_args['title_li'] &amp;&amp; 'list' === $parsed_args['style']
+		&amp;&amp; ( ! empty( $categories ) || ! $parsed_args['hide_title_if_empty'] )
+	) {
+		$output .= '&lt;/ul&gt;&lt;/li&gt;';
+	}
+
+	/**
+	 * Filters the HTML output of a taxonomy list.
+	 *
+	 * @since 2.1.0
+	 *
+	 * @param string $output HTML output.
+	 * @param array  $args   An array of taxonomy-listing arguments. See wp_list_categories()
+	 *                       for information on accepted arguments.
+	 */
+	$html = apply_filters( 'wp_list_categories', $output, $args );
+
+	if ( $parsed_args['echo'] ) {
+		echo $html;
+	} else {
+		return $html;
+	}
+}
+</pre>
+			</div>
+			<p class="source-code-links">
+				<span>
+					<a href="#" class="show-complete-source">Expand full source code</a>
+					<a href="#" class="less-complete-source">Collapse full source code</a>
+				</span>
+				<span><a href="https://core.trac.wordpress.org/browser/tags/5.8/src/wp-includes/category-template.php#L525">View on Trac</a></span>
+			</p>
+			</section>
+	<hr />
+	<section class="related">
+		<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="related" tabindex="-1">Related <a href="#related" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Related</span></a></h2>
+
+					<article class="uses">
+				<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="uses" tabindex="-1">Uses <a href="#uses" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Uses</span></a></h3>
+				<table id="uses-table">
+					<caption class="screen-reader-text">Uses</caption>
+					<thead>
+						<tr>
+							<th>Uses</th>
+							<th class="related-desc">Description</th>
+						</tr>
+					</thead>
+					<tbody>
+												<tr>
+							<td>
+								<span>wp-includes/category-template.php:</span>
+								<a href="../walk_category_tree/index.html">walk_category_tree()</a>
+							</td>
+							<td class="related-desc">
+								<p>Retrieves HTML list content for category list.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/category-template.php:</span>
+								<a href="../../hooks/wp_list_categories/index.html">wp_list_categories</a>
+							</td>
+							<td class="related-desc">
+								<p>Filters the HTML output of a taxonomy list.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/l10n.php:</span>
+								<a href="../__/index.html">__()</a>
+							</td>
+							<td class="related-desc">
+								<p>Retrieve the translation of $text.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/formatting.php:</span>
+								<a href="../esc_attr/index.html">esc_attr()</a>
+							</td>
+							<td class="related-desc">
+								<p>Escaping for HTML attributes.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/formatting.php:</span>
+								<a href="../esc_url/index.html">esc_url()</a>
+							</td>
+							<td class="related-desc">
+								<p>Checks and cleans a URL.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/query.php:</span>
+								<a href="../is_category/index.html">is_category()</a>
+							</td>
+							<td class="related-desc">
+								<p>Determines whether the query is for an existing category archive page.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/query.php:</span>
+								<a href="../is_tax/index.html">is_tax()</a>
+							</td>
+							<td class="related-desc">
+								<p>Determines whether the query is for an existing custom taxonomy archive page.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/query.php:</span>
+								<a href="../is_tag/index.html">is_tag()</a>
+							</td>
+							<td class="related-desc">
+								<p>Determines whether the query is for an existing tag archive page.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/query.php:</span>
+								<a href="../get_queried_object/index.html">get_queried_object()</a>
+							</td>
+							<td class="related-desc">
+								<p>Retrieves the currently queried object.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/query.php:</span>
+								<a href="../get_queried_object_id/index.html">get_queried_object_id()</a>
+							</td>
+							<td class="related-desc">
+								<p>Retrieves the ID of the currently queried object.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/category.php:</span>
+								<a href="../get_categories/index.html">get_categories()</a>
+							</td>
+							<td class="related-desc">
+								<p>Retrieves a list of category objects.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/functions.php:</span>
+								<a href="../wp_parse_args/index.html">wp_parse_args()</a>
+							</td>
+							<td class="related-desc">
+								<p>Merges user defined arguments into defaults array.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/functions.php:</span>
+								<a href="../wp_parse_id_list/index.html">wp_parse_id_list()</a>
+							</td>
+							<td class="related-desc">
+								<p>Cleans up an array, comma- or space-separated list of IDs.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/taxonomy.php:</span>
+								<a href="../taxonomy_exists/index.html">taxonomy_exists()</a>
+							</td>
+							<td class="related-desc">
+								<p>Determines whether the taxonomy name exists.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/taxonomy.php:</span>
+								<a href="../get_taxonomy/index.html">get_taxonomy()</a>
+							</td>
+							<td class="related-desc">
+								<p>Retrieves the taxonomy object of $taxonomy.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/link-template.php:</span>
+								<a href="../home_url/index.html">home_url()</a>
+							</td>
+							<td class="related-desc">
+								<p>Retrieves the URL for the current site where the front end is accessible.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/link-template.php:</span>
+								<a href="../get_post_type_archive_link/index.html">get_post_type_archive_link()</a>
+							</td>
+							<td class="related-desc">
+								<p>Retrieves the permalink for a post type archive.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/link-template.php:</span>
+								<a href="../get_permalink/index.html">get_permalink()</a>
+							</td>
+							<td class="related-desc">
+								<p>Retrieves the full permalink for the current post or post ID.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/plugin.php:</span>
+								<a href="../apply_filters/index.html">apply_filters()</a>
+							</td>
+							<td class="related-desc">
+								<p>Calls the callback functions that have been added to a filter hook.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/option.php:</span>
+								<a href="../get_option/index.html">get_option()</a>
+							</td>
+							<td class="related-desc">
+								<p>Retrieves an option value based on an option name.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/post.php:</span>
+								<a href="../get_post_type_object/index.html">get_post_type_object()</a>
+							</td>
+							<td class="related-desc">
+								<p>Retrieves a post type object by name.</p>
+							</td>
+						</tr>
+											<tbody>
+				</table>
+
+								<a href="#" class="show-more">Show 16 more uses</a>
+				<a href="#" class="hide-more">Hide more uses</a>
+							</article>
+		
+					<hr />
+			<article class="used-by">
+				<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="used-by" tabindex="-1">Used By <a href="#used-by" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Used By</span></a></h3>
+				<table id="used-by-table">
+					<caption class="screen-reader-text">Used By</caption>
+					<thead>
+						<tr>
+							<th>Used By</th>
+							<th class="related-desc">Description</th>
+						</tr>
+					</thead>
+					<tbody>
+												<tr>
+							<td>
+								<span>wp-includes/deprecated.php:</span>
+								<a href="../wp_list_cats/index.html">wp_list_cats()</a>
+							</td>
+							<td class="related-desc">
+								<p>Lists categories.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/widgets/class-wp-widget-categories.php:</span>
+								<a href="../../classes/wp_widget_categories/widget/index.html">WP_Widget_Categories::widget()</a>
+							</td>
+							<td class="related-desc">
+								<p>Outputs the content for the current Categories widget instance.</p>
+							</td>
+						</tr>
+											<tbody>
+				</table>
+
+							</article>
+			</section>
+		<hr />
+	<section class="changelog">
+		<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="changelog" tabindex="-1">Changelog <a href="#changelog" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Changelog</span></a></h2>
+
+		<table>
+			<caption class="screen-reader-text">Changelog</caption>
+			<thead>
+				<tr>
+					<th class="changelog-version">Version</th>
+					<th class="changelog-desc">Description</th>
+				</tr>
+			</thead>
+
+			<tbody>
+									
+					<tr>
+						<td><a href="../../since/4.4.0/index.html" alt="WordPress 4.4.0">4.4.0</a></td>
+						<td><span class="since-description">The <code>current_category</code> argument was modified to optionally accept an array of values.</span></td>
+					</tr>
+									
+					<tr>
+						<td><a href="../../since/2.1.0/index.html" alt="WordPress 2.1.0">2.1.0</a></td>
+						<td>Introduced.</td>
+					</tr>
+							</tbody>
+		</table>
+	</section>
+
+	<hr />
+	<section class="user-notes">
+		<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="user-contributed-notes" tabindex="-1">User Contributed Notes <a href="#user-contributed-notes" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">User Contributed Notes</span></a></h2>
+		
+<div id="comments" class="comments-area">
+
+			
+		<ol class="comment-list">
+						<li id="comment-1169" data-comment-id="1169" class="comment byuser comment-author-codex even thread-even depth-1">
+			<article id="div-comment-1169" class="comment-body">
+
+							<a href="#comment-content-1169" class="screen-reader-text">Skip to note 1 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="74b9e498ed"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="1169" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_list_categories%2F%23comment-1169"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="100% like this"><span class="screen-reader-text">Vote results for this note: </span>7</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="1169" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_list_categories%2F%23comment-1169"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/688ab6934b21bca68e0fe4fc54a66805?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/688ab6934b21bca68e0fe4fc54a66805?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/codex/" rel="external nofollow" class="url">Codex</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-1169">
+							<time datetime="2016-02-16T08:20:25+00:00">
+							6 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-1169">
+				<p><strong>Display Categories Assigned to a Post</strong></p>
+<p>Display the categories (or terms from other taxonomies) assigned to a post ordered by parent-child category relationship. Similar to the function get_the_category_list() which orders the categories by name. This example must be used inside the loop.</p>
+<section class="source-content">
+<div class="source-code-container">
+<pre class="brush: php; title: ; notranslate" title="">
+$taxonomy = 'category';
+
+// Get the term IDs assigned to post.
+$post_terms = wp_get_object_terms( $post-&gt;ID, $taxonomy, array( 'fields' =&gt; 'ids' ) );
+
+// Separator between links.
+$separator = ', ';
+
+if ( ! empty( $post_terms ) &amp;&amp; ! is_wp_error( $post_terms ) ) {
+
+	$term_ids = implode( ',' , $post_terms );
+
+	$terms = wp_list_categories( array(
+		'title_li' =&gt; '',
+		'style'    =&gt; 'none',
+		'echo'     =&gt; false,
+		'taxonomy' =&gt; $taxonomy,
+		'include'  =&gt; $term_ids
+	) );
+
+	$terms = rtrim( trim( str_replace( '&lt;br /&gt;',  $separator, $terms ) ), $separator );
+
+	// Display post categories.
+	echo  $terms;
+}
+</pre>
+</div>
+<p class="source-code-links"><span><a href="#" class="show-complete-source">Expand full source code</a><a href="#" class="less-complete-source">Collapse full source code</a></span></p>
+</section>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-1169' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_list_categories%2F%3Freplytocom%3D1169%23feedback-editor-1169" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-1163" data-comment-id="1163" class="comment byuser comment-author-codex odd alt thread-odd thread-alt depth-1">
+			<article id="div-comment-1163" class="comment-body">
+
+							<a href="#comment-content-1163" class="screen-reader-text">Skip to note 2 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="e611fd9a1d"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="1163" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_list_categories%2F%23comment-1163"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="100% like this"><span class="screen-reader-text">Vote results for this note: </span>4</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="1163" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_list_categories%2F%23comment-1163"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/688ab6934b21bca68e0fe4fc54a66805?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/688ab6934b21bca68e0fe4fc54a66805?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/codex/" rel="external nofollow" class="url">Codex</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-1163">
+							<time datetime="2016-02-16T08:16:17+00:00">
+							6 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-1163">
+				<p><strong>Include or Exclude Categories</strong></p>
+<p>To sort categories alphabetically and include only the categories with IDs of 16, 3, 9 and 5, you could write the following code:</p>
+<pre class="brush: php; title: ; notranslate" title="">
+&lt;ul&gt;
+	&lt;?php wp_list_categories( array(
+		'orderby' =&gt; 'name',
+		'include' =&gt; array( 3, 5, 9, 16 )
+	) ); ?&gt; 
+&lt;/ul&gt;
+</pre>
+<p>The following example displays category links sorted by name, shows the number of posts for each category, and excludes the category with the ID of 10 from the list.</p>
+<pre class="brush: php; title: ; notranslate" title="">
+&lt;ul&gt;
+	&lt;?php wp_list_categories( array(
+		'orderby'    =&gt; 'name',
+		'show_count' =&gt; true,
+		'exclude'    =&gt; array( 10 )
+	) ); ?&gt; 
+&lt;/ul&gt;
+</pre>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-1163' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_list_categories%2F%3Freplytocom%3D1163%23feedback-editor-1163" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-1164" data-comment-id="1164" class="comment byuser comment-author-codex even thread-even depth-1">
+			<article id="div-comment-1164" class="comment-body">
+
+							<a href="#comment-content-1164" class="screen-reader-text">Skip to note 3 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="f3c2c67a9f"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="1164" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_list_categories%2F%23comment-1164"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="100% like this"><span class="screen-reader-text">Vote results for this note: </span>3</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="1164" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_list_categories%2F%23comment-1164"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/688ab6934b21bca68e0fe4fc54a66805?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/688ab6934b21bca68e0fe4fc54a66805?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/codex/" rel="external nofollow" class="url">Codex</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-1164">
+							<time datetime="2016-02-16T08:17:11+00:00">
+							6 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-1164">
+				<p><strong>Display or Hide the List Heading</strong></p>
+<p>The title_li parameter sets or hides a title or heading for the category list generated by wp_list_categories. It defaults to &#8216;(__(&#8216;Categories&#8217;)&#8217;, i.e. it displays the word &#8220;Categories&#8221; as the list&#8217;s heading. If the parameter is set to a null or empty value, no heading is displayed. The following example code excludes categories with IDs 4 and 7 and hides the list heading:</p>
+<pre class="brush: php; title: ; notranslate" title="">
+&lt;ul&gt;
+	&lt;?php wp_list_categories( array(
+		'exclude'  =&gt; array( 4,7 ),
+		'title_li' =&gt; ''
+	) ); ?&gt;
+&lt;/ul&gt;
+</pre>
+<p>In the following example, only Categories with IDs 9, 5, and 23 are included in the list and the heading text has been changed to the word &#8220;Poetry&#8221;, with a heading style of :</p>
+<pre class="brush: php; title: ; notranslate" title="">
+&lt;ul&gt;
+	&lt;?php wp_list_categories( array(
+		'include'  =&gt; array( 5, 9, 23 ),
+		'title_li' =&gt; '&lt;h2&gt;' . __( 'Poetry', 'textdomain' ) . '&lt;/h2&gt;'
+	) ); ?&gt; 
+&lt;/ul&gt;
+</pre>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-1164' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_list_categories%2F%3Freplytocom%3D1164%23feedback-editor-1164" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-2568" data-comment-id="2568" class="comment byuser comment-author-certainlyakey odd alt thread-odd thread-alt depth-1">
+			<article id="div-comment-2568" class="comment-body">
+
+							<a href="#comment-content-2568" class="screen-reader-text">Skip to note 4 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="2fe0280c96"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="2568" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_list_categories%2F%23comment-2568"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="100% like this"><span class="screen-reader-text">Vote results for this note: </span>3</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="2568" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_list_categories%2F%23comment-2568"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/8f0911de52695bd28102d1f23c268285?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/8f0911de52695bd28102d1f23c268285?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/certainlyakey/" rel="external nofollow" class="url">certainlyakey</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-2568">
+							<time datetime="2018-02-03T21:21:37+00:00">
+							4 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-2568">
+				<p>Note that you can use all the arguments implemented for <a href="../get_terms/index.html">get_terms()</a> function and <a href="../../classes/wp_term_query/__construct/index.html">WP_Term_Query::__construct</a>. So, for example, the arguments <code>meta_key</code> or <code>meta_value</code> can be added and will do their job as well.</p>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-2568' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_list_categories%2F%3Freplytocom%3D2568%23feedback-editor-2568" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-1166" data-comment-id="1166" class="comment byuser comment-author-codex even thread-even depth-1">
+			<article id="div-comment-1166" class="comment-body">
+
+							<a href="#comment-content-1166" class="screen-reader-text">Skip to note 5 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="ba840218a4"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="1166" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_list_categories%2F%23comment-1166"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="100% like this"><span class="screen-reader-text">Vote results for this note: </span>2</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="1166" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_list_categories%2F%23comment-1166"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/688ab6934b21bca68e0fe4fc54a66805?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/688ab6934b21bca68e0fe4fc54a66805?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/codex/" rel="external nofollow" class="url">Codex</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-1166">
+							<time datetime="2016-02-16T08:18:28+00:00">
+							6 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-1166">
+				<p><strong>Remove Parentheses from Category Counts</strong></p>
+<p>When show_count=1, each category count is surrounded by parentheses. In order to remove the parentheses without modifying core WordPress files, use the following code.</p>
+<pre class="brush: php; title: ; notranslate" title="">
+$variable = wp_list_categories( array(
+	'echo' =&gt; false,
+	'show_count' =&gt; true,
+	'title_li' =&gt; '&lt;h2&gt;' . __( 'Categories', 'textdomain' ) . '&lt;/h2&gt;'
+) );
+
+$variable = preg_replace( '~\((\d+)\)(?=\s*+&lt;)~', '$1', $variable );
+echo $variable;
+</pre>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-1166' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_list_categories%2F%3Freplytocom%3D1166%23feedback-editor-1166" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-1168" data-comment-id="1168" class="comment byuser comment-author-codex odd alt thread-odd thread-alt depth-1">
+			<article id="div-comment-1168" class="comment-body">
+
+							<a href="#comment-content-1168" class="screen-reader-text">Skip to note 6 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="c816b2e8b5"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="1168" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_list_categories%2F%23comment-1168"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="100% like this"><span class="screen-reader-text">Vote results for this note: </span>2</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="1168" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_list_categories%2F%23comment-1168"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/688ab6934b21bca68e0fe4fc54a66805?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/688ab6934b21bca68e0fe4fc54a66805?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/codex/" rel="external nofollow" class="url">Codex</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-1168">
+							<time datetime="2016-02-16T08:19:54+00:00">
+							6 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-1168">
+				<p><strong>Display Terms in a custom taxonomy</strong></p>
+<p>With Version 3.0 the taxonomy parameter was added to enable wp_list_categories() function to list Custom Taxonomies. This example list the terms in the taxonomy genre:</p>
+<section class="source-content">
+<div class="source-code-container">
+<pre class="brush: php; title: ; notranslate" title="">
+// List terms in a given taxonomy using wp_list_categories (also useful as a widget if using a PHP Code plugin)
+
+$taxonomy     = 'genre';
+$orderby      = 'name'; 
+$show_count   = false;
+$pad_counts   = false;
+$hierarchical = true;
+$title        = '';
+
+$args = array(
+  'taxonomy'     =&gt; $taxonomy,
+  'orderby'      =&gt; $orderby,
+  'show_count'   =&gt; $show_count,
+  'pad_counts'   =&gt; $pad_counts,
+  'hierarchical' =&gt; $hierarchical,
+  'title_li'     =&gt; $title
+);
+?&gt;
+
+&lt;ul&gt;
+	&lt;?php wp_list_categories( $args ); ?&gt;
+&lt;/ul&gt;
+</pre>
+</div>
+<p class="source-code-links"><span><a href="#" class="show-complete-source">Expand full source code</a><a href="#" class="less-complete-source">Collapse full source code</a></span></p>
+</section>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-1168' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_list_categories%2F%3Freplytocom%3D1168%23feedback-editor-1168" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-1165" data-comment-id="1165" class="comment byuser comment-author-codex even thread-even depth-1">
+			<article id="div-comment-1165" class="comment-body">
+
+							<a href="#comment-content-1165" class="screen-reader-text">Skip to note 7 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="ecf6775635"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="1165" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_list_categories%2F%23comment-1165"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title=""><span class="screen-reader-text">Vote results for this note: </span>0</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="1165" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_list_categories%2F%23comment-1165"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/688ab6934b21bca68e0fe4fc54a66805?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/688ab6934b21bca68e0fe4fc54a66805?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/codex/" rel="external nofollow" class="url">Codex</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-1165">
+							<time datetime="2016-02-16T08:17:59+00:00">
+							6 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-1165">
+				<p><strong>Only Show Children of a Category</strong></p>
+<p>The following example code generates category links, sorted by ID, only for the children of the category with ID 8; it shows the number of posts per category and hides category descriptions from the title attribute of the generated links. Note: If there are no posts in a parent Category, the parent Category will not display.</p>
+<pre class="brush: php; title: ; notranslate" title="">
+&lt;ul&gt;
+	&lt;?php wp_list_categories( array(
+		'orderby'            =&gt; 'id',
+		'show_count'         =&gt; true,
+		'use_desc_for_title' =&gt; false,
+		'child_of'           =&gt; 8
+	) ); ?&gt;
+&lt;/ul&gt;
+</pre>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-1165' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_list_categories%2F%3Freplytocom%3D1165%23feedback-editor-1165" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-1167" data-comment-id="1167" class="comment byuser comment-author-codex odd alt thread-odd thread-alt depth-1">
+			<article id="div-comment-1167" class="comment-body">
+
+							<a href="#comment-content-1167" class="screen-reader-text">Skip to note 8 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="44414fc197"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="1167" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_list_categories%2F%23comment-1167"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title=""><span class="screen-reader-text">Vote results for this note: </span>0</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="1167" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_list_categories%2F%23comment-1167"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/688ab6934b21bca68e0fe4fc54a66805?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/688ab6934b21bca68e0fe4fc54a66805?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/codex/" rel="external nofollow" class="url">Codex</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-1167">
+							<time datetime="2016-02-16T08:19:09+00:00">
+							6 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-1167">
+				<p><strong>Display Categories with RSS Feed Links</strong></p>
+<p>The following example generates Category links sorted by name, shows the number of posts per Category, and displays links to the RSS feed for each Category.</p>
+<pre class="brush: php; title: ; notranslate" title="">
+&lt;ul&gt;
+	&lt;?php wp_list_categories( array(
+		'orderby'    =&gt; 'name',
+		'show_count' =&gt; true,
+		'feed'       =&gt; 'RSS'
+	) ); ?&gt;
+&lt;/ul&gt;
+</pre>
+<p>To replace the rss link with a feed icon, you could write:</p>
+<pre class="brush: php; title: ; notranslate" title="">
+&lt;ul&gt;
+	&lt;?php wp_list_categories( array(
+		'orderby'    =&gt; 'name',
+		'show_count' =&gt; true,
+		'feed_image' =&gt; '/images/rss.gif'
+	) ); ?&gt;
+&lt;/ul&gt;
+</pre>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-1167' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_list_categories%2F%3Freplytocom%3D1167%23feedback-editor-1167" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-1170" data-comment-id="1170" class="comment byuser comment-author-codex even thread-even depth-1">
+			<article id="div-comment-1170" class="comment-body">
+
+							<a href="#comment-content-1170" class="screen-reader-text">Skip to note 9 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="c16217e00e"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="1170" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_list_categories%2F%23comment-1170"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title=""><span class="screen-reader-text">Vote results for this note: </span>0</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="1170" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_list_categories%2F%23comment-1170"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/688ab6934b21bca68e0fe4fc54a66805?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/688ab6934b21bca68e0fe4fc54a66805?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/codex/" rel="external nofollow" class="url">Codex</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-1170">
+							<time datetime="2016-02-16T08:21:10+00:00">
+							6 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-1170">
+				<p><strong>Markup and Styling of Category Lists</strong></p>
+<p>By default, wp_list_categories() generates nested unordered lists (ul) within a single list item (li) titled &#8220;Categories&#8221;.</p>
+<p>You can remove the outermost item and list by setting the title_li parameter to an empty string. You&#8217;ll need to wrap the output in an ordered list (ol) or unordered list yourself (see the examples above). If you don&#8217;t want list output at all, set the style parameter to none.</p>
+<p>You can style the output with these CSS selectors :</p>
+<pre class="brush: php; title: ; notranslate" title="">
+ li.categories { ... }  /* outermost list item */
+ li.cat-item { ... }
+ li.cat-item-7 { ... }  /* category ID #7, etc */
+ li.current-cat { ... }
+ li.current-cat-parent { ... }
+ ul.children { ... }
+</pre>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-1170' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_list_categories%2F%3Freplytocom%3D1170%23feedback-editor-1170" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-3242" data-comment-id="3242" class="comment byuser comment-author-nossfloda odd alt thread-odd thread-alt depth-1">
+			<article id="div-comment-3242" class="comment-body">
+
+							<a href="#comment-content-3242" class="screen-reader-text">Skip to note 10 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="c3aba3a478"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="3242" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_list_categories%2F%23comment-3242"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title=""><span class="screen-reader-text">Vote results for this note: </span>0</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="3242" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_list_categories%2F%23comment-3242"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/2d134991ce0048accfd0eaea29fe062c?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/2d134991ce0048accfd0eaea29fe062c?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/nossfloda/" rel="external nofollow" class="url">nossfloda</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-3242">
+							<time datetime="2019-06-11T09:16:01+00:00">
+							2 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-3242">
+				<p>&#8216;include&#8217; is missing from the parameter list.</p>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-3242' class='feedback hide-if-js'>
+<h4 class='feedback-title'>Feedback</h4>
+<ul class='children'>
+			<li id="comment-4011" data-comment-id="4011" class="comment byuser comment-author-artgallery75 even depth-2">
+			<article id="div-comment-4011" class="comment-body">
+
+			
+				<div class="comment-content" id="comment-content-4011">
+				<p>This code is a variation of one that already appears here that the last two arrays show the child categories of 17 and then exclude the main category showing only the children.    </p>
+<pre class="brush: php; title: ; notranslate" title=""> $taxonomy = 'category'; $post_terms = wp_get_object_terms( $post-&gt;ID, $taxonomy, array( 'fields' =&gt; 'ids' ) ); $separator = ', '; if ( ! empty( $post_terms ) &amp;amp;&amp;amp; ! is_wp_error( $post_terms ) ) { $term_ids = implode( ',', $post_terms ); $terms = wp_list_categories( array( 'title_li' =&gt; '', 'style' =&gt; 'none', 'echo' =&gt; false, 'taxonomy' =&gt; $taxonomy, 'include' =&gt; $term_ids, 'child_of' =&gt; 17, 'exclude' =&gt; 17 ) ); $terms = rtrim( trim( str_replace( '&amp;lt;br /&gt;', $separator, $terms ) ), $separator ); echo $terms; } </pre>
+<p> &mdash; By <cite class="fn"><a href="https://profiles.wordpress.org/artgallery75/" rel="external nofollow" class="url">Artgallery75</a></cite> &mdash;  <a class="comment-date" href="index.html#comment-4011"><time datetime="2020-06-25T16:50:33+00:00">1 year ago</time></a></p>
+				</div><!-- .comment-content -->
+
+						</article>
+			</li>
+								<li id="comment-4471" data-comment-id="4471" class="comment byuser comment-author-nicholaseymann odd alt depth-2">
+			<article id="div-comment-4471" class="comment-body">
+
+			
+				<div class="comment-content" id="comment-content-4471">
+				<p>‘hierarchical’ is missing from the parameter list. &mdash; By <cite class="fn"><a href="https://profiles.wordpress.org/nicholaseymann/" rel="external nofollow" class="url">nicholas.eymann</a></cite> &mdash;  <a class="comment-date" href="index.html#comment-4471"><time datetime="2020-11-01T01:08:15+00:00">10 months ago</time></a></p>
+				</div><!-- .comment-content -->
+
+						</article>
+			</li>
+					</ul>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_list_categories%2F%3Freplytocom%3D3242%23feedback-editor-3242" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+		</ol><!-- .comment-list -->
+
+		
+	
+	
+			<div id="respond" class="comment-respond">
+		<h3 id="reply-title" class="comment-reply-title"> <small></small></h3><p>You must <a href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_list_categories%2F%23comments">log in</a> before being able to contribute a note or feedback.</p>	</div><!-- #respond -->
+		
+	
+</div><!-- #comments -->
+	</section>
+</div>
+
+</article>
+
+			
+		
+		</main><!-- #main -->
+	</div><!-- #primary -->
+	</div><!-- #content -->
+
+</div><!-- #page -->
+
+
+<div id="wporg-footer">
+	<div class="wrapper">
+		<ul>
+			<li><a href="http://wordpress.org/about/" title="An introduction to the WordPress project">About</a></li>
+			<li><a href="http://wordpress.org/news/" title="News and Updates">Blog</a></li>
+			<li><a href="http://wordpress.org/hosting/" title="Recommended web hosting providers">Hosting</a></li>
+			<li><a href="https://wordpressfoundation.org/donate/" title="Donate to the WordPress Foundation">Donate</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://wordpress.org/support/" title="Forums, documentation, and other resources">Support</a></li>
+			<li><a href="../../../index.html" title="Resources for WordPress developers">Developers</a></li>
+			<li><a href="http://make.wordpress.org/" title="Give back to WordPress through code, support, translation and more">Get Involved</a></li>
+			<li><a href="http://learn.wordpress.org/" title="Workshops and training materials">Learn</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://wordpress.org/showcase/" title="Some of the best WordPress sites on the Web">Showcase</a></li>
+			<li><a href="http://wordpress.org/plugins/" title="Add extra functionality to WordPress">Plugins</a></li>
+			<li><a href="http://wordpress.org/themes/" title="Make your WordPress pretty">Themes</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://central.wordcamp.org/" title="Find a WordPress event near you">WordCamp</a></li>
+			<li><a href="http://wordpress.tv/" title="Videos, tutorials, and WordCamp sessions">WordPress.TV</a></li>
+			<li><a href="http://buddypress.org/" title="A set of plugins to transform your WordPress into a social network">BuddyPress</a></li>
+			<li><a href="http://bbpress.org/" title="Fast, slick forums built on WordPress">bbPress</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://wordpress.com/?ref=wporg-footer" title="Hassle-free WordPress hosting">WordPress.com</a></li>
+			<li><a href="http://ma.tt/" title="Co-founder of WordPress, an example of what WordPress can do">Matt</a></li>
+			<li><a href="http://wordpress.org/about/privacy/" title="WordPress.org Privacy Policy">Privacy</a></li>
+			<li><a href="https://publiccode.eu/" target="_blank">Public Code</a></li>
+		</ul>
+
+		<ul class="social-media-links">
+			<li><span class="dashicons dashicons-twitter"></span><a href="https://twitter.com/WordPress" title="Follow @WordPress on Twitter">@WordPress</a></li>
+			<li><span class="dashicons dashicons-facebook"></span><a href="https://www.facebook.com/WordPress/" title="Like WordPress on Facebook">WordPress</a></li>
+		</ul>
+	</div>
+
+		<p class="cip cip-image">Code is Poetry.</p>
+</div>
+
+<script src="../../../../s.w.org/style/js/navigation.min.js?20190128"></script>
+
+<script type='text/javascript'>
+	(function(){
+		var corecss = document.createElement('link');
+		var themecss = document.createElement('link');
+		var corecssurl = "../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shCore.css?ver=3.0.9b";
+		if ( corecss.setAttribute ) {
+				corecss.setAttribute( "rel", "stylesheet" );
+				corecss.setAttribute( "type", "text/css" );
+				corecss.setAttribute( "href", corecssurl );
+		} else {
+				corecss.rel = "stylesheet";
+				corecss.href = corecssurl;
+		}
+		document.head.appendChild( corecss );
+		var themecssurl = "../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shThemeDefault.css?ver=3.0.9b";
+		if ( themecss.setAttribute ) {
+				themecss.setAttribute( "rel", "stylesheet" );
+				themecss.setAttribute( "type", "text/css" );
+				themecss.setAttribute( "href", themecssurl );
+		} else {
+				themecss.rel = "stylesheet";
+				themecss.href = themecssurl;
+		}
+		document.head.appendChild( themecss );
+	})();
+	SyntaxHighlighter.config.strings.expandSource = '+ expand source';
+	SyntaxHighlighter.config.strings.help = '?';
+	SyntaxHighlighter.config.strings.alert = 'SyntaxHighlighter\n\n';
+	SyntaxHighlighter.config.strings.noBrush = 'Can\'t find brush for: ';
+	SyntaxHighlighter.config.strings.brushNotHtmlScript = 'Brush wasn\'t configured for html-script option: ';
+	SyntaxHighlighter.defaults['pad-line-numbers'] = false;
+	SyntaxHighlighter.defaults['toolbar'] = false;
+	SyntaxHighlighter.all();
+
+	// Infinite scroll support
+	if ( typeof( jQuery ) !== 'undefined' ) {
+		jQuery( function( $ ) {
+			$( document.body ).on( 'post-load', function() {
+				SyntaxHighlighter.highlight();
+			} );
+		} );
+	}
+</script>
+<link rel='stylesheet' id='buttons-css'  href='../../../wp-includes/css/buttons.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<script type='text/javascript' src='../../../wp-includes/js/hoverintent-js.min.js?ver=2.2.1' id='hoverintent-js-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/admin-bar.min.js?ver=5.9-alpha-51701' id='admin-bar-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/navigation.js?ver=20181209' id='wporg-developer-navigation-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/skip-link-focus-fix.js?ver=20130115' id='wporg-developer-skip-link-focus-fix-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/search.js?ver=20150430' id='wporg-developer-search-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/menu.js?ver=20180201' id='wporg-developer-menu-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/awesomplete.min.js?ver=20160322' id='awesomplete-js'></script>
+<script type='text/javascript' id='autocomplete-js-extra'>
+/* <![CDATA[ */
+var autocomplete = {"ajaxurl":"https:\/\/developer.wordpress.org\/wp-admin\/admin-ajax.php","nonce":"8a60f70c4b"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/autocomplete.js?ver=20160524' id='autocomplete-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/function-reference.js?ver=20180724' id='wporg-developer-function-reference-js'></script>
+<script type='text/javascript' id='quicktags-js-extra'>
+/* <![CDATA[ */
+var quicktagsL10n = {"closeAllOpenTags":"Close all open tags","closeTags":"close tags","enterURL":"Enter the URL","enterImageURL":"Enter the URL of the image","enterImageDescription":"Enter a description of the image","textdirection":"text direction","toggleTextdirection":"Toggle Editor Text Direction","dfw":"Distraction-free writing mode","strong":"Bold","strongClose":"Close bold tag","em":"Italic","emClose":"Close italic tag","link":"Insert link","blockquote":"Blockquote","blockquoteClose":"Close blockquote tag","del":"Deleted text (strikethrough)","delClose":"Close deleted text tag","ins":"Inserted text","insClose":"Close inserted text tag","image":"Insert image","ul":"Bulleted list","ulClose":"Close bulleted list tag","ol":"Numbered list","olClose":"Close numbered list tag","li":"List item","liClose":"Close list item tag","code":"Code","codeClose":"Close code tag","more":"Insert Read More tag"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-includes/js/quicktags.min.js?ver=5.9-alpha-51701' id='quicktags-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/user-notes.js?ver=20200110' id='wporg-developer-user-notes-js'></script>
+<script type='text/javascript' id='wporg-developer-user-notes-feedback-js-extra'>
+/* <![CDATA[ */
+var wporg_note_feedback = {"show":"Show Feedback","hide":"Hide Feedback"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/user-notes-feedback.js?ver=20181023' id='wporg-developer-user-notes-feedback-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/tabs.js?ver=20160824' id='wporg-developer-tabs-js'></script>
+<script type='text/javascript' id='wporg-developer-preview-js-extra'>
+/* <![CDATA[ */
+var wporg_note_preview = {"ajaxurl":"https:\/\/developer.wordpress.org\/wp-admin\/admin-ajax.php","nonce":"504933b60e","preview":"preview note","preview_empty":"Nothing to preview","is_admin":""};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/user-notes-preview.js?ver=20200111' id='wporg-developer-preview-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/wp-embed.min.js?ver=5.9-alpha-51701' id='wp-embed-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/vendor/regenerator-runtime.min.js?ver=0.13.7' id='regenerator-runtime-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/vendor/wp-polyfill.min.js?ver=3.15.0' id='wp-polyfill-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/dom-ready.min.js?ver=71883072590656bf22c74c7b887df3dd' id='wp-dom-ready-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/hooks.min.js?ver=a7edae857aab69d69fa10d5aef23a5de' id='wp-hooks-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/i18n.min.js?ver=5f1269854226b4dd90450db411a12b79' id='wp-i18n-js'></script>
+<script type='text/javascript' id='wp-i18n-js-after'>
+wp.i18n.setLocaleData( { 'text direction\u0004ltr': [ 'ltr' ] } );
+</script>
+<script type='text/javascript' id='wp-a11y-js-translations'>
+( function( domain, translations ) {
+	var localeData = translations.locale_data[ domain ] || translations.locale_data.messages;
+	localeData[""].domain = domain;
+	wp.i18n.setLocaleData( localeData, domain );
+} )( "default", { "locale_data": { "messages": { "": {} } } } );
+</script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/a11y.min.js?ver=0ac8327cc1c40dcfdf29716affd7ac63' id='wp-a11y-js'></script>
+<script type='text/javascript' id='wplink-js-extra'>
+/* <![CDATA[ */
+var wpLinkL10n = {"title":"Insert\/edit link","update":"Update","save":"Add Link","noTitle":"(no title)","noMatchesFound":"No results found.","linkSelected":"Link selected.","linkInserted":"Link inserted.","minInputLength":"3"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-includes/js/wplink.min.js?ver=5.9-alpha-51701' id='wplink-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/jquery/ui/core.min.js?ver=1.12.1' id='jquery-ui-core-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/jquery/ui/menu.min.js?ver=1.12.1' id='jquery-ui-menu-js'></script>
+<script type='text/javascript' id='jquery-ui-autocomplete-js-extra'>
+/* <![CDATA[ */
+var uiAutocompleteL10n = {"noResults":"No results found.","oneResult":"1 result found. Use up and down arrow keys to navigate.","manyResults":"%d results found. Use up and down arrow keys to navigate.","itemSelected":"Item selected."};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-includes/js/jquery/ui/autocomplete.min.js?ver=1.12.1' id='jquery-ui-autocomplete-js'></script>
+
+		<script type="text/javascript">
+		tinyMCEPreInit = {
+			baseURL: "https://developer.wordpress.org/wp-includes/js/tinymce",
+			suffix: ".min",
+						mceInit: {},
+			qtInit: {'comment':{id:"comment",buttons:"strong,em,ul,ol,li,link"}},
+			ref: {plugins:"",theme:"modern",language:""},
+			load_ext: function(url,lang){var sl=tinymce.ScriptLoader;sl.markDone(url+'/langs/'+lang+'.js');sl.markDone(url+'/langs/'+lang+'_dlg.js');}
+		};
+		</script>
+				<script type="text/javascript">
+		var ajaxurl = "../../../wp-admin/admin-ajax.html";
+		( function() {
+			var initialized = [];
+			var initialize  = function() {
+				var init, id, inPostbox, $wrap;
+				var readyState = document.readyState;
+
+				if ( readyState !== 'complete' && readyState !== 'interactive' ) {
+					return;
+				}
+
+				for ( id in tinyMCEPreInit.mceInit ) {
+					if ( initialized.indexOf( id ) > -1 ) {
+						continue;
+					}
+
+					init      = tinyMCEPreInit.mceInit[id];
+					$wrap     = tinymce.$( '#wp-' + id + '-wrap' );
+					inPostbox = $wrap.parents( '.postbox' ).length > 0;
+
+					if (
+						! init.wp_skip_init &&
+						( $wrap.hasClass( 'tmce-active' ) || ! tinyMCEPreInit.qtInit.hasOwnProperty( id ) ) &&
+						( readyState === 'complete' || ( ! inPostbox && readyState === 'interactive' ) )
+					) {
+						tinymce.init( init );
+						initialized.push( id );
+
+						if ( ! window.wpActiveEditor ) {
+							window.wpActiveEditor = id;
+						}
+					}
+				}
+			}
+
+			if ( typeof tinymce !== 'undefined' ) {
+				if ( tinymce.Env.ie && tinymce.Env.ie < 11 ) {
+					tinymce.$( '.wp-editor-wrap ' ).removeClass( 'tmce-active' ).addClass( 'html-active' );
+				} else {
+					if ( document.readyState === 'complete' ) {
+						initialize();
+					} else {
+						document.addEventListener( 'readystatechange', initialize );
+					}
+				}
+			}
+
+			if ( typeof quicktags !== 'undefined' ) {
+				for ( id in tinyMCEPreInit.qtInit ) {
+					quicktags( tinyMCEPreInit.qtInit[id] );
+
+					if ( ! window.wpActiveEditor ) {
+						window.wpActiveEditor = id;
+					}
+				}
+			}
+		}());
+		</script>
+				<div id="wp-link-backdrop" style="display: none"></div>
+		<div id="wp-link-wrap" class="wp-core-ui" style="display: none" role="dialog" aria-labelledby="link-modal-title">
+		<form id="wp-link" tabindex="-1">
+		<input type="hidden" id="_ajax_linking_nonce" name="_ajax_linking_nonce" value="86f5a0a85d" />		<h1 id="link-modal-title">Insert/edit link</h1>
+		<button type="button" id="wp-link-close"><span class="screen-reader-text">Close</span></button>
+		<div id="link-selector">
+			<div id="link-options">
+				<p class="howto" id="wplink-enter-url">Enter the destination URL</p>
+				<div>
+					<label><span>URL</span>
+					<input id="wp-link-url" type="text" aria-describedby="wplink-enter-url" /></label>
+				</div>
+				<div class="wp-link-text-field">
+					<label><span>Link Text</span>
+					<input id="wp-link-text" type="text" /></label>
+				</div>
+				<div class="link-target">
+					<label><span></span>
+					<input type="checkbox" id="wp-link-target" /> Open link in a new tab</label>
+				</div>
+			</div>
+			<p class="howto" id="wplink-link-existing-content">Or link to existing content</p>
+			<div id="search-panel">
+				<div class="link-search-wrapper">
+					<label>
+						<span class="search-label">Search</span>
+						<input type="search" id="wp-link-search" class="link-search-field" autocomplete="off" aria-describedby="wplink-link-existing-content" />
+						<span class="spinner"></span>
+					</label>
+				</div>
+				<div id="search-results" class="query-results" tabindex="0">
+					<ul></ul>
+					<div class="river-waiting">
+						<span class="spinner"></span>
+					</div>
+				</div>
+				<div id="most-recent-results" class="query-results" tabindex="0">
+					<div class="query-notice" id="query-notice-message">
+						<em class="query-notice-default">No search term specified. Showing recent items.</em>
+						<em class="query-notice-hint screen-reader-text">Search or use up and down arrow keys to select an item.</em>
+					</div>
+					<ul></ul>
+					<div class="river-waiting">
+						<span class="spinner"></span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="submitbox">
+			<div id="wp-link-cancel">
+				<button type="button" class="button">Cancel</button>
+			</div>
+			<div id="wp-link-update">
+				<input type="submit" value="Add Link" class="button button-primary" id="wp-link-submit" name="wp-link-submit">
+			</div>
+		</div>
+		</form>
+		</div>
+		</body>
+
+<!-- Mirrored from developer.wordpress.org/reference/functions/wp_list_categories/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 31 Aug 2021 16:58:56 GMT -->
+</html>

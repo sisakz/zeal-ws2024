@@ -1,0 +1,864 @@
+<html><!--<![endif]--><!-- Mirrored from phpunit.readthedocs.io/en/7.1/fixtures.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 14 Jul 2018 16:54:06 GMT --><head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>4. Fixtures</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css">
+  <link rel="stylesheet" href="../../../media.readthedocs.org/css/sphinx_rtd_theme.css" type="text/css">
+    <link rel="index" title="Index" href="genindex.html">
+    <link rel="search" title="Search" href="search.html">
+    <link rel="copyright" title="Copyright" href="copyright.html">
+    <link rel="next" title="5. Organizing Tests" href="organizing-tests.html">
+    <link rel="prev" title="3. The Command-Line Test Runner" href="textui.html"> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+
+<!-- RTD Extra Head -->
+
+<!-- 
+Always link to the latest version, as canonical.
+http://docs.readthedocs.org/en/latest/canonical.html
+-->
+<link rel="canonical" href="fixtures.html">
+
+<link rel="stylesheet" href="../../../media.readthedocs.org/css/readthedocs-doc-embed.css" type="text/css">
+
+<script type="text/javascript" src="_static/readthedocs-data.js"></script>
+
+<!-- Add page-specific data, which must exist in the page js, not global -->
+<script type="text/javascript">
+READTHEDOCS_DATA['page'] = 'fixtures'
+READTHEDOCS_DATA['source_suffix'] = '.rst'
+</script>
+
+<script type="text/javascript" src="../../../media.readthedocs.org/javascript/readthedocs-analytics.js"></script>
+
+<!-- end RTD <extrahead> -->
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index-2.html" class="icon icon-home"> PHPUnit
+          
+
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="https://phpunit.readthedocs.io/en/7.1/search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs">
+    <input type="hidden" name="check_keywords" value="yes">
+    <input type="hidden" name="area" value="default">
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">1. Installing PHPUnit</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#php-archive-phar">PHP Archive (PHAR)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="installation.html#windows">Windows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="installation.html#verifying-phpunit-phar-releases">Verifying PHPUnit PHAR Releases</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#composer">Composer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#optional-packages">Optional packages</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="writing-tests-for-phpunit.html">2. Writing Tests for PHPUnit</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="writing-tests-for-phpunit.html#test-dependencies">Test Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writing-tests-for-phpunit.html#data-providers">Data Providers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writing-tests-for-phpunit.html#testing-exceptions">Testing Exceptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writing-tests-for-phpunit.html#testing-php-errors">Testing PHP Errors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writing-tests-for-phpunit.html#testing-output">Testing Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writing-tests-for-phpunit.html#error-output">Error output</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="writing-tests-for-phpunit.html#edge-cases">Edge cases</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="textui.html">3. The Command-Line Test Runner</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="textui.html#command-line-options">Command-Line Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="textui.html#testdox">TestDox</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">4. Fixtures</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#more-setup-than-teardown">More setUp() than tearDown()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#variations">Variations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sharing-fixture">Sharing Fixture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#global-state">Global State</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="organizing-tests.html">5. Organizing Tests</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="organizing-tests.html#composing-a-test-suite-using-the-filesystem">Composing a Test Suite Using the Filesystem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="organizing-tests.html#composing-a-test-suite-using-xml-configuration">Composing a Test Suite Using XML Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="risky-tests.html">6. Risky Tests</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="risky-tests.html#useless-tests">Useless Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="risky-tests.html#unintentionally-covered-code">Unintentionally Covered Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="risky-tests.html#output-during-test-execution">Output During Test Execution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="risky-tests.html#test-execution-timeout">Test Execution Timeout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="risky-tests.html#global-state-manipulation">Global State Manipulation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="incomplete-and-skipped-tests.html">7. Incomplete and Skipped Tests</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="incomplete-and-skipped-tests.html#incomplete-tests">Incomplete Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="incomplete-and-skipped-tests.html#skipping-tests">Skipping Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="incomplete-and-skipped-tests.html#skipping-tests-using-requires">Skipping Tests using @requires</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="database.html">8. Database Testing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="database.html#supported-vendors-for-database-testing">Supported Vendors for Database Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="database.html#difficulties-in-database-testing">Difficulties in Database Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="database.html#the-four-stages-of-a-database-test">The four stages of a database test</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="database.html#clean-up-database">1. Clean-Up Database</a></li>
+<li class="toctree-l3"><a class="reference internal" href="database.html#set-up-fixture">2. Set up fixture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="database.html#run-test-verify-outcome-and-teardown">3–5. Run Test, Verify outcome and Teardown</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="database.html#configuration-of-a-phpunit-database-testcase">Configuration of a PHPUnit Database TestCase</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="database.html#implementing-getconnection">Implementing getConnection()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="database.html#implementing-getdataset">Implementing getDataSet()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="database.html#what-about-the-database-schema-ddl">What about the Database Schema (DDL)?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="database.html#tip-use-your-own-abstract-database-testcase">Tip: Use your own Abstract Database TestCase</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="database.html#understanding-datasets-and-datatables">Understanding DataSets and DataTables</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="database.html#available-implementations">Available Implementations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="database.html#flat-xml-dataset">Flat XML DataSet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="database.html#xml-dataset">XML DataSet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="database.html#mysql-xml-dataset">MySQL XML DataSet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="database.html#yaml-dataset">YAML DataSet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="database.html#csv-dataset">CSV DataSet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="database.html#array-dataset">Array DataSet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="database.html#query-sql-dataset">Query (SQL) DataSet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="database.html#database-db-dataset">Database (DB) Dataset</a></li>
+<li class="toctree-l4"><a class="reference internal" href="database.html#replacement-dataset">Replacement DataSet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="database.html#dataset-filter">DataSet Filter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="database.html#composite-dataset">Composite DataSet</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="database.html#beware-of-foreign-keys">Beware of Foreign Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="database.html#implementing-your-own-datasets-datatables">Implementing your own DataSets/DataTables</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="database.html#using-the-database-connection-api">Using the Database Connection API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="database.html#database-assertions-api">Database Assertions API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="database.html#asserting-the-row-count-of-a-table">Asserting the Row-Count of a Table</a></li>
+<li class="toctree-l3"><a class="reference internal" href="database.html#asserting-the-state-of-a-table">Asserting the State of a Table</a></li>
+<li class="toctree-l3"><a class="reference internal" href="database.html#asserting-the-result-of-a-query">Asserting the Result of a Query</a></li>
+<li class="toctree-l3"><a class="reference internal" href="database.html#asserting-the-state-of-multiple-tables">Asserting the State of Multiple Tables</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="database.html#frequently-asked-questions">Frequently Asked Questions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="database.html#will-phpunit-re-create-the-database-schema-for-each-test">Will PHPUnit (re-)create the database schema for each test?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="database.html#am-i-required-to-use-pdo-in-my-application-for-the-database-extension-to-work">Am I required to use PDO in my application for the Database Extension to work?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="database.html#what-can-i-do-when-i-get-a-too-much-connections-error">What can I do, when I get a “Too much Connections“ Error?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="database.html#how-to-handle-null-with-flat-xml-csv-datasets">How to handle NULL with Flat XML / CSV Datasets?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="test-doubles.html">9. Test Doubles</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="test-doubles.html#stubs">Stubs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="test-doubles.html#mock-objects">Mock Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="test-doubles.html#prophecy">Prophecy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="test-doubles.html#mocking-traits-and-abstract-classes">Mocking Traits and Abstract Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="test-doubles.html#stubbing-and-mocking-web-services">Stubbing and Mocking Web Services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="test-doubles.html#mocking-the-filesystem">Mocking the Filesystem</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="code-coverage-analysis.html">10. Code Coverage Analysis</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="code-coverage-analysis.html#software-metrics-for-code-coverage">Software Metrics for Code Coverage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code-coverage-analysis.html#whitelisting-files">Whitelisting Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code-coverage-analysis.html#ignoring-code-blocks">Ignoring Code Blocks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code-coverage-analysis.html#specifying-covered-methods">Specifying Covered Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code-coverage-analysis.html#edge-cases">Edge Cases</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="logging.html">11. Logging</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="logging.html#test-results-xml">Test Results (XML)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="logging.html#code-coverage-xml">Code Coverage (XML)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="logging.html#code-coverage-text">Code Coverage (TEXT)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="extending-phpunit.html">12. Extending PHPUnit</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="extending-phpunit.html#subclass-phpunit-framework-testcase">Subclass PHPUnit\Framework\TestCase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="extending-phpunit.html#write-custom-assertions">Write custom assertions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="extending-phpunit.html#implement-phpunit-framework-testlistener">Implement PHPUnit\Framework\TestListener</a></li>
+<li class="toctree-l2"><a class="reference internal" href="extending-phpunit.html#implement-phpunitframeworktest">Implement PHPUnitFrameworkTest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="extending-phpunit.html#extending-the-testrunner">Extending the TestRunner</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="extending-phpunit.html#available-hook-interfaces">Available Hook Interfaces</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="assertions.html">1. Assertions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#static-vs-non-static-usage-of-assertion-methods">Static vs. Non-Static Usage of Assertion Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertarrayhaskey">assertArrayHasKey()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertclasshasattribute">assertClassHasAttribute()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertarraysubset">assertArraySubset()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertclasshasstaticattribute">assertClassHasStaticAttribute()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertcontains">assertContains()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertcontainsonly">assertContainsOnly()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertcontainsonlyinstancesof">assertContainsOnlyInstancesOf()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertcount">assertCount()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertdirectoryexists">assertDirectoryExists()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertdirectoryisreadable">assertDirectoryIsReadable()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertdirectoryiswritable">assertDirectoryIsWritable()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertempty">assertEmpty()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertequalxmlstructure">assertEqualXMLStructure()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertequals">assertEquals()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertfalse">assertFalse()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertfileequals">assertFileEquals()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertfileexists">assertFileExists()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertfileisreadable">assertFileIsReadable()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertfileiswritable">assertFileIsWritable()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertgreaterthan">assertGreaterThan()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertgreaterthanorequal">assertGreaterThanOrEqual()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertinfinite">assertInfinite()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertinstanceof">assertInstanceOf()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertinternaltype">assertInternalType()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertisreadable">assertIsReadable()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertiswritable">assertIsWritable()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertjsonfileequalsjsonfile">assertJsonFileEqualsJsonFile()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertjsonstringequalsjsonfile">assertJsonStringEqualsJsonFile()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertjsonstringequalsjsonstring">assertJsonStringEqualsJsonString()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertlessthan">assertLessThan()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertlessthanorequal">assertLessThanOrEqual()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertnan">assertNan()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertnull">assertNull()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertobjecthasattribute">assertObjectHasAttribute()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertregexp">assertRegExp()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertstringmatchesformat">assertStringMatchesFormat()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertstringmatchesformatfile">assertStringMatchesFormatFile()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertsame">assertSame()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertstringendswith">assertStringEndsWith()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertstringequalsfile">assertStringEqualsFile()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertstringstartswith">assertStringStartsWith()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertthat">assertThat()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#asserttrue">assertTrue()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertxmlfileequalsxmlfile">assertXmlFileEqualsXmlFile()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertxmlstringequalsxmlfile">assertXmlStringEqualsXmlFile()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertxmlstringequalsxmlstring">assertXmlStringEqualsXmlString()</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="annotations.html">2. Annotations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#author">@author</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#after">@after</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#afterclass">@afterClass</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#backupglobals">@backupGlobals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#backupstaticattributes">@backupStaticAttributes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#before">@before</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#beforeclass">@beforeClass</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#codecoverageignore">@codeCoverageIgnore*</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#covers">@covers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#coversdefaultclass">@coversDefaultClass</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#coversnothing">@coversNothing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#dataprovider">@dataProvider</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#depends">@depends</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#doesnotperformassertions">@doesNotPerformAssertions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#expectedexception">@expectedException</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#expectedexceptioncode">@expectedExceptionCode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#expectedexceptionmessage">@expectedExceptionMessage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#expectedexceptionmessageregexp">@expectedExceptionMessageRegExp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#group">@group</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#large">@large</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#medium">@medium</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#preserveglobalstate">@preserveGlobalState</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#requires">@requires</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#runtestsinseparateprocesses">@runTestsInSeparateProcesses</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#runinseparateprocess">@runInSeparateProcess</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#small">@small</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#test">@test</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#testdox">@testdox</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#testwith">@testWith</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#ticket">@ticket</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#uses">@uses</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">3. The XML Configuration File</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#phpunit">PHPUnit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#test-suites">Test Suites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#groups">Groups</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#whitelisting-files-for-code-coverage">Whitelisting Files for Code Coverage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#logging">Logging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#test-listeners">Test Listeners</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#registering-testrunner-extensions">Registering TestRunner Extensions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#setting-php-ini-settings-constants-and-global-variables">Setting PHP INI settings, Constants and Global Variables</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">4. Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="copyright.html">5. Copyright</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index-2.html">PHPUnit</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index-2.html">Docs</a> »</li>
+        
+      <li>4. Fixtures</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/sebastianbergmann/phpunit-documentation-english//7.1/src/fixtures.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="fixtures">
+<span id="id1"></span><h1>4. Fixtures</h1>
+<p>One of the most time-consuming parts of writing tests is writing the
+code to set the world up in a known state and then return it to its
+original state when the test is complete. This known state is called
+the <em>fixture</em> of the test.</p>
+<p>In <a class="reference internal" href="writing-tests-for-phpunit.html#writing-tests-for-phpunit-examples-stacktest-php"><span class="std std-ref">Testing array operations with PHPUnit</span></a>, the
+fixture was simply the array that is stored in the <code class="docutils literal"><span class="pre">$stack</span></code>
+variable. Most of the time, though, the fixture will be more complex
+than a simple array, and the amount of code needed to set it up will
+grow accordingly. The actual content of the test gets lost in the noise
+of setting up the fixture. This problem gets even worse when you write
+several tests with similar fixtures. Without some help from the testing
+framework, we would have to duplicate the code that sets up the fixture
+for each test we write.</p>
+<p>PHPUnit supports sharing the setup code. Before a test method is run, a
+template method called <code class="docutils literal"><span class="pre">setUp()</span></code> is invoked.
+<code class="docutils literal"><span class="pre">setUp()</span></code> is where you create the objects against which
+you will test. Once the test method has finished running, whether it
+succeeded or failed, another template method called
+<code class="docutils literal"><span class="pre">tearDown()</span></code> is invoked. <code class="docutils literal"><span class="pre">tearDown()</span></code>
+is where you clean up the objects against which you tested.</p>
+<p>In <a class="reference internal" href="writing-tests-for-phpunit.html#writing-tests-for-phpunit-examples-stacktest2-php"><span class="std std-ref">Using the @depends annotation to express dependencies</span></a> we
+used the producer-consumer relationship between tests to share a fixture. This
+is not always desired or even possible. <a class="reference internal" href="#fixtures-examples-stacktest-php"><span class="std std-numref">Example 4.1</span></a>
+shows how we can write the tests of the <code class="docutils literal"><span class="pre">StackTest</span></code> in such
+a way that not the fixture itself is reused but the code that creates it.
+First we declare the instance variable, <code class="docutils literal"><span class="pre">$stack</span></code>, that we
+are going to use instead of a method-local variable. Then we put the
+creation of the <code class="docutils literal"><span class="pre">array</span></code> fixture into the
+<code class="docutils literal"><span class="pre">setUp()</span></code> method. Finally, we remove the redundant code
+from the test methods and use the newly introduced instance variable,
+<code class="docutils literal"><span class="pre">$this-&gt;stack</span></code>, instead of the method-local variable
+<code class="docutils literal"><span class="pre">$stack</span></code> with the <code class="docutils literal"><span class="pre">assertSame()</span></code>
+assertion method.</p>
+<div class="literal-block-wrapper docutils container" id="fixtures-examples-stacktest-php">
+<div class="code-block-caption"><span class="caption-number">Example 4.1 </span><span class="caption-text">Using setUp() to create the stack fixture</span></div>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="k">use</span> <span class="nx">PHPUnit\Framework\TestCase</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">StackTest</span> <span class="k">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="k">protected</span> <span class="nv">$stack</span><span class="p">;</span>
+
+    <span class="k">protected</span> <span class="k">function</span> <span class="nf">setUp</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">stack</span> <span class="o">=</span> <span class="p">[];</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testEmpty</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertTrue</span><span class="p">(</span><span class="k">empty</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">stack</span><span class="p">));</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testPush</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nb">array_push</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">stack</span><span class="p">,</span> <span class="s1">'foo'</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertSame</span><span class="p">(</span><span class="s1">'foo'</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">stack</span><span class="p">[</span><span class="nb">count</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">stack</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">]);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertFalse</span><span class="p">(</span><span class="k">empty</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">stack</span><span class="p">));</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testPop</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nb">array_push</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">stack</span><span class="p">,</span> <span class="s1">'foo'</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertSame</span><span class="p">(</span><span class="s1">'foo'</span><span class="p">,</span> <span class="nb">array_pop</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">stack</span><span class="p">));</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertTrue</span><span class="p">(</span><span class="k">empty</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">stack</span><span class="p">));</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">setUp()</span></code> and <code class="docutils literal"><span class="pre">tearDown()</span></code> template
+methods are run once for each test method (and on fresh instances) of the
+test case class.</p>
+<p>In addition, the <code class="docutils literal"><span class="pre">setUpBeforeClass()</span></code> and
+<code class="docutils literal"><span class="pre">tearDownAfterClass()</span></code> template methods are called before
+the first test of the test case class is run and after the last test of the
+test case class is run, respectively.</p>
+<p>The example below shows all template methods that are available in a test
+case class.</p>
+<div class="literal-block-wrapper docutils container" id="fixtures-examples-templatemethodstest-php">
+<div class="code-block-caption"><span class="caption-number">Example 4.2 </span><span class="caption-text">Example showing all template methods available</span></div>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="k">use</span> <span class="nx">PHPUnit\Framework\TestCase</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">TemplateMethodsTest</span> <span class="k">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">setUpBeforeClass</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nb">fwrite</span><span class="p">(</span><span class="nx">STDOUT</span><span class="p">,</span> <span class="no">__METHOD__</span> <span class="o">.</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">protected</span> <span class="k">function</span> <span class="nf">setUp</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nb">fwrite</span><span class="p">(</span><span class="nx">STDOUT</span><span class="p">,</span> <span class="no">__METHOD__</span> <span class="o">.</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">protected</span> <span class="k">function</span> <span class="nf">assertPreConditions</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nb">fwrite</span><span class="p">(</span><span class="nx">STDOUT</span><span class="p">,</span> <span class="no">__METHOD__</span> <span class="o">.</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testOne</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nb">fwrite</span><span class="p">(</span><span class="nx">STDOUT</span><span class="p">,</span> <span class="no">__METHOD__</span> <span class="o">.</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertTrue</span><span class="p">(</span><span class="k">true</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testTwo</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nb">fwrite</span><span class="p">(</span><span class="nx">STDOUT</span><span class="p">,</span> <span class="no">__METHOD__</span> <span class="o">.</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertTrue</span><span class="p">(</span><span class="k">false</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">protected</span> <span class="k">function</span> <span class="nf">assertPostConditions</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nb">fwrite</span><span class="p">(</span><span class="nx">STDOUT</span><span class="p">,</span> <span class="no">__METHOD__</span> <span class="o">.</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">protected</span> <span class="k">function</span> <span class="nf">tearDown</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nb">fwrite</span><span class="p">(</span><span class="nx">STDOUT</span><span class="p">,</span> <span class="no">__METHOD__</span> <span class="o">.</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">tearDownAfterClass</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nb">fwrite</span><span class="p">(</span><span class="nx">STDOUT</span><span class="p">,</span> <span class="no">__METHOD__</span> <span class="o">.</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">protected</span> <span class="k">function</span> <span class="nf">onNotSuccessfulTest</span><span class="p">(</span><span class="nx">Exception</span> <span class="nv">$e</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nb">fwrite</span><span class="p">(</span><span class="nx">STDOUT</span><span class="p">,</span> <span class="no">__METHOD__</span> <span class="o">.</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">);</span>
+        <span class="k">throw</span> <span class="nv">$e</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ phpunit TemplateMethodsTest
+PHPUnit <span class="p">|</span>version<span class="p">|</span>.0 by Sebastian Bergmann and contributors.
+
+TemplateMethodsTest::setUpBeforeClass
+TemplateMethodsTest::setUp
+TemplateMethodsTest::assertPreConditions
+TemplateMethodsTest::testOne
+TemplateMethodsTest::assertPostConditions
+TemplateMethodsTest::tearDown
+.TemplateMethodsTest::setUp
+TemplateMethodsTest::assertPreConditions
+TemplateMethodsTest::testTwo
+TemplateMethodsTest::tearDown
+TemplateMethodsTest::onNotSuccessfulTest
+FTemplateMethodsTest::tearDownAfterClass
+
+Time: <span class="m">0</span> seconds, Memory: <span class="m">5</span>.25Mb
+
+There was <span class="m">1</span> failure:
+
+<span class="m">1</span><span class="o">)</span> TemplateMethodsTest::testTwo
+Failed asserting that &lt;boolean:false&gt; is true.
+/home/sb/TemplateMethodsTest.php:30
+
+FAILURES!
+Tests: <span class="m">2</span>, Assertions: <span class="m">2</span>, Failures: <span class="m">1</span>.
+</pre></div>
+</div>
+<div class="section" id="more-setup-than-teardown">
+<a class="dashAnchor" name="//apple_ref/Section/More%20setUp()%20than%20tearDown()"></a><span id="fixtures-more-setup-than-teardown"></span><h2>More setUp() than tearDown()</h2>
+<p><code class="docutils literal"><span class="pre">setUp()</span></code> and <code class="docutils literal"><span class="pre">tearDown()</span></code> are nicely
+symmetrical in theory but not in practice. In practice, you only need
+to implement <code class="docutils literal"><span class="pre">tearDown()</span></code> if you have allocated
+external resources like files or sockets in <code class="docutils literal"><span class="pre">setUp()</span></code>.
+If your <code class="docutils literal"><span class="pre">setUp()</span></code> just creates plain PHP objects, you
+can generally ignore <code class="docutils literal"><span class="pre">tearDown()</span></code>. However, if you
+create many objects in your <code class="docutils literal"><span class="pre">setUp()</span></code>, you might want
+to <code class="docutils literal"><span class="pre">unset()</span></code> the variables pointing to those objects
+in your <code class="docutils literal"><span class="pre">tearDown()</span></code> so they can be garbage collected.
+The garbage collection of test case objects is not predictable.</p>
+</div>
+<div class="section" id="variations">
+<a class="dashAnchor" name="//apple_ref/Section/Variations"></a><span id="fixtures-variations"></span><h2>Variations</h2>
+<p>What happens when you have two tests with slightly different setups?
+There are two possibilities:</p>
+<ul class="simple">
+<li>If the <code class="docutils literal"><span class="pre">setUp()</span></code> code differs only slightly, move
+the code that differs from the <code class="docutils literal"><span class="pre">setUp()</span></code> code to
+the test method.</li>
+<li>If you really have a different <code class="docutils literal"><span class="pre">setUp()</span></code>, you need
+a different test case class. Name the class after the difference in
+the setup.</li>
+</ul>
+</div>
+<div class="section" id="sharing-fixture">
+<a class="dashAnchor" name="//apple_ref/Section/Sharing%20Fixture"></a><span id="fixtures-sharing-fixture"></span><h2>Sharing Fixture</h2>
+<p>There are few good reasons to share fixtures between tests, but in most
+cases the need to share a fixture between tests stems from an unresolved
+design problem.</p>
+<p>A good example of a fixture that makes sense to share across several
+tests is a database connection: you log into the database once and reuse
+the database connection instead of creating a new connection for each
+test. This makes your tests run faster.</p>
+<p><a class="reference internal" href="#fixtures-sharing-fixture-examples-databasetest-php"><span class="std std-numref">Example 4.3</span></a>
+uses the <code class="docutils literal"><span class="pre">setUpBeforeClass()</span></code> and
+<code class="docutils literal"><span class="pre">tearDownAfterClass()</span></code> template methods to connect to the
+database before the test case class’ first test and to disconnect from the
+database after the last test of the test case, respectively.</p>
+<div class="literal-block-wrapper docutils container" id="fixtures-sharing-fixture-examples-databasetest-php">
+<div class="code-block-caption"><span class="caption-number">Example 4.3 </span><span class="caption-text">Sharing fixture between the tests of a test suite</span></div>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="k">use</span> <span class="nx">PHPUnit\Framework\TestCase</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">DatabaseTest</span> <span class="k">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="k">protected</span> <span class="k">static</span> <span class="nv">$dbh</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">setUpBeforeClass</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nx">self</span><span class="o">::</span><span class="nv">$dbh</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PDO</span><span class="p">(</span><span class="s1">'sqlite::memory:'</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">tearDownAfterClass</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nx">self</span><span class="o">::</span><span class="nv">$dbh</span> <span class="o">=</span> <span class="k">null</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<p>It cannot be emphasized enough that sharing fixtures between tests
+reduces the value of the tests. The underlying design problem is
+that objects are not loosely coupled. You will achieve better
+results solving the underlying design problem and then writing tests
+using stubs (see <a class="reference internal" href="test-doubles.html#test-doubles"><span class="std std-ref">Test Doubles</span></a>), than by creating
+dependencies between tests at runtime and ignoring the opportunity
+to improve your design.</p>
+</div>
+<div class="section" id="global-state">
+<a class="dashAnchor" name="//apple_ref/Section/Global%20State"></a><span id="fixtures-global-state"></span><h2>Global State</h2>
+<p><a class="reference external" href="http://googletesting.blogspot.com/2008/05/tott-using-dependancy-injection-to.html">It is hard to test code that uses singletons.</a>
+The same is true for code that uses global variables. Typically, the code
+you want to test is coupled strongly with a global variable and you cannot
+control its creation. An additional problem is the fact that one test’s
+change to a global variable might break another test.</p>
+<p>In PHP, global variables work like this:</p>
+<ul class="simple">
+<li>A global variable <code class="docutils literal"><span class="pre">$foo</span> <span class="pre">=</span> <span class="pre">'bar';</span></code> is stored as <code class="docutils literal"><span class="pre">$GLOBALS['foo']</span> <span class="pre">=</span> <span class="pre">'bar';</span></code>.</li>
+<li>The <code class="docutils literal"><span class="pre">$GLOBALS</span></code> variable is a so-called <em>super-global</em> variable.</li>
+<li>Super-global variables are built-in variables that are always available in all scopes.</li>
+<li>In the scope of a function or method, you may access the global variable <code class="docutils literal"><span class="pre">$foo</span></code> by either directly accessing <code class="docutils literal"><span class="pre">$GLOBALS['foo']</span></code> or by using <code class="docutils literal"><span class="pre">global</span> <span class="pre">$foo;</span></code> to create a local variable with a reference to the global variable.</li>
+</ul>
+<p>Besides global variables, static attributes of classes are also part of
+the global state.</p>
+<p>Prior to version 6, by default, PHPUnit ran your tests in a way where
+changes to global and super-global variables (<code class="docutils literal"><span class="pre">$GLOBALS</span></code>,
+<code class="docutils literal"><span class="pre">$_ENV</span></code>, <code class="docutils literal"><span class="pre">$_POST</span></code>,
+<code class="docutils literal"><span class="pre">$_GET</span></code>, <code class="docutils literal"><span class="pre">$_COOKIE</span></code>,
+<code class="docutils literal"><span class="pre">$_SERVER</span></code>, <code class="docutils literal"><span class="pre">$_FILES</span></code>,
+<code class="docutils literal"><span class="pre">$_REQUEST</span></code>) do not affect other tests.</p>
+<p>As of version 6, PHPUnit does not perform this backup and restore
+operation for global and super-global variables by default anymore.
+It can be activated by using the <code class="docutils literal"><span class="pre">--globals-backup</span></code>
+option or setting <code class="docutils literal"><span class="pre">backupGlobals="true"</span></code> in the
+XML configuration file.</p>
+<p>By using the <code class="docutils literal"><span class="pre">--static-backup</span></code> option or setting
+<code class="docutils literal"><span class="pre">backupStaticAttributes="true"</span></code> in the
+XML configuration file, this isolation can be extended to static
+attributes of classes.</p>
+<div class="admonition-note admonition">
+<p class="first admonition-title">Note</p>
+<p>The backup and restore operations for global variables and static
+class attributes use <code class="docutils literal"><span class="pre">serialize()</span></code> and
+<code class="docutils literal"><span class="pre">unserialize()</span></code>.</p>
+<p class="last">Objects of some classes (e.g., <code class="docutils literal"><span class="pre">PDO</span></code>) cannot be
+serialized and the backup operation will break when such an object is
+stored e.g. in the <code class="docutils literal"><span class="pre">$GLOBALS</span></code> array.</p>
+</div>
+<p>The <code class="docutils literal"><span class="pre">@backupGlobals</span></code> annotation that is discussed in
+<a class="reference internal" href="annotations.html#appendixes-annotations-backupglobals"><span class="std std-ref">@backupGlobals</span></a> can be used to
+control the backup and restore operations for global variables.
+Alternatively, you can provide a blacklist of global variables that are to
+be excluded from the backup and restore operations like this</p>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyTest</span> <span class="k">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="k">protected</span> <span class="nv">$backupGlobalsBlacklist</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'globalVariable'</span><span class="p">];</span>
+
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition-note admonition">
+<p class="first admonition-title">Note</p>
+<p class="last">Setting the <code class="docutils literal"><span class="pre">$backupGlobalsBlacklist</span></code> property inside
+e.g. the <code class="docutils literal"><span class="pre">setUp()</span></code> method has no effect.</p>
+</div>
+<p>The <code class="docutils literal"><span class="pre">@backupStaticAttributes</span></code> annotation discussed in
+<a class="reference internal" href="annotations.html#appendixes-annotations-backupstaticattributes"><span class="std std-ref">@backupStaticAttributes</span></a>
+can be used to back up all static property values in all declared classes
+before each test and restore them afterwards.</p>
+<p>It processes all classes that are declared at the time a test starts, not
+only the test class itself. It only applies to static class properties,
+not static variables within functions.</p>
+<div class="admonition-note admonition">
+<p class="first admonition-title">Note</p>
+<p>The <code class="docutils literal"><span class="pre">@backupStaticAttributes</span></code> operation is executed
+before a test method, but only if it is enabled. If a static value was
+changed by a previously executed test that did not have
+<code class="docutils literal"><span class="pre">@backupStaticAttributes</span></code> enabled, then that value will
+be backed up and restored — not the originally declared default value.
+PHP does not record the originally declared default value of any static
+variable.</p>
+<p>The same applies to static properties of classes that were newly
+loaded/declared within a test. They cannot be reset to their originally
+declared default value after the test, since that value is unknown.
+Whichever value is set will leak into subsequent tests.</p>
+<p class="last">For unit tests, it is recommended to explicitly reset the values of
+static properties under test in your <code class="docutils literal"><span class="pre">setUp()</span></code> code
+instead (and ideally also <code class="docutils literal"><span class="pre">tearDown()</span></code>, so as to not
+affect subsequently executed tests).</p>
+</div>
+<p>You can provide a blacklist of static attributes that are to be excluded
+from the backup and restore operations:</p>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyTest</span> <span class="k">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="k">protected</span> <span class="nv">$backupStaticAttributesBlacklist</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s1">'className'</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">'attributeName'</span><span class="p">]</span>
+    <span class="p">];</span>
+
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition-note admonition">
+<p class="first admonition-title">Note</p>
+<p class="last">Setting the <code class="docutils literal"><span class="pre">$backupStaticAttributesBlacklist</span></code> property
+inside e.g. the <code class="docutils literal"><span class="pre">setUp()</span></code> method has no effect.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="organizing-tests.html" class="btn btn-neutral float-right" title="5. Organizing Tests" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="textui.html" class="btn btn-neutral" title="3. The Command-Line Test Runner" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr>
+
+  <div role="contentinfo">
+    <p>
+        © <a href="copyright.html">Copyright</a> 2018, Sebastian Bergmann.
+      
+        <span class="commit">
+          Revision <code>25b86e5f</code>.
+        </span>
+      
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Read the Docs</span>
+      v: 7.1
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt>Versions</dt>
+        
+          <dd><a href="https://phpunit.readthedocs.io/en/latest/">latest</a></dd>
+        
+          <dd><a href="index.html">7.1</a></dd>
+        
+          <dd><a href="https://phpunit.readthedocs.io/en/7.0/">7.0</a></dd>
+        
+          <dd><a href="https://phpunit.readthedocs.io/en/master/">master</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>Downloads</dt>
+        
+          <dd><a href="http://readthedocs.org/projects/phpunit/downloads/pdf/7.1/">pdf</a></dd>
+        
+          <dd><a href="http://readthedocs.org/projects/phpunit/downloads/htmlzip/7.1/">htmlzip</a></dd>
+        
+          <dd><a href="http://readthedocs.org/projects/phpunit/downloads/epub/7.1/">epub</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>On Read the Docs</dt>
+          <dd>
+            <a href="http://readthedocs.org/projects/phpunit/?fromdocs=phpunit">Project Home</a>
+          </dd>
+          <dd>
+            <a href="http://readthedocs.org/builds/phpunit/?fromdocs=phpunit">Builds</a>
+          </dd>
+      </dl>
+      <hr>
+      Free document hosting provided by <a href="http://www.readthedocs.org/">Read the Docs</a>.
+
+    </div>
+  </div>
+
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'7.1',
+            LANGUAGE:'en',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../media.readthedocs.org/javascript/jquery/jquery-2.0.3.min.js"></script>
+      <script type="text/javascript" src="../../../media.readthedocs.org/javascript/jquery/jquery-migrate-1.2.1.min.js"></script>
+      <script type="text/javascript" src="../../../media.readthedocs.org/javascript/underscore.js"></script>
+      <script type="text/javascript" src="../../../media.readthedocs.org/javascript/doctools.js"></script>
+      <script type="text/javascript" src="../../../media.readthedocs.org/javascript/readthedocs-doc-embed.js"></script>
+
+  
+
+  
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          
+          SphinxRtdTheme.Navigation.enableSticky();
+          
+      });
+  </script> 
+
+
+
+<!-- Mirrored from phpunit.readthedocs.io/en/7.1/fixtures.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 14 Jul 2018 16:54:06 GMT -->
+</body></html>

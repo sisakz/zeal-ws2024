@@ -1,0 +1,1438 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+
+<!-- Mirrored from developer.wordpress.org/reference/classes/wp_plugin_install_list_table/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 31 Aug 2021 17:21:42 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<!--
+<meta property="fb:page_id" content="6427302910" />
+-->
+<meta name="google-site-verification" content="7VWES_-rcHBcmaQis9mSYamPfNwE03f4vyTj4pfuAw0" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WP_Plugin_Install_List_Table</title>
+<meta name="referrer" content="always">
+
+		<link href='../../../../fonts.googleapis.com/css.css?family=Open+Sans:300italic,400italic,600italic,400,300,600&amp;subset=latin,cyrillic-ext,greek-ext,greek,vietnamese,latin-ext,cyrillic' rel='stylesheet' type='text/css'>
+
+		<link rel="stylesheet" href="../../../../s.w.org/style/wp4.css?95" />
+
+<link rel="shortcut icon" href="../../../../s.w.org/favicon.ico?2" type="image/x-icon" />
+<link rel="pingback" href="../../../xmlrpc.php" /><meta name='robots' content='max-image-preview:large' />
+<link rel='dns-prefetch' href='../../../../fonts.googleapis.com/index.html' />
+<link rel='dns-prefetch' href='http://s.w.org/' />
+<link rel='dns-prefetch' href='http://www.googletagmanager.com/' />
+<link rel='dns-prefetch' href='http://fonts.gstatic.com/' />
+<link rel="alternate" type="application/rss+xml" title="WordPress Developer Resources &raquo; Feed" href="../../../feed/index.html" />
+<link rel="alternate" type="application/rss+xml" title="WordPress Developer Resources &raquo; Comments Feed" href="../../../comments/feed/index.html" />
+<meta property="og:title" content="WP_Plugin_Install_List_Table | Class | WordPress Developer Resources" />
+<meta property="og:site_name" content="WordPress Developer Resources" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="../../../index.html" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@WordPress" />
+<meta name="description" content="Core class used to implement displaying plugins to install in a list table." />
+<meta property="og:description" content="Core class used to implement displaying plugins to install in a list table." />
+<link rel="alternate" type="application/rss+xml" title="WordPress Developer Resources &raquo; WP_Plugin_Install_List_Table Comments Feed" href="https://developer.wordpress.org/reference/classes/wp_plugin_install_list_table/feed/" />
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'../../../../www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P24PF4B');</script>
+			<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/developer.wordpress.org\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.9-alpha-51701"}};
+			!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([10084,65039,8205,55357,56613],[10084,65039,8203,55357,56613])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel='stylesheet' id='dashicons-css'  href='../../../wp-includes/css/dashicons.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='admin-bar-css'  href='../../../wp-includes/css/admin-bar.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-block-library-css'  href='../../../wp-includes/css/dist/block-library/style.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='wporg-handbook-css-css'  href='../../../wp-content/plugins/handbook/stylesheets/callout-boxes.css?ver=20200121' type='text/css' media='all' />
+<link rel='stylesheet' id='open-sans-css'  href='../../../../fonts.googleapis.com/css-2.css?family=Open+Sans%3A300italic%2C400italic%2C600italic%2C300%2C400%2C600&amp;subset=latin%2Clatin-ext&amp;display=fallback&amp;ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='wporg-developer-style-css'  href='../../../wp-content/themes/pub/wporg-developer/style.css?ver=3' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-dev-sass-compiled-css'  href='../../../wp-content/themes/pub/wporg-developer/stylesheets/main.css?ver=20200713' type='text/css' media='all' />
+<link rel='stylesheet' id='awesomplete-css-css'  href='../../../wp-content/themes/pub/wporg-developer/stylesheets/awesomplete.css?ver=20160114' type='text/css' media='all' />
+<link rel='stylesheet' id='autocomplete-css-css'  href='../../../wp-content/themes/pub/wporg-developer/stylesheets/autocomplete.css?ver=20171220' type='text/css' media='all' />
+<link rel='stylesheet' id='syntaxhighlighter-core-css'  href='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shCore.css?ver=3.0.9b' type='text/css' media='all' />
+<link rel='stylesheet' id='syntaxhighlighter-theme-default-css'  href='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shThemeDefault.css?ver=3.0.9b' type='text/css' media='all' />
+<script type='text/javascript' src='../../../wp-includes/js/jquery/jquery.min.js?ver=3.6.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='../../../wp-content/plugins/handbook/scripts/handbook.js?ver=20150930' id='wporg-handbook-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/chapters.js?ver=20190603' id='wporg-developer-chapters-js'></script>
+<script type='text/javascript' src='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shCore.js?ver=3.0.9b' id='syntaxhighlighter-core-js'></script>
+<script type='text/javascript' src='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushPhp.js?ver=3.0.9b' id='syntaxhighlighter-brush-php-js'></script>
+<link rel="https://api.w.org/" href="https://developer.wordpress.org/wp-json/" /><link rel="alternate" type="application/json" href="https://developer.wordpress.org/wp-json/wp/v2/wp-parser-class/4702" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="../../../xmlrpc-2.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="../../../wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 5.9-alpha-51701" />
+<link rel='shortlink' href='https://developer.wordpress.org/?p=4702' />
+<link rel="alternate" type="application/json+oembed" href="https://developer.wordpress.org/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Fclasses%2Fwp_plugin_install_list_table%2F" />
+<link rel="alternate" type="text/xml+oembed" href="https://developer.wordpress.org/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Fclasses%2Fwp_plugin_install_list_table%2F&amp;format=xml" />
+<link rel="canonical" href="index.html">
+<!-- Stream WordPress user activity plugin v3.6.2 -->
+	<style>
+		@media screen and (max-width: 782px) {
+			#wpadminbar li#wp-admin-bar-log-in,
+			#wpadminbar li#wp-admin-bar-register {
+				display: block;
+			}
+
+			#wpadminbar li#wp-admin-bar-log-in a,
+			#wpadminbar li#wp-admin-bar-register a {
+				padding: 0 8px;
+			}
+		}
+	</style>
+		<style>
+			a.github-edit {
+				margin-left: .5em;
+				font-size: .5em;
+				vertical-align: top;
+				display: inline-block;
+				border: 1px solid #eeeeee;
+				border-radius: 2px;
+				background: #eeeeee;
+				padding: .5em .6em .4em;
+				color: black;
+				margin-top: 0.1em;
+			}
+			a.github-edit > * {
+				opacity: 0.6;
+			}
+			a.github-edit:hover > * {
+				opacity: 1;
+				color: black;
+			}
+			a.github-edit img {
+				height: .8em;
+			}
+		</style>
+		
+	<script type="text/javascript">
+		jQuery( '<style>.hide-if-js { display: none; }</style>' ).appendTo( 'head' );
+		jQuery( function($) {
+			$( 'body' ).addClass('js');
+		} );
+	</script>
+<style type="text/css" media="print">#wpadminbar { display:none; }</style>
+	<style type="text/css" media="screen">
+	</style>
+	<script>document.cookie='devicePixelRatio='+((window.devicePixelRatio === undefined) ? 1 : window.devicePixelRatio)+'; path=/';</script>
+
+</head>
+
+
+<body id="wordpress-org" class="wp-parser-class-template-default single single-wp-parser-class postid-4702 admin-bar no-customize-support">
+		<div id="wpadminbar" class="nojq nojs">
+						<div class="quicklinks" id="wp-toolbar" role="navigation" aria-label="Toolbar">
+				<ul id='wp-admin-bar-root-default' class="ab-top-menu"><li id='wp-admin-bar-wp-logo' class="menupop"><a class='ab-item' aria-haspopup="true" href='https://wordpress.org/about/'><span class="ab-icon" aria-hidden="true"></span><span class="screen-reader-text">About WordPress</span></a><div class="ab-sub-wrapper"><ul id='wp-admin-bar-wp-logo-default' class="ab-submenu"><li id='wp-admin-bar-about'><a class='ab-item' href='https://wordpress.org/about/'>About WordPress</a></li></ul><ul id='wp-admin-bar-wp-logo-external' class="ab-sub-secondary ab-submenu"><li id='wp-admin-bar-wporg'><a class='ab-item' href='https://wordpress.org/'>WordPress.org</a></li><li id='wp-admin-bar-documentation'><a class='ab-item' href='https://wordpress.org/support/'>Documentation</a></li><li id='wp-admin-bar-support-forums'><a class='ab-item' href='https://wordpress.org/support/forums/'>Support</a></li><li id='wp-admin-bar-feedback'><a class='ab-item' href='https://wordpress.org/support/forum/requests-and-feedback'>Feedback</a></li></ul></div></li></ul><ul id='wp-admin-bar-top-secondary' class="ab-top-secondary ab-top-menu"><li id='wp-admin-bar-search' class="admin-bar-search"><div class="ab-item ab-empty-item" tabindex="-1"><form action="https://developer.wordpress.org/" method="get" id="adminbarsearch"><input class="adminbar-input" name="s" id="adminbar-search" type="text" value="" maxlength="150" /><label for="adminbar-search" class="screen-reader-text">Search</label><input type="submit" class="adminbar-button" value="Search" /></form></div></li><li id='wp-admin-bar-log-in'><a class='ab-item' href='https://login.wordpress.org/?locale=en_US'>Log In</a></li><li id='wp-admin-bar-register'><a class='ab-item' href='https://login.wordpress.org/register?locale=en_US'>Register</a></li></ul>			</div>
+					</div>
+
+		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P24PF4B" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<div id="wporg-header">
+	<div class="wrapper">
+	<h1><a href="http://wordpress.org/">WordPress.org</a></h1>				<div id="head-search">
+		<form action="http://wordpress.org/search/do-search.php" method="get">
+			<label for="global-search" class="screen-reader-text">Search WordPress.org for:</label>
+			<input id="global-search" class="text" name="search" type="text" value="" maxlength="150" placeholder="Search WordPress.org" />
+			<button type="submit" class="button"><span class="screen-reader-text">Submit</span></button>
+		</form>
+		</div>
+				<div style="clear:both"></div>
+		<button id="mobile-menu-button" aria-expanded="false"><span class="screen-reader-text">Toggle Menu</span></button>
+		
+<nav aria-label="Main Menu">
+<ul id="wporg-header-menu">
+<li class="menu-item"><a href='http://wordpress.org/showcase/' data-title='See some of the sites built on WordPress.'>Showcase</a></li>
+<li class="menu-item"><a href='http://learn.wordpress.org/' data-title='Resources to help you learn more about WordPress and teach it to others.'>Learn</a></li>
+<li class="menu-item"><a href='http://wordpress.org/themes/' data-title='Find just the right look for your website.'>Themes</a></li>
+<li class="menu-item"><a href='http://wordpress.org/plugins/' data-title='Plugins can extend WordPress to do almost anything you can imagine.'>Plugins</a></li>
+<li class="menu-item"><a href='http://wordpress.org/mobile/' data-title='Take your website on the go!'>Mobile</a></li>
+<li class="menu-item"><a href='http://wordpress.org/support/' data-title='Forums, documentation, help.'>Support</a><ul class="nav-submenu"><li><a href='http://wordpress.org/support/' title='Documentation, tutorials, best practices.'>Documentation</a></li><li><a href='http://wordpress.org/support/forums/' title='Support and discussion forums.'>Forums</a></li></ul><div class="uparrow"></div></li>
+<li class="menu-item"><a href='http://make.wordpress.org/' data-title='Contribute your knowledge.'>Get Involved</a><ul class="nav-submenu"><li><a href='http://wordpress.org/five-for-the-future/' title='How five percent is powering the next generation of the web'>Five for the Future</a></li></ul><div class="uparrow"></div></li>
+<li class="menu-item"><a href='http://wordpress.org/about/' data-title='About the WordPress Organization, and where we&#039;re going.'>About</a></li>
+<li class="menu-item"><a href='http://wordpress.org/news/' data-title='Come here for the latest scoop.'>Blog</a></li>
+<li class="menu-item"><a href='http://wordpress.org/hosting/' data-title='Find a home for your blog.'>Hosting</a></li>
+<li id="download" class="button download-button menu-item"><a href='http://wordpress.org/download/' data-title='Get it. Got it? Good.'>Get WordPress</a></li>
+</ul>
+</nav>
+		<div style="clear:both"></div>
+	</div>
+</div>
+
+
+
+<header id="masthead" class="site-header" role="banner">
+		<div class="site-branding">
+		<h1 class="site-title">
+			<a href="../../index.html" rel="home">Code Reference</a>
+		</h1>
+
+		
+		<nav id="site-navigation" class="main-navigation" role="navigation">
+			<button class="menu-toggle dashicons dashicons-arrow-down-alt2" aria-controls="primary-menu" aria-expanded="false" aria-label="Primary Menu"></button>
+					</nav>
+	</div>
+</header><!-- #masthead -->
+
+<div id="page" class="hfeed site devhub-wrap">
+	<a href="#main" class="screen-reader-text">Skip to content</a>
+
+				<div id="inner-search">
+			<div class="search-section section clear hide-if-js">
+
+
+	
+	<form role="search" method="get" class="searchform searchform-filtered" action="https://developer.wordpress.org/">
+		<label for="search-field" class="screen-reader-text">Search for:</label>
+		<input type="text" id="search-field" class="search-field" placeholder="Search &hellip;" value="" name="s">
+		<button class="button button-primary button-search"><i class="dashicons dashicons-search"></i><span class="screen-reader-text">Search plugins</span></button>
+	
+		<div class="search-post-type">
+			<span>Filter by type:</span>
+									<label><input type="checkbox" name="post_type[]" value="wp-parser-function"
+						 /> Functions</label>
+									<label><input type="checkbox" name="post_type[]" value="wp-parser-hook"
+						 /> Hooks</label>
+									<label><input type="checkbox" name="post_type[]" value="wp-parser-class"
+						 /> Classes</label>
+									<label><input type="checkbox" name="post_type[]" value="wp-parser-method"
+						 /> Methods</label>
+					</div>
+
+	
+	</form>
+
+</div><!-- /search-guide -->
+			<div id="inner-search-icon-container">
+				<div id="inner-search-icon">
+					<div class="dashicons dashicons-search"><span class="screen-reader-text">Search</span></div>
+				</div>
+			</div>
+		</div>
+
+		<div id="content" class="site-content">
+
+	<div id="content-area" class="wp-parser-class-template-default single single-wp-parser-class postid-4702 admin-bar no-customize-support code-reference">
+
+		
+		<div class="breadcrumb-trail breadcrumbs" itemprop="breadcrumb">
+			<span class="trail-browse">Browse:</span> 
+			<span class="trail-begin"><a href="../../../index.html" title="WordPress Developer Resources" rel="home">Home</a></span> <span class="sep">&#47;</span> 
+			<span class="trail-inner"><a href="../../index.html" title="Reference">Reference</a></span> <span class="sep">&#47;</span> 
+			<span class="trail-inner"><a href="../index.html">Classes</a></span> <span class="sep">&#47;</span> <span class="trail-end">WP_Plugin_Install_List_Table</span>
+		</div>
+		<main id="main" class="site-main" role="main">
+
+		
+			
+<article id="post-4702" class="post-4702 wp-parser-class type-wp-parser-class status-publish hentry wp-parser-source-file-wp-admin_includes_class-wp-plugin-install-list-table-php wp-parser-package-administration wp-parser-package-wordpress wp-parser-since-3-1-0">
+
+	
+	
+	<h1>WP_Plugin_Install_List_Table</h1>
+
+	<section class="summary">
+		<p>Core class used to implement displaying plugins to install in a list table.</p>
+	</section>
+
+
+	
+	<div class="content-toc"><style> .toc-jump { text-align: right; font-size: 12px; } .page .toc-heading { margin-top: -50px; padding-top: 50px !important; }</style><div class="table-of-contents"><h2>Contents</h2><ul class="items"><li><a href="#description">Description</a>
+<ul>
+<li><a href="#see-also">See also</a>
+</ul></li>
+<li><a href="#source">Source</a></li>
+<li><a href="#related">Related</a>
+<ul>
+<li><a href="#uses">Uses</a>
+</ul></li>
+<li><a href="#methods">Methods</a></li>
+<li><a href="#changelog">Changelog</a></li>
+<li><a href="#user-contributed-notes">User Contributed Notes</a></ul>
+</div>
+
+<hr />
+<section class="description">
+	<h2 class="toc-heading" id="description" tabindex="-1">Description <a href="#description" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Description</span></a></h2>
+	
+		<h3 class="toc-heading" id="see-also" tabindex="-1">See also <a href="#see-also" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">See also</span></a></h3>
+
+	<ul>
+	<li><a href="../wp_list_table/index.html">WP_List_Table</a></li>
+	</ul>
+	</section>
+
+	<hr />
+	<section class="source-content">
+		<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="source" tabindex="-1">Source <a href="#source" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Source</span></a></h2>
+		<p>
+			File: <a href="../../files/wp-admin/includes/class-wp-plugin-install-list-table.php/index.html">wp-admin/includes/class-wp-plugin-install-list-table.php</a>		</p>
+
+					<div class="source-code-container">
+				<pre class="brush: php; toolbar: false; first-line: 18">class WP_Plugin_Install_List_Table extends WP_List_Table {
+
+	public $order   = 'ASC';
+	public $orderby = null;
+	public $groups  = array();
+
+	private $error;
+
+	/**
+	 * @return bool
+	 */
+	public function ajax_user_can() {
+		return current_user_can( 'install_plugins' );
+	}
+
+	/**
+	 * Return the list of known plugins.
+	 *
+	 * Uses the transient data from the updates API to determine the known
+	 * installed plugins.
+	 *
+	 * @since 4.9.0
+	 * @access protected
+	 *
+	 * @return array
+	 */
+	protected function get_installed_plugins() {
+		$plugins = array();
+
+		$plugin_info = get_site_transient( 'update_plugins' );
+		if ( isset( $plugin_info-&gt;no_update ) ) {
+			foreach ( $plugin_info-&gt;no_update as $plugin ) {
+				if ( isset( $plugin-&gt;slug ) ) {
+					$plugin-&gt;upgrade          = false;
+					$plugins[ $plugin-&gt;slug ] = $plugin;
+				}
+			}
+		}
+
+		if ( isset( $plugin_info-&gt;response ) ) {
+			foreach ( $plugin_info-&gt;response as $plugin ) {
+				if ( isset( $plugin-&gt;slug ) ) {
+					$plugin-&gt;upgrade          = true;
+					$plugins[ $plugin-&gt;slug ] = $plugin;
+				}
+			}
+		}
+
+		return $plugins;
+	}
+
+	/**
+	 * Return a list of slugs of installed plugins, if known.
+	 *
+	 * Uses the transient data from the updates API to determine the slugs of
+	 * known installed plugins. This might be better elsewhere, perhaps even
+	 * within get_plugins().
+	 *
+	 * @since 4.0.0
+	 *
+	 * @return array
+	 */
+	protected function get_installed_plugin_slugs() {
+		return array_keys( $this-&gt;get_installed_plugins() );
+	}
+
+	/**
+	 * @global array  $tabs
+	 * @global string $tab
+	 * @global int    $paged
+	 * @global string $type
+	 * @global string $term
+	 */
+	public function prepare_items() {
+		include_once ABSPATH . 'wp-admin/includes/plugin-install.php';
+
+		global $tabs, $tab, $paged, $type, $term;
+
+		wp_reset_vars( array( 'tab' ) );
+
+		$paged = $this-&gt;get_pagenum();
+
+		$per_page = 36;
+
+		// These are the tabs which are shown on the page.
+		$tabs = array();
+
+		if ( 'search' === $tab ) {
+			$tabs['search'] = __( 'Search Results' );
+		}
+
+		if ( 'beta' === $tab || false !== strpos( get_bloginfo( 'version' ), '-' ) ) {
+			$tabs['beta'] = _x( 'Beta Testing', 'Plugin Installer' );
+		}
+
+		$tabs['featured']    = _x( 'Featured', 'Plugin Installer' );
+		$tabs['popular']     = _x( 'Popular', 'Plugin Installer' );
+		$tabs['recommended'] = _x( 'Recommended', 'Plugin Installer' );
+		$tabs['favorites']   = _x( 'Favorites', 'Plugin Installer' );
+
+		if ( current_user_can( 'upload_plugins' ) ) {
+			// No longer a real tab. Here for filter compatibility.
+			// Gets skipped in get_views().
+			$tabs['upload'] = __( 'Upload Plugin' );
+		}
+
+		$nonmenu_tabs = array( 'plugin-information' ); // Valid actions to perform which do not have a Menu item.
+
+		/**
+		 * Filters the tabs shown on the Add Plugins screen.
+		 *
+		 * @since 2.7.0
+		 *
+		 * @param string[] $tabs The tabs shown on the Add Plugins screen. Defaults include
+		 *                       'featured', 'popular', 'recommended', 'favorites', and 'upload'.
+		 */
+		$tabs = apply_filters( 'install_plugins_tabs', $tabs );
+
+		/**
+		 * Filters tabs not associated with a menu item on the Add Plugins screen.
+		 *
+		 * @since 2.7.0
+		 *
+		 * @param string[] $nonmenu_tabs The tabs that don't have a menu item on the Add Plugins screen.
+		 */
+		$nonmenu_tabs = apply_filters( 'install_plugins_nonmenu_tabs', $nonmenu_tabs );
+
+		// If a non-valid menu tab has been selected, And it's not a non-menu action.
+		if ( empty( $tab ) || ( ! isset( $tabs[ $tab ] ) &amp;&amp; ! in_array( $tab, (array) $nonmenu_tabs, true ) ) ) {
+			$tab = key( $tabs );
+		}
+
+		$installed_plugins = $this-&gt;get_installed_plugins();
+
+		$args = array(
+			'page'     =&gt; $paged,
+			'per_page' =&gt; $per_page,
+			// Send the locale to the API so it can provide context-sensitive results.
+			'locale'   =&gt; get_user_locale(),
+		);
+
+		switch ( $tab ) {
+			case 'search':
+				$type = isset( $_REQUEST['type'] ) ? wp_unslash( $_REQUEST['type'] ) : 'term';
+				$term = isset( $_REQUEST['s'] ) ? wp_unslash( $_REQUEST['s'] ) : '';
+
+				switch ( $type ) {
+					case 'tag':
+						$args['tag'] = sanitize_title_with_dashes( $term );
+						break;
+					case 'term':
+						$args['search'] = $term;
+						break;
+					case 'author':
+						$args['author'] = $term;
+						break;
+				}
+
+				break;
+
+			case 'featured':
+			case 'popular':
+			case 'new':
+			case 'beta':
+				$args['browse'] = $tab;
+				break;
+			case 'recommended':
+				$args['browse'] = $tab;
+				// Include the list of installed plugins so we can get relevant results.
+				$args['installed_plugins'] = array_keys( $installed_plugins );
+				break;
+
+			case 'favorites':
+				$action = 'save_wporg_username_' . get_current_user_id();
+				if ( isset( $_GET['_wpnonce'] ) &amp;&amp; wp_verify_nonce( wp_unslash( $_GET['_wpnonce'] ), $action ) ) {
+					$user = isset( $_GET['user'] ) ? wp_unslash( $_GET['user'] ) : get_user_option( 'wporg_favorites' );
+
+					// If the save url parameter is passed with a falsey value, don't save the favorite user.
+					if ( ! isset( $_GET['save'] ) || $_GET['save'] ) {
+						update_user_meta( get_current_user_id(), 'wporg_favorites', $user );
+					}
+				} else {
+					$user = get_user_option( 'wporg_favorites' );
+				}
+				if ( $user ) {
+					$args['user'] = $user;
+				} else {
+					$args = false;
+				}
+
+				add_action( 'install_plugins_favorites', 'install_plugins_favorites_form', 9, 0 );
+				break;
+
+			default:
+				$args = false;
+				break;
+		}
+
+		/**
+		 * Filters API request arguments for each Add Plugins screen tab.
+		 *
+		 * The dynamic portion of the hook name, `$tab`, refers to the plugin install tabs.
+		 *
+		 * Possible hook names include:
+		 *
+		 *  - `install_plugins_table_api_args_favorites`
+		 *  - `install_plugins_table_api_args_featured`
+		 *  - `install_plugins_table_api_args_popular`
+		 *  - `install_plugins_table_api_args_recommended`
+		 *  - `install_plugins_table_api_args_upload`
+		 *
+		 * @since 3.7.0
+		 *
+		 * @param array|false $args Plugin install API arguments.
+		 */
+		$args = apply_filters( &quot;install_plugins_table_api_args_{$tab}&quot;, $args );
+
+		if ( ! $args ) {
+			return;
+		}
+
+		$api = plugins_api( 'query_plugins', $args );
+
+		if ( is_wp_error( $api ) ) {
+			$this-&gt;error = $api;
+			return;
+		}
+
+		$this-&gt;items = $api-&gt;plugins;
+
+		if ( $this-&gt;orderby ) {
+			uasort( $this-&gt;items, array( $this, 'order_callback' ) );
+		}
+
+		$this-&gt;set_pagination_args(
+			array(
+				'total_items' =&gt; $api-&gt;info['results'],
+				'per_page'    =&gt; $args['per_page'],
+			)
+		);
+
+		if ( isset( $api-&gt;info['groups'] ) ) {
+			$this-&gt;groups = $api-&gt;info['groups'];
+		}
+
+		if ( $installed_plugins ) {
+			$js_plugins = array_fill_keys(
+				array( 'all', 'search', 'active', 'inactive', 'recently_activated', 'mustuse', 'dropins' ),
+				array()
+			);
+
+			$js_plugins['all'] = array_values( wp_list_pluck( $installed_plugins, 'plugin' ) );
+			$upgrade_plugins   = wp_filter_object_list( $installed_plugins, array( 'upgrade' =&gt; true ), 'and', 'plugin' );
+
+			if ( $upgrade_plugins ) {
+				$js_plugins['upgrade'] = array_values( $upgrade_plugins );
+			}
+
+			wp_localize_script(
+				'updates',
+				'_wpUpdatesItemCounts',
+				array(
+					'plugins' =&gt; $js_plugins,
+					'totals'  =&gt; wp_get_update_data(),
+				)
+			);
+		}
+	}
+
+	/**
+	 */
+	public function no_items() {
+		if ( isset( $this-&gt;error ) ) { ?&gt;
+			&lt;div class=&quot;inline error&quot;&gt;&lt;p&gt;&lt;?php echo $this-&gt;error-&gt;get_error_message(); ?&gt;&lt;/p&gt;
+				&lt;p class=&quot;hide-if-no-js&quot;&gt;&lt;button class=&quot;button try-again&quot;&gt;&lt;?php _e( 'Try Again' ); ?&gt;&lt;/button&gt;&lt;/p&gt;
+			&lt;/div&gt;
+		&lt;?php } else { ?&gt;
+			&lt;div class=&quot;no-plugin-results&quot;&gt;&lt;?php _e( 'No plugins found. Try a different search.' ); ?&gt;&lt;/div&gt;
+			&lt;?php
+		}
+	}
+
+	/**
+	 * @global array $tabs
+	 * @global string $tab
+	 *
+	 * @return array
+	 */
+	protected function get_views() {
+		global $tabs, $tab;
+
+		$display_tabs = array();
+		foreach ( (array) $tabs as $action =&gt; $text ) {
+			$current_link_attributes                     = ( $action === $tab ) ? ' class=&quot;current&quot; aria-current=&quot;page&quot;' : '';
+			$href                                        = self_admin_url( 'plugin-install.php?tab=' . $action );
+			$display_tabs[ 'plugin-install-' . $action ] = &quot;&lt;a href='$href'$current_link_attributes&gt;$text&lt;/a&gt;&quot;;
+		}
+		// No longer a real tab.
+		unset( $display_tabs['plugin-install-upload'] );
+
+		return $display_tabs;
+	}
+
+	/**
+	 * Override parent views so we can use the filter bar display.
+	 */
+	public function views() {
+		$views = $this-&gt;get_views();
+
+		/** This filter is documented in wp-admin/inclues/class-wp-list-table.php */
+		$views = apply_filters( &quot;views_{$this-&gt;screen-&gt;id}&quot;, $views );
+
+		$this-&gt;screen-&gt;render_screen_reader_content( 'heading_views' );
+		?&gt;
+&lt;div class=&quot;wp-filter&quot;&gt;
+	&lt;ul class=&quot;filter-links&quot;&gt;
+		&lt;?php
+		if ( ! empty( $views ) ) {
+			foreach ( $views as $class =&gt; $view ) {
+				$views[ $class ] = &quot;\t&lt;li class='$class'&gt;$view&quot;;
+			}
+			echo implode( &quot; &lt;/li&gt;\n&quot;, $views ) . &quot;&lt;/li&gt;\n&quot;;
+		}
+		?&gt;
+	&lt;/ul&gt;
+
+		&lt;?php install_search_form(); ?&gt;
+&lt;/div&gt;
+		&lt;?php
+	}
+
+	/**
+	 * Displays the plugin install table.
+	 *
+	 * Overrides the parent display() method to provide a different container.
+	 *
+	 * @since 4.0.0
+	 */
+	public function display() {
+		$singular = $this-&gt;_args['singular'];
+
+		$data_attr = '';
+
+		if ( $singular ) {
+			$data_attr = &quot; data-wp-lists='list:$singular'&quot;;
+		}
+
+		$this-&gt;display_tablenav( 'top' );
+
+		?&gt;
+&lt;div class=&quot;wp-list-table &lt;?php echo implode( ' ', $this-&gt;get_table_classes() ); ?&gt;&quot;&gt;
+		&lt;?php
+		$this-&gt;screen-&gt;render_screen_reader_content( 'heading_list' );
+		?&gt;
+	&lt;div id=&quot;the-list&quot;&lt;?php echo $data_attr; ?&gt;&gt;
+		&lt;?php $this-&gt;display_rows_or_placeholder(); ?&gt;
+	&lt;/div&gt;
+&lt;/div&gt;
+		&lt;?php
+		$this-&gt;display_tablenav( 'bottom' );
+	}
+
+	/**
+	 * @global string $tab
+	 *
+	 * @param string $which
+	 */
+	protected function display_tablenav( $which ) {
+		if ( 'featured' === $GLOBALS['tab'] ) {
+			return;
+		}
+
+		if ( 'top' === $which ) {
+			wp_referer_field();
+			?&gt;
+			&lt;div class=&quot;tablenav top&quot;&gt;
+				&lt;div class=&quot;alignleft actions&quot;&gt;
+					&lt;?php
+					/**
+					 * Fires before the Plugin Install table header pagination is displayed.
+					 *
+					 * @since 2.7.0
+					 */
+					do_action( 'install_plugins_table_header' );
+					?&gt;
+				&lt;/div&gt;
+				&lt;?php $this-&gt;pagination( $which ); ?&gt;
+				&lt;br class=&quot;clear&quot; /&gt;
+			&lt;/div&gt;
+		&lt;?php } else { ?&gt;
+			&lt;div class=&quot;tablenav bottom&quot;&gt;
+				&lt;?php $this-&gt;pagination( $which ); ?&gt;
+				&lt;br class=&quot;clear&quot; /&gt;
+			&lt;/div&gt;
+			&lt;?php
+		}
+	}
+
+	/**
+	 * @return array
+	 */
+	protected function get_table_classes() {
+		return array( 'widefat', $this-&gt;_args['plural'] );
+	}
+
+	/**
+	 * @return array
+	 */
+	public function get_columns() {
+		return array();
+	}
+
+	/**
+	 * @param object $plugin_a
+	 * @param object $plugin_b
+	 * @return int
+	 */
+	private function order_callback( $plugin_a, $plugin_b ) {
+		$orderby = $this-&gt;orderby;
+		if ( ! isset( $plugin_a-&gt;$orderby, $plugin_b-&gt;$orderby ) ) {
+			return 0;
+		}
+
+		$a = $plugin_a-&gt;$orderby;
+		$b = $plugin_b-&gt;$orderby;
+
+		if ( $a === $b ) {
+			return 0;
+		}
+
+		if ( 'DESC' === $this-&gt;order ) {
+			return ( $a &lt; $b ) ? 1 : -1;
+		} else {
+			return ( $a &lt; $b ) ? -1 : 1;
+		}
+	}
+
+	public function display_rows() {
+		$plugins_allowedtags = array(
+			'a'       =&gt; array(
+				'href'   =&gt; array(),
+				'title'  =&gt; array(),
+				'target' =&gt; array(),
+			),
+			'abbr'    =&gt; array( 'title' =&gt; array() ),
+			'acronym' =&gt; array( 'title' =&gt; array() ),
+			'code'    =&gt; array(),
+			'pre'     =&gt; array(),
+			'em'      =&gt; array(),
+			'strong'  =&gt; array(),
+			'ul'      =&gt; array(),
+			'ol'      =&gt; array(),
+			'li'      =&gt; array(),
+			'p'       =&gt; array(),
+			'br'      =&gt; array(),
+		);
+
+		$plugins_group_titles = array(
+			'Performance' =&gt; _x( 'Performance', 'Plugin installer group title' ),
+			'Social'      =&gt; _x( 'Social', 'Plugin installer group title' ),
+			'Tools'       =&gt; _x( 'Tools', 'Plugin installer group title' ),
+		);
+
+		$group = null;
+
+		foreach ( (array) $this-&gt;items as $plugin ) {
+			if ( is_object( $plugin ) ) {
+				$plugin = (array) $plugin;
+			}
+
+			// Display the group heading if there is one.
+			if ( isset( $plugin['group'] ) &amp;&amp; $plugin['group'] !== $group ) {
+				if ( isset( $this-&gt;groups[ $plugin['group'] ] ) ) {
+					$group_name = $this-&gt;groups[ $plugin['group'] ];
+					if ( isset( $plugins_group_titles[ $group_name ] ) ) {
+						$group_name = $plugins_group_titles[ $group_name ];
+					}
+				} else {
+					$group_name = $plugin['group'];
+				}
+
+				// Starting a new group, close off the divs of the last one.
+				if ( ! empty( $group ) ) {
+					echo '&lt;/div&gt;&lt;/div&gt;';
+				}
+
+				echo '&lt;div class=&quot;plugin-group&quot;&gt;&lt;h3&gt;' . esc_html( $group_name ) . '&lt;/h3&gt;';
+				// Needs an extra wrapping div for nth-child selectors to work.
+				echo '&lt;div class=&quot;plugin-items&quot;&gt;';
+
+				$group = $plugin['group'];
+			}
+
+			$title = wp_kses( $plugin['name'], $plugins_allowedtags );
+
+			// Remove any HTML from the description.
+			$description = strip_tags( $plugin['short_description'] );
+			$version     = wp_kses( $plugin['version'], $plugins_allowedtags );
+
+			$name = strip_tags( $title . ' ' . $version );
+
+			$author = wp_kses( $plugin['author'], $plugins_allowedtags );
+			if ( ! empty( $author ) ) {
+				/* translators: %s: Plugin author. */
+				$author = ' &lt;cite&gt;' . sprintf( __( 'By %s' ), $author ) . '&lt;/cite&gt;';
+			}
+
+			$requires_php = isset( $plugin['requires_php'] ) ? $plugin['requires_php'] : null;
+			$requires_wp  = isset( $plugin['requires'] ) ? $plugin['requires'] : null;
+
+			$compatible_php = is_php_version_compatible( $requires_php );
+			$compatible_wp  = is_wp_version_compatible( $requires_wp );
+			$tested_wp      = ( empty( $plugin['tested'] ) || version_compare( get_bloginfo( 'version' ), $plugin['tested'], '&lt;=' ) );
+
+			$action_links = array();
+
+			if ( current_user_can( 'install_plugins' ) || current_user_can( 'update_plugins' ) ) {
+				$status = install_plugin_install_status( $plugin );
+
+				switch ( $status['status'] ) {
+					case 'install':
+						if ( $status['url'] ) {
+							if ( $compatible_php &amp;&amp; $compatible_wp ) {
+								$action_links[] = sprintf(
+									'&lt;a class=&quot;install-now button&quot; data-slug=&quot;%s&quot; href=&quot;%s&quot; aria-label=&quot;%s&quot; data-name=&quot;%s&quot;&gt;%s&lt;/a&gt;',
+									esc_attr( $plugin['slug'] ),
+									esc_url( $status['url'] ),
+									/* translators: %s: Plugin name and version. */
+									esc_attr( sprintf( _x( 'Install %s now', 'plugin' ), $name ) ),
+									esc_attr( $name ),
+									__( 'Install Now' )
+								);
+							} else {
+								$action_links[] = sprintf(
+									'&lt;button type=&quot;button&quot; class=&quot;button button-disabled&quot; disabled=&quot;disabled&quot;&gt;%s&lt;/button&gt;',
+									_x( 'Cannot Install', 'plugin' )
+								);
+							}
+						}
+						break;
+
+					case 'update_available':
+						if ( $status['url'] ) {
+							if ( $compatible_php &amp;&amp; $compatible_wp ) {
+								$action_links[] = sprintf(
+									'&lt;a class=&quot;update-now button aria-button-if-js&quot; data-plugin=&quot;%s&quot; data-slug=&quot;%s&quot; href=&quot;%s&quot; aria-label=&quot;%s&quot; data-name=&quot;%s&quot;&gt;%s&lt;/a&gt;',
+									esc_attr( $status['file'] ),
+									esc_attr( $plugin['slug'] ),
+									esc_url( $status['url'] ),
+									/* translators: %s: Plugin name and version. */
+									esc_attr( sprintf( _x( 'Update %s now', 'plugin' ), $name ) ),
+									esc_attr( $name ),
+									__( 'Update Now' )
+								);
+							} else {
+								$action_links[] = sprintf(
+									'&lt;button type=&quot;button&quot; class=&quot;button button-disabled&quot; disabled=&quot;disabled&quot;&gt;%s&lt;/button&gt;',
+									_x( 'Cannot Update', 'plugin' )
+								);
+							}
+						}
+						break;
+
+					case 'latest_installed':
+					case 'newer_installed':
+						if ( is_plugin_active( $status['file'] ) ) {
+							$action_links[] = sprintf(
+								'&lt;button type=&quot;button&quot; class=&quot;button button-disabled&quot; disabled=&quot;disabled&quot;&gt;%s&lt;/button&gt;',
+								_x( 'Active', 'plugin' )
+							);
+						} elseif ( current_user_can( 'activate_plugin', $status['file'] ) ) {
+							$button_text = __( 'Activate' );
+							/* translators: %s: Plugin name. */
+							$button_label = _x( 'Activate %s', 'plugin' );
+							$activate_url = add_query_arg(
+								array(
+									'_wpnonce' =&gt; wp_create_nonce( 'activate-plugin_' . $status['file'] ),
+									'action'   =&gt; 'activate',
+									'plugin'   =&gt; $status['file'],
+								),
+								network_admin_url( 'plugins.php' )
+							);
+
+							if ( is_network_admin() ) {
+								$button_text = __( 'Network Activate' );
+								/* translators: %s: Plugin name. */
+								$button_label = _x( 'Network Activate %s', 'plugin' );
+								$activate_url = add_query_arg( array( 'networkwide' =&gt; 1 ), $activate_url );
+							}
+
+							$action_links[] = sprintf(
+								'&lt;a href=&quot;%1$s&quot; class=&quot;button activate-now&quot; aria-label=&quot;%2$s&quot;&gt;%3$s&lt;/a&gt;',
+								esc_url( $activate_url ),
+								esc_attr( sprintf( $button_label, $plugin['name'] ) ),
+								$button_text
+							);
+						} else {
+							$action_links[] = sprintf(
+								'&lt;button type=&quot;button&quot; class=&quot;button button-disabled&quot; disabled=&quot;disabled&quot;&gt;%s&lt;/button&gt;',
+								_x( 'Installed', 'plugin' )
+							);
+						}
+						break;
+				}
+			}
+
+			$details_link = self_admin_url(
+				'plugin-install.php?tab=plugin-information&amp;amp;plugin=' . $plugin['slug'] .
+				'&amp;amp;TB_iframe=true&amp;amp;width=600&amp;amp;height=550'
+			);
+
+			$action_links[] = sprintf(
+				'&lt;a href=&quot;%s&quot; class=&quot;thickbox open-plugin-details-modal&quot; aria-label=&quot;%s&quot; data-title=&quot;%s&quot;&gt;%s&lt;/a&gt;',
+				esc_url( $details_link ),
+				/* translators: %s: Plugin name and version. */
+				esc_attr( sprintf( __( 'More information about %s' ), $name ) ),
+				esc_attr( $name ),
+				__( 'More Details' )
+			);
+
+			if ( ! empty( $plugin['icons']['svg'] ) ) {
+				$plugin_icon_url = $plugin['icons']['svg'];
+			} elseif ( ! empty( $plugin['icons']['2x'] ) ) {
+				$plugin_icon_url = $plugin['icons']['2x'];
+			} elseif ( ! empty( $plugin['icons']['1x'] ) ) {
+				$plugin_icon_url = $plugin['icons']['1x'];
+			} else {
+				$plugin_icon_url = $plugin['icons']['default'];
+			}
+
+			/**
+			 * Filters the install action links for a plugin.
+			 *
+			 * @since 2.7.0
+			 *
+			 * @param string[] $action_links An array of plugin action links. Defaults are links to Details and Install Now.
+			 * @param array    $plugin       The plugin currently being listed.
+			 */
+			$action_links = apply_filters( 'plugin_install_action_links', $action_links, $plugin );
+
+			$last_updated_timestamp = strtotime( $plugin['last_updated'] );
+			?&gt;
+		&lt;div class=&quot;plugin-card plugin-card-&lt;?php echo sanitize_html_class( $plugin['slug'] ); ?&gt;&quot;&gt;
+			&lt;?php
+			if ( ! $compatible_php || ! $compatible_wp ) {
+				echo '&lt;div class=&quot;notice inline notice-error notice-alt&quot;&gt;&lt;p&gt;';
+				if ( ! $compatible_php &amp;&amp; ! $compatible_wp ) {
+					_e( 'This plugin doesn&amp;#8217;t work with your versions of WordPress and PHP.' );
+					if ( current_user_can( 'update_core' ) &amp;&amp; current_user_can( 'update_php' ) ) {
+						printf(
+							/* translators: 1: URL to WordPress Updates screen, 2: URL to Update PHP page. */
+							' ' . __( '&lt;a href=&quot;%1$s&quot;&gt;Please update WordPress&lt;/a&gt;, and then &lt;a href=&quot;%2$s&quot;&gt;learn more about updating PHP&lt;/a&gt;.' ),
+							self_admin_url( 'update-core.php' ),
+							esc_url( wp_get_update_php_url() )
+						);
+						wp_update_php_annotation( '&lt;/p&gt;&lt;p&gt;&lt;em&gt;', '&lt;/em&gt;' );
+					} elseif ( current_user_can( 'update_core' ) ) {
+						printf(
+							/* translators: %s: URL to WordPress Updates screen. */
+							' ' . __( '&lt;a href=&quot;%s&quot;&gt;Please update WordPress&lt;/a&gt;.' ),
+							self_admin_url( 'update-core.php' )
+						);
+					} elseif ( current_user_can( 'update_php' ) ) {
+						printf(
+							/* translators: %s: URL to Update PHP page. */
+							' ' . __( '&lt;a href=&quot;%s&quot;&gt;Learn more about updating PHP&lt;/a&gt;.' ),
+							esc_url( wp_get_update_php_url() )
+						);
+						wp_update_php_annotation( '&lt;/p&gt;&lt;p&gt;&lt;em&gt;', '&lt;/em&gt;' );
+					}
+				} elseif ( ! $compatible_wp ) {
+					_e( 'This plugin doesn&amp;#8217;t work with your version of WordPress.' );
+					if ( current_user_can( 'update_core' ) ) {
+						printf(
+							/* translators: %s: URL to WordPress Updates screen. */
+							' ' . __( '&lt;a href=&quot;%s&quot;&gt;Please update WordPress&lt;/a&gt;.' ),
+							self_admin_url( 'update-core.php' )
+						);
+					}
+				} elseif ( ! $compatible_php ) {
+					_e( 'This plugin doesn&amp;#8217;t work with your version of PHP.' );
+					if ( current_user_can( 'update_php' ) ) {
+						printf(
+							/* translators: %s: URL to Update PHP page. */
+							' ' . __( '&lt;a href=&quot;%s&quot;&gt;Learn more about updating PHP&lt;/a&gt;.' ),
+							esc_url( wp_get_update_php_url() )
+						);
+						wp_update_php_annotation( '&lt;/p&gt;&lt;p&gt;&lt;em&gt;', '&lt;/em&gt;' );
+					}
+				}
+				echo '&lt;/p&gt;&lt;/div&gt;';
+			}
+			?&gt;
+			&lt;div class=&quot;plugin-card-top&quot;&gt;
+				&lt;div class=&quot;name column-name&quot;&gt;
+					&lt;h3&gt;
+						&lt;a href=&quot;&lt;?php echo esc_url( $details_link ); ?&gt;&quot; class=&quot;thickbox open-plugin-details-modal&quot;&gt;
+						&lt;?php echo $title; ?&gt;
+						&lt;img src=&quot;&lt;?php echo esc_url( $plugin_icon_url ); ?&gt;&quot; class=&quot;plugin-icon&quot; alt=&quot;&quot; /&gt;
+						&lt;/a&gt;
+					&lt;/h3&gt;
+				&lt;/div&gt;
+				&lt;div class=&quot;action-links&quot;&gt;
+					&lt;?php
+					if ( $action_links ) {
+						echo '&lt;ul class=&quot;plugin-action-buttons&quot;&gt;&lt;li&gt;' . implode( '&lt;/li&gt;&lt;li&gt;', $action_links ) . '&lt;/li&gt;&lt;/ul&gt;';
+					}
+					?&gt;
+				&lt;/div&gt;
+				&lt;div class=&quot;desc column-description&quot;&gt;
+					&lt;p&gt;&lt;?php echo $description; ?&gt;&lt;/p&gt;
+					&lt;p class=&quot;authors&quot;&gt;&lt;?php echo $author; ?&gt;&lt;/p&gt;
+				&lt;/div&gt;
+			&lt;/div&gt;
+			&lt;div class=&quot;plugin-card-bottom&quot;&gt;
+				&lt;div class=&quot;vers column-rating&quot;&gt;
+					&lt;?php
+					wp_star_rating(
+						array(
+							'rating' =&gt; $plugin['rating'],
+							'type'   =&gt; 'percent',
+							'number' =&gt; $plugin['num_ratings'],
+						)
+					);
+					?&gt;
+					&lt;span class=&quot;num-ratings&quot; aria-hidden=&quot;true&quot;&gt;(&lt;?php echo number_format_i18n( $plugin['num_ratings'] ); ?&gt;)&lt;/span&gt;
+				&lt;/div&gt;
+				&lt;div class=&quot;column-updated&quot;&gt;
+					&lt;strong&gt;&lt;?php _e( 'Last Updated:' ); ?&gt;&lt;/strong&gt;
+					&lt;?php
+						/* translators: %s: Human-readable time difference. */
+						printf( __( '%s ago' ), human_time_diff( $last_updated_timestamp ) );
+					?&gt;
+				&lt;/div&gt;
+				&lt;div class=&quot;column-downloaded&quot;&gt;
+					&lt;?php
+					if ( $plugin['active_installs'] &gt;= 1000000 ) {
+						$active_installs_millions = floor( $plugin['active_installs'] / 1000000 );
+						$active_installs_text     = sprintf(
+							/* translators: %s: Number of millions. */
+							_nx( '%s+ Million', '%s+ Million', $active_installs_millions, 'Active plugin installations' ),
+							number_format_i18n( $active_installs_millions )
+						);
+					} elseif ( 0 === $plugin['active_installs'] ) {
+						$active_installs_text = _x( 'Less Than 10', 'Active plugin installations' );
+					} else {
+						$active_installs_text = number_format_i18n( $plugin['active_installs'] ) . '+';
+					}
+					/* translators: %s: Number of installations. */
+					printf( __( '%s Active Installations' ), $active_installs_text );
+					?&gt;
+				&lt;/div&gt;
+				&lt;div class=&quot;column-compatibility&quot;&gt;
+					&lt;?php
+					if ( ! $tested_wp ) {
+						echo '&lt;span class=&quot;compatibility-untested&quot;&gt;' . __( 'Untested with your version of WordPress' ) . '&lt;/span&gt;';
+					} elseif ( ! $compatible_wp ) {
+						echo '&lt;span class=&quot;compatibility-incompatible&quot;&gt;' . __( '&lt;strong&gt;Incompatible&lt;/strong&gt; with your version of WordPress' ) . '&lt;/span&gt;';
+					} else {
+						echo '&lt;span class=&quot;compatibility-compatible&quot;&gt;' . __( '&lt;strong&gt;Compatible&lt;/strong&gt; with your version of WordPress' ) . '&lt;/span&gt;';
+					}
+					?&gt;
+				&lt;/div&gt;
+			&lt;/div&gt;
+		&lt;/div&gt;
+			&lt;?php
+		}
+
+		// Close off the group divs of the last one.
+		if ( ! empty( $group ) ) {
+			echo '&lt;/div&gt;&lt;/div&gt;';
+		}
+	}
+}
+</pre>
+			</div>
+			<p class="source-code-links">
+				<span>
+					<a href="#" class="show-complete-source">Expand full source code</a>
+					<a href="#" class="less-complete-source">Collapse full source code</a>
+				</span>
+				<span><a href="https://core.trac.wordpress.org/browser/tags/5.8/src/wp-admin/includes/class-wp-plugin-install-list-table.php#L18">View on Trac</a></span>
+			</p>
+			</section>
+	<hr />
+	<section class="related">
+		<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="related" tabindex="-1">Related <a href="#related" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Related</span></a></h2>
+
+					<article class="uses">
+				<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="uses" tabindex="-1">Uses <a href="#uses" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Uses</span></a></h3>
+				<table id="uses-table">
+					<caption class="screen-reader-text">Uses</caption>
+					<thead>
+						<tr>
+							<th>Uses</th>
+							<th class="related-desc">Description</th>
+						</tr>
+					</thead>
+					<tbody>
+												<tr>
+							<td>
+								<span>wp-admin/includes/class-wp-list-table.php:</span>
+								<a href="../wp_list_table/index.html">WP_List_Table</a>
+							</td>
+							<td class="related-desc">
+								<p>Base class for displaying a list of items in an ajaxified HTML table.</p>
+							</td>
+						</tr>
+											<tbody>
+				</table>
+
+							</article>
+		
+			</section>
+			<hr />
+		<section class="class-methods">
+			<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="methods" tabindex="-1">Methods <a href="#methods" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Methods</span></a></h2>
+			<ul>
+									<li><a href="ajax_user_can/index.html">
+							ajax_user_can</a>
+																	</li>
+									<li><a href="display/index.html">
+							display</a>
+						&mdash; Displays the plugin install table.											</li>
+									<li><a href="display_rows/index.html">
+							display_rows</a>
+																	</li>
+									<li><a href="display_tablenav/index.html">
+							display_tablenav</a>
+																	</li>
+									<li><a href="get_columns/index.html">
+							get_columns</a>
+																	</li>
+									<li><a href="get_installed_plugin_slugs/index.html">
+							get_installed_plugin_slugs</a>
+						&mdash; Return a list of slugs of installed plugins, if known.											</li>
+									<li><a href="get_installed_plugins/index.html">
+							get_installed_plugins</a>
+						&mdash; Return the list of known plugins.											</li>
+									<li><a href="get_table_classes/index.html">
+							get_table_classes</a>
+																	</li>
+									<li><a href="get_views/index.html">
+							get_views</a>
+																	</li>
+									<li><a href="no_items/index.html">
+							no_items</a>
+																	</li>
+									<li><a href="order_callback/index.html">
+							order_callback</a>
+																	</li>
+									<li><a href="prepare_items/index.html">
+							prepare_items</a>
+																	</li>
+									<li><a href="views/index.html">
+							views</a>
+						&mdash; Override parent views so we can use the filter bar display.											</li>
+							</ul>
+		</section>
+		<hr />
+	<section class="changelog">
+		<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="changelog" tabindex="-1">Changelog <a href="#changelog" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Changelog</span></a></h2>
+
+		<table>
+			<caption class="screen-reader-text">Changelog</caption>
+			<thead>
+				<tr>
+					<th class="changelog-version">Version</th>
+					<th class="changelog-desc">Description</th>
+				</tr>
+			</thead>
+
+			<tbody>
+									
+					<tr>
+						<td><a href="../../since/3.1.0/index.html" alt="WordPress 3.1.0">3.1.0</a></td>
+						<td>Introduced.</td>
+					</tr>
+							</tbody>
+		</table>
+	</section>
+
+	<hr />
+	<section class="user-notes">
+		<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="user-contributed-notes" tabindex="-1">User Contributed Notes <a href="#user-contributed-notes" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">User Contributed Notes</span></a></h2>
+		
+<div id="comments" class="comments-area">
+
+	
+	
+			<div id="respond" class="comment-respond">
+		<h3 id="reply-title" class="comment-reply-title"> <small></small></h3><p>You must <a href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Fclasses%2Fwp_plugin_install_list_table%2F%23respond">log in</a> before being able to contribute a note or feedback.</p>	</div><!-- #respond -->
+		
+	
+</div><!-- #comments -->
+	</section>
+</div>
+
+</article>
+
+			
+		
+		</main><!-- #main -->
+	</div><!-- #primary -->
+	</div><!-- #content -->
+
+</div><!-- #page -->
+
+
+<div id="wporg-footer">
+	<div class="wrapper">
+		<ul>
+			<li><a href="http://wordpress.org/about/" title="An introduction to the WordPress project">About</a></li>
+			<li><a href="http://wordpress.org/news/" title="News and Updates">Blog</a></li>
+			<li><a href="http://wordpress.org/hosting/" title="Recommended web hosting providers">Hosting</a></li>
+			<li><a href="https://wordpressfoundation.org/donate/" title="Donate to the WordPress Foundation">Donate</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://wordpress.org/support/" title="Forums, documentation, and other resources">Support</a></li>
+			<li><a href="../../../index.html" title="Resources for WordPress developers">Developers</a></li>
+			<li><a href="http://make.wordpress.org/" title="Give back to WordPress through code, support, translation and more">Get Involved</a></li>
+			<li><a href="http://learn.wordpress.org/" title="Workshops and training materials">Learn</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://wordpress.org/showcase/" title="Some of the best WordPress sites on the Web">Showcase</a></li>
+			<li><a href="http://wordpress.org/plugins/" title="Add extra functionality to WordPress">Plugins</a></li>
+			<li><a href="http://wordpress.org/themes/" title="Make your WordPress pretty">Themes</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://central.wordcamp.org/" title="Find a WordPress event near you">WordCamp</a></li>
+			<li><a href="http://wordpress.tv/" title="Videos, tutorials, and WordCamp sessions">WordPress.TV</a></li>
+			<li><a href="http://buddypress.org/" title="A set of plugins to transform your WordPress into a social network">BuddyPress</a></li>
+			<li><a href="http://bbpress.org/" title="Fast, slick forums built on WordPress">bbPress</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://wordpress.com/?ref=wporg-footer" title="Hassle-free WordPress hosting">WordPress.com</a></li>
+			<li><a href="http://ma.tt/" title="Co-founder of WordPress, an example of what WordPress can do">Matt</a></li>
+			<li><a href="http://wordpress.org/about/privacy/" title="WordPress.org Privacy Policy">Privacy</a></li>
+			<li><a href="https://publiccode.eu/" target="_blank">Public Code</a></li>
+		</ul>
+
+		<ul class="social-media-links">
+			<li><span class="dashicons dashicons-twitter"></span><a href="https://twitter.com/WordPress" title="Follow @WordPress on Twitter">@WordPress</a></li>
+			<li><span class="dashicons dashicons-facebook"></span><a href="https://www.facebook.com/WordPress/" title="Like WordPress on Facebook">WordPress</a></li>
+		</ul>
+	</div>
+
+		<p class="cip cip-image">Code is Poetry.</p>
+</div>
+
+<script src="../../../../s.w.org/style/js/navigation.min.js?20190128"></script>
+
+<link rel='stylesheet' id='buttons-css'  href='../../../wp-includes/css/buttons.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<script type='text/javascript' src='../../../wp-includes/js/hoverintent-js.min.js?ver=2.2.1' id='hoverintent-js-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/admin-bar.min.js?ver=5.9-alpha-51701' id='admin-bar-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/navigation.js?ver=20181209' id='wporg-developer-navigation-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/skip-link-focus-fix.js?ver=20130115' id='wporg-developer-skip-link-focus-fix-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/search.js?ver=20150430' id='wporg-developer-search-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/menu.js?ver=20180201' id='wporg-developer-menu-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/awesomplete.min.js?ver=20160322' id='awesomplete-js'></script>
+<script type='text/javascript' id='autocomplete-js-extra'>
+/* <![CDATA[ */
+var autocomplete = {"ajaxurl":"https:\/\/developer.wordpress.org\/wp-admin\/admin-ajax.php","nonce":"8a60f70c4b"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/autocomplete.js?ver=20160524' id='autocomplete-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/function-reference.js?ver=20180724' id='wporg-developer-function-reference-js'></script>
+<script type='text/javascript' id='quicktags-js-extra'>
+/* <![CDATA[ */
+var quicktagsL10n = {"closeAllOpenTags":"Close all open tags","closeTags":"close tags","enterURL":"Enter the URL","enterImageURL":"Enter the URL of the image","enterImageDescription":"Enter a description of the image","textdirection":"text direction","toggleTextdirection":"Toggle Editor Text Direction","dfw":"Distraction-free writing mode","strong":"Bold","strongClose":"Close bold tag","em":"Italic","emClose":"Close italic tag","link":"Insert link","blockquote":"Blockquote","blockquoteClose":"Close blockquote tag","del":"Deleted text (strikethrough)","delClose":"Close deleted text tag","ins":"Inserted text","insClose":"Close inserted text tag","image":"Insert image","ul":"Bulleted list","ulClose":"Close bulleted list tag","ol":"Numbered list","olClose":"Close numbered list tag","li":"List item","liClose":"Close list item tag","code":"Code","codeClose":"Close code tag","more":"Insert Read More tag"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-includes/js/quicktags.min.js?ver=5.9-alpha-51701' id='quicktags-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/user-notes.js?ver=20200110' id='wporg-developer-user-notes-js'></script>
+<script type='text/javascript' id='wporg-developer-user-notes-feedback-js-extra'>
+/* <![CDATA[ */
+var wporg_note_feedback = {"show":"Show Feedback","hide":"Hide Feedback"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/user-notes-feedback.js?ver=20181023' id='wporg-developer-user-notes-feedback-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/tabs.js?ver=20160824' id='wporg-developer-tabs-js'></script>
+<script type='text/javascript' id='wporg-developer-preview-js-extra'>
+/* <![CDATA[ */
+var wporg_note_preview = {"ajaxurl":"https:\/\/developer.wordpress.org\/wp-admin\/admin-ajax.php","nonce":"504933b60e","preview":"preview note","preview_empty":"Nothing to preview","is_admin":""};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/user-notes-preview.js?ver=20200111' id='wporg-developer-preview-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/wp-embed.min.js?ver=5.9-alpha-51701' id='wp-embed-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/vendor/regenerator-runtime.min.js?ver=0.13.7' id='regenerator-runtime-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/vendor/wp-polyfill.min.js?ver=3.15.0' id='wp-polyfill-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/dom-ready.min.js?ver=71883072590656bf22c74c7b887df3dd' id='wp-dom-ready-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/hooks.min.js?ver=a7edae857aab69d69fa10d5aef23a5de' id='wp-hooks-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/i18n.min.js?ver=5f1269854226b4dd90450db411a12b79' id='wp-i18n-js'></script>
+<script type='text/javascript' id='wp-i18n-js-after'>
+wp.i18n.setLocaleData( { 'text direction\u0004ltr': [ 'ltr' ] } );
+</script>
+<script type='text/javascript' id='wp-a11y-js-translations'>
+( function( domain, translations ) {
+	var localeData = translations.locale_data[ domain ] || translations.locale_data.messages;
+	localeData[""].domain = domain;
+	wp.i18n.setLocaleData( localeData, domain );
+} )( "default", { "locale_data": { "messages": { "": {} } } } );
+</script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/a11y.min.js?ver=0ac8327cc1c40dcfdf29716affd7ac63' id='wp-a11y-js'></script>
+<script type='text/javascript' id='wplink-js-extra'>
+/* <![CDATA[ */
+var wpLinkL10n = {"title":"Insert\/edit link","update":"Update","save":"Add Link","noTitle":"(no title)","noMatchesFound":"No results found.","linkSelected":"Link selected.","linkInserted":"Link inserted.","minInputLength":"3"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-includes/js/wplink.min.js?ver=5.9-alpha-51701' id='wplink-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/jquery/ui/core.min.js?ver=1.12.1' id='jquery-ui-core-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/jquery/ui/menu.min.js?ver=1.12.1' id='jquery-ui-menu-js'></script>
+<script type='text/javascript' id='jquery-ui-autocomplete-js-extra'>
+/* <![CDATA[ */
+var uiAutocompleteL10n = {"noResults":"No results found.","oneResult":"1 result found. Use up and down arrow keys to navigate.","manyResults":"%d results found. Use up and down arrow keys to navigate.","itemSelected":"Item selected."};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-includes/js/jquery/ui/autocomplete.min.js?ver=1.12.1' id='jquery-ui-autocomplete-js'></script>
+
+		<script type="text/javascript">
+		tinyMCEPreInit = {
+			baseURL: "https://developer.wordpress.org/wp-includes/js/tinymce",
+			suffix: ".min",
+						mceInit: {},
+			qtInit: {'comment':{id:"comment",buttons:"strong,em,ul,ol,li,link"}},
+			ref: {plugins:"",theme:"modern",language:""},
+			load_ext: function(url,lang){var sl=tinymce.ScriptLoader;sl.markDone(url+'/langs/'+lang+'.js');sl.markDone(url+'/langs/'+lang+'_dlg.js');}
+		};
+		</script>
+				<script type="text/javascript">
+		var ajaxurl = "../../../wp-admin/admin-ajax.html";
+		( function() {
+			var initialized = [];
+			var initialize  = function() {
+				var init, id, inPostbox, $wrap;
+				var readyState = document.readyState;
+
+				if ( readyState !== 'complete' && readyState !== 'interactive' ) {
+					return;
+				}
+
+				for ( id in tinyMCEPreInit.mceInit ) {
+					if ( initialized.indexOf( id ) > -1 ) {
+						continue;
+					}
+
+					init      = tinyMCEPreInit.mceInit[id];
+					$wrap     = tinymce.$( '#wp-' + id + '-wrap' );
+					inPostbox = $wrap.parents( '.postbox' ).length > 0;
+
+					if (
+						! init.wp_skip_init &&
+						( $wrap.hasClass( 'tmce-active' ) || ! tinyMCEPreInit.qtInit.hasOwnProperty( id ) ) &&
+						( readyState === 'complete' || ( ! inPostbox && readyState === 'interactive' ) )
+					) {
+						tinymce.init( init );
+						initialized.push( id );
+
+						if ( ! window.wpActiveEditor ) {
+							window.wpActiveEditor = id;
+						}
+					}
+				}
+			}
+
+			if ( typeof tinymce !== 'undefined' ) {
+				if ( tinymce.Env.ie && tinymce.Env.ie < 11 ) {
+					tinymce.$( '.wp-editor-wrap ' ).removeClass( 'tmce-active' ).addClass( 'html-active' );
+				} else {
+					if ( document.readyState === 'complete' ) {
+						initialize();
+					} else {
+						document.addEventListener( 'readystatechange', initialize );
+					}
+				}
+			}
+
+			if ( typeof quicktags !== 'undefined' ) {
+				for ( id in tinyMCEPreInit.qtInit ) {
+					quicktags( tinyMCEPreInit.qtInit[id] );
+
+					if ( ! window.wpActiveEditor ) {
+						window.wpActiveEditor = id;
+					}
+				}
+			}
+		}());
+		</script>
+				<div id="wp-link-backdrop" style="display: none"></div>
+		<div id="wp-link-wrap" class="wp-core-ui" style="display: none" role="dialog" aria-labelledby="link-modal-title">
+		<form id="wp-link" tabindex="-1">
+		<input type="hidden" id="_ajax_linking_nonce" name="_ajax_linking_nonce" value="86f5a0a85d" />		<h1 id="link-modal-title">Insert/edit link</h1>
+		<button type="button" id="wp-link-close"><span class="screen-reader-text">Close</span></button>
+		<div id="link-selector">
+			<div id="link-options">
+				<p class="howto" id="wplink-enter-url">Enter the destination URL</p>
+				<div>
+					<label><span>URL</span>
+					<input id="wp-link-url" type="text" aria-describedby="wplink-enter-url" /></label>
+				</div>
+				<div class="wp-link-text-field">
+					<label><span>Link Text</span>
+					<input id="wp-link-text" type="text" /></label>
+				</div>
+				<div class="link-target">
+					<label><span></span>
+					<input type="checkbox" id="wp-link-target" /> Open link in a new tab</label>
+				</div>
+			</div>
+			<p class="howto" id="wplink-link-existing-content">Or link to existing content</p>
+			<div id="search-panel">
+				<div class="link-search-wrapper">
+					<label>
+						<span class="search-label">Search</span>
+						<input type="search" id="wp-link-search" class="link-search-field" autocomplete="off" aria-describedby="wplink-link-existing-content" />
+						<span class="spinner"></span>
+					</label>
+				</div>
+				<div id="search-results" class="query-results" tabindex="0">
+					<ul></ul>
+					<div class="river-waiting">
+						<span class="spinner"></span>
+					</div>
+				</div>
+				<div id="most-recent-results" class="query-results" tabindex="0">
+					<div class="query-notice" id="query-notice-message">
+						<em class="query-notice-default">No search term specified. Showing recent items.</em>
+						<em class="query-notice-hint screen-reader-text">Search or use up and down arrow keys to select an item.</em>
+					</div>
+					<ul></ul>
+					<div class="river-waiting">
+						<span class="spinner"></span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="submitbox">
+			<div id="wp-link-cancel">
+				<button type="button" class="button">Cancel</button>
+			</div>
+			<div id="wp-link-update">
+				<input type="submit" value="Add Link" class="button button-primary" id="wp-link-submit" name="wp-link-submit">
+			</div>
+		</div>
+		</form>
+		</div>
+		</body>
+
+<!-- Mirrored from developer.wordpress.org/reference/classes/wp_plugin_install_list_table/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 31 Aug 2021 17:21:42 GMT -->
+</html>

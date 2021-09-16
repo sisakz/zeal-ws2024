@@ -1,0 +1,1566 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+
+<!-- Mirrored from developer.wordpress.org/reference/functions/wp_get_nav_menu_items/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 31 Aug 2021 17:04:19 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<!--
+<meta property="fb:page_id" content="6427302910" />
+-->
+<meta name="google-site-verification" content="7VWES_-rcHBcmaQis9mSYamPfNwE03f4vyTj4pfuAw0" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>wp_get_nav_menu_items()</title>
+<meta name="referrer" content="always">
+
+		<link href='../../../../fonts.googleapis.com/css.css?family=Open+Sans:300italic,400italic,600italic,400,300,600&amp;subset=latin,cyrillic-ext,greek-ext,greek,vietnamese,latin-ext,cyrillic' rel='stylesheet' type='text/css'>
+
+		<link rel="stylesheet" href="../../../../s.w.org/style/wp4.css?95" />
+
+<link rel="shortcut icon" href="../../../../s.w.org/favicon.ico?2" type="image/x-icon" />
+<link rel="pingback" href="../../../xmlrpc.php" /><meta name='robots' content='max-image-preview:large' />
+<link rel='dns-prefetch' href='../../../../fonts.googleapis.com/index.html' />
+<link rel='dns-prefetch' href='http://s.w.org/' />
+<link rel='dns-prefetch' href='http://www.googletagmanager.com/' />
+<link rel='dns-prefetch' href='http://fonts.gstatic.com/' />
+<link rel="alternate" type="application/rss+xml" title="WordPress Developer Resources &raquo; Feed" href="../../../feed/index.html" />
+<link rel="alternate" type="application/rss+xml" title="WordPress Developer Resources &raquo; Comments Feed" href="../../../comments/feed/index.html" />
+<meta property="og:title" content="wp_get_nav_menu_items() | Function | WordPress Developer Resources" />
+<meta property="og:site_name" content="WordPress Developer Resources" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="../../../index.html" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@WordPress" />
+<meta name="description" content="Retrieves all menu items of a navigation menu." />
+<meta property="og:description" content="Retrieves all menu items of a navigation menu." />
+<link rel="alternate" type="application/rss+xml" title="WordPress Developer Resources &raquo; wp_get_nav_menu_items Comments Feed" href="https://developer.wordpress.org/reference/functions/wp_get_nav_menu_items/feed/" />
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'../../../../www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P24PF4B');</script>
+			<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/developer.wordpress.org\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.9-alpha-51701"}};
+			!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([10084,65039,8205,55357,56613],[10084,65039,8203,55357,56613])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel='stylesheet' id='dashicons-css'  href='../../../wp-includes/css/dashicons.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='admin-bar-css'  href='../../../wp-includes/css/admin-bar.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-block-library-css'  href='../../../wp-includes/css/dist/block-library/style.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='wporg-handbook-css-css'  href='../../../wp-content/plugins/handbook/stylesheets/callout-boxes.css?ver=20200121' type='text/css' media='all' />
+<link rel='stylesheet' id='open-sans-css'  href='../../../../fonts.googleapis.com/css-2.css?family=Open+Sans%3A300italic%2C400italic%2C600italic%2C300%2C400%2C600&amp;subset=latin%2Clatin-ext&amp;display=fallback&amp;ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='wporg-developer-style-css'  href='../../../wp-content/themes/pub/wporg-developer/style.css?ver=3' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-dev-sass-compiled-css'  href='../../../wp-content/themes/pub/wporg-developer/stylesheets/main.css?ver=20200713' type='text/css' media='all' />
+<link rel='stylesheet' id='awesomplete-css-css'  href='../../../wp-content/themes/pub/wporg-developer/stylesheets/awesomplete.css?ver=20160114' type='text/css' media='all' />
+<link rel='stylesheet' id='autocomplete-css-css'  href='../../../wp-content/themes/pub/wporg-developer/stylesheets/autocomplete.css?ver=20171220' type='text/css' media='all' />
+<link rel='stylesheet' id='syntaxhighlighter-core-css'  href='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shCore.css?ver=3.0.9b' type='text/css' media='all' />
+<link rel='stylesheet' id='syntaxhighlighter-theme-default-css'  href='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shThemeDefault.css?ver=3.0.9b' type='text/css' media='all' />
+<script type='text/javascript' src='../../../wp-includes/js/jquery/jquery.min.js?ver=3.6.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='../../../wp-content/plugins/handbook/scripts/handbook.js?ver=20150930' id='wporg-handbook-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/chapters.js?ver=20190603' id='wporg-developer-chapters-js'></script>
+<script type='text/javascript' src='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shCore.js?ver=3.0.9b' id='syntaxhighlighter-core-js'></script>
+<script type='text/javascript' src='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushPhp.js?ver=3.0.9b' id='syntaxhighlighter-brush-php-js'></script>
+<link rel="https://api.w.org/" href="https://developer.wordpress.org/wp-json/" /><link rel="alternate" type="application/json" href="https://developer.wordpress.org/wp-json/wp/v2/wp-parser-function/755" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="../../../xmlrpc-2.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="../../../wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 5.9-alpha-51701" />
+<link rel='shortlink' href='https://developer.wordpress.org/?p=755' />
+<link rel="alternate" type="application/json+oembed" href="https://developer.wordpress.org/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_get_nav_menu_items%2F" />
+<link rel="alternate" type="text/xml+oembed" href="https://developer.wordpress.org/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_get_nav_menu_items%2F&amp;format=xml" />
+<link rel="canonical" href="index.html">
+<!-- Stream WordPress user activity plugin v3.6.2 -->
+	<style>
+		@media screen and (max-width: 782px) {
+			#wpadminbar li#wp-admin-bar-log-in,
+			#wpadminbar li#wp-admin-bar-register {
+				display: block;
+			}
+
+			#wpadminbar li#wp-admin-bar-log-in a,
+			#wpadminbar li#wp-admin-bar-register a {
+				padding: 0 8px;
+			}
+		}
+	</style>
+		<style>
+			a.github-edit {
+				margin-left: .5em;
+				font-size: .5em;
+				vertical-align: top;
+				display: inline-block;
+				border: 1px solid #eeeeee;
+				border-radius: 2px;
+				background: #eeeeee;
+				padding: .5em .6em .4em;
+				color: black;
+				margin-top: 0.1em;
+			}
+			a.github-edit > * {
+				opacity: 0.6;
+			}
+			a.github-edit:hover > * {
+				opacity: 1;
+				color: black;
+			}
+			a.github-edit img {
+				height: .8em;
+			}
+		</style>
+		
+	<script type="text/javascript">
+		jQuery( '<style>.hide-if-js { display: none; }</style>' ).appendTo( 'head' );
+		jQuery( function($) {
+			$( 'body' ).addClass('js');
+		} );
+	</script>
+<style type="text/css" media="print">#wpadminbar { display:none; }</style>
+	<style type="text/css" media="screen">
+	</style>
+	<script>document.cookie='devicePixelRatio='+((window.devicePixelRatio === undefined) ? 1 : window.devicePixelRatio)+'; path=/';</script>
+
+</head>
+
+
+<body id="wordpress-org" class="wp-parser-function-template-default single single-wp-parser-function postid-755 admin-bar no-customize-support">
+		<div id="wpadminbar" class="nojq nojs">
+						<div class="quicklinks" id="wp-toolbar" role="navigation" aria-label="Toolbar">
+				<ul id='wp-admin-bar-root-default' class="ab-top-menu"><li id='wp-admin-bar-wp-logo' class="menupop"><a class='ab-item' aria-haspopup="true" href='https://wordpress.org/about/'><span class="ab-icon" aria-hidden="true"></span><span class="screen-reader-text">About WordPress</span></a><div class="ab-sub-wrapper"><ul id='wp-admin-bar-wp-logo-default' class="ab-submenu"><li id='wp-admin-bar-about'><a class='ab-item' href='https://wordpress.org/about/'>About WordPress</a></li></ul><ul id='wp-admin-bar-wp-logo-external' class="ab-sub-secondary ab-submenu"><li id='wp-admin-bar-wporg'><a class='ab-item' href='https://wordpress.org/'>WordPress.org</a></li><li id='wp-admin-bar-documentation'><a class='ab-item' href='https://wordpress.org/support/'>Documentation</a></li><li id='wp-admin-bar-support-forums'><a class='ab-item' href='https://wordpress.org/support/forums/'>Support</a></li><li id='wp-admin-bar-feedback'><a class='ab-item' href='https://wordpress.org/support/forum/requests-and-feedback'>Feedback</a></li></ul></div></li></ul><ul id='wp-admin-bar-top-secondary' class="ab-top-secondary ab-top-menu"><li id='wp-admin-bar-search' class="admin-bar-search"><div class="ab-item ab-empty-item" tabindex="-1"><form action="https://developer.wordpress.org/" method="get" id="adminbarsearch"><input class="adminbar-input" name="s" id="adminbar-search" type="text" value="" maxlength="150" /><label for="adminbar-search" class="screen-reader-text">Search</label><input type="submit" class="adminbar-button" value="Search" /></form></div></li><li id='wp-admin-bar-log-in'><a class='ab-item' href='https://login.wordpress.org/?locale=en_US'>Log In</a></li><li id='wp-admin-bar-register'><a class='ab-item' href='https://login.wordpress.org/register?locale=en_US'>Register</a></li></ul>			</div>
+					</div>
+
+		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P24PF4B" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<div id="wporg-header">
+	<div class="wrapper">
+	<h1><a href="http://wordpress.org/">WordPress.org</a></h1>				<div id="head-search">
+		<form action="http://wordpress.org/search/do-search.php" method="get">
+			<label for="global-search" class="screen-reader-text">Search WordPress.org for:</label>
+			<input id="global-search" class="text" name="search" type="text" value="" maxlength="150" placeholder="Search WordPress.org" />
+			<button type="submit" class="button"><span class="screen-reader-text">Submit</span></button>
+		</form>
+		</div>
+				<div style="clear:both"></div>
+		<button id="mobile-menu-button" aria-expanded="false"><span class="screen-reader-text">Toggle Menu</span></button>
+		
+<nav aria-label="Main Menu">
+<ul id="wporg-header-menu">
+<li class="menu-item"><a href='http://wordpress.org/showcase/' data-title='See some of the sites built on WordPress.'>Showcase</a></li>
+<li class="menu-item"><a href='http://learn.wordpress.org/' data-title='Resources to help you learn more about WordPress and teach it to others.'>Learn</a></li>
+<li class="menu-item"><a href='http://wordpress.org/themes/' data-title='Find just the right look for your website.'>Themes</a></li>
+<li class="menu-item"><a href='http://wordpress.org/plugins/' data-title='Plugins can extend WordPress to do almost anything you can imagine.'>Plugins</a></li>
+<li class="menu-item"><a href='http://wordpress.org/mobile/' data-title='Take your website on the go!'>Mobile</a></li>
+<li class="menu-item"><a href='http://wordpress.org/support/' data-title='Forums, documentation, help.'>Support</a><ul class="nav-submenu"><li><a href='http://wordpress.org/support/' title='Documentation, tutorials, best practices.'>Documentation</a></li><li><a href='http://wordpress.org/support/forums/' title='Support and discussion forums.'>Forums</a></li></ul><div class="uparrow"></div></li>
+<li class="menu-item"><a href='http://make.wordpress.org/' data-title='Contribute your knowledge.'>Get Involved</a><ul class="nav-submenu"><li><a href='http://wordpress.org/five-for-the-future/' title='How five percent is powering the next generation of the web'>Five for the Future</a></li></ul><div class="uparrow"></div></li>
+<li class="menu-item"><a href='http://wordpress.org/about/' data-title='About the WordPress Organization, and where we&#039;re going.'>About</a></li>
+<li class="menu-item"><a href='http://wordpress.org/news/' data-title='Come here for the latest scoop.'>Blog</a></li>
+<li class="menu-item"><a href='http://wordpress.org/hosting/' data-title='Find a home for your blog.'>Hosting</a></li>
+<li id="download" class="button download-button menu-item"><a href='http://wordpress.org/download/' data-title='Get it. Got it? Good.'>Get WordPress</a></li>
+</ul>
+</nav>
+		<div style="clear:both"></div>
+	</div>
+</div>
+
+
+
+<header id="masthead" class="site-header" role="banner">
+		<div class="site-branding">
+		<h1 class="site-title">
+			<a href="../../index.html" rel="home">Code Reference</a>
+		</h1>
+
+		
+		<nav id="site-navigation" class="main-navigation" role="navigation">
+			<button class="menu-toggle dashicons dashicons-arrow-down-alt2" aria-controls="primary-menu" aria-expanded="false" aria-label="Primary Menu"></button>
+					</nav>
+	</div>
+</header><!-- #masthead -->
+
+<div id="page" class="hfeed site devhub-wrap">
+	<a href="#main" class="screen-reader-text">Skip to content</a>
+
+				<div id="inner-search">
+			<div class="search-section section clear hide-if-js">
+
+
+	
+	<form role="search" method="get" class="searchform searchform-filtered" action="https://developer.wordpress.org/">
+		<label for="search-field" class="screen-reader-text">Search for:</label>
+		<input type="text" id="search-field" class="search-field" placeholder="Search &hellip;" value="" name="s">
+		<button class="button button-primary button-search"><i class="dashicons dashicons-search"></i><span class="screen-reader-text">Search plugins</span></button>
+	
+		<div class="search-post-type">
+			<span>Filter by type:</span>
+									<label><input type="checkbox" name="post_type[]" value="wp-parser-function"
+						 /> Functions</label>
+									<label><input type="checkbox" name="post_type[]" value="wp-parser-hook"
+						 /> Hooks</label>
+									<label><input type="checkbox" name="post_type[]" value="wp-parser-class"
+						 /> Classes</label>
+									<label><input type="checkbox" name="post_type[]" value="wp-parser-method"
+						 /> Methods</label>
+					</div>
+
+	
+	</form>
+
+</div><!-- /search-guide -->
+			<div id="inner-search-icon-container">
+				<div id="inner-search-icon">
+					<div class="dashicons dashicons-search"><span class="screen-reader-text">Search</span></div>
+				</div>
+			</div>
+		</div>
+
+		<div id="content" class="site-content">
+
+	<div id="content-area" class="wp-parser-function-template-default single single-wp-parser-function postid-755 admin-bar no-customize-support code-reference">
+
+		
+		<div class="breadcrumb-trail breadcrumbs" itemprop="breadcrumb">
+			<span class="trail-browse">Browse:</span> 
+			<span class="trail-begin"><a href="../../../index.html" title="WordPress Developer Resources" rel="home">Home</a></span> <span class="sep">&#47;</span> 
+			<span class="trail-inner"><a href="../../index.html" title="Reference">Reference</a></span> <span class="sep">&#47;</span> 
+			<span class="trail-inner"><a href="../index.html">Functions</a></span> <span class="sep">&#47;</span> <span class="trail-end">wp_get_nav_menu_items()</span>
+		</div>
+		<main id="main" class="site-main" role="main">
+
+		
+			
+<article id="post-755" class="post-755 wp-parser-function type-wp-parser-function status-publish hentry wp-parser-source-file-wp-includes_nav-menu-php wp-parser-package-nav_menus wp-parser-package-wordpress wp-parser-since-3-0-0">
+
+	
+	
+	<h1>wp_get_nav_menu_items( <span class="arg-type">int|string|WP_Term</span>&nbsp;<span class="arg-name">$menu</span>,  <span class="arg-type">array</span>&nbsp;<span class="arg-name">$args</span>&nbsp;=&nbsp;<span class="arg-default">array()</span>&nbsp;)</h1>
+
+	<section class="summary">
+		<p>Retrieves all menu items of a navigation menu.</p>
+	</section>
+
+
+	
+	<div class="content-toc"><style> .toc-jump { text-align: right; font-size: 12px; } .page .toc-heading { margin-top: -50px; padding-top: 50px !important; }</style><div class="table-of-contents"><h2>Contents</h2><ul class="items"><li><a href="#description">Description</a></li>
+<li><a href="#parameters">Parameters</a></li>
+<li><a href="#return">Return</a></li>
+<li><a href="#source">Source</a></li>
+<li><a href="#related">Related</a>
+<ul>
+<li><a href="#uses">Uses</a></li>
+<li><a href="#used-by">Used By</a>
+</ul></li>
+<li><a href="#changelog">Changelog</a></li>
+<li><a href="#user-contributed-notes">User Contributed Notes</a></ul>
+</div>
+
+<hr />
+<section class="description">
+	<h2 class="toc-heading" id="description" tabindex="-1">Description <a href="#description" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Description</span></a></h2>
+	<p>Note: Most arguments passed to the <code>$args</code> parameter – save for &#8216;output_key&#8217; – are specifically for retrieving nav_menu_item posts from <a href="../get_posts/index.html">get_posts()</a> and may only indirectly affect the ultimate ordering and content of the resulting nav menu items that get returned from this function.</p>
+
+	</section>
+
+	<hr />
+	<section class="parameters">
+		<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="parameters" tabindex="-1">Parameters <a href="#parameters" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Parameters</span></a></h2>
+		<dl>
+												<dt>$menu</dt>
+								<dd>
+					<p class="desc">
+													<span class="type">(<span class="int">int</span>|<span class="string">string</span>|<span class="WP_Term"><a href="../../classes/wp_term/index.html">WP_Term</a></span>)</span>
+																			<span class="required">(Required)</span>
+																			<span class="description">Menu ID, slug, name, or object.</span>
+											</p>
+									</dd>
+												<dt>$args</dt>
+								<dd>
+					<p class="desc">
+													<span class="type">(<span class="array">array</span>)</span>
+																			<span class="required">(Optional)</span>
+																			<span class="description">Arguments to pass to <a href="../get_posts/index.html">get_posts()</a>. <ul class="param-hash"><li><b>'order'</b><br /><i><span class='type'>(string)</span></i> How to order nav menu items as queried with <a href="../get_posts/index.html">get_posts()</a>. Will be ignored if 'output' is ARRAY_A. Default 'ASC'.</li>
+<li><b>'orderby'</b><br /><i><span class='type'>(string)</span></i> Field to order menu items by as retrieved from <a href="../get_posts/index.html">get_posts()</a>. Supply an orderby field via 'output_key' to affect the output order of nav menu items. Default 'menu_order'.</li>
+<li><b>'post_type'</b><br /><i><span class='type'>(string)</span></i> Menu items post type. Default 'nav_menu_item'.</li>
+<li><b>'post_status'</b><br /><i><span class='type'>(string)</span></i> Menu items post status. Default 'publish'.</li>
+<li><b>'output'</b><br /><i><span class='type'>(string)</span></i> How to order outputted menu items. Default ARRAY_A.</li>
+<li><b>'output_key'</b><br /><i><span class='type'>(string)</span></i> Key to use for ordering the actual menu items that get returned. Note that that is not a <a href="../get_posts/index.html">get_posts()</a> argument and will only affect output of menu items processed in this function. Default 'menu_order'.</li>
+<li><b>'nopaging'</b><br /><i><span class='type'>(bool)</span></i> Whether to retrieve all menu items (true) or paginate (false). Default true.</li>
+</li></ul>
+</span>
+											</p>
+											<p class="default">Default value: array()</p>
+									</dd>
+					</dl>
+	</section>
+	<hr />
+	<section class="return">
+		<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="return" tabindex="-1">Return <a href="#return" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Return</span></a></h2>
+		<p><span class='return-type'>(array|false)</span> Array of menu items, otherwise false.</p>
+	</section>
+	<hr />
+	<section class="source-content">
+		<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="source" tabindex="-1">Source <a href="#source" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Source</span></a></h2>
+		<p>
+			File: <a href="../../files/wp-includes/nav-menu.php/index.html">wp-includes/nav-menu.php</a>		</p>
+
+					<div class="source-code-container">
+				<pre class="brush: php; toolbar: false; first-line: 678">function wp_get_nav_menu_items( $menu, $args = array() ) {
+	$menu = wp_get_nav_menu_object( $menu );
+
+	if ( ! $menu ) {
+		return false;
+	}
+
+	static $fetched = array();
+
+	$items = get_objects_in_term( $menu-&gt;term_id, 'nav_menu' );
+	if ( is_wp_error( $items ) ) {
+		return false;
+	}
+
+	$defaults        = array(
+		'order'       =&gt; 'ASC',
+		'orderby'     =&gt; 'menu_order',
+		'post_type'   =&gt; 'nav_menu_item',
+		'post_status' =&gt; 'publish',
+		'output'      =&gt; ARRAY_A,
+		'output_key'  =&gt; 'menu_order',
+		'nopaging'    =&gt; true,
+	);
+	$args            = wp_parse_args( $args, $defaults );
+	$args['include'] = $items;
+
+	if ( ! empty( $items ) ) {
+		$items = get_posts( $args );
+	} else {
+		$items = array();
+	}
+
+	// Get all posts and terms at once to prime the caches.
+	if ( empty( $fetched[ $menu-&gt;term_id ] ) &amp;&amp; ! wp_using_ext_object_cache() ) {
+		$fetched[ $menu-&gt;term_id ] = true;
+		$posts                     = array();
+		$terms                     = array();
+		foreach ( $items as $item ) {
+			$object_id = get_post_meta( $item-&gt;ID, '_menu_item_object_id', true );
+			$object    = get_post_meta( $item-&gt;ID, '_menu_item_object', true );
+			$type      = get_post_meta( $item-&gt;ID, '_menu_item_type', true );
+
+			if ( 'post_type' === $type ) {
+				$posts[ $object ][] = $object_id;
+			} elseif ( 'taxonomy' === $type ) {
+				$terms[ $object ][] = $object_id;
+			}
+		}
+
+		if ( ! empty( $posts ) ) {
+			foreach ( array_keys( $posts ) as $post_type ) {
+				get_posts(
+					array(
+						'post__in'               =&gt; $posts[ $post_type ],
+						'post_type'              =&gt; $post_type,
+						'nopaging'               =&gt; true,
+						'update_post_term_cache' =&gt; false,
+					)
+				);
+			}
+		}
+		unset( $posts );
+
+		if ( ! empty( $terms ) ) {
+			foreach ( array_keys( $terms ) as $taxonomy ) {
+				get_terms(
+					array(
+						'taxonomy'     =&gt; $taxonomy,
+						'include'      =&gt; $terms[ $taxonomy ],
+						'hierarchical' =&gt; false,
+					)
+				);
+			}
+		}
+		unset( $terms );
+	}
+
+	$items = array_map( 'wp_setup_nav_menu_item', $items );
+
+	if ( ! is_admin() ) { // Remove invalid items only on front end.
+		$items = array_filter( $items, '_is_valid_nav_menu_item' );
+	}
+
+	if ( ARRAY_A === $args['output'] ) {
+		$items = wp_list_sort(
+			$items,
+			array(
+				$args['output_key'] =&gt; 'ASC',
+			)
+		);
+
+		$i = 1;
+
+		foreach ( $items as $k =&gt; $item ) {
+			$items[ $k ]-&gt;{$args['output_key']} = $i++;
+		}
+	}
+
+	/**
+	 * Filters the navigation menu items being returned.
+	 *
+	 * @since 3.0.0
+	 *
+	 * @param array  $items An array of menu item post objects.
+	 * @param object $menu  The menu object.
+	 * @param array  $args  An array of arguments used to retrieve menu item objects.
+	 */
+	return apply_filters( 'wp_get_nav_menu_items', $items, $menu, $args );
+}
+</pre>
+			</div>
+			<p class="source-code-links">
+				<span>
+					<a href="#" class="show-complete-source">Expand full source code</a>
+					<a href="#" class="less-complete-source">Collapse full source code</a>
+				</span>
+				<span><a href="https://core.trac.wordpress.org/browser/tags/5.8/src/wp-includes/nav-menu.php#L678">View on Trac</a></span>
+			</p>
+			</section>
+	<hr />
+	<section class="related">
+		<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="related" tabindex="-1">Related <a href="#related" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Related</span></a></h2>
+
+					<article class="uses">
+				<h3 class="toc-heading" id="uses" tabindex="-1">Uses <a href="#uses" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Uses</span></a></h3>
+				<table id="uses-table">
+					<caption class="screen-reader-text">Uses</caption>
+					<thead>
+						<tr>
+							<th>Uses</th>
+							<th class="related-desc">Description</th>
+						</tr>
+					</thead>
+					<tbody>
+												<tr>
+							<td>
+								<span>wp-includes/functions.php:</span>
+								<a href="../wp_list_sort/index.html">wp_list_sort()</a>
+							</td>
+							<td class="related-desc">
+								<p>Sorts a list of objects, based on one or more orderby arguments.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/load.php:</span>
+								<a href="../is_admin/index.html">is_admin()</a>
+							</td>
+							<td class="related-desc">
+								<p>Determines whether the current request is for an administrative interface page.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/load.php:</span>
+								<a href="../wp_using_ext_object_cache/index.html">wp_using_ext_object_cache()</a>
+							</td>
+							<td class="related-desc">
+								<p>Toggle <code>$_wp_using_ext_object_cache</code> on and off without directly touching global.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/functions.php:</span>
+								<a href="../wp_parse_args/index.html">wp_parse_args()</a>
+							</td>
+							<td class="related-desc">
+								<p>Merges user defined arguments into defaults array.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/taxonomy.php:</span>
+								<a href="../get_terms/index.html">get_terms()</a>
+							</td>
+							<td class="related-desc">
+								<p>Retrieves the terms in a given taxonomy or list of taxonomies.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/taxonomy.php:</span>
+								<a href="../get_objects_in_term/index.html">get_objects_in_term()</a>
+							</td>
+							<td class="related-desc">
+								<p>Retrieve object_ids of valid taxonomy and term.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/plugin.php:</span>
+								<a href="../apply_filters/index.html">apply_filters()</a>
+							</td>
+							<td class="related-desc">
+								<p>Calls the callback functions that have been added to a filter hook.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/post.php:</span>
+								<a href="../get_posts/index.html">get_posts()</a>
+							</td>
+							<td class="related-desc">
+								<p>Retrieves an array of the latest posts, or posts matching the given criteria.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/post.php:</span>
+								<a href="../get_post_meta/index.html">get_post_meta()</a>
+							</td>
+							<td class="related-desc">
+								<p>Retrieves a post meta field for the given post ID.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/nav-menu.php:</span>
+								<a href="../../hooks/wp_get_nav_menu_items/index.html">wp_get_nav_menu_items</a>
+							</td>
+							<td class="related-desc">
+								<p>Filters the navigation menu items being returned.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/nav-menu.php:</span>
+								<a href="../wp_get_nav_menu_object/index.html">wp_get_nav_menu_object()</a>
+							</td>
+							<td class="related-desc">
+								<p>Returns a navigation menu object.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/load.php:</span>
+								<a href="../is_wp_error/index.html">is_wp_error()</a>
+							</td>
+							<td class="related-desc">
+								<p>Checks whether the given variable is a WordPress Error.</p>
+							</td>
+						</tr>
+											<tbody>
+				</table>
+
+								<a href="#" class="show-more">Show 7 more uses</a>
+				<a href="#" class="hide-more">Hide more uses</a>
+							</article>
+		
+					<hr />
+			<article class="used-by">
+				<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="used-by" tabindex="-1">Used By <a href="#used-by" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Used By</span></a></h3>
+				<table id="used-by-table">
+					<caption class="screen-reader-text">Used By</caption>
+					<thead>
+						<tr>
+							<th>Used By</th>
+							<th class="related-desc">Description</th>
+						</tr>
+					</thead>
+					<tbody>
+												<tr>
+							<td>
+								<span>wp-includes/class-wp-customize-nav-menus.php:</span>
+								<a href="../../classes/wp_customize_nav_menus/customize_register/index.html">WP_Customize_Nav_Menus::customize_register()</a>
+							</td>
+							<td class="related-desc">
+								<p>Add the customizer settings and controls.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-admin/includes/nav-menu.php:</span>
+								<a href="../wp_nav_menu_update_menu_items/index.html">wp_nav_menu_update_menu_items()</a>
+							</td>
+							<td class="related-desc">
+								<p>Saves nav menu items</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-admin/includes/nav-menu.php:</span>
+								<a href="../wp_get_nav_menu_to_edit/index.html">wp_get_nav_menu_to_edit()</a>
+							</td>
+							<td class="related-desc">
+								<p>Returns the menu formatted to edit.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/nav-menu-template.php:</span>
+								<a href="../wp_nav_menu/index.html">wp_nav_menu()</a>
+							</td>
+							<td class="related-desc">
+								<p>Displays a navigation menu.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/nav-menu.php:</span>
+								<a href="../_wp_auto_add_pages_to_menu/index.html">_wp_auto_add_pages_to_menu()</a>
+							</td>
+							<td class="related-desc">
+								<p>Automatically add newly published page objects to menus with that as an option.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/nav-menu.php:</span>
+								<a href="../wp_update_nav_menu_item/index.html">wp_update_nav_menu_item()</a>
+							</td>
+							<td class="related-desc">
+								<p>Save the properties of a menu item or create a new one.</p>
+							</td>
+						</tr>
+											<tbody>
+				</table>
+
+								<a href="#" class="show-more">Show 1 more used by</a>
+				<a href="#" class="hide-more">Hide more used by</a>
+							</article>
+			</section>
+		<hr />
+	<section class="changelog">
+		<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="changelog" tabindex="-1">Changelog <a href="#changelog" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Changelog</span></a></h2>
+
+		<table>
+			<caption class="screen-reader-text">Changelog</caption>
+			<thead>
+				<tr>
+					<th class="changelog-version">Version</th>
+					<th class="changelog-desc">Description</th>
+				</tr>
+			</thead>
+
+			<tbody>
+									
+					<tr>
+						<td><a href="../../since/3.0.0/index.html" alt="WordPress 3.0.0">3.0.0</a></td>
+						<td>Introduced.</td>
+					</tr>
+							</tbody>
+		</table>
+	</section>
+
+	<hr />
+	<section class="user-notes">
+		<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="user-contributed-notes" tabindex="-1">User Contributed Notes <a href="#user-contributed-notes" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">User Contributed Notes</span></a></h2>
+		
+<div id="comments" class="comments-area">
+
+			
+		<ol class="comment-list">
+						<li id="comment-1609" data-comment-id="1609" class="comment byuser comment-author-ragequit even thread-even depth-1">
+			<article id="div-comment-1609" class="comment-body">
+
+							<a href="#comment-content-1609" class="screen-reader-text">Skip to note 1 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="a370da26b0"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="1609" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_get_nav_menu_items%2F%23comment-1609"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="73% like this"><span class="screen-reader-text">Vote results for this note: </span>7</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="1609" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_get_nav_menu_items%2F%23comment-1609"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/20e6923a38bed4e12c6b6355fadd6f8f?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/20e6923a38bed4e12c6b6355fadd6f8f?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/ragequit/" rel="external nofollow" class="url">Stefano</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-1609">
+							<time datetime="2016-05-06T09:18:27+00:00">
+							5 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-1609">
+				<p>Building bootstrap 3 menu with submenu items without use WP_nav_walker (boostrap)! (Require bootstrap.css and bootstrap.js)</p>
+<section class="source-content">
+<div class="source-code-container">
+<pre class="brush: php; title: ; notranslate" title="">
+&lt;?php
+// Intented to use bootstrap 3.
+// Location is like a 'primary'
+// After, you print menu just add create_bootstrap_menu(&quot;primary&quot;) in your preferred position;
+ 
+#add this function in your theme functions.php
+ 
+function create_bootstrap_menu( $theme_location ) {
+    if ( ($theme_location) &amp;&amp; ($locations = get_nav_menu_locations()) &amp;&amp; isset($locations[$theme_location]) ) {
+		
+		$menu_list  = '&lt;nav class=&quot;navbar navbar-default&quot;&gt;' .&quot;\n&quot;;
+        $menu_list .= '&lt;div class=&quot;container-fluid&quot;&gt;' .&quot;\n&quot;;
+        $menu_list .= '&lt;!-- Brand and toggle get grouped for better mobile display --&gt;' .&quot;\n&quot;;
+        $menu_list .= '&lt;div class=&quot;navbar-header&quot;&gt;' .&quot;\n&quot;;
+        $menu_list .= '&lt;button type=&quot;button&quot; class=&quot;navbar-toggle collapsed&quot; data-toggle=&quot;collapse&quot; data-target=&quot;#bs-example-navbar-collapse-1&quot; aria-expanded=&quot;false&quot;&gt;' .&quot;\n&quot;;
+        $menu_list .= '&lt;span class=&quot;sr-only&quot;&gt;Toggle navigation&lt;/span&gt;' .&quot;\n&quot;;
+        $menu_list .= '&lt;span class=&quot;icon-bar&quot;&gt;&lt;/span&gt;' .&quot;\n&quot;;
+        $menu_list .= '&lt;span class=&quot;icon-bar&quot;&gt;&lt;/span&gt;' .&quot;\n&quot;;
+        $menu_list .= '&lt;span class=&quot;icon-bar&quot;&gt;&lt;/span&gt;' .&quot;\n&quot;;
+        $menu_list .= '&lt;/button&gt;' .&quot;\n&quot;;
+		$menu_list .= '&lt;a class=&quot;navbar-brand&quot; href=&quot;' . home_url() . '&quot;&gt;' . get_bloginfo( 'name' ) . '&lt;/a&gt;';
+        $menu_list .= '&lt;/div&gt;' .&quot;\n&quot;;
+          
+        $menu_list .= '&lt;!-- Collect the nav links, forms, and other content for toggling --&gt;';
+		
+		
+        $menu = get_term( $locations[$theme_location], 'nav_menu' );
+        $menu_items = wp_get_nav_menu_items($menu-&gt;term_id);
+
+        $menu_list .= '&lt;div class=&quot;collapse navbar-collapse&quot; id=&quot;bs-example-navbar-collapse-1&quot;&gt;' .&quot;\n&quot;;
+        $menu_list .= '&lt;ul class=&quot;nav navbar-nav&quot;&gt;' .&quot;\n&quot;;
+         
+        foreach( $menu_items as $menu_item ) {
+			if( $menu_item-&gt;menu_item_parent == 0 ) {
+				
+				$parent = $menu_item-&gt;ID;
+				
+				$menu_array = array();
+				foreach( $menu_items as $submenu ) {
+					if( $submenu-&gt;menu_item_parent == $parent ) {
+						$bool = true;
+						$menu_array[] = '&lt;li&gt;&lt;a href=&quot;' . $submenu-&gt;url . '&quot;&gt;' . $submenu-&gt;title . '&lt;/a&gt;&lt;/li&gt;' .&quot;\n&quot;;
+					}
+				}
+				if( $bool == true &amp;&amp; count( $menu_array ) &gt; 0 ) {
+					
+					$menu_list .= '&lt;li class=&quot;dropdown&quot;&gt;' .&quot;\n&quot;;
+					$menu_list .= '&lt;a href=&quot;#&quot; class=&quot;dropdown-toggle&quot; data-toggle=&quot;dropdown&quot; role=&quot;button&quot; aria-haspopup=&quot;true&quot; aria-expanded=&quot;false&quot;&gt;' . $menu_item-&gt;title . ' &lt;span class=&quot;caret&quot;&gt;&lt;/span&gt;&lt;/a&gt;' .&quot;\n&quot;;
+					
+					$menu_list .= '&lt;ul class=&quot;dropdown-menu&quot;&gt;' .&quot;\n&quot;;
+					$menu_list .= implode( &quot;\n&quot;, $menu_array );
+					$menu_list .= '&lt;/ul&gt;' .&quot;\n&quot;;
+					
+				} else {
+					
+					$menu_list .= '&lt;li&gt;' .&quot;\n&quot;;
+					$menu_list .= '&lt;a href=&quot;' . $menu_item-&gt;url . '&quot;&gt;' . $menu_item-&gt;title . '&lt;/a&gt;' .&quot;\n&quot;;
+				}
+				
+			}
+			
+			// end &lt;li&gt;
+			$menu_list .= '&lt;/li&gt;' .&quot;\n&quot;;
+        }
+         
+        $menu_list .= '&lt;/ul&gt;' .&quot;\n&quot;;
+        $menu_list .= '&lt;/div&gt;' .&quot;\n&quot;;
+		$menu_list .= '&lt;/div&gt;&lt;!-- /.container-fluid --&gt;' .&quot;\n&quot;;
+        $menu_list .= '&lt;/nav&gt;' .&quot;\n&quot;;
+ 
+    } else {
+        $menu_list = '&lt;!-- no menu defined in location &quot;'.$theme_location.'&quot; --&gt;';
+    }
+	
+	echo $menu_list;
+}
+?&gt;
+</pre>
+</div>
+<p class="source-code-links"><span><a href="#" class="show-complete-source">Expand full source code</a><a href="#" class="less-complete-source">Collapse full source code</a></span></p>
+</section>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-1609' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_get_nav_menu_items%2F%3Freplytocom%3D1609%23feedback-editor-1609" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-832" data-comment-id="832" class="comment byuser comment-author-andrija odd alt thread-odd thread-alt depth-1">
+			<article id="div-comment-832" class="comment-body">
+
+							<a href="#comment-content-832" class="screen-reader-text">Skip to note 2 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="5e9d51e028"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="832" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_get_nav_menu_items%2F%23comment-832"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="69% like this"><span class="screen-reader-text">Vote results for this note: </span>5</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="832" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_get_nav_menu_items%2F%23comment-832"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/de8a9735ad45865f91dec546bc4d4cb4?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/de8a9735ad45865f91dec546bc4d4cb4?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/andrija/" rel="external nofollow" class="url">Andrija Naglic</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-832">
+							<time datetime="2015-08-31T00:35:58+00:00">
+							6 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-832">
+				<p>Building menu list with children (submenus) and selecting the menu by it&#8217;s location:</p>
+<section class="source-content">
+<div class="source-code-container">
+<pre class="brush: php; title: ; notranslate" title="">
+// Intented to use with locations, like 'primary'
+// clean_custom_menu(&quot;primary&quot;);
+
+#add in your theme functions.php file
+
+function clean_custom_menu( $theme_location ) {
+	if ( ($theme_location) &amp;&amp; ($locations = get_nav_menu_locations()) &amp;&amp; isset($locations[$theme_location]) ) {
+		$menu = get_term( $locations[$theme_location], 'nav_menu' );
+		$menu_items = wp_get_nav_menu_items($menu-&gt;term_id);
+
+		$menu_list  = '&lt;nav&gt;' .&quot;\n&quot;;
+		$menu_list .= '&lt;ul class=&quot;main-nav&quot;&gt;' .&quot;\n&quot;;
+
+		$count = 0;
+		$submenu = false;
+		
+		foreach( $menu_items as $menu_item ) {
+			
+			$link = $menu_item-&gt;url;
+			$title = $menu_item-&gt;title;
+			
+			if ( !$menu_item-&gt;menu_item_parent ) {
+				$parent_id = $menu_item-&gt;ID;
+				
+				$menu_list .= '&lt;li class=&quot;item&quot;&gt;' .&quot;\n&quot;;
+				$menu_list .= '&lt;a href=&quot;'.$link.'&quot; class=&quot;title&quot;&gt;'.$title.'&lt;/a&gt;' .&quot;\n&quot;;
+			}
+
+			if ( $parent_id == $menu_item-&gt;menu_item_parent ) {
+
+				if ( !$submenu ) {
+					$submenu = true;
+					$menu_list .= '&lt;ul class=&quot;sub-menu&quot;&gt;' .&quot;\n&quot;;
+				}
+
+				$menu_list .= '&lt;li class=&quot;item&quot;&gt;' .&quot;\n&quot;;
+				$menu_list .= '&lt;a href=&quot;'.$link.'&quot; class=&quot;title&quot;&gt;'.$title.'&lt;/a&gt;' .&quot;\n&quot;;
+				$menu_list .= '&lt;/li&gt;' .&quot;\n&quot;;
+					
+
+				if ( $menu_items[ $count + 1 ]-&gt;menu_item_parent != $parent_id &amp;&amp; $submenu ){
+					$menu_list .= '&lt;/ul&gt;' .&quot;\n&quot;;
+					$submenu = false;
+				}
+
+			}
+
+			if ( $menu_items[ $count + 1 ]-&gt;menu_item_parent != $parent_id ) { 
+				$menu_list .= '&lt;/li&gt;' .&quot;\n&quot;;      
+				$submenu = false;
+			}
+
+			$count++;
+		}
+		
+		$menu_list .= '&lt;/ul&gt;' .&quot;\n&quot;;
+		$menu_list .= '&lt;/nav&gt;' .&quot;\n&quot;;
+
+	} else {
+		$menu_list = '&lt;!-- no menu defined in location &quot;'.$theme_location.'&quot; --&gt;';
+	}
+	echo $menu_list;
+}
+</pre>
+</div>
+<p class="source-code-links"><span><a href="#" class="show-complete-source">Expand full source code</a><a href="#" class="less-complete-source">Collapse full source code</a></span></p>
+</section>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-832' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_get_nav_menu_items%2F%3Freplytocom%3D832%23feedback-editor-832" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-1800" data-comment-id="1800" class="comment byuser comment-author-cesaraquino even thread-even depth-1">
+			<article id="div-comment-1800" class="comment-body">
+
+							<a href="#comment-content-1800" class="screen-reader-text">Skip to note 3 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="fc752456b5"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="1800" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_get_nav_menu_items%2F%23comment-1800"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="83% like this"><span class="screen-reader-text">Vote results for this note: </span>4</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="1800" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_get_nav_menu_items%2F%23comment-1800"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/36e97e4a516cbf5b805a0beee91ba9f8?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/36e97e4a516cbf5b805a0beee91ba9f8?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/cesaraquino/" rel="external nofollow" class="url">Cesar Jefferson Aquino Maximiliano</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-1800">
+							<time datetime="2016-08-31T16:18:41+00:00">
+							5 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-1800">
+				<p>Get simple array of menu. </p>
+<section class="source-content">
+<div class="source-code-container">
+<pre class="brush: php; title: ; notranslate" title="">
+function wp_get_menu_array($current_menu) {
+
+    $array_menu = wp_get_nav_menu_items($current_menu);
+	$menu = array();
+	foreach ($array_menu as $m) {
+		if (empty($m-&gt;menu_item_parent)) {
+			$menu[$m-&gt;ID] = array();
+			$menu[$m-&gt;ID]['ID'] 		= 	$m-&gt;ID;
+			$menu[$m-&gt;ID]['title'] 		= 	$m-&gt;title;
+			$menu[$m-&gt;ID]['url'] 		= 	$m-&gt;url;
+			$menu[$m-&gt;ID]['children']	= 	array();
+		}
+	}
+	$submenu = array();
+	foreach ($array_menu as $m) {
+		if ($m-&gt;menu_item_parent) {
+			$submenu[$m-&gt;ID] = array();
+			$submenu[$m-&gt;ID]['ID'] 		= 	$m-&gt;ID;
+			$submenu[$m-&gt;ID]['title']	= 	$m-&gt;title;
+			$submenu[$m-&gt;ID]['url'] 	= 	$m-&gt;url;
+			$menu[$m-&gt;menu_item_parent]['children'][$m-&gt;ID] = $submenu[$m-&gt;ID];
+		}
+	}
+    return $menu;
+    
+}
+</pre>
+</div>
+<p class="source-code-links"><span><a href="#" class="show-complete-source">Expand full source code</a><a href="#" class="less-complete-source">Collapse full source code</a></span></p>
+</section>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-1800' class='feedback hide-if-js'>
+<h4 class='feedback-title'>Feedback</h4>
+<ul class='children'>
+			<li id="comment-3086" data-comment-id="3086" class="comment byuser comment-author-charlyripp odd alt depth-2">
+			<article id="div-comment-3086" class="comment-body">
+
+			
+				<div class="comment-content" id="comment-content-3086">
+				<p>A simplified and more &#8216;JSON Friendly&#8217; take:  </p>
+<pre class="brush: php; title: ; notranslate" title=""> function get_menu($current_menu) {      $array_menu = wp_get_nav_menu_items($current_menu);      $menu = array();      $refs = array();      foreach ($array_menu as $m) {          if (empty($m-&gt;menu_item_parent)) {              $curMenu = array();              $curMenu['id']       =   $m-&gt;ID;              $curMenu['title']    =   $m-&gt;title;              $curMenu['url']      =   $m-&gt;url;              $curMenu['children'] =   array();              $refs[$m-&gt;ID] = count($menu);              array_push($menu, $curMenu);          } else {              $submenu = array();              $submenu['id']    =   $m-&gt;ID;              $submenu['title'] =   $m-&gt;title;              $submenu['url']   =   $m-&gt;url;              array_push($menu[$refs[$m-&gt;menu_item_parent]]['children'], $submenu);          }      }      return $menu; }  </pre>
+<p> &mdash; By <cite class="fn"><a href="https://profiles.wordpress.org/charlyripp/" rel="external nofollow" class="url">charlyripp</a></cite> &mdash;  <a class="comment-date" href="index.html#comment-3086"><time datetime="2019-02-27T05:29:42+00:00">3 years ago</time></a></p>
+				</div><!-- .comment-content -->
+
+						</article>
+			</li>
+								<li id="comment-4929" data-comment-id="4929" class="comment byuser comment-author-kelvincys even depth-2">
+			<article id="div-comment-4929" class="comment-body">
+
+			
+				<div class="comment-content" id="comment-content-4929">
+				<p>modified to get nested menu  <code>function wp_get_nested_menu_array($current_menu) {   		    $array_menu = wp_get_nav_menu_items($current_menu); 		    $menu = array(); 		    foreach ($array_menu as $m) { 		        if (empty($m-&gt;menu_item_parent)) { 		            $menu[$m-&gt;ID] = array(); 		            $menu[$m-&gt;ID]['ID']      =   $m-&gt;ID; 		            $menu[$m-&gt;ID]['title']       =   $m-&gt;title; 		            $menu[$m-&gt;ID]['url']         =   $m-&gt;url; 		            $menu[$m-&gt;ID]['children']    =   array(); 		        } 		    } 		    $submenu = array(); 		    foreach ($array_menu as $m) { 		        if ($m-&gt;menu_item_parent) { 		            $submenu[$m-&gt;ID] = array(); 		            $submenu[$m-&gt;ID]['ID']       =   $m-&gt;ID; 		            $submenu[$m-&gt;ID]['title']    =   $m-&gt;title; 		            $submenu[$m-&gt;ID]['url']  =   $m-&gt;url; 		            $submenu[$m-&gt;ID]['parent']  =   $m-&gt;menu_item_parent; 		            if (isset($submenu[$m-&gt;menu_item_parent])) { 		            	$submenu[$m-&gt;menu_item_parent]['children'][$m-&gt;ID] = $submenu[$m-&gt;ID]; 		            	$mainparentid = $submenu[$m-&gt;menu_item_parent]['parent']; 		            	$menu[$mainparentid]['children'][$m-&gt;menu_item_parent] = $submenu[$m-&gt;menu_item_parent]; 		            }else{ 		            	$menu[$m-&gt;menu_item_parent]['children'][$m-&gt;ID] = $submenu[$m-&gt;ID]; 		            } 		             		        } 		    } 		     		    return $menu; 		      		}</code> &mdash; By <cite class="fn"><a href="https://profiles.wordpress.org/kelvincys/" rel="external nofollow" class="url">kelvincys</a></cite> &mdash;  <a class="comment-date" href="index.html#comment-4929"><time datetime="2021-03-18T09:30:02+00:00">6 months ago</time></a></p>
+				</div><!-- .comment-content -->
+
+						</article>
+			</li>
+					</ul>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_get_nav_menu_items%2F%3Freplytocom%3D1800%23feedback-editor-1800" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-452" data-comment-id="452" class="comment byuser comment-author-codex odd alt thread-odd thread-alt depth-1">
+			<article id="div-comment-452" class="comment-body">
+
+							<a href="#comment-content-452" class="screen-reader-text">Skip to note 4 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="43b0785c91"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="452" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_get_nav_menu_items%2F%23comment-452"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="75% like this"><span class="screen-reader-text">Vote results for this note: </span>2</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="452" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_get_nav_menu_items%2F%23comment-452"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/688ab6934b21bca68e0fe4fc54a66805?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/688ab6934b21bca68e0fe4fc54a66805?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/codex/" rel="external nofollow" class="url">Codex</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-452">
+							<time datetime="2015-07-02T08:16:28+00:00">
+							6 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-452">
+				<p><strong>Building simple menu list</strong></p>
+<section class="source-content">
+<div class="source-code-container">
+<pre class="brush: php; title: ; notranslate" title="">
+// Get the nav menu based on $menu_name (same as 'theme_location' or 'menu' arg to wp_nav_menu)
+// This code based on wp_nav_menu's code to get Menu ID from menu slug
+
+$menu_name = 'custom_menu_slug';
+
+if ( ( $locations = get_nav_menu_locations() ) &amp;&amp; isset( $locations[ $menu_name ] ) ) {
+	$menu = wp_get_nav_menu_object( $locations[ $menu_name ] );
+
+	$menu_items = wp_get_nav_menu_items($menu-&gt;term_id);
+
+	$menu_list = '&lt;ul id=&quot;menu-' . $menu_name . '&quot;&gt;';
+
+	foreach ( (array) $menu_items as $key =&gt; $menu_item ) {
+		$title = $menu_item-&gt;title;
+		$url = $menu_item-&gt;url;
+		$menu_list .= '&lt;li&gt;&lt;a href=&quot;' . $url . '&quot;&gt;' . $title . '&lt;/a&gt;&lt;/li&gt;';
+	}
+	$menu_list .= '&lt;/ul&gt;';
+} else {
+	$menu_list = '&lt;ul&gt;&lt;li&gt;Menu &quot;' . $menu_name . '&quot; not defined.&lt;/li&gt;&lt;/ul&gt;';
+}
+// $menu_list now ready to output
+
+</pre>
+</div>
+<p class="source-code-links"><span><a href="#" class="show-complete-source">Expand full source code</a><a href="#" class="less-complete-source">Collapse full source code</a></span></p>
+</section>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-452' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_get_nav_menu_items%2F%3Freplytocom%3D452%23feedback-editor-452" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-2453" data-comment-id="2453" class="comment byuser comment-author-saadamin even thread-even depth-1">
+			<article id="div-comment-2453" class="comment-body">
+
+							<a href="#comment-content-2453" class="screen-reader-text">Skip to note 5 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="d49038e6bf"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="2453" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_get_nav_menu_items%2F%23comment-2453"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="50% like this"><span class="screen-reader-text">Vote results for this note: </span>0</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="2453" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_get_nav_menu_items%2F%23comment-2453"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/c602170ac17405b20b74180e465241b4?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/c602170ac17405b20b74180e465241b4?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/saadamin/" rel="external nofollow" class="url">Saad Amin</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-2453">
+							<time datetime="2017-11-15T19:19:11+00:00">
+							4 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-2453">
+				<p>I have tested this menu , it supports sub menu , submenu will have arrow , also current page parent and menu item will have active class.</p>
+<section class="source-content">
+<div class="source-code-container">
+<pre class="brush: php; title: ; notranslate" title="">
+$menu_name = 'header-menu';
+if ( ( $locations = get_nav_menu_locations() ) &amp;&amp; isset( $locations[ $menu_name ] ) ) {
+	$menu = wp_get_nav_menu_object( $locations[ $menu_name ] );
+ 
+	$menu_items = wp_get_nav_menu_items($menu-&gt;term_id);
+	$menu_list = '';
+	$count = 0;
+	$submenu = false;$cpi=get_the_id();
+	foreach( $menu_items as $current ) {
+		if($cpi == $current-&gt;object_id ){if ( !$current-&gt;menu_item_parent ) {$cpi=$current-&gt;ID;}else{$cpi=$current-&gt;menu_item_parent;}$cai=$current-&gt;ID;break;}
+	}
+	foreach( $menu_items as $menu_item ) {
+		$link = $menu_item-&gt;url;
+		$title = $menu_item-&gt;title;
+		$menu_item-&gt;ID==$cai ? $ac2=' current_menu' : $ac2='';
+		if ( !$menu_item-&gt;menu_item_parent ) {
+			$parent_id = $menu_item-&gt;ID;$parent_id==$cpi ? $ac=' current_item' : $ac='';
+			if(!empty($menu_items[$count + 1]) &amp;&amp; $menu_items[ $count + 1 ]-&gt;menu_item_parent == $parent_id ){//Checking has child
+				$menu_list .= '&lt;li class=&quot;dropdown has_child'.$ac.'&quot;&gt;&lt;a href=&quot;'.$link.'&quot; class=&quot;dropdown-toggle'.$ac2.'&quot; data-toggle=&quot;dropdown&quot; role=&quot;button&quot; aria-haspopup=&quot;true&quot; aria-expanded=&quot;false&quot;&gt;&lt;span class=&quot;nav-span&quot;&gt;&lt;/span&gt;'.$title.'&lt;span class=&quot;caret&quot;&gt;&lt;/span&gt;&lt;/a&gt;';
+			}else{
+				$menu_list .= '&lt;li class=&quot;'.$ac.'&quot;&gt;' .&quot;\n&quot;;$menu_list .= '&lt;a href=&quot;'.$link.'&quot; class=&quot;'.$ac2.'&quot;&gt;'.$title.'&lt;/a&gt;' .&quot;\n&quot;;
+			}
+			
+		}
+		if ( $parent_id == $menu_item-&gt;menu_item_parent ) {
+			if ( !$submenu ) {
+				$submenu = true;
+				$menu_list .= '&lt;ul class=&quot;dropdown-menu&quot;&gt;' .&quot;\n&quot;;
+			}
+			$menu_list .= '&lt;li class=&quot;item&quot;&gt;' .&quot;\n&quot;;
+			$menu_list .= '&lt;a href=&quot;'.$link.'&quot; class=&quot;'.$ac2.'&quot;&gt;'.$title.'&lt;/a&gt;' .&quot;\n&quot;;
+			$menu_list .= '&lt;/li&gt;' .&quot;\n&quot;;
+			if(empty($menu_items[$count + 1]) || $menu_items[ $count + 1 ]-&gt;menu_item_parent != $parent_id &amp;&amp; $submenu){
+				$menu_list .= '&lt;/ul&gt;' .&quot;\n&quot;;
+				$submenu = false;
+			}
+		}
+		if (empty($menu_items[$count + 1]) || $menu_items[ $count + 1 ]-&gt;menu_item_parent != $parent_id ) { 
+			$menu_list .= '&lt;/li&gt;' .&quot;\n&quot;;      
+			$submenu = false;
+		}
+		$count++;
+	}
+} else {
+	$menu_list = '&lt;li&gt;Menu &quot;' . $menu_name . '&quot; not defined.&lt;/li&gt;';
+}
+}
+</pre>
+</div>
+<p class="source-code-links"><span><a href="#" class="show-complete-source">Expand full source code</a><a href="#" class="less-complete-source">Collapse full source code</a></span></p>
+</section>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-2453' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_get_nav_menu_items%2F%3Freplytocom%3D2453%23feedback-editor-2453" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-4857" data-comment-id="4857" class="comment byuser comment-author-mathiasmadsen odd alt thread-odd thread-alt depth-1">
+			<article id="div-comment-4857" class="comment-body">
+
+							<a href="#comment-content-4857" class="screen-reader-text">Skip to note 6 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="760e47661e"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="4857" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_get_nav_menu_items%2F%23comment-4857"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title=""><span class="screen-reader-text">Vote results for this note: </span>0</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="4857" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_get_nav_menu_items%2F%23comment-4857"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/c30e578cb6a2588a590fdc53e066d9f2?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/c30e578cb6a2588a590fdc53e066d9f2?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/mathiasmadsen/" rel="external nofollow" class="url">mathiasmadsen</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-4857">
+							<time datetime="2021-02-11T14:58:58+00:00">
+							7 months ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-4857">
+				<p>Here are two functions that can be used to add the menu to the REST API and retrieve individual menu items:</p>
+<section class="source-content">
+<div class="source-code-container">
+<pre class="brush: php; title: ; notranslate" title="">function wpdocs_menu_route() {
+	$menuLocations = get_nav_menu_locations(); // Get nav locations set in theme, usually functions.php)
+	return $menuLocations;
+}
+
+add_action( 'rest_api_init', function () {
+	register_rest_route( 'custom', '/menu/', array(
+		'methods' =&gt; 'GET',
+		'callback' =&gt; 'wpdocs_menu_route',
+	) );
+} );
+
+function wpdocs_menu_single( $data ) {
+	$menuID = $data['id']; // Get the menu from the ID
+	$primaryNav = wp_get_nav_menu_items( $menuID ); // Get the array of wp objects, the nav items for our queried location.
+	return $primaryNav;
+}
+
+add_action( 'rest_api_init', function () {
+	register_rest_route( 'custom', '/menu/(?P&lt;id&gt;d+)', array(
+		'methods' =&gt; 'GET',
+		'callback' =&gt; 'wpdocs_menu_single',
+	) );
+} );</pre>
+</div>
+<p class="source-code-links"><span><a href="#" class="show-complete-source">Expand full source code</a><a href="#" class="less-complete-source">Collapse full source code</a></span></p>
+</section>
+<p>This allows us to access both:<br />
+<code>https://example.com/wp-json/custom/menu</code> and<br />
+<code>https://example.com/wp-json/custom/menu/{menuID}</code></p>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-4857' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_get_nav_menu_items%2F%3Freplytocom%3D4857%23feedback-editor-4857" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-4934" data-comment-id="4934" class="comment byuser comment-author-rachelboylson even thread-even depth-1">
+			<article id="div-comment-4934" class="comment-body">
+
+							<a href="#comment-content-4934" class="screen-reader-text">Skip to note 7 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="31ea498c71"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="4934" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_get_nav_menu_items%2F%23comment-4934"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title=""><span class="screen-reader-text">Vote results for this note: </span>0</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="4934" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_get_nav_menu_items%2F%23comment-4934"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/47e1fdbdc0829383b1c48da5a8efa855?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/47e1fdbdc0829383b1c48da5a8efa855?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/rachelboylson/" rel="external nofollow" class="url">rachelboylson</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-4934">
+							<time datetime="2021-03-19T05:43:30+00:00">
+							6 months ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-4934">
+				<p>Create a shortcode that takes a menu ID and prints a simple list of links.  Add this to your functions.php file.<br />
+Shortcode syntax: [my_custom_navigation menu_id=123]</p>
+<section class="source-content">
+<div class="source-code-container">
+<pre class="brush: php; title: ; notranslate" title="">
+// load navigation shortcode
+add_shortcode( 'wpdocs_custom_navigation', 'wpdocs_add_custom_navigation' );
+
+// create shortcode for navigation
+function wpdocs_add_custom_navigation( $attributes, $content = null ) {
+
+    // shortcode takes in one argument which is the menu id
+    $navigation_attributes = shortcode_atts( array(
+        'menu_id' =&gt; '',
+    ), $attributes );
+
+    // get navigation menu items based on menu id passed from shortcode
+    $menu_items = wp_get_nav_menu_items( $navigation_attributes['menu_id'] );
+
+    // create an empty string which we will add onto
+    $menu_html = '';
+
+    // loop through array and build list of navigation links
+    for ( $x = 0; $x &lt; count( $menu_items ); $x++ ) {
+
+        // get URL of menu item
+        $url = $menu_items[ $x ]-&gt;url;
+
+        // get title of menu item
+        $title = $menu_items[ $x ]-&gt;title;
+
+        // build HTML
+        $menu_html .= '&lt;a href=&quot;';
+        $menu_html .= esc_attr( esc_url( $url ) );
+        $menu_html .= '&quot;&gt;';
+        $menu_html .= wp_kses_post( $title );
+        $menu_html .= '&lt;/a&gt;&lt;br&gt;';
+    }
+
+    // return navigation HTML
+    return
+    '&lt;div id=&quot;menuWrapper&quot;&gt;'
+        . $menu_html .
+    '&lt;/div&gt;';
+}
+</pre>
+</div>
+<p class="source-code-links"><span><a href="#" class="show-complete-source">Expand full source code</a><a href="#" class="less-complete-source">Collapse full source code</a></span></p>
+</section>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-4934' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_get_nav_menu_items%2F%3Freplytocom%3D4934%23feedback-editor-4934" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+		</ol><!-- .comment-list -->
+
+		
+	
+	
+			<div id="respond" class="comment-respond">
+		<h3 id="reply-title" class="comment-reply-title"> <small></small></h3><p>You must <a href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_get_nav_menu_items%2F%23comments">log in</a> before being able to contribute a note or feedback.</p>	</div><!-- #respond -->
+		
+	
+</div><!-- #comments -->
+	</section>
+</div>
+
+</article>
+
+			
+		
+		</main><!-- #main -->
+	</div><!-- #primary -->
+	</div><!-- #content -->
+
+</div><!-- #page -->
+
+
+<div id="wporg-footer">
+	<div class="wrapper">
+		<ul>
+			<li><a href="http://wordpress.org/about/" title="An introduction to the WordPress project">About</a></li>
+			<li><a href="http://wordpress.org/news/" title="News and Updates">Blog</a></li>
+			<li><a href="http://wordpress.org/hosting/" title="Recommended web hosting providers">Hosting</a></li>
+			<li><a href="https://wordpressfoundation.org/donate/" title="Donate to the WordPress Foundation">Donate</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://wordpress.org/support/" title="Forums, documentation, and other resources">Support</a></li>
+			<li><a href="../../../index.html" title="Resources for WordPress developers">Developers</a></li>
+			<li><a href="http://make.wordpress.org/" title="Give back to WordPress through code, support, translation and more">Get Involved</a></li>
+			<li><a href="http://learn.wordpress.org/" title="Workshops and training materials">Learn</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://wordpress.org/showcase/" title="Some of the best WordPress sites on the Web">Showcase</a></li>
+			<li><a href="http://wordpress.org/plugins/" title="Add extra functionality to WordPress">Plugins</a></li>
+			<li><a href="http://wordpress.org/themes/" title="Make your WordPress pretty">Themes</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://central.wordcamp.org/" title="Find a WordPress event near you">WordCamp</a></li>
+			<li><a href="http://wordpress.tv/" title="Videos, tutorials, and WordCamp sessions">WordPress.TV</a></li>
+			<li><a href="http://buddypress.org/" title="A set of plugins to transform your WordPress into a social network">BuddyPress</a></li>
+			<li><a href="http://bbpress.org/" title="Fast, slick forums built on WordPress">bbPress</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://wordpress.com/?ref=wporg-footer" title="Hassle-free WordPress hosting">WordPress.com</a></li>
+			<li><a href="http://ma.tt/" title="Co-founder of WordPress, an example of what WordPress can do">Matt</a></li>
+			<li><a href="http://wordpress.org/about/privacy/" title="WordPress.org Privacy Policy">Privacy</a></li>
+			<li><a href="https://publiccode.eu/" target="_blank">Public Code</a></li>
+		</ul>
+
+		<ul class="social-media-links">
+			<li><span class="dashicons dashicons-twitter"></span><a href="https://twitter.com/WordPress" title="Follow @WordPress on Twitter">@WordPress</a></li>
+			<li><span class="dashicons dashicons-facebook"></span><a href="https://www.facebook.com/WordPress/" title="Like WordPress on Facebook">WordPress</a></li>
+		</ul>
+	</div>
+
+		<p class="cip cip-image">Code is Poetry.</p>
+</div>
+
+<script src="../../../../s.w.org/style/js/navigation.min.js?20190128"></script>
+
+<script type='text/javascript'>
+	(function(){
+		var corecss = document.createElement('link');
+		var themecss = document.createElement('link');
+		var corecssurl = "../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shCore.css?ver=3.0.9b";
+		if ( corecss.setAttribute ) {
+				corecss.setAttribute( "rel", "stylesheet" );
+				corecss.setAttribute( "type", "text/css" );
+				corecss.setAttribute( "href", corecssurl );
+		} else {
+				corecss.rel = "stylesheet";
+				corecss.href = corecssurl;
+		}
+		document.head.appendChild( corecss );
+		var themecssurl = "../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shThemeDefault.css?ver=3.0.9b";
+		if ( themecss.setAttribute ) {
+				themecss.setAttribute( "rel", "stylesheet" );
+				themecss.setAttribute( "type", "text/css" );
+				themecss.setAttribute( "href", themecssurl );
+		} else {
+				themecss.rel = "stylesheet";
+				themecss.href = themecssurl;
+		}
+		document.head.appendChild( themecss );
+	})();
+	SyntaxHighlighter.config.strings.expandSource = '+ expand source';
+	SyntaxHighlighter.config.strings.help = '?';
+	SyntaxHighlighter.config.strings.alert = 'SyntaxHighlighter\n\n';
+	SyntaxHighlighter.config.strings.noBrush = 'Can\'t find brush for: ';
+	SyntaxHighlighter.config.strings.brushNotHtmlScript = 'Brush wasn\'t configured for html-script option: ';
+	SyntaxHighlighter.defaults['pad-line-numbers'] = false;
+	SyntaxHighlighter.defaults['toolbar'] = false;
+	SyntaxHighlighter.all();
+
+	// Infinite scroll support
+	if ( typeof( jQuery ) !== 'undefined' ) {
+		jQuery( function( $ ) {
+			$( document.body ).on( 'post-load', function() {
+				SyntaxHighlighter.highlight();
+			} );
+		} );
+	}
+</script>
+<link rel='stylesheet' id='buttons-css'  href='../../../wp-includes/css/buttons.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<script type='text/javascript' src='../../../wp-includes/js/hoverintent-js.min.js?ver=2.2.1' id='hoverintent-js-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/admin-bar.min.js?ver=5.9-alpha-51701' id='admin-bar-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/navigation.js?ver=20181209' id='wporg-developer-navigation-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/skip-link-focus-fix.js?ver=20130115' id='wporg-developer-skip-link-focus-fix-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/search.js?ver=20150430' id='wporg-developer-search-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/menu.js?ver=20180201' id='wporg-developer-menu-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/awesomplete.min.js?ver=20160322' id='awesomplete-js'></script>
+<script type='text/javascript' id='autocomplete-js-extra'>
+/* <![CDATA[ */
+var autocomplete = {"ajaxurl":"https:\/\/developer.wordpress.org\/wp-admin\/admin-ajax.php","nonce":"8a60f70c4b"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/autocomplete.js?ver=20160524' id='autocomplete-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/function-reference.js?ver=20180724' id='wporg-developer-function-reference-js'></script>
+<script type='text/javascript' id='quicktags-js-extra'>
+/* <![CDATA[ */
+var quicktagsL10n = {"closeAllOpenTags":"Close all open tags","closeTags":"close tags","enterURL":"Enter the URL","enterImageURL":"Enter the URL of the image","enterImageDescription":"Enter a description of the image","textdirection":"text direction","toggleTextdirection":"Toggle Editor Text Direction","dfw":"Distraction-free writing mode","strong":"Bold","strongClose":"Close bold tag","em":"Italic","emClose":"Close italic tag","link":"Insert link","blockquote":"Blockquote","blockquoteClose":"Close blockquote tag","del":"Deleted text (strikethrough)","delClose":"Close deleted text tag","ins":"Inserted text","insClose":"Close inserted text tag","image":"Insert image","ul":"Bulleted list","ulClose":"Close bulleted list tag","ol":"Numbered list","olClose":"Close numbered list tag","li":"List item","liClose":"Close list item tag","code":"Code","codeClose":"Close code tag","more":"Insert Read More tag"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-includes/js/quicktags.min.js?ver=5.9-alpha-51701' id='quicktags-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/user-notes.js?ver=20200110' id='wporg-developer-user-notes-js'></script>
+<script type='text/javascript' id='wporg-developer-user-notes-feedback-js-extra'>
+/* <![CDATA[ */
+var wporg_note_feedback = {"show":"Show Feedback","hide":"Hide Feedback"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/user-notes-feedback.js?ver=20181023' id='wporg-developer-user-notes-feedback-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/tabs.js?ver=20160824' id='wporg-developer-tabs-js'></script>
+<script type='text/javascript' id='wporg-developer-preview-js-extra'>
+/* <![CDATA[ */
+var wporg_note_preview = {"ajaxurl":"https:\/\/developer.wordpress.org\/wp-admin\/admin-ajax.php","nonce":"504933b60e","preview":"preview note","preview_empty":"Nothing to preview","is_admin":""};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/user-notes-preview.js?ver=20200111' id='wporg-developer-preview-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/wp-embed.min.js?ver=5.9-alpha-51701' id='wp-embed-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/vendor/regenerator-runtime.min.js?ver=0.13.7' id='regenerator-runtime-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/vendor/wp-polyfill.min.js?ver=3.15.0' id='wp-polyfill-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/dom-ready.min.js?ver=71883072590656bf22c74c7b887df3dd' id='wp-dom-ready-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/hooks.min.js?ver=a7edae857aab69d69fa10d5aef23a5de' id='wp-hooks-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/i18n.min.js?ver=5f1269854226b4dd90450db411a12b79' id='wp-i18n-js'></script>
+<script type='text/javascript' id='wp-i18n-js-after'>
+wp.i18n.setLocaleData( { 'text direction\u0004ltr': [ 'ltr' ] } );
+</script>
+<script type='text/javascript' id='wp-a11y-js-translations'>
+( function( domain, translations ) {
+	var localeData = translations.locale_data[ domain ] || translations.locale_data.messages;
+	localeData[""].domain = domain;
+	wp.i18n.setLocaleData( localeData, domain );
+} )( "default", { "locale_data": { "messages": { "": {} } } } );
+</script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/a11y.min.js?ver=0ac8327cc1c40dcfdf29716affd7ac63' id='wp-a11y-js'></script>
+<script type='text/javascript' id='wplink-js-extra'>
+/* <![CDATA[ */
+var wpLinkL10n = {"title":"Insert\/edit link","update":"Update","save":"Add Link","noTitle":"(no title)","noMatchesFound":"No results found.","linkSelected":"Link selected.","linkInserted":"Link inserted.","minInputLength":"3"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-includes/js/wplink.min.js?ver=5.9-alpha-51701' id='wplink-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/jquery/ui/core.min.js?ver=1.12.1' id='jquery-ui-core-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/jquery/ui/menu.min.js?ver=1.12.1' id='jquery-ui-menu-js'></script>
+<script type='text/javascript' id='jquery-ui-autocomplete-js-extra'>
+/* <![CDATA[ */
+var uiAutocompleteL10n = {"noResults":"No results found.","oneResult":"1 result found. Use up and down arrow keys to navigate.","manyResults":"%d results found. Use up and down arrow keys to navigate.","itemSelected":"Item selected."};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-includes/js/jquery/ui/autocomplete.min.js?ver=1.12.1' id='jquery-ui-autocomplete-js'></script>
+
+		<script type="text/javascript">
+		tinyMCEPreInit = {
+			baseURL: "https://developer.wordpress.org/wp-includes/js/tinymce",
+			suffix: ".min",
+						mceInit: {},
+			qtInit: {'comment':{id:"comment",buttons:"strong,em,ul,ol,li,link"}},
+			ref: {plugins:"",theme:"modern",language:""},
+			load_ext: function(url,lang){var sl=tinymce.ScriptLoader;sl.markDone(url+'/langs/'+lang+'.js');sl.markDone(url+'/langs/'+lang+'_dlg.js');}
+		};
+		</script>
+				<script type="text/javascript">
+		var ajaxurl = "../../../wp-admin/admin-ajax.html";
+		( function() {
+			var initialized = [];
+			var initialize  = function() {
+				var init, id, inPostbox, $wrap;
+				var readyState = document.readyState;
+
+				if ( readyState !== 'complete' && readyState !== 'interactive' ) {
+					return;
+				}
+
+				for ( id in tinyMCEPreInit.mceInit ) {
+					if ( initialized.indexOf( id ) > -1 ) {
+						continue;
+					}
+
+					init      = tinyMCEPreInit.mceInit[id];
+					$wrap     = tinymce.$( '#wp-' + id + '-wrap' );
+					inPostbox = $wrap.parents( '.postbox' ).length > 0;
+
+					if (
+						! init.wp_skip_init &&
+						( $wrap.hasClass( 'tmce-active' ) || ! tinyMCEPreInit.qtInit.hasOwnProperty( id ) ) &&
+						( readyState === 'complete' || ( ! inPostbox && readyState === 'interactive' ) )
+					) {
+						tinymce.init( init );
+						initialized.push( id );
+
+						if ( ! window.wpActiveEditor ) {
+							window.wpActiveEditor = id;
+						}
+					}
+				}
+			}
+
+			if ( typeof tinymce !== 'undefined' ) {
+				if ( tinymce.Env.ie && tinymce.Env.ie < 11 ) {
+					tinymce.$( '.wp-editor-wrap ' ).removeClass( 'tmce-active' ).addClass( 'html-active' );
+				} else {
+					if ( document.readyState === 'complete' ) {
+						initialize();
+					} else {
+						document.addEventListener( 'readystatechange', initialize );
+					}
+				}
+			}
+
+			if ( typeof quicktags !== 'undefined' ) {
+				for ( id in tinyMCEPreInit.qtInit ) {
+					quicktags( tinyMCEPreInit.qtInit[id] );
+
+					if ( ! window.wpActiveEditor ) {
+						window.wpActiveEditor = id;
+					}
+				}
+			}
+		}());
+		</script>
+				<div id="wp-link-backdrop" style="display: none"></div>
+		<div id="wp-link-wrap" class="wp-core-ui" style="display: none" role="dialog" aria-labelledby="link-modal-title">
+		<form id="wp-link" tabindex="-1">
+		<input type="hidden" id="_ajax_linking_nonce" name="_ajax_linking_nonce" value="86f5a0a85d" />		<h1 id="link-modal-title">Insert/edit link</h1>
+		<button type="button" id="wp-link-close"><span class="screen-reader-text">Close</span></button>
+		<div id="link-selector">
+			<div id="link-options">
+				<p class="howto" id="wplink-enter-url">Enter the destination URL</p>
+				<div>
+					<label><span>URL</span>
+					<input id="wp-link-url" type="text" aria-describedby="wplink-enter-url" /></label>
+				</div>
+				<div class="wp-link-text-field">
+					<label><span>Link Text</span>
+					<input id="wp-link-text" type="text" /></label>
+				</div>
+				<div class="link-target">
+					<label><span></span>
+					<input type="checkbox" id="wp-link-target" /> Open link in a new tab</label>
+				</div>
+			</div>
+			<p class="howto" id="wplink-link-existing-content">Or link to existing content</p>
+			<div id="search-panel">
+				<div class="link-search-wrapper">
+					<label>
+						<span class="search-label">Search</span>
+						<input type="search" id="wp-link-search" class="link-search-field" autocomplete="off" aria-describedby="wplink-link-existing-content" />
+						<span class="spinner"></span>
+					</label>
+				</div>
+				<div id="search-results" class="query-results" tabindex="0">
+					<ul></ul>
+					<div class="river-waiting">
+						<span class="spinner"></span>
+					</div>
+				</div>
+				<div id="most-recent-results" class="query-results" tabindex="0">
+					<div class="query-notice" id="query-notice-message">
+						<em class="query-notice-default">No search term specified. Showing recent items.</em>
+						<em class="query-notice-hint screen-reader-text">Search or use up and down arrow keys to select an item.</em>
+					</div>
+					<ul></ul>
+					<div class="river-waiting">
+						<span class="spinner"></span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="submitbox">
+			<div id="wp-link-cancel">
+				<button type="button" class="button">Cancel</button>
+			</div>
+			<div id="wp-link-update">
+				<input type="submit" value="Add Link" class="button button-primary" id="wp-link-submit" name="wp-link-submit">
+			</div>
+		</div>
+		</form>
+		</div>
+		</body>
+
+<!-- Mirrored from developer.wordpress.org/reference/functions/wp_get_nav_menu_items/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 31 Aug 2021 17:04:19 GMT -->
+</html>

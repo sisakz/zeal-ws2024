@@ -1,0 +1,426 @@
+<html><!-- Mirrored from www.php.net/manual/en/mongodb.tutorial.library.php by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 11 Sep 2021 10:11:24 GMT --><!-- Added by HTTrack --><head><meta http-equiv="content-type" content="text/html;charset=utf-8"><!-- /Added by HTTrack -->
+
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Using the PHP Library for MongoDB (PHPLIB)</title>
+
+ <link rel="shortcut icon" href="../../favicon.ico">
+ <link rel="search" type="application/opensearchdescription+xml" href="http://php.net/phpnetimprovedsearch.src" title="Add PHP.net search">
+ <link rel="alternate" type="application/atom+xml" href="https://www.php.net/releases/feed.php" title="PHP Release feed">
+ <link rel="alternate" type="application/atom+xml" href="https://www.php.net/feed.atom" title="PHP: Hypertext Preprocessor">
+
+ <link rel="canonical" href="mongodb.tutorial.library.html">
+ <link rel="shorturl" href="mongodb.tutorial.library.html">
+ <link rel="alternate" href="mongodb.tutorial.library.html" hreflang="x-default">
+
+ <link rel="contents" href="index-2.html">
+ <link rel="index" href="mongodb.tutorial.html">
+ <link rel="prev" href="mongodb.tutorial.html">
+ <link rel="next" href="mongodb.tutorial.apm.html">
+
+ <link rel="alternate" href="mongodb.tutorial.library.html" hreflang="en">
+ <link rel="alternate" href="https://www.php.net/manual/pt_BR/mongodb.tutorial.library.php" hreflang="pt_BR">
+ <link rel="alternate" href="https://www.php.net/manual/zh/mongodb.tutorial.library.php" hreflang="zh">
+ <link rel="alternate" href="https://www.php.net/manual/fr/mongodb.tutorial.library.php" hreflang="fr">
+ <link rel="alternate" href="https://www.php.net/manual/de/mongodb.tutorial.library.php" hreflang="de">
+ <link rel="alternate" href="https://www.php.net/manual/ja/mongodb.tutorial.library.php" hreflang="ja">
+ <link rel="alternate" href="https://www.php.net/manual/ro/mongodb.tutorial.library.php" hreflang="ro">
+ <link rel="alternate" href="https://www.php.net/manual/ru/mongodb.tutorial.library.php" hreflang="ru">
+ <link rel="alternate" href="https://www.php.net/manual/es/mongodb.tutorial.library.php" hreflang="es">
+ <link rel="alternate" href="https://www.php.net/manual/tr/mongodb.tutorial.library.php" hreflang="tr">
+
+<link rel="stylesheet" type="text/css" href="../../cached0aba.css?t=1539771603&amp;f=/fonts/Fira/fira.css" media="screen">
+<link rel="stylesheet" type="text/css" href="../../cached2ecf.css?t=1539765004&amp;f=/fonts/Font-Awesome/css/fontello.css" media="screen">
+<link rel="stylesheet" type="text/css" href="../../cachedba57.css?t=1606338002&amp;f=/styles/theme-base.css" media="screen">
+<link rel="stylesheet" type="text/css" href="../../cached3afa.css?t=1627831203&amp;f=/styles/theme-medium.css" media="screen">
+
+ <!--[if lte IE 7]>
+ <link rel="stylesheet" type="text/css" href="https://www.php.net/styles/workarounds.ie7.css" media="screen">
+ <![endif]-->
+
+ <!--[if lte IE 8]>
+ <script>
+  window.brokenIE = true;
+ </script>
+ <![endif]-->
+
+ <!--[if lte IE 9]>
+ <link rel="stylesheet" type="text/css" href="https://www.php.net/styles/workarounds.ie9.css" media="screen">
+ <![endif]-->
+
+ <!--[if IE]>
+ <script src="https://www.php.net/js/ext/html5.js"></script>
+ <![endif]-->
+
+ <base>
+
+
+</head>
+<body class="docs " style="">
+
+
+<div class="headsup"><a href="https://www.php.net/conferences/index.php#id2021-09-08-1">Longhorn PHP 2021</a></div>
+<nav id="trick"><div><dl>
+<dt><a href="getting-started.html">Getting Started</a></dt>
+	<dd><a href="introduction.html">Introduction</a></dd>
+	<dd><a href="tutorial.html">A simple tutorial</a></dd>
+<dt><a href="langref.html">Language Reference</a></dt>
+	<dd><a href="language.basic-syntax.html">Basic syntax</a></dd>
+	<dd><a href="language.types.html">Types</a></dd>
+	<dd><a href="language.variables.html">Variables</a></dd>
+	<dd><a href="language.constants.html">Constants</a></dd>
+	<dd><a href="language.expressions.html">Expressions</a></dd>
+	<dd><a href="language.operators.html">Operators</a></dd>
+	<dd><a href="language.control-structures.html">Control Structures</a></dd>
+	<dd><a href="language.functions.html">Functions</a></dd>
+	<dd><a href="language.oop5.html">Classes and Objects</a></dd>
+	<dd><a href="language.namespaces.html">Namespaces</a></dd>
+	<dd><a href="language.errors.html">Errors</a></dd>
+	<dd><a href="language.exceptions.html">Exceptions</a></dd>
+	<dd><a href="language.generators.html">Generators</a></dd>
+	<dd><a href="language.attributes.html">Attributes</a></dd>
+	<dd><a href="language.references.html">References Explained</a></dd>
+	<dd><a href="reserved.variables.html">Predefined Variables</a></dd>
+	<dd><a href="reserved.exceptions.html">Predefined Exceptions</a></dd>
+	<dd><a href="reserved.interfaces.html">Predefined Interfaces and Classes</a></dd>
+	<dd><a href="context.html">Context options and parameters</a></dd>
+	<dd><a href="wrappers.html">Supported Protocols and Wrappers</a></dd>
+</dl>
+<dl>
+<dt><a href="security.html">Security</a></dt>
+	<dd><a href="security.intro.html">Introduction</a></dd>
+	<dd><a href="security.general.html">General considerations</a></dd>
+	<dd><a href="security.cgi-bin.html">Installed as CGI binary</a></dd>
+	<dd><a href="security.apache.html">Installed as an Apache module</a></dd>
+	<dd><a href="security.sessions.html">Session Security</a></dd>
+	<dd><a href="security.filesystem.html">Filesystem Security</a></dd>
+	<dd><a href="security.database.html">Database Security</a></dd>
+	<dd><a href="security.errors.html">Error Reporting</a></dd>
+	<dd><a href="security.variables.html">User Submitted Data</a></dd>
+	<dd><a href="security.hiding.html">Hiding PHP</a></dd>
+	<dd><a href="security.current.html">Keeping Current</a></dd>
+<dt><a href="features.html">Features</a></dt>
+	<dd><a href="features.http-auth.html">HTTP authentication with PHP</a></dd>
+	<dd><a href="features.cookies.html">Cookies</a></dd>
+	<dd><a href="features.sessions.html">Sessions</a></dd>
+	<dd><a href="features.xforms.html">Dealing with XForms</a></dd>
+	<dd><a href="features.file-upload.html">Handling file uploads</a></dd>
+	<dd><a href="features.remote-files.html">Using remote files</a></dd>
+	<dd><a href="features.connection-handling.html">Connection handling</a></dd>
+	<dd><a href="features.persistent-connections.html">Persistent Database Connections</a></dd>
+	<dd><a href="features.commandline.html">Command line usage</a></dd>
+	<dd><a href="features.gc.html">Garbage Collection</a></dd>
+	<dd><a href="features.dtrace.html">DTrace Dynamic Tracing</a></dd>
+</dl>
+<dl>
+<dt><a href="funcref.html">Function Reference</a></dt>
+	<dd><a href="refs.basic.php.html">Affecting PHP's Behaviour</a></dd>
+	<dd><a href="refs.utilspec.audio.html">Audio Formats Manipulation</a></dd>
+	<dd><a href="refs.remote.auth.html">Authentication Services</a></dd>
+	<dd><a href="refs.utilspec.cmdline.html">Command Line Specific Extensions</a></dd>
+	<dd><a href="refs.compression.html">Compression and Archive Extensions</a></dd>
+	<dd><a href="refs.crypto.html">Cryptography Extensions</a></dd>
+	<dd><a href="refs.database.html">Database Extensions</a></dd>
+	<dd><a href="refs.calendar.html">Date and Time Related Extensions</a></dd>
+	<dd><a href="refs.fileprocess.file.html">File System Related Extensions</a></dd>
+	<dd><a href="refs.international.html">Human Language and Character Encoding Support</a></dd>
+	<dd><a href="refs.utilspec.image.html">Image Processing and Generation</a></dd>
+	<dd><a href="refs.remote.mail.html">Mail Related Extensions</a></dd>
+	<dd><a href="refs.math.html">Mathematical Extensions</a></dd>
+	<dd><a href="refs.utilspec.nontext.html">Non-Text MIME Output</a></dd>
+	<dd><a href="refs.fileprocess.process.html">Process Control Extensions</a></dd>
+	<dd><a href="refs.basic.other.html">Other Basic Extensions</a></dd>
+	<dd><a href="refs.remote.other.html">Other Services</a></dd>
+	<dd><a href="refs.search.html">Search Engine Extensions</a></dd>
+	<dd><a href="refs.utilspec.server.html">Server Specific Extensions</a></dd>
+	<dd><a href="refs.basic.session.html">Session Extensions</a></dd>
+	<dd><a href="refs.basic.text.html">Text Processing</a></dd>
+	<dd><a href="refs.basic.vartype.html">Variable and Type Related Extensions</a></dd>
+	<dd><a href="refs.webservice.html">Web Services</a></dd>
+	<dd><a href="refs.utilspec.windows.html">Windows Only Extensions</a></dd>
+	<dd><a href="refs.xml.html">XML Manipulation</a></dd>
+	<dd><a href="refs.ui.html">GUI Extensions</a></dd>
+</dl>
+<dl>
+<dt>Keyboard Shortcuts</dt><dt>?</dt>
+<dd>This help</dd>
+<dt>j</dt>
+<dd>Next menu item</dd>
+<dt>k</dt>
+<dd>Previous menu item</dd>
+<dt>g p</dt>
+<dd>Previous man page</dd>
+<dt>g n</dt>
+<dd>Next man page</dd>
+<dt>G</dt>
+<dd>Scroll to bottom</dd>
+<dt>g g</dt>
+<dd>Scroll to top</dd>
+<dt>g h</dt>
+<dd>Goto homepage</dd>
+<dt>g s</dt>
+<dd>Goto search<br>(current page)</dd>
+<dt>/</dt>
+<dd>Focus search box</dd>
+</dl></div></nav>
+<div id="goto">
+    <div class="search">
+         <div class="text"></div>
+         <div class="results"><ul></ul></div>
+   </div>
+</div>
+
+  <div id="breadcrumbs" class="row-fluid">
+    <div id="breadcrumbs-inner">
+          
+              
+          <ul>
+            <li><a href="index-2.html">PHP Manual</a></li>      <li><a href="funcref.html">Function Reference</a></li>      <li><a href="refs.database.html">Database Extensions</a></li>      <li><a href="refs.database.vendors.html">Vendor Specific Database Extensions</a></li>      <li><a href="set.mongodb.html">MongoDB</a></li>      <li><a href="mongodb.tutorial.html">Tutorials</a></li>      </ul>
+    </div>
+  </div>
+
+
+
+
+<div id="layout" class="clearfix">
+  <section id="layout-content">
+  <div id="mongodb.tutorial.library" class="chapter">
+ <h1>Using the PHP Library for MongoDB (PHPLIB)</h1>
+
+
+ <p class="para">
+  After the initial driver set-up, we will continue explaining how to get
+  started with the MongoDB driver and corresponding userland library to write
+  our first project.
+ </p>
+
+ <div class="section">
+  <h2 class="title">Installing the PHP Library with Composer</h2>
+
+  <p class="para">
+   The last thing we still need to install to get started on the application
+   itself, is the PHP library.
+  </p>
+
+  <p class="para">
+   The library needs to be installed with
+   <a href="https://getcomposer.org/" class="link external">»&nbsp;Composer</a>, a package manager
+   for PHP. Instructions for installing Composer on various platforms may be
+   found on its website.
+   </p>
+
+   <p class="para">
+    Install the library by running:
+    </p><div class="example-contents">
+<div class="shellcode"><pre class="shellcode">$ composer require mongodb/mongodb</pre>
+</div>
+    </div>
+
+   <p></p>
+
+   <p class="para">
+It will output something akin to:
+
+    </p><div class="example-contents">
+<div class="textcode"><pre class="textcode">./composer.json has been created
+Loading composer repositories with package information
+Updating dependencies (including require-dev)
+  - Installing mongodb/mongodb (1.0.0)
+    Downloading: 100%         
+
+Writing lock file
+Generating autoload files</pre>
+</div>
+    </div>
+
+   <p></p>
+
+   <p class="para">
+    Composer will create several files: <code class="code">composer.json</code>,
+    <code class="code">composer.lock</code>, and a <code class="code">vendor</code> directory that will
+    contain the library and any other dependencies your project might require.
+   </p>
+  </div>
+
+  <div class="section">
+   <h2 class="title">Using the PHP Library</h2>
+
+   <p class="para">
+    In addition to managing your dependencies, Composer will also provide you
+    with an autoloader (for those dependencies' classes). Ensure that it is
+    included at the start of your script or in your application's bootstrap
+    code:
+    </p><div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br></span><span style="color: #FF8000">//&nbsp;This&nbsp;path&nbsp;should&nbsp;point&nbsp;to&nbsp;Composer's&nbsp;autoloader<br></span><span style="color: #007700">require&nbsp;</span><span style="color: #DD0000">'vendor/autoload.php'</span><span style="color: #007700">;</span>
+</span>
+</code></div>
+    </div>
+
+   <p></p>
+
+   <p class="para">
+    With this done, you can now use any of the functionality as described in the
+    <a href="https://docs.mongodb.com/php-library" class="link external">»&nbsp;library documentation</a>.
+   </p>
+
+   <p class="para">
+    If you have previously used the old driver (i.e. <code class="code">mongo</code>
+    extension), the library's API should look familiar. It contains a
+    <a href="https://docs.mongodb.com/php-library/master/reference/class/MongoDBClient/" class="link external">»&nbsp;Client</a>
+    class for connecting to MongoDB, and
+    <a href="https://docs.mongodb.com/php-library/master/reference/class/MongoDBDatabase/" class="link external">»&nbsp;Database</a>
+    class for database-level operations (e.g. commands, collection management)
+    and a
+    <a href="https://docs.mongodb.com/php-library/master/reference/class/MongoDBCollection" class="link external">»&nbsp;Collection</a>
+    class for collection-level operations (e.g.
+    <a href="https://en.wikipedia.org/wiki/Create,_read,_update_and_delete" class="link external">»&nbsp;CRUD</a> methods, index management).
+    Various Collection methods have been renamed for clarity, and to be in
+    accordance with a new language-agnostic
+    <a href="https://github.com/mongodb/specifications/blob/master/source/crud/crud.rst" class="link external">»&nbsp;specification</a>.
+   </p>
+
+   <p class="para">
+    As an example, this is how you insert a document into the
+    <em class="emphasis">beers</em> collection of the <em class="emphasis">demo</em>
+    database:
+    </p><div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br></span><span style="color: #007700">require&nbsp;</span><span style="color: #DD0000">'vendor/autoload.php'</span><span style="color: #007700">;&nbsp;</span><span style="color: #FF8000">//&nbsp;include&nbsp;Composer's&nbsp;autoloader<br><br></span><span style="color: #0000BB">$client&nbsp;</span><span style="color: #007700">=&nbsp;new&nbsp;</span><span style="color: #0000BB">MongoDB</span><span style="color: #007700">\</span><span style="color: #0000BB">Client</span><span style="color: #007700">(</span><span style="color: #DD0000">"mongodb://localhost:27017"</span><span style="color: #007700">);<br></span><span style="color: #0000BB">$collection&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$client</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">demo</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">beers</span><span style="color: #007700">;<br><br></span><span style="color: #0000BB">$result&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$collection</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">insertOne</span><span style="color: #007700">(&nbsp;[&nbsp;</span><span style="color: #DD0000">'name'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">'Hinterland'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'brewery'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">'BrewDog'&nbsp;</span><span style="color: #007700">]&nbsp;);<br><br>echo&nbsp;</span><span style="color: #DD0000">"Inserted&nbsp;with&nbsp;Object&nbsp;ID&nbsp;'</span><span style="color: #007700">{</span><span style="color: #0000BB">$result</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">getInsertedId</span><span style="color: #007700">()}</span><span style="color: #DD0000">'"</span><span style="color: #007700">;<br></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   <p></p>
+
+   <p class="para">
+    Instead of injecting the generated <code class="code">_id</code> field into the input
+    document (as was done in the old driver), it is now made available through
+    the result object returned by the <code class="code">insertOne</code> method.
+   </p>
+
+   <p class="para">
+    After insertion, you can of course also query the data that you have just
+    inserted. For that, you use the <code class="code">find</code> method, which returns an
+    iterable cursor:
+    </p><div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br></span><span style="color: #007700">require&nbsp;</span><span style="color: #DD0000">'vendor/autoload.php'</span><span style="color: #007700">;&nbsp;</span><span style="color: #FF8000">//&nbsp;include&nbsp;Composer's&nbsp;autoloader<br><br></span><span style="color: #0000BB">$client&nbsp;</span><span style="color: #007700">=&nbsp;new&nbsp;</span><span style="color: #0000BB">MongoDB</span><span style="color: #007700">\</span><span style="color: #0000BB">Client</span><span style="color: #007700">(</span><span style="color: #DD0000">"mongodb://localhost:27017"</span><span style="color: #007700">);<br></span><span style="color: #0000BB">$collection&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$client</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">demo</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">beers</span><span style="color: #007700">;<br><br></span><span style="color: #0000BB">$result&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$collection</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">find</span><span style="color: #007700">(&nbsp;[&nbsp;</span><span style="color: #DD0000">'name'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">'Hinterland'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'brewery'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">'BrewDog'&nbsp;</span><span style="color: #007700">]&nbsp;);<br><br>foreach&nbsp;(</span><span style="color: #0000BB">$result&nbsp;</span><span style="color: #007700">as&nbsp;</span><span style="color: #0000BB">$entry</span><span style="color: #007700">)&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #0000BB">$entry</span><span style="color: #007700">[</span><span style="color: #DD0000">'_id'</span><span style="color: #007700">],&nbsp;</span><span style="color: #DD0000">':&nbsp;'</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$entry</span><span style="color: #007700">[</span><span style="color: #DD0000">'name'</span><span style="color: #007700">],&nbsp;</span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br>}<br></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   <p></p>
+
+   <p class="para">
+    While it may not be apparent in the examples, BSON documents and arrays are
+    unserialized as type classes in the library by default. These classes ensure
+    that values preserve their type when being serialized back into BSON, which
+    avoids a caveat in the old driver where arrays might turn into documents,
+    and vice versa. Additionally, the classes extend
+    <span class="classname"><a href="class.arrayobject.html" class="classname">ArrayObject</a></span> for enhanced usability. You can find more
+    information on how serialization and deserialization between PHP variables
+    and BSON is handled by the driver and library by reading the
+    <a href="mongodb.persistence.html" class="xref">Persisting Data</a> specification.
+   </p>
+  </div>
+</div>
+
+<section id="usernotes">
+ <div class="head"><h3 class="title">User Contributed Notes</h3></div><div id="allnotes">
+  <div class="note" id="122519">  
+  <a class="name">
+  <strong class="user"><em>surajtiwari020 at gmail dot com</em></strong></a><div class="date" title="2018-03-16 05:03"><strong>3 years ago</strong></div>
+  <div class="text" id="Hcom122519">
+<div class="phpcode"><code><span class="html">
+Well most of the tutorials didn't explained well, So i hope this might help someone <br>Note: this is a part of my laravel project&nbsp; <br><br>//getting data from a collection<br><span class="default">&lt;?php<br><br></span><span class="keyword">use </span><span class="default">MongoDB</span><span class="keyword">\</span><span class="default">Client </span><span class="keyword">as </span><span class="default">Mongo</span><span class="keyword">;<br><br></span><span class="default">$user </span><span class="keyword">= </span><span class="string">"admin"</span><span class="keyword">;<br></span><span class="default">$pwd </span><span class="keyword">= </span><span class="string">'password'</span><span class="keyword">;<br><br></span><span class="default">$mongo </span><span class="keyword">= new </span><span class="default">Mongo</span><span class="keyword">(</span><span class="string">"mongodb://</span><span class="keyword">${</span><span class="default">user</span><span class="keyword">}</span><span class="string">:</span><span class="keyword">${</span><span class="default">pwd</span><span class="keyword">}</span><span class="string">@127.0.0.1:27017"</span><span class="keyword">);<br></span><span class="default">$collection </span><span class="keyword">= </span><span class="default">$mongo</span><span class="keyword">-&gt;</span><span class="default">db_name</span><span class="keyword">-&gt;</span><span class="default">collection</span><span class="keyword">;<br></span><span class="default">$result </span><span class="keyword">= </span><span class="default">$collection</span><span class="keyword">-&gt;</span><span class="default">find</span><span class="keyword">()-&gt;</span><span class="default">toArray</span><span class="keyword">();<br><br></span><span class="default">print_r</span><span class="keyword">(</span><span class="default">$result</span><span class="keyword">);<br><br></span><span class="default">?&gt;</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="121084">  
+  <a class="name">
+  <strong class="user"><em>crystale dot darck at gmail dot com</em></strong></a><div class="date" title="2017-05-15 04:03"><strong>4 years ago</strong></div>
+  <div class="text" id="Hcom121084">
+<div class="phpcode"><code><span class="html">
+To test your connection string, you can do something like this:<br><br><span class="default">&lt;?php<br>$mongo </span><span class="keyword">= new </span><span class="default">MongoDB</span><span class="keyword">\</span><span class="default">Client</span><span class="keyword">(</span><span class="string">'mongodb://my_server_does_not_exist_here:27017'</span><span class="keyword">);<br>try <br>{<br>&nbsp; &nbsp; </span><span class="default">$dbs </span><span class="keyword">= </span><span class="default">$mongo</span><span class="keyword">-&gt;</span><span class="default">listDatabases</span><span class="keyword">();<br>}<br>catch (</span><span class="default">MongoDB</span><span class="keyword">\</span><span class="default">Driver</span><span class="keyword">\</span><span class="default">Exception</span><span class="keyword">\</span><span class="default">ConnectionTimeoutException $e</span><span class="keyword">)<br>{<br>&nbsp; &nbsp; </span><span class="comment">// PHP cannot find a MongoDB server using the MongoDB connection string specified<br>&nbsp; &nbsp; // do something here<br></span><span class="keyword">}<br></span><span class="default">?&gt;</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="124329">  
+  <a class="name">
+  <strong class="user"><em>wpg</em></strong></a><div class="date" title="2019-10-23 05:40"><strong>1 year ago</strong></div>
+  <div class="text" id="Hcom124329">
+<div class="phpcode"><code><span class="html">
+If you have a number of JSON documents with nested elements such as 'responseId' below and you want to know how many documents have a responseId:<br>{"result":{"responseId":"xyz"}}<br>{"result":NULL}<br>{"result":{"responseId":"abc"}}<br><br>I was not having luck with the following format<br><span class="default">&lt;?php <br></span><span class="comment">// trying to get the count of documents where responseId is not equal to NULL (did not work for me)<br></span><span class="default">$intCount </span><span class="keyword">= </span><span class="default">$collection</span><span class="keyword">-&gt;</span><span class="default">count</span><span class="keyword">([</span><span class="string">'result' </span><span class="keyword">=&gt; [</span><span class="string">'responseId' </span><span class="keyword">=&gt; [</span><span class="string">'$ne' </span><span class="keyword">=&gt; </span><span class="default">NULL</span><span class="keyword">]]]);<br></span><span class="default">?&gt;<br></span><br>Instead I needed to use a period between the JSON elements:<br><span class="default">&lt;?php<br></span><span class="comment">// get the count of documents where responseId is not equal to NULL<br></span><span class="default">$intCount </span><span class="keyword">= </span><span class="default">$collection</span><span class="keyword">-&gt;</span><span class="default">count</span><span class="keyword">([</span><span class="string">'result.responseId' </span><span class="keyword">=&gt; [</span><span class="string">'$ne' </span><span class="keyword">=&gt; </span><span class="default">NULL</span><span class="keyword">]]);<br></span><span class="default">?&gt;</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="124121">  
+  <a class="name">
+  <strong class="user"><em>salos_12 at hotmail dot com</em></strong></a><div class="date" title="2019-08-16 07:16"><strong>2 years ago</strong></div>
+  <div class="text" id="Hcom124121">
+<div class="phpcode"><code><span class="html">
+When your database name contains a "-" (e.g. database-name) you need to use a string instead.<br><br><span class="default">&lt;?php<br><br>$client </span><span class="keyword">= new </span><span class="default">MongoDB</span><span class="keyword">\</span><span class="default">Client</span><span class="keyword">(</span><span class="string">"mongodb://ip_address:port"</span><span class="keyword">);<br></span><span class="default">$collection </span><span class="keyword">= </span><span class="default">$client</span><span class="keyword">-&gt;{</span><span class="string">'database-name'</span><span class="keyword">}-&gt;</span><span class="default">collection</span><span class="keyword">;<br><br></span><span class="default">?&gt;</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="118888">  
+  <a class="name">
+  <strong class="user"><em>Dc Shiman</em></strong></a><div class="date" title="2016-02-23 03:53"><strong>5 years ago</strong></div>
+  <div class="text" id="Hcom118888">
+<div class="phpcode"><code><span class="html">
+Do a text search on the collection with projection<br><br>$search['$text'] = ['$search' =&gt; "foo"];<br>$options["projection"] = ['score' =&gt; ['$meta' =&gt; "textScore"]];<br>$options["sort"] = ["score" =&gt; ['$meta' =&gt; "textScore"]];<br><br>$cursor = $collection-&gt;find($search, $options);</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="119729">  
+  <a class="name">
+  <strong class="user"><em>Basher</em></strong></a><div class="date" title="2016-08-12 04:10"><strong>5 years ago</strong></div>
+  <div class="text" id="Hcom119729">
+<div class="phpcode"><code><span class="html">
+Pecl MongoDB at time of writing can be installed (see phpinfo()) but composer will complain that it's not present.<br><br>$&nbsp; composer require "mongodb/mongodb=^1.0.0"<br>...<br>Your requirements could not be resolved to an installable set of packages.<br><br>If you see this try <br><br>$ composer require "mongodb/mongodb=^1.0.0" --ignore-platform-reqs</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="123179">  
+  <a class="name">
+  <strong class="user"><em>myname</em></strong></a><div class="date" title="2018-09-30 05:53"><strong>2 years ago</strong></div>
+  <div class="text" id="Hcom123179">
+<div class="phpcode"><code><span class="html">
+What folder we need to be in to run composer? I can't get it to work.</span>
+</code></div>
+  </div>
+ </div></div>
+
+ 
+</section>    </section><!-- layout-content -->
+        
+
+
+  </div><!-- layout -->
+
+  
+
+    
+ <!-- External and third party libraries. -->
+ 
+
+
+
+
+
+
+
+<a id="toTop" href="javascript:;"><span id="toTopHover"></span><img width="40" height="40" alt="To Top" src="../../images/to-top%402x.png"></a>
+
+
+
+<!-- Mirrored from www.php.net/manual/en/mongodb.tutorial.library.php by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 11 Sep 2021 10:11:24 GMT -->
+
+</body></html>

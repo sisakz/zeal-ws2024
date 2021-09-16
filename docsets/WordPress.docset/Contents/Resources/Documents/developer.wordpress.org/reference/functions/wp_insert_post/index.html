@@ -1,0 +1,3076 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+
+<!-- Mirrored from developer.wordpress.org/reference/functions/wp_insert_post/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 31 Aug 2021 16:53:24 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<!--
+<meta property="fb:page_id" content="6427302910" />
+-->
+<meta name="google-site-verification" content="7VWES_-rcHBcmaQis9mSYamPfNwE03f4vyTj4pfuAw0" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>wp_insert_post()</title>
+<meta name="referrer" content="always">
+
+		<link href='../../../../fonts.googleapis.com/css.css?family=Open+Sans:300italic,400italic,600italic,400,300,600&amp;subset=latin,cyrillic-ext,greek-ext,greek,vietnamese,latin-ext,cyrillic' rel='stylesheet' type='text/css'>
+
+		<link rel="stylesheet" href="../../../../s.w.org/style/wp4.css?95" />
+
+<link rel="shortcut icon" href="../../../../s.w.org/favicon.ico?2" type="image/x-icon" />
+<link rel="pingback" href="../../../xmlrpc.php" /><meta name='robots' content='max-image-preview:large' />
+<link rel='dns-prefetch' href='../../../../fonts.googleapis.com/index.html' />
+<link rel='dns-prefetch' href='http://s.w.org/' />
+<link rel='dns-prefetch' href='http://www.googletagmanager.com/' />
+<link rel='dns-prefetch' href='http://fonts.gstatic.com/' />
+<link rel="alternate" type="application/rss+xml" title="WordPress Developer Resources &raquo; Feed" href="../../../feed/index.html" />
+<link rel="alternate" type="application/rss+xml" title="WordPress Developer Resources &raquo; Comments Feed" href="../../../comments/feed/index.html" />
+<meta property="og:title" content="wp_insert_post() | Function | WordPress Developer Resources" />
+<meta property="og:site_name" content="WordPress Developer Resources" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="../../../index.html" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@WordPress" />
+<meta name="description" content="Insert or update a post." />
+<meta property="og:description" content="Insert or update a post." />
+<link rel="alternate" type="application/rss+xml" title="WordPress Developer Resources &raquo; wp_insert_post Comments Feed" href="https://developer.wordpress.org/reference/functions/wp_insert_post/feed/" />
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'../../../../www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P24PF4B');</script>
+			<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/developer.wordpress.org\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.9-alpha-51701"}};
+			!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([10084,65039,8205,55357,56613],[10084,65039,8203,55357,56613])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel='stylesheet' id='dashicons-css'  href='../../../wp-includes/css/dashicons.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='admin-bar-css'  href='../../../wp-includes/css/admin-bar.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-block-library-css'  href='../../../wp-includes/css/dist/block-library/style.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='wporg-handbook-css-css'  href='../../../wp-content/plugins/handbook/stylesheets/callout-boxes.css?ver=20200121' type='text/css' media='all' />
+<link rel='stylesheet' id='open-sans-css'  href='../../../../fonts.googleapis.com/css-2.css?family=Open+Sans%3A300italic%2C400italic%2C600italic%2C300%2C400%2C600&amp;subset=latin%2Clatin-ext&amp;display=fallback&amp;ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='wporg-developer-style-css'  href='../../../wp-content/themes/pub/wporg-developer/style.css?ver=3' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-dev-sass-compiled-css'  href='../../../wp-content/themes/pub/wporg-developer/stylesheets/main.css?ver=20200713' type='text/css' media='all' />
+<link rel='stylesheet' id='awesomplete-css-css'  href='../../../wp-content/themes/pub/wporg-developer/stylesheets/awesomplete.css?ver=20160114' type='text/css' media='all' />
+<link rel='stylesheet' id='autocomplete-css-css'  href='../../../wp-content/themes/pub/wporg-developer/stylesheets/autocomplete.css?ver=20171220' type='text/css' media='all' />
+<link rel='stylesheet' id='syntaxhighlighter-core-css'  href='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shCore.css?ver=3.0.9b' type='text/css' media='all' />
+<link rel='stylesheet' id='syntaxhighlighter-theme-default-css'  href='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shThemeDefault.css?ver=3.0.9b' type='text/css' media='all' />
+<script type='text/javascript' src='../../../wp-includes/js/jquery/jquery.min.js?ver=3.6.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='../../../wp-content/plugins/handbook/scripts/handbook.js?ver=20150930' id='wporg-handbook-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/chapters.js?ver=20190603' id='wporg-developer-chapters-js'></script>
+<script type='text/javascript' src='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shCore.js?ver=3.0.9b' id='syntaxhighlighter-core-js'></script>
+<script type='text/javascript' src='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushPhp.js?ver=3.0.9b' id='syntaxhighlighter-brush-php-js'></script>
+<link rel="https://api.w.org/" href="https://developer.wordpress.org/wp-json/" /><link rel="alternate" type="application/json" href="https://developer.wordpress.org/wp-json/wp/v2/wp-parser-function/1171" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="../../../xmlrpc-2.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="../../../wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 5.9-alpha-51701" />
+<link rel='shortlink' href='https://developer.wordpress.org/?p=1171' />
+<link rel="alternate" type="application/json+oembed" href="https://developer.wordpress.org/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_insert_post%2F" />
+<link rel="alternate" type="text/xml+oembed" href="https://developer.wordpress.org/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_insert_post%2F&amp;format=xml" />
+<link rel="canonical" href="index.html">
+<!-- Stream WordPress user activity plugin v3.6.2 -->
+	<style>
+		@media screen and (max-width: 782px) {
+			#wpadminbar li#wp-admin-bar-log-in,
+			#wpadminbar li#wp-admin-bar-register {
+				display: block;
+			}
+
+			#wpadminbar li#wp-admin-bar-log-in a,
+			#wpadminbar li#wp-admin-bar-register a {
+				padding: 0 8px;
+			}
+		}
+	</style>
+		<style>
+			a.github-edit {
+				margin-left: .5em;
+				font-size: .5em;
+				vertical-align: top;
+				display: inline-block;
+				border: 1px solid #eeeeee;
+				border-radius: 2px;
+				background: #eeeeee;
+				padding: .5em .6em .4em;
+				color: black;
+				margin-top: 0.1em;
+			}
+			a.github-edit > * {
+				opacity: 0.6;
+			}
+			a.github-edit:hover > * {
+				opacity: 1;
+				color: black;
+			}
+			a.github-edit img {
+				height: .8em;
+			}
+		</style>
+		
+	<script type="text/javascript">
+		jQuery( '<style>.hide-if-js { display: none; }</style>' ).appendTo( 'head' );
+		jQuery( function($) {
+			$( 'body' ).addClass('js');
+		} );
+	</script>
+<style type="text/css" media="print">#wpadminbar { display:none; }</style>
+	<style type="text/css" media="screen">
+	</style>
+	<script>document.cookie='devicePixelRatio='+((window.devicePixelRatio === undefined) ? 1 : window.devicePixelRatio)+'; path=/';</script>
+
+</head>
+
+
+<body id="wordpress-org" class="wp-parser-function-template-default single single-wp-parser-function postid-1171 admin-bar no-customize-support">
+		<div id="wpadminbar" class="nojq nojs">
+						<div class="quicklinks" id="wp-toolbar" role="navigation" aria-label="Toolbar">
+				<ul id='wp-admin-bar-root-default' class="ab-top-menu"><li id='wp-admin-bar-wp-logo' class="menupop"><a class='ab-item' aria-haspopup="true" href='https://wordpress.org/about/'><span class="ab-icon" aria-hidden="true"></span><span class="screen-reader-text">About WordPress</span></a><div class="ab-sub-wrapper"><ul id='wp-admin-bar-wp-logo-default' class="ab-submenu"><li id='wp-admin-bar-about'><a class='ab-item' href='https://wordpress.org/about/'>About WordPress</a></li></ul><ul id='wp-admin-bar-wp-logo-external' class="ab-sub-secondary ab-submenu"><li id='wp-admin-bar-wporg'><a class='ab-item' href='https://wordpress.org/'>WordPress.org</a></li><li id='wp-admin-bar-documentation'><a class='ab-item' href='https://wordpress.org/support/'>Documentation</a></li><li id='wp-admin-bar-support-forums'><a class='ab-item' href='https://wordpress.org/support/forums/'>Support</a></li><li id='wp-admin-bar-feedback'><a class='ab-item' href='https://wordpress.org/support/forum/requests-and-feedback'>Feedback</a></li></ul></div></li></ul><ul id='wp-admin-bar-top-secondary' class="ab-top-secondary ab-top-menu"><li id='wp-admin-bar-search' class="admin-bar-search"><div class="ab-item ab-empty-item" tabindex="-1"><form action="https://developer.wordpress.org/" method="get" id="adminbarsearch"><input class="adminbar-input" name="s" id="adminbar-search" type="text" value="" maxlength="150" /><label for="adminbar-search" class="screen-reader-text">Search</label><input type="submit" class="adminbar-button" value="Search" /></form></div></li><li id='wp-admin-bar-log-in'><a class='ab-item' href='https://login.wordpress.org/?locale=en_US'>Log In</a></li><li id='wp-admin-bar-register'><a class='ab-item' href='https://login.wordpress.org/register?locale=en_US'>Register</a></li></ul>			</div>
+					</div>
+
+		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P24PF4B" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<div id="wporg-header">
+	<div class="wrapper">
+	<h1><a href="http://wordpress.org/">WordPress.org</a></h1>				<div id="head-search">
+		<form action="http://wordpress.org/search/do-search.php" method="get">
+			<label for="global-search" class="screen-reader-text">Search WordPress.org for:</label>
+			<input id="global-search" class="text" name="search" type="text" value="" maxlength="150" placeholder="Search WordPress.org" />
+			<button type="submit" class="button"><span class="screen-reader-text">Submit</span></button>
+		</form>
+		</div>
+				<div style="clear:both"></div>
+		<button id="mobile-menu-button" aria-expanded="false"><span class="screen-reader-text">Toggle Menu</span></button>
+		
+<nav aria-label="Main Menu">
+<ul id="wporg-header-menu">
+<li class="menu-item"><a href='http://wordpress.org/showcase/' data-title='See some of the sites built on WordPress.'>Showcase</a></li>
+<li class="menu-item"><a href='http://learn.wordpress.org/' data-title='Resources to help you learn more about WordPress and teach it to others.'>Learn</a></li>
+<li class="menu-item"><a href='http://wordpress.org/themes/' data-title='Find just the right look for your website.'>Themes</a></li>
+<li class="menu-item"><a href='http://wordpress.org/plugins/' data-title='Plugins can extend WordPress to do almost anything you can imagine.'>Plugins</a></li>
+<li class="menu-item"><a href='http://wordpress.org/mobile/' data-title='Take your website on the go!'>Mobile</a></li>
+<li class="menu-item"><a href='http://wordpress.org/support/' data-title='Forums, documentation, help.'>Support</a><ul class="nav-submenu"><li><a href='http://wordpress.org/support/' title='Documentation, tutorials, best practices.'>Documentation</a></li><li><a href='http://wordpress.org/support/forums/' title='Support and discussion forums.'>Forums</a></li></ul><div class="uparrow"></div></li>
+<li class="menu-item"><a href='http://make.wordpress.org/' data-title='Contribute your knowledge.'>Get Involved</a><ul class="nav-submenu"><li><a href='http://wordpress.org/five-for-the-future/' title='How five percent is powering the next generation of the web'>Five for the Future</a></li></ul><div class="uparrow"></div></li>
+<li class="menu-item"><a href='http://wordpress.org/about/' data-title='About the WordPress Organization, and where we&#039;re going.'>About</a></li>
+<li class="menu-item"><a href='http://wordpress.org/news/' data-title='Come here for the latest scoop.'>Blog</a></li>
+<li class="menu-item"><a href='http://wordpress.org/hosting/' data-title='Find a home for your blog.'>Hosting</a></li>
+<li id="download" class="button download-button menu-item"><a href='http://wordpress.org/download/' data-title='Get it. Got it? Good.'>Get WordPress</a></li>
+</ul>
+</nav>
+		<div style="clear:both"></div>
+	</div>
+</div>
+
+
+
+<header id="masthead" class="site-header" role="banner">
+		<div class="site-branding">
+		<h1 class="site-title">
+			<a href="../../index.html" rel="home">Code Reference</a>
+		</h1>
+
+		
+		<nav id="site-navigation" class="main-navigation" role="navigation">
+			<button class="menu-toggle dashicons dashicons-arrow-down-alt2" aria-controls="primary-menu" aria-expanded="false" aria-label="Primary Menu"></button>
+					</nav>
+	</div>
+</header><!-- #masthead -->
+
+<div id="page" class="hfeed site devhub-wrap">
+	<a href="#main" class="screen-reader-text">Skip to content</a>
+
+				<div id="inner-search">
+			<div class="search-section section clear hide-if-js">
+
+
+	
+	<form role="search" method="get" class="searchform searchform-filtered" action="https://developer.wordpress.org/">
+		<label for="search-field" class="screen-reader-text">Search for:</label>
+		<input type="text" id="search-field" class="search-field" placeholder="Search &hellip;" value="" name="s">
+		<button class="button button-primary button-search"><i class="dashicons dashicons-search"></i><span class="screen-reader-text">Search plugins</span></button>
+	
+		<div class="search-post-type">
+			<span>Filter by type:</span>
+									<label><input type="checkbox" name="post_type[]" value="wp-parser-function"
+						 /> Functions</label>
+									<label><input type="checkbox" name="post_type[]" value="wp-parser-hook"
+						 /> Hooks</label>
+									<label><input type="checkbox" name="post_type[]" value="wp-parser-class"
+						 /> Classes</label>
+									<label><input type="checkbox" name="post_type[]" value="wp-parser-method"
+						 /> Methods</label>
+					</div>
+
+	
+	</form>
+
+</div><!-- /search-guide -->
+			<div id="inner-search-icon-container">
+				<div id="inner-search-icon">
+					<div class="dashicons dashicons-search"><span class="screen-reader-text">Search</span></div>
+				</div>
+			</div>
+		</div>
+
+		<div id="content" class="site-content">
+
+	<div id="content-area" class="wp-parser-function-template-default single single-wp-parser-function postid-1171 admin-bar no-customize-support code-reference">
+
+		
+		<div class="breadcrumb-trail breadcrumbs" itemprop="breadcrumb">
+			<span class="trail-browse">Browse:</span> 
+			<span class="trail-begin"><a href="../../../index.html" title="WordPress Developer Resources" rel="home">Home</a></span> <span class="sep">&#47;</span> 
+			<span class="trail-inner"><a href="../../index.html" title="Reference">Reference</a></span> <span class="sep">&#47;</span> 
+			<span class="trail-inner"><a href="../index.html">Functions</a></span> <span class="sep">&#47;</span> <span class="trail-end">wp_insert_post()</span>
+		</div>
+		<main id="main" class="site-main" role="main">
+
+		
+			
+<article id="post-1171" class="post-1171 wp-parser-function type-wp-parser-function status-publish hentry wp-parser-source-file-wp-includes_post-php wp-parser-package-post wp-parser-package-wordpress wp-parser-since-1-0-0 wp-parser-since-2-6-0 wp-parser-since-4-2-0 wp-parser-since-4-4-0 wp-parser-since-5-6-0">
+
+	
+	
+	<h1>wp_insert_post( <span class="arg-type">array</span>&nbsp;<span class="arg-name">$postarr</span>,  <span class="arg-type">bool</span>&nbsp;<span class="arg-name">$wp_error</span>&nbsp;=&nbsp;<span class="arg-default">false</span>,  <span class="arg-type">bool</span>&nbsp;<span class="arg-name">$fire_after_hooks</span>&nbsp;=&nbsp;<span class="arg-default">true</span>&nbsp;)</h1>
+
+	<section class="summary">
+		<p>Insert or update a post.</p>
+	</section>
+
+
+	
+	<div class="content-toc"><style> .toc-jump { text-align: right; font-size: 12px; } .page .toc-heading { margin-top: -50px; padding-top: 50px !important; }</style><div class="table-of-contents"><h2>Contents</h2><ul class="items"><li><a href="#description">Description</a>
+<ul>
+<li><a href="#see-also">See also</a>
+</ul></li>
+<li><a href="#parameters">Parameters</a></li>
+<li><a href="#return">Return</a></li>
+<li><a href="#more-information">More Information</a>
+<ul>
+<li><a href="#usage">Usage</a></li>
+<li><a href="#notes">Notes</a></li>
+<li><a href="#categories">Categories</a></li>
+<li><a href="#security">Security</a>
+</ul></li>
+<li><a href="#source">Source</a></li>
+<li><a href="#related">Related</a>
+<ul>
+<li><a href="#uses">Uses</a></li>
+<li><a href="#used-by">Used By</a>
+</ul></li>
+<li><a href="#changelog">Changelog</a></li>
+<li><a href="#user-contributed-notes">User Contributed Notes</a></ul>
+</div>
+
+<hr />
+<section class="description">
+	<h2 class="toc-heading" id="description" tabindex="-1">Description <a href="#description" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Description</span></a></h2>
+	<p>If the $postarr parameter has &#8216;ID&#8217; set to a value, then post will be updated.</p>
+<p>You can set the post date manually, by setting the values for &#8216;post_date&#8217; and &#8216;post_date_gmt&#8217; keys. You can close the comments or open the comments by setting the value for &#8216;comment_status&#8217; key.</p>
+
+		<h3 class="toc-heading" id="see-also" tabindex="-1">See also <a href="#see-also" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">See also</span></a></h3>
+
+	<ul>
+	<li><a href="../sanitize_post/index.html">sanitize_post()</a></li>
+	</ul>
+	</section>
+
+	<hr />
+	<section class="parameters">
+		<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="parameters" tabindex="-1">Parameters <a href="#parameters" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Parameters</span></a></h2>
+		<dl>
+												<dt>$postarr</dt>
+								<dd>
+					<p class="desc">
+													<span class="type">(<span class="array">array</span>)</span>
+																			<span class="required">(Required)</span>
+																			<span class="description">An array of elements that make up a post to update or insert. <ul class="param-hash"><li><b>'ID'</b><br /><i><span class='type'>(int)</span></i> The post ID. If equal to something other than 0, the post with that ID will be updated. Default 0.</li>
+<li><b>'post_author'</b><br /><i><span class='type'>(int)</span></i> The ID of the user who added the post. Default is the current user ID.</li>
+<li><b>'post_date'</b><br /><i><span class='type'>(string)</span></i> The date of the post. Default is the current time.</li>
+<li><b>'post_date_gmt'</b><br /><i><span class='type'>(string)</span></i> The date of the post in the GMT timezone. Default is the value of <code>$post_date</code>.</li>
+<li><b>'post_content'</b><br /><i><span class='type'>(mixed)</span></i> The post content. Default empty.</li>
+<li><b>'post_content_filtered'</b><br /><i><span class='type'>(string)</span></i> The filtered post content. Default empty.</li>
+<li><b>'post_title'</b><br /><i><span class='type'>(string)</span></i> The post title. Default empty.</li>
+<li><b>'post_excerpt'</b><br /><i><span class='type'>(string)</span></i> The post excerpt. Default empty.</li>
+<li><b>'post_status'</b><br /><i><span class='type'>(string)</span></i> The post status. Default 'draft'.</li>
+<li><b>'post_type'</b><br /><i><span class='type'>(string)</span></i> The post type. Default 'post'.</li>
+<li><b>'comment_status'</b><br /><i><span class='type'>(string)</span></i> Whether the post can accept comments. Accepts 'open' or 'closed'. Default is the value of 'default_comment_status' option.</li>
+<li><b>'ping_status'</b><br /><i><span class='type'>(string)</span></i> Whether the post can accept pings. Accepts 'open' or 'closed'. Default is the value of 'default_ping_status' option.</li>
+<li><b>'post_password'</b><br /><i><span class='type'>(string)</span></i> The password to access the post. Default empty.</li>
+<li><b>'post_name'</b><br /><i><span class='type'>(string)</span></i> The post name. Default is the sanitized post title when creating a new post.</li>
+<li><b>'to_ping'</b><br /><i><span class='type'>(string)</span></i> Space or carriage return-separated list of URLs to ping. Default empty.</li>
+<li><b>'pinged'</b><br /><i><span class='type'>(string)</span></i> Space or carriage return-separated list of URLs that have been pinged. Default empty.</li>
+<li><b>'post_modified'</b><br /><i><span class='type'>(string)</span></i> The date when the post was last modified. Default is the current time.</li>
+<li><b>'post_modified_gmt'</b><br /><i><span class='type'>(string)</span></i> The date when the post was last modified in the GMT timezone. Default is the current time.</li>
+<li><b>'post_parent'</b><br /><i><span class='type'>(int)</span></i> Set this for the post it belongs to, if any. Default 0.</li>
+<li><b>'menu_order'</b><br /><i><span class='type'>(int)</span></i> The order the post should be displayed in. Default 0.</li>
+<li><b>'post_mime_type'</b><br /><i><span class='type'>(string)</span></i> The mime type of the post. Default empty.</li>
+<li><b>'guid'</b><br /><i><span class='type'>(string)</span></i> Global Unique ID for referencing the post. Default empty.</li>
+<li><b>'import_id'</b><br /><i><span class='type'>(int)</span></i> The post ID to be used when inserting a new post. If specified, must not match any existing post ID. Default 0.</li>
+<li><b>'post_category'</b><br /><i><span class='type'>(int[])</span></i> Array of category IDs. Defaults to value of the 'default_category' option.</li>
+<li><b>'tags_input'</b><br /><i><span class='type'>(array)</span></i> Array of tag names, slugs, or IDs. Default empty.</li>
+<li><b>'tax_input'</b><br /><i><span class='type'>(array)</span></i> Array of taxonomy terms keyed by their taxonomy name. Default empty.</li>
+<li><b>'meta_input'</b><br /><i><span class='type'>(array)</span></i> Array of post meta values keyed by their post meta key. Default empty.</li>
+</li></ul>
+</span>
+											</p>
+									</dd>
+												<dt>$wp_error</dt>
+								<dd>
+					<p class="desc">
+													<span class="type">(<span class="bool">bool</span>)</span>
+																			<span class="required">(Optional)</span>
+																			<span class="description"> Whether to return a <a href="../../classes/wp_error/index.html">WP_Error</a> on failure. </span>
+											</p>
+											<p class="default">Default value: false</p>
+									</dd>
+												<dt>$fire_after_hooks</dt>
+								<dd>
+					<p class="desc">
+													<span class="type">(<span class="bool">bool</span>)</span>
+																			<span class="required">(Optional)</span>
+																			<span class="description"> Whether to fire the after insert hooks. </span>
+											</p>
+											<p class="default">Default value: true</p>
+									</dd>
+					</dl>
+	</section>
+	<hr />
+	<section class="return">
+		<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="return" tabindex="-1">Return <a href="#return" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Return</span></a></h2>
+		<p><span class='return-type'>(int|<a href="../../classes/wp_error/index.html">WP_Error</a>)</span> The post ID on success. The value 0 or <a href="../../classes/wp_error/index.html">WP_Error</a> on failure.</p>
+	</section>
+	<hr />
+	<section class="explanation">
+		<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="more-information" tabindex="-1">More Information <a href="#more-information" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">More Information</span></a></h2>
+
+		<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="usage" tabindex="-1">Usage <a href="#usage" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Usage</span></a></h3>
+<pre class="brush: php; title: ; notranslate" title="">
+wp_insert_post( $post, $wp_error );
+</pre>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="notes" tabindex="-1">Notes <a href="#notes" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Notes</span></a></h3>
+<ul>
+<li><tt>post_title</tt> and <tt>post_content</tt> are required</li>
+<li><tt>post_status</tt>: If providing a post_status of &#8216;future&#8217; you must specify the post_date in order for WordPress to know when to publish your post. See also <a title="Post Status Transitions" href="../../../../codex.wordpress.org/Post_Status_Transitions.html">Post Status Transitions</a>.</li>
+<li><tt>post_category</tt>: Equivalent to calling <a title="Function Reference/wp set post categories" href="../wp_set_post_categories/index.html">wp_set_post_categories()</a>.</li>
+<li><tt>tags_input</tt>: Equivalent to calling <a title="Function Reference/wp set post tags" href="../wp_set_post_tags/index.html">wp_set_post_tags()</a>.</li>
+<li><tt>tax_input</tt>: Equivalent to calling <a title="Function Reference/wp set post terms" href="../wp_set_post_terms/index.html">wp_set_post_terms()</a> for each custom taxonomy in the array. If the current user doesn&#8217;t have the capability to work with a taxonomy, then you must use <a title="Function Reference/wp set object terms" href="../wp_set_object_terms/index.html">wp_set_object_terms()</a> instead.</li>
+<li><tt>page_template</tt>: If post_type is &#8216;page&#8217;, will attempt to set the <a title="Page Templates" href="../../../themes/basics/page-templates/index.html">page template</a>. On failure, the function will return either a <a href="../../classes/wp_error/index.html">WP_Error</a> or 0, and stop before the final actions are called. If the post_type is not &#8216;page&#8217;, the parameter is ignored. You can set the page template for a non-page by calling <a title="Function Reference/update post meta" href="../update_post_meta/index.html">update_post_meta()</a> with a key of &#8216;_wp_page_template&#8217;.</li>
+</ul>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="categories" tabindex="-1">Categories <a href="#categories" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Categories</span></a></h3>
+<p>Categories need to be passed as an array of integers that match the category IDs in the database. This is the case even where only one category is assigned to the post.</p>
+<p>See also: <a title="Function Reference/wp set post terms" href="../wp_set_post_terms/index.html">wp_set_post_terms()</a></p>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="security" tabindex="-1">Security <a href="#security" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Security</span></a></h3>
+<p><tt><a href="index.html">wp_insert_post()</a></tt> passes data through <a href="_wp_link_placeholder.html">sanitize_post()</a>, which itself handles all necessary sanitization and validation (kses, etc.).</p>
+<p>As such, you don&#8217;t need to worry about that.</p>
+<p>You may wish, however, to remove HTML, JavaScript, and PHP tags from the post_title and any other fields. Surprisingly, WordPress does not do this automatically. This can be easily done by using the <a href="_wp_link_placeholder.html">wp_strip_all_tags()</a> function and is especially useful when building front-end post submission forms.</p>
+<pre class="brush: php; title: ; notranslate" title="">
+// Create post object
+$my_post = array(
+  'post_title'    =&gt; wp_strip_all_tags( $_POST['post_title'] ),
+  'post_content'  =&gt; $_POST['post_content'],
+  'post_status'   =&gt; 'publish',
+  'post_author'   =&gt; 1,
+  'post_category' =&gt; array( 8,39 )
+);
+
+// Insert the post into the database
+wp_insert_post( $my_post );
+</pre>
+	</section>
+	<hr />
+	<section class="source-content">
+		<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="source" tabindex="-1">Source <a href="#source" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Source</span></a></h2>
+		<p>
+			File: <a href="../../files/wp-includes/post.php/index.html">wp-includes/post.php</a>		</p>
+
+					<div class="source-code-container">
+				<pre class="brush: php; toolbar: false; first-line: 3834">function wp_insert_post( $postarr, $wp_error = false, $fire_after_hooks = true ) {
+	global $wpdb;
+
+	// Capture original pre-sanitized array for passing into filters.
+	$unsanitized_postarr = $postarr;
+
+	$user_id = get_current_user_id();
+
+	$defaults = array(
+		'post_author'           =&gt; $user_id,
+		'post_content'          =&gt; '',
+		'post_content_filtered' =&gt; '',
+		'post_title'            =&gt; '',
+		'post_excerpt'          =&gt; '',
+		'post_status'           =&gt; 'draft',
+		'post_type'             =&gt; 'post',
+		'comment_status'        =&gt; '',
+		'ping_status'           =&gt; '',
+		'post_password'         =&gt; '',
+		'to_ping'               =&gt; '',
+		'pinged'                =&gt; '',
+		'post_parent'           =&gt; 0,
+		'menu_order'            =&gt; 0,
+		'guid'                  =&gt; '',
+		'import_id'             =&gt; 0,
+		'context'               =&gt; '',
+		'post_date'             =&gt; '',
+		'post_date_gmt'         =&gt; '',
+	);
+
+	$postarr = wp_parse_args( $postarr, $defaults );
+
+	unset( $postarr['filter'] );
+
+	$postarr = sanitize_post( $postarr, 'db' );
+
+	// Are we updating or creating?
+	$post_ID = 0;
+	$update  = false;
+	$guid    = $postarr['guid'];
+
+	if ( ! empty( $postarr['ID'] ) ) {
+		$update = true;
+
+		// Get the post ID and GUID.
+		$post_ID     = $postarr['ID'];
+		$post_before = get_post( $post_ID );
+
+		if ( is_null( $post_before ) ) {
+			if ( $wp_error ) {
+				return new WP_Error( 'invalid_post', __( 'Invalid post ID.' ) );
+			}
+			return 0;
+		}
+
+		$guid            = get_post_field( 'guid', $post_ID );
+		$previous_status = get_post_field( 'post_status', $post_ID );
+	} else {
+		$previous_status = 'new';
+		$post_before     = null;
+	}
+
+	$post_type = empty( $postarr['post_type'] ) ? 'post' : $postarr['post_type'];
+
+	$post_title   = $postarr['post_title'];
+	$post_content = $postarr['post_content'];
+	$post_excerpt = $postarr['post_excerpt'];
+
+	if ( isset( $postarr['post_name'] ) ) {
+		$post_name = $postarr['post_name'];
+	} elseif ( $update ) {
+		// For an update, don't modify the post_name if it wasn't supplied as an argument.
+		$post_name = $post_before-&gt;post_name;
+	}
+
+	$maybe_empty = 'attachment' !== $post_type
+		&amp;&amp; ! $post_content &amp;&amp; ! $post_title &amp;&amp; ! $post_excerpt
+		&amp;&amp; post_type_supports( $post_type, 'editor' )
+		&amp;&amp; post_type_supports( $post_type, 'title' )
+		&amp;&amp; post_type_supports( $post_type, 'excerpt' );
+
+	/**
+	 * Filters whether the post should be considered &quot;empty&quot;.
+	 *
+	 * The post is considered &quot;empty&quot; if both:
+	 * 1. The post type supports the title, editor, and excerpt fields
+	 * 2. The title, editor, and excerpt fields are all empty
+	 *
+	 * Returning a truthy value from the filter will effectively short-circuit
+	 * the new post being inserted and return 0. If $wp_error is true, a WP_Error
+	 * will be returned instead.
+	 *
+	 * @since 3.3.0
+	 *
+	 * @param bool  $maybe_empty Whether the post should be considered &quot;empty&quot;.
+	 * @param array $postarr     Array of post data.
+	 */
+	if ( apply_filters( 'wp_insert_post_empty_content', $maybe_empty, $postarr ) ) {
+		if ( $wp_error ) {
+			return new WP_Error( 'empty_content', __( 'Content, title, and excerpt are empty.' ) );
+		} else {
+			return 0;
+		}
+	}
+
+	$post_status = empty( $postarr['post_status'] ) ? 'draft' : $postarr['post_status'];
+
+	if ( 'attachment' === $post_type &amp;&amp; ! in_array( $post_status, array( 'inherit', 'private', 'trash', 'auto-draft' ), true ) ) {
+		$post_status = 'inherit';
+	}
+
+	if ( ! empty( $postarr['post_category'] ) ) {
+		// Filter out empty terms.
+		$post_category = array_filter( $postarr['post_category'] );
+	}
+
+	// Make sure we set a valid category.
+	if ( empty( $post_category ) || 0 === count( $post_category ) || ! is_array( $post_category ) ) {
+		// 'post' requires at least one category.
+		if ( 'post' === $post_type &amp;&amp; 'auto-draft' !== $post_status ) {
+			$post_category = array( get_option( 'default_category' ) );
+		} else {
+			$post_category = array();
+		}
+	}
+
+	/*
+	 * Don't allow contributors to set the post slug for pending review posts.
+	 *
+	 * For new posts check the primitive capability, for updates check the meta capability.
+	 */
+	$post_type_object = get_post_type_object( $post_type );
+
+	if ( ! $update &amp;&amp; 'pending' === $post_status &amp;&amp; ! current_user_can( $post_type_object-&gt;cap-&gt;publish_posts ) ) {
+		$post_name = '';
+	} elseif ( $update &amp;&amp; 'pending' === $post_status &amp;&amp; ! current_user_can( 'publish_post', $post_ID ) ) {
+		$post_name = '';
+	}
+
+	/*
+	 * Create a valid post name. Drafts and pending posts are allowed to have
+	 * an empty post name.
+	 */
+	if ( empty( $post_name ) ) {
+		if ( ! in_array( $post_status, array( 'draft', 'pending', 'auto-draft' ), true ) ) {
+			$post_name = sanitize_title( $post_title );
+		} else {
+			$post_name = '';
+		}
+	} else {
+		// On updates, we need to check to see if it's using the old, fixed sanitization context.
+		$check_name = sanitize_title( $post_name, '', 'old-save' );
+
+		if ( $update &amp;&amp; strtolower( urlencode( $post_name ) ) == $check_name &amp;&amp; get_post_field( 'post_name', $post_ID ) == $check_name ) {
+			$post_name = $check_name;
+		} else { // new post, or slug has changed.
+			$post_name = sanitize_title( $post_name );
+		}
+	}
+
+	/*
+	 * Resolve the post date from any provided post date or post date GMT strings;
+	 * if none are provided, the date will be set to now.
+	 */
+	$post_date = wp_resolve_post_date( $postarr['post_date'], $postarr['post_date_gmt'] );
+	if ( ! $post_date ) {
+		if ( $wp_error ) {
+			return new WP_Error( 'invalid_date', __( 'Invalid date.' ) );
+		} else {
+			return 0;
+		}
+	}
+
+	if ( empty( $postarr['post_date_gmt'] ) || '0000-00-00 00:00:00' === $postarr['post_date_gmt'] ) {
+		if ( ! in_array( $post_status, get_post_stati( array( 'date_floating' =&gt; true ) ), true ) ) {
+			$post_date_gmt = get_gmt_from_date( $post_date );
+		} else {
+			$post_date_gmt = '0000-00-00 00:00:00';
+		}
+	} else {
+		$post_date_gmt = $postarr['post_date_gmt'];
+	}
+
+	if ( $update || '0000-00-00 00:00:00' === $post_date ) {
+		$post_modified     = current_time( 'mysql' );
+		$post_modified_gmt = current_time( 'mysql', 1 );
+	} else {
+		$post_modified     = $post_date;
+		$post_modified_gmt = $post_date_gmt;
+	}
+
+	if ( 'attachment' !== $post_type ) {
+		$now = gmdate( 'Y-m-d H:i:s' );
+
+		if ( 'publish' === $post_status ) {
+			if ( strtotime( $post_date_gmt ) - strtotime( $now ) &gt;= MINUTE_IN_SECONDS ) {
+				$post_status = 'future';
+			}
+		} elseif ( 'future' === $post_status ) {
+			if ( strtotime( $post_date_gmt ) - strtotime( $now ) &lt; MINUTE_IN_SECONDS ) {
+				$post_status = 'publish';
+			}
+		}
+	}
+
+	// Comment status.
+	if ( empty( $postarr['comment_status'] ) ) {
+		if ( $update ) {
+			$comment_status = 'closed';
+		} else {
+			$comment_status = get_default_comment_status( $post_type );
+		}
+	} else {
+		$comment_status = $postarr['comment_status'];
+	}
+
+	// These variables are needed by compact() later.
+	$post_content_filtered = $postarr['post_content_filtered'];
+	$post_author           = isset( $postarr['post_author'] ) ? $postarr['post_author'] : $user_id;
+	$ping_status           = empty( $postarr['ping_status'] ) ? get_default_comment_status( $post_type, 'pingback' ) : $postarr['ping_status'];
+	$to_ping               = isset( $postarr['to_ping'] ) ? sanitize_trackback_urls( $postarr['to_ping'] ) : '';
+	$pinged                = isset( $postarr['pinged'] ) ? $postarr['pinged'] : '';
+	$import_id             = isset( $postarr['import_id'] ) ? $postarr['import_id'] : 0;
+
+	/*
+	 * The 'wp_insert_post_parent' filter expects all variables to be present.
+	 * Previously, these variables would have already been extracted
+	 */
+	if ( isset( $postarr['menu_order'] ) ) {
+		$menu_order = (int) $postarr['menu_order'];
+	} else {
+		$menu_order = 0;
+	}
+
+	$post_password = isset( $postarr['post_password'] ) ? $postarr['post_password'] : '';
+	if ( 'private' === $post_status ) {
+		$post_password = '';
+	}
+
+	if ( isset( $postarr['post_parent'] ) ) {
+		$post_parent = (int) $postarr['post_parent'];
+	} else {
+		$post_parent = 0;
+	}
+
+	$new_postarr = array_merge(
+		array(
+			'ID' =&gt; $post_ID,
+		),
+		compact( array_diff( array_keys( $defaults ), array( 'context', 'filter' ) ) )
+	);
+
+	/**
+	 * Filters the post parent -- used to check for and prevent hierarchy loops.
+	 *
+	 * @since 3.1.0
+	 *
+	 * @param int   $post_parent Post parent ID.
+	 * @param int   $post_ID     Post ID.
+	 * @param array $new_postarr Array of parsed post data.
+	 * @param array $postarr     Array of sanitized, but otherwise unmodified post data.
+	 */
+	$post_parent = apply_filters( 'wp_insert_post_parent', $post_parent, $post_ID, $new_postarr, $postarr );
+
+	/*
+	 * If the post is being untrashed and it has a desired slug stored in post meta,
+	 * reassign it.
+	 */
+	if ( 'trash' === $previous_status &amp;&amp; 'trash' !== $post_status ) {
+		$desired_post_slug = get_post_meta( $post_ID, '_wp_desired_post_slug', true );
+
+		if ( $desired_post_slug ) {
+			delete_post_meta( $post_ID, '_wp_desired_post_slug' );
+			$post_name = $desired_post_slug;
+		}
+	}
+
+	// If a trashed post has the desired slug, change it and let this post have it.
+	if ( 'trash' !== $post_status &amp;&amp; $post_name ) {
+		/**
+		 * Filters whether or not to add a `__trashed` suffix to trashed posts that match the name of the updated post.
+		 *
+		 * @since 5.4.0
+		 *
+		 * @param bool   $add_trashed_suffix Whether to attempt to add the suffix.
+		 * @param string $post_name          The name of the post being updated.
+		 * @param int    $post_ID            Post ID.
+		 */
+		$add_trashed_suffix = apply_filters( 'add_trashed_suffix_to_trashed_posts', true, $post_name, $post_ID );
+
+		if ( $add_trashed_suffix ) {
+			wp_add_trashed_suffix_to_post_name_for_trashed_posts( $post_name, $post_ID );
+		}
+	}
+
+	// When trashing an existing post, change its slug to allow non-trashed posts to use it.
+	if ( 'trash' === $post_status &amp;&amp; 'trash' !== $previous_status &amp;&amp; 'new' !== $previous_status ) {
+		$post_name = wp_add_trashed_suffix_to_post_name_for_post( $post_ID );
+	}
+
+	$post_name = wp_unique_post_slug( $post_name, $post_ID, $post_status, $post_type, $post_parent );
+
+	// Don't unslash.
+	$post_mime_type = isset( $postarr['post_mime_type'] ) ? $postarr['post_mime_type'] : '';
+
+	// Expected_slashed (everything!).
+	$data = compact( 'post_author', 'post_date', 'post_date_gmt', 'post_content', 'post_content_filtered', 'post_title', 'post_excerpt', 'post_status', 'post_type', 'comment_status', 'ping_status', 'post_password', 'post_name', 'to_ping', 'pinged', 'post_modified', 'post_modified_gmt', 'post_parent', 'menu_order', 'post_mime_type', 'guid' );
+
+	$emoji_fields = array( 'post_title', 'post_content', 'post_excerpt' );
+
+	foreach ( $emoji_fields as $emoji_field ) {
+		if ( isset( $data[ $emoji_field ] ) ) {
+			$charset = $wpdb-&gt;get_col_charset( $wpdb-&gt;posts, $emoji_field );
+
+			if ( 'utf8' === $charset ) {
+				$data[ $emoji_field ] = wp_encode_emoji( $data[ $emoji_field ] );
+			}
+		}
+	}
+
+	if ( 'attachment' === $post_type ) {
+		/**
+		 * Filters attachment post data before it is updated in or added to the database.
+		 *
+		 * @since 3.9.0
+		 * @since 5.4.1 `$unsanitized_postarr` argument added.
+		 *
+		 * @param array $data                An array of slashed, sanitized, and processed attachment post data.
+		 * @param array $postarr             An array of slashed and sanitized attachment post data, but not processed.
+		 * @param array $unsanitized_postarr An array of slashed yet *unsanitized* and unprocessed attachment post data
+		 *                                   as originally passed to wp_insert_post().
+		 */
+		$data = apply_filters( 'wp_insert_attachment_data', $data, $postarr, $unsanitized_postarr );
+	} else {
+		/**
+		 * Filters slashed post data just before it is inserted into the database.
+		 *
+		 * @since 2.7.0
+		 * @since 5.4.1 `$unsanitized_postarr` argument added.
+		 *
+		 * @param array $data                An array of slashed, sanitized, and processed post data.
+		 * @param array $postarr             An array of sanitized (and slashed) but otherwise unmodified post data.
+		 * @param array $unsanitized_postarr An array of slashed yet *unsanitized* and unprocessed post data as
+		 *                                   originally passed to wp_insert_post().
+		 */
+		$data = apply_filters( 'wp_insert_post_data', $data, $postarr, $unsanitized_postarr );
+	}
+
+	$data  = wp_unslash( $data );
+	$where = array( 'ID' =&gt; $post_ID );
+
+	if ( $update ) {
+		/**
+		 * Fires immediately before an existing post is updated in the database.
+		 *
+		 * @since 2.5.0
+		 *
+		 * @param int   $post_ID Post ID.
+		 * @param array $data    Array of unslashed post data.
+		 */
+		do_action( 'pre_post_update', $post_ID, $data );
+
+		if ( false === $wpdb-&gt;update( $wpdb-&gt;posts, $data, $where ) ) {
+			if ( $wp_error ) {
+				if ( 'attachment' === $post_type ) {
+					$message = __( 'Could not update attachment in the database.' );
+				} else {
+					$message = __( 'Could not update post in the database.' );
+				}
+
+				return new WP_Error( 'db_update_error', $message, $wpdb-&gt;last_error );
+			} else {
+				return 0;
+			}
+		}
+	} else {
+		// If there is a suggested ID, use it if not already present.
+		if ( ! empty( $import_id ) ) {
+			$import_id = (int) $import_id;
+
+			if ( ! $wpdb-&gt;get_var( $wpdb-&gt;prepare( &quot;SELECT ID FROM $wpdb-&gt;posts WHERE ID = %d&quot;, $import_id ) ) ) {
+				$data['ID'] = $import_id;
+			}
+		}
+
+		if ( false === $wpdb-&gt;insert( $wpdb-&gt;posts, $data ) ) {
+			if ( $wp_error ) {
+				if ( 'attachment' === $post_type ) {
+					$message = __( 'Could not insert attachment into the database.' );
+				} else {
+					$message = __( 'Could not insert post into the database.' );
+				}
+
+				return new WP_Error( 'db_insert_error', $message, $wpdb-&gt;last_error );
+			} else {
+				return 0;
+			}
+		}
+
+		$post_ID = (int) $wpdb-&gt;insert_id;
+
+		// Use the newly generated $post_ID.
+		$where = array( 'ID' =&gt; $post_ID );
+	}
+
+	if ( empty( $data['post_name'] ) &amp;&amp; ! in_array( $data['post_status'], array( 'draft', 'pending', 'auto-draft' ), true ) ) {
+		$data['post_name'] = wp_unique_post_slug( sanitize_title( $data['post_title'], $post_ID ), $post_ID, $data['post_status'], $post_type, $post_parent );
+
+		$wpdb-&gt;update( $wpdb-&gt;posts, array( 'post_name' =&gt; $data['post_name'] ), $where );
+		clean_post_cache( $post_ID );
+	}
+
+	if ( is_object_in_taxonomy( $post_type, 'category' ) ) {
+		wp_set_post_categories( $post_ID, $post_category );
+	}
+
+	if ( isset( $postarr['tags_input'] ) &amp;&amp; is_object_in_taxonomy( $post_type, 'post_tag' ) ) {
+		wp_set_post_tags( $post_ID, $postarr['tags_input'] );
+	}
+
+	// Add default term for all associated custom taxonomies.
+	if ( 'auto-draft' !== $post_status ) {
+		foreach ( get_object_taxonomies( $post_type, 'object' ) as $taxonomy =&gt; $tax_object ) {
+
+			if ( ! empty( $tax_object-&gt;default_term ) ) {
+
+				// Filter out empty terms.
+				if ( isset( $postarr['tax_input'][ $taxonomy ] ) &amp;&amp; is_array( $postarr['tax_input'][ $taxonomy ] ) ) {
+					$postarr['tax_input'][ $taxonomy ] = array_filter( $postarr['tax_input'][ $taxonomy ] );
+				}
+
+				// Passed custom taxonomy list overwrites the existing list if not empty.
+				$terms = wp_get_object_terms( $post_ID, $taxonomy, array( 'fields' =&gt; 'ids' ) );
+				if ( ! empty( $terms ) &amp;&amp; empty( $postarr['tax_input'][ $taxonomy ] ) ) {
+					$postarr['tax_input'][ $taxonomy ] = $terms;
+				}
+
+				if ( empty( $postarr['tax_input'][ $taxonomy ] ) ) {
+					$default_term_id = get_option( 'default_term_' . $taxonomy );
+					if ( ! empty( $default_term_id ) ) {
+						$postarr['tax_input'][ $taxonomy ] = array( (int) $default_term_id );
+					}
+				}
+			}
+		}
+	}
+
+	// New-style support for all custom taxonomies.
+	if ( ! empty( $postarr['tax_input'] ) ) {
+		foreach ( $postarr['tax_input'] as $taxonomy =&gt; $tags ) {
+			$taxonomy_obj = get_taxonomy( $taxonomy );
+
+			if ( ! $taxonomy_obj ) {
+				/* translators: %s: Taxonomy name. */
+				_doing_it_wrong( __FUNCTION__, sprintf( __( 'Invalid taxonomy: %s.' ), $taxonomy ), '4.4.0' );
+				continue;
+			}
+
+			// array = hierarchical, string = non-hierarchical.
+			if ( is_array( $tags ) ) {
+				$tags = array_filter( $tags );
+			}
+
+			if ( current_user_can( $taxonomy_obj-&gt;cap-&gt;assign_terms ) ) {
+				wp_set_post_terms( $post_ID, $tags, $taxonomy );
+			}
+		}
+	}
+
+	if ( ! empty( $postarr['meta_input'] ) ) {
+		foreach ( $postarr['meta_input'] as $field =&gt; $value ) {
+			update_post_meta( $post_ID, $field, $value );
+		}
+	}
+
+	$current_guid = get_post_field( 'guid', $post_ID );
+
+	// Set GUID.
+	if ( ! $update &amp;&amp; '' === $current_guid ) {
+		$wpdb-&gt;update( $wpdb-&gt;posts, array( 'guid' =&gt; get_permalink( $post_ID ) ), $where );
+	}
+
+	if ( 'attachment' === $postarr['post_type'] ) {
+		if ( ! empty( $postarr['file'] ) ) {
+			update_attached_file( $post_ID, $postarr['file'] );
+		}
+
+		if ( ! empty( $postarr['context'] ) ) {
+			add_post_meta( $post_ID, '_wp_attachment_context', $postarr['context'], true );
+		}
+	}
+
+	// Set or remove featured image.
+	if ( isset( $postarr['_thumbnail_id'] ) ) {
+		$thumbnail_support = current_theme_supports( 'post-thumbnails', $post_type ) &amp;&amp; post_type_supports( $post_type, 'thumbnail' ) || 'revision' === $post_type;
+
+		if ( ! $thumbnail_support &amp;&amp; 'attachment' === $post_type &amp;&amp; $post_mime_type ) {
+			if ( wp_attachment_is( 'audio', $post_ID ) ) {
+				$thumbnail_support = post_type_supports( 'attachment:audio', 'thumbnail' ) || current_theme_supports( 'post-thumbnails', 'attachment:audio' );
+			} elseif ( wp_attachment_is( 'video', $post_ID ) ) {
+				$thumbnail_support = post_type_supports( 'attachment:video', 'thumbnail' ) || current_theme_supports( 'post-thumbnails', 'attachment:video' );
+			}
+		}
+
+		if ( $thumbnail_support ) {
+			$thumbnail_id = (int) $postarr['_thumbnail_id'];
+			if ( -1 === $thumbnail_id ) {
+				delete_post_thumbnail( $post_ID );
+			} else {
+				set_post_thumbnail( $post_ID, $thumbnail_id );
+			}
+		}
+	}
+
+	clean_post_cache( $post_ID );
+
+	$post = get_post( $post_ID );
+
+	if ( ! empty( $postarr['page_template'] ) ) {
+		$post-&gt;page_template = $postarr['page_template'];
+		$page_templates      = wp_get_theme()-&gt;get_page_templates( $post );
+
+		if ( 'default' !== $postarr['page_template'] &amp;&amp; ! isset( $page_templates[ $postarr['page_template'] ] ) ) {
+			if ( $wp_error ) {
+				return new WP_Error( 'invalid_page_template', __( 'Invalid page template.' ) );
+			}
+
+			update_post_meta( $post_ID, '_wp_page_template', 'default' );
+		} else {
+			update_post_meta( $post_ID, '_wp_page_template', $postarr['page_template'] );
+		}
+	}
+
+	if ( 'attachment' !== $postarr['post_type'] ) {
+		wp_transition_post_status( $data['post_status'], $previous_status, $post );
+	} else {
+		if ( $update ) {
+			/**
+			 * Fires once an existing attachment has been updated.
+			 *
+			 * @since 2.0.0
+			 *
+			 * @param int $post_ID Attachment ID.
+			 */
+			do_action( 'edit_attachment', $post_ID );
+
+			$post_after = get_post( $post_ID );
+
+			/**
+			 * Fires once an existing attachment has been updated.
+			 *
+			 * @since 4.4.0
+			 *
+			 * @param int     $post_ID      Post ID.
+			 * @param WP_Post $post_after   Post object following the update.
+			 * @param WP_Post $post_before  Post object before the update.
+			 */
+			do_action( 'attachment_updated', $post_ID, $post_after, $post_before );
+		} else {
+
+			/**
+			 * Fires once an attachment has been added.
+			 *
+			 * @since 2.0.0
+			 *
+			 * @param int $post_ID Attachment ID.
+			 */
+			do_action( 'add_attachment', $post_ID );
+		}
+
+		return $post_ID;
+	}
+
+	if ( $update ) {
+		/**
+		 * Fires once an existing post has been updated.
+		 *
+		 * The dynamic portion of the hook name, `$post-&gt;post_type`, refers to
+		 * the post type slug.
+		 *
+		 * @since 5.1.0
+		 *
+		 * @param int     $post_ID Post ID.
+		 * @param WP_Post $post    Post object.
+		 */
+		do_action( &quot;edit_post_{$post-&gt;post_type}&quot;, $post_ID, $post );
+
+		/**
+		 * Fires once an existing post has been updated.
+		 *
+		 * @since 1.2.0
+		 *
+		 * @param int     $post_ID Post ID.
+		 * @param WP_Post $post    Post object.
+		 */
+		do_action( 'edit_post', $post_ID, $post );
+
+		$post_after = get_post( $post_ID );
+
+		/**
+		 * Fires once an existing post has been updated.
+		 *
+		 * @since 3.0.0
+		 *
+		 * @param int     $post_ID      Post ID.
+		 * @param WP_Post $post_after   Post object following the update.
+		 * @param WP_Post $post_before  Post object before the update.
+		 */
+		do_action( 'post_updated', $post_ID, $post_after, $post_before );
+	}
+
+	/**
+	 * Fires once a post has been saved.
+	 *
+	 * The dynamic portion of the hook name, `$post-&gt;post_type`, refers to
+	 * the post type slug.
+	 *
+	 * @since 3.7.0
+	 *
+	 * @param int     $post_ID Post ID.
+	 * @param WP_Post $post    Post object.
+	 * @param bool    $update  Whether this is an existing post being updated.
+	 */
+	do_action( &quot;save_post_{$post-&gt;post_type}&quot;, $post_ID, $post, $update );
+
+	/**
+	 * Fires once a post has been saved.
+	 *
+	 * @since 1.5.0
+	 *
+	 * @param int     $post_ID Post ID.
+	 * @param WP_Post $post    Post object.
+	 * @param bool    $update  Whether this is an existing post being updated.
+	 */
+	do_action( 'save_post', $post_ID, $post, $update );
+
+	/**
+	 * Fires once a post has been saved.
+	 *
+	 * @since 2.0.0
+	 *
+	 * @param int     $post_ID Post ID.
+	 * @param WP_Post $post    Post object.
+	 * @param bool    $update  Whether this is an existing post being updated.
+	 */
+	do_action( 'wp_insert_post', $post_ID, $post, $update );
+
+	if ( $fire_after_hooks ) {
+		wp_after_insert_post( $post, $update, $post_before );
+	}
+
+	return $post_ID;
+}
+</pre>
+			</div>
+			<p class="source-code-links">
+				<span>
+					<a href="#" class="show-complete-source">Expand full source code</a>
+					<a href="#" class="less-complete-source">Collapse full source code</a>
+				</span>
+				<span><a href="https://core.trac.wordpress.org/browser/tags/5.8/src/wp-includes/post.php#L3834">View on Trac</a></span>
+			</p>
+			</section>
+	<hr />
+	<section class="related">
+		<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="related" tabindex="-1">Related <a href="#related" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Related</span></a></h2>
+
+					<article class="uses">
+				<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="uses" tabindex="-1">Uses <a href="#uses" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Uses</span></a></h3>
+				<table id="uses-table">
+					<caption class="screen-reader-text">Uses</caption>
+					<thead>
+						<tr>
+							<th>Uses</th>
+							<th class="related-desc">Description</th>
+						</tr>
+					</thead>
+					<tbody>
+												<tr>
+							<td>
+								<span>wp-includes/post.php:</span>
+								<a href="../wp_resolve_post_date/index.html">wp_resolve_post_date()</a>
+							</td>
+							<td class="related-desc">
+								<p>Uses wp_checkdate to return a valid Gregorian-calendar value for post_date.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/post.php:</span>
+								<a href="../wp_after_insert_post/index.html">wp_after_insert_post()</a>
+							</td>
+							<td class="related-desc">
+								<p>Fires actions after a post, its terms and meta data has been saved.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/post.php:</span>
+								<a href="../../hooks/add_trashed_suffix_to_trashed_posts/index.html">add_trashed_suffix_to_trashed_posts</a>
+							</td>
+							<td class="related-desc">
+								<p>Filters whether or not to add a <code>__trashed</code> suffix to trashed posts that match the name of the updated post.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/post.php:</span>
+								<a href="../../hooks/edit_post_post-post_type/index.html">edit_post_{$post-&gt;post_type}</a>
+							</td>
+							<td class="related-desc">
+								<p>Fires once an existing post has been updated.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/post.php:</span>
+								<a href="../wp_add_trashed_suffix_to_post_name_for_trashed_posts/index.html">wp_add_trashed_suffix_to_post_name_for_trashed_posts()</a>
+							</td>
+							<td class="related-desc">
+								<p>Adds a suffix if any trashed posts have a given slug.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/post.php:</span>
+								<a href="../wp_add_trashed_suffix_to_post_name_for_post/index.html">wp_add_trashed_suffix_to_post_name_for_post()</a>
+							</td>
+							<td class="related-desc">
+								<p>Adds a trashed suffix for a given post.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/post.php:</span>
+								<a href="../../hooks/attachment_updated/index.html">attachment_updated</a>
+							</td>
+							<td class="related-desc">
+								<p>Fires once an existing attachment has been updated.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/comment.php:</span>
+								<a href="../get_default_comment_status/index.html">get_default_comment_status()</a>
+							</td>
+							<td class="related-desc">
+								<p>Gets the default comment status for a post type.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/post.php:</span>
+								<a href="../../hooks/add_attachment/index.html">add_attachment</a>
+							</td>
+							<td class="related-desc">
+								<p>Fires once an attachment has been added.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/wp-db.php:</span>
+								<a href="../../classes/wpdb/get_col_charset/index.html">wpdb::get_col_charset()</a>
+							</td>
+							<td class="related-desc">
+								<p>Retrieves the character set for the given column.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/formatting.php:</span>
+								<a href="../wp_encode_emoji/index.html">wp_encode_emoji()</a>
+							</td>
+							<td class="related-desc">
+								<p>Convert emoji characters to their equivalent HTML entity.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/post.php:</span>
+								<a href="../wp_attachment_is/index.html">wp_attachment_is()</a>
+							</td>
+							<td class="related-desc">
+								<p>Verifies an attachment is of a given type.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/capabilities.php:</span>
+								<a href="../current_user_can/index.html">current_user_can()</a>
+							</td>
+							<td class="related-desc">
+								<p>Returns whether the current user has the specified capability.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/theme.php:</span>
+								<a href="../current_theme_supports/index.html">current_theme_supports()</a>
+							</td>
+							<td class="related-desc">
+								<p>Checks a theme&#8217;s support for a given feature.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/theme.php:</span>
+								<a href="../wp_get_theme/index.html">wp_get_theme()</a>
+							</td>
+							<td class="related-desc">
+								<p>Gets a <a href="../../classes/wp_theme/index.html">WP_Theme</a> object for a theme.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/l10n.php:</span>
+								<a href="../__/index.html">__()</a>
+							</td>
+							<td class="related-desc">
+								<p>Retrieve the translation of $text.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/formatting.php:</span>
+								<a href="../sanitize_trackback_urls/index.html">sanitize_trackback_urls()</a>
+							</td>
+							<td class="related-desc">
+								<p>Sanitize space or carriage return separated URLs that are used to send trackbacks.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/formatting.php:</span>
+								<a href="../wp_unslash/index.html">wp_unslash()</a>
+							</td>
+							<td class="related-desc">
+								<p>Removes slashes from a string or recursively removes slashes from strings within an array.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/formatting.php:</span>
+								<a href="../get_gmt_from_date/index.html">get_gmt_from_date()</a>
+							</td>
+							<td class="related-desc">
+								<p>Given a date in the timezone of the site, returns that date in UTC.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/formatting.php:</span>
+								<a href="../sanitize_title/index.html">sanitize_title()</a>
+							</td>
+							<td class="related-desc">
+								<p>Sanitizes a string into a slug, which can be used in URLs or HTML attributes.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/class-wp-theme.php:</span>
+								<a href="../../classes/wp_theme/get_page_templates/index.html">WP_Theme::get_page_templates()</a>
+							</td>
+							<td class="related-desc">
+								<p>Returns the theme&#8217;s post templates for a given post type.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/functions.php:</span>
+								<a href="../_doing_it_wrong/index.html">_doing_it_wrong()</a>
+							</td>
+							<td class="related-desc">
+								<p>Mark something as being incorrectly called.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/functions.php:</span>
+								<a href="../wp_parse_args/index.html">wp_parse_args()</a>
+							</td>
+							<td class="related-desc">
+								<p>Merges user defined arguments into defaults array.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/functions.php:</span>
+								<a href="../current_time/index.html">current_time()</a>
+							</td>
+							<td class="related-desc">
+								<p>Retrieves the current time based on specified type.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/taxonomy.php:</span>
+								<a href="../is_object_in_taxonomy/index.html">is_object_in_taxonomy()</a>
+							</td>
+							<td class="related-desc">
+								<p>Determine if the given object type is associated with the given taxonomy.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/taxonomy.php:</span>
+								<a href="../wp_get_object_terms/index.html">wp_get_object_terms()</a>
+							</td>
+							<td class="related-desc">
+								<p>Retrieves the terms associated with the given object(s), in the supplied taxonomies.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/taxonomy.php:</span>
+								<a href="../get_object_taxonomies/index.html">get_object_taxonomies()</a>
+							</td>
+							<td class="related-desc">
+								<p>Return the names or objects of the taxonomies which are registered for the requested object or object type, such as a post object or post type name.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/taxonomy.php:</span>
+								<a href="../get_taxonomy/index.html">get_taxonomy()</a>
+							</td>
+							<td class="related-desc">
+								<p>Retrieves the taxonomy object of $taxonomy.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/link-template.php:</span>
+								<a href="../get_permalink/index.html">get_permalink()</a>
+							</td>
+							<td class="related-desc">
+								<p>Retrieves the full permalink for the current post or post ID.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/plugin.php:</span>
+								<a href="../apply_filters/index.html">apply_filters()</a>
+							</td>
+							<td class="related-desc">
+								<p>Calls the callback functions that have been added to a filter hook.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/plugin.php:</span>
+								<a href="../do_action/index.html">do_action()</a>
+							</td>
+							<td class="related-desc">
+								<p>Calls the callback functions that have been added to an action hook.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/option.php:</span>
+								<a href="../get_option/index.html">get_option()</a>
+							</td>
+							<td class="related-desc">
+								<p>Retrieves an option value based on an option name.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/user.php:</span>
+								<a href="../get_current_user_id/index.html">get_current_user_id()</a>
+							</td>
+							<td class="related-desc">
+								<p>Get the current user&#8217;s ID</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/post.php:</span>
+								<a href="../clean_post_cache/index.html">clean_post_cache()</a>
+							</td>
+							<td class="related-desc">
+								<p>Will clean the post in the cache.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/post.php:</span>
+								<a href="../delete_post_thumbnail/index.html">delete_post_thumbnail()</a>
+							</td>
+							<td class="related-desc">
+								<p>Removes the thumbnail (featured image) from the given post.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/post.php:</span>
+								<a href="../set_post_thumbnail/index.html">set_post_thumbnail()</a>
+							</td>
+							<td class="related-desc">
+								<p>Sets the post thumbnail (featured image) for the given post.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/post.php:</span>
+								<a href="../../hooks/wp_insert_attachment_data/index.html">wp_insert_attachment_data</a>
+							</td>
+							<td class="related-desc">
+								<p>Filters attachment post data before it is updated in or added to the database.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/post.php:</span>
+								<a href="../../hooks/edit_attachment/index.html">edit_attachment</a>
+							</td>
+							<td class="related-desc">
+								<p>Fires once an existing attachment has been updated.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/post.php:</span>
+								<a href="../wp_unique_post_slug/index.html">wp_unique_post_slug()</a>
+							</td>
+							<td class="related-desc">
+								<p>Computes a unique slug for the post, when given the desired slug and some post details.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/post.php:</span>
+								<a href="../wp_set_post_categories/index.html">wp_set_post_categories()</a>
+							</td>
+							<td class="related-desc">
+								<p>Set categories for a post.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/post.php:</span>
+								<a href="../wp_set_post_tags/index.html">wp_set_post_tags()</a>
+							</td>
+							<td class="related-desc">
+								<p>Set the tags for a post.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/post.php:</span>
+								<a href="../wp_set_post_terms/index.html">wp_set_post_terms()</a>
+							</td>
+							<td class="related-desc">
+								<p>Set the terms for a post.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/post.php:</span>
+								<a href="../wp_transition_post_status/index.html">wp_transition_post_status()</a>
+							</td>
+							<td class="related-desc">
+								<p>Fires actions related to the transitioning of a post&#8217;s status.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/post.php:</span>
+								<a href="../../hooks/wp_insert_post_empty_content/index.html">wp_insert_post_empty_content</a>
+							</td>
+							<td class="related-desc">
+								<p>Filters whether the post should be considered &#8220;empty&#8221;.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/post.php:</span>
+								<a href="../../hooks/wp_insert_post_parent/index.html">wp_insert_post_parent</a>
+							</td>
+							<td class="related-desc">
+								<p>Filters the post parent &#8212; used to check for and prevent hierarchy loops.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/post.php:</span>
+								<a href="../../hooks/wp_insert_post_data/index.html">wp_insert_post_data</a>
+							</td>
+							<td class="related-desc">
+								<p>Filters slashed post data just before it is inserted into the database.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/post.php:</span>
+								<a href="../../hooks/pre_post_update/index.html">pre_post_update</a>
+							</td>
+							<td class="related-desc">
+								<p>Fires immediately before an existing post is updated in the database.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/post.php:</span>
+								<a href="../../hooks/edit_post/index.html">edit_post</a>
+							</td>
+							<td class="related-desc">
+								<p>Fires once an existing post has been updated.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/post.php:</span>
+								<a href="../../hooks/post_updated/index.html">post_updated</a>
+							</td>
+							<td class="related-desc">
+								<p>Fires once an existing post has been updated.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/post.php:</span>
+								<a href="../../hooks/save_post_post-post_type/index.html">save_post_{$post-&gt;post_type}</a>
+							</td>
+							<td class="related-desc">
+								<p>Fires once a post has been saved.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/post.php:</span>
+								<a href="../../hooks/save_post/index.html">save_post</a>
+							</td>
+							<td class="related-desc">
+								<p>Fires once a post has been saved.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/post.php:</span>
+								<a href="../../hooks/wp_insert_post/index.html">wp_insert_post</a>
+							</td>
+							<td class="related-desc">
+								<p>Fires once a post has been saved.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/post.php:</span>
+								<a href="../sanitize_post/index.html">sanitize_post()</a>
+							</td>
+							<td class="related-desc">
+								<p>Sanitizes every post field.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/post.php:</span>
+								<a href="../post_type_supports/index.html">post_type_supports()</a>
+							</td>
+							<td class="related-desc">
+								<p>Check a post type&#8217;s support for a given feature.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/post.php:</span>
+								<a href="../get_post_meta/index.html">get_post_meta()</a>
+							</td>
+							<td class="related-desc">
+								<p>Retrieves a post meta field for the given post ID.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/post.php:</span>
+								<a href="../delete_post_meta/index.html">delete_post_meta()</a>
+							</td>
+							<td class="related-desc">
+								<p>Deletes a post meta field for the given post ID.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/post.php:</span>
+								<a href="../update_post_meta/index.html">update_post_meta()</a>
+							</td>
+							<td class="related-desc">
+								<p>Updates a post meta field based on the given post ID.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/post.php:</span>
+								<a href="../add_post_meta/index.html">add_post_meta()</a>
+							</td>
+							<td class="related-desc">
+								<p>Adds a meta field to the given post.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/post.php:</span>
+								<a href="../get_post/index.html">get_post()</a>
+							</td>
+							<td class="related-desc">
+								<p>Retrieves post data given a post ID or post object.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/post.php:</span>
+								<a href="../get_post_field/index.html">get_post_field()</a>
+							</td>
+							<td class="related-desc">
+								<p>Retrieve data from a post field based on Post ID.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/post.php:</span>
+								<a href="../get_post_type_object/index.html">get_post_type_object()</a>
+							</td>
+							<td class="related-desc">
+								<p>Retrieves a post type object by name.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/post.php:</span>
+								<a href="../get_post_stati/index.html">get_post_stati()</a>
+							</td>
+							<td class="related-desc">
+								<p>Get a list of post statuses.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/post.php:</span>
+								<a href="../update_attached_file/index.html">update_attached_file()</a>
+							</td>
+							<td class="related-desc">
+								<p>Update attachment file path based on attachment ID.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/wp-db.php:</span>
+								<a href="../../classes/wpdb/update/index.html">wpdb::update()</a>
+							</td>
+							<td class="related-desc">
+								<p>Updates a row in the table.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/wp-db.php:</span>
+								<a href="../../classes/wpdb/get_var/index.html">wpdb::get_var()</a>
+							</td>
+							<td class="related-desc">
+								<p>Retrieves one variable from the database.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/wp-db.php:</span>
+								<a href="../../classes/wpdb/insert/index.html">wpdb::insert()</a>
+							</td>
+							<td class="related-desc">
+								<p>Inserts a row into the table.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/wp-db.php:</span>
+								<a href="../../classes/wpdb/prepare/index.html">wpdb::prepare()</a>
+							</td>
+							<td class="related-desc">
+								<p>Prepares a SQL query for safe execution.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/class-wp-error.php:</span>
+								<a href="../../classes/wp_error/__construct/index.html">WP_Error::__construct()</a>
+							</td>
+							<td class="related-desc">
+								<p>Initializes the error.</p>
+							</td>
+						</tr>
+											<tbody>
+				</table>
+
+								<a href="#" class="show-more">Show 63 more uses</a>
+				<a href="#" class="hide-more">Hide more uses</a>
+							</article>
+		
+					<hr />
+			<article class="used-by">
+				<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="used-by" tabindex="-1">Used By <a href="#used-by" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Used By</span></a></h3>
+				<table id="used-by-table">
+					<caption class="screen-reader-text">Used By</caption>
+					<thead>
+						<tr>
+							<th>Used By</th>
+							<th class="related-desc">Description</th>
+						</tr>
+					</thead>
+					<tbody>
+												<tr>
+							<td>
+								<span>wp-includes/rest-api/endpoints/class-wp-rest-templates-controller.php:</span>
+								<a href="../../classes/wp_rest_templates_controller/update_item/index.html">WP_REST_Templates_Controller::update_item()</a>
+							</td>
+							<td class="related-desc">
+								<p>Updates a single template.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/rest-api/endpoints/class-wp-rest-templates-controller.php:</span>
+								<a href="../../classes/wp_rest_templates_controller/create_item/index.html">WP_REST_Templates_Controller::create_item()</a>
+							</td>
+							<td class="related-desc">
+								<p>Creates a single template.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/user.php:</span>
+								<a href="../wp_create_user_request/index.html">wp_create_user_request()</a>
+							</td>
+							<td class="related-desc">
+								<p>Create and log a user request to perform a specific action.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/class-wp-customize-manager.php:</span>
+								<a href="../../classes/wp_customize_manager/save_changeset_post/index.html">WP_Customize_Manager::save_changeset_post()</a>
+							</td>
+							<td class="related-desc">
+								<p>Save the post for the loaded changeset.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/theme.php:</span>
+								<a href="../wp_update_custom_css_post/index.html">wp_update_custom_css_post()</a>
+							</td>
+							<td class="related-desc">
+								<p>Updates the <code>custom_css</code> post for a given theme.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:</span>
+								<a href="../../classes/wp_rest_posts_controller/create_item/index.html">WP_REST_Posts_Controller::create_item()</a>
+							</td>
+							<td class="related-desc">
+								<p>Creates a single post.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/class-wp-customize-nav-menus.php:</span>
+								<a href="../../classes/wp_customize_nav_menus/insert_auto_draft_post/index.html">WP_Customize_Nav_Menus::insert_auto_draft_post()</a>
+							</td>
+							<td class="related-desc">
+								<p>Add a new <code>auto-draft</code> post.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-admin/includes/post.php:</span>
+								<a href="../wp_write_post/index.html">wp_write_post()</a>
+							</td>
+							<td class="related-desc">
+								<p>Creates a new post from the &#8220;Write Post&#8221; form using $_POST information.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-admin/includes/post.php:</span>
+								<a href="../get_default_post_to_edit/index.html">get_default_post_to_edit()</a>
+							</td>
+							<td class="related-desc">
+								<p>Default post information to use when populating the &#8220;Write Post&#8221; form.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/class-wp-embed.php:</span>
+								<a href="../../classes/wp_embed/shortcode/index.html">WP_Embed::shortcode()</a>
+							</td>
+							<td class="related-desc">
+								<p>The <a href="../do_shortcode/index.html">do_shortcode()</a> callback function.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/post.php:</span>
+								<a href="../wp_insert_attachment/index.html">wp_insert_attachment()</a>
+							</td>
+							<td class="related-desc">
+								<p>Insert an attachment.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/post.php:</span>
+								<a href="../wp_update_post/index.html">wp_update_post()</a>
+							</td>
+							<td class="related-desc">
+								<p>Update a post with new post data.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/revision.php:</span>
+								<a href="../_wp_put_post_revision/index.html">_wp_put_post_revision()</a>
+							</td>
+							<td class="related-desc">
+								<p>Inserts post data into the posts table as a post revision.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/nav-menu.php:</span>
+								<a href="../wp_update_nav_menu_item/index.html">wp_update_nav_menu_item()</a>
+							</td>
+							<td class="related-desc">
+								<p>Save the properties of a menu item or create a new one.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/class-wp-xmlrpc-server.php:</span>
+								<a href="../../classes/wp_xmlrpc_server/blogger_newpost/index.html">wp_xmlrpc_server::blogger_newPost()</a>
+							</td>
+							<td class="related-desc">
+								<p>Creates new post.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/class-wp-xmlrpc-server.php:</span>
+								<a href="../../classes/wp_xmlrpc_server/mw_newpost/index.html">wp_xmlrpc_server::mw_newPost()</a>
+							</td>
+							<td class="related-desc">
+								<p>Create a new post.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/class-wp-xmlrpc-server.php:</span>
+								<a href="../../classes/wp_xmlrpc_server/_insert_post/index.html">wp_xmlrpc_server::_insert_post()</a>
+							</td>
+							<td class="related-desc">
+								<p>Helper method for wp_newPost() and wp_editPost(), containing shared logic.</p>
+							</td>
+						</tr>
+											<tbody>
+				</table>
+
+								<a href="#" class="show-more">Show 12 more used by</a>
+				<a href="#" class="hide-more">Hide more used by</a>
+							</article>
+			</section>
+		<hr />
+	<section class="changelog">
+		<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="changelog" tabindex="-1">Changelog <a href="#changelog" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Changelog</span></a></h2>
+
+		<table>
+			<caption class="screen-reader-text">Changelog</caption>
+			<thead>
+				<tr>
+					<th class="changelog-version">Version</th>
+					<th class="changelog-desc">Description</th>
+				</tr>
+			</thead>
+
+			<tbody>
+									
+					<tr>
+						<td><a href="../../since/5.6.0/index.html" alt="WordPress 5.6.0">5.6.0</a></td>
+						<td><span class="since-description">Added the <code>$fire_after_hooks</code> parameter.</span></td>
+					</tr>
+									
+					<tr>
+						<td><a href="../../since/4.4.0/index.html" alt="WordPress 4.4.0">4.4.0</a></td>
+						<td><span class="since-description">A 'meta_input' array can now be passed to <code>$postarr</code> to add post meta data.</span></td>
+					</tr>
+									
+					<tr>
+						<td><a href="../../since/4.2.0/index.html" alt="WordPress 4.2.0">4.2.0</a></td>
+						<td><span class="since-description">Support was added for encoding emoji in the post title, content, and excerpt.</span></td>
+					</tr>
+									
+					<tr>
+						<td><a href="../../since/2.6.0/index.html" alt="WordPress 2.6.0">2.6.0</a></td>
+						<td><span class="since-description">Added the <code>$wp_error</code> parameter to allow a <a href="../../classes/wp_error/index.html">WP_Error</a> to be returned on failure.</span></td>
+					</tr>
+									
+					<tr>
+						<td><a href="../../since/1.0.0/index.html" alt="WordPress 1.0.0">1.0.0</a></td>
+						<td>Introduced.</td>
+					</tr>
+							</tbody>
+		</table>
+	</section>
+
+	<hr />
+	<section class="user-notes">
+		<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="user-contributed-notes" tabindex="-1">User Contributed Notes <a href="#user-contributed-notes" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">User Contributed Notes</span></a></h2>
+		
+<div id="comments" class="comments-area">
+
+			
+		<ol class="comment-list">
+						<li id="comment-1710" data-comment-id="1710" class="comment byuser comment-author-truongwp even thread-even depth-1">
+			<article id="div-comment-1710" class="comment-body">
+
+							<a href="#comment-content-1710" class="screen-reader-text">Skip to note 1 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="55b99214f0"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="1710" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_insert_post%2F%23comment-1710"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="91% like this"><span class="screen-reader-text">Vote results for this note: </span>19</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="1710" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_insert_post%2F%23comment-1710"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/942c6335c75fe715429fdec0b2570499?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/942c6335c75fe715429fdec0b2570499?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/truongwp/" rel="external nofollow" class="url">truongwp</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-1710">
+							<time datetime="2016-07-14T04:16:52+00:00">
+							5 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-1710">
+				<p>Insert post with custom taxonomy and post meta data (since 4.4.0):</p>
+<section class="source-content">
+<div class="source-code-container">
+<pre class="brush: php; title: ; notranslate" title="">
+$hierarchical_tax = array( 13, 10 ); // Array of tax ids.
+$non_hierarchical_terms = 'tax name 1, tax name 2'; // Can use array of ids or string of tax names separated by commas
+
+$post_arr = array(
+	'post_title'   =&gt; 'Test post',
+	'post_content' =&gt; 'Test post content',
+	'post_status'  =&gt; 'publish',
+	'post_author'  =&gt; get_current_user_id(),
+	'tax_input'    =&gt; array(
+		'hierarchical_tax'     =&gt; $hierarchical_tax,
+		'non_hierarchical_tax' =&gt; $non_hierarchical_terms,
+	),
+	'meta_input'   =&gt; array(
+		'test_meta_key' =&gt; 'value of test_meta_key',
+	),
+);
+</pre>
+</div>
+<p class="source-code-links"><span><a href="#" class="show-complete-source">Expand full source code</a><a href="#" class="less-complete-source">Collapse full source code</a></span></p>
+</section>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-1710' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_insert_post%2F%3Freplytocom%3D1710%23feedback-editor-1710" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-2164" data-comment-id="2164" class="comment byuser comment-author-jxowe odd alt thread-odd thread-alt depth-1">
+			<article id="div-comment-2164" class="comment-body">
+
+							<a href="#comment-content-2164" class="screen-reader-text">Skip to note 2 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="818151a02f"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="2164" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_insert_post%2F%23comment-2164"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="92% like this"><span class="screen-reader-text">Vote results for this note: </span>10</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="2164" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_insert_post%2F%23comment-2164"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/e2a642e0e9b0704c30d61039f09092ec?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/e2a642e0e9b0704c30d61039f09092ec?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/jxowe/" rel="external nofollow" class="url">Kiera Howe</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-2164">
+							<time datetime="2017-03-24T18:55:37+00:00">
+							4 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-2164">
+				<p>‘tax_input’ in the arguments only works on wp_insert_post if the function is being called by a user with &#8220;assign_terms&#8221; access</p>
+<p><a href="https://core.trac.wordpress.org/browser/tags/4.7/src/wp-includes/post.php#L3352" rel="nofollow ugc">https://core.trac.wordpress.org/browser/tags/4.7/src/wp-includes/post.php#L3352</a></p>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-2164' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_insert_post%2F%3Freplytocom%3D2164%23feedback-editor-2164" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-401" data-comment-id="401" class="comment byuser comment-author-codex even thread-even depth-1">
+			<article id="div-comment-401" class="comment-body">
+
+							<a href="#comment-content-401" class="screen-reader-text">Skip to note 3 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="f72af60c1a"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="401" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_insert_post%2F%23comment-401"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="83% like this"><span class="screen-reader-text">Vote results for this note: </span>8</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="401" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_insert_post%2F%23comment-401"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/688ab6934b21bca68e0fe4fc54a66805?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/688ab6934b21bca68e0fe4fc54a66805?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/codex/" rel="external nofollow" class="url">Codex</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-401">
+							<time datetime="2015-07-02T06:09:51+00:00">
+							6 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-401">
+				<p><strong>Inserting a Post</strong></p>
+<p>Before calling <code>wp_insert_post()</code> it is necessary to create an array to pass the necessary elements that make up a post. The <code>wp_insert_post()</code> will fill out a default list of these but the user is required to provide the title and content otherwise the database write will fail.</p>
+<p>The next example shows the post title, content, status, author, and post categories being set. You can add further key-value pairs, making sure the keys match the names of the columns in the <code>wp_posts</code> table in the database.</p>
+<pre class="brush: php; title: ; notranslate" title="">
+// Gather post data.
+$my_post = array(
+	'post_title'    =&gt; 'My post',
+	'post_content'  =&gt; 'This is my post.',
+	'post_status'   =&gt; 'publish',
+	'post_author'   =&gt; 1,
+	'post_category' =&gt; array( 8,39 )
+);
+
+// Insert the post into the database.
+wp_insert_post( $my_post );
+</pre>
+<p>You can also get the new post ID after inserting a new post:</p>
+<pre class="brush: php; title: ; notranslate" title="">
+$post_id = wp_insert_post( $post, $wp_error );
+</pre>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-401' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_insert_post%2F%3Freplytocom%3D401%23feedback-editor-401" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-268" data-comment-id="268" class="comment byuser comment-author-natewr odd alt thread-odd thread-alt depth-1">
+			<article id="div-comment-268" class="comment-body">
+
+							<a href="#comment-content-268" class="screen-reader-text">Skip to note 4 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="004a70ae4e"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="268" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_insert_post%2F%23comment-268"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="75% like this"><span class="screen-reader-text">Vote results for this note: </span>6</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="268" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_insert_post%2F%23comment-268"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/154471b2aa048e7b2190c53303217ec4?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/154471b2aa048e7b2190c53303217ec4?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/natewr/" rel="external nofollow" class="url">NateWr</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-268">
+							<time datetime="2015-04-23T12:41:05+00:00">
+							6 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-268">
+				<p>By default, <code>wp_insert_post</code> will not insert an empty post. This can cause unexpected problems if you&#8217;re passing an <code>ID</code> and expecting it to fall back to <code>wp_update_post</code>. For instance, the following will not work:</p>
+<pre class="brush: php; title: ; notranslate" title="">
+wp_insert_post( array( 'ID' =&gt; 2, 'post_parent' =&gt; 1 ) );
+</pre>
+<p>You will need to call <code>wp_update_post</code> directly.</p>
+<pre class="brush: php; title: ; notranslate" title="">
+wp_update_post( array( 'ID' =&gt; 2, 'post_parent' =&gt; 1 ) );
+</pre>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-268' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_insert_post%2F%3Freplytocom%3D268%23feedback-editor-268" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-2096" data-comment-id="2096" class="comment byuser comment-author-aurovrata even thread-even depth-1">
+			<article id="div-comment-2096" class="comment-body">
+
+							<a href="#comment-content-2096" class="screen-reader-text">Skip to note 5 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="651958cf9a"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="2096" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_insert_post%2F%23comment-2096"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="88% like this"><span class="screen-reader-text">Vote results for this note: </span>6</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="2096" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_insert_post%2F%23comment-2096"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/ecd4288fedcf565267a5807b7d604e57?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/ecd4288fedcf565267a5807b7d604e57?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/aurovrata/" rel="external nofollow" class="url">Aurovrata Venet</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-2096">
+							<time datetime="2017-02-08T12:57:35+00:00">
+							5 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-2096">
+				<p>Its important that you validate your post ID before you use by checking if the returned values is not a WP_error,</p>
+<pre class="brush: php; title: ; notranslate" title="">
+$args = array(
+  'post_type' =&gt; 'my_custom_post',
+  /*other default parameters you want to set*/
+);
+$post_id = wp_insert_post($args);
+if(!is_wp_error($post_id)){
+  //the post is valid
+}else{
+  //there was an error in the post insertion, 
+  echo $post_id-&gt;get_error_message();
+}</pre>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-2096' class='feedback hide-if-js'>
+<h4 class='feedback-title'>Feedback</h4>
+<ul class='children'>
+			<li id="comment-5159" data-comment-id="5159" class="comment byuser comment-author-wpexplorer odd alt depth-2">
+			<article id="div-comment-5159" class="comment-body">
+
+			
+				<div class="comment-content" id="comment-content-5159">
+				<p>Variables must be escaped when echo&#8217;d.  Line 10 should read:  <code>echo esc_html( $post_id-&gt;get_error_message() );</code> &mdash; By <cite class="fn"><a href="https://profiles.wordpress.org/wpexplorer/" rel="external nofollow" class="url">wpexplorer</a></cite> &mdash;  <a class="comment-date" href="index.html#comment-5159"><time datetime="2021-06-20T19:27:27+00:00">2 months ago</time></a></p>
+				</div><!-- .comment-content -->
+
+						</article>
+			</li>
+					</ul>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_insert_post%2F%3Freplytocom%3D2096%23feedback-editor-2096" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-2319" data-comment-id="2319" class="comment byuser comment-author-compute even thread-odd thread-alt depth-1">
+			<article id="div-comment-2319" class="comment-body">
+
+							<a href="#comment-content-2319" class="screen-reader-text">Skip to note 6 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="f2f7c1fc75"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="2319" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_insert_post%2F%23comment-2319"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="88% like this"><span class="screen-reader-text">Vote results for this note: </span>6</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="2319" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_insert_post%2F%23comment-2319"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/a85b45ac9221cae7a90ac9a1838c1e74?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/a85b45ac9221cae7a90ac9a1838c1e74?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/compute/" rel="external nofollow" class="url">Compute</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-2319">
+							<time datetime="2017-08-07T10:44:04+00:00">
+							4 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-2319">
+				<p>When saving data containing slashes remember to add extra slashes due to <code>wp_insert_post</code> unslashing these values.</p>
+<pre class="brush: php; title: ; notranslate" title="">
+$regex = '(\b16-\d{3}\b)';
+$post_data = array(
+    'post_title' =&gt; 'Test regex',
+    'post_content' =&gt; $regex,
+    'post_type' =&gt; 'post',
+);
+$post_id = wp_insert_post( $post_data );
+</pre>
+<p>Will store <code>(b16-d{3}b)</code>. To fix this use <code>wp_slash()</code>:</p>
+<pre class="brush: php; title: ; notranslate" title="">
+$regex = '(\b16-\d{3}\b)';
+$post_data = array(
+    'post_title' =&gt; 'Test regex',
+    'post_content' =&gt; wp_slash( $regex ),
+    'post_type' =&gt; 'post',
+);
+$post_id = wp_insert_post( $post_data );
+</pre>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-2319' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_insert_post%2F%3Freplytocom%3D2319%23feedback-editor-2319" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-2434" data-comment-id="2434" class="comment byuser comment-author-karzin odd alt thread-even depth-1">
+			<article id="div-comment-2434" class="comment-body">
+
+							<a href="#comment-content-2434" class="screen-reader-text">Skip to note 7 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="ffbcc801e9"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="2434" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_insert_post%2F%23comment-2434"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="88% like this"><span class="screen-reader-text">Vote results for this note: </span>6</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="2434" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_insert_post%2F%23comment-2434"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/056b1bab5ecef6911d45ac9dd22abcfc?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/056b1bab5ecef6911d45ac9dd22abcfc?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/karzin/" rel="external nofollow" class="url">Pablo Pacheco</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-2434">
+							<time datetime="2017-11-06T21:01:21+00:00">
+							4 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-2434">
+				<p>As @Kiera Howe brilliantly noticed, <strong>&#8216;tax_input&#8217;</strong> requires <strong>&#8216;assign_terms&#8217;</strong> access.<br />
+Depending on the case it can make its use impracticable.</p>
+<p>A quick solution could be replacing it by:</p>
+<pre class="brush: php; title: ; notranslate" title="">wp_set_object_terms( $post_id, array( $term_id1, $term_id2 ), 'tax_slug' );</pre>
+<p>Reference:<br />
+<a href="https://ryansechrest.com/2012/07/wordpress-taxonomy-terms-dont-insert-when-cron-job-executes-wp_insert_post/" rel="nofollow ugc">https://ryansechrest.com/2012/07/wordpress-taxonomy-terms-dont-insert-when-cron-job-executes-wp_insert_post/</a></p>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-2434' class='feedback hide-if-js'>
+<h4 class='feedback-title'>Feedback</h4>
+<ul class='children'>
+			<li id="comment-3487" data-comment-id="3487" class="comment byuser comment-author-rinopo even depth-2">
+			<article id="div-comment-3487" class="comment-body">
+
+			
+				<div class="comment-content" id="comment-content-3487">
+				<p>Another solution could be to use <code>wp_set_current_user( 1 );</code> beforehand, assuming the ID &#8216;1&#8217; is the super admin. &mdash; By <cite class="fn"><a href="https://profiles.wordpress.org/rinopo/" rel="external nofollow" class="url">rinopo</a></cite> &mdash;  <a class="comment-date" href="index.html#comment-3487"><time datetime="2019-11-23T13:38:56+00:00">2 years ago</time></a></p>
+				</div><!-- .comment-content -->
+
+						</article>
+			</li>
+					</ul>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_insert_post%2F%3Freplytocom%3D2434%23feedback-editor-2434" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-3090" data-comment-id="3090" class="comment byuser comment-author-kanggheekeong odd alt thread-odd thread-alt depth-1">
+			<article id="div-comment-3090" class="comment-body">
+
+							<a href="#comment-content-3090" class="screen-reader-text">Skip to note 8 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="cabc5b84fe"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="3090" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_insert_post%2F%23comment-3090"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="100% like this"><span class="screen-reader-text">Vote results for this note: </span>6</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="3090" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_insert_post%2F%23comment-3090"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/f953d975a72c116171897954a5589c58?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/f953d975a72c116171897954a5589c58?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/kanggheekeong/" rel="external nofollow" class="url">kanggheekeong</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-3090">
+							<time datetime="2019-03-02T03:56:46+00:00">
+							3 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-3090">
+				<p>The post_template parameter should be described as well.</p>
+<p>It should be set with a full file name, such as &#8216;templatefilename.php&#8217;.</p>
+<p>This clarify will help developers trying to tie a template to a page.</p>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-3090' class='feedback hide-if-js'>
+<h4 class='feedback-title'>Feedback</h4>
+<ul class='children'>
+			<li id="comment-3608" data-comment-id="3608" class="comment byuser comment-author-larzans even depth-2">
+			<article id="div-comment-3608" class="comment-body">
+
+			
+				<div class="comment-content" id="comment-content-3608">
+				<p>And make sure to also add the subdirectory if your template is not in the theme&#8217;s root folder. So for example  <code>'page_template' =&gt; 'templates/tpl_default.php'</code> &mdash; By <cite class="fn"><a href="https://profiles.wordpress.org/larzans/" rel="external nofollow" class="url">Larzans</a></cite> &mdash;  <a class="comment-date" href="index.html#comment-3608"><time datetime="2020-01-31T11:05:37+00:00">2 years ago</time></a></p>
+				</div><!-- .comment-content -->
+
+						</article>
+			</li>
+					</ul>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_insert_post%2F%3Freplytocom%3D3090%23feedback-editor-3090" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-3355" data-comment-id="3355" class="comment byuser comment-author-flimm odd alt thread-even depth-1">
+			<article id="div-comment-3355" class="comment-body">
+
+							<a href="#comment-content-3355" class="screen-reader-text">Skip to note 9 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="92152164ee"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="3355" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_insert_post%2F%23comment-3355"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="100% like this"><span class="screen-reader-text">Vote results for this note: </span>4</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="3355" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_insert_post%2F%23comment-3355"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/936383b387d6cc6d51279e429e5d7cd9?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/936383b387d6cc6d51279e429e5d7cd9?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/flimm/" rel="external nofollow" class="url">flimm</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-3355">
+							<time datetime="2019-08-28T11:54:52+00:00">
+							2 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-3355">
+				<p>The format for <code>post_date</code> and <code>post_date_gmt</code> input is <code>Y-m-d H:i:s</code>, for instance <code>2019-01-01 01:01:01</code>. You can use PHP&#8217;s <code>date</code> function, like this:</p>
+<pre class="brush: php; title: ; notranslate" title="">
+wp_insert_post( array(
+    'post_date' =&gt; date( 'Y-m-d H:i:s', time() ),
+    // etc
+) );
+</pre>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-3355' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_insert_post%2F%3Freplytocom%3D3355%23feedback-editor-3355" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-3645" data-comment-id="3645" class="comment byuser comment-author-simongcc even thread-odd thread-alt depth-1">
+			<article id="div-comment-3645" class="comment-body">
+
+							<a href="#comment-content-3645" class="screen-reader-text">Skip to note 10 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="b6686ebf42"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="3645" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_insert_post%2F%23comment-3645"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="100% like this"><span class="screen-reader-text">Vote results for this note: </span>3</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="3645" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_insert_post%2F%23comment-3645"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/52b752660072401e4a971105206d44a0?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/52b752660072401e4a971105206d44a0?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/simongcc/" rel="external nofollow" class="url">simongcc</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-3645">
+							<time datetime="2020-02-18T06:40:12+00:00">
+							2 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-3645">
+				<p>About taxonomy parameter<br />
+Parameters: <code>'tax_input' (array) Array of taxonomy terms keyed by their taxonomy name. Default empty.</code>  </p>
+<p>The description for the parameter <strong>&#8216;tax_input&#8217;</strong> is not clearly stated and no example is given so far, so I would like to add a supplementary note here for the exact meaning and examples.  </p>
+<p>According to the source code of &#8216;wp_insert_post()&#8217;, the <strong>&#8216;tax_input&#8217;</strong> is being added by function <strong>&#8216;wp_set_post_terms()&#8217;</strong>. So I refer to its description that  Here is the example for using this: </p>
+<pre class="brush: php; title: ; notranslate" title="">'tax_input' =&gt; array( $taxomony =&gt; $tags )</pre>
+<ul>
+<li>$taxomony &#8211; (string) Taxonomy name $tags &#8211; (string|array) An array of terms to set for the post, or a string of terms separated by commas. <strong>(tags)</strong><br />
+eg.  </p>
+<pre class="brush: php; title: ; notranslate" title="">'something1, something2, something3'</pre>
+<p> or </p>
+<pre class="brush: php; title: ; notranslate" title="">array( 30, 40, 50 )</pre>
+<p> or </p>
+<pre class="brush: php; title: ; notranslate" title="">array( 'something1', 'something2', 'something3' )</pre>
+</li>
+<li>Hierarchical taxonomies <strong>(category)</strong> <strong><em>must always pass IDs</em></strong> rather than names so that children with the same names but different parents aren&#8217;t confused.  eg.
+<pre class="brush: php; title: ; notranslate" title="">array( 30, 40, 50 )</pre>
+</li>
+</ul>
+<p>Tested: I have personally tested it in a custom post type with custom category(taxonomy) name with wp_update_post()</p>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-3645' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_insert_post%2F%3Freplytocom%3D3645%23feedback-editor-3645" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-3329" data-comment-id="3329" class="comment byuser comment-author-sweetdaisy86 odd alt thread-even depth-1">
+			<article id="div-comment-3329" class="comment-body">
+
+							<a href="#comment-content-3329" class="screen-reader-text">Skip to note 11 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="0de81d11c8"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="3329" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_insert_post%2F%23comment-3329"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="100% like this"><span class="screen-reader-text">Vote results for this note: </span>2</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="3329" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_insert_post%2F%23comment-3329"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/dd3b8a82f793c155d0841521fedd1959?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/dd3b8a82f793c155d0841521fedd1959?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/sweetdaisy86/" rel="external nofollow" class="url">Ateeq Rafeeq</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-3329">
+							<time datetime="2019-08-07T13:07:02+00:00">
+							2 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-3329">
+				<p>To add Taxonomy and Meta field values with custom post types. </p>
+<p><strong>For Taxonomy:</strong><br />
+Make sure Taxonomy name is key of tax_input array. And the array of Taxonomy ID&#8217;s is value of that key like in example below. </p>
+<p><strong>For Meta Values:</strong><br />
+You can pass meta value name as key and meta value as that keys value. </p>
+<pre class="brush: php; title: ; notranslate" title="">$post_arr = array(
+				'post_title'   =&gt; esc_html($video_title),
+				'post_content' =&gt; $video_description,
+				'post_status'  =&gt; 'draft',
+				'post_author'  =&gt; $user_id,
+				'post_type'	   =&gt; 'videos',
+				'tax_input'    =&gt; array(
+					&quot;video_category&quot; =&gt; $taxnomy_ids //Video Cateogry is Taxnmony Name and being used as key of array.
+				),
+				'meta_input'   =&gt; array(
+					'wc_video_url' =&gt; $video_url,
+					'wc_product'   =&gt; $video_product
+				),
+			);</pre>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-3329' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_insert_post%2F%3Freplytocom%3D3329%23feedback-editor-3329" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-1834" data-comment-id="1834" class="comment byuser comment-author-daniyalahmedk even thread-odd thread-alt depth-1">
+			<article id="div-comment-1834" class="comment-body">
+
+							<a href="#comment-content-1834" class="screen-reader-text">Skip to note 12 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="6527da72bf"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="1834" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_insert_post%2F%23comment-1834"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="60% like this"><span class="screen-reader-text">Vote results for this note: </span>1</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="1834" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_insert_post%2F%23comment-1834"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/103bfae5b39dd19cd78754fbbf457109?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/103bfae5b39dd19cd78754fbbf457109?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/daniyalahmedk/" rel="external nofollow" class="url">daniyalahmedk</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-1834">
+							<time datetime="2016-09-16T23:44:34+00:00">
+							5 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-1834">
+				<p>Create a post for custom post type : </p>
+<pre class="brush: php; title: ; notranslate" title="">$id = wp_insert_post(array('post_title'=&gt;'random', 'post_type'=&gt;'custom_post', 'post_content'=&gt;'demo text'));</pre>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-1834' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_insert_post%2F%3Freplytocom%3D1834%23feedback-editor-1834" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-3682" data-comment-id="3682" class="comment byuser comment-author-benjithaimmortal odd alt thread-even depth-1">
+			<article id="div-comment-3682" class="comment-body">
+
+							<a href="#comment-content-3682" class="screen-reader-text">Skip to note 13 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="adc1566d65"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="3682" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_insert_post%2F%23comment-3682"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="100% like this"><span class="screen-reader-text">Vote results for this note: </span>1</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="3682" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_insert_post%2F%23comment-3682"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/6374e7fff3a61d615e0ff82076166945?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/6374e7fff3a61d615e0ff82076166945?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/benjithaimmortal/" rel="external nofollow" class="url">benjithaimmortal</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-3682">
+							<time datetime="2020-03-06T13:23:56+00:00">
+							1 year ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-3682">
+				<p>If you&#8217;re creating a post and the post ID doesn&#8217;t yet exist, using <code>'ID' =&gt; your_number</code> will not create a new post. It will return blank, because it searched for the ID and it didn&#8217;t exist.</p>
+<p>Instead, use <code>'import_id'</code> like this:</p>
+<pre class="brush: php; title: ; notranslate" title="">$args = array(
+	'import_id'    =&gt; your_custom_integer, 	// this designates the custom post ID you want to use! make sure it's unique
+	'post_type'	   =&gt; 'your_post_type',
+	'post_status'  =&gt; 'publish',
+	'content'	   =&gt; 'your_content',
+	'meta_input'   =&gt; array(
+		'product_data' =&gt; 'if_you_want_this'
+	)
+);
+
+$id = wp_insert_post($args);</pre>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-3682' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_insert_post%2F%3Freplytocom%3D3682%23feedback-editor-3682" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-4414" data-comment-id="4414" class="comment byuser comment-author-mdshuvo even thread-odd thread-alt depth-1">
+			<article id="div-comment-4414" class="comment-body">
+
+							<a href="#comment-content-4414" class="screen-reader-text">Skip to note 14 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="27bec3d69c"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="4414" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_insert_post%2F%23comment-4414"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="67% like this"><span class="screen-reader-text">Vote results for this note: </span>1</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="4414" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_insert_post%2F%23comment-4414"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/2808c88f5756dc54d0ebb227d460c7c2?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/2808c88f5756dc54d0ebb227d460c7c2?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/mdshuvo/" rel="external nofollow" class="url">Akhtarujjaman Shuvo</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-4414">
+							<time datetime="2020-10-19T10:33:09+00:00">
+							11 months ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-4414">
+				<p>Prevent duplicate post</p>
+<pre class="brush: php; title: ; notranslate" title="">// Product Title
+$post_title = 'Test Product';
+
+// Add Product
+$new_post = array(
+    'post_title' =&gt; $post_title,
+    'post_type' =&gt; 'product',
+    'post_staus' =&gt; 'draft', 
+    'post_content' =&gt; 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+    'post_excerpt' =&gt; 'Lorem Ipsum is simply dummy text'
+);
+
+// Catch post ID
+$post_id = post_exists( $post_title ) or wp_insert_post( $new_post );</pre>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-4414' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_insert_post%2F%3Freplytocom%3D4414%23feedback-editor-4414" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-5150" data-comment-id="5150" class="comment byuser comment-author-rkokdev odd alt thread-even depth-1">
+			<article id="div-comment-5150" class="comment-body">
+
+							<a href="#comment-content-5150" class="screen-reader-text">Skip to note 15 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="f56309e138"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="5150" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_insert_post%2F%23comment-5150"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title=""><span class="screen-reader-text">Vote results for this note: </span>0</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="5150" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_insert_post%2F%23comment-5150"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/52146db88ab9f5f64c372765222edf04?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/52146db88ab9f5f64c372765222edf04?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/rkokdev/" rel="external nofollow" class="url">Roberto</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-5150">
+							<time datetime="2021-06-16T08:04:34+00:00">
+							3 months ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-5150">
+				<p>Watch out when <strong>updating</strong> a post using wp_insert_post(); if you don&#8217;t explicitly specify the post_status, it will change it back to &#8216;draft&#8217;.</p>
+<p>I ended up using wp_update_post() instead.</p>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-5150' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_insert_post%2F%3Freplytocom%3D5150%23feedback-editor-5150" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-3112" data-comment-id="3112" class="comment byuser comment-author-khoipro even thread-odd thread-alt depth-1">
+			<article id="div-comment-3112" class="comment-body">
+
+							<a href="#comment-content-3112" class="screen-reader-text">Skip to note 16 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="21d6ac883c"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="3112" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_insert_post%2F%23comment-3112"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="0% like this"><span class="screen-reader-text">Vote results for this note: </span>-1</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="3112" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_insert_post%2F%23comment-3112"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/c40392394d8c406cfb0bd88373c81ecf?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/c40392394d8c406cfb0bd88373c81ecf?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/khoipro/" rel="external nofollow" class="url">Khoi Pro</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-3112">
+							<time datetime="2019-03-18T15:07:46+00:00">
+							2 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-3112">
+				<p>To work with this function, you should add condition to each of </p>
+<pre class="brush: php; title: ; notranslate" title="">$_POST</pre>
+<section class="source-content">
+<div class="source-code-container">
+<pre class="brush: php; title: ; notranslate" title="">
+  $post_title = $_POST['title'];
+  $post_description = $_POST['content'];
+  $post_posted_id = $_POST['user_id'];
+  $post_categories = $_POST['term'];
+  $post_options = array();
+
+  if( !empty($post_description) ) {
+    $post_options['post_content'] = wp_strip_all_tags(post_description);
+  }
+
+  if( !empty($post_title) ) {
+    $post_options['post_title'] = wp_strip_all_tags($post_title);
+    // Then start to add new post
+    $post_id = wp_insert_post($post_options);
+    // Then return JSON in case you are using AJAX
+
+    if( !is_wp_error($post_id) ) {
+      wp_send_json_success(array('post_id' =&gt; $post_id), 200);
+    } else {
+      wp_send_json_error($post_id-&gt;get_error_message());
+    }
+  }
+</pre>
+</div>
+<p class="source-code-links"><span><a href="#" class="show-complete-source">Expand full source code</a><a href="#" class="less-complete-source">Collapse full source code</a></span></p>
+</section>
+<p>The second thing, in case you push multiple params like multiple checkbox checked, you should know how to push to array:</p>
+<p>The example markup:</p>
+<pre class="brush: php; title: ; notranslate" title="">
+&lt;?php
+// Existing Bootstrap 4 markup
+if( !empty($languages) ) : ?&gt;
+  &lt;?php foreach($languages as $key =&gt; $language) : ?&gt;
+    &lt;div class=&quot;form-check&quot;&gt;
+      &lt;input class=&quot;form-check-input&quot; type=&quot;checkbox&quot; value=&quot;&lt;?php echo $language['id']; ?&gt;&quot; id=&quot;term[language][&lt;?php echo $key; ?&gt;]&quot; name=&quot;term[language][]&quot;&gt;
+      &lt;label class=&quot;form-check-label&quot; for=&quot;term[language][&lt;?php echo $key; ?&gt;]&quot;&gt;&lt;?php echo $language['name']; ?&gt;&lt;/label&gt;
+    &lt;/div&gt;
+  &lt;?php endforeach; ?&gt;
+&lt;?php endif; 
+// The result you got term[language] = [11, 13, 14];
+?&gt;
+</pre>
+<p>We should check and using this function to keep it working:</p>
+<section class="source-content">
+<div class="source-code-container">
+<pre class="brush: php; title: ; notranslate" title="">
+&lt;?php
+// Function hint: wp_ajax_
+// Function hint: wp_ajax_nopriv_
+
+$post_terms = $_POST['term'];
+if( !empty($post_terms) ) {
+  foreach($post_terms as $key =&gt; $category) {
+    if( $post_options['tax_input'][$key] !== '' ) {
+      $post_options['tax_input'][$key] = array($category);
+    } else {
+      array_push($post_options['tax_input'][$key], $category);
+    }
+  }
+}
+?&gt;
+</pre>
+</div>
+<p class="source-code-links"><span><a href="#" class="show-complete-source">Expand full source code</a><a href="#" class="less-complete-source">Collapse full source code</a></span></p>
+</section>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-3112' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_insert_post%2F%3Freplytocom%3D3112%23feedback-editor-3112" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-2476" data-comment-id="2476" class="comment byuser comment-author-oabadfol odd alt thread-even depth-1 bad-note">
+			<article id="div-comment-2476" class="comment-body">
+
+							<a href="#comment-content-2476" class="screen-reader-text">Skip to note 17 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="81463583d3"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="2476" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_insert_post%2F%23comment-2476"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="0% like this"><span class="screen-reader-text">Vote results for this note: </span>-9</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="2476" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_insert_post%2F%23comment-2476"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/9f52f83639b58a9455d6251ef04bf5de?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/9f52f83639b58a9455d6251ef04bf5de?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/oabadfol/" rel="external nofollow" class="url">Oscar Abad Folgueira</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-2476">
+							<time datetime="2017-11-28T10:12:57+00:00">
+							4 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-2476">
+				<p>This snippet creates a post with code checking if the post already exists before creating it.</p>
+<section class="source-content">
+<div class="source-code-container">
+<pre class="brush: php; title: ; notranslate" title="">
+function create_wordpress_post_with_code() {
+    
+        // Set the post ID to -1. This sets to no action at moment
+        $post_id = -1;
+    
+        // Set the Author, Slug, title and content of the new post
+        $author_id = 1;
+        $slug = 'wordpress-post-created-with-code';
+        $title = 'WordPress post created whith code';
+        $content = 'This is the content of the post that we are creating right now with code. 
+                    More text: I motsetning til hva mange tror, er ikke Lorem Ipsum bare tilfeldig tekst. 
+                    Dets røtter springer helt tilbake til et stykke klassisk latinsk litteratur fra 45 år f.kr., 
+                    hvilket gjør det over 2000 år gammelt. Richard McClintock - professor i latin ved Hampden-Sydney 
+                    College i Virginia, USA - slo opp flere av de mer obskure latinske ordene, consectetur, 
+                    fra en del av Lorem Ipsum, og fant dets utvilsomme opprinnelse gjennom å studere bruken 
+                    av disse ordene i klassisk litteratur. Lorem Ipsum kommer fra seksjon 1.10.32 og 1.10.33 i 
+                    &quot;de Finibus Bonorum et Malorum&quot; (The Extremes of Good and Evil) av Cicero, skrevet i år 45 f.kr. 
+                    Boken er en avhandling om teorier rundt etikk, og var veldig populær under renessansen. Den første 
+                    linjen av Lorem Ipsum, &quot;Lorem Ipsum dolor sit amet...&quot;, er hentet fra en linje i seksjon 1.10.32.';
+        // Cheks if doen't exists a post with slug &quot;wordpress-post-created-with-code&quot;.
+        if( !post_exists_by_slug( $slug ) ) {
+            // Set the post ID
+            $post_id = wp_insert_post(
+                array(
+                    'comment_status'	=&gt;	'closed',
+                    'ping_status'		=&gt;	'closed',
+                    'post_author'		=&gt;	$author_id,
+                    'post_name'		    =&gt;	$slug,
+                    'post_title'		=&gt;	$title,
+                    'post_content'      =&gt;  $content,
+                    'post_status'		=&gt;	'publish',
+                    'post_type'		    =&gt;	'post'
+                )
+            );
+        } else {
+    
+                // Set pos_id to -2 becouse there is a post with this slug.
+                $post_id = -2;
+        
+        } // end if
+    
+    } // end oaf_create_post_with_code
+ add_filter( 'after_setup_theme', 'create_wordpress_post_with_code' );
+ /**
+ * post_exists_by_slug.
+ *
+ * @return mixed boolean false if no post exists; post ID otherwise.
+ */
+function post_exists_by_slug( $post_slug ) {
+    $args_posts = array(
+        'post_type'      =&gt; 'post',
+        'post_status'    =&gt; 'any',
+        'name'           =&gt; $post_slug,
+        'posts_per_page' =&gt; 1,
+    );
+    $loop_posts = new WP_Query( $args_posts );
+    if ( ! $loop_posts-&gt;have_posts() ) {
+        return false;
+    } else {
+        $loop_posts-&gt;the_post();
+        return $loop_posts-&gt;post-&gt;ID;
+    }
+}
+</pre>
+</div>
+<p class="source-code-links"><span><a href="#" class="show-complete-source">Expand full source code</a><a href="#" class="less-complete-source">Collapse full source code</a></span></p>
+</section>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-2476' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_insert_post%2F%3Freplytocom%3D2476%23feedback-editor-2476" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+		</ol><!-- .comment-list -->
+
+		
+	
+	
+			<div id="respond" class="comment-respond">
+		<h3 id="reply-title" class="comment-reply-title"> <small></small></h3><p>You must <a href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_insert_post%2F%23comments">log in</a> before being able to contribute a note or feedback.</p>	</div><!-- #respond -->
+		
+	
+</div><!-- #comments -->
+	</section>
+</div>
+
+</article>
+
+			
+		
+		</main><!-- #main -->
+	</div><!-- #primary -->
+	</div><!-- #content -->
+
+</div><!-- #page -->
+
+
+<div id="wporg-footer">
+	<div class="wrapper">
+		<ul>
+			<li><a href="http://wordpress.org/about/" title="An introduction to the WordPress project">About</a></li>
+			<li><a href="http://wordpress.org/news/" title="News and Updates">Blog</a></li>
+			<li><a href="http://wordpress.org/hosting/" title="Recommended web hosting providers">Hosting</a></li>
+			<li><a href="https://wordpressfoundation.org/donate/" title="Donate to the WordPress Foundation">Donate</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://wordpress.org/support/" title="Forums, documentation, and other resources">Support</a></li>
+			<li><a href="../../../index.html" title="Resources for WordPress developers">Developers</a></li>
+			<li><a href="http://make.wordpress.org/" title="Give back to WordPress through code, support, translation and more">Get Involved</a></li>
+			<li><a href="http://learn.wordpress.org/" title="Workshops and training materials">Learn</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://wordpress.org/showcase/" title="Some of the best WordPress sites on the Web">Showcase</a></li>
+			<li><a href="http://wordpress.org/plugins/" title="Add extra functionality to WordPress">Plugins</a></li>
+			<li><a href="http://wordpress.org/themes/" title="Make your WordPress pretty">Themes</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://central.wordcamp.org/" title="Find a WordPress event near you">WordCamp</a></li>
+			<li><a href="http://wordpress.tv/" title="Videos, tutorials, and WordCamp sessions">WordPress.TV</a></li>
+			<li><a href="http://buddypress.org/" title="A set of plugins to transform your WordPress into a social network">BuddyPress</a></li>
+			<li><a href="http://bbpress.org/" title="Fast, slick forums built on WordPress">bbPress</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://wordpress.com/?ref=wporg-footer" title="Hassle-free WordPress hosting">WordPress.com</a></li>
+			<li><a href="http://ma.tt/" title="Co-founder of WordPress, an example of what WordPress can do">Matt</a></li>
+			<li><a href="http://wordpress.org/about/privacy/" title="WordPress.org Privacy Policy">Privacy</a></li>
+			<li><a href="https://publiccode.eu/" target="_blank">Public Code</a></li>
+		</ul>
+
+		<ul class="social-media-links">
+			<li><span class="dashicons dashicons-twitter"></span><a href="https://twitter.com/WordPress" title="Follow @WordPress on Twitter">@WordPress</a></li>
+			<li><span class="dashicons dashicons-facebook"></span><a href="https://www.facebook.com/WordPress/" title="Like WordPress on Facebook">WordPress</a></li>
+		</ul>
+	</div>
+
+		<p class="cip cip-image">Code is Poetry.</p>
+</div>
+
+<script src="../../../../s.w.org/style/js/navigation.min.js?20190128"></script>
+
+<script type='text/javascript'>
+	(function(){
+		var corecss = document.createElement('link');
+		var themecss = document.createElement('link');
+		var corecssurl = "../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shCore.css?ver=3.0.9b";
+		if ( corecss.setAttribute ) {
+				corecss.setAttribute( "rel", "stylesheet" );
+				corecss.setAttribute( "type", "text/css" );
+				corecss.setAttribute( "href", corecssurl );
+		} else {
+				corecss.rel = "stylesheet";
+				corecss.href = corecssurl;
+		}
+		document.head.appendChild( corecss );
+		var themecssurl = "../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shThemeDefault.css?ver=3.0.9b";
+		if ( themecss.setAttribute ) {
+				themecss.setAttribute( "rel", "stylesheet" );
+				themecss.setAttribute( "type", "text/css" );
+				themecss.setAttribute( "href", themecssurl );
+		} else {
+				themecss.rel = "stylesheet";
+				themecss.href = themecssurl;
+		}
+		document.head.appendChild( themecss );
+	})();
+	SyntaxHighlighter.config.strings.expandSource = '+ expand source';
+	SyntaxHighlighter.config.strings.help = '?';
+	SyntaxHighlighter.config.strings.alert = 'SyntaxHighlighter\n\n';
+	SyntaxHighlighter.config.strings.noBrush = 'Can\'t find brush for: ';
+	SyntaxHighlighter.config.strings.brushNotHtmlScript = 'Brush wasn\'t configured for html-script option: ';
+	SyntaxHighlighter.defaults['pad-line-numbers'] = false;
+	SyntaxHighlighter.defaults['toolbar'] = false;
+	SyntaxHighlighter.all();
+
+	// Infinite scroll support
+	if ( typeof( jQuery ) !== 'undefined' ) {
+		jQuery( function( $ ) {
+			$( document.body ).on( 'post-load', function() {
+				SyntaxHighlighter.highlight();
+			} );
+		} );
+	}
+</script>
+<link rel='stylesheet' id='buttons-css'  href='../../../wp-includes/css/buttons.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<script type='text/javascript' src='../../../wp-includes/js/hoverintent-js.min.js?ver=2.2.1' id='hoverintent-js-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/admin-bar.min.js?ver=5.9-alpha-51701' id='admin-bar-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/navigation.js?ver=20181209' id='wporg-developer-navigation-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/skip-link-focus-fix.js?ver=20130115' id='wporg-developer-skip-link-focus-fix-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/search.js?ver=20150430' id='wporg-developer-search-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/menu.js?ver=20180201' id='wporg-developer-menu-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/awesomplete.min.js?ver=20160322' id='awesomplete-js'></script>
+<script type='text/javascript' id='autocomplete-js-extra'>
+/* <![CDATA[ */
+var autocomplete = {"ajaxurl":"https:\/\/developer.wordpress.org\/wp-admin\/admin-ajax.php","nonce":"8a60f70c4b"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/autocomplete.js?ver=20160524' id='autocomplete-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/function-reference.js?ver=20180724' id='wporg-developer-function-reference-js'></script>
+<script type='text/javascript' id='quicktags-js-extra'>
+/* <![CDATA[ */
+var quicktagsL10n = {"closeAllOpenTags":"Close all open tags","closeTags":"close tags","enterURL":"Enter the URL","enterImageURL":"Enter the URL of the image","enterImageDescription":"Enter a description of the image","textdirection":"text direction","toggleTextdirection":"Toggle Editor Text Direction","dfw":"Distraction-free writing mode","strong":"Bold","strongClose":"Close bold tag","em":"Italic","emClose":"Close italic tag","link":"Insert link","blockquote":"Blockquote","blockquoteClose":"Close blockquote tag","del":"Deleted text (strikethrough)","delClose":"Close deleted text tag","ins":"Inserted text","insClose":"Close inserted text tag","image":"Insert image","ul":"Bulleted list","ulClose":"Close bulleted list tag","ol":"Numbered list","olClose":"Close numbered list tag","li":"List item","liClose":"Close list item tag","code":"Code","codeClose":"Close code tag","more":"Insert Read More tag"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-includes/js/quicktags.min.js?ver=5.9-alpha-51701' id='quicktags-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/user-notes.js?ver=20200110' id='wporg-developer-user-notes-js'></script>
+<script type='text/javascript' id='wporg-developer-user-notes-feedback-js-extra'>
+/* <![CDATA[ */
+var wporg_note_feedback = {"show":"Show Feedback","hide":"Hide Feedback"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/user-notes-feedback.js?ver=20181023' id='wporg-developer-user-notes-feedback-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/tabs.js?ver=20160824' id='wporg-developer-tabs-js'></script>
+<script type='text/javascript' id='wporg-developer-preview-js-extra'>
+/* <![CDATA[ */
+var wporg_note_preview = {"ajaxurl":"https:\/\/developer.wordpress.org\/wp-admin\/admin-ajax.php","nonce":"504933b60e","preview":"preview note","preview_empty":"Nothing to preview","is_admin":""};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/user-notes-preview.js?ver=20200111' id='wporg-developer-preview-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/wp-embed.min.js?ver=5.9-alpha-51701' id='wp-embed-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/vendor/regenerator-runtime.min.js?ver=0.13.7' id='regenerator-runtime-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/vendor/wp-polyfill.min.js?ver=3.15.0' id='wp-polyfill-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/dom-ready.min.js?ver=71883072590656bf22c74c7b887df3dd' id='wp-dom-ready-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/hooks.min.js?ver=a7edae857aab69d69fa10d5aef23a5de' id='wp-hooks-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/i18n.min.js?ver=5f1269854226b4dd90450db411a12b79' id='wp-i18n-js'></script>
+<script type='text/javascript' id='wp-i18n-js-after'>
+wp.i18n.setLocaleData( { 'text direction\u0004ltr': [ 'ltr' ] } );
+</script>
+<script type='text/javascript' id='wp-a11y-js-translations'>
+( function( domain, translations ) {
+	var localeData = translations.locale_data[ domain ] || translations.locale_data.messages;
+	localeData[""].domain = domain;
+	wp.i18n.setLocaleData( localeData, domain );
+} )( "default", { "locale_data": { "messages": { "": {} } } } );
+</script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/a11y.min.js?ver=0ac8327cc1c40dcfdf29716affd7ac63' id='wp-a11y-js'></script>
+<script type='text/javascript' id='wplink-js-extra'>
+/* <![CDATA[ */
+var wpLinkL10n = {"title":"Insert\/edit link","update":"Update","save":"Add Link","noTitle":"(no title)","noMatchesFound":"No results found.","linkSelected":"Link selected.","linkInserted":"Link inserted.","minInputLength":"3"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-includes/js/wplink.min.js?ver=5.9-alpha-51701' id='wplink-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/jquery/ui/core.min.js?ver=1.12.1' id='jquery-ui-core-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/jquery/ui/menu.min.js?ver=1.12.1' id='jquery-ui-menu-js'></script>
+<script type='text/javascript' id='jquery-ui-autocomplete-js-extra'>
+/* <![CDATA[ */
+var uiAutocompleteL10n = {"noResults":"No results found.","oneResult":"1 result found. Use up and down arrow keys to navigate.","manyResults":"%d results found. Use up and down arrow keys to navigate.","itemSelected":"Item selected."};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-includes/js/jquery/ui/autocomplete.min.js?ver=1.12.1' id='jquery-ui-autocomplete-js'></script>
+
+		<script type="text/javascript">
+		tinyMCEPreInit = {
+			baseURL: "https://developer.wordpress.org/wp-includes/js/tinymce",
+			suffix: ".min",
+						mceInit: {},
+			qtInit: {'comment':{id:"comment",buttons:"strong,em,ul,ol,li,link"}},
+			ref: {plugins:"",theme:"modern",language:""},
+			load_ext: function(url,lang){var sl=tinymce.ScriptLoader;sl.markDone(url+'/langs/'+lang+'.js');sl.markDone(url+'/langs/'+lang+'_dlg.js');}
+		};
+		</script>
+				<script type="text/javascript">
+		var ajaxurl = "../../../wp-admin/admin-ajax.html";
+		( function() {
+			var initialized = [];
+			var initialize  = function() {
+				var init, id, inPostbox, $wrap;
+				var readyState = document.readyState;
+
+				if ( readyState !== 'complete' && readyState !== 'interactive' ) {
+					return;
+				}
+
+				for ( id in tinyMCEPreInit.mceInit ) {
+					if ( initialized.indexOf( id ) > -1 ) {
+						continue;
+					}
+
+					init      = tinyMCEPreInit.mceInit[id];
+					$wrap     = tinymce.$( '#wp-' + id + '-wrap' );
+					inPostbox = $wrap.parents( '.postbox' ).length > 0;
+
+					if (
+						! init.wp_skip_init &&
+						( $wrap.hasClass( 'tmce-active' ) || ! tinyMCEPreInit.qtInit.hasOwnProperty( id ) ) &&
+						( readyState === 'complete' || ( ! inPostbox && readyState === 'interactive' ) )
+					) {
+						tinymce.init( init );
+						initialized.push( id );
+
+						if ( ! window.wpActiveEditor ) {
+							window.wpActiveEditor = id;
+						}
+					}
+				}
+			}
+
+			if ( typeof tinymce !== 'undefined' ) {
+				if ( tinymce.Env.ie && tinymce.Env.ie < 11 ) {
+					tinymce.$( '.wp-editor-wrap ' ).removeClass( 'tmce-active' ).addClass( 'html-active' );
+				} else {
+					if ( document.readyState === 'complete' ) {
+						initialize();
+					} else {
+						document.addEventListener( 'readystatechange', initialize );
+					}
+				}
+			}
+
+			if ( typeof quicktags !== 'undefined' ) {
+				for ( id in tinyMCEPreInit.qtInit ) {
+					quicktags( tinyMCEPreInit.qtInit[id] );
+
+					if ( ! window.wpActiveEditor ) {
+						window.wpActiveEditor = id;
+					}
+				}
+			}
+		}());
+		</script>
+				<div id="wp-link-backdrop" style="display: none"></div>
+		<div id="wp-link-wrap" class="wp-core-ui" style="display: none" role="dialog" aria-labelledby="link-modal-title">
+		<form id="wp-link" tabindex="-1">
+		<input type="hidden" id="_ajax_linking_nonce" name="_ajax_linking_nonce" value="86f5a0a85d" />		<h1 id="link-modal-title">Insert/edit link</h1>
+		<button type="button" id="wp-link-close"><span class="screen-reader-text">Close</span></button>
+		<div id="link-selector">
+			<div id="link-options">
+				<p class="howto" id="wplink-enter-url">Enter the destination URL</p>
+				<div>
+					<label><span>URL</span>
+					<input id="wp-link-url" type="text" aria-describedby="wplink-enter-url" /></label>
+				</div>
+				<div class="wp-link-text-field">
+					<label><span>Link Text</span>
+					<input id="wp-link-text" type="text" /></label>
+				</div>
+				<div class="link-target">
+					<label><span></span>
+					<input type="checkbox" id="wp-link-target" /> Open link in a new tab</label>
+				</div>
+			</div>
+			<p class="howto" id="wplink-link-existing-content">Or link to existing content</p>
+			<div id="search-panel">
+				<div class="link-search-wrapper">
+					<label>
+						<span class="search-label">Search</span>
+						<input type="search" id="wp-link-search" class="link-search-field" autocomplete="off" aria-describedby="wplink-link-existing-content" />
+						<span class="spinner"></span>
+					</label>
+				</div>
+				<div id="search-results" class="query-results" tabindex="0">
+					<ul></ul>
+					<div class="river-waiting">
+						<span class="spinner"></span>
+					</div>
+				</div>
+				<div id="most-recent-results" class="query-results" tabindex="0">
+					<div class="query-notice" id="query-notice-message">
+						<em class="query-notice-default">No search term specified. Showing recent items.</em>
+						<em class="query-notice-hint screen-reader-text">Search or use up and down arrow keys to select an item.</em>
+					</div>
+					<ul></ul>
+					<div class="river-waiting">
+						<span class="spinner"></span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="submitbox">
+			<div id="wp-link-cancel">
+				<button type="button" class="button">Cancel</button>
+			</div>
+			<div id="wp-link-update">
+				<input type="submit" value="Add Link" class="button button-primary" id="wp-link-submit" name="wp-link-submit">
+			</div>
+		</div>
+		</form>
+		</div>
+		</body>
+
+<!-- Mirrored from developer.wordpress.org/reference/functions/wp_insert_post/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 31 Aug 2021 16:53:26 GMT -->
+</html>

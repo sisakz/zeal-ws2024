@@ -1,0 +1,455 @@
+<html><!-- Mirrored from www.php.net/manual/en/memcached.getmulti.php by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 11 Sep 2021 09:12:48 GMT --><!-- Added by HTTrack --><head><meta http-equiv="content-type" content="text/html;charset=utf-8"><!-- /Added by HTTrack -->
+
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Memcached::getMulti</title>
+
+ <link rel="shortcut icon" href="../../favicon.ico">
+ <link rel="search" type="application/opensearchdescription+xml" href="http://php.net/phpnetimprovedsearch.src" title="Add PHP.net search">
+ <link rel="alternate" type="application/atom+xml" href="https://www.php.net/releases/feed.php" title="PHP Release feed">
+ <link rel="alternate" type="application/atom+xml" href="https://www.php.net/feed.atom" title="PHP: Hypertext Preprocessor">
+
+ <link rel="canonical" href="memcached.getmulti.html">
+ <link rel="shorturl" href="memcached.getmulti.html">
+ <link rel="alternate" href="memcached.getmulti.html" hreflang="x-default">
+
+ <link rel="contents" href="index-2.html">
+ <link rel="index" href="class.memcached.html">
+ <link rel="prev" href="memcached.getdelayedbykey.html">
+ <link rel="next" href="memcached.getmultibykey.html">
+
+ <link rel="alternate" href="memcached.getmulti.html" hreflang="en">
+ <link rel="alternate" href="https://www.php.net/manual/pt_BR/memcached.getmulti.php" hreflang="pt_BR">
+ <link rel="alternate" href="https://www.php.net/manual/zh/memcached.getmulti.php" hreflang="zh">
+ <link rel="alternate" href="https://www.php.net/manual/fr/memcached.getmulti.php" hreflang="fr">
+ <link rel="alternate" href="https://www.php.net/manual/de/memcached.getmulti.php" hreflang="de">
+ <link rel="alternate" href="https://www.php.net/manual/ja/memcached.getmulti.php" hreflang="ja">
+ <link rel="alternate" href="https://www.php.net/manual/ro/memcached.getmulti.php" hreflang="ro">
+ <link rel="alternate" href="https://www.php.net/manual/ru/memcached.getmulti.php" hreflang="ru">
+ <link rel="alternate" href="https://www.php.net/manual/es/memcached.getmulti.php" hreflang="es">
+ <link rel="alternate" href="https://www.php.net/manual/tr/memcached.getmulti.php" hreflang="tr">
+
+<link rel="stylesheet" type="text/css" href="../../cached0aba.css?t=1539771603&amp;f=/fonts/Fira/fira.css" media="screen">
+<link rel="stylesheet" type="text/css" href="../../cached2ecf.css?t=1539765004&amp;f=/fonts/Font-Awesome/css/fontello.css" media="screen">
+<link rel="stylesheet" type="text/css" href="../../cachedba57.css?t=1606338002&amp;f=/styles/theme-base.css" media="screen">
+<link rel="stylesheet" type="text/css" href="../../cached3afa.css?t=1627831203&amp;f=/styles/theme-medium.css" media="screen">
+
+ <!--[if lte IE 7]>
+ <link rel="stylesheet" type="text/css" href="https://www.php.net/styles/workarounds.ie7.css" media="screen">
+ <![endif]-->
+
+ <!--[if lte IE 8]>
+ <script>
+  window.brokenIE = true;
+ </script>
+ <![endif]-->
+
+ <!--[if lte IE 9]>
+ <link rel="stylesheet" type="text/css" href="https://www.php.net/styles/workarounds.ie9.css" media="screen">
+ <![endif]-->
+
+ <!--[if IE]>
+ <script src="https://www.php.net/js/ext/html5.js"></script>
+ <![endif]-->
+
+ <base>
+
+
+</head>
+<body class="docs " style="">
+
+
+<div class="headsup"><a href="https://www.php.net/conferences/index.php#id2021-09-08-1">Longhorn PHP 2021</a></div>
+<nav id="trick"><div><dl>
+<dt><a href="getting-started.html">Getting Started</a></dt>
+	<dd><a href="introduction.html">Introduction</a></dd>
+	<dd><a href="tutorial.html">A simple tutorial</a></dd>
+<dt><a href="langref.html">Language Reference</a></dt>
+	<dd><a href="language.basic-syntax.html">Basic syntax</a></dd>
+	<dd><a href="language.types.html">Types</a></dd>
+	<dd><a href="language.variables.html">Variables</a></dd>
+	<dd><a href="language.constants.html">Constants</a></dd>
+	<dd><a href="language.expressions.html">Expressions</a></dd>
+	<dd><a href="language.operators.html">Operators</a></dd>
+	<dd><a href="language.control-structures.html">Control Structures</a></dd>
+	<dd><a href="language.functions.html">Functions</a></dd>
+	<dd><a href="language.oop5.html">Classes and Objects</a></dd>
+	<dd><a href="language.namespaces.html">Namespaces</a></dd>
+	<dd><a href="language.errors.html">Errors</a></dd>
+	<dd><a href="language.exceptions.html">Exceptions</a></dd>
+	<dd><a href="language.generators.html">Generators</a></dd>
+	<dd><a href="language.attributes.html">Attributes</a></dd>
+	<dd><a href="language.references.html">References Explained</a></dd>
+	<dd><a href="reserved.variables.html">Predefined Variables</a></dd>
+	<dd><a href="reserved.exceptions.html">Predefined Exceptions</a></dd>
+	<dd><a href="reserved.interfaces.html">Predefined Interfaces and Classes</a></dd>
+	<dd><a href="context.html">Context options and parameters</a></dd>
+	<dd><a href="wrappers.html">Supported Protocols and Wrappers</a></dd>
+</dl>
+<dl>
+<dt><a href="security.html">Security</a></dt>
+	<dd><a href="security.intro.html">Introduction</a></dd>
+	<dd><a href="security.general.html">General considerations</a></dd>
+	<dd><a href="security.cgi-bin.html">Installed as CGI binary</a></dd>
+	<dd><a href="security.apache.html">Installed as an Apache module</a></dd>
+	<dd><a href="security.sessions.html">Session Security</a></dd>
+	<dd><a href="security.filesystem.html">Filesystem Security</a></dd>
+	<dd><a href="security.database.html">Database Security</a></dd>
+	<dd><a href="security.errors.html">Error Reporting</a></dd>
+	<dd><a href="security.variables.html">User Submitted Data</a></dd>
+	<dd><a href="security.hiding.html">Hiding PHP</a></dd>
+	<dd><a href="security.current.html">Keeping Current</a></dd>
+<dt><a href="features.html">Features</a></dt>
+	<dd><a href="features.http-auth.html">HTTP authentication with PHP</a></dd>
+	<dd><a href="features.cookies.html">Cookies</a></dd>
+	<dd><a href="features.sessions.html">Sessions</a></dd>
+	<dd><a href="features.xforms.html">Dealing with XForms</a></dd>
+	<dd><a href="features.file-upload.html">Handling file uploads</a></dd>
+	<dd><a href="features.remote-files.html">Using remote files</a></dd>
+	<dd><a href="features.connection-handling.html">Connection handling</a></dd>
+	<dd><a href="features.persistent-connections.html">Persistent Database Connections</a></dd>
+	<dd><a href="features.commandline.html">Command line usage</a></dd>
+	<dd><a href="features.gc.html">Garbage Collection</a></dd>
+	<dd><a href="features.dtrace.html">DTrace Dynamic Tracing</a></dd>
+</dl>
+<dl>
+<dt><a href="funcref.html">Function Reference</a></dt>
+	<dd><a href="refs.basic.php.html">Affecting PHP's Behaviour</a></dd>
+	<dd><a href="refs.utilspec.audio.html">Audio Formats Manipulation</a></dd>
+	<dd><a href="refs.remote.auth.html">Authentication Services</a></dd>
+	<dd><a href="refs.utilspec.cmdline.html">Command Line Specific Extensions</a></dd>
+	<dd><a href="refs.compression.html">Compression and Archive Extensions</a></dd>
+	<dd><a href="refs.crypto.html">Cryptography Extensions</a></dd>
+	<dd><a href="refs.database.html">Database Extensions</a></dd>
+	<dd><a href="refs.calendar.html">Date and Time Related Extensions</a></dd>
+	<dd><a href="refs.fileprocess.file.html">File System Related Extensions</a></dd>
+	<dd><a href="refs.international.html">Human Language and Character Encoding Support</a></dd>
+	<dd><a href="refs.utilspec.image.html">Image Processing and Generation</a></dd>
+	<dd><a href="refs.remote.mail.html">Mail Related Extensions</a></dd>
+	<dd><a href="refs.math.html">Mathematical Extensions</a></dd>
+	<dd><a href="refs.utilspec.nontext.html">Non-Text MIME Output</a></dd>
+	<dd><a href="refs.fileprocess.process.html">Process Control Extensions</a></dd>
+	<dd><a href="refs.basic.other.html">Other Basic Extensions</a></dd>
+	<dd><a href="refs.remote.other.html">Other Services</a></dd>
+	<dd><a href="refs.search.html">Search Engine Extensions</a></dd>
+	<dd><a href="refs.utilspec.server.html">Server Specific Extensions</a></dd>
+	<dd><a href="refs.basic.session.html">Session Extensions</a></dd>
+	<dd><a href="refs.basic.text.html">Text Processing</a></dd>
+	<dd><a href="refs.basic.vartype.html">Variable and Type Related Extensions</a></dd>
+	<dd><a href="refs.webservice.html">Web Services</a></dd>
+	<dd><a href="refs.utilspec.windows.html">Windows Only Extensions</a></dd>
+	<dd><a href="refs.xml.html">XML Manipulation</a></dd>
+	<dd><a href="refs.ui.html">GUI Extensions</a></dd>
+</dl>
+<dl>
+<dt>Keyboard Shortcuts</dt><dt>?</dt>
+<dd>This help</dd>
+<dt>j</dt>
+<dd>Next menu item</dd>
+<dt>k</dt>
+<dd>Previous menu item</dd>
+<dt>g p</dt>
+<dd>Previous man page</dd>
+<dt>g n</dt>
+<dd>Next man page</dd>
+<dt>G</dt>
+<dd>Scroll to bottom</dd>
+<dt>g g</dt>
+<dd>Scroll to top</dd>
+<dt>g h</dt>
+<dd>Goto homepage</dd>
+<dt>g s</dt>
+<dd>Goto search<br>(current page)</dd>
+<dt>/</dt>
+<dd>Focus search box</dd>
+</dl></div></nav>
+<div id="goto">
+    <div class="search">
+         <div class="text"></div>
+         <div class="results"><ul></ul></div>
+   </div>
+</div>
+
+  <div id="breadcrumbs" class="row-fluid">
+    <div id="breadcrumbs-inner">
+          
+              
+          <ul>
+            <li><a href="index-2.html">PHP Manual</a></li>      <li><a href="funcref.html">Function Reference</a></li>      <li><a href="refs.remote.other.html">Other Services</a></li>      <li><a href="book.memcached.html">Memcached</a></li>      <li><a href="class.memcached.html">Memcached</a></li>      </ul>
+    </div>
+  </div>
+
+
+
+
+<div id="layout" class="clearfix">
+  <section id="layout-content">
+  <div id="memcached.getmulti" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">Memcached::getMulti</h1>
+  <p class="verinfo">(PECL memcached &gt;= 0.1.0)</p><p class="refpurpose"><span class="refname">Memcached::getMulti</span> — <span class="dc-title">Retrieve multiple items</span></p>
+
+ </div>
+
+ <div class="refsect1 description" id="refsect1-memcached.getmulti-description">
+  <h3 class="title">Description</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="modifier">public</span> <span class="methodname"><strong>Memcached::getMulti</strong></span>(<span class="methodparam"><span class="type">array</span> <code class="parameter">$keys</code></span>, <span class="methodparam"><span class="type">int</span> <code class="parameter">$flags</code><span class="initializer"> = ?</span></span>): <span class="type"><a href="language.types.declarations.html#language.types.declarations.mixed" class="type mixed">mixed</a></span></div>
+
+  <p class="para rdfs-comment">
+   <span class="function"><strong>Memcached::getMulti()</strong></span> is similar to
+   <span class="methodname"><a href="memcached.get.html" class="methodname">Memcached::get()</a></span>, but instead of a single key
+   item, it retrieves multiple items the keys of which are specified in the
+   <code class="parameter">keys</code> array.
+   </p><blockquote class="note"><p><strong class="note">Note</strong>: 
+    </p><p class="para">
+     Before v3.0 a second argument <code class="parameter reference">&amp;cas_tokens</code> was in use.
+     It was filled with the CAS token values for the found items.
+     The <code class="parameter reference">&amp;cas_tokens</code> parameter was removed in v3.0 of the extension.
+     It was replaced with a new flag <strong><code>Memcached::GET_EXTENDED</code></strong>
+     that needs is to be used as the value for <code class="parameter">flags</code>.
+    </p>
+   <p></p></blockquote>
+  <p></p>
+  <p class="para">
+   The <code class="parameter">flags</code> parameter can be used to specify
+   additional options for <span class="function"><strong>Memcached::getMulti()</strong></span>.
+   <strong><code>Memcached::GET_PRESERVE_ORDER</code></strong> ensures that the
+   keys are returned in the same order as they were requested in.
+   <strong><code>Memcached::GET_EXTENDED</code></strong> ensures that the
+   CAS tokens will be fetched too.
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-memcached.getmulti-parameters">
+  <h3 class="title">Parameters</h3>
+  <p class="para">
+   </p><dl>
+    
+     <dt>
+<code class="parameter">keys</code></dt>
+
+     <dd>
+
+      <p class="para">
+       Array of keys to retrieve.
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">flags</code></dt>
+
+     <dd>
+
+      <p class="para">
+       The flags for the get operation.
+      </p>
+     </dd>
+
+    
+   </dl>
+
+  <p></p>
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-memcached.getmulti-returnvalues">
+  <h3 class="title">Return Values</h3>
+  <p class="para">
+   Returns the array of found items or <strong><code>false</code></strong> on failure.
+   Use <span class="methodname"><a href="memcached.getresultcode.html" class="methodname">Memcached::getResultCode()</a></span> if necessary.
+  </p>
+ </div>
+
+
+ <div class="refsect1 changelog" id="refsect1-memcached.getmulti-changelog">
+  <h3 class="title">Changelog</h3>
+  <table class="doctable informaltable">
+   
+    <thead>
+     <tr>
+      <th>Version</th>
+      <th>Description</th>
+     </tr>
+
+    </thead>
+
+    <tbody class="tbody">
+     <tr>
+      <td>PECL memcached 3.0.0</td>
+      <td>
+       The <code class="parameter reference">&amp;cas_tokens</code> parameter was removed.
+       The <strong><code>Memcached::GET_EXTENDED</code></strong> was added and when passed as a flag it ensures the CAS tokens to be fetched.
+      </td>
+     </tr>
+
+    </tbody>
+   
+  </table>
+
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-memcached.getmulti-examples">
+  <h3 class="title">Examples</h3>
+  <p class="para">
+   </p><div class="example" id="example-4364">
+    <p><strong>Example #1 <span class="function"><strong>Memcached::getMulti()</strong></span> example for Memcached v3</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br></span><span style="color: #FF8000">//&nbsp;Valid&nbsp;for&nbsp;v3&nbsp;of&nbsp;the&nbsp;extension<br><br></span><span style="color: #0000BB">$m&nbsp;</span><span style="color: #007700">=&nbsp;new&nbsp;</span><span style="color: #0000BB">Memcached</span><span style="color: #007700">();<br></span><span style="color: #0000BB">$m</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">addServer</span><span style="color: #007700">(</span><span style="color: #DD0000">'localhost'</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">11211</span><span style="color: #007700">);<br><br></span><span style="color: #0000BB">$items&nbsp;</span><span style="color: #007700">=&nbsp;array(<br>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">'key1'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">'value1'</span><span style="color: #007700">,<br>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">'key2'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">'value2'</span><span style="color: #007700">,<br>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">'key3'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">'value3'<br></span><span style="color: #007700">);<br></span><span style="color: #0000BB">$m</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">setMulti</span><span style="color: #007700">(</span><span style="color: #0000BB">$items</span><span style="color: #007700">);<br></span><span style="color: #0000BB">$result&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$m</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">getMulti</span><span style="color: #007700">(array(</span><span style="color: #DD0000">'key1'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'key3'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'badkey'</span><span style="color: #007700">));<br></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">$result</span><span style="color: #007700">);<br></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+    <div class="example-contents"><p>The above example will output
+something similar to:</p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>array(2) {
+  ["key1"]=&gt;
+  string(6) "value1"
+  ["key3"]=&gt;
+  string(6) "value3"
+}
+</pre></div>
+    </div>
+   </div>
+  <p></p>
+
+  <p class="para">
+   </p><div class="example" id="example-4365">
+    <p><strong>Example #2 <span class="function"><strong>Memcached::getMulti()</strong></span> example for Memcached v1 and v2</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br></span><span style="color: #FF8000">//&nbsp;Valid&nbsp;for&nbsp;v1&nbsp;and&nbsp;v2&nbsp;of&nbsp;the&nbsp;extension<br><br></span><span style="color: #0000BB">$m&nbsp;</span><span style="color: #007700">=&nbsp;new&nbsp;</span><span style="color: #0000BB">Memcached</span><span style="color: #007700">();<br></span><span style="color: #0000BB">$m</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">addServer</span><span style="color: #007700">(</span><span style="color: #DD0000">'localhost'</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">11211</span><span style="color: #007700">);<br><br></span><span style="color: #0000BB">$items&nbsp;</span><span style="color: #007700">=&nbsp;array(<br>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">'key1'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">'value1'</span><span style="color: #007700">,<br>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">'key2'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">'value2'</span><span style="color: #007700">,<br>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">'key3'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">'value3'<br></span><span style="color: #007700">);<br></span><span style="color: #0000BB">$m</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">setMulti</span><span style="color: #007700">(</span><span style="color: #0000BB">$items</span><span style="color: #007700">);<br></span><span style="color: #0000BB">$result&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$m</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">getMulti</span><span style="color: #007700">(array(</span><span style="color: #DD0000">'key1'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'key3'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'badkey'</span><span style="color: #007700">),&nbsp;</span><span style="color: #0000BB">$cas</span><span style="color: #007700">);<br></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">$result</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$cas</span><span style="color: #007700">);<br></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+    <div class="example-contents"><p>The above example will output
+something similar to:</p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>array(2) {
+  ["key1"]=&gt;
+  string(6) "value1"
+  ["key3"]=&gt;
+  string(6) "value3"
+}
+array(2) {
+  ["key1"]=&gt;
+  float(2360)
+  ["key3"]=&gt;
+  float(2362)
+}
+</pre></div>
+    </div>
+   </div>
+  <p></p>
+
+  <p class="para">
+   </p><div class="example" id="example-4366">
+    <p><strong>Example #3 <strong><code>Memcached::GET_PRESERVE_ORDER</code></strong> example for Memcached v3</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br></span><span style="color: #FF8000">//&nbsp;Valid&nbsp;for&nbsp;v3&nbsp;of&nbsp;the&nbsp;extension<br><br></span><span style="color: #0000BB">$m&nbsp;</span><span style="color: #007700">=&nbsp;new&nbsp;</span><span style="color: #0000BB">Memcached</span><span style="color: #007700">();<br></span><span style="color: #0000BB">$m</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">addServer</span><span style="color: #007700">(</span><span style="color: #DD0000">'localhost'</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">11211</span><span style="color: #007700">);<br><br></span><span style="color: #0000BB">$data&nbsp;</span><span style="color: #007700">=&nbsp;array(<br>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">'foo'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">'foo-data'</span><span style="color: #007700">,<br>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">'bar'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">'bar-data'</span><span style="color: #007700">,<br>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">'baz'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">'baz-data'</span><span style="color: #007700">,<br>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">'lol'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">'lol-data'</span><span style="color: #007700">,<br>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">'kek'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">'kek-data'</span><span style="color: #007700">,<br>);<br><br></span><span style="color: #0000BB">$m</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">setMulti</span><span style="color: #007700">(</span><span style="color: #0000BB">$data</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">3600</span><span style="color: #007700">);<br><br></span><span style="color: #0000BB">$keys&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">array_keys</span><span style="color: #007700">(</span><span style="color: #0000BB">$data</span><span style="color: #007700">);<br></span><span style="color: #0000BB">$keys</span><span style="color: #007700">[]&nbsp;=&nbsp;</span><span style="color: #DD0000">'zoo'</span><span style="color: #007700">;<br></span><span style="color: #0000BB">$got&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$m</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">getMulti</span><span style="color: #007700">(</span><span style="color: #0000BB">$keys</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">Memcached</span><span style="color: #007700">::</span><span style="color: #0000BB">GET_PRESERVE_ORDER</span><span style="color: #007700">);<br><br>foreach&nbsp;(</span><span style="color: #0000BB">$got&nbsp;</span><span style="color: #007700">as&nbsp;</span><span style="color: #0000BB">$k&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">$v</span><span style="color: #007700">)&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"</span><span style="color: #0000BB">$k</span><span style="color: #DD0000">&nbsp;</span><span style="color: #0000BB">$v</span><span style="color: #DD0000">\n"</span><span style="color: #007700">;<br>}<br></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+    <div class="example-contents"><p>The above example will output
+something similar to:</p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>foo foo-data
+bar bar-data
+baz baz-data
+lol lol-data
+kek kek-data
+zoo 
+</pre></div>
+    </div>
+   </div>
+  <p></p>
+
+  <p class="para">
+   </p><div class="example" id="example-4367">
+    <p><strong>Example #4 <strong><code>Memcached::GET_PRESERVE_ORDER</code></strong> example for Memcached v1 and v2</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br></span><span style="color: #FF8000">//&nbsp;Valid&nbsp;for&nbsp;v1&nbsp;and&nbsp;v2&nbsp;of&nbsp;the&nbsp;extension<br><br></span><span style="color: #0000BB">$m&nbsp;</span><span style="color: #007700">=&nbsp;new&nbsp;</span><span style="color: #0000BB">Memcached</span><span style="color: #007700">();<br></span><span style="color: #0000BB">$m</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">addServer</span><span style="color: #007700">(</span><span style="color: #DD0000">'localhost'</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">11211</span><span style="color: #007700">);<br><br></span><span style="color: #0000BB">$data&nbsp;</span><span style="color: #007700">=&nbsp;array(<br>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">'foo'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">'foo-data'</span><span style="color: #007700">,<br>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">'bar'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">'bar-data'</span><span style="color: #007700">,<br>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">'baz'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">'baz-data'</span><span style="color: #007700">,<br>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">'lol'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">'lol-data'</span><span style="color: #007700">,<br>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">'kek'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">'kek-data'</span><span style="color: #007700">,<br>);<br><br></span><span style="color: #0000BB">$m</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">setMulti</span><span style="color: #007700">(</span><span style="color: #0000BB">$data</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">3600</span><span style="color: #007700">);<br><br></span><span style="color: #0000BB">$null&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">null</span><span style="color: #007700">;<br></span><span style="color: #0000BB">$keys&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">array_keys</span><span style="color: #007700">(</span><span style="color: #0000BB">$data</span><span style="color: #007700">);<br></span><span style="color: #0000BB">$keys</span><span style="color: #007700">[]&nbsp;=&nbsp;</span><span style="color: #DD0000">'zoo'</span><span style="color: #007700">;<br></span><span style="color: #0000BB">$got&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$m</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">getMulti</span><span style="color: #007700">(</span><span style="color: #0000BB">$keys</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$null</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">Memcached</span><span style="color: #007700">::</span><span style="color: #0000BB">GET_PRESERVE_ORDER</span><span style="color: #007700">);<br><br>foreach&nbsp;(</span><span style="color: #0000BB">$got&nbsp;</span><span style="color: #007700">as&nbsp;</span><span style="color: #0000BB">$k&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">$v</span><span style="color: #007700">)&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"</span><span style="color: #0000BB">$k</span><span style="color: #DD0000">&nbsp;</span><span style="color: #0000BB">$v</span><span style="color: #DD0000">\n"</span><span style="color: #007700">;<br>}<br></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+    <div class="example-contents"><p>The above example will output
+something similar to:</p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>foo foo-data
+bar bar-data
+baz baz-data
+lol lol-data
+kek kek-data
+zoo 
+</pre></div>
+    </div>
+   </div>
+  <p></p>
+ </div>
+
+
+ <div class="refsect1 seealso" id="refsect1-memcached.getmulti-seealso">
+  <h3 class="title">See Also</h3>
+  <p class="para">
+   </p><ul class="simplelist">
+    <li class="member"><span class="methodname"><a href="memcached.getmultibykey.html" class="methodname" rel="rdfs-seeAlso">Memcached::getMultiByKey()</a> - Retrieve multiple items from a specific server</span></li>
+    <li class="member"><span class="methodname"><a href="memcached.get.html" class="methodname" rel="rdfs-seeAlso">Memcached::get()</a> - Retrieve an item</span></li>
+    <li class="member"><span class="methodname"><a href="memcached.getdelayed.html" class="methodname" rel="rdfs-seeAlso">Memcached::getDelayed()</a> - Request multiple items</span></li>
+   </ul>
+  <p></p>
+ </div>
+
+
+</div>
+<section id="usernotes">
+ <div class="head"><h3 class="title">User Contributed Notes</h3></div><div id="allnotes">
+  <div class="note" id="115665">  
+  <a class="name">
+  <strong class="user"><em>gabriel dot maybrun at demandmedia dot com</em></strong></a><div class="date" title="2014-09-04 11:58"><strong>7 years ago</strong></div>
+  <div class="text" id="Hcom115665">
+<div class="phpcode"><code><span class="html">
+GOTCHA: Recently I was tasked with moving from PECL memcache to PECL memcached and ran into a major problem -- memcache and memcached serialize data differently, meaning that data written with one library can't necessarily be read with the other library.<br><br>For example, If you write an object or an array with memcache, it's interpreted as an integer by memcached.&nbsp; If you write it with memcached, it's interpreted as a string by memcache.<br><br>tl;dr - You can't safely switch between memcache and memcached without a either a cache flush or isolated cache environments.<br><br><span class="default">&lt;?php<br>$memcache </span><span class="keyword">= new </span><span class="default">Memcache</span><span class="keyword">;<br></span><span class="default">$memcacheD </span><span class="keyword">= new </span><span class="default">Memcached</span><span class="keyword">;<br></span><span class="default">$memcache</span><span class="keyword">-&gt;</span><span class="default">addServer</span><span class="keyword">(</span><span class="default">$host</span><span class="keyword">);<br></span><span class="default">$memcacheD</span><span class="keyword">-&gt;</span><span class="default">addServers</span><span class="keyword">(</span><span class="default">$servers</span><span class="keyword">);<br><br></span><span class="default">$checks </span><span class="keyword">= array(<br>&nbsp; &nbsp; </span><span class="default">123</span><span class="keyword">,<br>&nbsp; &nbsp; </span><span class="default">4542.32</span><span class="keyword">,<br>&nbsp; &nbsp; </span><span class="string">'a string'</span><span class="keyword">,<br>&nbsp; &nbsp; </span><span class="default">true</span><span class="keyword">,<br>&nbsp; &nbsp; array(</span><span class="default">123</span><span class="keyword">, </span><span class="string">'string'</span><span class="keyword">),<br>&nbsp; &nbsp; (object)array(</span><span class="string">'key1' </span><span class="keyword">=&gt; </span><span class="string">'value1'</span><span class="keyword">),<br>);<br>foreach (</span><span class="default">$checks </span><span class="keyword">as </span><span class="default">$i </span><span class="keyword">=&gt; </span><span class="default">$value</span><span class="keyword">) {<br>&nbsp; &nbsp; print </span><span class="string">"Checking WRITE with Memcache\n"</span><span class="keyword">;<br>&nbsp; &nbsp; </span><span class="default">$key </span><span class="keyword">= </span><span class="string">'cachetest' </span><span class="keyword">. </span><span class="default">$i</span><span class="keyword">;<br>&nbsp; &nbsp; </span><span class="default">$memcache</span><span class="keyword">-&gt;</span><span class="default">set</span><span class="keyword">(</span><span class="default">$key</span><span class="keyword">, </span><span class="default">$value</span><span class="keyword">);<br>&nbsp; &nbsp; </span><span class="default">usleep</span><span class="keyword">(</span><span class="default">100</span><span class="keyword">);<br>&nbsp; &nbsp; </span><span class="default">$val </span><span class="keyword">= </span><span class="default">$memcache</span><span class="keyword">-&gt;</span><span class="default">get</span><span class="keyword">(</span><span class="default">$key</span><span class="keyword">);<br>&nbsp; &nbsp; </span><span class="default">$valD </span><span class="keyword">= </span><span class="default">$memcacheD</span><span class="keyword">-&gt;</span><span class="default">get</span><span class="keyword">(</span><span class="default">$key</span><span class="keyword">);<br>&nbsp; &nbsp; if (</span><span class="default">$val </span><span class="keyword">!== </span><span class="default">$valD</span><span class="keyword">) {<br>&nbsp; &nbsp; &nbsp; &nbsp; print </span><span class="string">"Not compatible!"</span><span class="keyword">;<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">compact</span><span class="keyword">(</span><span class="string">'val'</span><span class="keyword">, </span><span class="string">'valD'</span><span class="keyword">));<br>&nbsp; &nbsp; }<br><br>&nbsp; &nbsp; print </span><span class="string">"Checking WRITE with MemcacheD\n"</span><span class="keyword">;<br>&nbsp; &nbsp; </span><span class="default">$key </span><span class="keyword">= </span><span class="string">'cachetest' </span><span class="keyword">. </span><span class="default">$i</span><span class="keyword">;<br>&nbsp; &nbsp; </span><span class="default">$memcacheD</span><span class="keyword">-&gt;</span><span class="default">set</span><span class="keyword">(</span><span class="default">$key</span><span class="keyword">, </span><span class="default">$value</span><span class="keyword">);<br>&nbsp; &nbsp; </span><span class="default">usleep</span><span class="keyword">(</span><span class="default">100</span><span class="keyword">);<br>&nbsp; &nbsp; </span><span class="default">$val </span><span class="keyword">= </span><span class="default">$memcache</span><span class="keyword">-&gt;</span><span class="default">get</span><span class="keyword">(</span><span class="default">$key</span><span class="keyword">);<br>&nbsp; &nbsp; </span><span class="default">$valD </span><span class="keyword">= </span><span class="default">$memcacheD</span><span class="keyword">-&gt;</span><span class="default">get</span><span class="keyword">(</span><span class="default">$key</span><span class="keyword">);<br>&nbsp; &nbsp; if (</span><span class="default">$val </span><span class="keyword">!== </span><span class="default">$valD</span><span class="keyword">) {<br>&nbsp; &nbsp; &nbsp; &nbsp; print </span><span class="string">"Not compatible!"</span><span class="keyword">;<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">compact</span><span class="keyword">(</span><span class="string">'val'</span><span class="keyword">, </span><span class="string">'valD'</span><span class="keyword">));<br>&nbsp; &nbsp; }<br>}</span>
+</span>
+</code></div>
+  </div>
+ </div></div>
+
+ 
+</section>    </section><!-- layout-content -->
+        
+
+
+  </div><!-- layout -->
+
+  
+
+    
+ <!-- External and third party libraries. -->
+ 
+
+
+
+
+
+
+
+<a id="toTop" href="javascript:;"><span id="toTopHover"></span><img width="40" height="40" alt="To Top" src="../../images/to-top%402x.png"></a>
+
+
+
+<!-- Mirrored from www.php.net/manual/en/memcached.getmulti.php by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 11 Sep 2021 09:12:48 GMT -->
+
+</body></html>

@@ -1,0 +1,156 @@
+<html><!-- Online page at https://rx-angular.io/web/state/howtos/hostbindings --><head><meta charset="utf-8"><title>Work with HostBindings</title><link rel="stylesheet" href="../../../../angular.io/css_36.css" type="text/css"><link rel="stylesheet" href="../../../../angular.io/css_37.css" type="text/css"><link rel="stylesheet" href="../../../../angular.io/css_38.css" type="text/css"><link rel="stylesheet" href="../../../../angular.io/css_39.css" type="text/css"><link rel="stylesheet" href="../../../../angular.io/css_40.css" type="text/css"><link rel="stylesheet" href="../../../../angular.io/css_41.css" type="text/css"><script type="text/javascript" src="../../../../angular.io/js_1.js"></script><script type="text/javascript" src="../../../../angular.io/js_21.js"></script><script type="text/javascript" src="../../../../angular.io/js_22.js"></script><script type="text/javascript" src="../../../../angular.io/js_23.js"></script><script type="text/javascript" src="../../../../angular.io/js_24.js"></script><script type="text/javascript" src="../../../../angular.io/js_25.js"></script><script type="text/javascript" src="../../../../angular.io/js_26.js"></script><script type="text/javascript" src="../../../../angular.io/js_27.js"></script><script type="text/javascript" src="../../../../angular.io/js_28.js"></script></head><body data-page="/web/state/howtos/hostbindings.md" class="ready">
+    <section class="cover" style="background: linear-gradient(to left bottom, hsl(236, 100%, 85%) 0%,hsl(156, 100%, 85%) 100%)"><div class="mask"></div><div class="cover-main"><!--cover--></div></section><main><button class="sidebar-toggle" aria-label="Menu"><div class="sidebar-toggle-button"><span></span><span></span><span></span></div></button><aside class="sidebar"><div class="search"><div class="input-wrap">
+      <input type="search" value="" aria-label="Search text" placeholder="Type to search">
+      <div class="clear-button">
+        <svg width="26" height="24">
+          <circle cx="12" cy="12" r="11" fill="#ccc"></circle>
+          <path stroke="white" stroke-width="2" d="M8.25,8.25,15.75,15.75"></path>
+          <path stroke="white" stroke-width="2" d="M8.25,15.75,15.75,8.25"></path>
+        </svg>
+      </div>
+    </div>
+    <div class="results-panel"></div>
+    </div><h1 class="app-name"><a class="app-name-link" data-nosearch="" href="./hostbindings.html">@rx-angular</a></h1><div class="sidebar-nav"><!-- - @rx-angular/template [BETA]
+
+  - Getting started
+
+    - [Overview](/template/overview.md)
+    - [Setup](/template/basic-setup.md)
+
+  - Theory
+
+    - [Rendering issues in Angular](/template/theory/rendering-issues.md)
+    - [Concepts](/template/theory/concepts.md)
+
+  - Features
+
+    - [LetDirective](/template/features/let.md)
+    - [PushPipe](/template/features/push.md)
+    - [RenderStrategies](/template/features/render-strategies.md)
+
+  - Experimental
+
+    - [Unpatch directive](/template/experimental/unpatch.md) -->
+
+<ul><li><p><strong>@rx-angular/state</strong></p><ul><li><p>Getting started</p><ul><li><a href="../general/overview.html" title="Overview">Overview</a></li><li><a href="../general/basic-setup.html" title="Setup">Setup</a></li></ul></li><li><p>API</p><ul><li><a href="../api/rx-state.html" title="RxState">RxState</a></li><li><a href="../api/rxjs-operators.html" title="RxJS Operators">RxJS Operators</a></li><li><a href="../api/transformation-helpers.html" title="Transformation helpers">Transformation helpers</a></li><li><a href="../api/interfaces.html" title="Interfaces">Interfaces</a></li></ul></li><li><p>Tutorials</p><ul><li><a href="../tutorials/basic-tutorial.html" title="Basic tutorial">Basic tutorial</a></li><li><a href="../tutorials/incrementing-value.html" title="Incrementing a value">Incrementing a value</a></li><li><a href="../tutorials/from-imperative-to-reactive.html" title="Migrating to RxState">Migrating to RxState</a></li><li><a href="../tutorials/passing-observables.html" title="Passing observables directly">Passing observables directly</a></li></ul></li><li><p>Recipes</p><ul><li><a href="./determine-state.html" title="Determine state type">Determine state type</a></li><li><a href="./manage-viewmodel.html" title="Manage ViewModel">Manage ViewModel</a></li><li><a href="./partial-updates.html" title="Run partial updates">Run partial updates</a></li><li><a href="./load-data-on-route-change.html" title="Load data on route change">Load data on route change</a></li><li class="active"><a href="./hostbindings.html" title="Work with HostBindings">Work with HostBindings</a><ul class="app-sub-sidebar"><li><a class="section-link" href="./hostbindings.html" title="Be aware of changeDetection - HostBindings are not reactive">Be aware of changeDetection - HostBindings are not reactive</a></li><li><a class="section-link" href="./hostbindings.html" title="Render on your own">Render on your own</a></li></ul></li><li><a href="./rx-state-as-global-state.html" title="Use RxState as Global State">Use RxState as Global State</a></li></ul></li><li><p>Integrations</p><ul><li><a href="../integrations/compose-state-using-ngrx-selectors.html" title="Reuse ngrx selectors to compose state">Reuse ngrx selectors to compose state</a></li><li><a href="../integrations/manage-entities-ngrx.html" title="Manage entities using @ngrx/entity">Manage entities using <code>@ngrx/entity</code></a></li></ul></li></ul></li></ul><hr>
+<ul><li><p><strong>Links</strong></p></li><li><p><a href="https://github.com/rx-angular/rx-angular" target="_blank" rel="noopener" title=" Github"><img src="../../../../icongr.am/simple/github.svg" data-origin="https://icongr.am/simple/github.svg?color=808080&amp;size=24" alt="Github"> Github</a></p></li><li><p><a href="https://discord.com/invite/XWWGZsQ" target="_blank" rel="noopener" title=" Discord"><img src="../../../../icongr.am/material/discord.svg" data-origin="https://icongr.am/material/discord.svg?size=24&amp;color=7289da" alt="Discord"> Discord</a></p></li></ul></div></aside><section class="content"><article class="markdown-section" id="main"><h1 id="hostbindings"><a href="./hostbindings.html" data-id="hostbindings" class="anchor"><span>HostBindings</span></a></h1><p>Some examples how to reactively handle basic <a href="../../../../angular.io/api/core/HostBinding.html" target="_blank" rel="noopener"><code>HostBindings</code></a> with <code>@rx-angular/state</code> <code>RxState</code>.</p><p>Sadly <code>HostBindings</code> are not able to bind to <code>Observable</code> sources out of the box. So we have to come up with custom solutions
+in order to have fully reactive components.</p><p>In the following examples we will use the <code>rxLet</code> directive or the <code>push</code> pipe as replacements for angulars <code>async</code> pipe.
+<code>rxLet</code> and <code>push</code> belong to the not yet released <code>@rx-angular/template</code> package.</p><p>Furthermore we want to express that we will come up with a more convenient solution facing this problem. This can be seen as WIP and
+should not be the longterm solution to handle <code>HostBindings</code> in a fully reactive way.</p><p>Imagine you have the following state which you want to bind to properties of your host element.</p><pre v-pre="" data-lang="typescript"><code class="lang-typescript"><span class="token keyword">interface</span> <span class="token class-name">ComponentState</span> <span class="token punctuation">{</span>
+  visible<span class="token operator">:</span> <span class="token builtin">boolean</span><span class="token punctuation">;</span>
+  top<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span>
+  maxHeight<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code><button class="docsify-copy-code-button"><span class="label">Copy to clipboard</span><span class="error">Error</span><span class="success">Copied</span></button></pre><h2 id="be-aware-of-changedetection-hostbindings-are-not-reactive"><a href="./hostbindings.html" data-id="be-aware-of-changedetection-hostbindings-are-not-reactive" class="anchor"><span>Be aware of changeDetection - HostBindings are not reactive</span></a></h2><p>In this setup we assign our <code>HostBindings</code> to the <code>get()</code> method of our state.</p><p>As stated in the title, we have to be aware changeDetection. On every changeDetection cycle, angular will re-evaluate
+all <code>HostBindings</code>. If our component doesn't get flagged as dirty, our <code>HostBindings</code> won't get updated. So we have to make
+sure that state changes that are related to the <code>HostBindings</code> value are actually triggering a re-render.</p><pre v-pre="" data-lang="typescript"><code class="lang-typescript">@<span class="token function">Component</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  providers<span class="token operator">:</span> <span class="token punctuation">[</span>RxState<span class="token punctuation">]</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">RxComponent</span> <span class="token punctuation">{</span>
+  <span class="token comment">// Modifying the class</span>
+  @<span class="token function">HostBinding</span><span class="token punctuation">(</span><span class="token string">'[class.is-hidden]'</span><span class="token punctuation">)</span> <span class="token keyword">get</span> <span class="token function">isHidden</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token operator">!</span><span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>visible<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token comment">// Modifying styles</span>
+  @<span class="token function">HostBinding</span><span class="token punctuation">(</span><span class="token string">'[style.marginTop]'</span><span class="token punctuation">)</span> <span class="token keyword">get</span> <span class="token function">marginTop</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>top<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">px</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token comment">// Modifying styles</span>
+  @<span class="token function">HostBinding</span><span class="token punctuation">(</span><span class="token string">'[style.maxHeight]'</span><span class="token punctuation">)</span> <span class="token keyword">get</span> <span class="token function">maxHeight</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>maxHeight<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">px</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="token keyword">private</span> state<span class="token operator">:</span> RxState<span class="token operator">&lt;</span>ComponentState<span class="token operator">&gt;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code><button class="docsify-copy-code-button"><span class="label">Copy to clipboard</span><span class="error">Error</span><span class="success">Copied</span></button></pre><p>With this setup in place we have two options to get things done.</p><h3 id="call-changedetection-manually"><a href="./hostbindings.html" data-id="call-changedetection-manually" class="anchor"><span>Call ChangeDetection manually</span></a></h3><p>Since rendering is a side-effect, we could utilize the <code>hold</code> method and register
+a function which handles change detection for us.</p><pre v-pre="" data-lang="typescript"><code class="lang-typescript">@<span class="token function">Component</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  providers<span class="token operator">:</span> <span class="token punctuation">[</span>RxState<span class="token punctuation">]</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">RxComponent</span> <span class="token punctuation">{</span>
+  <span class="token comment">// Modifying the class</span>
+  @<span class="token function">HostBinding</span><span class="token punctuation">(</span><span class="token string">'[class.is-hidden]'</span><span class="token punctuation">)</span> <span class="token keyword">get</span> <span class="token function">isHidden</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token operator">!</span><span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>visible<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token comment">// Modifying styles</span>
+  @<span class="token function">HostBinding</span><span class="token punctuation">(</span><span class="token string">'[style.marginTop]'</span><span class="token punctuation">)</span> <span class="token keyword">get</span> <span class="token function">marginTop</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>top<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">px</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token comment">// Modifying styles</span>
+  @<span class="token function">HostBinding</span><span class="token punctuation">(</span><span class="token string">'[style.maxHeight]'</span><span class="token punctuation">)</span> <span class="token keyword">get</span> <span class="token function">maxHeight</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>maxHeight<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">px</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">constructor</span><span class="token punctuation">(</span>
+    <span class="token keyword">private</span> state<span class="token operator">:</span> RxState<span class="token operator">&lt;</span>ComponentState<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+    <span class="token keyword">private</span> cdRef<span class="token operator">:</span> ChangeDetectorRef
+  <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    state<span class="token punctuation">.</span><span class="token function">hold</span><span class="token punctuation">(</span>state<span class="token punctuation">.</span><span class="token function">select</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">this</span><span class="token punctuation">.</span>cdRef<span class="token punctuation">.</span><span class="token function">markForCheck</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code><button class="docsify-copy-code-button"><span class="label">Copy to clipboard</span><span class="error">Error</span><span class="success">Copied</span></button></pre><p>By calling <code>ChangeDetectorRef#markForCheck</code> after every state change, we flag our component dirty when needed and let angulars
+<code>ChangeDetection</code> do it's magic for us.</p><h3 id="let-the-template-handle-changedetection"><a href="./hostbindings.html" data-id="let-the-template-handle-changedetection" class="anchor"><span>Let the template handle changeDetection</span></a></h3><p>If you happen to need your variables not only for your <code>HostBindings</code> but aswell in the view, we could easily let
+our viewHelpers take care of detecting changes. Just make sure all of your variables needed for the <code>HostBindings</code> are bound
+to the view correctly.</p><p>Inside the component:</p><pre v-pre="" data-lang="typescript"><code class="lang-typescript">  <span class="token keyword">readonly</span> viewState$ <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">.</span><span class="token function">select</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code><button class="docsify-copy-code-button"><span class="label">Copy to clipboard</span><span class="error">Error</span><span class="success">Copied</span></button></pre><p>Inside the template:</p><pre v-pre="" data-lang="html"><code class="lang-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ng-container</span> <span class="token attr-name">*rxLet</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>viewState$; let s<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">*ngIf</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>s.visible<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>I am a visible span<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ng-container</span><span class="token punctuation">&gt;</span></span></code><button class="docsify-copy-code-button"><span class="label">Copy to clipboard</span><span class="error">Error</span><span class="success">Copied</span></button></pre><p>In this scenario, the <code>rxLet</code> directive will flag your component as dirty every time a new state arrives. By assigning the
+whole state object as to your <code>viewModel$</code>, any change will result in a re-rendering, thus updating your <code>HostBindings</code>.</p><h2 id="render-on-your-own"><a href="./hostbindings.html" data-id="render-on-your-own" class="anchor"><span>Render on your own</span></a></h2><p>With this setup you can opt-out of the <code>ChangeDetection</code> of angular and manage <code>HostBindings</code> completely on your own.
+This approach even works when calling <code>ChangeDetectorRef#detach</code> for your component.
+We will utilize the <code>ElementRef</code> itself for this purpose and manipulate the DOM on our own.</p><p>Feel free to use angulars <code>Renderer2</code> if you want an abstraction layer, should work the exact same way.</p><pre v-pre="" data-lang="typescript"><code class="lang-typescript">@<span class="token function">Component</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  providers<span class="token operator">:</span> <span class="token punctuation">[</span>RxState<span class="token punctuation">]</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">RxComponent</span> <span class="token punctuation">{</span>
+  <span class="token keyword">constructor</span><span class="token punctuation">(</span>
+    <span class="token keyword">private</span> state<span class="token operator">:</span> RxState<span class="token operator">&lt;</span>ComponentState<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+    <span class="token keyword">private</span> elementRef<span class="token operator">:</span> ElementRef<span class="token operator">&lt;</span>HTMLElement<span class="token operator">&gt;</span><span class="token punctuation">,</span>
+    <span class="token keyword">private</span> cdRef<span class="token operator">:</span> ChangeDetectorRef
+  <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// optional: cdRef.detach();</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">.</span><span class="token function">hold</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">.</span><span class="token function">select</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">{</span> visible<span class="token punctuation">,</span> top<span class="token punctuation">,</span> maxHeight <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+      <span class="token keyword">const</span> <span class="token punctuation">{</span> nativeElement <span class="token punctuation">}</span> <span class="token operator">=</span> elementRef<span class="token punctuation">;</span>
+      nativeElement<span class="token punctuation">.</span>style<span class="token punctuation">.</span>marginTop <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>top <span class="token operator">?</span> top <span class="token operator">:</span> <span class="token number">0</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">px</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+      nativeElement<span class="token punctuation">.</span>style<span class="token punctuation">.</span>maxHeight <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>maxHeight <span class="token operator">?</span> maxHeight <span class="token operator">:</span> <span class="token number">100</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">px</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+      <span class="token comment">// by using this, we could assign more classes</span>
+      <span class="token keyword">const</span> classList<span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token punctuation">[</span>cls<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">]</span><span class="token operator">:</span> <span class="token builtin">boolean</span> <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
+        <span class="token string">'is-hidden'</span><span class="token operator">:</span> <span class="token operator">!</span>visible<span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">;</span>
+      Object<span class="token punctuation">.</span><span class="token function">keys</span><span class="token punctuation">(</span>classList<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span>cls<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+        classList<span class="token punctuation">[</span>cls<span class="token punctuation">]</span>
+          <span class="token operator">?</span> nativeElement<span class="token punctuation">.</span>classList<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>cls<span class="token punctuation">)</span>
+          <span class="token operator">:</span> nativeElement<span class="token punctuation">.</span>classList<span class="token punctuation">.</span><span class="token function">remove</span><span class="token punctuation">(</span>cls<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code><button class="docsify-copy-code-button"><span class="label">Copy to clipboard</span><span class="error">Error</span><span class="success">Copied</span></button></pre></article></section></main>
+    <!-- Settings -->
+    <script>
+      window.$docsify = {
+        search: 'auto',
+        // Name that will be displayed in sidebar
+        name: '@rx-angular',
+        // Takes only # & ## as sidebar links
+        subMaxLevel: 2,
+        // Show sidebar
+        loadSidebar: true,
+        // Coverpage url
+        coverpage: './web/partials/_coverpage.md',
+        // Prevents multiple downloads of sidebar
+        alias: {
+          '/.*/_sidebar.md': './web/partials/_sidebar.md',
+          '/_sidebar.md': './web/partials/_sidebar.md',
+        },
+        routerMode: 'history',
+        // Autoscroll content to the top when changing page
+        auto2top: true,
+        relativePath: true,
+      };
+    </script>
+    <!-- Main script -->
+    <script src="../../../../cdn.jsdelivr.net/npm/docsify/lib/docsify.min.js"></script>
+    <!-- Typescript highlight -->
+    <script src="../../../../cdn.jsdelivr.net/npm/prismjs@1.21.0/components/prism-typescript.min.js"></script>
+    <!-- Search -->
+    <script src="../../../../cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
+    <!-- Zoom image -->
+    <script src="../../../../cdn.jsdelivr.net/npm/docsify/lib/plugins/zoom-image.min.js"></script>
+    <!-- Copy code plugin -->
+    <script src="https://unpkg.com/docsify-copy-code@2"></script>
+  
+
+<div class="progress" style="opacity: 0; width: 0%;"></div></body></html>

@@ -1,0 +1,412 @@
+<html><!-- Mirrored from www.php.net/manual/en/language.oop5.variance.php by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 11 Sep 2021 02:32:15 GMT --><!-- Added by HTTrack --><head><meta http-equiv="content-type" content="text/html;charset=utf-8"><!-- /Added by HTTrack -->
+
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Covariance and Contravariance</title>
+
+ <link rel="shortcut icon" href="../../favicon.ico">
+ <link rel="search" type="application/opensearchdescription+xml" href="http://php.net/phpnetimprovedsearch.src" title="Add PHP.net search">
+ <link rel="alternate" type="application/atom+xml" href="https://www.php.net/releases/feed.php" title="PHP Release feed">
+ <link rel="alternate" type="application/atom+xml" href="https://www.php.net/feed.atom" title="PHP: Hypertext Preprocessor">
+
+ <link rel="canonical" href="language.oop5.variance.html">
+ <link rel="shorturl" href="https://www.php.net/oop5.variance">
+ <link rel="alternate" href="https://www.php.net/oop5.variance" hreflang="x-default">
+
+ <link rel="contents" href="index-2.html">
+ <link rel="index" href="language.oop5.html">
+ <link rel="prev" href="language.oop5.serialization.html">
+ <link rel="next" href="language.oop5.changelog.html">
+
+ <link rel="alternate" href="language.oop5.variance.html" hreflang="en">
+ <link rel="alternate" href="https://www.php.net/manual/pt_BR/language.oop5.variance.php" hreflang="pt_BR">
+ <link rel="alternate" href="https://www.php.net/manual/zh/language.oop5.variance.php" hreflang="zh">
+ <link rel="alternate" href="https://www.php.net/manual/fr/language.oop5.variance.php" hreflang="fr">
+ <link rel="alternate" href="https://www.php.net/manual/de/language.oop5.variance.php" hreflang="de">
+ <link rel="alternate" href="https://www.php.net/manual/ja/language.oop5.variance.php" hreflang="ja">
+ <link rel="alternate" href="https://www.php.net/manual/ro/language.oop5.variance.php" hreflang="ro">
+ <link rel="alternate" href="https://www.php.net/manual/ru/language.oop5.variance.php" hreflang="ru">
+ <link rel="alternate" href="https://www.php.net/manual/es/language.oop5.variance.php" hreflang="es">
+ <link rel="alternate" href="https://www.php.net/manual/tr/language.oop5.variance.php" hreflang="tr">
+
+<link rel="stylesheet" type="text/css" href="../../cached0aba.css?t=1539771603&amp;f=/fonts/Fira/fira.css" media="screen">
+<link rel="stylesheet" type="text/css" href="../../cached2ecf.css?t=1539765004&amp;f=/fonts/Font-Awesome/css/fontello.css" media="screen">
+<link rel="stylesheet" type="text/css" href="../../cachedba57.css?t=1606338002&amp;f=/styles/theme-base.css" media="screen">
+<link rel="stylesheet" type="text/css" href="../../cached3afa.css?t=1627831203&amp;f=/styles/theme-medium.css" media="screen">
+
+ <!--[if lte IE 7]>
+ <link rel="stylesheet" type="text/css" href="https://www.php.net/styles/workarounds.ie7.css" media="screen">
+ <![endif]-->
+
+ <!--[if lte IE 8]>
+ <script>
+  window.brokenIE = true;
+ </script>
+ <![endif]-->
+
+ <!--[if lte IE 9]>
+ <link rel="stylesheet" type="text/css" href="https://www.php.net/styles/workarounds.ie9.css" media="screen">
+ <![endif]-->
+
+ <!--[if IE]>
+ <script src="https://www.php.net/js/ext/html5.js"></script>
+ <![endif]-->
+
+ <base>
+
+
+</head>
+<body class="docs " style="">
+
+
+<div class="headsup"><a href="https://www.php.net/conferences/index.php#id2021-09-08-1">Longhorn PHP 2021</a></div>
+<nav id="trick"><div><dl>
+<dt><a href="getting-started.html">Getting Started</a></dt>
+	<dd><a href="introduction.html">Introduction</a></dd>
+	<dd><a href="tutorial.html">A simple tutorial</a></dd>
+<dt><a href="langref.html">Language Reference</a></dt>
+	<dd><a href="language.basic-syntax.html">Basic syntax</a></dd>
+	<dd><a href="language.types.html">Types</a></dd>
+	<dd><a href="language.variables.html">Variables</a></dd>
+	<dd><a href="language.constants.html">Constants</a></dd>
+	<dd><a href="language.expressions.html">Expressions</a></dd>
+	<dd><a href="language.operators.html">Operators</a></dd>
+	<dd><a href="language.control-structures.html">Control Structures</a></dd>
+	<dd><a href="language.functions.html">Functions</a></dd>
+	<dd><a href="language.oop5.html">Classes and Objects</a></dd>
+	<dd><a href="language.namespaces.html">Namespaces</a></dd>
+	<dd><a href="language.errors.html">Errors</a></dd>
+	<dd><a href="language.exceptions.html">Exceptions</a></dd>
+	<dd><a href="language.generators.html">Generators</a></dd>
+	<dd><a href="language.attributes.html">Attributes</a></dd>
+	<dd><a href="language.references.html">References Explained</a></dd>
+	<dd><a href="reserved.variables.html">Predefined Variables</a></dd>
+	<dd><a href="reserved.exceptions.html">Predefined Exceptions</a></dd>
+	<dd><a href="reserved.interfaces.html">Predefined Interfaces and Classes</a></dd>
+	<dd><a href="context.html">Context options and parameters</a></dd>
+	<dd><a href="wrappers.html">Supported Protocols and Wrappers</a></dd>
+</dl>
+<dl>
+<dt><a href="security.html">Security</a></dt>
+	<dd><a href="security.intro.html">Introduction</a></dd>
+	<dd><a href="security.general.html">General considerations</a></dd>
+	<dd><a href="security.cgi-bin.html">Installed as CGI binary</a></dd>
+	<dd><a href="security.apache.html">Installed as an Apache module</a></dd>
+	<dd><a href="security.sessions.html">Session Security</a></dd>
+	<dd><a href="security.filesystem.html">Filesystem Security</a></dd>
+	<dd><a href="security.database.html">Database Security</a></dd>
+	<dd><a href="security.errors.html">Error Reporting</a></dd>
+	<dd><a href="security.variables.html">User Submitted Data</a></dd>
+	<dd><a href="security.hiding.html">Hiding PHP</a></dd>
+	<dd><a href="security.current.html">Keeping Current</a></dd>
+<dt><a href="features.html">Features</a></dt>
+	<dd><a href="features.http-auth.html">HTTP authentication with PHP</a></dd>
+	<dd><a href="features.cookies.html">Cookies</a></dd>
+	<dd><a href="features.sessions.html">Sessions</a></dd>
+	<dd><a href="features.xforms.html">Dealing with XForms</a></dd>
+	<dd><a href="features.file-upload.html">Handling file uploads</a></dd>
+	<dd><a href="features.remote-files.html">Using remote files</a></dd>
+	<dd><a href="features.connection-handling.html">Connection handling</a></dd>
+	<dd><a href="features.persistent-connections.html">Persistent Database Connections</a></dd>
+	<dd><a href="features.commandline.html">Command line usage</a></dd>
+	<dd><a href="features.gc.html">Garbage Collection</a></dd>
+	<dd><a href="features.dtrace.html">DTrace Dynamic Tracing</a></dd>
+</dl>
+<dl>
+<dt><a href="funcref.html">Function Reference</a></dt>
+	<dd><a href="refs.basic.php.html">Affecting PHP's Behaviour</a></dd>
+	<dd><a href="refs.utilspec.audio.html">Audio Formats Manipulation</a></dd>
+	<dd><a href="refs.remote.auth.html">Authentication Services</a></dd>
+	<dd><a href="refs.utilspec.cmdline.html">Command Line Specific Extensions</a></dd>
+	<dd><a href="refs.compression.html">Compression and Archive Extensions</a></dd>
+	<dd><a href="refs.crypto.html">Cryptography Extensions</a></dd>
+	<dd><a href="refs.database.html">Database Extensions</a></dd>
+	<dd><a href="refs.calendar.html">Date and Time Related Extensions</a></dd>
+	<dd><a href="refs.fileprocess.file.html">File System Related Extensions</a></dd>
+	<dd><a href="refs.international.html">Human Language and Character Encoding Support</a></dd>
+	<dd><a href="refs.utilspec.image.html">Image Processing and Generation</a></dd>
+	<dd><a href="refs.remote.mail.html">Mail Related Extensions</a></dd>
+	<dd><a href="refs.math.html">Mathematical Extensions</a></dd>
+	<dd><a href="refs.utilspec.nontext.html">Non-Text MIME Output</a></dd>
+	<dd><a href="refs.fileprocess.process.html">Process Control Extensions</a></dd>
+	<dd><a href="refs.basic.other.html">Other Basic Extensions</a></dd>
+	<dd><a href="refs.remote.other.html">Other Services</a></dd>
+	<dd><a href="refs.search.html">Search Engine Extensions</a></dd>
+	<dd><a href="refs.utilspec.server.html">Server Specific Extensions</a></dd>
+	<dd><a href="refs.basic.session.html">Session Extensions</a></dd>
+	<dd><a href="refs.basic.text.html">Text Processing</a></dd>
+	<dd><a href="refs.basic.vartype.html">Variable and Type Related Extensions</a></dd>
+	<dd><a href="refs.webservice.html">Web Services</a></dd>
+	<dd><a href="refs.utilspec.windows.html">Windows Only Extensions</a></dd>
+	<dd><a href="refs.xml.html">XML Manipulation</a></dd>
+	<dd><a href="refs.ui.html">GUI Extensions</a></dd>
+</dl>
+<dl>
+<dt>Keyboard Shortcuts</dt><dt>?</dt>
+<dd>This help</dd>
+<dt>j</dt>
+<dd>Next menu item</dd>
+<dt>k</dt>
+<dd>Previous menu item</dd>
+<dt>g p</dt>
+<dd>Previous man page</dd>
+<dt>g n</dt>
+<dd>Next man page</dd>
+<dt>G</dt>
+<dd>Scroll to bottom</dd>
+<dt>g g</dt>
+<dd>Scroll to top</dd>
+<dt>g h</dt>
+<dd>Goto homepage</dd>
+<dt>g s</dt>
+<dd>Goto search<br>(current page)</dd>
+<dt>/</dt>
+<dd>Focus search box</dd>
+</dl></div></nav>
+<div id="goto">
+    <div class="search">
+         <div class="text"></div>
+         <div class="results"><ul></ul></div>
+   </div>
+</div>
+
+  <div id="breadcrumbs" class="row-fluid">
+    <div id="breadcrumbs-inner">
+          
+              
+          <ul>
+            <li><a href="index-2.html">PHP Manual</a></li>      <li><a href="langref.html">Language Reference</a></li>      <li><a href="language.oop5.html">Classes and Objects</a></li>      </ul>
+    </div>
+  </div>
+
+
+
+
+<div id="layout" class="clearfix">
+  <section id="layout-content">
+  <div id="language.oop5.variance" class="sect1">
+ <h2 class="title">Covariance and Contravariance</h2>
+
+ <p class="para">
+  In PHP 7.2.0, partial contravariance was introduced by removing type restrictions
+  on parameters in a child method. As of PHP 7.4.0, full covariance and contravariance
+  support was added.
+ </p>
+ <p class="para">
+  Covariance allows a child's method to return a more specific type than the return type
+  of its parent's method. Whereas, contravariance allows a parameter type to be less 
+  specific in a child method, than that of its parent.
+ </p>
+ <p class="para">
+  A type declaration is considered more specific in the following case:
+  </p><ul class="itemizedlist">
+   <li class="listitem">
+    <span class="simpara">
+     A type is removed from a <a href="language.types.declarations.html#language.types.declarations.union" class="link">union type</a>
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     A class type is changed to a child class type
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     <span class="type">float</span> is changed to <span class="type">int</span>
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     <span class="type"><a href="language.types.iterable.html" class="type iterable">iterable</a></span> is changed to <span class="type">array</span> or <span class="classname"><a href="class.traversable.html" class="classname">Traversable</a></span>
+    </span>
+   </li>
+  </ul>
+
+  A type class is considered less specific if the opposite is true.
+ <p></p>
+
+ <div class="sect2" id="language.oop5.variance.covariance">
+  <h3 class="title">Covariance</h3>
+
+  <p class="para">
+   To illustrate how covariance works, a simple abstract parent class, <var class="varname">Animal</var>
+   is created. <var class="varname">Animal</var> will be extended by children classes, 
+   <var class="varname">Cat</var>, and <var class="varname">Dog</var>.
+  </p>
+
+  <div class="informalexample">
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br><br></span><span style="color: #007700">abstract&nbsp;class&nbsp;</span><span style="color: #0000BB">Animal<br></span><span style="color: #007700">{<br>&nbsp;&nbsp;&nbsp;&nbsp;protected&nbsp;</span><span style="color: #0000BB">string&nbsp;$name</span><span style="color: #007700">;<br><br>&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;function&nbsp;</span><span style="color: #0000BB">__construct</span><span style="color: #007700">(</span><span style="color: #0000BB">string&nbsp;$name</span><span style="color: #007700">)<br>&nbsp;&nbsp;&nbsp;&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">name&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$name</span><span style="color: #007700">;<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br><br>&nbsp;&nbsp;&nbsp;&nbsp;abstract&nbsp;public&nbsp;function&nbsp;</span><span style="color: #0000BB">speak</span><span style="color: #007700">();<br>}<br><br>class&nbsp;</span><span style="color: #0000BB">Dog&nbsp;</span><span style="color: #007700">extends&nbsp;</span><span style="color: #0000BB">Animal<br></span><span style="color: #007700">{<br>&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;function&nbsp;</span><span style="color: #0000BB">speak</span><span style="color: #007700">()<br>&nbsp;&nbsp;&nbsp;&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">name&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #DD0000">"&nbsp;barks"</span><span style="color: #007700">;<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>}<br><br>class&nbsp;</span><span style="color: #0000BB">Cat&nbsp;</span><span style="color: #007700">extends&nbsp;</span><span style="color: #0000BB">Animal&nbsp;<br></span><span style="color: #007700">{<br>&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;function&nbsp;</span><span style="color: #0000BB">speak</span><span style="color: #007700">()<br>&nbsp;&nbsp;&nbsp;&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">name&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #DD0000">"&nbsp;meows"</span><span style="color: #007700">;<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>}</span>
+</span>
+</code></div>
+   </div>
+
+  </div>
+
+  <p class="para">
+   Note that there aren't any methods which return values in this example. A few factories 
+   will be added which return a new object of class type <var class="varname">Animal</var>, 
+   <var class="varname">Cat</var>, or <var class="varname">Dog</var>.
+  </p>
+
+  <div class="informalexample">
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br><br></span><span style="color: #007700">interface&nbsp;</span><span style="color: #0000BB">AnimalShelter<br></span><span style="color: #007700">{<br>&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;function&nbsp;</span><span style="color: #0000BB">adopt</span><span style="color: #007700">(</span><span style="color: #0000BB">string&nbsp;$name</span><span style="color: #007700">):&nbsp;</span><span style="color: #0000BB">Animal</span><span style="color: #007700">;<br>}<br><br>class&nbsp;</span><span style="color: #0000BB">CatShelter&nbsp;</span><span style="color: #007700">implements&nbsp;</span><span style="color: #0000BB">AnimalShelter<br></span><span style="color: #007700">{<br>&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;function&nbsp;</span><span style="color: #0000BB">adopt</span><span style="color: #007700">(</span><span style="color: #0000BB">string&nbsp;$name</span><span style="color: #007700">):&nbsp;</span><span style="color: #0000BB">Cat&nbsp;</span><span style="color: #FF8000">//&nbsp;instead&nbsp;of&nbsp;returning&nbsp;class&nbsp;type&nbsp;Animal,&nbsp;it&nbsp;can&nbsp;return&nbsp;class&nbsp;type&nbsp;Cat<br>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;new&nbsp;</span><span style="color: #0000BB">Cat</span><span style="color: #007700">(</span><span style="color: #0000BB">$name</span><span style="color: #007700">);<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>}<br><br>class&nbsp;</span><span style="color: #0000BB">DogShelter&nbsp;</span><span style="color: #007700">implements&nbsp;</span><span style="color: #0000BB">AnimalShelter<br></span><span style="color: #007700">{<br>&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;function&nbsp;</span><span style="color: #0000BB">adopt</span><span style="color: #007700">(</span><span style="color: #0000BB">string&nbsp;$name</span><span style="color: #007700">):&nbsp;</span><span style="color: #0000BB">Dog&nbsp;</span><span style="color: #FF8000">//&nbsp;instead&nbsp;of&nbsp;returning&nbsp;class&nbsp;type&nbsp;Animal,&nbsp;it&nbsp;can&nbsp;return&nbsp;class&nbsp;type&nbsp;Dog<br>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;new&nbsp;</span><span style="color: #0000BB">Dog</span><span style="color: #007700">(</span><span style="color: #0000BB">$name</span><span style="color: #007700">);<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>}<br><br></span><span style="color: #0000BB">$kitty&nbsp;</span><span style="color: #007700">=&nbsp;(new&nbsp;</span><span style="color: #0000BB">CatShelter</span><span style="color: #007700">)-&gt;</span><span style="color: #0000BB">adopt</span><span style="color: #007700">(</span><span style="color: #DD0000">"Ricky"</span><span style="color: #007700">);<br></span><span style="color: #0000BB">$kitty</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">speak</span><span style="color: #007700">();<br>echo&nbsp;</span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br><br></span><span style="color: #0000BB">$doggy&nbsp;</span><span style="color: #007700">=&nbsp;(new&nbsp;</span><span style="color: #0000BB">DogShelter</span><span style="color: #007700">)-&gt;</span><span style="color: #0000BB">adopt</span><span style="color: #007700">(</span><span style="color: #DD0000">"Mavrick"</span><span style="color: #007700">);<br></span><span style="color: #0000BB">$doggy</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">speak</span><span style="color: #007700">();</span>
+</span>
+</code></div>
+   </div>
+
+   <p class="para">The above example will output:</p>
+   <div class="example-contents screen">
+<div class="cdata"><pre>Ricky meows
+Mavrick barks
+</pre></div>
+   </div>
+  </div>
+ </div>
+
+ <div class="sect2" id="language.oop5.variance.contravariance">
+  <h3 class="title">Contravariance</h3>
+
+  <p class="para">
+   Continuing with the previous example with the classes <var class="varname">Animal</var>, 
+   <var class="varname">Cat</var>, and <var class="varname">Dog</var>, a class called 
+   <var class="varname">Food</var> and <var class="varname">AnimalFood</var> will be included, and 
+   a method <var class="varname">eat(AnimalFood $food)</var> is added to the <var class="varname">Animal</var> 
+   abstract class.
+  </p>
+
+  <div class="informalexample">
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br><br></span><span style="color: #007700">class&nbsp;</span><span style="color: #0000BB">Food&nbsp;</span><span style="color: #007700">{}<br><br>class&nbsp;</span><span style="color: #0000BB">AnimalFood&nbsp;</span><span style="color: #007700">extends&nbsp;</span><span style="color: #0000BB">Food&nbsp;</span><span style="color: #007700">{}<br><br>abstract&nbsp;class&nbsp;</span><span style="color: #0000BB">Animal<br></span><span style="color: #007700">{<br>&nbsp;&nbsp;&nbsp;&nbsp;protected&nbsp;</span><span style="color: #0000BB">string&nbsp;$name</span><span style="color: #007700">;<br><br>&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;function&nbsp;</span><span style="color: #0000BB">__construct</span><span style="color: #007700">(</span><span style="color: #0000BB">string&nbsp;$name</span><span style="color: #007700">)<br>&nbsp;&nbsp;&nbsp;&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">name&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$name</span><span style="color: #007700">;<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br><br>&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;function&nbsp;</span><span style="color: #0000BB">eat</span><span style="color: #007700">(</span><span style="color: #0000BB">AnimalFood&nbsp;$food</span><span style="color: #007700">)<br>&nbsp;&nbsp;&nbsp;&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">name&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #DD0000">"&nbsp;eats&nbsp;"&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">get_class</span><span style="color: #007700">(</span><span style="color: #0000BB">$food</span><span style="color: #007700">);<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>}</span>
+</span>
+</code></div>
+   </div>
+
+  </div>
+
+  <p class="para">
+   In order to see the behavior of contravariance, the
+   <var class="varname">eat</var> method is overridden in the <var class="varname">Dog</var> class to allow 
+   any <var class="varname">Food</var> type object. The <var class="varname">Cat</var> class remains unchanged.
+  </p>
+
+  <div class="informalexample">
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br><br></span><span style="color: #007700">class&nbsp;</span><span style="color: #0000BB">Dog&nbsp;</span><span style="color: #007700">extends&nbsp;</span><span style="color: #0000BB">Animal<br></span><span style="color: #007700">{<br>&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;function&nbsp;</span><span style="color: #0000BB">eat</span><span style="color: #007700">(</span><span style="color: #0000BB">Food&nbsp;$food</span><span style="color: #007700">)&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">name&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #DD0000">"&nbsp;eats&nbsp;"&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">get_class</span><span style="color: #007700">(</span><span style="color: #0000BB">$food</span><span style="color: #007700">);<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>}</span>
+</span>
+</code></div>
+   </div>
+
+  </div>
+
+  <p class="para">
+   The next example will show the behavior of contravariance.
+  </p>
+
+  <div class="informalexample">
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br><br>$kitty&nbsp;</span><span style="color: #007700">=&nbsp;(new&nbsp;</span><span style="color: #0000BB">CatShelter</span><span style="color: #007700">)-&gt;</span><span style="color: #0000BB">adopt</span><span style="color: #007700">(</span><span style="color: #DD0000">"Ricky"</span><span style="color: #007700">);<br></span><span style="color: #0000BB">$catFood&nbsp;</span><span style="color: #007700">=&nbsp;new&nbsp;</span><span style="color: #0000BB">AnimalFood</span><span style="color: #007700">();<br></span><span style="color: #0000BB">$kitty</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">eat</span><span style="color: #007700">(</span><span style="color: #0000BB">$catFood</span><span style="color: #007700">);<br>echo&nbsp;</span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br><br></span><span style="color: #0000BB">$doggy&nbsp;</span><span style="color: #007700">=&nbsp;(new&nbsp;</span><span style="color: #0000BB">DogShelter</span><span style="color: #007700">)-&gt;</span><span style="color: #0000BB">adopt</span><span style="color: #007700">(</span><span style="color: #DD0000">"Mavrick"</span><span style="color: #007700">);<br></span><span style="color: #0000BB">$banana&nbsp;</span><span style="color: #007700">=&nbsp;new&nbsp;</span><span style="color: #0000BB">Food</span><span style="color: #007700">();<br></span><span style="color: #0000BB">$doggy</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">eat</span><span style="color: #007700">(</span><span style="color: #0000BB">$banana</span><span style="color: #007700">);</span>
+</span>
+</code></div>
+   </div>
+
+   <p class="para">The above example will output:</p>
+   <div class="example-contents screen">
+<div class="cdata"><pre>Ricky eats AnimalFood
+Mavrick eats Food
+</pre></div>
+   </div>
+
+   <p class="para">
+    But what happens if <var class="varname">$kitty</var> tries to <var class="varname">eat</var> the
+    <var class="varname">$banana</var>?
+   </p>
+
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+$kitty-&gt;eat($banana);</span>
+</code></div>
+   </div>
+
+   <p class="para">The above example will output:</p>
+   <div class="example-contents screen">
+<div class="cdata"><pre>Fatal error: Uncaught TypeError: Argument 1 passed to Animal::eat() must be an instance of AnimalFood, instance of Food given
+</pre></div>
+   </div>
+  </div>
+ </div>
+</div>
+<section id="usernotes">
+ <div class="head"><h3 class="title">User Contributed Notes</h3></div><div id="allnotes">
+  <div class="note" id="124609">  
+  <a class="name">
+  <strong class="user"><em>xedin dot unknown at gmail dot com</em></strong></a><div class="date" title="2020-01-13 04:20"><strong>1 year ago</strong></div>
+  <div class="text" id="Hcom124609">
+<div class="phpcode"><code><span class="html">
+I would like to explain why covariance and contravariance are important, and why they apply to return types and parameter types respectively, and not the other way around.<br><br>Covariance is probably easiest to understand, and is directly related to the Liskov Substitution Principle. Using the above example, let's say that we receive an `AnimalShelter` object, and then we want to use it by invoking its `adopt()` method. We know that it returns an `Animal` object, and no matter what exactly that object is, i.e. whether it is a `Cat` or a `Dog`, we can treat them the same. Therefore, it is OK to specialize the return type: we know at least the common interface of any thing that can be returned, and we can treat all of those values in the same way.<br><br>Contravariance is slightly more complicated. It is related very much to the practicality of increasing the flexibility of a method. Using the above example again, perhaps the "base" method `eat()` accepts a specific type of food; however, a _particular_ animal may want to support a _wider range_ of food types. Maybe it, like in the above example, adds functionality to the original method that allows it to consume _any_ kind of food, not just that meant for animals. The "base" method in `Animal` already implements the functionality allowing it to consume food specialized for animals. The overriding method in the `Dog` class can check if the parameter is of type `AnimalFood`, and simply invoke `parent::eat($food)`. If the parameter is _not_ of the specialized type, it can perform additional or even completely different processing of that parameter - without breaking the original signature, because it _still_ handles the specialized type, but also more. That's why it is also related closely to the Liskov Substitution: consumers may still pass a specialized food type to the `Animal` without knowing exactly whether it is a `Cat` or `Dog`.</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="124712">  
+  <a class="name">
+  <strong class="user"><em>Anonymous</em></strong></a><div class="date" title="2020-02-12 08:47"><strong>1 year ago</strong></div>
+  <div class="text" id="Hcom124712">
+<div class="phpcode"><code><span class="html">
+Covariance also works with general type-hinting, note also the interface:<br><br>interface xInterface<br>{<br>&nbsp; &nbsp; public function y() : object;<br>}<br><br>abstract class x implements xInterface<br>{<br>&nbsp; &nbsp; abstract public function y() : object;<br>}<br><br>class a extends x<br>{<br>&nbsp; &nbsp; public function y() : \DateTime<br>&nbsp; &nbsp; {<br>&nbsp; &nbsp; &nbsp; &nbsp; return new \DateTime("now");<br>&nbsp; &nbsp; }<br>}<br><br>$a = new a;<br>echo '&lt;pre&gt;';<br>var_dump($a-&gt;y());<br>echo '&lt;/pre&gt;';</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="125983">  
+  <a class="name">
+  <strong class="user"><em>maxim dot kainov at gmail dot com</em></strong></a><div class="date" title="2021-04-04 05:57"><strong>5 months ago</strong></div>
+  <div class="text" id="Hcom125983">
+<div class="phpcode"><code><span class="html">
+This example will not work:<br><br><span class="default">&lt;?php<br><br></span><span class="keyword">class </span><span class="default">CatFood </span><span class="keyword">extends </span><span class="default">AnimalFood </span><span class="keyword">{ }<br><br>class </span><span class="default">Cat </span><span class="keyword">extends </span><span class="default">Animal<br></span><span class="keyword">{<br>&nbsp; &nbsp; public function </span><span class="default">eat</span><span class="keyword">(</span><span class="default">CatFood $food</span><span class="keyword">) {<br>&nbsp; &nbsp; &nbsp; &nbsp; echo </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">name </span><span class="keyword">. </span><span class="string">" eats " </span><span class="keyword">. </span><span class="default">get_class</span><span class="keyword">(</span><span class="default">$food</span><span class="keyword">);<br>&nbsp; &nbsp; }<br>}<br><br></span><span class="default">?&gt;<br></span><br>The reason is:<br><br><span class="default">&lt;?php<br>&nbsp; &nbsp; </span><span class="keyword">class </span><span class="default">DogFood </span><span class="keyword">extends </span><span class="default">AnimalFood </span><span class="keyword">{ }<br>&nbsp;&nbsp; <br>&nbsp; &nbsp; function </span><span class="default">feedAnimal</span><span class="keyword">(</span><span class="default">Animal $animal</span><span class="keyword">, </span><span class="default">AnimalFood $food</span><span class="keyword">) {<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$animal</span><span class="keyword">-&gt;</span><span class="default">eat</span><span class="keyword">(</span><span class="default">$food</span><span class="keyword">);&nbsp;&nbsp; <br>&nbsp; &nbsp; }<br><br>&nbsp; &nbsp; </span><span class="default">$cat </span><span class="keyword">= new </span><span class="default">Cat</span><span class="keyword">();<br>&nbsp; &nbsp; </span><span class="default">$dogFood </span><span class="keyword">= new </span><span class="default">DogFood</span><span class="keyword">();&nbsp;&nbsp; <br><br>&nbsp; &nbsp; </span><span class="default">feedAnimal</span><span class="keyword">(</span><span class="default">$cat</span><span class="keyword">, </span><span class="default">$dogFood</span><span class="keyword">);&nbsp; &nbsp; <br></span><span class="default">?&gt;<br></span><br>But you can do it with traits, like this:<br><br><span class="default">&lt;?php<br><br></span><span class="keyword">trait </span><span class="default">AnimalTrait <br></span><span class="keyword">{<br>&nbsp; &nbsp; public function </span><span class="default">eat</span><span class="keyword">(</span><span class="default">AnimalFood $food</span><span class="keyword">)<br>&nbsp; &nbsp; {<br>&nbsp; &nbsp; &nbsp; &nbsp; echo </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">name </span><span class="keyword">. </span><span class="string">" ест " </span><span class="keyword">. </span><span class="default">get_class</span><span class="keyword">(</span><span class="default">$food</span><span class="keyword">);<br>&nbsp; &nbsp; }<br>}<br><br>class </span><span class="default">Cat<br></span><span class="keyword">{<br>&nbsp; &nbsp; use </span><span class="default">AnimalTrait</span><span class="keyword">;<br><br>&nbsp; &nbsp; public function </span><span class="default">eat</span><span class="keyword">(</span><span class="default">CatFood $food</span><span class="keyword">) {<br>&nbsp; &nbsp; &nbsp; &nbsp; echo </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">name </span><span class="keyword">. </span><span class="string">" eats " </span><span class="keyword">. </span><span class="default">get_class</span><span class="keyword">(</span><span class="default">$food</span><span class="keyword">);<br>&nbsp; &nbsp; }<br>}<br><br></span><span class="default">?&gt;</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="125704">  
+  <a class="name">
+  <strong class="user"><em>phpnet-at-kennel17-dotco-dotuk</em></strong></a><div class="date" title="2021-01-20 05:51"><strong>7 months ago</strong></div>
+  <div class="text" id="Hcom125704">
+<div class="phpcode"><code><span class="html">
+Following the examples above, you might assume the following would be possible.<br><br><span class="default">&lt;?php<br><br></span><span class="keyword">class </span><span class="default">CatFood </span><span class="keyword">extends </span><span class="default">AnimalFood </span><span class="keyword">{ ... }<br><br>class </span><span class="default">Cat </span><span class="keyword">extends </span><span class="default">Animal<br></span><span class="keyword">{<br>&nbsp; &nbsp; public function </span><span class="default">eat</span><span class="keyword">(</span><span class="default">CatFood $food</span><span class="keyword">) {<br>&nbsp; &nbsp; &nbsp; &nbsp; echo </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">name </span><span class="keyword">. </span><span class="string">" eats " </span><span class="keyword">. </span><span class="default">get_class</span><span class="keyword">(</span><span class="default">$food</span><span class="keyword">);<br>&nbsp; &nbsp; }<br>}<br><br></span><span class="default">?&gt;<br></span><br>However, the Liskov Substitution Prinicpal, and therefore PHP, forbids this.&nbsp; There's no way for cats to eat cat food, if animals are defined as eating animal food.<br><br>There are a large number of legitimate abstractions that are forbidden by PHP, due to this restriction.</span>
+</code></div>
+  </div>
+ </div></div>
+
+ 
+</section>    </section><!-- layout-content -->
+        
+
+
+  </div><!-- layout -->
+
+  
+
+    
+ <!-- External and third party libraries. -->
+ 
+
+
+
+
+
+
+
+<a id="toTop" href="javascript:;"><span id="toTopHover"></span><img width="40" height="40" alt="To Top" src="../../images/to-top%402x.png"></a>
+
+
+
+<!-- Mirrored from www.php.net/manual/en/language.oop5.variance.php by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 11 Sep 2021 02:32:15 GMT -->
+
+</body></html>

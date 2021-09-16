@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+
+<!-- Mirrored from developer.wordpress.org/apis/handbook/internationalization/localization/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 31 Aug 2021 16:54:47 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<!--
+<meta property="fb:page_id" content="6427302910" />
+-->
+<meta name="google-site-verification" content="7VWES_-rcHBcmaQis9mSYamPfNwE03f4vyTj4pfuAw0" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Localization</title>
+<meta name="referrer" content="always">
+
+		<link href='../../../../../fonts.googleapis.com/css.css?family=Open+Sans:300italic,400italic,600italic,400,300,600&amp;subset=latin,cyrillic-ext,greek-ext,greek,vietnamese,latin-ext,cyrillic' rel='stylesheet' type='text/css'>
+
+		<link rel="stylesheet" href="../../../../../s.w.org/style/wp4.css?95" />
+
+<link rel="shortcut icon" href="../../../../../s.w.org/favicon.ico?2" type="image/x-icon" />
+<link rel="pingback" href="../../../../xmlrpc.php" /><meta name='robots' content='max-image-preview:large' />
+<link rel='dns-prefetch' href='../../../../../fonts.googleapis.com/index.html' />
+<link rel='dns-prefetch' href='http://s.w.org/' />
+<link rel='dns-prefetch' href='http://www.googletagmanager.com/' />
+<link rel='dns-prefetch' href='http://fonts.gstatic.com/' />
+<link rel="alternate" type="application/rss+xml" title="WordPress Developer Resources &raquo; Feed" href="../../../../feed/index.html" />
+<link rel="alternate" type="application/rss+xml" title="WordPress Developer Resources &raquo; Comments Feed" href="../../../../comments/feed/index.html" />
+<meta property="og:title" content="Localization | Common APIs Handbook | WordPress Developer Resources" />
+<meta property="og:site_name" content="WordPress Developer Resources" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="../../../../index.html" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@WordPress" />
+<meta name="description" content="What is localization? Localization describes the process of translating a software and adapting its strings to a specific location.&hellip;" />
+<meta property="og:description" content="What is localization? Localization describes the process of translating a software and adapting its strings to a specific location.&hellip;" />
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'../../../../../www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P24PF4B');</script>
+			<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/developer.wordpress.org\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.9-alpha-51701"}};
+			!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([10084,65039,8205,55357,56613],[10084,65039,8203,55357,56613])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel='stylesheet' id='dashicons-css'  href='../../../../wp-includes/css/dashicons.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='admin-bar-css'  href='../../../../wp-includes/css/admin-bar.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-block-library-css'  href='../../../../wp-includes/css/dist/block-library/style.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='mkaz-code-syntax-prism-css-css'  href='../../../../wp-content/plugins/code-syntax-block/assets/prism-ghcolors.css?ver=1626664883' type='text/css' media='all' />
+<link rel='stylesheet' id='wporg-handbook-css-css'  href='../../../../wp-content/plugins/handbook/stylesheets/callout-boxes.css?ver=20200121' type='text/css' media='all' />
+<link rel='stylesheet' id='open-sans-css'  href='../../../../../fonts.googleapis.com/css-2.css?family=Open+Sans%3A300italic%2C400italic%2C600italic%2C300%2C400%2C600&amp;subset=latin%2Clatin-ext&amp;display=fallback&amp;ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='wporg-developer-style-css'  href='../../../../wp-content/themes/pub/wporg-developer/style.css?ver=3' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-dev-sass-compiled-css'  href='../../../../wp-content/themes/pub/wporg-developer/stylesheets/main.css?ver=20200713' type='text/css' media='all' />
+<link rel='stylesheet' id='awesomplete-css-css'  href='../../../../wp-content/themes/pub/wporg-developer/stylesheets/awesomplete.css?ver=20160114' type='text/css' media='all' />
+<link rel='stylesheet' id='autocomplete-css-css'  href='../../../../wp-content/themes/pub/wporg-developer/stylesheets/autocomplete.css?ver=20171220' type='text/css' media='all' />
+<link rel='stylesheet' id='syntaxhighlighter-core-css'  href='../../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shCore.css?ver=3.0.9b' type='text/css' media='all' />
+<link rel='stylesheet' id='syntaxhighlighter-theme-default-css'  href='../../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shThemeDefault.css?ver=3.0.9b' type='text/css' media='all' />
+<script type='text/javascript' src='../../../../wp-includes/js/jquery/jquery.min.js?ver=3.6.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='../../../../wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='../../../../wp-content/plugins/handbook/scripts/handbook.js?ver=20150930' id='wporg-handbook-js'></script>
+<script type='text/javascript' src='../../../../wp-content/themes/pub/wporg-developer/js/chapters.js?ver=20190603' id='wporg-developer-chapters-js'></script>
+<script type='text/javascript' src='../../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shCore.js?ver=3.0.9b' id='syntaxhighlighter-core-js'></script>
+<script type='text/javascript' src='../../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushPhp.js?ver=3.0.9b' id='syntaxhighlighter-brush-php-js'></script>
+<link rel="https://api.w.org/" href="https://developer.wordpress.org/wp-json/" /><link rel="alternate" type="application/json" href="https://developer.wordpress.org/wp-json/wp/v2/apis-handbook/126152" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="../../../../xmlrpc-2.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="../../../../wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 5.9-alpha-51701" />
+<link rel='shortlink' href='https://developer.wordpress.org/?p=126152' />
+<link rel="alternate" type="application/json+oembed" href="https://developer.wordpress.org/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fdeveloper.wordpress.org%2Fapis%2Fhandbook%2Finternationalization%2Flocalization%2F" />
+<link rel="alternate" type="text/xml+oembed" href="https://developer.wordpress.org/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fdeveloper.wordpress.org%2Fapis%2Fhandbook%2Finternationalization%2Flocalization%2F&amp;format=xml" />
+<link rel="canonical" href="index.html">
+<!-- Stream WordPress user activity plugin v3.6.2 -->
+	<style>
+		@media screen and (max-width: 782px) {
+			#wpadminbar li#wp-admin-bar-log-in,
+			#wpadminbar li#wp-admin-bar-register {
+				display: block;
+			}
+
+			#wpadminbar li#wp-admin-bar-log-in a,
+			#wpadminbar li#wp-admin-bar-register a {
+				padding: 0 8px;
+			}
+		}
+	</style>
+		<style>
+			a.github-edit {
+				margin-left: .5em;
+				font-size: .5em;
+				vertical-align: top;
+				display: inline-block;
+				border: 1px solid #eeeeee;
+				border-radius: 2px;
+				background: #eeeeee;
+				padding: .5em .6em .4em;
+				color: black;
+				margin-top: 0.1em;
+			}
+			a.github-edit > * {
+				opacity: 0.6;
+			}
+			a.github-edit:hover > * {
+				opacity: 1;
+				color: black;
+			}
+			a.github-edit img {
+				height: .8em;
+			}
+		</style>
+		
+	<script type="text/javascript">
+		jQuery( '<style>.hide-if-js { display: none; }</style>' ).appendTo( 'head' );
+		jQuery( function($) {
+			$( 'body' ).addClass('js');
+		} );
+	</script>
+<style type="text/css" media="print">#wpadminbar { display:none; }</style>
+	<style type="text/css" media="screen">
+	</style>
+	<script>document.cookie='devicePixelRatio='+((window.devicePixelRatio === undefined) ? 1 : window.devicePixelRatio)+'; path=/';</script>
+
+</head>
+
+
+<body id="wordpress-org" class="apis-handbook-template-default single single-apis-handbook postid-126152 admin-bar no-customize-support single-handbook">
+		<div id="wpadminbar" class="nojq nojs">
+						<div class="quicklinks" id="wp-toolbar" role="navigation" aria-label="Toolbar">
+				<ul id='wp-admin-bar-root-default' class="ab-top-menu"><li id='wp-admin-bar-wp-logo' class="menupop"><a class='ab-item' aria-haspopup="true" href='https://wordpress.org/about/'><span class="ab-icon" aria-hidden="true"></span><span class="screen-reader-text">About WordPress</span></a><div class="ab-sub-wrapper"><ul id='wp-admin-bar-wp-logo-default' class="ab-submenu"><li id='wp-admin-bar-about'><a class='ab-item' href='https://wordpress.org/about/'>About WordPress</a></li></ul><ul id='wp-admin-bar-wp-logo-external' class="ab-sub-secondary ab-submenu"><li id='wp-admin-bar-wporg'><a class='ab-item' href='https://wordpress.org/'>WordPress.org</a></li><li id='wp-admin-bar-documentation'><a class='ab-item' href='https://wordpress.org/support/'>Documentation</a></li><li id='wp-admin-bar-support-forums'><a class='ab-item' href='https://wordpress.org/support/forums/'>Support</a></li><li id='wp-admin-bar-feedback'><a class='ab-item' href='https://wordpress.org/support/forum/requests-and-feedback'>Feedback</a></li></ul></div></li></ul><ul id='wp-admin-bar-top-secondary' class="ab-top-secondary ab-top-menu"><li id='wp-admin-bar-search' class="admin-bar-search"><div class="ab-item ab-empty-item" tabindex="-1"><form action="https://developer.wordpress.org/" method="get" id="adminbarsearch"><input class="adminbar-input" name="s" id="adminbar-search" type="text" value="" maxlength="150" /><label for="adminbar-search" class="screen-reader-text">Search</label><input type="submit" class="adminbar-button" value="Search" /></form></div></li><li id='wp-admin-bar-log-in'><a class='ab-item' href='https://login.wordpress.org/?locale=en_US'>Log In</a></li><li id='wp-admin-bar-register'><a class='ab-item' href='https://login.wordpress.org/register?locale=en_US'>Register</a></li></ul>			</div>
+					</div>
+
+		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P24PF4B" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<div id="wporg-header">
+	<div class="wrapper">
+	<h1><a href="http://wordpress.org/">WordPress.org</a></h1>				<div id="head-search">
+		<form action="http://wordpress.org/search/do-search.php" method="get">
+			<label for="global-search" class="screen-reader-text">Search WordPress.org for:</label>
+			<input id="global-search" class="text" name="search" type="text" value="" maxlength="150" placeholder="Search WordPress.org" />
+			<button type="submit" class="button"><span class="screen-reader-text">Submit</span></button>
+		</form>
+		</div>
+				<div style="clear:both"></div>
+		<button id="mobile-menu-button" aria-expanded="false"><span class="screen-reader-text">Toggle Menu</span></button>
+		
+<nav aria-label="Main Menu">
+<ul id="wporg-header-menu">
+<li class="menu-item"><a href='http://wordpress.org/showcase/' data-title='See some of the sites built on WordPress.'>Showcase</a></li>
+<li class="menu-item"><a href='http://learn.wordpress.org/' data-title='Resources to help you learn more about WordPress and teach it to others.'>Learn</a></li>
+<li class="menu-item"><a href='http://wordpress.org/themes/' data-title='Find just the right look for your website.'>Themes</a></li>
+<li class="menu-item"><a href='http://wordpress.org/plugins/' data-title='Plugins can extend WordPress to do almost anything you can imagine.'>Plugins</a></li>
+<li class="menu-item"><a href='http://wordpress.org/mobile/' data-title='Take your website on the go!'>Mobile</a></li>
+<li class="menu-item"><a href='http://wordpress.org/support/' data-title='Forums, documentation, help.'>Support</a><ul class="nav-submenu"><li><a href='http://wordpress.org/support/' title='Documentation, tutorials, best practices.'>Documentation</a></li><li><a href='http://wordpress.org/support/forums/' title='Support and discussion forums.'>Forums</a></li></ul><div class="uparrow"></div></li>
+<li class="menu-item"><a href='http://make.wordpress.org/' data-title='Contribute your knowledge.'>Get Involved</a><ul class="nav-submenu"><li><a href='http://wordpress.org/five-for-the-future/' title='How five percent is powering the next generation of the web'>Five for the Future</a></li></ul><div class="uparrow"></div></li>
+<li class="menu-item"><a href='http://wordpress.org/about/' data-title='About the WordPress Organization, and where we&#039;re going.'>About</a></li>
+<li class="menu-item"><a href='http://wordpress.org/news/' data-title='Come here for the latest scoop.'>Blog</a></li>
+<li class="menu-item"><a href='http://wordpress.org/hosting/' data-title='Find a home for your blog.'>Hosting</a></li>
+<li id="download" class="button download-button menu-item"><a href='http://wordpress.org/download/' data-title='Get it. Got it? Good.'>Get WordPress</a></li>
+</ul>
+</nav>
+		<div style="clear:both"></div>
+	</div>
+</div>
+
+
+
+<header id="masthead" class="site-header" role="banner">
+			<a href="#" id="secondary-toggle" onclick="return false;"><strong>Menu</strong></a>
+		<div class="site-branding">
+		<h1 class="site-title">
+			<a href="../../../../index.html" rel="home">Common APIs Handbook</a>
+		</h1>
+
+		
+		<nav id="site-navigation" class="main-navigation" role="navigation">
+			<button class="menu-toggle dashicons dashicons-arrow-down-alt2" aria-controls="primary-menu" aria-expanded="false" aria-label="Primary Menu"></button>
+					</nav>
+	</div>
+</header><!-- #masthead -->
+
+<div id="page" class="hfeed site devhub-wrap">
+	<a href="#main" class="screen-reader-text">Skip to content</a>
+
+			<div id="content" class="site-content">
+
+
+	<div id="secondary" class="widget-area" role="complementary">
+		<a href="#" id="secondary-toggle"></a>
+		<div id="secondary-content">
+						<aside id="search-8" class="widget widget_search"><div class="search-section section clear hide-if-js">
+
+
+	
+	<form role="search" method="get" class="searchform searchform-handbook" action="https://developer.wordpress.org/apis/">
+		<label for="search-field" class="screen-reader-text">Search for:</label>
+		<input type="text" id="search-field" class="search-field" placeholder="Search &hellip;" value="" name="s">
+		<button class="button button-primary button-search"><i class="dashicons dashicons-search"></i><span class="screen-reader-text">Search plugins</span></button>
+	
+	</form>
+
+</div><!-- /search-guide -->
+</aside><aside id="handbook_pages-4" class="widget widget_wporg_handbook_pages"><h2 class="widget-title">Sections</h2>
+<div class="menu-table-of-contents-container">
+
+			<ul>
+				<li class="page_item page-item-125334 page_item_has_children current_page_ancestor current-menu-ancestor menu-item menu-item-has-children"><a href="../../../index.html">Common APIs Handbook</a>
+<ul class='children'>
+	<li class="page_item page-item-132071 menu-item"><a href="../../responsive-images/index.html">Responsive Images</a></li>
+	<li class="page_item page-item-125636 page_item_has_children menu-item menu-item-has-children"><a href="../../dashboard-widgets/index.html">Dashboard widgets API</a>
+	<ul class='children'>
+		<li class="page_item page-item-125763 menu-item"><a href="../../dashboard-widgets/example-dashboard-widget/index.html">Example Dashboard widget</a></li>
+	</ul>
+</li>
+	<li class="page_item page-item-125638 menu-item"><a href="../../database/index.html">Database API</a></li>
+	<li class="page_item page-item-126023 page_item_has_children current_page_ancestor current_page_parent current-menu-ancestor current-menu-parent menu-item menu-item-has-children"><a href="../index.html">Internationalization</a>
+	<ul class='children'>
+		<li class="page_item page-item-126122 menu-item"><a href="../internationalization-functions/index.html">Internationalization Functions</a></li>
+		<li class="page_item page-item-126126 menu-item"><a href="../internationalization-guidelines/index.html">Internationalization Guidelines</a></li>
+		<li class="page_item page-item-126152 current_page_item current-menu-item menu-item"><a href="index.html" aria-current="page">Localization</a></li>
+	</ul>
+</li>
+	<li class="page_item page-item-125642 menu-item"><a href="../../filesystem/index.html">Filesystem</a></li>
+	<li class="page_item page-item-125644 menu-item"><a href="../../global-variables/index.html">Global Variables</a></li>
+	<li class="page_item page-item-125646 menu-item"><a href="../../metadata/index.html">Metadata</a></li>
+	<li class="page_item page-item-125648 menu-item"><a href="../../options/index.html">Options</a></li>
+	<li class="page_item page-item-125650 menu-item"><a href="../../plugins/index.html">Plugins</a></li>
+	<li class="page_item page-item-129278 page_item_has_children menu-item menu-item-has-children"><a href="../../making-http-requests/index.html">Making HTTP requests</a>
+	<ul class='children'>
+		<li class="page_item page-item-129272 menu-item"><a href="../../making-http-requests/getting-data-from-an-external-service/index.html">GETting data from an external service</a></li>
+		<li class="page_item page-item-129270 menu-item"><a href="../../making-http-requests/posting-data-to-an-external-service/index.html">POSTing data to an external service</a></li>
+		<li class="page_item page-item-129268 menu-item"><a href="../../making-http-requests/performance/index.html">Performance</a></li>
+		<li class="page_item page-item-129274 menu-item"><a href="../../making-http-requests/advanced/index.html">Advanced</a></li>
+		<li class="page_item page-item-129276 menu-item"><a href="../../making-http-requests/authentication/index.html">Authentication</a></li>
+	</ul>
+</li>
+	<li class="page_item page-item-125652 menu-item"><a href="../../quicktags/index.html">Quicktags</a></li>
+	<li class="page_item page-item-125654 menu-item"><a href="../../rest/index.html">REST</a></li>
+	<li class="page_item page-item-125656 menu-item"><a href="../../rewrite/index.html">Rewrite</a></li>
+	<li class="page_item page-item-125658 menu-item"><a href="../../settings/index.html">Settings</a></li>
+	<li class="page_item page-item-125660 menu-item"><a href="../../shortcode/index.html">Shortcode</a></li>
+	<li class="page_item page-item-136532 menu-item"><a href="../../site-health/index.html">Site Health</a></li>
+	<li class="page_item page-item-125662 menu-item"><a href="../../theme/index.html">Theme</a></li>
+	<li class="page_item page-item-125664 menu-item"><a href="../../transients/index.html">Transients</a></li>
+	<li class="page_item page-item-125666 menu-item"><a href="../../xml-rpc/index.html">XML-RPC</a></li>
+</ul>
+</li>
+			</ul>
+
+			</div>		</div>
+	</div><!-- #secondary -->
+
+
+		<main id="primary" class="site-main post-126152 apis-handbook type-apis-handbook status-publish hentry type-handbook" role="main">
+
+		
+		<div class="breadcrumb-trail breadcrumbs" itemprop="breadcrumb">
+			<span class="trail-browse">Browse:</span> 
+			<span class="trail-begin"><a href="../../../../index.html" title="WordPress Developer Resources" rel="home">Home</a></span> <span class="sep">&#47;</span> 
+			<span class="trail-inner"><a href="../../../index.html">Common APIs Handbook</a></span> <span class="sep">&#47;</span> 
+			<span class="trail-inner"><a href="../../../index.html" title="Common APIs Handbook">Common APIs Handbook</a></span> <span class="sep">&#47;</span> 
+			<span class="trail-inner"><a href="../index.html" title="Internationalization">Internationalization</a></span> <span class="sep">&#47;</span> <span class="trail-end">Localization</span>
+		</div>
+		
+			
+<h1>Localization</h1>
+
+
+<style> .toc-jump { text-align: right; font-size: 12px; } .page .toc-heading { margin-top: -50px; padding-top: 50px !important; }</style><div class="table-of-contents"><h2>Topics</h2><ul class="items"><li><a href="#what-is-localization">What is localization?</a></li>
+<li><a href="#translating-wordpress-plugins-and-themes">Translating WordPress, Plugins and Themes</a></li>
+<li><a href="#translating-themes-and-plugins">Translating Themes and Plugins</a>
+<ul>
+<li><a href="#localization-files">Localization files</a></li>
+<li><a href="#pot-portable-object-template-files">POT (Portable Object Template) files</a></li>
+<li><a href="#po-portable-object-files">PO (Portable Object) files</a></li>
+<li><a href="#mo-machine-object-files">MO (Machine Object) files</a></li>
+<li><a href="#generating-pot-file">Generating POT file</a>
+<ul>
+<li><a href="#wp-cli">WP-CLI</a></li>
+<li><a href="#poedit">Poedit</a></li>
+<li><a href="#grunt-tasks">Grunt Tasks</a>
+</ul></li>
+<li><a href="#translate-po-file">Translate PO file</a></li>
+<li><a href="#generate-mo-file">Generate MO file</a>
+<ul>
+<li><a href="#command-line">Command line</a></li>
+<li><a href="#converting-multiple-po-files-at-once">Converting multiple PO files at once</a></li>
+<li><a href="#poedit-2">Poedit</a></li>
+<li><a href="#grunt-task">Grunt task</a>
+</ul></li>
+<li><a href="#tips-for-good-translations">Tips for Good Translations</a>
+<ul>
+<li><a href="#dont-translate-literally-translate-organically">Don&#8217;t translate literally, translate organically</a></li>
+<li><a href="#try-to-keep-the-same-level-of-formality-or-informality">Try to keep the same level of formality (or informality)</a></li>
+<li><a href="#dont-use-slang-or-audience-specific-terms">Don&#8217;t use slang or audience-specific terms</a></li>
+<li><a href="#read-other-softwares-localizations-in-your-language">Read other software&#8217;s localizations in your language</a>
+</ul></li>
+<li><a href="#using-localizations">Using Localizations</a></li>
+<li><a href="#resources">Resources</a></ul>
+</div>
+
+<h2 class="toc-heading" id="what-is-localization" tabindex="-1">What is localization? <a href="#what-is-localization" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">What is localization?</span></a></h2>
+
+
+
+<p>Localization describes the process of translating a software and adapting its strings to a specific location. Localization is abbreviated as <code>l10n</code> (because there are 10 letters between the l and the n.)</p>
+
+
+
+<p>The process of localizing software has two steps. The first step is when the developers provide a mechanism and method for the eventual translation of the program and its interface to suit local preferences and languages for users worldwide. This process is <a href="../index.html">internationalization</a> (i18n). WordPress developers have done this already, so in theory, WordPress can be used in any language.</p>
+
+
+
+<p>The second step is the actual <strong>localization</strong> (l10n), the process by which the text on the page and other settings are translated and adapted to another language and culture, using the framework prescribed by the developers of the software. WordPress has already been localized into many languages (see the list of <a href="https://make.wordpress.org/polyglots/teams/">polyglots teams</a> for more information).</p>
+
+
+
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="translating-wordpress-plugins-and-themes" tabindex="-1">Translating WordPress, Plugins and Themes <a href="#translating-wordpress-plugins-and-themes" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Translating WordPress, Plugins and Themes</span></a></h2>
+
+
+
+<p>If you want to help translating WordPress, or any Theme or Plugin hosted in WordPress.org themes and plugins directories, you should go to&nbsp; <a href="https://make.wordpress.org/polyglots">Translate WordPress.</a></p>
+
+
+
+<p>There you will get to know all the translators teams and learn about <a href="https://translate.wordpress.org/">translate.wordpress.org</a>, where you can work on translations online and in collaboration with thousands of translators around the world.</p>
+
+
+
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="translating-themes-and-plugins" tabindex="-1">Translating Themes and Plugins <a href="#translating-themes-and-plugins" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Translating Themes and Plugins</span></a></h2>
+
+
+
+<p>If you want to translating plugins and themes that are not hosted on WordPress.org, or if, for any reason, you want to translate themes or plugins offline and directly in the plugins/themes files, you can do this creating and editing Localization Files.</p>
+
+
+
+<h3 class="toc-heading" id="localization-files" tabindex="-1">Localization files <a href="#localization-files" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Localization files</span></a></h3>
+
+
+
+<p>There are three types of Localiztion files you need in order to translate your plugin/theme:</p>
+
+
+
+<ul><li>POT files: a template file with all your original strings</li><li>PO files: editable file with the translations to one language (one file per language)</li><li>MO files: compiled versions of the PO files, actually used by the application</li></ul>
+
+
+
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="pot-portable-object-template-files" tabindex="-1">POT (Portable Object Template) files <a href="#pot-portable-object-template-files" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">POT (Portable Object Template) files</span></a></h3>
+
+
+
+<p>This file contains the original strings (in English) in your plugin/theme. Here is an example <code>POT</code> file entry:</p>
+
+
+
+<pre class="wp-block-code"><code>#: plugin-name.php:123
+msgid "Page Title"
+msgstr ""</code></pre>
+
+
+
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="po-portable-object-files" tabindex="-1">PO (Portable Object) files <a href="#po-portable-object-files" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">PO (Portable Object) files</span></a></h3>
+
+
+
+<p>Every translator will take the <code>POT</code> file and translate the <code>msgstr</code> sections in their own language. The result is a <code>PO</code> file with the same format as a <code>POT</code>, but with translations and some specific headers. There is one PO file per language.</p>
+
+
+
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="mo-machine-object-files" tabindex="-1">MO (Machine Object) files <a href="#mo-machine-object-files" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">MO (Machine Object) files</span></a></h3>
+
+
+
+<p>From every translated <code>PO</code> file a <code>MO</code> file is built. These are machine-readable, binary files that the gettext functions actually use (they don’t care about .POT or .PO files), and are a “compiled” version of the PO file. The conversion is done using the <code>msgfmt</code> tool. In general, an application may use more than one large logical translatable module and a different <code>MO</code> file accordingly. A text domain is a handle of each module, which has a different <code>MO</code> file.</p>
+
+
+
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="generating-pot-file" tabindex="-1">Generating POT file <a href="#generating-pot-file" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Generating POT file</span></a></h3>
+
+
+
+<p>The POT file is the one you need to hand to translators, so that they can do their work. The POT and PO files can easily be interchangeably renamed to change file types without issues. It is a good idea to offer the POT file along with your plugin/theme, so that translators won&#8217;t have to ask you specifically about it. There are a couple of ways to generate a POT file for your plugin:</p>
+
+
+
+<h4 class="toc-heading" id="wp-cli" tabindex="-1">WP-CLI <a href="#wp-cli" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">WP-CLI</span></a></h4>
+
+
+
+<p>Install <a href="https://make.wordpress.org/cli/handbook/installing/">WP-CLI</a> and use the <code>wp i18n make-pot</code> command according to the <a href="../../../../cli/commands/i18n/make-pot/index.html">documentation</a>.</p>
+
+
+
+<p>Open command line and run the command like this:</p>
+
+
+
+<pre class="wp-block-code"><code>wp i18n make-pot path/to/your-plugin-directory</code></pre>
+
+
+
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h4 class="toc-heading" id="poedit" tabindex="-1">Poedit <a href="#poedit" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Poedit</span></a></h4>
+
+
+
+<p>You can also use <a href="http://www.poedit.net/">Poedit</a> locally when translating. This is an open source tool for all major OS. The free Poedit default version supports manual scanning of all source code with Gettext functions. A pro version of it also features one-click scanning for WordPress plugins. After generating the po file you can rename the file to POT. If a mo was generated then you can delete that file as it is not needed. If you don&#8217;t have the pro version you can easily get the <a href="https://github.com/fxbenard/Blank-WordPress-Pot">Blank POT</a> and use that as the base of your POT file. Once you have placed the blank POT in the languages folder you can click &#8220;Update&#8221; in Poedit to update the POT file with your strings.</p>
+
+
+
+<div class="wp-block-image"><figure class="aligncenter"><img loading="lazy" width="613" height="662" src="../../../../files/2014/10/internationalization-localization-03.jpg" alt="internationalization-localization-03" class="wp-image-11249" ></figure></div>
+
+
+
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h4 class="toc-heading" id="grunt-tasks" tabindex="-1">Grunt Tasks <a href="#grunt-tasks" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Grunt Tasks</span></a></h4>
+
+
+
+<p>There are even some grunt tasks that you can use to create the POTs. <a href="https://github.com/blazersix/grunt-wp-i18n">grunt-wp-i18n</a> &amp; <a href="https://www.npmjs.org/package/grunt-pot">grunt-pot</a><br>To set it up you need to install <a href="http://nodejs.org/">node.js</a>. It is a simple installation. Then you need to <a href="http://gruntjs.com/getting-started">install grunt</a> in the directory that you would like to use grunt in. This is done via <a href="http://leveluptuts.com/tutorials/command-line-basics">command line</a>. An <a href="https://gist.github.com/grappler/10187003">example Grunt.js and package.json</a> that you can place in the root of your plugin. You can the grunt tasks with a simple command in the command line.</p>
+
+
+
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="translate-po-file" tabindex="-1">Translate PO file <a href="#translate-po-file" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Translate PO file</span></a></h3>
+
+
+
+<p>There are multiple ways to translate a PO file.</p>
+
+
+
+<p>The easiest way is to use <a href="http://www.poedit.net/">Poedit</a> when translating. This is an open source tool for all major OS. The free Poedit default version supports manual scanning of all source code with Gettext functions. A pro version of it also features one-click scanning for WordPress plugins and themes.</p>
+
+
+
+<p>You can also use a text editor to enter the translation. In a text editor the strings will look like this.</p>
+
+
+
+<pre class="wp-block-code"><code>#: plugin-name.php:123 
+msgid "Page Title" 
+msgstr ""</code></pre>
+
+
+
+<p>You can enter the translation between the quotation marks. For the German translation, the final result would look like this.</p>
+
+
+
+<pre class="wp-block-code"><code>#: plugin-name.php:123 
+msgid "Page Title" 
+msgstr "Seitentitel"</code></pre>
+
+
+
+<p>A third option is to use an online translation service. The general idea is that you upload the POT file and then you can give permission to users or translators to translate your plugin. This allows you to track the changes, always have the latest translation and reduce the translation being done twice.</p>
+
+
+
+<p>Here are&nbsp;a few tools that can be used to translate PO files online:</p>
+
+
+
+<ul><li><a href="https://www.transifex.com/">Transifex</a></li><li><a href="https://webtranslateit.com/en">WebTranslateIt</a></li><li><a href="https://poeditor.com/">Poeditor</a></li><li><a href="http://translate.google.com/toolkit/">Google&nbsp;Translator Toolkit</a></li><li><a href="http://blog.glotpress.org/">GlotPress</a></li></ul>
+
+
+
+<p>The translated file is to be saved as&nbsp;<code>my-plugin-{locale}.mo</code>. The locale is the language code and/or country code you defined in the constant&nbsp;<code>WPLANG</code>&nbsp;in the file&nbsp;<code>wp-config.php</code>. For example, the locale for German is&nbsp;<code>de_DE</code>. From the code example above the text domain is ‘my-plugin’ therefore the German MO and PO files should be named&nbsp;<code>my-plugin-de_DE.mo</code>&nbsp;and&nbsp;<code>my-plugin-de_DE.po</code>. For more information about language and country codes, see&nbsp;<a href="../../../../../codex.wordpress.org/Installing_WordPress_in_Your_Language.html">Installing WordPress in Your Language</a>.</p>
+
+
+
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="generate-mo-file" tabindex="-1">Generate MO file <a href="#generate-mo-file" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Generate MO file</span></a></h3>
+
+
+
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h4 class="toc-heading" id="command-line" tabindex="-1">Command line <a href="#command-line" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Command line</span></a></h4>
+
+
+
+<p>A program&nbsp;<code>msgfmt</code>&nbsp;is used to create the MO file. <code>msgfmt</code> is part of Gettext package. Otherwise command line can be used. A typical&nbsp;<code>msgfmt</code>&nbsp;command looks like this:</p>
+
+
+
+<p><strong>Unix Operating Systems</strong></p>
+
+
+
+<pre class="wp-block-code"><code>msgfmt -o filename.mo filename.po</code></pre>
+
+
+
+<p><strong>Windows Operating Systems</strong></p>
+
+
+
+<pre class="wp-block-code"><code>msgfmt -o filename.mo filename.po</code></pre>
+
+
+
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h4 class="toc-heading" id="converting-multiple-po-files-at-once" tabindex="-1">Converting multiple PO files at once <a href="#converting-multiple-po-files-at-once" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Converting multiple PO files at once</span></a></h4>
+
+
+
+<p>If you have a lot of&nbsp;<code>PO</code>&nbsp;files to convert at once, you can run it as a batch. For example, using a&nbsp;<code>bash</code>&nbsp;command:</p>
+
+
+
+<p><strong>Unix Operating Systems</strong></p>
+
+
+
+<pre class="wp-block-code"><code># Find PO files, process each with msgfmt and rename the result to MO 
+for file in `find . -name "*.po"` ; do msgfmt -o ${file/.po/.mo} $file ; 
+done</code></pre>
+
+
+
+<p><strong>Windows Operating Systems</strong><br>For Windows, you need to install <a href="http://www.cygwin.com/">Cygwin</a> first.</p>
+
+
+
+<p>Create a file called potomo.sh with the following content:</p>
+
+
+
+<pre class="wp-block-code"><code>#! /bin/sh # Find PO files, process each with msgfmt and rename the result to MO 
+for file in `/usr/bin/find . -name '*.po'` ; do /usr/bin/msgfmt -o ${file/.po/.mo} $file ; 
+done</code></pre>
+
+
+
+<p>You can then run this command in the command line.</p>
+
+
+
+<pre class="wp-block-code"><code>cd C:/path/to/language/folder/my-plugin/languages 
+C:/cygwin/bin/bash -c /cygdrive/c/path/to/script/directory/potomo.sh</code></pre>
+
+
+
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h4 class="toc-heading" id="poedit-2" tabindex="-1">Poedit <a href="#poedit-2" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Poedit</span></a></h4>
+
+
+
+<p><code>msgfmt</code> is also integrated in <a href="http://www.poedit.net/">Poedit</a>&nbsp;allowing you to use it to generate the MO file. There is a setting in the preferences where you can enable or disable it.</p>
+
+
+
+<div class="wp-block-image"><figure class="aligncenter"><img loading="lazy" width="436" height="448" src="../../../../files/2014/10/internationalization-localization-04.jpg" alt="internationalization-localization-04" class="wp-image-11250" ></figure></div>
+
+
+
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h4 class="toc-heading" id="grunt-task" tabindex="-1">Grunt task <a href="#grunt-task" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Grunt task</span></a></h4>
+
+
+
+<p>There is <a href="https://www.npmjs.org/package/grunt-po2mo">grunt-po2mo</a> that will convert all of the files.</p>
+
+
+
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="tips-for-good-translations" tabindex="-1">Tips for Good Translations <a href="#tips-for-good-translations" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Tips for Good Translations</span></a></h2>
+
+
+
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="dont-translate-literally-translate-organically" tabindex="-1">Don&#8217;t translate literally, translate organically <a href="#dont-translate-literally-translate-organically" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Don&#8217;t translate literally, translate organically</span></a></h3>
+
+
+
+<p>Being bi- or multi-lingual, you undoubtedly know that the languages you speak have different structures, rhythms, tones, and inflections. Translated messages don&#8217;t need to be structured the same way as the English ones: take the ideas that are presented and come up with a message that expresses the same thing in a natural way for the target language. It&#8217;s the difference between creating an equal message and an equivalent message: don&#8217;t replicate, replace. Even with more structural items in messages, you have creative license to adapt and change if you feel it will be more logical for, or better adapted to, your target audience.</p>
+
+
+
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="try-to-keep-the-same-level-of-formality-or-informality" tabindex="-1">Try to keep the same level of formality (or informality) <a href="#try-to-keep-the-same-level-of-formality-or-informality" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Try to keep the same level of formality (or informality)</span></a></h3>
+
+
+
+<p>Each message has a different level of formality or informality. Exactly what level of formality or informality to use for each message in your target language is something you&#8217;ll have to figure out on your own (or with your team), but WordPress messages (informational messages in particular) tend to have a politely informal tone in English. Try to accomplish the equivalent in the target language, within your cultural context.</p>
+
+
+
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="dont-use-slang-or-audience-specific-terms" tabindex="-1">Don&#8217;t use slang or audience-specific terms <a href="#dont-use-slang-or-audience-specific-terms" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Don&#8217;t use slang or audience-specific terms</span></a></h3>
+
+
+
+<p>Some amount of terminology is to be expected in a blog, but refrain from using colloquialisms that only the &#8220;in&#8221; crowd will get. If the uninitiated blogger were to install WordPress in your language, would they know what the term means? Words like pingback, trackback, and feed are exceptions to this rule; they&#8217;re terminology that are typically difficult to translate, and many translators choose to leave in English.</p>
+
+
+
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="read-other-softwares-localizations-in-your-language" tabindex="-1">Read other software&#8217;s localizations in your language <a href="#read-other-softwares-localizations-in-your-language" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Read other software&#8217;s localizations in your language</span></a></h3>
+
+
+
+<p>If you get stuck or need direction, try reading through the translations of other popular software tools to get a feel for what terms are commonly used, how formality is addressed, etc. Of course, WordPress has its own tone and feel, so keep that in mind when you&#8217;re reading other localizations, but feel free to dig up UI terms and the like to maintain consistency with other software in your language.</p>
+
+
+
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="using-localizations" tabindex="-1">Using Localizations <a href="#using-localizations" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Using Localizations</span></a></h2>
+
+
+
+<p>Place the localization files in the language folder, either in the plugin <code>languages</code> folder or as of WordPress 3.7 in the plugin <code>languages</code> folder normally under <code>wp-content</code>. The full path would be <code>wp-content/languages/plugins/my-plugin-fr_FR.mo</code>.</p>
+
+
+
+<p>As of <a href="https://make.wordpress.org/core/2014/09/05/language-chooser-in-4-0/">WordPress 4.0</a> you can change the language in the &#8220;General Settings&#8221;. If you do not see any option or the language that you want to switch to then do the following steps:</p>
+
+
+
+<ul><li>Define WPLANG inside of wp-config.php to your chosen language. For example, if you wanted to use french, you would have:
+<pre class="brush: php; title: ; notranslate" title="">
+define ('WPLANG', 'fr_FR');
+</pre>
+</li><li>Go to <code>wp-admin/options-general.php</code> or &#8220;Settings&#8221; -&gt; &#8220;General&#8221;</li><li>Select your language in&nbsp;&#8220;Site Language&#8221; dropdown</li><li>Go to <code>wp-admin/update-core.php</code></li><li>Click “Update translations”, when available</li><li>Core translations files are downloaded, when available</li></ul>
+
+
+
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="resources" tabindex="-1">Resources <a href="#resources" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Resources</span></a></h2>
+
+
+
+<ul><li><a href="https://foxland.fi/creating-pot-file-for-your-theme-or-plugin/">Creating .pot file for your theme or plugin</a></li><li><a href="http://tommcfarlin.com/internationalize-wordpress-plugins/">How To Internationalize WordPress Plugins</a></li><li><a href="http://wp.tutsplus.com/tutorials/theme-development/translating-your-theme/">Translating Your Theme</a></li><li><a href="https://github.com/fxbenard/Blank-WordPress-Pot">Blank WordPress POT</a></li><li><a href="https://github.com/grappler/i18n">Improved&nbsp;i18n WordPress tools</a></li><li><a href="http://ulrich.pogson.ch/update-translations-quickly">How to update translations quickly</a></li><li><a href="http://wp-translations.org/workflow-using-github/">Workflow between GitHub/Transifex</a></li><li><a href="https://gist.github.com/grappler/10187003">Gist: Complete Localization Grunt&nbsp;task</a></li><li><a href="http://wordpress.tv/">WordPress.tv</a> tags: <a href="http://wordpress.tv/tag/i18n/">i18n</a>, <a href="http://wordpress.tv/tag/internationalization/">internationalization</a> and <a href="http://wordpress.tv/tag/translation/">translation</a></li></ul>
+
+
+
+<p></p>
+
+
+<div class="bottom-of-entry">&nbsp;</div>
+
+			
+		<nav class="handbook-navigation" role="navigation">
+			<h1 class="screen-reader-text">Handbook navigation</h1>
+			<div class="nav-links">
+
+			<a href="../internationalization-guidelines/index.html" rel="previous"><span class="meta-nav">&larr;</span> Internationalization Guidelines</a><a href="../../filesystem/index.html" rel="next">Filesystem <span class="meta-nav">&rarr;</span></a>
+			</div>
+			<!-- .nav-links -->
+		</nav><!-- .navigation -->
+	
+		
+		</main><!-- #main -->
+
+	</div><!-- #content -->
+
+</div><!-- #page -->
+
+
+<div id="wporg-footer">
+	<div class="wrapper">
+		<ul>
+			<li><a href="http://wordpress.org/about/" title="An introduction to the WordPress project">About</a></li>
+			<li><a href="http://wordpress.org/news/" title="News and Updates">Blog</a></li>
+			<li><a href="http://wordpress.org/hosting/" title="Recommended web hosting providers">Hosting</a></li>
+			<li><a href="https://wordpressfoundation.org/donate/" title="Donate to the WordPress Foundation">Donate</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://wordpress.org/support/" title="Forums, documentation, and other resources">Support</a></li>
+			<li><a href="../../../../index.html" title="Resources for WordPress developers">Developers</a></li>
+			<li><a href="http://make.wordpress.org/" title="Give back to WordPress through code, support, translation and more">Get Involved</a></li>
+			<li><a href="http://learn.wordpress.org/" title="Workshops and training materials">Learn</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://wordpress.org/showcase/" title="Some of the best WordPress sites on the Web">Showcase</a></li>
+			<li><a href="http://wordpress.org/plugins/" title="Add extra functionality to WordPress">Plugins</a></li>
+			<li><a href="http://wordpress.org/themes/" title="Make your WordPress pretty">Themes</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://central.wordcamp.org/" title="Find a WordPress event near you">WordCamp</a></li>
+			<li><a href="http://wordpress.tv/" title="Videos, tutorials, and WordCamp sessions">WordPress.TV</a></li>
+			<li><a href="http://buddypress.org/" title="A set of plugins to transform your WordPress into a social network">BuddyPress</a></li>
+			<li><a href="http://bbpress.org/" title="Fast, slick forums built on WordPress">bbPress</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://wordpress.com/?ref=wporg-footer" title="Hassle-free WordPress hosting">WordPress.com</a></li>
+			<li><a href="http://ma.tt/" title="Co-founder of WordPress, an example of what WordPress can do">Matt</a></li>
+			<li><a href="http://wordpress.org/about/privacy/" title="WordPress.org Privacy Policy">Privacy</a></li>
+			<li><a href="https://publiccode.eu/" target="_blank">Public Code</a></li>
+		</ul>
+
+		<ul class="social-media-links">
+			<li><span class="dashicons dashicons-twitter"></span><a href="https://twitter.com/WordPress" title="Follow @WordPress on Twitter">@WordPress</a></li>
+			<li><span class="dashicons dashicons-facebook"></span><a href="https://www.facebook.com/WordPress/" title="Like WordPress on Facebook">WordPress</a></li>
+		</ul>
+	</div>
+
+		<p class="cip cip-image">Code is Poetry.</p>
+</div>
+
+<script src="../../../../../s.w.org/style/js/navigation.min.js?20190128"></script>
+
+<script type='text/javascript'>
+	(function(){
+		var corecss = document.createElement('link');
+		var themecss = document.createElement('link');
+		var corecssurl = "../../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shCore.css?ver=3.0.9b";
+		if ( corecss.setAttribute ) {
+				corecss.setAttribute( "rel", "stylesheet" );
+				corecss.setAttribute( "type", "text/css" );
+				corecss.setAttribute( "href", corecssurl );
+		} else {
+				corecss.rel = "stylesheet";
+				corecss.href = corecssurl;
+		}
+		document.head.appendChild( corecss );
+		var themecssurl = "../../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shThemeDefault.css?ver=3.0.9b";
+		if ( themecss.setAttribute ) {
+				themecss.setAttribute( "rel", "stylesheet" );
+				themecss.setAttribute( "type", "text/css" );
+				themecss.setAttribute( "href", themecssurl );
+		} else {
+				themecss.rel = "stylesheet";
+				themecss.href = themecssurl;
+		}
+		document.head.appendChild( themecss );
+	})();
+	SyntaxHighlighter.config.strings.expandSource = '+ expand source';
+	SyntaxHighlighter.config.strings.help = '?';
+	SyntaxHighlighter.config.strings.alert = 'SyntaxHighlighter\n\n';
+	SyntaxHighlighter.config.strings.noBrush = 'Can\'t find brush for: ';
+	SyntaxHighlighter.config.strings.brushNotHtmlScript = 'Brush wasn\'t configured for html-script option: ';
+	SyntaxHighlighter.defaults['pad-line-numbers'] = false;
+	SyntaxHighlighter.defaults['toolbar'] = false;
+	SyntaxHighlighter.all();
+
+	// Infinite scroll support
+	if ( typeof( jQuery ) !== 'undefined' ) {
+		jQuery( function( $ ) {
+			$( document.body ).on( 'post-load', function() {
+				SyntaxHighlighter.highlight();
+			} );
+		} );
+	}
+</script>
+<script type='text/javascript' src='../../../../wp-includes/js/hoverintent-js.min.js?ver=2.2.1' id='hoverintent-js-js'></script>
+<script type='text/javascript' src='../../../../wp-includes/js/admin-bar.min.js?ver=5.9-alpha-51701' id='admin-bar-js'></script>
+<script type='text/javascript' id='mkaz-code-syntax-prism-js-js-extra'>
+/* <![CDATA[ */
+var prism_settings = {"pluginUrl":"https:\/\/developer.wordpress.org\/wp-content\/plugins\/code-syntax-block\/"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../../wp-content/plugins/code-syntax-block/assets/prism/prism.js?ver=1603766507' id='mkaz-code-syntax-prism-js-js'></script>
+<script type='text/javascript' src='../../../../wp-content/themes/pub/wporg-developer/js/navigation.js?ver=20181209' id='wporg-developer-navigation-js'></script>
+<script type='text/javascript' src='../../../../wp-content/themes/pub/wporg-developer/js/skip-link-focus-fix.js?ver=20130115' id='wporg-developer-skip-link-focus-fix-js'></script>
+<script type='text/javascript' src='../../../../wp-content/themes/pub/wporg-developer/js/search.js?ver=20150430' id='wporg-developer-search-js'></script>
+<script type='text/javascript' src='../../../../wp-content/themes/pub/wporg-developer/js/menu.js?ver=20180201' id='wporg-developer-menu-js'></script>
+<script type='text/javascript' src='../../../../wp-content/themes/pub/wporg-developer/js/awesomplete.min.js?ver=20160322' id='awesomplete-js'></script>
+<script type='text/javascript' id='autocomplete-js-extra'>
+/* <![CDATA[ */
+var autocomplete = {"ajaxurl":"https:\/\/developer.wordpress.org\/wp-admin\/admin-ajax.php","nonce":"8a60f70c4b"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../../wp-content/themes/pub/wporg-developer/js/autocomplete.js?ver=20160524' id='autocomplete-js'></script>
+<script type='text/javascript' src='../../../../wp-content/themes/pub/wporg-developer/js/function-reference.js?ver=20180724' id='wporg-developer-function-reference-js'></script>
+<script type='text/javascript' id='quicktags-js-extra'>
+/* <![CDATA[ */
+var quicktagsL10n = {"closeAllOpenTags":"Close all open tags","closeTags":"close tags","enterURL":"Enter the URL","enterImageURL":"Enter the URL of the image","enterImageDescription":"Enter a description of the image","textdirection":"text direction","toggleTextdirection":"Toggle Editor Text Direction","dfw":"Distraction-free writing mode","strong":"Bold","strongClose":"Close bold tag","em":"Italic","emClose":"Close italic tag","link":"Insert link","blockquote":"Blockquote","blockquoteClose":"Close blockquote tag","del":"Deleted text (strikethrough)","delClose":"Close deleted text tag","ins":"Inserted text","insClose":"Close inserted text tag","image":"Insert image","ul":"Bulleted list","ulClose":"Close bulleted list tag","ol":"Numbered list","olClose":"Close numbered list tag","li":"List item","liClose":"Close list item tag","code":"Code","codeClose":"Close code tag","more":"Insert Read More tag"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../../wp-includes/js/quicktags.min.js?ver=5.9-alpha-51701' id='quicktags-js'></script>
+<script type='text/javascript' src='../../../../wp-content/themes/pub/wporg-developer/js/user-notes.js?ver=20200110' id='wporg-developer-user-notes-js'></script>
+<script type='text/javascript' id='wporg-developer-user-notes-feedback-js-extra'>
+/* <![CDATA[ */
+var wporg_note_feedback = {"show":"Show Feedback","hide":"Hide Feedback"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../../wp-content/themes/pub/wporg-developer/js/user-notes-feedback.js?ver=20181023' id='wporg-developer-user-notes-feedback-js'></script>
+<script type='text/javascript' src='../../../../wp-content/themes/pub/wporg-developer/js/tabs.js?ver=20160824' id='wporg-developer-tabs-js'></script>
+<script type='text/javascript' id='wporg-developer-preview-js-extra'>
+/* <![CDATA[ */
+var wporg_note_preview = {"ajaxurl":"https:\/\/developer.wordpress.org\/wp-admin\/admin-ajax.php","nonce":"504933b60e","preview":"preview note","preview_empty":"Nothing to preview","is_admin":""};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../../wp-content/themes/pub/wporg-developer/js/user-notes-preview.js?ver=20200111' id='wporg-developer-preview-js'></script>
+<script type='text/javascript' src='../../../../wp-includes/js/wp-embed.min.js?ver=5.9-alpha-51701' id='wp-embed-js'></script>
+</body>
+
+<!-- Mirrored from developer.wordpress.org/apis/handbook/internationalization/localization/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 31 Aug 2021 16:54:47 GMT -->
+</html>

@@ -1,0 +1,2104 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+
+<!-- Mirrored from developer.wordpress.org/reference/classes/wp_comment_query/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 31 Aug 2021 17:18:40 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<!--
+<meta property="fb:page_id" content="6427302910" />
+-->
+<meta name="google-site-verification" content="7VWES_-rcHBcmaQis9mSYamPfNwE03f4vyTj4pfuAw0" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WP_Comment_Query</title>
+<meta name="referrer" content="always">
+
+		<link href='../../../../fonts.googleapis.com/css.css?family=Open+Sans:300italic,400italic,600italic,400,300,600&amp;subset=latin,cyrillic-ext,greek-ext,greek,vietnamese,latin-ext,cyrillic' rel='stylesheet' type='text/css'>
+
+		<link rel="stylesheet" href="../../../../s.w.org/style/wp4.css?95" />
+
+<link rel="shortcut icon" href="../../../../s.w.org/favicon.ico?2" type="image/x-icon" />
+<link rel="pingback" href="../../../xmlrpc.php" /><meta name='robots' content='max-image-preview:large' />
+<link rel='dns-prefetch' href='../../../../fonts.googleapis.com/index.html' />
+<link rel='dns-prefetch' href='http://s.w.org/' />
+<link rel='dns-prefetch' href='http://www.googletagmanager.com/' />
+<link rel='dns-prefetch' href='http://fonts.gstatic.com/' />
+<link rel="alternate" type="application/rss+xml" title="WordPress Developer Resources &raquo; Feed" href="../../../feed/index.html" />
+<link rel="alternate" type="application/rss+xml" title="WordPress Developer Resources &raquo; Comments Feed" href="../../../comments/feed/index.html" />
+<meta property="og:title" content="WP_Comment_Query | Class | WordPress Developer Resources" />
+<meta property="og:site_name" content="WordPress Developer Resources" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="../../../index.html" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@WordPress" />
+<meta name="description" content="Core class used for querying comments." />
+<meta property="og:description" content="Core class used for querying comments." />
+<link rel="alternate" type="application/rss+xml" title="WordPress Developer Resources &raquo; WP_Comment_Query Comments Feed" href="https://developer.wordpress.org/reference/classes/wp_comment_query/feed/" />
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'../../../../www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P24PF4B');</script>
+			<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/developer.wordpress.org\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.9-alpha-51701"}};
+			!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([10084,65039,8205,55357,56613],[10084,65039,8203,55357,56613])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel='stylesheet' id='dashicons-css'  href='../../../wp-includes/css/dashicons.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='admin-bar-css'  href='../../../wp-includes/css/admin-bar.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-block-library-css'  href='../../../wp-includes/css/dist/block-library/style.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='wporg-handbook-css-css'  href='../../../wp-content/plugins/handbook/stylesheets/callout-boxes.css?ver=20200121' type='text/css' media='all' />
+<link rel='stylesheet' id='open-sans-css'  href='../../../../fonts.googleapis.com/css-2.css?family=Open+Sans%3A300italic%2C400italic%2C600italic%2C300%2C400%2C600&amp;subset=latin%2Clatin-ext&amp;display=fallback&amp;ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='wporg-developer-style-css'  href='../../../wp-content/themes/pub/wporg-developer/style.css?ver=3' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-dev-sass-compiled-css'  href='../../../wp-content/themes/pub/wporg-developer/stylesheets/main.css?ver=20200713' type='text/css' media='all' />
+<link rel='stylesheet' id='awesomplete-css-css'  href='../../../wp-content/themes/pub/wporg-developer/stylesheets/awesomplete.css?ver=20160114' type='text/css' media='all' />
+<link rel='stylesheet' id='autocomplete-css-css'  href='../../../wp-content/themes/pub/wporg-developer/stylesheets/autocomplete.css?ver=20171220' type='text/css' media='all' />
+<link rel='stylesheet' id='syntaxhighlighter-core-css'  href='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shCore.css?ver=3.0.9b' type='text/css' media='all' />
+<link rel='stylesheet' id='syntaxhighlighter-theme-default-css'  href='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shThemeDefault.css?ver=3.0.9b' type='text/css' media='all' />
+<script type='text/javascript' src='../../../wp-includes/js/jquery/jquery.min.js?ver=3.6.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='../../../wp-content/plugins/handbook/scripts/handbook.js?ver=20150930' id='wporg-handbook-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/chapters.js?ver=20190603' id='wporg-developer-chapters-js'></script>
+<script type='text/javascript' src='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shCore.js?ver=3.0.9b' id='syntaxhighlighter-core-js'></script>
+<script type='text/javascript' src='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushPhp.js?ver=3.0.9b' id='syntaxhighlighter-brush-php-js'></script>
+<link rel="https://api.w.org/" href="https://developer.wordpress.org/wp-json/" /><link rel="alternate" type="application/json" href="https://developer.wordpress.org/wp-json/wp/v2/wp-parser-class/183" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="../../../xmlrpc-2.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="../../../wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 5.9-alpha-51701" />
+<link rel='shortlink' href='https://developer.wordpress.org/?p=183' />
+<link rel="alternate" type="application/json+oembed" href="https://developer.wordpress.org/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Fclasses%2Fwp_comment_query%2F" />
+<link rel="alternate" type="text/xml+oembed" href="https://developer.wordpress.org/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Fclasses%2Fwp_comment_query%2F&amp;format=xml" />
+<link rel="canonical" href="index.html">
+<!-- Stream WordPress user activity plugin v3.6.2 -->
+	<style>
+		@media screen and (max-width: 782px) {
+			#wpadminbar li#wp-admin-bar-log-in,
+			#wpadminbar li#wp-admin-bar-register {
+				display: block;
+			}
+
+			#wpadminbar li#wp-admin-bar-log-in a,
+			#wpadminbar li#wp-admin-bar-register a {
+				padding: 0 8px;
+			}
+		}
+	</style>
+		<style>
+			a.github-edit {
+				margin-left: .5em;
+				font-size: .5em;
+				vertical-align: top;
+				display: inline-block;
+				border: 1px solid #eeeeee;
+				border-radius: 2px;
+				background: #eeeeee;
+				padding: .5em .6em .4em;
+				color: black;
+				margin-top: 0.1em;
+			}
+			a.github-edit > * {
+				opacity: 0.6;
+			}
+			a.github-edit:hover > * {
+				opacity: 1;
+				color: black;
+			}
+			a.github-edit img {
+				height: .8em;
+			}
+		</style>
+		
+	<script type="text/javascript">
+		jQuery( '<style>.hide-if-js { display: none; }</style>' ).appendTo( 'head' );
+		jQuery( function($) {
+			$( 'body' ).addClass('js');
+		} );
+	</script>
+<style type="text/css" media="print">#wpadminbar { display:none; }</style>
+	<style type="text/css" media="screen">
+	</style>
+	<script>document.cookie='devicePixelRatio='+((window.devicePixelRatio === undefined) ? 1 : window.devicePixelRatio)+'; path=/';</script>
+
+</head>
+
+
+<body id="wordpress-org" class="wp-parser-class-template-default single single-wp-parser-class postid-183 admin-bar no-customize-support">
+		<div id="wpadminbar" class="nojq nojs">
+						<div class="quicklinks" id="wp-toolbar" role="navigation" aria-label="Toolbar">
+				<ul id='wp-admin-bar-root-default' class="ab-top-menu"><li id='wp-admin-bar-wp-logo' class="menupop"><a class='ab-item' aria-haspopup="true" href='https://wordpress.org/about/'><span class="ab-icon" aria-hidden="true"></span><span class="screen-reader-text">About WordPress</span></a><div class="ab-sub-wrapper"><ul id='wp-admin-bar-wp-logo-default' class="ab-submenu"><li id='wp-admin-bar-about'><a class='ab-item' href='https://wordpress.org/about/'>About WordPress</a></li></ul><ul id='wp-admin-bar-wp-logo-external' class="ab-sub-secondary ab-submenu"><li id='wp-admin-bar-wporg'><a class='ab-item' href='https://wordpress.org/'>WordPress.org</a></li><li id='wp-admin-bar-documentation'><a class='ab-item' href='https://wordpress.org/support/'>Documentation</a></li><li id='wp-admin-bar-support-forums'><a class='ab-item' href='https://wordpress.org/support/forums/'>Support</a></li><li id='wp-admin-bar-feedback'><a class='ab-item' href='https://wordpress.org/support/forum/requests-and-feedback'>Feedback</a></li></ul></div></li></ul><ul id='wp-admin-bar-top-secondary' class="ab-top-secondary ab-top-menu"><li id='wp-admin-bar-search' class="admin-bar-search"><div class="ab-item ab-empty-item" tabindex="-1"><form action="https://developer.wordpress.org/" method="get" id="adminbarsearch"><input class="adminbar-input" name="s" id="adminbar-search" type="text" value="" maxlength="150" /><label for="adminbar-search" class="screen-reader-text">Search</label><input type="submit" class="adminbar-button" value="Search" /></form></div></li><li id='wp-admin-bar-log-in'><a class='ab-item' href='https://login.wordpress.org/?locale=en_US'>Log In</a></li><li id='wp-admin-bar-register'><a class='ab-item' href='https://login.wordpress.org/register?locale=en_US'>Register</a></li></ul>			</div>
+					</div>
+
+		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P24PF4B" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<div id="wporg-header">
+	<div class="wrapper">
+	<h1><a href="http://wordpress.org/">WordPress.org</a></h1>				<div id="head-search">
+		<form action="http://wordpress.org/search/do-search.php" method="get">
+			<label for="global-search" class="screen-reader-text">Search WordPress.org for:</label>
+			<input id="global-search" class="text" name="search" type="text" value="" maxlength="150" placeholder="Search WordPress.org" />
+			<button type="submit" class="button"><span class="screen-reader-text">Submit</span></button>
+		</form>
+		</div>
+				<div style="clear:both"></div>
+		<button id="mobile-menu-button" aria-expanded="false"><span class="screen-reader-text">Toggle Menu</span></button>
+		
+<nav aria-label="Main Menu">
+<ul id="wporg-header-menu">
+<li class="menu-item"><a href='http://wordpress.org/showcase/' data-title='See some of the sites built on WordPress.'>Showcase</a></li>
+<li class="menu-item"><a href='http://learn.wordpress.org/' data-title='Resources to help you learn more about WordPress and teach it to others.'>Learn</a></li>
+<li class="menu-item"><a href='http://wordpress.org/themes/' data-title='Find just the right look for your website.'>Themes</a></li>
+<li class="menu-item"><a href='http://wordpress.org/plugins/' data-title='Plugins can extend WordPress to do almost anything you can imagine.'>Plugins</a></li>
+<li class="menu-item"><a href='http://wordpress.org/mobile/' data-title='Take your website on the go!'>Mobile</a></li>
+<li class="menu-item"><a href='http://wordpress.org/support/' data-title='Forums, documentation, help.'>Support</a><ul class="nav-submenu"><li><a href='http://wordpress.org/support/' title='Documentation, tutorials, best practices.'>Documentation</a></li><li><a href='http://wordpress.org/support/forums/' title='Support and discussion forums.'>Forums</a></li></ul><div class="uparrow"></div></li>
+<li class="menu-item"><a href='http://make.wordpress.org/' data-title='Contribute your knowledge.'>Get Involved</a><ul class="nav-submenu"><li><a href='http://wordpress.org/five-for-the-future/' title='How five percent is powering the next generation of the web'>Five for the Future</a></li></ul><div class="uparrow"></div></li>
+<li class="menu-item"><a href='http://wordpress.org/about/' data-title='About the WordPress Organization, and where we&#039;re going.'>About</a></li>
+<li class="menu-item"><a href='http://wordpress.org/news/' data-title='Come here for the latest scoop.'>Blog</a></li>
+<li class="menu-item"><a href='http://wordpress.org/hosting/' data-title='Find a home for your blog.'>Hosting</a></li>
+<li id="download" class="button download-button menu-item"><a href='http://wordpress.org/download/' data-title='Get it. Got it? Good.'>Get WordPress</a></li>
+</ul>
+</nav>
+		<div style="clear:both"></div>
+	</div>
+</div>
+
+
+
+<header id="masthead" class="site-header" role="banner">
+		<div class="site-branding">
+		<h1 class="site-title">
+			<a href="../../index.html" rel="home">Code Reference</a>
+		</h1>
+
+		
+		<nav id="site-navigation" class="main-navigation" role="navigation">
+			<button class="menu-toggle dashicons dashicons-arrow-down-alt2" aria-controls="primary-menu" aria-expanded="false" aria-label="Primary Menu"></button>
+					</nav>
+	</div>
+</header><!-- #masthead -->
+
+<div id="page" class="hfeed site devhub-wrap">
+	<a href="#main" class="screen-reader-text">Skip to content</a>
+
+				<div id="inner-search">
+			<div class="search-section section clear hide-if-js">
+
+
+	
+	<form role="search" method="get" class="searchform searchform-filtered" action="https://developer.wordpress.org/">
+		<label for="search-field" class="screen-reader-text">Search for:</label>
+		<input type="text" id="search-field" class="search-field" placeholder="Search &hellip;" value="" name="s">
+		<button class="button button-primary button-search"><i class="dashicons dashicons-search"></i><span class="screen-reader-text">Search plugins</span></button>
+	
+		<div class="search-post-type">
+			<span>Filter by type:</span>
+									<label><input type="checkbox" name="post_type[]" value="wp-parser-function"
+						 /> Functions</label>
+									<label><input type="checkbox" name="post_type[]" value="wp-parser-hook"
+						 /> Hooks</label>
+									<label><input type="checkbox" name="post_type[]" value="wp-parser-class"
+						 /> Classes</label>
+									<label><input type="checkbox" name="post_type[]" value="wp-parser-method"
+						 /> Methods</label>
+					</div>
+
+	
+	</form>
+
+</div><!-- /search-guide -->
+			<div id="inner-search-icon-container">
+				<div id="inner-search-icon">
+					<div class="dashicons dashicons-search"><span class="screen-reader-text">Search</span></div>
+				</div>
+			</div>
+		</div>
+
+		<div id="content" class="site-content">
+
+	<div id="content-area" class="wp-parser-class-template-default single single-wp-parser-class postid-183 admin-bar no-customize-support code-reference">
+
+		
+		<div class="breadcrumb-trail breadcrumbs" itemprop="breadcrumb">
+			<span class="trail-browse">Browse:</span> 
+			<span class="trail-begin"><a href="../../../index.html" title="WordPress Developer Resources" rel="home">Home</a></span> <span class="sep">&#47;</span> 
+			<span class="trail-inner"><a href="../../index.html" title="Reference">Reference</a></span> <span class="sep">&#47;</span> 
+			<span class="trail-inner"><a href="../index.html">Classes</a></span> <span class="sep">&#47;</span> <span class="trail-end">WP_Comment_Query</span>
+		</div>
+		<main id="main" class="site-main" role="main">
+
+		
+			
+<article id="post-183" class="post-183 wp-parser-class type-wp-parser-class status-publish hentry wp-parser-source-file-wp-includes_class-wp-comment-query-php wp-parser-package-comments wp-parser-package-wordpress wp-parser-since-3-1-0">
+
+	
+	
+	<h1>WP_Comment_Query</h1>
+
+	<section class="summary">
+		<p>Core class used for querying comments.</p>
+	</section>
+
+
+	
+	<div class="content-toc"><style> .toc-jump { text-align: right; font-size: 12px; } .page .toc-heading { margin-top: -50px; padding-top: 50px !important; }</style><div class="table-of-contents"><h2>Contents</h2><ul class="items"><li><a href="#description">Description</a>
+<ul>
+<li><a href="#see-also">See also</a>
+</ul></li>
+<li><a href="#more-information">More Information</a>
+<ul>
+<li><a href="#basic-usage">Basic Usage</a>
+</ul></li>
+<li><a href="#source">Source</a></li>
+<li><a href="#methods">Methods</a></li>
+<li><a href="#changelog">Changelog</a></li>
+<li><a href="#user-contributed-notes">User Contributed Notes</a></ul>
+</div>
+
+<hr />
+<section class="description">
+	<h2 class="toc-heading" id="description" tabindex="-1">Description <a href="#description" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Description</span></a></h2>
+	
+		<h3 class="toc-heading" id="see-also" tabindex="-1">See also <a href="#see-also" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">See also</span></a></h3>
+
+	<ul>
+	<li><a href="__construct/index-2.html">WP_Comment_Query::__construct()</a>: for accepted arguments.</li>
+	</ul>
+	</section>
+
+	<hr />
+	<section class="explanation">
+		<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="more-information" tabindex="-1">More Information <a href="#more-information" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">More Information</span></a></h2>
+
+		<p>When you create an instance of this class passing an array of arguments to its constructor, the class will automatically run the query method and return an instance of <code>WP_Comment_Query</code>. See <a href="__construct/index.html">__construct()</a> method for all accepted arguments and <a href="get_comments/index.html">get_comments()</a> method to all possible return values.</p>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="basic-usage" tabindex="-1">Basic Usage <a href="#basic-usage" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Basic Usage</span></a></h3>
+<section class="source-content">
+<div class="source-code-container">
+<pre class="brush: php; title: ; notranslate" title="">
+&lt;?php 
+$args = array( 
+    // args here 
+); 
+
+// The Query 
+
+$comments_query = new WP_Comment_Query( $args ); 
+$comments = $comments_query-&gt;comments;
+
+// Comment Loop 
+
+if ( $comments ) { 
+	foreach ( $comments as $comment ) { 
+		echo $comment-&gt;comment_content;
+	}
+} else {
+	echo 'No comments found.';
+}
+?&gt;
+</pre>
+</div>
+<p class="source-code-links"><span><a href="#" class="show-complete-source">Expand full source code</a><a href="#" class="less-complete-source">Collapse full source code</a></span></p>
+</section>
+	</section>
+	<hr />
+	<section class="source-content">
+		<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="source" tabindex="-1">Source <a href="#source" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Source</span></a></h2>
+		<p>
+			File: <a href="../../files/wp-includes/class-wp-comment-query.php/index.html">wp-includes/class-wp-comment-query.php</a>		</p>
+
+					<div class="source-code-container">
+				<pre class="brush: php; toolbar: false; first-line: 17">class WP_Comment_Query {
+
+	/**
+	 * SQL for database query.
+	 *
+	 * @since 4.0.1
+	 * @var string
+	 */
+	public $request;
+
+	/**
+	 * Metadata query container
+	 *
+	 * @since 3.5.0
+	 * @var WP_Meta_Query A meta query instance.
+	 */
+	public $meta_query = false;
+
+	/**
+	 * Metadata query clauses.
+	 *
+	 * @since 4.4.0
+	 * @var array
+	 */
+	protected $meta_query_clauses;
+
+	/**
+	 * SQL query clauses.
+	 *
+	 * @since 4.4.0
+	 * @var array
+	 */
+	protected $sql_clauses = array(
+		'select'  =&gt; '',
+		'from'    =&gt; '',
+		'where'   =&gt; array(),
+		'groupby' =&gt; '',
+		'orderby' =&gt; '',
+		'limits'  =&gt; '',
+	);
+
+	/**
+	 * SQL WHERE clause.
+	 *
+	 * Stored after the {@see 'comments_clauses'} filter is run on the compiled WHERE sub-clauses.
+	 *
+	 * @since 4.4.2
+	 * @var string
+	 */
+	protected $filtered_where_clause;
+
+	/**
+	 * Date query container
+	 *
+	 * @since 3.7.0
+	 * @var WP_Date_Query A date query instance.
+	 */
+	public $date_query = false;
+
+	/**
+	 * Query vars set by the user.
+	 *
+	 * @since 3.1.0
+	 * @var array
+	 */
+	public $query_vars;
+
+	/**
+	 * Default values for query vars.
+	 *
+	 * @since 4.2.0
+	 * @var array
+	 */
+	public $query_var_defaults;
+
+	/**
+	 * List of comments located by the query.
+	 *
+	 * @since 4.0.0
+	 * @var array
+	 */
+	public $comments;
+
+	/**
+	 * The amount of found comments for the current query.
+	 *
+	 * @since 4.4.0
+	 * @var int
+	 */
+	public $found_comments = 0;
+
+	/**
+	 * The number of pages.
+	 *
+	 * @since 4.4.0
+	 * @var int
+	 */
+	public $max_num_pages = 0;
+
+	/**
+	 * Make private/protected methods readable for backward compatibility.
+	 *
+	 * @since 4.0.0
+	 *
+	 * @param string $name      Method to call.
+	 * @param array  $arguments Arguments to pass when calling.
+	 * @return mixed|false Return value of the callback, false otherwise.
+	 */
+	public function __call( $name, $arguments ) {
+		if ( 'get_search_sql' === $name ) {
+			return $this-&gt;get_search_sql( ...$arguments );
+		}
+		return false;
+	}
+
+	/**
+	 * Constructor.
+	 *
+	 * Sets up the comment query, based on the query vars passed.
+	 *
+	 * @since 4.2.0
+	 * @since 4.4.0 `$parent__in` and `$parent__not_in` were added.
+	 * @since 4.4.0 Order by `comment__in` was added. `$update_comment_meta_cache`, `$no_found_rows`,
+	 *              `$hierarchical`, and `$update_comment_post_cache` were added.
+	 * @since 4.5.0 Introduced the `$author_url` argument.
+	 * @since 4.6.0 Introduced the `$cache_domain` argument.
+	 * @since 4.9.0 Introduced the `$paged` argument.
+	 *
+	 * @param string|array $query {
+	 *     Optional. Array or query string of comment query parameters. Default empty.
+	 *
+	 *     @type string       $author_email              Comment author email address. Default empty.
+	 *     @type string       $author_url                Comment author URL. Default empty.
+	 *     @type int[]        $author__in                Array of author IDs to include comments for. Default empty.
+	 *     @type int[]        $author__not_in            Array of author IDs to exclude comments for. Default empty.
+	 *     @type int[]        $comment__in               Array of comment IDs to include. Default empty.
+	 *     @type int[]        $comment__not_in           Array of comment IDs to exclude. Default empty.
+	 *     @type bool         $count                     Whether to return a comment count (true) or array of
+	 *                                                   comment objects (false). Default false.
+	 *     @type array        $date_query                Date query clauses to limit comments by. See WP_Date_Query.
+	 *                                                   Default null.
+	 *     @type string       $fields                    Comment fields to return. Accepts 'ids' for comment IDs
+	 *                                                   only or empty for all fields. Default empty.
+	 *     @type int          $ID                        Currently unused.
+	 *     @type array        $include_unapproved        Array of IDs or email addresses of users whose unapproved
+	 *                                                   comments will be returned by the query regardless of
+	 *                                                   `$status`. Default empty.
+	 *     @type int          $karma                     Karma score to retrieve matching comments for.
+	 *                                                   Default empty.
+	 *     @type string       $meta_key                  Include comments with a matching comment meta key.
+	 *                                                   Default empty.
+	 *     @type string       $meta_value                Include comments with a matching comment meta value.
+	 *                                                   Requires `$meta_key` to be set. Default empty.
+	 *     @type array        $meta_query                Meta query clauses to limit retrieved comments by.
+	 *                                                   See WP_Meta_Query. Default empty.
+	 *     @type int          $number                    Maximum number of comments to retrieve.
+	 *                                                   Default empty (no limit).
+	 *     @type int          $paged                     When used with $number, defines the page of results to return.
+	 *                                                   When used with $offset, $offset takes precedence. Default 1.
+	 *     @type int          $offset                    Number of comments to offset the query. Used to build
+	 *                                                   LIMIT clause. Default 0.
+	 *     @type bool         $no_found_rows             Whether to disable the `SQL_CALC_FOUND_ROWS` query.
+	 *                                                   Default: true.
+	 *     @type string|array $orderby                   Comment status or array of statuses. To use 'meta_value'
+	 *                                                   or 'meta_value_num', `$meta_key` must also be defined.
+	 *                                                   To sort by a specific `$meta_query` clause, use that
+	 *                                                   clause's array key. Accepts 'comment_agent',
+	 *                                                   'comment_approved', 'comment_author',
+	 *                                                   'comment_author_email', 'comment_author_IP',
+	 *                                                   'comment_author_url', 'comment_content', 'comment_date',
+	 *                                                   'comment_date_gmt', 'comment_ID', 'comment_karma',
+	 *                                                   'comment_parent', 'comment_post_ID', 'comment_type',
+	 *                                                   'user_id', 'comment__in', 'meta_value', 'meta_value_num',
+	 *                                                   the value of $meta_key, and the array keys of
+	 *                                                   `$meta_query`. Also accepts false, an empty array, or
+	 *                                                   'none' to disable `ORDER BY` clause.
+	 *                                                   Default: 'comment_date_gmt'.
+	 *     @type string       $order                     How to order retrieved comments. Accepts 'ASC', 'DESC'.
+	 *                                                   Default: 'DESC'.
+	 *     @type int          $parent                    Parent ID of comment to retrieve children of.
+	 *                                                   Default empty.
+	 *     @type int[]        $parent__in                Array of parent IDs of comments to retrieve children for.
+	 *                                                   Default empty.
+	 *     @type int[]        $parent__not_in            Array of parent IDs of comments *not* to retrieve
+	 *                                                   children for. Default empty.
+	 *     @type int[]        $post_author__in           Array of author IDs to retrieve comments for.
+	 *                                                   Default empty.
+	 *     @type int[]        $post_author__not_in       Array of author IDs *not* to retrieve comments for.
+	 *                                                   Default empty.
+	 *     @type int          $post_ID                   Currently unused.
+	 *     @type int          $post_id                   Limit results to those affiliated with a given post ID.
+	 *                                                   Default 0.
+	 *     @type int[]        $post__in                  Array of post IDs to include affiliated comments for.
+	 *                                                   Default empty.
+	 *     @type int[]        $post__not_in              Array of post IDs to exclude affiliated comments for.
+	 *                                                   Default empty.
+	 *     @type int          $post_author               Post author ID to limit results by. Default empty.
+	 *     @type string|array $post_status               Post status or array of post statuses to retrieve
+	 *                                                   affiliated comments for. Pass 'any' to match any value.
+	 *                                                   Default empty.
+	 *     @type string       $post_type                 Post type or array of post types to retrieve affiliated
+	 *                                                   comments for. Pass 'any' to match any value. Default empty.
+	 *     @type string       $post_name                 Post name to retrieve affiliated comments for.
+	 *                                                   Default empty.
+	 *     @type int          $post_parent               Post parent ID to retrieve affiliated comments for.
+	 *                                                   Default empty.
+	 *     @type string       $search                    Search term(s) to retrieve matching comments for.
+	 *                                                   Default empty.
+	 *     @type string|array $status                    Comment statuses to limit results by. Accepts an array
+	 *                                                   or space/comma-separated list of 'hold' (`comment_status=0`),
+	 *                                                   'approve' (`comment_status=1`), 'all', or a custom
+	 *                                                   comment status. Default 'all'.
+	 *     @type string|array $type                      Include comments of a given type, or array of types.
+	 *                                                   Accepts 'comment', 'pings' (includes 'pingback' and
+	 *                                                   'trackback'), or any custom type string. Default empty.
+	 *     @type string[]     $type__in                  Include comments from a given array of comment types.
+	 *                                                   Default empty.
+	 *     @type string[]     $type__not_in              Exclude comments from a given array of comment types.
+	 *                                                   Default empty.
+	 *     @type int          $user_id                   Include comments for a specific user ID. Default empty.
+	 *     @type bool|string  $hierarchical              Whether to include comment descendants in the results.
+	 *                                                   - 'threaded' returns a tree, with each comment's children
+	 *                                                   stored in a `children` property on the `WP_Comment` object.
+	 *                                                   - 'flat' returns a flat array of found comments plus
+	 *                                                   their children.
+	 *                                                   - Boolean `false` leaves out descendants.
+	 *                                                   The parameter is ignored (forced to `false`) when
+	 *                                                   `$fields` is 'ids' or 'counts'. Accepts 'threaded',
+	 *                                                   'flat', or false. Default: false.
+	 *     @type string       $cache_domain              Unique cache key to be produced when this query is stored in
+	 *                                                   an object cache. Default is 'core'.
+	 *     @type bool         $update_comment_meta_cache Whether to prime the metadata cache for found comments.
+	 *                                                   Default true.
+	 *     @type bool         $update_comment_post_cache Whether to prime the cache for comment posts.
+	 *                                                   Default false.
+	 * }
+	 */
+	public function __construct( $query = '' ) {
+		$this-&gt;query_var_defaults = array(
+			'author_email'              =&gt; '',
+			'author_url'                =&gt; '',
+			'author__in'                =&gt; '',
+			'author__not_in'            =&gt; '',
+			'include_unapproved'        =&gt; '',
+			'fields'                    =&gt; '',
+			'ID'                        =&gt; '',
+			'comment__in'               =&gt; '',
+			'comment__not_in'           =&gt; '',
+			'karma'                     =&gt; '',
+			'number'                    =&gt; '',
+			'offset'                    =&gt; '',
+			'no_found_rows'             =&gt; true,
+			'orderby'                   =&gt; '',
+			'order'                     =&gt; 'DESC',
+			'paged'                     =&gt; 1,
+			'parent'                    =&gt; '',
+			'parent__in'                =&gt; '',
+			'parent__not_in'            =&gt; '',
+			'post_author__in'           =&gt; '',
+			'post_author__not_in'       =&gt; '',
+			'post_ID'                   =&gt; '',
+			'post_id'                   =&gt; 0,
+			'post__in'                  =&gt; '',
+			'post__not_in'              =&gt; '',
+			'post_author'               =&gt; '',
+			'post_name'                 =&gt; '',
+			'post_parent'               =&gt; '',
+			'post_status'               =&gt; '',
+			'post_type'                 =&gt; '',
+			'status'                    =&gt; 'all',
+			'type'                      =&gt; '',
+			'type__in'                  =&gt; '',
+			'type__not_in'              =&gt; '',
+			'user_id'                   =&gt; '',
+			'search'                    =&gt; '',
+			'count'                     =&gt; false,
+			'meta_key'                  =&gt; '',
+			'meta_value'                =&gt; '',
+			'meta_query'                =&gt; '',
+			'date_query'                =&gt; null, // See WP_Date_Query.
+			'hierarchical'              =&gt; false,
+			'cache_domain'              =&gt; 'core',
+			'update_comment_meta_cache' =&gt; true,
+			'update_comment_post_cache' =&gt; false,
+		);
+
+		if ( ! empty( $query ) ) {
+			$this-&gt;query( $query );
+		}
+	}
+
+	/**
+	 * Parse arguments passed to the comment query with default query parameters.
+	 *
+	 * @since 4.2.0 Extracted from WP_Comment_Query::query().
+	 *
+	 * @param string|array $query WP_Comment_Query arguments. See WP_Comment_Query::__construct()
+	 */
+	public function parse_query( $query = '' ) {
+		if ( empty( $query ) ) {
+			$query = $this-&gt;query_vars;
+		}
+
+		$this-&gt;query_vars = wp_parse_args( $query, $this-&gt;query_var_defaults );
+
+		/**
+		 * Fires after the comment query vars have been parsed.
+		 *
+		 * @since 4.2.0
+		 *
+		 * @param WP_Comment_Query $this The WP_Comment_Query instance (passed by reference).
+		 */
+		do_action_ref_array( 'parse_comment_query', array( &amp;$this ) );
+	}
+
+	/**
+	 * Sets up the WordPress query for retrieving comments.
+	 *
+	 * @since 3.1.0
+	 * @since 4.1.0 Introduced 'comment__in', 'comment__not_in', 'post_author__in',
+	 *              'post_author__not_in', 'author__in', 'author__not_in', 'post__in',
+	 *              'post__not_in', 'include_unapproved', 'type__in', and 'type__not_in'
+	 *              arguments to $query_vars.
+	 * @since 4.2.0 Moved parsing to WP_Comment_Query::parse_query().
+	 *
+	 * @param string|array $query Array or URL query string of parameters.
+	 * @return array|int List of comments, or number of comments when 'count' is passed as a query var.
+	 */
+	public function query( $query ) {
+		$this-&gt;query_vars = wp_parse_args( $query );
+		return $this-&gt;get_comments();
+	}
+
+	/**
+	 * Get a list of comments matching the query vars.
+	 *
+	 * @since 4.2.0
+	 *
+	 * @global wpdb $wpdb WordPress database abstraction object.
+	 *
+	 * @return int|array List of comments or number of found comments if `$count` argument is true.
+	 */
+	public function get_comments() {
+		global $wpdb;
+
+		$this-&gt;parse_query();
+
+		// Parse meta query.
+		$this-&gt;meta_query = new WP_Meta_Query();
+		$this-&gt;meta_query-&gt;parse_query_vars( $this-&gt;query_vars );
+
+		/**
+		 * Fires before comments are retrieved.
+		 *
+		 * @since 3.1.0
+		 *
+		 * @param WP_Comment_Query $this Current instance of WP_Comment_Query (passed by reference).
+		 */
+		do_action_ref_array( 'pre_get_comments', array( &amp;$this ) );
+
+		// Reparse query vars, in case they were modified in a 'pre_get_comments' callback.
+		$this-&gt;meta_query-&gt;parse_query_vars( $this-&gt;query_vars );
+		if ( ! empty( $this-&gt;meta_query-&gt;queries ) ) {
+			$this-&gt;meta_query_clauses = $this-&gt;meta_query-&gt;get_sql( 'comment', $wpdb-&gt;comments, 'comment_ID', $this );
+		}
+
+		$comment_data = null;
+
+		/**
+		 * Filters the comments data before the query takes place.
+		 *
+		 * Return a non-null value to bypass WordPress' default comment queries.
+		 *
+		 * The expected return type from this filter depends on the value passed
+		 * in the request query vars:
+		 * - When `$this-&gt;query_vars['count']` is set, the filter should return
+		 *   the comment count as an integer.
+		 * - When `'ids' === $this-&gt;query_vars['fields']`, the filter should return
+		 *   an array of comment IDs.
+		 * - Otherwise the filter should return an array of WP_Comment objects.
+		 *
+		 * Note that if the filter returns an array of comment data, it will be assigned
+		 * to the `comments` property of the current WP_Comment_Query instance.
+		 *
+		 * Filtering functions that require pagination information are encouraged to set
+		 * the `found_comments` and `max_num_pages` properties of the WP_Comment_Query object,
+		 * passed to the filter by reference. If WP_Comment_Query does not perform a database
+		 * query, it will not have enough information to generate these values itself.
+		 *
+		 * @since 5.3.0
+		 * @since 5.6.0 The returned array of comment data is assigned to the `comments` property
+		 *              of the current WP_Comment_Query instance.
+		 *
+		 * @param array|int|null   $comment_data Return an array of comment data to short-circuit WP's comment query,
+		 *                                       the comment count as an integer if `$this-&gt;query_vars['count']` is set,
+		 *                                       or null to allow WP to run its normal queries.
+		 * @param WP_Comment_Query $query        The WP_Comment_Query instance, passed by reference.
+		 */
+		$comment_data = apply_filters_ref_array( 'comments_pre_query', array( $comment_data, &amp;$this ) );
+
+		if ( null !== $comment_data ) {
+			if ( is_array( $comment_data ) &amp;&amp; ! $this-&gt;query_vars['count'] ) {
+				$this-&gt;comments = $comment_data;
+			}
+
+			return $comment_data;
+		}
+
+		/*
+		 * Only use the args defined in the query_var_defaults to compute the key,
+		 * but ignore 'fields', which does not affect query results.
+		 */
+		$_args = wp_array_slice_assoc( $this-&gt;query_vars, array_keys( $this-&gt;query_var_defaults ) );
+		unset( $_args['fields'] );
+
+		$key          = md5( serialize( $_args ) );
+		$last_changed = wp_cache_get_last_changed( 'comment' );
+
+		$cache_key   = &quot;get_comments:$key:$last_changed&quot;;
+		$cache_value = wp_cache_get( $cache_key, 'comment' );
+		if ( false === $cache_value ) {
+			$comment_ids = $this-&gt;get_comment_ids();
+			if ( $comment_ids ) {
+				$this-&gt;set_found_comments();
+			}
+
+			$cache_value = array(
+				'comment_ids'    =&gt; $comment_ids,
+				'found_comments' =&gt; $this-&gt;found_comments,
+			);
+			wp_cache_add( $cache_key, $cache_value, 'comment' );
+		} else {
+			$comment_ids          = $cache_value['comment_ids'];
+			$this-&gt;found_comments = $cache_value['found_comments'];
+		}
+
+		if ( $this-&gt;found_comments &amp;&amp; $this-&gt;query_vars['number'] ) {
+			$this-&gt;max_num_pages = ceil( $this-&gt;found_comments / $this-&gt;query_vars['number'] );
+		}
+
+		// If querying for a count only, there's nothing more to do.
+		if ( $this-&gt;query_vars['count'] ) {
+			// $comment_ids is actually a count in this case.
+			return (int) $comment_ids;
+		}
+
+		$comment_ids = array_map( 'intval', $comment_ids );
+
+		if ( 'ids' === $this-&gt;query_vars['fields'] ) {
+			$this-&gt;comments = $comment_ids;
+			return $this-&gt;comments;
+		}
+
+		_prime_comment_caches( $comment_ids, $this-&gt;query_vars['update_comment_meta_cache'] );
+
+		// Fetch full comment objects from the primed cache.
+		$_comments = array();
+		foreach ( $comment_ids as $comment_id ) {
+			$_comment = get_comment( $comment_id );
+			if ( $_comment ) {
+				$_comments[] = $_comment;
+			}
+		}
+
+		// Prime comment post caches.
+		if ( $this-&gt;query_vars['update_comment_post_cache'] ) {
+			$comment_post_ids = array();
+			foreach ( $_comments as $_comment ) {
+				$comment_post_ids[] = $_comment-&gt;comment_post_ID;
+			}
+
+			_prime_post_caches( $comment_post_ids, false, false );
+		}
+
+		/**
+		 * Filters the comment query results.
+		 *
+		 * @since 3.1.0
+		 *
+		 * @param WP_Comment[]     $_comments An array of comments.
+		 * @param WP_Comment_Query $query     Current instance of WP_Comment_Query (passed by reference).
+		 */
+		$_comments = apply_filters_ref_array( 'the_comments', array( $_comments, &amp;$this ) );
+
+		// Convert to WP_Comment instances.
+		$comments = array_map( 'get_comment', $_comments );
+
+		if ( $this-&gt;query_vars['hierarchical'] ) {
+			$comments = $this-&gt;fill_descendants( $comments );
+		}
+
+		$this-&gt;comments = $comments;
+		return $this-&gt;comments;
+	}
+
+	/**
+	 * Used internally to get a list of comment IDs matching the query vars.
+	 *
+	 * @since 4.4.0
+	 *
+	 * @global wpdb $wpdb WordPress database abstraction object.
+	 *
+	 * @return int|array A single count of comment IDs if a count query. An array of comment IDs if a full query.
+	 */
+	protected function get_comment_ids() {
+		global $wpdb;
+
+		// Assemble clauses related to 'comment_approved'.
+		$approved_clauses = array();
+
+		// 'status' accepts an array or a comma-separated string.
+		$status_clauses = array();
+		$statuses       = wp_parse_list( $this-&gt;query_vars['status'] );
+
+		// Empty 'status' should be interpreted as 'all'.
+		if ( empty( $statuses ) ) {
+			$statuses = array( 'all' );
+		}
+
+		// 'any' overrides other statuses.
+		if ( ! in_array( 'any', $statuses, true ) ) {
+			foreach ( $statuses as $status ) {
+				switch ( $status ) {
+					case 'hold':
+						$status_clauses[] = &quot;comment_approved = '0'&quot;;
+						break;
+
+					case 'approve':
+						$status_clauses[] = &quot;comment_approved = '1'&quot;;
+						break;
+
+					case 'all':
+					case '':
+						$status_clauses[] = &quot;( comment_approved = '0' OR comment_approved = '1' )&quot;;
+						break;
+
+					default:
+						$status_clauses[] = $wpdb-&gt;prepare( 'comment_approved = %s', $status );
+						break;
+				}
+			}
+
+			if ( ! empty( $status_clauses ) ) {
+				$approved_clauses[] = '( ' . implode( ' OR ', $status_clauses ) . ' )';
+			}
+		}
+
+		// User IDs or emails whose unapproved comments are included, regardless of $status.
+		if ( ! empty( $this-&gt;query_vars['include_unapproved'] ) ) {
+			$include_unapproved = wp_parse_list( $this-&gt;query_vars['include_unapproved'] );
+
+			$unapproved_ids    = array();
+			$unapproved_emails = array();
+			foreach ( $include_unapproved as $unapproved_identifier ) {
+				// Numeric values are assumed to be user IDs.
+				if ( is_numeric( $unapproved_identifier ) ) {
+					$approved_clauses[] = $wpdb-&gt;prepare( &quot;( user_id = %d AND comment_approved = '0' )&quot;, $unapproved_identifier );
+				} else {
+					// Otherwise we match against email addresses.
+					if ( ! empty( $_GET['unapproved'] ) &amp;&amp; ! empty( $_GET['moderation-hash'] ) ) {
+						// Only include requested comment.
+						$approved_clauses[] = $wpdb-&gt;prepare( &quot;( comment_author_email = %s AND comment_approved = '0' AND comment_ID = %d )&quot;, $unapproved_identifier, (int) $_GET['unapproved'] );
+					} else {
+						// Include all of the author's unapproved comments.
+						$approved_clauses[] = $wpdb-&gt;prepare( &quot;( comment_author_email = %s AND comment_approved = '0' )&quot;, $unapproved_identifier );
+					}
+				}
+			}
+		}
+
+		// Collapse comment_approved clauses into a single OR-separated clause.
+		if ( ! empty( $approved_clauses ) ) {
+			if ( 1 === count( $approved_clauses ) ) {
+				$this-&gt;sql_clauses['where']['approved'] = $approved_clauses[0];
+			} else {
+				$this-&gt;sql_clauses['where']['approved'] = '( ' . implode( ' OR ', $approved_clauses ) . ' )';
+			}
+		}
+
+		$order = ( 'ASC' === strtoupper( $this-&gt;query_vars['order'] ) ) ? 'ASC' : 'DESC';
+
+		// Disable ORDER BY with 'none', an empty array, or boolean false.
+		if ( in_array( $this-&gt;query_vars['orderby'], array( 'none', array(), false ), true ) ) {
+			$orderby = '';
+		} elseif ( ! empty( $this-&gt;query_vars['orderby'] ) ) {
+			$ordersby = is_array( $this-&gt;query_vars['orderby'] ) ?
+				$this-&gt;query_vars['orderby'] :
+				preg_split( '/[,\s]/', $this-&gt;query_vars['orderby'] );
+
+			$orderby_array            = array();
+			$found_orderby_comment_id = false;
+			foreach ( $ordersby as $_key =&gt; $_value ) {
+				if ( ! $_value ) {
+					continue;
+				}
+
+				if ( is_int( $_key ) ) {
+					$_orderby = $_value;
+					$_order   = $order;
+				} else {
+					$_orderby = $_key;
+					$_order   = $_value;
+				}
+
+				if ( ! $found_orderby_comment_id &amp;&amp; in_array( $_orderby, array( 'comment_ID', 'comment__in' ), true ) ) {
+					$found_orderby_comment_id = true;
+				}
+
+				$parsed = $this-&gt;parse_orderby( $_orderby );
+
+				if ( ! $parsed ) {
+					continue;
+				}
+
+				if ( 'comment__in' === $_orderby ) {
+					$orderby_array[] = $parsed;
+					continue;
+				}
+
+				$orderby_array[] = $parsed . ' ' . $this-&gt;parse_order( $_order );
+			}
+
+			// If no valid clauses were found, order by comment_date_gmt.
+			if ( empty( $orderby_array ) ) {
+				$orderby_array[] = &quot;$wpdb-&gt;comments.comment_date_gmt $order&quot;;
+			}
+
+			// To ensure determinate sorting, always include a comment_ID clause.
+			if ( ! $found_orderby_comment_id ) {
+				$comment_id_order = '';
+
+				// Inherit order from comment_date or comment_date_gmt, if available.
+				foreach ( $orderby_array as $orderby_clause ) {
+					if ( preg_match( '/comment_date(?:_gmt)*\ (ASC|DESC)/', $orderby_clause, $match ) ) {
+						$comment_id_order = $match[1];
+						break;
+					}
+				}
+
+				// If no date-related order is available, use the date from the first available clause.
+				if ( ! $comment_id_order ) {
+					foreach ( $orderby_array as $orderby_clause ) {
+						if ( false !== strpos( 'ASC', $orderby_clause ) ) {
+							$comment_id_order = 'ASC';
+						} else {
+							$comment_id_order = 'DESC';
+						}
+
+						break;
+					}
+				}
+
+				// Default to DESC.
+				if ( ! $comment_id_order ) {
+					$comment_id_order = 'DESC';
+				}
+
+				$orderby_array[] = &quot;$wpdb-&gt;comments.comment_ID $comment_id_order&quot;;
+			}
+
+			$orderby = implode( ', ', $orderby_array );
+		} else {
+			$orderby = &quot;$wpdb-&gt;comments.comment_date_gmt $order&quot;;
+		}
+
+		$number = absint( $this-&gt;query_vars['number'] );
+		$offset = absint( $this-&gt;query_vars['offset'] );
+		$paged  = absint( $this-&gt;query_vars['paged'] );
+		$limits = '';
+
+		if ( ! empty( $number ) ) {
+			if ( $offset ) {
+				$limits = 'LIMIT ' . $offset . ',' . $number;
+			} else {
+				$limits = 'LIMIT ' . ( $number * ( $paged - 1 ) ) . ',' . $number;
+			}
+		}
+
+		if ( $this-&gt;query_vars['count'] ) {
+			$fields = 'COUNT(*)';
+		} else {
+			$fields = &quot;$wpdb-&gt;comments.comment_ID&quot;;
+		}
+
+		$post_id = absint( $this-&gt;query_vars['post_id'] );
+		if ( ! empty( $post_id ) ) {
+			$this-&gt;sql_clauses['where']['post_id'] = $wpdb-&gt;prepare( 'comment_post_ID = %d', $post_id );
+		}
+
+		// Parse comment IDs for an IN clause.
+		if ( ! empty( $this-&gt;query_vars['comment__in'] ) ) {
+			$this-&gt;sql_clauses['where']['comment__in'] = &quot;$wpdb-&gt;comments.comment_ID IN ( &quot; . implode( ',', wp_parse_id_list( $this-&gt;query_vars['comment__in'] ) ) . ' )';
+		}
+
+		// Parse comment IDs for a NOT IN clause.
+		if ( ! empty( $this-&gt;query_vars['comment__not_in'] ) ) {
+			$this-&gt;sql_clauses['where']['comment__not_in'] = &quot;$wpdb-&gt;comments.comment_ID NOT IN ( &quot; . implode( ',', wp_parse_id_list( $this-&gt;query_vars['comment__not_in'] ) ) . ' )';
+		}
+
+		// Parse comment parent IDs for an IN clause.
+		if ( ! empty( $this-&gt;query_vars['parent__in'] ) ) {
+			$this-&gt;sql_clauses['where']['parent__in'] = 'comment_parent IN ( ' . implode( ',', wp_parse_id_list( $this-&gt;query_vars['parent__in'] ) ) . ' )';
+		}
+
+		// Parse comment parent IDs for a NOT IN clause.
+		if ( ! empty( $this-&gt;query_vars['parent__not_in'] ) ) {
+			$this-&gt;sql_clauses['where']['parent__not_in'] = 'comment_parent NOT IN ( ' . implode( ',', wp_parse_id_list( $this-&gt;query_vars['parent__not_in'] ) ) . ' )';
+		}
+
+		// Parse comment post IDs for an IN clause.
+		if ( ! empty( $this-&gt;query_vars['post__in'] ) ) {
+			$this-&gt;sql_clauses['where']['post__in'] = 'comment_post_ID IN ( ' . implode( ',', wp_parse_id_list( $this-&gt;query_vars['post__in'] ) ) . ' )';
+		}
+
+		// Parse comment post IDs for a NOT IN clause.
+		if ( ! empty( $this-&gt;query_vars['post__not_in'] ) ) {
+			$this-&gt;sql_clauses['where']['post__not_in'] = 'comment_post_ID NOT IN ( ' . implode( ',', wp_parse_id_list( $this-&gt;query_vars['post__not_in'] ) ) . ' )';
+		}
+
+		if ( '' !== $this-&gt;query_vars['author_email'] ) {
+			$this-&gt;sql_clauses['where']['author_email'] = $wpdb-&gt;prepare( 'comment_author_email = %s', $this-&gt;query_vars['author_email'] );
+		}
+
+		if ( '' !== $this-&gt;query_vars['author_url'] ) {
+			$this-&gt;sql_clauses['where']['author_url'] = $wpdb-&gt;prepare( 'comment_author_url = %s', $this-&gt;query_vars['author_url'] );
+		}
+
+		if ( '' !== $this-&gt;query_vars['karma'] ) {
+			$this-&gt;sql_clauses['where']['karma'] = $wpdb-&gt;prepare( 'comment_karma = %d', $this-&gt;query_vars['karma'] );
+		}
+
+		// Filtering by comment_type: 'type', 'type__in', 'type__not_in'.
+		$raw_types = array(
+			'IN'     =&gt; array_merge( (array) $this-&gt;query_vars['type'], (array) $this-&gt;query_vars['type__in'] ),
+			'NOT IN' =&gt; (array) $this-&gt;query_vars['type__not_in'],
+		);
+
+		$comment_types = array();
+		foreach ( $raw_types as $operator =&gt; $_raw_types ) {
+			$_raw_types = array_unique( $_raw_types );
+
+			foreach ( $_raw_types as $type ) {
+				switch ( $type ) {
+					// An empty translates to 'all', for backward compatibility.
+					case '':
+					case 'all':
+						break;
+
+					case 'comment':
+					case 'comments':
+						$comment_types[ $operator ][] = &quot;''&quot;;
+						$comment_types[ $operator ][] = &quot;'comment'&quot;;
+						break;
+
+					case 'pings':
+						$comment_types[ $operator ][] = &quot;'pingback'&quot;;
+						$comment_types[ $operator ][] = &quot;'trackback'&quot;;
+						break;
+
+					default:
+						$comment_types[ $operator ][] = $wpdb-&gt;prepare( '%s', $type );
+						break;
+				}
+			}
+
+			if ( ! empty( $comment_types[ $operator ] ) ) {
+				$types_sql = implode( ', ', $comment_types[ $operator ] );
+				$this-&gt;sql_clauses['where'][ 'comment_type__' . strtolower( str_replace( ' ', '_', $operator ) ) ] = &quot;comment_type $operator ($types_sql)&quot;;
+			}
+		}
+
+		$parent = $this-&gt;query_vars['parent'];
+		if ( $this-&gt;query_vars['hierarchical'] &amp;&amp; ! $parent ) {
+			$parent = 0;
+		}
+
+		if ( '' !== $parent ) {
+			$this-&gt;sql_clauses['where']['parent'] = $wpdb-&gt;prepare( 'comment_parent = %d', $parent );
+		}
+
+		if ( is_array( $this-&gt;query_vars['user_id'] ) ) {
+			$this-&gt;sql_clauses['where']['user_id'] = 'user_id IN (' . implode( ',', array_map( 'absint', $this-&gt;query_vars['user_id'] ) ) . ')';
+		} elseif ( '' !== $this-&gt;query_vars['user_id'] ) {
+			$this-&gt;sql_clauses['where']['user_id'] = $wpdb-&gt;prepare( 'user_id = %d', $this-&gt;query_vars['user_id'] );
+		}
+
+		// Falsey search strings are ignored.
+		if ( strlen( $this-&gt;query_vars['search'] ) ) {
+			$search_sql = $this-&gt;get_search_sql(
+				$this-&gt;query_vars['search'],
+				array( 'comment_author', 'comment_author_email', 'comment_author_url', 'comment_author_IP', 'comment_content' )
+			);
+
+			// Strip leading 'AND'.
+			$this-&gt;sql_clauses['where']['search'] = preg_replace( '/^\s*AND\s*/', '', $search_sql );
+		}
+
+		// If any post-related query vars are passed, join the posts table.
+		$join_posts_table = false;
+		$plucked          = wp_array_slice_assoc( $this-&gt;query_vars, array( 'post_author', 'post_name', 'post_parent' ) );
+		$post_fields      = array_filter( $plucked );
+
+		if ( ! empty( $post_fields ) ) {
+			$join_posts_table = true;
+			foreach ( $post_fields as $field_name =&gt; $field_value ) {
+				// $field_value may be an array.
+				$esses = array_fill( 0, count( (array) $field_value ), '%s' );
+
+				// phpcs:ignore WordPress.DB.PreparedSQLPlaceholders.UnfinishedPrepare
+				$this-&gt;sql_clauses['where'][ $field_name ] = $wpdb-&gt;prepare( &quot; {$wpdb-&gt;posts}.{$field_name} IN (&quot; . implode( ',', $esses ) . ')', $field_value );
+			}
+		}
+
+		// 'post_status' and 'post_type' are handled separately, due to the specialized behavior of 'any'.
+		foreach ( array( 'post_status', 'post_type' ) as $field_name ) {
+			$q_values = array();
+			if ( ! empty( $this-&gt;query_vars[ $field_name ] ) ) {
+				$q_values = $this-&gt;query_vars[ $field_name ];
+				if ( ! is_array( $q_values ) ) {
+					$q_values = explode( ',', $q_values );
+				}
+
+				// 'any' will cause the query var to be ignored.
+				if ( in_array( 'any', $q_values, true ) || empty( $q_values ) ) {
+					continue;
+				}
+
+				$join_posts_table = true;
+
+				$esses = array_fill( 0, count( $q_values ), '%s' );
+
+				// phpcs:ignore WordPress.DB.PreparedSQLPlaceholders.UnfinishedPrepare
+				$this-&gt;sql_clauses['where'][ $field_name ] = $wpdb-&gt;prepare( &quot; {$wpdb-&gt;posts}.{$field_name} IN (&quot; . implode( ',', $esses ) . ')', $q_values );
+			}
+		}
+
+		// Comment author IDs for an IN clause.
+		if ( ! empty( $this-&gt;query_vars['author__in'] ) ) {
+			$this-&gt;sql_clauses['where']['author__in'] = 'user_id IN ( ' . implode( ',', wp_parse_id_list( $this-&gt;query_vars['author__in'] ) ) . ' )';
+		}
+
+		// Comment author IDs for a NOT IN clause.
+		if ( ! empty( $this-&gt;query_vars['author__not_in'] ) ) {
+			$this-&gt;sql_clauses['where']['author__not_in'] = 'user_id NOT IN ( ' . implode( ',', wp_parse_id_list( $this-&gt;query_vars['author__not_in'] ) ) . ' )';
+		}
+
+		// Post author IDs for an IN clause.
+		if ( ! empty( $this-&gt;query_vars['post_author__in'] ) ) {
+			$join_posts_table                              = true;
+			$this-&gt;sql_clauses['where']['post_author__in'] = 'post_author IN ( ' . implode( ',', wp_parse_id_list( $this-&gt;query_vars['post_author__in'] ) ) . ' )';
+		}
+
+		// Post author IDs for a NOT IN clause.
+		if ( ! empty( $this-&gt;query_vars['post_author__not_in'] ) ) {
+			$join_posts_table                                  = true;
+			$this-&gt;sql_clauses['where']['post_author__not_in'] = 'post_author NOT IN ( ' . implode( ',', wp_parse_id_list( $this-&gt;query_vars['post_author__not_in'] ) ) . ' )';
+		}
+
+		$join    = '';
+		$groupby = '';
+
+		if ( $join_posts_table ) {
+			$join .= &quot;JOIN $wpdb-&gt;posts ON $wpdb-&gt;posts.ID = $wpdb-&gt;comments.comment_post_ID&quot;;
+		}
+
+		if ( ! empty( $this-&gt;meta_query_clauses ) ) {
+			$join .= $this-&gt;meta_query_clauses['join'];
+
+			// Strip leading 'AND'.
+			$this-&gt;sql_clauses['where']['meta_query'] = preg_replace( '/^\s*AND\s*/', '', $this-&gt;meta_query_clauses['where'] );
+
+			if ( ! $this-&gt;query_vars['count'] ) {
+				$groupby = &quot;{$wpdb-&gt;comments}.comment_ID&quot;;
+			}
+		}
+
+		if ( ! empty( $this-&gt;query_vars['date_query'] ) &amp;&amp; is_array( $this-&gt;query_vars['date_query'] ) ) {
+			$this-&gt;date_query                         = new WP_Date_Query( $this-&gt;query_vars['date_query'], 'comment_date' );
+			$this-&gt;sql_clauses['where']['date_query'] = preg_replace( '/^\s*AND\s*/', '', $this-&gt;date_query-&gt;get_sql() );
+		}
+
+		$where = implode( ' AND ', $this-&gt;sql_clauses['where'] );
+
+		$pieces = array( 'fields', 'join', 'where', 'orderby', 'limits', 'groupby' );
+		/**
+		 * Filters the comment query clauses.
+		 *
+		 * @since 3.1.0
+		 *
+		 * @param string[]         $pieces An associative array of comment query clauses.
+		 * @param WP_Comment_Query $query  Current instance of WP_Comment_Query (passed by reference).
+		 */
+		$clauses = apply_filters_ref_array( 'comments_clauses', array( compact( $pieces ), &amp;$this ) );
+
+		$fields  = isset( $clauses['fields'] ) ? $clauses['fields'] : '';
+		$join    = isset( $clauses['join'] ) ? $clauses['join'] : '';
+		$where   = isset( $clauses['where'] ) ? $clauses['where'] : '';
+		$orderby = isset( $clauses['orderby'] ) ? $clauses['orderby'] : '';
+		$limits  = isset( $clauses['limits'] ) ? $clauses['limits'] : '';
+		$groupby = isset( $clauses['groupby'] ) ? $clauses['groupby'] : '';
+
+		$this-&gt;filtered_where_clause = $where;
+
+		if ( $where ) {
+			$where = 'WHERE ' . $where;
+		}
+
+		if ( $groupby ) {
+			$groupby = 'GROUP BY ' . $groupby;
+		}
+
+		if ( $orderby ) {
+			$orderby = &quot;ORDER BY $orderby&quot;;
+		}
+
+		$found_rows = '';
+		if ( ! $this-&gt;query_vars['no_found_rows'] ) {
+			$found_rows = 'SQL_CALC_FOUND_ROWS';
+		}
+
+		$this-&gt;sql_clauses['select']  = &quot;SELECT $found_rows $fields&quot;;
+		$this-&gt;sql_clauses['from']    = &quot;FROM $wpdb-&gt;comments $join&quot;;
+		$this-&gt;sql_clauses['groupby'] = $groupby;
+		$this-&gt;sql_clauses['orderby'] = $orderby;
+		$this-&gt;sql_clauses['limits']  = $limits;
+
+		$this-&gt;request = &quot;{$this-&gt;sql_clauses['select']} {$this-&gt;sql_clauses['from']} {$where} {$this-&gt;sql_clauses['groupby']} {$this-&gt;sql_clauses['orderby']} {$this-&gt;sql_clauses['limits']}&quot;;
+
+		if ( $this-&gt;query_vars['count'] ) {
+			return (int) $wpdb-&gt;get_var( $this-&gt;request );
+		} else {
+			$comment_ids = $wpdb-&gt;get_col( $this-&gt;request );
+			return array_map( 'intval', $comment_ids );
+		}
+	}
+
+	/**
+	 * Populates found_comments and max_num_pages properties for the current
+	 * query if the limit clause was used.
+	 *
+	 * @since 4.6.0
+	 *
+	 * @global wpdb $wpdb WordPress database abstraction object.
+	 */
+	private function set_found_comments() {
+		global $wpdb;
+
+		if ( $this-&gt;query_vars['number'] &amp;&amp; ! $this-&gt;query_vars['no_found_rows'] ) {
+			/**
+			 * Filters the query used to retrieve found comment count.
+			 *
+			 * @since 4.4.0
+			 *
+			 * @param string           $found_comments_query SQL query. Default 'SELECT FOUND_ROWS()'.
+			 * @param WP_Comment_Query $comment_query        The `WP_Comment_Query` instance.
+			 */
+			$found_comments_query = apply_filters( 'found_comments_query', 'SELECT FOUND_ROWS()', $this );
+
+			$this-&gt;found_comments = (int) $wpdb-&gt;get_var( $found_comments_query );
+		}
+	}
+
+	/**
+	 * Fetch descendants for located comments.
+	 *
+	 * Instead of calling `get_children()` separately on each child comment, we do a single set of queries to fetch
+	 * the descendant trees for all matched top-level comments.
+	 *
+	 * @since 4.4.0
+	 *
+	 * @global wpdb $wpdb WordPress database abstraction object.
+	 *
+	 * @param WP_Comment[] $comments Array of top-level comments whose descendants should be filled in.
+	 * @return array
+	 */
+	protected function fill_descendants( $comments ) {
+		global $wpdb;
+
+		$levels = array(
+			0 =&gt; wp_list_pluck( $comments, 'comment_ID' ),
+		);
+
+		$key          = md5( serialize( wp_array_slice_assoc( $this-&gt;query_vars, array_keys( $this-&gt;query_var_defaults ) ) ) );
+		$last_changed = wp_cache_get_last_changed( 'comment' );
+
+		// Fetch an entire level of the descendant tree at a time.
+		$level        = 0;
+		$exclude_keys = array( 'parent', 'parent__in', 'parent__not_in' );
+		do {
+			// Parent-child relationships may be cached. Only query for those that are not.
+			$child_ids           = array();
+			$uncached_parent_ids = array();
+			$_parent_ids         = $levels[ $level ];
+			foreach ( $_parent_ids as $parent_id ) {
+				$cache_key        = &quot;get_comment_child_ids:$parent_id:$key:$last_changed&quot;;
+				$parent_child_ids = wp_cache_get( $cache_key, 'comment' );
+				if ( false !== $parent_child_ids ) {
+					$child_ids = array_merge( $child_ids, $parent_child_ids );
+				} else {
+					$uncached_parent_ids[] = $parent_id;
+				}
+			}
+
+			if ( $uncached_parent_ids ) {
+				// Fetch this level of comments.
+				$parent_query_args = $this-&gt;query_vars;
+				foreach ( $exclude_keys as $exclude_key ) {
+					$parent_query_args[ $exclude_key ] = '';
+				}
+				$parent_query_args['parent__in']    = $uncached_parent_ids;
+				$parent_query_args['no_found_rows'] = true;
+				$parent_query_args['hierarchical']  = false;
+				$parent_query_args['offset']        = 0;
+				$parent_query_args['number']        = 0;
+
+				$level_comments = get_comments( $parent_query_args );
+
+				// Cache parent-child relationships.
+				$parent_map = array_fill_keys( $uncached_parent_ids, array() );
+				foreach ( $level_comments as $level_comment ) {
+					$parent_map[ $level_comment-&gt;comment_parent ][] = $level_comment-&gt;comment_ID;
+					$child_ids[]                                    = $level_comment-&gt;comment_ID;
+				}
+
+				foreach ( $parent_map as $parent_id =&gt; $children ) {
+					$cache_key = &quot;get_comment_child_ids:$parent_id:$key:$last_changed&quot;;
+					wp_cache_set( $cache_key, $children, 'comment' );
+				}
+			}
+
+			$level++;
+			$levels[ $level ] = $child_ids;
+		} while ( $child_ids );
+
+		// Prime comment caches for non-top-level comments.
+		$descendant_ids = array();
+		for ( $i = 1, $c = count( $levels ); $i &lt; $c; $i++ ) {
+			$descendant_ids = array_merge( $descendant_ids, $levels[ $i ] );
+		}
+
+		_prime_comment_caches( $descendant_ids, $this-&gt;query_vars['update_comment_meta_cache'] );
+
+		// Assemble a flat array of all comments + descendants.
+		$all_comments = $comments;
+		foreach ( $descendant_ids as $descendant_id ) {
+			$all_comments[] = get_comment( $descendant_id );
+		}
+
+		// If a threaded representation was requested, build the tree.
+		if ( 'threaded' === $this-&gt;query_vars['hierarchical'] ) {
+			$threaded_comments = array();
+			$ref               = array();
+			foreach ( $all_comments as $k =&gt; $c ) {
+				$_c = get_comment( $c-&gt;comment_ID );
+
+				// If the comment isn't in the reference array, it goes in the top level of the thread.
+				if ( ! isset( $ref[ $c-&gt;comment_parent ] ) ) {
+					$threaded_comments[ $_c-&gt;comment_ID ] = $_c;
+					$ref[ $_c-&gt;comment_ID ]               = $threaded_comments[ $_c-&gt;comment_ID ];
+
+					// Otherwise, set it as a child of its parent.
+				} else {
+
+					$ref[ $_c-&gt;comment_parent ]-&gt;add_child( $_c );
+					$ref[ $_c-&gt;comment_ID ] = $ref[ $_c-&gt;comment_parent ]-&gt;get_child( $_c-&gt;comment_ID );
+				}
+			}
+
+			// Set the 'populated_children' flag, to ensure additional database queries aren't run.
+			foreach ( $ref as $_ref ) {
+				$_ref-&gt;populated_children( true );
+			}
+
+			$comments = $threaded_comments;
+		} else {
+			$comments = $all_comments;
+		}
+
+		return $comments;
+	}
+
+	/**
+	 * Used internally to generate an SQL string for searching across multiple columns
+	 *
+	 * @since 3.1.0
+	 *
+	 * @global wpdb $wpdb WordPress database abstraction object.
+	 *
+	 * @param string $string
+	 * @param array  $cols
+	 * @return string
+	 */
+	protected function get_search_sql( $string, $cols ) {
+		global $wpdb;
+
+		$like = '%' . $wpdb-&gt;esc_like( $string ) . '%';
+
+		$searches = array();
+		foreach ( $cols as $col ) {
+			$searches[] = $wpdb-&gt;prepare( &quot;$col LIKE %s&quot;, $like );
+		}
+
+		return ' AND (' . implode( ' OR ', $searches ) . ')';
+	}
+
+	/**
+	 * Parse and sanitize 'orderby' keys passed to the comment query.
+	 *
+	 * @since 4.2.0
+	 *
+	 * @global wpdb $wpdb WordPress database abstraction object.
+	 *
+	 * @param string $orderby Alias for the field to order by.
+	 * @return string|false Value to used in the ORDER clause. False otherwise.
+	 */
+	protected function parse_orderby( $orderby ) {
+		global $wpdb;
+
+		$allowed_keys = array(
+			'comment_agent',
+			'comment_approved',
+			'comment_author',
+			'comment_author_email',
+			'comment_author_IP',
+			'comment_author_url',
+			'comment_content',
+			'comment_date',
+			'comment_date_gmt',
+			'comment_ID',
+			'comment_karma',
+			'comment_parent',
+			'comment_post_ID',
+			'comment_type',
+			'user_id',
+		);
+
+		if ( ! empty( $this-&gt;query_vars['meta_key'] ) ) {
+			$allowed_keys[] = $this-&gt;query_vars['meta_key'];
+			$allowed_keys[] = 'meta_value';
+			$allowed_keys[] = 'meta_value_num';
+		}
+
+		$meta_query_clauses = $this-&gt;meta_query-&gt;get_clauses();
+		if ( $meta_query_clauses ) {
+			$allowed_keys = array_merge( $allowed_keys, array_keys( $meta_query_clauses ) );
+		}
+
+		$parsed = false;
+		if ( $this-&gt;query_vars['meta_key'] === $orderby || 'meta_value' === $orderby ) {
+			$parsed = &quot;$wpdb-&gt;commentmeta.meta_value&quot;;
+		} elseif ( 'meta_value_num' === $orderby ) {
+			$parsed = &quot;$wpdb-&gt;commentmeta.meta_value+0&quot;;
+		} elseif ( 'comment__in' === $orderby ) {
+			$comment__in = implode( ',', array_map( 'absint', $this-&gt;query_vars['comment__in'] ) );
+			$parsed      = &quot;FIELD( {$wpdb-&gt;comments}.comment_ID, $comment__in )&quot;;
+		} elseif ( in_array( $orderby, $allowed_keys, true ) ) {
+
+			if ( isset( $meta_query_clauses[ $orderby ] ) ) {
+				$meta_clause = $meta_query_clauses[ $orderby ];
+				$parsed      = sprintf( 'CAST(%s.meta_value AS %s)', esc_sql( $meta_clause['alias'] ), esc_sql( $meta_clause['cast'] ) );
+			} else {
+				$parsed = &quot;$wpdb-&gt;comments.$orderby&quot;;
+			}
+		}
+
+		return $parsed;
+	}
+
+	/**
+	 * Parse an 'order' query variable and cast it to ASC or DESC as necessary.
+	 *
+	 * @since 4.2.0
+	 *
+	 * @param string $order The 'order' query variable.
+	 * @return string The sanitized 'order' query variable.
+	 */
+	protected function parse_order( $order ) {
+		if ( ! is_string( $order ) || empty( $order ) ) {
+			return 'DESC';
+		}
+
+		if ( 'ASC' === strtoupper( $order ) ) {
+			return 'ASC';
+		} else {
+			return 'DESC';
+		}
+	}
+}
+</pre>
+			</div>
+			<p class="source-code-links">
+				<span>
+					<a href="#" class="show-complete-source">Expand full source code</a>
+					<a href="#" class="less-complete-source">Collapse full source code</a>
+				</span>
+				<span><a href="https://core.trac.wordpress.org/browser/tags/5.8/src/wp-includes/class-wp-comment-query.php#L17">View on Trac</a></span>
+			</p>
+			</section>
+		<hr />
+		<section class="class-methods">
+			<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="methods" tabindex="-1">Methods <a href="#methods" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Methods</span></a></h2>
+			<ul>
+									<li><a href="__call/index.html">
+							__call</a>
+						&mdash; Make private/protected methods readable for backward compatibility.											</li>
+									<li><a href="__construct/index.html">
+							__construct</a>
+						&mdash; Constructor.											</li>
+									<li><a href="fill_descendants/index.html">
+							fill_descendants</a>
+						&mdash; Fetch descendants for located comments.											</li>
+									<li><a href="get_comment_ids/index.html">
+							get_comment_ids</a>
+						&mdash; Used internally to get a list of comment IDs matching the query vars.											</li>
+									<li><a href="get_comments/index.html">
+							get_comments</a>
+						&mdash; Get a list of comments matching the query vars.											</li>
+									<li><a href="get_search_sql/index.html">
+							get_search_sql</a>
+						&mdash; Used internally to generate an SQL string for searching across multiple columns											</li>
+									<li><a href="parse_order/index.html">
+							parse_order</a>
+						&mdash; Parse an 'order' query variable and cast it to ASC or DESC as necessary.											</li>
+									<li><a href="parse_orderby/index.html">
+							parse_orderby</a>
+						&mdash; Parse and sanitize 'orderby' keys passed to the comment query.											</li>
+									<li><a href="parse_query/index.html">
+							parse_query</a>
+						&mdash; Parse arguments passed to the comment query with default query parameters.											</li>
+									<li><a href="query/index.html">
+							query</a>
+						&mdash; Sets up the WordPress query for retrieving comments.											</li>
+									<li><a href="set_found_comments/index.html">
+							set_found_comments</a>
+						&mdash; Populates found_comments and max_num_pages properties for the current query if the limit clause was used.											</li>
+							</ul>
+		</section>
+		<hr />
+	<section class="changelog">
+		<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="changelog" tabindex="-1">Changelog <a href="#changelog" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Changelog</span></a></h2>
+
+		<table>
+			<caption class="screen-reader-text">Changelog</caption>
+			<thead>
+				<tr>
+					<th class="changelog-version">Version</th>
+					<th class="changelog-desc">Description</th>
+				</tr>
+			</thead>
+
+			<tbody>
+									
+					<tr>
+						<td><a href="../../since/3.1.0/index.html" alt="WordPress 3.1.0">3.1.0</a></td>
+						<td>Introduced.</td>
+					</tr>
+							</tbody>
+		</table>
+	</section>
+
+	<hr />
+	<section class="user-notes">
+		<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="user-contributed-notes" tabindex="-1">User Contributed Notes <a href="#user-contributed-notes" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">User Contributed Notes</span></a></h2>
+		
+<div id="comments" class="comments-area">
+
+			
+		<ol class="comment-list">
+						<li id="comment-1715" data-comment-id="1715" class="comment byuser comment-author-ramiy even thread-even depth-1">
+			<article id="div-comment-1715" class="comment-body">
+
+							<a href="#comment-content-1715" class="screen-reader-text">Skip to note 1 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="4a4c332018"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="1715" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Fclasses%2Fwp_comment_query%2F%23comment-1715"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="88% like this"><span class="screen-reader-text">Vote results for this note: </span>6</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="1715" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Fclasses%2Fwp_comment_query%2F%23comment-1715"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/ce2a269e424156d79cb0c4e1d4d82db1?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/ce2a269e424156d79cb0c4e1d4d82db1?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/ramiy/" rel="external nofollow" class="url">Rami Yushuvaev</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-1715">
+							<time datetime="2016-07-17T09:20:34+00:00">
+							5 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-1715">
+				<p>WordPress WP_Comment_Query Generator:</p>
+<p><a href="https://generatewp.com/wp_comment_query/" rel="nofollow ugc">https://GenerateWP.com/wp_comment_query/</a></p>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-1715' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Fclasses%2Fwp_comment_query%2F%3Freplytocom%3D1715%23feedback-editor-1715" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-2032" data-comment-id="2032" class="comment byuser comment-author-ketuchetan odd alt thread-odd thread-alt depth-1">
+			<article id="div-comment-2032" class="comment-body">
+
+							<a href="#comment-content-2032" class="screen-reader-text">Skip to note 2 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="ee50ff7892"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="2032" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Fclasses%2Fwp_comment_query%2F%23comment-2032"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="100% like this"><span class="screen-reader-text">Vote results for this note: </span>2</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="2032" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Fclasses%2Fwp_comment_query%2F%23comment-2032"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/912415882516bc8a5d8c2085fb0f9f31?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/912415882516bc8a5d8c2085fb0f9f31?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/ketuchetan/" rel="external nofollow" class="url">Chetan Satasiya</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-2032">
+							<time datetime="2017-01-03T07:51:07+00:00">
+							5 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-2032">
+				<p>Multiple meta fields handling</p>
+<section class="source-content">
+<div class="source-code-container">
+<pre class="brush: php; title: ; notranslate" title="">
+$args = array(
+	'meta_query' =&gt; array(
+		'relation' =&gt; 'AND',
+		array(
+			'key' =&gt; 'featured',
+			'value' =&gt; '1'
+		),
+		array(
+			'key' =&gt; 'buried',
+			'value' =&gt; '1',
+			'type' =&gt; 'numeric',
+			'compare' =&gt; '!='
+		)
+	)
+ );
+$comment_query = new WP_Comment_Query( $args );
+</pre>
+</div>
+<p class="source-code-links"><span><a href="#" class="show-complete-source">Expand full source code</a><a href="#" class="less-complete-source">Collapse full source code</a></span></p>
+</section>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-2032' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Fclasses%2Fwp_comment_query%2F%3Freplytocom%3D2032%23feedback-editor-2032" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-2029" data-comment-id="2029" class="comment byuser comment-author-ketuchetan even thread-even depth-1">
+			<article id="div-comment-2029" class="comment-body">
+
+							<a href="#comment-content-2029" class="screen-reader-text">Skip to note 3 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="50689e83a2"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="2029" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Fclasses%2Fwp_comment_query%2F%23comment-2029"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="0% like this"><span class="screen-reader-text">Vote results for this note: </span>-1</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="2029" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Fclasses%2Fwp_comment_query%2F%23comment-2029"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/912415882516bc8a5d8c2085fb0f9f31?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/912415882516bc8a5d8c2085fb0f9f31?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/ketuchetan/" rel="external nofollow" class="url">Chetan Satasiya</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-2029">
+							<time datetime="2017-01-03T07:49:48+00:00">
+							5 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-2029">
+				<section class="source-content">
+<div class="source-code-container">
+<pre class="brush: php; title: ; notranslate" title="">
+$args = array(
+   // args here
+);
+
+// The Query
+$comments_query = new WP_Comment_Query;
+$comments = $comments_query-&gt;query( $args );
+
+// Comment Loop
+if ( $comments ) {
+	foreach ( $comments as $comment ) {
+		echo '&lt;p&gt;' . $comment-&gt;comment_content . '&lt;/p&gt;';
+	}
+} else {
+	echo 'No comments found.';
+}
+</pre>
+</div>
+<p class="source-code-links"><span><a href="#" class="show-complete-source">Expand full source code</a><a href="#" class="less-complete-source">Collapse full source code</a></span></p>
+</section>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-2029' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Fclasses%2Fwp_comment_query%2F%3Freplytocom%3D2029%23feedback-editor-2029" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-2031" data-comment-id="2031" class="comment byuser comment-author-ketuchetan odd alt thread-odd thread-alt depth-1">
+			<article id="div-comment-2031" class="comment-body">
+
+							<a href="#comment-content-2031" class="screen-reader-text">Skip to note 4 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="e205e3513c"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="2031" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Fclasses%2Fwp_comment_query%2F%23comment-2031"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="0% like this"><span class="screen-reader-text">Vote results for this note: </span>-1</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="2031" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Fclasses%2Fwp_comment_query%2F%23comment-2031"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/912415882516bc8a5d8c2085fb0f9f31?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/912415882516bc8a5d8c2085fb0f9f31?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/ketuchetan/" rel="external nofollow" class="url">Chetan Satasiya</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-2031">
+							<time datetime="2017-01-03T07:50:42+00:00">
+							5 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-2031">
+				<p>Display featured comments</p>
+<pre class="brush: php; title: ; notranslate" title="">
+$comment_query = new WP_Comment_Query( array( 'meta_key' =&gt; 'featured', 'meta_value' =&gt; '1' ) );
+</pre>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-2031' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Fclasses%2Fwp_comment_query%2F%3Freplytocom%3D2031%23feedback-editor-2031" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-2574" data-comment-id="2574" class="comment byuser comment-author-rogerlos even thread-even depth-1">
+			<article id="div-comment-2574" class="comment-body">
+
+							<a href="#comment-content-2574" class="screen-reader-text">Skip to note 5 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="85cff35664"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="2574" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Fclasses%2Fwp_comment_query%2F%23comment-2574"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="0% like this"><span class="screen-reader-text">Vote results for this note: </span>-1</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="2574" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Fclasses%2Fwp_comment_query%2F%23comment-2574"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/3f0706f317b10eb5b35430e69ad2b110?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/3f0706f317b10eb5b35430e69ad2b110?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/rogerlos/" rel="external nofollow" class="url">rogerlos</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-2574">
+							<time datetime="2018-02-09T12:18:17+00:00">
+							4 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-2574">
+				<p>You cannot use this class&#8217; <code>get_comments</code> method to retrieve comments that have <code>comment_type</code> set to any of these types: </p>
+<ul>
+<li>comment</li>
+<li>pings</li>
+<li>all</li>
+</ul>
+<p>They are magical reserved words and will short-circuit the query. However, WordPress will let you save a comment with any of those types without noting that they cannot be retrieved without using the <code>comments_clauses</code> filter.</p>
+<p>See <a href="https://core.trac.wordpress.org/ticket/40073" rel="nofollow ugc">https://core.trac.wordpress.org/ticket/40073</a>.</p>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-2574' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Fclasses%2Fwp_comment_query%2F%3Freplytocom%3D2574%23feedback-editor-2574" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+		</ol><!-- .comment-list -->
+
+		
+	
+	
+			<div id="respond" class="comment-respond">
+		<h3 id="reply-title" class="comment-reply-title"> <small></small></h3><p>You must <a href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Fclasses%2Fwp_comment_query%2F%23comments">log in</a> before being able to contribute a note or feedback.</p>	</div><!-- #respond -->
+		
+	
+</div><!-- #comments -->
+	</section>
+</div>
+
+</article>
+
+			
+		
+		</main><!-- #main -->
+	</div><!-- #primary -->
+	</div><!-- #content -->
+
+</div><!-- #page -->
+
+
+<div id="wporg-footer">
+	<div class="wrapper">
+		<ul>
+			<li><a href="http://wordpress.org/about/" title="An introduction to the WordPress project">About</a></li>
+			<li><a href="http://wordpress.org/news/" title="News and Updates">Blog</a></li>
+			<li><a href="http://wordpress.org/hosting/" title="Recommended web hosting providers">Hosting</a></li>
+			<li><a href="https://wordpressfoundation.org/donate/" title="Donate to the WordPress Foundation">Donate</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://wordpress.org/support/" title="Forums, documentation, and other resources">Support</a></li>
+			<li><a href="../../../index.html" title="Resources for WordPress developers">Developers</a></li>
+			<li><a href="http://make.wordpress.org/" title="Give back to WordPress through code, support, translation and more">Get Involved</a></li>
+			<li><a href="http://learn.wordpress.org/" title="Workshops and training materials">Learn</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://wordpress.org/showcase/" title="Some of the best WordPress sites on the Web">Showcase</a></li>
+			<li><a href="http://wordpress.org/plugins/" title="Add extra functionality to WordPress">Plugins</a></li>
+			<li><a href="http://wordpress.org/themes/" title="Make your WordPress pretty">Themes</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://central.wordcamp.org/" title="Find a WordPress event near you">WordCamp</a></li>
+			<li><a href="http://wordpress.tv/" title="Videos, tutorials, and WordCamp sessions">WordPress.TV</a></li>
+			<li><a href="http://buddypress.org/" title="A set of plugins to transform your WordPress into a social network">BuddyPress</a></li>
+			<li><a href="http://bbpress.org/" title="Fast, slick forums built on WordPress">bbPress</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://wordpress.com/?ref=wporg-footer" title="Hassle-free WordPress hosting">WordPress.com</a></li>
+			<li><a href="http://ma.tt/" title="Co-founder of WordPress, an example of what WordPress can do">Matt</a></li>
+			<li><a href="http://wordpress.org/about/privacy/" title="WordPress.org Privacy Policy">Privacy</a></li>
+			<li><a href="https://publiccode.eu/" target="_blank">Public Code</a></li>
+		</ul>
+
+		<ul class="social-media-links">
+			<li><span class="dashicons dashicons-twitter"></span><a href="https://twitter.com/WordPress" title="Follow @WordPress on Twitter">@WordPress</a></li>
+			<li><span class="dashicons dashicons-facebook"></span><a href="https://www.facebook.com/WordPress/" title="Like WordPress on Facebook">WordPress</a></li>
+		</ul>
+	</div>
+
+		<p class="cip cip-image">Code is Poetry.</p>
+</div>
+
+<script src="../../../../s.w.org/style/js/navigation.min.js?20190128"></script>
+
+<script type='text/javascript'>
+	(function(){
+		var corecss = document.createElement('link');
+		var themecss = document.createElement('link');
+		var corecssurl = "../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shCore.css?ver=3.0.9b";
+		if ( corecss.setAttribute ) {
+				corecss.setAttribute( "rel", "stylesheet" );
+				corecss.setAttribute( "type", "text/css" );
+				corecss.setAttribute( "href", corecssurl );
+		} else {
+				corecss.rel = "stylesheet";
+				corecss.href = corecssurl;
+		}
+		document.head.appendChild( corecss );
+		var themecssurl = "../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shThemeDefault.css?ver=3.0.9b";
+		if ( themecss.setAttribute ) {
+				themecss.setAttribute( "rel", "stylesheet" );
+				themecss.setAttribute( "type", "text/css" );
+				themecss.setAttribute( "href", themecssurl );
+		} else {
+				themecss.rel = "stylesheet";
+				themecss.href = themecssurl;
+		}
+		document.head.appendChild( themecss );
+	})();
+	SyntaxHighlighter.config.strings.expandSource = '+ expand source';
+	SyntaxHighlighter.config.strings.help = '?';
+	SyntaxHighlighter.config.strings.alert = 'SyntaxHighlighter\n\n';
+	SyntaxHighlighter.config.strings.noBrush = 'Can\'t find brush for: ';
+	SyntaxHighlighter.config.strings.brushNotHtmlScript = 'Brush wasn\'t configured for html-script option: ';
+	SyntaxHighlighter.defaults['pad-line-numbers'] = false;
+	SyntaxHighlighter.defaults['toolbar'] = false;
+	SyntaxHighlighter.all();
+
+	// Infinite scroll support
+	if ( typeof( jQuery ) !== 'undefined' ) {
+		jQuery( function( $ ) {
+			$( document.body ).on( 'post-load', function() {
+				SyntaxHighlighter.highlight();
+			} );
+		} );
+	}
+</script>
+<link rel='stylesheet' id='buttons-css'  href='../../../wp-includes/css/buttons.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<script type='text/javascript' src='../../../wp-includes/js/hoverintent-js.min.js?ver=2.2.1' id='hoverintent-js-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/admin-bar.min.js?ver=5.9-alpha-51701' id='admin-bar-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/navigation.js?ver=20181209' id='wporg-developer-navigation-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/skip-link-focus-fix.js?ver=20130115' id='wporg-developer-skip-link-focus-fix-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/search.js?ver=20150430' id='wporg-developer-search-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/menu.js?ver=20180201' id='wporg-developer-menu-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/awesomplete.min.js?ver=20160322' id='awesomplete-js'></script>
+<script type='text/javascript' id='autocomplete-js-extra'>
+/* <![CDATA[ */
+var autocomplete = {"ajaxurl":"https:\/\/developer.wordpress.org\/wp-admin\/admin-ajax.php","nonce":"8a60f70c4b"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/autocomplete.js?ver=20160524' id='autocomplete-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/function-reference.js?ver=20180724' id='wporg-developer-function-reference-js'></script>
+<script type='text/javascript' id='quicktags-js-extra'>
+/* <![CDATA[ */
+var quicktagsL10n = {"closeAllOpenTags":"Close all open tags","closeTags":"close tags","enterURL":"Enter the URL","enterImageURL":"Enter the URL of the image","enterImageDescription":"Enter a description of the image","textdirection":"text direction","toggleTextdirection":"Toggle Editor Text Direction","dfw":"Distraction-free writing mode","strong":"Bold","strongClose":"Close bold tag","em":"Italic","emClose":"Close italic tag","link":"Insert link","blockquote":"Blockquote","blockquoteClose":"Close blockquote tag","del":"Deleted text (strikethrough)","delClose":"Close deleted text tag","ins":"Inserted text","insClose":"Close inserted text tag","image":"Insert image","ul":"Bulleted list","ulClose":"Close bulleted list tag","ol":"Numbered list","olClose":"Close numbered list tag","li":"List item","liClose":"Close list item tag","code":"Code","codeClose":"Close code tag","more":"Insert Read More tag"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-includes/js/quicktags.min.js?ver=5.9-alpha-51701' id='quicktags-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/user-notes.js?ver=20200110' id='wporg-developer-user-notes-js'></script>
+<script type='text/javascript' id='wporg-developer-user-notes-feedback-js-extra'>
+/* <![CDATA[ */
+var wporg_note_feedback = {"show":"Show Feedback","hide":"Hide Feedback"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/user-notes-feedback.js?ver=20181023' id='wporg-developer-user-notes-feedback-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/tabs.js?ver=20160824' id='wporg-developer-tabs-js'></script>
+<script type='text/javascript' id='wporg-developer-preview-js-extra'>
+/* <![CDATA[ */
+var wporg_note_preview = {"ajaxurl":"https:\/\/developer.wordpress.org\/wp-admin\/admin-ajax.php","nonce":"504933b60e","preview":"preview note","preview_empty":"Nothing to preview","is_admin":""};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/user-notes-preview.js?ver=20200111' id='wporg-developer-preview-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/wp-embed.min.js?ver=5.9-alpha-51701' id='wp-embed-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/vendor/regenerator-runtime.min.js?ver=0.13.7' id='regenerator-runtime-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/vendor/wp-polyfill.min.js?ver=3.15.0' id='wp-polyfill-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/dom-ready.min.js?ver=71883072590656bf22c74c7b887df3dd' id='wp-dom-ready-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/hooks.min.js?ver=a7edae857aab69d69fa10d5aef23a5de' id='wp-hooks-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/i18n.min.js?ver=5f1269854226b4dd90450db411a12b79' id='wp-i18n-js'></script>
+<script type='text/javascript' id='wp-i18n-js-after'>
+wp.i18n.setLocaleData( { 'text direction\u0004ltr': [ 'ltr' ] } );
+</script>
+<script type='text/javascript' id='wp-a11y-js-translations'>
+( function( domain, translations ) {
+	var localeData = translations.locale_data[ domain ] || translations.locale_data.messages;
+	localeData[""].domain = domain;
+	wp.i18n.setLocaleData( localeData, domain );
+} )( "default", { "locale_data": { "messages": { "": {} } } } );
+</script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/a11y.min.js?ver=0ac8327cc1c40dcfdf29716affd7ac63' id='wp-a11y-js'></script>
+<script type='text/javascript' id='wplink-js-extra'>
+/* <![CDATA[ */
+var wpLinkL10n = {"title":"Insert\/edit link","update":"Update","save":"Add Link","noTitle":"(no title)","noMatchesFound":"No results found.","linkSelected":"Link selected.","linkInserted":"Link inserted.","minInputLength":"3"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-includes/js/wplink.min.js?ver=5.9-alpha-51701' id='wplink-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/jquery/ui/core.min.js?ver=1.12.1' id='jquery-ui-core-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/jquery/ui/menu.min.js?ver=1.12.1' id='jquery-ui-menu-js'></script>
+<script type='text/javascript' id='jquery-ui-autocomplete-js-extra'>
+/* <![CDATA[ */
+var uiAutocompleteL10n = {"noResults":"No results found.","oneResult":"1 result found. Use up and down arrow keys to navigate.","manyResults":"%d results found. Use up and down arrow keys to navigate.","itemSelected":"Item selected."};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-includes/js/jquery/ui/autocomplete.min.js?ver=1.12.1' id='jquery-ui-autocomplete-js'></script>
+
+		<script type="text/javascript">
+		tinyMCEPreInit = {
+			baseURL: "https://developer.wordpress.org/wp-includes/js/tinymce",
+			suffix: ".min",
+						mceInit: {},
+			qtInit: {'comment':{id:"comment",buttons:"strong,em,ul,ol,li,link"}},
+			ref: {plugins:"",theme:"modern",language:""},
+			load_ext: function(url,lang){var sl=tinymce.ScriptLoader;sl.markDone(url+'/langs/'+lang+'.js');sl.markDone(url+'/langs/'+lang+'_dlg.js');}
+		};
+		</script>
+				<script type="text/javascript">
+		var ajaxurl = "../../../wp-admin/admin-ajax.html";
+		( function() {
+			var initialized = [];
+			var initialize  = function() {
+				var init, id, inPostbox, $wrap;
+				var readyState = document.readyState;
+
+				if ( readyState !== 'complete' && readyState !== 'interactive' ) {
+					return;
+				}
+
+				for ( id in tinyMCEPreInit.mceInit ) {
+					if ( initialized.indexOf( id ) > -1 ) {
+						continue;
+					}
+
+					init      = tinyMCEPreInit.mceInit[id];
+					$wrap     = tinymce.$( '#wp-' + id + '-wrap' );
+					inPostbox = $wrap.parents( '.postbox' ).length > 0;
+
+					if (
+						! init.wp_skip_init &&
+						( $wrap.hasClass( 'tmce-active' ) || ! tinyMCEPreInit.qtInit.hasOwnProperty( id ) ) &&
+						( readyState === 'complete' || ( ! inPostbox && readyState === 'interactive' ) )
+					) {
+						tinymce.init( init );
+						initialized.push( id );
+
+						if ( ! window.wpActiveEditor ) {
+							window.wpActiveEditor = id;
+						}
+					}
+				}
+			}
+
+			if ( typeof tinymce !== 'undefined' ) {
+				if ( tinymce.Env.ie && tinymce.Env.ie < 11 ) {
+					tinymce.$( '.wp-editor-wrap ' ).removeClass( 'tmce-active' ).addClass( 'html-active' );
+				} else {
+					if ( document.readyState === 'complete' ) {
+						initialize();
+					} else {
+						document.addEventListener( 'readystatechange', initialize );
+					}
+				}
+			}
+
+			if ( typeof quicktags !== 'undefined' ) {
+				for ( id in tinyMCEPreInit.qtInit ) {
+					quicktags( tinyMCEPreInit.qtInit[id] );
+
+					if ( ! window.wpActiveEditor ) {
+						window.wpActiveEditor = id;
+					}
+				}
+			}
+		}());
+		</script>
+				<div id="wp-link-backdrop" style="display: none"></div>
+		<div id="wp-link-wrap" class="wp-core-ui" style="display: none" role="dialog" aria-labelledby="link-modal-title">
+		<form id="wp-link" tabindex="-1">
+		<input type="hidden" id="_ajax_linking_nonce" name="_ajax_linking_nonce" value="86f5a0a85d" />		<h1 id="link-modal-title">Insert/edit link</h1>
+		<button type="button" id="wp-link-close"><span class="screen-reader-text">Close</span></button>
+		<div id="link-selector">
+			<div id="link-options">
+				<p class="howto" id="wplink-enter-url">Enter the destination URL</p>
+				<div>
+					<label><span>URL</span>
+					<input id="wp-link-url" type="text" aria-describedby="wplink-enter-url" /></label>
+				</div>
+				<div class="wp-link-text-field">
+					<label><span>Link Text</span>
+					<input id="wp-link-text" type="text" /></label>
+				</div>
+				<div class="link-target">
+					<label><span></span>
+					<input type="checkbox" id="wp-link-target" /> Open link in a new tab</label>
+				</div>
+			</div>
+			<p class="howto" id="wplink-link-existing-content">Or link to existing content</p>
+			<div id="search-panel">
+				<div class="link-search-wrapper">
+					<label>
+						<span class="search-label">Search</span>
+						<input type="search" id="wp-link-search" class="link-search-field" autocomplete="off" aria-describedby="wplink-link-existing-content" />
+						<span class="spinner"></span>
+					</label>
+				</div>
+				<div id="search-results" class="query-results" tabindex="0">
+					<ul></ul>
+					<div class="river-waiting">
+						<span class="spinner"></span>
+					</div>
+				</div>
+				<div id="most-recent-results" class="query-results" tabindex="0">
+					<div class="query-notice" id="query-notice-message">
+						<em class="query-notice-default">No search term specified. Showing recent items.</em>
+						<em class="query-notice-hint screen-reader-text">Search or use up and down arrow keys to select an item.</em>
+					</div>
+					<ul></ul>
+					<div class="river-waiting">
+						<span class="spinner"></span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="submitbox">
+			<div id="wp-link-cancel">
+				<button type="button" class="button">Cancel</button>
+			</div>
+			<div id="wp-link-update">
+				<input type="submit" value="Add Link" class="button button-primary" id="wp-link-submit" name="wp-link-submit">
+			</div>
+		</div>
+		</form>
+		</div>
+		</body>
+
+<!-- Mirrored from developer.wordpress.org/reference/classes/wp_comment_query/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 31 Aug 2021 17:18:40 GMT -->
+</html>

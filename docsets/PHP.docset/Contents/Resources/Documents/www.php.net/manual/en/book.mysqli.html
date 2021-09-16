@@ -1,0 +1,325 @@
+<html><!-- Mirrored from www.php.net/manual/en/book.mysqli.php by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 11 Sep 2021 06:47:15 GMT --><!-- Added by HTTrack --><head><meta http-equiv="content-type" content="text/html;charset=utf-8"><!-- /Added by HTTrack -->
+
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>MySQLi</title>
+
+ <link rel="shortcut icon" href="../../favicon.ico">
+ <link rel="search" type="application/opensearchdescription+xml" href="http://php.net/phpnetimprovedsearch.src" title="Add PHP.net search">
+ <link rel="alternate" type="application/atom+xml" href="https://www.php.net/releases/feed.php" title="PHP Release feed">
+ <link rel="alternate" type="application/atom+xml" href="https://www.php.net/feed.atom" title="PHP: Hypertext Preprocessor">
+
+ <link rel="canonical" href="book.mysqli.html">
+ <link rel="shorturl" href="https://www.php.net/mysqli">
+ <link rel="alternate" href="https://www.php.net/mysqli" hreflang="x-default">
+
+ <link rel="contents" href="index-2.html">
+ <link rel="index" href="set.mysqlinfo.html">
+ <link rel="prev" href="mysqlinfo.concepts.charset.html">
+ <link rel="next" href="intro.mysqli.html">
+
+ <link rel="alternate" href="book.mysqli.html" hreflang="en">
+ <link rel="alternate" href="https://www.php.net/manual/pt_BR/book.mysqli.php" hreflang="pt_BR">
+ <link rel="alternate" href="https://www.php.net/manual/zh/book.mysqli.php" hreflang="zh">
+ <link rel="alternate" href="https://www.php.net/manual/fr/book.mysqli.php" hreflang="fr">
+ <link rel="alternate" href="https://www.php.net/manual/de/book.mysqli.php" hreflang="de">
+ <link rel="alternate" href="https://www.php.net/manual/ja/book.mysqli.php" hreflang="ja">
+ <link rel="alternate" href="https://www.php.net/manual/ro/book.mysqli.php" hreflang="ro">
+ <link rel="alternate" href="https://www.php.net/manual/ru/book.mysqli.php" hreflang="ru">
+ <link rel="alternate" href="https://www.php.net/manual/es/book.mysqli.php" hreflang="es">
+ <link rel="alternate" href="https://www.php.net/manual/tr/book.mysqli.php" hreflang="tr">
+
+<link rel="stylesheet" type="text/css" href="../../cached0aba.css?t=1539771603&amp;f=/fonts/Fira/fira.css" media="screen">
+<link rel="stylesheet" type="text/css" href="../../cached2ecf.css?t=1539765004&amp;f=/fonts/Font-Awesome/css/fontello.css" media="screen">
+<link rel="stylesheet" type="text/css" href="../../cachedba57.css?t=1606338002&amp;f=/styles/theme-base.css" media="screen">
+<link rel="stylesheet" type="text/css" href="../../cached3afa.css?t=1627831203&amp;f=/styles/theme-medium.css" media="screen">
+
+ <!--[if lte IE 7]>
+ <link rel="stylesheet" type="text/css" href="https://www.php.net/styles/workarounds.ie7.css" media="screen">
+ <![endif]-->
+
+ <!--[if lte IE 8]>
+ <script>
+  window.brokenIE = true;
+ </script>
+ <![endif]-->
+
+ <!--[if lte IE 9]>
+ <link rel="stylesheet" type="text/css" href="https://www.php.net/styles/workarounds.ie9.css" media="screen">
+ <![endif]-->
+
+ <!--[if IE]>
+ <script src="https://www.php.net/js/ext/html5.js"></script>
+ <![endif]-->
+
+ <base>
+
+
+</head>
+<body class="docs " style="">
+
+
+<div class="headsup"><a href="https://www.php.net/conferences/index.php#id2021-09-08-1">Longhorn PHP 2021</a></div>
+<nav id="trick"><div><dl>
+<dt><a href="getting-started.html">Getting Started</a></dt>
+	<dd><a href="introduction.html">Introduction</a></dd>
+	<dd><a href="tutorial.html">A simple tutorial</a></dd>
+<dt><a href="langref.html">Language Reference</a></dt>
+	<dd><a href="language.basic-syntax.html">Basic syntax</a></dd>
+	<dd><a href="language.types.html">Types</a></dd>
+	<dd><a href="language.variables.html">Variables</a></dd>
+	<dd><a href="language.constants.html">Constants</a></dd>
+	<dd><a href="language.expressions.html">Expressions</a></dd>
+	<dd><a href="language.operators.html">Operators</a></dd>
+	<dd><a href="language.control-structures.html">Control Structures</a></dd>
+	<dd><a href="language.functions.html">Functions</a></dd>
+	<dd><a href="language.oop5.html">Classes and Objects</a></dd>
+	<dd><a href="language.namespaces.html">Namespaces</a></dd>
+	<dd><a href="language.errors.html">Errors</a></dd>
+	<dd><a href="language.exceptions.html">Exceptions</a></dd>
+	<dd><a href="language.generators.html">Generators</a></dd>
+	<dd><a href="language.attributes.html">Attributes</a></dd>
+	<dd><a href="language.references.html">References Explained</a></dd>
+	<dd><a href="reserved.variables.html">Predefined Variables</a></dd>
+	<dd><a href="reserved.exceptions.html">Predefined Exceptions</a></dd>
+	<dd><a href="reserved.interfaces.html">Predefined Interfaces and Classes</a></dd>
+	<dd><a href="context.html">Context options and parameters</a></dd>
+	<dd><a href="wrappers.html">Supported Protocols and Wrappers</a></dd>
+</dl>
+<dl>
+<dt><a href="security.html">Security</a></dt>
+	<dd><a href="security.intro.html">Introduction</a></dd>
+	<dd><a href="security.general.html">General considerations</a></dd>
+	<dd><a href="security.cgi-bin.html">Installed as CGI binary</a></dd>
+	<dd><a href="security.apache.html">Installed as an Apache module</a></dd>
+	<dd><a href="security.sessions.html">Session Security</a></dd>
+	<dd><a href="security.filesystem.html">Filesystem Security</a></dd>
+	<dd><a href="security.database.html">Database Security</a></dd>
+	<dd><a href="security.errors.html">Error Reporting</a></dd>
+	<dd><a href="security.variables.html">User Submitted Data</a></dd>
+	<dd><a href="security.hiding.html">Hiding PHP</a></dd>
+	<dd><a href="security.current.html">Keeping Current</a></dd>
+<dt><a href="features.html">Features</a></dt>
+	<dd><a href="features.http-auth.html">HTTP authentication with PHP</a></dd>
+	<dd><a href="features.cookies.html">Cookies</a></dd>
+	<dd><a href="features.sessions.html">Sessions</a></dd>
+	<dd><a href="features.xforms.html">Dealing with XForms</a></dd>
+	<dd><a href="features.file-upload.html">Handling file uploads</a></dd>
+	<dd><a href="features.remote-files.html">Using remote files</a></dd>
+	<dd><a href="features.connection-handling.html">Connection handling</a></dd>
+	<dd><a href="features.persistent-connections.html">Persistent Database Connections</a></dd>
+	<dd><a href="features.commandline.html">Command line usage</a></dd>
+	<dd><a href="features.gc.html">Garbage Collection</a></dd>
+	<dd><a href="features.dtrace.html">DTrace Dynamic Tracing</a></dd>
+</dl>
+<dl>
+<dt><a href="funcref.html">Function Reference</a></dt>
+	<dd><a href="refs.basic.php.html">Affecting PHP's Behaviour</a></dd>
+	<dd><a href="refs.utilspec.audio.html">Audio Formats Manipulation</a></dd>
+	<dd><a href="refs.remote.auth.html">Authentication Services</a></dd>
+	<dd><a href="refs.utilspec.cmdline.html">Command Line Specific Extensions</a></dd>
+	<dd><a href="refs.compression.html">Compression and Archive Extensions</a></dd>
+	<dd><a href="refs.crypto.html">Cryptography Extensions</a></dd>
+	<dd><a href="refs.database.html">Database Extensions</a></dd>
+	<dd><a href="refs.calendar.html">Date and Time Related Extensions</a></dd>
+	<dd><a href="refs.fileprocess.file.html">File System Related Extensions</a></dd>
+	<dd><a href="refs.international.html">Human Language and Character Encoding Support</a></dd>
+	<dd><a href="refs.utilspec.image.html">Image Processing and Generation</a></dd>
+	<dd><a href="refs.remote.mail.html">Mail Related Extensions</a></dd>
+	<dd><a href="refs.math.html">Mathematical Extensions</a></dd>
+	<dd><a href="refs.utilspec.nontext.html">Non-Text MIME Output</a></dd>
+	<dd><a href="refs.fileprocess.process.html">Process Control Extensions</a></dd>
+	<dd><a href="refs.basic.other.html">Other Basic Extensions</a></dd>
+	<dd><a href="refs.remote.other.html">Other Services</a></dd>
+	<dd><a href="refs.search.html">Search Engine Extensions</a></dd>
+	<dd><a href="refs.utilspec.server.html">Server Specific Extensions</a></dd>
+	<dd><a href="refs.basic.session.html">Session Extensions</a></dd>
+	<dd><a href="refs.basic.text.html">Text Processing</a></dd>
+	<dd><a href="refs.basic.vartype.html">Variable and Type Related Extensions</a></dd>
+	<dd><a href="refs.webservice.html">Web Services</a></dd>
+	<dd><a href="refs.utilspec.windows.html">Windows Only Extensions</a></dd>
+	<dd><a href="refs.xml.html">XML Manipulation</a></dd>
+	<dd><a href="refs.ui.html">GUI Extensions</a></dd>
+</dl>
+<dl>
+<dt>Keyboard Shortcuts</dt><dt>?</dt>
+<dd>This help</dd>
+<dt>j</dt>
+<dd>Next menu item</dd>
+<dt>k</dt>
+<dd>Previous menu item</dd>
+<dt>g p</dt>
+<dd>Previous man page</dd>
+<dt>g n</dt>
+<dd>Next man page</dd>
+<dt>G</dt>
+<dd>Scroll to bottom</dd>
+<dt>g g</dt>
+<dd>Scroll to top</dd>
+<dt>g h</dt>
+<dd>Goto homepage</dd>
+<dt>g s</dt>
+<dd>Goto search<br>(current page)</dd>
+<dt>/</dt>
+<dd>Focus search box</dd>
+</dl></div></nav>
+<div id="goto">
+    <div class="search">
+         <div class="text"></div>
+         <div class="results"><ul></ul></div>
+   </div>
+</div>
+
+  <div id="breadcrumbs" class="row-fluid">
+    <div id="breadcrumbs-inner">
+          
+              
+          <ul>
+            <li><a href="index-2.html">PHP Manual</a></li>      <li><a href="funcref.html">Function Reference</a></li>      <li><a href="refs.database.html">Database Extensions</a></li>      <li><a href="refs.database.vendors.html">Vendor Specific Database Extensions</a></li>      <li><a href="set.mysqlinfo.html">MySQL</a></li>      </ul>
+    </div>
+  </div>
+
+
+
+
+<div id="layout" class="clearfix">
+  <section id="layout-content">
+  <div id="book.mysqli" class="book">
+ 
+
+ <h1 class="title">MySQL Improved Extension</h1>
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+
+
+
+
+ 
+
+
+
+
+ 
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+ 
+
+
+
+
+
+ 
+
+
+ 
+
+
+
+ 
+
+
+ 
+
+
+
+ 
+
+
+ 
+
+
+
+ 
+
+
+ 
+
+
+
+ 
+
+
+
+
+
+
+ 
+ 
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+<ul class="chunklist chunklist_book"><li><a href="intro.mysqli.html">Introduction</a></li><li><a href="mysqli.overview.html">Overview</a></li><li><a href="mysqli.quickstart.html">Quick start guide</a><ul class="chunklist chunklist_book chunklist_children"><li><a href="mysqli.quickstart.dual-interface.html">Dual procedural and object-oriented interface</a></li><li><a href="mysqli.quickstart.connections.html">Connections</a></li><li><a href="mysqli.quickstart.statements.html">Executing statements</a></li><li><a href="mysqli.quickstart.prepared-statements.html">Prepared Statements</a></li><li><a href="mysqli.quickstart.stored-procedures.html">Stored Procedures</a></li><li><a href="mysqli.quickstart.multiple-statement.html">Multiple Statements</a></li><li><a href="mysqli.quickstart.transactions.html">API support for transactions</a></li><li><a href="mysqli.quickstart.metadata.html">Metadata</a></li></ul></li><li><a href="mysqli.setup.html">Installing/Configuring</a><ul class="chunklist chunklist_book chunklist_children"><li><a href="mysqli.requirements.html">Requirements</a></li><li><a href="mysqli.installation.html">Installation</a></li><li><a href="mysqli.configuration.html">Runtime Configuration</a></li><li><a href="mysqli.resources.html">Resource Types</a></li></ul></li><li><a href="mysqli.persistconns.html">The mysqli Extension and Persistent Connections</a></li><li><a href="mysqli.constants.html">Predefined Constants</a></li><li><a href="mysqli.notes.html">Notes</a></li><li><a href="mysqli.summary.html">The MySQLi Extension Function Summary</a></li><li><a href="class.mysqli.html">mysqli</a> — The mysqli class<ul class="chunklist chunklist_book chunklist_children"><li><a href="mysqli.affected-rows.html">mysqli::$affected_rows</a> — Gets the number of affected rows in a previous MySQL operation</li><li><a href="mysqli.autocommit.html">mysqli::autocommit</a> — Turns on or off auto-committing database modifications</li><li><a href="mysqli.begin-transaction.html">mysqli::begin_transaction</a> — Starts a transaction</li><li><a href="mysqli.change-user.html">mysqli::change_user</a> — Changes the user of the specified database connection</li><li><a href="mysqli.character-set-name.html">mysqli::character_set_name</a> — Returns the current character set of the database connection</li><li><a href="mysqli.close.html">mysqli::close</a> — Closes a previously opened database connection</li><li><a href="mysqli.commit.html">mysqli::commit</a> — Commits the current transaction</li><li><a href="mysqli.connect-errno.html">mysqli::$connect_errno</a> — Returns the error code from last connect call</li><li><a href="mysqli.connect-error.html">mysqli::$connect_error</a> — Returns a description of the last connection error</li><li><a href="mysqli.construct.html">mysqli::__construct</a> — Open a new connection to the MySQL server</li><li><a href="mysqli.debug.html">mysqli::debug</a> — Performs debugging operations</li><li><a href="mysqli.dump-debug-info.html">mysqli::dump_debug_info</a> — Dump debugging information into the log</li><li><a href="mysqli.errno.html">mysqli::$errno</a> — Returns the error code for the most recent function call</li><li><a href="mysqli.error-list.html">mysqli::$error_list</a> — Returns a list of errors from the last command executed</li><li><a href="mysqli.error.html">mysqli::$error</a> — Returns a string description of the last error</li><li><a href="mysqli.field-count.html">mysqli::$field_count</a> — Returns the number of columns for the most recent query</li><li><a href="mysqli.get-charset.html">mysqli::get_charset</a> — Returns a character set object</li><li><a href="mysqli.get-client-info.html">mysqli::$client_info</a> — Get MySQL client info</li><li><a href="mysqli.get-client-version.html">mysqli::$client_version</a> — Returns the MySQL client version as an integer</li><li><a href="mysqli.get-connection-stats.html">mysqli::get_connection_stats</a> — Returns statistics about the client connection</li><li><a href="mysqli.get-host-info.html">mysqli::$host_info</a> — Returns a string representing the type of connection used</li><li><a href="mysqli.get-proto-info.html">mysqli::$protocol_version</a> — Returns the version of the MySQL protocol used</li><li><a href="mysqli.get-server-info.html">mysqli::$server_info</a> — Returns the version of the MySQL server</li><li><a href="mysqli.get-server-version.html">mysqli::$server_version</a> — Returns the version of the MySQL server as an integer</li><li><a href="mysqli.get-warnings.html">mysqli::get_warnings</a> — Get result of SHOW WARNINGS</li><li><a href="mysqli.info.html">mysqli::$info</a> — Retrieves information about the most recently executed query</li><li><a href="mysqli.init.html">mysqli::init</a> — Initializes MySQLi and returns an object for use with mysqli_real_connect()</li><li><a href="mysqli.insert-id.html">mysqli::$insert_id</a> — Returns the value generated for an AUTO_INCREMENT column by the last query</li><li><a href="mysqli.kill.html">mysqli::kill</a> — Asks the server to kill a MySQL thread</li><li><a href="mysqli.more-results.html">mysqli::more_results</a> — Check if there are any more query results from a multi query</li><li><a href="mysqli.multi-query.html">mysqli::multi_query</a> — Performs one or more queries on the database</li><li><a href="mysqli.next-result.html">mysqli::next_result</a> — Prepare next result from multi_query</li><li><a href="mysqli.options.html">mysqli::options</a> — Set options</li><li><a href="mysqli.ping.html">mysqli::ping</a> — Pings a server connection, or tries to reconnect if the connection has gone down</li><li><a href="mysqli.poll.html">mysqli::poll</a> — Poll connections</li><li><a href="mysqli.prepare.html">mysqli::prepare</a> — Prepares an SQL statement for execution</li><li><a href="mysqli.query.html">mysqli::query</a> — Performs a query on the database</li><li><a href="mysqli.real-connect.html">mysqli::real_connect</a> — Opens a connection to a mysql server</li><li><a href="mysqli.real-escape-string.html">mysqli::real_escape_string</a> — Escapes special characters in a string for use in an SQL statement, taking into account the current charset of the connection</li><li><a href="mysqli.real-query.html">mysqli::real_query</a> — Execute an SQL query</li><li><a href="mysqli.reap-async-query.html">mysqli::reap_async_query</a> — Get result from async query</li><li><a href="mysqli.refresh.html">mysqli::refresh</a> — Refreshes</li><li><a href="mysqli.release-savepoint.html">mysqli::release_savepoint</a> — Removes the named savepoint from the set of savepoints of the current transaction</li><li><a href="mysqli.rollback.html">mysqli::rollback</a> — Rolls back current transaction</li><li><a href="mysqli.savepoint.html">mysqli::savepoint</a> — Set a named transaction savepoint</li><li><a href="mysqli.select-db.html">mysqli::select_db</a> — Selects the default database for database queries</li><li><a href="mysqli.set-charset.html">mysqli::set_charset</a> — Sets the client character set</li><li><a href="mysqli.sqlstate.html">mysqli::$sqlstate</a> — Returns the SQLSTATE error from previous MySQL operation</li><li><a href="mysqli.ssl-set.html">mysqli::ssl_set</a> — Used for establishing secure connections using SSL</li><li><a href="mysqli.stat.html">mysqli::stat</a> — Gets the current system status</li><li><a href="mysqli.stmt-init.html">mysqli::stmt_init</a> — Initializes a statement and returns an object for use with mysqli_stmt_prepare</li><li><a href="mysqli.store-result.html">mysqli::store_result</a> — Transfers a result set from the last query</li><li><a href="mysqli.thread-id.html">mysqli::$thread_id</a> — Returns the thread ID for the current connection</li><li><a href="mysqli.thread-safe.html">mysqli::thread_safe</a> — Returns whether thread safety is given or not</li><li><a href="mysqli.use-result.html">mysqli::use_result</a> — Initiate a result set retrieval</li><li><a href="mysqli.warning-count.html">mysqli::$warning_count</a> — Returns the number of warnings from the last query for the given link</li></ul></li><li><a href="class.mysqli-stmt.html">mysqli_stmt</a> — The mysqli_stmt class<ul class="chunklist chunklist_book chunklist_children"><li><a href="mysqli-stmt.affected-rows.html">mysqli_stmt::$affected_rows</a> — Returns the total number of rows changed, deleted, inserted, or
+  matched by the last statement executed</li><li><a href="mysqli-stmt.attr-get.html">mysqli_stmt::attr_get</a> — Used to get the current value of a statement attribute</li><li><a href="mysqli-stmt.attr-set.html">mysqli_stmt::attr_set</a> — Used to modify the behavior of a prepared statement</li><li><a href="mysqli-stmt.bind-param.html">mysqli_stmt::bind_param</a> — Binds variables to a prepared statement as parameters</li><li><a href="mysqli-stmt.bind-result.html">mysqli_stmt::bind_result</a> — Binds variables to a prepared statement for result storage</li><li><a href="mysqli-stmt.close.html">mysqli_stmt::close</a> — Closes a prepared statement</li><li><a href="mysqli-stmt.construct.html">mysqli_stmt::__construct</a> — Constructs a new mysqli_stmt object</li><li><a href="mysqli-stmt.data-seek.html">mysqli_stmt::data_seek</a> — Seeks to an arbitrary row in statement result set</li><li><a href="mysqli-stmt.errno.html">mysqli_stmt::$errno</a> — Returns the error code for the most recent statement call</li><li><a href="mysqli-stmt.error-list.html">mysqli_stmt::$error_list</a> — Returns a list of errors from the last statement executed</li><li><a href="mysqli-stmt.error.html">mysqli_stmt::$error</a> — Returns a string description for last statement error</li><li><a href="mysqli-stmt.execute.html">mysqli_stmt::execute</a> — Executes a prepared statement</li><li><a href="mysqli-stmt.fetch.html">mysqli_stmt::fetch</a> — Fetch results from a prepared statement into the bound variables</li><li><a href="mysqli-stmt.field-count.html">mysqli_stmt::$field_count</a> — Returns the number of columns in the given statement</li><li><a href="mysqli-stmt.free-result.html">mysqli_stmt::free_result</a> — Frees stored result memory for the given statement handle</li><li><a href="mysqli-stmt.get-result.html">mysqli_stmt::get_result</a> — Gets a result set from a prepared statement as a mysqli_result object</li><li><a href="mysqli-stmt.get-warnings.html">mysqli_stmt::get_warnings</a> — Get result of SHOW WARNINGS</li><li><a href="mysqli-stmt.insert-id.html">mysqli_stmt::$insert_id</a> — Get the ID generated from the previous INSERT operation</li><li><a href="mysqli-stmt.more-results.html">mysqli_stmt::more_results</a> — Check if there are more query results from a multiple query</li><li><a href="mysqli-stmt.next-result.html">mysqli_stmt::next_result</a> — Reads the next result from a multiple query</li><li><a href="mysqli-stmt.num-rows.html">mysqli_stmt::$num_rows</a> — Returns the number of rows fetched from the server</li><li><a href="mysqli-stmt.param-count.html">mysqli_stmt::$param_count</a> — Returns the number of parameters for the given statement</li><li><a href="mysqli-stmt.prepare.html">mysqli_stmt::prepare</a> — Prepares an SQL statement for execution</li><li><a href="mysqli-stmt.reset.html">mysqli_stmt::reset</a> — Resets a prepared statement</li><li><a href="mysqli-stmt.result-metadata.html">mysqli_stmt::result_metadata</a> — Returns result set metadata from a prepared statement</li><li><a href="mysqli-stmt.send-long-data.html">mysqli_stmt::send_long_data</a> — Send data in blocks</li><li><a href="mysqli-stmt.sqlstate.html">mysqli_stmt::$sqlstate</a> — Returns SQLSTATE error from previous statement operation</li><li><a href="mysqli-stmt.store-result.html">mysqli_stmt::store_result</a> — Stores a result set in an internal buffer</li></ul></li><li><a href="class.mysqli-result.html">mysqli_result</a> — The mysqli_result class<ul class="chunklist chunklist_book chunklist_children"><li><a href="mysqli-result.current-field.html">mysqli_result::$current_field</a> — Get current field offset of a result pointer</li><li><a href="mysqli-result.data-seek.html">mysqli_result::data_seek</a> — Adjusts the result pointer to an arbitrary row in the result</li><li><a href="mysqli-result.fetch-all.html">mysqli_result::fetch_all</a> — Fetch all result rows as an associative array, a numeric array, or both</li><li><a href="mysqli-result.fetch-array.html">mysqli_result::fetch_array</a> — Fetch a result row as an associative, a numeric array, or both</li><li><a href="mysqli-result.fetch-assoc.html">mysqli_result::fetch_assoc</a> — Fetch a result row as an associative array</li><li><a href="mysqli-result.fetch-field-direct.html">mysqli_result::fetch_field_direct</a> — Fetch meta-data for a single field</li><li><a href="mysqli-result.fetch-field.html">mysqli_result::fetch_field</a> — Returns the next field in the result set</li><li><a href="mysqli-result.fetch-fields.html">mysqli_result::fetch_fields</a> — Returns an array of objects representing the fields in a result set</li><li><a href="mysqli-result.fetch-object.html">mysqli_result::fetch_object</a> — Returns the current row of a result set as an object</li><li><a href="mysqli-result.fetch-row.html">mysqli_result::fetch_row</a> — Get a result row as an enumerated array</li><li><a href="mysqli-result.field-count.html">mysqli_result::$field_count</a> — Gets the number of fields in the result set</li><li><a href="mysqli-result.field-seek.html">mysqli_result::field_seek</a> — Set result pointer to a specified field offset</li><li><a href="mysqli-result.free.html">mysqli_result::free</a> — Frees the memory associated with a result</li><li><a href="mysqli-result.lengths.html">mysqli_result::$lengths</a> — Returns the lengths of the columns of the current row in the result set</li><li><a href="mysqli-result.num-rows.html">mysqli_result::$num_rows</a> — Gets the number of rows in the result set</li></ul></li><li><a href="class.mysqli-driver.html">mysqli_driver</a> — The mysqli_driver class<ul class="chunklist chunklist_book chunklist_children"><li><a href="mysqli-driver.embedded-server-end.html">mysqli_driver::embedded_server_end</a> — Stop embedded server</li><li><a href="mysqli-driver.embedded-server-start.html">mysqli_driver::embedded_server_start</a> — Initialize and start embedded server</li><li><a href="mysqli-driver.report-mode.html">mysqli_driver::$report_mode</a> — Sets mysqli error reporting mode</li></ul></li><li><a href="class.mysqli-warning.html">mysqli_warning</a> — The mysqli_warning class<ul class="chunklist chunklist_book chunklist_children"><li><a href="mysqli-warning.next.html">mysqli_warning::next</a> — Fetch next warning</li></ul></li><li><a href="class.mysqli-sql-exception.html">mysqli_sql_exception</a> — The mysqli_sql_exception class</li><li><a href="ref.mysqli.html">Aliases and deprecated Mysqli Functions</a><ul class="chunklist chunklist_book chunklist_children"><li><a href="function.mysqli-connect.html">mysqli_connect</a> — Alias of mysqli::__construct</li><li><a href="function.mysqli-escape-string.html">mysqli::escape_string</a> — Alias of mysqli_real_escape_string</li><li><a href="function.mysqli-execute.html">mysqli_execute</a> — Alias for mysqli_stmt_execute</li><li><a href="function.mysqli-get-client-stats.html">mysqli_get_client_stats</a> — Returns client per-process statistics</li><li><a href="function.mysqli-get-links-stats.html">mysqli_get_links_stats</a> — Return information about open and cached links</li><li><a href="function.mysqli-report.html">mysqli_report</a> — Alias of mysqli_driver-&gt;report_mode</li><li><a href="function.mysqli-set-opt.html">mysqli::set_opt</a> — Alias of mysqli_options</li></ul></li><li><a href="changelog.mysqli.html">Changelog</a></li></ul></div>
+<section id="usernotes">
+ <div class="head"><h3 class="title">User Contributed Notes</h3></div>
+ <div class="note">There are no user contributed notes for this page.</div></section>    </section><!-- layout-content -->
+        
+
+
+  </div><!-- layout -->
+
+  
+
+    
+ <!-- External and third party libraries. -->
+ 
+
+
+
+
+
+
+
+<a id="toTop" href="javascript:;"><span id="toTopHover"></span><img width="40" height="40" alt="To Top" src="../../images/to-top%402x.png"></a>
+
+
+
+<!-- Mirrored from www.php.net/manual/en/book.mysqli.php by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 11 Sep 2021 06:47:18 GMT -->
+
+</body></html>

@@ -1,0 +1,1938 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+
+<!-- Mirrored from developer.wordpress.org/reference/functions/wp_insert_user/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 31 Aug 2021 16:50:43 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<!--
+<meta property="fb:page_id" content="6427302910" />
+-->
+<meta name="google-site-verification" content="7VWES_-rcHBcmaQis9mSYamPfNwE03f4vyTj4pfuAw0" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>wp_insert_user()</title>
+<meta name="referrer" content="always">
+
+		<link href='../../../../fonts.googleapis.com/css.css?family=Open+Sans:300italic,400italic,600italic,400,300,600&amp;subset=latin,cyrillic-ext,greek-ext,greek,vietnamese,latin-ext,cyrillic' rel='stylesheet' type='text/css'>
+
+		<link rel="stylesheet" href="../../../../s.w.org/style/wp4.css?95" />
+
+<link rel="shortcut icon" href="../../../../s.w.org/favicon.ico?2" type="image/x-icon" />
+<link rel="pingback" href="../../../xmlrpc.php" /><meta name='robots' content='max-image-preview:large' />
+<link rel='dns-prefetch' href='../../../../fonts.googleapis.com/index.html' />
+<link rel='dns-prefetch' href='http://s.w.org/' />
+<link rel='dns-prefetch' href='http://www.googletagmanager.com/' />
+<link rel='dns-prefetch' href='http://fonts.gstatic.com/' />
+<link rel="alternate" type="application/rss+xml" title="WordPress Developer Resources &raquo; Feed" href="../../../feed/index.html" />
+<link rel="alternate" type="application/rss+xml" title="WordPress Developer Resources &raquo; Comments Feed" href="../../../comments/feed/index.html" />
+<meta property="og:title" content="wp_insert_user() | Function | WordPress Developer Resources" />
+<meta property="og:site_name" content="WordPress Developer Resources" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="../../../index.html" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@WordPress" />
+<meta name="description" content="Insert a user into the database." />
+<meta property="og:description" content="Insert a user into the database." />
+<link rel="alternate" type="application/rss+xml" title="WordPress Developer Resources &raquo; wp_insert_user Comments Feed" href="https://developer.wordpress.org/reference/functions/wp_insert_user/feed/" />
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'../../../../www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P24PF4B');</script>
+			<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/developer.wordpress.org\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.9-alpha-51701"}};
+			!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([10084,65039,8205,55357,56613],[10084,65039,8203,55357,56613])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel='stylesheet' id='dashicons-css'  href='../../../wp-includes/css/dashicons.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='admin-bar-css'  href='../../../wp-includes/css/admin-bar.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-block-library-css'  href='../../../wp-includes/css/dist/block-library/style.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='wporg-handbook-css-css'  href='../../../wp-content/plugins/handbook/stylesheets/callout-boxes.css?ver=20200121' type='text/css' media='all' />
+<link rel='stylesheet' id='open-sans-css'  href='../../../../fonts.googleapis.com/css-2.css?family=Open+Sans%3A300italic%2C400italic%2C600italic%2C300%2C400%2C600&amp;subset=latin%2Clatin-ext&amp;display=fallback&amp;ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='wporg-developer-style-css'  href='../../../wp-content/themes/pub/wporg-developer/style.css?ver=3' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-dev-sass-compiled-css'  href='../../../wp-content/themes/pub/wporg-developer/stylesheets/main.css?ver=20200713' type='text/css' media='all' />
+<link rel='stylesheet' id='awesomplete-css-css'  href='../../../wp-content/themes/pub/wporg-developer/stylesheets/awesomplete.css?ver=20160114' type='text/css' media='all' />
+<link rel='stylesheet' id='autocomplete-css-css'  href='../../../wp-content/themes/pub/wporg-developer/stylesheets/autocomplete.css?ver=20171220' type='text/css' media='all' />
+<link rel='stylesheet' id='syntaxhighlighter-core-css'  href='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shCore.css?ver=3.0.9b' type='text/css' media='all' />
+<link rel='stylesheet' id='syntaxhighlighter-theme-default-css'  href='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shThemeDefault.css?ver=3.0.9b' type='text/css' media='all' />
+<script type='text/javascript' src='../../../wp-includes/js/jquery/jquery.min.js?ver=3.6.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='../../../wp-content/plugins/handbook/scripts/handbook.js?ver=20150930' id='wporg-handbook-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/chapters.js?ver=20190603' id='wporg-developer-chapters-js'></script>
+<script type='text/javascript' src='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shCore.js?ver=3.0.9b' id='syntaxhighlighter-core-js'></script>
+<script type='text/javascript' src='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushPhp.js?ver=3.0.9b' id='syntaxhighlighter-brush-php-js'></script>
+<link rel="https://api.w.org/" href="https://developer.wordpress.org/wp-json/" /><link rel="alternate" type="application/json" href="https://developer.wordpress.org/wp-json/wp/v2/wp-parser-function/1570" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="../../../xmlrpc-2.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="../../../wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 5.9-alpha-51701" />
+<link rel='shortlink' href='https://developer.wordpress.org/?p=1570' />
+<link rel="alternate" type="application/json+oembed" href="https://developer.wordpress.org/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_insert_user%2F" />
+<link rel="alternate" type="text/xml+oembed" href="https://developer.wordpress.org/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_insert_user%2F&amp;format=xml" />
+<link rel="canonical" href="index.html">
+<!-- Stream WordPress user activity plugin v3.6.2 -->
+	<style>
+		@media screen and (max-width: 782px) {
+			#wpadminbar li#wp-admin-bar-log-in,
+			#wpadminbar li#wp-admin-bar-register {
+				display: block;
+			}
+
+			#wpadminbar li#wp-admin-bar-log-in a,
+			#wpadminbar li#wp-admin-bar-register a {
+				padding: 0 8px;
+			}
+		}
+	</style>
+		<style>
+			a.github-edit {
+				margin-left: .5em;
+				font-size: .5em;
+				vertical-align: top;
+				display: inline-block;
+				border: 1px solid #eeeeee;
+				border-radius: 2px;
+				background: #eeeeee;
+				padding: .5em .6em .4em;
+				color: black;
+				margin-top: 0.1em;
+			}
+			a.github-edit > * {
+				opacity: 0.6;
+			}
+			a.github-edit:hover > * {
+				opacity: 1;
+				color: black;
+			}
+			a.github-edit img {
+				height: .8em;
+			}
+		</style>
+		
+	<script type="text/javascript">
+		jQuery( '<style>.hide-if-js { display: none; }</style>' ).appendTo( 'head' );
+		jQuery( function($) {
+			$( 'body' ).addClass('js');
+		} );
+	</script>
+<style type="text/css" media="print">#wpadminbar { display:none; }</style>
+	<style type="text/css" media="screen">
+	</style>
+	<script>document.cookie='devicePixelRatio='+((window.devicePixelRatio === undefined) ? 1 : window.devicePixelRatio)+'; path=/';</script>
+
+</head>
+
+
+<body id="wordpress-org" class="wp-parser-function-template-default single single-wp-parser-function postid-1570 admin-bar no-customize-support">
+		<div id="wpadminbar" class="nojq nojs">
+						<div class="quicklinks" id="wp-toolbar" role="navigation" aria-label="Toolbar">
+				<ul id='wp-admin-bar-root-default' class="ab-top-menu"><li id='wp-admin-bar-wp-logo' class="menupop"><a class='ab-item' aria-haspopup="true" href='https://wordpress.org/about/'><span class="ab-icon" aria-hidden="true"></span><span class="screen-reader-text">About WordPress</span></a><div class="ab-sub-wrapper"><ul id='wp-admin-bar-wp-logo-default' class="ab-submenu"><li id='wp-admin-bar-about'><a class='ab-item' href='https://wordpress.org/about/'>About WordPress</a></li></ul><ul id='wp-admin-bar-wp-logo-external' class="ab-sub-secondary ab-submenu"><li id='wp-admin-bar-wporg'><a class='ab-item' href='https://wordpress.org/'>WordPress.org</a></li><li id='wp-admin-bar-documentation'><a class='ab-item' href='https://wordpress.org/support/'>Documentation</a></li><li id='wp-admin-bar-support-forums'><a class='ab-item' href='https://wordpress.org/support/forums/'>Support</a></li><li id='wp-admin-bar-feedback'><a class='ab-item' href='https://wordpress.org/support/forum/requests-and-feedback'>Feedback</a></li></ul></div></li></ul><ul id='wp-admin-bar-top-secondary' class="ab-top-secondary ab-top-menu"><li id='wp-admin-bar-search' class="admin-bar-search"><div class="ab-item ab-empty-item" tabindex="-1"><form action="https://developer.wordpress.org/" method="get" id="adminbarsearch"><input class="adminbar-input" name="s" id="adminbar-search" type="text" value="" maxlength="150" /><label for="adminbar-search" class="screen-reader-text">Search</label><input type="submit" class="adminbar-button" value="Search" /></form></div></li><li id='wp-admin-bar-log-in'><a class='ab-item' href='https://login.wordpress.org/?locale=en_US'>Log In</a></li><li id='wp-admin-bar-register'><a class='ab-item' href='https://login.wordpress.org/register?locale=en_US'>Register</a></li></ul>			</div>
+					</div>
+
+		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P24PF4B" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<div id="wporg-header">
+	<div class="wrapper">
+	<h1><a href="http://wordpress.org/">WordPress.org</a></h1>				<div id="head-search">
+		<form action="http://wordpress.org/search/do-search.php" method="get">
+			<label for="global-search" class="screen-reader-text">Search WordPress.org for:</label>
+			<input id="global-search" class="text" name="search" type="text" value="" maxlength="150" placeholder="Search WordPress.org" />
+			<button type="submit" class="button"><span class="screen-reader-text">Submit</span></button>
+		</form>
+		</div>
+				<div style="clear:both"></div>
+		<button id="mobile-menu-button" aria-expanded="false"><span class="screen-reader-text">Toggle Menu</span></button>
+		
+<nav aria-label="Main Menu">
+<ul id="wporg-header-menu">
+<li class="menu-item"><a href='http://wordpress.org/showcase/' data-title='See some of the sites built on WordPress.'>Showcase</a></li>
+<li class="menu-item"><a href='http://learn.wordpress.org/' data-title='Resources to help you learn more about WordPress and teach it to others.'>Learn</a></li>
+<li class="menu-item"><a href='http://wordpress.org/themes/' data-title='Find just the right look for your website.'>Themes</a></li>
+<li class="menu-item"><a href='http://wordpress.org/plugins/' data-title='Plugins can extend WordPress to do almost anything you can imagine.'>Plugins</a></li>
+<li class="menu-item"><a href='http://wordpress.org/mobile/' data-title='Take your website on the go!'>Mobile</a></li>
+<li class="menu-item"><a href='http://wordpress.org/support/' data-title='Forums, documentation, help.'>Support</a><ul class="nav-submenu"><li><a href='http://wordpress.org/support/' title='Documentation, tutorials, best practices.'>Documentation</a></li><li><a href='http://wordpress.org/support/forums/' title='Support and discussion forums.'>Forums</a></li></ul><div class="uparrow"></div></li>
+<li class="menu-item"><a href='http://make.wordpress.org/' data-title='Contribute your knowledge.'>Get Involved</a><ul class="nav-submenu"><li><a href='http://wordpress.org/five-for-the-future/' title='How five percent is powering the next generation of the web'>Five for the Future</a></li></ul><div class="uparrow"></div></li>
+<li class="menu-item"><a href='http://wordpress.org/about/' data-title='About the WordPress Organization, and where we&#039;re going.'>About</a></li>
+<li class="menu-item"><a href='http://wordpress.org/news/' data-title='Come here for the latest scoop.'>Blog</a></li>
+<li class="menu-item"><a href='http://wordpress.org/hosting/' data-title='Find a home for your blog.'>Hosting</a></li>
+<li id="download" class="button download-button menu-item"><a href='http://wordpress.org/download/' data-title='Get it. Got it? Good.'>Get WordPress</a></li>
+</ul>
+</nav>
+		<div style="clear:both"></div>
+	</div>
+</div>
+
+
+
+<header id="masthead" class="site-header" role="banner">
+		<div class="site-branding">
+		<h1 class="site-title">
+			<a href="../../index.html" rel="home">Code Reference</a>
+		</h1>
+
+		
+		<nav id="site-navigation" class="main-navigation" role="navigation">
+			<button class="menu-toggle dashicons dashicons-arrow-down-alt2" aria-controls="primary-menu" aria-expanded="false" aria-label="Primary Menu"></button>
+					</nav>
+	</div>
+</header><!-- #masthead -->
+
+<div id="page" class="hfeed site devhub-wrap">
+	<a href="#main" class="screen-reader-text">Skip to content</a>
+
+				<div id="inner-search">
+			<div class="search-section section clear hide-if-js">
+
+
+	
+	<form role="search" method="get" class="searchform searchform-filtered" action="https://developer.wordpress.org/">
+		<label for="search-field" class="screen-reader-text">Search for:</label>
+		<input type="text" id="search-field" class="search-field" placeholder="Search &hellip;" value="" name="s">
+		<button class="button button-primary button-search"><i class="dashicons dashicons-search"></i><span class="screen-reader-text">Search plugins</span></button>
+	
+		<div class="search-post-type">
+			<span>Filter by type:</span>
+									<label><input type="checkbox" name="post_type[]" value="wp-parser-function"
+						 /> Functions</label>
+									<label><input type="checkbox" name="post_type[]" value="wp-parser-hook"
+						 /> Hooks</label>
+									<label><input type="checkbox" name="post_type[]" value="wp-parser-class"
+						 /> Classes</label>
+									<label><input type="checkbox" name="post_type[]" value="wp-parser-method"
+						 /> Methods</label>
+					</div>
+
+	
+	</form>
+
+</div><!-- /search-guide -->
+			<div id="inner-search-icon-container">
+				<div id="inner-search-icon">
+					<div class="dashicons dashicons-search"><span class="screen-reader-text">Search</span></div>
+				</div>
+			</div>
+		</div>
+
+		<div id="content" class="site-content">
+
+	<div id="content-area" class="wp-parser-function-template-default single single-wp-parser-function postid-1570 admin-bar no-customize-support code-reference">
+
+		
+		<div class="breadcrumb-trail breadcrumbs" itemprop="breadcrumb">
+			<span class="trail-browse">Browse:</span> 
+			<span class="trail-begin"><a href="../../../index.html" title="WordPress Developer Resources" rel="home">Home</a></span> <span class="sep">&#47;</span> 
+			<span class="trail-inner"><a href="../../index.html" title="Reference">Reference</a></span> <span class="sep">&#47;</span> 
+			<span class="trail-inner"><a href="../index.html">Functions</a></span> <span class="sep">&#47;</span> <span class="trail-end">wp_insert_user()</span>
+		</div>
+		<main id="main" class="site-main" role="main">
+
+		
+			
+<article id="post-1570" class="post-1570 wp-parser-function type-wp-parser-function status-publish hentry wp-parser-source-file-wp-includes_user-php wp-parser-package-users wp-parser-package-wordpress wp-parser-since-2-0-0 wp-parser-since-3-6-0 wp-parser-since-4-7-0 wp-parser-since-5-3-0">
+
+	
+	
+	<h1>wp_insert_user( <span class="arg-type">array|object|WP_User</span>&nbsp;<span class="arg-name">$userdata</span>&nbsp;)</h1>
+
+	<section class="summary">
+		<p>Insert a user into the database.</p>
+	</section>
+
+
+	
+	<div class="content-toc"><style> .toc-jump { text-align: right; font-size: 12px; } .page .toc-heading { margin-top: -50px; padding-top: 50px !important; }</style><div class="table-of-contents"><h2>Contents</h2><ul class="items"><li><a href="#description">Description</a></li>
+<li><a href="#parameters">Parameters</a></li>
+<li><a href="#return">Return</a></li>
+<li><a href="#source">Source</a></li>
+<li><a href="#related">Related</a>
+<ul>
+<li><a href="#uses">Uses</a></li>
+<li><a href="#used-by">Used By</a>
+</ul></li>
+<li><a href="#changelog">Changelog</a></li>
+<li><a href="#user-contributed-notes">User Contributed Notes</a></ul>
+</div>
+
+<hr />
+<section class="description">
+	<h2 class="toc-heading" id="description" tabindex="-1">Description <a href="#description" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Description</span></a></h2>
+	<p>Most of the <code>$userdata</code> array fields have filters associated with the values. Exceptions are &#8216;ID&#8217;, &#8216;rich_editing&#8217;, &#8216;syntax_highlighting&#8217;, &#8216;comment_shortcuts&#8217;, &#8216;admin_color&#8217;, &#8216;use_ssl&#8217;, &#8216;user_registered&#8217;, &#8216;user_activation_key&#8217;, &#8216;spam&#8217;, and &#8216;role&#8217;. The filters have the prefix &#8216;pre_user_&#8217; followed by the field name. An example using &#8216;description&#8217; would have the filter called &#8216;pre_user_description&#8217; that can be hooked into.</p>
+
+	</section>
+
+	<hr />
+	<section class="parameters">
+		<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="parameters" tabindex="-1">Parameters <a href="#parameters" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Parameters</span></a></h2>
+		<dl>
+												<dt>$userdata</dt>
+								<dd>
+					<p class="desc">
+													<span class="type">(<span class="array">array</span>|<span class="object">object</span>|<span class="WP_User"><a href="../../classes/wp_user/index.html">WP_User</a></span>)</span>
+																			<span class="required">(Required)</span>
+																			<span class="description">An array, object, or <a href="../../classes/wp_user/index.html">WP_User</a> object of user data arguments. <ul class="param-hash"><li><b>'ID'</b><br /><i><span class='type'>(int)</span></i> User ID. If supplied, the user will be updated.</li>
+<li><b>'user_pass'</b><br /><i><span class='type'>(string)</span></i> The plain-text user password.</li>
+<li><b>'user_login'</b><br /><i><span class='type'>(string)</span></i> The user's login username.</li>
+<li><b>'user_nicename'</b><br /><i><span class='type'>(string)</span></i> The URL-friendly user name.</li>
+<li><b>'user_url'</b><br /><i><span class='type'>(string)</span></i> The user URL.</li>
+<li><b>'user_email'</b><br /><i><span class='type'>(string)</span></i> The user email address.</li>
+<li><b>'display_name'</b><br /><i><span class='type'>(string)</span></i> The user's display name. Default is the user's username.</li>
+<li><b>'nickname'</b><br /><i><span class='type'>(string)</span></i> The user's nickname. Default is the user's username.</li>
+<li><b>'first_name'</b><br /><i><span class='type'>(string)</span></i> The user's first name. For new users, will be used to build the first part of the user's display name if <code>$display_name</code> is not specified.</li>
+<li><b>'last_name'</b><br /><i><span class='type'>(string)</span></i> The user's last name. For new users, will be used to build the second part of the user's display name if <code>$display_name</code> is not specified.</li>
+<li><b>'description'</b><br /><i><span class='type'>(string)</span></i> The user's biographical description.</li>
+<li><b>'rich_editing'</b><br /><i><span class='type'>(string)</span></i> Whether to enable the rich-editor for the user. Accepts 'true' or 'false' as a string literal, not boolean. Default 'true'.</li>
+<li><b>'syntax_highlighting'</b><br /><i><span class='type'>(string)</span></i> Whether to enable the rich code editor for the user. Accepts 'true' or 'false' as a string literal, not boolean. Default 'true'.</li>
+<li><b>'comment_shortcuts'</b><br /><i><span class='type'>(string)</span></i> Whether to enable comment moderation keyboard shortcuts for the user. Accepts 'true' or 'false' as a string literal, not boolean. Default 'false'.</li>
+<li><b>'admin_color'</b><br /><i><span class='type'>(string)</span></i> Admin color scheme for the user. Default 'fresh'.</li>
+<li><b>'use_ssl'</b><br /><i><span class='type'>(bool)</span></i> Whether the user should always access the admin over https. Default false.</li>
+<li><b>'user_registered'</b><br /><i><span class='type'>(string)</span></i> Date the user registered. Format is 'Y-m-d H:i:s'.</li>
+<li><b>'user_activation_key'</b><br /><i><span class='type'>(string)</span></i> Password reset key. Default empty.</li>
+<li><b>'spam'</b><br /><i><span class='type'>(bool)</span></i> Multisite only. Whether the user is marked as spam. Default false.</li>
+<li><b>'show_admin_bar_front'</b><br /><i><span class='type'>(string)</span></i> Whether to display the Admin Bar for the user on the site's front end. Accepts 'true' or 'false' as a string literal, not boolean. Default 'true'.</li>
+<li><b>'role'</b><br /><i><span class='type'>(string)</span></i> User's role.</li>
+<li><b>'locale'</b><br /><i><span class='type'>(string)</span></i> User's locale. Default empty.</li>
+</li></ul>
+</span>
+											</p>
+									</dd>
+					</dl>
+	</section>
+	<hr />
+	<section class="return">
+		<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="return" tabindex="-1">Return <a href="#return" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Return</span></a></h2>
+		<p><span class='return-type'>(int|<a href="../../classes/wp_error/index.html">WP_Error</a>)</span> The newly created user's ID or a <a href="../../classes/wp_error/index.html">WP_Error</a> object if the user could not                      be created.</p>
+	</section>
+	<hr />
+	<section class="source-content">
+		<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="source" tabindex="-1">Source <a href="#source" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Source</span></a></h2>
+		<p>
+			File: <a href="../../files/wp-includes/user.php/index.html">wp-includes/user.php</a>		</p>
+
+					<div class="source-code-container">
+				<pre class="brush: php; toolbar: false; first-line: 1765">function wp_insert_user( $userdata ) {
+	global $wpdb;
+
+	if ( $userdata instanceof stdClass ) {
+		$userdata = get_object_vars( $userdata );
+	} elseif ( $userdata instanceof WP_User ) {
+		$userdata = $userdata-&gt;to_array();
+	}
+
+	// Are we updating or creating?
+	if ( ! empty( $userdata['ID'] ) ) {
+		$ID            = (int) $userdata['ID'];
+		$update        = true;
+		$old_user_data = get_userdata( $ID );
+
+		if ( ! $old_user_data ) {
+			return new WP_Error( 'invalid_user_id', __( 'Invalid user ID.' ) );
+		}
+
+		// Hashed in wp_update_user(), plaintext if called directly.
+		$user_pass = ! empty( $userdata['user_pass'] ) ? $userdata['user_pass'] : $old_user_data-&gt;user_pass;
+	} else {
+		$update = false;
+		// Hash the password.
+		$user_pass = wp_hash_password( $userdata['user_pass'] );
+	}
+
+	$sanitized_user_login = sanitize_user( $userdata['user_login'], true );
+
+	/**
+	 * Filters a username after it has been sanitized.
+	 *
+	 * This filter is called before the user is created or updated.
+	 *
+	 * @since 2.0.3
+	 *
+	 * @param string $sanitized_user_login Username after it has been sanitized.
+	 */
+	$pre_user_login = apply_filters( 'pre_user_login', $sanitized_user_login );
+
+	// Remove any non-printable chars from the login string to see if we have ended up with an empty username.
+	$user_login = trim( $pre_user_login );
+
+	// user_login must be between 0 and 60 characters.
+	if ( empty( $user_login ) ) {
+		return new WP_Error( 'empty_user_login', __( 'Cannot create a user with an empty login name.' ) );
+	} elseif ( mb_strlen( $user_login ) &gt; 60 ) {
+		return new WP_Error( 'user_login_too_long', __( 'Username may not be longer than 60 characters.' ) );
+	}
+
+	if ( ! $update &amp;&amp; username_exists( $user_login ) ) {
+		return new WP_Error( 'existing_user_login', __( 'Sorry, that username already exists!' ) );
+	}
+
+	/**
+	 * Filters the list of disallowed usernames.
+	 *
+	 * @since 4.4.0
+	 *
+	 * @param array $usernames Array of disallowed usernames.
+	 */
+	$illegal_logins = (array) apply_filters( 'illegal_user_logins', array() );
+
+	if ( in_array( strtolower( $user_login ), array_map( 'strtolower', $illegal_logins ), true ) ) {
+		return new WP_Error( 'invalid_username', __( 'Sorry, that username is not allowed.' ) );
+	}
+
+	/*
+	 * If a nicename is provided, remove unsafe user characters before using it.
+	 * Otherwise build a nicename from the user_login.
+	 */
+	if ( ! empty( $userdata['user_nicename'] ) ) {
+		$user_nicename = sanitize_user( $userdata['user_nicename'], true );
+		if ( mb_strlen( $user_nicename ) &gt; 50 ) {
+			return new WP_Error( 'user_nicename_too_long', __( 'Nicename may not be longer than 50 characters.' ) );
+		}
+	} else {
+		$user_nicename = mb_substr( $user_login, 0, 50 );
+	}
+
+	$user_nicename = sanitize_title( $user_nicename );
+
+	/**
+	 * Filters a user's nicename before the user is created or updated.
+	 *
+	 * @since 2.0.3
+	 *
+	 * @param string $user_nicename The user's nicename.
+	 */
+	$user_nicename = apply_filters( 'pre_user_nicename', $user_nicename );
+
+	$user_nicename_check = $wpdb-&gt;get_var( $wpdb-&gt;prepare( &quot;SELECT ID FROM $wpdb-&gt;users WHERE user_nicename = %s AND user_login != %s LIMIT 1&quot;, $user_nicename, $user_login ) );
+
+	if ( $user_nicename_check ) {
+		$suffix = 2;
+		while ( $user_nicename_check ) {
+			// user_nicename allows 50 chars. Subtract one for a hyphen, plus the length of the suffix.
+			$base_length         = 49 - mb_strlen( $suffix );
+			$alt_user_nicename   = mb_substr( $user_nicename, 0, $base_length ) . &quot;-$suffix&quot;;
+			$user_nicename_check = $wpdb-&gt;get_var( $wpdb-&gt;prepare( &quot;SELECT ID FROM $wpdb-&gt;users WHERE user_nicename = %s AND user_login != %s LIMIT 1&quot;, $alt_user_nicename, $user_login ) );
+			$suffix++;
+		}
+		$user_nicename = $alt_user_nicename;
+	}
+
+	$raw_user_email = empty( $userdata['user_email'] ) ? '' : $userdata['user_email'];
+
+	/**
+	 * Filters a user's email before the user is created or updated.
+	 *
+	 * @since 2.0.3
+	 *
+	 * @param string $raw_user_email The user's email.
+	 */
+	$user_email = apply_filters( 'pre_user_email', $raw_user_email );
+
+	/*
+	 * If there is no update, just check for `email_exists`. If there is an update,
+	 * check if current email and new email are the same, and check `email_exists`
+	 * accordingly.
+	 */
+	if ( ( ! $update || ( ! empty( $old_user_data ) &amp;&amp; 0 !== strcasecmp( $user_email, $old_user_data-&gt;user_email ) ) )
+		&amp;&amp; ! defined( 'WP_IMPORTING' )
+		&amp;&amp; email_exists( $user_email )
+	) {
+		return new WP_Error( 'existing_user_email', __( 'Sorry, that email address is already used!' ) );
+	}
+
+	$raw_user_url = empty( $userdata['user_url'] ) ? '' : $userdata['user_url'];
+
+	/**
+	 * Filters a user's URL before the user is created or updated.
+	 *
+	 * @since 2.0.3
+	 *
+	 * @param string $raw_user_url The user's URL.
+	 */
+	$user_url = apply_filters( 'pre_user_url', $raw_user_url );
+
+	$user_registered = empty( $userdata['user_registered'] ) ? gmdate( 'Y-m-d H:i:s' ) : $userdata['user_registered'];
+
+	$user_activation_key = empty( $userdata['user_activation_key'] ) ? '' : $userdata['user_activation_key'];
+
+	if ( ! empty( $userdata['spam'] ) &amp;&amp; ! is_multisite() ) {
+		return new WP_Error( 'no_spam', __( 'Sorry, marking a user as spam is only supported on Multisite.' ) );
+	}
+
+	$spam = empty( $userdata['spam'] ) ? 0 : (bool) $userdata['spam'];
+
+	// Store values to save in user meta.
+	$meta = array();
+
+	$nickname = empty( $userdata['nickname'] ) ? $user_login : $userdata['nickname'];
+
+	/**
+	 * Filters a user's nickname before the user is created or updated.
+	 *
+	 * @since 2.0.3
+	 *
+	 * @param string $nickname The user's nickname.
+	 */
+	$meta['nickname'] = apply_filters( 'pre_user_nickname', $nickname );
+
+	$first_name = empty( $userdata['first_name'] ) ? '' : $userdata['first_name'];
+
+	/**
+	 * Filters a user's first name before the user is created or updated.
+	 *
+	 * @since 2.0.3
+	 *
+	 * @param string $first_name The user's first name.
+	 */
+	$meta['first_name'] = apply_filters( 'pre_user_first_name', $first_name );
+
+	$last_name = empty( $userdata['last_name'] ) ? '' : $userdata['last_name'];
+
+	/**
+	 * Filters a user's last name before the user is created or updated.
+	 *
+	 * @since 2.0.3
+	 *
+	 * @param string $last_name The user's last name.
+	 */
+	$meta['last_name'] = apply_filters( 'pre_user_last_name', $last_name );
+
+	if ( empty( $userdata['display_name'] ) ) {
+		if ( $update ) {
+			$display_name = $user_login;
+		} elseif ( $meta['first_name'] &amp;&amp; $meta['last_name'] ) {
+			/* translators: 1: User's first name, 2: Last name. */
+			$display_name = sprintf( _x( '%1$s %2$s', 'Display name based on first name and last name' ), $meta['first_name'], $meta['last_name'] );
+		} elseif ( $meta['first_name'] ) {
+			$display_name = $meta['first_name'];
+		} elseif ( $meta['last_name'] ) {
+			$display_name = $meta['last_name'];
+		} else {
+			$display_name = $user_login;
+		}
+	} else {
+		$display_name = $userdata['display_name'];
+	}
+
+	/**
+	 * Filters a user's display name before the user is created or updated.
+	 *
+	 * @since 2.0.3
+	 *
+	 * @param string $display_name The user's display name.
+	 */
+	$display_name = apply_filters( 'pre_user_display_name', $display_name );
+
+	$description = empty( $userdata['description'] ) ? '' : $userdata['description'];
+
+	/**
+	 * Filters a user's description before the user is created or updated.
+	 *
+	 * @since 2.0.3
+	 *
+	 * @param string $description The user's description.
+	 */
+	$meta['description'] = apply_filters( 'pre_user_description', $description );
+
+	$meta['rich_editing'] = empty( $userdata['rich_editing'] ) ? 'true' : $userdata['rich_editing'];
+
+	$meta['syntax_highlighting'] = empty( $userdata['syntax_highlighting'] ) ? 'true' : $userdata['syntax_highlighting'];
+
+	$meta['comment_shortcuts'] = empty( $userdata['comment_shortcuts'] ) || 'false' === $userdata['comment_shortcuts'] ? 'false' : 'true';
+
+	$admin_color         = empty( $userdata['admin_color'] ) ? 'fresh' : $userdata['admin_color'];
+	$meta['admin_color'] = preg_replace( '|[^a-z0-9 _.\-@]|i', '', $admin_color );
+
+	$meta['use_ssl'] = empty( $userdata['use_ssl'] ) ? 0 : (bool) $userdata['use_ssl'];
+
+	$meta['show_admin_bar_front'] = empty( $userdata['show_admin_bar_front'] ) ? 'true' : $userdata['show_admin_bar_front'];
+
+	$meta['locale'] = isset( $userdata['locale'] ) ? $userdata['locale'] : '';
+
+	$compacted = compact( 'user_pass', 'user_nicename', 'user_email', 'user_url', 'user_registered', 'user_activation_key', 'display_name' );
+	$data      = wp_unslash( $compacted );
+
+	if ( ! $update ) {
+		$data = $data + compact( 'user_login' );
+	}
+
+	if ( is_multisite() ) {
+		$data = $data + compact( 'spam' );
+	}
+
+	/**
+	 * Filters user data before the record is created or updated.
+	 *
+	 * It only includes data in the users table, not any user metadata.
+	 *
+	 * @since 4.9.0
+	 * @since 5.8.0 The $userdata parameter was added.
+	 *
+	 * @param array    $data {
+	 *     Values and keys for the user.
+	 *
+	 *     @type string $user_login      The user's login. Only included if $update == false
+	 *     @type string $user_pass       The user's password.
+	 *     @type string $user_email      The user's email.
+	 *     @type string $user_url        The user's url.
+	 *     @type string $user_nicename   The user's nice name. Defaults to a URL-safe version of user's login
+	 *     @type string $display_name    The user's display name.
+	 *     @type string $user_registered MySQL timestamp describing the moment when the user registered. Defaults to
+	 *                                   the current UTC timestamp.
+	 * }
+	 * @param bool     $update   Whether the user is being updated rather than created.
+	 * @param int|null $id       ID of the user to be updated, or NULL if the user is being created.
+	 * @param array    $userdata The raw array of data passed to wp_insert_user().
+	 */
+	$data = apply_filters( 'wp_pre_insert_user_data', $data, $update, ( $update ? (int) $ID : null ), $userdata );
+
+	if ( empty( $data ) || ! is_array( $data ) ) {
+		return new WP_Error( 'empty_data', __( 'Not enough data to create this user.' ) );
+	}
+
+	if ( $update ) {
+		if ( $user_email !== $old_user_data-&gt;user_email || $user_pass !== $old_user_data-&gt;user_pass ) {
+			$data['user_activation_key'] = '';
+		}
+		$wpdb-&gt;update( $wpdb-&gt;users, $data, compact( 'ID' ) );
+		$user_id = (int) $ID;
+	} else {
+		$wpdb-&gt;insert( $wpdb-&gt;users, $data );
+		$user_id = (int) $wpdb-&gt;insert_id;
+	}
+
+	$user = new WP_User( $user_id );
+
+	/**
+	 * Filters a user's meta values and keys immediately after the user is created or updated
+	 * and before any user meta is inserted or updated.
+	 *
+	 * Does not include contact methods. These are added using `wp_get_user_contact_methods( $user )`.
+	 *
+	 * @since 4.4.0
+	 * @since 5.8.0 The $userdata parameter was added.
+	 *
+	 * @param array $meta {
+	 *     Default meta values and keys for the user.
+	 *
+	 *     @type string   $nickname             The user's nickname. Default is the user's username.
+	 *     @type string   $first_name           The user's first name.
+	 *     @type string   $last_name            The user's last name.
+	 *     @type string   $description          The user's description.
+	 *     @type string   $rich_editing         Whether to enable the rich-editor for the user. Default 'true'.
+	 *     @type string   $syntax_highlighting  Whether to enable the rich code editor for the user. Default 'true'.
+	 *     @type string   $comment_shortcuts    Whether to enable keyboard shortcuts for the user. Default 'false'.
+	 *     @type string   $admin_color          The color scheme for a user's admin screen. Default 'fresh'.
+	 *     @type int|bool $use_ssl              Whether to force SSL on the user's admin area. 0|false if SSL
+	 *                                          is not forced.
+	 *     @type string   $show_admin_bar_front Whether to show the admin bar on the front end for the user.
+	 *                                          Default 'true'.
+	 *     @type string   $locale               User's locale. Default empty.
+	 * }
+	 * @param WP_User $user     User object.
+	 * @param bool    $update   Whether the user is being updated rather than created.
+	 * @param array   $userdata The raw array of data passed to wp_insert_user().
+	 */
+	$meta = apply_filters( 'insert_user_meta', $meta, $user, $update, $userdata );
+
+	// Update user meta.
+	foreach ( $meta as $key =&gt; $value ) {
+		update_user_meta( $user_id, $key, $value );
+	}
+
+	foreach ( wp_get_user_contact_methods( $user ) as $key =&gt; $value ) {
+		if ( isset( $userdata[ $key ] ) ) {
+			update_user_meta( $user_id, $key, $userdata[ $key ] );
+		}
+	}
+
+	if ( isset( $userdata['role'] ) ) {
+		$user-&gt;set_role( $userdata['role'] );
+	} elseif ( ! $update ) {
+		$user-&gt;set_role( get_option( 'default_role' ) );
+	}
+
+	clean_user_cache( $user_id );
+
+	if ( $update ) {
+		/**
+		 * Fires immediately after an existing user is updated.
+		 *
+		 * @since 2.0.0
+		 * @since 5.8.0 The $userdata parameter was added.
+		 *
+		 * @param int     $user_id       User ID.
+		 * @param WP_User $old_user_data Object containing user's data prior to update.
+		 * @param array   $userdata      The raw array of data passed to wp_insert_user().
+		 */
+		do_action( 'profile_update', $user_id, $old_user_data, $userdata );
+
+		if ( isset( $userdata['spam'] ) &amp;&amp; $userdata['spam'] != $old_user_data-&gt;spam ) {
+			if ( 1 == $userdata['spam'] ) {
+				/**
+				 * Fires after the user is marked as a SPAM user.
+				 *
+				 * @since 3.0.0
+				 *
+				 * @param int $user_id ID of the user marked as SPAM.
+				 */
+				do_action( 'make_spam_user', $user_id );
+			} else {
+				/**
+				 * Fires after the user is marked as a HAM user. Opposite of SPAM.
+				 *
+				 * @since 3.0.0
+				 *
+				 * @param int $user_id ID of the user marked as HAM.
+				 */
+				do_action( 'make_ham_user', $user_id );
+			}
+		}
+	} else {
+		/**
+		 * Fires immediately after a new user is registered.
+		 *
+		 * @since 1.5.0
+		 * @since 5.8.0 The $userdata parameter was added.
+		 *
+		 * @param int   $user_id  User ID.
+		 * @param array $userdata The raw array of data passed to wp_insert_user().
+		 */
+		do_action( 'user_register', $user_id, $userdata );
+	}
+
+	return $user_id;
+}
+</pre>
+			</div>
+			<p class="source-code-links">
+				<span>
+					<a href="#" class="show-complete-source">Expand full source code</a>
+					<a href="#" class="less-complete-source">Collapse full source code</a>
+				</span>
+				<span><a href="https://core.trac.wordpress.org/browser/tags/5.8/src/wp-includes/user.php#L1765">View on Trac</a></span>
+			</p>
+			</section>
+	<hr />
+	<section class="related">
+		<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="related" tabindex="-1">Related <a href="#related" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Related</span></a></h2>
+
+					<article class="uses">
+				<h3 class="toc-heading" id="uses" tabindex="-1">Uses <a href="#uses" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Uses</span></a></h3>
+				<table id="uses-table">
+					<caption class="screen-reader-text">Uses</caption>
+					<thead>
+						<tr>
+							<th>Uses</th>
+							<th class="related-desc">Description</th>
+						</tr>
+					</thead>
+					<tbody>
+												<tr>
+							<td>
+								<span>wp-includes/user.php:</span>
+								<a href="../../hooks/wp_pre_insert_user_data/index.html">wp_pre_insert_user_data</a>
+							</td>
+							<td class="related-desc">
+								<p>Filters user data before the record is created or updated.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/user.php:</span>
+								<a href="../../hooks/insert_user_meta/index.html">insert_user_meta</a>
+							</td>
+							<td class="related-desc">
+								<p>Filters a user&#8217;s meta values and keys immediately after the user is created or updated and before any user meta is inserted or updated.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/user.php:</span>
+								<a href="../../hooks/illegal_user_logins/index.html">illegal_user_logins</a>
+							</td>
+							<td class="related-desc">
+								<p>Filters the list of disallowed usernames.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/user.php:</span>
+								<a href="../../hooks/make_spam_user/index.html">make_spam_user</a>
+							</td>
+							<td class="related-desc">
+								<p>Fires after the user is marked as a SPAM user.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/user.php:</span>
+								<a href="../../hooks/make_ham_user/index.html">make_ham_user</a>
+							</td>
+							<td class="related-desc">
+								<p>Fires after the user is marked as a HAM user. Opposite of SPAM.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/class-wp-user.php:</span>
+								<a href="../../classes/wp_user/__construct/index.html">WP_User::__construct()</a>
+							</td>
+							<td class="related-desc">
+								<p>Constructor.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/l10n.php:</span>
+								<a href="../__/index.html">__()</a>
+							</td>
+							<td class="related-desc">
+								<p>Retrieve the translation of $text.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/l10n.php:</span>
+								<a href="../_x/index.html">_x()</a>
+							</td>
+							<td class="related-desc">
+								<p>Retrieve translated string with gettext context.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/formatting.php:</span>
+								<a href="../wp_unslash/index.html">wp_unslash()</a>
+							</td>
+							<td class="related-desc">
+								<p>Removes slashes from a string or recursively removes slashes from strings within an array.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/formatting.php:</span>
+								<a href="../sanitize_user/index.html">sanitize_user()</a>
+							</td>
+							<td class="related-desc">
+								<p>Sanitizes a username, stripping out unsafe characters.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/formatting.php:</span>
+								<a href="../sanitize_title/index.html">sanitize_title()</a>
+							</td>
+							<td class="related-desc">
+								<p>Sanitizes a string into a slug, which can be used in URLs or HTML attributes.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/pluggable.php:</span>
+								<a href="../wp_hash_password/index.html">wp_hash_password()</a>
+							</td>
+							<td class="related-desc">
+								<p>Create a hash (encrypt) of a plain text password.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/pluggable.php:</span>
+								<a href="../get_userdata/index.html">get_userdata()</a>
+							</td>
+							<td class="related-desc">
+								<p>Retrieve user info by user ID.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/load.php:</span>
+								<a href="../is_multisite/index.html">is_multisite()</a>
+							</td>
+							<td class="related-desc">
+								<p>If Multisite is enabled.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/plugin.php:</span>
+								<a href="../apply_filters/index.html">apply_filters()</a>
+							</td>
+							<td class="related-desc">
+								<p>Calls the callback functions that have been added to a filter hook.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/plugin.php:</span>
+								<a href="../do_action/index.html">do_action()</a>
+							</td>
+							<td class="related-desc">
+								<p>Calls the callback functions that have been added to an action hook.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/option.php:</span>
+								<a href="../get_option/index.html">get_option()</a>
+							</td>
+							<td class="related-desc">
+								<p>Retrieves an option value based on an option name.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/user.php:</span>
+								<a href="../wp_get_user_contact_methods/index.html">wp_get_user_contact_methods()</a>
+							</td>
+							<td class="related-desc">
+								<p>Set up the user contact methods.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/user.php:</span>
+								<a href="../../hooks/profile_update/index.html">profile_update</a>
+							</td>
+							<td class="related-desc">
+								<p>Fires immediately after an existing user is updated.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/user.php:</span>
+								<a href="../../hooks/user_register/index.html">user_register</a>
+							</td>
+							<td class="related-desc">
+								<p>Fires immediately after a new user is registered.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/user.php:</span>
+								<a href="../username_exists/index.html">username_exists()</a>
+							</td>
+							<td class="related-desc">
+								<p>Determines whether the given username exists.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/user.php:</span>
+								<a href="../email_exists/index.html">email_exists()</a>
+							</td>
+							<td class="related-desc">
+								<p>Determines whether the given email exists.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/user.php:</span>
+								<a href="../clean_user_cache/index.html">clean_user_cache()</a>
+							</td>
+							<td class="related-desc">
+								<p>Clean all user caches</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/user.php:</span>
+								<a href="../../hooks/pre_user_login/index.html">pre_user_login</a>
+							</td>
+							<td class="related-desc">
+								<p>Filters a username after it has been sanitized.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/user.php:</span>
+								<a href="../../hooks/pre_user_nicename/index.html">pre_user_nicename</a>
+							</td>
+							<td class="related-desc">
+								<p>Filters a user&#8217;s nicename before the user is created or updated.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/user.php:</span>
+								<a href="../../hooks/pre_user_email/index.html">pre_user_email</a>
+							</td>
+							<td class="related-desc">
+								<p>Filters a user&#8217;s email before the user is created or updated.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/user.php:</span>
+								<a href="../../hooks/pre_user_url/index.html">pre_user_url</a>
+							</td>
+							<td class="related-desc">
+								<p>Filters a user&#8217;s URL before the user is created or updated.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/user.php:</span>
+								<a href="../../hooks/pre_user_nickname/index.html">pre_user_nickname</a>
+							</td>
+							<td class="related-desc">
+								<p>Filters a user&#8217;s nickname before the user is created or updated.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/user.php:</span>
+								<a href="../../hooks/pre_user_first_name/index.html">pre_user_first_name</a>
+							</td>
+							<td class="related-desc">
+								<p>Filters a user&#8217;s first name before the user is created or updated.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/user.php:</span>
+								<a href="../../hooks/pre_user_last_name/index.html">pre_user_last_name</a>
+							</td>
+							<td class="related-desc">
+								<p>Filters a user&#8217;s last name before the user is created or updated.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/user.php:</span>
+								<a href="../../hooks/pre_user_display_name/index.html">pre_user_display_name</a>
+							</td>
+							<td class="related-desc">
+								<p>Filters a user&#8217;s display name before the user is created or updated.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/user.php:</span>
+								<a href="../../hooks/pre_user_description/index.html">pre_user_description</a>
+							</td>
+							<td class="related-desc">
+								<p>Filters a user&#8217;s description before the user is created or updated.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/user.php:</span>
+								<a href="../update_user_meta/index.html">update_user_meta()</a>
+							</td>
+							<td class="related-desc">
+								<p>Update user meta field based on user ID.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/wp-db.php:</span>
+								<a href="../../classes/wpdb/get_var/index.html">wpdb::get_var()</a>
+							</td>
+							<td class="related-desc">
+								<p>Retrieves one variable from the database.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/wp-db.php:</span>
+								<a href="../../classes/wpdb/update/index.html">wpdb::update()</a>
+							</td>
+							<td class="related-desc">
+								<p>Updates a row in the table.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/wp-db.php:</span>
+								<a href="../../classes/wpdb/insert/index.html">wpdb::insert()</a>
+							</td>
+							<td class="related-desc">
+								<p>Inserts a row into the table.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/wp-db.php:</span>
+								<a href="../../classes/wpdb/prepare/index.html">wpdb::prepare()</a>
+							</td>
+							<td class="related-desc">
+								<p>Prepares a SQL query for safe execution.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/class-wp-error.php:</span>
+								<a href="../../classes/wp_error/__construct/index.html">WP_Error::__construct()</a>
+							</td>
+							<td class="related-desc">
+								<p>Initializes the error.</p>
+							</td>
+						</tr>
+											<tbody>
+				</table>
+
+								<a href="#" class="show-more">Show 33 more uses</a>
+				<a href="#" class="hide-more">Hide more uses</a>
+							</article>
+		
+					<hr />
+			<article class="used-by">
+				<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="used-by" tabindex="-1">Used By <a href="#used-by" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Used By</span></a></h3>
+				<table id="used-by-table">
+					<caption class="screen-reader-text">Used By</caption>
+					<thead>
+						<tr>
+							<th>Used By</th>
+							<th class="related-desc">Description</th>
+						</tr>
+					</thead>
+					<tbody>
+												<tr>
+							<td>
+								<span>wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:</span>
+								<a href="../../classes/wp_rest_users_controller/create_item/index.html">WP_REST_Users_Controller::create_item()</a>
+							</td>
+							<td class="related-desc">
+								<p>Creates a single user.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-admin/includes/user.php:</span>
+								<a href="../edit_user/index.html">edit_user()</a>
+							</td>
+							<td class="related-desc">
+								<p>Edit user settings based on contents of $_POST</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/user.php:</span>
+								<a href="../wp_update_user/index.html">wp_update_user()</a>
+							</td>
+							<td class="related-desc">
+								<p>Update a user in the database.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/user.php:</span>
+								<a href="../wp_create_user/index.html">wp_create_user()</a>
+							</td>
+							<td class="related-desc">
+								<p>A simpler way of inserting a user into the database.</p>
+							</td>
+						</tr>
+											<tbody>
+				</table>
+
+							</article>
+			</section>
+		<hr />
+	<section class="changelog">
+		<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="changelog" tabindex="-1">Changelog <a href="#changelog" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Changelog</span></a></h2>
+
+		<table>
+			<caption class="screen-reader-text">Changelog</caption>
+			<thead>
+				<tr>
+					<th class="changelog-version">Version</th>
+					<th class="changelog-desc">Description</th>
+				</tr>
+			</thead>
+
+			<tbody>
+									
+					<tr>
+						<td><a href="../../since/5.3.0/index.html" alt="WordPress 5.3.0">5.3.0</a></td>
+						<td><span class="since-description">The <code>spam</code> field can be passed to <code>$userdata</code> (Multisite only).</span></td>
+					</tr>
+									
+					<tr>
+						<td><a href="../../since/4.7.0/index.html" alt="WordPress 4.7.0">4.7.0</a></td>
+						<td><span class="since-description">The user's locale can be passed to <code>$userdata</code>.</span></td>
+					</tr>
+									
+					<tr>
+						<td><a href="../../since/3.6.0/index.html" alt="WordPress 3.6.0">3.6.0</a></td>
+						<td><span class="since-description">The <code>aim</code>, <code>jabber</code>, and <code>yim</code> fields were removed as default user contact              methods for new installations. See <a href="../wp_get_user_contact_methods/index.html">wp_get_user_contact_methods()</a>.</span></td>
+					</tr>
+									
+					<tr>
+						<td><a href="../../since/2.0.0/index.html" alt="WordPress 2.0.0">2.0.0</a></td>
+						<td>Introduced.</td>
+					</tr>
+							</tbody>
+		</table>
+	</section>
+
+	<hr />
+	<section class="user-notes">
+		<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="user-contributed-notes" tabindex="-1">User Contributed Notes <a href="#user-contributed-notes" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">User Contributed Notes</span></a></h2>
+		
+<div id="comments" class="comments-area">
+
+			
+		<ol class="comment-list">
+						<li id="comment-2837" data-comment-id="2837" class="comment byuser comment-author-brentleavitt even thread-even depth-1">
+			<article id="div-comment-2837" class="comment-body">
+
+							<a href="#comment-content-2837" class="screen-reader-text">Skip to note 1 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="b49fb51336"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="2837" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_insert_user%2F%23comment-2837"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="100% like this"><span class="screen-reader-text">Vote results for this note: </span>7</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="2837" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_insert_user%2F%23comment-2837"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/85352b9d5a50be6634287d582a207842?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/85352b9d5a50be6634287d582a207842?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/brentleavitt/" rel="external nofollow" class="url">Brent Leavitt</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-2837">
+							<time datetime="2018-08-28T19:49:40+00:00">
+							3 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-2837">
+				<p>The <code>wp_insert_user</code> function requires an array (or object) of user data to create the user. The full array version of <code>$userdata</code> is as follows: </p>
+<section class="source-content">
+<div class="source-code-container">
+<pre class="brush: php; title: ; notranslate" title="">$userdata = array(
+	'ID' 					=&gt; 0, 	//(int) User ID. If supplied, the user will be updated.
+	'user_pass'				=&gt; '', 	//(string) The plain-text user password.
+	'user_login' 			=&gt; '', 	//(string) The user's login username.
+	'user_nicename' 		=&gt; '', 	//(string) The URL-friendly user name.
+	'user_url' 				=&gt; '', 	//(string) The user URL.
+	'user_email' 			=&gt; '', 	//(string) The user email address.
+	'display_name' 			=&gt; '', 	//(string) The user's display name. Default is the user's username.
+	'nickname' 				=&gt; '', 	//(string) The user's nickname. Default is the user's username.
+	'first_name' 			=&gt; '', 	//(string) The user's first name. For new users, will be used to build the first part of the user's display name if $display_name is not specified.
+	'last_name' 			=&gt; '', 	//(string) The user's last name. For new users, will be used to build the second part of the user's display name if $display_name is not specified.
+	'description' 			=&gt; '', 	//(string) The user's biographical description.
+	'rich_editing' 			=&gt; '', 	//(string|bool) Whether to enable the rich-editor for the user. False if not empty.
+	'syntax_highlighting' 	=&gt; '', 	//(string|bool) Whether to enable the rich code editor for the user. False if not empty.
+	'comment_shortcuts' 	=&gt; '', 	//(string|bool) Whether to enable comment moderation keyboard shortcuts for the user. Default false.
+	'admin_color' 			=&gt; '', 	//(string) Admin color scheme for the user. Default 'fresh'.
+	'use_ssl' 				=&gt; '', 	//(bool) Whether the user should always access the admin over https. Default false.
+	'user_registered' 		=&gt; '', 	//(string) Date the user registered. Format is 'Y-m-d H:i:s'.
+	'show_admin_bar_front' 	=&gt; '', 	//(string|bool) Whether to display the Admin Bar for the user on the site's front end. Default true.
+	'role' 					=&gt; '', 	//(string) User's role.
+	'locale' 				=&gt; '', 	//(string) User's locale. Default empty.
+
+);</pre>
+</div>
+<p class="source-code-links"><span><a href="#" class="show-complete-source">Expand full source code</a><a href="#" class="less-complete-source">Collapse full source code</a></span></p>
+</section>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-2837' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_insert_user%2F%3Freplytocom%3D2837%23feedback-editor-2837" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-1242" data-comment-id="1242" class="comment byuser comment-author-ishulev odd alt thread-odd thread-alt depth-1">
+			<article id="div-comment-1242" class="comment-body">
+
+							<a href="#comment-content-1242" class="screen-reader-text">Skip to note 2 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="bfc816e53d"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="1242" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_insert_user%2F%23comment-1242"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="100% like this"><span class="screen-reader-text">Vote results for this note: </span>6</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="1242" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_insert_user%2F%23comment-1242"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/f878f283f06e0cfbe1c97265d8871e6f?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/f878f283f06e0cfbe1c97265d8871e6f?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/ishulev/" rel="external nofollow" class="url">Ivan Shulev</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-1242">
+							<time datetime="2016-02-21T11:05:03+00:00">
+							6 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-1242">
+				<p><strong>Example</strong></p>
+<p>Below is an example showing how to insert a new user with the website profile field filled.</p>
+<section class="source-content">
+<div class="source-code-container">
+<pre class="brush: php; title: ; notranslate" title="">
+$website = &quot;http://example.com&quot;;
+$userdata = array(
+    'user_login' =&gt;  'login_name',
+    'user_url'   =&gt;  $website,
+    'user_pass'  =&gt;  NULL // When creating an user, `user_pass` is expected.
+);
+
+$user_id = wp_insert_user( $userdata ) ;
+
+// On success.
+if ( ! is_wp_error( $user_id ) ) {
+    echo &quot;User created : &quot;. $user_id;
+}
+</pre>
+</div>
+<p class="source-code-links"><span><a href="#" class="show-complete-source">Expand full source code</a><a href="#" class="less-complete-source">Collapse full source code</a></span></p>
+</section>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-1242' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_insert_user%2F%3Freplytocom%3D1242%23feedback-editor-1242" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-1926" data-comment-id="1926" class="comment byuser comment-author-samuelimbert1985 even thread-even depth-1">
+			<article id="div-comment-1926" class="comment-body">
+
+							<a href="#comment-content-1926" class="screen-reader-text">Skip to note 3 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="231e46bab4"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="1926" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_insert_user%2F%23comment-1926"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="100% like this"><span class="screen-reader-text">Vote results for this note: </span>5</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="1926" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_insert_user%2F%23comment-1926"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/849a5c2320fe3c26f686cf0a9b644a65?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/849a5c2320fe3c26f686cf0a9b644a65?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/samuelimbert1985/" rel="external nofollow" class="url">samuelimbert1985</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-1926">
+							<time datetime="2016-11-23T17:02:57+00:00">
+							5 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-1926">
+				<p>The user_url length in database is limited to 100.</p>
+<p>But wp_insert_user won&#8217;t return a WP_Error if this size is exceeded, it returns 0.</p>
+<p>It could be a good improvement, as i just past 30 minutes, to find what was the problem. </p>
+<p>Thanks in advance,</p>
+<p>:)</p>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-1926' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_insert_user%2F%3Freplytocom%3D1926%23feedback-editor-1926" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-3598" data-comment-id="3598" class="comment byuser comment-author-andrija odd alt thread-odd thread-alt depth-1">
+			<article id="div-comment-3598" class="comment-body">
+
+							<a href="#comment-content-3598" class="screen-reader-text">Skip to note 4 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="7b26408881"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="3598" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_insert_user%2F%23comment-3598"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="100% like this"><span class="screen-reader-text">Vote results for this note: </span>3</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="3598" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_insert_user%2F%23comment-3598"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/de8a9735ad45865f91dec546bc4d4cb4?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/de8a9735ad45865f91dec546bc4d4cb4?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/andrija/" rel="external nofollow" class="url">Andrija Naglic</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-3598">
+							<time datetime="2020-01-26T01:38:33+00:00">
+							2 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-3598">
+				<p>The <code>'role'</code> should be <strong>lowercase</strong> or it won&#8217;t work.</p>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-3598' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_insert_user%2F%3Freplytocom%3D3598%23feedback-editor-3598" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-4063" data-comment-id="4063" class="comment byuser comment-author-mahdiebrahimii even thread-even depth-1">
+			<article id="div-comment-4063" class="comment-body">
+
+							<a href="#comment-content-4063" class="screen-reader-text">Skip to note 5 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="67d12d8c84"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="4063" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_insert_user%2F%23comment-4063"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="75% like this"><span class="screen-reader-text">Vote results for this note: </span>2</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="4063" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_insert_user%2F%23comment-4063"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/fe5eecdeba173ac42d31c888bff1b2a0?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/fe5eecdeba173ac42d31c888bff1b2a0?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/mahdiebrahimii/" rel="external nofollow" class="url">Mahdi Ebrahimi</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-4063">
+							<time datetime="2020-07-18T15:14:42+00:00">
+							1 year ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-4063">
+				<p>Below is an example showing how to insert a new user.</p>
+<section class="source-content">
+<div class="source-code-container">
+<pre class="brush: php; title: ; notranslate" title="">
+$data = array(
+    'user_login'           =&gt; 'login_name', // the user's login username.
+    'user_pass'	           =&gt; 'login_password', // not necessary to hash password ( The plain-text user password ).
+    'show_admin_bar_front' =&gt; false // display the Admin Bar for the user 'true' or 'false'
+);
+ 
+$user_id = wp_insert_user( $data );
+ 
+if ( ! is_wp_error( $user_id ) ) {
+	
+    echo &quot;User ID : &quot;. $user_id;
+	
+}
+</pre>
+</div>
+<p class="source-code-links"><span><a href="#" class="show-complete-source">Expand full source code</a><a href="#" class="less-complete-source">Collapse full source code</a></span></p>
+</section>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-4063' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_insert_user%2F%3Freplytocom%3D4063%23feedback-editor-4063" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-5086" data-comment-id="5086" class="comment byuser comment-author-mounirawy odd alt thread-odd thread-alt depth-1">
+			<article id="div-comment-5086" class="comment-body">
+
+							<a href="#comment-content-5086" class="screen-reader-text">Skip to note 6 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="0312c9eeb2"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="5086" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_insert_user%2F%23comment-5086"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="100% like this"><span class="screen-reader-text">Vote results for this note: </span>1</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="5086" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_insert_user%2F%23comment-5086"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/fd2c9168708633066618ee6851318e55?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/fd2c9168708633066618ee6851318e55?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/mounirawy/" rel="external nofollow" class="url">mounirawy</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-5086">
+							<time datetime="2021-05-27T07:21:57+00:00">
+							3 months ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-5086">
+				<p>user_login can&#8217;t be empty<br />
+When I typed </p>
+<pre class="brush: php; title: ; notranslate" title="">        $userdata = array(
+            'user_email'            =&gt; $email,   
+            'first_name'            =&gt; $fname,  
+            'last_name'             =&gt; $lname,  
+            'role'                  =&gt; 'subscriber',
+        );  </pre>
+<p>the function returned<br />
+<code>WP_Error Object ( [errors] =&gt; Array ( [empty_user_login] =&gt; Array ( [0] =&gt; Cannot create a user with an empty login name. ) ) [error_data] =&gt; Array ( ) [additional_data:protected] =&gt; Array ( ) ) </code></p>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-5086' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_insert_user%2F%3Freplytocom%3D5086%23feedback-editor-5086" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-5149" data-comment-id="5149" class="comment byuser comment-author-joe420nuts even thread-even depth-1">
+			<article id="div-comment-5149" class="comment-body">
+
+							<a href="#comment-content-5149" class="screen-reader-text">Skip to note 7 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="14aaa01773"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="5149" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_insert_user%2F%23comment-5149"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="100% like this"><span class="screen-reader-text">Vote results for this note: </span>1</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="5149" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_insert_user%2F%23comment-5149"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/7917f7b041eb9d2dca3cc84a2b247995?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/7917f7b041eb9d2dca3cc84a2b247995?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/joe420nuts/" rel="external nofollow" class="url">Joe Nuts</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-5149">
+							<time datetime="2021-06-15T16:19:43+00:00">
+							3 months ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-5149">
+				<p>My man Gregory got 10 downvotes because he used the inappropriate function to hash a password but I feel like people might have missed his point about the password needing to be hashed manually when updating a user using <code>wp_insert_user()</code> instead of <code>wp_update_user()</code>.</p>
+<p><strong>&#8220;Hashed in wp_update_user(), plaintext if called directly.&#8221;</strong> &#8211; line 1760.</p>
+<p>So the correct usage would be smth like:</p>
+<section class="source-content">
+<div class="source-code-container">
+<pre class="brush: php; title: ; notranslate" title="">$existing_user_id = wp_insert_user( array(
+
+	/**
+     * The existing user id
+     */
+    'ID' 		 =&gt;  $existing_user_id,
+
+    /**
+     * I think you need to supply the user login though i'm not too sure,
+     * When i tried this without passing in user_login it gave me errors idk why
+     * User login won't change tho as usernames in wordpress are permanent
+     */
+    'user_login' =&gt;  $user_login,
+
+    /**
+     * Hash the new password when updating an existing user using built in hashing function
+     */
+    'user_pass'  =&gt;  wp_hash_password( $new_password ),
+
+) ) ;</pre>
+</div>
+<p class="source-code-links"><span><a href="#" class="show-complete-source">Expand full source code</a><a href="#" class="less-complete-source">Collapse full source code</a></span></p>
+</section>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-5149' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_insert_user%2F%3Freplytocom%3D5149%23feedback-editor-5149" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-2316" data-comment-id="2316" class="comment byuser comment-author-leandroberg odd alt thread-odd thread-alt depth-1">
+			<article id="div-comment-2316" class="comment-body">
+
+							<a href="#comment-content-2316" class="screen-reader-text">Skip to note 8 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="08bd0561f2"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="2316" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_insert_user%2F%23comment-2316"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title=""><span class="screen-reader-text">Vote results for this note: </span>0</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="2316" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_insert_user%2F%23comment-2316"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/129a7c0514ec6bb87ff1c22bbe7cf180?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/129a7c0514ec6bb87ff1c22bbe7cf180?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/leandroberg/" rel="external nofollow" class="url">Leandro Berg</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-2316">
+							<time datetime="2017-08-04T15:22:32+00:00">
+							4 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-2316">
+				<p>The documentation says the show_admin_bar_front can be a boolean but I guess that does&#8217;t works, you have to use a string type when using this functions for the first time, I mean, when the user be created.</p>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-2316' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_insert_user%2F%3Freplytocom%3D2316%23feedback-editor-2316" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-4620" data-comment-id="4620" class="comment byuser comment-author-sergek-1 even thread-even depth-1">
+			<article id="div-comment-4620" class="comment-body">
+
+							<a href="#comment-content-4620" class="screen-reader-text">Skip to note 9 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="1a2432999f"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="4620" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_insert_user%2F%23comment-4620"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title=""><span class="screen-reader-text">Vote results for this note: </span>0</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="4620" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_insert_user%2F%23comment-4620"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/54e91e9204277f6de225055bddad5c96?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/54e91e9204277f6de225055bddad5c96?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/sergek-1/" rel="external nofollow" class="url">serge.k</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-4620">
+							<time datetime="2020-12-04T12:24:33+00:00">
+							9 months ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-4620">
+				<p>$userdata must be escaped. You will not be able to login to account created this way:</p>
+<pre class="brush: php; title: ; notranslate" title="">$userdata = array(
+	'user_login' =&gt; 'test',
+	'user_pass' =&gt; &quot;123'456&quot;,
+	'user_email' =&gt; 'test@example.com',
+);
+wp_insert_user( $userdata );</pre>
+<p>here is the correct code:</p>
+<pre class="brush: php; title: ; notranslate" title="">wp_insert_user( wp_slash( $userdata ) );</pre>
+<p>P.S. Tested on WP 5.5.3</p>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-4620' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_insert_user%2F%3Freplytocom%3D4620%23feedback-editor-4620" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-1737" data-comment-id="1737" class="comment byuser comment-author-gioni odd alt thread-odd thread-alt depth-1 bad-note">
+			<article id="div-comment-1737" class="comment-body">
+
+							<a href="#comment-content-1737" class="screen-reader-text">Skip to note 10 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="a71aca4dd5"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="1737" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_insert_user%2F%23comment-1737"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="0% like this"><span class="screen-reader-text">Vote results for this note: </span>-10</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="1737" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_insert_user%2F%23comment-1737"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/82d2f8eb81187479eead40d6e614a2c3?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/82d2f8eb81187479eead40d6e614a2c3?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/gioni/" rel="external nofollow" class="url">Gregory</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-1737">
+							<time datetime="2016-07-20T14:33:56+00:00">
+							5 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-1737">
+				<p>If you decided to use wp_insert_user() for updating existing users, you have to encode password with md5 function. Probably this is a bug.</p>
+<pre class="brush: php; title: ; notranslate" title="">
+// Tested with version WP 4.5
+$userdata = array(
+	'ID' =&gt; $user_id, // ID of existing user
+	'user_login' =&gt;  'login_name',
+	'user_pass'  =&gt;  md5($new_password) // no plain password here!
+); 
+
+$user_id = wp_insert_user( $userdata ) ;
+</pre>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-1737' class='feedback hide-if-js'>
+<h4 class='feedback-title'>Feedback</h4>
+<ul class='children'>
+			<li id="comment-4064" data-comment-id="4064" class="comment byuser comment-author-mahdiebrahimii even depth-2">
+			<article id="div-comment-4064" class="comment-body">
+
+			
+				<div class="comment-content" id="comment-content-4064">
+				<p><code>'user_pass'  =&gt;  md5($new_password) // no plain password here!</code> is wrong. password is not necessary to hash &mdash; By <cite class="fn"><a href="https://profiles.wordpress.org/mahdiebrahimii/" rel="external nofollow" class="url">Mahdi Ebrahimi</a></cite> &mdash;  <a class="comment-date" href="index.html#comment-4064"><time datetime="2020-07-18T15:18:19+00:00">1 year ago</time></a></p>
+				</div><!-- .comment-content -->
+
+						</article>
+			</li>
+					</ul>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_insert_user%2F%3Freplytocom%3D1737%23feedback-editor-1737" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+		</ol><!-- .comment-list -->
+
+		
+	
+	
+			<div id="respond" class="comment-respond">
+		<h3 id="reply-title" class="comment-reply-title"> <small></small></h3><p>You must <a href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_insert_user%2F%23comments">log in</a> before being able to contribute a note or feedback.</p>	</div><!-- #respond -->
+		
+	
+</div><!-- #comments -->
+	</section>
+</div>
+
+</article>
+
+			
+		
+		</main><!-- #main -->
+	</div><!-- #primary -->
+	</div><!-- #content -->
+
+</div><!-- #page -->
+
+
+<div id="wporg-footer">
+	<div class="wrapper">
+		<ul>
+			<li><a href="http://wordpress.org/about/" title="An introduction to the WordPress project">About</a></li>
+			<li><a href="http://wordpress.org/news/" title="News and Updates">Blog</a></li>
+			<li><a href="http://wordpress.org/hosting/" title="Recommended web hosting providers">Hosting</a></li>
+			<li><a href="https://wordpressfoundation.org/donate/" title="Donate to the WordPress Foundation">Donate</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://wordpress.org/support/" title="Forums, documentation, and other resources">Support</a></li>
+			<li><a href="../../../index.html" title="Resources for WordPress developers">Developers</a></li>
+			<li><a href="http://make.wordpress.org/" title="Give back to WordPress through code, support, translation and more">Get Involved</a></li>
+			<li><a href="http://learn.wordpress.org/" title="Workshops and training materials">Learn</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://wordpress.org/showcase/" title="Some of the best WordPress sites on the Web">Showcase</a></li>
+			<li><a href="http://wordpress.org/plugins/" title="Add extra functionality to WordPress">Plugins</a></li>
+			<li><a href="http://wordpress.org/themes/" title="Make your WordPress pretty">Themes</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://central.wordcamp.org/" title="Find a WordPress event near you">WordCamp</a></li>
+			<li><a href="http://wordpress.tv/" title="Videos, tutorials, and WordCamp sessions">WordPress.TV</a></li>
+			<li><a href="http://buddypress.org/" title="A set of plugins to transform your WordPress into a social network">BuddyPress</a></li>
+			<li><a href="http://bbpress.org/" title="Fast, slick forums built on WordPress">bbPress</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://wordpress.com/?ref=wporg-footer" title="Hassle-free WordPress hosting">WordPress.com</a></li>
+			<li><a href="http://ma.tt/" title="Co-founder of WordPress, an example of what WordPress can do">Matt</a></li>
+			<li><a href="http://wordpress.org/about/privacy/" title="WordPress.org Privacy Policy">Privacy</a></li>
+			<li><a href="https://publiccode.eu/" target="_blank">Public Code</a></li>
+		</ul>
+
+		<ul class="social-media-links">
+			<li><span class="dashicons dashicons-twitter"></span><a href="https://twitter.com/WordPress" title="Follow @WordPress on Twitter">@WordPress</a></li>
+			<li><span class="dashicons dashicons-facebook"></span><a href="https://www.facebook.com/WordPress/" title="Like WordPress on Facebook">WordPress</a></li>
+		</ul>
+	</div>
+
+		<p class="cip cip-image">Code is Poetry.</p>
+</div>
+
+<script src="../../../../s.w.org/style/js/navigation.min.js?20190128"></script>
+
+<script type='text/javascript'>
+	(function(){
+		var corecss = document.createElement('link');
+		var themecss = document.createElement('link');
+		var corecssurl = "../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shCore.css?ver=3.0.9b";
+		if ( corecss.setAttribute ) {
+				corecss.setAttribute( "rel", "stylesheet" );
+				corecss.setAttribute( "type", "text/css" );
+				corecss.setAttribute( "href", corecssurl );
+		} else {
+				corecss.rel = "stylesheet";
+				corecss.href = corecssurl;
+		}
+		document.head.appendChild( corecss );
+		var themecssurl = "../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shThemeDefault.css?ver=3.0.9b";
+		if ( themecss.setAttribute ) {
+				themecss.setAttribute( "rel", "stylesheet" );
+				themecss.setAttribute( "type", "text/css" );
+				themecss.setAttribute( "href", themecssurl );
+		} else {
+				themecss.rel = "stylesheet";
+				themecss.href = themecssurl;
+		}
+		document.head.appendChild( themecss );
+	})();
+	SyntaxHighlighter.config.strings.expandSource = '+ expand source';
+	SyntaxHighlighter.config.strings.help = '?';
+	SyntaxHighlighter.config.strings.alert = 'SyntaxHighlighter\n\n';
+	SyntaxHighlighter.config.strings.noBrush = 'Can\'t find brush for: ';
+	SyntaxHighlighter.config.strings.brushNotHtmlScript = 'Brush wasn\'t configured for html-script option: ';
+	SyntaxHighlighter.defaults['pad-line-numbers'] = false;
+	SyntaxHighlighter.defaults['toolbar'] = false;
+	SyntaxHighlighter.all();
+
+	// Infinite scroll support
+	if ( typeof( jQuery ) !== 'undefined' ) {
+		jQuery( function( $ ) {
+			$( document.body ).on( 'post-load', function() {
+				SyntaxHighlighter.highlight();
+			} );
+		} );
+	}
+</script>
+<link rel='stylesheet' id='buttons-css'  href='../../../wp-includes/css/buttons.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<script type='text/javascript' src='../../../wp-includes/js/hoverintent-js.min.js?ver=2.2.1' id='hoverintent-js-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/admin-bar.min.js?ver=5.9-alpha-51701' id='admin-bar-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/navigation.js?ver=20181209' id='wporg-developer-navigation-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/skip-link-focus-fix.js?ver=20130115' id='wporg-developer-skip-link-focus-fix-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/search.js?ver=20150430' id='wporg-developer-search-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/menu.js?ver=20180201' id='wporg-developer-menu-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/awesomplete.min.js?ver=20160322' id='awesomplete-js'></script>
+<script type='text/javascript' id='autocomplete-js-extra'>
+/* <![CDATA[ */
+var autocomplete = {"ajaxurl":"https:\/\/developer.wordpress.org\/wp-admin\/admin-ajax.php","nonce":"8a60f70c4b"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/autocomplete.js?ver=20160524' id='autocomplete-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/function-reference.js?ver=20180724' id='wporg-developer-function-reference-js'></script>
+<script type='text/javascript' id='quicktags-js-extra'>
+/* <![CDATA[ */
+var quicktagsL10n = {"closeAllOpenTags":"Close all open tags","closeTags":"close tags","enterURL":"Enter the URL","enterImageURL":"Enter the URL of the image","enterImageDescription":"Enter a description of the image","textdirection":"text direction","toggleTextdirection":"Toggle Editor Text Direction","dfw":"Distraction-free writing mode","strong":"Bold","strongClose":"Close bold tag","em":"Italic","emClose":"Close italic tag","link":"Insert link","blockquote":"Blockquote","blockquoteClose":"Close blockquote tag","del":"Deleted text (strikethrough)","delClose":"Close deleted text tag","ins":"Inserted text","insClose":"Close inserted text tag","image":"Insert image","ul":"Bulleted list","ulClose":"Close bulleted list tag","ol":"Numbered list","olClose":"Close numbered list tag","li":"List item","liClose":"Close list item tag","code":"Code","codeClose":"Close code tag","more":"Insert Read More tag"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-includes/js/quicktags.min.js?ver=5.9-alpha-51701' id='quicktags-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/user-notes.js?ver=20200110' id='wporg-developer-user-notes-js'></script>
+<script type='text/javascript' id='wporg-developer-user-notes-feedback-js-extra'>
+/* <![CDATA[ */
+var wporg_note_feedback = {"show":"Show Feedback","hide":"Hide Feedback"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/user-notes-feedback.js?ver=20181023' id='wporg-developer-user-notes-feedback-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/tabs.js?ver=20160824' id='wporg-developer-tabs-js'></script>
+<script type='text/javascript' id='wporg-developer-preview-js-extra'>
+/* <![CDATA[ */
+var wporg_note_preview = {"ajaxurl":"https:\/\/developer.wordpress.org\/wp-admin\/admin-ajax.php","nonce":"504933b60e","preview":"preview note","preview_empty":"Nothing to preview","is_admin":""};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/user-notes-preview.js?ver=20200111' id='wporg-developer-preview-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/wp-embed.min.js?ver=5.9-alpha-51701' id='wp-embed-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/vendor/regenerator-runtime.min.js?ver=0.13.7' id='regenerator-runtime-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/vendor/wp-polyfill.min.js?ver=3.15.0' id='wp-polyfill-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/dom-ready.min.js?ver=71883072590656bf22c74c7b887df3dd' id='wp-dom-ready-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/hooks.min.js?ver=a7edae857aab69d69fa10d5aef23a5de' id='wp-hooks-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/i18n.min.js?ver=5f1269854226b4dd90450db411a12b79' id='wp-i18n-js'></script>
+<script type='text/javascript' id='wp-i18n-js-after'>
+wp.i18n.setLocaleData( { 'text direction\u0004ltr': [ 'ltr' ] } );
+</script>
+<script type='text/javascript' id='wp-a11y-js-translations'>
+( function( domain, translations ) {
+	var localeData = translations.locale_data[ domain ] || translations.locale_data.messages;
+	localeData[""].domain = domain;
+	wp.i18n.setLocaleData( localeData, domain );
+} )( "default", { "locale_data": { "messages": { "": {} } } } );
+</script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/a11y.min.js?ver=0ac8327cc1c40dcfdf29716affd7ac63' id='wp-a11y-js'></script>
+<script type='text/javascript' id='wplink-js-extra'>
+/* <![CDATA[ */
+var wpLinkL10n = {"title":"Insert\/edit link","update":"Update","save":"Add Link","noTitle":"(no title)","noMatchesFound":"No results found.","linkSelected":"Link selected.","linkInserted":"Link inserted.","minInputLength":"3"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-includes/js/wplink.min.js?ver=5.9-alpha-51701' id='wplink-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/jquery/ui/core.min.js?ver=1.12.1' id='jquery-ui-core-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/jquery/ui/menu.min.js?ver=1.12.1' id='jquery-ui-menu-js'></script>
+<script type='text/javascript' id='jquery-ui-autocomplete-js-extra'>
+/* <![CDATA[ */
+var uiAutocompleteL10n = {"noResults":"No results found.","oneResult":"1 result found. Use up and down arrow keys to navigate.","manyResults":"%d results found. Use up and down arrow keys to navigate.","itemSelected":"Item selected."};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-includes/js/jquery/ui/autocomplete.min.js?ver=1.12.1' id='jquery-ui-autocomplete-js'></script>
+
+		<script type="text/javascript">
+		tinyMCEPreInit = {
+			baseURL: "https://developer.wordpress.org/wp-includes/js/tinymce",
+			suffix: ".min",
+						mceInit: {},
+			qtInit: {'comment':{id:"comment",buttons:"strong,em,ul,ol,li,link"}},
+			ref: {plugins:"",theme:"modern",language:""},
+			load_ext: function(url,lang){var sl=tinymce.ScriptLoader;sl.markDone(url+'/langs/'+lang+'.js');sl.markDone(url+'/langs/'+lang+'_dlg.js');}
+		};
+		</script>
+				<script type="text/javascript">
+		var ajaxurl = "../../../wp-admin/admin-ajax.html";
+		( function() {
+			var initialized = [];
+			var initialize  = function() {
+				var init, id, inPostbox, $wrap;
+				var readyState = document.readyState;
+
+				if ( readyState !== 'complete' && readyState !== 'interactive' ) {
+					return;
+				}
+
+				for ( id in tinyMCEPreInit.mceInit ) {
+					if ( initialized.indexOf( id ) > -1 ) {
+						continue;
+					}
+
+					init      = tinyMCEPreInit.mceInit[id];
+					$wrap     = tinymce.$( '#wp-' + id + '-wrap' );
+					inPostbox = $wrap.parents( '.postbox' ).length > 0;
+
+					if (
+						! init.wp_skip_init &&
+						( $wrap.hasClass( 'tmce-active' ) || ! tinyMCEPreInit.qtInit.hasOwnProperty( id ) ) &&
+						( readyState === 'complete' || ( ! inPostbox && readyState === 'interactive' ) )
+					) {
+						tinymce.init( init );
+						initialized.push( id );
+
+						if ( ! window.wpActiveEditor ) {
+							window.wpActiveEditor = id;
+						}
+					}
+				}
+			}
+
+			if ( typeof tinymce !== 'undefined' ) {
+				if ( tinymce.Env.ie && tinymce.Env.ie < 11 ) {
+					tinymce.$( '.wp-editor-wrap ' ).removeClass( 'tmce-active' ).addClass( 'html-active' );
+				} else {
+					if ( document.readyState === 'complete' ) {
+						initialize();
+					} else {
+						document.addEventListener( 'readystatechange', initialize );
+					}
+				}
+			}
+
+			if ( typeof quicktags !== 'undefined' ) {
+				for ( id in tinyMCEPreInit.qtInit ) {
+					quicktags( tinyMCEPreInit.qtInit[id] );
+
+					if ( ! window.wpActiveEditor ) {
+						window.wpActiveEditor = id;
+					}
+				}
+			}
+		}());
+		</script>
+				<div id="wp-link-backdrop" style="display: none"></div>
+		<div id="wp-link-wrap" class="wp-core-ui" style="display: none" role="dialog" aria-labelledby="link-modal-title">
+		<form id="wp-link" tabindex="-1">
+		<input type="hidden" id="_ajax_linking_nonce" name="_ajax_linking_nonce" value="86f5a0a85d" />		<h1 id="link-modal-title">Insert/edit link</h1>
+		<button type="button" id="wp-link-close"><span class="screen-reader-text">Close</span></button>
+		<div id="link-selector">
+			<div id="link-options">
+				<p class="howto" id="wplink-enter-url">Enter the destination URL</p>
+				<div>
+					<label><span>URL</span>
+					<input id="wp-link-url" type="text" aria-describedby="wplink-enter-url" /></label>
+				</div>
+				<div class="wp-link-text-field">
+					<label><span>Link Text</span>
+					<input id="wp-link-text" type="text" /></label>
+				</div>
+				<div class="link-target">
+					<label><span></span>
+					<input type="checkbox" id="wp-link-target" /> Open link in a new tab</label>
+				</div>
+			</div>
+			<p class="howto" id="wplink-link-existing-content">Or link to existing content</p>
+			<div id="search-panel">
+				<div class="link-search-wrapper">
+					<label>
+						<span class="search-label">Search</span>
+						<input type="search" id="wp-link-search" class="link-search-field" autocomplete="off" aria-describedby="wplink-link-existing-content" />
+						<span class="spinner"></span>
+					</label>
+				</div>
+				<div id="search-results" class="query-results" tabindex="0">
+					<ul></ul>
+					<div class="river-waiting">
+						<span class="spinner"></span>
+					</div>
+				</div>
+				<div id="most-recent-results" class="query-results" tabindex="0">
+					<div class="query-notice" id="query-notice-message">
+						<em class="query-notice-default">No search term specified. Showing recent items.</em>
+						<em class="query-notice-hint screen-reader-text">Search or use up and down arrow keys to select an item.</em>
+					</div>
+					<ul></ul>
+					<div class="river-waiting">
+						<span class="spinner"></span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="submitbox">
+			<div id="wp-link-cancel">
+				<button type="button" class="button">Cancel</button>
+			</div>
+			<div id="wp-link-update">
+				<input type="submit" value="Add Link" class="button button-primary" id="wp-link-submit" name="wp-link-submit">
+			</div>
+		</div>
+		</form>
+		</div>
+		</body>
+
+<!-- Mirrored from developer.wordpress.org/reference/functions/wp_insert_user/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 31 Aug 2021 16:50:43 GMT -->
+</html>

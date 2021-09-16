@@ -1,0 +1,1676 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+
+<!-- Mirrored from developer.wordpress.org/reference/classes/requests_iri/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 31 Aug 2021 17:28:56 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<!--
+<meta property="fb:page_id" content="6427302910" />
+-->
+<meta name="google-site-verification" content="7VWES_-rcHBcmaQis9mSYamPfNwE03f4vyTj4pfuAw0" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Requests_IRI</title>
+<meta name="referrer" content="always">
+
+		<link href='../../../../fonts.googleapis.com/css.css?family=Open+Sans:300italic,400italic,600italic,400,300,600&amp;subset=latin,cyrillic-ext,greek-ext,greek,vietnamese,latin-ext,cyrillic' rel='stylesheet' type='text/css'>
+
+		<link rel="stylesheet" href="../../../../s.w.org/style/wp4.css?95" />
+
+<link rel="shortcut icon" href="../../../../s.w.org/favicon.ico?2" type="image/x-icon" />
+<link rel="pingback" href="../../../xmlrpc.php" /><meta name='robots' content='max-image-preview:large' />
+<link rel='dns-prefetch' href='../../../../fonts.googleapis.com/index.html' />
+<link rel='dns-prefetch' href='http://s.w.org/' />
+<link rel='dns-prefetch' href='http://www.googletagmanager.com/' />
+<link rel='dns-prefetch' href='http://fonts.gstatic.com/' />
+<link rel="alternate" type="application/rss+xml" title="WordPress Developer Resources &raquo; Feed" href="../../../feed/index.html" />
+<link rel="alternate" type="application/rss+xml" title="WordPress Developer Resources &raquo; Comments Feed" href="../../../comments/feed/index.html" />
+<meta property="og:title" content="Requests_IRI | Class | WordPress Developer Resources" />
+<meta property="og:site_name" content="WordPress Developer Resources" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="../../../index.html" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@WordPress" />
+<meta name="description" content="IRI parser/serialiser/normaliser" />
+<meta property="og:description" content="IRI parser/serialiser/normaliser" />
+<link rel="alternate" type="application/rss+xml" title="WordPress Developer Resources &raquo; Requests_IRI Comments Feed" href="https://developer.wordpress.org/reference/classes/requests_iri/feed/" />
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'../../../../www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P24PF4B');</script>
+			<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/developer.wordpress.org\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.9-alpha-51701"}};
+			!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([10084,65039,8205,55357,56613],[10084,65039,8203,55357,56613])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel='stylesheet' id='dashicons-css'  href='../../../wp-includes/css/dashicons.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='admin-bar-css'  href='../../../wp-includes/css/admin-bar.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-block-library-css'  href='../../../wp-includes/css/dist/block-library/style.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='wporg-handbook-css-css'  href='../../../wp-content/plugins/handbook/stylesheets/callout-boxes.css?ver=20200121' type='text/css' media='all' />
+<link rel='stylesheet' id='open-sans-css'  href='../../../../fonts.googleapis.com/css-2.css?family=Open+Sans%3A300italic%2C400italic%2C600italic%2C300%2C400%2C600&amp;subset=latin%2Clatin-ext&amp;display=fallback&amp;ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='wporg-developer-style-css'  href='../../../wp-content/themes/pub/wporg-developer/style.css?ver=3' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-dev-sass-compiled-css'  href='../../../wp-content/themes/pub/wporg-developer/stylesheets/main.css?ver=20200713' type='text/css' media='all' />
+<link rel='stylesheet' id='awesomplete-css-css'  href='../../../wp-content/themes/pub/wporg-developer/stylesheets/awesomplete.css?ver=20160114' type='text/css' media='all' />
+<link rel='stylesheet' id='autocomplete-css-css'  href='../../../wp-content/themes/pub/wporg-developer/stylesheets/autocomplete.css?ver=20171220' type='text/css' media='all' />
+<link rel='stylesheet' id='syntaxhighlighter-core-css'  href='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shCore.css?ver=3.0.9b' type='text/css' media='all' />
+<link rel='stylesheet' id='syntaxhighlighter-theme-default-css'  href='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shThemeDefault.css?ver=3.0.9b' type='text/css' media='all' />
+<script type='text/javascript' src='../../../wp-includes/js/jquery/jquery.min.js?ver=3.6.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='../../../wp-content/plugins/handbook/scripts/handbook.js?ver=20150930' id='wporg-handbook-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/chapters.js?ver=20190603' id='wporg-developer-chapters-js'></script>
+<script type='text/javascript' src='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shCore.js?ver=3.0.9b' id='syntaxhighlighter-core-js'></script>
+<script type='text/javascript' src='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushPhp.js?ver=3.0.9b' id='syntaxhighlighter-brush-php-js'></script>
+<link rel="https://api.w.org/" href="https://developer.wordpress.org/wp-json/" /><link rel="alternate" type="application/json" href="https://developer.wordpress.org/wp-json/wp/v2/wp-parser-class/22048" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="../../../xmlrpc-2.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="../../../wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 5.9-alpha-51701" />
+<link rel='shortlink' href='https://developer.wordpress.org/?p=22048' />
+<link rel="alternate" type="application/json+oembed" href="https://developer.wordpress.org/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Fclasses%2Frequests_iri%2F" />
+<link rel="alternate" type="text/xml+oembed" href="https://developer.wordpress.org/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Fclasses%2Frequests_iri%2F&amp;format=xml" />
+<link rel="canonical" href="index.html">
+<!-- Stream WordPress user activity plugin v3.6.2 -->
+	<style>
+		@media screen and (max-width: 782px) {
+			#wpadminbar li#wp-admin-bar-log-in,
+			#wpadminbar li#wp-admin-bar-register {
+				display: block;
+			}
+
+			#wpadminbar li#wp-admin-bar-log-in a,
+			#wpadminbar li#wp-admin-bar-register a {
+				padding: 0 8px;
+			}
+		}
+	</style>
+		<style>
+			a.github-edit {
+				margin-left: .5em;
+				font-size: .5em;
+				vertical-align: top;
+				display: inline-block;
+				border: 1px solid #eeeeee;
+				border-radius: 2px;
+				background: #eeeeee;
+				padding: .5em .6em .4em;
+				color: black;
+				margin-top: 0.1em;
+			}
+			a.github-edit > * {
+				opacity: 0.6;
+			}
+			a.github-edit:hover > * {
+				opacity: 1;
+				color: black;
+			}
+			a.github-edit img {
+				height: .8em;
+			}
+		</style>
+		
+	<script type="text/javascript">
+		jQuery( '<style>.hide-if-js { display: none; }</style>' ).appendTo( 'head' );
+		jQuery( function($) {
+			$( 'body' ).addClass('js');
+		} );
+	</script>
+<style type="text/css" media="print">#wpadminbar { display:none; }</style>
+	<style type="text/css" media="screen">
+	</style>
+	<script>document.cookie='devicePixelRatio='+((window.devicePixelRatio === undefined) ? 1 : window.devicePixelRatio)+'; path=/';</script>
+
+</head>
+
+
+<body id="wordpress-org" class="wp-parser-class-template-default single single-wp-parser-class postid-22048 admin-bar no-customize-support">
+		<div id="wpadminbar" class="nojq nojs">
+						<div class="quicklinks" id="wp-toolbar" role="navigation" aria-label="Toolbar">
+				<ul id='wp-admin-bar-root-default' class="ab-top-menu"><li id='wp-admin-bar-wp-logo' class="menupop"><a class='ab-item' aria-haspopup="true" href='https://wordpress.org/about/'><span class="ab-icon" aria-hidden="true"></span><span class="screen-reader-text">About WordPress</span></a><div class="ab-sub-wrapper"><ul id='wp-admin-bar-wp-logo-default' class="ab-submenu"><li id='wp-admin-bar-about'><a class='ab-item' href='https://wordpress.org/about/'>About WordPress</a></li></ul><ul id='wp-admin-bar-wp-logo-external' class="ab-sub-secondary ab-submenu"><li id='wp-admin-bar-wporg'><a class='ab-item' href='https://wordpress.org/'>WordPress.org</a></li><li id='wp-admin-bar-documentation'><a class='ab-item' href='https://wordpress.org/support/'>Documentation</a></li><li id='wp-admin-bar-support-forums'><a class='ab-item' href='https://wordpress.org/support/forums/'>Support</a></li><li id='wp-admin-bar-feedback'><a class='ab-item' href='https://wordpress.org/support/forum/requests-and-feedback'>Feedback</a></li></ul></div></li></ul><ul id='wp-admin-bar-top-secondary' class="ab-top-secondary ab-top-menu"><li id='wp-admin-bar-search' class="admin-bar-search"><div class="ab-item ab-empty-item" tabindex="-1"><form action="https://developer.wordpress.org/" method="get" id="adminbarsearch"><input class="adminbar-input" name="s" id="adminbar-search" type="text" value="" maxlength="150" /><label for="adminbar-search" class="screen-reader-text">Search</label><input type="submit" class="adminbar-button" value="Search" /></form></div></li><li id='wp-admin-bar-log-in'><a class='ab-item' href='https://login.wordpress.org/?locale=en_US'>Log In</a></li><li id='wp-admin-bar-register'><a class='ab-item' href='https://login.wordpress.org/register?locale=en_US'>Register</a></li></ul>			</div>
+					</div>
+
+		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P24PF4B" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<div id="wporg-header">
+	<div class="wrapper">
+	<h1><a href="http://wordpress.org/">WordPress.org</a></h1>				<div id="head-search">
+		<form action="http://wordpress.org/search/do-search.php" method="get">
+			<label for="global-search" class="screen-reader-text">Search WordPress.org for:</label>
+			<input id="global-search" class="text" name="search" type="text" value="" maxlength="150" placeholder="Search WordPress.org" />
+			<button type="submit" class="button"><span class="screen-reader-text">Submit</span></button>
+		</form>
+		</div>
+				<div style="clear:both"></div>
+		<button id="mobile-menu-button" aria-expanded="false"><span class="screen-reader-text">Toggle Menu</span></button>
+		
+<nav aria-label="Main Menu">
+<ul id="wporg-header-menu">
+<li class="menu-item"><a href='http://wordpress.org/showcase/' data-title='See some of the sites built on WordPress.'>Showcase</a></li>
+<li class="menu-item"><a href='http://learn.wordpress.org/' data-title='Resources to help you learn more about WordPress and teach it to others.'>Learn</a></li>
+<li class="menu-item"><a href='http://wordpress.org/themes/' data-title='Find just the right look for your website.'>Themes</a></li>
+<li class="menu-item"><a href='http://wordpress.org/plugins/' data-title='Plugins can extend WordPress to do almost anything you can imagine.'>Plugins</a></li>
+<li class="menu-item"><a href='http://wordpress.org/mobile/' data-title='Take your website on the go!'>Mobile</a></li>
+<li class="menu-item"><a href='http://wordpress.org/support/' data-title='Forums, documentation, help.'>Support</a><ul class="nav-submenu"><li><a href='http://wordpress.org/support/' title='Documentation, tutorials, best practices.'>Documentation</a></li><li><a href='http://wordpress.org/support/forums/' title='Support and discussion forums.'>Forums</a></li></ul><div class="uparrow"></div></li>
+<li class="menu-item"><a href='http://make.wordpress.org/' data-title='Contribute your knowledge.'>Get Involved</a><ul class="nav-submenu"><li><a href='http://wordpress.org/five-for-the-future/' title='How five percent is powering the next generation of the web'>Five for the Future</a></li></ul><div class="uparrow"></div></li>
+<li class="menu-item"><a href='http://wordpress.org/about/' data-title='About the WordPress Organization, and where we&#039;re going.'>About</a></li>
+<li class="menu-item"><a href='http://wordpress.org/news/' data-title='Come here for the latest scoop.'>Blog</a></li>
+<li class="menu-item"><a href='http://wordpress.org/hosting/' data-title='Find a home for your blog.'>Hosting</a></li>
+<li id="download" class="button download-button menu-item"><a href='http://wordpress.org/download/' data-title='Get it. Got it? Good.'>Get WordPress</a></li>
+</ul>
+</nav>
+		<div style="clear:both"></div>
+	</div>
+</div>
+
+
+
+<header id="masthead" class="site-header" role="banner">
+		<div class="site-branding">
+		<h1 class="site-title">
+			<a href="../../index.html" rel="home">Code Reference</a>
+		</h1>
+
+		
+		<nav id="site-navigation" class="main-navigation" role="navigation">
+			<button class="menu-toggle dashicons dashicons-arrow-down-alt2" aria-controls="primary-menu" aria-expanded="false" aria-label="Primary Menu"></button>
+					</nav>
+	</div>
+</header><!-- #masthead -->
+
+<div id="page" class="hfeed site devhub-wrap">
+	<a href="#main" class="screen-reader-text">Skip to content</a>
+
+				<div id="inner-search">
+			<div class="search-section section clear hide-if-js">
+
+
+	
+	<form role="search" method="get" class="searchform searchform-filtered" action="https://developer.wordpress.org/">
+		<label for="search-field" class="screen-reader-text">Search for:</label>
+		<input type="text" id="search-field" class="search-field" placeholder="Search &hellip;" value="" name="s">
+		<button class="button button-primary button-search"><i class="dashicons dashicons-search"></i><span class="screen-reader-text">Search plugins</span></button>
+	
+		<div class="search-post-type">
+			<span>Filter by type:</span>
+									<label><input type="checkbox" name="post_type[]" value="wp-parser-function"
+						 /> Functions</label>
+									<label><input type="checkbox" name="post_type[]" value="wp-parser-hook"
+						 /> Hooks</label>
+									<label><input type="checkbox" name="post_type[]" value="wp-parser-class"
+						 /> Classes</label>
+									<label><input type="checkbox" name="post_type[]" value="wp-parser-method"
+						 /> Methods</label>
+					</div>
+
+	
+	</form>
+
+</div><!-- /search-guide -->
+			<div id="inner-search-icon-container">
+				<div id="inner-search-icon">
+					<div class="dashicons dashicons-search"><span class="screen-reader-text">Search</span></div>
+				</div>
+			</div>
+		</div>
+
+		<div id="content" class="site-content">
+
+	<div id="content-area" class="wp-parser-class-template-default single single-wp-parser-class postid-22048 admin-bar no-customize-support code-reference">
+
+		
+		<div class="breadcrumb-trail breadcrumbs" itemprop="breadcrumb">
+			<span class="trail-browse">Browse:</span> 
+			<span class="trail-begin"><a href="../../../index.html" title="WordPress Developer Resources" rel="home">Home</a></span> <span class="sep">&#47;</span> 
+			<span class="trail-inner"><a href="../../index.html" title="Reference">Reference</a></span> <span class="sep">&#47;</span> 
+			<span class="trail-inner"><a href="../index.html">Classes</a></span> <span class="sep">&#47;</span> <span class="trail-end">Requests_IRI</span>
+		</div>
+		<main id="main" class="site-main" role="main">
+
+		
+			
+<article id="post-22048" class="post-22048 wp-parser-class type-wp-parser-class status-publish hentry wp-parser-source-file-wp-includes_requests_iri-php wp-parser-package-requests wp-parser-package-utilities">
+
+	
+	
+	<h1>Requests_IRI</h1>
+
+	<section class="summary">
+		<p>IRI parser/serialiser/normaliser</p>
+	</section>
+
+
+	
+	<div class="content-toc"><style> .toc-jump { text-align: right; font-size: 12px; } .page .toc-heading { margin-top: -50px; padding-top: 50px !important; }</style><div class="table-of-contents"><h2>Contents</h2><ul class="items"><li><a href="#description">Description</a></li>
+<li><a href="#source">Source</a></li>
+<li><a href="#methods">Methods</a></li>
+<li><a href="#user-contributed-notes">User Contributed Notes</a></ul>
+</div>
+
+<hr />
+<section class="description">
+	<h2 class="toc-heading" id="description" tabindex="-1">Description <a href="#description" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Description</span></a></h2>
+	<p>Copyright (c) 2007-2010, Geoffrey Sneddon and Steve Minutillo. All rights reserved.</p>
+<p>Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:</p>
+<ul>
+<li>
+<p>Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.</p>
+</li>
+<li>
+<p>Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.</p>
+</li>
+<li>
+<p>Neither the name of the SimplePie Team nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.</p>
+</li>
+</ul>
+<p>THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot; AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDERS AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
+
+	</section>
+
+	<hr />
+	<section class="source-content">
+		<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="source" tabindex="-1">Source <a href="#source" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Source</span></a></h2>
+		<p>
+			File: <a href="../../files/wp-includes/requests/iri.php/index.html">wp-includes/Requests/IRI.php</a>		</p>
+
+					<div class="source-code-container">
+				<pre class="brush: php; toolbar: false; first-line: 66">class Requests_IRI {
+	/**
+	 * Scheme
+	 *
+	 * @var string|null
+	 */
+	protected $scheme = null;
+
+	/**
+	 * User Information
+	 *
+	 * @var string|null
+	 */
+	protected $iuserinfo = null;
+
+	/**
+	 * ihost
+	 *
+	 * @var string|null
+	 */
+	protected $ihost = null;
+
+	/**
+	 * Port
+	 *
+	 * @var string|null
+	 */
+	protected $port = null;
+
+	/**
+	 * ipath
+	 *
+	 * @var string
+	 */
+	protected $ipath = '';
+
+	/**
+	 * iquery
+	 *
+	 * @var string|null
+	 */
+	protected $iquery = null;
+
+	/**
+	 * ifragment|null
+	 *
+	 * @var string
+	 */
+	protected $ifragment = null;
+
+	/**
+	 * Normalization database
+	 *
+	 * Each key is the scheme, each value is an array with each key as the IRI
+	 * part and value as the default value for that part.
+	 *
+	 * @var array
+	 */
+	protected $normalization = array(
+		'acap' =&gt; array(
+			'port' =&gt; 674
+		),
+		'dict' =&gt; array(
+			'port' =&gt; 2628
+		),
+		'file' =&gt; array(
+			'ihost' =&gt; 'localhost'
+		),
+		'http' =&gt; array(
+			'port' =&gt; 80,
+		),
+		'https' =&gt; array(
+			'port' =&gt; 443,
+		),
+	);
+
+	/**
+	 * Return the entire IRI when you try and read the object as a string
+	 *
+	 * @return string
+	 */
+	public function __toString() {
+		return $this-&gt;get_iri();
+	}
+
+	/**
+	 * Overload __set() to provide access via properties
+	 *
+	 * @param string $name Property name
+	 * @param mixed $value Property value
+	 */
+	public function __set($name, $value) {
+		if (method_exists($this, 'set_' . $name)) {
+			call_user_func(array($this, 'set_' . $name), $value);
+		}
+		elseif (
+			   $name === 'iauthority'
+			|| $name === 'iuserinfo'
+			|| $name === 'ihost'
+			|| $name === 'ipath'
+			|| $name === 'iquery'
+			|| $name === 'ifragment'
+		) {
+			call_user_func(array($this, 'set_' . substr($name, 1)), $value);
+		}
+	}
+
+	/**
+	 * Overload __get() to provide access via properties
+	 *
+	 * @param string $name Property name
+	 * @return mixed
+	 */
+	public function __get($name) {
+		// isset() returns false for null, we don't want to do that
+		// Also why we use array_key_exists below instead of isset()
+		$props = get_object_vars($this);
+
+		if (
+			$name === 'iri' ||
+			$name === 'uri' ||
+			$name === 'iauthority' ||
+			$name === 'authority'
+		) {
+			$method = 'get_' . $name;
+			$return = $this-&gt;$method();
+		}
+		elseif (array_key_exists($name, $props)) {
+			$return = $this-&gt;$name;
+		}
+		// host -&gt; ihost
+		elseif (($prop = 'i' . $name) &amp;&amp; array_key_exists($prop, $props)) {
+			$name = $prop;
+			$return = $this-&gt;$prop;
+		}
+		// ischeme -&gt; scheme
+		elseif (($prop = substr($name, 1)) &amp;&amp; array_key_exists($prop, $props)) {
+			$name = $prop;
+			$return = $this-&gt;$prop;
+		}
+		else {
+			trigger_error('Undefined property: ' . get_class($this) . '::' . $name, E_USER_NOTICE);
+			$return = null;
+		}
+
+		if ($return === null &amp;&amp; isset($this-&gt;normalization[$this-&gt;scheme][$name])) {
+			return $this-&gt;normalization[$this-&gt;scheme][$name];
+		}
+		else {
+			return $return;
+		}
+	}
+
+	/**
+	 * Overload __isset() to provide access via properties
+	 *
+	 * @param string $name Property name
+	 * @return bool
+	 */
+	public function __isset($name) {
+		return (method_exists($this, 'get_' . $name) || isset($this-&gt;$name));
+	}
+
+	/**
+	 * Overload __unset() to provide access via properties
+	 *
+	 * @param string $name Property name
+	 */
+	public function __unset($name) {
+		if (method_exists($this, 'set_' . $name)) {
+			call_user_func(array($this, 'set_' . $name), '');
+		}
+	}
+
+	/**
+	 * Create a new IRI object, from a specified string
+	 *
+	 * @param string|null $iri
+	 */
+	public function __construct($iri = null) {
+		$this-&gt;set_iri($iri);
+	}
+
+	/**
+	 * Create a new IRI object by resolving a relative IRI
+	 *
+	 * Returns false if $base is not absolute, otherwise an IRI.
+	 *
+	 * @param Requests_IRI|string $base (Absolute) Base IRI
+	 * @param Requests_IRI|string $relative Relative IRI
+	 * @return Requests_IRI|false
+	 */
+	public static function absolutize($base, $relative) {
+		if (!($relative instanceof Requests_IRI)) {
+			$relative = new Requests_IRI($relative);
+		}
+		if (!$relative-&gt;is_valid()) {
+			return false;
+		}
+		elseif ($relative-&gt;scheme !== null) {
+			return clone $relative;
+		}
+
+		if (!($base instanceof Requests_IRI)) {
+			$base = new Requests_IRI($base);
+		}
+		if ($base-&gt;scheme === null || !$base-&gt;is_valid()) {
+			return false;
+		}
+
+		if ($relative-&gt;get_iri() !== '') {
+			if ($relative-&gt;iuserinfo !== null || $relative-&gt;ihost !== null || $relative-&gt;port !== null) {
+				$target = clone $relative;
+				$target-&gt;scheme = $base-&gt;scheme;
+			}
+			else {
+				$target = new Requests_IRI;
+				$target-&gt;scheme = $base-&gt;scheme;
+				$target-&gt;iuserinfo = $base-&gt;iuserinfo;
+				$target-&gt;ihost = $base-&gt;ihost;
+				$target-&gt;port = $base-&gt;port;
+				if ($relative-&gt;ipath !== '') {
+					if ($relative-&gt;ipath[0] === '/') {
+						$target-&gt;ipath = $relative-&gt;ipath;
+					}
+					elseif (($base-&gt;iuserinfo !== null || $base-&gt;ihost !== null || $base-&gt;port !== null) &amp;&amp; $base-&gt;ipath === '') {
+						$target-&gt;ipath = '/' . $relative-&gt;ipath;
+					}
+					elseif (($last_segment = strrpos($base-&gt;ipath, '/')) !== false) {
+						$target-&gt;ipath = substr($base-&gt;ipath, 0, $last_segment + 1) . $relative-&gt;ipath;
+					}
+					else {
+						$target-&gt;ipath = $relative-&gt;ipath;
+					}
+					$target-&gt;ipath = $target-&gt;remove_dot_segments($target-&gt;ipath);
+					$target-&gt;iquery = $relative-&gt;iquery;
+				}
+				else {
+					$target-&gt;ipath = $base-&gt;ipath;
+					if ($relative-&gt;iquery !== null) {
+						$target-&gt;iquery = $relative-&gt;iquery;
+					}
+					elseif ($base-&gt;iquery !== null) {
+						$target-&gt;iquery = $base-&gt;iquery;
+					}
+				}
+				$target-&gt;ifragment = $relative-&gt;ifragment;
+			}
+		}
+		else {
+			$target = clone $base;
+			$target-&gt;ifragment = null;
+		}
+		$target-&gt;scheme_normalization();
+		return $target;
+	}
+
+	/**
+	 * Parse an IRI into scheme/authority/path/query/fragment segments
+	 *
+	 * @param string $iri
+	 * @return array
+	 */
+	protected function parse_iri($iri) {
+		$iri = trim($iri, &quot;\x20\x09\x0A\x0C\x0D&quot;);
+		$has_match = preg_match('/^((?P&lt;scheme&gt;[^:\/?#]+):)?(\/\/(?P&lt;authority&gt;[^\/?#]*))?(?P&lt;path&gt;[^?#]*)(\?(?P&lt;query&gt;[^#]*))?(#(?P&lt;fragment&gt;.*))?$/', $iri, $match);
+		if (!$has_match) {
+			throw new Requests_Exception('Cannot parse supplied IRI', 'iri.cannot_parse', $iri);
+		}
+
+		if ($match[1] === '') {
+			$match['scheme'] = null;
+		}
+		if (!isset($match[3]) || $match[3] === '') {
+			$match['authority'] = null;
+		}
+		if (!isset($match[5])) {
+			$match['path'] = '';
+		}
+		if (!isset($match[6]) || $match[6] === '') {
+			$match['query'] = null;
+		}
+		if (!isset($match[8]) || $match[8] === '') {
+			$match['fragment'] = null;
+		}
+		return $match;
+	}
+
+	/**
+	 * Remove dot segments from a path
+	 *
+	 * @param string $input
+	 * @return string
+	 */
+	protected function remove_dot_segments($input) {
+		$output = '';
+		while (strpos($input, './') !== false || strpos($input, '/.') !== false || $input === '.' || $input === '..') {
+			// A: If the input buffer begins with a prefix of &quot;../&quot; or &quot;./&quot;,
+			// then remove that prefix from the input buffer; otherwise,
+			if (strpos($input, '../') === 0) {
+				$input = substr($input, 3);
+			}
+			elseif (strpos($input, './') === 0) {
+				$input = substr($input, 2);
+			}
+			// B: if the input buffer begins with a prefix of &quot;/./&quot; or &quot;/.&quot;,
+			// where &quot;.&quot; is a complete path segment, then replace that prefix
+			// with &quot;/&quot; in the input buffer; otherwise,
+			elseif (strpos($input, '/./') === 0) {
+				$input = substr($input, 2);
+			}
+			elseif ($input === '/.') {
+				$input = '/';
+			}
+			// C: if the input buffer begins with a prefix of &quot;/../&quot; or &quot;/..&quot;,
+			// where &quot;..&quot; is a complete path segment, then replace that prefix
+			// with &quot;/&quot; in the input buffer and remove the last segment and its
+			// preceding &quot;/&quot; (if any) from the output buffer; otherwise,
+			elseif (strpos($input, '/../') === 0) {
+				$input = substr($input, 3);
+				$output = substr_replace($output, '', strrpos($output, '/'));
+			}
+			elseif ($input === '/..') {
+				$input = '/';
+				$output = substr_replace($output, '', strrpos($output, '/'));
+			}
+			// D: if the input buffer consists only of &quot;.&quot; or &quot;..&quot;, then remove
+			// that from the input buffer; otherwise,
+			elseif ($input === '.' || $input === '..') {
+				$input = '';
+			}
+			// E: move the first path segment in the input buffer to the end of
+			// the output buffer, including the initial &quot;/&quot; character (if any)
+			// and any subsequent characters up to, but not including, the next
+			// &quot;/&quot; character or the end of the input buffer
+			elseif (($pos = strpos($input, '/', 1)) !== false) {
+				$output .= substr($input, 0, $pos);
+				$input = substr_replace($input, '', 0, $pos);
+			}
+			else {
+				$output .= $input;
+				$input = '';
+			}
+		}
+		return $output . $input;
+	}
+
+	/**
+	 * Replace invalid character with percent encoding
+	 *
+	 * @param string $string Input string
+	 * @param string $extra_chars Valid characters not in iunreserved or
+	 *                            iprivate (this is ASCII-only)
+	 * @param bool $iprivate Allow iprivate
+	 * @return string
+	 */
+	protected function replace_invalid_with_pct_encoding($string, $extra_chars, $iprivate = false) {
+		// Normalize as many pct-encoded sections as possible
+		$string = preg_replace_callback('/(?:%[A-Fa-f0-9]{2})+/', array($this, 'remove_iunreserved_percent_encoded'), $string);
+
+		// Replace invalid percent characters
+		$string = preg_replace('/%(?![A-Fa-f0-9]{2})/', '%25', $string);
+
+		// Add unreserved and % to $extra_chars (the latter is safe because all
+		// pct-encoded sections are now valid).
+		$extra_chars .= 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~%';
+
+		// Now replace any bytes that aren't allowed with their pct-encoded versions
+		$position = 0;
+		$strlen = strlen($string);
+		while (($position += strspn($string, $extra_chars, $position)) &lt; $strlen) {
+			$value = ord($string[$position]);
+
+			// Start position
+			$start = $position;
+
+			// By default we are valid
+			$valid = true;
+
+			// No one byte sequences are valid due to the while.
+			// Two byte sequence:
+			if (($value &amp; 0xE0) === 0xC0) {
+				$character = ($value &amp; 0x1F) &lt;&lt; 6;
+				$length = 2;
+				$remaining = 1;
+			}
+			// Three byte sequence:
+			elseif (($value &amp; 0xF0) === 0xE0) {
+				$character = ($value &amp; 0x0F) &lt;&lt; 12;
+				$length = 3;
+				$remaining = 2;
+			}
+			// Four byte sequence:
+			elseif (($value &amp; 0xF8) === 0xF0) {
+				$character = ($value &amp; 0x07) &lt;&lt; 18;
+				$length = 4;
+				$remaining = 3;
+			}
+			// Invalid byte:
+			else {
+				$valid = false;
+				$length = 1;
+				$remaining = 0;
+			}
+
+			if ($remaining) {
+				if ($position + $length &lt;= $strlen) {
+					for ($position++; $remaining; $position++) {
+						$value = ord($string[$position]);
+
+						// Check that the byte is valid, then add it to the character:
+						if (($value &amp; 0xC0) === 0x80) {
+							$character |= ($value &amp; 0x3F) &lt;&lt; (--$remaining * 6);
+						}
+						// If it is invalid, count the sequence as invalid and reprocess the current byte:
+						else {
+							$valid = false;
+							$position--;
+							break;
+						}
+					}
+				}
+				else {
+					$position = $strlen - 1;
+					$valid = false;
+				}
+			}
+
+			// Percent encode anything invalid or not in ucschar
+			if (
+				// Invalid sequences
+				!$valid
+				// Non-shortest form sequences are invalid
+				|| $length &gt; 1 &amp;&amp; $character &lt;= 0x7F
+				|| $length &gt; 2 &amp;&amp; $character &lt;= 0x7FF
+				|| $length &gt; 3 &amp;&amp; $character &lt;= 0xFFFF
+				// Outside of range of ucschar codepoints
+				// Noncharacters
+				|| ($character &amp; 0xFFFE) === 0xFFFE
+				|| $character &gt;= 0xFDD0 &amp;&amp; $character &lt;= 0xFDEF
+				|| (
+					// Everything else not in ucschar
+					   $character &gt; 0xD7FF &amp;&amp; $character &lt; 0xF900
+					|| $character &lt; 0xA0
+					|| $character &gt; 0xEFFFD
+				)
+				&amp;&amp; (
+					// Everything not in iprivate, if it applies
+					   !$iprivate
+					|| $character &lt; 0xE000
+					|| $character &gt; 0x10FFFD
+				)
+			) {
+				// If we were a character, pretend we weren't, but rather an error.
+				if ($valid) {
+					$position--;
+				}
+
+				for ($j = $start; $j &lt;= $position; $j++) {
+					$string = substr_replace($string, sprintf('%%%02X', ord($string[$j])), $j, 1);
+					$j += 2;
+					$position += 2;
+					$strlen += 2;
+				}
+			}
+		}
+
+		return $string;
+	}
+
+	/**
+	 * Callback function for preg_replace_callback.
+	 *
+	 * Removes sequences of percent encoded bytes that represent UTF-8
+	 * encoded characters in iunreserved
+	 *
+	 * @param array $match PCRE match
+	 * @return string Replacement
+	 */
+	protected function remove_iunreserved_percent_encoded($match) {
+		// As we just have valid percent encoded sequences we can just explode
+		// and ignore the first member of the returned array (an empty string).
+		$bytes = explode('%', $match[0]);
+
+		// Initialize the new string (this is what will be returned) and that
+		// there are no bytes remaining in the current sequence (unsurprising
+		// at the first byte!).
+		$string = '';
+		$remaining = 0;
+
+		// Loop over each and every byte, and set $value to its value
+		for ($i = 1, $len = count($bytes); $i &lt; $len; $i++) {
+			$value = hexdec($bytes[$i]);
+
+			// If we're the first byte of sequence:
+			if (!$remaining) {
+				// Start position
+				$start = $i;
+
+				// By default we are valid
+				$valid = true;
+
+				// One byte sequence:
+				if ($value &lt;= 0x7F) {
+					$character = $value;
+					$length = 1;
+				}
+				// Two byte sequence:
+				elseif (($value &amp; 0xE0) === 0xC0) {
+					$character = ($value &amp; 0x1F) &lt;&lt; 6;
+					$length = 2;
+					$remaining = 1;
+				}
+				// Three byte sequence:
+				elseif (($value &amp; 0xF0) === 0xE0) {
+					$character = ($value &amp; 0x0F) &lt;&lt; 12;
+					$length = 3;
+					$remaining = 2;
+				}
+				// Four byte sequence:
+				elseif (($value &amp; 0xF8) === 0xF0) {
+					$character = ($value &amp; 0x07) &lt;&lt; 18;
+					$length = 4;
+					$remaining = 3;
+				}
+				// Invalid byte:
+				else {
+					$valid = false;
+					$remaining = 0;
+				}
+			}
+			// Continuation byte:
+			else {
+				// Check that the byte is valid, then add it to the character:
+				if (($value &amp; 0xC0) === 0x80) {
+					$remaining--;
+					$character |= ($value &amp; 0x3F) &lt;&lt; ($remaining * 6);
+				}
+				// If it is invalid, count the sequence as invalid and reprocess the current byte as the start of a sequence:
+				else {
+					$valid = false;
+					$remaining = 0;
+					$i--;
+				}
+			}
+
+			// If we've reached the end of the current byte sequence, append it to Unicode::$data
+			if (!$remaining) {
+				// Percent encode anything invalid or not in iunreserved
+				if (
+					// Invalid sequences
+					!$valid
+					// Non-shortest form sequences are invalid
+					|| $length &gt; 1 &amp;&amp; $character &lt;= 0x7F
+					|| $length &gt; 2 &amp;&amp; $character &lt;= 0x7FF
+					|| $length &gt; 3 &amp;&amp; $character &lt;= 0xFFFF
+					// Outside of range of iunreserved codepoints
+					|| $character &lt; 0x2D
+					|| $character &gt; 0xEFFFD
+					// Noncharacters
+					|| ($character &amp; 0xFFFE) === 0xFFFE
+					|| $character &gt;= 0xFDD0 &amp;&amp; $character &lt;= 0xFDEF
+					// Everything else not in iunreserved (this is all BMP)
+					|| $character === 0x2F
+					|| $character &gt; 0x39 &amp;&amp; $character &lt; 0x41
+					|| $character &gt; 0x5A &amp;&amp; $character &lt; 0x61
+					|| $character &gt; 0x7A &amp;&amp; $character &lt; 0x7E
+					|| $character &gt; 0x7E &amp;&amp; $character &lt; 0xA0
+					|| $character &gt; 0xD7FF &amp;&amp; $character &lt; 0xF900
+				) {
+					for ($j = $start; $j &lt;= $i; $j++) {
+						$string .= '%' . strtoupper($bytes[$j]);
+					}
+				}
+				else {
+					for ($j = $start; $j &lt;= $i; $j++) {
+						$string .= chr(hexdec($bytes[$j]));
+					}
+				}
+			}
+		}
+
+		// If we have any bytes left over they are invalid (i.e., we are
+		// mid-way through a multi-byte sequence)
+		if ($remaining) {
+			for ($j = $start; $j &lt; $len; $j++) {
+				$string .= '%' . strtoupper($bytes[$j]);
+			}
+		}
+
+		return $string;
+	}
+
+	protected function scheme_normalization() {
+		if (isset($this-&gt;normalization[$this-&gt;scheme]['iuserinfo']) &amp;&amp; $this-&gt;iuserinfo === $this-&gt;normalization[$this-&gt;scheme]['iuserinfo']) {
+			$this-&gt;iuserinfo = null;
+		}
+		if (isset($this-&gt;normalization[$this-&gt;scheme]['ihost']) &amp;&amp; $this-&gt;ihost === $this-&gt;normalization[$this-&gt;scheme]['ihost']) {
+			$this-&gt;ihost = null;
+		}
+		if (isset($this-&gt;normalization[$this-&gt;scheme]['port']) &amp;&amp; $this-&gt;port === $this-&gt;normalization[$this-&gt;scheme]['port']) {
+			$this-&gt;port = null;
+		}
+		if (isset($this-&gt;normalization[$this-&gt;scheme]['ipath']) &amp;&amp; $this-&gt;ipath === $this-&gt;normalization[$this-&gt;scheme]['ipath']) {
+			$this-&gt;ipath = '';
+		}
+		if (isset($this-&gt;ihost) &amp;&amp; empty($this-&gt;ipath)) {
+			$this-&gt;ipath = '/';
+		}
+		if (isset($this-&gt;normalization[$this-&gt;scheme]['iquery']) &amp;&amp; $this-&gt;iquery === $this-&gt;normalization[$this-&gt;scheme]['iquery']) {
+			$this-&gt;iquery = null;
+		}
+		if (isset($this-&gt;normalization[$this-&gt;scheme]['ifragment']) &amp;&amp; $this-&gt;ifragment === $this-&gt;normalization[$this-&gt;scheme]['ifragment']) {
+			$this-&gt;ifragment = null;
+		}
+	}
+
+	/**
+	 * Check if the object represents a valid IRI. This needs to be done on each
+	 * call as some things change depending on another part of the IRI.
+	 *
+	 * @return bool
+	 */
+	public function is_valid() {
+		$isauthority = $this-&gt;iuserinfo !== null || $this-&gt;ihost !== null || $this-&gt;port !== null;
+		if ($this-&gt;ipath !== '' &amp;&amp;
+			(
+				$isauthority &amp;&amp; $this-&gt;ipath[0] !== '/' ||
+				(
+					$this-&gt;scheme === null &amp;&amp;
+					!$isauthority &amp;&amp;
+					strpos($this-&gt;ipath, ':') !== false &amp;&amp;
+					(strpos($this-&gt;ipath, '/') === false ? true : strpos($this-&gt;ipath, ':') &lt; strpos($this-&gt;ipath, '/'))
+				)
+			)
+		) {
+			return false;
+		}
+
+		return true;
+	}
+
+	/**
+	 * Set the entire IRI. Returns true on success, false on failure (if there
+	 * are any invalid characters).
+	 *
+	 * @param string $iri
+	 * @return bool
+	 */
+	protected function set_iri($iri) {
+		static $cache;
+		if (!$cache) {
+			$cache = array();
+		}
+
+		if ($iri === null) {
+			return true;
+		}
+		if (isset($cache[$iri])) {
+			list($this-&gt;scheme,
+				 $this-&gt;iuserinfo,
+				 $this-&gt;ihost,
+				 $this-&gt;port,
+				 $this-&gt;ipath,
+				 $this-&gt;iquery,
+				 $this-&gt;ifragment,
+				 $return) = $cache[$iri];
+			return $return;
+		}
+
+		$parsed = $this-&gt;parse_iri((string) $iri);
+
+		$return = $this-&gt;set_scheme($parsed['scheme'])
+			&amp;&amp; $this-&gt;set_authority($parsed['authority'])
+			&amp;&amp; $this-&gt;set_path($parsed['path'])
+			&amp;&amp; $this-&gt;set_query($parsed['query'])
+			&amp;&amp; $this-&gt;set_fragment($parsed['fragment']);
+
+		$cache[$iri] = array($this-&gt;scheme,
+							 $this-&gt;iuserinfo,
+							 $this-&gt;ihost,
+							 $this-&gt;port,
+							 $this-&gt;ipath,
+							 $this-&gt;iquery,
+							 $this-&gt;ifragment,
+							 $return);
+		return $return;
+	}
+
+	/**
+	 * Set the scheme. Returns true on success, false on failure (if there are
+	 * any invalid characters).
+	 *
+	 * @param string $scheme
+	 * @return bool
+	 */
+	protected function set_scheme($scheme) {
+		if ($scheme === null) {
+			$this-&gt;scheme = null;
+		}
+		elseif (!preg_match('/^[A-Za-z][0-9A-Za-z+\-.]*$/', $scheme)) {
+			$this-&gt;scheme = null;
+			return false;
+		}
+		else {
+			$this-&gt;scheme = strtolower($scheme);
+		}
+		return true;
+	}
+
+	/**
+	 * Set the authority. Returns true on success, false on failure (if there are
+	 * any invalid characters).
+	 *
+	 * @param string $authority
+	 * @return bool
+	 */
+	protected function set_authority($authority) {
+		static $cache;
+		if (!$cache) {
+			$cache = array();
+		}
+
+		if ($authority === null) {
+			$this-&gt;iuserinfo = null;
+			$this-&gt;ihost = null;
+			$this-&gt;port = null;
+			return true;
+		}
+		if (isset($cache[$authority])) {
+			list($this-&gt;iuserinfo,
+				 $this-&gt;ihost,
+				 $this-&gt;port,
+				 $return) = $cache[$authority];
+
+			return $return;
+		}
+
+		$remaining = $authority;
+		if (($iuserinfo_end = strrpos($remaining, '@')) !== false) {
+			$iuserinfo = substr($remaining, 0, $iuserinfo_end);
+			$remaining = substr($remaining, $iuserinfo_end + 1);
+		}
+		else {
+			$iuserinfo = null;
+		}
+		if (($port_start = strpos($remaining, ':', strpos($remaining, ']'))) !== false) {
+			$port = substr($remaining, $port_start + 1);
+			if ($port === false || $port === '') {
+				$port = null;
+			}
+			$remaining = substr($remaining, 0, $port_start);
+		}
+		else {
+			$port = null;
+		}
+
+		$return = $this-&gt;set_userinfo($iuserinfo) &amp;&amp;
+				  $this-&gt;set_host($remaining) &amp;&amp;
+				  $this-&gt;set_port($port);
+
+		$cache[$authority] = array($this-&gt;iuserinfo,
+								   $this-&gt;ihost,
+								   $this-&gt;port,
+								   $return);
+
+		return $return;
+	}
+
+	/**
+	 * Set the iuserinfo.
+	 *
+	 * @param string $iuserinfo
+	 * @return bool
+	 */
+	protected function set_userinfo($iuserinfo) {
+		if ($iuserinfo === null) {
+			$this-&gt;iuserinfo = null;
+		}
+		else {
+			$this-&gt;iuserinfo = $this-&gt;replace_invalid_with_pct_encoding($iuserinfo, '!$&amp;\'()*+,;=:');
+			$this-&gt;scheme_normalization();
+		}
+
+		return true;
+	}
+
+	/**
+	 * Set the ihost. Returns true on success, false on failure (if there are
+	 * any invalid characters).
+	 *
+	 * @param string $ihost
+	 * @return bool
+	 */
+	protected function set_host($ihost) {
+		if ($ihost === null) {
+			$this-&gt;ihost = null;
+			return true;
+		}
+		if (substr($ihost, 0, 1) === '[' &amp;&amp; substr($ihost, -1) === ']') {
+			if (Requests_IPv6::check_ipv6(substr($ihost, 1, -1))) {
+				$this-&gt;ihost = '[' . Requests_IPv6::compress(substr($ihost, 1, -1)) . ']';
+			}
+			else {
+				$this-&gt;ihost = null;
+				return false;
+			}
+		}
+		else {
+			$ihost = $this-&gt;replace_invalid_with_pct_encoding($ihost, '!$&amp;\'()*+,;=');
+
+			// Lowercase, but ignore pct-encoded sections (as they should
+			// remain uppercase). This must be done after the previous step
+			// as that can add unescaped characters.
+			$position = 0;
+			$strlen = strlen($ihost);
+			while (($position += strcspn($ihost, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ%', $position)) &lt; $strlen) {
+				if ($ihost[$position] === '%') {
+					$position += 3;
+				}
+				else {
+					$ihost[$position] = strtolower($ihost[$position]);
+					$position++;
+				}
+			}
+
+			$this-&gt;ihost = $ihost;
+		}
+
+		$this-&gt;scheme_normalization();
+
+		return true;
+	}
+
+	/**
+	 * Set the port. Returns true on success, false on failure (if there are
+	 * any invalid characters).
+	 *
+	 * @param string $port
+	 * @return bool
+	 */
+	protected function set_port($port) {
+		if ($port === null) {
+			$this-&gt;port = null;
+			return true;
+		}
+
+		if (strspn($port, '0123456789') === strlen($port)) {
+			$this-&gt;port = (int) $port;
+			$this-&gt;scheme_normalization();
+			return true;
+		}
+
+		$this-&gt;port = null;
+		return false;
+	}
+
+	/**
+	 * Set the ipath.
+	 *
+	 * @param string $ipath
+	 * @return bool
+	 */
+	protected function set_path($ipath) {
+		static $cache;
+		if (!$cache) {
+			$cache = array();
+		}
+
+		$ipath = (string) $ipath;
+
+		if (isset($cache[$ipath])) {
+			$this-&gt;ipath = $cache[$ipath][(int) ($this-&gt;scheme !== null)];
+		}
+		else {
+			$valid = $this-&gt;replace_invalid_with_pct_encoding($ipath, '!$&amp;\'()*+,;=@:/');
+			$removed = $this-&gt;remove_dot_segments($valid);
+
+			$cache[$ipath] = array($valid, $removed);
+			$this-&gt;ipath = ($this-&gt;scheme !== null) ? $removed : $valid;
+		}
+		$this-&gt;scheme_normalization();
+		return true;
+	}
+
+	/**
+	 * Set the iquery.
+	 *
+	 * @param string $iquery
+	 * @return bool
+	 */
+	protected function set_query($iquery) {
+		if ($iquery === null) {
+			$this-&gt;iquery = null;
+		}
+		else {
+			$this-&gt;iquery = $this-&gt;replace_invalid_with_pct_encoding($iquery, '!$&amp;\'()*+,;=:@/?', true);
+			$this-&gt;scheme_normalization();
+		}
+		return true;
+	}
+
+	/**
+	 * Set the ifragment.
+	 *
+	 * @param string $ifragment
+	 * @return bool
+	 */
+	protected function set_fragment($ifragment) {
+		if ($ifragment === null) {
+			$this-&gt;ifragment = null;
+		}
+		else {
+			$this-&gt;ifragment = $this-&gt;replace_invalid_with_pct_encoding($ifragment, '!$&amp;\'()*+,;=:@/?');
+			$this-&gt;scheme_normalization();
+		}
+		return true;
+	}
+
+	/**
+	 * Convert an IRI to a URI (or parts thereof)
+	 *
+	 * @param string|bool IRI to convert (or false from {@see get_iri})
+	 * @return string|false URI if IRI is valid, false otherwise.
+	 */
+	protected function to_uri($string) {
+		if (!is_string($string)) {
+			return false;
+		}
+
+		static $non_ascii;
+		if (!$non_ascii) {
+			$non_ascii = implode('', range(&quot;\x80&quot;, &quot;\xFF&quot;));
+		}
+
+		$position = 0;
+		$strlen = strlen($string);
+		while (($position += strcspn($string, $non_ascii, $position)) &lt; $strlen) {
+			$string = substr_replace($string, sprintf('%%%02X', ord($string[$position])), $position, 1);
+			$position += 3;
+			$strlen += 2;
+		}
+
+		return $string;
+	}
+
+	/**
+	 * Get the complete IRI
+	 *
+	 * @return string|false
+	 */
+	protected function get_iri() {
+		if (!$this-&gt;is_valid()) {
+			return false;
+		}
+
+		$iri = '';
+		if ($this-&gt;scheme !== null) {
+			$iri .= $this-&gt;scheme . ':';
+		}
+		if (($iauthority = $this-&gt;get_iauthority()) !== null) {
+			$iri .= '//' . $iauthority;
+		}
+		$iri .= $this-&gt;ipath;
+		if ($this-&gt;iquery !== null) {
+			$iri .= '?' . $this-&gt;iquery;
+		}
+		if ($this-&gt;ifragment !== null) {
+			$iri .= '#' . $this-&gt;ifragment;
+		}
+
+		return $iri;
+	}
+
+	/**
+	 * Get the complete URI
+	 *
+	 * @return string
+	 */
+	protected function get_uri() {
+		return $this-&gt;to_uri($this-&gt;get_iri());
+	}
+
+	/**
+	 * Get the complete iauthority
+	 *
+	 * @return string|null
+	 */
+	protected function get_iauthority() {
+		if ($this-&gt;iuserinfo === null &amp;&amp; $this-&gt;ihost === null &amp;&amp; $this-&gt;port === null) {
+			return null;
+		}
+
+		$iauthority = '';
+		if ($this-&gt;iuserinfo !== null) {
+			$iauthority .= $this-&gt;iuserinfo . '@';
+		}
+		if ($this-&gt;ihost !== null) {
+			$iauthority .= $this-&gt;ihost;
+		}
+		if ($this-&gt;port !== null) {
+			$iauthority .= ':' . $this-&gt;port;
+		}
+		return $iauthority;
+	}
+
+	/**
+	 * Get the complete authority
+	 *
+	 * @return string
+	 */
+	protected function get_authority() {
+		$iauthority = $this-&gt;get_iauthority();
+		if (is_string($iauthority)) {
+			return $this-&gt;to_uri($iauthority);
+		}
+		else {
+			return $iauthority;
+		}
+	}
+}
+</pre>
+			</div>
+			<p class="source-code-links">
+				<span>
+					<a href="#" class="show-complete-source">Expand full source code</a>
+					<a href="#" class="less-complete-source">Collapse full source code</a>
+				</span>
+				<span><a href="https://core.trac.wordpress.org/browser/tags/5.8/src/wp-includes/Requests/IRI.php#L66">View on Trac</a></span>
+			</p>
+			</section>
+		<hr />
+		<section class="class-methods">
+			<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="methods" tabindex="-1">Methods <a href="#methods" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Methods</span></a></h2>
+			<ul>
+									<li><a href="__construct/index.html">
+							__construct</a>
+						&mdash; Create a new IRI object, from a specified string											</li>
+									<li><a href="__get/index.html">
+							__get</a>
+						&mdash; Overload __get() to provide access via properties											</li>
+									<li><a href="__isset/index.html">
+							__isset</a>
+						&mdash; Overload __isset() to provide access via properties											</li>
+									<li><a href="__set/index.html">
+							__set</a>
+						&mdash; Overload __set() to provide access via properties											</li>
+									<li><a href="__tostring/index.html">
+							__toString</a>
+						&mdash; Return the entire IRI when you try and read the object as a string											</li>
+									<li><a href="__unset/index.html">
+							__unset</a>
+						&mdash; Overload __unset() to provide access via properties											</li>
+									<li><a href="absolutize/index.html">
+							absolutize</a>
+						&mdash; Create a new IRI object by resolving a relative IRI											</li>
+									<li><a href="get_authority/index.html">
+							get_authority</a>
+						&mdash; Get the complete authority											</li>
+									<li><a href="get_iauthority/index.html">
+							get_iauthority</a>
+						&mdash; Get the complete iauthority											</li>
+									<li><a href="get_iri/index.html">
+							get_iri</a>
+						&mdash; Get the complete IRI											</li>
+									<li><a href="get_uri/index.html">
+							get_uri</a>
+						&mdash; Get the complete URI											</li>
+									<li><a href="is_valid/index.html">
+							is_valid</a>
+						&mdash; Check if the object represents a valid IRI. This needs to be done on each call as some things change depending on another part of the IRI.											</li>
+									<li><a href="parse_iri/index.html">
+							parse_iri</a>
+						&mdash; Parse an IRI into scheme/authority/path/query/fragment segments											</li>
+									<li><a href="remove_dot_segments/index.html">
+							remove_dot_segments</a>
+						&mdash; Remove dot segments from a path											</li>
+									<li><a href="remove_iunreserved_percent_encoded/index.html">
+							remove_iunreserved_percent_encoded</a>
+						&mdash; Callback function for preg_replace_callback.											</li>
+									<li><a href="replace_invalid_with_pct_encoding/index.html">
+							replace_invalid_with_pct_encoding</a>
+						&mdash; Replace invalid character with percent encoding											</li>
+									<li><a href="scheme_normalization/index.html">
+							scheme_normalization</a>
+																	</li>
+									<li><a href="set_authority/index.html">
+							set_authority</a>
+						&mdash; Set the authority. Returns true on success, false on failure (if there are any invalid characters).											</li>
+									<li><a href="set_fragment/index.html">
+							set_fragment</a>
+						&mdash; Set the ifragment.											</li>
+									<li><a href="set_host/index.html">
+							set_host</a>
+						&mdash; Set the ihost. Returns true on success, false on failure (if there are any invalid characters).											</li>
+									<li><a href="set_iri/index.html">
+							set_iri</a>
+						&mdash; Set the entire IRI. Returns true on success, false on failure (if there are any invalid characters).											</li>
+									<li><a href="set_path/index.html">
+							set_path</a>
+						&mdash; Set the ipath.											</li>
+									<li><a href="set_port/index.html">
+							set_port</a>
+						&mdash; Set the port. Returns true on success, false on failure (if there are any invalid characters).											</li>
+									<li><a href="set_query/index.html">
+							set_query</a>
+						&mdash; Set the iquery.											</li>
+									<li><a href="set_scheme/index.html">
+							set_scheme</a>
+						&mdash; Set the scheme. Returns true on success, false on failure (if there are any invalid characters).											</li>
+									<li><a href="set_userinfo/index.html">
+							set_userinfo</a>
+						&mdash; Set the iuserinfo.											</li>
+									<li><a href="to_uri/index.html">
+							to_uri</a>
+						&mdash; Convert an IRI to a URI (or parts thereof)											</li>
+							</ul>
+		</section>
+	
+	<hr />
+	<section class="user-notes">
+		<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="user-contributed-notes" tabindex="-1">User Contributed Notes <a href="#user-contributed-notes" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">User Contributed Notes</span></a></h2>
+		
+<div id="comments" class="comments-area">
+
+	
+	
+			<div id="respond" class="comment-respond">
+		<h3 id="reply-title" class="comment-reply-title"> <small></small></h3><p>You must <a href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Fclasses%2Frequests_iri%2F%23respond">log in</a> before being able to contribute a note or feedback.</p>	</div><!-- #respond -->
+		
+	
+</div><!-- #comments -->
+	</section>
+</div>
+
+</article>
+
+			
+		
+		</main><!-- #main -->
+	</div><!-- #primary -->
+	</div><!-- #content -->
+
+</div><!-- #page -->
+
+
+<div id="wporg-footer">
+	<div class="wrapper">
+		<ul>
+			<li><a href="http://wordpress.org/about/" title="An introduction to the WordPress project">About</a></li>
+			<li><a href="http://wordpress.org/news/" title="News and Updates">Blog</a></li>
+			<li><a href="http://wordpress.org/hosting/" title="Recommended web hosting providers">Hosting</a></li>
+			<li><a href="https://wordpressfoundation.org/donate/" title="Donate to the WordPress Foundation">Donate</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://wordpress.org/support/" title="Forums, documentation, and other resources">Support</a></li>
+			<li><a href="../../../index.html" title="Resources for WordPress developers">Developers</a></li>
+			<li><a href="http://make.wordpress.org/" title="Give back to WordPress through code, support, translation and more">Get Involved</a></li>
+			<li><a href="http://learn.wordpress.org/" title="Workshops and training materials">Learn</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://wordpress.org/showcase/" title="Some of the best WordPress sites on the Web">Showcase</a></li>
+			<li><a href="http://wordpress.org/plugins/" title="Add extra functionality to WordPress">Plugins</a></li>
+			<li><a href="http://wordpress.org/themes/" title="Make your WordPress pretty">Themes</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://central.wordcamp.org/" title="Find a WordPress event near you">WordCamp</a></li>
+			<li><a href="http://wordpress.tv/" title="Videos, tutorials, and WordCamp sessions">WordPress.TV</a></li>
+			<li><a href="http://buddypress.org/" title="A set of plugins to transform your WordPress into a social network">BuddyPress</a></li>
+			<li><a href="http://bbpress.org/" title="Fast, slick forums built on WordPress">bbPress</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://wordpress.com/?ref=wporg-footer" title="Hassle-free WordPress hosting">WordPress.com</a></li>
+			<li><a href="http://ma.tt/" title="Co-founder of WordPress, an example of what WordPress can do">Matt</a></li>
+			<li><a href="http://wordpress.org/about/privacy/" title="WordPress.org Privacy Policy">Privacy</a></li>
+			<li><a href="https://publiccode.eu/" target="_blank">Public Code</a></li>
+		</ul>
+
+		<ul class="social-media-links">
+			<li><span class="dashicons dashicons-twitter"></span><a href="https://twitter.com/WordPress" title="Follow @WordPress on Twitter">@WordPress</a></li>
+			<li><span class="dashicons dashicons-facebook"></span><a href="https://www.facebook.com/WordPress/" title="Like WordPress on Facebook">WordPress</a></li>
+		</ul>
+	</div>
+
+		<p class="cip cip-image">Code is Poetry.</p>
+</div>
+
+<script src="../../../../s.w.org/style/js/navigation.min.js?20190128"></script>
+
+<link rel='stylesheet' id='buttons-css'  href='../../../wp-includes/css/buttons.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<script type='text/javascript' src='../../../wp-includes/js/hoverintent-js.min.js?ver=2.2.1' id='hoverintent-js-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/admin-bar.min.js?ver=5.9-alpha-51701' id='admin-bar-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/navigation.js?ver=20181209' id='wporg-developer-navigation-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/skip-link-focus-fix.js?ver=20130115' id='wporg-developer-skip-link-focus-fix-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/search.js?ver=20150430' id='wporg-developer-search-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/menu.js?ver=20180201' id='wporg-developer-menu-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/awesomplete.min.js?ver=20160322' id='awesomplete-js'></script>
+<script type='text/javascript' id='autocomplete-js-extra'>
+/* <![CDATA[ */
+var autocomplete = {"ajaxurl":"https:\/\/developer.wordpress.org\/wp-admin\/admin-ajax.php","nonce":"8a60f70c4b"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/autocomplete.js?ver=20160524' id='autocomplete-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/function-reference.js?ver=20180724' id='wporg-developer-function-reference-js'></script>
+<script type='text/javascript' id='quicktags-js-extra'>
+/* <![CDATA[ */
+var quicktagsL10n = {"closeAllOpenTags":"Close all open tags","closeTags":"close tags","enterURL":"Enter the URL","enterImageURL":"Enter the URL of the image","enterImageDescription":"Enter a description of the image","textdirection":"text direction","toggleTextdirection":"Toggle Editor Text Direction","dfw":"Distraction-free writing mode","strong":"Bold","strongClose":"Close bold tag","em":"Italic","emClose":"Close italic tag","link":"Insert link","blockquote":"Blockquote","blockquoteClose":"Close blockquote tag","del":"Deleted text (strikethrough)","delClose":"Close deleted text tag","ins":"Inserted text","insClose":"Close inserted text tag","image":"Insert image","ul":"Bulleted list","ulClose":"Close bulleted list tag","ol":"Numbered list","olClose":"Close numbered list tag","li":"List item","liClose":"Close list item tag","code":"Code","codeClose":"Close code tag","more":"Insert Read More tag"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-includes/js/quicktags.min.js?ver=5.9-alpha-51701' id='quicktags-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/user-notes.js?ver=20200110' id='wporg-developer-user-notes-js'></script>
+<script type='text/javascript' id='wporg-developer-user-notes-feedback-js-extra'>
+/* <![CDATA[ */
+var wporg_note_feedback = {"show":"Show Feedback","hide":"Hide Feedback"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/user-notes-feedback.js?ver=20181023' id='wporg-developer-user-notes-feedback-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/tabs.js?ver=20160824' id='wporg-developer-tabs-js'></script>
+<script type='text/javascript' id='wporg-developer-preview-js-extra'>
+/* <![CDATA[ */
+var wporg_note_preview = {"ajaxurl":"https:\/\/developer.wordpress.org\/wp-admin\/admin-ajax.php","nonce":"504933b60e","preview":"preview note","preview_empty":"Nothing to preview","is_admin":""};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/user-notes-preview.js?ver=20200111' id='wporg-developer-preview-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/wp-embed.min.js?ver=5.9-alpha-51701' id='wp-embed-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/vendor/regenerator-runtime.min.js?ver=0.13.7' id='regenerator-runtime-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/vendor/wp-polyfill.min.js?ver=3.15.0' id='wp-polyfill-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/dom-ready.min.js?ver=71883072590656bf22c74c7b887df3dd' id='wp-dom-ready-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/hooks.min.js?ver=a7edae857aab69d69fa10d5aef23a5de' id='wp-hooks-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/i18n.min.js?ver=5f1269854226b4dd90450db411a12b79' id='wp-i18n-js'></script>
+<script type='text/javascript' id='wp-i18n-js-after'>
+wp.i18n.setLocaleData( { 'text direction\u0004ltr': [ 'ltr' ] } );
+</script>
+<script type='text/javascript' id='wp-a11y-js-translations'>
+( function( domain, translations ) {
+	var localeData = translations.locale_data[ domain ] || translations.locale_data.messages;
+	localeData[""].domain = domain;
+	wp.i18n.setLocaleData( localeData, domain );
+} )( "default", { "locale_data": { "messages": { "": {} } } } );
+</script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/a11y.min.js?ver=0ac8327cc1c40dcfdf29716affd7ac63' id='wp-a11y-js'></script>
+<script type='text/javascript' id='wplink-js-extra'>
+/* <![CDATA[ */
+var wpLinkL10n = {"title":"Insert\/edit link","update":"Update","save":"Add Link","noTitle":"(no title)","noMatchesFound":"No results found.","linkSelected":"Link selected.","linkInserted":"Link inserted.","minInputLength":"3"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-includes/js/wplink.min.js?ver=5.9-alpha-51701' id='wplink-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/jquery/ui/core.min.js?ver=1.12.1' id='jquery-ui-core-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/jquery/ui/menu.min.js?ver=1.12.1' id='jquery-ui-menu-js'></script>
+<script type='text/javascript' id='jquery-ui-autocomplete-js-extra'>
+/* <![CDATA[ */
+var uiAutocompleteL10n = {"noResults":"No results found.","oneResult":"1 result found. Use up and down arrow keys to navigate.","manyResults":"%d results found. Use up and down arrow keys to navigate.","itemSelected":"Item selected."};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-includes/js/jquery/ui/autocomplete.min.js?ver=1.12.1' id='jquery-ui-autocomplete-js'></script>
+
+		<script type="text/javascript">
+		tinyMCEPreInit = {
+			baseURL: "https://developer.wordpress.org/wp-includes/js/tinymce",
+			suffix: ".min",
+						mceInit: {},
+			qtInit: {'comment':{id:"comment",buttons:"strong,em,ul,ol,li,link"}},
+			ref: {plugins:"",theme:"modern",language:""},
+			load_ext: function(url,lang){var sl=tinymce.ScriptLoader;sl.markDone(url+'/langs/'+lang+'.js');sl.markDone(url+'/langs/'+lang+'_dlg.js');}
+		};
+		</script>
+				<script type="text/javascript">
+		var ajaxurl = "../../../wp-admin/admin-ajax.html";
+		( function() {
+			var initialized = [];
+			var initialize  = function() {
+				var init, id, inPostbox, $wrap;
+				var readyState = document.readyState;
+
+				if ( readyState !== 'complete' && readyState !== 'interactive' ) {
+					return;
+				}
+
+				for ( id in tinyMCEPreInit.mceInit ) {
+					if ( initialized.indexOf( id ) > -1 ) {
+						continue;
+					}
+
+					init      = tinyMCEPreInit.mceInit[id];
+					$wrap     = tinymce.$( '#wp-' + id + '-wrap' );
+					inPostbox = $wrap.parents( '.postbox' ).length > 0;
+
+					if (
+						! init.wp_skip_init &&
+						( $wrap.hasClass( 'tmce-active' ) || ! tinyMCEPreInit.qtInit.hasOwnProperty( id ) ) &&
+						( readyState === 'complete' || ( ! inPostbox && readyState === 'interactive' ) )
+					) {
+						tinymce.init( init );
+						initialized.push( id );
+
+						if ( ! window.wpActiveEditor ) {
+							window.wpActiveEditor = id;
+						}
+					}
+				}
+			}
+
+			if ( typeof tinymce !== 'undefined' ) {
+				if ( tinymce.Env.ie && tinymce.Env.ie < 11 ) {
+					tinymce.$( '.wp-editor-wrap ' ).removeClass( 'tmce-active' ).addClass( 'html-active' );
+				} else {
+					if ( document.readyState === 'complete' ) {
+						initialize();
+					} else {
+						document.addEventListener( 'readystatechange', initialize );
+					}
+				}
+			}
+
+			if ( typeof quicktags !== 'undefined' ) {
+				for ( id in tinyMCEPreInit.qtInit ) {
+					quicktags( tinyMCEPreInit.qtInit[id] );
+
+					if ( ! window.wpActiveEditor ) {
+						window.wpActiveEditor = id;
+					}
+				}
+			}
+		}());
+		</script>
+				<div id="wp-link-backdrop" style="display: none"></div>
+		<div id="wp-link-wrap" class="wp-core-ui" style="display: none" role="dialog" aria-labelledby="link-modal-title">
+		<form id="wp-link" tabindex="-1">
+		<input type="hidden" id="_ajax_linking_nonce" name="_ajax_linking_nonce" value="86f5a0a85d" />		<h1 id="link-modal-title">Insert/edit link</h1>
+		<button type="button" id="wp-link-close"><span class="screen-reader-text">Close</span></button>
+		<div id="link-selector">
+			<div id="link-options">
+				<p class="howto" id="wplink-enter-url">Enter the destination URL</p>
+				<div>
+					<label><span>URL</span>
+					<input id="wp-link-url" type="text" aria-describedby="wplink-enter-url" /></label>
+				</div>
+				<div class="wp-link-text-field">
+					<label><span>Link Text</span>
+					<input id="wp-link-text" type="text" /></label>
+				</div>
+				<div class="link-target">
+					<label><span></span>
+					<input type="checkbox" id="wp-link-target" /> Open link in a new tab</label>
+				</div>
+			</div>
+			<p class="howto" id="wplink-link-existing-content">Or link to existing content</p>
+			<div id="search-panel">
+				<div class="link-search-wrapper">
+					<label>
+						<span class="search-label">Search</span>
+						<input type="search" id="wp-link-search" class="link-search-field" autocomplete="off" aria-describedby="wplink-link-existing-content" />
+						<span class="spinner"></span>
+					</label>
+				</div>
+				<div id="search-results" class="query-results" tabindex="0">
+					<ul></ul>
+					<div class="river-waiting">
+						<span class="spinner"></span>
+					</div>
+				</div>
+				<div id="most-recent-results" class="query-results" tabindex="0">
+					<div class="query-notice" id="query-notice-message">
+						<em class="query-notice-default">No search term specified. Showing recent items.</em>
+						<em class="query-notice-hint screen-reader-text">Search or use up and down arrow keys to select an item.</em>
+					</div>
+					<ul></ul>
+					<div class="river-waiting">
+						<span class="spinner"></span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="submitbox">
+			<div id="wp-link-cancel">
+				<button type="button" class="button">Cancel</button>
+			</div>
+			<div id="wp-link-update">
+				<input type="submit" value="Add Link" class="button button-primary" id="wp-link-submit" name="wp-link-submit">
+			</div>
+		</div>
+		</form>
+		</div>
+		</body>
+
+<!-- Mirrored from developer.wordpress.org/reference/classes/requests_iri/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 31 Aug 2021 17:28:56 GMT -->
+</html>

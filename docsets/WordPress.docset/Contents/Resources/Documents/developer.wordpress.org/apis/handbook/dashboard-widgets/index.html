@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+
+<!-- Mirrored from developer.wordpress.org/apis/handbook/dashboard-widgets/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 31 Aug 2021 16:22:01 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<!--
+<meta property="fb:page_id" content="6427302910" />
+-->
+<meta name="google-site-verification" content="7VWES_-rcHBcmaQis9mSYamPfNwE03f4vyTj4pfuAw0" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dashboard widgets API</title>
+<meta name="referrer" content="always">
+
+		<link href='../../../../fonts.googleapis.com/css.css?family=Open+Sans:300italic,400italic,600italic,400,300,600&amp;subset=latin,cyrillic-ext,greek-ext,greek,vietnamese,latin-ext,cyrillic' rel='stylesheet' type='text/css'>
+
+		<link rel="stylesheet" href="../../../../s.w.org/style/wp4.css?95" />
+
+<link rel="shortcut icon" href="../../../../s.w.org/favicon.ico?2" type="image/x-icon" />
+<link rel="pingback" href="../../../xmlrpc.php" /><meta name='robots' content='max-image-preview:large' />
+<link rel='dns-prefetch' href='../../../../fonts.googleapis.com/index.html' />
+<link rel='dns-prefetch' href='http://s.w.org/' />
+<link rel='dns-prefetch' href='http://www.googletagmanager.com/' />
+<link rel='dns-prefetch' href='http://fonts.gstatic.com/' />
+<link rel="alternate" type="application/rss+xml" title="WordPress Developer Resources &raquo; Feed" href="../../../feed/index.html" />
+<link rel="alternate" type="application/rss+xml" title="WordPress Developer Resources &raquo; Comments Feed" href="../../../comments/feed/index.html" />
+<meta property="og:title" content="Dashboard widgets API | Common APIs Handbook | WordPress Developer Resources" />
+<meta property="og:site_name" content="WordPress Developer Resources" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="../../../index.html" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@WordPress" />
+<meta name="description" content="Added in WordPress Version 2.7, the Dashboard Widgets API makes it simple to add new widgets to the administration dashboard. Doing so&hellip;" />
+<meta property="og:description" content="Added in WordPress Version 2.7, the Dashboard Widgets API makes it simple to add new widgets to the administration dashboard. Doing so&hellip;" />
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'../../../../www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P24PF4B');</script>
+			<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/developer.wordpress.org\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.9-alpha-51701"}};
+			!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([10084,65039,8205,55357,56613],[10084,65039,8203,55357,56613])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel='stylesheet' id='dashicons-css'  href='../../../wp-includes/css/dashicons.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='admin-bar-css'  href='../../../wp-includes/css/admin-bar.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-block-library-css'  href='../../../wp-includes/css/dist/block-library/style.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='wporg-handbook-css-css'  href='../../../wp-content/plugins/handbook/stylesheets/callout-boxes.css?ver=20200121' type='text/css' media='all' />
+<link rel='stylesheet' id='open-sans-css'  href='../../../../fonts.googleapis.com/css-2.css?family=Open+Sans%3A300italic%2C400italic%2C600italic%2C300%2C400%2C600&amp;subset=latin%2Clatin-ext&amp;display=fallback&amp;ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='wporg-developer-style-css'  href='../../../wp-content/themes/pub/wporg-developer/style.css?ver=3' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-dev-sass-compiled-css'  href='../../../wp-content/themes/pub/wporg-developer/stylesheets/main.css?ver=20200713' type='text/css' media='all' />
+<link rel='stylesheet' id='awesomplete-css-css'  href='../../../wp-content/themes/pub/wporg-developer/stylesheets/awesomplete.css?ver=20160114' type='text/css' media='all' />
+<link rel='stylesheet' id='autocomplete-css-css'  href='../../../wp-content/themes/pub/wporg-developer/stylesheets/autocomplete.css?ver=20171220' type='text/css' media='all' />
+<link rel='stylesheet' id='syntaxhighlighter-core-css'  href='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shCore.css?ver=3.0.9b' type='text/css' media='all' />
+<link rel='stylesheet' id='syntaxhighlighter-theme-default-css'  href='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shThemeDefault.css?ver=3.0.9b' type='text/css' media='all' />
+<script type='text/javascript' src='../../../wp-includes/js/jquery/jquery.min.js?ver=3.6.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='../../../wp-content/plugins/handbook/scripts/handbook.js?ver=20150930' id='wporg-handbook-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/chapters.js?ver=20190603' id='wporg-developer-chapters-js'></script>
+<script type='text/javascript' src='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shCore.js?ver=3.0.9b' id='syntaxhighlighter-core-js'></script>
+<script type='text/javascript' src='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushPhp.js?ver=3.0.9b' id='syntaxhighlighter-brush-php-js'></script>
+<link rel="https://api.w.org/" href="https://developer.wordpress.org/wp-json/" /><link rel="alternate" type="application/json" href="https://developer.wordpress.org/wp-json/wp/v2/apis-handbook/125636" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="../../../xmlrpc-2.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="../../../wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 5.9-alpha-51701" />
+<link rel='shortlink' href='https://developer.wordpress.org/?p=125636' />
+<link rel="alternate" type="application/json+oembed" href="https://developer.wordpress.org/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fdeveloper.wordpress.org%2Fapis%2Fhandbook%2Fdashboard-widgets%2F" />
+<link rel="alternate" type="text/xml+oembed" href="https://developer.wordpress.org/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fdeveloper.wordpress.org%2Fapis%2Fhandbook%2Fdashboard-widgets%2F&amp;format=xml" />
+<link rel="canonical" href="index.html">
+<!-- Stream WordPress user activity plugin v3.6.2 -->
+	<style>
+		@media screen and (max-width: 782px) {
+			#wpadminbar li#wp-admin-bar-log-in,
+			#wpadminbar li#wp-admin-bar-register {
+				display: block;
+			}
+
+			#wpadminbar li#wp-admin-bar-log-in a,
+			#wpadminbar li#wp-admin-bar-register a {
+				padding: 0 8px;
+			}
+		}
+	</style>
+		<style>
+			a.github-edit {
+				margin-left: .5em;
+				font-size: .5em;
+				vertical-align: top;
+				display: inline-block;
+				border: 1px solid #eeeeee;
+				border-radius: 2px;
+				background: #eeeeee;
+				padding: .5em .6em .4em;
+				color: black;
+				margin-top: 0.1em;
+			}
+			a.github-edit > * {
+				opacity: 0.6;
+			}
+			a.github-edit:hover > * {
+				opacity: 1;
+				color: black;
+			}
+			a.github-edit img {
+				height: .8em;
+			}
+		</style>
+		
+	<script type="text/javascript">
+		jQuery( '<style>.hide-if-js { display: none; }</style>' ).appendTo( 'head' );
+		jQuery( function($) {
+			$( 'body' ).addClass('js');
+		} );
+	</script>
+<style type="text/css" media="print">#wpadminbar { display:none; }</style>
+	<style type="text/css" media="screen">
+	</style>
+	<script>document.cookie='devicePixelRatio='+((window.devicePixelRatio === undefined) ? 1 : window.devicePixelRatio)+'; path=/';</script>
+
+</head>
+
+
+<body id="wordpress-org" class="apis-handbook-template-default single single-apis-handbook postid-125636 admin-bar no-customize-support single-handbook">
+		<div id="wpadminbar" class="nojq nojs">
+						<div class="quicklinks" id="wp-toolbar" role="navigation" aria-label="Toolbar">
+				<ul id='wp-admin-bar-root-default' class="ab-top-menu"><li id='wp-admin-bar-wp-logo' class="menupop"><a class='ab-item' aria-haspopup="true" href='https://wordpress.org/about/'><span class="ab-icon" aria-hidden="true"></span><span class="screen-reader-text">About WordPress</span></a><div class="ab-sub-wrapper"><ul id='wp-admin-bar-wp-logo-default' class="ab-submenu"><li id='wp-admin-bar-about'><a class='ab-item' href='https://wordpress.org/about/'>About WordPress</a></li></ul><ul id='wp-admin-bar-wp-logo-external' class="ab-sub-secondary ab-submenu"><li id='wp-admin-bar-wporg'><a class='ab-item' href='https://wordpress.org/'>WordPress.org</a></li><li id='wp-admin-bar-documentation'><a class='ab-item' href='https://wordpress.org/support/'>Documentation</a></li><li id='wp-admin-bar-support-forums'><a class='ab-item' href='https://wordpress.org/support/forums/'>Support</a></li><li id='wp-admin-bar-feedback'><a class='ab-item' href='https://wordpress.org/support/forum/requests-and-feedback'>Feedback</a></li></ul></div></li></ul><ul id='wp-admin-bar-top-secondary' class="ab-top-secondary ab-top-menu"><li id='wp-admin-bar-search' class="admin-bar-search"><div class="ab-item ab-empty-item" tabindex="-1"><form action="https://developer.wordpress.org/" method="get" id="adminbarsearch"><input class="adminbar-input" name="s" id="adminbar-search" type="text" value="" maxlength="150" /><label for="adminbar-search" class="screen-reader-text">Search</label><input type="submit" class="adminbar-button" value="Search" /></form></div></li><li id='wp-admin-bar-log-in'><a class='ab-item' href='https://login.wordpress.org/?locale=en_US'>Log In</a></li><li id='wp-admin-bar-register'><a class='ab-item' href='https://login.wordpress.org/register?locale=en_US'>Register</a></li></ul>			</div>
+					</div>
+
+		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P24PF4B" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<div id="wporg-header">
+	<div class="wrapper">
+	<h1><a href="http://wordpress.org/">WordPress.org</a></h1>				<div id="head-search">
+		<form action="http://wordpress.org/search/do-search.php" method="get">
+			<label for="global-search" class="screen-reader-text">Search WordPress.org for:</label>
+			<input id="global-search" class="text" name="search" type="text" value="" maxlength="150" placeholder="Search WordPress.org" />
+			<button type="submit" class="button"><span class="screen-reader-text">Submit</span></button>
+		</form>
+		</div>
+				<div style="clear:both"></div>
+		<button id="mobile-menu-button" aria-expanded="false"><span class="screen-reader-text">Toggle Menu</span></button>
+		
+<nav aria-label="Main Menu">
+<ul id="wporg-header-menu">
+<li class="menu-item"><a href='http://wordpress.org/showcase/' data-title='See some of the sites built on WordPress.'>Showcase</a></li>
+<li class="menu-item"><a href='http://learn.wordpress.org/' data-title='Resources to help you learn more about WordPress and teach it to others.'>Learn</a></li>
+<li class="menu-item"><a href='http://wordpress.org/themes/' data-title='Find just the right look for your website.'>Themes</a></li>
+<li class="menu-item"><a href='http://wordpress.org/plugins/' data-title='Plugins can extend WordPress to do almost anything you can imagine.'>Plugins</a></li>
+<li class="menu-item"><a href='http://wordpress.org/mobile/' data-title='Take your website on the go!'>Mobile</a></li>
+<li class="menu-item"><a href='http://wordpress.org/support/' data-title='Forums, documentation, help.'>Support</a><ul class="nav-submenu"><li><a href='http://wordpress.org/support/' title='Documentation, tutorials, best practices.'>Documentation</a></li><li><a href='http://wordpress.org/support/forums/' title='Support and discussion forums.'>Forums</a></li></ul><div class="uparrow"></div></li>
+<li class="menu-item"><a href='http://make.wordpress.org/' data-title='Contribute your knowledge.'>Get Involved</a><ul class="nav-submenu"><li><a href='http://wordpress.org/five-for-the-future/' title='How five percent is powering the next generation of the web'>Five for the Future</a></li></ul><div class="uparrow"></div></li>
+<li class="menu-item"><a href='http://wordpress.org/about/' data-title='About the WordPress Organization, and where we&#039;re going.'>About</a></li>
+<li class="menu-item"><a href='http://wordpress.org/news/' data-title='Come here for the latest scoop.'>Blog</a></li>
+<li class="menu-item"><a href='http://wordpress.org/hosting/' data-title='Find a home for your blog.'>Hosting</a></li>
+<li id="download" class="button download-button menu-item"><a href='http://wordpress.org/download/' data-title='Get it. Got it? Good.'>Get WordPress</a></li>
+</ul>
+</nav>
+		<div style="clear:both"></div>
+	</div>
+</div>
+
+
+
+<header id="masthead" class="site-header" role="banner">
+			<a href="#" id="secondary-toggle" onclick="return false;"><strong>Menu</strong></a>
+		<div class="site-branding">
+		<h1 class="site-title">
+			<a href="../../../index.html" rel="home">Common APIs Handbook</a>
+		</h1>
+
+		
+		<nav id="site-navigation" class="main-navigation" role="navigation">
+			<button class="menu-toggle dashicons dashicons-arrow-down-alt2" aria-controls="primary-menu" aria-expanded="false" aria-label="Primary Menu"></button>
+					</nav>
+	</div>
+</header><!-- #masthead -->
+
+<div id="page" class="hfeed site devhub-wrap">
+	<a href="#main" class="screen-reader-text">Skip to content</a>
+
+			<div id="content" class="site-content">
+
+
+	<div id="secondary" class="widget-area" role="complementary">
+		<a href="#" id="secondary-toggle"></a>
+		<div id="secondary-content">
+						<aside id="search-8" class="widget widget_search"><div class="search-section section clear hide-if-js">
+
+
+	
+	<form role="search" method="get" class="searchform searchform-handbook" action="https://developer.wordpress.org/apis/">
+		<label for="search-field" class="screen-reader-text">Search for:</label>
+		<input type="text" id="search-field" class="search-field" placeholder="Search &hellip;" value="" name="s">
+		<button class="button button-primary button-search"><i class="dashicons dashicons-search"></i><span class="screen-reader-text">Search plugins</span></button>
+	
+	</form>
+
+</div><!-- /search-guide -->
+</aside><aside id="handbook_pages-4" class="widget widget_wporg_handbook_pages"><h2 class="widget-title">Sections</h2>
+<div class="menu-table-of-contents-container">
+
+			<ul>
+				<li class="page_item page-item-125334 page_item_has_children current_page_ancestor current_page_parent current-menu-ancestor current-menu-parent menu-item menu-item-has-children"><a href="../../index.html">Common APIs Handbook</a>
+<ul class='children'>
+	<li class="page_item page-item-132071 menu-item"><a href="../responsive-images/index.html">Responsive Images</a></li>
+	<li class="page_item page-item-125636 page_item_has_children current_page_item current-menu-item menu-item menu-item-has-children"><a href="index.html" aria-current="page">Dashboard widgets API</a>
+	<ul class='children'>
+		<li class="page_item page-item-125763 menu-item"><a href="example-dashboard-widget/index.html">Example Dashboard widget</a></li>
+	</ul>
+</li>
+	<li class="page_item page-item-125638 menu-item"><a href="../database/index.html">Database API</a></li>
+	<li class="page_item page-item-126023 page_item_has_children menu-item menu-item-has-children"><a href="../internationalization/index.html">Internationalization</a>
+	<ul class='children'>
+		<li class="page_item page-item-126122 menu-item"><a href="../internationalization/internationalization-functions/index.html">Internationalization Functions</a></li>
+		<li class="page_item page-item-126126 menu-item"><a href="../internationalization/internationalization-guidelines/index.html">Internationalization Guidelines</a></li>
+		<li class="page_item page-item-126152 menu-item"><a href="../internationalization/localization/index.html">Localization</a></li>
+	</ul>
+</li>
+	<li class="page_item page-item-125642 menu-item"><a href="../filesystem/index.html">Filesystem</a></li>
+	<li class="page_item page-item-125644 menu-item"><a href="../global-variables/index.html">Global Variables</a></li>
+	<li class="page_item page-item-125646 menu-item"><a href="../metadata/index.html">Metadata</a></li>
+	<li class="page_item page-item-125648 menu-item"><a href="../options/index.html">Options</a></li>
+	<li class="page_item page-item-125650 menu-item"><a href="../plugins/index.html">Plugins</a></li>
+	<li class="page_item page-item-129278 page_item_has_children menu-item menu-item-has-children"><a href="../making-http-requests/index.html">Making HTTP requests</a>
+	<ul class='children'>
+		<li class="page_item page-item-129272 menu-item"><a href="../making-http-requests/getting-data-from-an-external-service/index.html">GETting data from an external service</a></li>
+		<li class="page_item page-item-129270 menu-item"><a href="../making-http-requests/posting-data-to-an-external-service/index.html">POSTing data to an external service</a></li>
+		<li class="page_item page-item-129268 menu-item"><a href="../making-http-requests/performance/index.html">Performance</a></li>
+		<li class="page_item page-item-129274 menu-item"><a href="../making-http-requests/advanced/index.html">Advanced</a></li>
+		<li class="page_item page-item-129276 menu-item"><a href="../making-http-requests/authentication/index.html">Authentication</a></li>
+	</ul>
+</li>
+	<li class="page_item page-item-125652 menu-item"><a href="../quicktags/index.html">Quicktags</a></li>
+	<li class="page_item page-item-125654 menu-item"><a href="../rest/index.html">REST</a></li>
+	<li class="page_item page-item-125656 menu-item"><a href="../rewrite/index.html">Rewrite</a></li>
+	<li class="page_item page-item-125658 menu-item"><a href="../settings/index.html">Settings</a></li>
+	<li class="page_item page-item-125660 menu-item"><a href="../shortcode/index.html">Shortcode</a></li>
+	<li class="page_item page-item-136532 menu-item"><a href="../site-health/index.html">Site Health</a></li>
+	<li class="page_item page-item-125662 menu-item"><a href="../theme/index.html">Theme</a></li>
+	<li class="page_item page-item-125664 menu-item"><a href="../transients/index.html">Transients</a></li>
+	<li class="page_item page-item-125666 menu-item"><a href="../xml-rpc/index.html">XML-RPC</a></li>
+</ul>
+</li>
+			</ul>
+
+			</div>		</div>
+	</div><!-- #secondary -->
+
+
+		<main id="primary" class="site-main post-125636 apis-handbook type-apis-handbook status-publish hentry type-handbook" role="main">
+
+		
+		<div class="breadcrumb-trail breadcrumbs" itemprop="breadcrumb">
+			<span class="trail-browse">Browse:</span> 
+			<span class="trail-begin"><a href="../../../index.html" title="WordPress Developer Resources" rel="home">Home</a></span> <span class="sep">&#47;</span> 
+			<span class="trail-inner"><a href="../../index.html">Common APIs Handbook</a></span> <span class="sep">&#47;</span> 
+			<span class="trail-inner"><a href="../../index.html" title="Common APIs Handbook">Common APIs Handbook</a></span> <span class="sep">&#47;</span> <span class="trail-end">Dashboard widgets API</span>
+		</div>
+		
+			
+<h1>Dashboard widgets API</h1>
+
+
+<style> .toc-jump { text-align: right; font-size: 12px; } .page .toc-heading { margin-top: -50px; padding-top: 50px !important; }</style><div class="table-of-contents"><h2>Topics</h2><ul class="items"><li><a href="#overview">Overview</a>
+<ul>
+<li><a href="#the-main-function">The main function</a></li>
+<li><a href="#usage">Usage</a></li>
+<li><a href="#action-hooks">Action hooks</a>
+</ul></li>
+<li><a href="#examples">Examples</a>
+<ul>
+<li><a href="#basic-usage">Basic usage</a></li>
+<li><a href="#forcing-your-widget-to-the-top">Forcing your widget to the top</a></li>
+<li><a href="#removing-default-dashboard-widgets">Removing default Dashboard Widgets</a></li>
+<li><a href="#adding-widgets-in-the-right-side">Adding Widgets in the right side</a></li>
+<li><a href="#aggregating-rss-feeds-in-the-dashboard">Aggregating RSS feeds in the dashboard</a>
+</ul></li>
+<li><a href="#widget-options">Widget Options</a>
+<ul>
+<li><a href="#getting-widget-options">Getting Widget Options</a></li>
+<li><a href="#get-a-single-widget-option">Get a Single Widget Option</a></li>
+<li><a href="#update-widget-options">Update Widget Options</a>
+</ul></li>
+<li><a href="#see-also">See Also</a></ul>
+</div>
+
+<p>Added in WordPress Version&nbsp;<a href="https://wordpress.org/support/wordpress-version/version-2-7/">2.7</a>, the&nbsp;<strong>Dashboard Widgets API</strong> makes it simple to add new widgets to the&nbsp;<a href="https://wordpress.org/support/article/dashboard-screen/">administration dashboard</a>.</p>
+
+
+
+<p>Doing so requires working knowledge of PHP and the WordPress&nbsp;<a href="../../../plugins/index.html">Plugin API</a>, but to plugin or theme authors familiar with hooking actions and filters, it only takes a few minutes and can be a great way to make your plugin even more useful.</p>
+
+
+
+<figure class="wp-block-image"><a href="../../../files/2019/08/admin-dashboard-widget-api.png" target="_blank" rel="noreferrer noopener"><img loading="lazy" width="1024" height="464" src="../../../files/2019/08/admin-dashboard-widget-api-1024x464.png" alt="" class="wp-image-125684" ></a><figcaption>Default Dashboard Widgets</figcaption></figure>
+
+
+
+<h2 class="toc-heading" id="overview" tabindex="-1">Overview <a href="#overview" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Overview</span></a></h2>
+
+
+
+<h3 class="toc-heading" id="the-main-function" tabindex="-1">The main function <a href="#the-main-function" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">The main function</span></a></h3>
+
+
+
+<p>The main tool needed to add Dashboard Widgets is the&nbsp;<a href="../../../reference/functions/wp_add_dashboard_widget/index.html">wp_add_dashboard_widget()</a>&nbsp;function. You will find a complete description of this function on that link, but a brief overview is given below.</p>
+
+
+
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="usage" tabindex="-1">Usage <a href="#usage" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Usage</span></a></h3>
+
+
+<div class="wp-block-syntaxhighlighter-code "><pre class="brush: php; title: ; notranslate" title="">
+wp_add_dashboard_widget( $widget_id, $widget_name, $callback, $control_callback, $callback_args );
+</pre></div>
+
+
+<ul><li><code>$widget_id</code>: an identifying slug for your widget. This will be used as its CSS class and its key in the array of widgets.</li><li><code>$widget_name</code>: this is the name your widget will display in its heading.</li><li><code>$callback</code>: The name of a function you will create that will display the actual contents of your widget.</li><li><code>$control_callback</code> (Optional): The name of a function you create that will handle submission of widget options forms, and will also display the form elements.</li><li><code>$callback_args</code> (Optional): Set of arguments for the callback function.</li></ul>
+
+
+
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="action-hooks" tabindex="-1">Action hooks <a href="#action-hooks" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Action hooks</span></a></h3>
+
+
+
+<p>To run the function you will need to hook into the action&nbsp;<a href="../../../reference/hooks/wp_dashboard_setup/index.html">wp_dashboard_setup</a>&nbsp;via&nbsp;<a href="../../../reference/functions/add_action/index.html">add_action()</a>. For the Network Admin dashboard, use the hook&nbsp;<a href="../../../reference/hooks/wp_network_dashboard_setup/index.html">wp_network_dashboard_setup</a>.</p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><pre class="brush: php; title: ; notranslate" title="">
+/**
+ * Add a widget to the dashboard.
+ *
+ * This function is hooked into the 'wp_dashboard_setup' action below.
+ */
+function wporg_add_dashboard_widgets() {
+	// Add function here
+}
+add_action( 'wp_dashboard_setup', 'wporg_add_dashboard_widgets' );
+</pre></div>
+
+
+<p>Network dashboard:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><pre class="brush: php; title: ; notranslate" title="">
+/**
+ * Add a widget to the network dashboard.
+ *
+ * This function is hooked into the 'wp_network_dashboard_setup' action below.
+ */
+function wporg_add_network_dashboard_widgets() {
+	// Add function here
+}
+add_action( 'wp_network_dashboard_setup', 'wporg_add_network_dashboard_widgets' );
+</pre></div>
+
+
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="examples" tabindex="-1">Examples <a href="#examples" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Examples</span></a></h2>
+
+
+
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="basic-usage" tabindex="-1">Basic usage <a href="#basic-usage" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Basic usage</span></a></h3>
+
+
+<div class="wp-block-syntaxhighlighter-code "><section class="source-content"><div class="source-code-container"><pre class="brush: php; title: ; notranslate" title="">
+/**
+ * Add a widget to the dashboard.
+ *
+ * This function is hooked into the 'wp_dashboard_setup' action below.
+ */
+function wporg_add_dashboard_widgets() {
+	wp_add_dashboard_widget(
+		'wporg_dashboard_widget',                          // Widget slug.
+		esc_html__( 'Example Dashboard Widget', 'wporg' ), // Title.
+		'wporg_dashboard_widget_render'                    // Display function.
+	); 
+}
+add_action( 'wp_dashboard_setup', 'wporg_add_dashboard_widgets' );
+
+/**
+ * Create the function to output the content of our Dashboard Widget.
+ */
+function wporg_dashboard_widget_render() {
+	// Display whatever you want to show.
+	esc_html_e( &quot;Howdy! I'm a great Dashboard Widget.&quot;, &quot;wporg&quot; );
+}
+</pre></div><p class="source-code-links"><span><a href="#" class="show-complete-source">Expand full source code</a><a href="#" class="less-complete-source">Collapse full source code</a></span></p></section></div>
+
+
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="forcing-your-widget-to-the-top" tabindex="-1">Forcing your widget to the top <a href="#forcing-your-widget-to-the-top" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Forcing your widget to the top</span></a></h3>
+
+
+
+<p>Normally you should just let the users of your plugin put your Dashboard Widget wherever they want by dragging it around. There currently isn&#8217;t an easy API way to pre-sort the default widgets, meaning your new widget will always be at the bottom of the list. Until sorting is added to the API its a bit complicated to get around this problem.</p>
+
+
+
+<p>Below is an example hooking function that will try to put your widget before the default ones. It does so by manually altering the internal array of metaboxes (of which dashboard widgets are one type) and putting your widget at the top of the list so it shows first.</p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><section class="source-content"><div class="source-code-container"><pre class="brush: php; title: ; notranslate" title="">
+function wporg_add_dashboard_widgets() {
+	wp_add_dashboard_widget( 
+		'wporg_dashboard_widget', 
+		esc_html__( 'Example Dashboard Widget', 'wporg' ), 
+		'wporg_dashboard_widget_function' 
+	);
+	
+	// Globalize the metaboxes array, this holds all the widgets for wp-admin.
+	global $wp_meta_boxes;
+	
+	// Get the regular dashboard widgets array 
+	// (which already has our new widget but appended at the end).
+	$default_dashboard = $wp_meta_boxes&#91;'dashboard']&#91;'normal']&#91;'core'];
+	
+	// Backup and delete our new dashboard widget from the end of the array.
+	$example_widget_backup = array( 'example_dashboard_widget' =&gt; $default_dashboard&#91;'example_dashboard_widget'] );
+	unset( $default_dashboard&#91;'example_dashboard_widget'] );
+ 
+	// Merge the two arrays together so our widget is at the beginning.
+	$sorted_dashboard = array_merge( $example_widget_backup, $default_dashboard );
+ 
+	// Save the sorted array back into the original metaboxes. 
+	$wp_meta_boxes&#91;'dashboard']&#91;'normal']&#91;'core'] = $sorted_dashboard;
+}
+add_action( 'wp_dashboard_setup', 'wporg_add_dashboard_widgets' );
+</pre></div><p class="source-code-links"><span><a href="#" class="show-complete-source">Expand full source code</a><a href="#" class="less-complete-source">Collapse full source code</a></span></p></section></div>
+
+
+<p>Unfortunately this only works for people who have never re-ordered their widgets. Once a user has done so their existing preferences will override this and they will have to move your widget to the top for it to stay there.</p>
+
+
+
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="removing-default-dashboard-widgets" tabindex="-1">Removing default Dashboard Widgets <a href="#removing-default-dashboard-widgets" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Removing default Dashboard Widgets</span></a></h3>
+
+
+
+<p>In some situations, especially on multi-user blogs, it may be useful to completely remove widgets from the interface. Each individual user can, by default, turn off any given widget using the <em><a href="https://wordpress.org/support/article/administration-screens/#screen-options">Screen Options</a></em> tab at the top, but if you have a lot of non-technical users it might be nicer for them to not see it at all.</p>
+
+
+
+<p>To remove dashboard widget, use the&nbsp;<a href="../../../reference/functions/remove_meta_box/index.html">remove_meta_box()</a>&nbsp;function. See the example codes below for the required parameters.</p>
+
+
+
+<p>These are the names of the default widgets on the dashboard:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><section class="source-content"><div class="source-code-container"><pre class="brush: php; title: ; notranslate" title="">
+// Main column (left): 
+// Browser Update Required
+$wp_meta_boxes&#91;'dashboard']&#91;'normal']&#91;'high']&#91;'dashboard_browser_nag']; 
+// PHP Update Required
+$wp_meta_boxes&#91;'dashboard']&#91;'normal']&#91;'high']&#91;'dashboard_php_nag']; 
+
+// At a Glance
+$wp_meta_boxes&#91;'dashboard']&#91;'normal']&#91;'core']&#91;'dashboard_right_now'];
+// Right Now
+$wp_meta_boxes&#91;'dashboard']&#91;'normal']&#91;'core']&#91;'network_dashboard_right_now'];
+// Activity
+$wp_meta_boxes&#91;'dashboard']&#91;'normal']&#91;'core']&#91;'dashboard_activity'];
+// Site Health Status
+$wp_meta_boxes&#91;'dashboard']&#91;'normal']&#91;'core']&#91;'health_check_status'];
+
+// Side Column (right): 
+// WordPress Events and News
+$wp_meta_boxes&#91;'dashboard']&#91;'side']&#91;'core']&#91;'dashboard_primary'];
+// Quick Draft, Your Recent Drafts
+$wp_meta_boxes&#91;'dashboard']&#91;'side']&#91;'core']&#91;'dashboard_quick_press']; 
+</pre></div><p class="source-code-links"><span><a href="#" class="show-complete-source">Expand full source code</a><a href="#" class="less-complete-source">Collapse full source code</a></span></p></section></div>
+
+
+<p>Here is an example function that removes the QuickPress widget:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><pre class="brush: php; title: ; notranslate" title="">
+// Create the function to use in the action hook
+function wporg_remove_dashboard_widget() {
+	remove_meta_box( 'dashboard_quick_press', 'dashboard', 'side' );
+} 
+// Hook into the 'wp_dashboard_setup' action to register our function
+add_action( 'wp_dashboard_setup', 'wporg_remove_dashboard_widget' );
+</pre></div>
+
+
+<p>The example below removes all Dashboard Widgets:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><pre class="brush: php; title: ; notranslate" title="">
+function wporg_remove_all_dashboard_metaboxes() {
+	// Remove Welcome panel
+	remove_action( 'welcome_panel', 'wp_welcome_panel' );
+	// Remove the rest of the dashboard widgets
+	remove_meta_box( 'dashboard_primary', 'dashboard', 'side' );
+	remove_meta_box( 'dashboard_quick_press', 'dashboard', 'side' );
+	remove_meta_box( 'health_check_status', 'dashboard', 'normal' );
+	remove_meta_box( 'dashboard_right_now', 'dashboard', 'normal' );
+	remove_meta_box( 'dashboard_activity', 'dashboard', 'normal');
+}
+add_action( 'wp_dashboard_setup', 'wporg_remove_all_dashboard_metaboxes' );
+</pre></div>
+
+
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="adding-widgets-in-the-right-side" tabindex="-1">Adding Widgets in the right side <a href="#adding-widgets-in-the-right-side" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Adding Widgets in the right side</span></a></h3>
+
+
+
+<p>The function doesn&#8217;t allow you to choose where you want your widget to go and will automatically add it to the &#8220;core&#8221; which is the left side. However you are able to get it on the right side very easily.</p>
+
+
+
+<p>You can use the&nbsp;<a href="../../../reference/functions/add_meta_box/index.html">add_meta_box()</a>&nbsp;function instead of&nbsp;<code>wp_add_dashboard_widget</code>. Simply specify&nbsp;&#8216;dashboard&#8217;&nbsp;in place of the&nbsp;$post_type. For example:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><pre class="brush: php; title: ; notranslate" title="">
+add_meta_box( 
+	'dashboard_widget_id', 
+	esc_html__( 'Dashboard Widget Title', 'wporg' ), 
+	'dashboard_widget', 
+	'dashboard', 
+	'side', 'high' 
+);
+</pre></div>
+
+
+<p>Or, after creating the widget:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><section class="source-content"><div class="source-code-container"><pre class="brush: php; title: ; notranslate" title="">
+function wporg_add_dashboard_widget() {
+	wp_add_dashboard_widget( 
+		'wporg_dashboard_widget', 
+		esc_html__( 'Example Dashboard Widget', 'wporg' ), 
+		'wporg_dashboard_widget_function' 
+	);
+	
+	// Global the $wp_meta_boxes variable (this will allow us to alter the array).
+	global $wp_meta_boxes;
+
+	// Then we make a backup of your widget.
+	$wporg_widget = $wp_meta_boxes&#91;'dashboard']&#91;'normal']&#91;'core']&#91;'wporg_dashboard_widget'];
+
+	// We then unset that part of the array.
+	unset( $wp_meta_boxes&#91;'dashboard']&#91;'normal']&#91;'core']&#91;'wporg_dashboard_widget'] );
+
+	// Now we just add your widget back in.
+	$wp_meta_boxes&#91;'dashboard']&#91;'side']&#91;'core']&#91;'wporg_dashboard_widget'] = $wporg_widget;
+}
+add_action( 'wp_dashboard_setup', 'wporg_add_dashboard_widget' );
+</pre></div><p class="source-code-links"><span><a href="#" class="show-complete-source">Expand full source code</a><a href="#" class="less-complete-source">Collapse full source code</a></span></p></section></div>
+
+
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="aggregating-rss-feeds-in-the-dashboard" tabindex="-1">Aggregating RSS feeds in the dashboard <a href="#aggregating-rss-feeds-in-the-dashboard" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Aggregating RSS feeds in the dashboard</span></a></h3>
+
+
+
+<p>If you need to aggregate RSS in your widget you should take a look at the way the existing plugins are set up with caching in&nbsp;<code><a href="https://core.trac.wordpress.org/browser/tags/5.2.1/src//wp-admin/includes/dashboard.php#L0">/wp-admin/includes/dashboard.php</a></code>.</p>
+
+
+
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="widget-options" tabindex="-1">Widget Options <a href="#widget-options" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Widget Options</span></a></h2>
+
+
+
+<p>WordPress does not provide a built-in way to fetch options for a specific widget. By default, you would need to use&nbsp;<code><a href="../../../reference/functions/get_option/index.html">get_option( 'dashboard_widget_options' )</a></code>&nbsp;to fetch all widget options and then filter the returned array manually. This section presents some functions that can easily be added to a theme or plugin to help getting and setting of widget options.</p>
+
+
+
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="getting-widget-options" tabindex="-1">Getting Widget Options <a href="#getting-widget-options" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Getting Widget Options</span></a></h3>
+
+
+
+<p>This function will fetch all widget options, or only options for a specified widget:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><section class="source-content"><div class="source-code-container"><pre class="brush: php; title: ; notranslate" title="">
+
+/**
+ * Gets all widget options, or only options for a specified widget if a widget id is provided.
+ *
+ * @param string $widget_id Optional. If provided, will only get options for that widget.
+ * @return array An associative array
+ */
+function wporg_get_dashboard_widget_options( $widget_id = '' ) {
+    // Fetch ALL dashboard widget options from the db
+    $options = get_option( 'dashboard_widget_options' );
+ 
+    // If no widget is specified, return everything
+    if ( empty( $widget_id ) ) {
+        return $options;
+    }
+ 
+    // If we request a widget and it exists, return it
+    if ( isset( $options&#91;$widget_id] ) ) {
+        return $options&#91;$widget_id];
+    }
+ 
+    // Something went wrong...
+    return false;
+}
+</pre></div><p class="source-code-links"><span><a href="#" class="show-complete-source">Expand full source code</a><a href="#" class="less-complete-source">Collapse full source code</a></span></p></section></div>
+
+
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="get-a-single-widget-option" tabindex="-1">Get a Single Widget Option <a href="#get-a-single-widget-option" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Get a Single Widget Option</span></a></h3>
+
+
+
+<p>If you want to easily fetch only a single option (for outputting to a theme), the following function will make that easier.</p>
+
+
+
+<p>This example should be used with the previous <a href="index.html#getting-widget-options">Getting Widget Options</a> example function.</p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><section class="source-content"><div class="source-code-container"><pre class="brush: php; title: ; notranslate" title="">
+/**
+ * Gets one specific option for the specified widget.
+ * 
+ * @param  string $widget_id Widget ID.
+ * @param  string $option    Widget option.
+ * @param  string $default   Default option.
+ * 
+ * @return string            Returns single widget option.
+ */
+function wporg_get_dashboard_widget_option( $widget_id, $option, $default = NULL ) {
+	$options = wporg_get_dashboard_widget_options( $widget_id );
+
+	// If widget options don't exist, return false.
+	if ( ! $options ) {
+		return false;
+	}
+
+	// Otherwise fetch the option or use default
+	if ( isset( $options&#91;$option] ) &amp;&amp; ! empty( $options&#91;$option] ) ) {
+		return $options&#91;$option];
+	} else {
+		return ( isset( $default ) ) ? $default : false;
+	}
+}
+</pre></div><p class="source-code-links"><span><a href="#" class="show-complete-source">Expand full source code</a><a href="#" class="less-complete-source">Collapse full source code</a></span></p></section></div>
+
+
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="update-widget-options" tabindex="-1">Update Widget Options <a href="#update-widget-options" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Update Widget Options</span></a></h3>
+
+
+
+<p>This function can be used to easily update all of a widget&#8217;s options. It can also be used to add a widget option non-destructively. Simply set the $add_option argument to true, and this will <strong>NOT overwrite</strong> any existing options (although it will add any missing ones).</p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><section class="source-content"><div class="source-code-container"><pre class="brush: php; title: ; notranslate" title="">
+/**
+ * Saves an array of options for a single dashboard widget to the database.
+ * Can also be used to define default values for a widget.
+ *
+ * @param string $widget_id  The name of the widget being updated
+ * @param array $args        An associative array of options being saved.
+ * @param bool $add_only     Set to true if you don't want to override any existing options.
+ */
+function update_dashboard_widget_options( $widget_id , $args = array(), $add_only = false ) {
+	// Fetch ALL dashboard widget options from the db...
+	$options = get_option( 'dashboard_widget_options' );
+
+	// Get just our widget's options, or set empty array.
+	$widget_options = ( isset( $options&#91;$widget_id] ) ) ? $options&#91;$widget_id] : array();
+
+	if ( $add_only ) {
+		// Flesh out any missing options (existing ones overwrite new ones).
+		$options&#91;$widget_id] = array_merge( $args, $widget_options );
+	} else {
+		// Merge new options with existing ones, and add it back to the widgets array.
+		$options&#91;$widget_id] = array_merge( $widget_options, $args );
+	}
+
+	// Save the entire widgets array back to the db.
+	return update_option( 'dashboard_widget_options', $options );
+}
+</pre></div><p class="source-code-links"><span><a href="#" class="show-complete-source">Expand full source code</a><a href="#" class="less-complete-source">Collapse full source code</a></span></p></section></div>
+
+
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="see-also" tabindex="-1">See Also <a href="#see-also" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">See Also</span></a></h2>
+
+
+
+<p>See <a href="example-dashboard-widget/index.html">Example Dashboard widget</a> for more examples.</p>
+
+
+<div class="bottom-of-entry">&nbsp;</div>
+
+			
+		<nav class="handbook-navigation" role="navigation">
+			<h1 class="screen-reader-text">Handbook navigation</h1>
+			<div class="nav-links">
+
+			<a href="../responsive-images/index.html" rel="previous"><span class="meta-nav">&larr;</span> Responsive Images</a><a href="example-dashboard-widget/index.html" rel="next">Example Dashboard widget <span class="meta-nav">&rarr;</span></a>
+			</div>
+			<!-- .nav-links -->
+		</nav><!-- .navigation -->
+	
+		
+		</main><!-- #main -->
+
+	</div><!-- #content -->
+
+</div><!-- #page -->
+
+
+<div id="wporg-footer">
+	<div class="wrapper">
+		<ul>
+			<li><a href="http://wordpress.org/about/" title="An introduction to the WordPress project">About</a></li>
+			<li><a href="http://wordpress.org/news/" title="News and Updates">Blog</a></li>
+			<li><a href="http://wordpress.org/hosting/" title="Recommended web hosting providers">Hosting</a></li>
+			<li><a href="https://wordpressfoundation.org/donate/" title="Donate to the WordPress Foundation">Donate</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://wordpress.org/support/" title="Forums, documentation, and other resources">Support</a></li>
+			<li><a href="../../../index.html" title="Resources for WordPress developers">Developers</a></li>
+			<li><a href="http://make.wordpress.org/" title="Give back to WordPress through code, support, translation and more">Get Involved</a></li>
+			<li><a href="http://learn.wordpress.org/" title="Workshops and training materials">Learn</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://wordpress.org/showcase/" title="Some of the best WordPress sites on the Web">Showcase</a></li>
+			<li><a href="http://wordpress.org/plugins/" title="Add extra functionality to WordPress">Plugins</a></li>
+			<li><a href="http://wordpress.org/themes/" title="Make your WordPress pretty">Themes</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://central.wordcamp.org/" title="Find a WordPress event near you">WordCamp</a></li>
+			<li><a href="http://wordpress.tv/" title="Videos, tutorials, and WordCamp sessions">WordPress.TV</a></li>
+			<li><a href="http://buddypress.org/" title="A set of plugins to transform your WordPress into a social network">BuddyPress</a></li>
+			<li><a href="http://bbpress.org/" title="Fast, slick forums built on WordPress">bbPress</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://wordpress.com/?ref=wporg-footer" title="Hassle-free WordPress hosting">WordPress.com</a></li>
+			<li><a href="http://ma.tt/" title="Co-founder of WordPress, an example of what WordPress can do">Matt</a></li>
+			<li><a href="http://wordpress.org/about/privacy/" title="WordPress.org Privacy Policy">Privacy</a></li>
+			<li><a href="https://publiccode.eu/" target="_blank">Public Code</a></li>
+		</ul>
+
+		<ul class="social-media-links">
+			<li><span class="dashicons dashicons-twitter"></span><a href="https://twitter.com/WordPress" title="Follow @WordPress on Twitter">@WordPress</a></li>
+			<li><span class="dashicons dashicons-facebook"></span><a href="https://www.facebook.com/WordPress/" title="Like WordPress on Facebook">WordPress</a></li>
+		</ul>
+	</div>
+
+		<p class="cip cip-image">Code is Poetry.</p>
+</div>
+
+<script src="../../../../s.w.org/style/js/navigation.min.js?20190128"></script>
+
+<script type='text/javascript' src='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushPlain.js?ver=3.0.9b' id='syntaxhighlighter-brush-plain-js'></script>
+<script type='text/javascript'>
+	(function(){
+		var corecss = document.createElement('link');
+		var themecss = document.createElement('link');
+		var corecssurl = "../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shCore.css?ver=3.0.9b";
+		if ( corecss.setAttribute ) {
+				corecss.setAttribute( "rel", "stylesheet" );
+				corecss.setAttribute( "type", "text/css" );
+				corecss.setAttribute( "href", corecssurl );
+		} else {
+				corecss.rel = "stylesheet";
+				corecss.href = corecssurl;
+		}
+		document.head.appendChild( corecss );
+		var themecssurl = "../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shThemeDefault.css?ver=3.0.9b";
+		if ( themecss.setAttribute ) {
+				themecss.setAttribute( "rel", "stylesheet" );
+				themecss.setAttribute( "type", "text/css" );
+				themecss.setAttribute( "href", themecssurl );
+		} else {
+				themecss.rel = "stylesheet";
+				themecss.href = themecssurl;
+		}
+		document.head.appendChild( themecss );
+	})();
+	SyntaxHighlighter.config.strings.expandSource = '+ expand source';
+	SyntaxHighlighter.config.strings.help = '?';
+	SyntaxHighlighter.config.strings.alert = 'SyntaxHighlighter\n\n';
+	SyntaxHighlighter.config.strings.noBrush = 'Can\'t find brush for: ';
+	SyntaxHighlighter.config.strings.brushNotHtmlScript = 'Brush wasn\'t configured for html-script option: ';
+	SyntaxHighlighter.defaults['pad-line-numbers'] = false;
+	SyntaxHighlighter.defaults['toolbar'] = false;
+	SyntaxHighlighter.all();
+
+	// Infinite scroll support
+	if ( typeof( jQuery ) !== 'undefined' ) {
+		jQuery( function( $ ) {
+			$( document.body ).on( 'post-load', function() {
+				SyntaxHighlighter.highlight();
+			} );
+		} );
+	}
+</script>
+<script type='text/javascript' src='../../../wp-includes/js/hoverintent-js.min.js?ver=2.2.1' id='hoverintent-js-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/admin-bar.min.js?ver=5.9-alpha-51701' id='admin-bar-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/navigation.js?ver=20181209' id='wporg-developer-navigation-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/skip-link-focus-fix.js?ver=20130115' id='wporg-developer-skip-link-focus-fix-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/search.js?ver=20150430' id='wporg-developer-search-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/menu.js?ver=20180201' id='wporg-developer-menu-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/awesomplete.min.js?ver=20160322' id='awesomplete-js'></script>
+<script type='text/javascript' id='autocomplete-js-extra'>
+/* <![CDATA[ */
+var autocomplete = {"ajaxurl":"https:\/\/developer.wordpress.org\/wp-admin\/admin-ajax.php","nonce":"8a60f70c4b"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/autocomplete.js?ver=20160524' id='autocomplete-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/function-reference.js?ver=20180724' id='wporg-developer-function-reference-js'></script>
+<script type='text/javascript' id='quicktags-js-extra'>
+/* <![CDATA[ */
+var quicktagsL10n = {"closeAllOpenTags":"Close all open tags","closeTags":"close tags","enterURL":"Enter the URL","enterImageURL":"Enter the URL of the image","enterImageDescription":"Enter a description of the image","textdirection":"text direction","toggleTextdirection":"Toggle Editor Text Direction","dfw":"Distraction-free writing mode","strong":"Bold","strongClose":"Close bold tag","em":"Italic","emClose":"Close italic tag","link":"Insert link","blockquote":"Blockquote","blockquoteClose":"Close blockquote tag","del":"Deleted text (strikethrough)","delClose":"Close deleted text tag","ins":"Inserted text","insClose":"Close inserted text tag","image":"Insert image","ul":"Bulleted list","ulClose":"Close bulleted list tag","ol":"Numbered list","olClose":"Close numbered list tag","li":"List item","liClose":"Close list item tag","code":"Code","codeClose":"Close code tag","more":"Insert Read More tag"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-includes/js/quicktags.min.js?ver=5.9-alpha-51701' id='quicktags-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/user-notes.js?ver=20200110' id='wporg-developer-user-notes-js'></script>
+<script type='text/javascript' id='wporg-developer-user-notes-feedback-js-extra'>
+/* <![CDATA[ */
+var wporg_note_feedback = {"show":"Show Feedback","hide":"Hide Feedback"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/user-notes-feedback.js?ver=20181023' id='wporg-developer-user-notes-feedback-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/tabs.js?ver=20160824' id='wporg-developer-tabs-js'></script>
+<script type='text/javascript' id='wporg-developer-preview-js-extra'>
+/* <![CDATA[ */
+var wporg_note_preview = {"ajaxurl":"https:\/\/developer.wordpress.org\/wp-admin\/admin-ajax.php","nonce":"504933b60e","preview":"preview note","preview_empty":"Nothing to preview","is_admin":""};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/user-notes-preview.js?ver=20200111' id='wporg-developer-preview-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/wp-embed.min.js?ver=5.9-alpha-51701' id='wp-embed-js'></script>
+</body>
+
+<!-- Mirrored from developer.wordpress.org/apis/handbook/dashboard-widgets/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 31 Aug 2021 16:22:01 GMT -->
+</html>

@@ -1,0 +1,2124 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+
+<!-- Mirrored from developer.wordpress.org/reference/functions/wp_mail/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 31 Aug 2021 17:05:41 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<!--
+<meta property="fb:page_id" content="6427302910" />
+-->
+<meta name="google-site-verification" content="7VWES_-rcHBcmaQis9mSYamPfNwE03f4vyTj4pfuAw0" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>wp_mail()</title>
+<meta name="referrer" content="always">
+
+		<link href='../../../../fonts.googleapis.com/css.css?family=Open+Sans:300italic,400italic,600italic,400,300,600&amp;subset=latin,cyrillic-ext,greek-ext,greek,vietnamese,latin-ext,cyrillic' rel='stylesheet' type='text/css'>
+
+		<link rel="stylesheet" href="../../../../s.w.org/style/wp4.css?95" />
+
+<link rel="shortcut icon" href="../../../../s.w.org/favicon.ico?2" type="image/x-icon" />
+<link rel="pingback" href="../../../xmlrpc.php" /><meta name='robots' content='max-image-preview:large' />
+<link rel='dns-prefetch' href='../../../../fonts.googleapis.com/index.html' />
+<link rel='dns-prefetch' href='http://s.w.org/' />
+<link rel='dns-prefetch' href='http://www.googletagmanager.com/' />
+<link rel='dns-prefetch' href='http://fonts.gstatic.com/' />
+<link rel="alternate" type="application/rss+xml" title="WordPress Developer Resources &raquo; Feed" href="../../../feed/index.html" />
+<link rel="alternate" type="application/rss+xml" title="WordPress Developer Resources &raquo; Comments Feed" href="../../../comments/feed/index.html" />
+<meta property="og:title" content="wp_mail() | Function | WordPress Developer Resources" />
+<meta property="og:site_name" content="WordPress Developer Resources" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="../../../index.html" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@WordPress" />
+<meta name="description" content="Sends an email, similar to PHP&#8217;s mail function." />
+<meta property="og:description" content="Sends an email, similar to PHP&#8217;s mail function." />
+<link rel="alternate" type="application/rss+xml" title="WordPress Developer Resources &raquo; wp_mail Comments Feed" href="https://developer.wordpress.org/reference/functions/wp_mail/feed/" />
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'../../../../www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P24PF4B');</script>
+			<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/developer.wordpress.org\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.9-alpha-51701"}};
+			!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([10084,65039,8205,55357,56613],[10084,65039,8203,55357,56613])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel='stylesheet' id='dashicons-css'  href='../../../wp-includes/css/dashicons.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='admin-bar-css'  href='../../../wp-includes/css/admin-bar.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-block-library-css'  href='../../../wp-includes/css/dist/block-library/style.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='wporg-handbook-css-css'  href='../../../wp-content/plugins/handbook/stylesheets/callout-boxes.css?ver=20200121' type='text/css' media='all' />
+<link rel='stylesheet' id='open-sans-css'  href='../../../../fonts.googleapis.com/css-2.css?family=Open+Sans%3A300italic%2C400italic%2C600italic%2C300%2C400%2C600&amp;subset=latin%2Clatin-ext&amp;display=fallback&amp;ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='wporg-developer-style-css'  href='../../../wp-content/themes/pub/wporg-developer/style.css?ver=3' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-dev-sass-compiled-css'  href='../../../wp-content/themes/pub/wporg-developer/stylesheets/main.css?ver=20200713' type='text/css' media='all' />
+<link rel='stylesheet' id='awesomplete-css-css'  href='../../../wp-content/themes/pub/wporg-developer/stylesheets/awesomplete.css?ver=20160114' type='text/css' media='all' />
+<link rel='stylesheet' id='autocomplete-css-css'  href='../../../wp-content/themes/pub/wporg-developer/stylesheets/autocomplete.css?ver=20171220' type='text/css' media='all' />
+<link rel='stylesheet' id='syntaxhighlighter-core-css'  href='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shCore.css?ver=3.0.9b' type='text/css' media='all' />
+<link rel='stylesheet' id='syntaxhighlighter-theme-default-css'  href='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shThemeDefault.css?ver=3.0.9b' type='text/css' media='all' />
+<script type='text/javascript' src='../../../wp-includes/js/jquery/jquery.min.js?ver=3.6.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='../../../wp-content/plugins/handbook/scripts/handbook.js?ver=20150930' id='wporg-handbook-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/chapters.js?ver=20190603' id='wporg-developer-chapters-js'></script>
+<script type='text/javascript' src='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shCore.js?ver=3.0.9b' id='syntaxhighlighter-core-js'></script>
+<script type='text/javascript' src='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushPhp.js?ver=3.0.9b' id='syntaxhighlighter-brush-php-js'></script>
+<link rel="https://api.w.org/" href="https://developer.wordpress.org/wp-json/" /><link rel="alternate" type="application/json" href="https://developer.wordpress.org/wp-json/wp/v2/wp-parser-function/3340" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="../../../xmlrpc-2.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="../../../wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 5.9-alpha-51701" />
+<link rel='shortlink' href='https://developer.wordpress.org/?p=3340' />
+<link rel="alternate" type="application/json+oembed" href="https://developer.wordpress.org/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_mail%2F" />
+<link rel="alternate" type="text/xml+oembed" href="https://developer.wordpress.org/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_mail%2F&amp;format=xml" />
+<link rel="canonical" href="index.html">
+<!-- Stream WordPress user activity plugin v3.6.2 -->
+	<style>
+		@media screen and (max-width: 782px) {
+			#wpadminbar li#wp-admin-bar-log-in,
+			#wpadminbar li#wp-admin-bar-register {
+				display: block;
+			}
+
+			#wpadminbar li#wp-admin-bar-log-in a,
+			#wpadminbar li#wp-admin-bar-register a {
+				padding: 0 8px;
+			}
+		}
+	</style>
+		<style>
+			a.github-edit {
+				margin-left: .5em;
+				font-size: .5em;
+				vertical-align: top;
+				display: inline-block;
+				border: 1px solid #eeeeee;
+				border-radius: 2px;
+				background: #eeeeee;
+				padding: .5em .6em .4em;
+				color: black;
+				margin-top: 0.1em;
+			}
+			a.github-edit > * {
+				opacity: 0.6;
+			}
+			a.github-edit:hover > * {
+				opacity: 1;
+				color: black;
+			}
+			a.github-edit img {
+				height: .8em;
+			}
+		</style>
+		
+	<script type="text/javascript">
+		jQuery( '<style>.hide-if-js { display: none; }</style>' ).appendTo( 'head' );
+		jQuery( function($) {
+			$( 'body' ).addClass('js');
+		} );
+	</script>
+<style type="text/css" media="print">#wpadminbar { display:none; }</style>
+	<style type="text/css" media="screen">
+	</style>
+	<script>document.cookie='devicePixelRatio='+((window.devicePixelRatio === undefined) ? 1 : window.devicePixelRatio)+'; path=/';</script>
+
+</head>
+
+
+<body id="wordpress-org" class="wp-parser-function-template-default single single-wp-parser-function postid-3340 admin-bar no-customize-support">
+		<div id="wpadminbar" class="nojq nojs">
+						<div class="quicklinks" id="wp-toolbar" role="navigation" aria-label="Toolbar">
+				<ul id='wp-admin-bar-root-default' class="ab-top-menu"><li id='wp-admin-bar-wp-logo' class="menupop"><a class='ab-item' aria-haspopup="true" href='https://wordpress.org/about/'><span class="ab-icon" aria-hidden="true"></span><span class="screen-reader-text">About WordPress</span></a><div class="ab-sub-wrapper"><ul id='wp-admin-bar-wp-logo-default' class="ab-submenu"><li id='wp-admin-bar-about'><a class='ab-item' href='https://wordpress.org/about/'>About WordPress</a></li></ul><ul id='wp-admin-bar-wp-logo-external' class="ab-sub-secondary ab-submenu"><li id='wp-admin-bar-wporg'><a class='ab-item' href='https://wordpress.org/'>WordPress.org</a></li><li id='wp-admin-bar-documentation'><a class='ab-item' href='https://wordpress.org/support/'>Documentation</a></li><li id='wp-admin-bar-support-forums'><a class='ab-item' href='https://wordpress.org/support/forums/'>Support</a></li><li id='wp-admin-bar-feedback'><a class='ab-item' href='https://wordpress.org/support/forum/requests-and-feedback'>Feedback</a></li></ul></div></li></ul><ul id='wp-admin-bar-top-secondary' class="ab-top-secondary ab-top-menu"><li id='wp-admin-bar-search' class="admin-bar-search"><div class="ab-item ab-empty-item" tabindex="-1"><form action="https://developer.wordpress.org/" method="get" id="adminbarsearch"><input class="adminbar-input" name="s" id="adminbar-search" type="text" value="" maxlength="150" /><label for="adminbar-search" class="screen-reader-text">Search</label><input type="submit" class="adminbar-button" value="Search" /></form></div></li><li id='wp-admin-bar-log-in'><a class='ab-item' href='https://login.wordpress.org/?locale=en_US'>Log In</a></li><li id='wp-admin-bar-register'><a class='ab-item' href='https://login.wordpress.org/register?locale=en_US'>Register</a></li></ul>			</div>
+					</div>
+
+		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P24PF4B" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<div id="wporg-header">
+	<div class="wrapper">
+	<h1><a href="http://wordpress.org/">WordPress.org</a></h1>				<div id="head-search">
+		<form action="http://wordpress.org/search/do-search.php" method="get">
+			<label for="global-search" class="screen-reader-text">Search WordPress.org for:</label>
+			<input id="global-search" class="text" name="search" type="text" value="" maxlength="150" placeholder="Search WordPress.org" />
+			<button type="submit" class="button"><span class="screen-reader-text">Submit</span></button>
+		</form>
+		</div>
+				<div style="clear:both"></div>
+		<button id="mobile-menu-button" aria-expanded="false"><span class="screen-reader-text">Toggle Menu</span></button>
+		
+<nav aria-label="Main Menu">
+<ul id="wporg-header-menu">
+<li class="menu-item"><a href='http://wordpress.org/showcase/' data-title='See some of the sites built on WordPress.'>Showcase</a></li>
+<li class="menu-item"><a href='http://learn.wordpress.org/' data-title='Resources to help you learn more about WordPress and teach it to others.'>Learn</a></li>
+<li class="menu-item"><a href='http://wordpress.org/themes/' data-title='Find just the right look for your website.'>Themes</a></li>
+<li class="menu-item"><a href='http://wordpress.org/plugins/' data-title='Plugins can extend WordPress to do almost anything you can imagine.'>Plugins</a></li>
+<li class="menu-item"><a href='http://wordpress.org/mobile/' data-title='Take your website on the go!'>Mobile</a></li>
+<li class="menu-item"><a href='http://wordpress.org/support/' data-title='Forums, documentation, help.'>Support</a><ul class="nav-submenu"><li><a href='http://wordpress.org/support/' title='Documentation, tutorials, best practices.'>Documentation</a></li><li><a href='http://wordpress.org/support/forums/' title='Support and discussion forums.'>Forums</a></li></ul><div class="uparrow"></div></li>
+<li class="menu-item"><a href='http://make.wordpress.org/' data-title='Contribute your knowledge.'>Get Involved</a><ul class="nav-submenu"><li><a href='http://wordpress.org/five-for-the-future/' title='How five percent is powering the next generation of the web'>Five for the Future</a></li></ul><div class="uparrow"></div></li>
+<li class="menu-item"><a href='http://wordpress.org/about/' data-title='About the WordPress Organization, and where we&#039;re going.'>About</a></li>
+<li class="menu-item"><a href='http://wordpress.org/news/' data-title='Come here for the latest scoop.'>Blog</a></li>
+<li class="menu-item"><a href='http://wordpress.org/hosting/' data-title='Find a home for your blog.'>Hosting</a></li>
+<li id="download" class="button download-button menu-item"><a href='http://wordpress.org/download/' data-title='Get it. Got it? Good.'>Get WordPress</a></li>
+</ul>
+</nav>
+		<div style="clear:both"></div>
+	</div>
+</div>
+
+
+
+<header id="masthead" class="site-header" role="banner">
+		<div class="site-branding">
+		<h1 class="site-title">
+			<a href="../../index.html" rel="home">Code Reference</a>
+		</h1>
+
+		
+		<nav id="site-navigation" class="main-navigation" role="navigation">
+			<button class="menu-toggle dashicons dashicons-arrow-down-alt2" aria-controls="primary-menu" aria-expanded="false" aria-label="Primary Menu"></button>
+					</nav>
+	</div>
+</header><!-- #masthead -->
+
+<div id="page" class="hfeed site devhub-wrap">
+	<a href="#main" class="screen-reader-text">Skip to content</a>
+
+				<div id="inner-search">
+			<div class="search-section section clear hide-if-js">
+
+
+	
+	<form role="search" method="get" class="searchform searchform-filtered" action="https://developer.wordpress.org/">
+		<label for="search-field" class="screen-reader-text">Search for:</label>
+		<input type="text" id="search-field" class="search-field" placeholder="Search &hellip;" value="" name="s">
+		<button class="button button-primary button-search"><i class="dashicons dashicons-search"></i><span class="screen-reader-text">Search plugins</span></button>
+	
+		<div class="search-post-type">
+			<span>Filter by type:</span>
+									<label><input type="checkbox" name="post_type[]" value="wp-parser-function"
+						 /> Functions</label>
+									<label><input type="checkbox" name="post_type[]" value="wp-parser-hook"
+						 /> Hooks</label>
+									<label><input type="checkbox" name="post_type[]" value="wp-parser-class"
+						 /> Classes</label>
+									<label><input type="checkbox" name="post_type[]" value="wp-parser-method"
+						 /> Methods</label>
+					</div>
+
+	
+	</form>
+
+</div><!-- /search-guide -->
+			<div id="inner-search-icon-container">
+				<div id="inner-search-icon">
+					<div class="dashicons dashicons-search"><span class="screen-reader-text">Search</span></div>
+				</div>
+			</div>
+		</div>
+
+		<div id="content" class="site-content">
+
+	<div id="content-area" class="wp-parser-function-template-default single single-wp-parser-function postid-3340 admin-bar no-customize-support code-reference">
+
+		
+		<div class="breadcrumb-trail breadcrumbs" itemprop="breadcrumb">
+			<span class="trail-browse">Browse:</span> 
+			<span class="trail-begin"><a href="../../../index.html" title="WordPress Developer Resources" rel="home">Home</a></span> <span class="sep">&#47;</span> 
+			<span class="trail-inner"><a href="../../index.html" title="Reference">Reference</a></span> <span class="sep">&#47;</span> 
+			<span class="trail-inner"><a href="../index.html">Functions</a></span> <span class="sep">&#47;</span> <span class="trail-end">wp_mail()</span>
+		</div>
+		<main id="main" class="site-main" role="main">
+
+		
+			
+<article id="post-3340" class="post-3340 wp-parser-function type-wp-parser-function status-publish hentry wp-parser-source-file-wp-includes_pluggable-php wp-parser-package-wordpress wp-parser-since-1-2-1 wp-parser-since-5-5-0">
+
+	
+	
+	<h1>wp_mail( <span class="arg-type">string|string[]</span>&nbsp;<span class="arg-name">$to</span>,  <span class="arg-type">string</span>&nbsp;<span class="arg-name">$subject</span>,  <span class="arg-type">string</span>&nbsp;<span class="arg-name">$message</span>,  <span class="arg-type">string|string[]</span>&nbsp;<span class="arg-name">$headers</span>&nbsp;=&nbsp;<span class="arg-default">''</span>,  <span class="arg-type">string|string[]</span>&nbsp;<span class="arg-name">$attachments</span>&nbsp;=&nbsp;<span class="arg-default">array()</span>&nbsp;)</h1>
+
+	<section class="summary">
+		<p>Sends an email, similar to PHP&#8217;s mail function.</p>
+	</section>
+
+
+	
+	<div class="content-toc"><style> .toc-jump { text-align: right; font-size: 12px; } .page .toc-heading { margin-top: -50px; padding-top: 50px !important; }</style><div class="table-of-contents"><h2>Contents</h2><ul class="items"><li><a href="#description">Description</a></li>
+<li><a href="#parameters">Parameters</a></li>
+<li><a href="#return">Return</a></li>
+<li><a href="#more-information">More Information</a>
+<ul>
+<li><a href="#usage">Usage</a></li>
+<li><a href="#notes">Notes</a></li>
+<li><a href="#valid-address-formats"><span id="Valid_Address_Formats" class="mw-headline">Valid Address Formats</span></a></li>
+<li><a href="#using-headers-to-set-from-cc-and-bcc-parameters"><span id="Using_.24headers_To_Set_.22From:.22.2C_.22Cc:.22_and_.22Bcc:.22_Parameters" class="mw-headline">Using $headers To Set &#8220;From:&#8221;, &#8220;Cc:&#8221; and &#8220;Bcc:&#8221; Parameters</span></a>
+</ul></li>
+<li><a href="#source">Source</a></li>
+<li><a href="#related">Related</a>
+<ul>
+<li><a href="#uses">Uses</a></li>
+<li><a href="#used-by">Used By</a>
+</ul></li>
+<li><a href="#changelog">Changelog</a></li>
+<li><a href="#user-contributed-notes">User Contributed Notes</a></ul>
+</div>
+
+<hr />
+<section class="description">
+	<h2 class="toc-heading" id="description" tabindex="-1">Description <a href="#description" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Description</span></a></h2>
+	<p>A true return value does not automatically mean that the user received the email successfully. It just only means that the method used was able to process the request without any errors.</p>
+<p>The default content type is <code>text/plain</code> which does not allow using HTML. However, you can set the content type of the email by using the <a href="../../hooks/wp_mail_content_type/index.html">&#8216;wp_mail_content_type&#8217;</a> filter.</p>
+<p>The default charset is based on the charset used on the blog. The charset can be set using the <a href="../../hooks/wp_mail_charset/index.html">&#8216;wp_mail_charset&#8217;</a> filter.</p>
+
+	</section>
+
+	<hr />
+	<section class="parameters">
+		<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="parameters" tabindex="-1">Parameters <a href="#parameters" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Parameters</span></a></h2>
+		<dl>
+												<dt>$to</dt>
+								<dd>
+					<p class="desc">
+													<span class="type">(<span class="string">string</span>|<span class="string[]">string[]</span>)</span>
+																			<span class="required">(Required)</span>
+																			<span class="description">Array or comma-separated list of email addresses to send message.</span>
+											</p>
+									</dd>
+												<dt>$subject</dt>
+								<dd>
+					<p class="desc">
+													<span class="type">(<span class="string">string</span>)</span>
+																			<span class="required">(Required)</span>
+																			<span class="description">Email subject.</span>
+											</p>
+									</dd>
+												<dt>$message</dt>
+								<dd>
+					<p class="desc">
+													<span class="type">(<span class="string">string</span>)</span>
+																			<span class="required">(Required)</span>
+																			<span class="description">Message contents.</span>
+											</p>
+									</dd>
+												<dt>$headers</dt>
+								<dd>
+					<p class="desc">
+													<span class="type">(<span class="string">string</span>|<span class="string[]">string[]</span>)</span>
+																			<span class="required">(Optional)</span>
+																			<span class="description"> Additional headers.</span>
+											</p>
+											<p class="default">Default value: ''</p>
+									</dd>
+												<dt>$attachments</dt>
+								<dd>
+					<p class="desc">
+													<span class="type">(<span class="string">string</span>|<span class="string[]">string[]</span>)</span>
+																			<span class="required">(Optional)</span>
+																			<span class="description"> Paths to files to attach.</span>
+											</p>
+											<p class="default">Default value: array()</p>
+									</dd>
+					</dl>
+	</section>
+	<hr />
+	<section class="return">
+		<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="return" tabindex="-1">Return <a href="#return" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Return</span></a></h2>
+		<p><span class='return-type'>(bool)</span> Whether the email was sent successfully.</p>
+	</section>
+	<hr />
+	<section class="explanation">
+		<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="more-information" tabindex="-1">More Information <a href="#more-information" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">More Information</span></a></h2>
+
+		<h3 class="toc-heading" id="usage" tabindex="-1">Usage <a href="#usage" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Usage</span></a></h3>
+<pre class="brush: php; title: ; notranslate" title="">
+wp_mail( $to, $subject, $message, $headers, $attachments );
+</pre>
+<p>Optional filters &#8216;<a href="../../hooks/wp_mail_from/index.html">wp_mail_from</a>&#8216; and &#8216;<a href="../../hooks/wp_mail_from_name/index.html">wp_mail_from_name</a>&#8216; are run on the sender email address and name. The return values are reassembled into a &#8216;from&#8217; address like &#8216;&#8221;Example User&#8221; &#8216; If only &#8216;<a href="../../hooks/wp_mail_from/index.html">wp_mail_from</a>&#8216; returns a value, then just the email address will be used with no name.</p>
+<p>The default content type is &#8216;text/plain&#8217; which does not allow using HTML. You can set the content type of the email either by using the <a href="../../hooks/wp_mail_content_type/index.html">&#8216;wp_mail_content_type</a>&#8216; filter ( see example below), or by including a header like &#8220;Content-type: text/html&#8221;. Be careful to reset &#8216;wp_mail_content_type&#8217; back to &#8216;text/plain&#8217; after you send your message, though, because failing to do so could lead to unexpected problems with e-mails from WP or plugins/themes.</p>
+<p>The default charset is based on the charset used on the blog. The charset can be set using the &#8216;<a href="../../hooks/wp_mail_charset/index.html">wp_mail_charset</a>&#8216; filter.</p>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="notes" tabindex="-1">Notes <a href="#notes" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Notes</span></a></h3>
+<ul>
+<li>A <tt>true</tt> return value does not automatically mean that the user received the email successfully.</li>
+<li>For this function to work, the settings <code>SMTP</code> and <code>smtp_port</code> (default: 25) need to be set in your php.ini file.</li>
+<li>The function is available after the hook <a title="Plugin API/Action Reference/plugins loaded" href="../../hooks/plugins_loaded/index.html"><code>'plugins_loaded'</code></a>.</li>
+<li>The filenames in the <code>$attachments</code> attribute have to be filesystem paths.</li>
+</ul>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="valid-address-formats" tabindex="-1"><span id="Valid_Address_Formats" class="mw-headline">Valid Address Formats</span> <a href="#valid-address-formats" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text"><span id="Valid_Address_Formats" class="mw-headline">Valid Address Formats</span></span></a></h3>
+<p>All email addresses supplied to <tt><a href="index.html">wp_mail()</a></tt> as the <tt>$to</tt> parameter must comply with <a class="external text" href="http://www.faqs.org/rfcs/rfc2822.html">RFC 2822</a>. Some valid examples:</p>
+<ul>
+<li>user@example.com</li>
+<li>user@example.com, anotheruser@example.com</li>
+<li>User &lt;user@example.com&gt;</li>
+<li>User &lt;user@example.com&gt;, Another User &lt;anotheruser@example.com&gt;</li>
+</ul>
+<p>The same applies to Cc: and Bcc: fields in <tt>$headers</tt>, but as noted in the next section, it&#8217;s better to push multiple addresses into an array instead of listing them on a single line. Either address format, with or without the user name, may be used.</p>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="using-headers-to-set-from-cc-and-bcc-parameters" tabindex="-1"><span id="Using_.24headers_To_Set_.22From:.22.2C_.22Cc:.22_and_.22Bcc:.22_Parameters" class="mw-headline">Using $headers To Set &#8220;From:&#8221;, &#8220;Cc:&#8221; and &#8220;Bcc:&#8221; Parameters</span> <a href="#using-headers-to-set-from-cc-and-bcc-parameters" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text"><span id="Using_.24headers_To_Set_.22From:.22.2C_.22Cc:.22_and_.22Bcc:.22_Parameters" class="mw-headline">Using $headers To Set &#8220;From:&#8221;, &#8220;Cc:&#8221; and &#8220;Bcc:&#8221; Parameters</span></span></a></h3>
+<p>To set the &#8220;From:&#8221; email address to something other than the WordPress default sender, or to add &#8220;Cc:&#8221; and/or &#8220;Bcc:&#8221; recipients, you must use the <tt>$headers</tt> argument.</p>
+<p><tt>$headers</tt> can be a string or an array, but it may be easiest to use in the array form. To use it, push a string onto the array, starting with &#8220;From:&#8221;, &#8220;Bcc:&#8221; or &#8220;Cc:&#8221; (note the use of the &#8220;:&#8221;), followed by a valid email address.</p>
+<p>When you are using the array form, you do not need to supply line breaks (<tt>"\n"</tt> or <tt>"\r\n"</tt>). Although the function can handle multiple emails per line, it may simply be easier to push each email address separately onto the <tt>$headers</tt> array. The function will figure it out and will build the proper Mime header automagically. Just don&#8217;t forget that each string you push must have the header type as the first part of the string (&#8220;From:&#8221;, &#8220;Cc:&#8221; or &#8220;Bcc:&#8221;)</p>
+	</section>
+	<hr />
+	<section class="source-content">
+		<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="source" tabindex="-1">Source <a href="#source" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Source</span></a></h2>
+		<p>
+			File: <a href="../../files/wp-includes/pluggable.php/index.html">wp-includes/pluggable.php</a>		</p>
+
+					<div class="source-code-container">
+				<pre class="brush: php; toolbar: false; first-line: 182">	function wp_mail( $to, $subject, $message, $headers = '', $attachments = array() ) {
+		// Compact the input, apply the filters, and extract them back out.
+
+		/**
+		 * Filters the wp_mail() arguments.
+		 *
+		 * @since 2.2.0
+		 *
+		 * @param array $args {
+		 *     Array of the `wp_mail()` arguments.
+		 *
+		 *     @type string|string[] $to          Array or comma-separated list of email addresses to send message.
+		 *     @type string          $subject     Email subject.
+		 *     @type string          $message     Message contents.
+		 *     @type string|string[] $headers     Additional headers.
+		 *     @type string|string[] $attachments Paths to files to attach.
+		 * }
+		 */
+		$atts = apply_filters( 'wp_mail', compact( 'to', 'subject', 'message', 'headers', 'attachments' ) );
+
+		/**
+		 * Filters whether to preempt sending an email.
+		 *
+		 * Returning a non-null value will short-circuit {@see wp_mail()}, returning
+		 * that value instead. A boolean return value should be used to indicate whether
+		 * the email was successfully sent.
+		 *
+		 * @since 5.7.0
+		 *
+		 * @param null|bool $return Short-circuit return value.
+		 * @param array     $atts {
+		 *     Array of the `wp_mail()` arguments.
+		 *
+		 *     @type string|string[] $to          Array or comma-separated list of email addresses to send message.
+		 *     @type string          $subject     Email subject.
+		 *     @type string          $message     Message contents.
+		 *     @type string|string[] $headers     Additional headers.
+		 *     @type string|string[] $attachments Paths to files to attach.
+		 * }
+		 */
+		$pre_wp_mail = apply_filters( 'pre_wp_mail', null, $atts );
+
+		if ( null !== $pre_wp_mail ) {
+			return $pre_wp_mail;
+		}
+
+		if ( isset( $atts['to'] ) ) {
+			$to = $atts['to'];
+		}
+
+		if ( ! is_array( $to ) ) {
+			$to = explode( ',', $to );
+		}
+
+		if ( isset( $atts['subject'] ) ) {
+			$subject = $atts['subject'];
+		}
+
+		if ( isset( $atts['message'] ) ) {
+			$message = $atts['message'];
+		}
+
+		if ( isset( $atts['headers'] ) ) {
+			$headers = $atts['headers'];
+		}
+
+		if ( isset( $atts['attachments'] ) ) {
+			$attachments = $atts['attachments'];
+		}
+
+		if ( ! is_array( $attachments ) ) {
+			$attachments = explode( &quot;\n&quot;, str_replace( &quot;\r\n&quot;, &quot;\n&quot;, $attachments ) );
+		}
+		global $phpmailer;
+
+		// (Re)create it, if it's gone missing.
+		if ( ! ( $phpmailer instanceof PHPMailer\PHPMailer\PHPMailer ) ) {
+			require_once ABSPATH . WPINC . '/PHPMailer/PHPMailer.php';
+			require_once ABSPATH . WPINC . '/PHPMailer/SMTP.php';
+			require_once ABSPATH . WPINC . '/PHPMailer/Exception.php';
+			$phpmailer = new PHPMailer\PHPMailer\PHPMailer( true );
+
+			$phpmailer::$validator = static function ( $email ) {
+				return (bool) is_email( $email );
+			};
+		}
+
+		// Headers.
+		$cc       = array();
+		$bcc      = array();
+		$reply_to = array();
+
+		if ( empty( $headers ) ) {
+			$headers = array();
+		} else {
+			if ( ! is_array( $headers ) ) {
+				// Explode the headers out, so this function can take
+				// both string headers and an array of headers.
+				$tempheaders = explode( &quot;\n&quot;, str_replace( &quot;\r\n&quot;, &quot;\n&quot;, $headers ) );
+			} else {
+				$tempheaders = $headers;
+			}
+			$headers = array();
+
+			// If it's actually got contents.
+			if ( ! empty( $tempheaders ) ) {
+				// Iterate through the raw headers.
+				foreach ( (array) $tempheaders as $header ) {
+					if ( strpos( $header, ':' ) === false ) {
+						if ( false !== stripos( $header, 'boundary=' ) ) {
+							$parts    = preg_split( '/boundary=/i', trim( $header ) );
+							$boundary = trim( str_replace( array( &quot;'&quot;, '&quot;' ), '', $parts[1] ) );
+						}
+						continue;
+					}
+					// Explode them out.
+					list( $name, $content ) = explode( ':', trim( $header ), 2 );
+
+					// Cleanup crew.
+					$name    = trim( $name );
+					$content = trim( $content );
+
+					switch ( strtolower( $name ) ) {
+						// Mainly for legacy -- process a &quot;From:&quot; header if it's there.
+						case 'from':
+							$bracket_pos = strpos( $content, '&lt;' );
+							if ( false !== $bracket_pos ) {
+								// Text before the bracketed email is the &quot;From&quot; name.
+								if ( $bracket_pos &gt; 0 ) {
+									$from_name = substr( $content, 0, $bracket_pos - 1 );
+									$from_name = str_replace( '&quot;', '', $from_name );
+									$from_name = trim( $from_name );
+								}
+
+								$from_email = substr( $content, $bracket_pos + 1 );
+								$from_email = str_replace( '&gt;', '', $from_email );
+								$from_email = trim( $from_email );
+
+								// Avoid setting an empty $from_email.
+							} elseif ( '' !== trim( $content ) ) {
+								$from_email = trim( $content );
+							}
+							break;
+						case 'content-type':
+							if ( strpos( $content, ';' ) !== false ) {
+								list( $type, $charset_content ) = explode( ';', $content );
+								$content_type                   = trim( $type );
+								if ( false !== stripos( $charset_content, 'charset=' ) ) {
+									$charset = trim( str_replace( array( 'charset=', '&quot;' ), '', $charset_content ) );
+								} elseif ( false !== stripos( $charset_content, 'boundary=' ) ) {
+									$boundary = trim( str_replace( array( 'BOUNDARY=', 'boundary=', '&quot;' ), '', $charset_content ) );
+									$charset  = '';
+								}
+
+								// Avoid setting an empty $content_type.
+							} elseif ( '' !== trim( $content ) ) {
+								$content_type = trim( $content );
+							}
+							break;
+						case 'cc':
+							$cc = array_merge( (array) $cc, explode( ',', $content ) );
+							break;
+						case 'bcc':
+							$bcc = array_merge( (array) $bcc, explode( ',', $content ) );
+							break;
+						case 'reply-to':
+							$reply_to = array_merge( (array) $reply_to, explode( ',', $content ) );
+							break;
+						default:
+							// Add it to our grand headers array.
+							$headers[ trim( $name ) ] = trim( $content );
+							break;
+					}
+				}
+			}
+		}
+
+		// Empty out the values that may be set.
+		$phpmailer-&gt;clearAllRecipients();
+		$phpmailer-&gt;clearAttachments();
+		$phpmailer-&gt;clearCustomHeaders();
+		$phpmailer-&gt;clearReplyTos();
+
+		// Set &quot;From&quot; name and email.
+
+		// If we don't have a name from the input headers.
+		if ( ! isset( $from_name ) ) {
+			$from_name = 'WordPress';
+		}
+
+		/*
+		 * If we don't have an email from the input headers, default to wordpress@$sitename
+		 * Some hosts will block outgoing mail from this address if it doesn't exist,
+		 * but there's no easy alternative. Defaulting to admin_email might appear to be
+		 * another option, but some hosts may refuse to relay mail from an unknown domain.
+		 * See https://core.trac.wordpress.org/ticket/5007.
+		 */
+		if ( ! isset( $from_email ) ) {
+			// Get the site domain and get rid of www.
+			$sitename = wp_parse_url( network_home_url(), PHP_URL_HOST );
+			if ( 'www.' === substr( $sitename, 0, 4 ) ) {
+				$sitename = substr( $sitename, 4 );
+			}
+
+			$from_email = 'wordpress@' . $sitename;
+		}
+
+		/**
+		 * Filters the email address to send from.
+		 *
+		 * @since 2.2.0
+		 *
+		 * @param string $from_email Email address to send from.
+		 */
+		$from_email = apply_filters( 'wp_mail_from', $from_email );
+
+		/**
+		 * Filters the name to associate with the &quot;from&quot; email address.
+		 *
+		 * @since 2.3.0
+		 *
+		 * @param string $from_name Name associated with the &quot;from&quot; email address.
+		 */
+		$from_name = apply_filters( 'wp_mail_from_name', $from_name );
+
+		try {
+			$phpmailer-&gt;setFrom( $from_email, $from_name, false );
+		} catch ( PHPMailer\PHPMailer\Exception $e ) {
+			$mail_error_data                             = compact( 'to', 'subject', 'message', 'headers', 'attachments' );
+			$mail_error_data['phpmailer_exception_code'] = $e-&gt;getCode();
+
+			/** This filter is documented in wp-includes/pluggable.php */
+			do_action( 'wp_mail_failed', new WP_Error( 'wp_mail_failed', $e-&gt;getMessage(), $mail_error_data ) );
+
+			return false;
+		}
+
+		// Set mail's subject and body.
+		$phpmailer-&gt;Subject = $subject;
+		$phpmailer-&gt;Body    = $message;
+
+		// Set destination addresses, using appropriate methods for handling addresses.
+		$address_headers = compact( 'to', 'cc', 'bcc', 'reply_to' );
+
+		foreach ( $address_headers as $address_header =&gt; $addresses ) {
+			if ( empty( $addresses ) ) {
+				continue;
+			}
+
+			foreach ( (array) $addresses as $address ) {
+				try {
+					// Break $recipient into name and address parts if in the format &quot;Foo &lt;bar@baz.com&gt;&quot;.
+					$recipient_name = '';
+
+					if ( preg_match( '/(.*)&lt;(.+)&gt;/', $address, $matches ) ) {
+						if ( count( $matches ) == 3 ) {
+							$recipient_name = $matches[1];
+							$address        = $matches[2];
+						}
+					}
+
+					switch ( $address_header ) {
+						case 'to':
+							$phpmailer-&gt;addAddress( $address, $recipient_name );
+							break;
+						case 'cc':
+							$phpmailer-&gt;addCc( $address, $recipient_name );
+							break;
+						case 'bcc':
+							$phpmailer-&gt;addBcc( $address, $recipient_name );
+							break;
+						case 'reply_to':
+							$phpmailer-&gt;addReplyTo( $address, $recipient_name );
+							break;
+					}
+				} catch ( PHPMailer\PHPMailer\Exception $e ) {
+					continue;
+				}
+			}
+		}
+
+		// Set to use PHP's mail().
+		$phpmailer-&gt;isMail();
+
+		// Set Content-Type and charset.
+
+		// If we don't have a content-type from the input headers.
+		if ( ! isset( $content_type ) ) {
+			$content_type = 'text/plain';
+		}
+
+		/**
+		 * Filters the wp_mail() content type.
+		 *
+		 * @since 2.3.0
+		 *
+		 * @param string $content_type Default wp_mail() content type.
+		 */
+		$content_type = apply_filters( 'wp_mail_content_type', $content_type );
+
+		$phpmailer-&gt;ContentType = $content_type;
+
+		// Set whether it's plaintext, depending on $content_type.
+		if ( 'text/html' === $content_type ) {
+			$phpmailer-&gt;isHTML( true );
+		}
+
+		// If we don't have a charset from the input headers.
+		if ( ! isset( $charset ) ) {
+			$charset = get_bloginfo( 'charset' );
+		}
+
+		/**
+		 * Filters the default wp_mail() charset.
+		 *
+		 * @since 2.3.0
+		 *
+		 * @param string $charset Default email charset.
+		 */
+		$phpmailer-&gt;CharSet = apply_filters( 'wp_mail_charset', $charset );
+
+		// Set custom headers.
+		if ( ! empty( $headers ) ) {
+			foreach ( (array) $headers as $name =&gt; $content ) {
+				// Only add custom headers not added automatically by PHPMailer.
+				if ( ! in_array( $name, array( 'MIME-Version', 'X-Mailer' ), true ) ) {
+					try {
+						$phpmailer-&gt;addCustomHeader( sprintf( '%1$s: %2$s', $name, $content ) );
+					} catch ( PHPMailer\PHPMailer\Exception $e ) {
+						continue;
+					}
+				}
+			}
+
+			if ( false !== stripos( $content_type, 'multipart' ) &amp;&amp; ! empty( $boundary ) ) {
+				$phpmailer-&gt;addCustomHeader( sprintf( 'Content-Type: %s; boundary=&quot;%s&quot;', $content_type, $boundary ) );
+			}
+		}
+
+		if ( ! empty( $attachments ) ) {
+			foreach ( $attachments as $attachment ) {
+				try {
+					$phpmailer-&gt;addAttachment( $attachment );
+				} catch ( PHPMailer\PHPMailer\Exception $e ) {
+					continue;
+				}
+			}
+		}
+
+		/**
+		 * Fires after PHPMailer is initialized.
+		 *
+		 * @since 2.2.0
+		 *
+		 * @param PHPMailer $phpmailer The PHPMailer instance (passed by reference).
+		 */
+		do_action_ref_array( 'phpmailer_init', array( &amp;$phpmailer ) );
+
+		// Send!
+		try {
+			return $phpmailer-&gt;send();
+		} catch ( PHPMailer\PHPMailer\Exception $e ) {
+
+			$mail_error_data                             = compact( 'to', 'subject', 'message', 'headers', 'attachments' );
+			$mail_error_data['phpmailer_exception_code'] = $e-&gt;getCode();
+
+			/**
+			 * Fires after a PHPMailer\PHPMailer\Exception is caught.
+			 *
+			 * @since 4.4.0
+			 *
+			 * @param WP_Error $error A WP_Error object with the PHPMailer\PHPMailer\Exception message, and an array
+			 *                        containing the mail recipient, subject, message, headers, and attachments.
+			 */
+			do_action( 'wp_mail_failed', new WP_Error( 'wp_mail_failed', $e-&gt;getMessage(), $mail_error_data ) );
+
+			return false;
+		}
+	}
+</pre>
+			</div>
+			<p class="source-code-links">
+				<span>
+					<a href="#" class="show-complete-source">Expand full source code</a>
+					<a href="#" class="less-complete-source">Collapse full source code</a>
+				</span>
+				<span><a href="https://core.trac.wordpress.org/browser/tags/5.8/src/wp-includes/pluggable.php#L182">View on Trac</a></span>
+			</p>
+			</section>
+	<hr />
+	<section class="related">
+		<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="related" tabindex="-1">Related <a href="#related" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Related</span></a></h2>
+
+					<article class="uses">
+				<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="uses" tabindex="-1">Uses <a href="#uses" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Uses</span></a></h3>
+				<table id="uses-table">
+					<caption class="screen-reader-text">Uses</caption>
+					<thead>
+						<tr>
+							<th>Uses</th>
+							<th class="related-desc">Description</th>
+						</tr>
+					</thead>
+					<tbody>
+												<tr>
+							<td>
+								<span>wp-includes/pluggable.php:</span>
+								<a href="../../hooks/pre_wp_mail/index.html">pre_wp_mail</a>
+							</td>
+							<td class="related-desc">
+								<p>Filters whether to preempt sending an email.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/class-pop3.php:</span>
+								<a href="../stripos/index.html">stripos()</a>
+							</td>
+							<td class="related-desc">
+															</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/http.php:</span>
+								<a href="../wp_parse_url/index.html">wp_parse_url()</a>
+							</td>
+							<td class="related-desc">
+								<p>A wrapper for PHP&#8217;s parse_url() function that handles consistency in the return values across PHP versions.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/pluggable.php:</span>
+								<a href="../../hooks/wp_mail_failed/index.html">wp_mail_failed</a>
+							</td>
+							<td class="related-desc">
+								<p>Fires after a PHPMailer\PHPMailer\Exception is caught.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/formatting.php:</span>
+								<a href="../is_email/index.html">is_email()</a>
+							</td>
+							<td class="related-desc">
+								<p>Verifies that an email is valid.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/pluggable.php:</span>
+								<a href="../../hooks/wp_mail/index.html">wp_mail</a>
+							</td>
+							<td class="related-desc">
+								<p>Filters the <a href="index.html">wp_mail()</a> arguments.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/pluggable.php:</span>
+								<a href="../../hooks/wp_mail_from/index.html">wp_mail_from</a>
+							</td>
+							<td class="related-desc">
+								<p>Filters the email address to send from.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/pluggable.php:</span>
+								<a href="../../hooks/wp_mail_from_name/index.html">wp_mail_from_name</a>
+							</td>
+							<td class="related-desc">
+								<p>Filters the name to associate with the &#8220;from&#8221; email address.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/pluggable.php:</span>
+								<a href="../../hooks/wp_mail_content_type/index.html">wp_mail_content_type</a>
+							</td>
+							<td class="related-desc">
+								<p>Filters the <a href="index.html">wp_mail()</a> content type.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/pluggable.php:</span>
+								<a href="../../hooks/wp_mail_charset/index.html">wp_mail_charset</a>
+							</td>
+							<td class="related-desc">
+								<p>Filters the default <a href="index.html">wp_mail()</a> charset.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/pluggable.php:</span>
+								<a href="../../hooks/phpmailer_init/index.html">phpmailer_init</a>
+							</td>
+							<td class="related-desc">
+								<p>Fires after PHPMailer is initialized.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/general-template.php:</span>
+								<a href="../get_bloginfo/index.html">get_bloginfo()</a>
+							</td>
+							<td class="related-desc">
+								<p>Retrieves information about the current site.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/link-template.php:</span>
+								<a href="../network_home_url/index.html">network_home_url()</a>
+							</td>
+							<td class="related-desc">
+								<p>Retrieves the home URL for the current network.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/plugin.php:</span>
+								<a href="../apply_filters/index.html">apply_filters()</a>
+							</td>
+							<td class="related-desc">
+								<p>Calls the callback functions that have been added to a filter hook.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/plugin.php:</span>
+								<a href="../do_action/index.html">do_action()</a>
+							</td>
+							<td class="related-desc">
+								<p>Calls the callback functions that have been added to an action hook.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/plugin.php:</span>
+								<a href="../do_action_ref_array/index.html">do_action_ref_array()</a>
+							</td>
+							<td class="related-desc">
+								<p>Calls the callback functions that have been added to an action hook, specifying arguments in an array.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/class-wp-error.php:</span>
+								<a href="../../classes/wp_error/__construct/index.html">WP_Error::__construct()</a>
+							</td>
+							<td class="related-desc">
+								<p>Initializes the error.</p>
+							</td>
+						</tr>
+											<tbody>
+				</table>
+
+								<a href="#" class="show-more">Show 12 more uses</a>
+				<a href="#" class="hide-more">Hide more uses</a>
+							</article>
+		
+					<hr />
+			<article class="used-by">
+				<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="used-by" tabindex="-1">Used By <a href="#used-by" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Used By</span></a></h3>
+				<table id="used-by-table">
+					<caption class="screen-reader-text">Used By</caption>
+					<thead>
+						<tr>
+							<th>Used By</th>
+							<th class="related-desc">Description</th>
+						</tr>
+					</thead>
+					<tbody>
+												<tr>
+							<td>
+								<span>wp-includes/ms-functions.php:</span>
+								<a href="../wpmu_new_site_admin_notification/index.html">wpmu_new_site_admin_notification()</a>
+							</td>
+							<td class="related-desc">
+								<p>Notifies the Multisite network administrator that a new site was created.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-admin/includes/class-wp-automatic-updater.php:</span>
+								<a href="../../classes/wp_automatic_updater/send_plugin_theme_email/index.html">WP_Automatic_Updater::send_plugin_theme_email()</a>
+							</td>
+							<td class="related-desc">
+								<p>Sends an email upon the completion or failure of a plugin or theme background update.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/class-wp-recovery-mode-email-service.php:</span>
+								<a href="../../classes/wp_recovery_mode_email_service/send_recovery_mode_email/index.html">WP_Recovery_Mode_Email_Service::send_recovery_mode_email()</a>
+							</td>
+							<td class="related-desc">
+								<p>Sends the Recovery Mode email to the site admin email address.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/user.php:</span>
+								<a href="../_wp_privacy_send_request_confirmation_notification/index.html">_wp_privacy_send_request_confirmation_notification()</a>
+							</td>
+							<td class="related-desc">
+								<p>Notify the site administrator via email when a request is confirmed.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/user.php:</span>
+								<a href="../_wp_privacy_send_erasure_fulfillment_notification/index.html">_wp_privacy_send_erasure_fulfillment_notification()</a>
+							</td>
+							<td class="related-desc">
+								<p>Notify the user when their erasure request is fulfilled.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/user.php:</span>
+								<a href="../wp_send_user_request/index.html">wp_send_user_request()</a>
+							</td>
+							<td class="related-desc">
+								<p>Send a confirmation request email to confirm an action.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-admin/includes/privacy-tools.php:</span>
+								<a href="../wp_privacy_send_personal_data_export_email/index.html">wp_privacy_send_personal_data_export_email()</a>
+							</td>
+							<td class="related-desc">
+								<p>Send an email to the user with a link to the personal data export file</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/functions.php:</span>
+								<a href="../wp_site_admin_email_change_notification/index.html">wp_site_admin_email_change_notification()</a>
+							</td>
+							<td class="related-desc">
+								<p>Send an email to the old site admin email address when the site admin email address changes.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/ms-functions.php:</span>
+								<a href="../update_network_option_new_admin_email/index.html">update_network_option_new_admin_email()</a>
+							</td>
+							<td class="related-desc">
+								<p>Send a confirmation request email when a change of network admin email address is attempted.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/ms-functions.php:</span>
+								<a href="../wp_network_admin_email_change_notification/index.html">wp_network_admin_email_change_notification()</a>
+							</td>
+							<td class="related-desc">
+								<p>Send an email to the old network admin email address when the network admin email address changes.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/user.php:</span>
+								<a href="../retrieve_password/index.html">retrieve_password()</a>
+							</td>
+							<td class="related-desc">
+								<p>Handles sending a password retrieval email to a user.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-admin/includes/class-wp-automatic-updater.php:</span>
+								<a href="../../classes/wp_automatic_updater/send_email/index.html">WP_Automatic_Updater::send_email()</a>
+							</td>
+							<td class="related-desc">
+								<p>Sends an email upon the completion or failure of a background core update.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-admin/includes/class-wp-automatic-updater.php:</span>
+								<a href="../../classes/wp_automatic_updater/send_debug_email/index.html">WP_Automatic_Updater::send_debug_email()</a>
+							</td>
+							<td class="related-desc">
+								<p>Prepares and sends an email of a full log of background update results, useful for debugging and geekery.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-admin/includes/misc.php:</span>
+								<a href="../update_option_new_admin_email/index.html">update_option_new_admin_email()</a>
+							</td>
+							<td class="related-desc">
+								<p>Send a confirmation request email when a change of site admin email address is attempted.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/user.php:</span>
+								<a href="../send_confirmation_on_profile_email/index.html">send_confirmation_on_profile_email()</a>
+							</td>
+							<td class="related-desc">
+								<p>Send a confirmation request email when a change of user email address is attempted.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-admin/includes/upgrade.php:</span>
+								<a href="../wp_new_blog_notification/index.html">wp_new_blog_notification()</a>
+							</td>
+							<td class="related-desc">
+								<p>Notifies the site admin that the installation of WordPress is complete.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/pluggable.php:</span>
+								<a href="../wp_password_change_notification/index.html">wp_password_change_notification()</a>
+							</td>
+							<td class="related-desc">
+								<p>Notify the blog admin of a user changing password, normally via email.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/pluggable.php:</span>
+								<a href="../wp_new_user_notification/index.html">wp_new_user_notification()</a>
+							</td>
+							<td class="related-desc">
+								<p>Email login credentials to a newly-registered user.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/pluggable.php:</span>
+								<a href="../wp_notify_postauthor/index.html">wp_notify_postauthor()</a>
+							</td>
+							<td class="related-desc">
+								<p>Notify an author (and/or others) of a comment/trackback/pingback on a post.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/pluggable.php:</span>
+								<a href="../wp_notify_moderator/index.html">wp_notify_moderator()</a>
+							</td>
+							<td class="related-desc">
+								<p>Notifies the moderator of the site about a new comment that is awaiting approval.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/user.php:</span>
+								<a href="../wp_update_user/index.html">wp_update_user()</a>
+							</td>
+							<td class="related-desc">
+								<p>Update a user in the database.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/ms-functions.php:</span>
+								<a href="../wpmu_welcome_user_notification/index.html">wpmu_welcome_user_notification()</a>
+							</td>
+							<td class="related-desc">
+								<p>Notify a user that their account activation has been successful.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/ms-functions.php:</span>
+								<a href="../newblog_notify_siteadmin/index.html">newblog_notify_siteadmin()</a>
+							</td>
+							<td class="related-desc">
+								<p>Notifies the network admin that a new site has been activated.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/ms-functions.php:</span>
+								<a href="../newuser_notify_siteadmin/index.html">newuser_notify_siteadmin()</a>
+							</td>
+							<td class="related-desc">
+								<p>Notifies the network admin that a new user has been activated.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/ms-functions.php:</span>
+								<a href="../wpmu_welcome_notification/index.html">wpmu_welcome_notification()</a>
+							</td>
+							<td class="related-desc">
+								<p>Notifies the site administrator that their site activation was successful.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/ms-functions.php:</span>
+								<a href="../wpmu_signup_blog_notification/index.html">wpmu_signup_blog_notification()</a>
+							</td>
+							<td class="related-desc">
+								<p>Send a confirmation request email to a user when they sign up for a new site. The new site will not become active until the confirmation link is clicked.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/ms-functions.php:</span>
+								<a href="../wpmu_signup_user_notification/index.html">wpmu_signup_user_notification()</a>
+							</td>
+							<td class="related-desc">
+								<p>Send a confirmation request email to a user when they sign up for a new user account (without signing up for a site at the same time). The user account will not become active until the confirmation link is clicked.</p>
+							</td>
+						</tr>
+											<tbody>
+				</table>
+
+								<a href="#" class="show-more">Show 22 more used by</a>
+				<a href="#" class="hide-more">Hide more used by</a>
+							</article>
+			</section>
+		<hr />
+	<section class="changelog">
+		<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="changelog" tabindex="-1">Changelog <a href="#changelog" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Changelog</span></a></h2>
+
+		<table>
+			<caption class="screen-reader-text">Changelog</caption>
+			<thead>
+				<tr>
+					<th class="changelog-version">Version</th>
+					<th class="changelog-desc">Description</th>
+				</tr>
+			</thead>
+
+			<tbody>
+									
+					<tr>
+						<td><a href="../../since/5.5.0/index.html" alt="WordPress 5.5.0">5.5.0</a></td>
+						<td><span class="since-description"><a href="../is_email/index.html">is_email()</a> is used for email validation,              instead of PHPMailer's default validator.</span></td>
+					</tr>
+									
+					<tr>
+						<td><a href="../../since/1.2.1/index.html" alt="WordPress 1.2.1">1.2.1</a></td>
+						<td>Introduced.</td>
+					</tr>
+							</tbody>
+		</table>
+	</section>
+
+	<hr />
+	<section class="user-notes">
+		<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="user-contributed-notes" tabindex="-1">User Contributed Notes <a href="#user-contributed-notes" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">User Contributed Notes</span></a></h2>
+		
+<div id="comments" class="comments-area">
+
+			
+		<ol class="comment-list">
+						<li id="comment-348" data-comment-id="348" class="comment byuser comment-author-codex even thread-even depth-1">
+			<article id="div-comment-348" class="comment-body">
+
+							<a href="#comment-content-348" class="screen-reader-text">Skip to note 1 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="7b123bf9f2"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="348" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_mail%2F%23comment-348"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="96% like this"><span class="screen-reader-text">Vote results for this note: </span>21</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="348" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_mail%2F%23comment-348"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/688ab6934b21bca68e0fe4fc54a66805?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/688ab6934b21bca68e0fe4fc54a66805?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/codex/" rel="external nofollow" class="url">Codex</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-348">
+							<time datetime="2015-06-30T13:15:31+00:00">
+							6 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-348">
+				<p>To send HTML formatted mail, you also can specify the Content-Type HTTP header in the <code>$headers</code> parameter:</p>
+<pre class="brush: php; title: ; notranslate" title="">
+$to = 'sendto@example.com';
+$subject = 'The subject';
+$body = 'The email body content';
+$headers = array('Content-Type: text/html; charset=UTF-8');
+
+wp_mail( $to, $subject, $body, $headers );
+</pre>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-348' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_mail%2F%3Freplytocom%3D348%23feedback-editor-348" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-349" data-comment-id="349" class="comment byuser comment-author-codex odd alt thread-odd thread-alt depth-1">
+			<article id="div-comment-349" class="comment-body">
+
+							<a href="#comment-content-349" class="screen-reader-text">Skip to note 2 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="a80d861781"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="349" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_mail%2F%23comment-349"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="85% like this"><span class="screen-reader-text">Vote results for this note: </span>14</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="349" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_mail%2F%23comment-349"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/688ab6934b21bca68e0fe4fc54a66805?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/688ab6934b21bca68e0fe4fc54a66805?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/codex/" rel="external nofollow" class="url">Codex</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-349">
+							<time datetime="2015-06-30T13:16:59+00:00">
+							6 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-349">
+				<p>Example using the array form of <code>$headers</code>:</p>
+<pre class="brush: php; title: ; notranslate" title="">
+&lt;?php
+// assumes $to, $subject, $message have already been defined earlier...
+
+$headers[] = 'From: Me Myself &lt;me@example.net&gt;';
+$headers[] = 'Cc: John Q Codex &lt;jqc@wordpress.org&gt;';
+$headers[] = 'Cc: iluvwp@wordpress.org'; // note you can just use a simple email address
+
+wp_mail( $to, $subject, $message, $headers );
+?&gt;
+</pre>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-349' class='feedback hide-if-js'>
+<h4 class='feedback-title'>Feedback</h4>
+<ul class='children'>
+			<li id="comment-4783" data-comment-id="4783" class="comment byuser comment-author-benjithaimmortal even depth-2">
+			<article id="div-comment-4783" class="comment-body">
+
+			
+				<div class="comment-content" id="comment-content-4783">
+				<p>Since WP started using hooks, you&#8217;re not going to have success setting the <code>From</code> header in <code>wp_mail()</code>. You should add filters to the hooks to add this header instead:   <code> add_filter( 'wp_mail_from', 'wporg_wp_mail_from' ); function wporg_wp_mail_from( $content_type) {    return 'the.email@example.com'; } add_filter( 'wp_mail_from_name', 'wporg_wp_mail_from_name' ); function wporg_wp_mail_from_name( $name ) {    return 'Your Name'; } </code> &mdash; By <cite class="fn"><a href="https://profiles.wordpress.org/benjithaimmortal/" rel="external nofollow" class="url">benjithaimmortal</a></cite> &mdash;  <a class="comment-date" href="index.html#comment-4783"><time datetime="2021-01-22T16:34:06+00:00">7 months ago</time></a></p>
+				</div><!-- .comment-content -->
+
+						</article>
+			</li>
+					</ul>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_mail%2F%3Freplytocom%3D349%23feedback-editor-349" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-1856" data-comment-id="1856" class="comment byuser comment-author-stratboy odd alt thread-even depth-1">
+			<article id="div-comment-1856" class="comment-body">
+
+							<a href="#comment-content-1856" class="screen-reader-text">Skip to note 3 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="7126ddaf2b"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="1856" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_mail%2F%23comment-1856"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="83% like this"><span class="screen-reader-text">Vote results for this note: </span>8</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="1856" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_mail%2F%23comment-1856"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/80f29c126bf635b4a6068806bb1dbd2a?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/80f29c126bf635b4a6068806bb1dbd2a?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/stratboy/" rel="external nofollow" class="url">stratboy</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-1856">
+							<time datetime="2016-09-28T10:46:28+00:00">
+							5 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-1856">
+				<p>Here&#8217;s an example of a basic configuration for SMTP (so phpmailer will be used instead of php&#8217;s mail()):</p>
+<pre class="brush: php; title: ; notranslate" title="">add_action( 'phpmailer_init', 'mailer_config', 10, 1);
+function mailer_config(PHPMailer $mailer){
+  $mailer-&gt;IsSMTP();
+  $mailer-&gt;Host = &quot;mail.telemar.it&quot;; // your SMTP server
+  $mailer-&gt;Port = 25;
+  $mailer-&gt;SMTPDebug = 2; // write 0 if you don't want to see client/server communication in page
+  $mailer-&gt;CharSet  = &quot;utf-8&quot;;
+}</pre>
+<p>Here&#8217;s an example of a basic error logging:</p>
+<pre class="brush: php; title: ; notranslate" title="">add_action('wp_mail_failed', 'log_mailer_errors', 10, 1);
+function log_mailer_errors( $wp_error ){
+  $fn = ABSPATH . '/mail.log'; // say you've got a mail.log file in your server root
+  $fp = fopen($fn, 'a');
+  fputs($fp, &quot;Mailer Error: &quot; . $wp_error-&gt;get_error_message() .&quot;\n&quot;);
+  fclose($fp);
+}</pre>
+<p>Then use wp_mail() to send your mail.</p>
+<p>If you&#8217;re using it for sending a form and your form&#8217;s action is the page&#8217;s permalink, you can do some basic checking for $_POST lenght/count to see if the page comes from a form submission.</p>
+<pre class="brush: php; title: ; notranslate" title="">
+if(count($_POST) != 0){ // on top of page
+  // Then collect form data and try to send the form and write messages and so on...
+  // Note: set $mailer-&gt;SMTPDebug to 0 to prevent it to write server messages on the page
+}
+</pre>
+<p>NOTE: if you are using MAMP PRO to test from your local server, you should:</p>
+<p>&#8211; go to the Postfix panel<br />
+&#8211; write your current virtual server as the &#8216;domain of outgoing email&#8217;<br />
+&#8211; activate &#8216;use a smart host for routing&#8217;<br />
+&#8211; write your provider&#8217;s smtp server (the same you are using in your mail client config)<br />
+&#8211; Eventually add authentication (then you should also setup the credentials in the phpmailer_init action)</p>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-1856' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_mail%2F%3Freplytocom%3D1856%23feedback-editor-1856" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-1816" data-comment-id="1816" class="comment byuser comment-author-markhowellsmead even thread-odd thread-alt depth-1">
+			<article id="div-comment-1816" class="comment-body">
+
+							<a href="#comment-content-1816" class="screen-reader-text">Skip to note 4 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="615158d5ce"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="1816" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_mail%2F%23comment-1816"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="100% like this"><span class="screen-reader-text">Vote results for this note: </span>5</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="1816" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_mail%2F%23comment-1816"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/bcb9db67dd09d53ef27ede605e687324?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/bcb9db67dd09d53ef27ede605e687324?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/markhowellsmead/" rel="external nofollow" class="url">Mark Howells-Mead</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-1816">
+							<time datetime="2016-09-07T16:04:55+00:00">
+							5 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-1816">
+				<p>If you need to set the Reply-To address, note that the syntax which PHPMailer needs is pretty specific. The email address must be enclosed within <code>&lt;&gt;</code> characters. It&#8217;s also advisable to set the “reply to” name.</p>
+<pre class="brush: php; title: ; notranslate" title="">$headers = array(
+  'Reply-To: Person Name &lt;person.name@example.com&gt;',
+);</pre>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-1816' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_mail%2F%3Freplytocom%3D1816%23feedback-editor-1816" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-1884" data-comment-id="1884" class="comment byuser comment-author-daniyalahmedk odd alt thread-even depth-1">
+			<article id="div-comment-1884" class="comment-body">
+
+							<a href="#comment-content-1884" class="screen-reader-text">Skip to note 5 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="9c36cbce5e"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="1884" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_mail%2F%23comment-1884"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="86% like this"><span class="screen-reader-text">Vote results for this note: </span>5</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="1884" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_mail%2F%23comment-1884"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/103bfae5b39dd19cd78754fbbf457109?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/103bfae5b39dd19cd78754fbbf457109?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/daniyalahmedk/" rel="external nofollow" class="url">daniyalahmedk</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-1884">
+							<time datetime="2016-10-17T19:07:41+00:00">
+							5 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-1884">
+				<p>Combining Content-Type(HTML) and From (Site name and &#8220;from&#8221; email)</p>
+<pre class="brush: php; title: ; notranslate" title="">
+$to = 'emailsendto@example.com';
+$subject = 'The subject';
+$body = 'The email body content';
+$headers = array('Content-Type: text/html; charset=UTF-8','From: My Site Name &lt;support@example.com&gt;');
+
+wp_mail( $to, $subject, $body, $headers );
+</pre>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-1884' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_mail%2F%3Freplytocom%3D1884%23feedback-editor-1884" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-344" data-comment-id="344" class="comment byuser comment-author-codex even thread-odd thread-alt depth-1">
+			<article id="div-comment-344" class="comment-body">
+
+							<a href="#comment-content-344" class="screen-reader-text">Skip to note 6 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="6b9191ead6"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="344" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_mail%2F%23comment-344"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="80% like this"><span class="screen-reader-text">Vote results for this note: </span>3</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="344" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_mail%2F%23comment-344"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/688ab6934b21bca68e0fe4fc54a66805?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/688ab6934b21bca68e0fe4fc54a66805?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/codex/" rel="external nofollow" class="url">Codex</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-344">
+							<time datetime="2015-06-30T13:10:56+00:00">
+							6 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-344">
+				<p>Basic usage example:</p>
+<pre class="brush: php; title: ; notranslate" title="">
+&lt;?php wp_mail( 'me@example.net', 'The subject', 'The message' ); ?&gt;
+</pre>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-344' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_mail%2F%3Freplytocom%3D344%23feedback-editor-344" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-347" data-comment-id="347" class="comment byuser comment-author-codex odd alt thread-even depth-1">
+			<article id="div-comment-347" class="comment-body">
+
+							<a href="#comment-content-347" class="screen-reader-text">Skip to note 7 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="50032be610"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="347" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_mail%2F%23comment-347"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="100% like this"><span class="screen-reader-text">Vote results for this note: </span>3</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="347" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_mail%2F%23comment-347"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/688ab6934b21bca68e0fe4fc54a66805?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/688ab6934b21bca68e0fe4fc54a66805?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/codex/" rel="external nofollow" class="url">Codex</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-347">
+							<time datetime="2015-06-30T13:13:55+00:00">
+							6 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-347">
+				<p>Switch to HTML formatted email (using the <code><a href="../../hooks/wp_mail_content_type/index.html" rel="nofollow">wp_mail_content_type</a></code> filter):</p>
+<section class="source-content">
+<div class="source-code-container">
+<pre class="brush: php; title: ; notranslate" title="">
+&lt;?php
+add_filter( 'wp_mail_content_type', 'wpdocs_set_html_mail_content_type' );
+
+$to = 'sendto@example.com';
+$subject = 'The subject';
+$body = 'The email body content';
+
+wp_mail( $to, $subject, $body );
+
+// Reset content-type to avoid conflicts -- https://core.trac.wordpress.org/ticket/23578
+remove_filter( 'wp_mail_content_type', 'wpdocs_set_html_mail_content_type' );
+
+function wpdocs_set_html_mail_content_type() {
+	return 'text/html';
+}
+?&gt;
+</pre>
+</div>
+<p class="source-code-links"><span><a href="#" class="show-complete-source">Expand full source code</a><a href="#" class="less-complete-source">Collapse full source code</a></span></p>
+</section>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-347' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_mail%2F%3Freplytocom%3D347%23feedback-editor-347" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-1783" data-comment-id="1783" class="comment byuser comment-author-drbobjr even thread-odd thread-alt depth-1">
+			<article id="div-comment-1783" class="comment-body">
+
+							<a href="#comment-content-1783" class="screen-reader-text">Skip to note 8 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="e8ca044fe6"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="1783" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_mail%2F%23comment-1783"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="100% like this"><span class="screen-reader-text">Vote results for this note: </span>3</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="1783" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_mail%2F%23comment-1783"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/81d6f463dfd2502cfebd58d7691f174c?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/81d6f463dfd2502cfebd58d7691f174c?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/drbobjr/" rel="external nofollow" class="url">drbobjr</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-1783">
+							<time datetime="2016-08-23T22:58:53+00:00">
+							5 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-1783">
+				<p>Having spent nearly a day banging my head against this one, I would strongly recommend that the doc for wp_mail() include the tip that many servers will require that a mail user account be created with the email address of <a href="mailto:wordpress@domain.com">wordpress@domain.com</a> before this function will work. I would have NEVER figured that one out without many hours of google searches.</p>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-1783' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_mail%2F%3Freplytocom%3D1783%23feedback-editor-1783" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-345" data-comment-id="345" class="comment byuser comment-author-codex odd alt thread-even depth-1">
+			<article id="div-comment-345" class="comment-body">
+
+							<a href="#comment-content-345" class="screen-reader-text">Skip to note 9 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="0903e6b5e2"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="345" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_mail%2F%23comment-345"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="67% like this"><span class="screen-reader-text">Vote results for this note: </span>2</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="345" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_mail%2F%23comment-345"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/688ab6934b21bca68e0fe4fc54a66805?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/688ab6934b21bca68e0fe4fc54a66805?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/codex/" rel="external nofollow" class="url">Codex</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-345">
+							<time datetime="2015-06-30T13:11:48+00:00">
+							6 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-345">
+				<p>Add attachment and <code>From</code> header:</p>
+<pre class="brush: php; title: ; notranslate" title="">
+&lt;?php
+$attachments = array( WP_CONTENT_DIR . '/uploads/file_to_attach.zip' );
+$headers = 'From: My Name &lt;myname@example.com&gt;' . &quot;\r\n&quot;;
+wp_mail( 'test@example.org', 'subject', 'message', $headers, $attachments );
+?&gt;
+</pre>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-345' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_mail%2F%3Freplytocom%3D345%23feedback-editor-345" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-346" data-comment-id="346" class="comment byuser comment-author-codex even thread-odd thread-alt depth-1">
+			<article id="div-comment-346" class="comment-body">
+
+							<a href="#comment-content-346" class="screen-reader-text">Skip to note 10 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="2bbfb22c88"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="346" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_mail%2F%23comment-346"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="75% like this"><span class="screen-reader-text">Vote results for this note: </span>2</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="346" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_mail%2F%23comment-346"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/688ab6934b21bca68e0fe4fc54a66805?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/688ab6934b21bca68e0fe4fc54a66805?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/codex/" rel="external nofollow" class="url">Codex</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-346">
+							<time datetime="2015-06-30T13:12:53+00:00">
+							6 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-346">
+				<p>Sending to multiple recipients:</p>
+<pre class="brush: php; title: ; notranslate" title="">
+&lt;?php
+$multiple_recipients = array(
+	'recipient1@example.com',
+	'recipient2@foo.example.com'
+);
+$subj = 'The email subject';
+$body = 'This is the body of the email';
+wp_mail( $multiple_recipients, $subj, $body );
+?&gt;
+</pre>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-346' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_mail%2F%3Freplytocom%3D346%23feedback-editor-346" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-2287" data-comment-id="2287" class="comment byuser comment-author-matthewslouismarie odd alt thread-even depth-1">
+			<article id="div-comment-2287" class="comment-body">
+
+							<a href="#comment-content-2287" class="screen-reader-text">Skip to note 11 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="9345ea0756"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="2287" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_mail%2F%23comment-2287"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="100% like this"><span class="screen-reader-text">Vote results for this note: </span>2</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="2287" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_mail%2F%23comment-2287"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/a6b9344a6534c82d7a10fbdd8228cd5d?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/a6b9344a6534c82d7a10fbdd8228cd5d?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/matthewslouismarie/" rel="external nofollow" class="url">Louis-Marie Matthews</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-2287">
+							<time datetime="2017-07-01T15:48:09+00:00">
+							4 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-2287">
+				<p>It&#8217;s important to know that this function might fail if you specify an empty body, even if using a SMTP.</p>
+<pre class="brush: php; title: ; notranslate" title="">wp_mail( 'email@provider.com', 'Subject', '' ); // returns false, the email was not sent</pre>
+<pre class="brush: php; title: ; notranslate" title="">wp_mail( 'email@provider.com', 'Subject', 'Body' ); // returns true (if everything else is working)</pre>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-2287' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_mail%2F%3Freplytocom%3D2287%23feedback-editor-2287" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-2062" data-comment-id="2062" class="comment byuser comment-author-jmikewp even thread-odd thread-alt depth-1">
+			<article id="div-comment-2062" class="comment-body">
+
+							<a href="#comment-content-2062" class="screen-reader-text">Skip to note 12 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="1c59d4fcb1"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="2062" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_mail%2F%23comment-2062"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="100% like this"><span class="screen-reader-text">Vote results for this note: </span>1</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="2062" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_mail%2F%23comment-2062"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/74c49bea11d135a37cf90e4a37916c19?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/74c49bea11d135a37cf90e4a37916c19?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/jmikewp/" rel="external nofollow" class="url">jmikewp</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-2062">
+							<time datetime="2017-01-20T12:14:12+00:00">
+							5 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-2062">
+				<p>As of 4.6 header from can&#8217;t be a post variable, need to be set before otherwise your site will show php error &#8220;Fatal error: Uncaught exception &#8216;phpmailerException&#8217; with message &#8216;Invalid address: (setFrom)&#8221;</p>
+<p>This is due to &#8216;from email&#8217; being set as variable and is not yet being passed by form submit. </p>
+<pre class="brush: php; title: ; notranslate" title="">$headers = &quot;From: $name &lt;$email&gt;&quot; . &quot;\r\n&quot;;</pre>
+<p>Fix by predefining a variable for both $name and $email that will be overwritten after submit(ex.1), or set hardcoded(ex.2).<br />
+ex.1</p>
+<pre class="brush: php; title: ; notranslate" title="">$name = &quot;Site name&quot;;
+$email = &quot;info@sitename.com&quot;;
+if(isset $_POST[&quot;name&quot;]){
+$name = sanitize_text_field($_POST[&quot;name&quot;]);
+$email = sanitize_email($_POST[&quot;email&quot;]);
+}</pre>
+<p>ex.2</p>
+<pre class="brush: php; title: ; notranslate" title="">$headers = &quot;From: Site name &lt;info@sitename.com&gt;&quot; . &quot;\r\n&quot;;</pre>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-2062' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_mail%2F%3Freplytocom%3D2062%23feedback-editor-2062" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-2805" data-comment-id="2805" class="comment byuser comment-author-lucasbustamante odd alt thread-even depth-1">
+			<article id="div-comment-2805" class="comment-body">
+
+							<a href="#comment-content-2805" class="screen-reader-text">Skip to note 13 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="7d638d627a"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="2805" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_mail%2F%23comment-2805"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="100% like this"><span class="screen-reader-text">Vote results for this note: </span>1</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="2805" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_mail%2F%23comment-2805"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/4294d7bc2405153085275c756155f07a?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/4294d7bc2405153085275c756155f07a?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/lucasbustamante/" rel="external nofollow" class="url">lucasbustamante</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-2805">
+							<time datetime="2018-07-31T02:14:21+00:00">
+							3 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-2805">
+				<p>To send e-mail to admin:</p>
+<pre class="brush: php; title: ; notranslate" title="">
+$to = get_option( 'admin_email' );
+$subject = 'The subject';
+$body = 'The email body content';
+$headers = array( 'Content-Type: text/html; charset=UTF-8' );
+wp_mail( $to, $subject, $message, $headers, array( '' ) );
+</pre>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-2805' class='feedback hide-if-js'>
+<h4 class='feedback-title'>Feedback</h4>
+<ul class='children'>
+			<li id="comment-3411" data-comment-id="3411" class="comment byuser comment-author-simongcc even depth-2">
+			<article id="div-comment-3411" class="comment-body">
+
+			
+				<div class="comment-content" id="comment-content-3411">
+				<p>I think it should be wp_mail( $to, $subject, $message, $headers, array( &#8221; ) ); instead &mdash; By <cite class="fn"><a href="https://profiles.wordpress.org/simongcc/" rel="external nofollow" class="url">simongcc</a></cite> &mdash;  <a class="comment-date" href="index.html#comment-3411"><time datetime="2019-10-05T09:15:56+00:00">2 years ago</time></a></p>
+				</div><!-- .comment-content -->
+
+						</article>
+			</li>
+					</ul>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_mail%2F%3Freplytocom%3D2805%23feedback-editor-2805" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-1115" data-comment-id="1115" class="comment byuser comment-author-alordiel odd alt thread-odd thread-alt depth-1 bad-note">
+			<article id="div-comment-1115" class="comment-body">
+
+							<a href="#comment-content-1115" class="screen-reader-text">Skip to note 14 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="7c469ece89"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="1115" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_mail%2F%23comment-1115"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="13% like this"><span class="screen-reader-text">Vote results for this note: </span>-11</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="1115" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_mail%2F%23comment-1115"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/f99e2fffba980f4c3b5e6ec73b8ffe93?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/f99e2fffba980f4c3b5e6ec73b8ffe93?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/alordiel/" rel="external nofollow" class="url">Al</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-1115">
+							<time datetime="2016-02-12T16:03:27+00:00">
+							6 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-1115">
+				<p><code><br />
+&lt;?php<br />
+    //combining in one header the From and content-type<br />
+    $headers[] = &#039;Content-Type: text/html; charset=UTF-8&#039;;<br />
+    $headers[] = &#039;From: Wishio Team ' . "\r\n";</p>
+<p>    wp_mail( $to, $subject, $message, $headers);<br />
+?&gt;<br />
+</code></p>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-1115' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_mail%2F%3Freplytocom%3D1115%23feedback-editor-1115" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+		</ol><!-- .comment-list -->
+
+		
+	
+	
+			<div id="respond" class="comment-respond">
+		<h3 id="reply-title" class="comment-reply-title"> <small></small></h3><p>You must <a href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fwp_mail%2F%23comments">log in</a> before being able to contribute a note or feedback.</p>	</div><!-- #respond -->
+		
+	
+</div><!-- #comments -->
+	</section>
+</div>
+
+</article>
+
+			
+		
+		</main><!-- #main -->
+	</div><!-- #primary -->
+	</div><!-- #content -->
+
+</div><!-- #page -->
+
+
+<div id="wporg-footer">
+	<div class="wrapper">
+		<ul>
+			<li><a href="http://wordpress.org/about/" title="An introduction to the WordPress project">About</a></li>
+			<li><a href="http://wordpress.org/news/" title="News and Updates">Blog</a></li>
+			<li><a href="http://wordpress.org/hosting/" title="Recommended web hosting providers">Hosting</a></li>
+			<li><a href="https://wordpressfoundation.org/donate/" title="Donate to the WordPress Foundation">Donate</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://wordpress.org/support/" title="Forums, documentation, and other resources">Support</a></li>
+			<li><a href="../../../index.html" title="Resources for WordPress developers">Developers</a></li>
+			<li><a href="http://make.wordpress.org/" title="Give back to WordPress through code, support, translation and more">Get Involved</a></li>
+			<li><a href="http://learn.wordpress.org/" title="Workshops and training materials">Learn</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://wordpress.org/showcase/" title="Some of the best WordPress sites on the Web">Showcase</a></li>
+			<li><a href="http://wordpress.org/plugins/" title="Add extra functionality to WordPress">Plugins</a></li>
+			<li><a href="http://wordpress.org/themes/" title="Make your WordPress pretty">Themes</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://central.wordcamp.org/" title="Find a WordPress event near you">WordCamp</a></li>
+			<li><a href="http://wordpress.tv/" title="Videos, tutorials, and WordCamp sessions">WordPress.TV</a></li>
+			<li><a href="http://buddypress.org/" title="A set of plugins to transform your WordPress into a social network">BuddyPress</a></li>
+			<li><a href="http://bbpress.org/" title="Fast, slick forums built on WordPress">bbPress</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://wordpress.com/?ref=wporg-footer" title="Hassle-free WordPress hosting">WordPress.com</a></li>
+			<li><a href="http://ma.tt/" title="Co-founder of WordPress, an example of what WordPress can do">Matt</a></li>
+			<li><a href="http://wordpress.org/about/privacy/" title="WordPress.org Privacy Policy">Privacy</a></li>
+			<li><a href="https://publiccode.eu/" target="_blank">Public Code</a></li>
+		</ul>
+
+		<ul class="social-media-links">
+			<li><span class="dashicons dashicons-twitter"></span><a href="https://twitter.com/WordPress" title="Follow @WordPress on Twitter">@WordPress</a></li>
+			<li><span class="dashicons dashicons-facebook"></span><a href="https://www.facebook.com/WordPress/" title="Like WordPress on Facebook">WordPress</a></li>
+		</ul>
+	</div>
+
+		<p class="cip cip-image">Code is Poetry.</p>
+</div>
+
+<script src="../../../../s.w.org/style/js/navigation.min.js?20190128"></script>
+
+<script type='text/javascript'>
+	(function(){
+		var corecss = document.createElement('link');
+		var themecss = document.createElement('link');
+		var corecssurl = "../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shCore.css?ver=3.0.9b";
+		if ( corecss.setAttribute ) {
+				corecss.setAttribute( "rel", "stylesheet" );
+				corecss.setAttribute( "type", "text/css" );
+				corecss.setAttribute( "href", corecssurl );
+		} else {
+				corecss.rel = "stylesheet";
+				corecss.href = corecssurl;
+		}
+		document.head.appendChild( corecss );
+		var themecssurl = "../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shThemeDefault.css?ver=3.0.9b";
+		if ( themecss.setAttribute ) {
+				themecss.setAttribute( "rel", "stylesheet" );
+				themecss.setAttribute( "type", "text/css" );
+				themecss.setAttribute( "href", themecssurl );
+		} else {
+				themecss.rel = "stylesheet";
+				themecss.href = themecssurl;
+		}
+		document.head.appendChild( themecss );
+	})();
+	SyntaxHighlighter.config.strings.expandSource = '+ expand source';
+	SyntaxHighlighter.config.strings.help = '?';
+	SyntaxHighlighter.config.strings.alert = 'SyntaxHighlighter\n\n';
+	SyntaxHighlighter.config.strings.noBrush = 'Can\'t find brush for: ';
+	SyntaxHighlighter.config.strings.brushNotHtmlScript = 'Brush wasn\'t configured for html-script option: ';
+	SyntaxHighlighter.defaults['pad-line-numbers'] = false;
+	SyntaxHighlighter.defaults['toolbar'] = false;
+	SyntaxHighlighter.all();
+
+	// Infinite scroll support
+	if ( typeof( jQuery ) !== 'undefined' ) {
+		jQuery( function( $ ) {
+			$( document.body ).on( 'post-load', function() {
+				SyntaxHighlighter.highlight();
+			} );
+		} );
+	}
+</script>
+<link rel='stylesheet' id='buttons-css'  href='../../../wp-includes/css/buttons.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<script type='text/javascript' src='../../../wp-includes/js/hoverintent-js.min.js?ver=2.2.1' id='hoverintent-js-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/admin-bar.min.js?ver=5.9-alpha-51701' id='admin-bar-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/navigation.js?ver=20181209' id='wporg-developer-navigation-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/skip-link-focus-fix.js?ver=20130115' id='wporg-developer-skip-link-focus-fix-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/search.js?ver=20150430' id='wporg-developer-search-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/menu.js?ver=20180201' id='wporg-developer-menu-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/awesomplete.min.js?ver=20160322' id='awesomplete-js'></script>
+<script type='text/javascript' id='autocomplete-js-extra'>
+/* <![CDATA[ */
+var autocomplete = {"ajaxurl":"https:\/\/developer.wordpress.org\/wp-admin\/admin-ajax.php","nonce":"8a60f70c4b"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/autocomplete.js?ver=20160524' id='autocomplete-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/function-reference.js?ver=20180724' id='wporg-developer-function-reference-js'></script>
+<script type='text/javascript' id='quicktags-js-extra'>
+/* <![CDATA[ */
+var quicktagsL10n = {"closeAllOpenTags":"Close all open tags","closeTags":"close tags","enterURL":"Enter the URL","enterImageURL":"Enter the URL of the image","enterImageDescription":"Enter a description of the image","textdirection":"text direction","toggleTextdirection":"Toggle Editor Text Direction","dfw":"Distraction-free writing mode","strong":"Bold","strongClose":"Close bold tag","em":"Italic","emClose":"Close italic tag","link":"Insert link","blockquote":"Blockquote","blockquoteClose":"Close blockquote tag","del":"Deleted text (strikethrough)","delClose":"Close deleted text tag","ins":"Inserted text","insClose":"Close inserted text tag","image":"Insert image","ul":"Bulleted list","ulClose":"Close bulleted list tag","ol":"Numbered list","olClose":"Close numbered list tag","li":"List item","liClose":"Close list item tag","code":"Code","codeClose":"Close code tag","more":"Insert Read More tag"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-includes/js/quicktags.min.js?ver=5.9-alpha-51701' id='quicktags-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/user-notes.js?ver=20200110' id='wporg-developer-user-notes-js'></script>
+<script type='text/javascript' id='wporg-developer-user-notes-feedback-js-extra'>
+/* <![CDATA[ */
+var wporg_note_feedback = {"show":"Show Feedback","hide":"Hide Feedback"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/user-notes-feedback.js?ver=20181023' id='wporg-developer-user-notes-feedback-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/tabs.js?ver=20160824' id='wporg-developer-tabs-js'></script>
+<script type='text/javascript' id='wporg-developer-preview-js-extra'>
+/* <![CDATA[ */
+var wporg_note_preview = {"ajaxurl":"https:\/\/developer.wordpress.org\/wp-admin\/admin-ajax.php","nonce":"504933b60e","preview":"preview note","preview_empty":"Nothing to preview","is_admin":""};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/user-notes-preview.js?ver=20200111' id='wporg-developer-preview-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/wp-embed.min.js?ver=5.9-alpha-51701' id='wp-embed-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/vendor/regenerator-runtime.min.js?ver=0.13.7' id='regenerator-runtime-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/vendor/wp-polyfill.min.js?ver=3.15.0' id='wp-polyfill-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/dom-ready.min.js?ver=71883072590656bf22c74c7b887df3dd' id='wp-dom-ready-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/hooks.min.js?ver=a7edae857aab69d69fa10d5aef23a5de' id='wp-hooks-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/i18n.min.js?ver=5f1269854226b4dd90450db411a12b79' id='wp-i18n-js'></script>
+<script type='text/javascript' id='wp-i18n-js-after'>
+wp.i18n.setLocaleData( { 'text direction\u0004ltr': [ 'ltr' ] } );
+</script>
+<script type='text/javascript' id='wp-a11y-js-translations'>
+( function( domain, translations ) {
+	var localeData = translations.locale_data[ domain ] || translations.locale_data.messages;
+	localeData[""].domain = domain;
+	wp.i18n.setLocaleData( localeData, domain );
+} )( "default", { "locale_data": { "messages": { "": {} } } } );
+</script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/a11y.min.js?ver=0ac8327cc1c40dcfdf29716affd7ac63' id='wp-a11y-js'></script>
+<script type='text/javascript' id='wplink-js-extra'>
+/* <![CDATA[ */
+var wpLinkL10n = {"title":"Insert\/edit link","update":"Update","save":"Add Link","noTitle":"(no title)","noMatchesFound":"No results found.","linkSelected":"Link selected.","linkInserted":"Link inserted.","minInputLength":"3"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-includes/js/wplink.min.js?ver=5.9-alpha-51701' id='wplink-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/jquery/ui/core.min.js?ver=1.12.1' id='jquery-ui-core-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/jquery/ui/menu.min.js?ver=1.12.1' id='jquery-ui-menu-js'></script>
+<script type='text/javascript' id='jquery-ui-autocomplete-js-extra'>
+/* <![CDATA[ */
+var uiAutocompleteL10n = {"noResults":"No results found.","oneResult":"1 result found. Use up and down arrow keys to navigate.","manyResults":"%d results found. Use up and down arrow keys to navigate.","itemSelected":"Item selected."};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-includes/js/jquery/ui/autocomplete.min.js?ver=1.12.1' id='jquery-ui-autocomplete-js'></script>
+
+		<script type="text/javascript">
+		tinyMCEPreInit = {
+			baseURL: "https://developer.wordpress.org/wp-includes/js/tinymce",
+			suffix: ".min",
+						mceInit: {},
+			qtInit: {'comment':{id:"comment",buttons:"strong,em,ul,ol,li,link"}},
+			ref: {plugins:"",theme:"modern",language:""},
+			load_ext: function(url,lang){var sl=tinymce.ScriptLoader;sl.markDone(url+'/langs/'+lang+'.js');sl.markDone(url+'/langs/'+lang+'_dlg.js');}
+		};
+		</script>
+				<script type="text/javascript">
+		var ajaxurl = "../../../wp-admin/admin-ajax.html";
+		( function() {
+			var initialized = [];
+			var initialize  = function() {
+				var init, id, inPostbox, $wrap;
+				var readyState = document.readyState;
+
+				if ( readyState !== 'complete' && readyState !== 'interactive' ) {
+					return;
+				}
+
+				for ( id in tinyMCEPreInit.mceInit ) {
+					if ( initialized.indexOf( id ) > -1 ) {
+						continue;
+					}
+
+					init      = tinyMCEPreInit.mceInit[id];
+					$wrap     = tinymce.$( '#wp-' + id + '-wrap' );
+					inPostbox = $wrap.parents( '.postbox' ).length > 0;
+
+					if (
+						! init.wp_skip_init &&
+						( $wrap.hasClass( 'tmce-active' ) || ! tinyMCEPreInit.qtInit.hasOwnProperty( id ) ) &&
+						( readyState === 'complete' || ( ! inPostbox && readyState === 'interactive' ) )
+					) {
+						tinymce.init( init );
+						initialized.push( id );
+
+						if ( ! window.wpActiveEditor ) {
+							window.wpActiveEditor = id;
+						}
+					}
+				}
+			}
+
+			if ( typeof tinymce !== 'undefined' ) {
+				if ( tinymce.Env.ie && tinymce.Env.ie < 11 ) {
+					tinymce.$( '.wp-editor-wrap ' ).removeClass( 'tmce-active' ).addClass( 'html-active' );
+				} else {
+					if ( document.readyState === 'complete' ) {
+						initialize();
+					} else {
+						document.addEventListener( 'readystatechange', initialize );
+					}
+				}
+			}
+
+			if ( typeof quicktags !== 'undefined' ) {
+				for ( id in tinyMCEPreInit.qtInit ) {
+					quicktags( tinyMCEPreInit.qtInit[id] );
+
+					if ( ! window.wpActiveEditor ) {
+						window.wpActiveEditor = id;
+					}
+				}
+			}
+		}());
+		</script>
+				<div id="wp-link-backdrop" style="display: none"></div>
+		<div id="wp-link-wrap" class="wp-core-ui" style="display: none" role="dialog" aria-labelledby="link-modal-title">
+		<form id="wp-link" tabindex="-1">
+		<input type="hidden" id="_ajax_linking_nonce" name="_ajax_linking_nonce" value="86f5a0a85d" />		<h1 id="link-modal-title">Insert/edit link</h1>
+		<button type="button" id="wp-link-close"><span class="screen-reader-text">Close</span></button>
+		<div id="link-selector">
+			<div id="link-options">
+				<p class="howto" id="wplink-enter-url">Enter the destination URL</p>
+				<div>
+					<label><span>URL</span>
+					<input id="wp-link-url" type="text" aria-describedby="wplink-enter-url" /></label>
+				</div>
+				<div class="wp-link-text-field">
+					<label><span>Link Text</span>
+					<input id="wp-link-text" type="text" /></label>
+				</div>
+				<div class="link-target">
+					<label><span></span>
+					<input type="checkbox" id="wp-link-target" /> Open link in a new tab</label>
+				</div>
+			</div>
+			<p class="howto" id="wplink-link-existing-content">Or link to existing content</p>
+			<div id="search-panel">
+				<div class="link-search-wrapper">
+					<label>
+						<span class="search-label">Search</span>
+						<input type="search" id="wp-link-search" class="link-search-field" autocomplete="off" aria-describedby="wplink-link-existing-content" />
+						<span class="spinner"></span>
+					</label>
+				</div>
+				<div id="search-results" class="query-results" tabindex="0">
+					<ul></ul>
+					<div class="river-waiting">
+						<span class="spinner"></span>
+					</div>
+				</div>
+				<div id="most-recent-results" class="query-results" tabindex="0">
+					<div class="query-notice" id="query-notice-message">
+						<em class="query-notice-default">No search term specified. Showing recent items.</em>
+						<em class="query-notice-hint screen-reader-text">Search or use up and down arrow keys to select an item.</em>
+					</div>
+					<ul></ul>
+					<div class="river-waiting">
+						<span class="spinner"></span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="submitbox">
+			<div id="wp-link-cancel">
+				<button type="button" class="button">Cancel</button>
+			</div>
+			<div id="wp-link-update">
+				<input type="submit" value="Add Link" class="button button-primary" id="wp-link-submit" name="wp-link-submit">
+			</div>
+		</div>
+		</form>
+		</div>
+		</body>
+
+<!-- Mirrored from developer.wordpress.org/reference/functions/wp_mail/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 31 Aug 2021 17:05:41 GMT -->
+</html>

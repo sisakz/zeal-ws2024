@@ -1,0 +1,1604 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+
+<!-- Mirrored from developer.wordpress.org/reference/classes/wp_image_editor_imagick/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 31 Aug 2021 17:24:28 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<!--
+<meta property="fb:page_id" content="6427302910" />
+-->
+<meta name="google-site-verification" content="7VWES_-rcHBcmaQis9mSYamPfNwE03f4vyTj4pfuAw0" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WP_Image_Editor_Imagick</title>
+<meta name="referrer" content="always">
+
+		<link href='../../../../fonts.googleapis.com/css.css?family=Open+Sans:300italic,400italic,600italic,400,300,600&amp;subset=latin,cyrillic-ext,greek-ext,greek,vietnamese,latin-ext,cyrillic' rel='stylesheet' type='text/css'>
+
+		<link rel="stylesheet" href="../../../../s.w.org/style/wp4.css?95" />
+
+<link rel="shortcut icon" href="../../../../s.w.org/favicon.ico?2" type="image/x-icon" />
+<link rel="pingback" href="../../../xmlrpc.php" /><meta name='robots' content='max-image-preview:large' />
+<link rel='dns-prefetch' href='../../../../fonts.googleapis.com/index.html' />
+<link rel='dns-prefetch' href='http://s.w.org/' />
+<link rel='dns-prefetch' href='http://www.googletagmanager.com/' />
+<link rel='dns-prefetch' href='http://fonts.gstatic.com/' />
+<link rel="alternate" type="application/rss+xml" title="WordPress Developer Resources &raquo; Feed" href="../../../feed/index.html" />
+<link rel="alternate" type="application/rss+xml" title="WordPress Developer Resources &raquo; Comments Feed" href="../../../comments/feed/index.html" />
+<meta property="og:title" content="WP_Image_Editor_Imagick | Class | WordPress Developer Resources" />
+<meta property="og:site_name" content="WordPress Developer Resources" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="../../../index.html" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@WordPress" />
+<meta name="description" content="WordPress Image Editor Class for Image Manipulation through Imagick PHP Module" />
+<meta property="og:description" content="WordPress Image Editor Class for Image Manipulation through Imagick PHP Module" />
+<link rel="alternate" type="application/rss+xml" title="WordPress Developer Resources &raquo; WP_Image_Editor_Imagick Comments Feed" href="https://developer.wordpress.org/reference/classes/wp_image_editor_imagick/feed/" />
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'../../../../www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P24PF4B');</script>
+			<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/developer.wordpress.org\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.9-alpha-51701"}};
+			!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([10084,65039,8205,55357,56613],[10084,65039,8203,55357,56613])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel='stylesheet' id='dashicons-css'  href='../../../wp-includes/css/dashicons.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='admin-bar-css'  href='../../../wp-includes/css/admin-bar.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-block-library-css'  href='../../../wp-includes/css/dist/block-library/style.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='wporg-handbook-css-css'  href='../../../wp-content/plugins/handbook/stylesheets/callout-boxes.css?ver=20200121' type='text/css' media='all' />
+<link rel='stylesheet' id='open-sans-css'  href='../../../../fonts.googleapis.com/css-2.css?family=Open+Sans%3A300italic%2C400italic%2C600italic%2C300%2C400%2C600&amp;subset=latin%2Clatin-ext&amp;display=fallback&amp;ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='wporg-developer-style-css'  href='../../../wp-content/themes/pub/wporg-developer/style.css?ver=3' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-dev-sass-compiled-css'  href='../../../wp-content/themes/pub/wporg-developer/stylesheets/main.css?ver=20200713' type='text/css' media='all' />
+<link rel='stylesheet' id='awesomplete-css-css'  href='../../../wp-content/themes/pub/wporg-developer/stylesheets/awesomplete.css?ver=20160114' type='text/css' media='all' />
+<link rel='stylesheet' id='autocomplete-css-css'  href='../../../wp-content/themes/pub/wporg-developer/stylesheets/autocomplete.css?ver=20171220' type='text/css' media='all' />
+<link rel='stylesheet' id='syntaxhighlighter-core-css'  href='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shCore.css?ver=3.0.9b' type='text/css' media='all' />
+<link rel='stylesheet' id='syntaxhighlighter-theme-default-css'  href='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shThemeDefault.css?ver=3.0.9b' type='text/css' media='all' />
+<script type='text/javascript' src='../../../wp-includes/js/jquery/jquery.min.js?ver=3.6.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='../../../wp-content/plugins/handbook/scripts/handbook.js?ver=20150930' id='wporg-handbook-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/chapters.js?ver=20190603' id='wporg-developer-chapters-js'></script>
+<script type='text/javascript' src='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shCore.js?ver=3.0.9b' id='syntaxhighlighter-core-js'></script>
+<script type='text/javascript' src='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushPhp.js?ver=3.0.9b' id='syntaxhighlighter-brush-php-js'></script>
+<link rel="https://api.w.org/" href="https://developer.wordpress.org/wp-json/" /><link rel="alternate" type="application/json" href="https://developer.wordpress.org/wp-json/wp/v2/wp-parser-class/2765" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="../../../xmlrpc-2.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="../../../wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 5.9-alpha-51701" />
+<link rel='shortlink' href='https://developer.wordpress.org/?p=2765' />
+<link rel="alternate" type="application/json+oembed" href="https://developer.wordpress.org/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Fclasses%2Fwp_image_editor_imagick%2F" />
+<link rel="alternate" type="text/xml+oembed" href="https://developer.wordpress.org/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Fclasses%2Fwp_image_editor_imagick%2F&amp;format=xml" />
+<link rel="canonical" href="index.html">
+<!-- Stream WordPress user activity plugin v3.6.2 -->
+	<style>
+		@media screen and (max-width: 782px) {
+			#wpadminbar li#wp-admin-bar-log-in,
+			#wpadminbar li#wp-admin-bar-register {
+				display: block;
+			}
+
+			#wpadminbar li#wp-admin-bar-log-in a,
+			#wpadminbar li#wp-admin-bar-register a {
+				padding: 0 8px;
+			}
+		}
+	</style>
+		<style>
+			a.github-edit {
+				margin-left: .5em;
+				font-size: .5em;
+				vertical-align: top;
+				display: inline-block;
+				border: 1px solid #eeeeee;
+				border-radius: 2px;
+				background: #eeeeee;
+				padding: .5em .6em .4em;
+				color: black;
+				margin-top: 0.1em;
+			}
+			a.github-edit > * {
+				opacity: 0.6;
+			}
+			a.github-edit:hover > * {
+				opacity: 1;
+				color: black;
+			}
+			a.github-edit img {
+				height: .8em;
+			}
+		</style>
+		
+	<script type="text/javascript">
+		jQuery( '<style>.hide-if-js { display: none; }</style>' ).appendTo( 'head' );
+		jQuery( function($) {
+			$( 'body' ).addClass('js');
+		} );
+	</script>
+<style type="text/css" media="print">#wpadminbar { display:none; }</style>
+	<style type="text/css" media="screen">
+	</style>
+	<script>document.cookie='devicePixelRatio='+((window.devicePixelRatio === undefined) ? 1 : window.devicePixelRatio)+'; path=/';</script>
+
+</head>
+
+
+<body id="wordpress-org" class="wp-parser-class-template-default single single-wp-parser-class postid-2765 admin-bar no-customize-support">
+		<div id="wpadminbar" class="nojq nojs">
+						<div class="quicklinks" id="wp-toolbar" role="navigation" aria-label="Toolbar">
+				<ul id='wp-admin-bar-root-default' class="ab-top-menu"><li id='wp-admin-bar-wp-logo' class="menupop"><a class='ab-item' aria-haspopup="true" href='https://wordpress.org/about/'><span class="ab-icon" aria-hidden="true"></span><span class="screen-reader-text">About WordPress</span></a><div class="ab-sub-wrapper"><ul id='wp-admin-bar-wp-logo-default' class="ab-submenu"><li id='wp-admin-bar-about'><a class='ab-item' href='https://wordpress.org/about/'>About WordPress</a></li></ul><ul id='wp-admin-bar-wp-logo-external' class="ab-sub-secondary ab-submenu"><li id='wp-admin-bar-wporg'><a class='ab-item' href='https://wordpress.org/'>WordPress.org</a></li><li id='wp-admin-bar-documentation'><a class='ab-item' href='https://wordpress.org/support/'>Documentation</a></li><li id='wp-admin-bar-support-forums'><a class='ab-item' href='https://wordpress.org/support/forums/'>Support</a></li><li id='wp-admin-bar-feedback'><a class='ab-item' href='https://wordpress.org/support/forum/requests-and-feedback'>Feedback</a></li></ul></div></li></ul><ul id='wp-admin-bar-top-secondary' class="ab-top-secondary ab-top-menu"><li id='wp-admin-bar-search' class="admin-bar-search"><div class="ab-item ab-empty-item" tabindex="-1"><form action="https://developer.wordpress.org/" method="get" id="adminbarsearch"><input class="adminbar-input" name="s" id="adminbar-search" type="text" value="" maxlength="150" /><label for="adminbar-search" class="screen-reader-text">Search</label><input type="submit" class="adminbar-button" value="Search" /></form></div></li><li id='wp-admin-bar-log-in'><a class='ab-item' href='https://login.wordpress.org/?locale=en_US'>Log In</a></li><li id='wp-admin-bar-register'><a class='ab-item' href='https://login.wordpress.org/register?locale=en_US'>Register</a></li></ul>			</div>
+					</div>
+
+		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P24PF4B" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<div id="wporg-header">
+	<div class="wrapper">
+	<h1><a href="http://wordpress.org/">WordPress.org</a></h1>				<div id="head-search">
+		<form action="http://wordpress.org/search/do-search.php" method="get">
+			<label for="global-search" class="screen-reader-text">Search WordPress.org for:</label>
+			<input id="global-search" class="text" name="search" type="text" value="" maxlength="150" placeholder="Search WordPress.org" />
+			<button type="submit" class="button"><span class="screen-reader-text">Submit</span></button>
+		</form>
+		</div>
+				<div style="clear:both"></div>
+		<button id="mobile-menu-button" aria-expanded="false"><span class="screen-reader-text">Toggle Menu</span></button>
+		
+<nav aria-label="Main Menu">
+<ul id="wporg-header-menu">
+<li class="menu-item"><a href='http://wordpress.org/showcase/' data-title='See some of the sites built on WordPress.'>Showcase</a></li>
+<li class="menu-item"><a href='http://learn.wordpress.org/' data-title='Resources to help you learn more about WordPress and teach it to others.'>Learn</a></li>
+<li class="menu-item"><a href='http://wordpress.org/themes/' data-title='Find just the right look for your website.'>Themes</a></li>
+<li class="menu-item"><a href='http://wordpress.org/plugins/' data-title='Plugins can extend WordPress to do almost anything you can imagine.'>Plugins</a></li>
+<li class="menu-item"><a href='http://wordpress.org/mobile/' data-title='Take your website on the go!'>Mobile</a></li>
+<li class="menu-item"><a href='http://wordpress.org/support/' data-title='Forums, documentation, help.'>Support</a><ul class="nav-submenu"><li><a href='http://wordpress.org/support/' title='Documentation, tutorials, best practices.'>Documentation</a></li><li><a href='http://wordpress.org/support/forums/' title='Support and discussion forums.'>Forums</a></li></ul><div class="uparrow"></div></li>
+<li class="menu-item"><a href='http://make.wordpress.org/' data-title='Contribute your knowledge.'>Get Involved</a><ul class="nav-submenu"><li><a href='http://wordpress.org/five-for-the-future/' title='How five percent is powering the next generation of the web'>Five for the Future</a></li></ul><div class="uparrow"></div></li>
+<li class="menu-item"><a href='http://wordpress.org/about/' data-title='About the WordPress Organization, and where we&#039;re going.'>About</a></li>
+<li class="menu-item"><a href='http://wordpress.org/news/' data-title='Come here for the latest scoop.'>Blog</a></li>
+<li class="menu-item"><a href='http://wordpress.org/hosting/' data-title='Find a home for your blog.'>Hosting</a></li>
+<li id="download" class="button download-button menu-item"><a href='http://wordpress.org/download/' data-title='Get it. Got it? Good.'>Get WordPress</a></li>
+</ul>
+</nav>
+		<div style="clear:both"></div>
+	</div>
+</div>
+
+
+
+<header id="masthead" class="site-header" role="banner">
+		<div class="site-branding">
+		<h1 class="site-title">
+			<a href="../../index.html" rel="home">Code Reference</a>
+		</h1>
+
+		
+		<nav id="site-navigation" class="main-navigation" role="navigation">
+			<button class="menu-toggle dashicons dashicons-arrow-down-alt2" aria-controls="primary-menu" aria-expanded="false" aria-label="Primary Menu"></button>
+					</nav>
+	</div>
+</header><!-- #masthead -->
+
+<div id="page" class="hfeed site devhub-wrap">
+	<a href="#main" class="screen-reader-text">Skip to content</a>
+
+				<div id="inner-search">
+			<div class="search-section section clear hide-if-js">
+
+
+	
+	<form role="search" method="get" class="searchform searchform-filtered" action="https://developer.wordpress.org/">
+		<label for="search-field" class="screen-reader-text">Search for:</label>
+		<input type="text" id="search-field" class="search-field" placeholder="Search &hellip;" value="" name="s">
+		<button class="button button-primary button-search"><i class="dashicons dashicons-search"></i><span class="screen-reader-text">Search plugins</span></button>
+	
+		<div class="search-post-type">
+			<span>Filter by type:</span>
+									<label><input type="checkbox" name="post_type[]" value="wp-parser-function"
+						 /> Functions</label>
+									<label><input type="checkbox" name="post_type[]" value="wp-parser-hook"
+						 /> Hooks</label>
+									<label><input type="checkbox" name="post_type[]" value="wp-parser-class"
+						 /> Classes</label>
+									<label><input type="checkbox" name="post_type[]" value="wp-parser-method"
+						 /> Methods</label>
+					</div>
+
+	
+	</form>
+
+</div><!-- /search-guide -->
+			<div id="inner-search-icon-container">
+				<div id="inner-search-icon">
+					<div class="dashicons dashicons-search"><span class="screen-reader-text">Search</span></div>
+				</div>
+			</div>
+		</div>
+
+		<div id="content" class="site-content">
+
+	<div id="content-area" class="wp-parser-class-template-default single single-wp-parser-class postid-2765 admin-bar no-customize-support code-reference">
+
+		
+		<div class="breadcrumb-trail breadcrumbs" itemprop="breadcrumb">
+			<span class="trail-browse">Browse:</span> 
+			<span class="trail-begin"><a href="../../../index.html" title="WordPress Developer Resources" rel="home">Home</a></span> <span class="sep">&#47;</span> 
+			<span class="trail-inner"><a href="../../index.html" title="Reference">Reference</a></span> <span class="sep">&#47;</span> 
+			<span class="trail-inner"><a href="../index.html">Classes</a></span> <span class="sep">&#47;</span> <span class="trail-end">WP_Image_Editor_Imagick</span>
+		</div>
+		<main id="main" class="site-main" role="main">
+
+		
+			
+<article id="post-2765" class="post-2765 wp-parser-class type-wp-parser-class status-publish hentry wp-parser-source-file-wp-includes_class-wp-image-editor-imagick-php wp-parser-package-image_editor wp-parser-package-wordpress wp-parser-since-3-5-0">
+
+	
+	
+	<h1>WP_Image_Editor_Imagick</h1>
+
+	<section class="summary">
+		<p>WordPress Image Editor Class for Image Manipulation through Imagick PHP Module</p>
+	</section>
+
+
+	
+	<div class="content-toc"><style> .toc-jump { text-align: right; font-size: 12px; } .page .toc-heading { margin-top: -50px; padding-top: 50px !important; }</style><div class="table-of-contents"><h2>Contents</h2><ul class="items"><li><a href="#description">Description</a>
+<ul>
+<li><a href="#see-also">See also</a>
+</ul></li>
+<li><a href="#source">Source</a></li>
+<li><a href="#related">Related</a>
+<ul>
+<li><a href="#uses">Uses</a>
+</ul></li>
+<li><a href="#methods">Methods</a></li>
+<li><a href="#changelog">Changelog</a></li>
+<li><a href="#user-contributed-notes">User Contributed Notes</a></ul>
+</div>
+
+<hr />
+<section class="description">
+	<h2 class="toc-heading" id="description" tabindex="-1">Description <a href="#description" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Description</span></a></h2>
+	
+		<h3 class="toc-heading" id="see-also" tabindex="-1">See also <a href="#see-also" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">See also</span></a></h3>
+
+	<ul>
+	<li><a href="../wp_image_editor/index.html">WP_Image_Editor</a></li>
+	</ul>
+	</section>
+
+	<hr />
+	<section class="source-content">
+		<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="source" tabindex="-1">Source <a href="#source" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Source</span></a></h2>
+		<p>
+			File: <a href="../../files/wp-includes/class-wp-image-editor-imagick.php/index.html">wp-includes/class-wp-image-editor-imagick.php</a>		</p>
+
+					<div class="source-code-container">
+				<pre class="brush: php; toolbar: false; first-line: 16">class WP_Image_Editor_Imagick extends WP_Image_Editor {
+	/**
+	 * Imagick object.
+	 *
+	 * @var Imagick
+	 */
+	protected $image;
+
+	public function __destruct() {
+		if ( $this-&gt;image instanceof Imagick ) {
+			// We don't need the original in memory anymore.
+			$this-&gt;image-&gt;clear();
+			$this-&gt;image-&gt;destroy();
+		}
+	}
+
+	/**
+	 * Checks to see if current environment supports Imagick.
+	 *
+	 * We require Imagick 2.2.0 or greater, based on whether the queryFormats()
+	 * method can be called statically.
+	 *
+	 * @since 3.5.0
+	 *
+	 * @param array $args
+	 * @return bool
+	 */
+	public static function test( $args = array() ) {
+
+		// First, test Imagick's extension and classes.
+		if ( ! extension_loaded( 'imagick' ) || ! class_exists( 'Imagick', false ) || ! class_exists( 'ImagickPixel', false ) ) {
+			return false;
+		}
+
+		if ( version_compare( phpversion( 'imagick' ), '2.2.0', '&lt;' ) ) {
+			return false;
+		}
+
+		$required_methods = array(
+			'clear',
+			'destroy',
+			'valid',
+			'getimage',
+			'writeimage',
+			'getimageblob',
+			'getimagegeometry',
+			'getimageformat',
+			'setimageformat',
+			'setimagecompression',
+			'setimagecompressionquality',
+			'setimagepage',
+			'setoption',
+			'scaleimage',
+			'cropimage',
+			'rotateimage',
+			'flipimage',
+			'flopimage',
+			'readimage',
+			'readimageblob',
+		);
+
+		// Now, test for deep requirements within Imagick.
+		if ( ! defined( 'imagick::COMPRESSION_JPEG' ) ) {
+			return false;
+		}
+
+		$class_methods = array_map( 'strtolower', get_class_methods( 'Imagick' ) );
+		if ( array_diff( $required_methods, $class_methods ) ) {
+			return false;
+		}
+
+		return true;
+	}
+
+	/**
+	 * Checks to see if editor supports the mime-type specified.
+	 *
+	 * @since 3.5.0
+	 *
+	 * @param string $mime_type
+	 * @return bool
+	 */
+	public static function supports_mime_type( $mime_type ) {
+		$imagick_extension = strtoupper( self::get_extension( $mime_type ) );
+
+		if ( ! $imagick_extension ) {
+			return false;
+		}
+
+		// setIteratorIndex is optional unless mime is an animated format.
+		// Here, we just say no if you are missing it and aren't loading a jpeg.
+		if ( ! method_exists( 'Imagick', 'setIteratorIndex' ) &amp;&amp; 'image/jpeg' !== $mime_type ) {
+				return false;
+		}
+
+		try {
+			// phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged
+			return ( (bool) @Imagick::queryFormats( $imagick_extension ) );
+		} catch ( Exception $e ) {
+			return false;
+		}
+	}
+
+	/**
+	 * Loads image from $this-&gt;file into new Imagick Object.
+	 *
+	 * @since 3.5.0
+	 *
+	 * @return true|WP_Error True if loaded; WP_Error on failure.
+	 */
+	public function load() {
+		if ( $this-&gt;image instanceof Imagick ) {
+			return true;
+		}
+
+		if ( ! is_file( $this-&gt;file ) &amp;&amp; ! wp_is_stream( $this-&gt;file ) ) {
+			return new WP_Error( 'error_loading_image', __( 'File doesn&amp;#8217;t exist?' ), $this-&gt;file );
+		}
+
+		/*
+		 * Even though Imagick uses less PHP memory than GD, set higher limit
+		 * for users that have low PHP.ini limits.
+		 */
+		wp_raise_memory_limit( 'image' );
+
+		try {
+			$this-&gt;image    = new Imagick();
+			$file_extension = strtolower( pathinfo( $this-&gt;file, PATHINFO_EXTENSION ) );
+
+			if ( 'pdf' === $file_extension ) {
+				$pdf_loaded = $this-&gt;pdf_load_source();
+
+				if ( is_wp_error( $pdf_loaded ) ) {
+					return $pdf_loaded;
+				}
+			} else {
+				if ( wp_is_stream( $this-&gt;file ) ) {
+					// Due to reports of issues with streams with `Imagick::readImageFile()`, uses `Imagick::readImageBlob()` instead.
+					$this-&gt;image-&gt;readImageBlob( file_get_contents( $this-&gt;file ), $this-&gt;file );
+				} else {
+					$this-&gt;image-&gt;readImage( $this-&gt;file );
+				}
+			}
+
+			if ( ! $this-&gt;image-&gt;valid() ) {
+				return new WP_Error( 'invalid_image', __( 'File is not an image.' ), $this-&gt;file );
+			}
+
+			// Select the first frame to handle animated images properly.
+			if ( is_callable( array( $this-&gt;image, 'setIteratorIndex' ) ) ) {
+				$this-&gt;image-&gt;setIteratorIndex( 0 );
+			}
+
+			$this-&gt;mime_type = $this-&gt;get_mime_type( $this-&gt;image-&gt;getImageFormat() );
+		} catch ( Exception $e ) {
+			return new WP_Error( 'invalid_image', $e-&gt;getMessage(), $this-&gt;file );
+		}
+
+		$updated_size = $this-&gt;update_size();
+
+		if ( is_wp_error( $updated_size ) ) {
+			return $updated_size;
+		}
+
+		return $this-&gt;set_quality();
+	}
+
+	/**
+	 * Sets Image Compression quality on a 1-100% scale.
+	 *
+	 * @since 3.5.0
+	 *
+	 * @param int $quality Compression Quality. Range: [1,100]
+	 * @return true|WP_Error True if set successfully; WP_Error on failure.
+	 */
+	public function set_quality( $quality = null ) {
+		$quality_result = parent::set_quality( $quality );
+		if ( is_wp_error( $quality_result ) ) {
+			return $quality_result;
+		} else {
+			$quality = $this-&gt;get_quality();
+		}
+
+		try {
+			switch ( $this-&gt;mime_type ) {
+				case 'image/jpeg':
+					$this-&gt;image-&gt;setImageCompressionQuality( $quality );
+					$this-&gt;image-&gt;setImageCompression( imagick::COMPRESSION_JPEG );
+					break;
+				case 'image/webp':
+					$webp_info = wp_get_webp_info( $this-&gt;file );
+
+					if ( 'lossless' === $webp_info['type'] ) {
+						// Use WebP lossless settings.
+						$this-&gt;image-&gt;setImageCompressionQuality( 100 );
+						$this-&gt;image-&gt;setOption( 'webp:lossless', 'true' );
+					} else {
+						$this-&gt;image-&gt;setImageCompressionQuality( $quality );
+					}
+					break;
+				default:
+					$this-&gt;image-&gt;setImageCompressionQuality( $quality );
+			}
+		} catch ( Exception $e ) {
+			return new WP_Error( 'image_quality_error', $e-&gt;getMessage() );
+		}
+		return true;
+	}
+
+
+	/**
+	 * Sets or updates current image size.
+	 *
+	 * @since 3.5.0
+	 *
+	 * @param int $width
+	 * @param int $height
+	 * @return true|WP_Error
+	 */
+	protected function update_size( $width = null, $height = null ) {
+		$size = null;
+		if ( ! $width || ! $height ) {
+			try {
+				$size = $this-&gt;image-&gt;getImageGeometry();
+			} catch ( Exception $e ) {
+				return new WP_Error( 'invalid_image', __( 'Could not read image size.' ), $this-&gt;file );
+			}
+		}
+
+		if ( ! $width ) {
+			$width = $size['width'];
+		}
+
+		if ( ! $height ) {
+			$height = $size['height'];
+		}
+
+		return parent::update_size( $width, $height );
+	}
+
+	/**
+	 * Resizes current image.
+	 *
+	 * At minimum, either a height or width must be provided.
+	 * If one of the two is set to null, the resize will
+	 * maintain aspect ratio according to the provided dimension.
+	 *
+	 * @since 3.5.0
+	 *
+	 * @param int|null $max_w Image width.
+	 * @param int|null $max_h Image height.
+	 * @param bool     $crop
+	 * @return true|WP_Error
+	 */
+	public function resize( $max_w, $max_h, $crop = false ) {
+		if ( ( $this-&gt;size['width'] == $max_w ) &amp;&amp; ( $this-&gt;size['height'] == $max_h ) ) {
+			return true;
+		}
+
+		$dims = image_resize_dimensions( $this-&gt;size['width'], $this-&gt;size['height'], $max_w, $max_h, $crop );
+		if ( ! $dims ) {
+			return new WP_Error( 'error_getting_dimensions', __( 'Could not calculate resized image dimensions' ) );
+		}
+
+		list( $dst_x, $dst_y, $src_x, $src_y, $dst_w, $dst_h, $src_w, $src_h ) = $dims;
+
+		if ( $crop ) {
+			return $this-&gt;crop( $src_x, $src_y, $src_w, $src_h, $dst_w, $dst_h );
+		}
+
+		// Execute the resize.
+		$thumb_result = $this-&gt;thumbnail_image( $dst_w, $dst_h );
+		if ( is_wp_error( $thumb_result ) ) {
+			return $thumb_result;
+		}
+
+		return $this-&gt;update_size( $dst_w, $dst_h );
+	}
+
+	/**
+	 * Efficiently resize the current image
+	 *
+	 * This is a WordPress specific implementation of Imagick::thumbnailImage(),
+	 * which resizes an image to given dimensions and removes any associated profiles.
+	 *
+	 * @since 4.5.0
+	 *
+	 * @param int    $dst_w       The destination width.
+	 * @param int    $dst_h       The destination height.
+	 * @param string $filter_name Optional. The Imagick filter to use when resizing. Default 'FILTER_TRIANGLE'.
+	 * @param bool   $strip_meta  Optional. Strip all profiles, excluding color profiles, from the image. Default true.
+	 * @return void|WP_Error
+	 */
+	protected function thumbnail_image( $dst_w, $dst_h, $filter_name = 'FILTER_TRIANGLE', $strip_meta = true ) {
+		$allowed_filters = array(
+			'FILTER_POINT',
+			'FILTER_BOX',
+			'FILTER_TRIANGLE',
+			'FILTER_HERMITE',
+			'FILTER_HANNING',
+			'FILTER_HAMMING',
+			'FILTER_BLACKMAN',
+			'FILTER_GAUSSIAN',
+			'FILTER_QUADRATIC',
+			'FILTER_CUBIC',
+			'FILTER_CATROM',
+			'FILTER_MITCHELL',
+			'FILTER_LANCZOS',
+			'FILTER_BESSEL',
+			'FILTER_SINC',
+		);
+
+		/**
+		 * Set the filter value if '$filter_name' name is in the allowed list and the related
+		 * Imagick constant is defined or fall back to the default filter.
+		 */
+		if ( in_array( $filter_name, $allowed_filters, true ) &amp;&amp; defined( 'Imagick::' . $filter_name ) ) {
+			$filter = constant( 'Imagick::' . $filter_name );
+		} else {
+			$filter = defined( 'Imagick::FILTER_TRIANGLE' ) ? Imagick::FILTER_TRIANGLE : false;
+		}
+
+		/**
+		 * Filters whether to strip metadata from images when they're resized.
+		 *
+		 * This filter only applies when resizing using the Imagick editor since GD
+		 * always strips profiles by default.
+		 *
+		 * @since 4.5.0
+		 *
+		 * @param bool $strip_meta Whether to strip image metadata during resizing. Default true.
+		 */
+		if ( apply_filters( 'image_strip_meta', $strip_meta ) ) {
+			$this-&gt;strip_meta(); // Fail silently if not supported.
+		}
+
+		try {
+			/*
+			 * To be more efficient, resample large images to 5x the destination size before resizing
+			 * whenever the output size is less that 1/3 of the original image size (1/3^2 ~= .111),
+			 * unless we would be resampling to a scale smaller than 128x128.
+			 */
+			if ( is_callable( array( $this-&gt;image, 'sampleImage' ) ) ) {
+				$resize_ratio  = ( $dst_w / $this-&gt;size['width'] ) * ( $dst_h / $this-&gt;size['height'] );
+				$sample_factor = 5;
+
+				if ( $resize_ratio &lt; .111 &amp;&amp; ( $dst_w * $sample_factor &gt; 128 &amp;&amp; $dst_h * $sample_factor &gt; 128 ) ) {
+					$this-&gt;image-&gt;sampleImage( $dst_w * $sample_factor, $dst_h * $sample_factor );
+				}
+			}
+
+			/*
+			 * Use resizeImage() when it's available and a valid filter value is set.
+			 * Otherwise, fall back to the scaleImage() method for resizing, which
+			 * results in better image quality over resizeImage() with default filter
+			 * settings and retains backward compatibility with pre 4.5 functionality.
+			 */
+			if ( is_callable( array( $this-&gt;image, 'resizeImage' ) ) &amp;&amp; $filter ) {
+				$this-&gt;image-&gt;setOption( 'filter:support', '2.0' );
+				$this-&gt;image-&gt;resizeImage( $dst_w, $dst_h, $filter, 1 );
+			} else {
+				$this-&gt;image-&gt;scaleImage( $dst_w, $dst_h );
+			}
+
+			// Set appropriate quality settings after resizing.
+			if ( 'image/jpeg' === $this-&gt;mime_type ) {
+				if ( is_callable( array( $this-&gt;image, 'unsharpMaskImage' ) ) ) {
+					$this-&gt;image-&gt;unsharpMaskImage( 0.25, 0.25, 8, 0.065 );
+				}
+
+				$this-&gt;image-&gt;setOption( 'jpeg:fancy-upsampling', 'off' );
+			}
+
+			if ( 'image/png' === $this-&gt;mime_type ) {
+				$this-&gt;image-&gt;setOption( 'png:compression-filter', '5' );
+				$this-&gt;image-&gt;setOption( 'png:compression-level', '9' );
+				$this-&gt;image-&gt;setOption( 'png:compression-strategy', '1' );
+				$this-&gt;image-&gt;setOption( 'png:exclude-chunk', 'all' );
+			}
+
+			/*
+			 * If alpha channel is not defined, set it opaque.
+			 *
+			 * Note that Imagick::getImageAlphaChannel() is only available if Imagick
+			 * has been compiled against ImageMagick version 6.4.0 or newer.
+			 */
+			if ( is_callable( array( $this-&gt;image, 'getImageAlphaChannel' ) )
+				&amp;&amp; is_callable( array( $this-&gt;image, 'setImageAlphaChannel' ) )
+				&amp;&amp; defined( 'Imagick::ALPHACHANNEL_UNDEFINED' )
+				&amp;&amp; defined( 'Imagick::ALPHACHANNEL_OPAQUE' )
+			) {
+				if ( $this-&gt;image-&gt;getImageAlphaChannel() === Imagick::ALPHACHANNEL_UNDEFINED ) {
+					$this-&gt;image-&gt;setImageAlphaChannel( Imagick::ALPHACHANNEL_OPAQUE );
+				}
+			}
+
+			// Limit the bit depth of resized images to 8 bits per channel.
+			if ( is_callable( array( $this-&gt;image, 'getImageDepth' ) ) &amp;&amp; is_callable( array( $this-&gt;image, 'setImageDepth' ) ) ) {
+				if ( 8 &lt; $this-&gt;image-&gt;getImageDepth() ) {
+					$this-&gt;image-&gt;setImageDepth( 8 );
+				}
+			}
+
+			if ( is_callable( array( $this-&gt;image, 'setInterlaceScheme' ) ) &amp;&amp; defined( 'Imagick::INTERLACE_NO' ) ) {
+				$this-&gt;image-&gt;setInterlaceScheme( Imagick::INTERLACE_NO );
+			}
+		} catch ( Exception $e ) {
+			return new WP_Error( 'image_resize_error', $e-&gt;getMessage() );
+		}
+	}
+
+	/**
+	 * Create multiple smaller images from a single source.
+	 *
+	 * Attempts to create all sub-sizes and returns the meta data at the end. This
+	 * may result in the server running out of resources. When it fails there may be few
+	 * &quot;orphaned&quot; images left over as the meta data is never returned and saved.
+	 *
+	 * As of 5.3.0 the preferred way to do this is with `make_subsize()`. It creates
+	 * the new images one at a time and allows for the meta data to be saved after
+	 * each new image is created.
+	 *
+	 * @since 3.5.0
+	 *
+	 * @param array $sizes {
+	 *     An array of image size data arrays.
+	 *
+	 *     Either a height or width must be provided.
+	 *     If one of the two is set to null, the resize will
+	 *     maintain aspect ratio according to the provided dimension.
+	 *
+	 *     @type array $size {
+	 *         Array of height, width values, and whether to crop.
+	 *
+	 *         @type int  $width  Image width. Optional if `$height` is specified.
+	 *         @type int  $height Image height. Optional if `$width` is specified.
+	 *         @type bool $crop   Optional. Whether to crop the image. Default false.
+	 *     }
+	 * }
+	 * @return array An array of resized images' metadata by size.
+	 */
+	public function multi_resize( $sizes ) {
+		$metadata = array();
+
+		foreach ( $sizes as $size =&gt; $size_data ) {
+			$meta = $this-&gt;make_subsize( $size_data );
+
+			if ( ! is_wp_error( $meta ) ) {
+				$metadata[ $size ] = $meta;
+			}
+		}
+
+		return $metadata;
+	}
+
+	/**
+	 * Create an image sub-size and return the image meta data value for it.
+	 *
+	 * @since 5.3.0
+	 *
+	 * @param array $size_data {
+	 *     Array of size data.
+	 *
+	 *     @type int  $width  The maximum width in pixels.
+	 *     @type int  $height The maximum height in pixels.
+	 *     @type bool $crop   Whether to crop the image to exact dimensions.
+	 * }
+	 * @return array|WP_Error The image data array for inclusion in the `sizes` array in the image meta,
+	 *                        WP_Error object on error.
+	 */
+	public function make_subsize( $size_data ) {
+		if ( ! isset( $size_data['width'] ) &amp;&amp; ! isset( $size_data['height'] ) ) {
+			return new WP_Error( 'image_subsize_create_error', __( 'Cannot resize the image. Both width and height are not set.' ) );
+		}
+
+		$orig_size  = $this-&gt;size;
+		$orig_image = $this-&gt;image-&gt;getImage();
+
+		if ( ! isset( $size_data['width'] ) ) {
+			$size_data['width'] = null;
+		}
+
+		if ( ! isset( $size_data['height'] ) ) {
+			$size_data['height'] = null;
+		}
+
+		if ( ! isset( $size_data['crop'] ) ) {
+			$size_data['crop'] = false;
+		}
+
+		$resized = $this-&gt;resize( $size_data['width'], $size_data['height'], $size_data['crop'] );
+
+		if ( is_wp_error( $resized ) ) {
+			$saved = $resized;
+		} else {
+			$saved = $this-&gt;_save( $this-&gt;image );
+
+			$this-&gt;image-&gt;clear();
+			$this-&gt;image-&gt;destroy();
+			$this-&gt;image = null;
+		}
+
+		$this-&gt;size  = $orig_size;
+		$this-&gt;image = $orig_image;
+
+		if ( ! is_wp_error( $saved ) ) {
+			unset( $saved['path'] );
+		}
+
+		return $saved;
+	}
+
+	/**
+	 * Crops Image.
+	 *
+	 * @since 3.5.0
+	 *
+	 * @param int  $src_x   The start x position to crop from.
+	 * @param int  $src_y   The start y position to crop from.
+	 * @param int  $src_w   The width to crop.
+	 * @param int  $src_h   The height to crop.
+	 * @param int  $dst_w   Optional. The destination width.
+	 * @param int  $dst_h   Optional. The destination height.
+	 * @param bool $src_abs Optional. If the source crop points are absolute.
+	 * @return true|WP_Error
+	 */
+	public function crop( $src_x, $src_y, $src_w, $src_h, $dst_w = null, $dst_h = null, $src_abs = false ) {
+		if ( $src_abs ) {
+			$src_w -= $src_x;
+			$src_h -= $src_y;
+		}
+
+		try {
+			$this-&gt;image-&gt;cropImage( $src_w, $src_h, $src_x, $src_y );
+			$this-&gt;image-&gt;setImagePage( $src_w, $src_h, 0, 0 );
+
+			if ( $dst_w || $dst_h ) {
+				// If destination width/height isn't specified,
+				// use same as width/height from source.
+				if ( ! $dst_w ) {
+					$dst_w = $src_w;
+				}
+				if ( ! $dst_h ) {
+					$dst_h = $src_h;
+				}
+
+				$thumb_result = $this-&gt;thumbnail_image( $dst_w, $dst_h );
+				if ( is_wp_error( $thumb_result ) ) {
+					return $thumb_result;
+				}
+
+				return $this-&gt;update_size();
+			}
+		} catch ( Exception $e ) {
+			return new WP_Error( 'image_crop_error', $e-&gt;getMessage() );
+		}
+
+		return $this-&gt;update_size();
+	}
+
+	/**
+	 * Rotates current image counter-clockwise by $angle.
+	 *
+	 * @since 3.5.0
+	 *
+	 * @param float $angle
+	 * @return true|WP_Error
+	 */
+	public function rotate( $angle ) {
+		/**
+		 * $angle is 360-$angle because Imagick rotates clockwise
+		 * (GD rotates counter-clockwise)
+		 */
+		try {
+			$this-&gt;image-&gt;rotateImage( new ImagickPixel( 'none' ), 360 - $angle );
+
+			// Normalise EXIF orientation data so that display is consistent across devices.
+			if ( is_callable( array( $this-&gt;image, 'setImageOrientation' ) ) &amp;&amp; defined( 'Imagick::ORIENTATION_TOPLEFT' ) ) {
+				$this-&gt;image-&gt;setImageOrientation( Imagick::ORIENTATION_TOPLEFT );
+			}
+
+			// Since this changes the dimensions of the image, update the size.
+			$result = $this-&gt;update_size();
+			if ( is_wp_error( $result ) ) {
+				return $result;
+			}
+
+			$this-&gt;image-&gt;setImagePage( $this-&gt;size['width'], $this-&gt;size['height'], 0, 0 );
+		} catch ( Exception $e ) {
+			return new WP_Error( 'image_rotate_error', $e-&gt;getMessage() );
+		}
+
+		return true;
+	}
+
+	/**
+	 * Flips current image.
+	 *
+	 * @since 3.5.0
+	 *
+	 * @param bool $horz Flip along Horizontal Axis
+	 * @param bool $vert Flip along Vertical Axis
+	 * @return true|WP_Error
+	 */
+	public function flip( $horz, $vert ) {
+		try {
+			if ( $horz ) {
+				$this-&gt;image-&gt;flipImage();
+			}
+
+			if ( $vert ) {
+				$this-&gt;image-&gt;flopImage();
+			}
+
+			// Normalise EXIF orientation data so that display is consistent across devices.
+			if ( is_callable( array( $this-&gt;image, 'setImageOrientation' ) ) &amp;&amp; defined( 'Imagick::ORIENTATION_TOPLEFT' ) ) {
+				$this-&gt;image-&gt;setImageOrientation( Imagick::ORIENTATION_TOPLEFT );
+			}
+		} catch ( Exception $e ) {
+			return new WP_Error( 'image_flip_error', $e-&gt;getMessage() );
+		}
+
+		return true;
+	}
+
+	/**
+	 * Check if a JPEG image has EXIF Orientation tag and rotate it if needed.
+	 *
+	 * As ImageMagick copies the EXIF data to the flipped/rotated image, proceed only
+	 * if EXIF Orientation can be reset afterwards.
+	 *
+	 * @since 5.3.0
+	 *
+	 * @return bool|WP_Error True if the image was rotated. False if no EXIF data or if the image doesn't need rotation.
+	 *                       WP_Error if error while rotating.
+	 */
+	public function maybe_exif_rotate() {
+		if ( is_callable( array( $this-&gt;image, 'setImageOrientation' ) ) &amp;&amp; defined( 'Imagick::ORIENTATION_TOPLEFT' ) ) {
+			return parent::maybe_exif_rotate();
+		} else {
+			return new WP_Error( 'write_exif_error', __( 'The image cannot be rotated because the embedded meta data cannot be updated.' ) );
+		}
+	}
+
+	/**
+	 * Saves current image to file.
+	 *
+	 * @since 3.5.0
+	 *
+	 * @param string $destfilename
+	 * @param string $mime_type
+	 * @return array|WP_Error {'path'=&gt;string, 'file'=&gt;string, 'width'=&gt;int, 'height'=&gt;int, 'mime-type'=&gt;string}
+	 */
+	public function save( $destfilename = null, $mime_type = null ) {
+		$saved = $this-&gt;_save( $this-&gt;image, $destfilename, $mime_type );
+
+		if ( ! is_wp_error( $saved ) ) {
+			$this-&gt;file      = $saved['path'];
+			$this-&gt;mime_type = $saved['mime-type'];
+
+			try {
+				$this-&gt;image-&gt;setImageFormat( strtoupper( $this-&gt;get_extension( $this-&gt;mime_type ) ) );
+			} catch ( Exception $e ) {
+				return new WP_Error( 'image_save_error', $e-&gt;getMessage(), $this-&gt;file );
+			}
+		}
+
+		return $saved;
+	}
+
+	/**
+	 * @param Imagick $image
+	 * @param string  $filename
+	 * @param string  $mime_type
+	 * @return array|WP_Error
+	 */
+	protected function _save( $image, $filename = null, $mime_type = null ) {
+		list( $filename, $extension, $mime_type ) = $this-&gt;get_output_format( $filename, $mime_type );
+
+		if ( ! $filename ) {
+			$filename = $this-&gt;generate_filename( null, null, $extension );
+		}
+
+		try {
+			// Store initial format.
+			$orig_format = $this-&gt;image-&gt;getImageFormat();
+
+			$this-&gt;image-&gt;setImageFormat( strtoupper( $this-&gt;get_extension( $mime_type ) ) );
+		} catch ( Exception $e ) {
+			return new WP_Error( 'image_save_error', $e-&gt;getMessage(), $filename );
+		}
+
+		$write_image_result = $this-&gt;write_image( $this-&gt;image, $filename );
+		if ( is_wp_error( $write_image_result ) ) {
+			return $write_image_result;
+		}
+
+		try {
+			// Reset original format.
+			$this-&gt;image-&gt;setImageFormat( $orig_format );
+		} catch ( Exception $e ) {
+			return new WP_Error( 'image_save_error', $e-&gt;getMessage(), $filename );
+		}
+
+		// Set correct file permissions.
+		$stat  = stat( dirname( $filename ) );
+		$perms = $stat['mode'] &amp; 0000666; // Same permissions as parent folder, strip off the executable bits.
+		chmod( $filename, $perms );
+
+		return array(
+			'path'      =&gt; $filename,
+			/** This filter is documented in wp-includes/class-wp-image-editor-gd.php */
+			'file'      =&gt; wp_basename( apply_filters( 'image_make_intermediate_size', $filename ) ),
+			'width'     =&gt; $this-&gt;size['width'],
+			'height'    =&gt; $this-&gt;size['height'],
+			'mime-type' =&gt; $mime_type,
+		);
+	}
+
+	/**
+	 * Writes an image to a file or stream.
+	 *
+	 * @since 5.6.0
+	 *
+	 * @param Imagick $image
+	 * @param string  $filename The destination filename or stream URL.
+	 * @return true|WP_Error
+	 */
+	private function write_image( $image, $filename ) {
+		if ( wp_is_stream( $filename ) ) {
+			/*
+			 * Due to reports of issues with streams with `Imagick::writeImageFile()` and `Imagick::writeImage()`, copies the blob instead.
+			 * Checks for exact type due to: https://www.php.net/manual/en/function.file-put-contents.php
+			 */
+			if ( file_put_contents( $filename, $image-&gt;getImageBlob() ) === false ) {
+				return new WP_Error(
+					'image_save_error',
+					sprintf(
+						/* translators: %s: PHP function name. */
+						__( '%s failed while writing image to stream.' ),
+						'&lt;code&gt;file_put_contents()&lt;/code&gt;'
+					),
+					$filename
+				);
+			} else {
+				return true;
+			}
+		} else {
+			$dirname = dirname( $filename );
+
+			if ( ! wp_mkdir_p( $dirname ) ) {
+				return new WP_Error(
+					'image_save_error',
+					sprintf(
+						/* translators: %s: Directory path. */
+						__( 'Unable to create directory %s. Is its parent directory writable by the server?' ),
+						esc_html( $dirname )
+					)
+				);
+			}
+
+			try {
+				return $image-&gt;writeImage( $filename );
+			} catch ( Exception $e ) {
+				return new WP_Error( 'image_save_error', $e-&gt;getMessage(), $filename );
+			}
+		}
+	}
+
+	/**
+	 * Streams current image to browser.
+	 *
+	 * @since 3.5.0
+	 *
+	 * @param string $mime_type The mime type of the image.
+	 * @return true|WP_Error True on success, WP_Error object on failure.
+	 */
+	public function stream( $mime_type = null ) {
+		list( $filename, $extension, $mime_type ) = $this-&gt;get_output_format( null, $mime_type );
+
+		try {
+			// Temporarily change format for stream.
+			$this-&gt;image-&gt;setImageFormat( strtoupper( $extension ) );
+
+			// Output stream of image content.
+			header( &quot;Content-Type: $mime_type&quot; );
+			print $this-&gt;image-&gt;getImageBlob();
+
+			// Reset image to original format.
+			$this-&gt;image-&gt;setImageFormat( $this-&gt;get_extension( $this-&gt;mime_type ) );
+		} catch ( Exception $e ) {
+			return new WP_Error( 'image_stream_error', $e-&gt;getMessage() );
+		}
+
+		return true;
+	}
+
+	/**
+	 * Strips all image meta except color profiles from an image.
+	 *
+	 * @since 4.5.0
+	 *
+	 * @return true|WP_Error True if stripping metadata was successful. WP_Error object on error.
+	 */
+	protected function strip_meta() {
+
+		if ( ! is_callable( array( $this-&gt;image, 'getImageProfiles' ) ) ) {
+			return new WP_Error(
+				'image_strip_meta_error',
+				sprintf(
+					/* translators: %s: ImageMagick method name. */
+					__( '%s is required to strip image meta.' ),
+					'&lt;code&gt;Imagick::getImageProfiles()&lt;/code&gt;'
+				)
+			);
+		}
+
+		if ( ! is_callable( array( $this-&gt;image, 'removeImageProfile' ) ) ) {
+			return new WP_Error(
+				'image_strip_meta_error',
+				sprintf(
+					/* translators: %s: ImageMagick method name. */
+					__( '%s is required to strip image meta.' ),
+					'&lt;code&gt;Imagick::removeImageProfile()&lt;/code&gt;'
+				)
+			);
+		}
+
+		/*
+		 * Protect a few profiles from being stripped for the following reasons:
+		 *
+		 * - icc:  Color profile information
+		 * - icm:  Color profile information
+		 * - iptc: Copyright data
+		 * - exif: Orientation data
+		 * - xmp:  Rights usage data
+		 */
+		$protected_profiles = array(
+			'icc',
+			'icm',
+			'iptc',
+			'exif',
+			'xmp',
+		);
+
+		try {
+			// Strip profiles.
+			foreach ( $this-&gt;image-&gt;getImageProfiles( '*', true ) as $key =&gt; $value ) {
+				if ( ! in_array( $key, $protected_profiles, true ) ) {
+					$this-&gt;image-&gt;removeImageProfile( $key );
+				}
+			}
+		} catch ( Exception $e ) {
+			return new WP_Error( 'image_strip_meta_error', $e-&gt;getMessage() );
+		}
+
+		return true;
+	}
+
+	/**
+	 * Sets up Imagick for PDF processing.
+	 * Increases rendering DPI and only loads first page.
+	 *
+	 * @since 4.7.0
+	 *
+	 * @return string|WP_Error File to load or WP_Error on failure.
+	 */
+	protected function pdf_setup() {
+		try {
+			// By default, PDFs are rendered in a very low resolution.
+			// We want the thumbnail to be readable, so increase the rendering DPI.
+			$this-&gt;image-&gt;setResolution( 128, 128 );
+
+			// Only load the first page.
+			return $this-&gt;file . '[0]';
+		} catch ( Exception $e ) {
+			return new WP_Error( 'pdf_setup_failed', $e-&gt;getMessage(), $this-&gt;file );
+		}
+	}
+
+	/**
+	 * Load the image produced by Ghostscript.
+	 *
+	 * Includes a workaround for a bug in Ghostscript 8.70 that prevents processing of some PDF files
+	 * when `use-cropbox` is set.
+	 *
+	 * @since 5.6.0
+	 *
+	 * @return true|WP_error
+	 */
+	protected function pdf_load_source() {
+		$filename = $this-&gt;pdf_setup();
+
+		if ( is_wp_error( $filename ) ) {
+			return $filename;
+		}
+
+		try {
+			// When generating thumbnails from cropped PDF pages, Imagemagick uses the uncropped
+			// area (resulting in unnecessary whitespace) unless the following option is set.
+			$this-&gt;image-&gt;setOption( 'pdf:use-cropbox', true );
+
+			// Reading image after Imagick instantiation because `setResolution`
+			// only applies correctly before the image is read.
+			$this-&gt;image-&gt;readImage( $filename );
+		} catch ( Exception $e ) {
+			// Attempt to run `gs` without the `use-cropbox` option. See #48853.
+			$this-&gt;image-&gt;setOption( 'pdf:use-cropbox', false );
+
+			$this-&gt;image-&gt;readImage( $filename );
+		}
+
+		return true;
+	}
+
+}
+</pre>
+			</div>
+			<p class="source-code-links">
+				<span>
+					<a href="#" class="show-complete-source">Expand full source code</a>
+					<a href="#" class="less-complete-source">Collapse full source code</a>
+				</span>
+				<span><a href="https://core.trac.wordpress.org/browser/tags/5.8/src/wp-includes/class-wp-image-editor-imagick.php#L16">View on Trac</a></span>
+			</p>
+			</section>
+	<hr />
+	<section class="related">
+		<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="related" tabindex="-1">Related <a href="#related" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Related</span></a></h2>
+
+					<article class="uses">
+				<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="uses" tabindex="-1">Uses <a href="#uses" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Uses</span></a></h3>
+				<table id="uses-table">
+					<caption class="screen-reader-text">Uses</caption>
+					<thead>
+						<tr>
+							<th>Uses</th>
+							<th class="related-desc">Description</th>
+						</tr>
+					</thead>
+					<tbody>
+												<tr>
+							<td>
+								<span>wp-includes/class-wp-image-editor.php:</span>
+								<a href="../wp_image_editor/index.html">WP_Image_Editor</a>
+							</td>
+							<td class="related-desc">
+								<p>Base image editor class from which implementations extend</p>
+							</td>
+						</tr>
+											<tbody>
+				</table>
+
+							</article>
+		
+			</section>
+			<hr />
+		<section class="class-methods">
+			<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="methods" tabindex="-1">Methods <a href="#methods" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Methods</span></a></h2>
+			<ul>
+									<li><a href="__destruct/index.html">
+							__destruct</a>
+																	</li>
+									<li><a href="_save/index.html">
+							_save</a>
+																	</li>
+									<li><a href="crop/index.html">
+							crop</a>
+						&mdash; Crops Image.											</li>
+									<li><a href="flip/index.html">
+							flip</a>
+						&mdash; Flips current image.											</li>
+									<li><a href="load/index.html">
+							load</a>
+						&mdash; Loads image from $this-&gt;file into new Imagick Object.											</li>
+									<li><a href="make_subsize/index.html">
+							make_subsize</a>
+						&mdash; Create an image sub-size and return the image meta data value for it.											</li>
+									<li><a href="maybe_exif_rotate/index.html">
+							maybe_exif_rotate</a>
+						&mdash; Check if a JPEG image has EXIF Orientation tag and rotate it if needed.											</li>
+									<li><a href="multi_resize/index.html">
+							multi_resize</a>
+						&mdash; Create multiple smaller images from a single source.											</li>
+									<li><a href="pdf_load_source/index.html">
+							pdf_load_source</a>
+						&mdash; Load the image produced by Ghostscript.											</li>
+									<li><a href="pdf_setup/index.html">
+							pdf_setup</a>
+						&mdash; Sets up Imagick for PDF processing.											</li>
+									<li><a href="resize/index.html">
+							resize</a>
+						&mdash; Resizes current image.											</li>
+									<li><a href="rotate/index.html">
+							rotate</a>
+						&mdash; Rotates current image counter-clockwise by $angle.											</li>
+									<li><a href="save/index.html">
+							save</a>
+						&mdash; Saves current image to file.											</li>
+									<li><a href="set_quality/index.html">
+							set_quality</a>
+						&mdash; Sets Image Compression quality on a 1-100% scale.											</li>
+									<li><a href="stream/index.html">
+							stream</a>
+						&mdash; Streams current image to browser.											</li>
+									<li><a href="strip_meta/index.html">
+							strip_meta</a>
+						&mdash; Strips all image meta except color profiles from an image.											</li>
+									<li><a href="supports_mime_type/index.html">
+							supports_mime_type</a>
+						&mdash; Checks to see if editor supports the mime-type specified.											</li>
+									<li><a href="test/index.html">
+							test</a>
+						&mdash; Checks to see if current environment supports Imagick.											</li>
+									<li><a href="thumbnail_image/index.html">
+							thumbnail_image</a>
+						&mdash; Efficiently resize the current image											</li>
+									<li><a href="update_size/index.html">
+							update_size</a>
+						&mdash; Sets or updates current image size.											</li>
+									<li><a href="write_image/index.html">
+							write_image</a>
+						&mdash; Writes an image to a file or stream.											</li>
+							</ul>
+		</section>
+		<hr />
+	<section class="changelog">
+		<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="changelog" tabindex="-1">Changelog <a href="#changelog" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Changelog</span></a></h2>
+
+		<table>
+			<caption class="screen-reader-text">Changelog</caption>
+			<thead>
+				<tr>
+					<th class="changelog-version">Version</th>
+					<th class="changelog-desc">Description</th>
+				</tr>
+			</thead>
+
+			<tbody>
+									
+					<tr>
+						<td><a href="../../since/3.5.0/index.html" alt="WordPress 3.5.0">3.5.0</a></td>
+						<td>Introduced.</td>
+					</tr>
+							</tbody>
+		</table>
+	</section>
+
+	<hr />
+	<section class="user-notes">
+		<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="user-contributed-notes" tabindex="-1">User Contributed Notes <a href="#user-contributed-notes" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">User Contributed Notes</span></a></h2>
+		
+<div id="comments" class="comments-area">
+
+	
+	
+			<div id="respond" class="comment-respond">
+		<h3 id="reply-title" class="comment-reply-title"> <small></small></h3><p>You must <a href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Fclasses%2Fwp_image_editor_imagick%2F%23respond">log in</a> before being able to contribute a note or feedback.</p>	</div><!-- #respond -->
+		
+	
+</div><!-- #comments -->
+	</section>
+</div>
+
+</article>
+
+			
+		
+		</main><!-- #main -->
+	</div><!-- #primary -->
+	</div><!-- #content -->
+
+</div><!-- #page -->
+
+
+<div id="wporg-footer">
+	<div class="wrapper">
+		<ul>
+			<li><a href="http://wordpress.org/about/" title="An introduction to the WordPress project">About</a></li>
+			<li><a href="http://wordpress.org/news/" title="News and Updates">Blog</a></li>
+			<li><a href="http://wordpress.org/hosting/" title="Recommended web hosting providers">Hosting</a></li>
+			<li><a href="https://wordpressfoundation.org/donate/" title="Donate to the WordPress Foundation">Donate</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://wordpress.org/support/" title="Forums, documentation, and other resources">Support</a></li>
+			<li><a href="../../../index.html" title="Resources for WordPress developers">Developers</a></li>
+			<li><a href="http://make.wordpress.org/" title="Give back to WordPress through code, support, translation and more">Get Involved</a></li>
+			<li><a href="http://learn.wordpress.org/" title="Workshops and training materials">Learn</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://wordpress.org/showcase/" title="Some of the best WordPress sites on the Web">Showcase</a></li>
+			<li><a href="http://wordpress.org/plugins/" title="Add extra functionality to WordPress">Plugins</a></li>
+			<li><a href="http://wordpress.org/themes/" title="Make your WordPress pretty">Themes</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://central.wordcamp.org/" title="Find a WordPress event near you">WordCamp</a></li>
+			<li><a href="http://wordpress.tv/" title="Videos, tutorials, and WordCamp sessions">WordPress.TV</a></li>
+			<li><a href="http://buddypress.org/" title="A set of plugins to transform your WordPress into a social network">BuddyPress</a></li>
+			<li><a href="http://bbpress.org/" title="Fast, slick forums built on WordPress">bbPress</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://wordpress.com/?ref=wporg-footer" title="Hassle-free WordPress hosting">WordPress.com</a></li>
+			<li><a href="http://ma.tt/" title="Co-founder of WordPress, an example of what WordPress can do">Matt</a></li>
+			<li><a href="http://wordpress.org/about/privacy/" title="WordPress.org Privacy Policy">Privacy</a></li>
+			<li><a href="https://publiccode.eu/" target="_blank">Public Code</a></li>
+		</ul>
+
+		<ul class="social-media-links">
+			<li><span class="dashicons dashicons-twitter"></span><a href="https://twitter.com/WordPress" title="Follow @WordPress on Twitter">@WordPress</a></li>
+			<li><span class="dashicons dashicons-facebook"></span><a href="https://www.facebook.com/WordPress/" title="Like WordPress on Facebook">WordPress</a></li>
+		</ul>
+	</div>
+
+		<p class="cip cip-image">Code is Poetry.</p>
+</div>
+
+<script src="../../../../s.w.org/style/js/navigation.min.js?20190128"></script>
+
+<link rel='stylesheet' id='buttons-css'  href='../../../wp-includes/css/buttons.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<script type='text/javascript' src='../../../wp-includes/js/hoverintent-js.min.js?ver=2.2.1' id='hoverintent-js-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/admin-bar.min.js?ver=5.9-alpha-51701' id='admin-bar-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/navigation.js?ver=20181209' id='wporg-developer-navigation-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/skip-link-focus-fix.js?ver=20130115' id='wporg-developer-skip-link-focus-fix-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/search.js?ver=20150430' id='wporg-developer-search-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/menu.js?ver=20180201' id='wporg-developer-menu-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/awesomplete.min.js?ver=20160322' id='awesomplete-js'></script>
+<script type='text/javascript' id='autocomplete-js-extra'>
+/* <![CDATA[ */
+var autocomplete = {"ajaxurl":"https:\/\/developer.wordpress.org\/wp-admin\/admin-ajax.php","nonce":"8a60f70c4b"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/autocomplete.js?ver=20160524' id='autocomplete-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/function-reference.js?ver=20180724' id='wporg-developer-function-reference-js'></script>
+<script type='text/javascript' id='quicktags-js-extra'>
+/* <![CDATA[ */
+var quicktagsL10n = {"closeAllOpenTags":"Close all open tags","closeTags":"close tags","enterURL":"Enter the URL","enterImageURL":"Enter the URL of the image","enterImageDescription":"Enter a description of the image","textdirection":"text direction","toggleTextdirection":"Toggle Editor Text Direction","dfw":"Distraction-free writing mode","strong":"Bold","strongClose":"Close bold tag","em":"Italic","emClose":"Close italic tag","link":"Insert link","blockquote":"Blockquote","blockquoteClose":"Close blockquote tag","del":"Deleted text (strikethrough)","delClose":"Close deleted text tag","ins":"Inserted text","insClose":"Close inserted text tag","image":"Insert image","ul":"Bulleted list","ulClose":"Close bulleted list tag","ol":"Numbered list","olClose":"Close numbered list tag","li":"List item","liClose":"Close list item tag","code":"Code","codeClose":"Close code tag","more":"Insert Read More tag"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-includes/js/quicktags.min.js?ver=5.9-alpha-51701' id='quicktags-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/user-notes.js?ver=20200110' id='wporg-developer-user-notes-js'></script>
+<script type='text/javascript' id='wporg-developer-user-notes-feedback-js-extra'>
+/* <![CDATA[ */
+var wporg_note_feedback = {"show":"Show Feedback","hide":"Hide Feedback"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/user-notes-feedback.js?ver=20181023' id='wporg-developer-user-notes-feedback-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/tabs.js?ver=20160824' id='wporg-developer-tabs-js'></script>
+<script type='text/javascript' id='wporg-developer-preview-js-extra'>
+/* <![CDATA[ */
+var wporg_note_preview = {"ajaxurl":"https:\/\/developer.wordpress.org\/wp-admin\/admin-ajax.php","nonce":"504933b60e","preview":"preview note","preview_empty":"Nothing to preview","is_admin":""};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/user-notes-preview.js?ver=20200111' id='wporg-developer-preview-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/wp-embed.min.js?ver=5.9-alpha-51701' id='wp-embed-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/vendor/regenerator-runtime.min.js?ver=0.13.7' id='regenerator-runtime-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/vendor/wp-polyfill.min.js?ver=3.15.0' id='wp-polyfill-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/dom-ready.min.js?ver=71883072590656bf22c74c7b887df3dd' id='wp-dom-ready-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/hooks.min.js?ver=a7edae857aab69d69fa10d5aef23a5de' id='wp-hooks-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/i18n.min.js?ver=5f1269854226b4dd90450db411a12b79' id='wp-i18n-js'></script>
+<script type='text/javascript' id='wp-i18n-js-after'>
+wp.i18n.setLocaleData( { 'text direction\u0004ltr': [ 'ltr' ] } );
+</script>
+<script type='text/javascript' id='wp-a11y-js-translations'>
+( function( domain, translations ) {
+	var localeData = translations.locale_data[ domain ] || translations.locale_data.messages;
+	localeData[""].domain = domain;
+	wp.i18n.setLocaleData( localeData, domain );
+} )( "default", { "locale_data": { "messages": { "": {} } } } );
+</script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/a11y.min.js?ver=0ac8327cc1c40dcfdf29716affd7ac63' id='wp-a11y-js'></script>
+<script type='text/javascript' id='wplink-js-extra'>
+/* <![CDATA[ */
+var wpLinkL10n = {"title":"Insert\/edit link","update":"Update","save":"Add Link","noTitle":"(no title)","noMatchesFound":"No results found.","linkSelected":"Link selected.","linkInserted":"Link inserted.","minInputLength":"3"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-includes/js/wplink.min.js?ver=5.9-alpha-51701' id='wplink-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/jquery/ui/core.min.js?ver=1.12.1' id='jquery-ui-core-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/jquery/ui/menu.min.js?ver=1.12.1' id='jquery-ui-menu-js'></script>
+<script type='text/javascript' id='jquery-ui-autocomplete-js-extra'>
+/* <![CDATA[ */
+var uiAutocompleteL10n = {"noResults":"No results found.","oneResult":"1 result found. Use up and down arrow keys to navigate.","manyResults":"%d results found. Use up and down arrow keys to navigate.","itemSelected":"Item selected."};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-includes/js/jquery/ui/autocomplete.min.js?ver=1.12.1' id='jquery-ui-autocomplete-js'></script>
+
+		<script type="text/javascript">
+		tinyMCEPreInit = {
+			baseURL: "https://developer.wordpress.org/wp-includes/js/tinymce",
+			suffix: ".min",
+						mceInit: {},
+			qtInit: {'comment':{id:"comment",buttons:"strong,em,ul,ol,li,link"}},
+			ref: {plugins:"",theme:"modern",language:""},
+			load_ext: function(url,lang){var sl=tinymce.ScriptLoader;sl.markDone(url+'/langs/'+lang+'.js');sl.markDone(url+'/langs/'+lang+'_dlg.js');}
+		};
+		</script>
+				<script type="text/javascript">
+		var ajaxurl = "../../../wp-admin/admin-ajax.html";
+		( function() {
+			var initialized = [];
+			var initialize  = function() {
+				var init, id, inPostbox, $wrap;
+				var readyState = document.readyState;
+
+				if ( readyState !== 'complete' && readyState !== 'interactive' ) {
+					return;
+				}
+
+				for ( id in tinyMCEPreInit.mceInit ) {
+					if ( initialized.indexOf( id ) > -1 ) {
+						continue;
+					}
+
+					init      = tinyMCEPreInit.mceInit[id];
+					$wrap     = tinymce.$( '#wp-' + id + '-wrap' );
+					inPostbox = $wrap.parents( '.postbox' ).length > 0;
+
+					if (
+						! init.wp_skip_init &&
+						( $wrap.hasClass( 'tmce-active' ) || ! tinyMCEPreInit.qtInit.hasOwnProperty( id ) ) &&
+						( readyState === 'complete' || ( ! inPostbox && readyState === 'interactive' ) )
+					) {
+						tinymce.init( init );
+						initialized.push( id );
+
+						if ( ! window.wpActiveEditor ) {
+							window.wpActiveEditor = id;
+						}
+					}
+				}
+			}
+
+			if ( typeof tinymce !== 'undefined' ) {
+				if ( tinymce.Env.ie && tinymce.Env.ie < 11 ) {
+					tinymce.$( '.wp-editor-wrap ' ).removeClass( 'tmce-active' ).addClass( 'html-active' );
+				} else {
+					if ( document.readyState === 'complete' ) {
+						initialize();
+					} else {
+						document.addEventListener( 'readystatechange', initialize );
+					}
+				}
+			}
+
+			if ( typeof quicktags !== 'undefined' ) {
+				for ( id in tinyMCEPreInit.qtInit ) {
+					quicktags( tinyMCEPreInit.qtInit[id] );
+
+					if ( ! window.wpActiveEditor ) {
+						window.wpActiveEditor = id;
+					}
+				}
+			}
+		}());
+		</script>
+				<div id="wp-link-backdrop" style="display: none"></div>
+		<div id="wp-link-wrap" class="wp-core-ui" style="display: none" role="dialog" aria-labelledby="link-modal-title">
+		<form id="wp-link" tabindex="-1">
+		<input type="hidden" id="_ajax_linking_nonce" name="_ajax_linking_nonce" value="86f5a0a85d" />		<h1 id="link-modal-title">Insert/edit link</h1>
+		<button type="button" id="wp-link-close"><span class="screen-reader-text">Close</span></button>
+		<div id="link-selector">
+			<div id="link-options">
+				<p class="howto" id="wplink-enter-url">Enter the destination URL</p>
+				<div>
+					<label><span>URL</span>
+					<input id="wp-link-url" type="text" aria-describedby="wplink-enter-url" /></label>
+				</div>
+				<div class="wp-link-text-field">
+					<label><span>Link Text</span>
+					<input id="wp-link-text" type="text" /></label>
+				</div>
+				<div class="link-target">
+					<label><span></span>
+					<input type="checkbox" id="wp-link-target" /> Open link in a new tab</label>
+				</div>
+			</div>
+			<p class="howto" id="wplink-link-existing-content">Or link to existing content</p>
+			<div id="search-panel">
+				<div class="link-search-wrapper">
+					<label>
+						<span class="search-label">Search</span>
+						<input type="search" id="wp-link-search" class="link-search-field" autocomplete="off" aria-describedby="wplink-link-existing-content" />
+						<span class="spinner"></span>
+					</label>
+				</div>
+				<div id="search-results" class="query-results" tabindex="0">
+					<ul></ul>
+					<div class="river-waiting">
+						<span class="spinner"></span>
+					</div>
+				</div>
+				<div id="most-recent-results" class="query-results" tabindex="0">
+					<div class="query-notice" id="query-notice-message">
+						<em class="query-notice-default">No search term specified. Showing recent items.</em>
+						<em class="query-notice-hint screen-reader-text">Search or use up and down arrow keys to select an item.</em>
+					</div>
+					<ul></ul>
+					<div class="river-waiting">
+						<span class="spinner"></span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="submitbox">
+			<div id="wp-link-cancel">
+				<button type="button" class="button">Cancel</button>
+			</div>
+			<div id="wp-link-update">
+				<input type="submit" value="Add Link" class="button button-primary" id="wp-link-submit" name="wp-link-submit">
+			</div>
+		</div>
+		</form>
+		</div>
+		</body>
+
+<!-- Mirrored from developer.wordpress.org/reference/classes/wp_image_editor_imagick/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 31 Aug 2021 17:24:29 GMT -->
+</html>

@@ -1,0 +1,771 @@
+<html><!--<![endif]--><!-- Mirrored from phpunit.readthedocs.io/en/7.1/installation.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 14 Jul 2018 16:54:05 GMT --><head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>1. Installing PHPUnit</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css">
+  <link rel="stylesheet" href="../../../media.readthedocs.org/css/sphinx_rtd_theme.css" type="text/css">
+    <link rel="index" title="Index" href="genindex.html">
+    <link rel="search" title="Search" href="search.html">
+    <link rel="copyright" title="Copyright" href="copyright.html">
+    <link rel="next" title="2. Writing Tests for PHPUnit" href="writing-tests-for-phpunit.html">
+    <link rel="prev" title="PHPUnit Manual" href="index-2.html"> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+
+<!-- RTD Extra Head -->
+
+<!-- 
+Always link to the latest version, as canonical.
+http://docs.readthedocs.org/en/latest/canonical.html
+-->
+<link rel="canonical" href="installation.html">
+
+<link rel="stylesheet" href="../../../media.readthedocs.org/css/readthedocs-doc-embed.css" type="text/css">
+
+<script type="text/javascript" src="_static/readthedocs-data.js"></script>
+
+<!-- Add page-specific data, which must exist in the page js, not global -->
+<script type="text/javascript">
+READTHEDOCS_DATA['page'] = 'installation'
+READTHEDOCS_DATA['source_suffix'] = '.rst'
+</script>
+
+<script type="text/javascript" src="../../../media.readthedocs.org/javascript/readthedocs-analytics.js"></script>
+
+<!-- end RTD <extrahead> -->
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index-2.html" class="icon icon-home"> PHPUnit
+          
+
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="https://phpunit.readthedocs.io/en/7.1/search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs">
+    <input type="hidden" name="check_keywords" value="yes">
+    <input type="hidden" name="area" value="default">
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">1. Installing PHPUnit</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#php-archive-phar">PHP Archive (PHAR)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#windows">Windows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#verifying-phpunit-phar-releases">Verifying PHPUnit PHAR Releases</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#composer">Composer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#optional-packages">Optional packages</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="writing-tests-for-phpunit.html">2. Writing Tests for PHPUnit</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="writing-tests-for-phpunit.html#test-dependencies">Test Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writing-tests-for-phpunit.html#data-providers">Data Providers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writing-tests-for-phpunit.html#testing-exceptions">Testing Exceptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writing-tests-for-phpunit.html#testing-php-errors">Testing PHP Errors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writing-tests-for-phpunit.html#testing-output">Testing Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writing-tests-for-phpunit.html#error-output">Error output</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="writing-tests-for-phpunit.html#edge-cases">Edge cases</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="textui.html">3. The Command-Line Test Runner</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="textui.html#command-line-options">Command-Line Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="textui.html#testdox">TestDox</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="fixtures.html">4. Fixtures</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="fixtures.html#more-setup-than-teardown">More setUp() than tearDown()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fixtures.html#variations">Variations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fixtures.html#sharing-fixture">Sharing Fixture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fixtures.html#global-state">Global State</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="organizing-tests.html">5. Organizing Tests</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="organizing-tests.html#composing-a-test-suite-using-the-filesystem">Composing a Test Suite Using the Filesystem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="organizing-tests.html#composing-a-test-suite-using-xml-configuration">Composing a Test Suite Using XML Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="risky-tests.html">6. Risky Tests</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="risky-tests.html#useless-tests">Useless Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="risky-tests.html#unintentionally-covered-code">Unintentionally Covered Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="risky-tests.html#output-during-test-execution">Output During Test Execution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="risky-tests.html#test-execution-timeout">Test Execution Timeout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="risky-tests.html#global-state-manipulation">Global State Manipulation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="incomplete-and-skipped-tests.html">7. Incomplete and Skipped Tests</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="incomplete-and-skipped-tests.html#incomplete-tests">Incomplete Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="incomplete-and-skipped-tests.html#skipping-tests">Skipping Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="incomplete-and-skipped-tests.html#skipping-tests-using-requires">Skipping Tests using @requires</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="database.html">8. Database Testing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="database.html#supported-vendors-for-database-testing">Supported Vendors for Database Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="database.html#difficulties-in-database-testing">Difficulties in Database Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="database.html#the-four-stages-of-a-database-test">The four stages of a database test</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="database.html#clean-up-database">1. Clean-Up Database</a></li>
+<li class="toctree-l3"><a class="reference internal" href="database.html#set-up-fixture">2. Set up fixture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="database.html#run-test-verify-outcome-and-teardown">3–5. Run Test, Verify outcome and Teardown</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="database.html#configuration-of-a-phpunit-database-testcase">Configuration of a PHPUnit Database TestCase</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="database.html#implementing-getconnection">Implementing getConnection()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="database.html#implementing-getdataset">Implementing getDataSet()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="database.html#what-about-the-database-schema-ddl">What about the Database Schema (DDL)?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="database.html#tip-use-your-own-abstract-database-testcase">Tip: Use your own Abstract Database TestCase</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="database.html#understanding-datasets-and-datatables">Understanding DataSets and DataTables</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="database.html#available-implementations">Available Implementations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="database.html#flat-xml-dataset">Flat XML DataSet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="database.html#xml-dataset">XML DataSet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="database.html#mysql-xml-dataset">MySQL XML DataSet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="database.html#yaml-dataset">YAML DataSet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="database.html#csv-dataset">CSV DataSet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="database.html#array-dataset">Array DataSet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="database.html#query-sql-dataset">Query (SQL) DataSet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="database.html#database-db-dataset">Database (DB) Dataset</a></li>
+<li class="toctree-l4"><a class="reference internal" href="database.html#replacement-dataset">Replacement DataSet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="database.html#dataset-filter">DataSet Filter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="database.html#composite-dataset">Composite DataSet</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="database.html#beware-of-foreign-keys">Beware of Foreign Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="database.html#implementing-your-own-datasets-datatables">Implementing your own DataSets/DataTables</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="database.html#using-the-database-connection-api">Using the Database Connection API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="database.html#database-assertions-api">Database Assertions API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="database.html#asserting-the-row-count-of-a-table">Asserting the Row-Count of a Table</a></li>
+<li class="toctree-l3"><a class="reference internal" href="database.html#asserting-the-state-of-a-table">Asserting the State of a Table</a></li>
+<li class="toctree-l3"><a class="reference internal" href="database.html#asserting-the-result-of-a-query">Asserting the Result of a Query</a></li>
+<li class="toctree-l3"><a class="reference internal" href="database.html#asserting-the-state-of-multiple-tables">Asserting the State of Multiple Tables</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="database.html#frequently-asked-questions">Frequently Asked Questions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="database.html#will-phpunit-re-create-the-database-schema-for-each-test">Will PHPUnit (re-)create the database schema for each test?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="database.html#am-i-required-to-use-pdo-in-my-application-for-the-database-extension-to-work">Am I required to use PDO in my application for the Database Extension to work?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="database.html#what-can-i-do-when-i-get-a-too-much-connections-error">What can I do, when I get a “Too much Connections“ Error?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="database.html#how-to-handle-null-with-flat-xml-csv-datasets">How to handle NULL with Flat XML / CSV Datasets?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="test-doubles.html">9. Test Doubles</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="test-doubles.html#stubs">Stubs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="test-doubles.html#mock-objects">Mock Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="test-doubles.html#prophecy">Prophecy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="test-doubles.html#mocking-traits-and-abstract-classes">Mocking Traits and Abstract Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="test-doubles.html#stubbing-and-mocking-web-services">Stubbing and Mocking Web Services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="test-doubles.html#mocking-the-filesystem">Mocking the Filesystem</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="code-coverage-analysis.html">10. Code Coverage Analysis</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="code-coverage-analysis.html#software-metrics-for-code-coverage">Software Metrics for Code Coverage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code-coverage-analysis.html#whitelisting-files">Whitelisting Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code-coverage-analysis.html#ignoring-code-blocks">Ignoring Code Blocks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code-coverage-analysis.html#specifying-covered-methods">Specifying Covered Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code-coverage-analysis.html#edge-cases">Edge Cases</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="logging.html">11. Logging</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="logging.html#test-results-xml">Test Results (XML)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="logging.html#code-coverage-xml">Code Coverage (XML)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="logging.html#code-coverage-text">Code Coverage (TEXT)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="extending-phpunit.html">12. Extending PHPUnit</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="extending-phpunit.html#subclass-phpunit-framework-testcase">Subclass PHPUnit\Framework\TestCase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="extending-phpunit.html#write-custom-assertions">Write custom assertions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="extending-phpunit.html#implement-phpunit-framework-testlistener">Implement PHPUnit\Framework\TestListener</a></li>
+<li class="toctree-l2"><a class="reference internal" href="extending-phpunit.html#implement-phpunitframeworktest">Implement PHPUnitFrameworkTest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="extending-phpunit.html#extending-the-testrunner">Extending the TestRunner</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="extending-phpunit.html#available-hook-interfaces">Available Hook Interfaces</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="assertions.html">1. Assertions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#static-vs-non-static-usage-of-assertion-methods">Static vs. Non-Static Usage of Assertion Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertarrayhaskey">assertArrayHasKey()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertclasshasattribute">assertClassHasAttribute()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertarraysubset">assertArraySubset()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertclasshasstaticattribute">assertClassHasStaticAttribute()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertcontains">assertContains()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertcontainsonly">assertContainsOnly()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertcontainsonlyinstancesof">assertContainsOnlyInstancesOf()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertcount">assertCount()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertdirectoryexists">assertDirectoryExists()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertdirectoryisreadable">assertDirectoryIsReadable()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertdirectoryiswritable">assertDirectoryIsWritable()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertempty">assertEmpty()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertequalxmlstructure">assertEqualXMLStructure()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertequals">assertEquals()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertfalse">assertFalse()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertfileequals">assertFileEquals()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertfileexists">assertFileExists()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertfileisreadable">assertFileIsReadable()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertfileiswritable">assertFileIsWritable()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertgreaterthan">assertGreaterThan()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertgreaterthanorequal">assertGreaterThanOrEqual()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertinfinite">assertInfinite()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertinstanceof">assertInstanceOf()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertinternaltype">assertInternalType()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertisreadable">assertIsReadable()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertiswritable">assertIsWritable()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertjsonfileequalsjsonfile">assertJsonFileEqualsJsonFile()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertjsonstringequalsjsonfile">assertJsonStringEqualsJsonFile()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertjsonstringequalsjsonstring">assertJsonStringEqualsJsonString()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertlessthan">assertLessThan()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertlessthanorequal">assertLessThanOrEqual()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertnan">assertNan()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertnull">assertNull()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertobjecthasattribute">assertObjectHasAttribute()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertregexp">assertRegExp()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertstringmatchesformat">assertStringMatchesFormat()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertstringmatchesformatfile">assertStringMatchesFormatFile()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertsame">assertSame()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertstringendswith">assertStringEndsWith()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertstringequalsfile">assertStringEqualsFile()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertstringstartswith">assertStringStartsWith()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertthat">assertThat()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#asserttrue">assertTrue()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertxmlfileequalsxmlfile">assertXmlFileEqualsXmlFile()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertxmlstringequalsxmlfile">assertXmlStringEqualsXmlFile()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertxmlstringequalsxmlstring">assertXmlStringEqualsXmlString()</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="annotations.html">2. Annotations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#author">@author</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#after">@after</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#afterclass">@afterClass</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#backupglobals">@backupGlobals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#backupstaticattributes">@backupStaticAttributes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#before">@before</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#beforeclass">@beforeClass</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#codecoverageignore">@codeCoverageIgnore*</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#covers">@covers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#coversdefaultclass">@coversDefaultClass</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#coversnothing">@coversNothing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#dataprovider">@dataProvider</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#depends">@depends</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#doesnotperformassertions">@doesNotPerformAssertions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#expectedexception">@expectedException</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#expectedexceptioncode">@expectedExceptionCode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#expectedexceptionmessage">@expectedExceptionMessage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#expectedexceptionmessageregexp">@expectedExceptionMessageRegExp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#group">@group</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#large">@large</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#medium">@medium</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#preserveglobalstate">@preserveGlobalState</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#requires">@requires</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#runtestsinseparateprocesses">@runTestsInSeparateProcesses</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#runinseparateprocess">@runInSeparateProcess</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#small">@small</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#test">@test</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#testdox">@testdox</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#testwith">@testWith</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#ticket">@ticket</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#uses">@uses</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">3. The XML Configuration File</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#phpunit">PHPUnit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#test-suites">Test Suites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#groups">Groups</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#whitelisting-files-for-code-coverage">Whitelisting Files for Code Coverage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#logging">Logging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#test-listeners">Test Listeners</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#registering-testrunner-extensions">Registering TestRunner Extensions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#setting-php-ini-settings-constants-and-global-variables">Setting PHP INI settings, Constants and Global Variables</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">4. Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="copyright.html">5. Copyright</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index-2.html">PHPUnit</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index-2.html">Docs</a> »</li>
+        
+      <li>1. Installing PHPUnit</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/sebastianbergmann/phpunit-documentation-english//7.1/src/installation.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="installing-phpunit">
+<span id="installation"></span><h1>1. Installing PHPUnit</h1>
+<div class="section" id="requirements">
+<a class="dashAnchor" name="//apple_ref/Section/Requirements"></a><span id="installation-requirements"></span><h2>Requirements</h2>
+<p>PHPUnit 7.1 requires PHP 7.1; using the latest version of PHP is highly
+recommended.</p>
+<p>PHPUnit requires the <a class="reference external" href="http://php.net/manual/en/dom.setup.php">dom</a> and <a class="reference external" href="http://php.net/manual/en/json.installation.php">json</a>
+extensions, which are normally enabled by default.</p>
+<p>PHPUnit also requires the
+<a class="reference external" href="http://php.net/manual/en/pcre.installation.php">pcre</a>,
+<a class="reference external" href="http://php.net/manual/en/reflection.installation.php">reflection</a>,
+and <a class="reference external" href="http://php.net/manual/en/spl.installation.php">spl</a>
+extensions. These standard extensions are enabled by default and cannot be
+disabled without patching PHP’s build system and/or C sources.</p>
+<p>The code coverage report feature requires the
+<a class="reference external" href="http://xdebug.org/">Xdebug</a> (2.5.0 or later) and
+<a class="reference external" href="http://php.net/manual/en/tokenizer.installation.php">tokenizer</a>
+extensions.
+Generating XML reports requires the
+<a class="reference external" href="http://php.net/manual/en/xmlwriter.installation.php">xmlwriter</a>
+extension.</p>
+</div>
+<div class="section" id="php-archive-phar">
+<a class="dashAnchor" name="//apple_ref/Section/PHP%20Archive%20(PHAR)"></a><span id="installation-phar"></span><h2>PHP Archive (PHAR)</h2>
+<p>The easiest way to obtain PHPUnit is to download a <a class="reference external" href="http://php.net/phar">PHP Archive (PHAR)</a> that has all required
+(as well as some optional) dependencies of PHPUnit bundled in a single
+file.</p>
+<p>The <a class="reference external" href="http://php.net/manual/en/phar.installation.php">phar</a>
+extension is required for using PHP Archives (PHAR).</p>
+<p>If the <a class="reference external" href="http://suhosin.org/">Suhosin</a> extension is
+enabled, you need to allow execution of PHARs in your
+<code class="docutils literal"><span class="pre">php.ini</span></code>:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>suhosin.executor.include.whitelist <span class="o">=</span> phar
+</pre></div>
+</div>
+<p>To globally install the PHAR:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$  wget https://phar.phpunit.de/phpunit-<span class="p">|</span>version<span class="p">|</span>.phar
+$  chmod +x phpunit-<span class="p">|</span>version<span class="p">|</span>.phar
+$  sudo mv phpunit-<span class="p">|</span>version<span class="p">|</span>.phar /usr/local/bin/phpunit
+$  phpunit --version
+PHPUnit x.y.z by Sebastian Bergmann and contributors.
+</pre></div>
+</div>
+<p>You may also use the downloaded PHAR file directly:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$  wget https://phar.phpunit.de/phpunit-<span class="p">|</span>version<span class="p">|</span>.phar
+$  php phpunit-<span class="p">|</span>version<span class="p">|</span>.phar --version
+PHPUnit x.y.z by Sebastian Bergmann and contributors.
+</pre></div>
+</div>
+<div class="section" id="windows">
+<a class="dashAnchor" name="//apple_ref/Section/Windows"></a><span id="installation-phar-windows"></span><h3>Windows</h3>
+<p>Globally installing the PHAR involves the same procedure as manually
+<a class="reference external" href="https://getcomposer.org/doc/00-intro.md#installation-windows">installing Composer on Windows</a>:</p>
+<ol class="arabic">
+<li><p class="first">Create a directory for PHP binaries; e.g., <code class="file docutils literal"><span class="pre">C:\bin</span></code></p>
+</li>
+<li><p class="first">Append ;C:bin to your <code class="docutils literal"><span class="pre">PATH</span></code>
+environment variable
+(<a class="reference external" href="http://stackoverflow.com/questions/6318156/adding-python-path-on-windows-7">related help</a>)</p>
+</li>
+<li><p class="first">Download <a class="reference external" href="https://phar.phpunit.de/phpunit-|version|.phar">https://phar.phpunit.de/phpunit-|version|.phar</a> and
+save the file as <code class="file docutils literal"><span class="pre">C:\bin\phpunit.phar</span></code></p>
+</li>
+<li><p class="first">Open a command line (e.g.,
+press <code class="kbd docutils literal"><span class="pre">Windows</span></code><code class="kbd docutils literal"><span class="pre">R</span></code>
+» type cmd
+» <code class="kbd docutils literal"><span class="pre">ENTER</span></code>)</p>
+</li>
+<li><p class="first">Create a wrapping batch script (results in
+<code class="file docutils literal"><span class="pre">C:\bin\phpunit.cmd</span></code>):</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>C:<span class="se">\U</span>sers<span class="se">\u</span>sername&gt;  <span class="nb">cd</span> C:<span class="se">\b</span>in
+C:<span class="se">\b</span>in&gt;  <span class="nb">echo</span> @php <span class="s2">"%~dp0phpunit.phar"</span> %* &gt; phpunit.cmd
+C:<span class="se">\b</span>in&gt;  <span class="nb">exit</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Open a new command line and confirm that you can execute PHPUnit
+from any path:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>C:<span class="se">\U</span>sers<span class="se">\u</span>sername&gt;  phpunit --version
+PHPUnit x.y.z by Sebastian Bergmann and contributors.
+</pre></div>
+</div>
+</li>
+</ol>
+<p>For Cygwin and/or MingW32 (e.g., TortoiseGit) shell environments, you
+may skip step 5. above, simply save the file as
+<code class="file docutils literal"><span class="pre">phpunit</span></code> (without <code class="file docutils literal"><span class="pre">.phar</span></code>
+extension), and make it executable via
+chmod 775 phpunit.</p>
+</div>
+<div class="section" id="verifying-phpunit-phar-releases">
+<a class="dashAnchor" name="//apple_ref/Section/Verifying%20PHPUnit%20PHAR%20Releases"></a><span id="installation-phar-verification"></span><h3>Verifying PHPUnit PHAR Releases</h3>
+<p>All official releases of code distributed by the PHPUnit Project are
+signed by the release manager for the release. PGP signatures and SHA1
+hashes are available for verification on <a class="reference external" href="https://phar.phpunit.de/">phar.phpunit.de</a>.</p>
+<p>The following example details how release verification works. We start
+by downloading <code class="file docutils literal"><span class="pre">phpunit.phar</span></code> as well as its
+detached PGP signature <code class="file docutils literal"><span class="pre">phpunit.phar.asc</span></code>:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>wget https://phar.phpunit.de/phpunit.phar
+wget https://phar.phpunit.de/phpunit.phar.asc
+</pre></div>
+</div>
+<p>We want to verify PHPUnit’s PHP Archive (<code class="file docutils literal"><span class="pre">phpunit.phar</span></code>)
+against its detached signature (<code class="file docutils literal"><span class="pre">phpunit.phar.asc</span></code>):</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>gpg phpunit.phar.asc
+gpg: Signature made Sat 19 Jul 2014 01:28:02 PM CEST using RSA key ID 6372C20A
+gpg: Can't check signature: public key not found
+</pre></div>
+</div>
+<p>We don’t have the release manager’s public key (<code class="docutils literal"><span class="pre">6372C20A</span></code>)
+in our local system. In order to proceed with the verification we need
+to retrieve the release manager’s public key from a key server. One such
+server is <code class="file docutils literal"><span class="pre">pgp.uni-mainz.de</span></code>. The public key servers
+are linked together, so you should be able to connect to any key server.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>gpg --keyserver pgp.uni-mainz.de --recv-keys 0x4AA394086372C20A
+gpg: requesting key 6372C20A from hkp server pgp.uni-mainz.de
+gpg: key 6372C20A: public key <span class="s2">"Sebastian Bergmann &lt;sb@sebastian-bergmann.de&gt;"</span> imported
+gpg: Total number processed: <span class="m">1</span>
+gpg:               imported: <span class="m">1</span>  <span class="o">(</span>RSA: <span class="m">1</span><span class="o">)</span>
+</pre></div>
+</div>
+<p>Now we have received a public key for an entity known as “Sebastian
+Bergmann &lt;<a class="reference external" href="mailto:sb%40sebastian-bergmann.de">sb<span>@</span>sebastian-bergmann<span>.</span>de</a>&gt;”. However, we have no way of
+verifying this key was created by the person known as Sebastian
+Bergmann. But, let’s try to verify the release signature again.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>gpg phpunit.phar.asc
+gpg: Signature made Sat <span class="m">19</span> Jul <span class="m">2014</span> <span class="m">01</span>:28:02 PM CEST using RSA key ID 6372C20A
+gpg: Good signature from <span class="s2">"Sebastian Bergmann &lt;sb@sebastian-bergmann.de&gt;"</span>
+gpg:                 aka <span class="s2">"Sebastian Bergmann &lt;sebastian@php.net&gt;"</span>
+gpg:                 aka <span class="s2">"Sebastian Bergmann &lt;sebastian@thephp.cc&gt;"</span>
+gpg:                 aka <span class="s2">"Sebastian Bergmann &lt;sebastian@phpunit.de&gt;"</span>
+gpg:                 aka <span class="s2">"Sebastian Bergmann &lt;sebastian.bergmann@thephp.cc&gt;"</span>
+gpg:                 aka <span class="s2">"[jpeg image of size 40635]"</span>
+gpg: WARNING: This key is not certified with a trusted signature!
+gpg:          There is no indication that the signature belongs to the owner.
+Primary key fingerprint: D840 6D0D <span class="m">8294</span> <span class="m">7747</span> <span class="m">2937</span>  <span class="m">7831</span> 4AA3 <span class="m">9408</span> <span class="m">6372</span> C20A
+</pre></div>
+</div>
+<p>At this point, the signature is good, but we don’t trust this key. A
+good signature means that the file has not been tampered. However, due
+to the nature of public key cryptography, you need to additionally
+verify that key <code class="docutils literal"><span class="pre">6372C20A</span></code> was created by the real
+Sebastian Bergmann.</p>
+<p>Any attacker can create a public key and upload it to the public key
+servers. They can then create a malicious release signed by this fake
+key. Then, if you tried to verify the signature of this corrupt release,
+it would succeed because the key was not the “real” key. Therefore, you
+need to validate the authenticity of this key. Validating the
+authenticity of a public key, however, is outside the scope of this
+documentation.</p>
+<p>It may be prudent to create a shell script to manage PHPUnit installation
+that verifies the GnuPG signature before running your test suite. For
+example:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env bash</span>
+<span class="nv">clean</span><span class="o">=</span><span class="m">1</span> <span class="c1"># Delete phpunit.phar after the tests are complete?</span>
+<span class="nv">aftercmd</span><span class="o">=</span><span class="s2">"php phpunit.phar --bootstrap bootstrap.php src/tests"</span>
+gpg --fingerprint D8406D0D82947747293778314AA394086372C20A
+<span class="k">if</span> <span class="o">[</span> <span class="nv">$?</span> -ne <span class="m">0</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+    <span class="nb">echo</span> -e <span class="s2">"\033[33mDownloading PGP Public Key...\033[0m"</span>
+    gpg --recv-keys D8406D0D82947747293778314AA394086372C20A
+    <span class="c1"># Sebastian Bergmann &lt;sb@sebastian-bergmann.de&gt;</span>
+    gpg --fingerprint D8406D0D82947747293778314AA394086372C20A
+    <span class="k">if</span> <span class="o">[</span> <span class="nv">$?</span> -ne <span class="m">0</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+        <span class="nb">echo</span> -e <span class="s2">"\033[31mCould not download PGP public key for verification\033[0m"</span>
+        <span class="nb">exit</span>
+    <span class="k">fi</span>
+<span class="k">fi</span>
+
+<span class="k">if</span> <span class="o">[</span> <span class="s2">"</span><span class="nv">$clean</span><span class="s2">"</span> -eq <span class="m">1</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+    <span class="c1"># Let's clean them up, if they exist</span>
+    <span class="k">if</span> <span class="o">[</span> -f phpunit.phar <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+        rm -f phpunit.phar
+    <span class="k">fi</span>
+    <span class="k">if</span> <span class="o">[</span> -f phpunit.phar.asc <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+        rm -f phpunit.phar.asc
+    <span class="k">fi</span>
+<span class="k">fi</span>
+
+<span class="c1"># Let's grab the latest release and its signature</span>
+<span class="k">if</span> <span class="o">[</span> ! -f phpunit.phar <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+    wget https://phar.phpunit.de/phpunit.phar
+<span class="k">fi</span>
+<span class="k">if</span> <span class="o">[</span> ! -f phpunit.phar.asc <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+    wget https://phar.phpunit.de/phpunit.phar.asc
+<span class="k">fi</span>
+
+<span class="c1"># Verify before running</span>
+gpg --verify phpunit.phar.asc phpunit.phar
+<span class="k">if</span> <span class="o">[</span> <span class="nv">$?</span> -eq <span class="m">0</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+    <span class="nb">echo</span>
+    <span class="nb">echo</span> -e <span class="s2">"\033[33mBegin Unit Testing\033[0m"</span>
+    <span class="c1"># Run the testing suite</span>
+    <span class="sb">`</span><span class="nv">$after_cmd</span><span class="sb">`</span>
+    <span class="c1"># Cleanup</span>
+    <span class="k">if</span> <span class="o">[</span> <span class="s2">"</span><span class="nv">$clean</span><span class="s2">"</span> -eq <span class="m">1</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+        <span class="nb">echo</span> -e <span class="s2">"\033[32mCleaning Up!\033[0m"</span>
+        rm -f phpunit.phar
+        rm -f phpunit.phar.asc
+    <span class="k">fi</span>
+<span class="k">else</span>
+    <span class="nb">echo</span>
+    chmod -x phpunit.phar
+    mv phpunit.phar /tmp/bad-phpunit.phar
+    mv phpunit.phar.asc /tmp/bad-phpunit.phar.asc
+    <span class="nb">echo</span> -e <span class="s2">"\033[31mSignature did not match! PHPUnit has been moved to /tmp/bad-phpunit.phar\033[0m"</span>
+    <span class="nb">exit</span> <span class="m">1</span>
+<span class="k">fi</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="composer">
+<a class="dashAnchor" name="//apple_ref/Section/Composer"></a><span id="installation-composer"></span><h2>Composer</h2>
+<p>Simply add a (development-time) dependency on
+<code class="docutils literal"><span class="pre">phpunit/phpunit</span></code> to your project’s
+<code class="docutils literal"><span class="pre">composer.json</span></code> file if you use <a class="reference external" href="https://getcomposer.org/">Composer</a> to manage the
+dependencies of your project:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>composer require --dev phpunit/phpunit ^<span class="p">|</span>version<span class="p">|</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="optional-packages">
+<a class="dashAnchor" name="//apple_ref/Section/Optional%20packages"></a><span id="installation-optional-packages"></span><h2>Optional packages</h2>
+<p>The following optional packages are available:</p>
+<p><code class="docutils literal"><span class="pre">PHP_Invoker</span></code></p>
+<blockquote>
+<div><p>A utility class for invoking callables with a timeout. This package is
+required to enforce test timeouts in strict mode.</p>
+<p>This package is included in the PHAR distribution of PHPUnit. It can
+be installed via Composer using the following command:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>composer require --dev phpunit/php-invoker
+</pre></div>
+</div>
+</div></blockquote>
+<p><code class="docutils literal"><span class="pre">DbUnit</span></code></p>
+<blockquote>
+<div><p>DbUnit port for PHP/PHPUnit to support database interaction testing.</p>
+<p>This package is not included in the PHAR distribution of PHPUnit. It can
+be installed via Composer using the following command:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>composer require --dev phpunit/dbunit
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="writing-tests-for-phpunit.html" class="btn btn-neutral float-right" title="2. Writing Tests for PHPUnit" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index-2.html" class="btn btn-neutral" title="PHPUnit Manual" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr>
+
+  <div role="contentinfo">
+    <p>
+        © <a href="copyright.html">Copyright</a> 2018, Sebastian Bergmann.
+      
+        <span class="commit">
+          Revision <code>25b86e5f</code>.
+        </span>
+      
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Read the Docs</span>
+      v: 7.1
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt>Versions</dt>
+        
+          <dd><a href="https://phpunit.readthedocs.io/en/latest/">latest</a></dd>
+        
+          <dd><a href="index.html">7.1</a></dd>
+        
+          <dd><a href="https://phpunit.readthedocs.io/en/7.0/">7.0</a></dd>
+        
+          <dd><a href="https://phpunit.readthedocs.io/en/master/">master</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>Downloads</dt>
+        
+          <dd><a href="http://readthedocs.org/projects/phpunit/downloads/pdf/7.1/">pdf</a></dd>
+        
+          <dd><a href="http://readthedocs.org/projects/phpunit/downloads/htmlzip/7.1/">htmlzip</a></dd>
+        
+          <dd><a href="http://readthedocs.org/projects/phpunit/downloads/epub/7.1/">epub</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>On Read the Docs</dt>
+          <dd>
+            <a href="http://readthedocs.org/projects/phpunit/?fromdocs=phpunit">Project Home</a>
+          </dd>
+          <dd>
+            <a href="http://readthedocs.org/builds/phpunit/?fromdocs=phpunit">Builds</a>
+          </dd>
+      </dl>
+      <hr>
+      Free document hosting provided by <a href="http://www.readthedocs.org/">Read the Docs</a>.
+
+    </div>
+  </div>
+
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'7.1',
+            LANGUAGE:'en',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../media.readthedocs.org/javascript/jquery/jquery-2.0.3.min.js"></script>
+      <script type="text/javascript" src="../../../media.readthedocs.org/javascript/jquery/jquery-migrate-1.2.1.min.js"></script>
+      <script type="text/javascript" src="../../../media.readthedocs.org/javascript/underscore.js"></script>
+      <script type="text/javascript" src="../../../media.readthedocs.org/javascript/doctools.js"></script>
+      <script type="text/javascript" src="../../../media.readthedocs.org/javascript/readthedocs-doc-embed.js"></script>
+
+  
+
+  
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          
+          SphinxRtdTheme.Navigation.enableSticky();
+          
+      });
+  </script> 
+
+
+
+<!-- Mirrored from phpunit.readthedocs.io/en/7.1/installation.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 14 Jul 2018 16:54:05 GMT -->
+</body></html>

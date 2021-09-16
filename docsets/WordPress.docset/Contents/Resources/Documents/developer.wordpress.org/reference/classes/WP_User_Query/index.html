@@ -1,0 +1,2039 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+
+<!-- Mirrored from developer.wordpress.org/reference/classes/wp_user_query/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 31 Aug 2021 17:21:12 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<!--
+<meta property="fb:page_id" content="6427302910" />
+-->
+<meta name="google-site-verification" content="7VWES_-rcHBcmaQis9mSYamPfNwE03f4vyTj4pfuAw0" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WP_User_Query</title>
+<meta name="referrer" content="always">
+
+		<link href='../../../../fonts.googleapis.com/css.css?family=Open+Sans:300italic,400italic,600italic,400,300,600&amp;subset=latin,cyrillic-ext,greek-ext,greek,vietnamese,latin-ext,cyrillic' rel='stylesheet' type='text/css'>
+
+		<link rel="stylesheet" href="../../../../s.w.org/style/wp4.css?95" />
+
+<link rel="shortcut icon" href="../../../../s.w.org/favicon.ico?2" type="image/x-icon" />
+<link rel="pingback" href="../../../xmlrpc.php" /><meta name='robots' content='max-image-preview:large' />
+<link rel='dns-prefetch' href='../../../../fonts.googleapis.com/index.html' />
+<link rel='dns-prefetch' href='http://s.w.org/' />
+<link rel='dns-prefetch' href='http://www.googletagmanager.com/' />
+<link rel='dns-prefetch' href='http://fonts.gstatic.com/' />
+<link rel="alternate" type="application/rss+xml" title="WordPress Developer Resources &raquo; Feed" href="../../../feed/index.html" />
+<link rel="alternate" type="application/rss+xml" title="WordPress Developer Resources &raquo; Comments Feed" href="../../../comments/feed/index.html" />
+<meta property="og:title" content="WP_User_Query | Class | WordPress Developer Resources" />
+<meta property="og:site_name" content="WordPress Developer Resources" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="../../../index.html" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@WordPress" />
+<meta name="description" content="Core class used for querying users." />
+<meta property="og:description" content="Core class used for querying users." />
+<link rel="alternate" type="application/rss+xml" title="WordPress Developer Resources &raquo; WP_User_Query Comments Feed" href="https://developer.wordpress.org/reference/classes/wp_user_query/feed/" />
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'../../../../www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P24PF4B');</script>
+			<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/developer.wordpress.org\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.9-alpha-51701"}};
+			!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([10084,65039,8205,55357,56613],[10084,65039,8203,55357,56613])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel='stylesheet' id='dashicons-css'  href='../../../wp-includes/css/dashicons.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='admin-bar-css'  href='../../../wp-includes/css/admin-bar.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-block-library-css'  href='../../../wp-includes/css/dist/block-library/style.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='wporg-handbook-css-css'  href='../../../wp-content/plugins/handbook/stylesheets/callout-boxes.css?ver=20200121' type='text/css' media='all' />
+<link rel='stylesheet' id='open-sans-css'  href='../../../../fonts.googleapis.com/css-2.css?family=Open+Sans%3A300italic%2C400italic%2C600italic%2C300%2C400%2C600&amp;subset=latin%2Clatin-ext&amp;display=fallback&amp;ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='wporg-developer-style-css'  href='../../../wp-content/themes/pub/wporg-developer/style.css?ver=3' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-dev-sass-compiled-css'  href='../../../wp-content/themes/pub/wporg-developer/stylesheets/main.css?ver=20200713' type='text/css' media='all' />
+<link rel='stylesheet' id='awesomplete-css-css'  href='../../../wp-content/themes/pub/wporg-developer/stylesheets/awesomplete.css?ver=20160114' type='text/css' media='all' />
+<link rel='stylesheet' id='autocomplete-css-css'  href='../../../wp-content/themes/pub/wporg-developer/stylesheets/autocomplete.css?ver=20171220' type='text/css' media='all' />
+<link rel='stylesheet' id='syntaxhighlighter-core-css'  href='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shCore.css?ver=3.0.9b' type='text/css' media='all' />
+<link rel='stylesheet' id='syntaxhighlighter-theme-default-css'  href='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shThemeDefault.css?ver=3.0.9b' type='text/css' media='all' />
+<script type='text/javascript' src='../../../wp-includes/js/jquery/jquery.min.js?ver=3.6.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='../../../wp-content/plugins/handbook/scripts/handbook.js?ver=20150930' id='wporg-handbook-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/chapters.js?ver=20190603' id='wporg-developer-chapters-js'></script>
+<script type='text/javascript' src='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shCore.js?ver=3.0.9b' id='syntaxhighlighter-core-js'></script>
+<script type='text/javascript' src='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushPhp.js?ver=3.0.9b' id='syntaxhighlighter-brush-php-js'></script>
+<link rel="https://api.w.org/" href="https://developer.wordpress.org/wp-json/" /><link rel="alternate" type="application/json" href="https://developer.wordpress.org/wp-json/wp/v2/wp-parser-class/1596" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="../../../xmlrpc-2.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="../../../wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 5.9-alpha-51701" />
+<link rel='shortlink' href='https://developer.wordpress.org/?p=1596' />
+<link rel="alternate" type="application/json+oembed" href="https://developer.wordpress.org/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Fclasses%2Fwp_user_query%2F" />
+<link rel="alternate" type="text/xml+oembed" href="https://developer.wordpress.org/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Fclasses%2Fwp_user_query%2F&amp;format=xml" />
+<link rel="canonical" href="index.html">
+<!-- Stream WordPress user activity plugin v3.6.2 -->
+	<style>
+		@media screen and (max-width: 782px) {
+			#wpadminbar li#wp-admin-bar-log-in,
+			#wpadminbar li#wp-admin-bar-register {
+				display: block;
+			}
+
+			#wpadminbar li#wp-admin-bar-log-in a,
+			#wpadminbar li#wp-admin-bar-register a {
+				padding: 0 8px;
+			}
+		}
+	</style>
+		<style>
+			a.github-edit {
+				margin-left: .5em;
+				font-size: .5em;
+				vertical-align: top;
+				display: inline-block;
+				border: 1px solid #eeeeee;
+				border-radius: 2px;
+				background: #eeeeee;
+				padding: .5em .6em .4em;
+				color: black;
+				margin-top: 0.1em;
+			}
+			a.github-edit > * {
+				opacity: 0.6;
+			}
+			a.github-edit:hover > * {
+				opacity: 1;
+				color: black;
+			}
+			a.github-edit img {
+				height: .8em;
+			}
+		</style>
+		
+	<script type="text/javascript">
+		jQuery( '<style>.hide-if-js { display: none; }</style>' ).appendTo( 'head' );
+		jQuery( function($) {
+			$( 'body' ).addClass('js');
+		} );
+	</script>
+<style type="text/css" media="print">#wpadminbar { display:none; }</style>
+	<style type="text/css" media="screen">
+	</style>
+	<script>document.cookie='devicePixelRatio='+((window.devicePixelRatio === undefined) ? 1 : window.devicePixelRatio)+'; path=/';</script>
+
+</head>
+
+
+<body id="wordpress-org" class="wp-parser-class-template-default single single-wp-parser-class postid-1596 admin-bar no-customize-support">
+		<div id="wpadminbar" class="nojq nojs">
+						<div class="quicklinks" id="wp-toolbar" role="navigation" aria-label="Toolbar">
+				<ul id='wp-admin-bar-root-default' class="ab-top-menu"><li id='wp-admin-bar-wp-logo' class="menupop"><a class='ab-item' aria-haspopup="true" href='https://wordpress.org/about/'><span class="ab-icon" aria-hidden="true"></span><span class="screen-reader-text">About WordPress</span></a><div class="ab-sub-wrapper"><ul id='wp-admin-bar-wp-logo-default' class="ab-submenu"><li id='wp-admin-bar-about'><a class='ab-item' href='https://wordpress.org/about/'>About WordPress</a></li></ul><ul id='wp-admin-bar-wp-logo-external' class="ab-sub-secondary ab-submenu"><li id='wp-admin-bar-wporg'><a class='ab-item' href='https://wordpress.org/'>WordPress.org</a></li><li id='wp-admin-bar-documentation'><a class='ab-item' href='https://wordpress.org/support/'>Documentation</a></li><li id='wp-admin-bar-support-forums'><a class='ab-item' href='https://wordpress.org/support/forums/'>Support</a></li><li id='wp-admin-bar-feedback'><a class='ab-item' href='https://wordpress.org/support/forum/requests-and-feedback'>Feedback</a></li></ul></div></li></ul><ul id='wp-admin-bar-top-secondary' class="ab-top-secondary ab-top-menu"><li id='wp-admin-bar-search' class="admin-bar-search"><div class="ab-item ab-empty-item" tabindex="-1"><form action="https://developer.wordpress.org/" method="get" id="adminbarsearch"><input class="adminbar-input" name="s" id="adminbar-search" type="text" value="" maxlength="150" /><label for="adminbar-search" class="screen-reader-text">Search</label><input type="submit" class="adminbar-button" value="Search" /></form></div></li><li id='wp-admin-bar-log-in'><a class='ab-item' href='https://login.wordpress.org/?locale=en_US'>Log In</a></li><li id='wp-admin-bar-register'><a class='ab-item' href='https://login.wordpress.org/register?locale=en_US'>Register</a></li></ul>			</div>
+					</div>
+
+		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P24PF4B" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<div id="wporg-header">
+	<div class="wrapper">
+	<h1><a href="http://wordpress.org/">WordPress.org</a></h1>				<div id="head-search">
+		<form action="http://wordpress.org/search/do-search.php" method="get">
+			<label for="global-search" class="screen-reader-text">Search WordPress.org for:</label>
+			<input id="global-search" class="text" name="search" type="text" value="" maxlength="150" placeholder="Search WordPress.org" />
+			<button type="submit" class="button"><span class="screen-reader-text">Submit</span></button>
+		</form>
+		</div>
+				<div style="clear:both"></div>
+		<button id="mobile-menu-button" aria-expanded="false"><span class="screen-reader-text">Toggle Menu</span></button>
+		
+<nav aria-label="Main Menu">
+<ul id="wporg-header-menu">
+<li class="menu-item"><a href='http://wordpress.org/showcase/' data-title='See some of the sites built on WordPress.'>Showcase</a></li>
+<li class="menu-item"><a href='http://learn.wordpress.org/' data-title='Resources to help you learn more about WordPress and teach it to others.'>Learn</a></li>
+<li class="menu-item"><a href='http://wordpress.org/themes/' data-title='Find just the right look for your website.'>Themes</a></li>
+<li class="menu-item"><a href='http://wordpress.org/plugins/' data-title='Plugins can extend WordPress to do almost anything you can imagine.'>Plugins</a></li>
+<li class="menu-item"><a href='http://wordpress.org/mobile/' data-title='Take your website on the go!'>Mobile</a></li>
+<li class="menu-item"><a href='http://wordpress.org/support/' data-title='Forums, documentation, help.'>Support</a><ul class="nav-submenu"><li><a href='http://wordpress.org/support/' title='Documentation, tutorials, best practices.'>Documentation</a></li><li><a href='http://wordpress.org/support/forums/' title='Support and discussion forums.'>Forums</a></li></ul><div class="uparrow"></div></li>
+<li class="menu-item"><a href='http://make.wordpress.org/' data-title='Contribute your knowledge.'>Get Involved</a><ul class="nav-submenu"><li><a href='http://wordpress.org/five-for-the-future/' title='How five percent is powering the next generation of the web'>Five for the Future</a></li></ul><div class="uparrow"></div></li>
+<li class="menu-item"><a href='http://wordpress.org/about/' data-title='About the WordPress Organization, and where we&#039;re going.'>About</a></li>
+<li class="menu-item"><a href='http://wordpress.org/news/' data-title='Come here for the latest scoop.'>Blog</a></li>
+<li class="menu-item"><a href='http://wordpress.org/hosting/' data-title='Find a home for your blog.'>Hosting</a></li>
+<li id="download" class="button download-button menu-item"><a href='http://wordpress.org/download/' data-title='Get it. Got it? Good.'>Get WordPress</a></li>
+</ul>
+</nav>
+		<div style="clear:both"></div>
+	</div>
+</div>
+
+
+
+<header id="masthead" class="site-header" role="banner">
+		<div class="site-branding">
+		<h1 class="site-title">
+			<a href="../../index.html" rel="home">Code Reference</a>
+		</h1>
+
+		
+		<nav id="site-navigation" class="main-navigation" role="navigation">
+			<button class="menu-toggle dashicons dashicons-arrow-down-alt2" aria-controls="primary-menu" aria-expanded="false" aria-label="Primary Menu"></button>
+					</nav>
+	</div>
+</header><!-- #masthead -->
+
+<div id="page" class="hfeed site devhub-wrap">
+	<a href="#main" class="screen-reader-text">Skip to content</a>
+
+				<div id="inner-search">
+			<div class="search-section section clear hide-if-js">
+
+
+	
+	<form role="search" method="get" class="searchform searchform-filtered" action="https://developer.wordpress.org/">
+		<label for="search-field" class="screen-reader-text">Search for:</label>
+		<input type="text" id="search-field" class="search-field" placeholder="Search &hellip;" value="" name="s">
+		<button class="button button-primary button-search"><i class="dashicons dashicons-search"></i><span class="screen-reader-text">Search plugins</span></button>
+	
+		<div class="search-post-type">
+			<span>Filter by type:</span>
+									<label><input type="checkbox" name="post_type[]" value="wp-parser-function"
+						 /> Functions</label>
+									<label><input type="checkbox" name="post_type[]" value="wp-parser-hook"
+						 /> Hooks</label>
+									<label><input type="checkbox" name="post_type[]" value="wp-parser-class"
+						 /> Classes</label>
+									<label><input type="checkbox" name="post_type[]" value="wp-parser-method"
+						 /> Methods</label>
+					</div>
+
+	
+	</form>
+
+</div><!-- /search-guide -->
+			<div id="inner-search-icon-container">
+				<div id="inner-search-icon">
+					<div class="dashicons dashicons-search"><span class="screen-reader-text">Search</span></div>
+				</div>
+			</div>
+		</div>
+
+		<div id="content" class="site-content">
+
+	<div id="content-area" class="wp-parser-class-template-default single single-wp-parser-class postid-1596 admin-bar no-customize-support code-reference">
+
+		
+		<div class="breadcrumb-trail breadcrumbs" itemprop="breadcrumb">
+			<span class="trail-browse">Browse:</span> 
+			<span class="trail-begin"><a href="../../../index.html" title="WordPress Developer Resources" rel="home">Home</a></span> <span class="sep">&#47;</span> 
+			<span class="trail-inner"><a href="../../index.html" title="Reference">Reference</a></span> <span class="sep">&#47;</span> 
+			<span class="trail-inner"><a href="../index.html">Classes</a></span> <span class="sep">&#47;</span> <span class="trail-end">WP_User_Query</span>
+		</div>
+		<main id="main" class="site-main" role="main">
+
+		
+			
+<article id="post-1596" class="post-1596 wp-parser-class type-wp-parser-class status-publish hentry wp-parser-source-file-wp-includes_class-wp-user-query-php wp-parser-package-users wp-parser-package-wordpress wp-parser-since-3-1-0">
+
+	
+	
+	<h1>WP_User_Query</h1>
+
+	<section class="summary">
+		<p>Core class used for querying users.</p>
+	</section>
+
+
+	
+	<div class="content-toc"><style> .toc-jump { text-align: right; font-size: 12px; } .page .toc-heading { margin-top: -50px; padding-top: 50px !important; }</style><div class="table-of-contents"><h2>Contents</h2><ul class="items"><li><a href="#description">Description</a>
+<ul>
+<li><a href="#see-also">See also</a>
+</ul></li>
+<li><a href="#more-information">More Information</a></li>
+<li><a href="#usage"><span id="Usage" class="mw-headline">Usage</span></a></li>
+<li><a href="#parameters"><span id="Parameters" class="mw-headline">Parameters</span></a>
+<ul>
+<li><a href="#user-role-parameter"><span id="User_Role_Parameter" class="mw-headline">User Role Parameter</span></a></li>
+<li><a href="#include-exclude-parameters"><span id="Include_.26_Exclude_Parameters" class="mw-headline">Include &amp; Exclude Parameters</span></a></li>
+<li><a href="#blog-parameter"><span id="Blog_Parameter" class="mw-headline">Blog Parameter</span></a></li>
+<li><a href="#search-parameters"><span id="Search_Parameters" class="mw-headline">Search Parameters</span></a></li>
+<li><a href="#pagination-parameters"><span id="Pagination_Parameters" class="mw-headline">Pagination Parameters</span></a></li>
+<li><a href="#order-orderby-parameters"><span id="Order_.26_Orderby_Parameters" class="mw-headline">Order &amp; Orderby Parameters</span></a></li>
+<li><a href="#date-parameters"><span id="Date_Parameters" class="mw-headline">Date Parameters</span></a></li>
+<li><a href="#custom-field-parameters"><span id="Custom_Field_Parameters" class="mw-headline">Custom Field Parameters</span></a></li>
+<li><a href="#who-parameter"><span id="Who_Parameter" class="mw-headline">Who Parameter</span></a></li>
+<li><a href="#total-count-parameter"><span id="Total_Count_Parameter" class="mw-headline">Total Count Parameter</span></a></li>
+<li><a href="#has-published-posts-parameter"><span id="Has_Published_Posts_Parameter" class="mw-headline">Has Published Posts Parameter</span></a></li>
+<li><a href="#return-fields-parameter"><span id="Return_Fields_Parameter" class="mw-headline">Return Fields Parameter</span></a>
+</ul></li>
+<li><a href="#return-values"><span id="Return_Values" class="mw-headline">Return Values</span></a></li>
+<li><a href="#filters"><span id="Filters" class="mw-headline">Filters</span></a></li>
+<li><a href="#source">Source</a></li>
+<li><a href="#methods">Methods</a></li>
+<li><a href="#changelog">Changelog</a></li>
+<li><a href="#user-contributed-notes">User Contributed Notes</a></ul>
+</div>
+
+<hr />
+<section class="description">
+	<h2 class="toc-heading" id="description" tabindex="-1">Description <a href="#description" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Description</span></a></h2>
+	
+		<h3 class="toc-heading" id="see-also" tabindex="-1">See also <a href="#see-also" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">See also</span></a></h3>
+
+	<ul>
+	<li><a href="prepare_query/index-2.html">WP_User_Query::prepare_query()</a>: for information on accepted arguments.</li>
+	</ul>
+	</section>
+
+	<hr />
+	<section class="explanation">
+		<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="more-information" tabindex="-1">More Information <a href="#more-information" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">More Information</span></a></h2>
+
+		<p>This class allows querying WordPress database tables &#8216;<tt>wp_users</tt>&#8216; and &#8216;<tt>wp_usermeta</tt>&#8216;.</p>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="usage" tabindex="-1"><span id="Usage" class="mw-headline">Usage</span> <a href="#usage" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text"><span id="Usage" class="mw-headline">Usage</span></span></a></h2>
+<pre>&lt;?php
+$args = array(
+	.
+	.
+	.
+);
+
+// The Query
+$user_query = new WP_User_Query( $args );
+
+// User Loop
+if ( ! empty( $user_query-&gt;get_results() ) ) {
+	foreach ( $user_query-&gt;get_results() as $user ) {
+		echo '&lt;p&gt;' . $user-&gt;display_name . '&lt;/p&gt;';
+	}
+} else {
+	echo 'No users found.';
+}
+?&gt;
+</pre>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="parameters" tabindex="-1"><span id="Parameters" class="mw-headline">Parameters</span> <a href="#parameters" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text"><span id="Parameters" class="mw-headline">Parameters</span></span></a></h2>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="user-role-parameter" tabindex="-1"><span id="User_Role_Parameter" class="mw-headline">User Role Parameter</span> <a href="#user-role-parameter" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text"><span id="User_Role_Parameter" class="mw-headline">User Role Parameter</span></span></a></h3>
+<p>Show users associated with certain role.</p>
+<ul>
+<li><b><tt>role</tt></b> (<i>string / array</i>) &#8211; use <a title="Roles and Capabilities" href="https://wordpress.org/support/article/roles-and-capabilities/">User Role</a>. An array or a comma-separated list of role names that users must match to be included in results. Note that this is an inclusive list: users must match *each* role. Default empty.</li>
+<li><b><tt>role__in</tt></b> (<i>array</i>) &#8211; An array of role names. Matched users must have at least one of these roles. Default empty array. (since <a title="Version 4.4" href="https://wordpress.org/support/wordpress-version/version-4-4/">Version 4.4</a>).</li>
+<li><b><tt>role__not_in</tt></b> (<i>array</i>) &#8211; An array of role names to exclude. Users matching one or more of these roles will not be included in results. Default empty array. (since <a title="Version 4.4" href="https://wordpress.org/support/wordpress-version/version-4-4/">Version 4.4</a>).</li>
+</ul>
+<p><b>Display Administrator role users</b></p>
+<pre>$user_query = new WP_User_Query( array( 'role' =&gt; 'Administrator' ) );
+</pre>
+<p><b>Display Subscriber role users</b></p>
+<pre>$user_query = new WP_User_Query( array( 'role' =&gt; 'Subscriber' ) );
+</pre>
+<p><b>Display all users except Subscriber role users</b></p>
+<pre>$user_query = new WP_User_Query( array( 'role__not_in' =&gt; 'Subscriber' ) );
+</pre>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="include-exclude-parameters" tabindex="-1"><span id="Include_.26_Exclude_Parameters" class="mw-headline">Include &amp; Exclude Parameters</span> <a href="#include-exclude-parameters" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text"><span id="Include_.26_Exclude_Parameters" class="mw-headline">Include &amp; Exclude Parameters</span></span></a></h3>
+<p>Show specific users.</p>
+<ul>
+<li><b><tt>include</tt></b> (<i>array</i>) &#8211; List of users to be included.</li>
+<li><b><tt>exclude</tt></b> (<i>array</i>) &#8211; List of users to be excluded.</li>
+</ul>
+<p><b>Display specific users list</b></p>
+<pre>$user_query = new WP_User_Query( array( 'include' =&gt; array( 1, 2, 3 ) ) );
+</pre>
+<p><b>Display all users except a specific list of users</b></p>
+<pre>$user_query = new WP_User_Query( array( 'exclude' =&gt; array( 4, 5, 6 ) ) );
+</pre>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="blog-parameter" tabindex="-1"><span id="Blog_Parameter" class="mw-headline">Blog Parameter</span> <a href="#blog-parameter" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text"><span id="Blog_Parameter" class="mw-headline">Blog Parameter</span></span></a></h3>
+<p>Show users associated with certain blog on the network.</p>
+<ul>
+<li><b><tt>blog_id</tt></b> (<i>int</i>) &#8211; The blog id on a multisite environment. Defaults to the current blog id.</li>
+</ul>
+<p><b>Display users from blog 33</b></p>
+<pre>$user_query = new WP_User_Query( array( 'blog_id' =&gt; 33 ) );
+</pre>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="search-parameters" tabindex="-1"><span id="Search_Parameters" class="mw-headline">Search Parameters</span> <a href="#search-parameters" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text"><span id="Search_Parameters" class="mw-headline">Search Parameters</span></span></a></h3>
+<p>Search users.</p>
+<ul>
+<li><b><tt>search</tt></b> (<i>string</i>) &#8211; Searches for possible string matches on columns. Use of the * wildcard before and/or after the string will match on columns <tt>starting with*</tt>, <tt>*ending with</tt>, or <tt>*containing*</tt> the string you enter.</li>
+<li><b><tt>search_columns</tt></b> (<i>array</i>) &#8211; List of <a title="Database Description" href="../../../../codex.wordpress.org/Database_Description.html#Table:_wp_users">database table columns</a> to matches the search string across multiple columns.
+<ul>
+<li>&#8216;<tt>ID</tt>&#8216; &#8211; Search by user id.</li>
+<li>&#8216;<tt>user_login</tt>&#8216; &#8211; Search by user login.</li>
+<li>&#8216;<tt>user_nicename</tt>&#8216; &#8211; Search by user nicename.</li>
+<li>&#8216;<tt>user_email</tt>&#8216; &#8211; Search by user email.</li>
+<li>&#8216;<tt>user_url</tt>&#8216; &#8211; Search by user url.</li>
+</ul>
+</li>
+</ul>
+<p>We can use the <a title="Plugin API/Filter Reference/user search columns" href="../../hooks/user_search_columns/index.html">user_search_columns</a> filter to modify the search columns.</p>
+<p><b>Display users based on a keyword search</b></p>
+<pre>$user_query = new WP_User_Query( array( 'search' =&gt; 'Rami' ) );
+</pre>
+<p><b>Display users based on a keyword search, only on login and email columns</b></p>
+<pre>$args = array(
+	'search'         =&gt; 'Rami',
+	'search_columns' =&gt; array( 'user_login', 'user_email' )
+);
+$user_query = new WP_User_Query( $args );
+</pre>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="pagination-parameters" tabindex="-1"><span id="Pagination_Parameters" class="mw-headline">Pagination Parameters</span> <a href="#pagination-parameters" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text"><span id="Pagination_Parameters" class="mw-headline">Pagination Parameters</span></span></a></h3>
+<p>Limit retrieved Users.</p>
+<ul>
+<li><b><tt>number</tt></b> (<i>int</i>) &#8211; The maximum returned number of results (needed in pagination).</li>
+<li><b><tt>offset</tt></b> (<i>int</i>) &#8211; Offset the returned results (needed in pagination).</li>
+<li><b><tt>paged</tt></b> (<i>int</i>) &#8211; When used with number, defines the page of results to return. Default 1. (since <a title="Version 4.4" href="https://wordpress.org/support/wordpress-version/version-4-4/">Version 4.4</a>).</li>
+</ul>
+<p><b>Display 10 users</b></p>
+<pre>$user_query = new WP_User_Query( array( 'number' =&gt; 10 ) );
+</pre>
+<p><b>Display 5 users starting from 25</b></p>
+<pre>$user_query = new WP_User_Query( array( 'number' =&gt; 5, 'offset' =&gt; 25 ) );
+</pre>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="order-orderby-parameters" tabindex="-1"><span id="Order_.26_Orderby_Parameters" class="mw-headline">Order &amp; Orderby Parameters</span> <a href="#order-orderby-parameters" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text"><span id="Order_.26_Orderby_Parameters" class="mw-headline">Order &amp; Orderby Parameters</span></span></a></h3>
+<p>Sort retrieved Users.</p>
+<ul>
+<li><b><tt>orderby</tt></b> (<i>string|array</i>) &#8211; Sort retrieved users by parameter. Defaults to &#8216;login&#8217;. It can be a string with a single field, a string containing a list of values separated by commas or spaces, or an array with fields.
+<ul>
+<li>&#8216;<tt>ID</tt>&#8216; &#8211; Order by user id.</li>
+<li>&#8216;<tt>display_name</tt>&#8216; &#8211; Order by user display name.</li>
+<li>&#8216;<tt>name</tt>&#8216; / &#8216;<tt>user_name</tt>&#8216; &#8211; Order by user name.</li>
+<li>&#8216;<tt>include</tt>&#8216; &#8211; Order by the included list of user_ids (requires the include parameter) (since <a title="Version 4.1" href="https://wordpress.org/support/wordpress-version/version-4-1/">Version 4.1</a>).</li>
+<li>&#8216;<tt>login</tt>&#8216; / &#8216;<tt>user_login</tt>&#8216; &#8211; Order by user login.</li>
+<li>&#8216;<tt>nicename</tt>&#8216; / &#8216;<tt>user_nicename</tt>&#8216; &#8211; Order by user nicename.</li>
+<li>&#8216;<tt>email</tt>&#8216; / &#8216;<tt>user_email</tt>&#8216; &#8211; Order by user email.</li>
+<li>&#8216;<tt>url</tt>&#8216; / &#8216;<tt>user_url</tt>&#8216; &#8211; Order by user url.</li>
+<li>&#8216;<tt>registered</tt>&#8216; / &#8216;<tt>user_registered</tt>&#8216; &#8211; Order by user registered date.</li>
+<li>&#8216;<tt>post_count</tt>&#8216; &#8211; Order by user post count.</li>
+<li>&#8216;<tt>meta_value</tt>&#8216; &#8211; Note that a &#8216;meta_key=keyname&#8217; must also be present in the query (available with <a title="Version 3.7" href="https://wordpress.org/support/wordpress-version/version-3-7/">Version 3.7</a>).</li>
+<li>&#8216;<tt>meta_value_num</tt>&#8216; &#8211; Note that a &#8216;meta_key=keyname&#8217; must also be present in the query (available with <a title="Version 4.2" href="https://wordpress.org/support/wordpress-version/version-4-2/">Version 4.2</a>).</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><b><tt>order</tt></b> (<i>string</i>) &#8211; Designates the ascending or descending order of the &#8216;<tt>orderby</tt>&#8216; parameter. Defaults to &#8216;ASC&#8217;.
+<ul>
+<li>&#8216;<tt>ASC</tt>&#8216; &#8211; ascending order from lowest to highest values (1, 2, 3; a, b, c).</li>
+<li>&#8216;<tt>DESC</tt>&#8216; &#8211; descending order from highest to lowest values (3, 2, 1; c, b, a).</li>
+</ul>
+</li>
+</ul>
+<p><b>Display users sorted by Post Count, Descending order</b></p>
+<pre>$user_query = new WP_User_Query( array ( 'orderby' =&gt; 'post_count', 'order' =&gt; 'DESC' ) );
+</pre>
+<p><b>Display users sorted by registered, Ascending order</b></p>
+<pre>$user_query = new WP_User_Query( array ( 'orderby' =&gt; 'registered', 'order' =&gt; 'ASC' ) );
+</pre>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="date-parameters" tabindex="-1"><span id="Date_Parameters" class="mw-headline">Date Parameters</span> <a href="#date-parameters" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text"><span id="Date_Parameters" class="mw-headline">Date Parameters</span></span></a></h3>
+<p>Date queries are handled through to the <tt><a href="../wp_date_query/index.html">WP_Date_Query</a></tt> object and are applied to the <tt>user_registered</tt> field.</p>
+<p>Available since <a class="external text" href="https://wordpress.org/support/wordpress-version/version-4-1/" rel="nofollow">version 4.1</a>.</p>
+<ul>
+<li><b><tt>date_query</tt></b> (<i>array</i>) &#8211; See the documentation for the <tt><a title="Class Reference/WP Query" href="../wp_query/index.html"> <a href="../wp_query/index.html">WP_Query</a></a></tt> class.</li>
+</ul>
+<p><b>Find users that registered during the last 12 hours:</b></p>
+<pre>$args = array(
+    'date_query' =&gt; array( 
+        array( 'after' =&gt; '12 hours ago', 'inclusive' =&gt; true )  
+    )
+);
+$user_query = new WP_User_Query( $args );
+</pre>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="custom-field-parameters" tabindex="-1"><span id="Custom_Field_Parameters" class="mw-headline">Custom Field Parameters</span> <a href="#custom-field-parameters" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text"><span id="Custom_Field_Parameters" class="mw-headline">Custom Field Parameters</span></span></a></h3>
+<p>Show users associated with a certain custom field.</p>
+<p>The <tt><a title="Class Reference/WP Meta Query" href="../wp_meta_query/index.html"> <a href="../wp_meta_query/index.html">WP_Meta_Query</a></a></tt> class is used to parse this part of the query since <a title="Version 3.2" href="https://wordpress.org/support/wordpress-version/version-3-2/">3.2.0</a>, so check the docs for that class for the full, up to date <a title="Class Reference/WP Meta Query" href="../wp_meta_query/index.html"> list of arguments</a>.</p>
+<ul>
+<li><b><tt>meta_key</tt></b> (<i>string</i>) &#8211; Custom field key.</li>
+<li><b><tt>meta_value</tt></b> (<i>string</i>) &#8211; Custom field value.</li>
+<li><b><tt>meta_compare</tt></b> (<i>string</i>) &#8211; Operator to test the &#8216;<tt>meta_value</tt>&#8216;. See <tt>'compare'</tt> below.</li>
+</ul>
+<ul>
+<li><b><tt>meta_query</tt></b> (<i>array</i>) &#8211; Custom field parameters (available with <a title="Version 3.5" href="https://wordpress.org/support/wordpress-version/version-3-5/">Version 3.5</a>).
+<ul>
+<li><b><tt>key</tt></b> (<i>string</i>) &#8211; Custom field key.</li>
+<li><b><tt>value</tt></b> (<i>string</i>|<i>array</i>) &#8211; Custom field value (<i>Note</i>: Array support is limited to a compare value of &#8216;IN&#8217;, &#8216;NOT IN&#8217;, &#8216;BETWEEN&#8217;, &#8216;NOT BETWEEN&#8217;, &#8216;EXISTS&#8217; or &#8216;NOT EXISTS&#8217;)</li>
+<li><b><tt>compare</tt></b> (<i>string</i>) &#8211; Operator to test. Possible values are &#8216;=&#8217;, &#8216;!=&#8217;, &#8216;&gt;&#8217;, &#8216;&gt;=&#8217;, &#8216;&lt;&#8216;, &#8216;&lt;=&#8217;, &#8216;LIKE&#8217;, &#8216;NOT LIKE&#8217;, &#8216;IN&#8217;, &#8216;NOT IN&#8217;, &#8216;BETWEEN&#8217;, &#8216;NOT BETWEEN&#8217;, &#8216;EXISTS&#8217;, and &#8216;NOT EXISTS&#8217; ; &#8216;REGEXP&#8217;, &#8216;NOT REGEXP&#8217; and &#8216;RLIKE&#8217; were added in WordPress 3.7. Default value is &#8216;=&#8217;.<br />
+<b>Note:</b> Currently <tt>'NOT EXISTS'</tt> does not always work as intended if <tt>'relation'</tt> is <tt>'OR'</tt> when, (1) using the <a href="../../../../codex.wordpress.org/Class_Reference/WP_User_Query.html#User_Role_Parameter"><tt>'role'</tt></a> parameter on single site installs, or (2) for any query on multisite. See <a class="external text" href="https://core.trac.wordpress.org/ticket/23849" rel="nofollow">ticket #23849</a>.<br />
+<b>Note 2:</b> with &#8216;LIKE&#8217; the value parameter is change to &#8216;%&lt;value&gt;%&#8217;. So the string is searched anywhere in the custom field value. If value parameter contain a &#8216;%&#8217; it is escaped. So it bans to search a string beginning by some characters, for exemple&#8230; To construct this query you must use &#8216;REGEXP&#8217; with a regular expression in value parameter (ex : &#8216;^n.*&#8217; matchs all values that beginning by &#8220;n&#8221; or &#8220;N&#8221;).</li>
+<li><b><tt>type</tt></b> (<i>string</i>) &#8211; Custom field type. Possible values are &#8216;NUMERIC&#8217;, &#8216;BINARY&#8217;, &#8216;CHAR&#8217;, &#8216;DATE&#8217;, &#8216;DATETIME&#8217;, &#8216;DECIMAL&#8217;, &#8216;SIGNED&#8217;, &#8216;TIME&#8217;, &#8216;UNSIGNED&#8217;. Default value is &#8216;CHAR&#8217;. You can also specify precision and scale for the &#8216;DECIMAL&#8217; and &#8216;NUMERIC&#8217; types (for example, &#8216;DECIMAL(10,5)&#8217; or &#8216;NUMERIC(10)&#8217; are valid).</li>
+</ul>
+</li>
+</ul>
+<p><b>Display users from Israel</b></p>
+<pre>$user_query = new WP_User_Query( array( 'meta_key' =&gt; 'country', 'meta_value' =&gt; 'Israel' ) );
+</pre>
+<p><b>Display users under 30 years old</b></p>
+<pre>$user_query = new WP_User_Query( array( 'meta_key' =&gt; 'age', 'meta_value' =&gt; '30', 'meta_compare' =&gt; '&lt;' ) );
+</pre>
+<p><b>Multiple custom user fields handling</b></p>
+<pre>$args = array(
+	'meta_query' =&gt; array(
+		'relation' =&gt; 'OR',
+			array(
+				'key'     =&gt; 'country',
+				'value'   =&gt; 'Israel',
+	 			'compare' =&gt; '='
+			),
+			array(
+				'key'     =&gt; 'age',
+				'value'   =&gt; array( 20, 30 ),
+				'type'    =&gt; 'numeric',
+				'compare' =&gt; 'BETWEEN'
+			)
+	)
+ );
+$user_query = new WP_User_Query( $args );
+</pre>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="who-parameter" tabindex="-1"><span id="Who_Parameter" class="mw-headline">Who Parameter</span> <a href="#who-parameter" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text"><span id="Who_Parameter" class="mw-headline">Who Parameter</span></span></a></h3>
+<p>Which users?</p>
+<ul>
+<li><b><tt>who</tt></b> (<i>string</i>) &#8211; Which users to query. Currently only &#8216;authors&#8217; is supported. Default is all users.</li>
+</ul>
+<p><b>Display only authors</b></p>
+<pre>$user_query = new WP_User_Query( array( 'who' =&gt; 'authors' ) );
+</pre>
+<p>Equals to:</p>
+<pre>$args = array(
+	'meta_key'     =&gt; 'user_level',
+	'meta_value'   =&gt; '0',
+	'meta_compare' =&gt; '!=',
+	'blog_id'      =&gt; 0
+)
+$user_query = new WP_User_Query( $args );
+</pre>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="total-count-parameter" tabindex="-1"><span id="Total_Count_Parameter" class="mw-headline">Total Count Parameter</span> <a href="#total-count-parameter" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text"><span id="Total_Count_Parameter" class="mw-headline">Total Count Parameter</span></span></a></h3>
+<ul>
+<li><b><tt>count_total</tt></b> (<i>boolean</i>) &#8211; Whether to count the total number of users found. When <tt>true</tt> (default), the total number of results for the query can be retrieved using the <tt>get_total()</tt> method. If you don&#8217;t need the total number of results, set this to <tt>false</tt>.</li>
+</ul>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="has-published-posts-parameter" tabindex="-1"><span id="Has_Published_Posts_Parameter" class="mw-headline">Has Published Posts Parameter</span> <a href="#has-published-posts-parameter" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text"><span id="Has_Published_Posts_Parameter" class="mw-headline">Has Published Posts Parameter</span></span></a></h3>
+<ul>
+<li><b><tt>has_published_posts</tt></b> (<i>boolean / array</i>) &#8211; Pass an array of post types to filter results to users who have published posts in those post types. <tt>true</tt> is an alias for all public post types. Default is <tt>null</tt>. Since <a title="Version 4.3" href="https://wordpress.org/support/wordpress-version/version-4-3/">Version 4.3</a>.</li>
+</ul>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="return-fields-parameter" tabindex="-1"><span id="Return_Fields_Parameter" class="mw-headline">Return Fields Parameter</span> <a href="#return-fields-parameter" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text"><span id="Return_Fields_Parameter" class="mw-headline">Return Fields Parameter</span></span></a></h3>
+<p>Set return values.</p>
+<ul>
+<li><b><tt>fields</tt></b> (<i>string|array</i>) &#8211; Which fields to return. Defaults to <i>all</i>.
+<ul>
+<li>&#8216;<tt>ID</tt>&#8216; &#8211; Return an array of user id&#8217;s.</li>
+<li>&#8216;<tt>display_name</tt>&#8216; &#8211; Return an array of user display names.</li>
+<li>&#8216;<tt>login</tt>&#8216; / &#8216;<tt>user_login</tt>&#8216; &#8211; Return an array of user login names.</li>
+<li>&#8216;<tt>nicename</tt>&#8216; / &#8216;<tt>user_nicename</tt>&#8216; &#8211; Return an array of user nicenames.</li>
+<li>&#8216;<tt>email</tt>&#8216; / &#8216;<tt>user_email</tt>&#8216; &#8211; Return an array of user emails.</li>
+<li>&#8216;<tt>url</tt>&#8216; / &#8216;<tt>user_url</tt>&#8216; &#8211; Return an array of user urls.</li>
+<li>&#8216;<tt>registered</tt>&#8216; / &#8216;<tt>user_registered</tt>&#8216; &#8211; Return an array of user registered dates.</li>
+<li>&#8216;<tt>all</tt> (default) or <tt>all_with_meta</tt>&#8216; &#8211; Returns an array of <a title="Class Reference/WP User" href="../../../../codex.wordpress.org/Class_Reference/WP_User.html">WP_User</a> objects. Must pass an array to subset fields returned. *&#8217;all_with_meta&#8217; currently returns the same fields as &#8216;all&#8217; which does not include user fields stored in wp_usermeta. You must create a second query to get the user meta fields by ID or use the __get PHP magic method to get the values of these fields.</li>
+</ul>
+</li>
+</ul>
+<p><b>Return an array of <a href="../wp_user/index.html">WP_User</a> object</b></p>
+<pre>$user_query = new WP_User_Query( array( 'role' =&gt; 'editor', 'fields' =&gt; 'all' ) );
+</pre>
+<p><b>Return List all blog editors, return limited fields in resulting row objects:</b></p>
+<pre>$user_fields = array( 'user_login', 'user_nicename', 'user_email', 'user_url' );
+$user_query = new WP_User_Query( array( 'role' =&gt; 'editor', 'fields' =&gt; $user_fields ) );
+</pre>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="return-values" tabindex="-1"><span id="Return_Values" class="mw-headline">Return Values</span> <a href="#return-values" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text"><span id="Return_Values" class="mw-headline">Return Values</span></span></a></h2>
+<dl>
+<dt>(Array)</dt>
+<dd>An array of IDs, stdClass objects, or <a title="Class Reference/WP User" href="../../../../codex.wordpress.org/Class_Reference/WP_User.html">WP_User</a> objects, depending on the value of the &#8216;<tt>fields</tt>&#8216; parameter.</p>
+<ul>
+<li>If &#8216;<tt>fields</tt>&#8216; is set to &#8216;all&#8217; (default), or &#8216;all_with_meta&#8217;, it will return an array of <a title="Class Reference/WP User" href="../../../../codex.wordpress.org/Class_Reference/WP_User.html">WP_User</a> objects (does not include related user meta fields even with &#8216;all_with_meta&#8217; set) .</li>
+<li>If &#8216;<tt>fields</tt>&#8216; is set to an array of <tt><a title="Database Description" href="../../../../codex.wordpress.org/Database_Description.html#Table:_wp_users"> wp_users</a></tt> table fields, it will return an array of stdClass objects with only those fields.</li>
+<li>If &#8216;<tt>fields</tt>&#8216; is set to any individual <tt><a title="Database Description" href="../../../../codex.wordpress.org/Database_Description.html#Table:_wp_users"> wp_users</a></tt> table field, an array of IDs will be returned.</li>
+</ul>
+</dd>
+</dl>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="filters" tabindex="-1"><span id="Filters" class="mw-headline">Filters</span> <a href="#filters" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text"><span id="Filters" class="mw-headline">Filters</span></span></a></h2>
+<ul>
+<li><b><tt><a class="new" title="Plugin API/Filter Reference/found users query (page does not exist)" href="../../hooks/found_users_query/index.html">found_users_query</a></tt></b> &#8211; Alters SQL &#8216;SELECT FOUND_ROWS()&#8217; clause to the query that returns the count total.</li>
+</ul>
+<p>&nbsp;</p>
+	</section>
+	<hr />
+	<section class="source-content">
+		<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="source" tabindex="-1">Source <a href="#source" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Source</span></a></h2>
+		<p>
+			File: <a href="../../files/wp-includes/class-wp-user-query.php/index.html">wp-includes/class-wp-user-query.php</a>		</p>
+
+					<div class="source-code-container">
+				<pre class="brush: php; toolbar: false; first-line: 17">class WP_User_Query {
+
+	/**
+	 * Query vars, after parsing
+	 *
+	 * @since 3.5.0
+	 * @var array
+	 */
+	public $query_vars = array();
+
+	/**
+	 * List of found user IDs.
+	 *
+	 * @since 3.1.0
+	 * @var array
+	 */
+	private $results;
+
+	/**
+	 * Total number of found users for the current query
+	 *
+	 * @since 3.1.0
+	 * @var int
+	 */
+	private $total_users = 0;
+
+	/**
+	 * Metadata query container.
+	 *
+	 * @since 4.2.0
+	 * @var WP_Meta_Query
+	 */
+	public $meta_query = false;
+
+	/**
+	 * The SQL query used to fetch matching users.
+	 *
+	 * @since 4.4.0
+	 * @var string
+	 */
+	public $request;
+
+	private $compat_fields = array( 'results', 'total_users' );
+
+	// SQL clauses.
+	public $query_fields;
+	public $query_from;
+	public $query_where;
+	public $query_orderby;
+	public $query_limit;
+
+	/**
+	 * PHP5 constructor.
+	 *
+	 * @since 3.1.0
+	 *
+	 * @param null|string|array $query Optional. The query variables.
+	 */
+	public function __construct( $query = null ) {
+		if ( ! empty( $query ) ) {
+			$this-&gt;prepare_query( $query );
+			$this-&gt;query();
+		}
+	}
+
+	/**
+	 * Fills in missing query variables with default values.
+	 *
+	 * @since 4.4.0
+	 *
+	 * @param array $args Query vars, as passed to `WP_User_Query`.
+	 * @return array Complete query variables with undefined ones filled in with defaults.
+	 */
+	public static function fill_query_vars( $args ) {
+		$defaults = array(
+			'blog_id'             =&gt; get_current_blog_id(),
+			'role'                =&gt; '',
+			'role__in'            =&gt; array(),
+			'role__not_in'        =&gt; array(),
+			'meta_key'            =&gt; '',
+			'meta_value'          =&gt; '',
+			'meta_compare'        =&gt; '',
+			'include'             =&gt; array(),
+			'exclude'             =&gt; array(),
+			'search'              =&gt; '',
+			'search_columns'      =&gt; array(),
+			'orderby'             =&gt; 'login',
+			'order'               =&gt; 'ASC',
+			'offset'              =&gt; '',
+			'number'              =&gt; '',
+			'paged'               =&gt; 1,
+			'count_total'         =&gt; true,
+			'fields'              =&gt; 'all',
+			'who'                 =&gt; '',
+			'has_published_posts' =&gt; null,
+			'nicename'            =&gt; '',
+			'nicename__in'        =&gt; array(),
+			'nicename__not_in'    =&gt; array(),
+			'login'               =&gt; '',
+			'login__in'           =&gt; array(),
+			'login__not_in'       =&gt; array(),
+		);
+
+		return wp_parse_args( $args, $defaults );
+	}
+
+	/**
+	 * Prepare the query variables.
+	 *
+	 * @since 3.1.0
+	 * @since 4.1.0 Added the ability to order by the `include` value.
+	 * @since 4.2.0 Added 'meta_value_num' support for `$orderby` parameter. Added multi-dimensional array syntax
+	 *              for `$orderby` parameter.
+	 * @since 4.3.0 Added 'has_published_posts' parameter.
+	 * @since 4.4.0 Added 'paged', 'role__in', and 'role__not_in' parameters. The 'role' parameter was updated to
+	 *              permit an array or comma-separated list of values. The 'number' parameter was updated to support
+	 *              querying for all users with using -1.
+	 * @since 4.7.0 Added 'nicename', 'nicename__in', 'nicename__not_in', 'login', 'login__in',
+	 *              and 'login__not_in' parameters.
+	 *
+	 * @global wpdb $wpdb WordPress database abstraction object.
+	 * @global int  $blog_id
+	 *
+	 * @param string|array $query {
+	 *     Optional. Array or string of Query parameters.
+	 *
+	 *     @type int          $blog_id             The site ID. Default is the current site.
+	 *     @type string|array $role                An array or a comma-separated list of role names that users must match
+	 *                                             to be included in results. Note that this is an inclusive list: users
+	 *                                             must match *each* role. Default empty.
+	 *     @type string[]     $role__in            An array of role names. Matched users must have at least one of these
+	 *                                             roles. Default empty array.
+	 *     @type string[]     $role__not_in        An array of role names to exclude. Users matching one or more of these
+	 *                                             roles will not be included in results. Default empty array.
+	 *     @type string       $meta_key            User meta key. Default empty.
+	 *     @type string       $meta_value          User meta value. Default empty.
+	 *     @type string       $meta_compare        Comparison operator to test the `$meta_value`. Accepts '=', '!=',
+	 *                                             '&gt;', '&gt;=', '&lt;', '&lt;=', 'LIKE', 'NOT LIKE', 'IN', 'NOT IN',
+	 *                                             'BETWEEN', 'NOT BETWEEN', 'EXISTS', 'NOT EXISTS', 'REGEXP',
+	 *                                             'NOT REGEXP', or 'RLIKE'. Default '='.
+	 *     @type int[]        $include             An array of user IDs to include. Default empty array.
+	 *     @type int[]        $exclude             An array of user IDs to exclude. Default empty array.
+	 *     @type string       $search              Search keyword. Searches for possible string matches on columns.
+	 *                                             When `$search_columns` is left empty, it tries to determine which
+	 *                                             column to search in based on search string. Default empty.
+	 *     @type string[]     $search_columns      Array of column names to be searched. Accepts 'ID', 'user_login',
+	 *                                             'user_email', 'user_url', 'user_nicename', 'display_name'.
+	 *                                             Default empty array.
+	 *     @type string|array $orderby             Field(s) to sort the retrieved users by. May be a single value,
+	 *                                             an array of values, or a multi-dimensional array with fields as
+	 *                                             keys and orders ('ASC' or 'DESC') as values. Accepted values are
+	 *                                             'ID', 'display_name' (or 'name'), 'include', 'user_login'
+	 *                                             (or 'login'), 'login__in', 'user_nicename' (or 'nicename'),
+	 *                                             'nicename__in', 'user_email (or 'email'), 'user_url' (or 'url'),
+	 *                                             'user_registered' (or 'registered'), 'post_count', 'meta_value',
+	 *                                             'meta_value_num', the value of `$meta_key`, or an array key of
+	 *                                             `$meta_query`. To use 'meta_value' or 'meta_value_num', `$meta_key`
+	 *                                             must be also be defined. Default 'user_login'.
+	 *     @type string       $order               Designates ascending or descending order of users. Order values
+	 *                                             passed as part of an `$orderby` array take precedence over this
+	 *                                             parameter. Accepts 'ASC', 'DESC'. Default 'ASC'.
+	 *     @type int          $offset              Number of users to offset in retrieved results. Can be used in
+	 *                                             conjunction with pagination. Default 0.
+	 *     @type int          $number              Number of users to limit the query for. Can be used in
+	 *                                             conjunction with pagination. Value -1 (all) is supported, but
+	 *                                             should be used with caution on larger sites.
+	 *                                             Default -1 (all users).
+	 *     @type int          $paged               When used with number, defines the page of results to return.
+	 *                                             Default 1.
+	 *     @type bool         $count_total         Whether to count the total number of users found. If pagination
+	 *                                             is not needed, setting this to false can improve performance.
+	 *                                             Default true.
+	 *     @type string|array $fields              Which fields to return. Single or all fields (string), or array
+	 *                                             of fields. Accepts 'ID', 'display_name', 'user_login',
+	 *                                             'user_nicename', 'user_email', 'user_url', 'user_registered'.
+	 *                                             Use 'all' for all fields and 'all_with_meta' to include
+	 *                                             meta fields. Default 'all'.
+	 *     @type string       $who                 Type of users to query. Accepts 'authors'.
+	 *                                             Default empty (all users).
+	 *     @type bool|array   $has_published_posts Pass an array of post types to filter results to users who have
+	 *                                             published posts in those post types. `true` is an alias for all
+	 *                                             public post types.
+	 *     @type string       $nicename            The user nicename. Default empty.
+	 *     @type string[]     $nicename__in        An array of nicenames to include. Users matching one of these
+	 *                                             nicenames will be included in results. Default empty array.
+	 *     @type string[]     $nicename__not_in    An array of nicenames to exclude. Users matching one of these
+	 *                                             nicenames will not be included in results. Default empty array.
+	 *     @type string       $login               The user login. Default empty.
+	 *     @type string[]     $login__in           An array of logins to include. Users matching one of these
+	 *                                             logins will be included in results. Default empty array.
+	 *     @type string[]     $login__not_in       An array of logins to exclude. Users matching one of these
+	 *                                             logins will not be included in results. Default empty array.
+	 * }
+	 */
+	public function prepare_query( $query = array() ) {
+		global $wpdb;
+
+		if ( empty( $this-&gt;query_vars ) || ! empty( $query ) ) {
+			$this-&gt;query_limit = null;
+			$this-&gt;query_vars  = $this-&gt;fill_query_vars( $query );
+		}
+
+		/**
+		 * Fires before the WP_User_Query has been parsed.
+		 *
+		 * The passed WP_User_Query object contains the query variables,
+		 * not yet passed into SQL.
+		 *
+		 * @since 4.0.0
+		 *
+		 * @param WP_User_Query $query Current instance of WP_User_Query (passed by reference).
+		 */
+		do_action_ref_array( 'pre_get_users', array( &amp;$this ) );
+
+		// Ensure that query vars are filled after 'pre_get_users'.
+		$qv =&amp; $this-&gt;query_vars;
+		$qv = $this-&gt;fill_query_vars( $qv );
+
+		if ( is_array( $qv['fields'] ) ) {
+			$qv['fields'] = array_unique( $qv['fields'] );
+
+			$this-&gt;query_fields = array();
+			foreach ( $qv['fields'] as $field ) {
+				$field                = 'ID' === $field ? 'ID' : sanitize_key( $field );
+				$this-&gt;query_fields[] = &quot;$wpdb-&gt;users.$field&quot;;
+			}
+			$this-&gt;query_fields = implode( ',', $this-&gt;query_fields );
+		} elseif ( 'all' === $qv['fields'] ) {
+			$this-&gt;query_fields = &quot;$wpdb-&gt;users.*&quot;;
+		} else {
+			$this-&gt;query_fields = &quot;$wpdb-&gt;users.ID&quot;;
+		}
+
+		if ( isset( $qv['count_total'] ) &amp;&amp; $qv['count_total'] ) {
+			$this-&gt;query_fields = 'SQL_CALC_FOUND_ROWS ' . $this-&gt;query_fields;
+		}
+
+		$this-&gt;query_from  = &quot;FROM $wpdb-&gt;users&quot;;
+		$this-&gt;query_where = 'WHERE 1=1';
+
+		// Parse and sanitize 'include', for use by 'orderby' as well as 'include' below.
+		if ( ! empty( $qv['include'] ) ) {
+			$include = wp_parse_id_list( $qv['include'] );
+		} else {
+			$include = false;
+		}
+
+		$blog_id = 0;
+		if ( isset( $qv['blog_id'] ) ) {
+			$blog_id = absint( $qv['blog_id'] );
+		}
+
+		if ( $qv['has_published_posts'] &amp;&amp; $blog_id ) {
+			if ( true === $qv['has_published_posts'] ) {
+				$post_types = get_post_types( array( 'public' =&gt; true ) );
+			} else {
+				$post_types = (array) $qv['has_published_posts'];
+			}
+
+			foreach ( $post_types as &amp;$post_type ) {
+				$post_type = $wpdb-&gt;prepare( '%s', $post_type );
+			}
+
+			$posts_table        = $wpdb-&gt;get_blog_prefix( $blog_id ) . 'posts';
+			$this-&gt;query_where .= &quot; AND $wpdb-&gt;users.ID IN ( SELECT DISTINCT $posts_table.post_author FROM $posts_table WHERE $posts_table.post_status = 'publish' AND $posts_table.post_type IN ( &quot; . implode( ', ', $post_types ) . ' ) )';
+		}
+
+		// nicename
+		if ( '' !== $qv['nicename'] ) {
+			$this-&gt;query_where .= $wpdb-&gt;prepare( ' AND user_nicename = %s', $qv['nicename'] );
+		}
+
+		if ( ! empty( $qv['nicename__in'] ) ) {
+			$sanitized_nicename__in = array_map( 'esc_sql', $qv['nicename__in'] );
+			$nicename__in           = implode( &quot;','&quot;, $sanitized_nicename__in );
+			$this-&gt;query_where     .= &quot; AND user_nicename IN ( '$nicename__in' )&quot;;
+		}
+
+		if ( ! empty( $qv['nicename__not_in'] ) ) {
+			$sanitized_nicename__not_in = array_map( 'esc_sql', $qv['nicename__not_in'] );
+			$nicename__not_in           = implode( &quot;','&quot;, $sanitized_nicename__not_in );
+			$this-&gt;query_where         .= &quot; AND user_nicename NOT IN ( '$nicename__not_in' )&quot;;
+		}
+
+		// login
+		if ( '' !== $qv['login'] ) {
+			$this-&gt;query_where .= $wpdb-&gt;prepare( ' AND user_login = %s', $qv['login'] );
+		}
+
+		if ( ! empty( $qv['login__in'] ) ) {
+			$sanitized_login__in = array_map( 'esc_sql', $qv['login__in'] );
+			$login__in           = implode( &quot;','&quot;, $sanitized_login__in );
+			$this-&gt;query_where  .= &quot; AND user_login IN ( '$login__in' )&quot;;
+		}
+
+		if ( ! empty( $qv['login__not_in'] ) ) {
+			$sanitized_login__not_in = array_map( 'esc_sql', $qv['login__not_in'] );
+			$login__not_in           = implode( &quot;','&quot;, $sanitized_login__not_in );
+			$this-&gt;query_where      .= &quot; AND user_login NOT IN ( '$login__not_in' )&quot;;
+		}
+
+		// Meta query.
+		$this-&gt;meta_query = new WP_Meta_Query();
+		$this-&gt;meta_query-&gt;parse_query_vars( $qv );
+
+		if ( isset( $qv['who'] ) &amp;&amp; 'authors' === $qv['who'] &amp;&amp; $blog_id ) {
+			$who_query = array(
+				'key'     =&gt; $wpdb-&gt;get_blog_prefix( $blog_id ) . 'user_level',
+				'value'   =&gt; 0,
+				'compare' =&gt; '!=',
+			);
+
+			// Prevent extra meta query.
+			$qv['blog_id'] = 0;
+			$blog_id       = 0;
+
+			if ( empty( $this-&gt;meta_query-&gt;queries ) ) {
+				$this-&gt;meta_query-&gt;queries = array( $who_query );
+			} else {
+				// Append the cap query to the original queries and reparse the query.
+				$this-&gt;meta_query-&gt;queries = array(
+					'relation' =&gt; 'AND',
+					array( $this-&gt;meta_query-&gt;queries, $who_query ),
+				);
+			}
+
+			$this-&gt;meta_query-&gt;parse_query_vars( $this-&gt;meta_query-&gt;queries );
+		}
+
+		$roles = array();
+		if ( isset( $qv['role'] ) ) {
+			if ( is_array( $qv['role'] ) ) {
+				$roles = $qv['role'];
+			} elseif ( is_string( $qv['role'] ) &amp;&amp; ! empty( $qv['role'] ) ) {
+				$roles = array_map( 'trim', explode( ',', $qv['role'] ) );
+			}
+		}
+
+		$role__in = array();
+		if ( isset( $qv['role__in'] ) ) {
+			$role__in = (array) $qv['role__in'];
+		}
+
+		$role__not_in = array();
+		if ( isset( $qv['role__not_in'] ) ) {
+			$role__not_in = (array) $qv['role__not_in'];
+		}
+
+		if ( $blog_id &amp;&amp; ( ! empty( $roles ) || ! empty( $role__in ) || ! empty( $role__not_in ) || is_multisite() ) ) {
+			$role_queries = array();
+
+			$roles_clauses = array( 'relation' =&gt; 'AND' );
+			if ( ! empty( $roles ) ) {
+				foreach ( $roles as $role ) {
+					$roles_clauses[] = array(
+						'key'     =&gt; $wpdb-&gt;get_blog_prefix( $blog_id ) . 'capabilities',
+						'value'   =&gt; '&quot;' . $role . '&quot;',
+						'compare' =&gt; 'LIKE',
+					);
+				}
+
+				$role_queries[] = $roles_clauses;
+			}
+
+			$role__in_clauses = array( 'relation' =&gt; 'OR' );
+			if ( ! empty( $role__in ) ) {
+				foreach ( $role__in as $role ) {
+					$role__in_clauses[] = array(
+						'key'     =&gt; $wpdb-&gt;get_blog_prefix( $blog_id ) . 'capabilities',
+						'value'   =&gt; '&quot;' . $role . '&quot;',
+						'compare' =&gt; 'LIKE',
+					);
+				}
+
+				$role_queries[] = $role__in_clauses;
+			}
+
+			$role__not_in_clauses = array( 'relation' =&gt; 'AND' );
+			if ( ! empty( $role__not_in ) ) {
+				foreach ( $role__not_in as $role ) {
+					$role__not_in_clauses[] = array(
+						'key'     =&gt; $wpdb-&gt;get_blog_prefix( $blog_id ) . 'capabilities',
+						'value'   =&gt; '&quot;' . $role . '&quot;',
+						'compare' =&gt; 'NOT LIKE',
+					);
+				}
+
+				$role_queries[] = $role__not_in_clauses;
+			}
+
+			// If there are no specific roles named, make sure the user is a member of the site.
+			if ( empty( $role_queries ) ) {
+				$role_queries[] = array(
+					'key'     =&gt; $wpdb-&gt;get_blog_prefix( $blog_id ) . 'capabilities',
+					'compare' =&gt; 'EXISTS',
+				);
+			}
+
+			// Specify that role queries should be joined with AND.
+			$role_queries['relation'] = 'AND';
+
+			if ( empty( $this-&gt;meta_query-&gt;queries ) ) {
+				$this-&gt;meta_query-&gt;queries = $role_queries;
+			} else {
+				// Append the cap query to the original queries and reparse the query.
+				$this-&gt;meta_query-&gt;queries = array(
+					'relation' =&gt; 'AND',
+					array( $this-&gt;meta_query-&gt;queries, $role_queries ),
+				);
+			}
+
+			$this-&gt;meta_query-&gt;parse_query_vars( $this-&gt;meta_query-&gt;queries );
+		}
+
+		if ( ! empty( $this-&gt;meta_query-&gt;queries ) ) {
+			$clauses            = $this-&gt;meta_query-&gt;get_sql( 'user', $wpdb-&gt;users, 'ID', $this );
+			$this-&gt;query_from  .= $clauses['join'];
+			$this-&gt;query_where .= $clauses['where'];
+
+			if ( $this-&gt;meta_query-&gt;has_or_relation() ) {
+				$this-&gt;query_fields = 'DISTINCT ' . $this-&gt;query_fields;
+			}
+		}
+
+		// Sorting.
+		$qv['order'] = isset( $qv['order'] ) ? strtoupper( $qv['order'] ) : '';
+		$order       = $this-&gt;parse_order( $qv['order'] );
+
+		if ( empty( $qv['orderby'] ) ) {
+			// Default order is by 'user_login'.
+			$ordersby = array( 'user_login' =&gt; $order );
+		} elseif ( is_array( $qv['orderby'] ) ) {
+			$ordersby = $qv['orderby'];
+		} else {
+			// 'orderby' values may be a comma- or space-separated list.
+			$ordersby = preg_split( '/[,\s]+/', $qv['orderby'] );
+		}
+
+		$orderby_array = array();
+		foreach ( $ordersby as $_key =&gt; $_value ) {
+			if ( ! $_value ) {
+				continue;
+			}
+
+			if ( is_int( $_key ) ) {
+				// Integer key means this is a flat array of 'orderby' fields.
+				$_orderby = $_value;
+				$_order   = $order;
+			} else {
+				// Non-integer key means this the key is the field and the value is ASC/DESC.
+				$_orderby = $_key;
+				$_order   = $_value;
+			}
+
+			$parsed = $this-&gt;parse_orderby( $_orderby );
+
+			if ( ! $parsed ) {
+				continue;
+			}
+
+			if ( 'nicename__in' === $_orderby || 'login__in' === $_orderby ) {
+				$orderby_array[] = $parsed;
+			} else {
+				$orderby_array[] = $parsed . ' ' . $this-&gt;parse_order( $_order );
+			}
+		}
+
+		// If no valid clauses were found, order by user_login.
+		if ( empty( $orderby_array ) ) {
+			$orderby_array[] = &quot;user_login $order&quot;;
+		}
+
+		$this-&gt;query_orderby = 'ORDER BY ' . implode( ', ', $orderby_array );
+
+		// Limit.
+		if ( isset( $qv['number'] ) &amp;&amp; $qv['number'] &gt; 0 ) {
+			if ( $qv['offset'] ) {
+				$this-&gt;query_limit = $wpdb-&gt;prepare( 'LIMIT %d, %d', $qv['offset'], $qv['number'] );
+			} else {
+				$this-&gt;query_limit = $wpdb-&gt;prepare( 'LIMIT %d, %d', $qv['number'] * ( $qv['paged'] - 1 ), $qv['number'] );
+			}
+		}
+
+		$search = '';
+		if ( isset( $qv['search'] ) ) {
+			$search = trim( $qv['search'] );
+		}
+
+		if ( $search ) {
+			$leading_wild  = ( ltrim( $search, '*' ) != $search );
+			$trailing_wild = ( rtrim( $search, '*' ) != $search );
+			if ( $leading_wild &amp;&amp; $trailing_wild ) {
+				$wild = 'both';
+			} elseif ( $leading_wild ) {
+				$wild = 'leading';
+			} elseif ( $trailing_wild ) {
+				$wild = 'trailing';
+			} else {
+				$wild = false;
+			}
+			if ( $wild ) {
+				$search = trim( $search, '*' );
+			}
+
+			$search_columns = array();
+			if ( $qv['search_columns'] ) {
+				$search_columns = array_intersect( $qv['search_columns'], array( 'ID', 'user_login', 'user_email', 'user_url', 'user_nicename', 'display_name' ) );
+			}
+			if ( ! $search_columns ) {
+				if ( false !== strpos( $search, '@' ) ) {
+					$search_columns = array( 'user_email' );
+				} elseif ( is_numeric( $search ) ) {
+					$search_columns = array( 'user_login', 'ID' );
+				} elseif ( preg_match( '|^https?://|', $search ) &amp;&amp; ! ( is_multisite() &amp;&amp; wp_is_large_network( 'users' ) ) ) {
+					$search_columns = array( 'user_url' );
+				} else {
+					$search_columns = array( 'user_login', 'user_url', 'user_email', 'user_nicename', 'display_name' );
+				}
+			}
+
+			/**
+			 * Filters the columns to search in a WP_User_Query search.
+			 *
+			 * The default columns depend on the search term, and include 'ID', 'user_login',
+			 * 'user_email', 'user_url', 'user_nicename', and 'display_name'.
+			 *
+			 * @since 3.6.0
+			 *
+			 * @param string[]      $search_columns Array of column names to be searched.
+			 * @param string        $search         Text being searched.
+			 * @param WP_User_Query $query          The current WP_User_Query instance.
+			 */
+			$search_columns = apply_filters( 'user_search_columns', $search_columns, $search, $this );
+
+			$this-&gt;query_where .= $this-&gt;get_search_sql( $search, $search_columns, $wild );
+		}
+
+		if ( ! empty( $include ) ) {
+			// Sanitized earlier.
+			$ids                = implode( ',', $include );
+			$this-&gt;query_where .= &quot; AND $wpdb-&gt;users.ID IN ($ids)&quot;;
+		} elseif ( ! empty( $qv['exclude'] ) ) {
+			$ids                = implode( ',', wp_parse_id_list( $qv['exclude'] ) );
+			$this-&gt;query_where .= &quot; AND $wpdb-&gt;users.ID NOT IN ($ids)&quot;;
+		}
+
+		// Date queries are allowed for the user_registered field.
+		if ( ! empty( $qv['date_query'] ) &amp;&amp; is_array( $qv['date_query'] ) ) {
+			$date_query         = new WP_Date_Query( $qv['date_query'], 'user_registered' );
+			$this-&gt;query_where .= $date_query-&gt;get_sql();
+		}
+
+		/**
+		 * Fires after the WP_User_Query has been parsed, and before
+		 * the query is executed.
+		 *
+		 * The passed WP_User_Query object contains SQL parts formed
+		 * from parsing the given query.
+		 *
+		 * @since 3.1.0
+		 *
+		 * @param WP_User_Query $query Current instance of WP_User_Query (passed by reference).
+		 */
+		do_action_ref_array( 'pre_user_query', array( &amp;$this ) );
+	}
+
+	/**
+	 * Execute the query, with the current variables.
+	 *
+	 * @since 3.1.0
+	 *
+	 * @global wpdb $wpdb WordPress database abstraction object.
+	 */
+	public function query() {
+		global $wpdb;
+
+		$qv =&amp; $this-&gt;query_vars;
+
+		/**
+		 * Filters the users array before the query takes place.
+		 *
+		 * Return a non-null value to bypass WordPress' default user queries.
+		 *
+		 * Filtering functions that require pagination information are encouraged to set
+		 * the `total_users` property of the WP_User_Query object, passed to the filter
+		 * by reference. If WP_User_Query does not perform a database query, it will not
+		 * have enough information to generate these values itself.
+		 *
+		 * @since 5.1.0
+		 *
+		 * @param array|null    $results Return an array of user data to short-circuit WP's user query
+		 *                               or null to allow WP to run its normal queries.
+		 * @param WP_User_Query $query   The WP_User_Query instance (passed by reference).
+		 */
+		$this-&gt;results = apply_filters_ref_array( 'users_pre_query', array( null, &amp;$this ) );
+
+		if ( null === $this-&gt;results ) {
+			$this-&gt;request = &quot;SELECT $this-&gt;query_fields $this-&gt;query_from $this-&gt;query_where $this-&gt;query_orderby $this-&gt;query_limit&quot;;
+
+			if ( is_array( $qv['fields'] ) || 'all' === $qv['fields'] ) {
+				$this-&gt;results = $wpdb-&gt;get_results( $this-&gt;request );
+			} else {
+				$this-&gt;results = $wpdb-&gt;get_col( $this-&gt;request );
+			}
+
+			if ( isset( $qv['count_total'] ) &amp;&amp; $qv['count_total'] ) {
+				/**
+				 * Filters SELECT FOUND_ROWS() query for the current WP_User_Query instance.
+				 *
+				 * @since 3.2.0
+				 * @since 5.1.0 Added the `$this` parameter.
+				 *
+				 * @global wpdb $wpdb WordPress database abstraction object.
+				 *
+				 * @param string        $sql   The SELECT FOUND_ROWS() query for the current WP_User_Query.
+				 * @param WP_User_Query $query The current WP_User_Query instance.
+				 */
+				$found_users_query = apply_filters( 'found_users_query', 'SELECT FOUND_ROWS()', $this );
+
+				$this-&gt;total_users = (int) $wpdb-&gt;get_var( $found_users_query );
+			}
+		}
+
+		if ( ! $this-&gt;results ) {
+			return;
+		}
+
+		if ( 'all_with_meta' === $qv['fields'] ) {
+			cache_users( $this-&gt;results );
+
+			$r = array();
+			foreach ( $this-&gt;results as $userid ) {
+				$r[ $userid ] = new WP_User( $userid, '', $qv['blog_id'] );
+			}
+
+			$this-&gt;results = $r;
+		} elseif ( 'all' === $qv['fields'] ) {
+			foreach ( $this-&gt;results as $key =&gt; $user ) {
+				$this-&gt;results[ $key ] = new WP_User( $user, '', $qv['blog_id'] );
+			}
+		}
+	}
+
+	/**
+	 * Retrieve query variable.
+	 *
+	 * @since 3.5.0
+	 *
+	 * @param string $query_var Query variable key.
+	 * @return mixed
+	 */
+	public function get( $query_var ) {
+		if ( isset( $this-&gt;query_vars[ $query_var ] ) ) {
+			return $this-&gt;query_vars[ $query_var ];
+		}
+
+		return null;
+	}
+
+	/**
+	 * Set query variable.
+	 *
+	 * @since 3.5.0
+	 *
+	 * @param string $query_var Query variable key.
+	 * @param mixed  $value     Query variable value.
+	 */
+	public function set( $query_var, $value ) {
+		$this-&gt;query_vars[ $query_var ] = $value;
+	}
+
+	/**
+	 * Used internally to generate an SQL string for searching across multiple columns
+	 *
+	 * @since 3.1.0
+	 *
+	 * @global wpdb $wpdb WordPress database abstraction object.
+	 *
+	 * @param string $string
+	 * @param array  $cols
+	 * @param bool   $wild   Whether to allow wildcard searches. Default is false for Network Admin, true for single site.
+	 *                       Single site allows leading and trailing wildcards, Network Admin only trailing.
+	 * @return string
+	 */
+	protected function get_search_sql( $string, $cols, $wild = false ) {
+		global $wpdb;
+
+		$searches      = array();
+		$leading_wild  = ( 'leading' === $wild || 'both' === $wild ) ? '%' : '';
+		$trailing_wild = ( 'trailing' === $wild || 'both' === $wild ) ? '%' : '';
+		$like          = $leading_wild . $wpdb-&gt;esc_like( $string ) . $trailing_wild;
+
+		foreach ( $cols as $col ) {
+			if ( 'ID' === $col ) {
+				$searches[] = $wpdb-&gt;prepare( &quot;$col = %s&quot;, $string );
+			} else {
+				$searches[] = $wpdb-&gt;prepare( &quot;$col LIKE %s&quot;, $like );
+			}
+		}
+
+		return ' AND (' . implode( ' OR ', $searches ) . ')';
+	}
+
+	/**
+	 * Return the list of users.
+	 *
+	 * @since 3.1.0
+	 *
+	 * @return array Array of results.
+	 */
+	public function get_results() {
+		return $this-&gt;results;
+	}
+
+	/**
+	 * Return the total number of users for the current query.
+	 *
+	 * @since 3.1.0
+	 *
+	 * @return int Number of total users.
+	 */
+	public function get_total() {
+		return $this-&gt;total_users;
+	}
+
+	/**
+	 * Parse and sanitize 'orderby' keys passed to the user query.
+	 *
+	 * @since 4.2.0
+	 *
+	 * @global wpdb $wpdb WordPress database abstraction object.
+	 *
+	 * @param string $orderby Alias for the field to order by.
+	 * @return string Value to used in the ORDER clause, if `$orderby` is valid.
+	 */
+	protected function parse_orderby( $orderby ) {
+		global $wpdb;
+
+		$meta_query_clauses = $this-&gt;meta_query-&gt;get_clauses();
+
+		$_orderby = '';
+		if ( in_array( $orderby, array( 'login', 'nicename', 'email', 'url', 'registered' ), true ) ) {
+			$_orderby = 'user_' . $orderby;
+		} elseif ( in_array( $orderby, array( 'user_login', 'user_nicename', 'user_email', 'user_url', 'user_registered' ), true ) ) {
+			$_orderby = $orderby;
+		} elseif ( 'name' === $orderby || 'display_name' === $orderby ) {
+			$_orderby = 'display_name';
+		} elseif ( 'post_count' === $orderby ) {
+			// @todo Avoid the JOIN.
+			$where             = get_posts_by_author_sql( 'post' );
+			$this-&gt;query_from .= &quot; LEFT OUTER JOIN (
+				SELECT post_author, COUNT(*) as post_count
+				FROM $wpdb-&gt;posts
+				$where
+				GROUP BY post_author
+			) p ON ({$wpdb-&gt;users}.ID = p.post_author)
+			&quot;;
+			$_orderby          = 'post_count';
+		} elseif ( 'ID' === $orderby || 'id' === $orderby ) {
+			$_orderby = 'ID';
+		} elseif ( 'meta_value' === $orderby || $this-&gt;get( 'meta_key' ) == $orderby ) {
+			$_orderby = &quot;$wpdb-&gt;usermeta.meta_value&quot;;
+		} elseif ( 'meta_value_num' === $orderby ) {
+			$_orderby = &quot;$wpdb-&gt;usermeta.meta_value+0&quot;;
+		} elseif ( 'include' === $orderby &amp;&amp; ! empty( $this-&gt;query_vars['include'] ) ) {
+			$include     = wp_parse_id_list( $this-&gt;query_vars['include'] );
+			$include_sql = implode( ',', $include );
+			$_orderby    = &quot;FIELD( $wpdb-&gt;users.ID, $include_sql )&quot;;
+		} elseif ( 'nicename__in' === $orderby ) {
+			$sanitized_nicename__in = array_map( 'esc_sql', $this-&gt;query_vars['nicename__in'] );
+			$nicename__in           = implode( &quot;','&quot;, $sanitized_nicename__in );
+			$_orderby               = &quot;FIELD( user_nicename, '$nicename__in' )&quot;;
+		} elseif ( 'login__in' === $orderby ) {
+			$sanitized_login__in = array_map( 'esc_sql', $this-&gt;query_vars['login__in'] );
+			$login__in           = implode( &quot;','&quot;, $sanitized_login__in );
+			$_orderby            = &quot;FIELD( user_login, '$login__in' )&quot;;
+		} elseif ( isset( $meta_query_clauses[ $orderby ] ) ) {
+			$meta_clause = $meta_query_clauses[ $orderby ];
+			$_orderby    = sprintf( 'CAST(%s.meta_value AS %s)', esc_sql( $meta_clause['alias'] ), esc_sql( $meta_clause['cast'] ) );
+		}
+
+		return $_orderby;
+	}
+
+	/**
+	 * Parse an 'order' query variable and cast it to ASC or DESC as necessary.
+	 *
+	 * @since 4.2.0
+	 *
+	 * @param string $order The 'order' query variable.
+	 * @return string The sanitized 'order' query variable.
+	 */
+	protected function parse_order( $order ) {
+		if ( ! is_string( $order ) || empty( $order ) ) {
+			return 'DESC';
+		}
+
+		if ( 'ASC' === strtoupper( $order ) ) {
+			return 'ASC';
+		} else {
+			return 'DESC';
+		}
+	}
+
+	/**
+	 * Make private properties readable for backward compatibility.
+	 *
+	 * @since 4.0.0
+	 *
+	 * @param string $name Property to get.
+	 * @return mixed Property.
+	 */
+	public function __get( $name ) {
+		if ( in_array( $name, $this-&gt;compat_fields, true ) ) {
+			return $this-&gt;$name;
+		}
+	}
+
+	/**
+	 * Make private properties settable for backward compatibility.
+	 *
+	 * @since 4.0.0
+	 *
+	 * @param string $name  Property to check if set.
+	 * @param mixed  $value Property value.
+	 * @return mixed Newly-set property.
+	 */
+	public function __set( $name, $value ) {
+		if ( in_array( $name, $this-&gt;compat_fields, true ) ) {
+			return $this-&gt;$name = $value;
+		}
+	}
+
+	/**
+	 * Make private properties checkable for backward compatibility.
+	 *
+	 * @since 4.0.0
+	 *
+	 * @param string $name Property to check if set.
+	 * @return bool Whether the property is set.
+	 */
+	public function __isset( $name ) {
+		if ( in_array( $name, $this-&gt;compat_fields, true ) ) {
+			return isset( $this-&gt;$name );
+		}
+	}
+
+	/**
+	 * Make private properties un-settable for backward compatibility.
+	 *
+	 * @since 4.0.0
+	 *
+	 * @param string $name Property to unset.
+	 */
+	public function __unset( $name ) {
+		if ( in_array( $name, $this-&gt;compat_fields, true ) ) {
+			unset( $this-&gt;$name );
+		}
+	}
+
+	/**
+	 * Make private/protected methods readable for backward compatibility.
+	 *
+	 * @since 4.0.0
+	 *
+	 * @param string $name      Method to call.
+	 * @param array  $arguments Arguments to pass when calling.
+	 * @return mixed Return value of the callback, false otherwise.
+	 */
+	public function __call( $name, $arguments ) {
+		if ( 'get_search_sql' === $name ) {
+			return $this-&gt;get_search_sql( ...$arguments );
+		}
+		return false;
+	}
+}
+</pre>
+			</div>
+			<p class="source-code-links">
+				<span>
+					<a href="#" class="show-complete-source">Expand full source code</a>
+					<a href="#" class="less-complete-source">Collapse full source code</a>
+				</span>
+				<span><a href="https://core.trac.wordpress.org/browser/tags/5.8/src/wp-includes/class-wp-user-query.php#L17">View on Trac</a></span>
+			</p>
+			</section>
+		<hr />
+		<section class="class-methods">
+			<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="methods" tabindex="-1">Methods <a href="#methods" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Methods</span></a></h2>
+			<ul>
+									<li><a href="__call/index.html">
+							__call</a>
+						&mdash; Make private/protected methods readable for backward compatibility.											</li>
+									<li><a href="__construct/index.html">
+							__construct</a>
+						&mdash; PHP5 constructor.											</li>
+									<li><a href="__get/index.html">
+							__get</a>
+						&mdash; Make private properties readable for backward compatibility.											</li>
+									<li><a href="__isset/index.html">
+							__isset</a>
+						&mdash; Make private properties checkable for backward compatibility.											</li>
+									<li><a href="__set/index.html">
+							__set</a>
+						&mdash; Make private properties settable for backward compatibility.											</li>
+									<li><a href="__unset/index.html">
+							__unset</a>
+						&mdash; Make private properties un-settable for backward compatibility.											</li>
+									<li><a href="fill_query_vars/index.html">
+							fill_query_vars</a>
+						&mdash; Fills in missing query variables with default values.											</li>
+									<li><a href="get/index.html">
+							get</a>
+						&mdash; Retrieve query variable.											</li>
+									<li><a href="get_results/index.html">
+							get_results</a>
+						&mdash; Return the list of users.											</li>
+									<li><a href="get_search_sql/index.html">
+							get_search_sql</a>
+						&mdash; Used internally to generate an SQL string for searching across multiple columns											</li>
+									<li><a href="get_total/index.html">
+							get_total</a>
+						&mdash; Return the total number of users for the current query.											</li>
+									<li><a href="parse_order/index.html">
+							parse_order</a>
+						&mdash; Parse an 'order' query variable and cast it to ASC or DESC as necessary.											</li>
+									<li><a href="parse_orderby/index.html">
+							parse_orderby</a>
+						&mdash; Parse and sanitize 'orderby' keys passed to the user query.											</li>
+									<li><a href="prepare_query/index.html">
+							prepare_query</a>
+						&mdash; Prepare the query variables.											</li>
+									<li><a href="query/index.html">
+							query</a>
+						&mdash; Execute the query, with the current variables.											</li>
+									<li><a href="set/index.html">
+							set</a>
+						&mdash; Set query variable.											</li>
+							</ul>
+		</section>
+		<hr />
+	<section class="changelog">
+		<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="changelog" tabindex="-1">Changelog <a href="#changelog" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Changelog</span></a></h2>
+
+		<table>
+			<caption class="screen-reader-text">Changelog</caption>
+			<thead>
+				<tr>
+					<th class="changelog-version">Version</th>
+					<th class="changelog-desc">Description</th>
+				</tr>
+			</thead>
+
+			<tbody>
+									
+					<tr>
+						<td><a href="../../since/3.1.0/index.html" alt="WordPress 3.1.0">3.1.0</a></td>
+						<td>Introduced.</td>
+					</tr>
+							</tbody>
+		</table>
+	</section>
+
+	<hr />
+	<section class="user-notes">
+		<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="user-contributed-notes" tabindex="-1">User Contributed Notes <a href="#user-contributed-notes" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">User Contributed Notes</span></a></h2>
+		
+<div id="comments" class="comments-area">
+
+			
+		<ol class="comment-list">
+						<li id="comment-1714" data-comment-id="1714" class="comment byuser comment-author-ramiy even thread-even depth-1">
+			<article id="div-comment-1714" class="comment-body">
+
+							<a href="#comment-content-1714" class="screen-reader-text">Skip to note 1 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="a1eaa20d50"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="1714" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Fclasses%2Fwp_user_query%2F%23comment-1714"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="90% like this"><span class="screen-reader-text">Vote results for this note: </span>8</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="1714" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Fclasses%2Fwp_user_query%2F%23comment-1714"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/ce2a269e424156d79cb0c4e1d4d82db1?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/ce2a269e424156d79cb0c4e1d4d82db1?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/ramiy/" rel="external nofollow" class="url">Rami Yushuvaev</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-1714">
+							<time datetime="2016-07-17T00:34:57+00:00">
+							5 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-1714">
+				<p>WordPress WP_User_Query Generator:</p>
+<p><a href="https://generatewp.com/wp_user_query/" rel="nofollow ugc">https://GenerateWP.com/wp_user_query/</a></p>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-1714' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Fclasses%2Fwp_user_query%2F%3Freplytocom%3D1714%23feedback-editor-1714" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-3001" data-comment-id="3001" class="comment byuser comment-author-janwoostendorp odd alt thread-odd thread-alt depth-1">
+			<article id="div-comment-3001" class="comment-body">
+
+							<a href="#comment-content-3001" class="screen-reader-text">Skip to note 2 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="8e0f4c89ec"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="3001" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Fclasses%2Fwp_user_query%2F%23comment-3001"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="100% like this"><span class="screen-reader-text">Vote results for this note: </span>1</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="3001" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Fclasses%2Fwp_user_query%2F%23comment-3001"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/a0259b3a1bd1d9affc7f75fc5480fd82?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/a0259b3a1bd1d9affc7f75fc5480fd82?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/janwoostendorp/" rel="external nofollow" class="url">janw.oostendorp</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-3001">
+							<time datetime="2018-12-10T15:06:23+00:00">
+							3 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-3001">
+				<p>If you need all network users use `&#8217;blog_id&#8217; =&gt; 0,`</p>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-3001' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Fclasses%2Fwp_user_query%2F%3Freplytocom%3D3001%23feedback-editor-3001" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-3459" data-comment-id="3459" class="comment byuser comment-author-maximeculea even thread-even depth-1">
+			<article id="div-comment-3459" class="comment-body">
+
+							<a href="#comment-content-3459" class="screen-reader-text">Skip to note 3 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="4402c03d55"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="3459" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Fclasses%2Fwp_user_query%2F%23comment-3459"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="100% like this"><span class="screen-reader-text">Vote results for this note: </span>1</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="3459" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Fclasses%2Fwp_user_query%2F%23comment-3459"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/de66cc66fbdf436866dab2c927d13be2?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/de66cc66fbdf436866dab2c927d13be2?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/maximeculea/" rel="external nofollow" class="url">Maxime Culea</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-3459">
+							<time datetime="2019-11-06T13:14:25+00:00">
+							2 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-3459">
+				<p>Also note that users with no roles have also no wp_capabilities, so querying with following args will not match any of them: </p>
+<pre class="brush: jscript; title: ; notranslate" title="">
+role
+role__not_in
+role__in
+</pre>
+<p>The workaround to get theses users, is to use the builtin method : <strong><a href="wp_get_users_with_no_role.html" rel="nofollow ugc">wp_get_users_with_no_role()</a></strong></p>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-3459' class='feedback hide-if-js'>
+<h4 class='feedback-title'>Feedback</h4>
+<ul class='children'>
+			<li id="comment-3519" data-comment-id="3519" class="comment byuser comment-author-sproutchris odd alt depth-2">
+			<article id="div-comment-3519" class="comment-body">
+
+			
+				<div class="comment-content" id="comment-content-3519">
+				<p>Link returns a 404. Might be looking for: <a href="../../functions/wp_get_users_with_no_role/index.html" rel="nofollow ugc">https://developer.wordpress.org/reference/functions/wp_get_users_with_no_role/</a> &mdash; By <cite class="fn"><a href="https://profiles.wordpress.org/sproutchris/" rel="external nofollow" class="url">sproutchris</a></cite> &mdash;  <a class="comment-date" href="index.html#comment-3519"><time datetime="2019-12-09T20:31:03+00:00">2 years ago</time></a></p>
+				</div><!-- .comment-content -->
+
+						</article>
+			</li>
+					</ul>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Fclasses%2Fwp_user_query%2F%3Freplytocom%3D3459%23feedback-editor-3459" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-2008" data-comment-id="2008" class="comment byuser comment-author-dots even thread-odd thread-alt depth-1">
+			<article id="div-comment-2008" class="comment-body">
+
+							<a href="#comment-content-2008" class="screen-reader-text">Skip to note 4 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="1b5322c9a6"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="2008" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Fclasses%2Fwp_user_query%2F%23comment-2008"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="50% like this"><span class="screen-reader-text">Vote results for this note: </span>0</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="2008" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Fclasses%2Fwp_user_query%2F%23comment-2008"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/16e5856657a905b3548f1705c8e5025c?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/16e5856657a905b3548f1705c8e5025c?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/dots/" rel="external nofollow" class="url">Dotstore</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-2008">
+							<time datetime="2016-12-24T12:57:53+00:00">
+							5 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-2008">
+				<p><strong> If you want to search a user by first_name / last_name / description and the default search_columns. </strong></p>
+<section class="source-content">
+<div class="source-code-container">
+<pre class="brush: php; title: ; notranslate" title="">
+
+// The search term
+$search_term = 'Ross';
+
+// WP_User_Query arguments
+$args = array (
+    'role' =&gt; 'reporter',
+    'order' =&gt; 'ASC',
+    'orderby' =&gt; 'display_name',
+    'search' =&gt; '*'.esc_attr( $search_term ).'*',
+    'meta_query' =&gt; array(
+        'relation' =&gt; 'OR',
+        array(
+            'key'     =&gt; 'first_name',
+            'value'   =&gt; $search_term,
+            'compare' =&gt; 'LIKE'
+        ),
+        array(
+            'key'     =&gt; 'last_name',
+            'value'   =&gt; $search_term,
+            'compare' =&gt; 'LIKE'
+        ),
+        array(
+            'key' =&gt; 'description',
+            'value' =&gt; $search_term ,
+            'compare' =&gt; 'LIKE'
+        )
+    )
+);
+
+// Create the WP_User_Query object
+$wp_user_query = new WP_User_Query($args);
+
+// Get the results
+$authors = $wp_user_query-&gt;get_results();
+
+// Check for results
+if (!empty($authors)) {
+    echo '&lt;ul&gt;';
+    // loop through each author
+    foreach ($authors as $author)
+    {
+        // get all the user's data
+        $author_info = get_userdata($author-&gt;ID);
+        echo '&lt;li&gt;' . $author_info-&gt;first_name . ' ' . $author_info-&gt;last_name . '&lt;/li&gt;';
+    }
+    echo '&lt;/ul&gt;';
+} else {
+    echo 'No authors found';
+}
+</pre>
+</div>
+<p class="source-code-links"><span><a href="#" class="show-complete-source">Expand full source code</a><a href="#" class="less-complete-source">Collapse full source code</a></span></p>
+</section>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-2008' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Fclasses%2Fwp_user_query%2F%3Freplytocom%3D2008%23feedback-editor-2008" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+		</ol><!-- .comment-list -->
+
+		
+	
+	
+			<div id="respond" class="comment-respond">
+		<h3 id="reply-title" class="comment-reply-title"> <small></small></h3><p>You must <a href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Fclasses%2Fwp_user_query%2F%23comments">log in</a> before being able to contribute a note or feedback.</p>	</div><!-- #respond -->
+		
+	
+</div><!-- #comments -->
+	</section>
+</div>
+
+</article>
+
+			
+		
+		</main><!-- #main -->
+	</div><!-- #primary -->
+	</div><!-- #content -->
+
+</div><!-- #page -->
+
+
+<div id="wporg-footer">
+	<div class="wrapper">
+		<ul>
+			<li><a href="http://wordpress.org/about/" title="An introduction to the WordPress project">About</a></li>
+			<li><a href="http://wordpress.org/news/" title="News and Updates">Blog</a></li>
+			<li><a href="http://wordpress.org/hosting/" title="Recommended web hosting providers">Hosting</a></li>
+			<li><a href="https://wordpressfoundation.org/donate/" title="Donate to the WordPress Foundation">Donate</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://wordpress.org/support/" title="Forums, documentation, and other resources">Support</a></li>
+			<li><a href="../../../index.html" title="Resources for WordPress developers">Developers</a></li>
+			<li><a href="http://make.wordpress.org/" title="Give back to WordPress through code, support, translation and more">Get Involved</a></li>
+			<li><a href="http://learn.wordpress.org/" title="Workshops and training materials">Learn</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://wordpress.org/showcase/" title="Some of the best WordPress sites on the Web">Showcase</a></li>
+			<li><a href="http://wordpress.org/plugins/" title="Add extra functionality to WordPress">Plugins</a></li>
+			<li><a href="http://wordpress.org/themes/" title="Make your WordPress pretty">Themes</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://central.wordcamp.org/" title="Find a WordPress event near you">WordCamp</a></li>
+			<li><a href="http://wordpress.tv/" title="Videos, tutorials, and WordCamp sessions">WordPress.TV</a></li>
+			<li><a href="http://buddypress.org/" title="A set of plugins to transform your WordPress into a social network">BuddyPress</a></li>
+			<li><a href="http://bbpress.org/" title="Fast, slick forums built on WordPress">bbPress</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://wordpress.com/?ref=wporg-footer" title="Hassle-free WordPress hosting">WordPress.com</a></li>
+			<li><a href="http://ma.tt/" title="Co-founder of WordPress, an example of what WordPress can do">Matt</a></li>
+			<li><a href="http://wordpress.org/about/privacy/" title="WordPress.org Privacy Policy">Privacy</a></li>
+			<li><a href="https://publiccode.eu/" target="_blank">Public Code</a></li>
+		</ul>
+
+		<ul class="social-media-links">
+			<li><span class="dashicons dashicons-twitter"></span><a href="https://twitter.com/WordPress" title="Follow @WordPress on Twitter">@WordPress</a></li>
+			<li><span class="dashicons dashicons-facebook"></span><a href="https://www.facebook.com/WordPress/" title="Like WordPress on Facebook">WordPress</a></li>
+		</ul>
+	</div>
+
+		<p class="cip cip-image">Code is Poetry.</p>
+</div>
+
+<script src="../../../../s.w.org/style/js/navigation.min.js?20190128"></script>
+
+<script type='text/javascript' src='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushJScript.js?ver=3.0.9b' id='syntaxhighlighter-brush-jscript-js'></script>
+<script type='text/javascript'>
+	(function(){
+		var corecss = document.createElement('link');
+		var themecss = document.createElement('link');
+		var corecssurl = "../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shCore.css?ver=3.0.9b";
+		if ( corecss.setAttribute ) {
+				corecss.setAttribute( "rel", "stylesheet" );
+				corecss.setAttribute( "type", "text/css" );
+				corecss.setAttribute( "href", corecssurl );
+		} else {
+				corecss.rel = "stylesheet";
+				corecss.href = corecssurl;
+		}
+		document.head.appendChild( corecss );
+		var themecssurl = "../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shThemeDefault.css?ver=3.0.9b";
+		if ( themecss.setAttribute ) {
+				themecss.setAttribute( "rel", "stylesheet" );
+				themecss.setAttribute( "type", "text/css" );
+				themecss.setAttribute( "href", themecssurl );
+		} else {
+				themecss.rel = "stylesheet";
+				themecss.href = themecssurl;
+		}
+		document.head.appendChild( themecss );
+	})();
+	SyntaxHighlighter.config.strings.expandSource = '+ expand source';
+	SyntaxHighlighter.config.strings.help = '?';
+	SyntaxHighlighter.config.strings.alert = 'SyntaxHighlighter\n\n';
+	SyntaxHighlighter.config.strings.noBrush = 'Can\'t find brush for: ';
+	SyntaxHighlighter.config.strings.brushNotHtmlScript = 'Brush wasn\'t configured for html-script option: ';
+	SyntaxHighlighter.defaults['pad-line-numbers'] = false;
+	SyntaxHighlighter.defaults['toolbar'] = false;
+	SyntaxHighlighter.all();
+
+	// Infinite scroll support
+	if ( typeof( jQuery ) !== 'undefined' ) {
+		jQuery( function( $ ) {
+			$( document.body ).on( 'post-load', function() {
+				SyntaxHighlighter.highlight();
+			} );
+		} );
+	}
+</script>
+<link rel='stylesheet' id='buttons-css'  href='../../../wp-includes/css/buttons.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<script type='text/javascript' src='../../../wp-includes/js/hoverintent-js.min.js?ver=2.2.1' id='hoverintent-js-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/admin-bar.min.js?ver=5.9-alpha-51701' id='admin-bar-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/navigation.js?ver=20181209' id='wporg-developer-navigation-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/skip-link-focus-fix.js?ver=20130115' id='wporg-developer-skip-link-focus-fix-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/search.js?ver=20150430' id='wporg-developer-search-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/menu.js?ver=20180201' id='wporg-developer-menu-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/awesomplete.min.js?ver=20160322' id='awesomplete-js'></script>
+<script type='text/javascript' id='autocomplete-js-extra'>
+/* <![CDATA[ */
+var autocomplete = {"ajaxurl":"https:\/\/developer.wordpress.org\/wp-admin\/admin-ajax.php","nonce":"8a60f70c4b"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/autocomplete.js?ver=20160524' id='autocomplete-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/function-reference.js?ver=20180724' id='wporg-developer-function-reference-js'></script>
+<script type='text/javascript' id='quicktags-js-extra'>
+/* <![CDATA[ */
+var quicktagsL10n = {"closeAllOpenTags":"Close all open tags","closeTags":"close tags","enterURL":"Enter the URL","enterImageURL":"Enter the URL of the image","enterImageDescription":"Enter a description of the image","textdirection":"text direction","toggleTextdirection":"Toggle Editor Text Direction","dfw":"Distraction-free writing mode","strong":"Bold","strongClose":"Close bold tag","em":"Italic","emClose":"Close italic tag","link":"Insert link","blockquote":"Blockquote","blockquoteClose":"Close blockquote tag","del":"Deleted text (strikethrough)","delClose":"Close deleted text tag","ins":"Inserted text","insClose":"Close inserted text tag","image":"Insert image","ul":"Bulleted list","ulClose":"Close bulleted list tag","ol":"Numbered list","olClose":"Close numbered list tag","li":"List item","liClose":"Close list item tag","code":"Code","codeClose":"Close code tag","more":"Insert Read More tag"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-includes/js/quicktags.min.js?ver=5.9-alpha-51701' id='quicktags-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/user-notes.js?ver=20200110' id='wporg-developer-user-notes-js'></script>
+<script type='text/javascript' id='wporg-developer-user-notes-feedback-js-extra'>
+/* <![CDATA[ */
+var wporg_note_feedback = {"show":"Show Feedback","hide":"Hide Feedback"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/user-notes-feedback.js?ver=20181023' id='wporg-developer-user-notes-feedback-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/tabs.js?ver=20160824' id='wporg-developer-tabs-js'></script>
+<script type='text/javascript' id='wporg-developer-preview-js-extra'>
+/* <![CDATA[ */
+var wporg_note_preview = {"ajaxurl":"https:\/\/developer.wordpress.org\/wp-admin\/admin-ajax.php","nonce":"504933b60e","preview":"preview note","preview_empty":"Nothing to preview","is_admin":""};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/user-notes-preview.js?ver=20200111' id='wporg-developer-preview-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/wp-embed.min.js?ver=5.9-alpha-51701' id='wp-embed-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/vendor/regenerator-runtime.min.js?ver=0.13.7' id='regenerator-runtime-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/vendor/wp-polyfill.min.js?ver=3.15.0' id='wp-polyfill-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/dom-ready.min.js?ver=71883072590656bf22c74c7b887df3dd' id='wp-dom-ready-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/hooks.min.js?ver=a7edae857aab69d69fa10d5aef23a5de' id='wp-hooks-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/i18n.min.js?ver=5f1269854226b4dd90450db411a12b79' id='wp-i18n-js'></script>
+<script type='text/javascript' id='wp-i18n-js-after'>
+wp.i18n.setLocaleData( { 'text direction\u0004ltr': [ 'ltr' ] } );
+</script>
+<script type='text/javascript' id='wp-a11y-js-translations'>
+( function( domain, translations ) {
+	var localeData = translations.locale_data[ domain ] || translations.locale_data.messages;
+	localeData[""].domain = domain;
+	wp.i18n.setLocaleData( localeData, domain );
+} )( "default", { "locale_data": { "messages": { "": {} } } } );
+</script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/a11y.min.js?ver=0ac8327cc1c40dcfdf29716affd7ac63' id='wp-a11y-js'></script>
+<script type='text/javascript' id='wplink-js-extra'>
+/* <![CDATA[ */
+var wpLinkL10n = {"title":"Insert\/edit link","update":"Update","save":"Add Link","noTitle":"(no title)","noMatchesFound":"No results found.","linkSelected":"Link selected.","linkInserted":"Link inserted.","minInputLength":"3"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-includes/js/wplink.min.js?ver=5.9-alpha-51701' id='wplink-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/jquery/ui/core.min.js?ver=1.12.1' id='jquery-ui-core-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/jquery/ui/menu.min.js?ver=1.12.1' id='jquery-ui-menu-js'></script>
+<script type='text/javascript' id='jquery-ui-autocomplete-js-extra'>
+/* <![CDATA[ */
+var uiAutocompleteL10n = {"noResults":"No results found.","oneResult":"1 result found. Use up and down arrow keys to navigate.","manyResults":"%d results found. Use up and down arrow keys to navigate.","itemSelected":"Item selected."};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-includes/js/jquery/ui/autocomplete.min.js?ver=1.12.1' id='jquery-ui-autocomplete-js'></script>
+
+		<script type="text/javascript">
+		tinyMCEPreInit = {
+			baseURL: "https://developer.wordpress.org/wp-includes/js/tinymce",
+			suffix: ".min",
+						mceInit: {},
+			qtInit: {'comment':{id:"comment",buttons:"strong,em,ul,ol,li,link"}},
+			ref: {plugins:"",theme:"modern",language:""},
+			load_ext: function(url,lang){var sl=tinymce.ScriptLoader;sl.markDone(url+'/langs/'+lang+'.js');sl.markDone(url+'/langs/'+lang+'_dlg.js');}
+		};
+		</script>
+				<script type="text/javascript">
+		var ajaxurl = "../../../wp-admin/admin-ajax.html";
+		( function() {
+			var initialized = [];
+			var initialize  = function() {
+				var init, id, inPostbox, $wrap;
+				var readyState = document.readyState;
+
+				if ( readyState !== 'complete' && readyState !== 'interactive' ) {
+					return;
+				}
+
+				for ( id in tinyMCEPreInit.mceInit ) {
+					if ( initialized.indexOf( id ) > -1 ) {
+						continue;
+					}
+
+					init      = tinyMCEPreInit.mceInit[id];
+					$wrap     = tinymce.$( '#wp-' + id + '-wrap' );
+					inPostbox = $wrap.parents( '.postbox' ).length > 0;
+
+					if (
+						! init.wp_skip_init &&
+						( $wrap.hasClass( 'tmce-active' ) || ! tinyMCEPreInit.qtInit.hasOwnProperty( id ) ) &&
+						( readyState === 'complete' || ( ! inPostbox && readyState === 'interactive' ) )
+					) {
+						tinymce.init( init );
+						initialized.push( id );
+
+						if ( ! window.wpActiveEditor ) {
+							window.wpActiveEditor = id;
+						}
+					}
+				}
+			}
+
+			if ( typeof tinymce !== 'undefined' ) {
+				if ( tinymce.Env.ie && tinymce.Env.ie < 11 ) {
+					tinymce.$( '.wp-editor-wrap ' ).removeClass( 'tmce-active' ).addClass( 'html-active' );
+				} else {
+					if ( document.readyState === 'complete' ) {
+						initialize();
+					} else {
+						document.addEventListener( 'readystatechange', initialize );
+					}
+				}
+			}
+
+			if ( typeof quicktags !== 'undefined' ) {
+				for ( id in tinyMCEPreInit.qtInit ) {
+					quicktags( tinyMCEPreInit.qtInit[id] );
+
+					if ( ! window.wpActiveEditor ) {
+						window.wpActiveEditor = id;
+					}
+				}
+			}
+		}());
+		</script>
+				<div id="wp-link-backdrop" style="display: none"></div>
+		<div id="wp-link-wrap" class="wp-core-ui" style="display: none" role="dialog" aria-labelledby="link-modal-title">
+		<form id="wp-link" tabindex="-1">
+		<input type="hidden" id="_ajax_linking_nonce" name="_ajax_linking_nonce" value="86f5a0a85d" />		<h1 id="link-modal-title">Insert/edit link</h1>
+		<button type="button" id="wp-link-close"><span class="screen-reader-text">Close</span></button>
+		<div id="link-selector">
+			<div id="link-options">
+				<p class="howto" id="wplink-enter-url">Enter the destination URL</p>
+				<div>
+					<label><span>URL</span>
+					<input id="wp-link-url" type="text" aria-describedby="wplink-enter-url" /></label>
+				</div>
+				<div class="wp-link-text-field">
+					<label><span>Link Text</span>
+					<input id="wp-link-text" type="text" /></label>
+				</div>
+				<div class="link-target">
+					<label><span></span>
+					<input type="checkbox" id="wp-link-target" /> Open link in a new tab</label>
+				</div>
+			</div>
+			<p class="howto" id="wplink-link-existing-content">Or link to existing content</p>
+			<div id="search-panel">
+				<div class="link-search-wrapper">
+					<label>
+						<span class="search-label">Search</span>
+						<input type="search" id="wp-link-search" class="link-search-field" autocomplete="off" aria-describedby="wplink-link-existing-content" />
+						<span class="spinner"></span>
+					</label>
+				</div>
+				<div id="search-results" class="query-results" tabindex="0">
+					<ul></ul>
+					<div class="river-waiting">
+						<span class="spinner"></span>
+					</div>
+				</div>
+				<div id="most-recent-results" class="query-results" tabindex="0">
+					<div class="query-notice" id="query-notice-message">
+						<em class="query-notice-default">No search term specified. Showing recent items.</em>
+						<em class="query-notice-hint screen-reader-text">Search or use up and down arrow keys to select an item.</em>
+					</div>
+					<ul></ul>
+					<div class="river-waiting">
+						<span class="spinner"></span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="submitbox">
+			<div id="wp-link-cancel">
+				<button type="button" class="button">Cancel</button>
+			</div>
+			<div id="wp-link-update">
+				<input type="submit" value="Add Link" class="button button-primary" id="wp-link-submit" name="wp-link-submit">
+			</div>
+		</div>
+		</form>
+		</div>
+		</body>
+
+<!-- Mirrored from developer.wordpress.org/reference/classes/wp_user_query/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 31 Aug 2021 17:21:13 GMT -->
+</html>

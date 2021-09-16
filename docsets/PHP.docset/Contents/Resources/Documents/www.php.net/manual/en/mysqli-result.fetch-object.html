@@ -1,0 +1,491 @@
+<html><!-- Mirrored from www.php.net/manual/en/mysqli-result.fetch-object.php by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 11 Sep 2021 06:41:10 GMT --><!-- Added by HTTrack --><head><meta http-equiv="content-type" content="text/html;charset=utf-8"><!-- /Added by HTTrack -->
+
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>mysqli_result::fetch_object</title>
+
+ <link rel="shortcut icon" href="../../favicon.ico">
+ <link rel="search" type="application/opensearchdescription+xml" href="http://php.net/phpnetimprovedsearch.src" title="Add PHP.net search">
+ <link rel="alternate" type="application/atom+xml" href="https://www.php.net/releases/feed.php" title="PHP Release feed">
+ <link rel="alternate" type="application/atom+xml" href="https://www.php.net/feed.atom" title="PHP: Hypertext Preprocessor">
+
+ <link rel="canonical" href="mysqli-result.fetch-object.html">
+ <link rel="shorturl" href="mysqli-result.fetch-object.html">
+ <link rel="alternate" href="mysqli-result.fetch-object.html" hreflang="x-default">
+
+ <link rel="contents" href="index-2.html">
+ <link rel="index" href="class.mysqli-result.html">
+ <link rel="prev" href="mysqli-result.fetch-fields.html">
+ <link rel="next" href="mysqli-result.fetch-row.html">
+
+ <link rel="alternate" href="mysqli-result.fetch-object.html" hreflang="en">
+ <link rel="alternate" href="https://www.php.net/manual/pt_BR/mysqli-result.fetch-object.php" hreflang="pt_BR">
+ <link rel="alternate" href="https://www.php.net/manual/zh/mysqli-result.fetch-object.php" hreflang="zh">
+ <link rel="alternate" href="https://www.php.net/manual/fr/mysqli-result.fetch-object.php" hreflang="fr">
+ <link rel="alternate" href="https://www.php.net/manual/de/mysqli-result.fetch-object.php" hreflang="de">
+ <link rel="alternate" href="https://www.php.net/manual/ja/mysqli-result.fetch-object.php" hreflang="ja">
+ <link rel="alternate" href="https://www.php.net/manual/ro/mysqli-result.fetch-object.php" hreflang="ro">
+ <link rel="alternate" href="https://www.php.net/manual/ru/mysqli-result.fetch-object.php" hreflang="ru">
+ <link rel="alternate" href="https://www.php.net/manual/es/mysqli-result.fetch-object.php" hreflang="es">
+ <link rel="alternate" href="https://www.php.net/manual/tr/mysqli-result.fetch-object.php" hreflang="tr">
+
+<link rel="stylesheet" type="text/css" href="../../cached0aba.css?t=1539771603&amp;f=/fonts/Fira/fira.css" media="screen">
+<link rel="stylesheet" type="text/css" href="../../cached2ecf.css?t=1539765004&amp;f=/fonts/Font-Awesome/css/fontello.css" media="screen">
+<link rel="stylesheet" type="text/css" href="../../cachedba57.css?t=1606338002&amp;f=/styles/theme-base.css" media="screen">
+<link rel="stylesheet" type="text/css" href="../../cached3afa.css?t=1627831203&amp;f=/styles/theme-medium.css" media="screen">
+
+ <!--[if lte IE 7]>
+ <link rel="stylesheet" type="text/css" href="https://www.php.net/styles/workarounds.ie7.css" media="screen">
+ <![endif]-->
+
+ <!--[if lte IE 8]>
+ <script>
+  window.brokenIE = true;
+ </script>
+ <![endif]-->
+
+ <!--[if lte IE 9]>
+ <link rel="stylesheet" type="text/css" href="https://www.php.net/styles/workarounds.ie9.css" media="screen">
+ <![endif]-->
+
+ <!--[if IE]>
+ <script src="https://www.php.net/js/ext/html5.js"></script>
+ <![endif]-->
+
+ <base>
+
+
+</head>
+<body class="docs " style="">
+
+
+<div class="headsup"><a href="https://www.php.net/conferences/index.php#id2021-09-08-1">Longhorn PHP 2021</a></div>
+<nav id="trick"><div><dl>
+<dt><a href="getting-started.html">Getting Started</a></dt>
+	<dd><a href="introduction.html">Introduction</a></dd>
+	<dd><a href="tutorial.html">A simple tutorial</a></dd>
+<dt><a href="langref.html">Language Reference</a></dt>
+	<dd><a href="language.basic-syntax.html">Basic syntax</a></dd>
+	<dd><a href="language.types.html">Types</a></dd>
+	<dd><a href="language.variables.html">Variables</a></dd>
+	<dd><a href="language.constants.html">Constants</a></dd>
+	<dd><a href="language.expressions.html">Expressions</a></dd>
+	<dd><a href="language.operators.html">Operators</a></dd>
+	<dd><a href="language.control-structures.html">Control Structures</a></dd>
+	<dd><a href="language.functions.html">Functions</a></dd>
+	<dd><a href="language.oop5.html">Classes and Objects</a></dd>
+	<dd><a href="language.namespaces.html">Namespaces</a></dd>
+	<dd><a href="language.errors.html">Errors</a></dd>
+	<dd><a href="language.exceptions.html">Exceptions</a></dd>
+	<dd><a href="language.generators.html">Generators</a></dd>
+	<dd><a href="language.attributes.html">Attributes</a></dd>
+	<dd><a href="language.references.html">References Explained</a></dd>
+	<dd><a href="reserved.variables.html">Predefined Variables</a></dd>
+	<dd><a href="reserved.exceptions.html">Predefined Exceptions</a></dd>
+	<dd><a href="reserved.interfaces.html">Predefined Interfaces and Classes</a></dd>
+	<dd><a href="context.html">Context options and parameters</a></dd>
+	<dd><a href="wrappers.html">Supported Protocols and Wrappers</a></dd>
+</dl>
+<dl>
+<dt><a href="security.html">Security</a></dt>
+	<dd><a href="security.intro.html">Introduction</a></dd>
+	<dd><a href="security.general.html">General considerations</a></dd>
+	<dd><a href="security.cgi-bin.html">Installed as CGI binary</a></dd>
+	<dd><a href="security.apache.html">Installed as an Apache module</a></dd>
+	<dd><a href="security.sessions.html">Session Security</a></dd>
+	<dd><a href="security.filesystem.html">Filesystem Security</a></dd>
+	<dd><a href="security.database.html">Database Security</a></dd>
+	<dd><a href="security.errors.html">Error Reporting</a></dd>
+	<dd><a href="security.variables.html">User Submitted Data</a></dd>
+	<dd><a href="security.hiding.html">Hiding PHP</a></dd>
+	<dd><a href="security.current.html">Keeping Current</a></dd>
+<dt><a href="features.html">Features</a></dt>
+	<dd><a href="features.http-auth.html">HTTP authentication with PHP</a></dd>
+	<dd><a href="features.cookies.html">Cookies</a></dd>
+	<dd><a href="features.sessions.html">Sessions</a></dd>
+	<dd><a href="features.xforms.html">Dealing with XForms</a></dd>
+	<dd><a href="features.file-upload.html">Handling file uploads</a></dd>
+	<dd><a href="features.remote-files.html">Using remote files</a></dd>
+	<dd><a href="features.connection-handling.html">Connection handling</a></dd>
+	<dd><a href="features.persistent-connections.html">Persistent Database Connections</a></dd>
+	<dd><a href="features.commandline.html">Command line usage</a></dd>
+	<dd><a href="features.gc.html">Garbage Collection</a></dd>
+	<dd><a href="features.dtrace.html">DTrace Dynamic Tracing</a></dd>
+</dl>
+<dl>
+<dt><a href="funcref.html">Function Reference</a></dt>
+	<dd><a href="refs.basic.php.html">Affecting PHP's Behaviour</a></dd>
+	<dd><a href="refs.utilspec.audio.html">Audio Formats Manipulation</a></dd>
+	<dd><a href="refs.remote.auth.html">Authentication Services</a></dd>
+	<dd><a href="refs.utilspec.cmdline.html">Command Line Specific Extensions</a></dd>
+	<dd><a href="refs.compression.html">Compression and Archive Extensions</a></dd>
+	<dd><a href="refs.crypto.html">Cryptography Extensions</a></dd>
+	<dd><a href="refs.database.html">Database Extensions</a></dd>
+	<dd><a href="refs.calendar.html">Date and Time Related Extensions</a></dd>
+	<dd><a href="refs.fileprocess.file.html">File System Related Extensions</a></dd>
+	<dd><a href="refs.international.html">Human Language and Character Encoding Support</a></dd>
+	<dd><a href="refs.utilspec.image.html">Image Processing and Generation</a></dd>
+	<dd><a href="refs.remote.mail.html">Mail Related Extensions</a></dd>
+	<dd><a href="refs.math.html">Mathematical Extensions</a></dd>
+	<dd><a href="refs.utilspec.nontext.html">Non-Text MIME Output</a></dd>
+	<dd><a href="refs.fileprocess.process.html">Process Control Extensions</a></dd>
+	<dd><a href="refs.basic.other.html">Other Basic Extensions</a></dd>
+	<dd><a href="refs.remote.other.html">Other Services</a></dd>
+	<dd><a href="refs.search.html">Search Engine Extensions</a></dd>
+	<dd><a href="refs.utilspec.server.html">Server Specific Extensions</a></dd>
+	<dd><a href="refs.basic.session.html">Session Extensions</a></dd>
+	<dd><a href="refs.basic.text.html">Text Processing</a></dd>
+	<dd><a href="refs.basic.vartype.html">Variable and Type Related Extensions</a></dd>
+	<dd><a href="refs.webservice.html">Web Services</a></dd>
+	<dd><a href="refs.utilspec.windows.html">Windows Only Extensions</a></dd>
+	<dd><a href="refs.xml.html">XML Manipulation</a></dd>
+	<dd><a href="refs.ui.html">GUI Extensions</a></dd>
+</dl>
+<dl>
+<dt>Keyboard Shortcuts</dt><dt>?</dt>
+<dd>This help</dd>
+<dt>j</dt>
+<dd>Next menu item</dd>
+<dt>k</dt>
+<dd>Previous menu item</dd>
+<dt>g p</dt>
+<dd>Previous man page</dd>
+<dt>g n</dt>
+<dd>Next man page</dd>
+<dt>G</dt>
+<dd>Scroll to bottom</dd>
+<dt>g g</dt>
+<dd>Scroll to top</dd>
+<dt>g h</dt>
+<dd>Goto homepage</dd>
+<dt>g s</dt>
+<dd>Goto search<br>(current page)</dd>
+<dt>/</dt>
+<dd>Focus search box</dd>
+</dl></div></nav>
+<div id="goto">
+    <div class="search">
+         <div class="text"></div>
+         <div class="results"><ul></ul></div>
+   </div>
+</div>
+
+  <div id="breadcrumbs" class="row-fluid">
+    <div id="breadcrumbs-inner">
+          
+              
+          <ul>
+            <li><a href="index-2.html">PHP Manual</a></li>      <li><a href="funcref.html">Function Reference</a></li>      <li><a href="refs.database.html">Database Extensions</a></li>      <li><a href="refs.database.vendors.html">Vendor Specific Database Extensions</a></li>      <li><a href="set.mysqlinfo.html">MySQL</a></li>      <li><a href="book.mysqli.html">MySQLi</a></li>      <li><a href="class.mysqli-result.html">mysqli_result</a></li>      </ul>
+    </div>
+  </div>
+
+
+
+
+<div id="layout" class="clearfix">
+  <section id="layout-content">
+  <div id="mysqli-result.fetch-object" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">mysqli_result::fetch_object</h1>
+  <h1 class="refname">mysqli_fetch_object</h1>
+  <p class="verinfo">(PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">mysqli_result::fetch_object</span> -- <span class="refname">mysqli_fetch_object</span> — <span class="dc-title">Returns the current row of a result set as an object</span></p>
+
+ </div>
+
+ <div class="refsect1 description" id="refsect1-mysqli-result.fetch-object-description">
+  <h3 class="title">Description</h3>
+  <p class="para">Object-oriented style</p>
+  <div class="methodsynopsis dc-description">
+   <span class="modifier">public</span> <span class="methodname"><strong>mysqli_result::fetch_object</strong></span>(<span class="methodparam"><span class="type">string</span> <code class="parameter">$class</code><span class="initializer"> = "stdClass"</span></span>, <span class="methodparam"><span class="type">array</span> <code class="parameter">$constructor_args</code><span class="initializer"> = []</span></span>): <span class="type"><span class="type">object</span>|<span class="type">null</span>|<span class="type"><span class="type false">false</span></span></span></div>
+
+  <p class="para rdfs-comment">Procedural style</p>
+  <div class="methodsynopsis dc-description"><span class="methodname"><strong>mysqli_fetch_object</strong></span>(<span class="methodparam"><span class="type"><a href="class.mysqli-result.html" class="type mysqli_result">mysqli_result</a></span> <code class="parameter">$result</code></span>, <span class="methodparam"><span class="type">string</span> <code class="parameter">$class</code><span class="initializer"> = "stdClass"</span></span>, <span class="methodparam"><span class="type">array</span> <code class="parameter">$constructor_args</code><span class="initializer"> = []</span></span>): <span class="type"><span class="type">object</span>|<span class="type">null</span>|<span class="type"><span class="type false">false</span></span></span></div>
+
+  <p class="para rdfs-comment">
+   Returns the current row
+   result set as an object where the attributes of the object represent the
+   names of the fields found within the result set.
+  </p>
+  <blockquote class="note"><p><strong class="note">Note</strong>: 
+   <span class="simpara">
+     This function sets the properties
+     of the object before calling the object constructor.
+   </span>
+  </p></blockquote>
+  <blockquote class="note"><p><strong class="note">Note</strong>: <span class="simpara">Field names returned by this function
+are <em class="emphasis">case-sensitive</em>.</span></p></blockquote>
+  <blockquote class="note"><p><strong class="note">Note</strong>: <span class="simpara">This function sets NULL fields to
+the PHP <strong><code>null</code></strong> value.</span></p></blockquote>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-mysqli-result.fetch-object-parameters">
+  <h3 class="title">Parameters</h3>
+  <p class="para">
+   </p><dl>
+    <dt>
+<code class="parameter">
+result</code></dt>
+<dd>
+<p class="para">Procedural style only: A <span class="classname"><a href="class.mysqli-result.html" class="classname">mysqli_result</a></span>
+object returned by <span class="function"><a href="mysqli.query.html" class="function">mysqli_query()</a></span>, <span class="function"><a href="mysqli.store-result.html" class="function">mysqli_store_result()</a></span>,
+<span class="function"><a href="mysqli.use-result.html" class="function">mysqli_use_result()</a></span> or <span class="function"><a href="mysqli-stmt.get-result.html" class="function">mysqli_stmt_get_result()</a></span>.</p></dd>
+
+    
+     <dt>
+<code class="parameter">class</code></dt>
+
+     <dd>
+
+      <p class="para">
+       The name of the class to instantiate, set the properties of and return.
+       If not specified, a <span class="classname"><strong class="classname">stdClass</strong></span> object is returned.
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">constructor_args</code></dt>
+
+     <dd>
+
+      <p class="para">
+       An optional <span class="type">array</span> of parameters to pass to the constructor
+       for <code class="parameter">class</code> objects.
+      </p>
+     </dd>
+
+    
+   </dl>
+
+  <p></p>
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-mysqli-result.fetch-object-returnvalues">
+  <h3 class="title">Return Values</h3>
+  <p class="para">
+   Returns an object that corresponds to the fetched
+   row or <strong><code>null</code></strong> if there are no more rows in result set.
+  </p>
+ </div>
+
+
+ <div class="refsect1 changelog" id="refsect1-mysqli-result.fetch-object-changelog">
+  <h3 class="title">Changelog</h3>
+  <table class="doctable informaltable">
+   
+    <thead>
+     <tr>
+      <th>Version</th>
+      <th>Description</th>
+     </tr>
+
+    </thead>
+
+    <tbody class="tbody">
+     <tr>
+      <td>8.0.0</td>
+      <td>
+       <code class="parameter">constructor_args</code> now accepts <code class="literal">[]</code> for constructors with 0 parameters;
+       previously an exception was thrown.
+      </td>
+     </tr>
+
+    </tbody>
+   
+  </table>
+
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-mysqli-result.fetch-object-examples">
+  <h3 class="title">Examples</h3>
+  <div class="example" id="example-1461">
+   <p><strong>Example #1 <span class="methodname"><strong>mysqli_result::fetch_object()</strong></span> example</strong></p>
+   <div class="example-contents"><p>Object-oriented style</p></div>
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br><br>mysqli_report</span><span style="color: #007700">(</span><span style="color: #0000BB">MYSQLI_REPORT_ERROR&nbsp;</span><span style="color: #007700">|&nbsp;</span><span style="color: #0000BB">MYSQLI_REPORT_STRICT</span><span style="color: #007700">);<br></span><span style="color: #0000BB">$mysqli&nbsp;</span><span style="color: #007700">=&nbsp;new&nbsp;</span><span style="color: #0000BB">mysqli</span><span style="color: #007700">(</span><span style="color: #DD0000">"localhost"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"my_user"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"my_password"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"world"</span><span style="color: #007700">);<br>&nbsp;<br></span><span style="color: #0000BB">$query&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">"SELECT&nbsp;Name,&nbsp;CountryCode&nbsp;FROM&nbsp;City&nbsp;ORDER&nbsp;BY&nbsp;ID&nbsp;DESC"</span><span style="color: #007700">;<br><br></span><span style="color: #0000BB">$result&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$mysqli</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">query</span><span style="color: #007700">(</span><span style="color: #0000BB">$query</span><span style="color: #007700">);<br><br></span><span style="color: #FF8000">/*&nbsp;fetch&nbsp;object&nbsp;array&nbsp;*/<br></span><span style="color: #007700">while&nbsp;(</span><span style="color: #0000BB">$obj&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$result</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">fetch_object</span><span style="color: #007700">())&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">printf</span><span style="color: #007700">(</span><span style="color: #DD0000">"%s&nbsp;(%s)\n"</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$obj</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">Name</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$obj</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">CountryCode</span><span style="color: #007700">);<br>}</span>
+</span>
+</code></div>
+   </div>
+
+   <div class="example-contents"><p>Procedural style</p></div>
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br><br>mysqli_report</span><span style="color: #007700">(</span><span style="color: #0000BB">MYSQLI_REPORT_ERROR&nbsp;</span><span style="color: #007700">|&nbsp;</span><span style="color: #0000BB">MYSQLI_REPORT_STRICT</span><span style="color: #007700">);<br></span><span style="color: #0000BB">$link&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">mysqli_connect</span><span style="color: #007700">(</span><span style="color: #DD0000">"localhost"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"my_user"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"my_password"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"world"</span><span style="color: #007700">);<br><br></span><span style="color: #0000BB">$query&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">"SELECT&nbsp;Name,&nbsp;CountryCode&nbsp;FROM&nbsp;City&nbsp;ORDER&nbsp;BY&nbsp;ID&nbsp;DESC"</span><span style="color: #007700">;<br><br></span><span style="color: #0000BB">$result&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">mysqli_query</span><span style="color: #007700">(</span><span style="color: #0000BB">$link</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$query</span><span style="color: #007700">);<br><br></span><span style="color: #FF8000">/*&nbsp;fetch&nbsp;associative&nbsp;array&nbsp;*/<br></span><span style="color: #007700">while&nbsp;(</span><span style="color: #0000BB">$obj&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">mysqli_fetch_object</span><span style="color: #007700">(</span><span style="color: #0000BB">$result</span><span style="color: #007700">))&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">printf</span><span style="color: #007700">(</span><span style="color: #DD0000">"%s&nbsp;(%s)\n"</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$obj</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">Name</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$obj</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">CountryCode</span><span style="color: #007700">);<br>}</span>
+</span>
+</code></div>
+   </div>
+
+   <div class="example-contents"><p>The above examples will output
+something similar to:</p></div>
+   <div class="example-contents screen">
+<div class="cdata"><pre>Pueblo (USA)
+Arvada (USA)
+Cape Coral (USA)
+Green Bay (USA)
+Santa Clara (USA)
+</pre></div>
+   </div>
+  </div>
+ </div>
+
+
+ <div class="refsect1 seealso" id="refsect1-mysqli-result.fetch-object-seealso">
+  <h3 class="title">See Also</h3>
+  <p class="para">
+   </p><ul class="simplelist">
+    <li class="member"><span class="function"><a href="mysqli-result.fetch-array.html" class="function" rel="rdfs-seeAlso">mysqli_fetch_array()</a> - Fetch a result row as an associative, a numeric array, or both</span></li>
+    <li class="member"><span class="function"><a href="mysqli-result.fetch-assoc.html" class="function" rel="rdfs-seeAlso">mysqli_fetch_assoc()</a> - Fetch a result row as an associative array</span></li>
+    <li class="member"><span class="function"><a href="mysqli-result.fetch-row.html" class="function" rel="rdfs-seeAlso">mysqli_fetch_row()</a> - Get a result row as an enumerated array</span></li>
+    <li class="member"><span class="function"><a href="mysqli.query.html" class="function" rel="rdfs-seeAlso">mysqli_query()</a> - Performs a query on the database</span></li>
+    <li class="member"><span class="function"><a href="mysqli-result.data-seek.html" class="function" rel="rdfs-seeAlso">mysqli_data_seek()</a> - Adjusts the result pointer to an arbitrary row in the result</span></li>
+   </ul>
+  <p></p>
+ </div>
+
+
+</div>
+<section id="usernotes">
+ <div class="head"><h3 class="title">User Contributed Notes</h3></div><div id="allnotes">
+  <div class="note" id="118852">  
+  <a class="name">
+  <strong class="user"><em>object-array at gmail dot com</em></strong></a><div class="date" title="2016-02-17 08:56"><strong>5 years ago</strong></div>
+  <div class="text" id="Hcom118852">
+<div class="phpcode"><code><span class="html">
+Please mind the difference between objects and arrays in PHP&gt;=5: arrays are by value while objects are by reference.<br><br>&lt;?<br>$o = mysqli_fetch_object($res);<br>$o1 = $o;<br>$o1-&gt;value = 10;<br><br>$a = mysqli_fetch_array($res);<br>$a1 = $a;<br>$a1['value'] = 10;<br><br>echo $o-&gt;value; // 10<br>echo $a['value']; // (original value from db)<br>?&gt;<br><br>Should same behaviour be intended, the object needs to be cloned:<br><br>&lt;?<br>$o1 = clone $o;<br>?&gt;<br><br>More about object cloning:<br><a rel="nofollow" target="_blank">http://php.net/manual/en/language.oop5.cloning.php</a></span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="109186">  
+  <a class="name">
+  <strong class="user"><em>Driek</em></strong></a><div class="date" title="2012-06-26 05:18"><strong>9 years ago</strong></div>
+  <div class="text" id="Hcom109186">
+<div class="phpcode"><code><span class="html">
+As indicated in the user comments of the mysql_fetch_object, it is important to realize that class fields get values assigned to them BEFORE the constructor is called.<br>For example;<br><span class="default">&lt;?php<br><br></span><span class="keyword">class </span><span class="default">Employee<br></span><span class="keyword">{<br>&nbsp; private </span><span class="default">$id</span><span class="keyword">;<br><br>&nbsp; public function </span><span class="default">__construct</span><span class="keyword">(</span><span class="default">$id </span><span class="keyword">= </span><span class="default">0</span><span class="keyword">)<br>&nbsp; {<br>&nbsp; &nbsp; </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">id </span><span class="keyword">= </span><span class="default">$id</span><span class="keyword">;<br>&nbsp; }<br>}<br><br></span><span class="comment">// some code for creating a database connection... i.e. mysqli object<br></span><span class="keyword">....<br></span><span class="default">$result </span><span class="keyword">= </span><span class="default">$con</span><span class="keyword">-&gt;</span><span class="default">query</span><span class="keyword">(</span><span class="string">"select id, name from employees"</span><span class="keyword">);<br></span><span class="default">$anEmployee </span><span class="keyword">= </span><span class="default">$result</span><span class="keyword">-&gt;</span><span class="default">fetch_object</span><span class="keyword">(</span><span class="string">"Employee"</span><span class="keyword">);<br></span><span class="default">?&gt;<br></span>will result in the ID being 0 because it is overridden by the constructor. Therefore, it is useful to check if the class field is already set.<br>I.e.<br><span class="default">&lt;?php<br></span><span class="keyword">class </span><span class="default">Employee<br></span><span class="keyword">{<br>&nbsp; private </span><span class="default">$id</span><span class="keyword">;<br><br>&nbsp; public function </span><span class="default">__construct</span><span class="keyword">(</span><span class="default">$id </span><span class="keyword">= </span><span class="default">0</span><span class="keyword">)<br>&nbsp; {<br>&nbsp; &nbsp; if (!</span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">id</span><span class="keyword">)<br>&nbsp; &nbsp; {<br>&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">id </span><span class="keyword">= </span><span class="default">$id <br>&nbsp; &nbsp; </span><span class="keyword">}<br>&nbsp; }<br>}<br></span><span class="default">?&gt;<br></span>Also note that the fields which will be assigned by fetch_object are case sensitive. If your table has the field "ID", it will result in the class field $ID being set. A simple work-around is to use aliases. I.e. "SELECT *, ID as id FROM myTable"<br>I hope this helps some people.</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="119298">  
+  <a class="name">
+  <strong class="user"><em>neo22s at gmail dot com</em></strong></a><div class="date" title="2016-05-08 08:04"><strong>5 years ago</strong></div>
+  <div class="text" id="Hcom119298">
+<div class="phpcode"><code><span class="html">
+Since 5.6.21 and PHP 7.0.6<br><br>mysqli_fetch_object() sets the properties of the object AFTER calling the object constructor. Not BEFORE as was in previous versions.<br><br>So behaviour has changed. Seems a bug but not sure if was done intentionally.<br><br><a rel="nofollow" target="_blank">https://bugs.php.net/bug.php?id=72151</a></span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="119531">  
+  <a class="name">
+  <strong class="user"><em>macole at paypal dot com</em></strong></a><div class="date" title="2016-06-30 02:56"><strong>5 years ago</strong></div>
+  <div class="text" id="Hcom119531">
+<div class="phpcode"><code><span class="html">
+Note that if you supply a class that has a __set() magic method defined in it, that method will be called for any properties that are not defined in your class.&nbsp; For example:<br><br><span class="default">&lt;?php<br><br></span><span class="keyword">class </span><span class="default">SomeClass </span><span class="keyword">{<br>&nbsp; &nbsp; private </span><span class="default">$id</span><span class="keyword">;<br>&nbsp; &nbsp; public </span><span class="default">$partner_name</span><span class="keyword">;<br>&nbsp; &nbsp; public function </span><span class="default">__set</span><span class="keyword">( </span><span class="default">$name</span><span class="keyword">, </span><span class="default">$value </span><span class="keyword">) {<br>&nbsp; &nbsp; &nbsp; &nbsp; echo </span><span class="string">"__set was called!&nbsp; Name = </span><span class="default">$name</span><span class="string">\n"</span><span class="keyword">;<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">$name </span><span class="keyword">= </span><span class="default">$value</span><span class="keyword">;<br>&nbsp; &nbsp; }<br>}<br><br></span><span class="default">$db </span><span class="keyword">= new </span><span class="default">mysqli</span><span class="keyword">( </span><span class="string">'localhost'</span><span class="keyword">, </span><span class="string">'Username'</span><span class="keyword">, </span><span class="string">'Password'</span><span class="keyword">, </span><span class="string">'DbName' </span><span class="keyword">);<br></span><span class="default">$result </span><span class="keyword">= </span><span class="default">$db</span><span class="keyword">-&gt;</span><span class="default">query</span><span class="keyword">( </span><span class="string">'SELECT id, partner_name, partner_type FROM submissions' </span><span class="keyword">);<br></span><span class="default">$object </span><span class="keyword">= </span><span class="default">$result</span><span class="keyword">-&gt;</span><span class="default">fetch_object</span><span class="keyword">( </span><span class="string">'SomeClass' </span><span class="keyword">);<br><br></span><span class="default">?&gt;<br></span><br>Produces the following output:<br><br>__set was called!&nbsp; Name = partner_type</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="92784">  
+  <a class="name">
+  <strong class="user"><em>benpptung at tacol dot biz</em></strong></a><div class="date" title="2009-08-08 08:04"><strong>12 years ago</strong></div>
+  <div class="text" id="Hcom92784">
+<div class="phpcode"><code><span class="html">
+I don't know why no one talk about this.
+<br>fetch_object is very powerful since you can instantiate an Object which has the methods you wanna have.
+<br>
+<br>You can try like this..
+<br>
+<br><span class="default">&lt;?php
+<br></span><span class="keyword">class </span><span class="default">PowerfulVO </span><span class="keyword">extends </span><span class="default">AbstractWhatEver </span><span class="keyword">{
+<br>
+<br>&nbsp; &nbsp; public </span><span class="default">$field1</span><span class="keyword">;
+<br>&nbsp; &nbsp; private </span><span class="default">$field2</span><span class="keyword">; </span><span class="comment">// note : private is ok
+<br>
+<br>&nbsp; &nbsp; </span><span class="keyword">public function </span><span class="default">method</span><span class="keyword">(){
+<br>&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="comment">// method in this class
+<br>&nbsp; &nbsp; </span><span class="keyword">}
+<br>}
+<br>
+<br>&nbsp; &nbsp;&nbsp; </span><span class="default">$sql </span><span class="keyword">= </span><span class="string">"SELECT * FROM table ..."
+<br>&nbsp; &nbsp;&nbsp; </span><span class="default">$mysqli </span><span class="keyword">= new </span><span class="default">mysqli</span><span class="keyword">(........);
+<br>&nbsp; &nbsp;&nbsp; </span><span class="default">$result </span><span class="keyword">= </span><span class="default">$mysqli</span><span class="keyword">-&gt;</span><span class="default">query</span><span class="keyword">(</span><span class="default">$sql</span><span class="keyword">);
+<br>&nbsp; &nbsp;&nbsp; </span><span class="default">$vo </span><span class="keyword">= </span><span class="default">$result</span><span class="keyword">-&gt;</span><span class="default">fetch_object</span><span class="keyword">(</span><span class="string">'PowerfulVO'</span><span class="keyword">);
+<br></span><span class="default">?&gt;
+<br></span>
+<br>Note : if the field is not defined in the class, fetch_object will add this field for you as public.
+<br>
+<br>The method is very powerful, especially if you want to use a VO design pattern or class mapping feature with Flex Remoting Object( Of course, you need to have ZendAMF or AMFPHP ..framework)
+<br>
+<br>Hope this help and open new possibilities for you</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="120166">  
+  <a class="name">
+  <strong class="user"><em>fedge-no at hotmail dot calm</em></strong></a><div class="date" title="2016-11-15 07:48"><strong>4 years ago</strong></div>
+  <div class="text" id="Hcom120166">
+<div class="phpcode"><code><span class="html">
+I checked the bug database and as long as your PHP installation is up to date, the order of setting properties and calling the constructor should now follow the order specified in the documentation. There was a little while that a patch had been introduced where it was happening the other way around but that has been fixed now.</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="107280">  
+  <a class="name">
+  <strong class="user"><em>Alex</em></strong></a><div class="date" title="2012-01-27 04:36"><strong>9 years ago</strong></div>
+  <div class="text" id="Hcom107280">
+<div class="phpcode"><code><span class="html">
+Make sure to specify the full namespace for the "string $class_name" parameter and not a partial one, as it won't find it. For example:<br><br><span class="default">&lt;?php<br><br></span><span class="keyword">namespace </span><span class="default">Root</span><span class="keyword">(</span><span class="default">backslash</span><span class="keyword">)</span><span class="default">FirstLevel<br></span><span class="keyword">{<br>&nbsp; &nbsp; public static function </span><span class="default">Test</span><span class="keyword">(</span><span class="default">$result</span><span class="keyword">)<br>&nbsp; &nbsp; {<br>&nbsp; &nbsp; &nbsp; &nbsp; return </span><span class="default">mysqli_fetch_object</span><span class="keyword">(</span><span class="default">$result</span><span class="keyword">, </span><span class="string">'SecondLevel\\MyClass'</span><span class="keyword">);<br>&nbsp; &nbsp; }<br>}<br><br></span><span class="default">?&gt;<br></span><br>... will not work but this will:<br><br><span class="default">&lt;?php<br><br></span><span class="keyword">namespace </span><span class="default">Root</span><span class="keyword">(</span><span class="default">backslash</span><span class="keyword">)</span><span class="default">FirstLevel<br></span><span class="keyword">{<br>&nbsp; &nbsp; public static function </span><span class="default">Test</span><span class="keyword">(</span><span class="default">$result</span><span class="keyword">)<br>&nbsp; &nbsp; {<br>&nbsp; &nbsp; &nbsp; &nbsp; return </span><span class="default">mysqli_fetch_object</span><span class="keyword">(</span><span class="default">$result</span><span class="keyword">, </span><span class="string">'Root\\FirstLevel\\SecondLevel\\MyClass'</span><span class="keyword">);<br>&nbsp; &nbsp; }<br>}<br><br></span><span class="default">?&gt;</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="114722">  
+  <a class="name">
+  <strong class="user"><em>me at philkershaw dot me</em></strong></a><div class="date" title="2014-03-28 05:02"><strong>7 years ago</strong></div>
+  <div class="text" id="Hcom114722">
+<div class="phpcode"><code><span class="html">
+As a best practice, if you intend to use a defined class when using fetching_object(). Put the data obtaining code within a static method of the defined class. Otherwise, wherever you include the file (if not using an autoloader) the data connection will occur whether you want it to or not.<br><br>For example:<br><br><span class="default">&lt;?php<br><br></span><span class="keyword">class </span><span class="default">User<br></span><span class="keyword">{<br>&nbsp; &nbsp; public </span><span class="default">$name</span><span class="keyword">;<br><br>&nbsp; &nbsp; public static function </span><span class="default">getUser</span><span class="keyword">(</span><span class="default">$id</span><span class="keyword">)<br>&nbsp; &nbsp; {<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$conn </span><span class="keyword">= new </span><span class="default">mysqli</span><span class="keyword">(</span><span class="string">'localhost'</span><span class="keyword">, </span><span class="string">'username'</span><span class="keyword">, </span><span class="string">'password'</span><span class="keyword">, </span><span class="string">'database'</span><span class="keyword">);<br>&nbsp; &nbsp; &nbsp; &nbsp; if (</span><span class="default">$result </span><span class="keyword">= </span><span class="default">$conn</span><span class="keyword">-&gt;</span><span class="default">query</span><span class="keyword">(</span><span class="string">"SELECT * FROM users WHERE id = </span><span class="keyword">{</span><span class="default">$id</span><span class="keyword">}</span><span class="string"> LIMIT 1"</span><span class="keyword">)) {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return </span><span class="default">$result</span><span class="keyword">-&gt;</span><span class="default">fetch_object</span><span class="keyword">(</span><span class="string">'User'</span><span class="keyword">);<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$result</span><span class="keyword">-&gt;</span><span class="default">close</span><span class="keyword">();<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; }<br>}<br></span><span class="default">?&gt;<br></span><br>Call the static method to obtain an instance of the User class with your data applied to it.<br><br><span class="default">&lt;?php<br>$user </span><span class="keyword">= </span><span class="default">User</span><span class="keyword">::</span><span class="default">getUser</span><span class="keyword">(</span><span class="string">'31'</span><span class="keyword">); <br>echo </span><span class="default">$user</span><span class="keyword">-&gt;</span><span class="default">name</span><span class="keyword">; </span><span class="comment">// echo's 'Phil'<br></span><span class="default">?&gt;</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="85163">  
+  <a class="name">
+  <strong class="user"><em>peterbelm at g[oogle]mail dot com</em></strong></a><div class="date" title="2008-08-18 07:10"><strong>13 years ago</strong></div>
+  <div class="text" id="Hcom85163">
+<div class="phpcode"><code><span class="html">
+If your SQL code selects columns with empty names like so:<br><br>SELECT id as ``...<br><br>You will get a fatal error "Cannot access empty property", this took me a while to track down!<br><br>Obviously your SQL really shouldn't do that, and should be fixed but I'm going to submit a feature request to ask for a better error message for that.</span>
+</code></div>
+  </div>
+ </div></div>
+
+ 
+</section>    </section><!-- layout-content -->
+        
+
+
+  </div><!-- layout -->
+
+  
+
+    
+ <!-- External and third party libraries. -->
+ 
+
+
+
+
+
+
+
+<a id="toTop" href="javascript:;"><span id="toTopHover"></span><img width="40" height="40" alt="To Top" src="../../images/to-top%402x.png"></a>
+
+
+
+<!-- Mirrored from www.php.net/manual/en/mysqli-result.fetch-object.php by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 11 Sep 2021 06:41:10 GMT -->
+
+</body></html>

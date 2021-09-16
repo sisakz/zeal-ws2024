@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+
+
+<!-- Mirrored from codex.wordpress.org/Создание_резервной_копии_базы_данных by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 31 Aug 2021 16:47:09 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'../www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P24PF4B');</script>
+<!--
+<meta property="fb:page_id" content="6427302910" />
+-->
+<link rel="dns-prefetch" href="http://s.w.org/" />
+<link rel="dns-prefetch" href="../fonts.googleapis.com/index.html" />
+<link rel="dns-prefetch" href="http://fonts.gstatic.com/" />
+<link rel="dns-prefetch" href="http://www.googletagmanager.com/" />
+<meta name="google-site-verification" content="7VWES_-rcHBcmaQis9mSYamPfNwE03f4vyTj4pfuAw0" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Создание резервной копии базы данных</title>
+<link rel="canonical" href="%d0%a1%d0%be%d0%b7%d0%b4%d0%b0%d0%bd%d0%b8%d0%b5_%d1%80%d0%b5%d0%b7%d0%b5%d1%80%d0%b2%d0%bd%d0%be%d0%b9_%d0%ba%d0%be%d0%bf%d0%b8%d0%b8_%d0%b1%d0%b0%d0%b7%d1%8b_%d0%b4%d0%b0%d0%bd%d0%bd%d1%8b%d1%85.html" />
+
+<link rel="stylesheet" href="../s.w.org/style/codex-wp4.css?3" />
+<meta name="referrer" content="always">
+
+			<link href="../s.w.org/wp-includes/css/dashicons.min.css?20181204" rel="stylesheet" type="text/css" />
+		<link href='../fonts.googleapis.com/css.css?family=Open+Sans:300italic,400italic,600italic,400,300,600&amp;subset=latin,cyrillic-ext,greek-ext,greek,vietnamese,latin-ext,cyrillic' rel='stylesheet' type='text/css'>
+
+		<link rel="stylesheet" href="../s.w.org/style/wp4-2.css?92" />
+
+<link rel="shortcut icon" href="../s.w.org/favicon.ico?2" type="image/x-icon" />
+<script type="text/javascript" src="../s.w.org/wp-includes/js/jquery/jquery.js?v=1.11.1"></script>
+<script>document.cookie='devicePixelRatio='+((window.devicePixelRatio === undefined) ? 1 : window.devicePixelRatio)+'; path=/';</script>
+<!--[if IE]>
+    <script type="text/javascript" src="/skins/common/IEFixes.js"></script>
+    <meta http-equiv="imagetoolbar" content="no" />
+<![endif]-->
+
+<script type="text/javascript">wgBreakFrames=false;wgContentLanguage='en';</script>
+
+
+</head>
+
+
+<body id="wordpress-org" class="wporg-responsive wporg-codex">
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P24PF4B" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<div id="wporg-header">
+	<div class="wrapper">
+	<h1><a href="http://wordpress.org/">WordPress.org</a></h1>				<div id="head-search">
+		<form action="http://wordpress.org/search/do-search.php" method="get">
+			<label for="global-search" class="screen-reader-text">Search WordPress.org for:</label>
+			<input id="global-search" class="text" name="search" type="text" value="" maxlength="150" placeholder="Search WordPress.org" />
+			<button type="submit" class="button"><span class="screen-reader-text">Submit</span></button>
+		</form>
+		</div>
+				<div style="clear:both"></div>
+		<button id="mobile-menu-button" aria-expanded="false"><span class="screen-reader-text">Toggle Menu</span></button>
+		
+<nav aria-label="Main Menu">
+<ul id="wporg-header-menu">
+<li class="menu-item"><a href='http://wordpress.org/showcase/' data-title='See some of the sites built on WordPress.'>Showcase</a></li>
+<li class="menu-item"><a href='http://learn.wordpress.org/' data-title='Resources to help you learn more about WordPress and teach it to others.'>Learn</a></li>
+<li class="menu-item"><a href='http://wordpress.org/themes/' data-title='Find just the right look for your website.'>Themes</a></li>
+<li class="menu-item"><a href='http://wordpress.org/plugins/' data-title='Plugins can extend WordPress to do almost anything you can imagine.'>Plugins</a></li>
+<li class="menu-item"><a href='http://wordpress.org/mobile/' data-title='Take your website on the go!'>Mobile</a></li>
+<li class="menu-item"><a href='http://wordpress.org/support/' data-title='Forums, documentation, help.' aria-current="true" class="current">Support</a><ul class="nav-submenu"><li><a href='http://wordpress.org/support/' title='Documentation, tutorials, best practices.'>Documentation</a></li><li><a href='http://wordpress.org/support/forums/' title='Support and discussion forums.'>Forums</a></li></ul><div class="uparrow"></div></li>
+<li class="menu-item"><a href='http://make.wordpress.org/' data-title='Contribute your knowledge.'>Get Involved</a><ul class="nav-submenu"><li><a href='http://wordpress.org/five-for-the-future/' title='How five percent is powering the next generation of the web'>Five for the Future</a></li></ul><div class="uparrow"></div></li>
+<li class="menu-item"><a href='http://wordpress.org/about/' data-title='About the WordPress Organization, and where we&#039;re going.'>About</a></li>
+<li class="menu-item"><a href='http://wordpress.org/news/' data-title='Come here for the latest scoop.'>Blog</a></li>
+<li class="menu-item"><a href='http://wordpress.org/hosting/' data-title='Find a home for your blog.'>Hosting</a></li>
+<li id="download" class="button download-button menu-item"><a href='http://wordpress.org/download/' data-title='Get it. Got it? Good.'>Get WordPress</a></li>
+</ul>
+</nav>
+		<div style="clear:both"></div>
+	</div>
+</div>
+
+
+
+<div id="headline">
+	<div class="wrapper">
+		<h2><a href="index.html">Codex</a></h2>
+		
+		<div class="portlet" id="p-personal">
+		  <p class="login">Codex tools:
+		     <a href="https://codex.wordpress.org/index.php?title=Special:UserLogin&amp;returnto=%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5+%D1%80%D0%B5%D0%B7%D0%B5%D1%80%D0%B2%D0%BD%D0%BE%D0%B9+%D0%BA%D0%BE%D0%BF%D0%B8%D0%B8+%D0%B1%D0%B0%D0%B7%D1%8B+%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D1%85">Log in</a> 		  </p>
+		</div>
+	</div>
+</div>
+
+<div id="pagebody">
+	<div class="wrapper">	
+		<div class="col-10" id="bodyContent">
+			<div id="siteNotice"><div id="localNotice" lang="en" dir="ltr"><div style="clear:both; background-color:#e5f5fa; border-left:4px solid #00a0d2; padding:10px 12px 8px; margin:0.5em auto 1.5em auto;"><span class="dashicons dashicons-info" style="color:#00a0d2"></span> Interested in functions, hooks, classes, or methods? Check out the new <a rel="nofollow" class="external text" href="../developer.wordpress.org/reference/index.html">WordPress Code Reference</a>!</div>
+</div></div>			<h2 class="pagetitle">Создание резервной копии базы данных</h2>
+									<!-- start content -->
+				<div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr"><p class="LanguageLinks" style="border:1px solid #CCCCCC; line-height:1.5; text-align:left; color:#333333; font-size:90%; padding:10px;"><span style="white-space:nowrap;"><a href="Multilingual_Codex.html" title="Multilingual Codex" class="mw-redirect">Languages</a>:</span> 
+<a href="Backing_Up_Your_Database.html" title="Backing Up Your Database">English</a> • 
+<a rel="nofollow" class="external text" href="https://wpdocs.osdn.jp/データベースのバックアップ">日本語</a> 
+<strong class="selflink">Русский</strong> • 
+
+ <small>(<a href="Multilingual_Codex.html#Language_Cross_Reference" title="Multilingual Codex" class="mw-redirect">Add your language</a>)</small>
+</p>
+<div style="background-color:#FAEBD7; border:1px solid #CCCCCC; color:#000000; padding:7px; margin:0.5em auto 0.5em auto; vertical-align:middle; overflow:hidden;">Эта страница <a href="Category_Stubs.html" title="Category:Stubs">помечена</a> как незавершённая. Вы можете <a href="https://codex.wordpress.org/Codex:Contributing" title="Codex:Contributing">помочь</a> проекту, <b><a rel="nofollow" class="external text" href="https://codex.wordpress.org/index.php?title=%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5_%D1%80%D0%B5%D0%B7%D0%B5%D1%80%D0%B2%D0%BD%D0%BE%D0%B9_%D0%BA%D0%BE%D0%BF%D0%B8%D0%B8_%D0%B1%D0%B0%D0%B7%D1%8B_%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D1%85&amp;action=edit">дополнив её</a></b>.</div>
+<p><b>Настоятельно рекомендуется архивировать базу данных на регулярной основе и перед обновлением блога.</b>
+</p><p>В этом случае становится возможным <a href="Restoring_Your_Database_From_Backup.html" title="Restoring Your Database From Backup">восстановить базу данных из резервной копии</a>, если что-то пойдёт не так.
+</p>
+<div id="toc" class="toc"><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#.D0.9F.D1.80.D0.B8_.D0.BF.D0.BE.D0.BC.D0.BE.D1.89.D0.B8_phpMyAdmin"><span class="tocnumber">1</span> <span class="toctext">При помощи phpMyAdmin</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="#.D0.98.D1.81.D0.BF.D0.BE.D0.BB.D1.8C.D0.B7.D1.83.D1.8F_.D0.BA.D0.BE.D0.BC.D0.B0.D0.BD.D0.B4.D1.8B_MySQL_.D0.BD.D0.B0.D0.BF.D1.80.D1.8F.D0.BC.D1.83.D1.8E"><span class="tocnumber">2</span> <span class="toctext">Используя команды MySQL напрямую</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="#.D0.A1_.D0.BF.D0.BE.D0.BC.D0.BE.D1.89.D1.8C.D1.8E_MySQL_Administrator"><span class="tocnumber">3</span> <span class="toctext">С помощью MySQL Administrator</span></a>
+<ul>
+<li class="toclevel-2 tocsection-4"><a href="#Getting_MySQL_Admin"><span class="tocnumber">3.1</span> <span class="toctext">Getting MySQL Admin</span></a></li>
+<li class="toclevel-2 tocsection-5"><a href="#Backing_Up_the_Database"><span class="tocnumber">3.2</span> <span class="toctext">Backing Up the Database</span></a></li>
+<li class="toclevel-2 tocsection-6"><a href="#.D0.92.D0.BE.D1.81.D1.81.D1.82.D0.B0.D0.BD.D0.BE.D0.B2.D0.BB.D0.B5.D0.BD.D0.B8.D0.B5_.D0.B8.D0.B7_.D1.80.D0.B5.D0.B7.D0.B5.D1.80.D0.B2.D0.BD.D0.BE.D0.B9_.D0.BA.D0.BE.D0.BF.D0.B8.D0.B8"><span class="tocnumber">3.3</span> <span class="toctext">Восстановление из резервной копии</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-7"><a href="#.D0.98.D1.81.D0.BF.D0.BE.D0.BB.D1.8C.D0.B7.D1.83.D1.8F_.D0.BF.D0.BB.D0.B0.D0.B3.D0.B8.D0.BD_WordPress_Database_Backup"><span class="tocnumber">4</span> <span class="toctext">Используя плагин WordPress Database Backup</span></a>
+<ul>
+<li class="toclevel-2 tocsection-8"><a href="#.D0.A3.D1.81.D1.82.D0.B0.D0.BD.D0.BE.D0.B2.D0.BA.D0.B0_.D0.BF.D0.BB.D0.B0.D0.B3.D0.B8.D0.BD.D0.B0"><span class="tocnumber">4.1</span> <span class="toctext">Установка плагина</span></a></li>
+<li class="toclevel-2 tocsection-9"><a href="#.D0.90.D0.BA.D1.82.D0.B8.D0.B2.D0.B0.D1.86.D0.B8.D1.8F_.D0.BF.D0.BB.D0.B0.D0.B3.D0.B8.D0.BD.D0.B0"><span class="tocnumber">4.2</span> <span class="toctext">Активация плагина</span></a></li>
+<li class="toclevel-2 tocsection-10"><a href="#.D0.A0.D0.B5.D0.B7.D0.B5.D1.80.D0.B2.D0.BD.D0.BE.D0.B5_.D0.BA.D0.BE.D0.BF.D0.B8.D1.80.D0.BE.D0.B2.D0.B0.D0.BD.D0.B8.D0.B5"><span class="tocnumber">4.3</span> <span class="toctext">Резервное копирование</span></a></li>
+<li class="toclevel-2 tocsection-11"><a href="#.D0.92.D0.BE.D1.81.D1.81.D1.82.D0.B0.D0.BD.D0.BE.D0.B2.D0.BB.D0.B5.D0.BD.D0.B8.D0.B5_.D0.B4.D0.B0.D0.BD.D0.BD.D1.8B.D1.85"><span class="tocnumber">4.4</span> <span class="toctext">Восстановление данных</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-12"><a href="#.D0.98.D1.81.D0.BF.D0.BE.D0.BB.D1.8C.D0.B7.D1.83.D1.8F_CocoaMySQL"><span class="tocnumber">5</span> <span class="toctext">Используя CocoaMySQL</span></a></li>
+<li class="toclevel-1 tocsection-13"><a href="#.D0.A0.D0.B5.D1.81.D1.83.D1.80.D1.81.D1.8B_.D0.B8_.D0.BF.D0.BB.D0.B0.D0.B3.D0.B8.D0.BD.D1.8B_.D0.B4.D0.BB.D1.8F_.D1.80.D0.B5.D0.B7.D0.B5.D1.80.D0.B2.D0.BD.D0.BE.D0.B3.D0.BE_.D0.BA.D0.BE.D0.BF.D0.B8.D1.80.D0.BE.D0.B2.D0.B0.D0.BD.D0.B8.D1.8F"><span class="tocnumber">6</span> <span class="toctext">Ресурсы и плагины для резервного копирования</span></a></li>
+</ul>
+</div>
+
+<h2><span class="mw-headline" id=".D0.9F.D1.80.D0.B8_.D0.BF.D0.BE.D0.BC.D0.BE.D1.89.D0.B8_phpMyAdmin">При помощи phpMyAdmin</span></h2>
+<p><a href="phpMyAdmin.html" title="phpMyAdmin">phpMyAdmin</a> — это программа для выполнения операций с базой данных. 
+</p>
+<ol>
+<li>Войдите в интерфейс phpMyAdmin на вашем сервере</li><br />
+<li>На главной странице выберите 'Базы данных' ('Databases')</li>
+<p><a href="File_podz_backup_1.jpg" class="image"><img alt="podz backup 1.jpg" src="images/8/80/podz_backup_1.jpg" width="216" height="184" /></a><br /><br />
+</p>
+<li>Щелкните по имени вашей базы данных - точнее, базы данных вашего WordPress, если у вас их несколько.</li>
+<p><a href="File_podz_backup_2.jpg" class="image"><img alt="podz backup 2.jpg" src="images/5/5d/podz_backup_2.jpg" width="443" height="225" /></a><br /><br />
+</p>
+<li>Следующий экран покажет вам все таблицы внутри базы.<br />
+Проигнорируйте это и нажмите на закладку 'Экспорт' ('Export') вверху экрана.</li>
+<p><a href="File_podz_backup_3.jpg" class="image"><img alt="podz backup 3.jpg" src="images/a/a8/podz_backup_3.jpg" width="468" height="79" /></a><br /><br />
+</p>
+<li>Обратите внимание на левую верхнюю часть секции 'Экспорт' ('Export'). Все таблицы, которые вы выбрали из вашей базы, отображаются в этой секции.</li>
+<p><a href="File_phpMyAdmin_backup_export.png" class="image"><img alt="phpMyAdmin backup export.png" src="images/b/b9/phpMyAdmin_backup_export.png" width="224" height="578" /></a>
+</p>
+<ul>
+<li>Если у вас есть другие программы, использующие базу, тогда выберите только те таблицы, которые относятся к вашей установке wordpress'a. Их названия начинаются с "wp_" либо как-то еще 'префикс_таблицы' ('table_prefix') которые вы задали в файле 'wp-config.php'.</li>
+<li>Если же у вас установлен только блог WordPress, то оставьте всё как есть (либо нажмите 'Выбрать все' ('Select All') если вы изменили свой выбор)</li>
+<li>Обязательно убедитесь, что выбрано 'SQL'!</li>
+</ul><br />
+<li>Секция SQL</li>
+Tick the following boxes:<ul><li>'Structure'</li>
+<li>'Add DROP TABLE'</li>
+<li>'Add AUTO_INCREMENT' and</li>
+<li>'Enclose table and field names with backquotes'</li>
+</ul><br />
+<li>Секция DATA</li>
+Leave the boxes inside this section unticked, but make sure to keep the checkbox next to the "DATA" heading checked.</li>
+<p><a href="File_phpMyAdmin_backup_data.png" class="image"><img alt="phpMyAdmin backup data.png" src="images/5/5f/phpMyAdmin_backup_data.png" width="466" height="222" /></a><br /><br />
+</p>
+<li>Tick the 'Save as file' option, and leave the template name as is.</li>
+<p><a href="File_podz_backup_5.jpg" class="image"><img alt="podz backup 5.jpg" src="images/0/06/podz_backup_5.jpg" width="486" height="105" /></a><br />
+</p>
+<li>Now click 'Go' and you should be prompted for a file to download. Save the file to your computer.<br />
+Depending on the database size, this may take a few moments.</li><br />
+<li>You have now backed up your database.</li>
+<p>If you wanted, you could download a backup in each of the compression formats. Your choice. For example: <b>None</b> and "<b>zipped</b>":
+<a href="File_podz_backup_6.gif" class="image"><img alt="podz backup 6.gif" src="images/1/17/podz_backup_6.gif" width="424" height="56" /></a>
+</p>
+<b>Remember</b> - you have NOT backed up the files and folders - such as images - but all your posts and comments are now safe.</li>
+</ol>
+<h2><span class="mw-headline" id=".D0.98.D1.81.D0.BF.D0.BE.D0.BB.D1.8C.D0.B7.D1.83.D1.8F_.D0.BA.D0.BE.D0.BC.D0.B0.D0.BD.D0.B4.D1.8B_MySQL_.D0.BD.D0.B0.D0.BF.D1.80.D1.8F.D0.BC.D1.83.D1.8E">Используя команды MySQL напрямую</span></h2>
+<p>phpMyAdmin не справляется с большими базами данных, в этом случае поможет использование MySQL напрямую.
+</p><p>1. Перейдите в директорию, в которую вы хотите сохранить бэкап:
+</p>
+<pre>user@linux:~&gt; cd files/blog</pre>
+<p>2. Используйте команду <code>mysqldump</code> для выгрузки всех таблиц базы данных. Чтобы выгрузить только некоторые таблицы из базы данных, укажите их имена в конце команды как <code>(имя_таблицы имя_таблицы имя_таблицы)</code>, только не вводите круглые скобки <code>( )</code>. (За более подробным описанием, обратитесь к <code>man mysqldump</code>.):
+</p>
+<pre>user@linux:~/files/blog&gt; mysqldump --add-drop-table -h mysqlhostserver
+ -u mysqlusername -p databasename (tablename tablename tablename) | bzip2
+ -c &gt; blog.bak.sql.bz2
+
+Enter password: (введите ваш пароль mysql)
+user@linux~/files/blog&gt;</pre>
+<pre>
+Пример:
+mysqldump --add-drop-table -h db01.example.net -u dbocodex -p dbwp | bzip2 -c &gt; blog.bak.sql.bz2
+
+Enter password: my-password
+user@linux~/files/blog&gt;
+</pre>
+<p>Команда <code>bzip2 -c</code> после | (pipe, конвейер) означает, что бэкап будет сжат на лету, а <code>&gt; blog.bak.sql.bz2</code> отсылает вывод <code>bzip</code> в файл под названием <code>blog.bak.sql.bz2</code>.  То же самое можно сделать с помощью двух последовательно выполненных команд:
+</p>
+<pre>
+mysqldump --add-drop-table -h db01.example.net -u dbocodex -p dbwp &gt; blog.bak.sql
+bzip2 blog.bak.sql
+</pre>
+<h2><span class="mw-headline" id=".D0.A1_.D0.BF.D0.BE.D0.BC.D0.BE.D1.89.D1.8C.D1.8E_MySQL_Administrator">С помощью MySQL Administrator</span></h2>
+<p>MySQL Administrator is a program for performing administrative
+operations, such as configuring your MySQL server, monitoring its
+status and performance, starting and stopping it, managing users and
+connections, performing backups, restoring backups and a number of
+other administrative tasks.
+You can perform most of those tasks using a command line interface
+such as that provided by <a rel="nofollow" class="external text" href="http://dev.mysql.com/doc/mysql/en/mysqladmin.html"><b>mysqladmin</b></a> or
+<a rel="nofollow" class="external text" href="http://dev.mysql.com/doc/mysql/en/mysql.html"><b>mysql</b></a>, but MySQL Administrator is advantageous in the following respects:
+</p>
+<ul><li>Its graphical user interface makes it more intuitive to use.</li></ul>
+<ul><li>It provides a better overview of the settings that are crucial for the performance, reliability, and security of your MySQL servers.</li></ul>
+<ul><li>It displays performance indicators graphically, thus making it easier to determine and tune server settings.</li></ul>
+<ul><li>It is available for Linux, Windows and MacOS X, and allows a remote client to backup the database across platforms. As long as you have access to the MySQL databases on the remote server, you can backup your data to wherever you have write access.</li></ul>
+<ul><li>There is no limit to the size of the database to be backed up as there is with phpMyAdmin.</li></ul>
+<p>MySQL Administrator is designed to work with MySQL servers versions 4.0 and above.
+</p>
+<h3><span class="mw-headline" id="Getting_MySQL_Admin">Getting MySQL Admin</span></h3>
+<p>MySQL Admin may be downloaded from <a rel="nofollow" class="external text" href="http://dev.mysql.com/downloads/administrator/1.0.html">the MySQL.Com site</a>. Installation binaries and documentation may also be found there.
+</p>
+<h3><span class="mw-headline" id="Backing_Up_the_Database">Backing Up the Database</span></h3>
+<p>This assumes you have already installed MySQL Admin and set it up so that you can login to the MySQL Database Server either locally or remotely. Refer to the documentation that comes with the installation package of MySQL Admin for your platform for installation instructions.
+</p><p>1. Open the MySQL Admin client and login as you had previously set up to do.
+</p><p>2. From the icon menu on the left hand side of the client window select Backup.
+</p><p>3. If you have not already created a Backup Project, do this now by clicking on the "New Project" button at the lower part of the window and type in a name for the Backup Project where prompted.
+</p><p>4. Select one or more databases that you want to Backup (in the MySQL Admin client these are called a "Schema" (pl. "Schemata")). Add them to the Backup Content window on the right using the right-pointing arrow button.
+</p><p>5. When you have selected the Schema(ta), you can save the Backup Project. Or you may simply choose to Backup Now using the button on the lower right of the window.
+</p><p>6. A dialogue will come up asking you where to put the Backup. Enter the pathname or browse to the location using the dialogue.
+</p><p>7. Assuming all is correct (and you have write permissions in the directory to which you are writing the Backup), the backup will complete shortly.
+</p>
+<h3><span class="mw-headline" id=".D0.92.D0.BE.D1.81.D1.81.D1.82.D0.B0.D0.BD.D0.BE.D0.B2.D0.BB.D0.B5.D0.BD.D0.B8.D0.B5_.D0.B8.D0.B7_.D1.80.D0.B5.D0.B7.D0.B5.D1.80.D0.B2.D0.BD.D0.BE.D0.B9_.D0.BA.D0.BE.D0.BF.D0.B8.D0.B8">Восстановление из резервной копии</span></h3>
+<p>1. Open the MySQL Admin client and login as you had previously set up to do.
+</p><p>2. From the icon menu on the left hand side of the client window select Restore.
+</p><p>3. Click the "Open Backup File" button on the lower right of the window.
+</p><p>4. Type in or browse to the Schema(ta) backup file and select. Click "Open".
+</p><p>5. The Target Schema(ta) will most likely be the "Original Location", or you may choose an alternate location using the drop-down menu.
+</p><p>6. Click the "Start Restore" button on the lower right of the window. The database restore will commence.
+</p>
+<h2><span class="mw-headline" id=".D0.98.D1.81.D0.BF.D0.BE.D0.BB.D1.8C.D0.B7.D1.83.D1.8F_.D0.BF.D0.BB.D0.B0.D0.B3.D0.B8.D0.BD_WordPress_Database_Backup">Используя плагин WordPress Database Backup</span></h2>
+<p><a rel="nofollow" class="external text" href="http://www.ilfilosofo.com/">Austin Matzko</a> поддерживает плагин originally created by <a rel="nofollow" class="external text" href="http://www.skippy.net/">Skippy</a> под названием <a rel="nofollow" class="external text" href="http://www.ilfilosofo.com/blog/wp-db-backup">WordPress Database Backup</a>. Он входил в состав WordPress 2.0, но с версии 2.1 больше не поставляется. 
+</p>
+<h3><span class="mw-headline" id=".D0.A3.D1.81.D1.82.D0.B0.D0.BD.D0.BE.D0.B2.D0.BA.D0.B0_.D0.BF.D0.BB.D0.B0.D0.B3.D0.B8.D0.BD.D0.B0">Установка плагина</span></h3>
+<ol><li> If you do download the plugin, follow the directions in the <i>wp-db-backup.txt</i> file to install the plugin correctly.</li></ol>
+<h3><span class="mw-headline" id=".D0.90.D0.BA.D1.82.D0.B8.D0.B2.D0.B0.D1.86.D0.B8.D1.8F_.D0.BF.D0.BB.D0.B0.D0.B3.D0.B8.D0.BD.D0.B0">Активация плагина</span></h3>
+<ol><li> Make sure the <tt>wp-content</tt> folder is <a href="Changing_File_Permissions.html" title="Changing File Permissions">writeable</a> by your server (change its CHMOD)</li>
+<li> Go to your  <a href="Administration_Panels.html" title="Administration Panels" class="mw-redirect">Administration</a> &gt; <a href="Administration_Panels.html#Plugins" title="Administration Panels" class="mw-redirect">Plugins</a> &gt; <a href="Managing_Plugins.html" title="Managing Plugins">Plugins Panel</a> and activate the plug-in</li></ol>
+<h3><span class="mw-headline" id=".D0.A0.D0.B5.D0.B7.D0.B5.D1.80.D0.B2.D0.BD.D0.BE.D0.B5_.D0.BA.D0.BE.D0.BF.D0.B8.D1.80.D0.BE.D0.B2.D0.B0.D0.BD.D0.B8.D0.B5">Резервное копирование</span></h3>
+<ol><li> Navigate to <a href="Administration_Panels.html" title="Administration Panels" class="mw-redirect">Administration</a> &gt; <a href="Administration_Panels.html#Backup" title="Administration Panels" class="mw-redirect">Manage</a> &gt; <a href="Manage_Backup_SubPanel.html" title="Manage Backup SubPanel">Backup Panel</a></li>
+<li> Select any tables, in addition to the core WordPress tables, that should be backed-up.  Select the Backup Options; the backup can be saved on the server, downloaded, or emailed.  Finally, click on the Backup button to actually perform the backup.  If you have installed the <a rel="nofollow" class="external text" href="http://www.skippy.net/blog/category/wordpress/plugins/wp-cron/">WP-Cron plugin</a>, you can schedule daily backups.</li></ol>
+<h3><span class="mw-headline" id=".D0.92.D0.BE.D1.81.D1.81.D1.82.D0.B0.D0.BD.D0.BE.D0.B2.D0.BB.D0.B5.D0.BD.D0.B8.D0.B5_.D0.B4.D0.B0.D0.BD.D0.BD.D1.8B.D1.85">Восстановление данных</span></h3>
+<p>The file created is a standard SQL file. If you want information about how to upload that file, look at <a href="Restoring_Your_Database_From_Backup.html" title="Restoring Your Database From Backup">Restoring Your Database From Backup</a>.
+</p>
+<h2><span class="mw-headline" id=".D0.98.D1.81.D0.BF.D0.BE.D0.BB.D1.8C.D0.B7.D1.83.D1.8F_CocoaMySQL">Используя CocoaMySQL</span></h2>
+<p><a rel="nofollow" class="external text" href="http://cocoamysql.sourceforge.net/">CocoaMySQL</a> is a free MySQL client for Mac OS X.
+</p><p>Open your database from CocoaMySQL and choose <strong>File → Export → MySQL file…</strong>, and check these options:
+</p>
+<ul><li> Add drop table</li>
+<li> Add create table</li>
+<li> Add table content</li></ul>
+<p><a href="File_cocoamysql_export_dialog.png" class="image"><img alt="cocoamysql export dialog.png" src="images/9/91/cocoamysql_export_dialog.png" width="482" height="290" /></a>
+</p>
+<h2><span class="mw-headline" id=".D0.A0.D0.B5.D1.81.D1.83.D1.80.D1.81.D1.8B_.D0.B8_.D0.BF.D0.BB.D0.B0.D0.B3.D0.B8.D0.BD.D1.8B_.D0.B4.D0.BB.D1.8F_.D1.80.D0.B5.D0.B7.D0.B5.D1.80.D0.B2.D0.BD.D0.BE.D0.B3.D0.BE_.D0.BA.D0.BE.D0.BF.D0.B8.D1.80.D0.BE.D0.B2.D0.B0.D0.BD.D0.B8.D1.8F">Ресурсы и плагины для резервного копирования</span></h2>
+<ul><li> <a rel="nofollow" class="external text" href="http://wpmag.ru/2014/backup-wordpress/">6 плагинов для резервного копирования WordPress</a></li>
+<li> <a rel="nofollow" class="external text" href="http://wpmag.ru/2014/rezervnoe-kopirovanie-wordpress-mysqldump-tar/">Резервное копирование WordPress с помощью mysqldump и tar</a></li>
+<li> <a href="Backup_WPMU.html" title="Backup WPMU" class="mw-redirect">Backup at its elementary level</a></li>
+<li> <a href="https://codex.wordpress.org/index.php?title=Plugins/BackUpWordPress&amp;action=edit&amp;redlink=1" class="new" title="Plugins/BackUpWordPress (page does not exist)">Plugins/BackUpWordPress</a> for automated backups.</li>
+<li> <a rel="nofollow" class="external text" href="http://www.ilfilosofo.com/blog/wp-db-backup">WordPress Database Backup Plugin</a></li>
+<li> <a rel="nofollow" class="external text" href="http://www.quickonlinetips.com/archives/2007/06/reduce-database-backup-size-delete-akismet-blocked-spam/">Reduce Database Backup Size: Delete Akismet Spam</a></li></ul>
+
+<!-- 
+NewPP limit report
+Cached time: 20210122105727
+Cache expiry: 86400
+Dynamic content: false
+CPU time usage: 0.028 seconds
+Real time usage: 0.036 seconds
+Preprocessor visited node count: 138/1000000
+Preprocessor generated node count: 436/1000000
+Post‐expand include size: 2297/2097152 bytes
+Template argument size: 814/2097152 bytes
+Highest expansion depth: 5/40
+Expensive parser function count: 0/100
+-->
+
+<!-- 
+Transclusion expansion time report (%,ms,calls,template)
+100.00%    9.239      1 - -total
+ 55.26%    5.106      1 - Template:Languages
+ 38.01%    3.512      1 - Template:ru:Stub
+ 15.97%    1.476      1 - Template:Message
+ 15.00%    1.386      1 - Template:ru
+ 12.70%    1.173      1 - Template:ja
+ 11.86%    1.096      1 - Template:en
+-->
+</div><div class="printfooter">
+Retrieved from "<a dir="ltr" href="https://codex.wordpress.org/index.php?title=%d0%a1%d0%be%d0%b7%d0%b4%d0%b0%d0%bd%d0%b8%d0%b5_%d1%80%d0%b5%d0%b7%d0%b5%d1%80%d0%b2%d0%bd%d0%be%d0%b9_%d0%ba%d0%be%d0%bf%d0%b8%d0%b8_%d0%b1%d0%b0%d0%b7%d1%8b_%d0%b4%d0%b0%d0%bd%d0%bd%d1%8b%d1%85&amp;oldid=143219">https://codex.wordpress.org/index.php?title=Создание_резервной_копии_базы_данных&amp;oldid=143219</a>"</div>
+				<div id="catlinks"><div id="catlinks" class="catlinks" data-mw="interface"><div id="mw-normal-catlinks" class="mw-normal-catlinks"><a href="https://codex.wordpress.org/Special:Categories" title="Special:Categories">Categories</a>: <ul><li><a href="Category_Stubs.html" title="Category:Stubs">Stubs</a></li><li><a href="Category_Getting_Started.html" title="Category:Getting Started">Getting Started</a></li><li><a href="Category_Advanced_Topics.html" title="Category:Advanced Topics">Advanced Topics</a></li><li><a href="Category_Troubleshooting.html" title="Category:Troubleshooting">Troubleshooting</a></li><li><a href="Category_Russian_Codex.html" title="Category:Russian Codex">Russian Codex</a></li></ul></div></div></div>			<!-- end content -->
+		</div>
+		<div class="col-2">
+			
+						
+			<ul class="submenu">
+				<li id="n-mainpage"><a href="Main_Page.html">Home Page</a></li>	
+				<li><a href="WordPress_Lessons.html">WordPress Lessons</a></li>
+				<li><a href="Getting_Started_with_WordPress.html">Getting Started</a></li>
+				<li><a href="Working_with_WordPress.html">Working with WordPress</a></li>
+				<li><a href="Blog_Design_and_Layout.html">Design and Layout</a></li>
+				<li><a href="Advanced_Topics.html">Advanced Topics</a></li>
+				<li><a href="Troubleshooting.html">Troubleshooting</a></li>
+				<li><a href="Developer_Documentation.html">Developer Docs</a></li>
+				<li><a href="About_WordPress.html">About WordPress</a></li>
+			</ul>
+
+			<h3>Codex Resources</h3>
+			<ul class="submenu">
+				<li id="n-portal"><a href="https://codex.wordpress.org/Codex:Community_Portal">Community portal</a></li>	      
+				<li id="n-currentevents"><a href="Current_events.html">Current events</a></li>	      
+				<li id="n-recentchanges"><a href="https://codex.wordpress.org/Special:RecentChanges">Recent changes</a></li>	      
+				<li id="n-randompage"><a href="https://codex.wordpress.org/Special:Random">Random page</a></li>	      
+				<li id="n-help"><a href="https://codex.wordpress.org/Help:Contents">Help</a></li>	
+			</ul>
+			
+		</div>
+	</div>
+</div>
+
+
+<div id="wporg-footer">
+	<div class="wrapper">
+		<ul>
+			<li><a href="http://wordpress.org/about/" title="An introduction to the WordPress project">About</a></li>
+			<li><a href="http://wordpress.org/news/" title="News and Updates">Blog</a></li>
+			<li><a href="http://wordpress.org/hosting/" title="Recommended web hosting providers">Hosting</a></li>
+			<li><a href="https://wordpressfoundation.org/donate/" title="Donate to the WordPress Foundation">Donate</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://wordpress.org/support/" title="Forums, documentation, and other resources">Support</a></li>
+			<li><a href="../developer.wordpress.org/index.html" title="Resources for WordPress developers">Developers</a></li>
+			<li><a href="http://make.wordpress.org/" title="Give back to WordPress through code, support, translation and more">Get Involved</a></li>
+			<li><a href="http://learn.wordpress.org/" title="Workshops and training materials">Learn</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://wordpress.org/showcase/" title="Some of the best WordPress sites on the Web">Showcase</a></li>
+			<li><a href="http://wordpress.org/plugins/" title="Add extra functionality to WordPress">Plugins</a></li>
+			<li><a href="http://wordpress.org/themes/" title="Make your WordPress pretty">Themes</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://central.wordcamp.org/" title="Find a WordPress event near you">WordCamp</a></li>
+			<li><a href="http://wordpress.tv/" title="Videos, tutorials, and WordCamp sessions">WordPress.TV</a></li>
+			<li><a href="http://buddypress.org/" title="A set of plugins to transform your WordPress into a social network">BuddyPress</a></li>
+			<li><a href="http://bbpress.org/" title="Fast, slick forums built on WordPress">bbPress</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://wordpress.com/?ref=wporg-footer" title="Hassle-free WordPress hosting">WordPress.com</a></li>
+			<li><a href="http://ma.tt/" title="Co-founder of WordPress, an example of what WordPress can do">Matt</a></li>
+			<li><a href="http://wordpress.org/about/privacy/" title="WordPress.org Privacy Policy">Privacy</a></li>
+			<li><a href="https://publiccode.eu/" target="_blank">Public Code</a></li>
+		</ul>
+
+		<ul>
+			<li><span class="dashicons dashicons-twitter"></span><a href="https://twitter.com/WordPress" title="Follow @WordPress on Twitter">@WordPress</a></li>
+			<li><span class="dashicons dashicons-facebook"></span><a href="https://www.facebook.com/WordPress/" title="Like WordPress on Facebook">WordPress</a></li>
+		</ul>
+	</div>
+
+		<p class="cip cip-image">Code is Poetry.</p>
+</div>
+
+<script src="../s.w.org/style/js/navigation.min.js?20190128"></script>
+
+</body>
+<!-- Cached 20210122105727 -->
+
+<!-- Mirrored from codex.wordpress.org/Создание_резервной_копии_базы_данных by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 31 Aug 2021 16:47:09 GMT -->
+</html>

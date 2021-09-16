@@ -1,0 +1,1972 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+
+<!-- Mirrored from developer.wordpress.org/reference/classes/wp_term_query/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 31 Aug 2021 17:26:30 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<!--
+<meta property="fb:page_id" content="6427302910" />
+-->
+<meta name="google-site-verification" content="7VWES_-rcHBcmaQis9mSYamPfNwE03f4vyTj4pfuAw0" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WP_Term_Query</title>
+<meta name="referrer" content="always">
+
+		<link href='../../../../fonts.googleapis.com/css.css?family=Open+Sans:300italic,400italic,600italic,400,300,600&amp;subset=latin,cyrillic-ext,greek-ext,greek,vietnamese,latin-ext,cyrillic' rel='stylesheet' type='text/css'>
+
+		<link rel="stylesheet" href="../../../../s.w.org/style/wp4.css?95" />
+
+<link rel="shortcut icon" href="../../../../s.w.org/favicon.ico?2" type="image/x-icon" />
+<link rel="pingback" href="../../../xmlrpc.php" /><meta name='robots' content='max-image-preview:large' />
+<link rel='dns-prefetch' href='../../../../fonts.googleapis.com/index.html' />
+<link rel='dns-prefetch' href='http://s.w.org/' />
+<link rel='dns-prefetch' href='http://www.googletagmanager.com/' />
+<link rel='dns-prefetch' href='http://fonts.gstatic.com/' />
+<link rel="alternate" type="application/rss+xml" title="WordPress Developer Resources &raquo; Feed" href="../../../feed/index.html" />
+<link rel="alternate" type="application/rss+xml" title="WordPress Developer Resources &raquo; Comments Feed" href="../../../comments/feed/index.html" />
+<meta property="og:title" content="WP_Term_Query | Class | WordPress Developer Resources" />
+<meta property="og:site_name" content="WordPress Developer Resources" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="../../../index.html" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@WordPress" />
+<meta name="description" content="Class used for querying terms." />
+<meta property="og:description" content="Class used for querying terms." />
+<link rel="alternate" type="application/rss+xml" title="WordPress Developer Resources &raquo; WP_Term_Query Comments Feed" href="https://developer.wordpress.org/reference/classes/wp_term_query/feed/" />
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'../../../../www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P24PF4B');</script>
+			<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/developer.wordpress.org\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.9-alpha-51701"}};
+			!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([10084,65039,8205,55357,56613],[10084,65039,8203,55357,56613])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel='stylesheet' id='dashicons-css'  href='../../../wp-includes/css/dashicons.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='admin-bar-css'  href='../../../wp-includes/css/admin-bar.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-block-library-css'  href='../../../wp-includes/css/dist/block-library/style.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='wporg-handbook-css-css'  href='../../../wp-content/plugins/handbook/stylesheets/callout-boxes.css?ver=20200121' type='text/css' media='all' />
+<link rel='stylesheet' id='open-sans-css'  href='../../../../fonts.googleapis.com/css-2.css?family=Open+Sans%3A300italic%2C400italic%2C600italic%2C300%2C400%2C600&amp;subset=latin%2Clatin-ext&amp;display=fallback&amp;ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='wporg-developer-style-css'  href='../../../wp-content/themes/pub/wporg-developer/style.css?ver=3' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-dev-sass-compiled-css'  href='../../../wp-content/themes/pub/wporg-developer/stylesheets/main.css?ver=20200713' type='text/css' media='all' />
+<link rel='stylesheet' id='awesomplete-css-css'  href='../../../wp-content/themes/pub/wporg-developer/stylesheets/awesomplete.css?ver=20160114' type='text/css' media='all' />
+<link rel='stylesheet' id='autocomplete-css-css'  href='../../../wp-content/themes/pub/wporg-developer/stylesheets/autocomplete.css?ver=20171220' type='text/css' media='all' />
+<link rel='stylesheet' id='syntaxhighlighter-core-css'  href='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shCore.css?ver=3.0.9b' type='text/css' media='all' />
+<link rel='stylesheet' id='syntaxhighlighter-theme-default-css'  href='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shThemeDefault.css?ver=3.0.9b' type='text/css' media='all' />
+<script type='text/javascript' src='../../../wp-includes/js/jquery/jquery.min.js?ver=3.6.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='../../../wp-content/plugins/handbook/scripts/handbook.js?ver=20150930' id='wporg-handbook-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/chapters.js?ver=20190603' id='wporg-developer-chapters-js'></script>
+<script type='text/javascript' src='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shCore.js?ver=3.0.9b' id='syntaxhighlighter-core-js'></script>
+<script type='text/javascript' src='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushPhp.js?ver=3.0.9b' id='syntaxhighlighter-brush-php-js'></script>
+<link rel="https://api.w.org/" href="https://developer.wordpress.org/wp-json/" /><link rel="alternate" type="application/json" href="https://developer.wordpress.org/wp-json/wp/v2/wp-parser-class/22285" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="../../../xmlrpc-2.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="../../../wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 5.9-alpha-51701" />
+<link rel='shortlink' href='https://developer.wordpress.org/?p=22285' />
+<link rel="alternate" type="application/json+oembed" href="https://developer.wordpress.org/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Fclasses%2Fwp_term_query%2F" />
+<link rel="alternate" type="text/xml+oembed" href="https://developer.wordpress.org/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Fclasses%2Fwp_term_query%2F&amp;format=xml" />
+<link rel="canonical" href="index.html">
+<!-- Stream WordPress user activity plugin v3.6.2 -->
+	<style>
+		@media screen and (max-width: 782px) {
+			#wpadminbar li#wp-admin-bar-log-in,
+			#wpadminbar li#wp-admin-bar-register {
+				display: block;
+			}
+
+			#wpadminbar li#wp-admin-bar-log-in a,
+			#wpadminbar li#wp-admin-bar-register a {
+				padding: 0 8px;
+			}
+		}
+	</style>
+		<style>
+			a.github-edit {
+				margin-left: .5em;
+				font-size: .5em;
+				vertical-align: top;
+				display: inline-block;
+				border: 1px solid #eeeeee;
+				border-radius: 2px;
+				background: #eeeeee;
+				padding: .5em .6em .4em;
+				color: black;
+				margin-top: 0.1em;
+			}
+			a.github-edit > * {
+				opacity: 0.6;
+			}
+			a.github-edit:hover > * {
+				opacity: 1;
+				color: black;
+			}
+			a.github-edit img {
+				height: .8em;
+			}
+		</style>
+		
+	<script type="text/javascript">
+		jQuery( '<style>.hide-if-js { display: none; }</style>' ).appendTo( 'head' );
+		jQuery( function($) {
+			$( 'body' ).addClass('js');
+		} );
+	</script>
+<style type="text/css" media="print">#wpadminbar { display:none; }</style>
+	<style type="text/css" media="screen">
+	</style>
+	<script>document.cookie='devicePixelRatio='+((window.devicePixelRatio === undefined) ? 1 : window.devicePixelRatio)+'; path=/';</script>
+
+</head>
+
+
+<body id="wordpress-org" class="wp-parser-class-template-default single single-wp-parser-class postid-22285 admin-bar no-customize-support">
+		<div id="wpadminbar" class="nojq nojs">
+						<div class="quicklinks" id="wp-toolbar" role="navigation" aria-label="Toolbar">
+				<ul id='wp-admin-bar-root-default' class="ab-top-menu"><li id='wp-admin-bar-wp-logo' class="menupop"><a class='ab-item' aria-haspopup="true" href='https://wordpress.org/about/'><span class="ab-icon" aria-hidden="true"></span><span class="screen-reader-text">About WordPress</span></a><div class="ab-sub-wrapper"><ul id='wp-admin-bar-wp-logo-default' class="ab-submenu"><li id='wp-admin-bar-about'><a class='ab-item' href='https://wordpress.org/about/'>About WordPress</a></li></ul><ul id='wp-admin-bar-wp-logo-external' class="ab-sub-secondary ab-submenu"><li id='wp-admin-bar-wporg'><a class='ab-item' href='https://wordpress.org/'>WordPress.org</a></li><li id='wp-admin-bar-documentation'><a class='ab-item' href='https://wordpress.org/support/'>Documentation</a></li><li id='wp-admin-bar-support-forums'><a class='ab-item' href='https://wordpress.org/support/forums/'>Support</a></li><li id='wp-admin-bar-feedback'><a class='ab-item' href='https://wordpress.org/support/forum/requests-and-feedback'>Feedback</a></li></ul></div></li></ul><ul id='wp-admin-bar-top-secondary' class="ab-top-secondary ab-top-menu"><li id='wp-admin-bar-search' class="admin-bar-search"><div class="ab-item ab-empty-item" tabindex="-1"><form action="https://developer.wordpress.org/" method="get" id="adminbarsearch"><input class="adminbar-input" name="s" id="adminbar-search" type="text" value="" maxlength="150" /><label for="adminbar-search" class="screen-reader-text">Search</label><input type="submit" class="adminbar-button" value="Search" /></form></div></li><li id='wp-admin-bar-log-in'><a class='ab-item' href='https://login.wordpress.org/?locale=en_US'>Log In</a></li><li id='wp-admin-bar-register'><a class='ab-item' href='https://login.wordpress.org/register?locale=en_US'>Register</a></li></ul>			</div>
+					</div>
+
+		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P24PF4B" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<div id="wporg-header">
+	<div class="wrapper">
+	<h1><a href="http://wordpress.org/">WordPress.org</a></h1>				<div id="head-search">
+		<form action="http://wordpress.org/search/do-search.php" method="get">
+			<label for="global-search" class="screen-reader-text">Search WordPress.org for:</label>
+			<input id="global-search" class="text" name="search" type="text" value="" maxlength="150" placeholder="Search WordPress.org" />
+			<button type="submit" class="button"><span class="screen-reader-text">Submit</span></button>
+		</form>
+		</div>
+				<div style="clear:both"></div>
+		<button id="mobile-menu-button" aria-expanded="false"><span class="screen-reader-text">Toggle Menu</span></button>
+		
+<nav aria-label="Main Menu">
+<ul id="wporg-header-menu">
+<li class="menu-item"><a href='http://wordpress.org/showcase/' data-title='See some of the sites built on WordPress.'>Showcase</a></li>
+<li class="menu-item"><a href='http://learn.wordpress.org/' data-title='Resources to help you learn more about WordPress and teach it to others.'>Learn</a></li>
+<li class="menu-item"><a href='http://wordpress.org/themes/' data-title='Find just the right look for your website.'>Themes</a></li>
+<li class="menu-item"><a href='http://wordpress.org/plugins/' data-title='Plugins can extend WordPress to do almost anything you can imagine.'>Plugins</a></li>
+<li class="menu-item"><a href='http://wordpress.org/mobile/' data-title='Take your website on the go!'>Mobile</a></li>
+<li class="menu-item"><a href='http://wordpress.org/support/' data-title='Forums, documentation, help.'>Support</a><ul class="nav-submenu"><li><a href='http://wordpress.org/support/' title='Documentation, tutorials, best practices.'>Documentation</a></li><li><a href='http://wordpress.org/support/forums/' title='Support and discussion forums.'>Forums</a></li></ul><div class="uparrow"></div></li>
+<li class="menu-item"><a href='http://make.wordpress.org/' data-title='Contribute your knowledge.'>Get Involved</a><ul class="nav-submenu"><li><a href='http://wordpress.org/five-for-the-future/' title='How five percent is powering the next generation of the web'>Five for the Future</a></li></ul><div class="uparrow"></div></li>
+<li class="menu-item"><a href='http://wordpress.org/about/' data-title='About the WordPress Organization, and where we&#039;re going.'>About</a></li>
+<li class="menu-item"><a href='http://wordpress.org/news/' data-title='Come here for the latest scoop.'>Blog</a></li>
+<li class="menu-item"><a href='http://wordpress.org/hosting/' data-title='Find a home for your blog.'>Hosting</a></li>
+<li id="download" class="button download-button menu-item"><a href='http://wordpress.org/download/' data-title='Get it. Got it? Good.'>Get WordPress</a></li>
+</ul>
+</nav>
+		<div style="clear:both"></div>
+	</div>
+</div>
+
+
+
+<header id="masthead" class="site-header" role="banner">
+		<div class="site-branding">
+		<h1 class="site-title">
+			<a href="../../index.html" rel="home">Code Reference</a>
+		</h1>
+
+		
+		<nav id="site-navigation" class="main-navigation" role="navigation">
+			<button class="menu-toggle dashicons dashicons-arrow-down-alt2" aria-controls="primary-menu" aria-expanded="false" aria-label="Primary Menu"></button>
+					</nav>
+	</div>
+</header><!-- #masthead -->
+
+<div id="page" class="hfeed site devhub-wrap">
+	<a href="#main" class="screen-reader-text">Skip to content</a>
+
+				<div id="inner-search">
+			<div class="search-section section clear hide-if-js">
+
+
+	
+	<form role="search" method="get" class="searchform searchform-filtered" action="https://developer.wordpress.org/">
+		<label for="search-field" class="screen-reader-text">Search for:</label>
+		<input type="text" id="search-field" class="search-field" placeholder="Search &hellip;" value="" name="s">
+		<button class="button button-primary button-search"><i class="dashicons dashicons-search"></i><span class="screen-reader-text">Search plugins</span></button>
+	
+		<div class="search-post-type">
+			<span>Filter by type:</span>
+									<label><input type="checkbox" name="post_type[]" value="wp-parser-function"
+						 /> Functions</label>
+									<label><input type="checkbox" name="post_type[]" value="wp-parser-hook"
+						 /> Hooks</label>
+									<label><input type="checkbox" name="post_type[]" value="wp-parser-class"
+						 /> Classes</label>
+									<label><input type="checkbox" name="post_type[]" value="wp-parser-method"
+						 /> Methods</label>
+					</div>
+
+	
+	</form>
+
+</div><!-- /search-guide -->
+			<div id="inner-search-icon-container">
+				<div id="inner-search-icon">
+					<div class="dashicons dashicons-search"><span class="screen-reader-text">Search</span></div>
+				</div>
+			</div>
+		</div>
+
+		<div id="content" class="site-content">
+
+	<div id="content-area" class="wp-parser-class-template-default single single-wp-parser-class postid-22285 admin-bar no-customize-support code-reference">
+
+		
+		<div class="breadcrumb-trail breadcrumbs" itemprop="breadcrumb">
+			<span class="trail-browse">Browse:</span> 
+			<span class="trail-begin"><a href="../../../index.html" title="WordPress Developer Resources" rel="home">Home</a></span> <span class="sep">&#47;</span> 
+			<span class="trail-inner"><a href="../../index.html" title="Reference">Reference</a></span> <span class="sep">&#47;</span> 
+			<span class="trail-inner"><a href="../index.html">Classes</a></span> <span class="sep">&#47;</span> <span class="trail-end">WP_Term_Query</span>
+		</div>
+		<main id="main" class="site-main" role="main">
+
+		
+			
+<article id="post-22285" class="post-22285 wp-parser-class type-wp-parser-class status-publish hentry wp-parser-source-file-wp-includes_class-wp-term-query-php wp-parser-package-taxonomy wp-parser-package-wordpress wp-parser-since-4-6-0">
+
+	
+	
+	<h1>WP_Term_Query</h1>
+
+	<section class="summary">
+		<p>Class used for querying terms.</p>
+	</section>
+
+
+	
+	<div class="content-toc"><style> .toc-jump { text-align: right; font-size: 12px; } .page .toc-heading { margin-top: -50px; padding-top: 50px !important; }</style><div class="table-of-contents"><h2>Contents</h2><ul class="items"><li><a href="#description">Description</a>
+<ul>
+<li><a href="#see-also">See also</a>
+</ul></li>
+<li><a href="#source">Source</a></li>
+<li><a href="#methods">Methods</a></li>
+<li><a href="#changelog">Changelog</a></li>
+<li><a href="#user-contributed-notes">User Contributed Notes</a></ul>
+</div>
+
+<hr />
+<section class="description">
+	<h2 class="toc-heading" id="description" tabindex="-1">Description <a href="#description" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Description</span></a></h2>
+	
+		<h3 class="toc-heading" id="see-also" tabindex="-1">See also <a href="#see-also" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">See also</span></a></h3>
+
+	<ul>
+	<li><a href="__construct/index-2.html">WP_Term_Query::__construct()</a>: for accepted arguments.</li>
+	</ul>
+	</section>
+
+	<hr />
+	<section class="source-content">
+		<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="source" tabindex="-1">Source <a href="#source" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Source</span></a></h2>
+		<p>
+			File: <a href="../../files/wp-includes/class-wp-term-query.php/index.html">wp-includes/class-wp-term-query.php</a>		</p>
+
+					<div class="source-code-container">
+				<pre class="brush: php; toolbar: false; first-line: 18">class WP_Term_Query {
+
+	/**
+	 * SQL string used to perform database query.
+	 *
+	 * @since 4.6.0
+	 * @var string
+	 */
+	public $request;
+
+	/**
+	 * Metadata query container.
+	 *
+	 * @since 4.6.0
+	 * @var WP_Meta_Query A meta query instance.
+	 */
+	public $meta_query = false;
+
+	/**
+	 * Metadata query clauses.
+	 *
+	 * @since 4.6.0
+	 * @var array
+	 */
+	protected $meta_query_clauses;
+
+	/**
+	 * SQL query clauses.
+	 *
+	 * @since 4.6.0
+	 * @var array
+	 */
+	protected $sql_clauses = array(
+		'select'  =&gt; '',
+		'from'    =&gt; '',
+		'where'   =&gt; array(),
+		'orderby' =&gt; '',
+		'limits'  =&gt; '',
+	);
+
+	/**
+	 * Query vars set by the user.
+	 *
+	 * @since 4.6.0
+	 * @var array
+	 */
+	public $query_vars;
+
+	/**
+	 * Default values for query vars.
+	 *
+	 * @since 4.6.0
+	 * @var array
+	 */
+	public $query_var_defaults;
+
+	/**
+	 * List of terms located by the query.
+	 *
+	 * @since 4.6.0
+	 * @var array
+	 */
+	public $terms;
+
+	/**
+	 * Constructor.
+	 *
+	 * Sets up the term query, based on the query vars passed.
+	 *
+	 * @since 4.6.0
+	 * @since 4.6.0 Introduced 'term_taxonomy_id' parameter.
+	 * @since 4.7.0 Introduced 'object_ids' parameter.
+	 * @since 4.9.0 Added 'slug__in' support for 'orderby'.
+	 *
+	 * @param string|array $query {
+	 *     Optional. Array or query string of term query parameters. Default empty.
+	 *
+	 *     @type string|array $taxonomy               Taxonomy name, or array of taxonomies, to which results should
+	 *                                                be limited.
+	 *     @type int|int[]    $object_ids             Optional. Object ID, or array of object IDs. Results will be
+	 *                                                limited to terms associated with these objects.
+	 *     @type string       $orderby                Field(s) to order terms by. Accepts:
+	 *                                                * term fields ('name', 'slug', 'term_group', 'term_id', 'id',
+	 *                                                  'description', 'parent', 'term_order'). Unless `$object_ids`
+	 *                                                  is not empty, 'term_order' is treated the same as 'term_id'.
+	 *                                                * 'count' to use the number of objects associated with the term.
+	 *                                                * 'include' to match the 'order' of the $include param.
+	 *                                                * 'slug__in' to match the 'order' of the $slug param.
+	 *                                                * 'meta_value', 'meta_value_num'.
+	 *                                                  the value of `$meta_key`.
+	 *                                                  the array keys of `$meta_query`.
+	 *                                                * 'none' to omit the ORDER BY clause.
+	 *                                                Defaults to 'name'.
+	 *     @type string       $order                  Whether to order terms in ascending or descending order.
+	 *                                                Accepts 'ASC' (ascending) or 'DESC' (descending).
+	 *                                                Default 'ASC'.
+	 *     @type bool|int     $hide_empty             Whether to hide terms not assigned to any posts. Accepts
+	 *                                                1|true or 0|false. Default 1|true.
+	 *     @type int[]|string $include                Array or comma/space-separated string of term IDs to include.
+	 *                                                Default empty array.
+	 *     @type int[]|string $exclude                Array or comma/space-separated string of term IDs to exclude.
+	 *                                                If $include is non-empty, $exclude is ignored.
+	 *                                                Default empty array.
+	 *     @type int[]|string $exclude_tree           Array or comma/space-separated string of term IDs to exclude
+	 *                                                along with all of their descendant terms. If $include is
+	 *                                                non-empty, $exclude_tree is ignored. Default empty array.
+	 *     @type int|string   $number                 Maximum number of terms to return. Accepts ''|0 (all) or any
+	 *                                                positive number. Default ''|0 (all). Note that $number may
+	 *                                                not return accurate results when coupled with $object_ids.
+	 *                                                See #41796 for details.
+	 *     @type int          $offset                 The number by which to offset the terms query. Default empty.
+	 *     @type string       $fields                 Term fields to query for. Accepts:
+	 *                                                * 'all' Returns an array of complete term objects (`WP_Term[]`).
+	 *                                                * 'all_with_object_id' Returns an array of term objects
+	 *                                                  with the 'object_id' param (`WP_Term[]`). Works only
+	 *                                                  when the `$object_ids` parameter is populated.
+	 *                                                * 'ids' Returns an array of term IDs (`int[]`).
+	 *                                                * 'tt_ids' Returns an array of term taxonomy IDs (`int[]`).
+	 *                                                * 'names' Returns an array of term names (`string[]`).
+	 *                                                * 'slugs' Returns an array of term slugs (`string[]`).
+	 *                                                * 'count' Returns the number of matching terms (`int`).
+	 *                                                * 'id=&gt;parent' Returns an associative array of parent term IDs,
+	 *                                                   keyed by term ID (`int[]`).
+	 *                                                * 'id=&gt;name' Returns an associative array of term names,
+	 *                                                   keyed by term ID (`string[]`).
+	 *                                                * 'id=&gt;slug' Returns an associative array of term slugs,
+	 *                                                   keyed by term ID (`string[]`).
+	 *                                                Default 'all'.
+	 *     @type bool         $count                  Whether to return a term count. If true, will take precedence
+	 *                                                over `$fields`. Default false.
+	 *     @type string|array $name                   Optional. Name or array of names to return term(s) for.
+	 *                                                Default empty.
+	 *     @type string|array $slug                   Optional. Slug or array of slugs to return term(s) for.
+	 *                                                Default empty.
+	 *     @type int|int[]    $term_taxonomy_id       Optional. Term taxonomy ID, or array of term taxonomy IDs,
+	 *                                                to match when querying terms.
+	 *     @type bool         $hierarchical           Whether to include terms that have non-empty descendants
+	 *                                                (even if $hide_empty is set to true). Default true.
+	 *     @type string       $search                 Search criteria to match terms. Will be SQL-formatted with
+	 *                                                wildcards before and after. Default empty.
+	 *     @type string       $name__like             Retrieve terms with criteria by which a term is LIKE
+	 *                                                `$name__like`. Default empty.
+	 *     @type string       $description__like      Retrieve terms where the description is LIKE
+	 *                                                `$description__like`. Default empty.
+	 *     @type bool         $pad_counts             Whether to pad the quantity of a term's children in the
+	 *                                                quantity of each term's &quot;count&quot; object variable.
+	 *                                                Default false.
+	 *     @type string       $get                    Whether to return terms regardless of ancestry or whether the
+	 *                                                terms are empty. Accepts 'all' or empty (disabled).
+	 *                                                Default empty.
+	 *     @type int          $child_of               Term ID to retrieve child terms of. If multiple taxonomies
+	 *                                                are passed, $child_of is ignored. Default 0.
+	 *     @type int|string   $parent                 Parent term ID to retrieve direct-child terms of.
+	 *                                                Default empty.
+	 *     @type bool         $childless              True to limit results to terms that have no children.
+	 *                                                This parameter has no effect on non-hierarchical taxonomies.
+	 *                                                Default false.
+	 *     @type string       $cache_domain           Unique cache key to be produced when this query is stored in
+	 *                                                an object cache. Default is 'core'.
+	 *     @type bool         $update_term_meta_cache Whether to prime meta caches for matched terms. Default true.
+	 *     @type array        $meta_query             Optional. Meta query clauses to limit retrieved terms by.
+	 *                                                See `WP_Meta_Query`. Default empty.
+	 *     @type string       $meta_key               Limit terms to those matching a specific metadata key.
+	 *                                                Can be used in conjunction with `$meta_value`. Default empty.
+	 *     @type string       $meta_value             Limit terms to those matching a specific metadata value.
+	 *                                                Usually used in conjunction with `$meta_key`. Default empty.
+	 *     @type string       $meta_type              MySQL data type that the `$meta_value` will be CAST to for
+	 *                                                comparisons. Default empty.
+	 *     @type string       $meta_compare           Comparison operator to test the 'meta_value'. Default empty.
+	 * }
+	 */
+	public function __construct( $query = '' ) {
+		$this-&gt;query_var_defaults = array(
+			'taxonomy'               =&gt; null,
+			'object_ids'             =&gt; null,
+			'orderby'                =&gt; 'name',
+			'order'                  =&gt; 'ASC',
+			'hide_empty'             =&gt; true,
+			'include'                =&gt; array(),
+			'exclude'                =&gt; array(),
+			'exclude_tree'           =&gt; array(),
+			'number'                 =&gt; '',
+			'offset'                 =&gt; '',
+			'fields'                 =&gt; 'all',
+			'count'                  =&gt; false,
+			'name'                   =&gt; '',
+			'slug'                   =&gt; '',
+			'term_taxonomy_id'       =&gt; '',
+			'hierarchical'           =&gt; true,
+			'search'                 =&gt; '',
+			'name__like'             =&gt; '',
+			'description__like'      =&gt; '',
+			'pad_counts'             =&gt; false,
+			'get'                    =&gt; '',
+			'child_of'               =&gt; 0,
+			'parent'                 =&gt; '',
+			'childless'              =&gt; false,
+			'cache_domain'           =&gt; 'core',
+			'update_term_meta_cache' =&gt; true,
+			'meta_query'             =&gt; '',
+			'meta_key'               =&gt; '',
+			'meta_value'             =&gt; '',
+			'meta_type'              =&gt; '',
+			'meta_compare'           =&gt; '',
+		);
+
+		if ( ! empty( $query ) ) {
+			$this-&gt;query( $query );
+		}
+	}
+
+	/**
+	 * Parse arguments passed to the term query with default query parameters.
+	 *
+	 * @since 4.6.0
+	 *
+	 * @param string|array $query WP_Term_Query arguments. See WP_Term_Query::__construct()
+	 */
+	public function parse_query( $query = '' ) {
+		if ( empty( $query ) ) {
+			$query = $this-&gt;query_vars;
+		}
+
+		$taxonomies = isset( $query['taxonomy'] ) ? (array) $query['taxonomy'] : null;
+
+		/**
+		 * Filters the terms query default arguments.
+		 *
+		 * Use {@see 'get_terms_args'} to filter the passed arguments.
+		 *
+		 * @since 4.4.0
+		 *
+		 * @param array    $defaults   An array of default get_terms() arguments.
+		 * @param string[] $taxonomies An array of taxonomy names.
+		 */
+		$this-&gt;query_var_defaults = apply_filters( 'get_terms_defaults', $this-&gt;query_var_defaults, $taxonomies );
+
+		$query = wp_parse_args( $query, $this-&gt;query_var_defaults );
+
+		$query['number'] = absint( $query['number'] );
+		$query['offset'] = absint( $query['offset'] );
+
+		// 'parent' overrides 'child_of'.
+		if ( 0 &lt; (int) $query['parent'] ) {
+			$query['child_of'] = false;
+		}
+
+		if ( 'all' === $query['get'] ) {
+			$query['childless']    = false;
+			$query['child_of']     = 0;
+			$query['hide_empty']   = 0;
+			$query['hierarchical'] = false;
+			$query['pad_counts']   = false;
+		}
+
+		$query['taxonomy'] = $taxonomies;
+
+		$this-&gt;query_vars = $query;
+
+		/**
+		 * Fires after term query vars have been parsed.
+		 *
+		 * @since 4.6.0
+		 *
+		 * @param WP_Term_Query $this Current instance of WP_Term_Query.
+		 */
+		do_action( 'parse_term_query', $this );
+	}
+
+	/**
+	 * Sets up the query and retrieves the results.
+	 *
+	 * The return type varies depending on the value passed to `$args['fields']`. See
+	 * WP_Term_Query::get_terms() for details.
+	 *
+	 * @since 4.6.0
+	 *
+	 * @param string|array $query Array or URL query string of parameters.
+	 * @return WP_Term[]|int[]|string[]|string Array of terms, or number of terms as numeric string
+	 *                                         when 'count' is passed as a query var.
+	 */
+	public function query( $query ) {
+		$this-&gt;query_vars = wp_parse_args( $query );
+		return $this-&gt;get_terms();
+	}
+
+	/**
+	 * Retrieves the query results.
+	 *
+	 * The return type varies depending on the value passed to `$args['fields']`.
+	 *
+	 * The following will result in an array of `WP_Term` objects being returned:
+	 *
+	 *   - 'all'
+	 *   - 'all_with_object_id'
+	 *
+	 * The following will result in a numeric string being returned:
+	 *
+	 *   - 'count'
+	 *
+	 * The following will result in an array of text strings being returned:
+	 *
+	 *   - 'id=&gt;name'
+	 *   - 'id=&gt;slug'
+	 *   - 'names'
+	 *   - 'slugs'
+	 *
+	 * The following will result in an array of numeric strings being returned:
+	 *
+	 *   - 'id=&gt;parent'
+	 *
+	 * The following will result in an array of integers being returned:
+	 *
+	 *   - 'ids'
+	 *   - 'tt_ids'
+	 *
+	 * @since 4.6.0
+	 *
+	 * @global wpdb $wpdb WordPress database abstraction object.
+	 *
+	 * @return WP_Term[]|int[]|string[]|string Array of terms, or number of terms as numeric string
+	 *                                         when 'count' is passed as a query var.
+	 */
+	public function get_terms() {
+		global $wpdb;
+
+		$this-&gt;parse_query( $this-&gt;query_vars );
+		$args = &amp;$this-&gt;query_vars;
+
+		// Set up meta_query so it's available to 'pre_get_terms'.
+		$this-&gt;meta_query = new WP_Meta_Query();
+		$this-&gt;meta_query-&gt;parse_query_vars( $args );
+
+		/**
+		 * Fires before terms are retrieved.
+		 *
+		 * @since 4.6.0
+		 *
+		 * @param WP_Term_Query $this Current instance of WP_Term_Query (passed by reference).
+		 */
+		do_action_ref_array( 'pre_get_terms', array( &amp;$this ) );
+
+		$taxonomies = (array) $args['taxonomy'];
+
+		// Save queries by not crawling the tree in the case of multiple taxes or a flat tax.
+		$has_hierarchical_tax = false;
+		if ( $taxonomies ) {
+			foreach ( $taxonomies as $_tax ) {
+				if ( is_taxonomy_hierarchical( $_tax ) ) {
+					$has_hierarchical_tax = true;
+				}
+			}
+		} else {
+			// When no taxonomies are provided, assume we have to descend the tree.
+			$has_hierarchical_tax = true;
+		}
+
+		if ( ! $has_hierarchical_tax ) {
+			$args['hierarchical'] = false;
+			$args['pad_counts']   = false;
+		}
+
+		// 'parent' overrides 'child_of'.
+		if ( 0 &lt; (int) $args['parent'] ) {
+			$args['child_of'] = false;
+		}
+
+		if ( 'all' === $args['get'] ) {
+			$args['childless']    = false;
+			$args['child_of']     = 0;
+			$args['hide_empty']   = 0;
+			$args['hierarchical'] = false;
+			$args['pad_counts']   = false;
+		}
+
+		/**
+		 * Filters the terms query arguments.
+		 *
+		 * @since 3.1.0
+		 *
+		 * @param array    $args       An array of get_terms() arguments.
+		 * @param string[] $taxonomies An array of taxonomy names.
+		 */
+		$args = apply_filters( 'get_terms_args', $args, $taxonomies );
+
+		// Avoid the query if the queried parent/child_of term has no descendants.
+		$child_of = $args['child_of'];
+		$parent   = $args['parent'];
+
+		if ( $child_of ) {
+			$_parent = $child_of;
+		} elseif ( $parent ) {
+			$_parent = $parent;
+		} else {
+			$_parent = false;
+		}
+
+		if ( $_parent ) {
+			$in_hierarchy = false;
+			foreach ( $taxonomies as $_tax ) {
+				$hierarchy = _get_term_hierarchy( $_tax );
+
+				if ( isset( $hierarchy[ $_parent ] ) ) {
+					$in_hierarchy = true;
+				}
+			}
+
+			if ( ! $in_hierarchy ) {
+				if ( 'count' === $args['fields'] ) {
+					return 0;
+				} else {
+					$this-&gt;terms = array();
+					return $this-&gt;terms;
+				}
+			}
+		}
+
+		// 'term_order' is a legal sort order only when joining the relationship table.
+		$_orderby = $this-&gt;query_vars['orderby'];
+		if ( 'term_order' === $_orderby &amp;&amp; empty( $this-&gt;query_vars['object_ids'] ) ) {
+			$_orderby = 'term_id';
+		}
+
+		$orderby = $this-&gt;parse_orderby( $_orderby );
+
+		if ( $orderby ) {
+			$orderby = &quot;ORDER BY $orderby&quot;;
+		}
+
+		$order = $this-&gt;parse_order( $this-&gt;query_vars['order'] );
+
+		if ( $taxonomies ) {
+			$this-&gt;sql_clauses['where']['taxonomy'] = &quot;tt.taxonomy IN ('&quot; . implode( &quot;', '&quot;, array_map( 'esc_sql', $taxonomies ) ) . &quot;')&quot;;
+		}
+
+		$exclude      = $args['exclude'];
+		$exclude_tree = $args['exclude_tree'];
+		$include      = $args['include'];
+
+		$inclusions = '';
+		if ( ! empty( $include ) ) {
+			$exclude      = '';
+			$exclude_tree = '';
+			$inclusions   = implode( ',', wp_parse_id_list( $include ) );
+		}
+
+		if ( ! empty( $inclusions ) ) {
+			$this-&gt;sql_clauses['where']['inclusions'] = 't.term_id IN ( ' . $inclusions . ' )';
+		}
+
+		$exclusions = array();
+		if ( ! empty( $exclude_tree ) ) {
+			$exclude_tree      = wp_parse_id_list( $exclude_tree );
+			$excluded_children = $exclude_tree;
+			foreach ( $exclude_tree as $extrunk ) {
+				$excluded_children = array_merge(
+					$excluded_children,
+					(array) get_terms(
+						array(
+							'taxonomy'   =&gt; reset( $taxonomies ),
+							'child_of'   =&gt; (int) $extrunk,
+							'fields'     =&gt; 'ids',
+							'hide_empty' =&gt; 0,
+						)
+					)
+				);
+			}
+			$exclusions = array_merge( $excluded_children, $exclusions );
+		}
+
+		if ( ! empty( $exclude ) ) {
+			$exclusions = array_merge( wp_parse_id_list( $exclude ), $exclusions );
+		}
+
+		// 'childless' terms are those without an entry in the flattened term hierarchy.
+		$childless = (bool) $args['childless'];
+		if ( $childless ) {
+			foreach ( $taxonomies as $_tax ) {
+				$term_hierarchy = _get_term_hierarchy( $_tax );
+				$exclusions     = array_merge( array_keys( $term_hierarchy ), $exclusions );
+			}
+		}
+
+		if ( ! empty( $exclusions ) ) {
+			$exclusions = 't.term_id NOT IN (' . implode( ',', array_map( 'intval', $exclusions ) ) . ')';
+		} else {
+			$exclusions = '';
+		}
+
+		/**
+		 * Filters the terms to exclude from the terms query.
+		 *
+		 * @since 2.3.0
+		 *
+		 * @param string   $exclusions `NOT IN` clause of the terms query.
+		 * @param array    $args       An array of terms query arguments.
+		 * @param string[] $taxonomies An array of taxonomy names.
+		 */
+		$exclusions = apply_filters( 'list_terms_exclusions', $exclusions, $args, $taxonomies );
+
+		if ( ! empty( $exclusions ) ) {
+			// Must do string manipulation here for backward compatibility with filter.
+			$this-&gt;sql_clauses['where']['exclusions'] = preg_replace( '/^\s*AND\s*/', '', $exclusions );
+		}
+
+		if (
+			( ! empty( $args['name'] ) ) ||
+			( is_string( $args['name'] ) &amp;&amp; 0 !== strlen( $args['name'] ) )
+		) {
+			$names = (array) $args['name'];
+			foreach ( $names as &amp;$_name ) {
+				// `sanitize_term_field()` returns slashed data.
+				$_name = stripslashes( sanitize_term_field( 'name', $_name, 0, reset( $taxonomies ), 'db' ) );
+			}
+
+			$this-&gt;sql_clauses['where']['name'] = &quot;t.name IN ('&quot; . implode( &quot;', '&quot;, array_map( 'esc_sql', $names ) ) . &quot;')&quot;;
+		}
+
+		if (
+			( ! empty( $args['slug'] ) ) ||
+			( is_string( $args['slug'] ) &amp;&amp; 0 !== strlen( $args['slug'] ) )
+		) {
+			if ( is_array( $args['slug'] ) ) {
+				$slug                               = array_map( 'sanitize_title', $args['slug'] );
+				$this-&gt;sql_clauses['where']['slug'] = &quot;t.slug IN ('&quot; . implode( &quot;', '&quot;, $slug ) . &quot;')&quot;;
+			} else {
+				$slug                               = sanitize_title( $args['slug'] );
+				$this-&gt;sql_clauses['where']['slug'] = &quot;t.slug = '$slug'&quot;;
+			}
+		}
+
+		if ( ! empty( $args['term_taxonomy_id'] ) ) {
+			if ( is_array( $args['term_taxonomy_id'] ) ) {
+				$tt_ids = implode( ',', array_map( 'intval', $args['term_taxonomy_id'] ) );
+				$this-&gt;sql_clauses['where']['term_taxonomy_id'] = &quot;tt.term_taxonomy_id IN ({$tt_ids})&quot;;
+			} else {
+				$this-&gt;sql_clauses['where']['term_taxonomy_id'] = $wpdb-&gt;prepare( 'tt.term_taxonomy_id = %d', $args['term_taxonomy_id'] );
+			}
+		}
+
+		if ( ! empty( $args['name__like'] ) ) {
+			$this-&gt;sql_clauses['where']['name__like'] = $wpdb-&gt;prepare( 't.name LIKE %s', '%' . $wpdb-&gt;esc_like( $args['name__like'] ) . '%' );
+		}
+
+		if ( ! empty( $args['description__like'] ) ) {
+			$this-&gt;sql_clauses['where']['description__like'] = $wpdb-&gt;prepare( 'tt.description LIKE %s', '%' . $wpdb-&gt;esc_like( $args['description__like'] ) . '%' );
+		}
+
+		if ( ! empty( $args['object_ids'] ) ) {
+			$object_ids = $args['object_ids'];
+			if ( ! is_array( $object_ids ) ) {
+				$object_ids = array( $object_ids );
+			}
+
+			$object_ids                               = implode( ', ', array_map( 'intval', $object_ids ) );
+			$this-&gt;sql_clauses['where']['object_ids'] = &quot;tr.object_id IN ($object_ids)&quot;;
+		}
+
+		/*
+		 * When querying for object relationships, the 'count &gt; 0' check
+		 * added by 'hide_empty' is superfluous.
+		 */
+		if ( ! empty( $args['object_ids'] ) ) {
+			$args['hide_empty'] = false;
+		}
+
+		if ( '' !== $parent ) {
+			$parent                               = (int) $parent;
+			$this-&gt;sql_clauses['where']['parent'] = &quot;tt.parent = '$parent'&quot;;
+		}
+
+		$hierarchical = $args['hierarchical'];
+		if ( 'count' === $args['fields'] ) {
+			$hierarchical = false;
+		}
+		if ( $args['hide_empty'] &amp;&amp; ! $hierarchical ) {
+			$this-&gt;sql_clauses['where']['count'] = 'tt.count &gt; 0';
+		}
+
+		$number = $args['number'];
+		$offset = $args['offset'];
+
+		// Don't limit the query results when we have to descend the family tree.
+		if ( $number &amp;&amp; ! $hierarchical &amp;&amp; ! $child_of &amp;&amp; '' === $parent ) {
+			if ( $offset ) {
+				$limits = 'LIMIT ' . $offset . ',' . $number;
+			} else {
+				$limits = 'LIMIT ' . $number;
+			}
+		} else {
+			$limits = '';
+		}
+
+		if ( ! empty( $args['search'] ) ) {
+			$this-&gt;sql_clauses['where']['search'] = $this-&gt;get_search_sql( $args['search'] );
+		}
+
+		// Meta query support.
+		$join     = '';
+		$distinct = '';
+
+		// Reparse meta_query query_vars, in case they were modified in a 'pre_get_terms' callback.
+		$this-&gt;meta_query-&gt;parse_query_vars( $this-&gt;query_vars );
+		$mq_sql       = $this-&gt;meta_query-&gt;get_sql( 'term', 't', 'term_id' );
+		$meta_clauses = $this-&gt;meta_query-&gt;get_clauses();
+
+		if ( ! empty( $meta_clauses ) ) {
+			$join                                    .= $mq_sql['join'];
+			$this-&gt;sql_clauses['where']['meta_query'] = preg_replace( '/^\s*AND\s*/', '', $mq_sql['where'] );
+			$distinct                                .= 'DISTINCT';
+
+		}
+
+		$selects = array();
+		switch ( $args['fields'] ) {
+			case 'all':
+			case 'all_with_object_id':
+			case 'tt_ids':
+			case 'slugs':
+				$selects = array( 't.*', 'tt.*' );
+				if ( 'all_with_object_id' === $args['fields'] &amp;&amp; ! empty( $args['object_ids'] ) ) {
+					$selects[] = 'tr.object_id';
+				}
+				break;
+			case 'ids':
+			case 'id=&gt;parent':
+				$selects = array( 't.term_id', 'tt.parent', 'tt.count', 'tt.taxonomy' );
+				break;
+			case 'names':
+				$selects = array( 't.term_id', 'tt.parent', 'tt.count', 't.name', 'tt.taxonomy' );
+				break;
+			case 'count':
+				$orderby = '';
+				$order   = '';
+				$selects = array( 'COUNT(*)' );
+				break;
+			case 'id=&gt;name':
+				$selects = array( 't.term_id', 't.name', 'tt.parent', 'tt.count', 'tt.taxonomy' );
+				break;
+			case 'id=&gt;slug':
+				$selects = array( 't.term_id', 't.slug', 'tt.parent', 'tt.count', 'tt.taxonomy' );
+				break;
+		}
+
+		$_fields = $args['fields'];
+
+		/**
+		 * Filters the fields to select in the terms query.
+		 *
+		 * Field lists modified using this filter will only modify the term fields returned
+		 * by the function when the `$fields` parameter set to 'count' or 'all'. In all other
+		 * cases, the term fields in the results array will be determined by the `$fields`
+		 * parameter alone.
+		 *
+		 * Use of this filter can result in unpredictable behavior, and is not recommended.
+		 *
+		 * @since 2.8.0
+		 *
+		 * @param string[] $selects    An array of fields to select for the terms query.
+		 * @param array    $args       An array of term query arguments.
+		 * @param string[] $taxonomies An array of taxonomy names.
+		 */
+		$fields = implode( ', ', apply_filters( 'get_terms_fields', $selects, $args, $taxonomies ) );
+
+		$join .= &quot; INNER JOIN $wpdb-&gt;term_taxonomy AS tt ON t.term_id = tt.term_id&quot;;
+
+		if ( ! empty( $this-&gt;query_vars['object_ids'] ) ) {
+			$join .= &quot; INNER JOIN {$wpdb-&gt;term_relationships} AS tr ON tr.term_taxonomy_id = tt.term_taxonomy_id&quot;;
+		}
+
+		$where = implode( ' AND ', $this-&gt;sql_clauses['where'] );
+
+		/**
+		 * Filters the terms query SQL clauses.
+		 *
+		 * @since 3.1.0
+		 *
+		 * @param string[] $pieces     Array of query SQL clauses.
+		 * @param string[] $taxonomies An array of taxonomy names.
+		 * @param array    $args       An array of term query arguments.
+		 */
+		$clauses = apply_filters( 'terms_clauses', compact( 'fields', 'join', 'where', 'distinct', 'orderby', 'order', 'limits' ), $taxonomies, $args );
+
+		$fields   = isset( $clauses['fields'] ) ? $clauses['fields'] : '';
+		$join     = isset( $clauses['join'] ) ? $clauses['join'] : '';
+		$where    = isset( $clauses['where'] ) ? $clauses['where'] : '';
+		$distinct = isset( $clauses['distinct'] ) ? $clauses['distinct'] : '';
+		$orderby  = isset( $clauses['orderby'] ) ? $clauses['orderby'] : '';
+		$order    = isset( $clauses['order'] ) ? $clauses['order'] : '';
+		$limits   = isset( $clauses['limits'] ) ? $clauses['limits'] : '';
+
+		if ( $where ) {
+			$where = &quot;WHERE $where&quot;;
+		}
+
+		$this-&gt;sql_clauses['select']  = &quot;SELECT $distinct $fields&quot;;
+		$this-&gt;sql_clauses['from']    = &quot;FROM $wpdb-&gt;terms AS t $join&quot;;
+		$this-&gt;sql_clauses['orderby'] = $orderby ? &quot;$orderby $order&quot; : '';
+		$this-&gt;sql_clauses['limits']  = $limits;
+
+		$this-&gt;request = &quot;{$this-&gt;sql_clauses['select']} {$this-&gt;sql_clauses['from']} {$where} {$this-&gt;sql_clauses['orderby']} {$this-&gt;sql_clauses['limits']}&quot;;
+
+		$this-&gt;terms = null;
+
+		/**
+		 * Filters the terms array before the query takes place.
+		 *
+		 * Return a non-null value to bypass WordPress' default term queries.
+		 *
+		 * @since 5.3.0
+		 *
+		 * @param array|null    $terms Return an array of term data to short-circuit WP's term query,
+		 *                             or null to allow WP queries to run normally.
+		 * @param WP_Term_Query $query The WP_Term_Query instance, passed by reference.
+		 */
+		$this-&gt;terms = apply_filters_ref_array( 'terms_pre_query', array( $this-&gt;terms, &amp;$this ) );
+
+		if ( null !== $this-&gt;terms ) {
+			return $this-&gt;terms;
+		}
+
+		// $args can be anything. Only use the args defined in defaults to compute the key.
+		$key          = md5( serialize( wp_array_slice_assoc( $args, array_keys( $this-&gt;query_var_defaults ) ) ) . serialize( $taxonomies ) . $this-&gt;request );
+		$last_changed = wp_cache_get_last_changed( 'terms' );
+		$cache_key    = &quot;get_terms:$key:$last_changed&quot;;
+		$cache        = wp_cache_get( $cache_key, 'terms' );
+		if ( false !== $cache ) {
+			if ( 'all' === $_fields || 'all_with_object_id' === $_fields ) {
+				$cache = $this-&gt;populate_terms( $cache );
+			}
+
+			$this-&gt;terms = $cache;
+			return $this-&gt;terms;
+		}
+
+		if ( 'count' === $_fields ) {
+			$count = $wpdb-&gt;get_var( $this-&gt;request );
+			wp_cache_set( $cache_key, $count, 'terms' );
+			return $count;
+		}
+
+		$terms = $wpdb-&gt;get_results( $this-&gt;request );
+
+		if ( 'all' === $_fields || 'all_with_object_id' === $_fields ) {
+			update_term_cache( $terms );
+		}
+
+		// Prime termmeta cache.
+		if ( $args['update_term_meta_cache'] ) {
+			$term_ids = wp_list_pluck( $terms, 'term_id' );
+			update_termmeta_cache( $term_ids );
+		}
+
+		if ( empty( $terms ) ) {
+			wp_cache_add( $cache_key, array(), 'terms', DAY_IN_SECONDS );
+			return array();
+		}
+
+		if ( $child_of ) {
+			foreach ( $taxonomies as $_tax ) {
+				$children = _get_term_hierarchy( $_tax );
+				if ( ! empty( $children ) ) {
+					$terms = _get_term_children( $child_of, $terms, $_tax );
+				}
+			}
+		}
+
+		// Update term counts to include children.
+		if ( $args['pad_counts'] &amp;&amp; 'all' === $_fields ) {
+			foreach ( $taxonomies as $_tax ) {
+				_pad_term_counts( $terms, $_tax );
+			}
+		}
+
+		// Make sure we show empty categories that have children.
+		if ( $hierarchical &amp;&amp; $args['hide_empty'] &amp;&amp; is_array( $terms ) ) {
+			foreach ( $terms as $k =&gt; $term ) {
+				if ( ! $term-&gt;count ) {
+					$children = get_term_children( $term-&gt;term_id, $term-&gt;taxonomy );
+					if ( is_array( $children ) ) {
+						foreach ( $children as $child_id ) {
+							$child = get_term( $child_id, $term-&gt;taxonomy );
+							if ( $child-&gt;count ) {
+								continue 2;
+							}
+						}
+					}
+
+					// It really is empty.
+					unset( $terms[ $k ] );
+				}
+			}
+		}
+
+		/*
+		 * When querying for terms connected to objects, we may get
+		 * duplicate results. The duplicates should be preserved if
+		 * `$fields` is 'all_with_object_id', but should otherwise be
+		 * removed.
+		 */
+		if ( ! empty( $args['object_ids'] ) &amp;&amp; 'all_with_object_id' !== $_fields ) {
+			$_tt_ids = array();
+			$_terms  = array();
+			foreach ( $terms as $term ) {
+				if ( isset( $_tt_ids[ $term-&gt;term_id ] ) ) {
+					continue;
+				}
+
+				$_tt_ids[ $term-&gt;term_id ] = 1;
+				$_terms[]                  = $term;
+			}
+
+			$terms = $_terms;
+		}
+
+		$_terms = array();
+		if ( 'id=&gt;parent' === $_fields ) {
+			foreach ( $terms as $term ) {
+				$_terms[ $term-&gt;term_id ] = $term-&gt;parent;
+			}
+		} elseif ( 'ids' === $_fields ) {
+			foreach ( $terms as $term ) {
+				$_terms[] = (int) $term-&gt;term_id;
+			}
+		} elseif ( 'tt_ids' === $_fields ) {
+			foreach ( $terms as $term ) {
+				$_terms[] = (int) $term-&gt;term_taxonomy_id;
+			}
+		} elseif ( 'names' === $_fields ) {
+			foreach ( $terms as $term ) {
+				$_terms[] = $term-&gt;name;
+			}
+		} elseif ( 'slugs' === $_fields ) {
+			foreach ( $terms as $term ) {
+				$_terms[] = $term-&gt;slug;
+			}
+		} elseif ( 'id=&gt;name' === $_fields ) {
+			foreach ( $terms as $term ) {
+				$_terms[ $term-&gt;term_id ] = $term-&gt;name;
+			}
+		} elseif ( 'id=&gt;slug' === $_fields ) {
+			foreach ( $terms as $term ) {
+				$_terms[ $term-&gt;term_id ] = $term-&gt;slug;
+			}
+		}
+
+		if ( ! empty( $_terms ) ) {
+			$terms = $_terms;
+		}
+
+		// Hierarchical queries are not limited, so 'offset' and 'number' must be handled now.
+		if ( $hierarchical &amp;&amp; $number &amp;&amp; is_array( $terms ) ) {
+			if ( $offset &gt;= count( $terms ) ) {
+				$terms = array();
+			} else {
+				$terms = array_slice( $terms, $offset, $number, true );
+			}
+		}
+
+		wp_cache_add( $cache_key, $terms, 'terms', DAY_IN_SECONDS );
+
+		if ( 'all' === $_fields || 'all_with_object_id' === $_fields ) {
+			$terms = $this-&gt;populate_terms( $terms );
+		}
+
+		$this-&gt;terms = $terms;
+		return $this-&gt;terms;
+	}
+
+	/**
+	 * Parse and sanitize 'orderby' keys passed to the term query.
+	 *
+	 * @since 4.6.0
+	 *
+	 * @global wpdb $wpdb WordPress database abstraction object.
+	 *
+	 * @param string $orderby_raw Alias for the field to order by.
+	 * @return string|false Value to used in the ORDER clause. False otherwise.
+	 */
+	protected function parse_orderby( $orderby_raw ) {
+		$_orderby           = strtolower( $orderby_raw );
+		$maybe_orderby_meta = false;
+
+		if ( in_array( $_orderby, array( 'term_id', 'name', 'slug', 'term_group' ), true ) ) {
+			$orderby = &quot;t.$_orderby&quot;;
+		} elseif ( in_array( $_orderby, array( 'count', 'parent', 'taxonomy', 'term_taxonomy_id', 'description' ), true ) ) {
+			$orderby = &quot;tt.$_orderby&quot;;
+		} elseif ( 'term_order' === $_orderby ) {
+			$orderby = 'tr.term_order';
+		} elseif ( 'include' === $_orderby &amp;&amp; ! empty( $this-&gt;query_vars['include'] ) ) {
+			$include = implode( ',', wp_parse_id_list( $this-&gt;query_vars['include'] ) );
+			$orderby = &quot;FIELD( t.term_id, $include )&quot;;
+		} elseif ( 'slug__in' === $_orderby &amp;&amp; ! empty( $this-&gt;query_vars['slug'] ) &amp;&amp; is_array( $this-&gt;query_vars['slug'] ) ) {
+			$slugs   = implode( &quot;', '&quot;, array_map( 'sanitize_title_for_query', $this-&gt;query_vars['slug'] ) );
+			$orderby = &quot;FIELD( t.slug, '&quot; . $slugs . &quot;')&quot;;
+		} elseif ( 'none' === $_orderby ) {
+			$orderby = '';
+		} elseif ( empty( $_orderby ) || 'id' === $_orderby || 'term_id' === $_orderby ) {
+			$orderby = 't.term_id';
+		} else {
+			$orderby = 't.name';
+
+			// This may be a value of orderby related to meta.
+			$maybe_orderby_meta = true;
+		}
+
+		/**
+		 * Filters the ORDERBY clause of the terms query.
+		 *
+		 * @since 2.8.0
+		 *
+		 * @param string   $orderby    `ORDERBY` clause of the terms query.
+		 * @param array    $args       An array of term query arguments.
+		 * @param string[] $taxonomies An array of taxonomy names.
+		 */
+		$orderby = apply_filters( 'get_terms_orderby', $orderby, $this-&gt;query_vars, $this-&gt;query_vars['taxonomy'] );
+
+		// Run after the 'get_terms_orderby' filter for backward compatibility.
+		if ( $maybe_orderby_meta ) {
+			$maybe_orderby_meta = $this-&gt;parse_orderby_meta( $_orderby );
+			if ( $maybe_orderby_meta ) {
+				$orderby = $maybe_orderby_meta;
+			}
+		}
+
+		return $orderby;
+	}
+
+	/**
+	 * Generate the ORDER BY clause for an 'orderby' param that is potentially related to a meta query.
+	 *
+	 * @since 4.6.0
+	 *
+	 * @param string $orderby_raw Raw 'orderby' value passed to WP_Term_Query.
+	 * @return string ORDER BY clause.
+	 */
+	protected function parse_orderby_meta( $orderby_raw ) {
+		$orderby = '';
+
+		// Tell the meta query to generate its SQL, so we have access to table aliases.
+		$this-&gt;meta_query-&gt;get_sql( 'term', 't', 'term_id' );
+		$meta_clauses = $this-&gt;meta_query-&gt;get_clauses();
+		if ( ! $meta_clauses || ! $orderby_raw ) {
+			return $orderby;
+		}
+
+		$allowed_keys       = array();
+		$primary_meta_key   = null;
+		$primary_meta_query = reset( $meta_clauses );
+		if ( ! empty( $primary_meta_query['key'] ) ) {
+			$primary_meta_key = $primary_meta_query['key'];
+			$allowed_keys[]   = $primary_meta_key;
+		}
+		$allowed_keys[] = 'meta_value';
+		$allowed_keys[] = 'meta_value_num';
+		$allowed_keys   = array_merge( $allowed_keys, array_keys( $meta_clauses ) );
+
+		if ( ! in_array( $orderby_raw, $allowed_keys, true ) ) {
+			return $orderby;
+		}
+
+		switch ( $orderby_raw ) {
+			case $primary_meta_key:
+			case 'meta_value':
+				if ( ! empty( $primary_meta_query['type'] ) ) {
+					$orderby = &quot;CAST({$primary_meta_query['alias']}.meta_value AS {$primary_meta_query['cast']})&quot;;
+				} else {
+					$orderby = &quot;{$primary_meta_query['alias']}.meta_value&quot;;
+				}
+				break;
+
+			case 'meta_value_num':
+				$orderby = &quot;{$primary_meta_query['alias']}.meta_value+0&quot;;
+				break;
+
+			default:
+				if ( array_key_exists( $orderby_raw, $meta_clauses ) ) {
+					// $orderby corresponds to a meta_query clause.
+					$meta_clause = $meta_clauses[ $orderby_raw ];
+					$orderby     = &quot;CAST({$meta_clause['alias']}.meta_value AS {$meta_clause['cast']})&quot;;
+				}
+				break;
+		}
+
+		return $orderby;
+	}
+
+	/**
+	 * Parse an 'order' query variable and cast it to ASC or DESC as necessary.
+	 *
+	 * @since 4.6.0
+	 *
+	 * @param string $order The 'order' query variable.
+	 * @return string The sanitized 'order' query variable.
+	 */
+	protected function parse_order( $order ) {
+		if ( ! is_string( $order ) || empty( $order ) ) {
+			return 'DESC';
+		}
+
+		if ( 'ASC' === strtoupper( $order ) ) {
+			return 'ASC';
+		} else {
+			return 'DESC';
+		}
+	}
+
+	/**
+	 * Used internally to generate a SQL string related to the 'search' parameter.
+	 *
+	 * @since 4.6.0
+	 *
+	 * @global wpdb $wpdb WordPress database abstraction object.
+	 *
+	 * @param string $string
+	 * @return string
+	 */
+	protected function get_search_sql( $string ) {
+		global $wpdb;
+
+		$like = '%' . $wpdb-&gt;esc_like( $string ) . '%';
+
+		return $wpdb-&gt;prepare( '((t.name LIKE %s) OR (t.slug LIKE %s))', $like, $like );
+	}
+
+	/**
+	 * Creates an array of term objects from an array of term IDs.
+	 *
+	 * Also discards invalid term objects.
+	 *
+	 * @since 4.9.8
+	 *
+	 * @param array $term_ids Term IDs.
+	 * @return array
+	 */
+	protected function populate_terms( $term_ids ) {
+		$terms = array();
+
+		if ( ! is_array( $term_ids ) ) {
+			return $terms;
+		}
+
+		foreach ( $term_ids as $key =&gt; $term_id ) {
+			$term = get_term( $term_id );
+			if ( $term instanceof WP_Term ) {
+				$terms[ $key ] = $term;
+			}
+		}
+
+		return $terms;
+	}
+}
+</pre>
+			</div>
+			<p class="source-code-links">
+				<span>
+					<a href="#" class="show-complete-source">Expand full source code</a>
+					<a href="#" class="less-complete-source">Collapse full source code</a>
+				</span>
+				<span><a href="https://core.trac.wordpress.org/browser/tags/5.8/src/wp-includes/class-wp-term-query.php#L18">View on Trac</a></span>
+			</p>
+			</section>
+		<hr />
+		<section class="class-methods">
+			<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="methods" tabindex="-1">Methods <a href="#methods" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Methods</span></a></h2>
+			<ul>
+									<li><a href="__construct/index.html">
+							__construct</a>
+						&mdash; Constructor.											</li>
+									<li><a href="get_search_sql/index.html">
+							get_search_sql</a>
+						&mdash; Used internally to generate a SQL string related to the 'search' parameter.											</li>
+									<li><a href="get_terms/index.html">
+							get_terms</a>
+						&mdash; Retrieves the query results.											</li>
+									<li><a href="parse_order/index.html">
+							parse_order</a>
+						&mdash; Parse an 'order' query variable and cast it to ASC or DESC as necessary.											</li>
+									<li><a href="parse_orderby/index.html">
+							parse_orderby</a>
+						&mdash; Parse and sanitize 'orderby' keys passed to the term query.											</li>
+									<li><a href="parse_orderby_meta/index.html">
+							parse_orderby_meta</a>
+						&mdash; Generate the ORDER BY clause for an 'orderby' param that is potentially related to a meta query.											</li>
+									<li><a href="parse_query/index.html">
+							parse_query</a>
+						&mdash; Parse arguments passed to the term query with default query parameters.											</li>
+									<li><a href="populate_terms/index.html">
+							populate_terms</a>
+						&mdash; Creates an array of term objects from an array of term IDs.											</li>
+									<li><a href="query/index.html">
+							query</a>
+						&mdash; Sets up the query and retrieves the results.											</li>
+							</ul>
+		</section>
+		<hr />
+	<section class="changelog">
+		<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="changelog" tabindex="-1">Changelog <a href="#changelog" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Changelog</span></a></h2>
+
+		<table>
+			<caption class="screen-reader-text">Changelog</caption>
+			<thead>
+				<tr>
+					<th class="changelog-version">Version</th>
+					<th class="changelog-desc">Description</th>
+				</tr>
+			</thead>
+
+			<tbody>
+									
+					<tr>
+						<td><a href="../../since/4.6.0/index.html" alt="WordPress 4.6.0">4.6.0</a></td>
+						<td>Introduced.</td>
+					</tr>
+							</tbody>
+		</table>
+	</section>
+
+	<hr />
+	<section class="user-notes">
+		<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="user-contributed-notes" tabindex="-1">User Contributed Notes <a href="#user-contributed-notes" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">User Contributed Notes</span></a></h2>
+		
+<div id="comments" class="comments-area">
+
+			
+		<ol class="comment-list">
+						<li id="comment-1938" data-comment-id="1938" class="comment byuser comment-author-ramiy even thread-even depth-1">
+			<article id="div-comment-1938" class="comment-body">
+
+							<a href="#comment-content-1938" class="screen-reader-text">Skip to note 1 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="fb79f852cc"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="1938" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Fclasses%2Fwp_term_query%2F%23comment-1938"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="100% like this"><span class="screen-reader-text">Vote results for this note: </span>8</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="1938" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Fclasses%2Fwp_term_query%2F%23comment-1938"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/ce2a269e424156d79cb0c4e1d4d82db1?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/ce2a269e424156d79cb0c4e1d4d82db1?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/ramiy/" rel="external nofollow" class="url">Rami Yushuvaev</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-1938">
+							<time datetime="2016-12-01T00:46:05+00:00">
+							5 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-1938">
+				<p>WordPress WP_Term_Query Generator:</p>
+<p><a href="https://generatewp.com/wp_term_query/" rel="nofollow ugc">https://GenerateWP.com/wp_term_query/</a></p>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-1938' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Fclasses%2Fwp_term_query%2F%3Freplytocom%3D1938%23feedback-editor-1938" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-1882" data-comment-id="1882" class="comment byuser comment-author-itzmekhokan odd alt thread-odd thread-alt depth-1">
+			<article id="div-comment-1882" class="comment-body">
+
+							<a href="#comment-content-1882" class="screen-reader-text">Skip to note 2 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="8a29c77997"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="1882" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Fclasses%2Fwp_term_query%2F%23comment-1882"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="100% like this"><span class="screen-reader-text">Vote results for this note: </span>4</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="1882" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Fclasses%2Fwp_term_query%2F%23comment-1882"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/45a5ad6143801474d295a2bddf7bd31c?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/45a5ad6143801474d295a2bddf7bd31c?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/itzmekhokan/" rel="external nofollow" class="url">Khokan Sardar</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-1882">
+							<time datetime="2016-10-17T10:32:28+00:00">
+							5 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-1882">
+				<section class="source-content">
+<div class="source-code-container">
+<pre class="brush: php; title: ; notranslate" title="">&lt;ul&gt;
+&lt;?php 
+$args = array(
+    'taxonomy'               =&gt; 'category',
+    'orderby'                =&gt; 'name',
+    'order'                  =&gt; 'ASC',
+    'hide_empty'             =&gt; false,
+);
+$the_query = new WP_Term_Query($args);
+foreach($the_query-&gt;get_terms() as $term){ 
+?&gt;
+	&lt;li&gt;&lt;?php echo $term-&gt;name.&quot; (&quot;.$term-&gt;count.&quot;)&quot;; ?&gt;&lt;/li&gt;
+&lt;?php
+}
+?&gt;
+&lt;/ul&gt;
+</pre>
+</div>
+<p class="source-code-links"><span><a href="#" class="show-complete-source">Expand full source code</a><a href="#" class="less-complete-source">Collapse full source code</a></span></p>
+</section>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-1882' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Fclasses%2Fwp_term_query%2F%3Freplytocom%3D1882%23feedback-editor-1882" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-1827" data-comment-id="1827" class="comment byuser comment-author-vlass even thread-even depth-1">
+			<article id="div-comment-1827" class="comment-body">
+
+							<a href="#comment-content-1827" class="screen-reader-text">Skip to note 3 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="bc59db4815"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="1827" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Fclasses%2Fwp_term_query%2F%23comment-1827"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="67% like this"><span class="screen-reader-text">Vote results for this note: </span>1</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="1827" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Fclasses%2Fwp_term_query%2F%23comment-1827"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/d3f759548ac8d15190d4dc7fa50705bf?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/d3f759548ac8d15190d4dc7fa50705bf?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/vlass/" rel="external nofollow" class="url">Vlass Contreras</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-1827">
+							<time datetime="2016-09-13T18:02:16+00:00">
+							5 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-1827">
+				<p>Basic usage: list all the terms of <code>product_type</code> taxonomy:</p>
+<pre class="brush: php; title: ; notranslate" title="">
+$term_args = array(
+	'taxonomy'               =&gt; 'product_type',
+	'hide_empty'             =&gt; false,
+	'fields'                 =&gt; 'all',
+	'count'                  =&gt; true,
+);
+$term_query = new WP_Term_Query( $term_args );
+
+foreach ( $term_query-&gt;terms as $term ) {
+	echo &quot;Term ID: {$term-&gt;term_id}&lt;br&gt;&quot;;
+	echo &quot;Term Name: {$term-&gt;name}&lt;br&gt;&lt;br&gt;&quot;;
+}
+</pre>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-1827' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Fclasses%2Fwp_term_query%2F%3Freplytocom%3D1827%23feedback-editor-1827" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-2309" data-comment-id="2309" class="comment byuser comment-author-_smartik_ odd alt thread-odd thread-alt depth-1">
+			<article id="div-comment-2309" class="comment-body">
+
+							<a href="#comment-content-2309" class="screen-reader-text">Skip to note 4 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="e8aca5a462"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="2309" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Fclasses%2Fwp_term_query%2F%23comment-2309"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title=""><span class="screen-reader-text">Vote results for this note: </span>0</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="2309" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Fclasses%2Fwp_term_query%2F%23comment-2309"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/7f20efa57653fb7402e9c37783248e49?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/7f20efa57653fb7402e9c37783248e49?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/_smartik_/" rel="external nofollow" class="url">Andrei Surdu</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-2309">
+							<time datetime="2017-07-26T18:40:36+00:00">
+							4 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-2309">
+				<p>Get terms with a specific non-empty meta key from one or all public taxonomies, using the WP_Term_Meta class. Will return term object of false if nothing found.</p>
+<p>It will select all terms that has `$meta_key` value assigned and is not empty.</p>
+<p><strong>The function:</strong></p>
+<section class="source-content">
+<div class="source-code-container">
+<pre class="brush: php; title: ; notranslate" title="">
+/**
+ * Get terms with a specific non-empty meta key
+ *
+ * @param string $meta_key The meta key to check for.
+ * @param string $taxonomy The taxonomy slug or `null` to query all public taxonomies
+ * @return array|bool(false)
+ */
+function wpdocs_get_terms_with_meta( $meta_key, $taxonomy = null ){
+	/* Do Query
+	----------------*/
+	$term_args = array(
+		'taxonomy'   =&gt; $taxonomy,
+		'hide_empty' =&gt; false,
+		'fields'     =&gt; 'all',
+		'count'      =&gt; true,
+		'meta_key'   =&gt; $meta_key,
+		'meta_value'   =&gt; '',
+		'meta_compare'   =&gt; '!=',
+	);
+
+	$term_query = new WP_Term_Query( $term_args );
+
+	/* Do we have any terms?
+	-----------------------------*/
+	if( empty( $term_query-&gt;terms ) ){
+		return false;
+	}
+
+	/* Get the terms :)
+	------------------------*/
+	return $term_query-&gt;terms;
+}
+</pre>
+</div>
+<p class="source-code-links"><span><a href="#" class="show-complete-source">Expand full source code</a><a href="#" class="less-complete-source">Collapse full source code</a></span></p>
+</section>
+<p><strong>Example usage:</strong></p>
+<pre class="brush: php; title: ; notranslate" title="">
+// Get all terms from all taxonomies
+$terms = wpdocs_get_terms_with_meta( 'example_field_key' );
+if( ! empty( $terms ) ){
+	foreach ($terms as $term) {
+		$meta_value = get_term_meta( $term-&gt;term_id, $meta_key, true );
+		echo $meta_value . '&lt;br&gt;';
+	}
+}
+</pre>
+<pre class="brush: php; title: ; notranslate" title="">
+// Get all terms from all `category` taxonomy
+$terms = wpdocs_get_terms_with_meta( 'example_field_key', 'category' );
+if( ! empty( $terms ) ){
+	foreach ($terms as $term) {
+		$meta_value = get_term_meta( $term-&gt;term_id, $meta_key, true );
+		echo $meta_value . '&lt;br&gt;';
+	}
+}
+</pre>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-2309' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Fclasses%2Fwp_term_query%2F%3Freplytocom%3D2309%23feedback-editor-2309" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-4560" data-comment-id="4560" class="comment byuser comment-author-tonydjukic even thread-even depth-1">
+			<article id="div-comment-4560" class="comment-body">
+
+							<a href="#comment-content-4560" class="screen-reader-text">Skip to note 5 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="ec44ff1f12"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="4560" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Fclasses%2Fwp_term_query%2F%23comment-4560"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title=""><span class="screen-reader-text">Vote results for this note: </span>0</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="4560" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Fclasses%2Fwp_term_query%2F%23comment-4560"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/775abcd34181e17fe865a04cd79fbbf4?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/775abcd34181e17fe865a04cd79fbbf4?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/tonydjukic/" rel="external nofollow" class="url">tonydjukic</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-4560">
+							<time datetime="2020-11-18T01:32:49+00:00">
+							10 months ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-4560">
+				<p>When running a search based query on terms, while the standard WP_Query uses <code>'s'</code> for its search argument, WP_Term_Query uses <code>'search'</code>:</p>
+<pre class="brush: php; title: ; notranslate" title="">$term_args = array(
+    'search'		=&gt; 'desired search term',
+	'taxonomy'		=&gt; 'category',
+	'hide_empty'	=&gt; false
+);
+$term_results = new WP_Term_Query( $term_args );</pre>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-4560' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Fclasses%2Fwp_term_query%2F%3Freplytocom%3D4560%23feedback-editor-4560" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+		</ol><!-- .comment-list -->
+
+		
+	
+	
+			<div id="respond" class="comment-respond">
+		<h3 id="reply-title" class="comment-reply-title"> <small></small></h3><p>You must <a href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Fclasses%2Fwp_term_query%2F%23comments">log in</a> before being able to contribute a note or feedback.</p>	</div><!-- #respond -->
+		
+	
+</div><!-- #comments -->
+	</section>
+</div>
+
+</article>
+
+			
+		
+		</main><!-- #main -->
+	</div><!-- #primary -->
+	</div><!-- #content -->
+
+</div><!-- #page -->
+
+
+<div id="wporg-footer">
+	<div class="wrapper">
+		<ul>
+			<li><a href="http://wordpress.org/about/" title="An introduction to the WordPress project">About</a></li>
+			<li><a href="http://wordpress.org/news/" title="News and Updates">Blog</a></li>
+			<li><a href="http://wordpress.org/hosting/" title="Recommended web hosting providers">Hosting</a></li>
+			<li><a href="https://wordpressfoundation.org/donate/" title="Donate to the WordPress Foundation">Donate</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://wordpress.org/support/" title="Forums, documentation, and other resources">Support</a></li>
+			<li><a href="../../../index.html" title="Resources for WordPress developers">Developers</a></li>
+			<li><a href="http://make.wordpress.org/" title="Give back to WordPress through code, support, translation and more">Get Involved</a></li>
+			<li><a href="http://learn.wordpress.org/" title="Workshops and training materials">Learn</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://wordpress.org/showcase/" title="Some of the best WordPress sites on the Web">Showcase</a></li>
+			<li><a href="http://wordpress.org/plugins/" title="Add extra functionality to WordPress">Plugins</a></li>
+			<li><a href="http://wordpress.org/themes/" title="Make your WordPress pretty">Themes</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://central.wordcamp.org/" title="Find a WordPress event near you">WordCamp</a></li>
+			<li><a href="http://wordpress.tv/" title="Videos, tutorials, and WordCamp sessions">WordPress.TV</a></li>
+			<li><a href="http://buddypress.org/" title="A set of plugins to transform your WordPress into a social network">BuddyPress</a></li>
+			<li><a href="http://bbpress.org/" title="Fast, slick forums built on WordPress">bbPress</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://wordpress.com/?ref=wporg-footer" title="Hassle-free WordPress hosting">WordPress.com</a></li>
+			<li><a href="http://ma.tt/" title="Co-founder of WordPress, an example of what WordPress can do">Matt</a></li>
+			<li><a href="http://wordpress.org/about/privacy/" title="WordPress.org Privacy Policy">Privacy</a></li>
+			<li><a href="https://publiccode.eu/" target="_blank">Public Code</a></li>
+		</ul>
+
+		<ul class="social-media-links">
+			<li><span class="dashicons dashicons-twitter"></span><a href="https://twitter.com/WordPress" title="Follow @WordPress on Twitter">@WordPress</a></li>
+			<li><span class="dashicons dashicons-facebook"></span><a href="https://www.facebook.com/WordPress/" title="Like WordPress on Facebook">WordPress</a></li>
+		</ul>
+	</div>
+
+		<p class="cip cip-image">Code is Poetry.</p>
+</div>
+
+<script src="../../../../s.w.org/style/js/navigation.min.js?20190128"></script>
+
+<script type='text/javascript'>
+	(function(){
+		var corecss = document.createElement('link');
+		var themecss = document.createElement('link');
+		var corecssurl = "../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shCore.css?ver=3.0.9b";
+		if ( corecss.setAttribute ) {
+				corecss.setAttribute( "rel", "stylesheet" );
+				corecss.setAttribute( "type", "text/css" );
+				corecss.setAttribute( "href", corecssurl );
+		} else {
+				corecss.rel = "stylesheet";
+				corecss.href = corecssurl;
+		}
+		document.head.appendChild( corecss );
+		var themecssurl = "../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shThemeDefault.css?ver=3.0.9b";
+		if ( themecss.setAttribute ) {
+				themecss.setAttribute( "rel", "stylesheet" );
+				themecss.setAttribute( "type", "text/css" );
+				themecss.setAttribute( "href", themecssurl );
+		} else {
+				themecss.rel = "stylesheet";
+				themecss.href = themecssurl;
+		}
+		document.head.appendChild( themecss );
+	})();
+	SyntaxHighlighter.config.strings.expandSource = '+ expand source';
+	SyntaxHighlighter.config.strings.help = '?';
+	SyntaxHighlighter.config.strings.alert = 'SyntaxHighlighter\n\n';
+	SyntaxHighlighter.config.strings.noBrush = 'Can\'t find brush for: ';
+	SyntaxHighlighter.config.strings.brushNotHtmlScript = 'Brush wasn\'t configured for html-script option: ';
+	SyntaxHighlighter.defaults['pad-line-numbers'] = false;
+	SyntaxHighlighter.defaults['toolbar'] = false;
+	SyntaxHighlighter.all();
+
+	// Infinite scroll support
+	if ( typeof( jQuery ) !== 'undefined' ) {
+		jQuery( function( $ ) {
+			$( document.body ).on( 'post-load', function() {
+				SyntaxHighlighter.highlight();
+			} );
+		} );
+	}
+</script>
+<link rel='stylesheet' id='buttons-css'  href='../../../wp-includes/css/buttons.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<script type='text/javascript' src='../../../wp-includes/js/hoverintent-js.min.js?ver=2.2.1' id='hoverintent-js-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/admin-bar.min.js?ver=5.9-alpha-51701' id='admin-bar-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/navigation.js?ver=20181209' id='wporg-developer-navigation-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/skip-link-focus-fix.js?ver=20130115' id='wporg-developer-skip-link-focus-fix-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/search.js?ver=20150430' id='wporg-developer-search-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/menu.js?ver=20180201' id='wporg-developer-menu-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/awesomplete.min.js?ver=20160322' id='awesomplete-js'></script>
+<script type='text/javascript' id='autocomplete-js-extra'>
+/* <![CDATA[ */
+var autocomplete = {"ajaxurl":"https:\/\/developer.wordpress.org\/wp-admin\/admin-ajax.php","nonce":"8a60f70c4b"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/autocomplete.js?ver=20160524' id='autocomplete-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/function-reference.js?ver=20180724' id='wporg-developer-function-reference-js'></script>
+<script type='text/javascript' id='quicktags-js-extra'>
+/* <![CDATA[ */
+var quicktagsL10n = {"closeAllOpenTags":"Close all open tags","closeTags":"close tags","enterURL":"Enter the URL","enterImageURL":"Enter the URL of the image","enterImageDescription":"Enter a description of the image","textdirection":"text direction","toggleTextdirection":"Toggle Editor Text Direction","dfw":"Distraction-free writing mode","strong":"Bold","strongClose":"Close bold tag","em":"Italic","emClose":"Close italic tag","link":"Insert link","blockquote":"Blockquote","blockquoteClose":"Close blockquote tag","del":"Deleted text (strikethrough)","delClose":"Close deleted text tag","ins":"Inserted text","insClose":"Close inserted text tag","image":"Insert image","ul":"Bulleted list","ulClose":"Close bulleted list tag","ol":"Numbered list","olClose":"Close numbered list tag","li":"List item","liClose":"Close list item tag","code":"Code","codeClose":"Close code tag","more":"Insert Read More tag"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-includes/js/quicktags.min.js?ver=5.9-alpha-51701' id='quicktags-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/user-notes.js?ver=20200110' id='wporg-developer-user-notes-js'></script>
+<script type='text/javascript' id='wporg-developer-user-notes-feedback-js-extra'>
+/* <![CDATA[ */
+var wporg_note_feedback = {"show":"Show Feedback","hide":"Hide Feedback"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/user-notes-feedback.js?ver=20181023' id='wporg-developer-user-notes-feedback-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/tabs.js?ver=20160824' id='wporg-developer-tabs-js'></script>
+<script type='text/javascript' id='wporg-developer-preview-js-extra'>
+/* <![CDATA[ */
+var wporg_note_preview = {"ajaxurl":"https:\/\/developer.wordpress.org\/wp-admin\/admin-ajax.php","nonce":"504933b60e","preview":"preview note","preview_empty":"Nothing to preview","is_admin":""};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/user-notes-preview.js?ver=20200111' id='wporg-developer-preview-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/wp-embed.min.js?ver=5.9-alpha-51701' id='wp-embed-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/vendor/regenerator-runtime.min.js?ver=0.13.7' id='regenerator-runtime-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/vendor/wp-polyfill.min.js?ver=3.15.0' id='wp-polyfill-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/dom-ready.min.js?ver=71883072590656bf22c74c7b887df3dd' id='wp-dom-ready-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/hooks.min.js?ver=a7edae857aab69d69fa10d5aef23a5de' id='wp-hooks-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/i18n.min.js?ver=5f1269854226b4dd90450db411a12b79' id='wp-i18n-js'></script>
+<script type='text/javascript' id='wp-i18n-js-after'>
+wp.i18n.setLocaleData( { 'text direction\u0004ltr': [ 'ltr' ] } );
+</script>
+<script type='text/javascript' id='wp-a11y-js-translations'>
+( function( domain, translations ) {
+	var localeData = translations.locale_data[ domain ] || translations.locale_data.messages;
+	localeData[""].domain = domain;
+	wp.i18n.setLocaleData( localeData, domain );
+} )( "default", { "locale_data": { "messages": { "": {} } } } );
+</script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/a11y.min.js?ver=0ac8327cc1c40dcfdf29716affd7ac63' id='wp-a11y-js'></script>
+<script type='text/javascript' id='wplink-js-extra'>
+/* <![CDATA[ */
+var wpLinkL10n = {"title":"Insert\/edit link","update":"Update","save":"Add Link","noTitle":"(no title)","noMatchesFound":"No results found.","linkSelected":"Link selected.","linkInserted":"Link inserted.","minInputLength":"3"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-includes/js/wplink.min.js?ver=5.9-alpha-51701' id='wplink-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/jquery/ui/core.min.js?ver=1.12.1' id='jquery-ui-core-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/jquery/ui/menu.min.js?ver=1.12.1' id='jquery-ui-menu-js'></script>
+<script type='text/javascript' id='jquery-ui-autocomplete-js-extra'>
+/* <![CDATA[ */
+var uiAutocompleteL10n = {"noResults":"No results found.","oneResult":"1 result found. Use up and down arrow keys to navigate.","manyResults":"%d results found. Use up and down arrow keys to navigate.","itemSelected":"Item selected."};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-includes/js/jquery/ui/autocomplete.min.js?ver=1.12.1' id='jquery-ui-autocomplete-js'></script>
+
+		<script type="text/javascript">
+		tinyMCEPreInit = {
+			baseURL: "https://developer.wordpress.org/wp-includes/js/tinymce",
+			suffix: ".min",
+						mceInit: {},
+			qtInit: {'comment':{id:"comment",buttons:"strong,em,ul,ol,li,link"}},
+			ref: {plugins:"",theme:"modern",language:""},
+			load_ext: function(url,lang){var sl=tinymce.ScriptLoader;sl.markDone(url+'/langs/'+lang+'.js');sl.markDone(url+'/langs/'+lang+'_dlg.js');}
+		};
+		</script>
+				<script type="text/javascript">
+		var ajaxurl = "../../../wp-admin/admin-ajax.html";
+		( function() {
+			var initialized = [];
+			var initialize  = function() {
+				var init, id, inPostbox, $wrap;
+				var readyState = document.readyState;
+
+				if ( readyState !== 'complete' && readyState !== 'interactive' ) {
+					return;
+				}
+
+				for ( id in tinyMCEPreInit.mceInit ) {
+					if ( initialized.indexOf( id ) > -1 ) {
+						continue;
+					}
+
+					init      = tinyMCEPreInit.mceInit[id];
+					$wrap     = tinymce.$( '#wp-' + id + '-wrap' );
+					inPostbox = $wrap.parents( '.postbox' ).length > 0;
+
+					if (
+						! init.wp_skip_init &&
+						( $wrap.hasClass( 'tmce-active' ) || ! tinyMCEPreInit.qtInit.hasOwnProperty( id ) ) &&
+						( readyState === 'complete' || ( ! inPostbox && readyState === 'interactive' ) )
+					) {
+						tinymce.init( init );
+						initialized.push( id );
+
+						if ( ! window.wpActiveEditor ) {
+							window.wpActiveEditor = id;
+						}
+					}
+				}
+			}
+
+			if ( typeof tinymce !== 'undefined' ) {
+				if ( tinymce.Env.ie && tinymce.Env.ie < 11 ) {
+					tinymce.$( '.wp-editor-wrap ' ).removeClass( 'tmce-active' ).addClass( 'html-active' );
+				} else {
+					if ( document.readyState === 'complete' ) {
+						initialize();
+					} else {
+						document.addEventListener( 'readystatechange', initialize );
+					}
+				}
+			}
+
+			if ( typeof quicktags !== 'undefined' ) {
+				for ( id in tinyMCEPreInit.qtInit ) {
+					quicktags( tinyMCEPreInit.qtInit[id] );
+
+					if ( ! window.wpActiveEditor ) {
+						window.wpActiveEditor = id;
+					}
+				}
+			}
+		}());
+		</script>
+				<div id="wp-link-backdrop" style="display: none"></div>
+		<div id="wp-link-wrap" class="wp-core-ui" style="display: none" role="dialog" aria-labelledby="link-modal-title">
+		<form id="wp-link" tabindex="-1">
+		<input type="hidden" id="_ajax_linking_nonce" name="_ajax_linking_nonce" value="86f5a0a85d" />		<h1 id="link-modal-title">Insert/edit link</h1>
+		<button type="button" id="wp-link-close"><span class="screen-reader-text">Close</span></button>
+		<div id="link-selector">
+			<div id="link-options">
+				<p class="howto" id="wplink-enter-url">Enter the destination URL</p>
+				<div>
+					<label><span>URL</span>
+					<input id="wp-link-url" type="text" aria-describedby="wplink-enter-url" /></label>
+				</div>
+				<div class="wp-link-text-field">
+					<label><span>Link Text</span>
+					<input id="wp-link-text" type="text" /></label>
+				</div>
+				<div class="link-target">
+					<label><span></span>
+					<input type="checkbox" id="wp-link-target" /> Open link in a new tab</label>
+				</div>
+			</div>
+			<p class="howto" id="wplink-link-existing-content">Or link to existing content</p>
+			<div id="search-panel">
+				<div class="link-search-wrapper">
+					<label>
+						<span class="search-label">Search</span>
+						<input type="search" id="wp-link-search" class="link-search-field" autocomplete="off" aria-describedby="wplink-link-existing-content" />
+						<span class="spinner"></span>
+					</label>
+				</div>
+				<div id="search-results" class="query-results" tabindex="0">
+					<ul></ul>
+					<div class="river-waiting">
+						<span class="spinner"></span>
+					</div>
+				</div>
+				<div id="most-recent-results" class="query-results" tabindex="0">
+					<div class="query-notice" id="query-notice-message">
+						<em class="query-notice-default">No search term specified. Showing recent items.</em>
+						<em class="query-notice-hint screen-reader-text">Search or use up and down arrow keys to select an item.</em>
+					</div>
+					<ul></ul>
+					<div class="river-waiting">
+						<span class="spinner"></span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="submitbox">
+			<div id="wp-link-cancel">
+				<button type="button" class="button">Cancel</button>
+			</div>
+			<div id="wp-link-update">
+				<input type="submit" value="Add Link" class="button button-primary" id="wp-link-submit" name="wp-link-submit">
+			</div>
+		</div>
+		</form>
+		</div>
+		</body>
+
+<!-- Mirrored from developer.wordpress.org/reference/classes/wp_term_query/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 31 Aug 2021 17:26:30 GMT -->
+</html>

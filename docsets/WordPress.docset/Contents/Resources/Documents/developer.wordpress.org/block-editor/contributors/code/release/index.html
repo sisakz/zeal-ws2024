@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+
+<!-- Mirrored from developer.wordpress.org/block-editor/contributors/code/release/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 31 Aug 2021 17:17:05 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<!--
+<meta property="fb:page_id" content="6427302910" />
+-->
+<meta name="google-site-verification" content="7VWES_-rcHBcmaQis9mSYamPfNwE03f4vyTj4pfuAw0" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gutenberg Release Process</title>
+<meta name="referrer" content="always">
+
+		<link href='../../../../../fonts.googleapis.com/css.css?family=Open+Sans:300italic,400italic,600italic,400,300,600&amp;subset=latin,cyrillic-ext,greek-ext,greek,vietnamese,latin-ext,cyrillic' rel='stylesheet' type='text/css'>
+
+		<link rel="stylesheet" href="../../../../../s.w.org/style/wp4.css?95" />
+
+<link rel="shortcut icon" href="../../../../../s.w.org/favicon.ico?2" type="image/x-icon" />
+<link rel="pingback" href="../../../../xmlrpc.php" /><meta name='robots' content='max-image-preview:large' />
+<link rel='dns-prefetch' href='../../../../../fonts.googleapis.com/index.html' />
+<link rel='dns-prefetch' href='http://s.w.org/' />
+<link rel='dns-prefetch' href='http://www.googletagmanager.com/' />
+<link rel='dns-prefetch' href='http://fonts.gstatic.com/' />
+<link rel="alternate" type="application/rss+xml" title="WordPress Developer Resources &raquo; Feed" href="../../../../feed/index.html" />
+<link rel="alternate" type="application/rss+xml" title="WordPress Developer Resources &raquo; Comments Feed" href="../../../../comments/feed/index.html" />
+<meta property="og:title" content="Gutenberg Release Process | Block Editor Handbook | WordPress Developer Resources" />
+<meta property="og:site_name" content="WordPress Developer Resources" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="../../../../index.html" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@WordPress" />
+<meta name="description" content="This Repository is used to perform several types of releases. This document serves as a checklist for each one of these. It is helpful if&hellip;" />
+<meta property="og:description" content="This Repository is used to perform several types of releases. This document serves as a checklist for each one of these. It is helpful if&hellip;" />
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'../../../../../www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P24PF4B');</script>
+			<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/developer.wordpress.org\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.9-alpha-51701"}};
+			!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([10084,65039,8205,55357,56613],[10084,65039,8203,55357,56613])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel='stylesheet' id='dashicons-css'  href='../../../../wp-includes/css/dashicons.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='admin-bar-css'  href='../../../../wp-includes/css/admin-bar.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-block-library-css'  href='../../../../wp-includes/css/dist/block-library/style.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='wporg-handbook-css-css'  href='../../../../wp-content/plugins/handbook/stylesheets/callout-boxes.css?ver=20200121' type='text/css' media='all' />
+<link rel='stylesheet' id='open-sans-css'  href='../../../../../fonts.googleapis.com/css-2.css?family=Open+Sans%3A300italic%2C400italic%2C600italic%2C300%2C400%2C600&amp;subset=latin%2Clatin-ext&amp;display=fallback&amp;ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='wporg-developer-style-css'  href='../../../../wp-content/themes/pub/wporg-developer/style.css?ver=3' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-dev-sass-compiled-css'  href='../../../../wp-content/themes/pub/wporg-developer/stylesheets/main.css?ver=20200713' type='text/css' media='all' />
+<link rel='stylesheet' id='awesomplete-css-css'  href='../../../../wp-content/themes/pub/wporg-developer/stylesheets/awesomplete.css?ver=20160114' type='text/css' media='all' />
+<link rel='stylesheet' id='autocomplete-css-css'  href='../../../../wp-content/themes/pub/wporg-developer/stylesheets/autocomplete.css?ver=20171220' type='text/css' media='all' />
+<link rel='stylesheet' id='syntaxhighlighter-core-css'  href='../../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shCore.css?ver=3.0.9b' type='text/css' media='all' />
+<link rel='stylesheet' id='syntaxhighlighter-theme-default-css'  href='../../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shThemeDefault.css?ver=3.0.9b' type='text/css' media='all' />
+<script type='text/javascript' src='../../../../wp-includes/js/jquery/jquery.min.js?ver=3.6.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='../../../../wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='../../../../wp-content/plugins/handbook/scripts/handbook.js?ver=20150930' id='wporg-handbook-js'></script>
+<script type='text/javascript' src='../../../../wp-content/themes/pub/wporg-developer/js/chapters.js?ver=20190603' id='wporg-developer-chapters-js'></script>
+<script type='text/javascript' src='../../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shCore.js?ver=3.0.9b' id='syntaxhighlighter-core-js'></script>
+<script type='text/javascript' src='../../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushPhp.js?ver=3.0.9b' id='syntaxhighlighter-brush-php-js'></script>
+<link rel="https://api.w.org/" href="https://developer.wordpress.org/wp-json/" /><link rel="alternate" type="application/json" href="https://developer.wordpress.org/wp-json/wp/v2/blocks-handbook/135104" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="../../../../xmlrpc-2.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="../../../../wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 5.9-alpha-51701" />
+<link rel='shortlink' href='https://developer.wordpress.org/?p=135104' />
+<link rel="alternate" type="application/json+oembed" href="https://developer.wordpress.org/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fdeveloper.wordpress.org%2Fblock-editor%2Fcontributors%2Fcode%2Frelease%2F" />
+<link rel="alternate" type="text/xml+oembed" href="https://developer.wordpress.org/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fdeveloper.wordpress.org%2Fblock-editor%2Fcontributors%2Fcode%2Frelease%2F&amp;format=xml" />
+<link rel="canonical" href="index.html">
+<!-- Stream WordPress user activity plugin v3.6.2 -->
+	<style>
+		@media screen and (max-width: 782px) {
+			#wpadminbar li#wp-admin-bar-log-in,
+			#wpadminbar li#wp-admin-bar-register {
+				display: block;
+			}
+
+			#wpadminbar li#wp-admin-bar-log-in a,
+			#wpadminbar li#wp-admin-bar-register a {
+				padding: 0 8px;
+			}
+		}
+	</style>
+		<style>
+			a.github-edit {
+				margin-left: .5em;
+				font-size: .5em;
+				vertical-align: top;
+				display: inline-block;
+				border: 1px solid #eeeeee;
+				border-radius: 2px;
+				background: #eeeeee;
+				padding: .5em .6em .4em;
+				color: black;
+				margin-top: 0.1em;
+			}
+			a.github-edit > * {
+				opacity: 0.6;
+			}
+			a.github-edit:hover > * {
+				opacity: 1;
+				color: black;
+			}
+			a.github-edit img {
+				height: .8em;
+			}
+		</style>
+		
+	<script type="text/javascript">
+		jQuery( '<style>.hide-if-js { display: none; }</style>' ).appendTo( 'head' );
+		jQuery( function($) {
+			$( 'body' ).addClass('js');
+		} );
+	</script>
+<style type="text/css" media="print">#wpadminbar { display:none; }</style>
+	<style type="text/css" media="screen">
+	</style>
+	<script>document.cookie='devicePixelRatio='+((window.devicePixelRatio === undefined) ? 1 : window.devicePixelRatio)+'; path=/';</script>
+
+</head>
+
+
+<body id="wordpress-org" class="blocks-handbook-template-default single single-blocks-handbook postid-135104 admin-bar no-customize-support single-handbook">
+		<div id="wpadminbar" class="nojq nojs">
+						<div class="quicklinks" id="wp-toolbar" role="navigation" aria-label="Toolbar">
+				<ul id='wp-admin-bar-root-default' class="ab-top-menu"><li id='wp-admin-bar-wp-logo' class="menupop"><a class='ab-item' aria-haspopup="true" href='https://wordpress.org/about/'><span class="ab-icon" aria-hidden="true"></span><span class="screen-reader-text">About WordPress</span></a><div class="ab-sub-wrapper"><ul id='wp-admin-bar-wp-logo-default' class="ab-submenu"><li id='wp-admin-bar-about'><a class='ab-item' href='https://wordpress.org/about/'>About WordPress</a></li></ul><ul id='wp-admin-bar-wp-logo-external' class="ab-sub-secondary ab-submenu"><li id='wp-admin-bar-wporg'><a class='ab-item' href='https://wordpress.org/'>WordPress.org</a></li><li id='wp-admin-bar-documentation'><a class='ab-item' href='https://wordpress.org/support/'>Documentation</a></li><li id='wp-admin-bar-support-forums'><a class='ab-item' href='https://wordpress.org/support/forums/'>Support</a></li><li id='wp-admin-bar-feedback'><a class='ab-item' href='https://wordpress.org/support/forum/requests-and-feedback'>Feedback</a></li></ul></div></li></ul><ul id='wp-admin-bar-top-secondary' class="ab-top-secondary ab-top-menu"><li id='wp-admin-bar-search' class="admin-bar-search"><div class="ab-item ab-empty-item" tabindex="-1"><form action="https://developer.wordpress.org/" method="get" id="adminbarsearch"><input class="adminbar-input" name="s" id="adminbar-search" type="text" value="" maxlength="150" /><label for="adminbar-search" class="screen-reader-text">Search</label><input type="submit" class="adminbar-button" value="Search" /></form></div></li><li id='wp-admin-bar-log-in'><a class='ab-item' href='https://login.wordpress.org/?locale=en_US'>Log In</a></li><li id='wp-admin-bar-register'><a class='ab-item' href='https://login.wordpress.org/register?locale=en_US'>Register</a></li></ul>			</div>
+					</div>
+
+		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P24PF4B" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<div id="wporg-header">
+	<div class="wrapper">
+	<h1><a href="http://wordpress.org/">WordPress.org</a></h1>				<div id="head-search">
+		<form action="http://wordpress.org/search/do-search.php" method="get">
+			<label for="global-search" class="screen-reader-text">Search WordPress.org for:</label>
+			<input id="global-search" class="text" name="search" type="text" value="" maxlength="150" placeholder="Search WordPress.org" />
+			<button type="submit" class="button"><span class="screen-reader-text">Submit</span></button>
+		</form>
+		</div>
+				<div style="clear:both"></div>
+		<button id="mobile-menu-button" aria-expanded="false"><span class="screen-reader-text">Toggle Menu</span></button>
+		
+<nav aria-label="Main Menu">
+<ul id="wporg-header-menu">
+<li class="menu-item"><a href='http://wordpress.org/showcase/' data-title='See some of the sites built on WordPress.'>Showcase</a></li>
+<li class="menu-item"><a href='http://learn.wordpress.org/' data-title='Resources to help you learn more about WordPress and teach it to others.'>Learn</a></li>
+<li class="menu-item"><a href='http://wordpress.org/themes/' data-title='Find just the right look for your website.'>Themes</a></li>
+<li class="menu-item"><a href='http://wordpress.org/plugins/' data-title='Plugins can extend WordPress to do almost anything you can imagine.'>Plugins</a></li>
+<li class="menu-item"><a href='http://wordpress.org/mobile/' data-title='Take your website on the go!'>Mobile</a></li>
+<li class="menu-item"><a href='http://wordpress.org/support/' data-title='Forums, documentation, help.'>Support</a><ul class="nav-submenu"><li><a href='http://wordpress.org/support/' title='Documentation, tutorials, best practices.'>Documentation</a></li><li><a href='http://wordpress.org/support/forums/' title='Support and discussion forums.'>Forums</a></li></ul><div class="uparrow"></div></li>
+<li class="menu-item"><a href='http://make.wordpress.org/' data-title='Contribute your knowledge.'>Get Involved</a><ul class="nav-submenu"><li><a href='http://wordpress.org/five-for-the-future/' title='How five percent is powering the next generation of the web'>Five for the Future</a></li></ul><div class="uparrow"></div></li>
+<li class="menu-item"><a href='http://wordpress.org/about/' data-title='About the WordPress Organization, and where we&#039;re going.'>About</a></li>
+<li class="menu-item"><a href='http://wordpress.org/news/' data-title='Come here for the latest scoop.'>Blog</a></li>
+<li class="menu-item"><a href='http://wordpress.org/hosting/' data-title='Find a home for your blog.'>Hosting</a></li>
+<li id="download" class="button download-button menu-item"><a href='http://wordpress.org/download/' data-title='Get it. Got it? Good.'>Get WordPress</a></li>
+</ul>
+</nav>
+		<div style="clear:both"></div>
+	</div>
+</div>
+
+
+
+<header id="masthead" class="site-header" role="banner">
+			<a href="#" id="secondary-toggle" onclick="return false;"><strong>Menu</strong></a>
+		<div class="site-branding">
+		<h1 class="site-title">
+			<a href="../../../../index.html" rel="home">Block Editor Handbook</a>
+		</h1>
+
+		
+		<nav id="site-navigation" class="main-navigation" role="navigation">
+			<button class="menu-toggle dashicons dashicons-arrow-down-alt2" aria-controls="primary-menu" aria-expanded="false" aria-label="Primary Menu"></button>
+					</nav>
+	</div>
+</header><!-- #masthead -->
+
+<div id="page" class="hfeed site devhub-wrap">
+	<a href="#main" class="screen-reader-text">Skip to content</a>
+
+			<div id="content" class="site-content">
+
+
+	<div id="secondary" class="widget-area" role="complementary">
+		<a href="#" id="secondary-toggle"></a>
+		<div id="secondary-content">
+						<aside id="search-7" class="widget widget_search"><div class="search-section section clear hide-if-js">
+
+
+	
+	<form role="search" method="get" class="searchform searchform-handbook" action="https://developer.wordpress.org/block-editor/">
+		<label for="search-field" class="screen-reader-text">Search for:</label>
+		<input type="text" id="search-field" class="search-field" placeholder="Search &hellip;" value="" name="s">
+		<button class="button button-primary button-search"><i class="dashicons dashicons-search"></i><span class="screen-reader-text">Search plugins</span></button>
+	
+	</form>
+
+</div><!-- /search-guide -->
+</aside><aside id="handbook_pages-3" class="widget widget_wporg_handbook_pages"><h2 class="widget-title">Chapters</h2>
+<div class="menu-table-of-contents-container">
+
+			<ul>
+				<li class="page_item page-item-122779 page_item_has_children menu-item menu-item-has-children"><a href="../../../index.html">Getting started</a>
+<ul class='children'>
+	<li class="page_item page-item-134335 page_item_has_children menu-item menu-item-has-children"><a href="../../../handbook/tutorials/index.html">Tutorials</a>
+	<ul class='children'>
+		<li class="page_item page-item-134336 page_item_has_children menu-item menu-item-has-children"><a href="../../../handbook/tutorials/devenv/index.html">Development Environment</a>
+		<ul class='children'>
+			<li class="page_item page-item-134337 menu-item"><a href="../../../handbook/tutorials/devenv/docker-ubuntu/index.html">How to setup local WordPress environment on Ubuntu</a></li>
+		</ul>
+</li>
+		<li class="page_item page-item-134338 page_item_has_children menu-item menu-item-has-children"><a href="../../../handbook/tutorials/create-block/index.html">Create a Block Tutorial</a>
+		<ul class='children'>
+			<li class="page_item page-item-134339 menu-item"><a href="../../../handbook/tutorials/create-block/wp-plugin/index.html">WordPress Plugin</a></li>
+			<li class="page_item page-item-134340 menu-item"><a href="../../../handbook/tutorials/create-block/block-anatomy/index.html">Anatomy of a Block</a></li>
+			<li class="page_item page-item-134341 menu-item"><a href="../../../handbook/tutorials/create-block/attributes/index.html">Block Attributes</a></li>
+			<li class="page_item page-item-134342 menu-item"><a href="../../../handbook/tutorials/create-block/block-code/index.html">Code Implementation</a></li>
+			<li class="page_item page-item-134343 menu-item"><a href="../../../handbook/tutorials/create-block/author-experience/index.html">Authoring Experience</a></li>
+			<li class="page_item page-item-134344 menu-item"><a href="../../../handbook/tutorials/create-block/finishing/index.html">Finishing Touches</a></li>
+			<li class="page_item page-item-134345 menu-item"><a href="../../../handbook/tutorials/create-block/submitting-to-block-directory/index.html">Share your Block with the World</a></li>
+		</ul>
+</li>
+	</ul>
+</li>
+	<li class="page_item page-item-135656 menu-item"><a href="../../../handbook/full-site-editing/index.html">Full Site Editing</a></li>
+	<li class="page_item page-item-135085 menu-item"><a href="../../../handbook/glossary/index.html">Glossary</a></li>
+	<li class="page_item page-item-135086 menu-item"><a href="../../../handbook/faq/index.html">Frequently Asked Questions</a></li>
+	<li class="page_item page-item-135087 menu-item"><a href="../../../handbook/history/index.html">History</a></li>
+	<li class="page_item page-item-135088 menu-item"><a href="../../../handbook/outreach/index.html">Outreach</a></li>
+</ul>
+</li>
+<li class="page_item page-item-134350 page_item_has_children menu-item menu-item-has-children"><a href="../../../how-to-guides/index.html">How-to Guides</a>
+<ul class='children'>
+	<li class="page_item page-item-134351 page_item_has_children menu-item menu-item-has-children"><a href="../../../how-to-guides/javascript/index.html">Getting Started with JavaScript</a>
+	<ul class='children'>
+		<li class="page_item page-item-134352 menu-item"><a href="../../../how-to-guides/javascript/plugins-background/index.html">Plugins Background</a></li>
+		<li class="page_item page-item-134353 menu-item"><a href="../../../how-to-guides/javascript/loading-javascript/index.html">Loading JavaScript</a></li>
+		<li class="page_item page-item-134354 menu-item"><a href="../../../how-to-guides/javascript/extending-the-block-editor/index.html">Extending the Block Editor</a></li>
+		<li class="page_item page-item-134355 menu-item"><a href="../../../how-to-guides/javascript/troubleshooting/index.html">Troubleshooting</a></li>
+		<li class="page_item page-item-134356 menu-item"><a href="../../../how-to-guides/javascript/versions-and-building/index.html">JavaScript Versions and Build Step</a></li>
+		<li class="page_item page-item-134357 menu-item"><a href="../../../how-to-guides/javascript/scope-your-code/index.html">Scope Your Code</a></li>
+		<li class="page_item page-item-134358 menu-item"><a href="../../../how-to-guides/javascript/js-build-setup/index.html">JavaScript Build Setup</a></li>
+		<li class="page_item page-item-134359 menu-item"><a href="../../../how-to-guides/javascript/esnext-js/index.html">ESNext Syntax</a></li>
+	</ul>
+</li>
+	<li class="page_item page-item-134360 page_item_has_children menu-item menu-item-has-children"><a href="../../../how-to-guides/metabox/index.html">Meta Boxes</a>
+	<ul class='children'>
+		<li class="page_item page-item-134361 menu-item"><a href="../../../how-to-guides/metabox/meta-block-1-intro/index.html">Store Post Meta with a Block</a></li>
+		<li class="page_item page-item-134362 menu-item"><a href="../../../how-to-guides/metabox/meta-block-2-register-meta/index.html">Register Meta Field</a></li>
+		<li class="page_item page-item-134363 menu-item"><a href="../../../how-to-guides/metabox/meta-block-3-add/index.html">Create Meta Block</a></li>
+		<li class="page_item page-item-134364 menu-item"><a href="../../../how-to-guides/metabox/meta-block-4-use-data/index.html">Use Post Meta Data</a></li>
+		<li class="page_item page-item-134365 menu-item"><a href="../../../how-to-guides/metabox/meta-block-5-finishing/index.html">Finishing Touches</a></li>
+	</ul>
+</li>
+	<li class="page_item page-item-134366 menu-item"><a href="../../../how-to-guides/notices/index.html">Displaying Notices from Your Plugin or Theme</a></li>
+	<li class="page_item page-item-134367 page_item_has_children menu-item menu-item-has-children"><a href="../../../how-to-guides/plugin-sidebar-0/index.html">Creating a Sidebar for Your Plugin</a>
+	<ul class='children'>
+		<li class="page_item page-item-134368 menu-item"><a href="../../../how-to-guides/plugin-sidebar-0/plugin-sidebar-1-up-and-running/index.html">Get a Sidebar up and Running</a></li>
+		<li class="page_item page-item-134369 menu-item"><a href="../../../how-to-guides/plugin-sidebar-0/plugin-sidebar-2-styles-and-controls/index.html">Tweak the sidebar style and add controls</a></li>
+		<li class="page_item page-item-134370 menu-item"><a href="../../../how-to-guides/plugin-sidebar-0/plugin-sidebar-3-register-meta/index.html">Register the Meta Field</a></li>
+		<li class="page_item page-item-134371 menu-item"><a href="../../../how-to-guides/plugin-sidebar-0/plugin-sidebar-4-initialize-input/index.html">Initialize the Input Control</a></li>
+		<li class="page_item page-item-134372 menu-item"><a href="../../../how-to-guides/plugin-sidebar-0/plugin-sidebar-5-update-meta/index.html">Update the Meta Field When the Input&#8217;s Content Changes</a></li>
+		<li class="page_item page-item-134373 menu-item"><a href="../../../how-to-guides/plugin-sidebar-0/plugin-sidebar-6-finishing-touches/index.html">Finishing Touches</a></li>
+	</ul>
+</li>
+	<li class="page_item page-item-134374 page_item_has_children menu-item menu-item-has-children"><a href="../../../how-to-guides/block-tutorial/index.html">Blocks</a>
+	<ul class='children'>
+		<li class="page_item page-item-134375 menu-item"><a href="../../../how-to-guides/block-tutorial/writing-your-first-block-type/index.html">Writing Your First Block Type</a></li>
+		<li class="page_item page-item-134376 menu-item"><a href="../../../how-to-guides/block-tutorial/applying-styles-with-stylesheets/index.html">Applying Styles From a Stylesheet</a></li>
+		<li class="page_item page-item-134377 menu-item"><a href="../../../how-to-guides/block-tutorial/introducing-attributes-and-editable-fields/index.html">Introducing Attributes and Editable Fields</a></li>
+		<li class="page_item page-item-134378 menu-item"><a href="../../../how-to-guides/block-tutorial/block-controls-toolbar-and-sidebar/index.html">Block Controls: Block Toolbar and Settings Sidebar</a></li>
+		<li class="page_item page-item-134379 menu-item"><a href="../../../how-to-guides/block-tutorial/creating-dynamic-blocks/index.html">Creating dynamic blocks</a></li>
+		<li class="page_item page-item-134380 menu-item"><a href="../../../how-to-guides/block-tutorial/generate-blocks-with-wp-cli/index.html">Generate Blocks with WP-CLI</a></li>
+		<li class="page_item page-item-134381 menu-item"><a href="../../../how-to-guides/block-tutorial/nested-blocks-inner-blocks/index.html">Nested Blocks: Using InnerBlocks</a></li>
+	</ul>
+</li>
+	<li class="page_item page-item-135662 page_item_has_children menu-item menu-item-has-children"><a href="../../../how-to-guides/themes/index.html">Themes</a>
+	<ul class='children'>
+		<li class="page_item page-item-135663 menu-item"><a href="../../../how-to-guides/themes/block-theme-overview/index.html">Block Theme</a></li>
+		<li class="page_item page-item-135664 menu-item"><a href="../../../how-to-guides/themes/create-block-theme/index.html">Create a block theme</a></li>
+		<li class="page_item page-item-135665 menu-item"><a href="../../../how-to-guides/themes/theme-json/index.html">Global Settings &amp; Styles (theme.json)</a></li>
+		<li class="page_item page-item-135666 menu-item"><a href="../../../how-to-guides/themes/theme-support/index.html">Theme Support</a></li>
+	</ul>
+</li>
+	<li class="page_item page-item-134382 menu-item"><a href="../../../how-to-guides/feature-flags/index.html">Feature Flags</a></li>
+	<li class="page_item page-item-134388 page_item_has_children menu-item menu-item-has-children"><a href="../../../how-to-guides/backward-compatibility/index.html">Backward Compatibility</a>
+	<ul class='children'>
+		<li class="page_item page-item-134389 menu-item"><a href="../../../how-to-guides/backward-compatibility/deprecations/index.html">Deprecations</a></li>
+		<li class="page_item page-item-134390 menu-item"><a href="../../../how-to-guides/backward-compatibility/meta-box/index.html">Meta Boxes</a></li>
+	</ul>
+</li>
+	<li class="page_item page-item-134391 page_item_has_children menu-item menu-item-has-children"><a href="../../../how-to-guides/format-api/index.html">Introduction to the Format API</a>
+	<ul class='children'>
+		<li class="page_item page-item-134392 menu-item"><a href="../../../how-to-guides/format-api/1-register-format/index.html">Register a New Format</a></li>
+		<li class="page_item page-item-134393 menu-item"><a href="../../../how-to-guides/format-api/2-toolbar-button/index.html">Add a Button to the Toolbar</a></li>
+		<li class="page_item page-item-134394 menu-item"><a href="../../../how-to-guides/format-api/3-apply-format/index.html">Apply the Format When the Button Is Clicked</a></li>
+	</ul>
+</li>
+	<li class="page_item page-item-134395 page_item_has_children menu-item menu-item-has-children"><a href="../../../how-to-guides/platform/index.html">Gutenberg as a Development Platform</a>
+	<ul class='children'>
+		<li class="page_item page-item-134396 page_item_has_children menu-item menu-item-has-children"><a href="../../../how-to-guides/platform/custom-block-editor/index.html">Building a custom block editor</a>
+		<ul class='children'>
+			<li class="page_item page-item-134397 menu-item"><a href="../../../how-to-guides/platform/custom-block-editor/tutorial/index.html">Tutorial: building a custom block editor</a></li>
+		</ul>
+</li>
+	</ul>
+</li>
+	<li class="page_item page-item-134398 page_item_has_children menu-item menu-item-has-children"><a href="../../../how-to-guides/designers/index.html">Designer Documentation</a>
+	<ul class='children'>
+		<li class="page_item page-item-134399 menu-item"><a href="../../../how-to-guides/designers/block-design/index.html">Block Design</a></li>
+		<li class="page_item page-item-134400 menu-item"><a href="../../../how-to-guides/designers/user-interface/index.html">User Interface</a></li>
+		<li class="page_item page-item-134401 menu-item"><a href="../../../how-to-guides/designers/design-resources/index.html">Resources</a></li>
+		<li class="page_item page-item-134402 menu-item"><a href="../../../how-to-guides/designers/animation/index.html">Animation</a></li>
+	</ul>
+</li>
+	<li class="page_item page-item-134403 menu-item"><a href="../../../how-to-guides/accessibility/index.html">Accessibility</a></li>
+	<li class="page_item page-item-134404 menu-item"><a href="../../../how-to-guides/internationalization/index.html">Internationalization</a></li>
+	<li class="page_item page-item-135818 page_item_has_children menu-item menu-item-has-children"><a href="../../../how-to-guides/widgets/index.html">Widgets</a>
+	<ul class='children'>
+		<li class="page_item page-item-135819 menu-item"><a href="../../../how-to-guides/widgets/overview/index.html">Widgets Block Editor overview</a></li>
+		<li class="page_item page-item-135820 menu-item"><a href="../../../how-to-guides/widgets/opting-out/index.html">Restoring the classic Widgets Editor</a></li>
+		<li class="page_item page-item-135821 menu-item"><a href="../../../how-to-guides/widgets/legacy-widget-block/index.html">About the Legacy Widget block</a></li>
+	</ul>
+</li>
+</ul>
+</li>
+<li class="page_item page-item-134405 page_item_has_children menu-item menu-item-has-children"><a href="../../../reference-guides/index.html">Reference Guides</a>
+<ul class='children'>
+	<li class="page_item page-item-134406 page_item_has_children menu-item menu-item-has-children"><a href="../../../reference-guides/block-api/index.html">Block API Reference</a>
+	<ul class='children'>
+		<li class="page_item page-item-134417 menu-item"><a href="../../../reference-guides/block-api/block-annotations/index.html">Annotations</a></li>
+		<li class="page_item page-item-135620 menu-item"><a href="../../../reference-guides/block-api/block-api-versions/index.html">API Versions</a></li>
+		<li class="page_item page-item-134409 menu-item"><a href="../../../reference-guides/block-api/block-attributes/index.html">Attributes</a></li>
+		<li class="page_item page-item-135621 menu-item"><a href="../../../reference-guides/block-api/block-context/index.html">Context</a></li>
+		<li class="page_item page-item-135622 menu-item"><a href="../../../reference-guides/block-api/block-deprecation/index.html">Deprecation</a></li>
+		<li class="page_item page-item-134408 menu-item"><a href="../../../reference-guides/block-api/block-edit-save/index.html">Edit and Save</a></li>
+		<li class="page_item page-item-135623 menu-item"><a href="../../../reference-guides/block-api/block-metadata/index.html">Metadata</a></li>
+		<li class="page_item page-item-135624 menu-item"><a href="../../../reference-guides/block-api/block-patterns/index.html">Patterns</a></li>
+		<li class="page_item page-item-135625 menu-item"><a href="../../../reference-guides/block-api/block-registration/index.html">Registration</a></li>
+		<li class="page_item page-item-135827 menu-item"><a href="../../../reference-guides/block-api/block-styles/index.html">Styles</a></li>
+		<li class="page_item page-item-135626 menu-item"><a href="../../../reference-guides/block-api/block-supports/index.html">Supports</a></li>
+		<li class="page_item page-item-134414 menu-item"><a href="../../../reference-guides/block-api/block-templates/index.html">Templates</a></li>
+		<li class="page_item page-item-135627 menu-item"><a href="../../../reference-guides/block-api/block-transforms/index.html">Transforms</a></li>
+		<li class="page_item page-item-135628 menu-item"><a href="../../../reference-guides/block-api/block-variations/index.html">Variations</a></li>
+	</ul>
+</li>
+	<li class="page_item page-item-134419 page_item_has_children menu-item menu-item-has-children"><a href="../../../reference-guides/filters/index.html">Filter Reference</a>
+	<ul class='children'>
+		<li class="page_item page-item-134420 menu-item"><a href="../../../reference-guides/filters/block-filters/index.html">Block Filters</a></li>
+		<li class="page_item page-item-134421 menu-item"><a href="../../../reference-guides/filters/editor-filters/index.html">Editor Filters</a></li>
+		<li class="page_item page-item-136823 menu-item"><a href="../../../reference-guides/filters/i18n-filters/index.html">i18n Filters</a></li>
+		<li class="page_item page-item-134422 menu-item"><a href="../../../reference-guides/filters/parser-filters/index.html">Parser Filters</a></li>
+		<li class="page_item page-item-134423 menu-item"><a href="../../../reference-guides/filters/autocomplete-filters/index.html">Autocomplete</a></li>
+	</ul>
+</li>
+	<li class="page_item page-item-134424 page_item_has_children menu-item menu-item-has-children"><a href="../../../reference-guides/slotfills/index.html">SlotFills Reference</a>
+	<ul class='children'>
+		<li class="page_item page-item-134425 menu-item"><a href="../../../reference-guides/slotfills/main-dashboard-button/index.html">MainDashboardButton</a></li>
+		<li class="page_item page-item-134426 menu-item"><a href="../../../reference-guides/slotfills/plugin-block-settings-menu-item/index.html">PluginBlockSettingsMenuItem</a></li>
+		<li class="page_item page-item-134427 menu-item"><a href="../../../reference-guides/slotfills/plugin-document-setting-panel/index.html">PluginDocumentSettingPanel</a></li>
+		<li class="page_item page-item-134428 menu-item"><a href="../../../reference-guides/slotfills/plugin-more-menu-item/index.html">PluginMoreMenuItem</a></li>
+		<li class="page_item page-item-134429 menu-item"><a href="../../../reference-guides/slotfills/plugin-post-publish-panel/index.html">PluginPostPublishPanel</a></li>
+		<li class="page_item page-item-134430 menu-item"><a href="../../../reference-guides/slotfills/plugin-post-status-info/index.html">PluginPostStatusInfo</a></li>
+		<li class="page_item page-item-134431 menu-item"><a href="../../../reference-guides/slotfills/plugin-pre-publish-panel/index.html">PluginPrePublishPanel</a></li>
+		<li class="page_item page-item-134432 menu-item"><a href="../../../reference-guides/slotfills/plugin-sidebar/index.html">PluginSidebar</a></li>
+		<li class="page_item page-item-134433 menu-item"><a href="../../../reference-guides/slotfills/plugin-sidebar-more-menu-item/index.html">PluginSidebarMoreMenuItem</a></li>
+	</ul>
+</li>
+	<li class="page_item page-item-134434 menu-item"><a href="../../../reference-guides/richtext/index.html">RichText Reference</a></li>
+	<li class="page_item page-item-134435 page_item_has_children menu-item menu-item-has-children"><a href="../../../reference-guides/components/index.html">Component Reference</a>
+	<ul class='children'>
+		<li class="page_item page-item-134436 menu-item"><a href="../../../reference-guides/components/alignment-matrix-control/index.html">AlignmentMatrixControl</a></li>
+		<li class="page_item page-item-134437 menu-item"><a href="../../../reference-guides/components/angle-picker-control/index.html">AnglePickerControl</a></li>
+		<li class="page_item page-item-134438 menu-item"><a href="../../../reference-guides/components/animate/index.html">Animate</a></li>
+		<li class="page_item page-item-134439 menu-item"><a href="../../../reference-guides/components/autocomplete/index.html">Autocomplete</a></li>
+		<li class="page_item page-item-134440 menu-item"><a href="../../../reference-guides/components/base-control/index.html">BaseControl</a></li>
+		<li class="page_item page-item-136286 menu-item"><a href="../../../reference-guides/components/base-field/index.html">BaseField</a></li>
+		<li class="page_item page-item-134441 menu-item"><a href="../../../reference-guides/components/box-control/index.html">BoxControl</a></li>
+		<li class="page_item page-item-134442 menu-item"><a href="../../../reference-guides/components/button-group/index.html">ButtonGroup</a></li>
+		<li class="page_item page-item-134443 menu-item"><a href="../../../reference-guides/components/button/index.html">Button</a></li>
+		<li class="page_item page-item-136324 menu-item"><a href="../../../reference-guides/components/card-body/index.html">CardBody</a></li>
+		<li class="page_item page-item-136325 menu-item"><a href="../../../reference-guides/components/card-divider/index.html">CardDivider</a></li>
+		<li class="page_item page-item-136326 menu-item"><a href="../../../reference-guides/components/card-footer/index.html">CardFooter</a></li>
+		<li class="page_item page-item-136327 menu-item"><a href="../../../reference-guides/components/card-header/index.html">CardHeader</a></li>
+		<li class="page_item page-item-136328 menu-item"><a href="../../../reference-guides/components/card-media/index.html">CardMedia</a></li>
+		<li class="page_item page-item-134444 menu-item"><a href="../../../reference-guides/components/card/index.html">Card</a></li>
+		<li class="page_item page-item-134445 menu-item"><a href="../../../reference-guides/components/checkbox-control/index.html">CheckboxControl</a></li>
+		<li class="page_item page-item-134446 menu-item"><a href="../../../reference-guides/components/clipboard-button/index.html">ClipboardButton</a></li>
+		<li class="page_item page-item-134447 menu-item"><a href="../../../reference-guides/components/color-indicator/index.html">ColorIndicator</a></li>
+		<li class="page_item page-item-134448 menu-item"><a href="../../../reference-guides/components/color-palette/index.html">ColorPalette</a></li>
+		<li class="page_item page-item-134449 menu-item"><a href="../../../reference-guides/components/color-picker/index.html">ColorPicker</a></li>
+		<li class="page_item page-item-134450 menu-item"><a href="../../../reference-guides/components/combobox-control/index.html">ComboboxControl</a></li>
+		<li class="page_item page-item-134451 menu-item"><a href="../../../reference-guides/components/custom-select-control/index.html">CustomSelectControl</a></li>
+		<li class="page_item page-item-134452 menu-item"><a href="../../../reference-guides/components/dashicon/index.html">Dashicon</a></li>
+		<li class="page_item page-item-134453 menu-item"><a href="../../../reference-guides/components/date-time/index.html">DateTime</a></li>
+		<li class="page_item page-item-134454 menu-item"><a href="../../../reference-guides/components/dimension-control/index.html">DimensionControl</a></li>
+		<li class="page_item page-item-134455 menu-item"><a href="../../../reference-guides/components/disabled/index.html">Disabled</a></li>
+		<li class="page_item page-item-135813 menu-item"><a href="../../../reference-guides/components/divider/index.html">Divider</a></li>
+		<li class="page_item page-item-134456 menu-item"><a href="../../../reference-guides/components/draggable/index.html">Draggable</a></li>
+		<li class="page_item page-item-134457 menu-item"><a href="../../../reference-guides/components/drop-zone/index.html">DropZone</a></li>
+		<li class="page_item page-item-134458 menu-item"><a href="../../../reference-guides/components/dropdown-menu/index.html">DropdownMenu</a></li>
+		<li class="page_item page-item-134459 menu-item"><a href="../../../reference-guides/components/dropdown/index.html">Dropdown</a></li>
+		<li class="page_item page-item-135646 menu-item"><a href="../../../reference-guides/components/duotone-picker/index.html">DuotonePicker</a></li>
+		<li class="page_item page-item-136231 menu-item"><a href="../../../reference-guides/components/elevation/index.html">Elevation</a></li>
+		<li class="page_item page-item-134460 menu-item"><a href="../../../reference-guides/components/external-link/index.html">ExternalLink</a></li>
+		<li class="page_item page-item-135760 menu-item"><a href="../../../reference-guides/components/flex-block/index.html">FlexBlock</a></li>
+		<li class="page_item page-item-135761 menu-item"><a href="../../../reference-guides/components/flex-item/index.html">FlexItem</a></li>
+		<li class="page_item page-item-134461 menu-item"><a href="../../../reference-guides/components/flex/index.html">Flex</a></li>
+		<li class="page_item page-item-136416 menu-item"><a href="../../../reference-guides/components/flyout/index.html">Flyout</a></li>
+		<li class="page_item page-item-134462 menu-item"><a href="../../../reference-guides/components/focal-point-picker/index.html">FocalPointPicker</a></li>
+		<li class="page_item page-item-134463 menu-item"><a href="../../../reference-guides/components/focusable-iframe/index.html">FocusableIframe</a></li>
+		<li class="page_item page-item-134464 menu-item"><a href="../../../reference-guides/components/font-size-picker/index.html">FontSizePicker</a></li>
+		<li class="page_item page-item-134465 menu-item"><a href="../../../reference-guides/components/form-file-upload/index.html">FormFileUpload</a></li>
+		<li class="page_item page-item-134466 menu-item"><a href="../../../reference-guides/components/form-toggle/index.html">FormToggle</a></li>
+		<li class="page_item page-item-134467 menu-item"><a href="../../../reference-guides/components/form-token-field/index.html">FormTokenField</a></li>
+		<li class="page_item page-item-135809 menu-item"><a href="../../../reference-guides/components/grid/index.html">Grid</a></li>
+		<li class="page_item page-item-134468 menu-item"><a href="../../../reference-guides/components/guide/index.html">Guide</a></li>
+		<li class="page_item page-item-135796 menu-item"><a href="../../../reference-guides/components/h-stack/index.html">HStack</a></li>
+		<li class="page_item page-item-135770 menu-item"><a href="../../../reference-guides/components/heading/index.html">Heading</a></li>
+		<li class="page_item page-item-134469 menu-item"><a href="../../../reference-guides/components/navigate-regions/index.html">NavigateRegions</a></li>
+		<li class="page_item page-item-134470 menu-item"><a href="../../../reference-guides/components/higher-order/index.html">HigherOrder</a></li>
+		<li class="page_item page-item-134471 menu-item"><a href="../../../reference-guides/components/with-constrained-tabbing/index.html">WithConstrainedTabbing</a></li>
+		<li class="page_item page-item-134472 menu-item"><a href="../../../reference-guides/components/with-fallback-styles/index.html">WithFallbackStyles</a></li>
+		<li class="page_item page-item-134473 menu-item"><a href="../../../reference-guides/components/with-filters/index.html">WithFilters</a></li>
+		<li class="page_item page-item-134474 menu-item"><a href="../../../reference-guides/components/with-focus-outside/index.html">WithFocusOutside</a></li>
+		<li class="page_item page-item-134475 menu-item"><a href="../../../reference-guides/components/with-focus-return/index.html">WithFocusReturn</a></li>
+		<li class="page_item page-item-134476 menu-item"><a href="../../../reference-guides/components/with-notices/index.html">WithNotices</a></li>
+		<li class="page_item page-item-134477 menu-item"><a href="../../../reference-guides/components/with-spoken-messages/index.html">WithSpokenMessages</a></li>
+		<li class="page_item page-item-134478 menu-item"><a href="../../../reference-guides/components/icon/index.html">Icon</a></li>
+		<li class="page_item page-item-134479 menu-item"><a href="../../../reference-guides/components/input-control/index.html">InputControl</a></li>
+		<li class="page_item page-item-134480 menu-item"><a href="../../../reference-guides/components/isolated-event-container/index.html">IsolatedEventContainer</a></li>
+		<li class="page_item page-item-136845 menu-item"><a href="../../../reference-guides/components/item-group/index.html">ItemGroup</a></li>
+		<li class="page_item page-item-136846 menu-item"><a href="../../../reference-guides/components/item/index.html">Item</a></li>
+		<li class="page_item page-item-134481 menu-item"><a href="../../../reference-guides/components/keyboard-shortcuts/index.html">KeyboardShortcuts</a></li>
+		<li class="page_item page-item-134482 menu-item"><a href="../../../reference-guides/components/menu-group/index.html">MenuGroup</a></li>
+		<li class="page_item page-item-134483 menu-item"><a href="../../../reference-guides/components/menu-item/index.html">MenuItem</a></li>
+		<li class="page_item page-item-134484 menu-item"><a href="../../../reference-guides/components/menu-items-choice/index.html">MenuItemsChoice</a></li>
+		<li class="page_item page-item-134485 menu-item"><a href="../../../reference-guides/components/modal/index.html">Modal</a></li>
+		<li class="page_item page-item-134486 menu-item"><a href="../../../reference-guides/components/navigable-container/index.html">NavigableContainer</a></li>
+		<li class="page_item page-item-134487 menu-item"><a href="../../../reference-guides/components/navigation/index.html">Navigation</a></li>
+		<li class="page_item page-item-134488 menu-item"><a href="../../../reference-guides/components/notice/index.html">Notice</a></li>
+		<li class="page_item page-item-134489 menu-item"><a href="../../../reference-guides/components/number-control/index.html">NumberControl</a></li>
+		<li class="page_item page-item-134490 menu-item"><a href="../../../reference-guides/components/panel/index.html">Panel</a></li>
+		<li class="page_item page-item-134491 menu-item"><a href="../../../reference-guides/components/placeholder/index.html">Placeholder</a></li>
+		<li class="page_item page-item-134492 menu-item"><a href="../../../reference-guides/components/popover/index.html">Popover</a></li>
+		<li class="page_item page-item-134493 menu-item"><a href="../../../reference-guides/components/query-controls/index.html">QueryControls</a></li>
+		<li class="page_item page-item-134494 menu-item"><a href="../../../reference-guides/components/radio-control/index.html">RadioControl</a></li>
+		<li class="page_item page-item-134495 menu-item"><a href="../../../reference-guides/components/radio-group/index.html">RadioGroup</a></li>
+		<li class="page_item page-item-134496 menu-item"><a href="../../../reference-guides/components/range-control/index.html">RangeControl</a></li>
+		<li class="page_item page-item-134497 menu-item"><a href="../../../reference-guides/components/resizable-box/index.html">ResizableBox</a></li>
+		<li class="page_item page-item-134498 menu-item"><a href="../../../reference-guides/components/resize-tooltip/index.html">ResizeTooltip</a></li>
+		<li class="page_item page-item-134499 menu-item"><a href="../../../reference-guides/components/responsive-wrapper/index.html">ResponsiveWrapper</a></li>
+		<li class="page_item page-item-134500 menu-item"><a href="../../../reference-guides/components/sandbox/index.html">Sandbox</a></li>
+		<li class="page_item page-item-134501 menu-item"><a href="../../../reference-guides/components/scroll-lock/index.html">ScrollLock</a></li>
+		<li class="page_item page-item-136311 menu-item"><a href="../../../reference-guides/components/scrollable/index.html">Scrollable</a></li>
+		<li class="page_item page-item-136420 menu-item"><a href="../../../reference-guides/components/search-control/index.html">SearchControl</a></li>
+		<li class="page_item page-item-136507 menu-item"><a href="../../../reference-guides/components/segmented-control/index.html">SegmentedControl</a></li>
+		<li class="page_item page-item-134502 menu-item"><a href="../../../reference-guides/components/select-control/index.html">SelectControl</a></li>
+		<li class="page_item page-item-134503 menu-item"><a href="../../../reference-guides/components/slot-fill/index.html">SlotFill</a></li>
+		<li class="page_item page-item-134504 menu-item"><a href="../../../reference-guides/components/snackbar/index.html">Snackbar</a></li>
+		<li class="page_item page-item-135803 menu-item"><a href="../../../reference-guides/components/spacer/index.html">Spacer</a></li>
+		<li class="page_item page-item-134505 menu-item"><a href="../../../reference-guides/components/spinner/index.html">Spinner</a></li>
+		<li class="page_item page-item-136315 menu-item"><a href="../../../reference-guides/components/surface/index.html">Surface</a></li>
+		<li class="page_item page-item-134506 menu-item"><a href="../../../reference-guides/components/tab-panel/index.html">TabPanel</a></li>
+		<li class="page_item page-item-134507 menu-item"><a href="../../../reference-guides/components/text-control/index.html">TextControl</a></li>
+		<li class="page_item page-item-134508 menu-item"><a href="../../../reference-guides/components/text-highlight/index.html">TextHighlight</a></li>
+		<li class="page_item page-item-134509 menu-item"><a href="../../../reference-guides/components/text/index.html">Text</a></li>
+		<li class="page_item page-item-134510 menu-item"><a href="../../../reference-guides/components/textarea-control/index.html">TextareaControl</a></li>
+		<li class="page_item page-item-134511 menu-item"><a href="../../../reference-guides/components/toggle-control/index.html">ToggleControl</a></li>
+		<li class="page_item page-item-136900 menu-item"><a href="../../../reference-guides/components/toggle-group-control/index.html">ToggleGroupControl</a></li>
+		<li class="page_item page-item-134512 menu-item"><a href="../../../reference-guides/components/toolbar-button/index.html">ToolbarButton</a></li>
+		<li class="page_item page-item-135800 menu-item"><a href="../../../reference-guides/components/toolbar-dropdown-menu/index.html">ToolbarDropdownMenu</a></li>
+		<li class="page_item page-item-134513 menu-item"><a href="../../../reference-guides/components/toolbar-group/index.html">ToolbarGroup</a></li>
+		<li class="page_item page-item-134514 menu-item"><a href="../../../reference-guides/components/toolbar-item/index.html">ToolbarItem</a></li>
+		<li class="page_item page-item-134515 menu-item"><a href="../../../reference-guides/components/toolbar/index.html">Toolbar</a></li>
+		<li class="page_item page-item-136876 menu-item"><a href="../../../reference-guides/components/tools-panel-header/index.html">ToolsPanelHeader</a></li>
+		<li class="page_item page-item-136877 menu-item"><a href="../../../reference-guides/components/tools-panel-item/index.html">ToolsPanelItem</a></li>
+		<li class="page_item page-item-136878 menu-item"><a href="../../../reference-guides/components/tools-panel/index.html">ToolsPanel</a></li>
+		<li class="page_item page-item-134516 menu-item"><a href="../../../reference-guides/components/tooltip/index.html">Tooltip</a></li>
+		<li class="page_item page-item-134517 menu-item"><a href="../../../reference-guides/components/tree-grid/index.html">TreeGrid</a></li>
+		<li class="page_item page-item-134518 menu-item"><a href="../../../reference-guides/components/tree-select/index.html">TreeSelect</a></li>
+		<li class="page_item page-item-135766 menu-item"><a href="../../../reference-guides/components/truncate/index.html">Truncate</a></li>
+		<li class="page_item page-item-134519 menu-item"><a href="../../../reference-guides/components/unit-control/index.html">UnitControl</a></li>
+		<li class="page_item page-item-135797 menu-item"><a href="../../../reference-guides/components/v-stack/index.html">VStack</a></li>
+		<li class="page_item page-item-134520 menu-item"><a href="../../../reference-guides/components/visually-hidden/index.html">VisuallyHidden</a></li>
+		<li class="page_item page-item-136221 menu-item"><a href="../../../reference-guides/components/z-stack/index.html">ZStack</a></li>
+	</ul>
+</li>
+	<li class="page_item page-item-134521 page_item_has_children menu-item menu-item-has-children"><a href="../../../reference-guides/packages/index.html">Package Reference</a>
+	<ul class='children'>
+		<li class="page_item page-item-136401 menu-item"><a href="../../../reference-guides/packages/packages-admin-manifest/index.html">@wordpress/admin-manifest</a></li>
+		<li class="page_item page-item-134522 menu-item"><a href="../../../reference-guides/packages/packages-a11y/index.html">@wordpress/a11y</a></li>
+		<li class="page_item page-item-134523 menu-item"><a href="../../../reference-guides/packages/packages-annotations/index.html">@wordpress/annotations</a></li>
+		<li class="page_item page-item-134524 menu-item"><a href="../../../reference-guides/packages/packages-api-fetch/index.html">@wordpress/api-fetch</a></li>
+		<li class="page_item page-item-134525 menu-item"><a href="../../../reference-guides/packages/packages-autop/index.html">@wordpress/autop</a></li>
+		<li class="page_item page-item-134526 menu-item"><a href="../../../reference-guides/packages/packages-babel-plugin-import-jsx-pragma/index.html">@wordpress/babel-plugin-import-jsx-pragma</a></li>
+		<li class="page_item page-item-134527 menu-item"><a href="../../../reference-guides/packages/packages-babel-plugin-makepot/index.html">@wordpress/babel-plugin-makepot</a></li>
+		<li class="page_item page-item-134528 menu-item"><a href="../../../reference-guides/packages/packages-babel-preset-default/index.html">@wordpress/babel-preset-default</a></li>
+		<li class="page_item page-item-134529 menu-item"><a href="../../../reference-guides/packages/packages-base-styles/index.html">@wordpress/base-styles</a></li>
+		<li class="page_item page-item-134530 menu-item"><a href="../../../reference-guides/packages/packages-blob/index.html">@wordpress/blob</a></li>
+		<li class="page_item page-item-134531 menu-item"><a href="../../../reference-guides/packages/packages-block-directory/index.html">@wordpress/block-directory</a></li>
+		<li class="page_item page-item-134532 menu-item"><a href="../../../reference-guides/packages/packages-block-editor/index.html">@wordpress/block-editor</a></li>
+		<li class="page_item page-item-134533 menu-item"><a href="../../../reference-guides/packages/packages-block-library/index.html">@wordpress/block-library</a></li>
+		<li class="page_item page-item-134534 menu-item"><a href="../../../reference-guides/packages/packages-block-serialization-default-parser/index.html">@wordpress/block-serialization-default-parser</a></li>
+		<li class="page_item page-item-134535 menu-item"><a href="../../../reference-guides/packages/packages-block-serialization-spec-parser/index.html">@wordpress/block-serialization-spec-parser</a></li>
+		<li class="page_item page-item-134536 menu-item"><a href="../../../reference-guides/packages/packages-blocks/index.html">@wordpress/blocks</a></li>
+		<li class="page_item page-item-134537 menu-item"><a href="../../../reference-guides/packages/packages-browserslist-config/index.html">@wordpress/browserslist-config</a></li>
+		<li class="page_item page-item-134538 menu-item"><a href="../../../reference-guides/packages/packages-components/index.html">@wordpress/components</a></li>
+		<li class="page_item page-item-134539 menu-item"><a href="../../../reference-guides/packages/packages-compose/index.html">@wordpress/compose</a></li>
+		<li class="page_item page-item-134540 menu-item"><a href="../../../reference-guides/packages/packages-core-data/index.html">@wordpress/core-data</a></li>
+		<li class="page_item page-item-134541 menu-item"><a href="../../../reference-guides/packages/packages-create-block-tutorial-template/index.html">@wordpress/create-block-tutorial-template</a></li>
+		<li class="page_item page-item-134542 menu-item"><a href="../../../reference-guides/packages/packages-create-block/index.html">@wordpress/create-block</a></li>
+		<li class="page_item page-item-134543 menu-item"><a href="../../../reference-guides/packages/packages-custom-templated-path-webpack-plugin/index.html">@wordpress/custom-templated-path-webpack-plugin</a></li>
+		<li class="page_item page-item-134544 menu-item"><a href="../../../reference-guides/packages/packages-customize-widgets/index.html">@wordpress/customize-widgets</a></li>
+		<li class="page_item page-item-134545 menu-item"><a href="../../../reference-guides/packages/packages-data-controls/index.html">@wordpress/data-controls</a></li>
+		<li class="page_item page-item-134546 menu-item"><a href="../../../reference-guides/packages/packages-data/index.html">@wordpress/data</a></li>
+		<li class="page_item page-item-134547 menu-item"><a href="../../../reference-guides/packages/packages-date/index.html">@wordpress/date</a></li>
+		<li class="page_item page-item-134548 menu-item"><a href="../../../reference-guides/packages/packages-dependency-extraction-webpack-plugin/index.html">@wordpress/dependency-extraction-webpack-plugin</a></li>
+		<li class="page_item page-item-134555 menu-item"><a href="../../../reference-guides/packages/packages-edit-navigation/index.html">@wordpress/edit-navigation</a></li>
+		<li class="page_item page-item-134549 menu-item"><a href="../../../reference-guides/packages/packages-deprecated/index.html">@wordpress/deprecated</a></li>
+		<li class="page_item page-item-134550 menu-item"><a href="../../../reference-guides/packages/packages-docgen/index.html">@wordpress/docgen</a></li>
+		<li class="page_item page-item-134551 menu-item"><a href="../../../reference-guides/packages/packages-dom-ready/index.html">@wordpress/dom-ready</a></li>
+		<li class="page_item page-item-134552 menu-item"><a href="../../../reference-guides/packages/packages-dom/index.html">@wordpress/dom</a></li>
+		<li class="page_item page-item-134553 menu-item"><a href="../../../reference-guides/packages/packages-e2e-test-utils/index.html">@wordpress/e2e-test-utils</a></li>
+		<li class="page_item page-item-134554 menu-item"><a href="../../../reference-guides/packages/packages-e2e-tests/index.html">@wordpress/e2e-tests</a></li>
+		<li class="page_item page-item-134556 menu-item"><a href="../../../reference-guides/packages/packages-edit-post/index.html">@wordpress/edit-post</a></li>
+		<li class="page_item page-item-134557 menu-item"><a href="../../../reference-guides/packages/packages-edit-site/index.html">@wordpress/edit-site</a></li>
+		<li class="page_item page-item-134558 menu-item"><a href="../../../reference-guides/packages/packages-edit-widgets/index.html">@wordpress/edit-widgets</a></li>
+		<li class="page_item page-item-134559 menu-item"><a href="../../../reference-guides/packages/packages-editor/index.html">@wordpress/editor</a></li>
+		<li class="page_item page-item-134560 menu-item"><a href="../../../reference-guides/packages/packages-element/index.html">@wordpress/element</a></li>
+		<li class="page_item page-item-134561 menu-item"><a href="../../../reference-guides/packages/packages-env/index.html">@wordpress/env</a></li>
+		<li class="page_item page-item-134562 menu-item"><a href="../../../reference-guides/packages/packages-escape-html/index.html">@wordpress/escape-html</a></li>
+		<li class="page_item page-item-134563 menu-item"><a href="../../../reference-guides/packages/packages-eslint-plugin/index.html">@wordpress/eslint-plugin</a></li>
+		<li class="page_item page-item-134564 menu-item"><a href="../../../reference-guides/packages/packages-format-library/index.html">@wordpress/format-library</a></li>
+		<li class="page_item page-item-134565 menu-item"><a href="../../../reference-guides/packages/packages-hooks/index.html">@wordpress/hooks</a></li>
+		<li class="page_item page-item-134566 menu-item"><a href="../../../reference-guides/packages/packages-html-entities/index.html">@wordpress/html-entities</a></li>
+		<li class="page_item page-item-134567 menu-item"><a href="../../../reference-guides/packages/packages-i18n/index.html">@wordpress/i18n</a></li>
+		<li class="page_item page-item-134568 menu-item"><a href="../../../reference-guides/packages/packages-icons/index.html">@wordpress/icons</a></li>
+		<li class="page_item page-item-134569 menu-item"><a href="../../../reference-guides/packages/packages-interface/index.html">@wordpress/interface</a></li>
+		<li class="page_item page-item-134570 menu-item"><a href="../../../reference-guides/packages/packages-is-shallow-equal/index.html">@wordpress/is-shallow-equal</a></li>
+		<li class="page_item page-item-134571 menu-item"><a href="../../../reference-guides/packages/packages-jest-console/index.html">@wordpress/jest-console</a></li>
+		<li class="page_item page-item-134572 menu-item"><a href="../../../reference-guides/packages/packages-jest-preset-default/index.html">@wordpress/jest-preset-default</a></li>
+		<li class="page_item page-item-134573 menu-item"><a href="../../../reference-guides/packages/packages-jest-puppeteer-axe/index.html">@wordpress/jest-puppeteer-axe</a></li>
+		<li class="page_item page-item-134574 menu-item"><a href="../../../reference-guides/packages/packages-keyboard-shortcuts/index.html">@wordpress/keyboard-shortcuts</a></li>
+		<li class="page_item page-item-134575 menu-item"><a href="../../../reference-guides/packages/packages-keycodes/index.html">@wordpress/keycodes</a></li>
+		<li class="page_item page-item-134576 menu-item"><a href="../../../reference-guides/packages/packages-lazy-import/index.html">@wordpress/lazy-import</a></li>
+		<li class="page_item page-item-134577 menu-item"><a href="../../../reference-guides/packages/packages-library-export-default-webpack-plugin/index.html">@wordpress/library-export-default-webpack-plugin</a></li>
+		<li class="page_item page-item-134578 menu-item"><a href="../../../reference-guides/packages/packages-list-reusable-blocks/index.html">@wordpress/list-reusable-blocks</a></li>
+		<li class="page_item page-item-134579 menu-item"><a href="../../../reference-guides/packages/packages-media-utils/index.html">@wordpress/media-utils</a></li>
+		<li class="page_item page-item-134580 menu-item"><a href="../../../reference-guides/packages/packages-notices/index.html">@wordpress/notices</a></li>
+		<li class="page_item page-item-134581 menu-item"><a href="../../../reference-guides/packages/packages-npm-package-json-lint-config/index.html">@wordpress/npm-package-json-lint-config</a></li>
+		<li class="page_item page-item-134582 menu-item"><a href="../../../reference-guides/packages/packages-nux/index.html">@wordpress/nux</a></li>
+		<li class="page_item page-item-134583 menu-item"><a href="../../../reference-guides/packages/packages-plugins/index.html">@wordpress/plugins</a></li>
+		<li class="page_item page-item-134584 menu-item"><a href="../../../reference-guides/packages/packages-postcss-plugins-preset/index.html">@wordpress/postcss-plugins-preset</a></li>
+		<li class="page_item page-item-134585 menu-item"><a href="../../../reference-guides/packages/packages-postcss-themes/index.html">@wordpress/postcss-themes</a></li>
+		<li class="page_item page-item-134591 menu-item"><a href="../../../reference-guides/packages/packages-react-native-aztec/index.html">@wordpress/react-native-aztec</a></li>
+		<li class="page_item page-item-134586 menu-item"><a href="../../../reference-guides/packages/packages-prettier-config/index.html">@wordpress/prettier-config</a></li>
+		<li class="page_item page-item-134592 menu-item"><a href="../../../reference-guides/packages/packages-react-native-bridge/index.html">@wordpress/react-native-bridge</a></li>
+		<li class="page_item page-item-134587 menu-item"><a href="../../../reference-guides/packages/packages-primitives/index.html">@wordpress/primitives</a></li>
+		<li class="page_item page-item-134593 menu-item"><a href="../../../reference-guides/packages/packages-react-native-editor/index.html">@wordpress/react-native-editor</a></li>
+		<li class="page_item page-item-134588 menu-item"><a href="../../../reference-guides/packages/packages-priority-queue/index.html">@wordpress/priority-queue</a></li>
+		<li class="page_item page-item-134589 menu-item"><a href="../../../reference-guides/packages/packages-project-management-automation/index.html">@wordpress/project-management-automation</a></li>
+		<li class="page_item page-item-134590 menu-item"><a href="../../../reference-guides/packages/packages-react-i18n/index.html">@wordpress/react-i18n</a></li>
+		<li class="page_item page-item-136338 menu-item"><a href="../../../reference-guides/packages/packages-readable-js-assets-webpack-plugin/index.html">@wordpress/readable-js-assets-webpack-plugin</a></li>
+		<li class="page_item page-item-134594 menu-item"><a href="../../../reference-guides/packages/packages-redux-routine/index.html">@wordpress/redux-routine</a></li>
+		<li class="page_item page-item-134595 menu-item"><a href="../../../reference-guides/packages/packages-reusable-blocks/index.html">@wordpress/reusable-blocks</a></li>
+		<li class="page_item page-item-134596 menu-item"><a href="../../../reference-guides/packages/packages-rich-text/index.html">@wordpress/rich-text</a></li>
+		<li class="page_item page-item-134597 menu-item"><a href="../../../reference-guides/packages/packages-scripts/index.html">@wordpress/scripts</a></li>
+		<li class="page_item page-item-134598 menu-item"><a href="../../../reference-guides/packages/packages-server-side-render/index.html">@wordpress/server-side-render</a></li>
+		<li class="page_item page-item-134599 menu-item"><a href="../../../reference-guides/packages/packages-shortcode/index.html">@wordpress/shortcode</a></li>
+		<li class="page_item page-item-134600 menu-item"><a href="../../../reference-guides/packages/packages-stylelint-config/index.html">@wordpress/stylelint-config</a></li>
+		<li class="page_item page-item-134601 menu-item"><a href="../../../reference-guides/packages/packages-token-list/index.html">@wordpress/token-list</a></li>
+		<li class="page_item page-item-134602 menu-item"><a href="../../../reference-guides/packages/packages-url/index.html">@wordpress/url</a></li>
+		<li class="page_item page-item-134603 menu-item"><a href="../../../reference-guides/packages/packages-viewport/index.html">@wordpress/viewport</a></li>
+		<li class="page_item page-item-134604 menu-item"><a href="../../../reference-guides/packages/packages-warning/index.html">@wordpress/warning</a></li>
+		<li class="page_item page-item-135780 menu-item"><a href="../../../reference-guides/packages/packages-widgets/index.html">@wordpress/widgets</a></li>
+		<li class="page_item page-item-134605 menu-item"><a href="../../../reference-guides/packages/packages-wordcount/index.html">@wordpress/wordcount</a></li>
+	</ul>
+</li>
+	<li class="page_item page-item-134606 page_item_has_children menu-item menu-item-has-children"><a href="../../../reference-guides/data/index.html">Data Module Reference</a>
+	<ul class='children'>
+		<li class="page_item page-item-134607 menu-item"><a href="../../../reference-guides/data/data-core/index.html">WordPress Core Data</a></li>
+		<li class="page_item page-item-134608 menu-item"><a href="../../../reference-guides/data/data-core-annotations/index.html">Annotations</a></li>
+		<li class="page_item page-item-134609 menu-item"><a href="../../../reference-guides/data/data-core-blocks/index.html">Block Types Data</a></li>
+		<li class="page_item page-item-134610 menu-item"><a href="../../../reference-guides/data/data-core-block-editor/index.html">The Block Editor’s Data</a></li>
+		<li class="page_item page-item-134611 menu-item"><a href="../../../reference-guides/data/data-core-editor/index.html">The Post Editor’s Data</a></li>
+		<li class="page_item page-item-134612 menu-item"><a href="../../../reference-guides/data/data-core-edit-post/index.html">The Editor’s UI Data</a></li>
+		<li class="page_item page-item-134613 menu-item"><a href="../../../reference-guides/data/data-core-notices/index.html">Notices Data</a></li>
+		<li class="page_item page-item-134614 menu-item"><a href="../../../reference-guides/data/data-core-nux/index.html">The NUX (New User Experience) Data</a></li>
+		<li class="page_item page-item-134615 menu-item"><a href="../../../reference-guides/data/data-core-viewport/index.html">The Viewport Data</a></li>
+	</ul>
+</li>
+</ul>
+</li>
+<li class="page_item page-item-134616 page_item_has_children menu-item menu-item-has-children"><a href="../../../explanations/index.html">Explanations</a>
+<ul class='children'>
+	<li class="page_item page-item-134617 page_item_has_children menu-item menu-item-has-children"><a href="../../../explanations/architecture/index.html">Architecture</a>
+	<ul class='children'>
+		<li class="page_item page-item-134618 menu-item"><a href="../../../explanations/architecture/key-concepts/index.html">Key Concepts</a></li>
+		<li class="page_item page-item-134619 menu-item"><a href="../../../explanations/architecture/data-flow/index.html">Data Flow and Data Format</a></li>
+		<li class="page_item page-item-134620 menu-item"><a href="../../../explanations/architecture/modularity/index.html">Modularity</a></li>
+		<li class="page_item page-item-134621 menu-item"><a href="../../../explanations/architecture/performance/index.html">Performance</a></li>
+		<li class="page_item page-item-134622 menu-item"><a href="../../../explanations/architecture/automated-testing/index.html">Automated Testing</a></li>
+		<li class="page_item page-item-134623 menu-item"><a href="../../../explanations/architecture/full-site-editing-templates/index.html">Full Site Editing Templates</a></li>
+	</ul>
+</li>
+</ul>
+</li>
+<li class="page_item page-item-135089 page_item_has_children current_page_ancestor current-menu-ancestor menu-item menu-item-has-children"><a href="../../index.html">Contributor Guide</a>
+<ul class='children'>
+	<li class="page_item page-item-135090 page_item_has_children current_page_ancestor current_page_parent current-menu-ancestor current-menu-parent menu-item menu-item-has-children"><a href="../index.html">Code Contributions</a>
+	<ul class='children'>
+		<li class="page_item page-item-135097 menu-item"><a href="../getting-started-with-code-contribution/index.html">Getting Started With Code Contribution</a></li>
+		<li class="page_item page-item-135098 menu-item"><a href="../git-workflow/index.html">Git Workflow</a></li>
+		<li class="page_item page-item-135099 menu-item"><a href="../coding-guidelines/index.html">Coding Guidelines</a></li>
+		<li class="page_item page-item-135100 menu-item"><a href="../testing-overview/index.html">Testing Overview</a></li>
+		<li class="page_item page-item-135101 menu-item"><a href="../grammar/index.html">Block Grammar</a></li>
+		<li class="page_item page-item-135102 menu-item"><a href="../scripts/index.html">Scripts</a></li>
+		<li class="page_item page-item-135103 menu-item"><a href="../managing-packages/index.html">Managing Packages</a></li>
+		<li class="page_item page-item-135104 current_page_item current-menu-item menu-item"><a href="index.html" aria-current="page">Gutenberg Release Process</a></li>
+		<li class="page_item page-item-135105 menu-item"><a href="../native-mobile/index.html">React Native based mobile Gutenberg</a></li>
+		<li class="page_item page-item-136933 menu-item"><a href="../native-mobile-integration-test-guide/index.html">React Native Integration Test Guide</a></li>
+		<li class="page_item page-item-135106 menu-item"><a href="../getting-started-native-mobile/index.html">Getting Started for the React Native based Mobile Gutenberg</a></li>
+	</ul>
+</li>
+	<li class="page_item page-item-134990 page_item_has_children menu-item menu-item-has-children"><a href="../../design/index.html">Design Contributions</a>
+	<ul class='children'>
+		<li class="page_item page-item-135107 menu-item"><a href="../../design/the-block/index.html">Blocks are the Interface</a></li>
+		<li class="page_item page-item-135108 menu-item"><a href="../../design/reference/index.html">Reference</a></li>
+	</ul>
+</li>
+	<li class="page_item page-item-134991 page_item_has_children menu-item menu-item-has-children"><a href="../../documentation/index.html">Documentation Contributions</a>
+	<ul class='children'>
+		<li class="page_item page-item-134637 menu-item"><a href="../../documentation/copy-guide/index.html">Copy Guidelines</a></li>
+	</ul>
+</li>
+	<li class="page_item page-item-129316 menu-item"><a href="../../triage/index.html">Triage</a></li>
+	<li class="page_item page-item-41897 menu-item"><a href="../../localizing/index.html">Localizing Gutenberg Plugin</a></li>
+	<li class="page_item page-item-134638 menu-item"><a href="../../accessibility-testing/index.html">Accessibility Testing</a></li>
+	<li class="page_item page-item-41530 menu-item"><a href="../../repository-management/index.html">Repository Management</a></li>
+	<li class="page_item page-item-134639 menu-item"><a href="../../folder-structure/index.html">Folder Structure</a></li>
+	<li class="page_item page-item-134640 menu-item"><a href="../../versions-in-wordpress/index.html">Versions in WordPress</a></li>
+	<li class="page_item page-item-134641 menu-item"><a href="../../roadmap/index.html">Upcoming Projects &amp; Roadmap</a></li>
+</ul>
+</li>
+			</ul>
+
+			</div>		</div>
+	</div><!-- #secondary -->
+
+
+		<main id="primary" class="site-main post-135104 blocks-handbook type-blocks-handbook status-publish hentry type-handbook" role="main">
+
+		
+		<div class="breadcrumb-trail breadcrumbs" itemprop="breadcrumb">
+			<span class="trail-browse">Browse:</span> 
+			<span class="trail-begin"><a href="../../../../index.html" title="WordPress Developer Resources" rel="home">Home</a></span> <span class="sep">&#47;</span> 
+			<span class="trail-inner"><a href="../../../index.html">Block Editor Handbook</a></span> <span class="sep">&#47;</span> 
+			<span class="trail-inner"><a href="../../index.html" title="Contributor Guide">Contributor Guide</a></span> <span class="sep">&#47;</span> 
+			<span class="trail-inner"><a href="../index.html" title="Code Contributions">Code Contributions</a></span> <span class="sep">&#47;</span> <span class="trail-end">Gutenberg Release Process</span>
+		</div>
+		
+			
+<h1>Gutenberg Release Process <a class="github-edit" href="https://github.com/WordPress/gutenberg/edit/trunk/docs/contributors/code/release.md"><img src="../../../../wp-content/plugins/wporg-cli/assets/images/github-mark.svg"> <span>Edit</span></a></h1>
+
+
+<p>This Repository is used to perform several types of releases. This document serves as a checklist for each one of these. It is helpful if you&#8217;d like to understand the different workflows.</p>
+<p>To release a stable version of the Gutenberg plugin you need to be part of the <a href="../../../block-editor/contributors/repository-management/index.html#teams">Gutenberg development team</a>. On top of that, you need approval from a member of the Gutenberg Core team for the final step of the release process (upload to the WordPress.org plugin repo &#8212; see below). If you aren&#8217;t a member yourself, make sure to contact one ahead of time so they&#8217;ll be around at the time of the release. You can ping in the <a href="https://wordpress.slack.com/messages/C02QB2JS7">#core-editor Slack channel</a>.</p>
+<p>To release Gutenberg&#8217;s npm packages, you need to be part of the <a href="https://www.npmjs.com/org/wordpress">WordPress organization at npm</a>. 🙂</p>
+<h2 class="toc-heading" id="plugin-releases" tabindex="-1">Plugin Releases <a href="#plugin-releases" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Plugin Releases</span></a></h2>
+<h3 class="toc-heading" id="schedule" tabindex="-1">Schedule <a href="#schedule" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Schedule</span></a></h3>
+<p>We release a new major version approximately every two weeks. The current and next versions are <a href="https://github.com/WordPress/gutenberg/milestones">tracked in GitHub milestones</a>, along with each version&#8217;s tagging date (the day when <em>the release candidate</em> is to be tagged).</p>
+<ul>
+<li><strong>On the date of the current milestone</strong>, we publish a release candidate and make it available for plugin authors and users to test. If any regressions are found with a release candidate, a new one can be published. On this date, all remaining PRs on the milestone are moved automatically to the next release. Release candidates should be versioned incrementally, starting with <code>-rc.1</code>, then <code>-rc.2</code>, and so on. <a href="../../../block-editor/contributors/code/release/index.html#writing-the-release-notes-and-post">Preparation of the release post starts here</a> and spans until the final release.</p>
+</li>
+<li>
+<p><strong>One week after the first release candidate</strong>, the stable version is created based on the last release candidate and any necessary regression fixes. Once the stable version is released, the release post is published, including a <a href="../../../block-editor/contributors/testing-overview/index.html#performance-testing">performance audit</a>.</p>
+</li>
+</ul>
+<p>If critical bugs are discovered on stable versions of the plugin, patch versions can be released at any time.</p>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="release-tool" tabindex="-1">Release Tool <a href="#release-tool" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Release Tool</span></a></h3>
+<blockquote><p>
+  Note that at the time of writing, the tool doesn&#8217;t support releasing consecutive RC releases. However, it is possible to use the tool for patch releases following the first stable release.
+</p></blockquote>
+<p>The plugin release process is entirely automated and happens solely on GitHub &#8212; i.e. it doesn&#8217;t require any steps to be run locally on your machine.</p>
+<p>For your convenience, here&#8217;s an <a href="https://youtu.be/TnSgJd3zpJY">11-minute video walkthrough</a> that demonstrates the release process. It&#8217;s recommended to watch this if you&#8217;re unfamiliar with it. The process is also documented in the following paragraphs.</p>
+<p>In order to start the release process, go to Gutenberg&#8217;s GitHub repository&#8217;s Actions tab, and locate the <a href="https://github.com/WordPress/gutenberg/actions/workflows/build-plugin-zip.yml">&#8220;Build Gutenberg Plugin Zip&#8221; action</a>. Note the blue banner that says &#8220;This workflow has a <code>workflow_dispatch</code> event trigger.&#8221;, and expand the &#8220;Run workflow&#8221; dropdown on its right hand side.</p>
+<p><img src="../../../../../raw.githubusercontent.com/WordPress/gutenberg/HEAD/docs/contributors/code/workflow-dispatch-banner.png" alt="Run workflow dropdown" /></p>
+<p>To release a release candidate (RC) version of the plugin, enter <code>rc</code>. To release a stable version, enter <code>stable</code>. In each case, press the green &#8220;Run workflow&#8221; button.</p>
+<p>This will trigger a GitHub Actions (GHA) workflow that bumps the plugin version, builds the Gutenberg plugin .zip file, creates a release draft, and attaches the plugin .zip file to it. This part of the process typically takes a little under six minutes. You&#8217;ll see that workflow appear at the top of the list, right under the blue banner. Once it&#8217;s finished, it&#8217;ll change its status icon from a yellow dot to a green checkmark. You can follow along in a more detailed view by clicking on the workflow.</p>
+<p>As soon as the workflow has finished, you&#8217;ll find the release draft under https://github.com/WordPress/gutenberg/releases. The draft is pre-populated with changelog entries based on previous release candidates for this version, and any changes that have since been cherry-picked to the release branch. Thus, when releasing the first stable version of a series, make sure to delete any RC version headers (that are only there for your information) and to move the more recent changes to the correct section (see below).</p>
+<p>The changelog draft will be at least partially pre-organized (based on Github label) into sections and within those into &#8220;features&#8221;. Take some time to read the generated notes and then edit them to ensure legibility and accuracy.</p>
+<p>Don&#8217;t rush this part &#8212; it&#8217;s important to bring the release notes into a nice shape. You don&#8217;t have to do it all in one go &#8212; you can save the draft and come back to it later.</p>
+<p>When editing the notes, you should be sure to:</p>
+<ol>
+<li>Delete the <code>Various</code> section and move anything under it to a more appropriate section.</li>
+<li>Move all features under <code>Uncategorized</code> bullet points to a more suitable feature.</li>
+</ol>
+<p>You can find some more tips on writing the release notes and post in the section below.</p>
+<p>Only once you&#8217;re happy with the shape of the release notes should you press the green &#8220;Publish release&#8221; button. This will create a <code>git</code> tag for the version, publish the release, and trigger <a href="https://github.com/WordPress/gutenberg/actions/workflows/upload-release-to-plugin-repo.yml">another GHA workflow</a> that has a twofold purpose:</p>
+<ol>
+<li>Use the release notes that you just edited to update <code>changelog.txt</code>, and</li>
+<li>upload the new plugin version to the WordPress.org plugin repository (SVN) (only if you&#8217;re releasing a stable version).</li>
+</ol>
+<p>The latter step needs approval by a member of the Gutenberg Core team. Locate the <a href="https://github.com/WordPress/gutenberg/actions/workflows/upload-release-to-plugin-repo.yml">&#8220;Upload Gutenberg plugin to WordPress.org plugin repo&#8221; workflow</a> for the new version, and have it <a href="https://docs.github.com/en/actions/managing-workflow-runs/reviewing-deployments#approving-or-rejecting-a-job">approved</a>.</p>
+<p>This will cause the new version to be available to users of WordPress all over the globe! 💃<br />
+You should check that folks are able to install the new version from their Dashboard.</p>
+<p>Once released, all that&#8217;s left to do is writing a release post on <a href="https://make.wordpress.org/core/">make.wordpress.org/core</a>. You can find some tips on that below.</p>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="documenting-the-release-with-the-release-notes-and-post" tabindex="-1">Documenting the release with the Release Notes and Post <a href="#documenting-the-release-with-the-release-notes-and-post" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Documenting the release with the Release Notes and Post</span></a></h3>
+<div class="callout callout-info">
+Documenting the release is a group effort between the release manager, Gutenberg core team developers, and designers , comprised of a series of sequential steps that, because of the amount of people involved and the coordination required, need to adhere to a timeline between the RC and stable releases. The release manager will get pinged by a core member to kick-off and coordinate this process.
+</div>
+<ol>
+<li>Curating the changelog &#8211; Wednesday after the RC release to Friday</li>
+<li>Selecting the release highlights &#8211; Friday to Monday</li>
+<li>Drafting the release post &#8211; Monday to Wednesday</li>
+<li>Running the performance tests &#8211; Wednesday right after the stable release</li>
+<li>Publishing the post &#8211; Wednesday after stable release</li>
+</ol>
+<h4 class="toc-heading" id="1-curating-the-changelog" tabindex="-1">1. Curating the changelog <a href="#1-curating-the-changelog" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">1. Curating the changelog</span></a></h4>
+<p>The release notes draft is auto-generated by a script that looks for pull requests for the current milestone, and:</p>
+<ol>
+<li>Groups them into sections (by pull request label).</li>
+<li>Sub-groups them into &#8220;features&#8221; within each section (again by pull request label)</li>
+</ol>
+<p>This is intended to be a starting point for release notes, and manually reviewing and curating the changelog entries is still required. The release candidate changelog is reused in the stable release and greatly helps select the highlights; because depending on the release it can be a very time-consuming process, <strong>it is recommended to start this process as soon as the milestone is closed</strong> and the release candidate is published.</p>
+<p>Guidelines for proof-reading include:</p>
+<ul>
+<li>Move <em>all</em> entries under the <code>Various</code> section to a more appropriate section.</li>
+<li>Move <em>all</em> features listed under the <code>Uncategorized</code> bullet points to a more suitable feature grouping.</li>
+<li>Fix spelling errors or clarify wording. Phrasing should be easy to understand where the intended audience is those who use the plugin or are keeping up with ongoing development.</li>
+<li>Create new groupings as applicable, and move pull requests between.</li>
+<li>When multiple pull requests relate to the same task (such as a follow-up pull request), try to combine them to a single entry.</li>
+<li>If subtasks of a related set of pull requests are substantial, consider organizing as entries in a nested list.</li>
+<li>If one or more pull requests revert one or more pull requests in the same release netting a zero-sum of code changes, remove them.</li>
+<li>Remove all mobile app pull request entries (the only exception to this rule is if the mobile PR also updates functionality for the web).</li>
+</ul>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h4 class="toc-heading" id="2-selecting-the-release-highlights" tabindex="-1">2. Selecting the release highlights <a href="#2-selecting-the-release-highlights" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">2. Selecting the release highlights</span></a></h4>
+<p>Once the changelog is cleaned up, the next step is to choose a few changes to highlight in the release post. These highlights usually focus on new features and enhancements, including performance and accessibility ones, but can also include important API changes or critical bug fixes.</p>
+<p>Given the big scope of Gutenberg and the high number of pull requests merged in each milestone, it is not uncommon to overlook impactful changes worth highlighting; because of this, this step is a collaborative effort between the release manager, design, and Gutenberg Core team members.</p>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h4 class="toc-heading" id="3-drafting-the-release-post" tabindex="-1">3. Drafting the release post <a href="#3-drafting-the-release-post" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">3. Drafting the release post</span></a></h4>
+<p>Because of the nature of the release post content, responsibilities are divided in this step. While the post <strong>can either be drafted by the release manager or delegated to another core member</strong> agreed upon in advance, <strong>visual assets are created by the design team</strong>.</p>
+<p>When possible, the highlighted changes in the release post should include an animation (video or GIF) or a static image of them in use. Choosing between an animation or a static image will depend on the best way to showcase each highlight: while animations are better to demonstrate workflows, more direct highlights can be shown with an image; having too many video players adds a layer of friction for users to see the highlight, whereas too many simultaneous animated GIFs can distract and overwhelm the reader.</p>
+<p>These visual assets should maintain consistency with previous release posts; using lean, white themes helps in this regard and visually integrate well with the <a href="https://make.wordpress.org/core/">make.wordpress.org/core</a> blog aesthetics. Including copyrighted material should be avoided, and browser plugins that can be seen in the browser canvas (spell checkers, form fillers, etc.) disabled when capturing the assets.</p>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h4 class="toc-heading" id="4-running-the-performance-tests" tabindex="-1">4. Running the performance tests <a href="#4-running-the-performance-tests" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">4. Running the performance tests</span></a></h4>
+<p>The post should also include a performance audit at the end, comparing the current Gutenberg release with both the previous one and the latest WordPress major version. There are GitHub worfklows in place to do this comparison as part of the Continuous Integration setup, so the performance audit results can be found at the workflow run generated by the release commit in the <a href="https://github.com/WordPress/gutenberg/actions/workflows/performance.yml">Performance Tests workflows</a> page, with the job name <code>Compare performance with current WordPress Core and previous Gutenberg versions</code>.</p>
+<p>If the GitHub workflow fails, the performance audit can be executed locally using <code>bin/plugin/cli.js perf</code> and passing as parameters the tags to run the performance suite against, such as <code>bin/plugin/cli.js perf release/x.y release/x.z wp/a.b</code>.</p>
+<p>The performance values usually displayed in the release post are:</p>
+<ul>
+<li>Post Editor Loading Time (test named <code>load</code>)</li>
+<li>KeyPress Event (test named <code>typing</code>)</li>
+</ul>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h4 class="toc-heading" id="5-publishing-the-post" tabindex="-1">5. Publishing the post <a href="#5-publishing-the-post" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">5. Publishing the post</span></a></h4>
+<p>Once the post content is ready, an author already having permissions to post in <a href="https://make.wordpress.org/core/">make.wordpress.org/core</a> will create a new draft and import the content; this post should be published after the actual release, helping external media to echo and amplify the release news. Remember asking for peer review is encouraged by the <a href="https://make.wordpress.org/core/handbook/best-practices/post-comment-guidelines/#peer-review">make/core posting guidelines</a>!</p>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="creating-release-candidate-patches-done-via-git-cherry-pick" tabindex="-1">Creating Release Candidate Patches (done via <code>git cherry-pick</code>) <a href="#creating-release-candidate-patches-done-via-git-cherry-pick" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Creating Release Candidate Patches (done via <code>git cherry-pick</code>)</span></a></h3>
+<p>If a bug is found in a release candidate and a fix is committed to <code>trunk</code>, we should include that fix in the stable version (or optionally in another release candidate before that). To do this you&#8217;ll need to use <code>git cherry-pick</code> to add these changes to the milestone&#8217;s release branch. This way only the desired fixes are added rather than all the new code that has landed on <code>trunk</code> since tagging:</p>
+<ol>
+<li>Checkout the corresponding release branch with: <code>git checkout release/x.x</code>.</li>
+<li>Cherry-pick fix commits (in chronological order) with <code>git cherry-pick [SHA]</code>.</li>
+<li>When done, push the changes to GitHub: <code>git push</code>.</li>
+</ol>
+<p>If you decide that the fixes deserve another release candidate before the stable version is published, create one by following the instructions above. Let other contributors know that a new release candidate has been released in the <a href="https://wordpress.slack.com/messages/C02QB2JS7"><code>#core-editor</code> channel</a>.</p>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="creating-point-releases" tabindex="-1">Creating Point Releases <a href="#creating-point-releases" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Creating Point Releases</span></a></h3>
+<p>Occasionally it&#8217;s necessary to create a point release (i.e. X.Y.<em>Z</em>) of the Plugin.</p>
+<p>The method for doing this is nearly identical to the main Plugin release process (see above). In the <code>Run workflow</code> control specify <code>stable</code> and, <em>if</em> the previous version was stable (<code>x.y.z</code>), the workflow will release a point release, with z incremented (<code>x.y.(z+1)</code>) as necessary.</p>
+<p><strong>Please note</strong> however, that if the previous release was an <em>RC</em> (e.g. <code>x.y.0-rc.1</code>), the workflow will try to release the next major <em>stable</em> version. Therefore, should you wish to release a point release for a stable version of the Plugin (e.g. <code>10.1.0</code>) but there is an <em>RC already published</em> for the <em>next</em> version of the Plugin (e.g. <code>10.2.0-rc.1</code>) you will need to manually select the stable version&#8217;s release branch when creating the release.</p>
+<p>To do this, when running the Workflow, select the appropriate <code>release/</code> branch from the <code>Use workflow from</code> dropdown (e.g. <code>release/10.1</code>) and specify <code>stable</code> in the text input field.</p>
+<p>Please note you <strong>cannot create point releases for previous stable releases once a more recent stable release has been published</strong> as this would require significant changes to how we upload plugin versions to the WP.org plugin SVN repo).</p>
+<p>More more information please see <a href="https://github.com/WordPress/gutenberg/issues/33277#issuecomment-876289457">this Issue</a>.</p>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="packages-releases-to-npm-and-wordpress-core-updates" tabindex="-1">Packages Releases to npm and WordPress Core Updates <a href="#packages-releases-to-npm-and-wordpress-core-updates" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Packages Releases to npm and WordPress Core Updates</span></a></h2>
+<p>The Gutenberg repository mirrors the <a href="https://make.wordpress.org/core/handbook/about/release-cycle/">WordPress SVN repository</a> in terms of branching for each SVN branch, a corresponding Gutenberg <code>wp/*</code> branch is created:</p>
+<ul>
+<li>The <code>wp/trunk</code> branch contains the same version of packages published to npm with the <code>latest</code> distribution tag. The WordPress core consumes those packages directly in the <code>trunk</code> branch and uses them for public releases.</li>
+<li>The <code>wp/next</code> branch contains the same version of packages published to npm with the <code>next</code> distribution tag. Projects should use those packages for development purposes only.</li>
+<li>A Gutenberg branch targeting a specific WordPress major release (including its further minor increments) is created (example <code>wp/5.2</code>) based on the <code>wp/trunk</code> Gutenberg branch when the corresponding WordPress release branch is created. (This usually happens when the first <code>RC</code> of the next WordPress major version is released).</li>
+</ul>
+<p>Release types and their schedule:</p>
+<ul>
+<li><a href="#synchronizing-wordpress-trunk">Synchronizing WordPress Trunk</a> (<code>latest</code> dist tag) – when there is no &#8220;feature-freeze&#8221; mode in WordPress Core, then publishing happens every two weeks based on the new stable version of the Gutenberg plugin. Otherwise, only bug fixes get manually included and published to npm before every next beta and RC version of the following WordPress release.</li>
+<li><a href="#minor-wordpress-releases">Minor WordPress Releases</a> (<code>patch</code> dist tag) – only when bug fixes or security releases need to be backported into WordPress Core.</li>
+<li><a href="#development-releases">Development Releases</a> (<code>next</code> dist tag) – at least every two weeks when the RC version for the Gutenberg plugin is released.</li>
+</ul>
+<p>There is also an option to perform <a href="#standalone-bugfix-package-releases">Standalone Bugfix Package Releases</a> at will. It should be reserved only for critical bug fixes or security releases that must be published to <em>npm</em> outside of a regular WordPress release cycle.</p>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="synchronizing-wordpress-trunk" tabindex="-1">Synchronizing WordPress Trunk <a href="#synchronizing-wordpress-trunk" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Synchronizing WordPress Trunk</span></a></h3>
+<p>For each Gutenberg plugin release, WordPress trunk should be synchronized. Note that the WordPress <code>trunk</code> branch can be closed or in &#8220;feature-freeze&#8221; mode. Usually, this happens between the first <code>beta</code> and the first <code>RC</code> of the WordPress release cycle. During this period, the Gutenberg plugin releases should not be synchronized with WordPress Core.</p>
+<p>The process has three steps: 1) update the <code>wp/trunk</code> branch within the Gutenberg repo 2) publish the new package versions to npm 3) update the WordPress <code>trunk</code> branch.</p>
+<p>The first step is automated via <code>./bin/plugin/cli.js npm-latest</code> command. You only have to run the command, but, for the record, the manual process would look very close to the following steps:</p>
+<ol>
+<li>Ensure the WordPress <code>trunk</code> branch is open for enhancements.</li>
+<li>Get the last published Gutenberg release branch with <code>git fetch</code>.</li>
+<li>Check out the <code>wp/trunk</code> branch.</li>
+<li>Remove all files from the current branch: <code>git rm -r .</code>.</li>
+<li>Check out all the files from the release branch: <code>git checkout release/x.x -- .</code>.</li>
+<li>Commit all changes to the <code>wp/trunk</code> branch with <code>git commit -m "Merge changes published in the Gutenberg plugin vX.X release"</code> and push to the repository.</li>
+<li>Update the <code>CHANGELOG.md</code> files of the packages with the new publish version calculated and commit to the <code>wp/trunk</code> branch. Assuming the package versions are written using this format <code>major.minor.patch</code>, make sure to bump at least the <code>minor</code> version number after every major WordPress release. For example, if the CHANGELOG of the package to be released indicates that the next unreleased version is <code>5.6.1</code>, choose <code>5.7.0</code> as a version in case of <code>minor</code> version. This is important as the patch version numbers should be reserved in case bug fixes are needed for a minor WordPress release (see below).</li>
+<li>Log-in to npm via the console: <code>npm login</code>. Note that you should have 2FA enabled.</li>
+<li>From the <code>wp/trunk</code> branch, install npm dependencies with <code>npm ci</code>.</li>
+<li>Run the script <code>npm run publish:latest</code>.
+<ul>
+<li>When asked for the version numbers to choose for each package pick the values of the updated CHANGELOG files.</li>
+<li>You&#8217;ll be asked for your One-Time Password (OTP) a couple of times. This is the code from the 2FA authenticator app you use. Depending on how many packages are to be released you may be asked for more than one OTP, as they tend to expire before all packages are released.</li>
+<li>If the publishing process ends up incomplete (perhaps because it timed-out or an bad OTP was introduce) you can resume it via <a href="https://github.com/lerna/lerna/tree/HEAD/commands/publish#bump-from-package"><code>lerna publish from-package</code></a>.</li>
+</ul>
+</li>
+</ol>
+<p>Finally, now that the npm packages are ready, a patch can be created and committed into WordPress <code>trunk</code>. You should also cherry-pick the commits created by lerna (&#8220;Publish&#8221; and the CHANGELOG update) into the <code>trunk</code> branch of Gutenberg.</p>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="minor-wordpress-releases" tabindex="-1">Minor WordPress Releases <a href="#minor-wordpress-releases" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Minor WordPress Releases</span></a></h3>
+<p>The following workflow is needed when bug fixes or security releases need to be backported into WordPress Core. This can happen in a few use-cases:</p>
+<ul>
+<li>During the <code>RC</code> period of the WordPress release cycle when <code>wp/X.Y</code> (example <code>wp/5.7</code>) branch for the release is already present.</li>
+<li>For WordPress minor releases and WordPress security releases (example <code>5.1.1</code>).</li>
+</ul>
+<ol>
+<li>Check out the relevant WordPress major branch (If the minor release is 5.2.1, check out <code>wp/5.2</code>).</li>
+<li>Create a feature branch from that branch, and cherry-pick the merge commits for the needed bug fixes onto it.</li>
+<li>Create a Pull Request from this branch targeting the WordPress major branch used above.</li>
+<li>Merge the Pull Request using the &#8220;Rebase and Merge&#8221; button to keep the history of the commits.</li>
+</ol>
+<p>Now, the branch is ready to be used to publish the npm packages.</p>
+<ol>
+<li>Check out the WordPress branch used before (Example <code>wp/5.2</code>).</li>
+<li><code>git pull</code>.</li>
+<li>Run the <code>npm run publish:patch</code> command (see more in <a href="https://github.com/WordPress/gutenberg/blob/HEAD/packages/README.md#releasing-packages">package release process</a>) but when asked for the version numbers to choose for each package, (assuming the package versions are written using this format <code>major.minor.patch</code>) make sure to bump only the <code>patch</code> version number. For example, if the last published package version for this WordPress branch was <code>5.6.0</code>, choose <code>5.6.1</code> as a version.</li>
+</ol>
+<p><strong>Note:</strong> For WordPress <code>5.0</code> and WordPress <code>5.1</code>, a different release process was used. This means that when choosing npm package versions targeting these two releases, you won&#8217;t be able to use the next <code>patch</code> version number as it may have been already used. You should use the &#8220;metadata&#8221; modifier for these. For example, if the last published package version for this WordPress branch was <code>5.6.1</code>, choose <code>5.6.1+patch.1</code> as a version.</p>
+<ol>
+<li>Optionally update the <code>CHANGELOG.md</code> files of the published packages with the new released versions and commit to the corresponding branch (Example <code>wp/5.2</code>).</li>
+<li>Cherry-pick the CHANGELOG update commits, if any, into the <code>trunk</code> branch of Gutenberg.</li>
+</ol>
+<p>Now, the npm packages should be ready and a patch can be created and committed into the corresponding WordPress SVN branch.</p>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="standalone-bugfix-package-releases" tabindex="-1">Standalone Bugfix Package Releases <a href="#standalone-bugfix-package-releases" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Standalone Bugfix Package Releases</span></a></h3>
+<p>The following workflow is needed when packages require bug fixes or security releases to be published to <em>npm</em> outside of a regular WordPress release cycle.</p>
+<p>Note: Both the <code>trunk</code> and <code>wp/trunk</code> branches are restricted and can only be <em>pushed</em> to by the Gutenberg Core team.</p>
+<p>Identify the commit hashes from the pull requests that need to be ported from the repo <code>trunk</code> branch to <code>wp/trunk</code></p>
+<p>The <code>wp/trunk</code> branch now needs to be prepared to release and publish the packages to <em>npm</em>.</p>
+<p>Open a terminal and perform the following steps:</p>
+<ol>
+<li><code>git checkout trunk</code></li>
+<li><code>git pull</code></li>
+<li><code>git checkout wp/trunk</code></li>
+<li><code>git pull</code></li>
+</ol>
+<p>Before porting commits check that the <code>wp/trunk</code> branch does not have any outstanding packages waiting to be published:</p>
+<ol>
+<li><code>git checkout wp/trunk</code></li>
+<li><code>npm run publish:check</code></li>
+</ol>
+<p>Now <em>cherry-pick</em> the commits from <code>trunk</code> to <code>wp/trunk</code>, use <code>-m 1 commithash</code> if the commit was a pull request merge commit:</p>
+<ol>
+<li><code>git cherry-pick -m 1 cb150a2</code></li>
+<li><code>git push</code></li>
+</ol>
+<p>Whilst waiting for the GitHub actions build for <code>wp/trunk</code><a href="https://github.com/WordPress/gutenberg/actions?query=branch%3Awp%2Ftrunk">branch to pass</a>, identify and begin updating the <code>CHANGELOG.md</code> files:</p>
+<ol>
+<li><code>git checkout wp/trunk</code></li>
+<li><code>npm run publish:check</code><br />
+&gt; Example<br />
+&gt;<br />
+&gt; <code>shell<br />
+&gt; npm run publish:check<br />
+&gt; @wordpress/e2e-tests<br />
+&gt; @wordpress/jest-preset-default<br />
+&gt; @wordpress/scripts<br />
+&gt; lerna success found 3 packages ready to publish<br />
+&gt;</code></li>
+</ol>
+<p>Check the versions listed in the current <code>CHANGELOG.md</code> file, looking through the commit history of a package e.g <a href="https://github.com/WordPress/gutenberg/commits/HEAD/packages/scripts">@wordpress/scripts</a> and look out for <em>&#8220;chore(release): publish&#8221;</em> and <em>&#8220;Update changelogs&#8221;</em> commits to determine recent version bumps, then looking at the commits since the most recent release should aid with discovering what changes have occurred since the last release.</p>
+<p>Note: You may discover the current version of each package is not up to date, if so updating the previous released versions would be appreciated.</p>
+<p>The good news is that the rest of the process is automated with <code>./bin/plugin/cli.js npm-bugfix</code> command. The rest of the section covers all the necessary steps for publishing the packages if you prefer to do it manually.</p>
+<p>Begin updating the <em>changelogs</em> based on the <a href="https://github.com/WordPress/gutenberg/blob/HEAD/packages/README.md#maintaining-changelogs">Maintaining Changelogs</a> documentation and commit the changes:</p>
+<ol>
+<li><code>git checkout wp/trunk</code></li>
+<li>Update each of the <code>CHANGELOG.md</code> files</li>
+<li>Stage the <em>changelog</em> changes <code>git add packages/</code></li>
+<li><code>git commit -m "Update changelogs"</code></li>
+<li>Make a note of the commit hash of this commit<br />
+&gt; Example<br />
+&gt;<br />
+&gt; <code>&gt; [trunk 278f524f16] Update changelogs` 278f524<br />
+&gt;</code></li>
+<li><code>git push</code></li>
+</ol>
+<p>Now that the changes have been committed to the <code>wp/trunk</code> branch and the Travis CI builds for the <code>wp/trunk</code> <a href="https://travis-ci.com/WordPress/gutenberg/branches">branch are passing</a> it&#8217;s time to publish the packages to npm:</p>
+<ol>
+<li>Once again run <code>npm run publish:check</code> to confirm there are no unexpected packages ready to be published:<br />
+&gt; Example<br />
+&gt;<br />
+&gt; <code>shell<br />
+&gt; npm run publish:check<br />
+&gt; @wordpress/e2e-tests<br />
+&gt; @wordpress/jest-preset-default<br />
+&gt; @wordpress/scripts<br />
+&gt; lerna success found 3 packages ready to publish<br />
+&gt;</code></li>
+<li>Run the <code>npm run publish:latest</code> command (see more in <a href="https://github.com/WordPress/gutenberg/blob/HEAD/packages/README.md#releasing-packages">package release process</a>) but when asked for the version numbers to choose for each package use the versions you made note of above when updating each packages <code>CHANGELOG.md</code> file.<br />
+&gt; Truncated example of publishing process output<br />
+&gt;<br />
+&gt; <code>&gt; npm run publish:latest<br />
+&gt;<br />
+&gt; Build Progress: [==============================] 100%<br />
+&gt; lerna notice cli v3.18.2<br />
+&gt; lerna info versioning independent<br />
+&gt; ? Select a new version for @wordpress/e2e-tests (currently 1.9.0) Patch (1.9.1)<br />
+&gt; ? Select a new version for @wordpress/jest-preset-default (currently 5.3.0) Patch (5.3.1)<br />
+&gt; ? Select a new version for @wordpress/scripts (currently 6.1.0) Patch (6.1.1)<br />
+&gt;<br />
+&gt; Changes:<br />
+&gt;  - @wordpress/e2e-tests: 1.9.0 =&gt; 1.9.1<br />
+&gt;  - @wordpress/jest-preset-default: 5.3.0 =&gt; 5.3.1<br />
+&gt;  - @wordpress/scripts: 6.1.0 =&gt; 6.1.1<br />
+&gt;<br />
+&gt; ? Are you sure you want to publish these packages? Yes<br />
+&gt; lerna info execute Skipping releases<br />
+&gt; lerna info git Pushing tags...<br />
+&gt; lerna info publish Publishing packages to npm...<br />
+&gt; lerna info Verifying npm credentials<br />
+&gt; lerna info Checking two-factor auth mode<br />
+&gt; ? Enter OTP: 753566<br />
+&gt; lerna success published @wordpress/jest-preset-default 5.3.1<br />
+&gt; lerna success published @wordpress/scripts 6.1.1<br />
+&gt; lerna success published @wordpress/e2e-tests 1.9.1<br />
+&gt; Successfully published:<br />
+&gt;  - @wordpress/e2e-tests@1.9.1<br />
+&gt;  - @wordpress/jest-preset-default@5.3.1<br />
+&gt;  - @wordpress/scripts@6.1.1<br />
+&gt; lerna success published 3 packages<br />
+&gt;</code></li>
+</ol>
+<p>Now that the packages have been published the <em>&#8220;chore(release): publish&#8221;</em> and <em>&#8220;Update changelogs&#8221;</em> commits to <code>wp/trunk</code> need to be ported to the <code>trunk</code> branch:</p>
+<ol>
+<li><code>git checkout trunk</code></li>
+<li><code>git pull</code></li>
+<li>Cherry-pick the <code>278f524</code>hash you noted above from the <em>&#8220;Update changelogs&#8221;</em> commit made to <code>wp/trunk</code></li>
+<li><code>git cherry-pick 278f524</code></li>
+<li>Get the commit hash from the the lerna publish commit either from the terminal or <a href="https://github.com/WordPress/gutenberg/commits/wp/trunk">wp/trunk commits</a></li>
+<li>Cherry-pick the <code>fe6ae0d</code> &#8220;chore(release): publish&#8221;&#095; commit made to <code>wp/trunk</code></li>
+<li><code>git cherry-pick fe6ae0d</code></li>
+<li><code>git push</code></li>
+</ol>
+<p>Confirm the packages dependencies do not contain <code>file://</code> links in the <code>dependencies</code> or <code>devdependencies</code> section of the packages released, e.g:</p>
+<blockquote><p>
+  https://unpkg.com/browse/@wordpress/jest-preset-default@5.3.1/package.json &gt; https://unpkg.com/browse/@wordpress/scripts@6.1.1/package.json &gt; https://unpkg.com/browse/@wordpress/jest-preset-default@5.3.1/package.json
+</p></blockquote>
+<p>Time to announce the published changes in the #core-js and #core-editor Slack channels</p>
+<blockquote>
+<pre class="brush: php; title: ; notranslate" title="">
+  📣 Successfully published:
+  • @wordpress/e2e-tests@1.9.1
+  • @wordpress/jest-preset-default@5.3.1
+  • @wordpress/scripts@6.1.1
+  Lerna success published 3 packages
+  </pre>
+</blockquote>
+<hr />
+<p>Ta-da! 🎉</p>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="development-releases" tabindex="-1">Development Releases <a href="#development-releases" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Development Releases</span></a></h3>
+<p>As noted in the <a href="#synchronizing-wordpress-trunk">Synchronizing WordPress Trunk</a> section, the WordPress trunk branch can be closed or in &#8220;feature-freeze&#8221; mode. Usually, this happens during the WordPress ongoing release cycle, which takes several weeks. It means that packages don&#8217;t get any enhancements and new features during the ongoing WordPress major release process. Another type of release is available to address the limitation mentioned earlier and unblock ongoing development for projects that depend on WordPress packages. We are taking advantage of <a href="https://docs.npmjs.com/cli/v7/commands/npm-dist-tag">package distribution tags</a> that make it possible to consume the future version of the codebase according to npm guidelines:</p>
+<blockquote><p>
+  By default, the <code>latest</code> tag is used by npm to identify the current version of a package, and <code>npm install &lt;pkg&gt;</code> (without any <code>@&lt;version&gt;</code> or <code>@&lt;tag&gt;</code> specifier) installs the <code>latest</code> tag. Typically, projects only use the <code>latest</code> tag for stable release versions, and use other tags for unstable versions such as prereleases.
+</p></blockquote>
+<p>In our case, we use the <code>next</code> distribution tag for code. Developers that want to install such a version of the package need to type:</p>
+<pre class="brush: php; title: ; notranslate" title="">
+npm install @wordpress/components@next
+</pre>
+<p>The release process is fully automated via <code>./bin/plugin/cli.js npm-next</code> command. You only have to run the script, and everything else happens through interactions in the terminal.</p>
+<p>Behind the scenes, the <code>wp/next</code> branch is synchronized with the latest release branch (<code>release/*</code>) created for the Gutenberg plugin. To avoid collisions in the versioning of packages, we always include the newest commit&#8217;s <code>sha</code>, for example, <code>@wordpress/block-editor@5.2.10-next.645224df70.0</code>.</p>
+
+
+<div class="bottom-of-entry">&nbsp;</div>
+
+			
+		<nav class="handbook-navigation" role="navigation">
+			<h1 class="screen-reader-text">Handbook navigation</h1>
+			<div class="nav-links">
+
+			<a href="../managing-packages/index.html" rel="previous"><span class="meta-nav">&larr;</span> Managing Packages</a><a href="../native-mobile/index.html" rel="next">React Native based mobile Gutenberg <span class="meta-nav">&rarr;</span></a>
+			</div>
+			<!-- .nav-links -->
+		</nav><!-- .navigation -->
+	
+		
+		</main><!-- #main -->
+
+	</div><!-- #content -->
+
+</div><!-- #page -->
+
+
+<div id="wporg-footer">
+	<div class="wrapper">
+		<ul>
+			<li><a href="http://wordpress.org/about/" title="An introduction to the WordPress project">About</a></li>
+			<li><a href="http://wordpress.org/news/" title="News and Updates">Blog</a></li>
+			<li><a href="http://wordpress.org/hosting/" title="Recommended web hosting providers">Hosting</a></li>
+			<li><a href="https://wordpressfoundation.org/donate/" title="Donate to the WordPress Foundation">Donate</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://wordpress.org/support/" title="Forums, documentation, and other resources">Support</a></li>
+			<li><a href="../../../../index.html" title="Resources for WordPress developers">Developers</a></li>
+			<li><a href="http://make.wordpress.org/" title="Give back to WordPress through code, support, translation and more">Get Involved</a></li>
+			<li><a href="http://learn.wordpress.org/" title="Workshops and training materials">Learn</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://wordpress.org/showcase/" title="Some of the best WordPress sites on the Web">Showcase</a></li>
+			<li><a href="http://wordpress.org/plugins/" title="Add extra functionality to WordPress">Plugins</a></li>
+			<li><a href="http://wordpress.org/themes/" title="Make your WordPress pretty">Themes</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://central.wordcamp.org/" title="Find a WordPress event near you">WordCamp</a></li>
+			<li><a href="http://wordpress.tv/" title="Videos, tutorials, and WordCamp sessions">WordPress.TV</a></li>
+			<li><a href="http://buddypress.org/" title="A set of plugins to transform your WordPress into a social network">BuddyPress</a></li>
+			<li><a href="http://bbpress.org/" title="Fast, slick forums built on WordPress">bbPress</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://wordpress.com/?ref=wporg-footer" title="Hassle-free WordPress hosting">WordPress.com</a></li>
+			<li><a href="http://ma.tt/" title="Co-founder of WordPress, an example of what WordPress can do">Matt</a></li>
+			<li><a href="http://wordpress.org/about/privacy/" title="WordPress.org Privacy Policy">Privacy</a></li>
+			<li><a href="https://publiccode.eu/" target="_blank">Public Code</a></li>
+		</ul>
+
+		<ul class="social-media-links">
+			<li><span class="dashicons dashicons-twitter"></span><a href="https://twitter.com/WordPress" title="Follow @WordPress on Twitter">@WordPress</a></li>
+			<li><span class="dashicons dashicons-facebook"></span><a href="https://www.facebook.com/WordPress/" title="Like WordPress on Facebook">WordPress</a></li>
+		</ul>
+	</div>
+
+		<p class="cip cip-image">Code is Poetry.</p>
+</div>
+
+<script src="../../../../../s.w.org/style/js/navigation.min.js?20190128"></script>
+
+<script type='text/javascript'>
+	(function(){
+		var corecss = document.createElement('link');
+		var themecss = document.createElement('link');
+		var corecssurl = "../../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shCore.css?ver=3.0.9b";
+		if ( corecss.setAttribute ) {
+				corecss.setAttribute( "rel", "stylesheet" );
+				corecss.setAttribute( "type", "text/css" );
+				corecss.setAttribute( "href", corecssurl );
+		} else {
+				corecss.rel = "stylesheet";
+				corecss.href = corecssurl;
+		}
+		document.head.appendChild( corecss );
+		var themecssurl = "../../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shThemeDefault.css?ver=3.0.9b";
+		if ( themecss.setAttribute ) {
+				themecss.setAttribute( "rel", "stylesheet" );
+				themecss.setAttribute( "type", "text/css" );
+				themecss.setAttribute( "href", themecssurl );
+		} else {
+				themecss.rel = "stylesheet";
+				themecss.href = themecssurl;
+		}
+		document.head.appendChild( themecss );
+	})();
+	SyntaxHighlighter.config.strings.expandSource = '+ expand source';
+	SyntaxHighlighter.config.strings.help = '?';
+	SyntaxHighlighter.config.strings.alert = 'SyntaxHighlighter\n\n';
+	SyntaxHighlighter.config.strings.noBrush = 'Can\'t find brush for: ';
+	SyntaxHighlighter.config.strings.brushNotHtmlScript = 'Brush wasn\'t configured for html-script option: ';
+	SyntaxHighlighter.defaults['pad-line-numbers'] = false;
+	SyntaxHighlighter.defaults['toolbar'] = false;
+	SyntaxHighlighter.all();
+
+	// Infinite scroll support
+	if ( typeof( jQuery ) !== 'undefined' ) {
+		jQuery( function( $ ) {
+			$( document.body ).on( 'post-load', function() {
+				SyntaxHighlighter.highlight();
+			} );
+		} );
+	}
+</script>
+<script type='text/javascript' src='../../../../wp-includes/js/hoverintent-js.min.js?ver=2.2.1' id='hoverintent-js-js'></script>
+<script type='text/javascript' src='../../../../wp-includes/js/admin-bar.min.js?ver=5.9-alpha-51701' id='admin-bar-js'></script>
+<script type='text/javascript' src='../../../../wp-content/themes/pub/wporg-developer/js/navigation.js?ver=20181209' id='wporg-developer-navigation-js'></script>
+<script type='text/javascript' src='../../../../wp-content/themes/pub/wporg-developer/js/skip-link-focus-fix.js?ver=20130115' id='wporg-developer-skip-link-focus-fix-js'></script>
+<script type='text/javascript' src='../../../../wp-content/themes/pub/wporg-developer/js/search.js?ver=20150430' id='wporg-developer-search-js'></script>
+<script type='text/javascript' src='../../../../wp-content/themes/pub/wporg-developer/js/menu.js?ver=20180201' id='wporg-developer-menu-js'></script>
+<script type='text/javascript' src='../../../../wp-content/themes/pub/wporg-developer/js/awesomplete.min.js?ver=20160322' id='awesomplete-js'></script>
+<script type='text/javascript' id='autocomplete-js-extra'>
+/* <![CDATA[ */
+var autocomplete = {"ajaxurl":"https:\/\/developer.wordpress.org\/wp-admin\/admin-ajax.php","nonce":"8a60f70c4b"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../../wp-content/themes/pub/wporg-developer/js/autocomplete.js?ver=20160524' id='autocomplete-js'></script>
+<script type='text/javascript' src='../../../../wp-content/themes/pub/wporg-developer/js/function-reference.js?ver=20180724' id='wporg-developer-function-reference-js'></script>
+<script type='text/javascript' id='quicktags-js-extra'>
+/* <![CDATA[ */
+var quicktagsL10n = {"closeAllOpenTags":"Close all open tags","closeTags":"close tags","enterURL":"Enter the URL","enterImageURL":"Enter the URL of the image","enterImageDescription":"Enter a description of the image","textdirection":"text direction","toggleTextdirection":"Toggle Editor Text Direction","dfw":"Distraction-free writing mode","strong":"Bold","strongClose":"Close bold tag","em":"Italic","emClose":"Close italic tag","link":"Insert link","blockquote":"Blockquote","blockquoteClose":"Close blockquote tag","del":"Deleted text (strikethrough)","delClose":"Close deleted text tag","ins":"Inserted text","insClose":"Close inserted text tag","image":"Insert image","ul":"Bulleted list","ulClose":"Close bulleted list tag","ol":"Numbered list","olClose":"Close numbered list tag","li":"List item","liClose":"Close list item tag","code":"Code","codeClose":"Close code tag","more":"Insert Read More tag"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../../wp-includes/js/quicktags.min.js?ver=5.9-alpha-51701' id='quicktags-js'></script>
+<script type='text/javascript' src='../../../../wp-content/themes/pub/wporg-developer/js/user-notes.js?ver=20200110' id='wporg-developer-user-notes-js'></script>
+<script type='text/javascript' id='wporg-developer-user-notes-feedback-js-extra'>
+/* <![CDATA[ */
+var wporg_note_feedback = {"show":"Show Feedback","hide":"Hide Feedback"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../../wp-content/themes/pub/wporg-developer/js/user-notes-feedback.js?ver=20181023' id='wporg-developer-user-notes-feedback-js'></script>
+<script type='text/javascript' src='../../../../wp-content/themes/pub/wporg-developer/js/tabs.js?ver=20160824' id='wporg-developer-tabs-js'></script>
+<script type='text/javascript' id='wporg-developer-preview-js-extra'>
+/* <![CDATA[ */
+var wporg_note_preview = {"ajaxurl":"https:\/\/developer.wordpress.org\/wp-admin\/admin-ajax.php","nonce":"504933b60e","preview":"preview note","preview_empty":"Nothing to preview","is_admin":""};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../../wp-content/themes/pub/wporg-developer/js/user-notes-preview.js?ver=20200111' id='wporg-developer-preview-js'></script>
+<script type='text/javascript' src='../../../../wp-includes/js/wp-embed.min.js?ver=5.9-alpha-51701' id='wp-embed-js'></script>
+</body>
+
+<!-- Mirrored from developer.wordpress.org/block-editor/contributors/code/release/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 31 Aug 2021 17:17:05 GMT -->
+</html>

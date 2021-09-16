@@ -1,0 +1,337 @@
+<html><!-- Mirrored from www.php.net/manual/en/mysqli.debug.php by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 11 Sep 2021 10:32:58 GMT --><!-- Added by HTTrack --><head><meta http-equiv="content-type" content="text/html;charset=utf-8"><!-- /Added by HTTrack -->
+
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>mysqli::debug</title>
+
+ <link rel="shortcut icon" href="../../favicon.ico">
+ <link rel="search" type="application/opensearchdescription+xml" href="http://php.net/phpnetimprovedsearch.src" title="Add PHP.net search">
+ <link rel="alternate" type="application/atom+xml" href="https://www.php.net/releases/feed.php" title="PHP Release feed">
+ <link rel="alternate" type="application/atom+xml" href="https://www.php.net/feed.atom" title="PHP: Hypertext Preprocessor">
+
+ <link rel="canonical" href="mysqli.debug.html">
+ <link rel="shorturl" href="mysqli.debug.html">
+ <link rel="alternate" href="mysqli.debug.html" hreflang="x-default">
+
+ <link rel="contents" href="index-2.html">
+ <link rel="index" href="class.mysqli.html">
+ <link rel="prev" href="mysqli.construct.html">
+ <link rel="next" href="mysqli.dump-debug-info.html">
+
+ <link rel="alternate" href="mysqli.debug.html" hreflang="en">
+ <link rel="alternate" href="https://www.php.net/manual/pt_BR/mysqli.debug.php" hreflang="pt_BR">
+ <link rel="alternate" href="https://www.php.net/manual/zh/mysqli.debug.php" hreflang="zh">
+ <link rel="alternate" href="https://www.php.net/manual/fr/mysqli.debug.php" hreflang="fr">
+ <link rel="alternate" href="https://www.php.net/manual/de/mysqli.debug.php" hreflang="de">
+ <link rel="alternate" href="https://www.php.net/manual/ja/mysqli.debug.php" hreflang="ja">
+ <link rel="alternate" href="https://www.php.net/manual/ro/mysqli.debug.php" hreflang="ro">
+ <link rel="alternate" href="https://www.php.net/manual/ru/mysqli.debug.php" hreflang="ru">
+ <link rel="alternate" href="https://www.php.net/manual/es/mysqli.debug.php" hreflang="es">
+ <link rel="alternate" href="https://www.php.net/manual/tr/mysqli.debug.php" hreflang="tr">
+
+<link rel="stylesheet" type="text/css" href="../../cached0aba.css?t=1539771603&amp;f=/fonts/Fira/fira.css" media="screen">
+<link rel="stylesheet" type="text/css" href="../../cached2ecf.css?t=1539765004&amp;f=/fonts/Font-Awesome/css/fontello.css" media="screen">
+<link rel="stylesheet" type="text/css" href="../../cachedba57.css?t=1606338002&amp;f=/styles/theme-base.css" media="screen">
+<link rel="stylesheet" type="text/css" href="../../cached3afa.css?t=1627831203&amp;f=/styles/theme-medium.css" media="screen">
+
+ <!--[if lte IE 7]>
+ <link rel="stylesheet" type="text/css" href="https://www.php.net/styles/workarounds.ie7.css" media="screen">
+ <![endif]-->
+
+ <!--[if lte IE 8]>
+ <script>
+  window.brokenIE = true;
+ </script>
+ <![endif]-->
+
+ <!--[if lte IE 9]>
+ <link rel="stylesheet" type="text/css" href="https://www.php.net/styles/workarounds.ie9.css" media="screen">
+ <![endif]-->
+
+ <!--[if IE]>
+ <script src="https://www.php.net/js/ext/html5.js"></script>
+ <![endif]-->
+
+ <base>
+
+
+</head>
+<body class="docs " style="">
+
+
+<div class="headsup"><a href="https://www.php.net/conferences/index.php#id2021-09-08-1">Longhorn PHP 2021</a></div>
+<nav id="trick"><div><dl>
+<dt><a href="getting-started.html">Getting Started</a></dt>
+	<dd><a href="introduction.html">Introduction</a></dd>
+	<dd><a href="tutorial.html">A simple tutorial</a></dd>
+<dt><a href="langref.html">Language Reference</a></dt>
+	<dd><a href="language.basic-syntax.html">Basic syntax</a></dd>
+	<dd><a href="language.types.html">Types</a></dd>
+	<dd><a href="language.variables.html">Variables</a></dd>
+	<dd><a href="language.constants.html">Constants</a></dd>
+	<dd><a href="language.expressions.html">Expressions</a></dd>
+	<dd><a href="language.operators.html">Operators</a></dd>
+	<dd><a href="language.control-structures.html">Control Structures</a></dd>
+	<dd><a href="language.functions.html">Functions</a></dd>
+	<dd><a href="language.oop5.html">Classes and Objects</a></dd>
+	<dd><a href="language.namespaces.html">Namespaces</a></dd>
+	<dd><a href="language.errors.html">Errors</a></dd>
+	<dd><a href="language.exceptions.html">Exceptions</a></dd>
+	<dd><a href="language.generators.html">Generators</a></dd>
+	<dd><a href="language.attributes.html">Attributes</a></dd>
+	<dd><a href="language.references.html">References Explained</a></dd>
+	<dd><a href="reserved.variables.html">Predefined Variables</a></dd>
+	<dd><a href="reserved.exceptions.html">Predefined Exceptions</a></dd>
+	<dd><a href="reserved.interfaces.html">Predefined Interfaces and Classes</a></dd>
+	<dd><a href="context.html">Context options and parameters</a></dd>
+	<dd><a href="wrappers.html">Supported Protocols and Wrappers</a></dd>
+</dl>
+<dl>
+<dt><a href="security.html">Security</a></dt>
+	<dd><a href="security.intro.html">Introduction</a></dd>
+	<dd><a href="security.general.html">General considerations</a></dd>
+	<dd><a href="security.cgi-bin.html">Installed as CGI binary</a></dd>
+	<dd><a href="security.apache.html">Installed as an Apache module</a></dd>
+	<dd><a href="security.sessions.html">Session Security</a></dd>
+	<dd><a href="security.filesystem.html">Filesystem Security</a></dd>
+	<dd><a href="security.database.html">Database Security</a></dd>
+	<dd><a href="security.errors.html">Error Reporting</a></dd>
+	<dd><a href="security.variables.html">User Submitted Data</a></dd>
+	<dd><a href="security.hiding.html">Hiding PHP</a></dd>
+	<dd><a href="security.current.html">Keeping Current</a></dd>
+<dt><a href="features.html">Features</a></dt>
+	<dd><a href="features.http-auth.html">HTTP authentication with PHP</a></dd>
+	<dd><a href="features.cookies.html">Cookies</a></dd>
+	<dd><a href="features.sessions.html">Sessions</a></dd>
+	<dd><a href="features.xforms.html">Dealing with XForms</a></dd>
+	<dd><a href="features.file-upload.html">Handling file uploads</a></dd>
+	<dd><a href="features.remote-files.html">Using remote files</a></dd>
+	<dd><a href="features.connection-handling.html">Connection handling</a></dd>
+	<dd><a href="features.persistent-connections.html">Persistent Database Connections</a></dd>
+	<dd><a href="features.commandline.html">Command line usage</a></dd>
+	<dd><a href="features.gc.html">Garbage Collection</a></dd>
+	<dd><a href="features.dtrace.html">DTrace Dynamic Tracing</a></dd>
+</dl>
+<dl>
+<dt><a href="funcref.html">Function Reference</a></dt>
+	<dd><a href="refs.basic.php.html">Affecting PHP's Behaviour</a></dd>
+	<dd><a href="refs.utilspec.audio.html">Audio Formats Manipulation</a></dd>
+	<dd><a href="refs.remote.auth.html">Authentication Services</a></dd>
+	<dd><a href="refs.utilspec.cmdline.html">Command Line Specific Extensions</a></dd>
+	<dd><a href="refs.compression.html">Compression and Archive Extensions</a></dd>
+	<dd><a href="refs.crypto.html">Cryptography Extensions</a></dd>
+	<dd><a href="refs.database.html">Database Extensions</a></dd>
+	<dd><a href="refs.calendar.html">Date and Time Related Extensions</a></dd>
+	<dd><a href="refs.fileprocess.file.html">File System Related Extensions</a></dd>
+	<dd><a href="refs.international.html">Human Language and Character Encoding Support</a></dd>
+	<dd><a href="refs.utilspec.image.html">Image Processing and Generation</a></dd>
+	<dd><a href="refs.remote.mail.html">Mail Related Extensions</a></dd>
+	<dd><a href="refs.math.html">Mathematical Extensions</a></dd>
+	<dd><a href="refs.utilspec.nontext.html">Non-Text MIME Output</a></dd>
+	<dd><a href="refs.fileprocess.process.html">Process Control Extensions</a></dd>
+	<dd><a href="refs.basic.other.html">Other Basic Extensions</a></dd>
+	<dd><a href="refs.remote.other.html">Other Services</a></dd>
+	<dd><a href="refs.search.html">Search Engine Extensions</a></dd>
+	<dd><a href="refs.utilspec.server.html">Server Specific Extensions</a></dd>
+	<dd><a href="refs.basic.session.html">Session Extensions</a></dd>
+	<dd><a href="refs.basic.text.html">Text Processing</a></dd>
+	<dd><a href="refs.basic.vartype.html">Variable and Type Related Extensions</a></dd>
+	<dd><a href="refs.webservice.html">Web Services</a></dd>
+	<dd><a href="refs.utilspec.windows.html">Windows Only Extensions</a></dd>
+	<dd><a href="refs.xml.html">XML Manipulation</a></dd>
+	<dd><a href="refs.ui.html">GUI Extensions</a></dd>
+</dl>
+<dl>
+<dt>Keyboard Shortcuts</dt><dt>?</dt>
+<dd>This help</dd>
+<dt>j</dt>
+<dd>Next menu item</dd>
+<dt>k</dt>
+<dd>Previous menu item</dd>
+<dt>g p</dt>
+<dd>Previous man page</dd>
+<dt>g n</dt>
+<dd>Next man page</dd>
+<dt>G</dt>
+<dd>Scroll to bottom</dd>
+<dt>g g</dt>
+<dd>Scroll to top</dd>
+<dt>g h</dt>
+<dd>Goto homepage</dd>
+<dt>g s</dt>
+<dd>Goto search<br>(current page)</dd>
+<dt>/</dt>
+<dd>Focus search box</dd>
+</dl></div></nav>
+<div id="goto">
+    <div class="search">
+         <div class="text"></div>
+         <div class="results"><ul></ul></div>
+   </div>
+</div>
+
+  <div id="breadcrumbs" class="row-fluid">
+    <div id="breadcrumbs-inner">
+          
+              
+          <ul>
+            <li><a href="index-2.html">PHP Manual</a></li>      <li><a href="funcref.html">Function Reference</a></li>      <li><a href="refs.database.html">Database Extensions</a></li>      <li><a href="refs.database.vendors.html">Vendor Specific Database Extensions</a></li>      <li><a href="set.mysqlinfo.html">MySQL</a></li>      <li><a href="book.mysqli.html">MySQLi</a></li>      <li><a href="class.mysqli.html">mysqli</a></li>      </ul>
+    </div>
+  </div>
+
+
+
+
+<div id="layout" class="clearfix">
+  <section id="layout-content">
+  <div id="mysqli.debug" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">mysqli::debug</h1>
+  <h1 class="refname">mysqli_debug</h1>
+  <p class="verinfo">(PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">mysqli::debug</span> -- <span class="refname">mysqli_debug</span> — <span class="dc-title">Performs debugging operations</span></p>
+
+ </div>
+
+ <div class="refsect1 description" id="refsect1-mysqli.debug-description">
+  <h3 class="title">Description</h3>
+  <p class="para">Object-oriented style</p>
+  <div class="methodsynopsis dc-description">
+   <span class="modifier">public</span> <span class="methodname"><strong>mysqli::debug</strong></span>(<span class="methodparam"><span class="type">string</span> <code class="parameter">$options</code></span>): <span class="type">bool</span></div>
+
+  <p class="para rdfs-comment">Procedural style</p>
+  <div class="methodsynopsis dc-description"><span class="methodname"><strong>mysqli_debug</strong></span>(<span class="methodparam"><span class="type">string</span> <code class="parameter">$options</code></span>): <span class="type">bool</span></div>
+
+  <p class="para rdfs-comment">
+   Performs debugging operations using the Fred Fish debugging library.
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-mysqli.debug-parameters">
+  <h3 class="title">Parameters</h3>
+  <p class="para">
+   </p><dl>
+    
+     <dt>
+<code class="parameter">options</code></dt>
+
+     <dd>
+
+      <p class="para">
+       A string representing the debugging operation to perform
+      </p>
+     </dd>
+
+    
+   </dl>
+
+  <p></p>
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-mysqli.debug-returnvalues">
+  <h3 class="title">Return Values</h3>
+  <p class="para">
+   Returns <strong><code>true</code></strong>.
+  </p>
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-mysqli.debug-examples">
+  <h3 class="title">Examples</h3>
+  <p class="para">
+   </p><div class="example" id="example-1385">
+    <p><strong>Example #1 Generating a Trace File</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br><br></span><span style="color: #FF8000">/*&nbsp;Create&nbsp;a&nbsp;trace&nbsp;file&nbsp;in&nbsp;'/tmp/client.trace'&nbsp;on&nbsp;the&nbsp;local&nbsp;(client)&nbsp;machine:&nbsp;*/<br></span><span style="color: #0000BB">mysqli_debug</span><span style="color: #007700">(</span><span style="color: #DD0000">"d:t:o,/tmp/client.trace"</span><span style="color: #007700">);<br><br></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+  <p></p>
+ </div>
+
+
+ <div class="refsect1 notes" id="refsect1-mysqli.debug-notes">
+  <h3 class="title">Notes</h3>
+  <blockquote class="note"><p><strong class="note">Note</strong>: 
+   </p><p class="para">
+    To use the <span class="function"><strong>mysqli_debug()</strong></span> function you must compile
+    the MySQL client library to support debugging.
+   </p>
+  <p></p></blockquote>
+ </div>
+
+
+ <div class="refsect1 seealso" id="refsect1-mysqli.debug-seealso">
+  <h3 class="title">See Also</h3>
+  <p class="para">
+   </p><ul class="simplelist">
+    <li class="member"><span class="function"><a href="mysqli.dump-debug-info.html" class="function" rel="rdfs-seeAlso">mysqli_dump_debug_info()</a> - Dump debugging information into the log</span></li>
+    <li class="member"><span class="function"><a href="function.mysqli-report.html" class="function" rel="rdfs-seeAlso">mysqli_report()</a> - Alias of mysqli_driver-&gt;report_mode</span></li>
+   </ul>
+  <p></p>
+ </div>
+
+
+</div>
+<section id="usernotes">
+ <div class="head"><h3 class="title">User Contributed Notes</h3></div><div id="allnotes">
+  <div class="note" id="114991">  
+  <a class="name">
+  <strong class="user"><em>Peter</em></strong></a><div class="date" title="2014-05-10 10:59"><strong>7 years ago</strong></div>
+  <div class="text" id="Hcom114991">
+<div class="phpcode"><code><span class="html">
+can there be more documenation with a small (but working) example script on how to use this ?<br><br>Some issues&nbsp; (Ive seen the "same" code example in dozens of tutorials):-<br><br>( I'll use capitals for emphasis only)<br><br>QUESTION: what does D:T:O mean ? UNEXPLAINED.<br><br>QUESTION: Do we *ONLY* use these 3 lines in a self-contained script ? Does this log ALL future MYSQL commands ?<br><br>QUESTION :- Do we put that one line just<br><br>- immediately after we connect to MYSQL ?<br>- before we connect to MYSQL ?<br>- before our suspected error ?</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="122219">  
+  <a class="name">
+  <strong class="user"><em>riversnowchang at gmail dot com</em></strong></a><div class="date" title="2018-01-03 02:42"><strong>3 years ago</strong></div>
+  <div class="text" id="Hcom122219">
+<div class="phpcode"><code><span class="html">
+Here are the information about debug options on mysqli_debug()<br><br>O,o:MYSQLND_DEBUG_FLUSH<br>A,a:MYSQLND_DEBUG_APPEND<br>F:MYSQLND_DEBUG_DUMP_FILE<br>L:MYSQLND_DEBUG_DUMP_LINE<br>m:MYSQLND_DEBUG_TRACE_MEMORY_CALLS<br>n:MYSQLND_DEBUG_DUMP_LEVEL<br>o:output to file<br>T:MYSQLND_DEBUG_DUMP_TIME<br>t:MYSQLND_DEBUG_DUMP_TRACE<br>x:MYSQLND_DEBUG_PROFILE_CALLS<br>f:? still investigating<br><br>For example, mysqli_debug("T:n:t:m:x:F:L:o,/tmp/client.trace");<br>mysqlnd will write Time, Level, trace, memory calls, profile calls, File, Line to client.trace file.<br><br>22:35:42.704501 ../mysqlnd_connection.c:&nbsp; 269&nbsp;&nbsp; 0:&gt;mysqlnd_connection_init<br>22:35:42.704538 ../mysqlnd_driver.c:&nbsp;&nbsp; 10&nbsp;&nbsp; 1:| &gt;mysqlnd_driver::get_connection<br>22:35:42.704549 ../mysqlnd_driver.c:&nbsp;&nbsp; 10&nbsp;&nbsp; 2:| | info : persistent=1<br>22:35:42.704558 ../mysqlnd_alloc.c:&nbsp;&nbsp; 21&nbsp;&nbsp; 2:| | &gt;_mysqlnd_pecalloc<br>22:35:42.704570 ../mysqlnd_alloc.c:&nbsp;&nbsp; 23&nbsp;&nbsp; 2:| | &lt;_mysqlnd_pecalloc (total=3 own=3 in_calls=0)<br>22:35:42.704602 ../mysqlnd_alloc.c:&nbsp;&nbsp; 21&nbsp;&nbsp; 2:| | &gt;_mysqlnd_pecalloc<br>22:35:42.704626 ../mysqlnd_alloc.c:&nbsp;&nbsp; 23&nbsp;&nbsp; 2:| | &lt;_mysqlnd_pecalloc (total=2 own=2 in_calls=0)<br>22:35:42.704650 ../mysqlnd_connection.c:&nbsp;&nbsp; 15&nbsp;&nbsp; 2:| | &gt;mysqlnd_error_info_init<br>22:35:42.704675 ../mysqlnd_connection.c:&nbsp;&nbsp; 10&nbsp;&nbsp; 3:| | | &gt;mysqlnd_error_info::reset<br>22:35:42.704697 ../mysqlnd_connection.c:&nbsp;&nbsp; 10&nbsp;&nbsp; 3:| | | &lt;mysqlnd_error_info::reset (total=1 own=1 in_calls=0)<br>22:35:42.704725 ../mysqlnd_connection.c:&nbsp;&nbsp; 16&nbsp;&nbsp; 2:| | &lt;mysqlnd_error_info_init (total=51 own=50 in_calls=1)<br>22:35:42.704744 ../mysqlnd_connection.c:&nbsp;&nbsp; 21&nbsp;&nbsp; 2:| | &gt;mysqlnd_connection_state_init<br><br>If there is anything wrong, please let me know.</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="122730">  
+  <a class="name">
+  <strong class="user"><em>Domenic</em></strong></a><div class="date" title="2018-05-14 10:17"><strong>3 years ago</strong></div>
+  <div class="text" id="Hcom122730">
+<div class="phpcode"><code><span class="html">
+Looks like this manual could be referred to:<br><br><a rel="nofollow" target="_blank">http://tiebing.blogspot.com.au/2011/10/cc-dbug-library.html</a><br><br>(I haven't tested it)</span>
+</code></div>
+  </div>
+ </div></div>
+
+ 
+</section>    </section><!-- layout-content -->
+        
+
+
+  </div><!-- layout -->
+
+  
+
+    
+ <!-- External and third party libraries. -->
+ 
+
+
+
+
+
+
+
+<a id="toTop" href="javascript:;"><span id="toTopHover"></span><img width="40" height="40" alt="To Top" src="../../images/to-top%402x.png"></a>
+
+
+
+<!-- Mirrored from www.php.net/manual/en/mysqli.debug.php by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 11 Sep 2021 10:32:58 GMT -->
+
+</body></html>

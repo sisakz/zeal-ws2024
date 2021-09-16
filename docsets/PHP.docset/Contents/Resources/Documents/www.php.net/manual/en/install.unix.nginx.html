@@ -1,0 +1,553 @@
+<html><!-- Mirrored from www.php.net/manual/en/install.unix.nginx.php by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 11 Sep 2021 05:45:57 GMT --><!-- Added by HTTrack --><head><meta http-equiv="content-type" content="text/html;charset=utf-8"><!-- /Added by HTTrack -->
+
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Nginx 1.4.x on Unix systems</title>
+
+ <link rel="shortcut icon" href="../../favicon.ico">
+ <link rel="search" type="application/opensearchdescription+xml" href="http://php.net/phpnetimprovedsearch.src" title="Add PHP.net search">
+ <link rel="alternate" type="application/atom+xml" href="https://www.php.net/releases/feed.php" title="PHP Release feed">
+ <link rel="alternate" type="application/atom+xml" href="https://www.php.net/feed.atom" title="PHP: Hypertext Preprocessor">
+
+ <link rel="canonical" href="install.unix.nginx.html">
+ <link rel="shorturl" href="install.unix.nginx.html">
+ <link rel="alternate" href="install.unix.nginx.html" hreflang="x-default">
+
+ <link rel="contents" href="index-2.html">
+ <link rel="index" href="install.unix.html">
+ <link rel="prev" href="install.unix.apache2.html">
+ <link rel="next" href="install.unix.lighttpd-14.html">
+
+ <link rel="alternate" href="install.unix.nginx.html" hreflang="en">
+ <link rel="alternate" href="https://www.php.net/manual/pt_BR/install.unix.nginx.php" hreflang="pt_BR">
+ <link rel="alternate" href="https://www.php.net/manual/zh/install.unix.nginx.php" hreflang="zh">
+ <link rel="alternate" href="https://www.php.net/manual/fr/install.unix.nginx.php" hreflang="fr">
+ <link rel="alternate" href="https://www.php.net/manual/de/install.unix.nginx.php" hreflang="de">
+ <link rel="alternate" href="https://www.php.net/manual/ja/install.unix.nginx.php" hreflang="ja">
+ <link rel="alternate" href="https://www.php.net/manual/ro/install.unix.nginx.php" hreflang="ro">
+ <link rel="alternate" href="https://www.php.net/manual/ru/install.unix.nginx.php" hreflang="ru">
+ <link rel="alternate" href="https://www.php.net/manual/es/install.unix.nginx.php" hreflang="es">
+ <link rel="alternate" href="https://www.php.net/manual/tr/install.unix.nginx.php" hreflang="tr">
+
+<link rel="stylesheet" type="text/css" href="../../cached0aba.css?t=1539771603&amp;f=/fonts/Fira/fira.css" media="screen">
+<link rel="stylesheet" type="text/css" href="../../cached2ecf.css?t=1539765004&amp;f=/fonts/Font-Awesome/css/fontello.css" media="screen">
+<link rel="stylesheet" type="text/css" href="../../cachedba57.css?t=1606338002&amp;f=/styles/theme-base.css" media="screen">
+<link rel="stylesheet" type="text/css" href="../../cached3afa.css?t=1627831203&amp;f=/styles/theme-medium.css" media="screen">
+
+ <!--[if lte IE 7]>
+ <link rel="stylesheet" type="text/css" href="https://www.php.net/styles/workarounds.ie7.css" media="screen">
+ <![endif]-->
+
+ <!--[if lte IE 8]>
+ <script>
+  window.brokenIE = true;
+ </script>
+ <![endif]-->
+
+ <!--[if lte IE 9]>
+ <link rel="stylesheet" type="text/css" href="https://www.php.net/styles/workarounds.ie9.css" media="screen">
+ <![endif]-->
+
+ <!--[if IE]>
+ <script src="https://www.php.net/js/ext/html5.js"></script>
+ <![endif]-->
+
+ <base>
+
+
+</head>
+<body class="docs " style="">
+
+
+<div class="headsup"><a href="https://www.php.net/conferences/index.php#id2021-09-08-1">Longhorn PHP 2021</a></div>
+<nav id="trick"><div><dl>
+<dt><a href="getting-started.html">Getting Started</a></dt>
+	<dd><a href="introduction.html">Introduction</a></dd>
+	<dd><a href="tutorial.html">A simple tutorial</a></dd>
+<dt><a href="langref.html">Language Reference</a></dt>
+	<dd><a href="language.basic-syntax.html">Basic syntax</a></dd>
+	<dd><a href="language.types.html">Types</a></dd>
+	<dd><a href="language.variables.html">Variables</a></dd>
+	<dd><a href="language.constants.html">Constants</a></dd>
+	<dd><a href="language.expressions.html">Expressions</a></dd>
+	<dd><a href="language.operators.html">Operators</a></dd>
+	<dd><a href="language.control-structures.html">Control Structures</a></dd>
+	<dd><a href="language.functions.html">Functions</a></dd>
+	<dd><a href="language.oop5.html">Classes and Objects</a></dd>
+	<dd><a href="language.namespaces.html">Namespaces</a></dd>
+	<dd><a href="language.errors.html">Errors</a></dd>
+	<dd><a href="language.exceptions.html">Exceptions</a></dd>
+	<dd><a href="language.generators.html">Generators</a></dd>
+	<dd><a href="language.attributes.html">Attributes</a></dd>
+	<dd><a href="language.references.html">References Explained</a></dd>
+	<dd><a href="reserved.variables.html">Predefined Variables</a></dd>
+	<dd><a href="reserved.exceptions.html">Predefined Exceptions</a></dd>
+	<dd><a href="reserved.interfaces.html">Predefined Interfaces and Classes</a></dd>
+	<dd><a href="context.html">Context options and parameters</a></dd>
+	<dd><a href="wrappers.html">Supported Protocols and Wrappers</a></dd>
+</dl>
+<dl>
+<dt><a href="security.html">Security</a></dt>
+	<dd><a href="security.intro.html">Introduction</a></dd>
+	<dd><a href="security.general.html">General considerations</a></dd>
+	<dd><a href="security.cgi-bin.html">Installed as CGI binary</a></dd>
+	<dd><a href="security.apache.html">Installed as an Apache module</a></dd>
+	<dd><a href="security.sessions.html">Session Security</a></dd>
+	<dd><a href="security.filesystem.html">Filesystem Security</a></dd>
+	<dd><a href="security.database.html">Database Security</a></dd>
+	<dd><a href="security.errors.html">Error Reporting</a></dd>
+	<dd><a href="security.variables.html">User Submitted Data</a></dd>
+	<dd><a href="security.hiding.html">Hiding PHP</a></dd>
+	<dd><a href="security.current.html">Keeping Current</a></dd>
+<dt><a href="features.html">Features</a></dt>
+	<dd><a href="features.http-auth.html">HTTP authentication with PHP</a></dd>
+	<dd><a href="features.cookies.html">Cookies</a></dd>
+	<dd><a href="features.sessions.html">Sessions</a></dd>
+	<dd><a href="features.xforms.html">Dealing with XForms</a></dd>
+	<dd><a href="features.file-upload.html">Handling file uploads</a></dd>
+	<dd><a href="features.remote-files.html">Using remote files</a></dd>
+	<dd><a href="features.connection-handling.html">Connection handling</a></dd>
+	<dd><a href="features.persistent-connections.html">Persistent Database Connections</a></dd>
+	<dd><a href="features.commandline.html">Command line usage</a></dd>
+	<dd><a href="features.gc.html">Garbage Collection</a></dd>
+	<dd><a href="features.dtrace.html">DTrace Dynamic Tracing</a></dd>
+</dl>
+<dl>
+<dt><a href="funcref.html">Function Reference</a></dt>
+	<dd><a href="refs.basic.php.html">Affecting PHP's Behaviour</a></dd>
+	<dd><a href="refs.utilspec.audio.html">Audio Formats Manipulation</a></dd>
+	<dd><a href="refs.remote.auth.html">Authentication Services</a></dd>
+	<dd><a href="refs.utilspec.cmdline.html">Command Line Specific Extensions</a></dd>
+	<dd><a href="refs.compression.html">Compression and Archive Extensions</a></dd>
+	<dd><a href="refs.crypto.html">Cryptography Extensions</a></dd>
+	<dd><a href="refs.database.html">Database Extensions</a></dd>
+	<dd><a href="refs.calendar.html">Date and Time Related Extensions</a></dd>
+	<dd><a href="refs.fileprocess.file.html">File System Related Extensions</a></dd>
+	<dd><a href="refs.international.html">Human Language and Character Encoding Support</a></dd>
+	<dd><a href="refs.utilspec.image.html">Image Processing and Generation</a></dd>
+	<dd><a href="refs.remote.mail.html">Mail Related Extensions</a></dd>
+	<dd><a href="refs.math.html">Mathematical Extensions</a></dd>
+	<dd><a href="refs.utilspec.nontext.html">Non-Text MIME Output</a></dd>
+	<dd><a href="refs.fileprocess.process.html">Process Control Extensions</a></dd>
+	<dd><a href="refs.basic.other.html">Other Basic Extensions</a></dd>
+	<dd><a href="refs.remote.other.html">Other Services</a></dd>
+	<dd><a href="refs.search.html">Search Engine Extensions</a></dd>
+	<dd><a href="refs.utilspec.server.html">Server Specific Extensions</a></dd>
+	<dd><a href="refs.basic.session.html">Session Extensions</a></dd>
+	<dd><a href="refs.basic.text.html">Text Processing</a></dd>
+	<dd><a href="refs.basic.vartype.html">Variable and Type Related Extensions</a></dd>
+	<dd><a href="refs.webservice.html">Web Services</a></dd>
+	<dd><a href="refs.utilspec.windows.html">Windows Only Extensions</a></dd>
+	<dd><a href="refs.xml.html">XML Manipulation</a></dd>
+	<dd><a href="refs.ui.html">GUI Extensions</a></dd>
+</dl>
+<dl>
+<dt>Keyboard Shortcuts</dt><dt>?</dt>
+<dd>This help</dd>
+<dt>j</dt>
+<dd>Next menu item</dd>
+<dt>k</dt>
+<dd>Previous menu item</dd>
+<dt>g p</dt>
+<dd>Previous man page</dd>
+<dt>g n</dt>
+<dd>Next man page</dd>
+<dt>G</dt>
+<dd>Scroll to bottom</dd>
+<dt>g g</dt>
+<dd>Scroll to top</dd>
+<dt>g h</dt>
+<dd>Goto homepage</dd>
+<dt>g s</dt>
+<dd>Goto search<br>(current page)</dd>
+<dt>/</dt>
+<dd>Focus search box</dd>
+</dl></div></nav>
+<div id="goto">
+    <div class="search">
+         <div class="text"></div>
+         <div class="results"><ul></ul></div>
+   </div>
+</div>
+
+  <div id="breadcrumbs" class="row-fluid">
+    <div id="breadcrumbs-inner">
+          
+              
+          <ul>
+            <li><a href="index-2.html">PHP Manual</a></li>      <li><a href="install.html">Installation and Configuration</a></li>      <li><a href="install.unix.html">Installation on Unix systems</a></li>      </ul>
+    </div>
+  </div>
+
+
+
+
+<div id="layout" class="clearfix">
+  <section id="layout-content">
+  <div id="install.unix.nginx" class="sect1">
+ <h2 class="title">Nginx 1.4.x on Unix systems</h2>
+
+ <p class="para">
+  This documentation will cover installing and configuring PHP with
+  PHP-FPM for a Nginx 1.4.x HTTP server.
+ </p>
+
+ <p class="para">
+  This guide will assume that you have built Nginx from source and therefore
+  all binaries and configuration files are located at
+  <code class="literal">/usr/local/nginx</code>. If this is not the case and you have
+  obtained Nginx through other means then please refer to the
+  <a href="https://www.nginx.com/resources/wiki/" class="link external">»&nbsp;Nginx Wiki</a> in order to translate
+  this manual to your setup.
+ </p>
+
+ <p class="para">
+  This guide will cover the basics of configuring an Nginx server to
+  process PHP applications and serve them on port 80, it is recommended
+  that you study the Nginx and PHP-FPM documentation if you wish to
+  optimise your setup past the scope of this documentation.
+ </p>
+
+ <p class="para">
+  Please note that throughout this documentation version numbers have been
+  replaced with an 'x' to ensure this documentation stays correct in the future,
+  please replace these as necessary with the corresponding version numbers.
+ </p>
+
+ <ol type="1">
+  <li class="listitem">
+   <p class="para">
+    It is recommended that you visit the Nginx Wiki
+    <a href="https://www.nginx.com/resources/wiki/start/topics/tutorials/install/" class="link external">»&nbsp;install</a> page 
+    in order to obtain and install Nginx on your system.
+   </p>
+  </li>
+
+  <li class="listitem">
+   <p class="para">
+    Obtain and unpack the PHP source:
+   </p>
+
+   <div class="informalexample">
+    <div class="example-contents screen">
+<div class="cdata"><pre>tar zxf php-x.x.x
+</pre></div>
+    </div>
+   </div>
+  </li>
+
+  <li class="listitem">
+   <p class="para">
+    Configure and build PHP.  This is where you customize PHP
+    with various options, like which extensions will be enabled. Run
+    ./configure --help for a list of available options.  In our example
+    we'll do a simple configure with PHP-FPM and MySQLi support.
+   </p>
+
+   <div class="informalexample">
+    <div class="example-contents screen">
+<div class="cdata"><pre>cd ../php-x.x.x
+./configure --enable-fpm --with-mysqli
+make
+sudo make install
+</pre></div>
+    </div>
+   </div>
+  </li>
+
+  <li class="listitem">
+   <p class="para">
+    Obtain and move configuration files to their correct locations
+   </p>
+
+   <div class="informalexample">
+    <div class="example-contents screen">
+<div class="cdata"><pre>cp php.ini-development /usr/local/php/php.ini
+cp /usr/local/etc/php-fpm.d/www.conf.default /usr/local/etc/php-fpm.d/www.conf
+cp sapi/fpm/php-fpm /usr/local/bin
+</pre></div>
+    </div>
+   </div>
+  </li>
+
+  <li class="listitem">
+   <p class="para">
+    It is important that we prevent Nginx from passing requests to the
+    PHP-FPM backend if the file does not exists, allowing us to prevent
+    arbitrarily script injection.
+   </p>
+   <p class="para">
+    We can fix this by setting the
+    <a href="ini.core.html#ini.cgi.fix-pathinfo" class="link">cgi.fix_pathinfo</a>
+    directive to <code class="literal">0</code> within our php.ini file.
+   </p>
+   <p class="para">
+    Load up php.ini:
+   </p>
+
+   <div class="informalexample">
+    <div class="example-contents screen">
+<div class="cdata"><pre>vim /usr/local/php/php.ini
+</pre></div>
+    </div>
+   </div>
+
+   <p class="para">
+    Locate <code class="literal">cgi.fix_pathinfo=</code> and modify it as follows:
+   </p>
+
+   <div class="informalexample">
+    <div class="example-contents screen">
+<div class="cdata"><pre>cgi.fix_pathinfo=0
+</pre></div>
+    </div>
+   </div>
+  </li>
+
+  <li class="listitem">
+   <p class="para">
+    php-fpm.conf must be modified to specify that php-fpm must run as the user
+    www-data and the group www-data before we can start the service:
+   </p>
+
+   <div class="informalexample">
+    <div class="example-contents screen">
+<div class="cdata"><pre>vim /usr/local/etc/php-fpm.d/www.conf
+</pre></div>
+    </div>
+   </div>
+
+   <p class="para">
+    Find and modify the following: 
+   </p>
+
+   <div class="informalexample">
+    <div class="example-contents screen">
+<div class="cdata"><pre>; Unix user/group of processes
+; Note: The user is mandatory. If the group is not set, the default user's group
+;       will be used.
+user = www-data
+group = www-data
+</pre></div>
+    </div>
+   </div>
+
+   <p class="para">
+    The php-fpm service can now be started:
+   </p>
+
+   <div class="informalexample">
+    <div class="example-contents screen">
+<div class="cdata"><pre>/usr/local/bin/php-fpm
+</pre></div>
+    </div>
+   </div>
+
+   <p class="para">
+    This guide will not configure php-fpm any further, if you are interested
+    in further configuring php-fpm then please consult the documentation.
+   </p>
+  </li>
+
+  <li class="listitem">
+   <p class="para">
+    Nginx must now be configured to support the processing of PHP applications:
+   </p>
+
+   <div class="informalexample">
+    <div class="example-contents">
+<div class="cdata"><pre>vim /usr/local/nginx/conf/nginx.conf
+</pre></div>
+    </div>
+
+   </div>
+
+   <p class="para">
+    Modify the default location block to be aware it must attempt
+    to serve .php files:
+   </p>
+
+   <div class="informalexample">
+    <div class="example-contents">
+<div class="nginx-confcode"><pre class="nginx-confcode">location / {
+    root   html;
+    index  index.php index.html index.htm;
+}</pre>
+</div>
+    </div>
+
+   </div>
+
+   <p class="para">
+    The next step is to ensure that .php files are passed to the
+    PHP-FPM backend. Below the commented default PHP location block,
+    enter the following:
+   </p>
+
+   <div class="informalexample">
+    <div class="example-contents">
+<div class="nginx-confcode"><pre class="nginx-confcode">location ~* \.php$ {
+    fastcgi_index   index.php;
+    fastcgi_pass    127.0.0.1:9000;
+    include         fastcgi_params;
+    fastcgi_param   SCRIPT_FILENAME    $document_root$fastcgi_script_name;
+    fastcgi_param   SCRIPT_NAME        $fastcgi_script_name;
+}</pre>
+</div>
+    </div>
+
+   </div>
+
+   <p class="para">
+    Restart Nginx.
+   </p>
+
+   <div class="informalexample">
+    <div class="example-contents screen">
+<div class="cdata"><pre>sudo /usr/local/nginx/sbin/nginx -s stop
+sudo /usr/local/nginx/sbin/nginx
+</pre></div>
+    </div>
+   </div>
+  </li>
+
+  <li class="listitem">
+   <p class="para">
+    Create a test file
+   </p>
+
+   <div class="informalexample">
+    <div class="example-contents screen">
+<div class="cdata"><pre>rm /usr/local/nginx/html/index.html
+echo "&lt;?php phpinfo(); ?&gt;" &gt;&gt; /usr/local/nginx/html/index.php
+</pre></div>
+    </div>
+   </div>
+
+   <p class="para">
+    Now navigate to http://localhost. The phpinfo() should now be shown.
+   </p>
+  </li>
+ </ol>
+
+ <p class="para">
+  Following the steps above you will have a running Nginx web server with
+  support for PHP as an <code class="literal">FPM</code> <code class="literal">SAPI</code> module.  Of course there are
+  many more configuration options available for Nginx and PHP.  For more
+  information type <strong class="command">./configure --help</strong> in the corresponding
+  source tree.
+ </p>
+
+</div>
+<section id="usernotes">
+ <div class="head"><h3 class="title">User Contributed Notes</h3></div><div id="allnotes">
+  <div class="note" id="118875">  
+  <a class="name">
+  <strong class="user"><em>Lenny</em></strong></a><div class="date" title="2016-02-21 02:40"><strong>5 years ago</strong></div>
+  <div class="text" id="Hcom118875">
+<div class="phpcode"><code><span class="html">
+Building from source is not easy if something is a bit different, and I had a hard time with some directory and configuration options. I was floundering around the web until I found this site that translated from Chinese. No one else had the solution.&nbsp; I couldn't get php fpm to start until I changed the directory (Item 2.ERROR: Unable to globalize). I had other issues listed but I was able to solve them. Please don't delete this, it is very useful info.<br><br>The original site&nbsp; (it is in Chinese, not my site, but I want to give credit):<br><br>(there is some more there, you can goto the site)<br><br>blog.dream1987.top/?paged=2<br><br>Installation problems:<br><br>1. configure: error:. Xml2-config not found Please check your libxml2 installation.<br><br>solution:<br><br>apt-get install libxml2-dev<br><br> <br><br>2.Warning: Declaration of PEAR_Installer :: download () should be compatible with &amp; PEAR_Downloader :: download ($ params) in phar: ///root/php-7.0.0alpha1/pear/install-pear-nozlib.phar/PEAR /Installer.php on line 43<br><br>Warning: Declaration of PEAR_PackageFile_Parser_v2 :: parse () should be compatible with PEAR_XMLParser :: parse ($ data) in phar: ///root/php-7.0.0alpha1/pear/install-pear-nozlib.phar/PEAR/PackageFile/ Parser / v2.php on line 113 <br>[PEAR] Archive_Tar - already installed: 1.3.13 <br>[PEAR] Console_Getopt - already installed: 1.3.1 <br>[PEAR] Structures_Graph- already installed: 1.0.4<br><br>Warning: Declaration of PEAR_Task_Replace :: init () should be compatible with PEAR_Task_Common :: init ($ xml, $ fileAttributes, $ lastVersion) in phar: ///root/php-7.0.0alpha1/pear/install-pear-nozlib. phar / PEAR / Task / Replace.php on line 31 <br>[PEAR] XML_Util - already installed: 1.2.3<br><br>Warning: Declaration of PEAR_Task_Windowseol :: init () should be compatible with PEAR_Task_Common :: init ($ xml, $ fileAttributes, $ lastVersion) in phar: ///root/php-7.0.0alpha1/pear/install-pear-nozlib. phar / PEAR / Task / Windowseol.php on line 76<br><br>Warning: Declaration of PEAR_Task_Unixeol :: init () should be compatible with PEAR_Task_Common :: init ($ xml, $ fileAttributes, $ lastVersion) in phar: ///root/php-7.0.0alpha1/pear/install-pear-nozlib. phar / PEAR / Task / Unixeol.php on line 76 <br>[PEAR] PEAR - already installed: 1.9.5<br><br>solution:<br><br>Workaround not found (<a rel="nofollow" target="_blank">http://pear.php.net/bugs/bug.php?id=20554</a>)<br><br>3. Start php-fpm<br><br>1.ERROR: failed to open configuration file '/usr/local/etc/php-fpm.conf': No such file or directory (2) <br>ERROR: failed to load configuration file '/usr/local/etc/php-fpm.conf' <br>ERROR: FPM initialization failed<br><br>solution:<br><br>Php-fpm.conf copy files from the source file to that location.<br><br>cp /root/php-7.0.0alpha1/sapi/fpm/php-fpm.conf /usr/local/etc/php-fpm.conf<br><br>2.ERROR: Unable to globalize '/usr/local/NONE/etc/php-fpm.d/*.conf' (ret = 2) from /usr/local/etc/php-fpm.conf at line 125. <br>ERROR: failed to load configuration file '/usr/local/etc/php-fpm.conf' <br>ERROR: FPM initialization failed<br><br>solution:<br><br>Edit /usr/local/etc/php-fpm.conf document introduced * .conf part, change to the correct path include = / usr / local / etc / php-fpm.d / *. Conf<br><br>If there is no /usr/local/etc/php-fpm.d directory, create the directory.<br><br>3.WARNING: Nothing matches the include pattern '/usr/local/etc/php-fpm.d/*.conf' from /usr/local/etc/php-fpm.conf at line 125. <br>ERROR:. No pool defined at least one pool section must be specified in config file <br>ERROR: failed to post process the configuration <br>ERROR: FPM initialization failed<br><br>solution:<br><br>cp www.conf.default www.conf<br><br>4.ERROR: [pool www] can not get gid for group 'nobody' <br>ERROR: FPM initialization failed<br><br>solution:<br><br>Www.conf open files, user and group users into nginx default settings, usually the default is www-data.</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="123396">  
+  <a class="name">
+  <strong class="user"><em>1097625354 at qq dot com</em></strong></a><div class="date" title="2018-12-03 08:31"><strong>2 years ago</strong></div>
+  <div class="text" id="Hcom123396">
+<div class="phpcode"><code><span class="html">
+cp php/php.ini-development&nbsp; &nbsp; &nbsp; &nbsp; php/lib/php.ini<br>cp php/etc/php-fpm.conf.default&nbsp; &nbsp; &nbsp;&nbsp; php/etc/php-fpm.conf<br>cp php/etc/php-fpm.d/www.conf.default&nbsp; &nbsp;&nbsp; php/etc/php-fpm.d/www.conf</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="126291">  
+  <a class="name">
+  <strong class="user"><em>Leon Nguyen vnlab</em></strong></a><div class="date" title="2021-07-30 04:46"><strong>1 month ago</strong></div>
+  <div class="text" id="Hcom126291">
+<div class="phpcode"><code><span class="html">
+To maximize the server performance with highest speed, with fewest resources, i have decided to compile PHP 8 manually from minimal Linux/Unix-based OS (my Linux distro is rpm-based packages) <br><br>My system has successfully powered up by PHP 8.0.9 - with Opcache/JIT enabled &amp; other several PHP extension module. Here is several experience that may save you several hours of research.<br><br>1. Before step (3) - Configure and build PHP - to ensure that no errors occurs, you can refer to my prerequisites library. <br><br>sudo dnf install \<br>gcc gcc-c++ make cmake autoconfig \<br>zlib zlib-devel pcre pcre-devel \<br>libxml2-devel libxslt-devel \<br>bzip2-devel curl-devel libzip-devel\<br>sqlite-devel \<br>systemd-devel \<br>openssl-devel \<br>libffi-devel \<br>libpng libpng-devel libwebp libwebp-devel libjpeg libjpeg-devel libXpm libXpm-devel \<br>freetype-devel \<br>gmp-devel \<br>libldb-devel \<br>libc-client libc-client-devel \<br>openldap openldap-devel \<br>oniguruma oniguruma-devel \<br>net-snmp-devel readline-devel unixODBC-devel \<br>uw-imap uw-imap-devel uw-imap-static uw-imap-utils \<br>libicu-devel \<br>enchant2 enchant2-devel \<br>gd gd-devel \<br>libsodium libsodium-devel \<br>libtidy libtidy-devel<br><br>You may not receive error when issuing ./configure, make &amp;&amp; make install. Even when you manually build your PHP extension package later. <br><br>2. At step 5 - before modifying php.ini - you may double-check whether the current PHP is reading which php.ini file by this command<br><br>php -ini | grep php.ini <br># My result. It is different from tutorial. <br>Configuration File (php.ini) Path =&gt; /usr/local/lib<br>Loaded Configuration File =&gt; /usr/local/lib/php.ini</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="123579">  
+  <a class="name">
+  <strong class="user"><em>uanaoeng at outlook dot com</em></strong></a><div class="date" title="2019-02-01 08:56"><strong>2 years ago</strong></div>
+  <div class="text" id="Hcom123579">
+<div class="phpcode"><code><span class="html">
+When I run the following command to start the php-fpm:<br>/usr/local/bin/php-fpm<br><br>I got the following error information:<br>Unable to globalize '/usr/local/NONE/etc/php-fpm.d/*.conf' (ret=2) from /usr/local/etc/php-fpm.conf at line 143.<br><br>To fix this error, do:<br>change the string "include=NONE/etc/php-fpm.d/*.conf" to "include=etc/php-fpm.d/*.conf" in the file "/usr/local/etc/php-fpm.conf" with text editor.<br><br>After that, I try to start the php-fpm again and got error information again:<br>Nothing matches the include pattern '/usr/local/etc/php-fpm.d/*.conf' from /usr/local/etc/php-fpm.conf at line 143.<br><br>To fix this error, do:<br>cp /usr/local/etc/php-fpm.d/www.conf.default /usr/local/etc/php-fpm.d/www.conf</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="122475">  
+  <a class="name">
+  <strong class="user"><em>sp at rysmax dot com</em></strong></a><div class="date" title="2018-03-06 09:10"><strong>3 years ago</strong></div>
+  <div class="text" id="Hcom122475">
+<div class="phpcode"><code><span class="html">
+Translate errors:<br><br>Теперь перейдите в <a rel="nofollow" target="_blank">http://localhsot</a><br>Теперь перейдите в <a rel="nofollow" target="_blank">http://localhost</a><br><br>В этом разделе описивыется <br>В этом разделе описывается <br><br>запрещаем Nginx от отправлять<br>запрещаем Nginx отправлять</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="124418">  
+  <a class="name">
+  <strong class="user"><em>610010559 at qq dot com</em></strong></a><div class="date" title="2019-11-21 12:44"><strong>1 year ago</strong></div>
+  <div class="text" id="Hcom124418">
+<div class="phpcode"><code><span class="html">
+in linux system, if you want to add php-fpm service to system service;&nbsp; it is easy to do that, because php offer the relate shell script:<br><br>after make and make install;enter the source code package sapi/fpm/init.d.php-fpm ; type the code in the linux system.&nbsp; <br>cp sapi/fpm/init.d.php-fpm&nbsp; /etc/init.d/php-fpm<br><br>then you can use "php-fpm {start|stop|force-quit|restart|reload|status|configtest} "&nbsp; command&nbsp; to control your php-fpm program more convenient .</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="118414">  
+  <a class="name">
+  <strong class="user"><em>nguyentienlong88 at gmail dot com</em></strong></a><div class="date" title="2015-12-03 03:22"><strong>5 years ago</strong></div>
+  <div class="text" id="Hcom118414">
+<div class="phpcode"><code><span class="html">
+at step 3, after command "sudo make install"<br>if there is problem with pear.php.net (https). Need to change this line (from https to http) in Makefile<br>PEAR_INSTALLER_URL = <a rel="nofollow" target="_blank">http://pear.php.net/install-pear-nozlib.phar</a></span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="118520">  
+  <a class="name">
+  <strong class="user"><em>Akash Kumar Sharma</em></strong></a><div class="date" title="2015-12-20 08:48"><strong>5 years ago</strong></div>
+  <div class="text" id="Hcom118520">
+<div class="phpcode"><code><span class="html">
+If you get "File not found" error then add "root ROOT_DIR_LOCATION" directive to PHP location block i.e. "location ~* \.php$ { }" , where ROOT_DIR_LOCATION is root directory like "/usr/share/nginx/html" .</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="118408">  
+  <a class="name">
+  <strong class="user"><em>nguyentienlong88 at gmail dot com</em></strong></a><div class="date" title="2015-12-02 07:38"><strong>5 years ago</strong></div>
+  <div class="text" id="Hcom118408">
+<div class="phpcode"><code><span class="html">
+at step 3, if there is no configure script yet, you need to rebuiding configure script using this command:<br>&nbsp;&nbsp; <br>./buildconf --force</span>
+</code></div>
+  </div>
+ </div></div>
+
+ 
+</section>    </section><!-- layout-content -->
+        
+
+
+  </div><!-- layout -->
+
+  
+
+    
+ <!-- External and third party libraries. -->
+ 
+
+
+
+
+
+
+
+<a id="toTop" href="javascript:;"><span id="toTopHover"></span><img width="40" height="40" alt="To Top" src="../../images/to-top%402x.png"></a>
+
+
+
+<!-- Mirrored from www.php.net/manual/en/install.unix.nginx.php by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 11 Sep 2021 05:45:57 GMT -->
+
+</body></html>

@@ -1,0 +1,1393 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+
+<!-- Mirrored from developer.wordpress.org/apis/handbook/shortcode/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 31 Aug 2021 16:22:11 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<!--
+<meta property="fb:page_id" content="6427302910" />
+-->
+<meta name="google-site-verification" content="7VWES_-rcHBcmaQis9mSYamPfNwE03f4vyTj4pfuAw0" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shortcode</title>
+<meta name="referrer" content="always">
+
+		<link href='../../../../fonts.googleapis.com/css.css?family=Open+Sans:300italic,400italic,600italic,400,300,600&amp;subset=latin,cyrillic-ext,greek-ext,greek,vietnamese,latin-ext,cyrillic' rel='stylesheet' type='text/css'>
+
+		<link rel="stylesheet" href="../../../../s.w.org/style/wp4.css?95" />
+
+<link rel="shortcut icon" href="../../../../s.w.org/favicon.ico?2" type="image/x-icon" />
+<link rel="pingback" href="../../../xmlrpc.php" /><meta name='robots' content='max-image-preview:large' />
+<link rel='dns-prefetch' href='../../../../fonts.googleapis.com/index.html' />
+<link rel='dns-prefetch' href='http://s.w.org/' />
+<link rel='dns-prefetch' href='http://www.googletagmanager.com/' />
+<link rel='dns-prefetch' href='http://fonts.gstatic.com/' />
+<link rel="alternate" type="application/rss+xml" title="WordPress Developer Resources &raquo; Feed" href="../../../feed/index.html" />
+<link rel="alternate" type="application/rss+xml" title="WordPress Developer Resources &raquo; Comments Feed" href="../../../comments/feed/index.html" />
+<meta property="og:title" content="Shortcode | Common APIs Handbook | WordPress Developer Resources" />
+<meta property="og:site_name" content="WordPress Developer Resources" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="../../../index.html" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@WordPress" />
+<meta name="description" content="The Shortcode API The Shortcode API is a simple set of functions for creating WordPress shortcodes for use in posts and pages. For&hellip;" />
+<meta property="og:description" content="The Shortcode API The Shortcode API is a simple set of functions for creating WordPress shortcodes for use in posts and pages. For&hellip;" />
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'../../../../www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P24PF4B');</script>
+			<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/developer.wordpress.org\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.9-alpha-51701"}};
+			!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([10084,65039,8205,55357,56613],[10084,65039,8203,55357,56613])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel='stylesheet' id='dashicons-css'  href='../../../wp-includes/css/dashicons.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='admin-bar-css'  href='../../../wp-includes/css/admin-bar.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-block-library-css'  href='../../../wp-includes/css/dist/block-library/style.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='wporg-handbook-css-css'  href='../../../wp-content/plugins/handbook/stylesheets/callout-boxes.css?ver=20200121' type='text/css' media='all' />
+<link rel='stylesheet' id='open-sans-css'  href='../../../../fonts.googleapis.com/css-2.css?family=Open+Sans%3A300italic%2C400italic%2C600italic%2C300%2C400%2C600&amp;subset=latin%2Clatin-ext&amp;display=fallback&amp;ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='wporg-developer-style-css'  href='../../../wp-content/themes/pub/wporg-developer/style.css?ver=3' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-dev-sass-compiled-css'  href='../../../wp-content/themes/pub/wporg-developer/stylesheets/main.css?ver=20200713' type='text/css' media='all' />
+<link rel='stylesheet' id='awesomplete-css-css'  href='../../../wp-content/themes/pub/wporg-developer/stylesheets/awesomplete.css?ver=20160114' type='text/css' media='all' />
+<link rel='stylesheet' id='autocomplete-css-css'  href='../../../wp-content/themes/pub/wporg-developer/stylesheets/autocomplete.css?ver=20171220' type='text/css' media='all' />
+<link rel='stylesheet' id='syntaxhighlighter-core-css'  href='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shCore.css?ver=3.0.9b' type='text/css' media='all' />
+<link rel='stylesheet' id='syntaxhighlighter-theme-default-css'  href='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shThemeDefault.css?ver=3.0.9b' type='text/css' media='all' />
+<script type='text/javascript' src='../../../wp-includes/js/jquery/jquery.min.js?ver=3.6.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='../../../wp-content/plugins/handbook/scripts/handbook.js?ver=20150930' id='wporg-handbook-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/chapters.js?ver=20190603' id='wporg-developer-chapters-js'></script>
+<script type='text/javascript' src='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shCore.js?ver=3.0.9b' id='syntaxhighlighter-core-js'></script>
+<script type='text/javascript' src='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushPhp.js?ver=3.0.9b' id='syntaxhighlighter-brush-php-js'></script>
+<link rel="https://api.w.org/" href="https://developer.wordpress.org/wp-json/" /><link rel="alternate" type="application/json" href="https://developer.wordpress.org/wp-json/wp/v2/apis-handbook/125660" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="../../../xmlrpc-2.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="../../../wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 5.9-alpha-51701" />
+<link rel='shortlink' href='https://developer.wordpress.org/?p=125660' />
+<link rel="alternate" type="application/json+oembed" href="https://developer.wordpress.org/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fdeveloper.wordpress.org%2Fapis%2Fhandbook%2Fshortcode%2F" />
+<link rel="alternate" type="text/xml+oembed" href="https://developer.wordpress.org/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fdeveloper.wordpress.org%2Fapis%2Fhandbook%2Fshortcode%2F&amp;format=xml" />
+<link rel="canonical" href="index.html">
+<!-- Stream WordPress user activity plugin v3.6.2 -->
+	<style>
+		@media screen and (max-width: 782px) {
+			#wpadminbar li#wp-admin-bar-log-in,
+			#wpadminbar li#wp-admin-bar-register {
+				display: block;
+			}
+
+			#wpadminbar li#wp-admin-bar-log-in a,
+			#wpadminbar li#wp-admin-bar-register a {
+				padding: 0 8px;
+			}
+		}
+	</style>
+		<style>
+			a.github-edit {
+				margin-left: .5em;
+				font-size: .5em;
+				vertical-align: top;
+				display: inline-block;
+				border: 1px solid #eeeeee;
+				border-radius: 2px;
+				background: #eeeeee;
+				padding: .5em .6em .4em;
+				color: black;
+				margin-top: 0.1em;
+			}
+			a.github-edit > * {
+				opacity: 0.6;
+			}
+			a.github-edit:hover > * {
+				opacity: 1;
+				color: black;
+			}
+			a.github-edit img {
+				height: .8em;
+			}
+		</style>
+		
+	<script type="text/javascript">
+		jQuery( '<style>.hide-if-js { display: none; }</style>' ).appendTo( 'head' );
+		jQuery( function($) {
+			$( 'body' ).addClass('js');
+		} );
+	</script>
+<style type="text/css" media="print">#wpadminbar { display:none; }</style>
+	<style type="text/css" media="screen">
+	</style>
+	<script>document.cookie='devicePixelRatio='+((window.devicePixelRatio === undefined) ? 1 : window.devicePixelRatio)+'; path=/';</script>
+
+</head>
+
+
+<body id="wordpress-org" class="apis-handbook-template-default single single-apis-handbook postid-125660 admin-bar no-customize-support single-handbook">
+		<div id="wpadminbar" class="nojq nojs">
+						<div class="quicklinks" id="wp-toolbar" role="navigation" aria-label="Toolbar">
+				<ul id='wp-admin-bar-root-default' class="ab-top-menu"><li id='wp-admin-bar-wp-logo' class="menupop"><a class='ab-item' aria-haspopup="true" href='https://wordpress.org/about/'><span class="ab-icon" aria-hidden="true"></span><span class="screen-reader-text">About WordPress</span></a><div class="ab-sub-wrapper"><ul id='wp-admin-bar-wp-logo-default' class="ab-submenu"><li id='wp-admin-bar-about'><a class='ab-item' href='https://wordpress.org/about/'>About WordPress</a></li></ul><ul id='wp-admin-bar-wp-logo-external' class="ab-sub-secondary ab-submenu"><li id='wp-admin-bar-wporg'><a class='ab-item' href='https://wordpress.org/'>WordPress.org</a></li><li id='wp-admin-bar-documentation'><a class='ab-item' href='https://wordpress.org/support/'>Documentation</a></li><li id='wp-admin-bar-support-forums'><a class='ab-item' href='https://wordpress.org/support/forums/'>Support</a></li><li id='wp-admin-bar-feedback'><a class='ab-item' href='https://wordpress.org/support/forum/requests-and-feedback'>Feedback</a></li></ul></div></li></ul><ul id='wp-admin-bar-top-secondary' class="ab-top-secondary ab-top-menu"><li id='wp-admin-bar-search' class="admin-bar-search"><div class="ab-item ab-empty-item" tabindex="-1"><form action="https://developer.wordpress.org/" method="get" id="adminbarsearch"><input class="adminbar-input" name="s" id="adminbar-search" type="text" value="" maxlength="150" /><label for="adminbar-search" class="screen-reader-text">Search</label><input type="submit" class="adminbar-button" value="Search" /></form></div></li><li id='wp-admin-bar-log-in'><a class='ab-item' href='https://login.wordpress.org/?locale=en_US'>Log In</a></li><li id='wp-admin-bar-register'><a class='ab-item' href='https://login.wordpress.org/register?locale=en_US'>Register</a></li></ul>			</div>
+					</div>
+
+		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P24PF4B" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<div id="wporg-header">
+	<div class="wrapper">
+	<h1><a href="http://wordpress.org/">WordPress.org</a></h1>				<div id="head-search">
+		<form action="http://wordpress.org/search/do-search.php" method="get">
+			<label for="global-search" class="screen-reader-text">Search WordPress.org for:</label>
+			<input id="global-search" class="text" name="search" type="text" value="" maxlength="150" placeholder="Search WordPress.org" />
+			<button type="submit" class="button"><span class="screen-reader-text">Submit</span></button>
+		</form>
+		</div>
+				<div style="clear:both"></div>
+		<button id="mobile-menu-button" aria-expanded="false"><span class="screen-reader-text">Toggle Menu</span></button>
+		
+<nav aria-label="Main Menu">
+<ul id="wporg-header-menu">
+<li class="menu-item"><a href='http://wordpress.org/showcase/' data-title='See some of the sites built on WordPress.'>Showcase</a></li>
+<li class="menu-item"><a href='http://learn.wordpress.org/' data-title='Resources to help you learn more about WordPress and teach it to others.'>Learn</a></li>
+<li class="menu-item"><a href='http://wordpress.org/themes/' data-title='Find just the right look for your website.'>Themes</a></li>
+<li class="menu-item"><a href='http://wordpress.org/plugins/' data-title='Plugins can extend WordPress to do almost anything you can imagine.'>Plugins</a></li>
+<li class="menu-item"><a href='http://wordpress.org/mobile/' data-title='Take your website on the go!'>Mobile</a></li>
+<li class="menu-item"><a href='http://wordpress.org/support/' data-title='Forums, documentation, help.'>Support</a><ul class="nav-submenu"><li><a href='http://wordpress.org/support/' title='Documentation, tutorials, best practices.'>Documentation</a></li><li><a href='http://wordpress.org/support/forums/' title='Support and discussion forums.'>Forums</a></li></ul><div class="uparrow"></div></li>
+<li class="menu-item"><a href='http://make.wordpress.org/' data-title='Contribute your knowledge.'>Get Involved</a><ul class="nav-submenu"><li><a href='http://wordpress.org/five-for-the-future/' title='How five percent is powering the next generation of the web'>Five for the Future</a></li></ul><div class="uparrow"></div></li>
+<li class="menu-item"><a href='http://wordpress.org/about/' data-title='About the WordPress Organization, and where we&#039;re going.'>About</a></li>
+<li class="menu-item"><a href='http://wordpress.org/news/' data-title='Come here for the latest scoop.'>Blog</a></li>
+<li class="menu-item"><a href='http://wordpress.org/hosting/' data-title='Find a home for your blog.'>Hosting</a></li>
+<li id="download" class="button download-button menu-item"><a href='http://wordpress.org/download/' data-title='Get it. Got it? Good.'>Get WordPress</a></li>
+</ul>
+</nav>
+		<div style="clear:both"></div>
+	</div>
+</div>
+
+
+
+<header id="masthead" class="site-header" role="banner">
+			<a href="#" id="secondary-toggle" onclick="return false;"><strong>Menu</strong></a>
+		<div class="site-branding">
+		<h1 class="site-title">
+			<a href="../../../index.html" rel="home">Common APIs Handbook</a>
+		</h1>
+
+		
+		<nav id="site-navigation" class="main-navigation" role="navigation">
+			<button class="menu-toggle dashicons dashicons-arrow-down-alt2" aria-controls="primary-menu" aria-expanded="false" aria-label="Primary Menu"></button>
+					</nav>
+	</div>
+</header><!-- #masthead -->
+
+<div id="page" class="hfeed site devhub-wrap">
+	<a href="#main" class="screen-reader-text">Skip to content</a>
+
+			<div id="content" class="site-content">
+
+
+	<div id="secondary" class="widget-area" role="complementary">
+		<a href="#" id="secondary-toggle"></a>
+		<div id="secondary-content">
+						<aside id="search-8" class="widget widget_search"><div class="search-section section clear hide-if-js">
+
+
+	
+	<form role="search" method="get" class="searchform searchform-handbook" action="https://developer.wordpress.org/apis/">
+		<label for="search-field" class="screen-reader-text">Search for:</label>
+		<input type="text" id="search-field" class="search-field" placeholder="Search &hellip;" value="" name="s">
+		<button class="button button-primary button-search"><i class="dashicons dashicons-search"></i><span class="screen-reader-text">Search plugins</span></button>
+	
+	</form>
+
+</div><!-- /search-guide -->
+</aside><aside id="handbook_pages-4" class="widget widget_wporg_handbook_pages"><h2 class="widget-title">Sections</h2>
+<div class="menu-table-of-contents-container">
+
+			<ul>
+				<li class="page_item page-item-125334 page_item_has_children current_page_ancestor current_page_parent current-menu-ancestor current-menu-parent menu-item menu-item-has-children"><a href="../../index.html">Common APIs Handbook</a>
+<ul class='children'>
+	<li class="page_item page-item-132071 menu-item"><a href="../responsive-images/index.html">Responsive Images</a></li>
+	<li class="page_item page-item-125636 page_item_has_children menu-item menu-item-has-children"><a href="../dashboard-widgets/index.html">Dashboard widgets API</a>
+	<ul class='children'>
+		<li class="page_item page-item-125763 menu-item"><a href="../dashboard-widgets/example-dashboard-widget/index.html">Example Dashboard widget</a></li>
+	</ul>
+</li>
+	<li class="page_item page-item-125638 menu-item"><a href="../database/index.html">Database API</a></li>
+	<li class="page_item page-item-126023 page_item_has_children menu-item menu-item-has-children"><a href="../internationalization/index.html">Internationalization</a>
+	<ul class='children'>
+		<li class="page_item page-item-126122 menu-item"><a href="../internationalization/internationalization-functions/index.html">Internationalization Functions</a></li>
+		<li class="page_item page-item-126126 menu-item"><a href="../internationalization/internationalization-guidelines/index.html">Internationalization Guidelines</a></li>
+		<li class="page_item page-item-126152 menu-item"><a href="../internationalization/localization/index.html">Localization</a></li>
+	</ul>
+</li>
+	<li class="page_item page-item-125642 menu-item"><a href="../filesystem/index.html">Filesystem</a></li>
+	<li class="page_item page-item-125644 menu-item"><a href="../global-variables/index.html">Global Variables</a></li>
+	<li class="page_item page-item-125646 menu-item"><a href="../metadata/index.html">Metadata</a></li>
+	<li class="page_item page-item-125648 menu-item"><a href="../options/index.html">Options</a></li>
+	<li class="page_item page-item-125650 menu-item"><a href="../plugins/index.html">Plugins</a></li>
+	<li class="page_item page-item-129278 page_item_has_children menu-item menu-item-has-children"><a href="../making-http-requests/index.html">Making HTTP requests</a>
+	<ul class='children'>
+		<li class="page_item page-item-129272 menu-item"><a href="../making-http-requests/getting-data-from-an-external-service/index.html">GETting data from an external service</a></li>
+		<li class="page_item page-item-129270 menu-item"><a href="../making-http-requests/posting-data-to-an-external-service/index.html">POSTing data to an external service</a></li>
+		<li class="page_item page-item-129268 menu-item"><a href="../making-http-requests/performance/index.html">Performance</a></li>
+		<li class="page_item page-item-129274 menu-item"><a href="../making-http-requests/advanced/index.html">Advanced</a></li>
+		<li class="page_item page-item-129276 menu-item"><a href="../making-http-requests/authentication/index.html">Authentication</a></li>
+	</ul>
+</li>
+	<li class="page_item page-item-125652 menu-item"><a href="../quicktags/index.html">Quicktags</a></li>
+	<li class="page_item page-item-125654 menu-item"><a href="../rest/index.html">REST</a></li>
+	<li class="page_item page-item-125656 menu-item"><a href="../rewrite/index.html">Rewrite</a></li>
+	<li class="page_item page-item-125658 menu-item"><a href="../settings/index.html">Settings</a></li>
+	<li class="page_item page-item-125660 current_page_item current-menu-item menu-item"><a href="index.html" aria-current="page">Shortcode</a></li>
+	<li class="page_item page-item-136532 menu-item"><a href="../site-health/index.html">Site Health</a></li>
+	<li class="page_item page-item-125662 menu-item"><a href="../theme/index.html">Theme</a></li>
+	<li class="page_item page-item-125664 menu-item"><a href="../transients/index.html">Transients</a></li>
+	<li class="page_item page-item-125666 menu-item"><a href="../xml-rpc/index.html">XML-RPC</a></li>
+</ul>
+</li>
+			</ul>
+
+			</div>		</div>
+	</div><!-- #secondary -->
+
+
+		<main id="primary" class="site-main post-125660 apis-handbook type-apis-handbook status-publish hentry type-handbook" role="main">
+
+		
+		<div class="breadcrumb-trail breadcrumbs" itemprop="breadcrumb">
+			<span class="trail-browse">Browse:</span> 
+			<span class="trail-begin"><a href="../../../index.html" title="WordPress Developer Resources" rel="home">Home</a></span> <span class="sep">&#47;</span> 
+			<span class="trail-inner"><a href="../../index.html">Common APIs Handbook</a></span> <span class="sep">&#47;</span> 
+			<span class="trail-inner"><a href="../../index.html" title="Common APIs Handbook">Common APIs Handbook</a></span> <span class="sep">&#47;</span> <span class="trail-end">Shortcode</span>
+		</div>
+		
+			
+<h1>Shortcode</h1>
+
+
+<style> .toc-jump { text-align: right; font-size: 12px; } .page .toc-heading { margin-top: -50px; padding-top: 50px !important; }</style><div class="table-of-contents"><h2>Topics</h2><ul class="items"><li><a href="#the-shortcode-api">The Shortcode API</a></li>
+<li><a href="#history">History</a></li>
+<li><a href="#overview">Overview</a>
+<ul>
+<li><a href="#handling-attributes">Handling Attributes</a></li>
+<li><a href="#output">Output</a></li>
+<li><a href="#enclosing-vs-self-closing-shortcodes">Enclosing vs self-closing shortcodes</a></li>
+<li><a href="#other-features-in-brief">Other features in brief</a></li>
+<li><a href="#function-reference">Function reference</a></li>
+<li><a href="#limitations">Limitations</a>
+<ul>
+<li><a href="#nested-shortcodes">Nested Shortcodes</a></li>
+<li><a href="#unregistered-names">Unregistered Names</a></li>
+<li><a href="#unclosed-shortcodes">Unclosed Shortcodes</a></li>
+<li><a href="#hyphens">Hyphens</a></li>
+<li><a href="#square-brackets">Square Brackets</a></li>
+<li><a href="#html">HTML</a></li>
+<li><a href="#registration-count">Registration Count</a>
+</ul></li>
+<li><a href="#formal-syntax">Formal Syntax</a>
+<ul>
+<li><a href="#names">Names</a></li>
+<li><a href="#attributes">Attributes</a></li>
+<li><a href="#self-closing">Self-Closing</a></li>
+<li><a href="#escaping">Escaping</a>
+</ul></li>
+<li><a href="#external-resources">External Resources</a></li>
+<li><a href="#default-shortcodes">Default Shortcodes</a></li>
+<li><a href="#shortcode-api-functions-list">Shortcode API functions list</a></ul>
+</div>
+
+<h2 class="toc-heading" id="the-shortcode-api" tabindex="-1">The Shortcode API <a href="#the-shortcode-api" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">The Shortcode API</span></a></h2>
+
+
+
+<p>The <strong>Shortcode API</strong> is a simple set of functions for creating WordPress <a href="../../../plugins/shortcodes/index.html">shortcodes</a> for use in posts and pages. For instance, the following shortcode (in the body of a post or page) would add a photo gallery of images attached to that post or page: <code>[ gallery ]</code></p>
+
+
+
+<p>The API enables plugin developers to create special kinds of content (e.g. forms, content generators) that users can attach to certain pages by adding the corresponding shortcode into the page text.</p>
+
+
+
+<p>The Shortcode API makes it easy to create shortcodes that support attributes like this:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><pre class="brush: php; title: ; notranslate" title="">
+&#91; gallery id=&quot;123&quot; size=&quot;medium&quot; ]
+</pre></div>
+
+
+<p>The API handles all the tricky parsing, eliminating the need for writing a custom regular expression for each shortcode. Helper functions are included for setting and fetching default attributes. The API supports both self-closing and enclosing shortcodes.</p>
+
+
+
+<p>As a quick start for those in a hurry, here&#8217;s a minimal example of the PHP code required to create a shortcode:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><pre class="brush: php; title: ; notranslate" title="">
+// &#91;foobar]
+function wporg_foobar_func( $atts ) {
+	return &quot;foo and bar&quot;;
+}
+add_shortcode( 'foobar', 'wporg_foobar_func' );
+</pre></div>
+
+
+<p>This will create <code>[foobar]</code> shortcode that returns as: foo and bar</p>
+
+
+
+<p>With attributes:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><pre class="brush: php; title: ; notranslate" title="">
+// &#91;bartag foo=&quot;foo-value&quot;]
+function bartag_func( $atts ) {
+	$a = shortcode_atts( array(
+		'foo' =&gt; 'something',
+		'bar' =&gt; 'something else',
+	), $atts );
+
+	return &quot;foo = {$a&#91;'foo']}&quot;;
+}
+add_shortcode( 'bartag', 'bartag_func' );
+</pre></div>
+
+
+<p>This creates a <code>[bartag]</code> shortcode that supports two attributes: &#8220;foo&#8221; and &#8220;bar&#8221;. Both attributes are optional and will take on default options <code>[foo="something" bar="something else"]</code> if they are not provided. The shortcode will return as <code>foo = {the value of the foo attribute}</code>.</p>
+
+
+
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="history" tabindex="-1">History <a href="#history" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">History</span></a></h2>
+
+
+
+<p>The Shortcode API was introduced in WordPress 2.5.</p>
+
+
+
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="overview" tabindex="-1">Overview <a href="#overview" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Overview</span></a></h2>
+
+
+
+<p>Shortcodes are written by providing a handler function. Shortcode handlers are broadly similar to WordPress filters: they accept parameters (attributes) and return a result (the shortcode output).</p>
+
+
+
+<p>Shortcode names should be all lowercase and use all letters, but numbers and underscores should work fine too. Be wary of&nbsp;using hyphens&nbsp;(dashes), you&#8217;ll be better off not using them.</p>
+
+
+
+<p>The&nbsp;<code><a href="../../../reference/functions/add_shortcode/index.html">add_shortcode</a></code>&nbsp;function is used to register a shortcode handler. It takes two parameters: the shortcode name (the string used in a post body), and the callback function name.</p>
+
+
+
+<p>Three parameters are passed to the shortcode callback function. You can choose to use any number of them including none of them.</p>
+
+
+
+<ul><li><code>$atts</code>: an associative array of attributes, or an empty string if no attributes are given</li><li><code>$content</code>: the enclosed content (if the shortcode is used in its enclosing form)</li><li><code>$tag</code>: the shortcode tag, useful for shared callback functions</li></ul>
+
+
+
+<p>The API call to register the shortcode handler would look something like this:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><pre class="brush: php; title: ; notranslate" title="">
+add_shortcode( 'wporgshortcode', 'wporg_shortcode_handler' );
+</pre></div>
+
+
+<p>When&nbsp;<a href="../../../reference/functions/the_content/index.html">the_content</a>&nbsp;is displayed, the shortcode API will parse any registered shortcodes such as <code>[myshortcode]</code>, separate and parse the attributes and content, if any, and pass them the corresponding shortcode handler function. Any string&nbsp;<em>returned</em>&nbsp;(not echoed) by the shortcode handler will be inserted into the post body in place of the shortcode itself.</p>
+
+
+
+<p>Shortcode attributes are entered like this:</p>
+
+
+
+<p><code>[wporgshortcode foo="bar" bar="bing"]</code></p>
+
+
+
+<p>These attributes will be converted into an associative array like the following, passed to the handler function as its&nbsp;<code>$atts</code>&nbsp;parameter:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><pre class="brush: php; title: ; notranslate" title="">
+array( 'foo' =&gt; 'bar', 'bar' =&gt; 'bing' )
+</pre></div>
+
+
+<p>The array keys are the attribute names; array values are the corresponding attribute values. In addition, the zeroeth entry (<code>$atts[0]</code>) will hold the string that matched the shortcode regex, but ONLY IF that is different from the callback name.</p>
+
+
+
+<h3 class="toc-heading" id="handling-attributes" tabindex="-1">Handling Attributes <a href="#handling-attributes" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Handling Attributes</span></a></h3>
+
+
+
+<p>The raw <code>$atts</code> array may include any arbitrary attributes that are specified by the user. (In addition, the zeroeth entry of the array may contain the string that was recognized by the regex; see the note below.)</p>
+
+
+
+<p>In order to help set default values for missing attributes, and eliminate any attributes that are not recognized by your shortcode, the API provides a <a href="../../../reference/functions/shortcode_atts/index.html">shortcode_atts()</a> function.</p>
+
+
+
+<p><code><a href="../../../reference/functions/shortcode_atts/index.html">shortcode_atts()</a></code>&nbsp;resembles the&nbsp;<code><a href="../../../reference/functions/wp_parse_args/index.html">wp_parse_args</a></code>&nbsp;function, but has some important differences. Its parameters are:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><pre class="brush: php; title: ; notranslate" title="">
+shortcode_atts( $defaults_array, $atts );
+</pre></div>
+
+
+<p>Both parameters are required.&nbsp;<code>$defaults_array</code>&nbsp;is an associative array that specifies the recognized attribute names and their default values.&nbsp;<code>$atts</code>&nbsp;is the raw attributes array as passed into your shortcode handler.&nbsp;<code>shortcode_atts()</code>&nbsp;will return a normalized array containing all of the keys from the&nbsp;<code>$defaults_array</code>, filled in with values from the&nbsp;<code>$atts</code>&nbsp;array if present. For example:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><pre class="brush: php; title: ; notranslate" title="">
+$a = shortcode_atts( array(
+	'title' =&gt; 'My Title',
+	'foo' =&gt; 123,
+), $atts );
+</pre></div>
+
+
+<p>If&nbsp;<code>$atts</code>&nbsp;were to contain&nbsp;<code>array( 'foo' =&gt; 456, 'bar' =&gt; 'something' )</code>, the resulting&nbsp;<code>$a</code>&nbsp;would be&nbsp;<code>array( 'title' =&gt; 'My Title', 'foo' =&gt; 456 )</code>. The value of&nbsp;<code>$atts['foo']</code>&nbsp;overrides the default of 123.&nbsp;<code>$atts['title']</code>&nbsp;is not set, so the default &#8216;My Title&#8217; is used. There is no &#8216;bar&#8217; item in the defaults array, so it is not included in the result.</p>
+
+
+
+<p>Attribute names are always converted to lowercase before they are passed into the handler function. Values are untouched.<code>[myshortcode FOO="BAR"]</code>&nbsp;produces&nbsp;<code>$atts = array( 'foo' =&gt; 'BAR' )</code>.</p>
+
+
+
+<p>A suggested code idiom for declaring defaults and parsing attributes in a shortcode handler is as follows:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><pre class="brush: php; title: ; notranslate" title="">
+function wporg_shortcode_handler( $atts, $content = null ) {
+	$a = shortcode_atts( array(
+		'attr_1' =&gt; 'attribute 1 default',
+		'attr_2' =&gt; 'attribute 2 default',
+		// ...etc
+	), $atts );
+}
+</pre></div>
+
+
+<p>This will parse the attributes, set default values, eliminate any unsupported attributes, and store the results in a local array variable named&nbsp;<code>$a</code>&nbsp;with the attributes as keys &#8211;&nbsp;<code>$a['attr_1']</code>,&nbsp;<code>$a['attr_2']</code>, and so on. In other words, the array of defaults approximates a list of local variable declarations.</p>
+
+
+
+<p><strong>IMPORTANT &#8211; Don&#8217;t use camelCase or UPPER-CASE for your&nbsp;<code>$atts</code>&nbsp;attribute names</strong>:</p>
+
+
+
+<p><code>$atts</code>&nbsp;values are&nbsp;<em><strong>lower-cased</strong></em>&nbsp;during&nbsp;<code>shortcode_atts( array( 'attr_1' =&gt; 'attr_1 default', // ...etc ), $atts )</code>&nbsp;processing, so you might want to&nbsp;<em>just use lower-case</em>.</p>
+
+
+
+<p><strong>NOTE on confusing regex/callback name reference:</strong></p>
+
+
+
+<p>The zeroeth entry of the attributes array (<strong><code>$atts[0]</code></strong>) will contain the string that matched the shortcode regex, but ONLY if that differs from the callback name, which otherwise appears as the third argument to the callback function.</p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><pre class="brush: php; title: ; notranslate" title="">
+add_shortcode('foo','foo'); // two shortcodes referencing the same callback
+ add_shortcode('bar','foo');
+    produces this behavior:
+ &#91;foo a='b'] ==&gt; callback to: foo(array('a'=&gt;'b'),NULL,&quot;foo&quot;);
+ &#91;bar a='c'] ==&gt; callback to: foo(array(0 =&gt; 'bar', 'a'=&gt;'c'),NULL,&quot;&quot;);
+</pre></div>
+
+
+<p>This is confusing and perhaps reflects an underlying bug, but an overloaded callback routine can correctly determine what shortcode was used to call it, by checking BOTH the third argument to the callback and the zeroeth attribute. (It is NOT an error to have two shortcodes reference the same callback routine, which allows for common code.)</p>
+
+
+
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="output" tabindex="-1">Output <a href="#output" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Output</span></a></h3>
+
+
+
+<p>The return value of a shortcode handler function is inserted into the post content output in place of the shortcode macro.&nbsp;<strong>Remember to use return and not echo &#8211; anything that is echoed will be output to the browser, but it won&#8217;t appear in the correct place on the page</strong>.</p>
+
+
+
+<p>Shortcodes are parsed after&nbsp;<a href="../../../reference/functions/wpautop/index.html">wpautop</a>&nbsp;and&nbsp;<a href="../../../reference/functions/wptexturize/index.html">wptexturize</a>&nbsp;post formatting has been applied. This means that your shortcode output HTML won&#8217;t automatically have curly quotes applied, p and br tags added, and so on. If you do want your shortcode output to be formatted, you should call <code>wpautop()</code> or <code>wptexturize()</code> directly when you return the output from your shortcode handler.</p>
+
+
+
+<p>wpautop recognizes shortcode syntax and will attempt not to wrap p or br tags around shortcodes that stand alone on a line by themselves. Shortcodes intended for use in this manner should ensure that the output is wrapped in an appropriate block tag such as <code>&lt;p&gt;</code> or <code>&lt;div&gt;</code>.</p>
+
+
+
+<p>If the shortcode produces a lot of HTML then <code>ob_start</code> can be used to capture output and convert it to a string as follows:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><pre class="brush: php; title: ; notranslate" title="">
+function wporg_shortcode() {
+	ob_start();
+	?&gt; &lt;HTML&gt; &lt;here&gt; ... &lt;?php
+	return ob_get_clean();
+}
+</pre></div>
+
+
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="enclosing-vs-self-closing-shortcodes" tabindex="-1">Enclosing vs self-closing shortcodes <a href="#enclosing-vs-self-closing-shortcodes" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Enclosing vs self-closing shortcodes</span></a></h3>
+
+
+
+<p>The examples above show self-closing shortcode macros such as <code>[myshortcode]</code>. The API also supports enclosing shortcodes such as <code>[myshortcode]content[/myshortcode]</code>.</p>
+
+
+
+<p>If a shortcode macro is used to enclose content, its handler function will receive a second parameter containing that content. Users might write shortcodes in either form, so it is necessary to allow for either case by providing a default value for the second parameter to your handler function:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><pre class="brush: php; title: ; notranslate" title="">
+function wporg_shortcode_handler( $atts, $content = null )
+</pre></div>
+
+
+<p><code>empty( $content )</code> can be used to distinguish between the self-closing and enclosing cases.</p>
+
+
+
+<p>When content is enclosed, the complete shortcode macro including its content will be replaced with the function output. It is the responsibility of the handler function to provide any necessary escaping or encoding of the raw content string, and include it in the output.</p>
+
+
+
+<p>Here&#8217;s a trivial example of an enclosing shortcode:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><pre class="brush: php; title: ; notranslate" title="">
+function wporg_caption_shortcode( $atts, $content = null ) {
+	return '&lt;span class=&quot;caption&quot;&gt;' . $content . '&lt;/span&gt;';
+}
+add_shortcode( 'caption', 'wporg_caption_shortcode' );
+</pre></div>
+
+
+<p>When used like this:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><pre class="brush: php; title: ; notranslate" title="">
+&#91;caption]My Caption&#91;/caption]
+</pre></div>
+
+
+<p>The output would be:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><pre class="brush: php; title: ; notranslate" title="">
+&lt;span class=&quot;caption&quot;&gt;My Caption&lt;/span&gt;
+</pre></div>
+
+
+<p>Since <code>$content</code> is included in the return value without any escaping or encoding, the user can include raw HTML:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><pre class="brush: php; title: ; notranslate" title="">
+&#91;caption]&lt;a href=&quot;http://example.com/&quot;&gt;My Caption&lt;/a&gt;&#91;/caption]
+</pre></div>
+
+
+<p>Which would produce:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><pre class="brush: php; title: ; notranslate" title="">
+&lt;span class=&quot;caption&quot;&gt;&lt;a href=&quot;http://example.com/&quot;&gt;My Caption&lt;/a&gt;&lt;/span&gt;
+</pre></div>
+
+
+<p>This may or may not be intended behaviour &#8211; if the shortcode should not permit raw HTML in its output, it should use an escaping or filtering function to deal with it before returning the result.</p>
+
+
+
+<p>The shortcode parser uses a single pass on the post content. This means that if the <code>$content</code> parameter of a shortcode handler contains another shortcode, it won&#8217;t be parsed:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><pre class="brush: php; title: ; notranslate" title="">
+&#91;caption]Caption: &#91;myshortcode]&#91;/caption]
+</pre></div>
+
+
+<p>This would produce:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><pre class="brush: php; title: ; notranslate" title="">
+&lt;span class=&quot;caption&quot;&gt;Caption: &#91;myshortcode]&lt;/span&gt;
+</pre></div>
+
+
+<p>If the enclosing shortcode is intended to permit other shortcodes in its output, the handler function can call&nbsp;<a href="../../../reference/functions/do_shortcode/index.html">do_shortcode()</a>&nbsp;recursively:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><pre class="brush: php; title: ; notranslate" title="">
+function wporg_caption_shortcode( $atts, $content = null ) {
+    return '&lt;span class=&quot;caption&quot;&gt;' . do_shortcode($content) . '&lt;/span&gt;';
+}
+</pre></div>
+
+
+<p>In the previous example, this would ensure the <code>[myshortcode]</code> macro in the enclosed content is parsed, and its output enclosed by the caption span:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><pre class="brush: php; title: ; notranslate" title="">
+&lt;span class=&quot;caption&quot;&gt;Caption: The result of myshortcode's handler function&lt;/span&gt;
+</pre></div>
+
+
+<p>The parser does not handle mixing of enclosing and non-enclosing forms of the same shortcode as you would want it to. For example, if you have:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><pre class="brush: php; title: ; notranslate" title="">
+&#91;myshortcode example='non-enclosing' /] non-enclosed content &#91;myshortcode] enclosed content &#91;/myshortcode]
+</pre></div>
+
+
+<p>Instead of being treated as two shortcodes separated by the text &#8221; non-enclosed content &#8220;, the parser treats this as a single shortcode enclosing &#8221; non-enclosed content <code>[myshortcode]</code> enclosed content&#8221;.</p>
+
+
+
+<p>Enclosing shortcodes support attributes in the same way as self-closing shortcodes. Here&#8217;s an example of the <code>caption_shortcode()</code> improved to support a &#8216;class&#8217; attribute:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><pre class="brush: php; title: ; notranslate" title="">
+function wporg_caption_shortcode( $atts, $content = null ) {
+	$a = shortcode_atts( array(
+		'class' =&gt; 'caption',
+	), $atts );
+
+	return '&lt;span class=&quot;' . esc_attr($a&#91;'class']) . '&quot;&gt;' . $content . '&lt;/span&gt;';
+}
+</pre></div>
+
+<div class="wp-block-syntaxhighlighter-code "><pre class="brush: php; title: ; notranslate" title="">
+&#91;caption class=&quot;headline&quot;]My Caption&#91;/caption]
+</pre></div>
+
+<div class="wp-block-syntaxhighlighter-code "><pre class="brush: php; title: ; notranslate" title="">
+&lt;span class=&quot;headline&quot;&gt;My Caption&lt;/span&gt;
+</pre></div>
+
+
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="other-features-in-brief" tabindex="-1">Other features in brief <a href="#other-features-in-brief" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Other features in brief</span></a></h3>
+
+
+
+<ul><li>The parser supports xhtml-style closing shortcodes like <code>[myshortcode /]</code>, but this is optional.</li><li>Shortcode macros may use single or double quotes for attribute values, or omit them entirely if the attribute value does not contain spaces. <code>[myshortcode foo='123' bar=456]</code> is equivalent to <code>[myshortcode foo="123" bar="456"]</code>. Note the attribute value in the last position may not end with a forward slash because the feature in the paragraph above will consume that slash.</li><li>For backwards compatibility with older ad-hoc shortcodes, attribute names may be omitted. If an attribute has no name it will be given a positional numeric key in the <code>$atts</code> array. For example, <code>[myshortcode 123]</code> will produce <code>$atts = array( 0 =&gt; 123 )</code>. Positional attributes may be mixed with named ones, and quotes may be used if the values contain spaces or other significant characters.</li><li>The shortcode API has test cases. The tests &#8212; which contain a number of examples of error cases and unusual syntax &#8212; can be found at&nbsp;<a href="http://svn.automattic.com/wordpress-tests/trunk/tests/shortcode.php">http://svn.automattic.com/wordpress-tests/trunk/tests/shortcode.php</a></li></ul>
+
+
+
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="function-reference" tabindex="-1">Function reference <a href="#function-reference" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Function reference</span></a></h3>
+
+
+
+<p>The following Shortcode API functions are available:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><pre class="brush: php; title: ; notranslate" title="">
+function add_shortcode( $tag, $func )
+</pre></div>
+
+
+<p>Registers a new shortcode handler function. <code>$tag</code> is the shortcode string as written by the user (without braces), such as &#8220;myshortcode&#8221;. $func is the handler function name.</p>
+
+
+
+<p>Only one handler function may exist for a given shortcode. Calling <code>add_shortcode()</code> again with the same $tag name will overwrite the previous handler.</p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><pre class="brush: php; title: ; notranslate" title="">
+function remove_shortcode( $tag )
+</pre></div>
+
+
+<p>Deregisters an existing shortcode. <code>$tag</code> is the shortcode name as used in <code>add_shortcode()</code>.</p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><pre class="brush: php; title: ; notranslate" title="">
+function remove_all_shortcodes()
+</pre></div>
+
+
+<p>Deregisters all shortcodes.</p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><pre class="brush: php; title: ; notranslate" title="">
+function shortcode_atts( $pairs, $atts )
+</pre></div>
+
+
+<p>Process a raw array of attributes <code>$atts</code> against the set of defaults specified in <code>$pairs</code>. Returns an array. The result will contain every key from <code>$pairs</code>, merged with values from <code>$atts</code>. Any keys in <code>$atts</code> that do not exist in $pairs are ignored.</p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><pre class="brush: php; title: ; notranslate" title="">
+function do_shortcode( $content )
+</pre></div>
+
+
+<p>Parse any known shortcode macros in the <code>$content</code> string. Returns a string containing the original content with shortcode macros replaced by their handler functions output.</p>
+
+
+
+<p><a href="../../../reference/functions/do_shortcode/index.html">do_shortcode()</a>&nbsp;is registered as a default filter on &#8216;the_content&#8217; with a priority of 11.</p>
+
+
+
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="limitations" tabindex="-1">Limitations <a href="#limitations" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Limitations</span></a></h3>
+
+
+
+<h4 class="toc-heading" id="nested-shortcodes" tabindex="-1">Nested Shortcodes <a href="#nested-shortcodes" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Nested Shortcodes</span></a></h4>
+
+
+
+<p>The shortcode parser correctly deals with nested shortcode macros, provided their handler functions support it by recursively calling&nbsp;<a href="../../../reference/functions/do_shortcode/index.html">do_shortcode()</a>:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><pre class="brush: php; title: ; notranslate" title="">
+&#91;tag-a]
+   &#91;tag-b]
+      &#91;tag-c]
+   &#91;/tag-b]
+&#91;/tag-a]
+</pre></div>
+
+
+<p>However the parser will fail if a shortcode macro is used to enclose another macro of the same name:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><pre class="brush: php; title: ; notranslate" title="">
+&#91;tag-a]
+   &#91;tag-a]
+   &#91;/tag-a]
+&#91;/tag-a]
+</pre></div>
+
+
+<p>This is a limitation of the context-free regexp parser used by&nbsp;<code>do_shortcode()</code>&nbsp;&#8211; it is very fast but does not count levels of nesting, so it can&#8217;t match each opening tag with its correct closing tag in these cases.</p>
+
+
+
+<p>In future versions of WordPress, it may be necessary for plugins having a nested shortcode syntax to ensure that the <code>wptexturize()</code> processor does not interfere with the inner codes. It is recommended that for such complex syntax, the&nbsp;<a href="../../../reference/hooks/no_texturize_shortcodes/index.html">no_texturize_shortcodes</a>&nbsp;filter should be used on the outer tags. In the examples used here, tag-a should be added to the list of shortcodes to not texturize. If the contents of tag-a or tag-b still need to be texturized, then you can call&nbsp;<code>wptexturize()</code>&nbsp;before calling&nbsp;<code>do_shortcode()</code>&nbsp;as described above.</p>
+
+
+
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h4 class="toc-heading" id="unregistered-names" tabindex="-1">Unregistered Names <a href="#unregistered-names" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Unregistered Names</span></a></h4>
+
+
+
+<p>Some plugin authors have chosen a strategy of not registering shortcode names, for example to disable a nested shortcode until the parent shortcode&#8217;s handler function is called. This may have unintended consequences, such as failure to parse shortcode attribute values. For example:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><pre class="brush: php; title: ; notranslate" title="">
+&#91;tag-a unit=&quot;north&quot;]
+   &#91;tag-b size=&quot;24&quot;]
+      &#91;tag-c color=&quot;red&quot;]
+   &#91;/tag-b]
+&#91;/tag-a]
+</pre></div>
+
+
+<p>Starting with version 4.0.1, if a plugin fails to register tag-b and tag-c as valid shortcodes, the <code>wptexturize()</code> processor will output the following text prior to any shortcode being parsed:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><pre class="brush: php; title: ; notranslate" title="">
+&#91;tag-a unit=&quot;north&quot;]
+   &#91;tag-b size=”24”]
+      &#91;tag-c color=”red”]
+   &#91;/tag-b]
+&#91;/tag-a]
+</pre></div>
+
+
+<p>Unregistered shortcodes should be considered normal plain text that have no special meaning, and the practice of using unregistered shortcodes is discouraged. If you must enclose raw code between shortcode tags, at least consider using the&nbsp;<a href="../../../reference/hooks/no_texturize_shortcodes/index.html">no_texturize_shortcodes</a> filter to prevent texturization of the contents of tag-a:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><pre class="brush: php; title: ; notranslate" title="">
+add_shortcode( 'tag-a', 'wporg_tag_a_handler' );
+add_filter( 'no_texturize_shortcodes', 'wporg_ignore_tag_a' );
+
+function wporg_ignore_tag_a( $list ) {
+  $list&#91;] = 'tag-a';
+  return $list;
+}
+</pre></div>
+
+
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h4 class="toc-heading" id="unclosed-shortcodes" tabindex="-1">Unclosed Shortcodes <a href="#unclosed-shortcodes" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Unclosed Shortcodes</span></a></h4>
+
+
+
+<p>In certain cases the shortcode parser cannot correctly deal with the use of both closed and unclosed shortcodes. For instance in this case the parser will only correctly identify the second instance of the shortcode:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><pre class="brush: php; title: ; notranslate" title="">
+&#91;tag]
+&#91;tag]
+   CONTENT
+&#91;/tag]
+</pre></div>
+
+
+<p>However in this case the parser will identify both:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><pre class="brush: php; title: ; notranslate" title="">
+&#91;tag]
+   CONTENT
+&#91;/tag]
+&#91;tag]
+</pre></div>
+
+
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h4 class="toc-heading" id="hyphens" tabindex="-1">Hyphens <a href="#hyphens" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Hyphens</span></a></h4>
+
+
+
+<p>Take caution when using hyphens in the name of your shortcodes. In the following instance WordPress may see the second opening shortcode as equivalent to the first (basically WordPress sees the first part before the hyphen):</p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><pre class="brush: php; title: ; notranslate" title="">
+&#91;tag]
+&#91;tag-a]
+</pre></div>
+
+
+<p>It all depends on which shortcode is defined first. If you are going to use hyphens then define the shortest shortcode first.</p>
+
+
+
+<p>To avoid this, use an underscore or simply no separator:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><pre class="brush: php; title: ; notranslate" title="">
+&#91;tag]
+&#91;tag_a]
+
+&#91;tag]
+&#91;taga]
+</pre></div>
+
+
+<p>If the first part of the shortcode is different from one another, you can get away with using hyphens:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><pre class="brush: php; title: ; notranslate" title="">
+&#91;tag]
+&#91;tagfoo-a]
+</pre></div>
+
+
+<p><strong>Important:</strong>&nbsp;Using hyphens can have implications that you may not be aware of; such as if other installed shortcodes also are use hyphens, the use of generic words with hyphens may cause collisions (if shortcodes are used together within the same request):</p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><pre class="brush: php; title: ; notranslate" title="">
+// plugin-A
+&#91;is-logged-in]
+
+// plugin-B
+&#91;is-admin]
+</pre></div>
+
+
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h4 class="toc-heading" id="square-brackets" tabindex="-1">Square Brackets <a href="#square-brackets" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Square Brackets</span></a></h4>
+
+
+
+<p>The shortcode parser does not accept square brackets within attributes. Thus the following will fail:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><pre class="brush: php; title: ; notranslate" title="">
+&#91;tag attribute=&quot;&#91;Some value]&quot;]
+</pre></div>
+
+
+<p>Tags surrounded by cosmetic brackets are not yet fully supported by <a href="../../../reference/functions/wptexturize/index.html">wptexturize()</a> or its filters. These codes may give unexpected results:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><pre class="brush: php; title: ; notranslate" title="">
+&#91;I put random text near my captions. &#91;caption]]
+</pre></div>
+
+
+<p><strong>Note:</strong>&nbsp;these limitations may change in future versions of WordPress, you should test to be absolutely sure.</p>
+
+
+
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h4 class="toc-heading" id="html" tabindex="-1">HTML <a href="#html" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">HTML</span></a></h4>
+
+
+
+<p>Starting with version 3.9.3, use of HTML is limited inside shortcode attributes. For example, this shortcode will not work correctly because it contains a <code>&gt;</code> character:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><pre class="brush: php; title: ; notranslate" title="">
+&#91;tag value1=&quot;35&quot; value2=&quot;25&quot; compare=&quot;&gt;&quot;]
+</pre></div>
+
+
+<p>Version 4.0 is designed to allow validated HTML, so this will work:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><pre class="brush: php; title: ; notranslate" title="">
+&#91;tag description=&quot;&lt;b&gt;Greetings&lt;/b&gt;&quot;]
+</pre></div>
+
+
+<p>The suggested workaround for HTML limitations is to use HTML encoding for all user input, and then add HTML decoding in the custom shortcode handler. Extra API functions are planned.</p>
+
+
+
+<p>Full usage of HTML in shortcode attributes was never officially supported, and this will not be expanded in future versions.</p>
+
+
+
+<p>Starting with version 4.2.3, similar limitations were placed on use of shortcodes inside HTML. For example, this shortcode will not work correctly because it is nested inside a scripting attribute:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><pre class="brush: php; title: ; notranslate" title="">
+&lt;a onclick=&quot;&#91;tag]&quot;&gt;
+</pre></div>
+
+
+<p>The suggested workaround for dynamic attributes is to design a shortcode that outputs all needed HTML rather than just a single value. This will work better:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><pre class="brush: php; title: ; notranslate" title="">
+&#91;link onclick=&quot;tag&quot;]
+</pre></div>
+
+
+<p>Also notice the following shortcode is no longer allowed because of incorrect attribute quoting:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><pre class="brush: php; title: ; notranslate" title="">
+&lt;a title=&quot;&#91;tag attr=&quot;id&quot;]&quot;&gt;
+</pre></div>
+
+
+<p>The only way to parse this as valid HTML is to use single quotes and double quotes in a nested manner:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><pre class="brush: php; title: ; notranslate" title="">
+&lt;a title=&quot;&#91;tag attr='id']&quot;&gt;
+</pre></div>
+
+
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h4 class="toc-heading" id="registration-count" tabindex="-1">Registration Count <a href="#registration-count" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Registration Count</span></a></h4>
+
+
+
+<p>The API is known to become unstable when registering hundreds of shortcodes. Plugin authors should create solutions that rely on only a small number of shortcodes names. This limitation might change in future versions.</p>
+
+
+
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="formal-syntax" tabindex="-1">Formal Syntax <a href="#formal-syntax" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Formal Syntax</span></a></h3>
+
+
+
+<p>WordPress shortcodes do not use special characters in the same way as HTML. The square braces may seem magical at first glance, but they are not truly part of any language. For example:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><pre class="brush: php; title: ; notranslate" title="">
+&#91;gallery]
+</pre></div>
+
+
+<p>The gallery shortcode is parsed by the API as a special symbol because it is a registered shortcode. On the other hand, square braces are simply ignored when a shortcode is not registered:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><pre class="brush: php; title: ; notranslate" title="">
+&#91;randomthing]
+</pre></div>
+
+
+<p>The randomthing symbol and its square braces are ignored because they are not part of any registered shortcode.</p>
+
+
+
+<p>In a perfect world, any <code>[*]</code> symbol could be handled by the API, but we have to consider the following challenges: Square braces are allowed in HTML and are not always shortcodes, angle braces are allowed inside of shortcodes only in limited situations, and all of this code must run through multiple layers of customizeable filters and parsers before output. Because of these language compatibility issues, square braces can&#8217;t be magical.</p>
+
+
+
+<p>The shortcode syntax uses these general parts:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><pre class="brush: php; title: ; notranslate" title="">
+&#91;name attributes close]
+</pre></div>
+
+<div class="wp-block-syntaxhighlighter-code "><pre class="brush: php; title: ; notranslate" title="">
+&#91;name attributes]Any HTML or shortcode may go here.&#91;/name]
+</pre></div>
+
+
+<p>Escaped shortcodes are identical but have exactly two extra braces:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><pre class="brush: php; title: ; notranslate" title="">
+&#91;&#91;name attributes close]]
+</pre></div>
+
+<div class="wp-block-syntaxhighlighter-code "><pre class="brush: php; title: ; notranslate" title="">
+&#91;&#91;name attributes]Any HTML or shortcode may go here.&#91;/name]]
+</pre></div>
+
+
+<p>Again, the shortcode name must be registered, otherwise all four examples would be ignored.</p>
+
+
+
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h4 class="toc-heading" id="names" tabindex="-1">Names <a href="#names" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Names</span></a></h4>
+
+
+
+<p>Shortcode names must never contain the following characters:</p>
+
+
+
+<ul><li>Square braces: <code>[ ]</code></li><li>Angle braces: <code>&lt; &gt;</code></li><li>Ampersand: <code>&amp;</code></li><li>Forward slash: <code>/</code></li><li>Whitespace: space linefeed tab</li><li>Non-printing characters: <code>\x00</code> &#8211; <code>\x20</code></li></ul>
+
+
+
+<p>It is recommended to also avoid quotes in the names of shortcodes.</p>
+
+
+
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h4 class="toc-heading" id="attributes" tabindex="-1">Attributes <a href="#attributes" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Attributes</span></a></h4>
+
+
+
+<p>Attributes are optional. A space is required between the shortcode name and the shortcode attributes. When more than one attribute is used, each attribute must be separated by at least one space.</p>
+
+
+
+<p>Each attribute should conform to one of these formats:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><pre class="brush: php; title: ; notranslate" title="">
+attribute_name = 'value'
+</pre></div>
+
+<div class="wp-block-syntaxhighlighter-code "><pre class="brush: php; title: ; notranslate" title="">
+attribute_name = &quot;value&quot;
+</pre></div>
+
+<div class="wp-block-syntaxhighlighter-code "><pre class="brush: php; title: ; notranslate" title="">
+attribute_name = value
+</pre></div>
+
+<div class="wp-block-syntaxhighlighter-code "><pre class="brush: php; title: ; notranslate" title="">
+&quot;value&quot;
+</pre></div>
+
+<div class="wp-block-syntaxhighlighter-code "><pre class="brush: php; title: ; notranslate" title="">
+value
+</pre></div>
+
+
+<p>Attribute names are optional and should contain only the following characters for compatibility across all platforms:</p>
+
+
+
+<ul><li>Upper-case and lower-case letters: <code>A-Z</code> <code>a-z</code></li><li>Digits: <code>0-9</code></li><li>Underscore: <code>_</code></li><li>Hyphen: <code>-</code> </li></ul>
+
+
+
+<p>Spaces are not allowed in attribute names. Optional spaces may be used between the name and the <code>=</code> sign. Optional spaces may also be used between the <code>=</code> sign and the value.</p>
+
+
+
+<p>It should be noted that even though attributes can be used with mixed case in the editor, they will always be lowercase after parsing.</p>
+
+
+
+<p>Attribute values must never contain the following characters:</p>
+
+
+
+<ul><li>Square braces: <code>[ ]</code></li><li>Quotes: <code>"</code>, <code>'</code></li></ul>
+
+
+
+<p>Unquoted values also must never contain spaces.</p>
+
+
+
+<p>HTML characters <code>&lt;</code> and <code>&gt;</code> have only limited support in attributes.</p>
+
+
+
+<p>The recommended method of escaping special characters in shortcode attributes is HTML encoding. Most importantly, any user input appearing in a shortcode attribute must be escaped or stripped of special characters.</p>
+
+
+
+<p>Note that double quotes are allowed inside of single-quoted values and vice versa, however this is not recommended when dealing with user input.</p>
+
+
+
+<p>The following characters, if they are not escaped within an attribute value, will be automatically stripped and converted to spaces:</p>
+
+
+
+<ul><li>No-break space: <code>\xC2\xA0</code></li><li>Zero-width space: <code>\xE2\x80\x8B</code></li></ul>
+
+
+
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h4 class="toc-heading" id="self-closing" tabindex="-1">Self-Closing <a href="#self-closing" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Self-Closing</span></a></h4>
+
+
+
+<p>The self-closing marker, a single forward slash, is optional. Space before the marker is optional. Spaces are not allowed after the marker.</p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><pre class="brush: php; title: ; notranslate" title="">
+&#91;example /]
+</pre></div>
+
+
+<p>The self-closing marker is purely cosmetic and has no effect except that it will force the shortcode parser to ignore any closing tag that follows it.</p>
+
+
+
+<p>The enclosing type shortcodes may not use a self-closing marker.</p>
+
+
+
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h4 class="toc-heading" id="escaping" tabindex="-1">Escaping <a href="#escaping" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Escaping</span></a></h4>
+
+
+
+<p>WordPress attempts to insert curly quotes between the <code>[name]</code> and <code>[/name]</code> tags. It will process that content just like any other. As of 4.0.1, unregistered shortcodes are also &#8220;texturized&#8221; and this may give unexpected curly quotes:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><pre class="brush: php; title: ; notranslate" title="">
+&#91;randomthing param=&quot;test&quot;]
+</pre></div>
+
+
+<p>A better example would be:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><pre class="brush: php; title: ; notranslate" title="">
+&lt;code&gt;&#91;randomthing param=&quot;test&quot;]&lt;/code&gt;
+</pre></div>
+
+
+<p>The <code>&lt;code&gt;</code> element is always avoided for the sake of curly quotes.</p>
+
+
+
+<p>Registered shortcodes are still processed inside of <code>&lt;code&gt;</code> elements. To escape a registered shortcode for display on your website, the syntax becomes:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><pre class="brush: php; title: ; notranslate" title="">
+&#91;&#91;caption param=&quot;test&quot;]]
+</pre></div>
+
+
+<p>which will output:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><pre class="brush: php; title: ; notranslate" title="">
+&#91;caption param=&quot;test&quot;]
+</pre></div>
+
+
+<p>The <code>&lt;code&gt;</code> element is optional in that situation.</p>
+
+
+
+<p>For enclosing shortcodes, use the following syntax:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><pre class="brush: php; title: ; notranslate" title="">
+&#91;&#91;caption]My Caption&#91;/caption]]
+</pre></div>
+
+
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="external-resources" tabindex="-1">External Resources <a href="#external-resources" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">External Resources</span></a></h2>
+
+
+
+<ul><li><a href="http://generatewp.com/shortcodes/">WordPress Shortcodes Generator</a></li><li><a href="https://www.nimbusthemes.com/add-shortcode-wordpress-snippet-generator/">Add Shortcode – WordPress Code Snippet Generator</a>&nbsp;&#8211; A snippet generator and full documentation about how to add the code to a WordPress website.</li><li><a href="http://ran.ge/2008/04/15/wordpress-25-shortcodes/">Shortcode summary by Aaron D. Campbell</a>&nbsp;&#8211; Explains shortcodes and gives examples including how to incorporate shortcodes into a meta box for sending them to the editor using js.</li><li><a href="https://wordpress.org/extend/plugins/iblocks/">Innovative WordPress Shortcodes In Action</a>&nbsp;&#8211; a WordPress plugin that shows you how to effectively use shortcodes to change your post content designs.</li><li><a href="http://planetozh.com/blog/2008/03/wordpress-25-shortcodes-api-overview/">WordPress Shortcode API Overview</a>&nbsp;&#8211; explanations on usage and example of plugin using shortcodes.</li><li><a href="https://wordpress.org/extend/plugins/bbcode/">Simple shortcode-powered BBCode plugin</a>&nbsp;&#8211; a simple plugin that adds support for BBCode via shortcode. A good way to see shortcodes in action.</li></ul>
+
+
+
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="default-shortcodes" tabindex="-1">Default Shortcodes <a href="#default-shortcodes" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Default Shortcodes</span></a></h2>
+
+
+
+<ul><li><code><a href="../../../reference/hooks/wp_audio_shortcode/index.html">[ audio ]</a></code></li><li><code>[ wp_caption ]</code></li><li><code>[ caption ]</code></li><li><code><a href="../../../reference/classes/wp_embed/shortcode/index.html">[ embed ]</a></code></li><li><code><a href="../../../reference/functions/gallery_shortcode/index.html">[ gallery ]</a></code></li><li><code><a href="../../../reference/hooks/wp_video_shortcode/index.html">[ video ]</a></code></li><li><code><a href="../../../reference/functions/wp_playlist_shortcode/index.html">[ playlist ]</a></code></li></ul>
+
+
+
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="shortcode-api-functions-list" tabindex="-1">Shortcode API functions list <a href="#shortcode-api-functions-list" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Shortcode API functions list</span></a></h2>
+
+
+
+<ul><li>Function:&nbsp;<a href="../../../reference/functions/do_shortcode/index.html">do_shortcode()</a></li><li>Function:&nbsp;<a href="../../../reference/functions/add_shortcode/index.html">add_shortcode()</a></li><li>Function:&nbsp;<a href="../../../reference/functions/remove_shortcode/index.html">remove_shortcode()</a></li><li>Function:&nbsp;<a href="../../../reference/functions/remove_all_shortcodes/index.html">remove_all_shortcodes()</a></li><li>Function:&nbsp;<a href="../../../reference/functions/shortcode_atts/index.html">shortcode_atts()</a></li><li>Function:&nbsp;<a href="../../../reference/functions/strip_shortcodes/index.html">strip_shortcodes()</a></li><li>Function:&nbsp;<a href="../../../reference/functions/shortcode_exists/index.html">shortcode_exists()</a></li><li>Function:&nbsp;<a href="../../../reference/functions/has_shortcode/index.html">has_shortcode()</a></li><li>Function:&nbsp;<a href="../../../reference/functions/get_shortcode_regex/index.html">get_shortcode_regex()</a></li><li>Function:&nbsp;<a href="../../../reference/functions/wp_audio_shortcode/index.html">wp_audio_shortcode()</a></li><li>Function:&nbsp;<a href="../../../reference/functions/wp_video_shortcode/index.html">wp_video_shortcode()</a></li><li>Filter:&nbsp;<a href="../../../reference/hooks/no_texturize_shortcodes/index.html">no_texturize_shortcodes</a></li></ul>
+
+
+<div class="bottom-of-entry">&nbsp;</div>
+
+			
+		<nav class="handbook-navigation" role="navigation">
+			<h1 class="screen-reader-text">Handbook navigation</h1>
+			<div class="nav-links">
+
+			<a href="../settings/index.html" rel="previous"><span class="meta-nav">&larr;</span> Settings</a><a href="../site-health/index.html" rel="next">Site Health <span class="meta-nav">&rarr;</span></a>
+			</div>
+			<!-- .nav-links -->
+		</nav><!-- .navigation -->
+	
+		
+		</main><!-- #main -->
+
+	</div><!-- #content -->
+
+</div><!-- #page -->
+
+
+<div id="wporg-footer">
+	<div class="wrapper">
+		<ul>
+			<li><a href="http://wordpress.org/about/" title="An introduction to the WordPress project">About</a></li>
+			<li><a href="http://wordpress.org/news/" title="News and Updates">Blog</a></li>
+			<li><a href="http://wordpress.org/hosting/" title="Recommended web hosting providers">Hosting</a></li>
+			<li><a href="https://wordpressfoundation.org/donate/" title="Donate to the WordPress Foundation">Donate</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://wordpress.org/support/" title="Forums, documentation, and other resources">Support</a></li>
+			<li><a href="../../../index.html" title="Resources for WordPress developers">Developers</a></li>
+			<li><a href="http://make.wordpress.org/" title="Give back to WordPress through code, support, translation and more">Get Involved</a></li>
+			<li><a href="http://learn.wordpress.org/" title="Workshops and training materials">Learn</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://wordpress.org/showcase/" title="Some of the best WordPress sites on the Web">Showcase</a></li>
+			<li><a href="http://wordpress.org/plugins/" title="Add extra functionality to WordPress">Plugins</a></li>
+			<li><a href="http://wordpress.org/themes/" title="Make your WordPress pretty">Themes</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://central.wordcamp.org/" title="Find a WordPress event near you">WordCamp</a></li>
+			<li><a href="http://wordpress.tv/" title="Videos, tutorials, and WordCamp sessions">WordPress.TV</a></li>
+			<li><a href="http://buddypress.org/" title="A set of plugins to transform your WordPress into a social network">BuddyPress</a></li>
+			<li><a href="http://bbpress.org/" title="Fast, slick forums built on WordPress">bbPress</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://wordpress.com/?ref=wporg-footer" title="Hassle-free WordPress hosting">WordPress.com</a></li>
+			<li><a href="http://ma.tt/" title="Co-founder of WordPress, an example of what WordPress can do">Matt</a></li>
+			<li><a href="http://wordpress.org/about/privacy/" title="WordPress.org Privacy Policy">Privacy</a></li>
+			<li><a href="https://publiccode.eu/" target="_blank">Public Code</a></li>
+		</ul>
+
+		<ul class="social-media-links">
+			<li><span class="dashicons dashicons-twitter"></span><a href="https://twitter.com/WordPress" title="Follow @WordPress on Twitter">@WordPress</a></li>
+			<li><span class="dashicons dashicons-facebook"></span><a href="https://www.facebook.com/WordPress/" title="Like WordPress on Facebook">WordPress</a></li>
+		</ul>
+	</div>
+
+		<p class="cip cip-image">Code is Poetry.</p>
+</div>
+
+<script src="../../../../s.w.org/style/js/navigation.min.js?20190128"></script>
+
+<script type='text/javascript' src='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushPlain.js?ver=3.0.9b' id='syntaxhighlighter-brush-plain-js'></script>
+<script type='text/javascript'>
+	(function(){
+		var corecss = document.createElement('link');
+		var themecss = document.createElement('link');
+		var corecssurl = "../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shCore.css?ver=3.0.9b";
+		if ( corecss.setAttribute ) {
+				corecss.setAttribute( "rel", "stylesheet" );
+				corecss.setAttribute( "type", "text/css" );
+				corecss.setAttribute( "href", corecssurl );
+		} else {
+				corecss.rel = "stylesheet";
+				corecss.href = corecssurl;
+		}
+		document.head.appendChild( corecss );
+		var themecssurl = "../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shThemeDefault.css?ver=3.0.9b";
+		if ( themecss.setAttribute ) {
+				themecss.setAttribute( "rel", "stylesheet" );
+				themecss.setAttribute( "type", "text/css" );
+				themecss.setAttribute( "href", themecssurl );
+		} else {
+				themecss.rel = "stylesheet";
+				themecss.href = themecssurl;
+		}
+		document.head.appendChild( themecss );
+	})();
+	SyntaxHighlighter.config.strings.expandSource = '+ expand source';
+	SyntaxHighlighter.config.strings.help = '?';
+	SyntaxHighlighter.config.strings.alert = 'SyntaxHighlighter\n\n';
+	SyntaxHighlighter.config.strings.noBrush = 'Can\'t find brush for: ';
+	SyntaxHighlighter.config.strings.brushNotHtmlScript = 'Brush wasn\'t configured for html-script option: ';
+	SyntaxHighlighter.defaults['pad-line-numbers'] = false;
+	SyntaxHighlighter.defaults['toolbar'] = false;
+	SyntaxHighlighter.all();
+
+	// Infinite scroll support
+	if ( typeof( jQuery ) !== 'undefined' ) {
+		jQuery( function( $ ) {
+			$( document.body ).on( 'post-load', function() {
+				SyntaxHighlighter.highlight();
+			} );
+		} );
+	}
+</script>
+<script type='text/javascript' src='../../../wp-includes/js/hoverintent-js.min.js?ver=2.2.1' id='hoverintent-js-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/admin-bar.min.js?ver=5.9-alpha-51701' id='admin-bar-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/navigation.js?ver=20181209' id='wporg-developer-navigation-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/skip-link-focus-fix.js?ver=20130115' id='wporg-developer-skip-link-focus-fix-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/search.js?ver=20150430' id='wporg-developer-search-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/menu.js?ver=20180201' id='wporg-developer-menu-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/awesomplete.min.js?ver=20160322' id='awesomplete-js'></script>
+<script type='text/javascript' id='autocomplete-js-extra'>
+/* <![CDATA[ */
+var autocomplete = {"ajaxurl":"https:\/\/developer.wordpress.org\/wp-admin\/admin-ajax.php","nonce":"8a60f70c4b"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/autocomplete.js?ver=20160524' id='autocomplete-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/function-reference.js?ver=20180724' id='wporg-developer-function-reference-js'></script>
+<script type='text/javascript' id='quicktags-js-extra'>
+/* <![CDATA[ */
+var quicktagsL10n = {"closeAllOpenTags":"Close all open tags","closeTags":"close tags","enterURL":"Enter the URL","enterImageURL":"Enter the URL of the image","enterImageDescription":"Enter a description of the image","textdirection":"text direction","toggleTextdirection":"Toggle Editor Text Direction","dfw":"Distraction-free writing mode","strong":"Bold","strongClose":"Close bold tag","em":"Italic","emClose":"Close italic tag","link":"Insert link","blockquote":"Blockquote","blockquoteClose":"Close blockquote tag","del":"Deleted text (strikethrough)","delClose":"Close deleted text tag","ins":"Inserted text","insClose":"Close inserted text tag","image":"Insert image","ul":"Bulleted list","ulClose":"Close bulleted list tag","ol":"Numbered list","olClose":"Close numbered list tag","li":"List item","liClose":"Close list item tag","code":"Code","codeClose":"Close code tag","more":"Insert Read More tag"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-includes/js/quicktags.min.js?ver=5.9-alpha-51701' id='quicktags-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/user-notes.js?ver=20200110' id='wporg-developer-user-notes-js'></script>
+<script type='text/javascript' id='wporg-developer-user-notes-feedback-js-extra'>
+/* <![CDATA[ */
+var wporg_note_feedback = {"show":"Show Feedback","hide":"Hide Feedback"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/user-notes-feedback.js?ver=20181023' id='wporg-developer-user-notes-feedback-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/tabs.js?ver=20160824' id='wporg-developer-tabs-js'></script>
+<script type='text/javascript' id='wporg-developer-preview-js-extra'>
+/* <![CDATA[ */
+var wporg_note_preview = {"ajaxurl":"https:\/\/developer.wordpress.org\/wp-admin\/admin-ajax.php","nonce":"504933b60e","preview":"preview note","preview_empty":"Nothing to preview","is_admin":""};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/user-notes-preview.js?ver=20200111' id='wporg-developer-preview-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/wp-embed.min.js?ver=5.9-alpha-51701' id='wp-embed-js'></script>
+</body>
+
+<!-- Mirrored from developer.wordpress.org/apis/handbook/shortcode/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 31 Aug 2021 16:22:11 GMT -->
+</html>

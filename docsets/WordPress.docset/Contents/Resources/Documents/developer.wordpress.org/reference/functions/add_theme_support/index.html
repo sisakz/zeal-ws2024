@@ -1,0 +1,1814 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+
+<!-- Mirrored from developer.wordpress.org/reference/functions/add_theme_support/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 31 Aug 2021 16:21:50 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<!--
+<meta property="fb:page_id" content="6427302910" />
+-->
+<meta name="google-site-verification" content="7VWES_-rcHBcmaQis9mSYamPfNwE03f4vyTj4pfuAw0" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>add_theme_support()</title>
+<meta name="referrer" content="always">
+
+		<link href='../../../../fonts.googleapis.com/css.css?family=Open+Sans:300italic,400italic,600italic,400,300,600&amp;subset=latin,cyrillic-ext,greek-ext,greek,vietnamese,latin-ext,cyrillic' rel='stylesheet' type='text/css'>
+
+		<link rel="stylesheet" href="../../../../s.w.org/style/wp4.css?95" />
+
+<link rel="shortcut icon" href="../../../../s.w.org/favicon.ico?2" type="image/x-icon" />
+<link rel="pingback" href="../../../xmlrpc.php" /><meta name='robots' content='max-image-preview:large' />
+<link rel='dns-prefetch' href='../../../../fonts.googleapis.com/index.html' />
+<link rel='dns-prefetch' href='http://s.w.org/' />
+<link rel='dns-prefetch' href='http://www.googletagmanager.com/' />
+<link rel='dns-prefetch' href='http://fonts.gstatic.com/' />
+<link rel="alternate" type="application/rss+xml" title="WordPress Developer Resources &raquo; Feed" href="../../../feed/index.html" />
+<link rel="alternate" type="application/rss+xml" title="WordPress Developer Resources &raquo; Comments Feed" href="../../../comments/feed/index.html" />
+<meta property="og:title" content="add_theme_support() | Function | WordPress Developer Resources" />
+<meta property="og:site_name" content="WordPress Developer Resources" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="../../../index.html" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@WordPress" />
+<meta name="description" content="Registers theme support for a given feature." />
+<meta property="og:description" content="Registers theme support for a given feature." />
+<link rel="alternate" type="application/rss+xml" title="WordPress Developer Resources &raquo; add_theme_support Comments Feed" href="https://developer.wordpress.org/reference/functions/add_theme_support/feed/" />
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'../../../../www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P24PF4B');</script>
+			<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/developer.wordpress.org\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.9-alpha-51701"}};
+			!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([10084,65039,8205,55357,56613],[10084,65039,8203,55357,56613])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel='stylesheet' id='dashicons-css'  href='../../../wp-includes/css/dashicons.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='admin-bar-css'  href='../../../wp-includes/css/admin-bar.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-block-library-css'  href='../../../wp-includes/css/dist/block-library/style.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='wporg-handbook-css-css'  href='../../../wp-content/plugins/handbook/stylesheets/callout-boxes.css?ver=20200121' type='text/css' media='all' />
+<link rel='stylesheet' id='open-sans-css'  href='../../../../fonts.googleapis.com/css-2.css?family=Open+Sans%3A300italic%2C400italic%2C600italic%2C300%2C400%2C600&amp;subset=latin%2Clatin-ext&amp;display=fallback&amp;ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='wporg-developer-style-css'  href='../../../wp-content/themes/pub/wporg-developer/style.css?ver=3' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-dev-sass-compiled-css'  href='../../../wp-content/themes/pub/wporg-developer/stylesheets/main.css?ver=20200713' type='text/css' media='all' />
+<link rel='stylesheet' id='awesomplete-css-css'  href='../../../wp-content/themes/pub/wporg-developer/stylesheets/awesomplete.css?ver=20160114' type='text/css' media='all' />
+<link rel='stylesheet' id='autocomplete-css-css'  href='../../../wp-content/themes/pub/wporg-developer/stylesheets/autocomplete.css?ver=20171220' type='text/css' media='all' />
+<link rel='stylesheet' id='syntaxhighlighter-core-css'  href='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shCore.css?ver=3.0.9b' type='text/css' media='all' />
+<link rel='stylesheet' id='syntaxhighlighter-theme-default-css'  href='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shThemeDefault.css?ver=3.0.9b' type='text/css' media='all' />
+<script type='text/javascript' src='../../../wp-includes/js/jquery/jquery.min.js?ver=3.6.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='../../../wp-content/plugins/handbook/scripts/handbook.js?ver=20150930' id='wporg-handbook-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/chapters.js?ver=20190603' id='wporg-developer-chapters-js'></script>
+<script type='text/javascript' src='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shCore.js?ver=3.0.9b' id='syntaxhighlighter-core-js'></script>
+<script type='text/javascript' src='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushPhp.js?ver=3.0.9b' id='syntaxhighlighter-brush-php-js'></script>
+<link rel="https://api.w.org/" href="https://developer.wordpress.org/wp-json/" /><link rel="alternate" type="application/json" href="https://developer.wordpress.org/wp-json/wp/v2/wp-parser-function/3654" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="../../../xmlrpc-2.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="../../../wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 5.9-alpha-51701" />
+<link rel='shortlink' href='https://developer.wordpress.org/?p=3654' />
+<link rel="alternate" type="application/json+oembed" href="https://developer.wordpress.org/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fadd_theme_support%2F" />
+<link rel="alternate" type="text/xml+oembed" href="https://developer.wordpress.org/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fadd_theme_support%2F&amp;format=xml" />
+<link rel="canonical" href="index.html">
+<!-- Stream WordPress user activity plugin v3.6.2 -->
+	<style>
+		@media screen and (max-width: 782px) {
+			#wpadminbar li#wp-admin-bar-log-in,
+			#wpadminbar li#wp-admin-bar-register {
+				display: block;
+			}
+
+			#wpadminbar li#wp-admin-bar-log-in a,
+			#wpadminbar li#wp-admin-bar-register a {
+				padding: 0 8px;
+			}
+		}
+	</style>
+		<style>
+			a.github-edit {
+				margin-left: .5em;
+				font-size: .5em;
+				vertical-align: top;
+				display: inline-block;
+				border: 1px solid #eeeeee;
+				border-radius: 2px;
+				background: #eeeeee;
+				padding: .5em .6em .4em;
+				color: black;
+				margin-top: 0.1em;
+			}
+			a.github-edit > * {
+				opacity: 0.6;
+			}
+			a.github-edit:hover > * {
+				opacity: 1;
+				color: black;
+			}
+			a.github-edit img {
+				height: .8em;
+			}
+		</style>
+		
+	<script type="text/javascript">
+		jQuery( '<style>.hide-if-js { display: none; }</style>' ).appendTo( 'head' );
+		jQuery( function($) {
+			$( 'body' ).addClass('js');
+		} );
+	</script>
+<style type="text/css" media="print">#wpadminbar { display:none; }</style>
+	<style type="text/css" media="screen">
+	</style>
+	<script>document.cookie='devicePixelRatio='+((window.devicePixelRatio === undefined) ? 1 : window.devicePixelRatio)+'; path=/';</script>
+
+</head>
+
+
+<body id="wordpress-org" class="wp-parser-function-template-default single single-wp-parser-function postid-3654 admin-bar no-customize-support">
+		<div id="wpadminbar" class="nojq nojs">
+						<div class="quicklinks" id="wp-toolbar" role="navigation" aria-label="Toolbar">
+				<ul id='wp-admin-bar-root-default' class="ab-top-menu"><li id='wp-admin-bar-wp-logo' class="menupop"><a class='ab-item' aria-haspopup="true" href='https://wordpress.org/about/'><span class="ab-icon" aria-hidden="true"></span><span class="screen-reader-text">About WordPress</span></a><div class="ab-sub-wrapper"><ul id='wp-admin-bar-wp-logo-default' class="ab-submenu"><li id='wp-admin-bar-about'><a class='ab-item' href='https://wordpress.org/about/'>About WordPress</a></li></ul><ul id='wp-admin-bar-wp-logo-external' class="ab-sub-secondary ab-submenu"><li id='wp-admin-bar-wporg'><a class='ab-item' href='https://wordpress.org/'>WordPress.org</a></li><li id='wp-admin-bar-documentation'><a class='ab-item' href='https://wordpress.org/support/'>Documentation</a></li><li id='wp-admin-bar-support-forums'><a class='ab-item' href='https://wordpress.org/support/forums/'>Support</a></li><li id='wp-admin-bar-feedback'><a class='ab-item' href='https://wordpress.org/support/forum/requests-and-feedback'>Feedback</a></li></ul></div></li></ul><ul id='wp-admin-bar-top-secondary' class="ab-top-secondary ab-top-menu"><li id='wp-admin-bar-search' class="admin-bar-search"><div class="ab-item ab-empty-item" tabindex="-1"><form action="https://developer.wordpress.org/" method="get" id="adminbarsearch"><input class="adminbar-input" name="s" id="adminbar-search" type="text" value="" maxlength="150" /><label for="adminbar-search" class="screen-reader-text">Search</label><input type="submit" class="adminbar-button" value="Search" /></form></div></li><li id='wp-admin-bar-log-in'><a class='ab-item' href='https://login.wordpress.org/?locale=en_US'>Log In</a></li><li id='wp-admin-bar-register'><a class='ab-item' href='https://login.wordpress.org/register?locale=en_US'>Register</a></li></ul>			</div>
+					</div>
+
+		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P24PF4B" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<div id="wporg-header">
+	<div class="wrapper">
+	<h1><a href="http://wordpress.org/">WordPress.org</a></h1>				<div id="head-search">
+		<form action="http://wordpress.org/search/do-search.php" method="get">
+			<label for="global-search" class="screen-reader-text">Search WordPress.org for:</label>
+			<input id="global-search" class="text" name="search" type="text" value="" maxlength="150" placeholder="Search WordPress.org" />
+			<button type="submit" class="button"><span class="screen-reader-text">Submit</span></button>
+		</form>
+		</div>
+				<div style="clear:both"></div>
+		<button id="mobile-menu-button" aria-expanded="false"><span class="screen-reader-text">Toggle Menu</span></button>
+		
+<nav aria-label="Main Menu">
+<ul id="wporg-header-menu">
+<li class="menu-item"><a href='http://wordpress.org/showcase/' data-title='See some of the sites built on WordPress.'>Showcase</a></li>
+<li class="menu-item"><a href='http://learn.wordpress.org/' data-title='Resources to help you learn more about WordPress and teach it to others.'>Learn</a></li>
+<li class="menu-item"><a href='http://wordpress.org/themes/' data-title='Find just the right look for your website.'>Themes</a></li>
+<li class="menu-item"><a href='http://wordpress.org/plugins/' data-title='Plugins can extend WordPress to do almost anything you can imagine.'>Plugins</a></li>
+<li class="menu-item"><a href='http://wordpress.org/mobile/' data-title='Take your website on the go!'>Mobile</a></li>
+<li class="menu-item"><a href='http://wordpress.org/support/' data-title='Forums, documentation, help.'>Support</a><ul class="nav-submenu"><li><a href='http://wordpress.org/support/' title='Documentation, tutorials, best practices.'>Documentation</a></li><li><a href='http://wordpress.org/support/forums/' title='Support and discussion forums.'>Forums</a></li></ul><div class="uparrow"></div></li>
+<li class="menu-item"><a href='http://make.wordpress.org/' data-title='Contribute your knowledge.'>Get Involved</a><ul class="nav-submenu"><li><a href='http://wordpress.org/five-for-the-future/' title='How five percent is powering the next generation of the web'>Five for the Future</a></li></ul><div class="uparrow"></div></li>
+<li class="menu-item"><a href='http://wordpress.org/about/' data-title='About the WordPress Organization, and where we&#039;re going.'>About</a></li>
+<li class="menu-item"><a href='http://wordpress.org/news/' data-title='Come here for the latest scoop.'>Blog</a></li>
+<li class="menu-item"><a href='http://wordpress.org/hosting/' data-title='Find a home for your blog.'>Hosting</a></li>
+<li id="download" class="button download-button menu-item"><a href='http://wordpress.org/download/' data-title='Get it. Got it? Good.'>Get WordPress</a></li>
+</ul>
+</nav>
+		<div style="clear:both"></div>
+	</div>
+</div>
+
+
+
+<header id="masthead" class="site-header" role="banner">
+		<div class="site-branding">
+		<h1 class="site-title">
+			<a href="../../index.html" rel="home">Code Reference</a>
+		</h1>
+
+		
+		<nav id="site-navigation" class="main-navigation" role="navigation">
+			<button class="menu-toggle dashicons dashicons-arrow-down-alt2" aria-controls="primary-menu" aria-expanded="false" aria-label="Primary Menu"></button>
+					</nav>
+	</div>
+</header><!-- #masthead -->
+
+<div id="page" class="hfeed site devhub-wrap">
+	<a href="#main" class="screen-reader-text">Skip to content</a>
+
+				<div id="inner-search">
+			<div class="search-section section clear hide-if-js">
+
+
+	
+	<form role="search" method="get" class="searchform searchform-filtered" action="https://developer.wordpress.org/">
+		<label for="search-field" class="screen-reader-text">Search for:</label>
+		<input type="text" id="search-field" class="search-field" placeholder="Search &hellip;" value="" name="s">
+		<button class="button button-primary button-search"><i class="dashicons dashicons-search"></i><span class="screen-reader-text">Search plugins</span></button>
+	
+		<div class="search-post-type">
+			<span>Filter by type:</span>
+									<label><input type="checkbox" name="post_type[]" value="wp-parser-function"
+						 /> Functions</label>
+									<label><input type="checkbox" name="post_type[]" value="wp-parser-hook"
+						 /> Hooks</label>
+									<label><input type="checkbox" name="post_type[]" value="wp-parser-class"
+						 /> Classes</label>
+									<label><input type="checkbox" name="post_type[]" value="wp-parser-method"
+						 /> Methods</label>
+					</div>
+
+	
+	</form>
+
+</div><!-- /search-guide -->
+			<div id="inner-search-icon-container">
+				<div id="inner-search-icon">
+					<div class="dashicons dashicons-search"><span class="screen-reader-text">Search</span></div>
+				</div>
+			</div>
+		</div>
+
+		<div id="content" class="site-content">
+
+	<div id="content-area" class="wp-parser-function-template-default single single-wp-parser-function postid-3654 admin-bar no-customize-support code-reference">
+
+		
+		<div class="breadcrumb-trail breadcrumbs" itemprop="breadcrumb">
+			<span class="trail-browse">Browse:</span> 
+			<span class="trail-begin"><a href="../../../index.html" title="WordPress Developer Resources" rel="home">Home</a></span> <span class="sep">&#47;</span> 
+			<span class="trail-inner"><a href="../../index.html" title="Reference">Reference</a></span> <span class="sep">&#47;</span> 
+			<span class="trail-inner"><a href="../index.html">Functions</a></span> <span class="sep">&#47;</span> <span class="trail-end">add_theme_support()</span>
+		</div>
+		<main id="main" class="site-main" role="main">
+
+		
+			
+<article id="post-3654" class="post-3654 wp-parser-function type-wp-parser-function status-publish hentry wp-parser-source-file-wp-includes_theme-php wp-parser-package-theme wp-parser-package-wordpress wp-parser-since-2-9-0 wp-parser-since-3-4-0 wp-parser-since-3-6-0 wp-parser-since-3-9-0 wp-parser-since-4-1-0 wp-parser-since-4-5-0 wp-parser-since-4-7-0 wp-parser-since-5-0-0 wp-parser-since-5-3-0 wp-parser-since-5-5-0 wp-parser-since-5-6-0 wp-parser-since-5-8-0">
+
+	
+	
+	<h1>add_theme_support( <span class="arg-type">string</span>&nbsp;<span class="arg-name">$feature</span>,  <span class="arg-type">mixed</span>&nbsp;<span class="arg-name">$args</span>&nbsp;)</h1>
+
+	<section class="summary">
+		<p>Registers theme support for a given feature.</p>
+	</section>
+
+
+	
+	<div class="content-toc"><style> .toc-jump { text-align: right; font-size: 12px; } .page .toc-heading { margin-top: -50px; padding-top: 50px !important; }</style><div class="table-of-contents"><h2>Contents</h2><ul class="items"><li><a href="#description">Description</a></li>
+<li><a href="#parameters">Parameters</a></li>
+<li><a href="#return">Return</a></li>
+<li><a href="#more-information">More Information</a>
+<ul>
+<li><a href="#features">Features</a>
+<ul>
+<li><a href="#post-formats">Post Formats</a></li>
+<li><a href="#post-thumbnails">Post Thumbnails</a></li>
+<li><a href="#custom-background">Custom Background</a></li>
+<li><a href="#custom-header">Custom Header</a></li>
+<li><a href="#custom-logo">Custom Logo</a></li>
+<li><a href="#feed-links">Feed Links</a></li>
+<li><a href="#html5">HTML5</a></li>
+<li><a href="#title-tag">Title Tag</a></li>
+<li><a href="#customize-selective-refresh-widgets">Customize Selective Refresh Widgets</a>
+</ul></li>
+<li><a href="#multisite">Multisite</a></li>
+<li><a href="#other-notes">Other Notes</a>
+</ul></li>
+<li><a href="#source">Source</a></li>
+<li><a href="#related">Related</a>
+<ul>
+<li><a href="#uses">Uses</a></li>
+<li><a href="#used-by">Used By</a>
+</ul></li>
+<li><a href="#changelog">Changelog</a></li>
+<li><a href="#user-contributed-notes">User Contributed Notes</a></ul>
+</div>
+
+<hr />
+<section class="description">
+	<h2 class="toc-heading" id="description" tabindex="-1">Description <a href="#description" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Description</span></a></h2>
+	<p>Must be called in the theme&#8217;s functions.php file to work. If attached to a hook, it must be <a href="../../hooks/after_setup_theme/index.html">&#8216;after_setup_theme&#8217;</a>. The <a href="../../hooks/init/index.html">&#8216;init&#8217;</a> hook may be too late for some features.</p>
+<p>Example usage:</p>
+<pre><code>add_theme_support( 'title-tag' );
+add_theme_support( 'custom-logo', array(
+    'height' =&gt; 480,
+    'width'  =&gt; 720,
+) );</code></pre>
+
+	</section>
+
+	<hr />
+	<section class="parameters">
+		<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="parameters" tabindex="-1">Parameters <a href="#parameters" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Parameters</span></a></h2>
+		<dl>
+												<dt>$feature</dt>
+								<dd>
+					<p class="desc">
+													<span class="type">(<span class="string">string</span>)</span>
+																			<span class="required">(Required)</span>
+																			<span class="description">The feature being added. Likely core values include:                         
+<ul><li>'admin-bar'                         </li>
+
+<li>'align-wide'                         </li>
+
+<li>'automatic-feed-links'                         </li>
+
+<li>'core-block-patterns'                         </li>
+
+<li>'custom-background'                         </li>
+
+<li>'custom-header'                         </li>
+
+<li>'custom-line-height'                         </li>
+
+<li>'custom-logo'                         </li>
+
+<li>'customize-selective-refresh-widgets'                         </li>
+
+<li>'custom-spacing'                         </li>
+
+<li>'custom-units'                         </li>
+
+<li>'dark-editor-style'                         </li>
+
+<li>'disable-custom-colors'                         </li>
+
+<li>'disable-custom-font-sizes'                         </li>
+
+<li>'editor-color-palette'                         </li>
+
+<li>'editor-gradient-presets'                         </li>
+
+<li>'editor-font-sizes'                         </li>
+
+<li>'editor-styles'                         </li>
+
+<li>'featured-content'                         </li>
+
+<li>'html5'                         </li>
+
+<li>'menus'                         </li>
+
+<li>'post-formats'                         </li>
+
+<li>'post-thumbnails'                         </li>
+
+<li>'responsive-embeds'                         </li>
+
+<li>'starter-content'                         </li>
+
+<li>'title-tag'                         </li>
+
+<li>'wp-block-styles'                         </li>
+
+<li>'widgets'                         </li>
+
+<li>'widgets-block-editor'</li></ul></span>
+											</p>
+									</dd>
+												<dt>$args</dt>
+								<dd>
+					<p class="desc">
+													<span class="type">(<span class="mixed">mixed</span>)</span>
+																			<span class="required">(Optional)</span>
+																			<span class="description">extra arguments to pass along with certain features.</span>
+											</p>
+									</dd>
+					</dl>
+	</section>
+	<hr />
+	<section class="return">
+		<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="return" tabindex="-1">Return <a href="#return" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Return</span></a></h2>
+		<p><span class='return-type'>(void|false)</span> Void on success, false on failure.</p>
+	</section>
+	<hr />
+	<section class="explanation">
+		<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="more-information" tabindex="-1">More Information <a href="#more-information" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">More Information</span></a></h2>
+
+		<h3 class="toc-heading" id="features" tabindex="-1">Features <a href="#features" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Features</span></a></h3>
+<h4 class="toc-heading" id="post-formats" tabindex="-1">Post Formats <a href="#post-formats" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Post Formats</span></a></h4>
+<p>This feature enables <a href="../../../../codex.wordpress.org/Post_Formats.html">Post Formats</a> support for a theme. When using <a title="Child Themes" href="../../../../codex.wordpress.org/Child_Themes.html">child themes</a>, be aware that</p>
+<p><code>add_theme_support( 'post-formats' )</code></p>
+<p>will <strong>override</strong> the formats as defined by the parent theme, not add to it.</p>
+<p>To enable the specific formats (see supported formats at <a href="../../../../codex.wordpress.org/Post_Formats.html">Post Formats</a>), use:</p>
+<pre class="brush: php; title: ; notranslate" title="">
+add_theme_support( 'post-formats', array( 'aside', 'gallery' ) );
+</pre>
+<p>To check if there is a &#8216;quote&#8217; post format assigned to the post, use <a href="../has_post_format/index.html">has_post_format()</a>:</p>
+<pre class="brush: php; title: ; notranslate" title="">
+// In your theme single.php, page.php or custom post type
+if ( has_post_format( 'quote' ) ) {
+	echo 'This is a quote.';
+}
+</pre>
+<hr />
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h4 class="toc-heading" id="post-thumbnails" tabindex="-1">Post Thumbnails <a href="#post-thumbnails" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Post Thumbnails</span></a></h4>
+<p>This feature enables <a href="../../../../codex.wordpress.org/Post_Thumbnails.html">Post Thumbnails</a> support for a theme. Note that you can optionally pass a second argument, <code>$args</code>, with an array of the <a href="../../../../codex.wordpress.org/Post_Types.html">Post Types</a> for which you want to enable this feature.</p>
+<pre class="brush: php; title: ; notranslate" title="">
+add_theme_support( 'post-thumbnails' );
+add_theme_support( 'post-thumbnails', array( 'post' ) );          // Posts only
+add_theme_support( 'post-thumbnails', array( 'page' ) );          // Pages only
+add_theme_support( 'post-thumbnails', array( 'post', 'movie' ) ); // Posts and Movies
+</pre>
+<p>This feature must be called before the <a href="../../hooks/init/index.html">&#8216;init&#8217;</a> hook is fired. That means it needs to be placed directly into functions.php or within a function attached to the <a href="../../hooks/after_setup_theme/index.html">&#8216;after_setup_theme&#8217;</a> hook. For custom post types, you can also add post thumbnails using the <a href="../register_post_type/index.html">register_post_type()</a> function as well.</p>
+<p>To display thumbnails in themes index.php or single.php or custom templates, use:</p>
+<pre class="brush: php; title: ; notranslate" title="">
+the_post_thumbnail();
+</pre>
+<p>To check if there is a post thumbnail assigned to the post before displaying it, use:</p>
+<pre class="brush: php; title: ; notranslate" title="">
+if ( has_post_thumbnail() ) {
+	the_post_thumbnail();
+}
+</pre>
+<hr />
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h4 class="toc-heading" id="custom-background" tabindex="-1">Custom Background <a href="#custom-background" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Custom Background</span></a></h4>
+<p>This feature enables <a title="Custom Backgrounds" href="../../../../codex.wordpress.org/Custom_Backgrounds.html">Custom_Backgrounds</a> support for a theme.</p>
+<pre class="brush: php; title: ; notranslate" title="">
+add_theme_support( 'custom-background' );
+</pre>
+<p>Note that you can add default arguments using:</p>
+<section class="source-content">
+<div class="source-code-container">
+<pre class="brush: php; title: ; notranslate" title="">
+$defaults = array(
+	'default-image'          =&gt; '',
+	'default-preset'         =&gt; 'default', // 'default', 'fill', 'fit', 'repeat', 'custom'
+	'default-position-x'     =&gt; 'left',    // 'left', 'center', 'right'
+	'default-position-y'     =&gt; 'top',     // 'top', 'center', 'bottom'
+	'default-size'           =&gt; 'auto',    // 'auto', 'contain', 'cover'
+	'default-repeat'         =&gt; 'repeat',  // 'repeat-x', 'repeat-y', 'repeat', 'no-repeat'
+	'default-attachment'     =&gt; 'scroll',  // 'scroll', 'fixed'
+	'default-color'          =&gt; '',
+	'wp-head-callback'       =&gt; '_custom_background_cb',
+	'admin-head-callback'    =&gt; '',
+	'admin-preview-callback' =&gt; '',
+);
+add_theme_support( 'custom-background', $defaults );
+</pre>
+</div>
+<p class="source-code-links"><span><a href="#" class="show-complete-source">Expand full source code</a><a href="#" class="less-complete-source">Collapse full source code</a></span></p>
+</section>
+<hr />
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h4 class="toc-heading" id="custom-header" tabindex="-1">Custom Header <a href="#custom-header" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Custom Header</span></a></h4>
+<p>This feature enables <a href="../../../../codex.wordpress.org/Custom_Headers.html">Custom_Headers</a> support for a theme.</p>
+<pre class="brush: php; title: ; notranslate" title="">
+add_theme_support( 'custom-header' );
+</pre>
+<p>Note that you can add default arguments using:</p>
+<section class="source-content">
+<div class="source-code-container">
+<pre class="brush: php; title: ; notranslate" title="">
+$defaults = array(
+	'default-image'          =&gt; '',
+	'random-default'         =&gt; false,
+	'width'                  =&gt; 0,
+	'height'                 =&gt; 0,
+	'flex-height'            =&gt; false,
+	'flex-width'             =&gt; false,
+	'default-text-color'     =&gt; '',
+	'header-text'            =&gt; true,
+	'uploads'                =&gt; true,
+	'wp-head-callback'       =&gt; '',
+	'admin-head-callback'    =&gt; '',
+	'admin-preview-callback' =&gt; '',
+	'video'                  =&gt; false,
+	'video-active-callback'  =&gt; 'is_front_page',
+);
+add_theme_support( 'custom-header', $defaults );
+</pre>
+</div>
+<p class="source-code-links"><span><a href="#" class="show-complete-source">Expand full source code</a><a href="#" class="less-complete-source">Collapse full source code</a></span></p>
+</section>
+<hr />
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h4 class="toc-heading" id="custom-logo" tabindex="-1">Custom Logo <a href="#custom-logo" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Custom Logo</span></a></h4>
+<p>This feature, first introduced in <a title="Version 4.5" href="https://wordpress.org/support/wordpress-version/version-4-5/">Version_4.5</a>, enables <a href="../../../../codex.wordpress.org/Theme_Logo.html">Theme_Logo</a> support for a theme.</p>
+<pre class="brush: php; title: ; notranslate" title="">
+add_theme_support( 'custom-logo' );
+</pre>
+<p>Note that you can add default arguments using:</p>
+<pre class="brush: php; title: ; notranslate" title="">
+add_theme_support( 'custom-logo', array(
+	'height'               =&gt; 100,
+	'width'                =&gt; 400,
+	'flex-height'          =&gt; true,
+	'flex-width'           =&gt; true,
+	'header-text'          =&gt; array( 'site-title', 'site-description' ),
+	'unlink-homepage-logo' =&gt; true,
+) );
+</pre>
+<hr />
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h4 class="toc-heading" id="feed-links" tabindex="-1">Feed Links <a href="#feed-links" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Feed Links</span></a></h4>
+<p>This feature enables <a href="../../../../codex.wordpress.org/Automatic_Feed_Links.html">Automatic Feed Links</a> for post and comment in the head. This should be used in place of the deprecated <a href="../automatic_feed_links/index.html">automatic_feed_links()</a> function.</p>
+<pre class="brush: php; title: ; notranslate" title="">
+add_theme_support( 'automatic-feed-links' );
+</pre>
+<hr />
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h4 class="toc-heading" id="html5" tabindex="-1">HTML5 <a href="#html5" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">HTML5</span></a></h4>
+<p>This feature allows the use of <a href="../../../../codex.wordpress.org/Theme_Markup.html">HTML5 markup</a> for the search forms, comment forms, comment lists, gallery, and caption.</p>
+<pre class="brush: php; title: ; notranslate" title="">
+add_theme_support( 'html5', array( 'comment-list', 'comment-form', 'search-form', 'gallery', 'caption', 'style', 'script' ) );
+</pre>
+<hr />
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h4 class="toc-heading" id="title-tag" tabindex="-1">Title Tag <a href="#title-tag" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Title Tag</span></a></h4>
+<p>This feature enables plugins and themes to manage the <a href="../../../../codex.wordpress.org/Title_Tag.html">document title tag</a>. This should be used in place of <a href="../wp_title/index.html">wp_title()</a> function.</p>
+<pre class="brush: php; title: ; notranslate" title="">
+add_theme_support( 'title-tag' );
+</pre>
+<hr />
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h4 class="toc-heading" id="customize-selective-refresh-widgets" tabindex="-1">Customize Selective Refresh Widgets <a href="#customize-selective-refresh-widgets" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Customize Selective Refresh Widgets</span></a></h4>
+<p>This feature enables Selective Refresh for Widgets being managed within the Customizer. This feature became available in WordPress 4.5. For more on why and how Selective Refresh works read <a href="https://make.wordpress.org/core/2016/03/22/implementing-selective-refresh-support-for-widgets/">Implementing Selective Refresh Support for Widgets</a>.</p>
+<pre class="brush: php; title: ; notranslate" title="">
+add_theme_support( 'customize-selective-refresh-widgets' );
+</pre>
+<hr />
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="multisite" tabindex="-1">Multisite <a href="#multisite" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Multisite</span></a></h3>
+<p>To show the &#8220;Featured Image&#8221; meta box in Multisite installation, make sure you update the allowed upload file types, in Network Admin, <a href="../../../../codex.wordpress.org/Network_Admin_Settings_SubPanel.html#Upload_Settings">Network Admin Settings SubPanel#Upload_Settings</a>, Media upload buttons options. Default is <code>jpg jpeg png gif mp3 mov avi wmv midi mid pdf</code>.</p>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="other-notes" tabindex="-1">Other Notes <a href="#other-notes" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Other Notes</span></a></h3>
+<p>The following parameters are read only, and should only be used in the context of <a href="../current_theme_supports/index.html">current_theme_supports()</a>:</p>
+<ul>
+<li><code>sidebars</code>: Use <a href="../register_sidebar/index.html">register_sidebar()</a> or <a href="../register_sidebars/index.html">register_sidebars()</a> instead.</li>
+<li><code>menus</code>: Use <a href="../register_nav_menu/index.html">register_nav_menu()</a> or <a href="../register_nav_menus/index.html">register_nav_menus()</a> instead.</li>
+<li><code>editor-style</code>: Use <a href="../add_editor_style/index.html">add_editor_style()</a> instead.</li>
+</ul>
+	</section>
+	<hr />
+	<section class="source-content">
+		<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="source" tabindex="-1">Source <a href="#source" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Source</span></a></h2>
+		<p>
+			File: <a href="../../files/wp-includes/theme.php/index.html">wp-includes/theme.php</a>		</p>
+
+					<div class="source-code-container">
+				<pre class="brush: php; toolbar: false; first-line: 2519">function add_theme_support( $feature, ...$args ) {
+	global $_wp_theme_features;
+
+	if ( ! $args ) {
+		$args = true;
+	}
+
+	switch ( $feature ) {
+		case 'post-thumbnails':
+			// All post types are already supported.
+			if ( true === get_theme_support( 'post-thumbnails' ) ) {
+				return;
+			}
+
+			/*
+			 * Merge post types with any that already declared their support
+			 * for post thumbnails.
+			 */
+			if ( isset( $args[0] ) &amp;&amp; is_array( $args[0] ) &amp;&amp; isset( $_wp_theme_features['post-thumbnails'] ) ) {
+				$args[0] = array_unique( array_merge( $_wp_theme_features['post-thumbnails'][0], $args[0] ) );
+			}
+
+			break;
+
+		case 'post-formats':
+			if ( isset( $args[0] ) &amp;&amp; is_array( $args[0] ) ) {
+				$post_formats = get_post_format_slugs();
+				unset( $post_formats['standard'] );
+
+				$args[0] = array_intersect( $args[0], array_keys( $post_formats ) );
+			} else {
+				_doing_it_wrong( &quot;add_theme_support( 'post-formats' )&quot;, __( 'You need to pass an array of post formats.' ), '5.6.0' );
+				return false;
+			}
+			break;
+
+		case 'html5':
+			// You can't just pass 'html5', you need to pass an array of types.
+			if ( empty( $args[0] ) ) {
+				// Build an array of types for back-compat.
+				$args = array( 0 =&gt; array( 'comment-list', 'comment-form', 'search-form' ) );
+			} elseif ( ! isset( $args[0] ) || ! is_array( $args[0] ) ) {
+				_doing_it_wrong( &quot;add_theme_support( 'html5' )&quot;, __( 'You need to pass an array of types.' ), '3.6.1' );
+				return false;
+			}
+
+			// Calling 'html5' again merges, rather than overwrites.
+			if ( isset( $_wp_theme_features['html5'] ) ) {
+				$args[0] = array_merge( $_wp_theme_features['html5'][0], $args[0] );
+			}
+			break;
+
+		case 'custom-logo':
+			if ( true === $args ) {
+				$args = array( 0 =&gt; array() );
+			}
+			$defaults = array(
+				'width'                =&gt; null,
+				'height'               =&gt; null,
+				'flex-width'           =&gt; false,
+				'flex-height'          =&gt; false,
+				'header-text'          =&gt; '',
+				'unlink-homepage-logo' =&gt; false,
+			);
+			$args[0]  = wp_parse_args( array_intersect_key( $args[0], $defaults ), $defaults );
+
+			// Allow full flexibility if no size is specified.
+			if ( is_null( $args[0]['width'] ) &amp;&amp; is_null( $args[0]['height'] ) ) {
+				$args[0]['flex-width']  = true;
+				$args[0]['flex-height'] = true;
+			}
+			break;
+
+		case 'custom-header-uploads':
+			return add_theme_support( 'custom-header', array( 'uploads' =&gt; true ) );
+
+		case 'custom-header':
+			if ( true === $args ) {
+				$args = array( 0 =&gt; array() );
+			}
+
+			$defaults = array(
+				'default-image'          =&gt; '',
+				'random-default'         =&gt; false,
+				'width'                  =&gt; 0,
+				'height'                 =&gt; 0,
+				'flex-height'            =&gt; false,
+				'flex-width'             =&gt; false,
+				'default-text-color'     =&gt; '',
+				'header-text'            =&gt; true,
+				'uploads'                =&gt; true,
+				'wp-head-callback'       =&gt; '',
+				'admin-head-callback'    =&gt; '',
+				'admin-preview-callback' =&gt; '',
+				'video'                  =&gt; false,
+				'video-active-callback'  =&gt; 'is_front_page',
+			);
+
+			$jit = isset( $args[0]['__jit'] );
+			unset( $args[0]['__jit'] );
+
+			// Merge in data from previous add_theme_support() calls.
+			// The first value registered wins. (A child theme is set up first.)
+			if ( isset( $_wp_theme_features['custom-header'] ) ) {
+				$args[0] = wp_parse_args( $_wp_theme_features['custom-header'][0], $args[0] );
+			}
+
+			// Load in the defaults at the end, as we need to insure first one wins.
+			// This will cause all constants to be defined, as each arg will then be set to the default.
+			if ( $jit ) {
+				$args[0] = wp_parse_args( $args[0], $defaults );
+			}
+
+			/*
+			 * If a constant was defined, use that value. Otherwise, define the constant to ensure
+			 * the constant is always accurate (and is not defined later,  overriding our value).
+			 * As stated above, the first value wins.
+			 * Once we get to wp_loaded (just-in-time), define any constants we haven't already.
+			 * Constants are lame. Don't reference them. This is just for backward compatibility.
+			 */
+
+			if ( defined( 'NO_HEADER_TEXT' ) ) {
+				$args[0]['header-text'] = ! NO_HEADER_TEXT;
+			} elseif ( isset( $args[0]['header-text'] ) ) {
+				define( 'NO_HEADER_TEXT', empty( $args[0]['header-text'] ) );
+			}
+
+			if ( defined( 'HEADER_IMAGE_WIDTH' ) ) {
+				$args[0]['width'] = (int) HEADER_IMAGE_WIDTH;
+			} elseif ( isset( $args[0]['width'] ) ) {
+				define( 'HEADER_IMAGE_WIDTH', (int) $args[0]['width'] );
+			}
+
+			if ( defined( 'HEADER_IMAGE_HEIGHT' ) ) {
+				$args[0]['height'] = (int) HEADER_IMAGE_HEIGHT;
+			} elseif ( isset( $args[0]['height'] ) ) {
+				define( 'HEADER_IMAGE_HEIGHT', (int) $args[0]['height'] );
+			}
+
+			if ( defined( 'HEADER_TEXTCOLOR' ) ) {
+				$args[0]['default-text-color'] = HEADER_TEXTCOLOR;
+			} elseif ( isset( $args[0]['default-text-color'] ) ) {
+				define( 'HEADER_TEXTCOLOR', $args[0]['default-text-color'] );
+			}
+
+			if ( defined( 'HEADER_IMAGE' ) ) {
+				$args[0]['default-image'] = HEADER_IMAGE;
+			} elseif ( isset( $args[0]['default-image'] ) ) {
+				define( 'HEADER_IMAGE', $args[0]['default-image'] );
+			}
+
+			if ( $jit &amp;&amp; ! empty( $args[0]['default-image'] ) ) {
+				$args[0]['random-default'] = false;
+			}
+
+			// If headers are supported, and we still don't have a defined width or height,
+			// we have implicit flex sizes.
+			if ( $jit ) {
+				if ( empty( $args[0]['width'] ) &amp;&amp; empty( $args[0]['flex-width'] ) ) {
+					$args[0]['flex-width'] = true;
+				}
+				if ( empty( $args[0]['height'] ) &amp;&amp; empty( $args[0]['flex-height'] ) ) {
+					$args[0]['flex-height'] = true;
+				}
+			}
+
+			break;
+
+		case 'custom-background':
+			if ( true === $args ) {
+				$args = array( 0 =&gt; array() );
+			}
+
+			$defaults = array(
+				'default-image'          =&gt; '',
+				'default-preset'         =&gt; 'default',
+				'default-position-x'     =&gt; 'left',
+				'default-position-y'     =&gt; 'top',
+				'default-size'           =&gt; 'auto',
+				'default-repeat'         =&gt; 'repeat',
+				'default-attachment'     =&gt; 'scroll',
+				'default-color'          =&gt; '',
+				'wp-head-callback'       =&gt; '_custom_background_cb',
+				'admin-head-callback'    =&gt; '',
+				'admin-preview-callback' =&gt; '',
+			);
+
+			$jit = isset( $args[0]['__jit'] );
+			unset( $args[0]['__jit'] );
+
+			// Merge in data from previous add_theme_support() calls. The first value registered wins.
+			if ( isset( $_wp_theme_features['custom-background'] ) ) {
+				$args[0] = wp_parse_args( $_wp_theme_features['custom-background'][0], $args[0] );
+			}
+
+			if ( $jit ) {
+				$args[0] = wp_parse_args( $args[0], $defaults );
+			}
+
+			if ( defined( 'BACKGROUND_COLOR' ) ) {
+				$args[0]['default-color'] = BACKGROUND_COLOR;
+			} elseif ( isset( $args[0]['default-color'] ) || $jit ) {
+				define( 'BACKGROUND_COLOR', $args[0]['default-color'] );
+			}
+
+			if ( defined( 'BACKGROUND_IMAGE' ) ) {
+				$args[0]['default-image'] = BACKGROUND_IMAGE;
+			} elseif ( isset( $args[0]['default-image'] ) || $jit ) {
+				define( 'BACKGROUND_IMAGE', $args[0]['default-image'] );
+			}
+
+			break;
+
+		// Ensure that 'title-tag' is accessible in the admin.
+		case 'title-tag':
+			// Can be called in functions.php but must happen before wp_loaded, i.e. not in header.php.
+			if ( did_action( 'wp_loaded' ) ) {
+				_doing_it_wrong(
+					&quot;add_theme_support( 'title-tag' )&quot;,
+					sprintf(
+						/* translators: 1: title-tag, 2: wp_loaded */
+						__( 'Theme support for %1$s should be registered before the %2$s hook.' ),
+						'&lt;code&gt;title-tag&lt;/code&gt;',
+						'&lt;code&gt;wp_loaded&lt;/code&gt;'
+					),
+					'4.1.0'
+				);
+
+				return false;
+			}
+	}
+
+	$_wp_theme_features[ $feature ] = $args;
+}
+</pre>
+			</div>
+			<p class="source-code-links">
+				<span>
+					<a href="#" class="show-complete-source">Expand full source code</a>
+					<a href="#" class="less-complete-source">Collapse full source code</a>
+				</span>
+				<span><a href="https://core.trac.wordpress.org/browser/tags/5.8/src/wp-includes/theme.php#L2519">View on Trac</a></span>
+			</p>
+			</section>
+	<hr />
+	<section class="related">
+		<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="related" tabindex="-1">Related <a href="#related" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Related</span></a></h2>
+
+					<article class="uses">
+				<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="uses" tabindex="-1">Uses <a href="#uses" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Uses</span></a></h3>
+				<table id="uses-table">
+					<caption class="screen-reader-text">Uses</caption>
+					<thead>
+						<tr>
+							<th>Uses</th>
+							<th class="related-desc">Description</th>
+						</tr>
+					</thead>
+					<tbody>
+												<tr>
+							<td>
+								<span>wp-includes/theme.php:</span>
+								<a href="../get_theme_support/index.html">get_theme_support()</a>
+							</td>
+							<td class="related-desc">
+								<p>Gets the theme support arguments passed when registering that support.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/theme.php:</span>
+								<a href="index.html">add_theme_support()</a>
+							</td>
+							<td class="related-desc">
+								<p>Registers theme support for a given feature.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/l10n.php:</span>
+								<a href="../__/index.html">__()</a>
+							</td>
+							<td class="related-desc">
+								<p>Retrieve the translation of $text.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/functions.php:</span>
+								<a href="../_doing_it_wrong/index.html">_doing_it_wrong()</a>
+							</td>
+							<td class="related-desc">
+								<p>Mark something as being incorrectly called.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/functions.php:</span>
+								<a href="../wp_parse_args/index.html">wp_parse_args()</a>
+							</td>
+							<td class="related-desc">
+								<p>Merges user defined arguments into defaults array.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/plugin.php:</span>
+								<a href="../did_action/index.html">did_action()</a>
+							</td>
+							<td class="related-desc">
+								<p>Retrieves the number of times an action has been fired during the current request.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/post-formats.php:</span>
+								<a href="../get_post_format_slugs/index.html">get_post_format_slugs()</a>
+							</td>
+							<td class="related-desc">
+								<p>Retrieves the array of post format slugs.</p>
+							</td>
+						</tr>
+											<tbody>
+				</table>
+
+								<a href="#" class="show-more">Show 2 more uses</a>
+				<a href="#" class="hide-more">Hide more uses</a>
+							</article>
+		
+					<hr />
+			<article class="used-by">
+				<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="used-by" tabindex="-1">Used By <a href="#used-by" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Used By</span></a></h3>
+				<table id="used-by-table">
+					<caption class="screen-reader-text">Used By</caption>
+					<thead>
+						<tr>
+							<th>Used By</th>
+							<th class="related-desc">Description</th>
+						</tr>
+					</thead>
+					<tbody>
+												<tr>
+							<td>
+								<span>wp-includes/theme-templates.php:</span>
+								<a href="../wp_enable_block_templates/index.html">wp_enable_block_templates()</a>
+							</td>
+							<td class="related-desc">
+								<p>Enable the block templates (editor mode) for themes with theme.json by default.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/widgets.php:</span>
+								<a href="../wp_setup_widgets_block_editor/index.html">wp_setup_widgets_block_editor()</a>
+							</td>
+							<td class="related-desc">
+								<p>Enables the widgets block editor. This is hooked into &#8216;after_setup_theme&#8217; so that the block editor is enabled by default but can be disabled by themes.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/theme.php:</span>
+								<a href="../add_editor_style/index.html">add_editor_style()</a>
+							</td>
+							<td class="related-desc">
+								<p>Adds callback for custom TinyMCE editor stylesheets.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/theme.php:</span>
+								<a href="index.html">add_theme_support()</a>
+							</td>
+							<td class="related-desc">
+								<p>Registers theme support for a given feature.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/theme.php:</span>
+								<a href="../_custom_header_background_just_in_time/index.html">_custom_header_background_just_in_time()</a>
+							</td>
+							<td class="related-desc">
+								<p>Registers the internal custom header and background routines.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/theme.php:</span>
+								<a href="../_remove_theme_support/index.html">_remove_theme_support()</a>
+							</td>
+							<td class="related-desc">
+								<p>Do not use. Removes theme support internally without knowledge of those not used by themes directly.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/deprecated.php:</span>
+								<a href="../add_custom_image_header/index.html">add_custom_image_header()</a>
+							</td>
+							<td class="related-desc">
+								<p>Add callbacks for image header display.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/deprecated.php:</span>
+								<a href="../add_custom_background/index.html">add_custom_background()</a>
+							</td>
+							<td class="related-desc">
+								<p>Add callbacks for background image display.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/deprecated.php:</span>
+								<a href="../automatic_feed_links/index.html">automatic_feed_links()</a>
+							</td>
+							<td class="related-desc">
+								<p>Enable/disable automatic general feed link outputting.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/nav-menu.php:</span>
+								<a href="../register_nav_menus/index.html">register_nav_menus()</a>
+							</td>
+							<td class="related-desc">
+								<p>Registers navigation menu locations for a theme.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/widgets.php:</span>
+								<a href="../register_sidebar/index.html">register_sidebar()</a>
+							</td>
+							<td class="related-desc">
+								<p>Builds the definition for a single sidebar and returns the ID.</p>
+							</td>
+						</tr>
+											<tbody>
+				</table>
+
+								<a href="#" class="show-more">Show 6 more used by</a>
+				<a href="#" class="hide-more">Hide more used by</a>
+							</article>
+			</section>
+		<hr />
+	<section class="changelog">
+		<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="changelog" tabindex="-1">Changelog <a href="#changelog" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Changelog</span></a></h2>
+
+		<table>
+			<caption class="screen-reader-text">Changelog</caption>
+			<thead>
+				<tr>
+					<th class="changelog-version">Version</th>
+					<th class="changelog-desc">Description</th>
+				</tr>
+			</thead>
+
+			<tbody>
+									
+					<tr>
+						<td><a href="../../since/5.8.0/index.html" alt="WordPress 5.8.0">5.8.0</a></td>
+						<td><span class="since-description">The <code>widgets-block-editor</code> feature enables the Widgets block editor.</span></td>
+					</tr>
+									
+					<tr>
+						<td><a href="../../since/5.6.0/index.html" alt="WordPress 5.6.0">5.6.0</a></td>
+						<td><span class="since-description">The <code>post-formats</code> feature warns if no array is passed.</span></td>
+					</tr>
+									
+					<tr>
+						<td><a href="../../since/5.5.0/index.html" alt="WordPress 5.5.0">5.5.0</a></td>
+						<td><span class="since-description">The <code>custom-logo</code> feature now also accepts 'unlink-homepage-logo'.</span></td>
+					</tr>
+									
+					<tr>
+						<td><a href="../../since/5.3.0/index.html" alt="WordPress 5.3.0">5.3.0</a></td>
+						<td><span class="since-description">Formalized the existing and already documented <code>...$args</code> parameter              by adding it to the function signature.</span></td>
+					</tr>
+									
+					<tr>
+						<td><a href="../../since/5.0.0/index.html" alt="WordPress 5.0.0">5.0.0</a></td>
+						<td><span class="since-description">The <code>responsive-embeds</code>, <code>align-wide</code>, <code>dark-editor-style</code>, <code>disable-custom-colors</code>,              <code>disable-custom-font-sizes</code>, <code>editor-color-palette</code>, <code>editor-font-sizes</code>,              <code>editor-styles</code>, and <code>wp-block-styles</code> features were added.</span></td>
+					</tr>
+									
+					<tr>
+						<td><a href="../../since/4.7.0/index.html" alt="WordPress 4.7.0">4.7.0</a></td>
+						<td><span class="since-description">The <code>starter-content</code> feature was added.</span></td>
+					</tr>
+									
+					<tr>
+						<td><a href="../../since/4.5.0/index.html" alt="WordPress 4.5.0">4.5.0</a></td>
+						<td><span class="since-description">The <code>customize-selective-refresh-widgets</code> feature was added.</span></td>
+					</tr>
+									
+					<tr>
+						<td><a href="../../since/4.1.0/index.html" alt="WordPress 4.1.0">4.1.0</a></td>
+						<td><span class="since-description">The <code>title-tag</code> feature was added.</span></td>
+					</tr>
+									
+					<tr>
+						<td><a href="../../since/3.9.0/index.html" alt="WordPress 3.9.0">3.9.0</a></td>
+						<td><span class="since-description">The <code>html5</code> feature now also accepts 'gallery' and 'caption'.</span></td>
+					</tr>
+									
+					<tr>
+						<td><a href="../../since/3.6.0/index.html" alt="WordPress 3.6.0">3.6.0</a></td>
+						<td><span class="since-description">The <code>html5</code> feature was added.</span></td>
+					</tr>
+									
+					<tr>
+						<td><a href="../../since/3.4.0/index.html" alt="WordPress 3.4.0">3.4.0</a></td>
+						<td><span class="since-description">The <code>custom-header-uploads</code> feature was deprecated.</span></td>
+					</tr>
+									
+					<tr>
+						<td><a href="../../since/2.9.0/index.html" alt="WordPress 2.9.0">2.9.0</a></td>
+						<td>Introduced.</td>
+					</tr>
+							</tbody>
+		</table>
+	</section>
+
+	<hr />
+	<section class="user-notes">
+		<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="user-contributed-notes" tabindex="-1">User Contributed Notes <a href="#user-contributed-notes" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">User Contributed Notes</span></a></h2>
+		
+<div id="comments" class="comments-area">
+
+			
+		<ol class="comment-list">
+						<li id="comment-3027" data-comment-id="3027" class="comment byuser comment-author-binsaifullah even thread-even depth-1">
+			<article id="div-comment-3027" class="comment-body">
+
+							<a href="#comment-content-3027" class="screen-reader-text">Skip to note 1 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="71db5f0ccf"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="3027" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fadd_theme_support%2F%23comment-3027"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="100% like this"><span class="screen-reader-text">Vote results for this note: </span>8</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="3027" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fadd_theme_support%2F%23comment-3027"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/e28c06c1e6407d5650d9e766496315f1?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/e28c06c1e6407d5650d9e766496315f1?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/binsaifullah/" rel="external nofollow" class="url">Binsaifullah</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-3027">
+							<time datetime="2019-01-03T07:05:25+00:00">
+							3 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-3027">
+				<section class="source-content">
+<div class="source-code-container">
+<pre class="brush: php; title: ; notranslate" title="">
+
+/**
+ * Essential theme supports
+ * */
+function theme_setup(){
+    /** automatic feed link*/
+    add_theme_support( 'automatic-feed-links' );
+
+    /** tag-title **/
+    add_theme_support( 'title-tag' );
+
+    /** post formats */
+    $post_formats = array('aside','image','gallery','video','audio','link','quote','status');
+    add_theme_support( 'post-formats', $post_formats);
+
+    /** post thumbnail **/
+    add_theme_support( 'post-thumbnails' );
+
+    /** HTML5 support **/
+    add_theme_support( 'html5', array( 'comment-list', 'comment-form', 'search-form', 'gallery', 'caption' ) );
+
+    /** refresh widgest **/
+    add_theme_support( 'customize-selective-refresh-widgets' );
+
+    /** custom background **/
+    $bg_defaults = array(
+        'default-image'          =&gt; '',
+        'default-preset'         =&gt; 'default',
+        'default-size'           =&gt; 'cover',
+        'default-repeat'         =&gt; 'no-repeat',
+        'default-attachment'     =&gt; 'scroll',
+    );
+    add_theme_support( 'custom-background', $bg_defaults );
+
+    /** custom header **/
+    $header_defaults = array(
+        'default-image'          =&gt; '',
+        'width'                  =&gt; 300,
+        'height'                 =&gt; 60,
+        'flex-height'            =&gt; true,
+        'flex-width'             =&gt; true,
+        'default-text-color'     =&gt; '',
+        'header-text'            =&gt; true,
+        'uploads'                =&gt; true,
+    );
+    add_theme_support( 'custom-header', $header_defaults );
+
+    /** custom log **/
+    add_theme_support( 'custom-logo', array(
+        'height'      =&gt; 60,
+        'width'       =&gt; 400,
+        'flex-height' =&gt; true,
+        'flex-width'  =&gt; true,
+        'header-text' =&gt; array( 'site-title', 'site-description' ),
+    ) );
+
+
+
+}
+add_action('after_setup_theme','theme_setup');
+</pre>
+</div>
+<p class="source-code-links"><span><a href="#" class="show-complete-source">Expand full source code</a><a href="#" class="less-complete-source">Collapse full source code</a></span></p>
+</section>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-3027' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fadd_theme_support%2F%3Freplytocom%3D3027%23feedback-editor-3027" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-2358" data-comment-id="2358" class="comment byuser comment-author-joyously odd alt thread-odd thread-alt depth-1">
+			<article id="div-comment-2358" class="comment-body">
+
+							<a href="#comment-content-2358" class="screen-reader-text">Skip to note 2 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="f152900eb5"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="2358" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fadd_theme_support%2F%23comment-2358"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="88% like this"><span class="screen-reader-text">Vote results for this note: </span>6</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="2358" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fadd_theme_support%2F%23comment-2358"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/2569964a08cb895916258be5762d4e54?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/2569964a08cb895916258be5762d4e54?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/joyously/" rel="external nofollow" class="url">Joy</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-2358">
+							<time datetime="2017-09-10T18:02:33+00:00">
+							4 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-2358">
+				<p>Feedback:<br />
+There needs to be a section for starter content.<br />
+This page has good explanation <a href="https://make.wordpress.org/core/2016/11/30/starter-content-for-themes-in-4-7/" rel="nofollow ugc">https://make.wordpress.org/core/2016/11/30/starter-content-for-themes-in-4-7/</a><br />
+and this function shows all the default values: <a href="../get_theme_starter_content/index.html" rel="nofollow ugc">https://developer.wordpress.org/reference/functions/get_theme_starter_content/</a></p>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-2358' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fadd_theme_support%2F%3Freplytocom%3D2358%23feedback-editor-2358" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-3120" data-comment-id="3120" class="comment byuser comment-author-bph even thread-even depth-1">
+			<article id="div-comment-3120" class="comment-body">
+
+							<a href="#comment-content-3120" class="screen-reader-text">Skip to note 3 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="9f0026a53e"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="3120" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fadd_theme_support%2F%23comment-3120"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="100% like this"><span class="screen-reader-text">Vote results for this note: </span>6</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="3120" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fadd_theme_support%2F%23comment-3120"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/050e54a57a6e3ad0ff5897b867e983cb?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/050e54a57a6e3ad0ff5897b867e983cb?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/bph/" rel="external nofollow" class="url">Birgit Pauli-Haack</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-3120">
+							<time datetime="2019-03-23T20:54:59+00:00">
+							2 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-3120">
+				<p>Enabling theme support for align full and align wide option for the block editor, use<br />
+<code>add_theme_support( 'align-wide' );</code></p>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-3120' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fadd_theme_support%2F%3Freplytocom%3D3120%23feedback-editor-3120" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-3528" data-comment-id="3528" class="comment byuser comment-author-mattrad odd alt thread-odd thread-alt depth-1">
+			<article id="div-comment-3528" class="comment-body">
+
+							<a href="#comment-content-3528" class="screen-reader-text">Skip to note 4 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="463409d357"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="3528" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fadd_theme_support%2F%23comment-3528"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="100% like this"><span class="screen-reader-text">Vote results for this note: </span>4</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="3528" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fadd_theme_support%2F%23comment-3528"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/bc7d9effac65754a991e13573538914b?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/bc7d9effac65754a991e13573538914b?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/mattrad/" rel="external nofollow" class="url">Matt Radford</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-3528">
+							<time datetime="2019-12-16T10:54:24+00:00">
+							2 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-3528">
+				<p>From WP 5.3, <code>add_theme_support('html5', ['script', 'style']);</code> removes <code>type="text/javascript"</code> and type=&#8221;text/css&#8221; from enqueued scripts and styles.</p>
+<p>See <a href="https://make.wordpress.org/core/2019/10/15/miscellaneous-developer-focused-changes-in-5-3/" rel="nofollow ugc">https://make.wordpress.org/core/2019/10/15/miscellaneous-developer-focused-changes-in-5-3/</a> &#8211; HTML5 Supports Argument for Script and Style Tags</p>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-3528' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fadd_theme_support%2F%3Freplytocom%3D3528%23feedback-editor-3528" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-3561" data-comment-id="3561" class="comment byuser comment-author-cameronjonesweb even thread-even depth-1">
+			<article id="div-comment-3561" class="comment-body">
+
+							<a href="#comment-content-3561" class="screen-reader-text">Skip to note 5 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="fa7d1e845d"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="3561" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fadd_theme_support%2F%23comment-3561"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="100% like this"><span class="screen-reader-text">Vote results for this note: </span>2</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="3561" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fadd_theme_support%2F%23comment-3561"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/95d0c3a6511821a3f93807930a329cbb?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/95d0c3a6511821a3f93807930a329cbb?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/cameronjonesweb/" rel="external nofollow" class="url">Cameron Jones</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-3561">
+							<time datetime="2020-01-13T02:22:39+00:00">
+							2 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-3561">
+				<p>To determine if the theme support exists (and retrieve it&#8217;s arguments), use <code>get_theme_support( $feature )</code></p>
+<p><a href="../get_theme_support/index.html" rel="nofollow ugc">https://developer.wordpress.org/reference/functions/get_theme_support/</a></p>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-3561' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fadd_theme_support%2F%3Freplytocom%3D3561%23feedback-editor-3561" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-3525" data-comment-id="3525" class="comment byuser comment-author-puggan odd alt thread-odd thread-alt depth-1">
+			<article id="div-comment-3525" class="comment-body">
+
+							<a href="#comment-content-3525" class="screen-reader-text">Skip to note 6 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="7deb7c6bd1"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="3525" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fadd_theme_support%2F%23comment-3525"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="100% like this"><span class="screen-reader-text">Vote results for this note: </span>1</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="3525" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fadd_theme_support%2F%23comment-3525"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/6b2c25d2a3229845fb4bbb98120d95e4?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/6b2c25d2a3229845fb4bbb98120d95e4?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/puggan/" rel="external nofollow" class="url">puggan</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-3525">
+							<time datetime="2019-12-13T14:28:12+00:00">
+							2 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-3525">
+				<p>The Changelog missing the row:<br />
+&#8220;The html5 feature now also accepts &#8216;script and &#8216;style&#8217;.&#8221;</p>
+<p>Don&#8217;t know what version it was added in, but its there in 5.3.1 atleast.</p>
+<p>Exemple of use:<br />
+<a href="https://github.com/WordPress/WordPress/blob/48692b65241fcbadcd686c3f66696e16883a0e83/wp-includes/theme.php#L708" rel="nofollow ugc">https://github.com/WordPress/WordPress/blob/48692b65241fcbadcd686c3f66696e16883a0e83/wp-includes/theme.php#L708</a><br />
+<a href="https://github.com/WordPress/WordPress/blob/48692b65241fcbadcd686c3f66696e16883a0e83/wp-includes/theme.php#L3233" rel="nofollow ugc">https://github.com/WordPress/WordPress/blob/48692b65241fcbadcd686c3f66696e16883a0e83/wp-includes/theme.php#L3233</a></p>
+<p>Commit:<br />
+<a href="https://github.com/WordPress/WordPress/commit/252628652e7706cabb3913f4aa57218fa5012e4b" rel="nofollow ugc">https://github.com/WordPress/WordPress/commit/252628652e7706cabb3913f4aa57218fa5012e4b</a></p>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-3525' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fadd_theme_support%2F%3Freplytocom%3D3525%23feedback-editor-3525" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-3661" data-comment-id="3661" class="comment byuser comment-author-skorasaurus even thread-even depth-1">
+			<article id="div-comment-3661" class="comment-body">
+
+							<a href="#comment-content-3661" class="screen-reader-text">Skip to note 7 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="def9a465e5"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="3661" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fadd_theme_support%2F%23comment-3661"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="100% like this"><span class="screen-reader-text">Vote results for this note: </span>1</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="3661" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fadd_theme_support%2F%23comment-3661"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/3f2a3925f19f9684808db864d290682c?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/3f2a3925f19f9684808db864d290682c?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/skorasaurus/" rel="external nofollow" class="url">Will Skora</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-3661">
+							<time datetime="2020-02-25T17:21:36+00:00">
+							2 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-3661">
+				<p>Note that you have to individually call each of these; including multiple ones as an array <code><br />
+add_theme_support( array( 'editor-styles', 'align-wide' ) )<br />
+</code></p>
+<p>Instead, you must call them individually:</p>
+<pre class="brush: php; title: ; notranslate" title="">add_theme_support( 'editor-styles' );
+add_theme_support( 'align-wide' );</pre>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-3661' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fadd_theme_support%2F%3Freplytocom%3D3661%23feedback-editor-3661" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-4101" data-comment-id="4101" class="comment byuser comment-author-marcio-zebedeu odd alt thread-odd thread-alt depth-1">
+			<article id="div-comment-4101" class="comment-body">
+
+							<a href="#comment-content-4101" class="screen-reader-text">Skip to note 8 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="7f22daadd5"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="4101" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fadd_theme_support%2F%23comment-4101"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="100% like this"><span class="screen-reader-text">Vote results for this note: </span>1</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="4101" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fadd_theme_support%2F%23comment-4101"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/40e3de6aca1fa140bdf5dd4cdad3ed36?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/40e3de6aca1fa140bdf5dd4cdad3ed36?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/marcio-zebedeu/" rel="external nofollow" class="url">Marcio Zebedeu</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-4101">
+							<time datetime="2020-08-01T17:23:16+00:00">
+							1 year ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-4101">
+				<p>Declare support for navigation widgets markup.</p>
+<pre class="brush: php; title: ; notranslate" title="">add_theme_support( 'html5', array( 'navigation-widgets' ) );</pre>
+<p>&#8220;Theme developers are highly encouraged to utilize this improvement in their themes. This new theme support feature is an easy way to improve semantics and accessibility in all of the sites using your theme.&#8221;</p>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-4101' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fadd_theme_support%2F%3Freplytocom%3D4101%23feedback-editor-4101" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-2676" data-comment-id="2676" class="comment byuser comment-author-justinmahar even thread-even depth-1">
+			<article id="div-comment-2676" class="comment-body">
+
+							<a href="#comment-content-2676" class="screen-reader-text">Skip to note 9 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="c4d2145c87"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="2676" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fadd_theme_support%2F%23comment-2676"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="50% like this"><span class="screen-reader-text">Vote results for this note: </span>0</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="2676" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fadd_theme_support%2F%23comment-2676"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/0b11ba7811185e5a69f7ea76eee05df6?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/0b11ba7811185e5a69f7ea76eee05df6?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/justinmahar/" rel="external nofollow" class="url">justinmahar</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-2676">
+							<time datetime="2018-05-04T21:46:55+00:00">
+							3 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-2676">
+				<p><strong>Starter Content #</strong></p>
+<p>Defines and registers starter content to showcase themes on new sites.</p>
+<section class="source-content">
+<div class="source-code-container">
+<pre class="brush: php; title: ; notranslate" title="">
+add_theme_support( 'starter-content', array(
+    // Place widgets in the desired locations (such as sidebar or footer).
+    // Example widgets: archives, calendar, categories, meta, recent-comments, recent-posts, 
+    //                  search, text_business_info, text_about
+    'widgets'     =&gt; array( 'sidebar-1' =&gt; array( 'search', 'categories', 'meta'), ),
+    // Specify pages to create, and optionally add custom thumbnails to them.
+    // Note: For thumbnails, use attachment symbolic references in {{double-curly-braces}}.
+    // Post options: post_type, post_title, post_excerpt, post_name (slug), post_content, 
+    //               menu_order, comment_status, thumbnail (featured image ID), and template
+    'posts'       =&gt; array( 'home', 'about', 'blog' =&gt; array( 'thumbnail' =&gt; '{{image-cafe}}' ), ),
+    // Create custom image attachments used as post thumbnails for pages.
+    // Note: You can reference these attachment IDs in the posts section above. Example: {{image-cafe}}
+    'attachments' =&gt; array( 'image-cafe' =&gt; array( 'post_title' =&gt; 'Cafe', 'file' =&gt; 'assets/images/cafe.jpg' ), ),
+    // Assign options defaults, such as front page settings.
+    // The 'show_on_front' value can be 'page' to show a specified page, or 'posts' to show your latest posts.
+    // Note: Use page ID symbolic references from the posts section above wrapped in {{double-curly-braces}}.
+    'options'     =&gt; array( 'show_on_front'  =&gt; 'page', 'page_on_front' =&gt; '{{home}}', 'page_for_posts' =&gt; '{{blog}}', ),
+	// Set the theme mods.
+    'theme_mods'  =&gt; array( 'panel_1' =&gt; '{{about}}' ),
+	// Set up nav menus.
+    'nav_menus'   =&gt; array( 'top' =&gt; array( 'name' =&gt; 'Top Menu', 'items' =&gt; array( 'link_home', 'page_about', 'page_blog' )), ),
+) );
+</pre>
+</div>
+<p class="source-code-links"><span><a href="#" class="show-complete-source">Expand full source code</a><a href="#" class="less-complete-source">Collapse full source code</a></span></p>
+</section>
+<p>For full examples of each option, you can reference the Twenty Seventeen theme&#8217;s <code>functions.php</code>: </p>
+<p><a href="https://github.com/xwp/wordpress-develop/blob/master/src/wp-content/themes/twentyseventeen/functions.php#L117" rel="nofollow ugc">https://github.com/xwp/wordpress-develop/blob/master/src/wp-content/themes/twentyseventeen/functions.php#L117</a></p>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-2676' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fadd_theme_support%2F%3Freplytocom%3D2676%23feedback-editor-2676" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-4954" data-comment-id="4954" class="comment byuser comment-author-benoitadam odd alt thread-odd thread-alt depth-1">
+			<article id="div-comment-4954" class="comment-body">
+
+							<a href="#comment-content-4954" class="screen-reader-text">Skip to note 10 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="51e2e10bf6"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="4954" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fadd_theme_support%2F%23comment-4954"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="0% like this"><span class="screen-reader-text">Vote results for this note: </span>-1</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="4954" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fadd_theme_support%2F%23comment-4954"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/f1c99c186102fd69ab692e42d841b48d?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/f1c99c186102fd69ab692e42d841b48d?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/benoitadam/" rel="external nofollow" class="url">benoitadam</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-4954">
+							<time datetime="2021-03-24T22:26:13+00:00">
+							5 months ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-4954">
+				<p>&#8220;default-color&#8221; for custom background doesn&#8217;t work</p>
+<p>Solution is to define your own stylesheet class and add the CSS class to the <code>body</code> tag.</p>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-4954' class='feedback hide-if-js'>
+<h4 class='feedback-title'>Feedback</h4>
+<ul class='children'>
+			<li id="comment-4955" data-comment-id="4955" class="comment byuser comment-author-crstauf even depth-2">
+			<article id="div-comment-4955" class="comment-body">
+
+			
+				<div class="comment-content" id="comment-content-4955">
+				<p>The <code>default-color</code> argument doesn&#8217;t actually set the background color: the theme has to implement the default color using CSS. &mdash; By <cite class="fn"><a href="https://profiles.wordpress.org/crstauf/" rel="external nofollow" class="url">crstauf</a></cite> &mdash;  <a class="comment-date" href="index.html#comment-4955"><time datetime="2021-03-25T03:03:30+00:00">5 months ago</time></a></p>
+				</div><!-- .comment-content -->
+
+						</article>
+			</li>
+					</ul>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fadd_theme_support%2F%3Freplytocom%3D4954%23feedback-editor-4954" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+		</ol><!-- .comment-list -->
+
+		
+	
+	
+			<div id="respond" class="comment-respond">
+		<h3 id="reply-title" class="comment-reply-title"> <small></small></h3><p>You must <a href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fadd_theme_support%2F%23comments">log in</a> before being able to contribute a note or feedback.</p>	</div><!-- #respond -->
+		
+	
+</div><!-- #comments -->
+	</section>
+</div>
+
+</article>
+
+			
+		
+		</main><!-- #main -->
+	</div><!-- #primary -->
+	</div><!-- #content -->
+
+</div><!-- #page -->
+
+
+<div id="wporg-footer">
+	<div class="wrapper">
+		<ul>
+			<li><a href="http://wordpress.org/about/" title="An introduction to the WordPress project">About</a></li>
+			<li><a href="http://wordpress.org/news/" title="News and Updates">Blog</a></li>
+			<li><a href="http://wordpress.org/hosting/" title="Recommended web hosting providers">Hosting</a></li>
+			<li><a href="https://wordpressfoundation.org/donate/" title="Donate to the WordPress Foundation">Donate</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://wordpress.org/support/" title="Forums, documentation, and other resources">Support</a></li>
+			<li><a href="../../../index.html" title="Resources for WordPress developers">Developers</a></li>
+			<li><a href="http://make.wordpress.org/" title="Give back to WordPress through code, support, translation and more">Get Involved</a></li>
+			<li><a href="http://learn.wordpress.org/" title="Workshops and training materials">Learn</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://wordpress.org/showcase/" title="Some of the best WordPress sites on the Web">Showcase</a></li>
+			<li><a href="http://wordpress.org/plugins/" title="Add extra functionality to WordPress">Plugins</a></li>
+			<li><a href="http://wordpress.org/themes/" title="Make your WordPress pretty">Themes</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://central.wordcamp.org/" title="Find a WordPress event near you">WordCamp</a></li>
+			<li><a href="http://wordpress.tv/" title="Videos, tutorials, and WordCamp sessions">WordPress.TV</a></li>
+			<li><a href="http://buddypress.org/" title="A set of plugins to transform your WordPress into a social network">BuddyPress</a></li>
+			<li><a href="http://bbpress.org/" title="Fast, slick forums built on WordPress">bbPress</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://wordpress.com/?ref=wporg-footer" title="Hassle-free WordPress hosting">WordPress.com</a></li>
+			<li><a href="http://ma.tt/" title="Co-founder of WordPress, an example of what WordPress can do">Matt</a></li>
+			<li><a href="http://wordpress.org/about/privacy/" title="WordPress.org Privacy Policy">Privacy</a></li>
+			<li><a href="https://publiccode.eu/" target="_blank">Public Code</a></li>
+		</ul>
+
+		<ul class="social-media-links">
+			<li><span class="dashicons dashicons-twitter"></span><a href="https://twitter.com/WordPress" title="Follow @WordPress on Twitter">@WordPress</a></li>
+			<li><span class="dashicons dashicons-facebook"></span><a href="https://www.facebook.com/WordPress/" title="Like WordPress on Facebook">WordPress</a></li>
+		</ul>
+	</div>
+
+		<p class="cip cip-image">Code is Poetry.</p>
+</div>
+
+<script src="../../../../s.w.org/style/js/navigation.min.js?20190128"></script>
+
+<script type='text/javascript'>
+	(function(){
+		var corecss = document.createElement('link');
+		var themecss = document.createElement('link');
+		var corecssurl = "../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shCore.css?ver=3.0.9b";
+		if ( corecss.setAttribute ) {
+				corecss.setAttribute( "rel", "stylesheet" );
+				corecss.setAttribute( "type", "text/css" );
+				corecss.setAttribute( "href", corecssurl );
+		} else {
+				corecss.rel = "stylesheet";
+				corecss.href = corecssurl;
+		}
+		document.head.appendChild( corecss );
+		var themecssurl = "../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shThemeDefault.css?ver=3.0.9b";
+		if ( themecss.setAttribute ) {
+				themecss.setAttribute( "rel", "stylesheet" );
+				themecss.setAttribute( "type", "text/css" );
+				themecss.setAttribute( "href", themecssurl );
+		} else {
+				themecss.rel = "stylesheet";
+				themecss.href = themecssurl;
+		}
+		document.head.appendChild( themecss );
+	})();
+	SyntaxHighlighter.config.strings.expandSource = '+ expand source';
+	SyntaxHighlighter.config.strings.help = '?';
+	SyntaxHighlighter.config.strings.alert = 'SyntaxHighlighter\n\n';
+	SyntaxHighlighter.config.strings.noBrush = 'Can\'t find brush for: ';
+	SyntaxHighlighter.config.strings.brushNotHtmlScript = 'Brush wasn\'t configured for html-script option: ';
+	SyntaxHighlighter.defaults['pad-line-numbers'] = false;
+	SyntaxHighlighter.defaults['toolbar'] = false;
+	SyntaxHighlighter.all();
+
+	// Infinite scroll support
+	if ( typeof( jQuery ) !== 'undefined' ) {
+		jQuery( function( $ ) {
+			$( document.body ).on( 'post-load', function() {
+				SyntaxHighlighter.highlight();
+			} );
+		} );
+	}
+</script>
+<link rel='stylesheet' id='buttons-css'  href='../../../wp-includes/css/buttons.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<script type='text/javascript' src='../../../wp-includes/js/hoverintent-js.min.js?ver=2.2.1' id='hoverintent-js-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/admin-bar.min.js?ver=5.9-alpha-51701' id='admin-bar-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/navigation.js?ver=20181209' id='wporg-developer-navigation-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/skip-link-focus-fix.js?ver=20130115' id='wporg-developer-skip-link-focus-fix-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/search.js?ver=20150430' id='wporg-developer-search-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/menu.js?ver=20180201' id='wporg-developer-menu-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/awesomplete.min.js?ver=20160322' id='awesomplete-js'></script>
+<script type='text/javascript' id='autocomplete-js-extra'>
+/* <![CDATA[ */
+var autocomplete = {"ajaxurl":"https:\/\/developer.wordpress.org\/wp-admin\/admin-ajax.php","nonce":"8a60f70c4b"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/autocomplete.js?ver=20160524' id='autocomplete-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/function-reference.js?ver=20180724' id='wporg-developer-function-reference-js'></script>
+<script type='text/javascript' id='quicktags-js-extra'>
+/* <![CDATA[ */
+var quicktagsL10n = {"closeAllOpenTags":"Close all open tags","closeTags":"close tags","enterURL":"Enter the URL","enterImageURL":"Enter the URL of the image","enterImageDescription":"Enter a description of the image","textdirection":"text direction","toggleTextdirection":"Toggle Editor Text Direction","dfw":"Distraction-free writing mode","strong":"Bold","strongClose":"Close bold tag","em":"Italic","emClose":"Close italic tag","link":"Insert link","blockquote":"Blockquote","blockquoteClose":"Close blockquote tag","del":"Deleted text (strikethrough)","delClose":"Close deleted text tag","ins":"Inserted text","insClose":"Close inserted text tag","image":"Insert image","ul":"Bulleted list","ulClose":"Close bulleted list tag","ol":"Numbered list","olClose":"Close numbered list tag","li":"List item","liClose":"Close list item tag","code":"Code","codeClose":"Close code tag","more":"Insert Read More tag"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-includes/js/quicktags.min.js?ver=5.9-alpha-51701' id='quicktags-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/user-notes.js?ver=20200110' id='wporg-developer-user-notes-js'></script>
+<script type='text/javascript' id='wporg-developer-user-notes-feedback-js-extra'>
+/* <![CDATA[ */
+var wporg_note_feedback = {"show":"Show Feedback","hide":"Hide Feedback"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/user-notes-feedback.js?ver=20181023' id='wporg-developer-user-notes-feedback-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/tabs.js?ver=20160824' id='wporg-developer-tabs-js'></script>
+<script type='text/javascript' id='wporg-developer-preview-js-extra'>
+/* <![CDATA[ */
+var wporg_note_preview = {"ajaxurl":"https:\/\/developer.wordpress.org\/wp-admin\/admin-ajax.php","nonce":"504933b60e","preview":"preview note","preview_empty":"Nothing to preview","is_admin":""};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/user-notes-preview.js?ver=20200111' id='wporg-developer-preview-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/wp-embed.min.js?ver=5.9-alpha-51701' id='wp-embed-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/vendor/regenerator-runtime.min.js?ver=0.13.7' id='regenerator-runtime-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/vendor/wp-polyfill.min.js?ver=3.15.0' id='wp-polyfill-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/dom-ready.min.js?ver=71883072590656bf22c74c7b887df3dd' id='wp-dom-ready-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/hooks.min.js?ver=a7edae857aab69d69fa10d5aef23a5de' id='wp-hooks-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/i18n.min.js?ver=5f1269854226b4dd90450db411a12b79' id='wp-i18n-js'></script>
+<script type='text/javascript' id='wp-i18n-js-after'>
+wp.i18n.setLocaleData( { 'text direction\u0004ltr': [ 'ltr' ] } );
+</script>
+<script type='text/javascript' id='wp-a11y-js-translations'>
+( function( domain, translations ) {
+	var localeData = translations.locale_data[ domain ] || translations.locale_data.messages;
+	localeData[""].domain = domain;
+	wp.i18n.setLocaleData( localeData, domain );
+} )( "default", { "locale_data": { "messages": { "": {} } } } );
+</script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/a11y.min.js?ver=0ac8327cc1c40dcfdf29716affd7ac63' id='wp-a11y-js'></script>
+<script type='text/javascript' id='wplink-js-extra'>
+/* <![CDATA[ */
+var wpLinkL10n = {"title":"Insert\/edit link","update":"Update","save":"Add Link","noTitle":"(no title)","noMatchesFound":"No results found.","linkSelected":"Link selected.","linkInserted":"Link inserted.","minInputLength":"3"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-includes/js/wplink.min.js?ver=5.9-alpha-51701' id='wplink-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/jquery/ui/core.min.js?ver=1.12.1' id='jquery-ui-core-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/jquery/ui/menu.min.js?ver=1.12.1' id='jquery-ui-menu-js'></script>
+<script type='text/javascript' id='jquery-ui-autocomplete-js-extra'>
+/* <![CDATA[ */
+var uiAutocompleteL10n = {"noResults":"No results found.","oneResult":"1 result found. Use up and down arrow keys to navigate.","manyResults":"%d results found. Use up and down arrow keys to navigate.","itemSelected":"Item selected."};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-includes/js/jquery/ui/autocomplete.min.js?ver=1.12.1' id='jquery-ui-autocomplete-js'></script>
+
+		<script type="text/javascript">
+		tinyMCEPreInit = {
+			baseURL: "https://developer.wordpress.org/wp-includes/js/tinymce",
+			suffix: ".min",
+						mceInit: {},
+			qtInit: {'comment':{id:"comment",buttons:"strong,em,ul,ol,li,link"}},
+			ref: {plugins:"",theme:"modern",language:""},
+			load_ext: function(url,lang){var sl=tinymce.ScriptLoader;sl.markDone(url+'/langs/'+lang+'.js');sl.markDone(url+'/langs/'+lang+'_dlg.js');}
+		};
+		</script>
+				<script type="text/javascript">
+		var ajaxurl = "../../../wp-admin/admin-ajax.html";
+		( function() {
+			var initialized = [];
+			var initialize  = function() {
+				var init, id, inPostbox, $wrap;
+				var readyState = document.readyState;
+
+				if ( readyState !== 'complete' && readyState !== 'interactive' ) {
+					return;
+				}
+
+				for ( id in tinyMCEPreInit.mceInit ) {
+					if ( initialized.indexOf( id ) > -1 ) {
+						continue;
+					}
+
+					init      = tinyMCEPreInit.mceInit[id];
+					$wrap     = tinymce.$( '#wp-' + id + '-wrap' );
+					inPostbox = $wrap.parents( '.postbox' ).length > 0;
+
+					if (
+						! init.wp_skip_init &&
+						( $wrap.hasClass( 'tmce-active' ) || ! tinyMCEPreInit.qtInit.hasOwnProperty( id ) ) &&
+						( readyState === 'complete' || ( ! inPostbox && readyState === 'interactive' ) )
+					) {
+						tinymce.init( init );
+						initialized.push( id );
+
+						if ( ! window.wpActiveEditor ) {
+							window.wpActiveEditor = id;
+						}
+					}
+				}
+			}
+
+			if ( typeof tinymce !== 'undefined' ) {
+				if ( tinymce.Env.ie && tinymce.Env.ie < 11 ) {
+					tinymce.$( '.wp-editor-wrap ' ).removeClass( 'tmce-active' ).addClass( 'html-active' );
+				} else {
+					if ( document.readyState === 'complete' ) {
+						initialize();
+					} else {
+						document.addEventListener( 'readystatechange', initialize );
+					}
+				}
+			}
+
+			if ( typeof quicktags !== 'undefined' ) {
+				for ( id in tinyMCEPreInit.qtInit ) {
+					quicktags( tinyMCEPreInit.qtInit[id] );
+
+					if ( ! window.wpActiveEditor ) {
+						window.wpActiveEditor = id;
+					}
+				}
+			}
+		}());
+		</script>
+				<div id="wp-link-backdrop" style="display: none"></div>
+		<div id="wp-link-wrap" class="wp-core-ui" style="display: none" role="dialog" aria-labelledby="link-modal-title">
+		<form id="wp-link" tabindex="-1">
+		<input type="hidden" id="_ajax_linking_nonce" name="_ajax_linking_nonce" value="86f5a0a85d" />		<h1 id="link-modal-title">Insert/edit link</h1>
+		<button type="button" id="wp-link-close"><span class="screen-reader-text">Close</span></button>
+		<div id="link-selector">
+			<div id="link-options">
+				<p class="howto" id="wplink-enter-url">Enter the destination URL</p>
+				<div>
+					<label><span>URL</span>
+					<input id="wp-link-url" type="text" aria-describedby="wplink-enter-url" /></label>
+				</div>
+				<div class="wp-link-text-field">
+					<label><span>Link Text</span>
+					<input id="wp-link-text" type="text" /></label>
+				</div>
+				<div class="link-target">
+					<label><span></span>
+					<input type="checkbox" id="wp-link-target" /> Open link in a new tab</label>
+				</div>
+			</div>
+			<p class="howto" id="wplink-link-existing-content">Or link to existing content</p>
+			<div id="search-panel">
+				<div class="link-search-wrapper">
+					<label>
+						<span class="search-label">Search</span>
+						<input type="search" id="wp-link-search" class="link-search-field" autocomplete="off" aria-describedby="wplink-link-existing-content" />
+						<span class="spinner"></span>
+					</label>
+				</div>
+				<div id="search-results" class="query-results" tabindex="0">
+					<ul></ul>
+					<div class="river-waiting">
+						<span class="spinner"></span>
+					</div>
+				</div>
+				<div id="most-recent-results" class="query-results" tabindex="0">
+					<div class="query-notice" id="query-notice-message">
+						<em class="query-notice-default">No search term specified. Showing recent items.</em>
+						<em class="query-notice-hint screen-reader-text">Search or use up and down arrow keys to select an item.</em>
+					</div>
+					<ul></ul>
+					<div class="river-waiting">
+						<span class="spinner"></span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="submitbox">
+			<div id="wp-link-cancel">
+				<button type="button" class="button">Cancel</button>
+			</div>
+			<div id="wp-link-update">
+				<input type="submit" value="Add Link" class="button button-primary" id="wp-link-submit" name="wp-link-submit">
+			</div>
+		</div>
+		</form>
+		</div>
+		</body>
+
+<!-- Mirrored from developer.wordpress.org/reference/functions/add_theme_support/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 31 Aug 2021 16:21:52 GMT -->
+</html>

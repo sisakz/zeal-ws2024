@@ -1,0 +1,1028 @@
+<html><!-- Mirrored from www.php.net/manual/en/function.mail.php by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 11 Sep 2021 06:45:43 GMT --><!-- Added by HTTrack --><head><meta http-equiv="content-type" content="text/html;charset=utf-8"><!-- /Added by HTTrack -->
+
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>mail</title>
+
+ <link rel="shortcut icon" href="../../favicon.ico">
+ <link rel="search" type="application/opensearchdescription+xml" href="http://php.net/phpnetimprovedsearch.src" title="Add PHP.net search">
+ <link rel="alternate" type="application/atom+xml" href="https://www.php.net/releases/feed.php" title="PHP Release feed">
+ <link rel="alternate" type="application/atom+xml" href="https://www.php.net/feed.atom" title="PHP: Hypertext Preprocessor">
+
+ <link rel="canonical" href="function.mail.html">
+ <link rel="shorturl" href="https://www.php.net/mail">
+ <link rel="alternate" href="https://www.php.net/mail" hreflang="x-default">
+
+ <link rel="contents" href="index-2.html">
+ <link rel="index" href="ref.mail.html">
+ <link rel="prev" href="function.ezmlm-hash.html">
+ <link rel="next" href="book.mailparse.html">
+
+ <link rel="alternate" href="function.mail.html" hreflang="en">
+ <link rel="alternate" href="https://www.php.net/manual/pt_BR/function.mail.php" hreflang="pt_BR">
+ <link rel="alternate" href="https://www.php.net/manual/zh/function.mail.php" hreflang="zh">
+ <link rel="alternate" href="https://www.php.net/manual/fr/function.mail.php" hreflang="fr">
+ <link rel="alternate" href="https://www.php.net/manual/de/function.mail.php" hreflang="de">
+ <link rel="alternate" href="https://www.php.net/manual/ja/function.mail.php" hreflang="ja">
+ <link rel="alternate" href="https://www.php.net/manual/ro/function.mail.php" hreflang="ro">
+ <link rel="alternate" href="https://www.php.net/manual/ru/function.mail.php" hreflang="ru">
+ <link rel="alternate" href="https://www.php.net/manual/es/function.mail.php" hreflang="es">
+ <link rel="alternate" href="https://www.php.net/manual/tr/function.mail.php" hreflang="tr">
+
+<link rel="stylesheet" type="text/css" href="../../cached0aba.css?t=1539771603&amp;f=/fonts/Fira/fira.css" media="screen">
+<link rel="stylesheet" type="text/css" href="../../cached2ecf.css?t=1539765004&amp;f=/fonts/Font-Awesome/css/fontello.css" media="screen">
+<link rel="stylesheet" type="text/css" href="../../cachedba57.css?t=1606338002&amp;f=/styles/theme-base.css" media="screen">
+<link rel="stylesheet" type="text/css" href="../../cached3afa.css?t=1627831203&amp;f=/styles/theme-medium.css" media="screen">
+
+ <!--[if lte IE 7]>
+ <link rel="stylesheet" type="text/css" href="https://www.php.net/styles/workarounds.ie7.css" media="screen">
+ <![endif]-->
+
+ <!--[if lte IE 8]>
+ <script>
+  window.brokenIE = true;
+ </script>
+ <![endif]-->
+
+ <!--[if lte IE 9]>
+ <link rel="stylesheet" type="text/css" href="https://www.php.net/styles/workarounds.ie9.css" media="screen">
+ <![endif]-->
+
+ <!--[if IE]>
+ <script src="https://www.php.net/js/ext/html5.js"></script>
+ <![endif]-->
+
+ <base>
+
+
+</head>
+<body class="docs " style="">
+
+
+<div class="headsup"><a href="https://www.php.net/conferences/index.php#id2021-09-08-1">Longhorn PHP 2021</a></div>
+<nav id="trick"><div><dl>
+<dt><a href="getting-started.html">Getting Started</a></dt>
+	<dd><a href="introduction.html">Introduction</a></dd>
+	<dd><a href="tutorial.html">A simple tutorial</a></dd>
+<dt><a href="langref.html">Language Reference</a></dt>
+	<dd><a href="language.basic-syntax.html">Basic syntax</a></dd>
+	<dd><a href="language.types.html">Types</a></dd>
+	<dd><a href="language.variables.html">Variables</a></dd>
+	<dd><a href="language.constants.html">Constants</a></dd>
+	<dd><a href="language.expressions.html">Expressions</a></dd>
+	<dd><a href="language.operators.html">Operators</a></dd>
+	<dd><a href="language.control-structures.html">Control Structures</a></dd>
+	<dd><a href="language.functions.html">Functions</a></dd>
+	<dd><a href="language.oop5.html">Classes and Objects</a></dd>
+	<dd><a href="language.namespaces.html">Namespaces</a></dd>
+	<dd><a href="language.errors.html">Errors</a></dd>
+	<dd><a href="language.exceptions.html">Exceptions</a></dd>
+	<dd><a href="language.generators.html">Generators</a></dd>
+	<dd><a href="language.attributes.html">Attributes</a></dd>
+	<dd><a href="language.references.html">References Explained</a></dd>
+	<dd><a href="reserved.variables.html">Predefined Variables</a></dd>
+	<dd><a href="reserved.exceptions.html">Predefined Exceptions</a></dd>
+	<dd><a href="reserved.interfaces.html">Predefined Interfaces and Classes</a></dd>
+	<dd><a href="context.html">Context options and parameters</a></dd>
+	<dd><a href="wrappers.html">Supported Protocols and Wrappers</a></dd>
+</dl>
+<dl>
+<dt><a href="security.html">Security</a></dt>
+	<dd><a href="security.intro.html">Introduction</a></dd>
+	<dd><a href="security.general.html">General considerations</a></dd>
+	<dd><a href="security.cgi-bin.html">Installed as CGI binary</a></dd>
+	<dd><a href="security.apache.html">Installed as an Apache module</a></dd>
+	<dd><a href="security.sessions.html">Session Security</a></dd>
+	<dd><a href="security.filesystem.html">Filesystem Security</a></dd>
+	<dd><a href="security.database.html">Database Security</a></dd>
+	<dd><a href="security.errors.html">Error Reporting</a></dd>
+	<dd><a href="security.variables.html">User Submitted Data</a></dd>
+	<dd><a href="security.hiding.html">Hiding PHP</a></dd>
+	<dd><a href="security.current.html">Keeping Current</a></dd>
+<dt><a href="features.html">Features</a></dt>
+	<dd><a href="features.http-auth.html">HTTP authentication with PHP</a></dd>
+	<dd><a href="features.cookies.html">Cookies</a></dd>
+	<dd><a href="features.sessions.html">Sessions</a></dd>
+	<dd><a href="features.xforms.html">Dealing with XForms</a></dd>
+	<dd><a href="features.file-upload.html">Handling file uploads</a></dd>
+	<dd><a href="features.remote-files.html">Using remote files</a></dd>
+	<dd><a href="features.connection-handling.html">Connection handling</a></dd>
+	<dd><a href="features.persistent-connections.html">Persistent Database Connections</a></dd>
+	<dd><a href="features.commandline.html">Command line usage</a></dd>
+	<dd><a href="features.gc.html">Garbage Collection</a></dd>
+	<dd><a href="features.dtrace.html">DTrace Dynamic Tracing</a></dd>
+</dl>
+<dl>
+<dt><a href="funcref.html">Function Reference</a></dt>
+	<dd><a href="refs.basic.php.html">Affecting PHP's Behaviour</a></dd>
+	<dd><a href="refs.utilspec.audio.html">Audio Formats Manipulation</a></dd>
+	<dd><a href="refs.remote.auth.html">Authentication Services</a></dd>
+	<dd><a href="refs.utilspec.cmdline.html">Command Line Specific Extensions</a></dd>
+	<dd><a href="refs.compression.html">Compression and Archive Extensions</a></dd>
+	<dd><a href="refs.crypto.html">Cryptography Extensions</a></dd>
+	<dd><a href="refs.database.html">Database Extensions</a></dd>
+	<dd><a href="refs.calendar.html">Date and Time Related Extensions</a></dd>
+	<dd><a href="refs.fileprocess.file.html">File System Related Extensions</a></dd>
+	<dd><a href="refs.international.html">Human Language and Character Encoding Support</a></dd>
+	<dd><a href="refs.utilspec.image.html">Image Processing and Generation</a></dd>
+	<dd><a href="refs.remote.mail.html">Mail Related Extensions</a></dd>
+	<dd><a href="refs.math.html">Mathematical Extensions</a></dd>
+	<dd><a href="refs.utilspec.nontext.html">Non-Text MIME Output</a></dd>
+	<dd><a href="refs.fileprocess.process.html">Process Control Extensions</a></dd>
+	<dd><a href="refs.basic.other.html">Other Basic Extensions</a></dd>
+	<dd><a href="refs.remote.other.html">Other Services</a></dd>
+	<dd><a href="refs.search.html">Search Engine Extensions</a></dd>
+	<dd><a href="refs.utilspec.server.html">Server Specific Extensions</a></dd>
+	<dd><a href="refs.basic.session.html">Session Extensions</a></dd>
+	<dd><a href="refs.basic.text.html">Text Processing</a></dd>
+	<dd><a href="refs.basic.vartype.html">Variable and Type Related Extensions</a></dd>
+	<dd><a href="refs.webservice.html">Web Services</a></dd>
+	<dd><a href="refs.utilspec.windows.html">Windows Only Extensions</a></dd>
+	<dd><a href="refs.xml.html">XML Manipulation</a></dd>
+	<dd><a href="refs.ui.html">GUI Extensions</a></dd>
+</dl>
+<dl>
+<dt>Keyboard Shortcuts</dt><dt>?</dt>
+<dd>This help</dd>
+<dt>j</dt>
+<dd>Next menu item</dd>
+<dt>k</dt>
+<dd>Previous menu item</dd>
+<dt>g p</dt>
+<dd>Previous man page</dd>
+<dt>g n</dt>
+<dd>Next man page</dd>
+<dt>G</dt>
+<dd>Scroll to bottom</dd>
+<dt>g g</dt>
+<dd>Scroll to top</dd>
+<dt>g h</dt>
+<dd>Goto homepage</dd>
+<dt>g s</dt>
+<dd>Goto search<br>(current page)</dd>
+<dt>/</dt>
+<dd>Focus search box</dd>
+</dl></div></nav>
+<div id="goto">
+    <div class="search">
+         <div class="text"></div>
+         <div class="results"><ul></ul></div>
+   </div>
+</div>
+
+  <div id="breadcrumbs" class="row-fluid">
+    <div id="breadcrumbs-inner">
+          
+              
+          <ul>
+            <li><a href="index-2.html">PHP Manual</a></li>      <li><a href="funcref.html">Function Reference</a></li>      <li><a href="refs.remote.mail.html">Mail Related Extensions</a></li>      <li><a href="book.mail.html">Mail</a></li>      <li><a href="ref.mail.html">Mail Functions</a></li>      </ul>
+    </div>
+  </div>
+
+
+
+
+<div id="layout" class="clearfix">
+  <section id="layout-content">
+  <div id="function.mail" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">mail</h1>
+  <p class="verinfo">(PHP 4, PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">mail</span> — <span class="dc-title">Send mail</span></p>
+
+ </div>
+
+ <div class="refsect1 description" id="refsect1-function.mail-description">
+  <h3 class="title">Description</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>mail</strong></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">string</span> <code class="parameter">$to</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">string</span> <code class="parameter">$subject</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">string</span> <code class="parameter">$message</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type"><span class="type">array</span>|<span class="type">string</span></span> <code class="parameter">$additional_headers</code><span class="initializer"> = []</span></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">string</span> <code class="parameter">$additional_params</code><span class="initializer"> = ""</span></span><br>): <span class="type">bool</span></div>
+
+  <p class="para rdfs-comment">
+   Sends an email.
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-function.mail-parameters">
+  <h3 class="title">Parameters</h3>
+  <p class="para">
+   </p><dl>
+    
+     <dt>
+<code class="parameter">to</code></dt>
+
+     <dd>
+
+      <p class="para">
+       Receiver, or receivers of the mail.
+      </p>
+      <p class="para">
+       The formatting of this string must comply with
+       <a href="http://www.faqs.org/rfcs/rfc2822" class="link external">»&nbsp;RFC 2822</a>. Some examples are:
+       </p><ul class="simplelist">
+        <li class="member">user@example.com</li>
+        <li class="member">user@example.com, anotheruser@example.com</li>
+        <li class="member">User &lt;user@example.com&gt;</li>
+        <li class="member">User &lt;user@example.com&gt;, Another User &lt;anotheruser@example.com&gt;</li>
+       </ul>
+      <p></p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">subject</code></dt>
+
+     <dd>
+
+      <p class="para">
+       Subject of the email to be sent.
+      </p>
+      <div class="caution"><strong class="caution">Caution</strong>
+       <p class="para">
+        Subject must satisfy <a href="http://www.faqs.org/rfcs/rfc2047" class="link external">»&nbsp;RFC 2047</a>.
+       </p>
+      </div>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">message</code></dt>
+
+     <dd>
+
+      <p class="para">
+       Message to be sent.
+      </p>
+      <p class="para">
+       Each line should be separated with a CRLF (\r\n). Lines should not be
+       larger than 70 characters.
+      </p>
+      <div class="caution"><strong class="caution">Caution</strong>
+       <p class="para">
+        (Windows only) When PHP is talking to a SMTP server directly, if a full
+        stop is found on the start of a line, it is removed. To counter-act this,
+        replace these occurrences with a double dot.
+        </p><div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br>$text&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">str_replace</span><span style="color: #007700">(</span><span style="color: #DD0000">"\n."</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"\n.."</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$text</span><span style="color: #007700">);<br></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+        </div>
+
+       <p></p>
+      </div>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">additional_headers</code> (optional)</dt>
+
+     <dd>
+
+      <p class="para">
+       <span class="type">String</span> or <span class="type">array</span> to be inserted at the end of the email header.
+      </p>
+      <p class="para">
+       This is typically used to add extra headers (From, Cc, and Bcc).
+       Multiple extra headers should be separated with a CRLF (\r\n).
+       If outside data are used to compose this header, the data should be sanitized
+       so that no unwanted headers could be injected. 
+      </p>
+      <p class="para">
+       If an <span class="type">array</span> is passed, its keys are the header names and its
+       values are the respective header values.
+      </p>
+      <blockquote class="note"><p><strong class="note">Note</strong>: 
+       </p><p class="para">
+        Before PHP 5.4.42 and 5.5.27, repectively, <code class="parameter">additional_headers</code> did not have mail header
+        injection protection. Therefore, users must make sure specified headers
+        are safe and contains headers only. i.e. Never start mail body by putting
+        multiple newlines.
+       </p>
+      <p></p></blockquote>      
+      <blockquote class="note"><p><strong class="note">Note</strong>: 
+       </p><p class="para">
+        When sending mail, the mail <em class="emphasis">must</em> contain
+        a <code class="literal">From</code> header. This can be set with the
+        <code class="parameter">additional_headers</code> parameter, or a default
+        can be set in <var class="filename">php.ini</var>.
+       </p>
+       <p class="para">
+        Failing to do this will result in an error
+        message similar to <code class="literal">Warning: mail(): "sendmail_from" not
+        set in php.ini or custom "From:" header missing</code>.
+        The <code class="literal">From</code> header sets also
+        <code class="literal">Return-Path</code> when sending directly via SMTP (Windows only).
+       </p>
+      <p></p></blockquote>
+      <blockquote class="note"><p><strong class="note">Note</strong>: 
+       </p><p class="para">
+        If messages are not received, try using a LF (\n) only.
+        Some Unix mail transfer agents (most notably
+        <a href="http://cr.yp.to/qmail.html" class="link external">»&nbsp;qmail</a>) replace LF by CRLF
+        automatically (which leads to doubling CR if CRLF is used).
+        This should be a last resort, as it does not comply with
+        <a href="http://www.faqs.org/rfcs/rfc2822" class="link external">»&nbsp;RFC 2822</a>.
+       </p>
+      <p></p></blockquote>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">additional_params</code> (optional)</dt>
+
+     <dd>
+
+      <p class="para">
+       The <code class="parameter">additional_params</code> parameter
+       can be used to pass additional flags as command line options to the
+       program configured to be used when sending mail, as defined by the
+       <code class="literal">sendmail_path</code> configuration setting. For example,
+       this can be used to set the envelope sender address when using
+       sendmail with the <code class="literal">-f</code> sendmail option.
+      </p>
+      <p class="para">
+       This parameter is escaped by <span class="function"><a href="function.escapeshellcmd.html" class="function">escapeshellcmd()</a></span> internally
+       to prevent command execution. <span class="function"><a href="function.escapeshellcmd.html" class="function">escapeshellcmd()</a></span> prevents
+       command execution, but allows to add additional parameters. For security reasons,
+       it is recommended for the user to sanitize this parameter to avoid adding unwanted
+       parameters to the shell command.
+      </p>
+      <p class="para">
+       Since <span class="function"><a href="function.escapeshellcmd.html" class="function">escapeshellcmd()</a></span> is applied automatically, some characters
+       that are allowed as email addresses by internet RFCs cannot be used. 
+       <span class="function"><strong>mail()</strong></span> can not allow such characters, so in programs where the use of
+       such characters is required, alternative means of sending emails (such as using a framework
+       or a library) is recommended. 
+      </p>
+      <p class="para">
+       The user that the webserver runs as should be added as a trusted user to the
+       sendmail configuration to prevent a 'X-Warning' header from being added
+       to the message when the envelope sender (-f) is set using this method.
+       For sendmail users, this file is <var class="filename">/etc/mail/trusted-users</var>.
+      </p>
+     </dd>
+
+    
+   </dl>
+
+  <p></p>
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-function.mail-returnvalues">
+  <h3 class="title">Return Values</h3>
+  <p class="para">
+   Returns <strong><code>true</code></strong> if the mail was successfully accepted for delivery, <strong><code>false</code></strong> otherwise.
+  </p>
+  <p class="para">
+   It is important to note that just because the mail was accepted for delivery,
+   it does NOT mean the mail will actually reach the intended destination.
+  </p>
+ </div>
+
+
+ <div class="refsect1 changelog" id="refsect1-function.mail-changelog">
+  <h3 class="title">Changelog</h3>
+  <p class="para">
+   </p><table class="doctable informaltable">
+    
+     <thead>
+      <tr>
+       <th>Version</th>
+       <th>Description</th>
+      </tr>
+
+     </thead>
+
+     <tbody class="tbody">
+      <tr>
+       <td>7.2.0</td>
+       <td>
+        The <code class="parameter">additional_headers</code> parameter now also accepts
+        an <span class="type">array</span>.
+       </td>
+      </tr>
+
+     </tbody>
+    
+   </table>
+
+  <p></p>
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-function.mail-examples">
+  <h3 class="title">Examples</h3>
+  <p class="para">
+   </p><div class="example" id="example-2984">
+    <p><strong>Example #1 Sending mail.</strong></p>
+    <div class="example-contents"><p>
+     Using <span class="function"><strong>mail()</strong></span> to send a simple email:
+    </p></div>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br></span><span style="color: #FF8000">//&nbsp;The&nbsp;message<br></span><span style="color: #0000BB">$message&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">"Line&nbsp;1\r\nLine&nbsp;2\r\nLine&nbsp;3"</span><span style="color: #007700">;<br><br></span><span style="color: #FF8000">//&nbsp;In&nbsp;case&nbsp;any&nbsp;of&nbsp;our&nbsp;lines&nbsp;are&nbsp;larger&nbsp;than&nbsp;70&nbsp;characters,&nbsp;we&nbsp;should&nbsp;use&nbsp;wordwrap()<br></span><span style="color: #0000BB">$message&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">wordwrap</span><span style="color: #007700">(</span><span style="color: #0000BB">$message</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">70</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"\r\n"</span><span style="color: #007700">);<br><br></span><span style="color: #FF8000">//&nbsp;Send<br></span><span style="color: #0000BB">mail</span><span style="color: #007700">(</span><span style="color: #DD0000">'caffeinated@example.com'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'My&nbsp;Subject'</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$message</span><span style="color: #007700">);<br></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+   <div class="example" id="example-2985">
+    <p><strong>Example #2 Sending mail with extra headers.</strong></p>
+    <div class="example-contents"><p>
+     The addition of basic headers, telling the MUA
+     the From and Reply-To addresses:
+    </p></div>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br>$to&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">'nobody@example.com'</span><span style="color: #007700">;<br></span><span style="color: #0000BB">$subject&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">'the&nbsp;subject'</span><span style="color: #007700">;<br></span><span style="color: #0000BB">$message&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">'hello'</span><span style="color: #007700">;<br></span><span style="color: #0000BB">$headers&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">'From:&nbsp;webmaster@example.com'&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #DD0000">"\r\n"&nbsp;</span><span style="color: #007700">.<br>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">'Reply-To:&nbsp;webmaster@example.com'&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #DD0000">"\r\n"&nbsp;</span><span style="color: #007700">.<br>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">'X-Mailer:&nbsp;PHP/'&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">phpversion</span><span style="color: #007700">();<br><br></span><span style="color: #0000BB">mail</span><span style="color: #007700">(</span><span style="color: #0000BB">$to</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$subject</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$message</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$headers</span><span style="color: #007700">);<br></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+   <div class="example" id="example-2986">
+    <p><strong>Example #3 Sending mail with extra headers as <span class="type">array</span></strong></p>
+    <div class="example-contents"><p>
+     This example sends the same mail as the example immediately above, but
+     passes the additional headers as array (available as of PHP 7.2.0).
+    </p></div>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br>$to&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">'nobody@example.com'</span><span style="color: #007700">;<br></span><span style="color: #0000BB">$subject&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">'the&nbsp;subject'</span><span style="color: #007700">;<br></span><span style="color: #0000BB">$message&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">'hello'</span><span style="color: #007700">;<br></span><span style="color: #0000BB">$headers&nbsp;</span><span style="color: #007700">=&nbsp;array(<br>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">'From'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">'webmaster@example.com'</span><span style="color: #007700">,<br>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">'Reply-To'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">'webmaster@example.com'</span><span style="color: #007700">,<br>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">'X-Mailer'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">'PHP/'&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">phpversion</span><span style="color: #007700">()<br>);<br><br></span><span style="color: #0000BB">mail</span><span style="color: #007700">(</span><span style="color: #0000BB">$to</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$subject</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$message</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$headers</span><span style="color: #007700">);<br></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+   <div class="example" id="example-2987">
+    <p><strong>Example #4 Sending mail with an additional command line parameter.</strong></p>
+    <div class="example-contents"><p>
+     The <code class="parameter">additional_params</code> parameter
+     can be used to pass an additional parameter to the program configured
+     to use when sending mail using the <code class="literal">sendmail_path</code>.
+    </p></div>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br>mail</span><span style="color: #007700">(</span><span style="color: #DD0000">'nobody@example.com'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'the&nbsp;subject'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'the&nbsp;message'</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">null</span><span style="color: #007700">,<br>&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">'-fwebmaster@example.com'</span><span style="color: #007700">);<br></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+   <div class="example" id="example-2988">
+    <p><strong>Example #5 Sending HTML email</strong></p>
+    <div class="example-contents"><p>
+     It is also possible to send HTML email with <span class="function"><strong>mail()</strong></span>.
+    </p></div>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br></span><span style="color: #FF8000">//&nbsp;Multiple&nbsp;recipients<br></span><span style="color: #0000BB">$to&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">'johny@example.com,&nbsp;sally@example.com'</span><span style="color: #007700">;&nbsp;</span><span style="color: #FF8000">//&nbsp;note&nbsp;the&nbsp;comma<br><br>//&nbsp;Subject<br></span><span style="color: #0000BB">$subject&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">'Birthday&nbsp;Reminders&nbsp;for&nbsp;August'</span><span style="color: #007700">;<br><br></span><span style="color: #FF8000">//&nbsp;Message<br></span><span style="color: #0000BB">$message&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">'<br>&lt;html&gt;<br>&lt;head&gt;<br>&nbsp;&nbsp;&lt;title&gt;Birthday&nbsp;Reminders&nbsp;for&nbsp;August&lt;/title&gt;<br>&lt;/head&gt;<br>&lt;body&gt;<br>&nbsp;&nbsp;&lt;p&gt;Here&nbsp;are&nbsp;the&nbsp;birthdays&nbsp;upcoming&nbsp;in&nbsp;August!&lt;/p&gt;<br>&nbsp;&nbsp;&lt;table&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&lt;tr&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;th&gt;Person&lt;/th&gt;&lt;th&gt;Day&lt;/th&gt;&lt;th&gt;Month&lt;/th&gt;&lt;th&gt;Year&lt;/th&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/tr&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&lt;tr&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;td&gt;Johny&lt;/td&gt;&lt;td&gt;10th&lt;/td&gt;&lt;td&gt;August&lt;/td&gt;&lt;td&gt;1970&lt;/td&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/tr&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&lt;tr&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;td&gt;Sally&lt;/td&gt;&lt;td&gt;17th&lt;/td&gt;&lt;td&gt;August&lt;/td&gt;&lt;td&gt;1973&lt;/td&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/tr&gt;<br>&nbsp;&nbsp;&lt;/table&gt;<br>&lt;/body&gt;<br>&lt;/html&gt;<br>'</span><span style="color: #007700">;<br><br></span><span style="color: #FF8000">//&nbsp;To&nbsp;send&nbsp;HTML&nbsp;mail,&nbsp;the&nbsp;Content-type&nbsp;header&nbsp;must&nbsp;be&nbsp;set<br></span><span style="color: #0000BB">$headers</span><span style="color: #007700">[]&nbsp;=&nbsp;</span><span style="color: #DD0000">'MIME-Version:&nbsp;1.0'</span><span style="color: #007700">;<br></span><span style="color: #0000BB">$headers</span><span style="color: #007700">[]&nbsp;=&nbsp;</span><span style="color: #DD0000">'Content-type:&nbsp;text/html;&nbsp;charset=iso-8859-1'</span><span style="color: #007700">;<br><br></span><span style="color: #FF8000">//&nbsp;Additional&nbsp;headers<br></span><span style="color: #0000BB">$headers</span><span style="color: #007700">[]&nbsp;=&nbsp;</span><span style="color: #DD0000">'To:&nbsp;Mary&nbsp;&lt;mary@example.com&gt;,&nbsp;Kelly&nbsp;&lt;kelly@example.com&gt;'</span><span style="color: #007700">;<br></span><span style="color: #0000BB">$headers</span><span style="color: #007700">[]&nbsp;=&nbsp;</span><span style="color: #DD0000">'From:&nbsp;Birthday&nbsp;Reminder&nbsp;&lt;birthday@example.com&gt;'</span><span style="color: #007700">;<br></span><span style="color: #0000BB">$headers</span><span style="color: #007700">[]&nbsp;=&nbsp;</span><span style="color: #DD0000">'Cc:&nbsp;birthdayarchive@example.com'</span><span style="color: #007700">;<br></span><span style="color: #0000BB">$headers</span><span style="color: #007700">[]&nbsp;=&nbsp;</span><span style="color: #DD0000">'Bcc:&nbsp;birthdaycheck@example.com'</span><span style="color: #007700">;<br><br></span><span style="color: #FF8000">//&nbsp;Mail&nbsp;it<br></span><span style="color: #0000BB">mail</span><span style="color: #007700">(</span><span style="color: #0000BB">$to</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$subject</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$message</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">implode</span><span style="color: #007700">(</span><span style="color: #DD0000">"\r\n"</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$headers</span><span style="color: #007700">));<br></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+  <p></p>
+  <p class="para">
+   </p><blockquote class="note"><p><strong class="note">Note</strong>: 
+    </p><p class="para">
+     If intending to send HTML or otherwise Complex mails, it is recommended
+     to use the PEAR package <a href="https://pear.php.net/package/Mail_Mime" class="link external">»&nbsp;PEAR::Mail_Mime</a>.
+    </p>
+   <p></p></blockquote>
+  <p></p>
+ </div>
+
+
+ <div class="refsect1 notes" id="refsect1-function.mail-notes">    
+  <h3 class="title">Notes</h3>
+  <blockquote class="note"><p><strong class="note">Note</strong>: 
+   </p><p class="para">
+    The SMTP implementation (Windows only) of <span class="function"><strong>mail()</strong></span> differs in many
+    ways from the sendmail implementation. First, it doesn't use a local binary
+    for composing messages but only operates on direct sockets which means a
+    <code class="literal">MTA</code> is needed listening on a network socket (which
+    can either on the localhost or a remote machine).
+   </p>
+   <p class="para">
+    Second, the custom headers like
+    <code class="literal">From:</code>,
+    <code class="literal">Cc:</code>,
+    <code class="literal">Bcc:</code> and
+    <code class="literal">Date:</code> are
+    <em class="emphasis">not</em> interpreted by the
+    <code class="literal">MTA</code> in the first place, but are parsed by PHP.
+   </p>
+   <p class="para">
+    As such, the <code class="parameter">to</code> parameter should not be an address
+    in the form of "Something &lt;someone@example.com&gt;". The
+    mail command may not parse this properly while talking with 
+    the MTA.
+   </p>
+  <p></p></blockquote>
+  
+  <blockquote class="note"><p><strong class="note">Note</strong>: 
+   </p><p class="para">
+    It is worth noting that the <span class="function"><strong>mail()</strong></span> function is not
+    suitable for larger volumes of email in a loop. This function opens
+    and closes an SMTP socket for each email, which is not very efficient.
+   </p>
+   <p class="para">
+    For the sending of large amounts of email, see the
+    <a href="https://pear.php.net/package/Mail" class="link external">»&nbsp;PEAR::Mail</a>, and
+    <a href="https://pear.php.net/package/Mail_Queue" class="link external">»&nbsp;PEAR::Mail_Queue</a> packages.
+   </p>
+  <p></p></blockquote>
+
+  <blockquote class="note"><p><strong class="note">Note</strong>: 
+   </p><p class="para">
+    The following RFCs may be useful:
+    <a href="http://www.faqs.org/rfcs/rfc1896" class="link external">»&nbsp;RFC 1896</a>,
+    <a href="http://www.faqs.org/rfcs/rfc2045" class="link external">»&nbsp;RFC 2045</a>,
+    <a href="http://www.faqs.org/rfcs/rfc2046" class="link external">»&nbsp;RFC 2046</a>,
+    <a href="http://www.faqs.org/rfcs/rfc2047" class="link external">»&nbsp;RFC 2047</a>,
+    <a href="http://www.faqs.org/rfcs/rfc2048" class="link external">»&nbsp;RFC 2048</a>,
+    <a href="http://www.faqs.org/rfcs/rfc2049" class="link external">»&nbsp;RFC 2049</a>, and
+    <a href="http://www.faqs.org/rfcs/rfc2822" class="link external">»&nbsp;RFC 2822</a>.
+   </p>
+  <p></p></blockquote>
+ </div>
+
+
+ <div class="refsect1 seealso" id="refsect1-function.mail-seealso">
+  <h3 class="title">See Also</h3>
+  <p class="para">
+   </p><ul class="simplelist">
+    <li class="member"><span class="function"><a href="function.mb-send-mail.html" class="function" rel="rdfs-seeAlso">mb_send_mail()</a> - Send encoded mail</span></li>
+    <li class="member"><span class="function"><a href="function.imap-mail.html" class="function" rel="rdfs-seeAlso">imap_mail()</a> - Send an email message</span></li>
+    <li class="member"><a href="https://pear.php.net/package/Mail" class="link external">»&nbsp;PEAR::Mail</a></li>
+    <li class="member"><a href="https://pear.php.net/package/Mail_Mime" class="link external">»&nbsp;PEAR::Mail_Mime</a></li>
+   </ul>
+  <p></p>
+ </div>
+
+</div>
+<section id="usernotes">
+ <div class="head"><h3 class="title">User Contributed Notes</h3></div><div id="allnotes">
+  <div class="note" id="124291">  
+  <a class="name">
+  <strong class="user"><em>Anonymous</em></strong></a><div class="date" title="2019-10-12 07:36"><strong>1 year ago</strong></div>
+  <div class="text" id="Hcom124291">
+<div class="phpcode"><code><span class="html">
+If you notice wrong displayed characters in the email it's because you need to properly set the Content-Type and the Charset in the headers of the email:<br><br><span class="default">&lt;?php<br>$headers </span><span class="keyword">= </span><span class="string">'Content-Type: text/plain; charset=utf-8' </span><span class="keyword">. </span><span class="string">"\r\n"</span><span class="keyword">;<br></span><span class="default">?&gt;<br></span><br>Mostly, UTF-8 is your best choice.<br><br>You can set custom headers with the fourth parameter of the mail() function.<br><br>To make the whole thing waterproof, add the following header too:<br><br><span class="default">&lt;?php<br>$headers </span><span class="keyword">.= </span><span class="string">'Content-Transfer-Encoding: base64' </span><span class="keyword">. </span><span class="string">"\r\n"</span><span class="keyword">;<br></span><span class="default">?&gt;<br></span><br>Now you can use the combination of UTF-8 and Base64 to properly encode the subject line and the recipient name like this:<br><br><span class="default">&lt;?php<br>$subject </span><span class="keyword">= </span><span class="string">'=?UTF-8?B?' </span><span class="keyword">. </span><span class="default">base64_encode</span><span class="keyword">(</span><span class="string">'Test email with German Umlauts öäüß'</span><span class="keyword">) . </span><span class="string">'?='</span><span class="keyword">;<br></span><span class="default">$recipient </span><span class="keyword">= </span><span class="string">'=?UTF-8?B?' </span><span class="keyword">. </span><span class="default">base64_encode</span><span class="keyword">(</span><span class="string">'Margret Müller'</span><span class="keyword">) . </span><span class="string">'?= &lt;recipient@domain.com&gt;'</span><span class="keyword">;<br></span><span class="default">?&gt;<br></span><br>And don't forget to Base64 encode the email message too:<br><br><span class="default">&lt;?php<br>$message </span><span class="keyword">= </span><span class="default">base64_encode</span><span class="keyword">(</span><span class="string">'This email contains German Umlauts öäüß.'</span><span class="keyword">);<br></span><span class="default">?&gt;<br></span><br>All references are taken from:<br><a rel="nofollow" target="_blank">https://dev.to/lutvit/how-to-make-the-php-mail-function-awesome-3cii</a></span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="124015">  
+  <a class="name">
+  <strong class="user"><em>Mark Simon</em></strong></a><div class="date" title="2019-07-05 07:04"><strong>2 years ago</strong></div>
+  <div class="text" id="Hcom124015">
+<div class="phpcode"><code><span class="html">
+It is worth noting that you can set up a fake sendmail program using the sendmail_path directive in php.ini.<br><br>Despite the comment in that file, sendmail_path also works for Window. From <a rel="nofollow" target="_blank">https://www.php.net/manual/en/mail.configuration.php#ini.sendmail-path:</a><br><br>This directive works also under Windows. If set, smtp, smtp_port and sendmail_from are ignored and the specified command is executed.</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="121163">  
+  <a class="name">
+  <strong class="user"><em>php at simoneast dot net</em></strong></a><div class="date" title="2017-05-31 05:19"><strong>4 years ago</strong></div>
+  <div class="text" id="Hcom121163">
+<div class="phpcode"><code><span class="html">
+Often it's helpful to find the exact error message that is triggered by the mail() function. While the function doesn't provide an error directly, you can use error_get_last() when mail() returns false.<br><br><span class="default">&lt;?php<br>$success </span><span class="keyword">= </span><span class="default">mail</span><span class="keyword">(</span><span class="string">'example@example.com'</span><span class="keyword">, </span><span class="string">'My Subject'</span><span class="keyword">, </span><span class="default">$message</span><span class="keyword">);<br>if (!</span><span class="default">$success</span><span class="keyword">) {<br>&nbsp; &nbsp; </span><span class="default">$errorMessage </span><span class="keyword">= </span><span class="default">error_get_last</span><span class="keyword">()[</span><span class="string">'message'</span><span class="keyword">];<br>}<br></span><span class="default">?&gt;<br></span><br>(Tested successfully on Windows which uses SMTP by default, but sendmail on Linux/OSX may not provide the same level of detail.)<br><br>Thanks to <a rel="nofollow" target="_blank">https://stackoverflow.com/a/20203870/195835</a></span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="120328">  
+  <a class="name">
+  <strong class="user"><em>Anonymous</em></strong></a><div class="date" title="2016-12-14 10:18"><strong>4 years ago</strong></div>
+  <div class="text" id="Hcom120328">
+<div class="phpcode"><code><span class="html">
+Security advice: Although it is not documented, for the parameters $to and $subject the mail() function changes at least \r and \n to space. So these parameters are safe against injection of additional headers. But you might want to check $to for commas as these separate multiple addresses and you might not want to send to more than one recipient.<br><br>The crucial part is the $additional_headers parameter. This parameter can't be cleaned by the mail() function. So it is up to you to prevent unwanted \r or \n to be inserted into the values you put in there. Otherwise you just created a potential spam distributor.</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="121027">  
+  <a class="name">
+  <strong class="user"><em>chris at ocproducts dot com</em></strong></a><div class="date" title="2017-04-26 10:04"><strong>4 years ago</strong></div>
+  <div class="text" id="Hcom121027">
+<div class="phpcode"><code><span class="html">
+The 'sendmail' executable which PHP uses on Linux/Mac (not Windows) expects "\n" as a line separator.<br><br>This executable is a standard, and emulated by other MTAs.<br><br>"\n" is confirmed required for qmail and postfix, probably also for sendmail and exim but I have not tested.<br><br>If you pass through using "\r\n" as a separator it may appear to work, but your email will be subtly corrupted and some middleware may break. It only works because some systems will clean up your mistake.<br><br>If you are implementing DKIM be very careful, as DKIM checks will fail (at least on popular validation tools) if you screw this up. DKIM must be calculated using "\r\n" but then you must switch it all to "\n" when using the PHP mail function.<br><br>On Windows, however, you should use "\r\n" because PHP is using SMTP in this situation, and hence the normal rules of the SMTP protocol (not the normal rules of Unix piping) apply.</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="121858">  
+  <a class="name">
+  <strong class="user"><em>charles dot fisher at arconic dot com</em></strong></a><div class="date" title="2017-11-10 07:34"><strong>3 years ago</strong></div>
+  <div class="text" id="Hcom121858">
+<div class="phpcode"><code><span class="html">
+I migrated an application to a platform without a local transport agent (MTA). I did not want to configure an MTA, so I wrote this xxmail function to replace mail() with calls to a remote SMTP server. Hopefully it is of some use.<br><br>function xxmail($to, $subject, $body, $headers)<br>{<br> $smtp = stream_socket_client('tcp://smtp.yourmail.com:25', $eno, $estr, 30);<br><br> $B = 8192;<br> $c = "\r\n";<br> $s = 'myapp@someserver.com';<br><br> fwrite($smtp, 'helo ' . $_ENV['HOSTNAME'] . $c);<br>&nbsp; $junk = fgets($smtp, $B);<br><br> // Envelope<br> fwrite($smtp, 'mail from: ' . $s . $c);<br>&nbsp; $junk = fgets($smtp, $B);<br> fwrite($smtp, 'rcpt to: ' . $to . $c);<br>&nbsp; $junk = fgets($smtp, $B);<br> fwrite($smtp, 'data' . $c);<br>&nbsp; $junk = fgets($smtp, $B);<br><br> // Header <br> fwrite($smtp, 'To: ' . $to . $c); <br> if(strlen($subject)) fwrite($smtp, 'Subject: ' . $subject . $c); <br> if(strlen($headers)) fwrite($smtp, $headers); // Must be \r\n (delimited)<br> fwrite($smtp, $headers . $c); <br><br> // Body<br> if(strlen($body)) fwrite($smtp, $body . $c); <br> fwrite($smtp, $c . '.' . $c);<br>&nbsp; $junk = fgets($smtp, $B);<br><br> // Close<br> fwrite($smtp, 'quit' . $c);<br>&nbsp; $junk = fgets($smtp, $B);<br> fclose($smtp);<br>}</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="107321">  
+  <a class="name">
+  <strong class="user"><em>ABOMB</em></strong></a><div class="date" title="2012-01-30 10:16"><strong>9 years ago</strong></div>
+  <div class="text" id="Hcom107321">
+<div class="phpcode"><code><span class="html">
+I was having delivery issues from this function to Gmail, Yahoo, AOL, etc.&nbsp; I used the notes here to figure that you need to be setting your Return-Path to a valid email to catch bounces.&nbsp; There are two extra delivery gotchas on top of that:<br><br>1) The domain in the email used in the -f option in the php.ini sendmail parameter or in the mail() extra parameters field, needs to have a valid SPF record for the domain (in DNS as a "TXT" record type for sure and add an additional&nbsp; "SPF" type record if possible).&nbsp; Why? That's header field being used for spam checks.<br><br>2) You should also use a domain key or DKIM.&nbsp; The trick here is that the domain key/DKIM is case sensitive!&nbsp; I used Cpanel to create my domain key which automatically used all lowercase domain names in the key creation.&nbsp; I found when&nbsp; sending email and using a camel case "-f account@MyDomainHere.Com" option, my key was not accepted.&nbsp; However it was accepted when I used "-f account@mydomainhere.com".<br><br>There are many other factors that can contribute to mail not getting to inboxes, including your own multiple failed testing attempts, so I suggest you consult each site's guidelines and don't ask me for help.&nbsp; These are just the couple technical issues that helped my case.<br><br>I hope this saves someone some time and headaches...</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="59773">  
+  <a class="name">
+  <strong class="user"><em>Ben Cooke</em></strong></a><div class="date" title="2005-12-15 05:34"><strong>15 years ago</strong></div>
+  <div class="text" id="Hcom59773">
+<div class="phpcode"><code><span class="html">
+Note that there is a big difference between the behavior of this function on Windows systems vs. UNIX systems. On Windows it delivers directly to an SMTP server, while on a UNIX system it uses a local command to hand off to the system's own MTA.
+<br>
+<br>The upshot of all this is that on a Windows system your&nbsp; message and headers must use the standard line endings \r\n as prescribed by the email specs. On a UNIX system the MTA's "sendmail" interface assumes that recieved data will use UNIX line endings and will turn any \n to \r\n, so you must supply only \n to mail() on a UNIX system to avoid the MTA hypercorrecting to \r\r\n.
+<br>
+<br>If you use plain old \n on a Windows system, some MTAs will get a little upset. qmail in particular will refuse outright to accept any message that has a lonely \n without an accompanying \r.</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="98775">  
+  <a class="name">
+  <strong class="user"><em>Porjo</em></strong></a><div class="date" title="2010-07-06 11:19"><strong>11 years ago</strong></div>
+  <div class="text" id="Hcom98775">
+<div class="phpcode"><code><span class="html">
+Make sure you enclose \r\n in double quotes (not single quotes!) so that PHP can translate that into the correct linefeed code</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="108669">  
+  <a class="name">
+  <strong class="user"><em>pavel.lint at vk.com</em></strong></a><div class="date" title="2012-05-16 11:22"><strong>9 years ago</strong></div>
+  <div class="text" id="Hcom108669">
+<div class="phpcode"><code><span class="html">
+Here's a small handy function I use to send email in UTF-8.<br><br> <span class="default">&lt;?php<br></span><span class="keyword">function </span><span class="default">mail_utf8</span><span class="keyword">(</span><span class="default">$to</span><span class="keyword">, </span><span class="default">$from_user</span><span class="keyword">, </span><span class="default">$from_email</span><span class="keyword">, <br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$subject </span><span class="keyword">= </span><span class="string">'(No subject)'</span><span class="keyword">, </span><span class="default">$message </span><span class="keyword">= </span><span class="string">''</span><span class="keyword">)<br>&nbsp;&nbsp; { <br>&nbsp; &nbsp; &nbsp; </span><span class="default">$from_user </span><span class="keyword">= </span><span class="string">"=?UTF-8?B?"</span><span class="keyword">.</span><span class="default">base64_encode</span><span class="keyword">(</span><span class="default">$from_user</span><span class="keyword">).</span><span class="string">"?="</span><span class="keyword">;<br>&nbsp; &nbsp; &nbsp; </span><span class="default">$subject </span><span class="keyword">= </span><span class="string">"=?UTF-8?B?"</span><span class="keyword">.</span><span class="default">base64_encode</span><span class="keyword">(</span><span class="default">$subject</span><span class="keyword">).</span><span class="string">"?="</span><span class="keyword">;<br><br>&nbsp; &nbsp; &nbsp; </span><span class="default">$headers </span><span class="keyword">= </span><span class="string">"From: </span><span class="default">$from_user</span><span class="string"> &lt;</span><span class="default">$from_email</span><span class="string">&gt;\r\n"</span><span class="keyword">. <br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">"MIME-Version: 1.0" </span><span class="keyword">. </span><span class="string">"\r\n" </span><span class="keyword">. <br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">"Content-type: text/html; charset=UTF-8" </span><span class="keyword">. </span><span class="string">"\r\n"</span><span class="keyword">; <br><br>&nbsp; &nbsp;&nbsp; return </span><span class="default">mail</span><span class="keyword">(</span><span class="default">$to</span><span class="keyword">, </span><span class="default">$subject</span><span class="keyword">, </span><span class="default">$message</span><span class="keyword">, </span><span class="default">$headers</span><span class="keyword">); <br>&nbsp;&nbsp; }<br></span><span class="default">?&gt;</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="126334">  
+  <a class="name">
+  <strong class="user"><em>atesin () gmial ! com</em></strong></a><div class="date" title="2021-08-12 08:07"><strong>29 days ago</strong></div>
+  <div class="text" id="Hcom126334">
+<div class="phpcode"><code><span class="html">
+HOW PHP MAIL() WORKS INTERNALLY, more or less, according some tests i did<br><br>imagine php is running with uid 33 when reaches a mail() function like this<br><br>---- /my/htdocs/mailer-script.php line 69 ----<br>$was_sent = mail(<br>&nbsp; 'Alice &lt;alice@wonder.land&gt;, white-rabbit@endless.cave',<br>&nbsp; 'Invitation',<br>&nbsp; "Hi, you are cordially invited to drink a cup of tea at my house\ntomorrow at sunset",<br>&nbsp; "Some-Header: foo\r\nOther-Header: bar", // can also be an associative array of 'Header' =&gt; 'Value'<br>&nbsp; 'param1 param2');<br>----<br><br>then look for ini options like this (all optional, on any operating system)<br><br>---- ini options ----<br>; path to mail sender command + arguments, if omitted will defaults to NULL<br>sendmail_path = '/bin/sendmail-esque arg1 arg2'<br>; the From header, can be also set in sendmail but make sure it SENDS ONE<br>sendmail_from = 'Mad Hatter &lt;hatter@house.forest&gt;'<br>; recommended to not being blind, look at file permissions<br>mail.log = '/var/log/php/mail.log'<br>; adds an originating script header to send php mail internals (security sensitive)<br>mail.add_x_header = on<br>; outgoing mail server address, if omitted will defaults to "localhost"<br>;SMTP = 'localhost'<br>; server tcp port, if omitted will defaults to port 25<br>;smtp_port = 25<br>----<br><br>then craft a message like this (please avoid duplicated headers)<br><br>---- mail message ----<br>From: Mad Hatter &lt;hatter@house.forest&gt;<br>To: Alice &lt;alice@wonder.land&gt;, white-rabbit@endless.cave<br>Subject: Invitation<br>Some-Header: foo<br>Other-Header: bar<br>X-PHP-Originating-Script: 33:mailer-script.php<br><br>Hi, you are cordially invited to drink a cup of tea at my house<br>tomorrow at sunset<br>----<br><br>then APPEND this log line<br><br>---- /var/log/php/mail.log ----<br>[&lt;date&gt; &lt;time&gt; &lt;zone&gt;] mail() on [/my/htdocs/mailer-script.php:69]: &lt;all headers joined...&gt;<br>----<br><br>THEN IF (sendmail_path is not empty, AND file is found, AND has +rx permissions):<br><br>- craft and run this shell command<br><br>---- shell ----<br>/bin/sendmail-esque arg1 arg2 param1 param2<br>----<br><br>- send the crafted message to its standard input<br>- wait the program to exit<br>- pass last exit code to mail() return<br><br>OR ELSE (i.e. sendmail bin not run) (not sure about these):<br><br>- try to internally open an smtp connection (with fsockopen()?)<br>- send the message directly and wait for connection to close<br>- pass last socket status to mail() return</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="121411">  
+  <a class="name">
+  <strong class="user"><em>eeeugeneee</em></strong></a><div class="date" title="2017-07-21 01:39"><strong>4 years ago</strong></div>
+  <div class="text" id="Hcom121411">
+<div class="phpcode"><code><span class="html">
+Send mail with minimal requirements from email services.<br><br><span class="default">&lt;?php<br>&nbsp; &nbsp; $encoding </span><span class="keyword">= </span><span class="string">"utf-8"</span><span class="keyword">;<br><br>&nbsp; &nbsp; </span><span class="comment">// Preferences for Subject field<br>&nbsp; &nbsp; </span><span class="default">$subject_preferences </span><span class="keyword">= array(<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="string">"input-charset" </span><span class="keyword">=&gt; </span><span class="default">$encoding</span><span class="keyword">,<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="string">"output-charset" </span><span class="keyword">=&gt; </span><span class="default">$encoding</span><span class="keyword">,<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="string">"line-length" </span><span class="keyword">=&gt; </span><span class="default">76</span><span class="keyword">,<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="string">"line-break-chars" </span><span class="keyword">=&gt; </span><span class="string">"\r\n"<br>&nbsp; &nbsp; </span><span class="keyword">);<br><br>&nbsp; &nbsp; </span><span class="comment">// Mail header<br>&nbsp; &nbsp; </span><span class="default">$header </span><span class="keyword">= </span><span class="string">"Content-type: text/html; charset="</span><span class="keyword">.</span><span class="default">$encoding</span><span class="keyword">.</span><span class="string">" \r\n"</span><span class="keyword">;<br>&nbsp; &nbsp; </span><span class="default">$header </span><span class="keyword">.= </span><span class="string">"From: "</span><span class="keyword">.</span><span class="default">$from_name</span><span class="keyword">.</span><span class="string">" &lt;"</span><span class="keyword">.</span><span class="default">$from_mail</span><span class="keyword">.</span><span class="string">"&gt; \r\n"</span><span class="keyword">;<br>&nbsp; &nbsp; </span><span class="default">$header </span><span class="keyword">.= </span><span class="string">"MIME-Version: 1.0 \r\n"</span><span class="keyword">;<br>&nbsp; &nbsp; </span><span class="default">$header </span><span class="keyword">.= </span><span class="string">"Content-Transfer-Encoding: 8bit \r\n"</span><span class="keyword">;<br>&nbsp; &nbsp; </span><span class="default">$header </span><span class="keyword">.= </span><span class="string">"Date: "</span><span class="keyword">.</span><span class="default">date</span><span class="keyword">(</span><span class="string">"r (T)"</span><span class="keyword">).</span><span class="string">" \r\n"</span><span class="keyword">;<br>&nbsp; &nbsp; </span><span class="default">$header </span><span class="keyword">.= </span><span class="default">iconv_mime_encode</span><span class="keyword">(</span><span class="string">"Subject"</span><span class="keyword">, </span><span class="default">$mail_subject</span><span class="keyword">, </span><span class="default">$subject_preferences</span><span class="keyword">);<br><br>&nbsp; &nbsp; </span><span class="comment">// Send mail<br>&nbsp; &nbsp; </span><span class="default">mail</span><span class="keyword">(</span><span class="default">$mail_to</span><span class="keyword">, </span><span class="default">$mail_subject</span><span class="keyword">, </span><span class="default">$mail_message</span><span class="keyword">, </span><span class="default">$header</span><span class="keyword">);<br></span><span class="default">?&gt;</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="107524">  
+  <a class="name">
+  <strong class="user"><em>Max AT</em></strong></a><div class="date" title="2012-02-15 09:26"><strong>9 years ago</strong></div>
+  <div class="text" id="Hcom107524">
+<div class="phpcode"><code><span class="html">
+To define a mail sensitivity you have to put this line in the headers:<br><br><span class="default">&lt;?php<br>&nbsp; &nbsp; &nbsp; &nbsp; $headers </span><span class="keyword">= </span><span class="string">"MIME-Version: 1.0\n" </span><span class="keyword">;<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$headers </span><span class="keyword">.= </span><span class="string">"Content-Type: text/html; charset=\"iso-8859-1\"\n"</span><span class="keyword">;<br><br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$headers </span><span class="keyword">.= </span><span class="string">"Sensitivity: Personal\n"</span><span class="keyword">;<br><br> </span><span class="default">$status&nbsp;&nbsp; </span><span class="keyword">= </span><span class="default">mail</span><span class="keyword">(</span><span class="default">$to</span><span class="keyword">, </span><span class="default">$subject</span><span class="keyword">, </span><span class="default">$message</span><span class="keyword">,</span><span class="default">$headers</span><span class="keyword">);<br></span><span class="default">?&gt;</span> <br><br>Possible Options:<br>Sensitivity: Normal, Personal, Private and Company-Confidential<br><br>These will be recognised and handled in Outlook, Thunderbird and others.</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="125168">  
+  <a class="name">
+  <strong class="user"><em>pangz dot lab at gmail dot com</em></strong></a><div class="date" title="2020-07-06 08:42"><strong>1 year ago</strong></div>
+  <div class="text" id="Hcom125168">
+<div class="phpcode"><code><span class="html">
+* Sending email with attachment<br><br>function sendMail(<br>&nbsp; &nbsp; string $fileAttachment,<br>&nbsp; &nbsp; string $mailMessage = MAIL_CONF["mailMessage"],<br>&nbsp; &nbsp; string $subject&nbsp; &nbsp;&nbsp; = MAIL_CONF["subject"],<br>&nbsp; &nbsp; string $toAddress&nbsp;&nbsp; = MAIL_CONF["toAddress"],<br>&nbsp; &nbsp; string $fromMail&nbsp; &nbsp; = MAIL_CONF["fromMail"]<br>): bool {<br>&nbsp; &nbsp; <br>&nbsp; &nbsp; $fileAttachment = trim($fileAttachment);<br>&nbsp; &nbsp; $from&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; = $fromMail;<br>&nbsp; &nbsp; $pathInfo&nbsp; &nbsp; &nbsp;&nbsp; = pathinfo($fileAttachment);<br>&nbsp; &nbsp; $attchmentName&nbsp; = "attachment_".date("YmdHms").(<br>&nbsp; &nbsp; (isset($pathInfo['extension']))? ".".$pathInfo['extension'] : ""<br>&nbsp; &nbsp; );<br>&nbsp; &nbsp; <br>&nbsp; &nbsp; $attachment&nbsp; &nbsp; = chunk_split(base64_encode(file_get_contents($fileAttachment)));<br>&nbsp; &nbsp; $boundary&nbsp; &nbsp; &nbsp; = "PHP-mixed-".md5(time());<br>&nbsp; &nbsp; $boundWithPre&nbsp; = "\n--".$boundary;<br>&nbsp; &nbsp; <br>&nbsp; &nbsp; $headers&nbsp;&nbsp; = "From: $from";<br>&nbsp; &nbsp; $headers&nbsp; .= "\nReply-To: $from";<br>&nbsp; &nbsp; $headers&nbsp; .= "\nContent-Type: multipart/mixed; boundary=\"".$boundary."\"";<br>&nbsp; &nbsp; <br>&nbsp; &nbsp; $message&nbsp;&nbsp; = $boundWithPre;<br>&nbsp; &nbsp; $message&nbsp; .= "\n Content-Type: text/plain; charset=UTF-8\n";<br>&nbsp; &nbsp; $message&nbsp; .= "\n $mailMessage";<br>&nbsp; &nbsp; <br>&nbsp; &nbsp; $message .= $boundWithPre;<br>&nbsp; &nbsp; $message .= "\nContent-Type: application/octet-stream; name=\"".$attchmentName."\"";<br>&nbsp; &nbsp; $message .= "\nContent-Transfer-Encoding: base64\n";<br>&nbsp; &nbsp; $message .= "\nContent-Disposition: attachment\n";<br>&nbsp; &nbsp; $message .= $attachment;<br>&nbsp; &nbsp; $message .= $boundWithPre."--";<br>&nbsp; &nbsp; <br>&nbsp; &nbsp; return mail($toAddress, $subject, $message, $headers);<br>}<br><br>* Sending email in html<br><br>function sendHtmlMail(<br>&nbsp; &nbsp; string $mailMessage = MAIL_CONF["mailMessage"],<br>&nbsp; &nbsp; string $subject&nbsp; &nbsp;&nbsp; = MAIL_CONF["subject"],<br>&nbsp; &nbsp; array $toAddress&nbsp; &nbsp; = MAIL_CONF["toAddress"],<br>&nbsp; &nbsp; string $fromMail&nbsp; &nbsp; = MAIL_CONF["fromMail"]<br>): bool {<br>&nbsp; &nbsp; <br>&nbsp; &nbsp; $to&nbsp; &nbsp; &nbsp; &nbsp; = implode(",", $toAddress);<br>&nbsp; &nbsp; $headers[] = 'MIME-Version: 1.0';<br>&nbsp; &nbsp; $headers[] = 'Content-type: text/html; charset=iso-8859-1';&nbsp; &nbsp; <br>&nbsp; &nbsp; $headers[] = 'To: '.$to;<br>&nbsp; &nbsp; $headers[] = 'From: '.$fromMail;&nbsp; &nbsp; <br><br>&nbsp; &nbsp; return mail($to, $subject, $mailMessage, implode("\r\n", $headers));<br>}</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="108498">  
+  <a class="name">
+  <strong class="user"><em>rexlorenzo at gmail dot com</em></strong></a><div class="date" title="2012-05-02 01:24"><strong>9 years ago</strong></div>
+  <div class="text" id="Hcom108498">
+<div class="phpcode"><code><span class="html">
+Be careful to not put extra spaces for the $headers variable.<br><br>For example, this didn't work on our servers:<br><br>$headers = "From: $from \r\n Bcc: $bcc \r\n";<br><br>But this did:<br><br>$headers = "From: $from\r\nBcc: $bcc\r\n";<br><br>Notice the removal of the spaces around the first \r\n.</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="118602">  
+  <a class="name">
+  <strong class="user"><em>jim at jimbrooking dot net</em></strong></a><div class="date" title="2016-01-06 04:17"><strong>5 years ago</strong></div>
+  <div class="text" id="Hcom118602">
+<div class="phpcode"><code><span class="html">
+I recently changed hosting companies and spent a day trying to see why an email script that had been working for years failed on the new server.<br><br>The answer was that the old hosting company's email server accepted multiple "CC:" lines in the additional headers string, and the new did not. Thus on the new server<br><br>...<br>$add_hdr .= "CC: " . $email1 . PHP_EOL;<br>$add_hdr .= "CC: " . $email2 . PHP_EOL;<br>...<br><br>did not work, but<br><br>...<br>$add_hdr .= "CC: " . $email1 . ", " . $email2 . PHP_EOL;<br>...<br><br>did work.<br><br>In both cases, PHP's mail() function returned no error, but until I placed both emails, comma-separated, in the same line I was getting the following error:<br><br>550 Messages should have one or no Cc headers, not 2.<br><br>Hope this helps someone.</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="121028">  
+  <a class="name">
+  <strong class="user"><em>chris at ocproducts dot com</em></strong></a><div class="date" title="2017-04-26 10:15"><strong>4 years ago</strong></div>
+  <div class="text" id="Hcom121028">
+<div class="phpcode"><code><span class="html">
+Correction to my earlier note:<br><br>'"\n" is confirmed required for qmail and postfix, probably also for sendmail and exim but I have not tested.'<br><br>It only affects qmail.</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="106877">  
+  <a class="name">
+  <strong class="user"><em>debis at woh dot rr dot com</em></strong></a><div class="date" title="2011-12-14 03:09"><strong>9 years ago</strong></div>
+  <div class="text" id="Hcom106877">
+<div class="phpcode"><code><span class="html">
+This is for Windows Server 2003, IIS 6.0 with SMTP virtual server. <br><br>The problem I had was not including init_set for the SMTP server, I thought the SMTP definition in the IIS SMTP virtual server configuration would work.&nbsp; When I sent mail manually this was not an issue.&nbsp; <br><br>Also, $mail_sent = @mail( $to, $subject, $message, $headers ); wouldn't work but $mail_sent = mail($to, $subject, $message, $headers); did.<br>Lack of date_default_timezone_set() only caused a warning because php guessed what it should be.<br><br>This worked:<br><span class="default">&lt;?php<br>$to&nbsp; &nbsp; &nbsp; </span><span class="keyword">= </span><span class="string">'nobody@example.com'</span><span class="keyword">;<br></span><span class="default">$subject </span><span class="keyword">= </span><span class="string">'the subject'</span><span class="keyword">;<br></span><span class="default">$message </span><span class="keyword">= </span><span class="string">'hello'</span><span class="keyword">;<br></span><span class="default">$headers </span><span class="keyword">= </span><span class="string">'From: webmaster@example.com' </span><span class="keyword">. </span><span class="string">"\r\n" </span><span class="keyword">.<br>&nbsp; &nbsp; </span><span class="string">'Reply-To: webmaster@example.com' </span><span class="keyword">. </span><span class="string">"\r\n" </span><span class="keyword">.<br>&nbsp; &nbsp; </span><span class="string">'X-Mailer: PHP/' </span><span class="keyword">. </span><span class="default">phpversion</span><span class="keyword">();<br></span><span class="default">ini_set </span><span class="keyword">( </span><span class="string">"SMTP"</span><span class="keyword">, </span><span class="string">"smtp-server.example.com" </span><span class="keyword">); <br></span><span class="default">date_default_timezone_set</span><span class="keyword">(</span><span class="string">'America/New_York'</span><span class="keyword">);<br><br></span><span class="default">mail</span><span class="keyword">(</span><span class="default">$to</span><span class="keyword">, </span><span class="default">$subject</span><span class="keyword">, </span><span class="default">$message</span><span class="keyword">, </span><span class="default">$headers</span><span class="keyword">);<br></span><span class="default">?&gt;</span> <br><br>And just so you can troubleshoot, this worked when sending mail from the command line/manually. CLI worked even though the php code without the init_set function wouldn't work. <br><br>You will notice that the "rcpt to" and "to" fields appear redundant, but if both are not used, the delivered mail's "to" field will be blank/empty.<br><br>-------------------------------<br>telnet www.example.com 25<br>helo<br>mail from: webmaster@example.com<br>rcpt to: someone@example.com<br>data<br>to: someone@example.com<br>subject: test again to make sure<br><br>this is my message <br>.<br>quit<br>-----------------------------------</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="118210">  
+  <a class="name">
+  <strong class="user"><em>jimmytrojan009 at gmail dot com</em></strong></a><div class="date" title="2015-10-26 06:05"><strong>5 years ago</strong></div>
+  <div class="text" id="Hcom118210">
+<div class="phpcode"><code><span class="html">
+I have tried many online tutorials to get mail() function working in windows, until i stumbled upon this website<br><a rel="nofollow" target="_blank">http://php.codeindepth.com/php-sending-mail/</a><br><br>It really boils down to changing few directives in php.ini and sendmail.ini<br><br>Changes required in sendmail.ini<br><br>smtp_server=smtp.gmail.com<br>smtp_port=587<br>error_logfile=error.log<br>debug_logfile=debug.log<br>auth_username=your-gmail-id@gmail.com<br>auth_password=your-gmail-password<br>force_sender=your-gmail-id@gmail.com<br><br>Changes required in php.ini<br><br>SMTP=smtp.gmail.com<br>smtp_port=587<br>sendmail_from = your-gmail-id@gmail.com<br>sendmail_path = "\"C:\xampp\sendmail\sendmail.exe\" -t"<br>;sendmail_path = "C:\xampp\mailtodisk\mailtodisk.exe"</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="81979">  
+  <a class="name">
+  <strong class="user"><em>richard at richard-sumilang dot com</em></strong></a><div class="date" title="2008-03-22 12:12"><strong>13 years ago</strong></div>
+  <div class="text" id="Hcom81979">
+<div class="phpcode"><code><span class="html">
+If you are using the sendmail app from an exim package or something you don't really need to change the normal parameters PHP gives it (-t -i) as other posts described.
+<br>
+<br>I just added "-f myemail@example.com" and it worked.
+<br>
+<br>One thing that got me stuck for a few hours was trying to figure out why the return-path was set as the user (user running php) and not what I was setting it with the -f option then I later found at that in order to forcefully set the return-path the user account running the command must be in exim's trusted users configuration! It helps to add trusted_groups as well then everything works fine :)
+<br>- Richard Sumilang</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="110329">  
+  <a class="name">
+  <strong class="user"><em>bburch at bouncingpixel dot com</em></strong></a><div class="date" title="2012-10-11 12:13"><strong>8 years ago</strong></div>
+  <div class="text" id="Hcom110329">
+<div class="phpcode"><code><span class="html">
+When using the PHP mail() function with IIS 6 on Windows Server 2003, check your "Relay" settings on the SMTP Virtual Server in IIS.&nbsp; If you grant access to 127.0.0.1 and set then set your php.ini SMTP to the same IP address (along with setting the same port 25), you should have success in sending mail.&nbsp; <br><br>I'm using PHP 5.3 and have had success with this configuration and did not have to define the "sendmail_from" setting in our php.ini file.</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="92639">  
+  <a class="name">
+  <strong class="user"><em>Edward</em></strong></a><div class="date" title="2009-08-01 02:08"><strong>12 years ago</strong></div>
+  <div class="text" id="Hcom92639">
+<div class="phpcode"><code><span class="html">
+Currently my hosting service is on Godaddy. When attempting to use the mail function without the fifth parameter containing "-f", my message headers would not work.
+<br>
+<br>Whenever your message headers do not work, simply try using the fifth parameter:
+<br>
+<br><span class="default">&lt;?php
+<br>mail</span><span class="keyword">(</span><span class="default">$to</span><span class="keyword">, </span><span class="default">$subject</span><span class="keyword">, </span><span class="default">$message</span><span class="keyword">, </span><span class="default">$headers</span><span class="keyword">, </span><span class="string">"-femail.address@example.com"</span><span class="keyword">);
+<br></span><span class="default">?&gt;</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="52856">  
+  <a class="name">
+  <strong class="user"><em>msheldon at desertraven dot com</em></strong></a><div class="date" title="2005-05-15 12:09"><strong>16 years ago</strong></div>
+  <div class="text" id="Hcom52856">
+<div class="phpcode"><code><span class="html">
+Just a comment on some of the examples, and as a note for those who may be unaware. The SMTP RFC 822 is VERY explicit in stating that \r\n is the ONLY acceptable line break format in the headers, though is a little vague about the message body. While many MTAs will deal with just \n, I've run accross plenty of them that will exhibit "interesting" behaviours when this happens. Those MTAs that are strict in compliance will definitely break when header lines are terminated with only \n. They will also most likely break if the body of the message contains more than 1000 consecutive characters without a \r\n.*<br><br>Note that RFC 821 is a little more clear in defining:<br>"line<br>&nbsp; &nbsp; &nbsp; A a sequence of ASCII characters ending with a &lt;CRLF&gt;."<br><br>RFC 821 makes no distinction between header lines and message body lines, since both are actually transmitted during the DATA phase.<br><br>Bottom line, best practice is to be sure to convert any bare \n characters in the message to \r\n.<br><br>* "The maximum total length of a text line including the &lt;CRLF&gt; is 1000 characters" (RFC 821)</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="29038">  
+  <a class="name">
+  <strong class="user"><em>f dot touchard at laposte dot net</em></strong></a><div class="date" title="2003-01-30 07:46"><strong>18 years ago</strong></div>
+  <div class="text" id="Hcom29038">
+<div class="phpcode"><code><span class="html">
+***Encoding plain text as quoted-printable in MIME email***
+<br>
+<br>If you don't want to install IMAP and use imap_8bit() to encode plain text or html message as quoted-printable
+<br>(friendly french special characters encoding :-) in MIME email, try this function.
+<br>I haven't fully tested it ( like with microtime with long mails). I send html message as 7-bit, so I didn't try yet with html.
+<br>If you have good html practise, you don't really need to encode html as quote-printable as it only uses 7-bit chars.
+<br>F.Touchard
+<br>
+<br><span class="default">&lt;?php
+<br></span><span class="keyword">function </span><span class="default">qp_encoding</span><span class="keyword">(</span><span class="default">$Message</span><span class="keyword">) {
+<br>&nbsp; &nbsp; 
+<br>&nbsp; &nbsp; </span><span class="comment">/* Build (most polpular) Extended ASCII Char/Hex MAP (characters &gt;127 &amp; &lt;255) */
+<br>&nbsp; &nbsp; </span><span class="keyword">for (</span><span class="default">$i</span><span class="keyword">=</span><span class="default">0</span><span class="keyword">; </span><span class="default">$i</span><span class="keyword">&lt;</span><span class="default">127</span><span class="keyword">; </span><span class="default">$i</span><span class="keyword">++) {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$CharList</span><span class="keyword">[</span><span class="default">$i</span><span class="keyword">] = </span><span class="string">"/"</span><span class="keyword">.</span><span class="default">chr</span><span class="keyword">(</span><span class="default">$i</span><span class="keyword">+</span><span class="default">128</span><span class="keyword">).</span><span class="string">"/"</span><span class="keyword">;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$HexList</span><span class="keyword">[</span><span class="default">$i</span><span class="keyword">] = </span><span class="string">"="</span><span class="keyword">.</span><span class="default">strtoupper</span><span class="keyword">(</span><span class="default">bin2hex</span><span class="keyword">(</span><span class="default">chr</span><span class="keyword">(</span><span class="default">$i</span><span class="keyword">+</span><span class="default">128</span><span class="keyword">)));
+<br>&nbsp; &nbsp; }
+<br>
+<br>&nbsp; &nbsp; </span><span class="comment">/* Encode equal sign &amp; 8-bit characters as equal signs followed by their hexadecimal values */
+<br>&nbsp; &nbsp; </span><span class="default">$Message </span><span class="keyword">= </span><span class="default">str_replace</span><span class="keyword">(</span><span class="string">"="</span><span class="keyword">, </span><span class="string">"=3D"</span><span class="keyword">, </span><span class="default">$Message</span><span class="keyword">);
+<br>&nbsp; &nbsp; </span><span class="default">$Message </span><span class="keyword">= </span><span class="default">preg_replace</span><span class="keyword">(</span><span class="default">$CharList</span><span class="keyword">, </span><span class="default">$HexList</span><span class="keyword">, </span><span class="default">$Message</span><span class="keyword">);
+<br>
+<br>&nbsp; &nbsp; </span><span class="comment">/* Lines longer than 76 characters (size limit for quoted-printable Content-Transfer-Encoding)
+<br>&nbsp; &nbsp; &nbsp; &nbsp; will be cut after character 75 and an equals sign is appended to these lines. */ 
+<br>&nbsp; &nbsp; </span><span class="default">$MessageLines </span><span class="keyword">= </span><span class="default">split</span><span class="keyword">(</span><span class="string">"\n"</span><span class="keyword">, </span><span class="default">$Message</span><span class="keyword">);
+<br>&nbsp; &nbsp; </span><span class="default">$Message_qp </span><span class="keyword">= </span><span class="string">""</span><span class="keyword">;
+<br>&nbsp; &nbsp; while(list(, </span><span class="default">$Line</span><span class="keyword">) = </span><span class="default">each</span><span class="keyword">(</span><span class="default">$MessageLines</span><span class="keyword">)) {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; if (</span><span class="default">strlen</span><span class="keyword">(</span><span class="default">$Line</span><span class="keyword">) &gt; </span><span class="default">75</span><span class="keyword">) {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$Pointer </span><span class="keyword">= </span><span class="default">0</span><span class="keyword">;&nbsp; &nbsp; &nbsp; &nbsp; 
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; while (</span><span class="default">$Pointer </span><span class="keyword">&lt;= </span><span class="default">strlen</span><span class="keyword">(</span><span class="default">$Line</span><span class="keyword">)) {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$Offset </span><span class="keyword">= </span><span class="default">0</span><span class="keyword">;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (</span><span class="default">preg_match</span><span class="keyword">(</span><span class="string">"/^=(3D|([8-9A-F]{1}[0-9A-F]{1}))$/"</span><span class="keyword">, </span><span class="default">substr</span><span class="keyword">(</span><span class="default">$Line</span><span class="keyword">, (</span><span class="default">$Pointer</span><span class="keyword">+</span><span class="default">73</span><span class="keyword">), </span><span class="default">3</span><span class="keyword">))) </span><span class="default">$Offset</span><span class="keyword">=-</span><span class="default">2</span><span class="keyword">;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (</span><span class="default">preg_match</span><span class="keyword">(</span><span class="string">"/^=(3D|([8-9A-F]{1}[0-9A-F]{1}))$/"</span><span class="keyword">, </span><span class="default">substr</span><span class="keyword">(</span><span class="default">$Line</span><span class="keyword">, (</span><span class="default">$Pointer</span><span class="keyword">+</span><span class="default">74</span><span class="keyword">), </span><span class="default">3</span><span class="keyword">))) </span><span class="default">$Offset</span><span class="keyword">=-</span><span class="default">1</span><span class="keyword">;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$Message_qp</span><span class="keyword">.= </span><span class="default">substr</span><span class="keyword">(</span><span class="default">$Line</span><span class="keyword">, </span><span class="default">$Pointer</span><span class="keyword">, (</span><span class="default">75</span><span class="keyword">+</span><span class="default">$Offset</span><span class="keyword">)).</span><span class="string">"=\n"</span><span class="keyword">;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if ((</span><span class="default">strlen</span><span class="keyword">(</span><span class="default">$Line</span><span class="keyword">) - (</span><span class="default">$Pointer</span><span class="keyword">+</span><span class="default">75</span><span class="keyword">)) &lt;= </span><span class="default">75</span><span class="keyword">) {&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$Message_qp</span><span class="keyword">.= </span><span class="default">substr</span><span class="keyword">(</span><span class="default">$Line</span><span class="keyword">, (</span><span class="default">$Pointer</span><span class="keyword">+</span><span class="default">75</span><span class="keyword">+</span><span class="default">$Offset</span><span class="keyword">)).</span><span class="string">"\n"</span><span class="keyword">;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; break </span><span class="default">1</span><span class="keyword">;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$Pointer</span><span class="keyword">+= </span><span class="default">75</span><span class="keyword">+</span><span class="default">$Offset</span><span class="keyword">;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }
+<br>&nbsp; &nbsp; &nbsp; &nbsp; } else {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$Message_qp</span><span class="keyword">.= </span><span class="default">$Line</span><span class="keyword">.</span><span class="string">"\n"</span><span class="keyword">;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; }
+<br>&nbsp; &nbsp; }&nbsp; &nbsp; &nbsp; &nbsp; 
+<br>&nbsp; &nbsp; return </span><span class="default">$Message_qp</span><span class="keyword">;
+<br>}
+<br></span><span class="default">?&gt;</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="86321">  
+  <a class="name">
+  <strong class="user"><em>molotster on google mail com</em></strong></a><div class="date" title="2008-10-13 01:03"><strong>12 years ago</strong></div>
+  <div class="text" id="Hcom86321">
+<div class="phpcode"><code><span class="html">
+Note, that single line should not contain more than 78 character, but is not allowed to contain more than 998 characters.<br><br>The possible consequences are:<br>Over 78 - clients are allowed to display the message in a "harder to read" way.<br>Over 998 - clients and servers are allowed to drop the message or cause any buffer-limit error.<br><br>See:<br><a rel="nofollow" target="_blank">http://www.faqs.org/rfcs/rfc2822</a> part 2.1.1.</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="111797">  
+  <a class="name">
+  <strong class="user"><em>ittasks at gmail dot com</em></strong></a><div class="date" title="2013-03-28 08:55"><strong>8 years ago</strong></div>
+  <div class="text" id="Hcom111797">
+<div class="phpcode"><code><span class="html">
+When dealing with mail headers "\n" and "\r\n" *sometimes* makes a big difference.<br><br>Once our CentOs servers got re-installed, all headers like:<br><br>&nbsp; $headers = "MIME-Version: 1.0\r\n";<br>&nbsp; $headers.= "Content-type: text/html; charset=iso-8859-1\r\n";<br> ...<br><br>became part of message body instead of headers<br><br>I was able to fixed this by replacing "\r\n" with just "\n"</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="89043">  
+  <a class="name">
+  <strong class="user"><em>Erich at gasboysnospam dot net</em></strong></a><div class="date" title="2009-02-18 07:43"><strong>12 years ago</strong></div>
+  <div class="text" id="Hcom89043">
+<div class="phpcode"><code><span class="html">
+if your mail is failing (returns false) be aware that many servers are configured to kill mail going out with a bcc or cc header.<br><br>The ideal workaround is to use the smtp functions which servers allow because of its better audit trail. Alternatively call the mail function several times.<br><br>I've just spent about four hours trying to work out what I was doing wrong!!</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="75460">  
+  <a class="name">
+  <strong class="user"><em>Alex Jaspersen</em></strong></a><div class="date" title="2007-05-30 11:03"><strong>14 years ago</strong></div>
+  <div class="text" id="Hcom75460">
+<div class="phpcode"><code><span class="html">
+For qmail users, I have written a function that talks directly to qmail-queue, rather than going through the sendmail wrapper used by mail(). Thus it allows more direct control over the message (for example, you can adapt the function to display "undisclosed recipients" in to the To: header). It also performs careful validation of the e-mail addresses passed to it, making it more difficult for spammers to exploit your scripts.<br><br>Please note that this function differs from the mail() function in that the from address must be passed as a _separate_ argument. It is automatically put into the message headers and _does not_ need to be included in $additional_headers.<br><br>$to can either be an array or a single address contained in a string.<br>$message should not contain any carriage return characters - only linefeeds.<br><br>No validation is performed on $additional_headers. This is mostly unnecessary because qmail will ignore any additional To: headers injected by a malicious user. However if you have some strange mail setup it might be a problem.<br><br>The function returns false if the message fails validation or is rejected by qmail-queue, and returns true on success.<br><br><span class="default">&lt;?php<br></span><span class="keyword">function </span><span class="default">qmail_queue</span><span class="keyword">(</span><span class="default">$to</span><span class="keyword">, </span><span class="default">$from</span><span class="keyword">, </span><span class="default">$subject</span><span class="keyword">, </span><span class="default">$message</span><span class="keyword">, </span><span class="default">$additional_headers </span><span class="keyword">= </span><span class="string">""</span><span class="keyword">)<br>{<br>&nbsp; &nbsp; </span><span class="comment">// qmail-queue location and hostname used for Message-Id<br>&nbsp; &nbsp; </span><span class="default">$cmd </span><span class="keyword">= </span><span class="string">"/var/qmail/bin/qmail-queue"</span><span class="keyword">;<br>&nbsp; &nbsp; </span><span class="default">$hostname </span><span class="keyword">= </span><span class="default">trim</span><span class="keyword">(</span><span class="default">file_get_contents</span><span class="keyword">(</span><span class="string">"/var/qmail/control/me"</span><span class="keyword">));<br>&nbsp; &nbsp; <br>&nbsp; &nbsp; </span><span class="comment">// convert $to into an array<br>&nbsp; &nbsp; </span><span class="keyword">if(</span><span class="default">is_scalar</span><span class="keyword">(</span><span class="default">$to</span><span class="keyword">))<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$to </span><span class="keyword">= array(</span><span class="default">$to</span><span class="keyword">);<br>&nbsp; &nbsp; <br>&nbsp; &nbsp; </span><span class="comment">// BEGIN VALIDATION<br>&nbsp; &nbsp; // e-mail address validation<br>&nbsp; &nbsp; </span><span class="default">$e </span><span class="keyword">= </span><span class="string">"/^[-+\\.0-9=a-z_]+@([-0-9a-z]+\\.)+([0-9a-z]){2,4}$/i"</span><span class="keyword">;<br>&nbsp; &nbsp; </span><span class="comment">// from address<br>&nbsp; &nbsp; </span><span class="keyword">if(!</span><span class="default">preg_match</span><span class="keyword">(</span><span class="default">$e</span><span class="keyword">, </span><span class="default">$from</span><span class="keyword">)) return </span><span class="default">false</span><span class="keyword">;<br>&nbsp; &nbsp; </span><span class="comment">// to address(es)<br>&nbsp; &nbsp; </span><span class="keyword">foreach(</span><span class="default">$to </span><span class="keyword">as </span><span class="default">$rcpt</span><span class="keyword">)<br>&nbsp; &nbsp; {<br>&nbsp; &nbsp; &nbsp; &nbsp; if(!</span><span class="default">preg_match</span><span class="keyword">(</span><span class="default">$e</span><span class="keyword">, </span><span class="default">$rcpt</span><span class="keyword">)) return </span><span class="default">false</span><span class="keyword">;<br>&nbsp; &nbsp; }<br>&nbsp; &nbsp; <br>&nbsp; &nbsp; </span><span class="comment">// subject validation (only printable 7-bit ascii characters allowed)<br>&nbsp; &nbsp; // needs to be adapted to allow for foreign languages with 8-bit characters<br>&nbsp; &nbsp; </span><span class="keyword">if(!</span><span class="default">preg_match</span><span class="keyword">(</span><span class="string">"/^[\\040-\\176]+$/"</span><span class="keyword">, </span><span class="default">$subject</span><span class="keyword">)) return </span><span class="default">false</span><span class="keyword">;<br>&nbsp; &nbsp; <br>&nbsp; &nbsp; </span><span class="comment">// END VALIDATION<br>&nbsp; &nbsp; <br>&nbsp; &nbsp; // open qmail-queue process<br>&nbsp; &nbsp; </span><span class="default">$dspec </span><span class="keyword">= array<br>&nbsp; &nbsp; (<br>&nbsp; &nbsp; &nbsp; &nbsp; array(</span><span class="string">"pipe"</span><span class="keyword">, </span><span class="string">"r"</span><span class="keyword">), </span><span class="comment">// message descriptor<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="keyword">array(</span><span class="string">"pipe"</span><span class="keyword">, </span><span class="string">"r"</span><span class="keyword">) </span><span class="comment">// envelope descriptor<br>&nbsp; &nbsp; </span><span class="keyword">);<br>&nbsp; &nbsp; </span><span class="default">$pipes </span><span class="keyword">= array();<br>&nbsp; &nbsp; </span><span class="default">$proc </span><span class="keyword">= </span><span class="default">proc_open</span><span class="keyword">(</span><span class="default">$cmd</span><span class="keyword">, </span><span class="default">$dspec</span><span class="keyword">, </span><span class="default">$pipes</span><span class="keyword">);<br>&nbsp; &nbsp; if(!</span><span class="default">is_resource</span><span class="keyword">(</span><span class="default">$proc</span><span class="keyword">)) return </span><span class="default">false</span><span class="keyword">;<br>&nbsp; &nbsp; <br>&nbsp; &nbsp; </span><span class="comment">// write additional headers<br>&nbsp; &nbsp; </span><span class="keyword">if(!empty(</span><span class="default">$additional_headers</span><span class="keyword">))<br>&nbsp; &nbsp; {<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">fwrite</span><span class="keyword">(</span><span class="default">$pipes</span><span class="keyword">[</span><span class="default">0</span><span class="keyword">], </span><span class="default">$additional_headers </span><span class="keyword">. </span><span class="string">"\n"</span><span class="keyword">);<br>&nbsp; &nbsp; }<br>&nbsp; &nbsp; <br>&nbsp; &nbsp; </span><span class="comment">// write to/from/subject/date/message-ID headers<br>&nbsp; &nbsp; </span><span class="default">fwrite</span><span class="keyword">(</span><span class="default">$pipes</span><span class="keyword">[</span><span class="default">0</span><span class="keyword">], </span><span class="string">"To: " </span><span class="keyword">. </span><span class="default">$to</span><span class="keyword">[</span><span class="default">0</span><span class="keyword">]); </span><span class="comment">// first recipient<br>&nbsp; &nbsp; </span><span class="keyword">for(</span><span class="default">$i </span><span class="keyword">= </span><span class="default">1</span><span class="keyword">; </span><span class="default">$i </span><span class="keyword">&lt; </span><span class="default">sizeof</span><span class="keyword">(</span><span class="default">$to</span><span class="keyword">); </span><span class="default">$i</span><span class="keyword">++) </span><span class="comment">// additional recipients<br>&nbsp; &nbsp; </span><span class="keyword">{<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">fwrite</span><span class="keyword">(</span><span class="default">$pipes</span><span class="keyword">[</span><span class="default">0</span><span class="keyword">], </span><span class="string">", " </span><span class="keyword">. </span><span class="default">$to</span><span class="keyword">[</span><span class="default">$i</span><span class="keyword">]);<br>&nbsp; &nbsp; }<br>&nbsp; &nbsp; </span><span class="default">fwrite</span><span class="keyword">(</span><span class="default">$pipes</span><span class="keyword">[</span><span class="default">0</span><span class="keyword">], </span><span class="string">"\nSubject: " </span><span class="keyword">. </span><span class="default">$subject </span><span class="keyword">. </span><span class="string">"\n"</span><span class="keyword">);<br>&nbsp; &nbsp; </span><span class="default">fwrite</span><span class="keyword">(</span><span class="default">$pipes</span><span class="keyword">[</span><span class="default">0</span><span class="keyword">], </span><span class="string">"From: " </span><span class="keyword">. </span><span class="default">$from </span><span class="keyword">. </span><span class="string">"\n"</span><span class="keyword">);<br>&nbsp; &nbsp; </span><span class="default">fwrite</span><span class="keyword">(</span><span class="default">$pipes</span><span class="keyword">[</span><span class="default">0</span><span class="keyword">], </span><span class="string">"Message-Id: &lt;" </span><span class="keyword">. </span><span class="default">md5</span><span class="keyword">(</span><span class="default">uniqid</span><span class="keyword">(</span><span class="default">microtime</span><span class="keyword">())) . </span><span class="string">"@" </span><span class="keyword">. </span><span class="default">$hostname </span><span class="keyword">. </span><span class="string">"&gt;\n"</span><span class="keyword">);<br>&nbsp; &nbsp; </span><span class="default">fwrite</span><span class="keyword">(</span><span class="default">$pipes</span><span class="keyword">[</span><span class="default">0</span><span class="keyword">], </span><span class="string">"Date: " </span><span class="keyword">. </span><span class="default">date</span><span class="keyword">(</span><span class="string">"r"</span><span class="keyword">) . </span><span class="string">"\n\n"</span><span class="keyword">);<br>&nbsp; &nbsp; </span><span class="default">fwrite</span><span class="keyword">(</span><span class="default">$pipes</span><span class="keyword">[</span><span class="default">0</span><span class="keyword">], </span><span class="default">$message</span><span class="keyword">);<br>&nbsp; &nbsp; </span><span class="default">fwrite</span><span class="keyword">(</span><span class="default">$pipes</span><span class="keyword">[</span><span class="default">0</span><span class="keyword">], </span><span class="string">"\n"</span><span class="keyword">);<br>&nbsp; &nbsp; </span><span class="default">fclose</span><span class="keyword">(</span><span class="default">$pipes</span><span class="keyword">[</span><span class="default">0</span><span class="keyword">]);<br>&nbsp; &nbsp; <br>&nbsp; &nbsp; </span><span class="comment">// write from address and recipients<br>&nbsp; &nbsp; </span><span class="default">fwrite</span><span class="keyword">(</span><span class="default">$pipes</span><span class="keyword">[</span><span class="default">1</span><span class="keyword">], </span><span class="string">"F" </span><span class="keyword">. </span><span class="default">$from </span><span class="keyword">. </span><span class="string">"\0"</span><span class="keyword">);<br>&nbsp; &nbsp; foreach(</span><span class="default">$to </span><span class="keyword">as </span><span class="default">$rcpt</span><span class="keyword">)<br>&nbsp; &nbsp; {<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">fwrite</span><span class="keyword">(</span><span class="default">$pipes</span><span class="keyword">[</span><span class="default">1</span><span class="keyword">], </span><span class="string">"T" </span><span class="keyword">. </span><span class="default">$rcpt </span><span class="keyword">. </span><span class="string">"\0"</span><span class="keyword">);<br>&nbsp; &nbsp; }<br>&nbsp; &nbsp; </span><span class="default">fwrite</span><span class="keyword">(</span><span class="default">$pipes</span><span class="keyword">[</span><span class="default">1</span><span class="keyword">], </span><span class="string">"\0"</span><span class="keyword">);<br>&nbsp; &nbsp; </span><span class="default">fclose</span><span class="keyword">(</span><span class="default">$pipes</span><span class="keyword">[</span><span class="default">1</span><span class="keyword">]);<br>&nbsp; &nbsp; <br>&nbsp; &nbsp; </span><span class="comment">// return true on success.<br>&nbsp; &nbsp; </span><span class="keyword">return </span><span class="default">proc_close</span><span class="keyword">(</span><span class="default">$proc</span><span class="keyword">) == </span><span class="default">0</span><span class="keyword">;<br>}<br></span><span class="default">?&gt;</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="94428">  
+  <a class="name">
+  <strong class="user"><em>Systemx</em></strong></a><div class="date" title="2009-11-04 02:29"><strong>11 years ago</strong></div>
+  <div class="text" id="Hcom94428">
+<div class="phpcode"><code><span class="html">
+Bare LFs in SMTP
+<br>
+<br>Use This
+<br>
+<br><span class="default">&lt;?php
+<br></span><span class="comment">// Fix any bare linefeeds in the message to make it RFC821 Compliant.
+<br></span><span class="default">$message </span><span class="keyword">= </span><span class="default">preg_replace</span><span class="keyword">(</span><span class="string">"#(?&lt;!\r)\n#si"</span><span class="keyword">, </span><span class="string">"\r\n"</span><span class="keyword">, </span><span class="default">$message</span><span class="keyword">); 
+<br>&nbsp; &nbsp; 
+<br></span><span class="comment">// Make sure there are no bare linefeeds in the headers
+<br></span><span class="default">$headers </span><span class="keyword">= </span><span class="default">preg_replace</span><span class="keyword">(</span><span class="string">'#(?&lt;!\r)\n#si'</span><span class="keyword">, </span><span class="string">"\r\n"</span><span class="keyword">, </span><span class="default">$headers</span><span class="keyword">);
+<br></span><span class="default">?&gt;</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="40204">  
+  <a class="name">
+  <strong class="user"><em>Paul</em></strong></a><div class="date" title="2004-02-25 02:51"><strong>17 years ago</strong></div>
+  <div class="text" id="Hcom40204">
+<div class="phpcode"><code><span class="html">
+My mime multipart/alternative messages were going ok, until I switched to qmail with php .. after years of painfull searching, I came across this on the Life With Qmail 'Gotchas' section:<br><br>G.11. Carriage Return/Linefeed (CRLF) line breaks don't work<br><br>qmail-inject and other local injection mechanisms like sendmail don't work right when messages are injected with DOS-style carriage return/linefeed (CRLF) line breaks. Unlike Sendmail, qmail requires locally-injected messages to use Unix newlines (LF only). This is a common problem with PHP scripts.<br><br>So now, I can go back to sending emails with text AND html components :)</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="109655">  
+  <a class="name">
+  <strong class="user"><em>martin dot farrow at versacloud dot com</em></strong></a><div class="date" title="2012-08-06 09:07"><strong>9 years ago</strong></div>
+  <div class="text" id="Hcom109655">
+<div class="phpcode"><code><span class="html">
+I've noticed that on some versions of PHP occasionally mail() returns the empty string for success, rather than true or false. The empty string evaluates to false.<br><br>if you use constructs like<br><br>if ( mail( ... ) ){<br>&nbsp; # do something here on success<br>}<br><br>this wont work consistently.<br><br>so you need code like<br><br>$ret=mail(....)<br><br>if ( $ret == '' || $ret ){<br>&nbsp; # do something here<br>}<br><br>to get consistent results.</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="125498">  
+  <a class="name">
+  <strong class="user"><em>John dot php at yaph dot org dot uk</em></strong></a><div class="date" title="2020-11-07 07:37"><strong>10 months ago</strong></div>
+  <div class="text" id="Hcom125498">
+<div class="phpcode"><code><span class="html">
+I found I needed to use the additional parameter -f$envelope_sender to send subscribe messages to my email list manager (Enemies of Carlotta, YMMV). Simply setting From: email@address.tld in additional headers wasn't sufficient.<br><br>So to subscribe to mylist@example.com via a PHP script I call<br>mail("mylist-subscribe@example.com", $emailSubject, $body, '', "-f$email_to_subscribe");</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="50544">  
+  <a class="name">
+  <strong class="user"><em>php dot net at schrecktech dot com</em></strong></a><div class="date" title="2005-03-02 04:07"><strong>16 years ago</strong></div>
+  <div class="text" id="Hcom50544">
+<div class="phpcode"><code><span class="html">
+When sending MIME email make sure you follow the documentation with the "70" characters per line...you may end up with missing characters...and that is really hard to track down...</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="125559">  
+  <a class="name">
+  <strong class="user"><em>marcrbarker at NOSPAMgmail dot com</em></strong></a><div class="date" title="2020-12-02 12:03"><strong>9 months ago</strong></div>
+  <div class="text" id="Hcom125559">
+<div class="phpcode"><code><span class="html">
+DKIM signature can break by trying to add &lt;HTML tag&gt; text effects where plain text is expected:<br><br>.<br>.<br>.<br>$headers[] = 'MIME-Version: 1.0';<br>$headers[] = 'Content-Type: text/html; utf-8';<br>$headers[] = 'Content-Transfer-Encoding: quoted-printable';<br><br>// *** This will break DKIM ***<br>$message = '&lt;span style="color:green;font-size:24px;"&gt;ThisIsColored&lt;/span&gt;'<br>// *** This had broke DKIM ***<br><br>mail($email, $subject, $message, implode("\r\n", $headers));<br>.<br>.<br>.</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="124702">  
+  <a class="name">
+  <strong class="user"><em>jerold at pangzlab dot com</em></strong></a><div class="date" title="2020-02-10 05:47"><strong>1 year ago</strong></div>
+  <div class="text" id="Hcom124702">
+<div class="phpcode"><code><span class="html">
+Sending mail with attachments<br><br>function sendMail(<br>&nbsp; &nbsp; $mailTo,<br>&nbsp; &nbsp; $message,<br>&nbsp; &nbsp; $subject&nbsp; &nbsp; = "Your Subject",<br>&nbsp; &nbsp; $fromMail&nbsp;&nbsp; = "your@emialaddress.com",<br>&nbsp; &nbsp; $fromName&nbsp;&nbsp; = "from sender",<br>&nbsp; &nbsp; $replyTo&nbsp; &nbsp; = "no-reply",<br>&nbsp; &nbsp; $filePath&nbsp;&nbsp; = "path"<br>)<br>{<br>&nbsp; &nbsp; $LE&nbsp; = "\r\n";<br>&nbsp; &nbsp; $uid = md5(uniqid(time()));<br>&nbsp; &nbsp; $withAttachment = ($filePath !== NULL &amp;&amp; file_exists($filePath));<br><br>&nbsp; &nbsp; if($withAttachment){<br>&nbsp; &nbsp; &nbsp; &nbsp; $fileName&nbsp;&nbsp; = basename($filePath);<br>&nbsp; &nbsp; &nbsp; &nbsp; $fileSize&nbsp;&nbsp; = filesize($filePath);<br>&nbsp; &nbsp; &nbsp; &nbsp; $handle&nbsp; &nbsp;&nbsp; = fopen($filePath, "r");<br>&nbsp; &nbsp; &nbsp; &nbsp; $content&nbsp; &nbsp; = fread($handle, $fileSize);<br>&nbsp; &nbsp; &nbsp; &nbsp; fclose($handle);<br>&nbsp; &nbsp; &nbsp; &nbsp; $content = chunk_split(base64_encode($content));<br>&nbsp; &nbsp; }<br><br>&nbsp; &nbsp; $header = "From: ".$fromName." &lt;".$fromMail."&gt;$LE";<br>&nbsp; &nbsp; $header .= "Reply-To: ".$replyTo."$LE";<br>&nbsp; &nbsp; $header .= "MIME-Version: 1.0$LE";<br>&nbsp; &nbsp; $header .= "Content-Type: multipart/mixed; boundary=\"".$uid."\"$LE$LE";<br>&nbsp; &nbsp; $header .= "This is a multi-part message in MIME format.$LE";<br>&nbsp; &nbsp; $header .= "--".$uid."$LE";<br>&nbsp; &nbsp; $header .= "Content-type:text/html; charset=UTF-8$LE";<br>&nbsp; &nbsp; $header .= "Content-Transfer-Encoding: 7bit$LE$LE";<br>&nbsp; &nbsp; $header .= $message."$LE$LE";<br><br>&nbsp; &nbsp; if($withAttachment){<br>&nbsp; &nbsp; &nbsp; &nbsp; $header .= "--".$uid."$LE";<br>&nbsp; &nbsp; &nbsp; &nbsp; $header .= "Content-Type: application/octet-stream; name=\"".$fileName."\"$LE";<br>&nbsp; &nbsp; &nbsp; &nbsp; $header .= "Content-Transfer-Encoding: base64$LE";<br>&nbsp; &nbsp; &nbsp; &nbsp; $header .= "Content-Disposition: attachment; filename=\"".$fileName."\"$LE$LE";<br>&nbsp; &nbsp; &nbsp; &nbsp; $header .= $content."$LE$LE";<br>&nbsp; &nbsp; &nbsp; &nbsp; $header .= "--".$uid."--";<br>&nbsp; &nbsp; }<br>&nbsp; &nbsp; return mail($mailTo, $subject, "", $header);<br>}</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="97680">  
+  <a class="name">
+  <strong class="user"><em>umangberi at gmail dot com</em></strong></a><div class="date" title="2010-05-02 01:41"><strong>11 years ago</strong></div>
+  <div class="text" id="Hcom97680">
+<div class="phpcode"><code><span class="html">
+Outlook 2007 seemed to be a little finicky with me to have carriage returns in the headers. So any \r\n resulted in messages that had default apache messages sent over to me.<br><br>As soon as I removed \r from all of the headers, the script started working fine. Hope that helped.</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="108328">  
+  <a class="name">
+  <strong class="user"><em>yarik dot bohatsky at gmail dot com</em></strong></a><div class="date" title="2012-04-17 03:02"><strong>9 years ago</strong></div>
+  <div class="text" id="Hcom108328">
+<div class="phpcode"><code><span class="html">
+If you want to send UTF-8 HTML letter you need to mention charset twice:<br><br>1) In message header:<br><span class="default">&lt;?php<br>$headers </span><span class="keyword">.= </span><span class="string">'Content-type: text/html; charset=utf-8' </span><span class="keyword">. </span><span class="string">"\r\n"</span><span class="keyword">;<br></span><span class="default">?&gt;<br></span><br>2) In HTML header:<br><span class="default">&lt;?php<br>$message </span><span class="keyword">= </span><span class="string">'<br>&lt;html&gt;<br>&lt;head&gt;<br>&nbsp;&nbsp; &lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8" /&gt;<br>&nbsp;&nbsp; &lt;title&gt;Fillon soutient à fond le retour d\'un Grand Prix de France&lt;/title&gt;<br>&lt;/head&gt;<br>&lt;body&gt;<br>&nbsp;&nbsp; &lt;p&gt;Le Premier ministre François Fillon, passionné d\'automobile et pilote à ses heures, a apporté un soutien appuyé au retour d\'un Grand Prix de France au calendrier 2013 de la Formule 1, en faisant un passage-éclair vendredi sur le circuit Paul Ricard dans le Var.&lt;/p&gt;<br>&lt;/body&gt;<br>&lt;/html&gt;<br>'</span><span class="keyword">;<br><br></span><span class="default">In this </span><span class="keyword">case </span><span class="default">Outlook will also </span><span class="string">"understand" </span><span class="default">that message is encoded using UTF</span><span class="keyword">-</span><span class="default">8.</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="100727">  
+  <a class="name">
+  <strong class="user"><em>shuitest at gmail dot com</em></strong></a><div class="date" title="2010-11-02 09:50"><strong>10 years ago</strong></div>
+  <div class="text" id="Hcom100727">
+<div class="phpcode"><code><span class="html">
+If you use mutt, do as below, <br><br>/usr/bin/mutt -s '$subject' -f /dev/null -e 'set copy=no' -e 'set from = "{$GLOBALS[cfg][email_from]}"' -a '$attach_file_full_path' '{$GLOBALS[cfg][email_to]}' &lt;/dev/null 2&gt;&amp;1;</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="110606">  
+  <a class="name">
+  <strong class="user"><em>shenyqwilliam</em></strong></a><div class="date" title="2012-11-12 02:32"><strong>8 years ago</strong></div>
+  <div class="text" id="Hcom110606">
+<div class="phpcode"><code><span class="html">
+If you're sending a large attachment, you may encounter overflow problem.<br>AFAIK, two common limits could be responsible.<br><br>1. Postfix message size limit.<br>Edit /etc/postfix/main.cf . Change the value of "message_size_limit".<br><br>2. Apache memory size limit for scripts.<br>Edit /etc/php.ini . Change the value of "memory_limit".<br><br>//Then reload (or restart) Postfix and Apache.<br>//Empirically, sending 200MB attachment requires 500MB memory.<br><br>Be careful! Raising memory limits may cause unexpected consequences, and is hence deprecated.<br>Recommended alternatives include:<br>* Pack and split attachment into several emails.<br>* Only include a link to the file. The receiver can download it later.<br>* Use IMAP/POP3 server (e.g. Dovecot).</span>
+</code></div>
+  </div>
+ </div></div>
+
+ 
+</section>    </section><!-- layout-content -->
+        
+
+
+  </div><!-- layout -->
+
+  
+
+    
+ <!-- External and third party libraries. -->
+ 
+
+
+
+
+
+
+
+<a id="toTop" href="javascript:;"><span id="toTopHover"></span><img width="40" height="40" alt="To Top" src="../../images/to-top%402x.png"></a>
+
+
+
+<!-- Mirrored from www.php.net/manual/en/function.mail.php by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 11 Sep 2021 06:45:43 GMT -->
+
+</body></html>

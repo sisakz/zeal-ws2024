@@ -1,0 +1,811 @@
+<html><!-- Mirrored from www.php.net/manual/en/function.in-array.php by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 11 Sep 2021 09:41:31 GMT --><!-- Added by HTTrack --><head><meta http-equiv="content-type" content="text/html;charset=utf-8"><!-- /Added by HTTrack -->
+
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>in_array</title>
+
+ <link rel="shortcut icon" href="../../favicon.ico">
+ <link rel="search" type="application/opensearchdescription+xml" href="http://php.net/phpnetimprovedsearch.src" title="Add PHP.net search">
+ <link rel="alternate" type="application/atom+xml" href="https://www.php.net/releases/feed.php" title="PHP Release feed">
+ <link rel="alternate" type="application/atom+xml" href="https://www.php.net/feed.atom" title="PHP: Hypertext Preprocessor">
+
+ <link rel="canonical" href="function.in-array.html">
+ <link rel="shorturl" href="https://www.php.net/in-array">
+ <link rel="alternate" href="https://www.php.net/in-array" hreflang="x-default">
+
+ <link rel="contents" href="index-2.html">
+ <link rel="index" href="ref.array.html">
+ <link rel="prev" href="function.extract.html">
+ <link rel="next" href="function.key-exists.html">
+
+ <link rel="alternate" href="function.in-array.html" hreflang="en">
+ <link rel="alternate" href="https://www.php.net/manual/pt_BR/function.in-array.php" hreflang="pt_BR">
+ <link rel="alternate" href="https://www.php.net/manual/zh/function.in-array.php" hreflang="zh">
+ <link rel="alternate" href="https://www.php.net/manual/fr/function.in-array.php" hreflang="fr">
+ <link rel="alternate" href="https://www.php.net/manual/de/function.in-array.php" hreflang="de">
+ <link rel="alternate" href="https://www.php.net/manual/ja/function.in-array.php" hreflang="ja">
+ <link rel="alternate" href="https://www.php.net/manual/ro/function.in-array.php" hreflang="ro">
+ <link rel="alternate" href="https://www.php.net/manual/ru/function.in-array.php" hreflang="ru">
+ <link rel="alternate" href="https://www.php.net/manual/es/function.in-array.php" hreflang="es">
+ <link rel="alternate" href="https://www.php.net/manual/tr/function.in-array.php" hreflang="tr">
+
+<link rel="stylesheet" type="text/css" href="../../cached0aba.css?t=1539771603&amp;f=/fonts/Fira/fira.css" media="screen">
+<link rel="stylesheet" type="text/css" href="../../cached2ecf.css?t=1539765004&amp;f=/fonts/Font-Awesome/css/fontello.css" media="screen">
+<link rel="stylesheet" type="text/css" href="../../cachedba57.css?t=1606338002&amp;f=/styles/theme-base.css" media="screen">
+<link rel="stylesheet" type="text/css" href="../../cached3afa.css?t=1627831203&amp;f=/styles/theme-medium.css" media="screen">
+
+ <!--[if lte IE 7]>
+ <link rel="stylesheet" type="text/css" href="https://www.php.net/styles/workarounds.ie7.css" media="screen">
+ <![endif]-->
+
+ <!--[if lte IE 8]>
+ <script>
+  window.brokenIE = true;
+ </script>
+ <![endif]-->
+
+ <!--[if lte IE 9]>
+ <link rel="stylesheet" type="text/css" href="https://www.php.net/styles/workarounds.ie9.css" media="screen">
+ <![endif]-->
+
+ <!--[if IE]>
+ <script src="https://www.php.net/js/ext/html5.js"></script>
+ <![endif]-->
+
+ <base>
+
+
+</head>
+<body class="docs " style="">
+
+
+<div class="headsup"><a href="https://www.php.net/conferences/index.php#id2021-09-08-1">Longhorn PHP 2021</a></div>
+<nav id="trick"><div><dl>
+<dt><a href="getting-started.html">Getting Started</a></dt>
+	<dd><a href="introduction.html">Introduction</a></dd>
+	<dd><a href="tutorial.html">A simple tutorial</a></dd>
+<dt><a href="langref.html">Language Reference</a></dt>
+	<dd><a href="language.basic-syntax.html">Basic syntax</a></dd>
+	<dd><a href="language.types.html">Types</a></dd>
+	<dd><a href="language.variables.html">Variables</a></dd>
+	<dd><a href="language.constants.html">Constants</a></dd>
+	<dd><a href="language.expressions.html">Expressions</a></dd>
+	<dd><a href="language.operators.html">Operators</a></dd>
+	<dd><a href="language.control-structures.html">Control Structures</a></dd>
+	<dd><a href="language.functions.html">Functions</a></dd>
+	<dd><a href="language.oop5.html">Classes and Objects</a></dd>
+	<dd><a href="language.namespaces.html">Namespaces</a></dd>
+	<dd><a href="language.errors.html">Errors</a></dd>
+	<dd><a href="language.exceptions.html">Exceptions</a></dd>
+	<dd><a href="language.generators.html">Generators</a></dd>
+	<dd><a href="language.attributes.html">Attributes</a></dd>
+	<dd><a href="language.references.html">References Explained</a></dd>
+	<dd><a href="reserved.variables.html">Predefined Variables</a></dd>
+	<dd><a href="reserved.exceptions.html">Predefined Exceptions</a></dd>
+	<dd><a href="reserved.interfaces.html">Predefined Interfaces and Classes</a></dd>
+	<dd><a href="context.html">Context options and parameters</a></dd>
+	<dd><a href="wrappers.html">Supported Protocols and Wrappers</a></dd>
+</dl>
+<dl>
+<dt><a href="security.html">Security</a></dt>
+	<dd><a href="security.intro.html">Introduction</a></dd>
+	<dd><a href="security.general.html">General considerations</a></dd>
+	<dd><a href="security.cgi-bin.html">Installed as CGI binary</a></dd>
+	<dd><a href="security.apache.html">Installed as an Apache module</a></dd>
+	<dd><a href="security.sessions.html">Session Security</a></dd>
+	<dd><a href="security.filesystem.html">Filesystem Security</a></dd>
+	<dd><a href="security.database.html">Database Security</a></dd>
+	<dd><a href="security.errors.html">Error Reporting</a></dd>
+	<dd><a href="security.variables.html">User Submitted Data</a></dd>
+	<dd><a href="security.hiding.html">Hiding PHP</a></dd>
+	<dd><a href="security.current.html">Keeping Current</a></dd>
+<dt><a href="features.html">Features</a></dt>
+	<dd><a href="features.http-auth.html">HTTP authentication with PHP</a></dd>
+	<dd><a href="features.cookies.html">Cookies</a></dd>
+	<dd><a href="features.sessions.html">Sessions</a></dd>
+	<dd><a href="features.xforms.html">Dealing with XForms</a></dd>
+	<dd><a href="features.file-upload.html">Handling file uploads</a></dd>
+	<dd><a href="features.remote-files.html">Using remote files</a></dd>
+	<dd><a href="features.connection-handling.html">Connection handling</a></dd>
+	<dd><a href="features.persistent-connections.html">Persistent Database Connections</a></dd>
+	<dd><a href="features.commandline.html">Command line usage</a></dd>
+	<dd><a href="features.gc.html">Garbage Collection</a></dd>
+	<dd><a href="features.dtrace.html">DTrace Dynamic Tracing</a></dd>
+</dl>
+<dl>
+<dt><a href="funcref.html">Function Reference</a></dt>
+	<dd><a href="refs.basic.php.html">Affecting PHP's Behaviour</a></dd>
+	<dd><a href="refs.utilspec.audio.html">Audio Formats Manipulation</a></dd>
+	<dd><a href="refs.remote.auth.html">Authentication Services</a></dd>
+	<dd><a href="refs.utilspec.cmdline.html">Command Line Specific Extensions</a></dd>
+	<dd><a href="refs.compression.html">Compression and Archive Extensions</a></dd>
+	<dd><a href="refs.crypto.html">Cryptography Extensions</a></dd>
+	<dd><a href="refs.database.html">Database Extensions</a></dd>
+	<dd><a href="refs.calendar.html">Date and Time Related Extensions</a></dd>
+	<dd><a href="refs.fileprocess.file.html">File System Related Extensions</a></dd>
+	<dd><a href="refs.international.html">Human Language and Character Encoding Support</a></dd>
+	<dd><a href="refs.utilspec.image.html">Image Processing and Generation</a></dd>
+	<dd><a href="refs.remote.mail.html">Mail Related Extensions</a></dd>
+	<dd><a href="refs.math.html">Mathematical Extensions</a></dd>
+	<dd><a href="refs.utilspec.nontext.html">Non-Text MIME Output</a></dd>
+	<dd><a href="refs.fileprocess.process.html">Process Control Extensions</a></dd>
+	<dd><a href="refs.basic.other.html">Other Basic Extensions</a></dd>
+	<dd><a href="refs.remote.other.html">Other Services</a></dd>
+	<dd><a href="refs.search.html">Search Engine Extensions</a></dd>
+	<dd><a href="refs.utilspec.server.html">Server Specific Extensions</a></dd>
+	<dd><a href="refs.basic.session.html">Session Extensions</a></dd>
+	<dd><a href="refs.basic.text.html">Text Processing</a></dd>
+	<dd><a href="refs.basic.vartype.html">Variable and Type Related Extensions</a></dd>
+	<dd><a href="refs.webservice.html">Web Services</a></dd>
+	<dd><a href="refs.utilspec.windows.html">Windows Only Extensions</a></dd>
+	<dd><a href="refs.xml.html">XML Manipulation</a></dd>
+	<dd><a href="refs.ui.html">GUI Extensions</a></dd>
+</dl>
+<dl>
+<dt>Keyboard Shortcuts</dt><dt>?</dt>
+<dd>This help</dd>
+<dt>j</dt>
+<dd>Next menu item</dd>
+<dt>k</dt>
+<dd>Previous menu item</dd>
+<dt>g p</dt>
+<dd>Previous man page</dd>
+<dt>g n</dt>
+<dd>Next man page</dd>
+<dt>G</dt>
+<dd>Scroll to bottom</dd>
+<dt>g g</dt>
+<dd>Scroll to top</dd>
+<dt>g h</dt>
+<dd>Goto homepage</dd>
+<dt>g s</dt>
+<dd>Goto search<br>(current page)</dd>
+<dt>/</dt>
+<dd>Focus search box</dd>
+</dl></div></nav>
+<div id="goto">
+    <div class="search">
+         <div class="text"></div>
+         <div class="results"><ul></ul></div>
+   </div>
+</div>
+
+  <div id="breadcrumbs" class="row-fluid">
+    <div id="breadcrumbs-inner">
+          
+              
+          <ul>
+            <li><a href="index-2.html">PHP Manual</a></li>      <li><a href="funcref.html">Function Reference</a></li>      <li><a href="refs.basic.vartype.html">Variable and Type Related Extensions</a></li>      <li><a href="book.array.html">Arrays</a></li>      <li><a href="ref.array.html">Array Functions</a></li>      </ul>
+    </div>
+  </div>
+
+
+
+
+<div id="layout" class="clearfix">
+  <section id="layout-content">
+  <div id="function.in-array" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">in_array</h1>
+  <p class="verinfo">(PHP 4, PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">in_array</span> — <span class="dc-title">Checks if a value exists in an array</span></p>
+
+ </div>
+ <div class="refsect1 description" id="refsect1-function.in-array-description">
+  <h3 class="title">Description</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>in_array</strong></span>(<span class="methodparam"><span class="type"><a href="language.types.declarations.html#language.types.declarations.mixed" class="type mixed">mixed</a></span> <code class="parameter">$needle</code></span>, <span class="methodparam"><span class="type">array</span> <code class="parameter">$haystack</code></span>, <span class="methodparam"><span class="type">bool</span> <code class="parameter">$strict</code><span class="initializer"> = <strong><code>false</code></strong></span></span>): <span class="type">bool</span></div>
+
+  <p class="para rdfs-comment">
+   Searches for <code class="parameter">needle</code> in <code class="parameter">haystack</code> using loose comparison
+   unless <code class="parameter">strict</code> is set.
+  </p>
+ </div>
+
+ <div class="refsect1 parameters" id="refsect1-function.in-array-parameters">
+  <h3 class="title">Parameters</h3>
+  <p class="para">
+   </p><dl>
+    
+     <dt>
+<code class="parameter">needle</code></dt>
+
+     <dd>
+
+      <p class="para">
+       The searched value.
+      </p>
+      <blockquote class="note"><p><strong class="note">Note</strong>: 
+       </p><p class="para">
+        If <code class="parameter">needle</code> is a string, the comparison is done
+        in a case-sensitive manner.
+       </p>
+      <p></p></blockquote>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">haystack</code></dt>
+
+     <dd>
+
+      <p class="para">
+       The array.
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">strict</code></dt>
+
+     <dd>
+
+      <p class="para">
+       If the third parameter <code class="parameter">strict</code> is set to <strong><code>true</code></strong>
+       then the <span class="function"><strong>in_array()</strong></span> function will also check the
+       <a href="language.types.html" class="link">types</a> of the
+       <code class="parameter">needle</code> in the <code class="parameter">haystack</code>.
+      </p>
+     </dd>
+
+    
+   </dl>
+
+  <p></p>
+ </div>
+
+ <div class="refsect1 returnvalues" id="refsect1-function.in-array-returnvalues">
+  <h3 class="title">Return Values</h3>
+  <p class="para">
+   Returns <strong><code>true</code></strong> if <code class="parameter">needle</code> is found in the array,
+   <strong><code>false</code></strong> otherwise.
+  </p>
+ </div>
+
+ <div class="refsect1 examples" id="refsect1-function.in-array-examples">
+  <h3 class="title">Examples</h3>
+  <p class="para">
+   </p><div class="example" id="example-4949">
+    <p><strong>Example #1 <span class="function"><strong>in_array()</strong></span> example</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br>$os&nbsp;</span><span style="color: #007700">=&nbsp;array(</span><span style="color: #DD0000">"Mac"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"NT"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"Irix"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"Linux"</span><span style="color: #007700">);<br>if&nbsp;(</span><span style="color: #0000BB">in_array</span><span style="color: #007700">(</span><span style="color: #DD0000">"Irix"</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$os</span><span style="color: #007700">))&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"Got&nbsp;Irix"</span><span style="color: #007700">;<br>}<br>if&nbsp;(</span><span style="color: #0000BB">in_array</span><span style="color: #007700">(</span><span style="color: #DD0000">"mac"</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$os</span><span style="color: #007700">))&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"Got&nbsp;mac"</span><span style="color: #007700">;<br>}<br></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+    <div class="example-contents"><p>
+     The second condition fails because <span class="function"><strong>in_array()</strong></span>
+     is case-sensitive, so the program above will display:
+    </p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>Got Irix
+</pre></div>
+    </div>
+   </div>
+  <p></p>
+  <p class="para">
+   </p><div class="example" id="example-4950">
+    <p><strong>Example #2 <span class="function"><strong>in_array()</strong></span> with strict example</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br>$a&nbsp;</span><span style="color: #007700">=&nbsp;array(</span><span style="color: #DD0000">'1.10'</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">12.4</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">1.13</span><span style="color: #007700">);<br><br>if&nbsp;(</span><span style="color: #0000BB">in_array</span><span style="color: #007700">(</span><span style="color: #DD0000">'12.4'</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$a</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">true</span><span style="color: #007700">))&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"'12.4'&nbsp;found&nbsp;with&nbsp;strict&nbsp;check\n"</span><span style="color: #007700">;<br>}<br><br>if&nbsp;(</span><span style="color: #0000BB">in_array</span><span style="color: #007700">(</span><span style="color: #0000BB">1.13</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$a</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">true</span><span style="color: #007700">))&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"1.13&nbsp;found&nbsp;with&nbsp;strict&nbsp;check\n"</span><span style="color: #007700">;<br>}<br></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+    <div class="example-contents"><p>The above example will output:</p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>1.13 found with strict check
+</pre></div>
+    </div>
+   </div>
+  <p></p>
+  <p class="para">
+   </p><div class="example" id="example-4951">
+    <p><strong>Example #3 <span class="function"><strong>in_array()</strong></span> with an array as needle</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br>$a&nbsp;</span><span style="color: #007700">=&nbsp;array(array(</span><span style="color: #DD0000">'p'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'h'</span><span style="color: #007700">),&nbsp;array(</span><span style="color: #DD0000">'p'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'r'</span><span style="color: #007700">),&nbsp;</span><span style="color: #DD0000">'o'</span><span style="color: #007700">);<br><br>if&nbsp;(</span><span style="color: #0000BB">in_array</span><span style="color: #007700">(array(</span><span style="color: #DD0000">'p'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'h'</span><span style="color: #007700">),&nbsp;</span><span style="color: #0000BB">$a</span><span style="color: #007700">))&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"'ph'&nbsp;was&nbsp;found\n"</span><span style="color: #007700">;<br>}<br><br>if&nbsp;(</span><span style="color: #0000BB">in_array</span><span style="color: #007700">(array(</span><span style="color: #DD0000">'f'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'i'</span><span style="color: #007700">),&nbsp;</span><span style="color: #0000BB">$a</span><span style="color: #007700">))&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"'fi'&nbsp;was&nbsp;found\n"</span><span style="color: #007700">;<br>}<br><br>if&nbsp;(</span><span style="color: #0000BB">in_array</span><span style="color: #007700">(</span><span style="color: #DD0000">'o'</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$a</span><span style="color: #007700">))&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"'o'&nbsp;was&nbsp;found\n"</span><span style="color: #007700">;<br>}<br></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+    <div class="example-contents"><p>The above example will output:</p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>  'ph' was found
+  'o' was found
+</pre></div>
+    </div>
+   </div>
+  <p></p>
+ </div>
+
+ <div class="refsect1 seealso" id="refsect1-function.in-array-seealso">
+  <h3 class="title">See Also</h3>
+  <p class="para">
+   </p><ul class="simplelist">
+    <li class="member"><span class="function"><a href="function.array-search.html" class="function" rel="rdfs-seeAlso">array_search()</a> - Searches the array for a given value and returns the first corresponding key if successful</span></li>
+    <li class="member"><span class="function"><a href="function.isset.html" class="function" rel="rdfs-seeAlso">isset()</a> - Determine if a variable is declared and is different than null</span></li>
+    <li class="member"><span class="function"><a href="function.array-key-exists.html" class="function" rel="rdfs-seeAlso">array_key_exists()</a> - Checks if the given key or index exists in the array</span></li>
+   </ul>
+  <p></p>
+ </div>
+
+</div>
+<section id="usernotes">
+ <div class="head"><h3 class="title">User Contributed Notes</h3></div><div id="allnotes">
+  <div class="note" id="106319">  
+  <a class="name">
+  <strong class="user"><em>beingmrkenny at gmail dot com</em></strong></a><div class="date" title="2011-10-27 03:35"><strong>9 years ago</strong></div>
+  <div class="text" id="Hcom106319">
+<div class="phpcode"><code><span class="html">
+Loose checking returns some crazy, counter-intuitive results when used with certain arrays. It is completely correct behaviour, due to PHP's leniency on variable types, but in "real-life" is almost useless.<br><br>The solution is to use the strict checking option.<br><br><span class="default">&lt;?php<br><br></span><span class="comment">// Example array<br><br></span><span class="default">$array </span><span class="keyword">= array(<br>&nbsp; &nbsp; </span><span class="string">'egg' </span><span class="keyword">=&gt; </span><span class="default">true</span><span class="keyword">,<br>&nbsp; &nbsp; </span><span class="string">'cheese' </span><span class="keyword">=&gt; </span><span class="default">false</span><span class="keyword">,<br>&nbsp; &nbsp; </span><span class="string">'hair' </span><span class="keyword">=&gt; </span><span class="default">765</span><span class="keyword">,<br>&nbsp; &nbsp; </span><span class="string">'goblins' </span><span class="keyword">=&gt; </span><span class="default">null</span><span class="keyword">,<br>&nbsp; &nbsp; </span><span class="string">'ogres' </span><span class="keyword">=&gt; </span><span class="string">'no ogres allowed in this array'<br></span><span class="keyword">);<br><br></span><span class="comment">// Loose checking -- return values are in comments<br><br>// First three make sense, last four do not<br><br></span><span class="default">in_array</span><span class="keyword">(</span><span class="default">null</span><span class="keyword">, </span><span class="default">$array</span><span class="keyword">); </span><span class="comment">// true<br></span><span class="default">in_array</span><span class="keyword">(</span><span class="default">false</span><span class="keyword">, </span><span class="default">$array</span><span class="keyword">); </span><span class="comment">// true<br></span><span class="default">in_array</span><span class="keyword">(</span><span class="default">765</span><span class="keyword">, </span><span class="default">$array</span><span class="keyword">); </span><span class="comment">// true<br></span><span class="default">in_array</span><span class="keyword">(</span><span class="default">763</span><span class="keyword">, </span><span class="default">$array</span><span class="keyword">); </span><span class="comment">// true<br></span><span class="default">in_array</span><span class="keyword">(</span><span class="string">'egg'</span><span class="keyword">, </span><span class="default">$array</span><span class="keyword">); </span><span class="comment">// true<br></span><span class="default">in_array</span><span class="keyword">(</span><span class="string">'hhh'</span><span class="keyword">, </span><span class="default">$array</span><span class="keyword">); </span><span class="comment">// true<br></span><span class="default">in_array</span><span class="keyword">(array(), </span><span class="default">$array</span><span class="keyword">); </span><span class="comment">// true<br><br>// Strict checking<br><br></span><span class="default">in_array</span><span class="keyword">(</span><span class="default">null</span><span class="keyword">, </span><span class="default">$array</span><span class="keyword">, </span><span class="default">true</span><span class="keyword">); </span><span class="comment">// true<br></span><span class="default">in_array</span><span class="keyword">(</span><span class="default">false</span><span class="keyword">, </span><span class="default">$array</span><span class="keyword">, </span><span class="default">true</span><span class="keyword">); </span><span class="comment">// true<br></span><span class="default">in_array</span><span class="keyword">(</span><span class="default">765</span><span class="keyword">, </span><span class="default">$array</span><span class="keyword">, </span><span class="default">true</span><span class="keyword">); </span><span class="comment">// true<br></span><span class="default">in_array</span><span class="keyword">(</span><span class="default">763</span><span class="keyword">, </span><span class="default">$array</span><span class="keyword">, </span><span class="default">true</span><span class="keyword">); </span><span class="comment">// false<br></span><span class="default">in_array</span><span class="keyword">(</span><span class="string">'egg'</span><span class="keyword">, </span><span class="default">$array</span><span class="keyword">, </span><span class="default">true</span><span class="keyword">); </span><span class="comment">// false<br></span><span class="default">in_array</span><span class="keyword">(</span><span class="string">'hhh'</span><span class="keyword">, </span><span class="default">$array</span><span class="keyword">, </span><span class="default">true</span><span class="keyword">); </span><span class="comment">// false<br></span><span class="default">in_array</span><span class="keyword">(array(), </span><span class="default">$array</span><span class="keyword">, </span><span class="default">true</span><span class="keyword">); </span><span class="comment">// false<br><br></span><span class="default">?&gt;</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="96198">  
+  <a class="name">
+  <strong class="user"><em>jv at vip dot ie</em></strong></a><div class="date" title="2010-02-13 04:46"><strong>11 years ago</strong></div>
+  <div class="text" id="Hcom96198">
+<div class="phpcode"><code><span class="html">
+If you're working with very large 2 dimensional arrays (eg 20,000+ elements) it's much faster to do this...
+<br>
+<br><span class="default">&lt;?php
+<br>$needle </span><span class="keyword">= </span><span class="string">'test for this'</span><span class="keyword">;
+<br>
+<br></span><span class="default">$flipped_haystack </span><span class="keyword">= </span><span class="default">array_flip</span><span class="keyword">(</span><span class="default">$haystack</span><span class="keyword">);
+<br>
+<br>if ( isset(</span><span class="default">$flipped_haystack</span><span class="keyword">[</span><span class="default">$needle</span><span class="keyword">]) )
+<br>{
+<br>&nbsp; print </span><span class="string">"Yes it's there!"</span><span class="keyword">;
+<br>}
+<br></span><span class="default">?&gt;
+<br></span>
+<br>I had a script that went from 30+ seconds down to 2 seconds (when hunting through a 50,000 element array 50,000 times).
+<br>
+<br>Remember to only flip it once at the beginning of your code though!</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="124374">  
+  <a class="name">
+  <strong class="user"><em>Camille Dugas</em></strong></a><div class="date" title="2019-11-06 03:09"><strong>1 year ago</strong></div>
+  <div class="text" id="Hcom124374">
+<div class="phpcode"><code><span class="html">
+<span class="default">&lt;?php<br><br></span><span class="keyword">class </span><span class="default">Method </span><span class="keyword">{<br><br>&nbsp; &nbsp; </span><span class="comment">/** @var int current number of inMultiArray() loop */<br>&nbsp; &nbsp; </span><span class="keyword">private static </span><span class="default">$currentMultiArrayExec </span><span class="keyword">= </span><span class="default">0</span><span class="keyword">;<br><br>&nbsp; &nbsp; </span><span class="comment">/**<br>&nbsp; &nbsp;&nbsp; * Checks if an element is found in an array or one of its subarray.<br>&nbsp; &nbsp;&nbsp; * The verification layer of this method is limited to the parameter boundary xdebug.max_nesting_level of your php.ini.<br>&nbsp; &nbsp;&nbsp; * @param mixed $element<br>&nbsp; &nbsp;&nbsp; * @param array $array<br>&nbsp; &nbsp;&nbsp; * @param bool $strict<br>&nbsp; &nbsp;&nbsp; * @return bool<br>&nbsp; &nbsp;&nbsp; */<br>&nbsp; &nbsp; </span><span class="keyword">public static function </span><span class="default">inMultiArray</span><span class="keyword">(</span><span class="default">$element</span><span class="keyword">, array </span><span class="default">$array</span><span class="keyword">, </span><span class="default">bool $strict </span><span class="keyword">= </span><span class="default">true</span><span class="keyword">) : </span><span class="default">bool </span><span class="keyword">{<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">self</span><span class="keyword">::</span><span class="default">$currentMultiArrayExec</span><span class="keyword">++;<br><br>&nbsp; &nbsp; &nbsp; &nbsp; if(</span><span class="default">self</span><span class="keyword">::</span><span class="default">$currentMultiArrayExec </span><span class="keyword">&gt;= </span><span class="default">ini_get</span><span class="keyword">(</span><span class="string">"xdebug.max_nesting_level"</span><span class="keyword">)) return </span><span class="default">false</span><span class="keyword">;<br><br>&nbsp; &nbsp; &nbsp; &nbsp; foreach(</span><span class="default">$array </span><span class="keyword">as </span><span class="default">$key </span><span class="keyword">=&gt; </span><span class="default">$value</span><span class="keyword">){<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$bool </span><span class="keyword">= </span><span class="default">$strict </span><span class="keyword">? </span><span class="default">$element </span><span class="keyword">=== </span><span class="default">$key </span><span class="keyword">: </span><span class="default">$element </span><span class="keyword">== </span><span class="default">$key</span><span class="keyword">;<br><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if(</span><span class="default">$bool</span><span class="keyword">) return </span><span class="default">true</span><span class="keyword">;<br><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if(</span><span class="default">is_array</span><span class="keyword">(</span><span class="default">$value</span><span class="keyword">)){<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$bool </span><span class="keyword">= </span><span class="default">self</span><span class="keyword">::</span><span class="default">inMultiArray</span><span class="keyword">(</span><span class="default">$element</span><span class="keyword">, </span><span class="default">$value</span><span class="keyword">, </span><span class="default">$strict</span><span class="keyword">);<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; } else {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$bool </span><span class="keyword">= </span><span class="default">$strict </span><span class="keyword">? </span><span class="default">$element </span><span class="keyword">=== </span><span class="default">$value </span><span class="keyword">: </span><span class="default">$element </span><span class="keyword">== </span><span class="default">$value</span><span class="keyword">;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if(</span><span class="default">$bool</span><span class="keyword">) return </span><span class="default">true</span><span class="keyword">;<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br><br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">self</span><span class="keyword">::</span><span class="default">$currentMultiArrayExec </span><span class="keyword">= </span><span class="default">0</span><span class="keyword">;<br>&nbsp; &nbsp; &nbsp; &nbsp; return isset(</span><span class="default">$bool</span><span class="keyword">) ? </span><span class="default">$bool </span><span class="keyword">: </span><span class="default">false</span><span class="keyword">;<br>&nbsp; &nbsp; }<br>}<br><br></span><span class="default">$array </span><span class="keyword">= array(</span><span class="string">"foo" </span><span class="keyword">=&gt; array(</span><span class="string">"foo2"</span><span class="keyword">, </span><span class="string">"bar"</span><span class="keyword">));<br></span><span class="default">$search </span><span class="keyword">= </span><span class="string">"foo"</span><span class="keyword">;<br><br>if(</span><span class="default">Method</span><span class="keyword">::</span><span class="default">inMultiArray</span><span class="keyword">(</span><span class="default">$search</span><span class="keyword">, </span><span class="default">$array</span><span class="keyword">, </span><span class="default">false</span><span class="keyword">)){<br>&nbsp; &nbsp; echo </span><span class="default">$search </span><span class="keyword">. </span><span class="string">" it is found in the array or one of its sub array."</span><span class="keyword">;<br>} else {<br>&nbsp; &nbsp; echo </span><span class="default">$search </span><span class="keyword">. </span><span class="string">" was not found."</span><span class="keyword">;<br>}<br><br></span><span class="comment"># foo it is found in the array or one of its sub array.</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="89256">  
+  <a class="name">
+  <strong class="user"><em>Kelvin J</em></strong></a><div class="date" title="2009-02-28 05:04"><strong>12 years ago</strong></div>
+  <div class="text" id="Hcom89256">
+<div class="phpcode"><code><span class="html">
+For a case-insensitive in_array(), you can use array_map() to avoid a foreach statement, e.g.:<br><br><span class="default">&lt;?php<br>&nbsp; &nbsp; </span><span class="keyword">function </span><span class="default">in_arrayi</span><span class="keyword">(</span><span class="default">$needle</span><span class="keyword">, </span><span class="default">$haystack</span><span class="keyword">) {<br>&nbsp; &nbsp; &nbsp; &nbsp; return </span><span class="default">in_array</span><span class="keyword">(</span><span class="default">strtolower</span><span class="keyword">(</span><span class="default">$needle</span><span class="keyword">), </span><span class="default">array_map</span><span class="keyword">(</span><span class="string">'strtolower'</span><span class="keyword">, </span><span class="default">$haystack</span><span class="keyword">));<br>&nbsp; &nbsp; }<br></span><span class="default">?&gt;</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="105251">  
+  <a class="name">
+  <strong class="user"><em>Lea Hayes</em></strong></a><div class="date" title="2011-08-04 05:40"><strong>10 years ago</strong></div>
+  <div class="text" id="Hcom105251">
+<div class="phpcode"><code><span class="html">
+Determine whether an object field matches needle.
+<br>
+<br>Usage Example:
+<br>---------------
+<br>
+<br><span class="default">&lt;?php
+<br>$arr </span><span class="keyword">= array( new </span><span class="default">stdClass</span><span class="keyword">(), new </span><span class="default">stdClass</span><span class="keyword">() );
+<br></span><span class="default">$arr</span><span class="keyword">[</span><span class="default">0</span><span class="keyword">]-&gt;</span><span class="default">colour </span><span class="keyword">= </span><span class="string">'red'</span><span class="keyword">;
+<br></span><span class="default">$arr</span><span class="keyword">[</span><span class="default">1</span><span class="keyword">]-&gt;</span><span class="default">colour </span><span class="keyword">= </span><span class="string">'green'</span><span class="keyword">;
+<br></span><span class="default">$arr</span><span class="keyword">[</span><span class="default">1</span><span class="keyword">]-&gt;</span><span class="default">state&nbsp; </span><span class="keyword">= </span><span class="string">'enabled'</span><span class="keyword">;
+<br>
+<br>if (</span><span class="default">in_array_field</span><span class="keyword">(</span><span class="string">'red'</span><span class="keyword">, </span><span class="string">'colour'</span><span class="keyword">, </span><span class="default">$arr</span><span class="keyword">))
+<br>&nbsp;&nbsp; echo </span><span class="string">'Item exists with colour red.'</span><span class="keyword">;
+<br>if (</span><span class="default">in_array_field</span><span class="keyword">(</span><span class="string">'magenta'</span><span class="keyword">, </span><span class="string">'colour'</span><span class="keyword">, </span><span class="default">$arr</span><span class="keyword">))
+<br>&nbsp;&nbsp; echo </span><span class="string">'Item exists with colour magenta.'</span><span class="keyword">;
+<br>if (</span><span class="default">in_array_field</span><span class="keyword">(</span><span class="string">'enabled'</span><span class="keyword">, </span><span class="string">'state'</span><span class="keyword">, </span><span class="default">$arr</span><span class="keyword">))
+<br>&nbsp;&nbsp; echo </span><span class="string">'Item exists with enabled state.'</span><span class="keyword">;
+<br></span><span class="default">?&gt;
+<br></span>
+<br>Output:
+<br>--------
+<br>Item exists with colour red.
+<br>Item exists with enabled state.
+<br>
+<br><span class="default">&lt;?php
+<br></span><span class="keyword">function </span><span class="default">in_array_field</span><span class="keyword">(</span><span class="default">$needle</span><span class="keyword">, </span><span class="default">$needle_field</span><span class="keyword">, </span><span class="default">$haystack</span><span class="keyword">, </span><span class="default">$strict </span><span class="keyword">= </span><span class="default">false</span><span class="keyword">) {
+<br>&nbsp; &nbsp; if (</span><span class="default">$strict</span><span class="keyword">) {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; foreach (</span><span class="default">$haystack </span><span class="keyword">as </span><span class="default">$item</span><span class="keyword">)
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (isset(</span><span class="default">$item</span><span class="keyword">-&gt;</span><span class="default">$needle_field</span><span class="keyword">) &amp;&amp; </span><span class="default">$item</span><span class="keyword">-&gt;</span><span class="default">$needle_field </span><span class="keyword">=== </span><span class="default">$needle</span><span class="keyword">)
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return </span><span class="default">true</span><span class="keyword">;
+<br>&nbsp; &nbsp; }
+<br>&nbsp; &nbsp; else {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; foreach (</span><span class="default">$haystack </span><span class="keyword">as </span><span class="default">$item</span><span class="keyword">)
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (isset(</span><span class="default">$item</span><span class="keyword">-&gt;</span><span class="default">$needle_field</span><span class="keyword">) &amp;&amp; </span><span class="default">$item</span><span class="keyword">-&gt;</span><span class="default">$needle_field </span><span class="keyword">== </span><span class="default">$needle</span><span class="keyword">)
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return </span><span class="default">true</span><span class="keyword">;
+<br>&nbsp; &nbsp; }
+<br>&nbsp; &nbsp; return </span><span class="default">false</span><span class="keyword">;
+<br>}
+<br></span><span class="default">?&gt;</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="124168">  
+  <a class="name">
+  <strong class="user"><em>artem dot g dot prozorov at gmail dot com</em></strong></a><div class="date" title="2019-09-04 11:43"><strong>2 years ago</strong></div>
+  <div class="text" id="Hcom124168">
+<div class="phpcode"><code><span class="html">
+in_array() may also return NULL if the second argument is NULL and strict types are off.<br><br><span class="default">&lt;?php<br>var_dump</span><span class="keyword">(</span><span class="default">in_array</span><span class="keyword">(</span><span class="default">1</span><span class="keyword">, </span><span class="default">null</span><span class="keyword">));<br></span><span class="default">?&gt;<br></span><br>The output is NULL<br><br>If the strict mode is on, then this code would end up with the TypeError</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="114171">  
+  <a class="name">
+  <strong class="user"><em>what loose checking means</em></strong></a><div class="date" title="2014-01-20 05:03"><strong>7 years ago</strong></div>
+  <div class="text" id="Hcom114171">
+<div class="phpcode"><code><span class="html">
+In a high-voted example, an array is given that contains, amongst other things, true, false and null, against which various variables are tested using in_array and loose checking.<br><br>It impossible to receive false as a return value from in_array using loose checking if your arrays contains both the constants true and false. You might understandably trip over this (or the inverse - passing boolean true to check against an array of e.g. non-empty strings), but it's certainly not counter intuitive and makes perfect sense.</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="99676">  
+  <a class="name">
+  <strong class="user"><em>ctulek at gmail dot com</em></strong></a><div class="date" title="2010-08-30 11:07"><strong>11 years ago</strong></div>
+  <div class="text" id="Hcom99676">
+<div class="phpcode"><code><span class="html">
+If you have an array like:<br>$arr = array(0,1,2,3,4,5);<br><br>in_array(NULL, $arr) returns true because you have 0 in your array. That is, in_array does not use === for equal check.</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="121177">  
+  <a class="name">
+  <strong class="user"><em>stocki dot r at gmail dot com</em></strong></a><div class="date" title="2017-06-02 02:56"><strong>4 years ago</strong></div>
+  <div class="text" id="Hcom121177">
+<div class="phpcode"><code><span class="html">
+Add an extra if() to adrian foeder's comment to make it work properly:<br><br><span class="default">&lt;?php<br>&nbsp; &nbsp; </span><span class="keyword">...<br>&nbsp; &nbsp; if (!@</span><span class="default">$ret</span><span class="keyword">) {<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$ret </span><span class="keyword">= </span><span class="default">rec_in_array</span><span class="keyword">(</span><span class="default">$needle</span><span class="keyword">, </span><span class="default">$element</span><span class="keyword">, </span><span class="default">$alsokeys</span><span class="keyword">);<br>&nbsp; &nbsp; }<br>&nbsp; &nbsp; ...<br></span><span class="default">?&gt;<br></span><br>So this will work, too:<br><br><span class="default">&lt;?php<br>&nbsp; &nbsp; $array </span><span class="keyword">= array(<br>&nbsp; &nbsp; &nbsp; &nbsp; array(</span><span class="string">'a'</span><span class="keyword">, </span><span class="string">'b'</span><span class="keyword">),<br>&nbsp; &nbsp; &nbsp; &nbsp; array(</span><span class="string">'c'</span><span class="keyword">, </span><span class="string">'d'</span><span class="keyword">)<br>&nbsp; &nbsp; );<br>&nbsp; &nbsp; </span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">rec_in_array</span><span class="keyword">(</span><span class="string">'a'</span><span class="keyword">, </span><span class="default">$array</span><span class="keyword">));<br></span><span class="default">?&gt;</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="97465">  
+  <a class="name">
+  <strong class="user"><em>bogdan AT bogdanconstantinescu DOT com</em></strong></a><div class="date" title="2010-04-21 08:01"><strong>11 years ago</strong></div>
+  <div class="text" id="Hcom97465">
+<div class="phpcode"><code><span class="html">
+If you found yourself in need of a multidimensional array in_array like function you can use the one below. Works in a fair amount of time<br><br><span class="default">&lt;?php<br><br>&nbsp; &nbsp; </span><span class="keyword">function </span><span class="default">in_multiarray</span><span class="keyword">(</span><span class="default">$elem</span><span class="keyword">, </span><span class="default">$array</span><span class="keyword">)<br>&nbsp; &nbsp; {<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$top </span><span class="keyword">= </span><span class="default">sizeof</span><span class="keyword">(</span><span class="default">$array</span><span class="keyword">) - </span><span class="default">1</span><span class="keyword">;<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$bottom </span><span class="keyword">= </span><span class="default">0</span><span class="keyword">;<br>&nbsp; &nbsp; &nbsp; &nbsp; while(</span><span class="default">$bottom </span><span class="keyword">&lt;= </span><span class="default">$top</span><span class="keyword">)<br>&nbsp; &nbsp; &nbsp; &nbsp; {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if(</span><span class="default">$array</span><span class="keyword">[</span><span class="default">$bottom</span><span class="keyword">] == </span><span class="default">$elem</span><span class="keyword">)<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return </span><span class="default">true</span><span class="keyword">;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; else <br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if(</span><span class="default">is_array</span><span class="keyword">(</span><span class="default">$array</span><span class="keyword">[</span><span class="default">$bottom</span><span class="keyword">]))<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if(</span><span class="default">in_multiarray</span><span class="keyword">(</span><span class="default">$elem</span><span class="keyword">, (</span><span class="default">$array</span><span class="keyword">[</span><span class="default">$bottom</span><span class="keyword">])))<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return </span><span class="default">true</span><span class="keyword">;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$bottom</span><span class="keyword">++;<br>&nbsp; &nbsp; &nbsp; &nbsp; }&nbsp; &nbsp; &nbsp; &nbsp; <br>&nbsp; &nbsp; &nbsp; &nbsp; return </span><span class="default">false</span><span class="keyword">;<br>&nbsp; &nbsp; }<br></span><span class="default">?&gt;</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="120397">  
+  <a class="name">
+  <strong class="user"><em>rhuan at rhuan dot com dot br</em></strong></a><div class="date" title="2016-12-31 11:29"><strong>4 years ago</strong></div>
+  <div class="text" id="Hcom120397">
+<div class="phpcode"><code><span class="html">
+This code will search for a value in a multidimensional array with strings or numbers on keys.<br><br>function in_multiarray($elem, $array)<br>{<br>&nbsp; &nbsp; while (current($array) !== false) {<br>&nbsp; &nbsp; &nbsp; &nbsp; if (current($array) == $elem) {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return true;<br>&nbsp; &nbsp; &nbsp; &nbsp; } elseif (is_array(current($array))) {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (in_multiarray($elem, current($array))) {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return true;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; &nbsp; &nbsp; next($array);<br>&nbsp; &nbsp; }<br>&nbsp; &nbsp; return false;<br>}</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="91911">  
+  <a class="name">
+  <strong class="user"><em>john at dwarven dot co dot uk</em></strong></a><div class="date" title="2009-07-01 04:34"><strong>12 years ago</strong></div>
+  <div class="text" id="Hcom91911">
+<div class="phpcode"><code><span class="html">
+I just struggled for a while with this, although it may be obvious to others.<br><br>If you have an array with mixed type content such as:<br><br><span class="default">&lt;?php<br><br> $ary </span><span class="keyword">= array (<br>&nbsp;&nbsp; </span><span class="default">1</span><span class="keyword">,<br>&nbsp;&nbsp; </span><span class="string">"John"</span><span class="keyword">,<br>&nbsp;&nbsp; </span><span class="default">0</span><span class="keyword">,<br>&nbsp;&nbsp; </span><span class="string">"Foo"</span><span class="keyword">,<br>&nbsp;&nbsp; </span><span class="string">"Bar"<br> </span><span class="keyword">);<br><br></span><span class="default">?&gt;<br></span><br>be sure to use the strict checking when searching for a string in the array, or it will match on the 0 int in that array and give a true for all values of needle that are strings strings.<br><br><span class="default">&lt;?php<br><br>var_dump</span><span class="keyword">( </span><span class="default">in_array</span><span class="keyword">( </span><span class="default">2</span><span class="keyword">, </span><span class="default">$ary </span><span class="keyword">) );<br><br></span><span class="comment">// outputs FALSE<br><br></span><span class="default">var_dump</span><span class="keyword">( </span><span class="default">in_array</span><span class="keyword">( </span><span class="string">'Not in there'</span><span class="keyword">, </span><span class="default">$ary </span><span class="keyword">) );<br><br></span><span class="comment">// outputs TRUE<br><br></span><span class="default">var_dump</span><span class="keyword">( </span><span class="default">in_array</span><span class="keyword">( </span><span class="string">'Not in there'</span><span class="keyword">, </span><span class="default">$ary</span><span class="keyword">, </span><span class="default">TRUE </span><span class="keyword">) );<br><br></span><span class="comment">// outputs FALSE<br><br></span><span class="default">?&gt;</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="88260">  
+  <a class="name">
+  <strong class="user"><em>rhill at xenu-directory dot net</em></strong></a><div class="date" title="2009-01-17 01:05"><strong>12 years ago</strong></div>
+  <div class="text" id="Hcom88260">
+<div class="phpcode"><code><span class="html">
+I found out that in_array will *not* find an associative array within a haystack of associative arrays in strict mode if the keys were not generated in the *same order*:<br><br><span class="default">&lt;?php<br><br>$needle </span><span class="keyword">= array(<br>&nbsp; &nbsp; </span><span class="string">'fruit'</span><span class="keyword">=&gt;</span><span class="string">'banana'</span><span class="keyword">, </span><span class="string">'vegetable'</span><span class="keyword">=&gt;</span><span class="string">'carrot'<br>&nbsp; &nbsp; </span><span class="keyword">);<br><br></span><span class="default">$haystack </span><span class="keyword">= array(<br>&nbsp; &nbsp; array(</span><span class="string">'vegetable'</span><span class="keyword">=&gt;</span><span class="string">'carrot'</span><span class="keyword">, </span><span class="string">'fruit'</span><span class="keyword">=&gt;</span><span class="string">'banana'</span><span class="keyword">),<br>&nbsp; &nbsp; array(</span><span class="string">'fruit'</span><span class="keyword">=&gt;</span><span class="string">'apple'</span><span class="keyword">, </span><span class="string">'vegetable'</span><span class="keyword">=&gt;</span><span class="string">'celery'</span><span class="keyword">)<br>&nbsp; &nbsp; );<br><br>echo </span><span class="default">in_array</span><span class="keyword">(</span><span class="default">$needle</span><span class="keyword">, </span><span class="default">$haystack</span><span class="keyword">, </span><span class="default">true</span><span class="keyword">) ? </span><span class="string">'true' </span><span class="keyword">: </span><span class="string">'false'</span><span class="keyword">;<br></span><span class="comment">// Output is 'false'<br><br></span><span class="keyword">echo </span><span class="default">in_array</span><span class="keyword">(</span><span class="default">$needle</span><span class="keyword">, </span><span class="default">$haystack</span><span class="keyword">) ? </span><span class="string">'true' </span><span class="keyword">: </span><span class="string">'false'</span><span class="keyword">;<br></span><span class="comment">// Output is 'true'<br><br></span><span class="default">?&gt;<br></span><br>I had wrongly assumed the order of the items in an associative array were irrelevant, regardless of whether 'strict' is TRUE or FALSE: The order is irrelevant *only* if not in strict mode.</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="118045">  
+  <a class="name">
+  <strong class="user"><em>dazero0 dot ls at gmail dot com</em></strong></a><div class="date" title="2015-09-24 10:43"><strong>5 years ago</strong></div>
+  <div class="text" id="Hcom118045">
+<div class="phpcode"><code><span class="html">
+I would like to add something to beingmrkenny at gmail dot com comparison post. After debugging a system, i discovered a security issue in our system and his post helped me find the problem.<br><br>In my additional testing i found out that not matter what you search for in an array, except for 0 and null, you get true as the result if the array contains true as the value.<br><br>Examples as php code :<br><br><span class="default">&lt;?php<br>$a </span><span class="keyword">= [</span><span class="string">'a'</span><span class="keyword">, </span><span class="default">32</span><span class="keyword">, </span><span class="default">true</span><span class="keyword">, </span><span class="string">'x' </span><span class="keyword">=&gt; </span><span class="default">y</span><span class="keyword">];<br></span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">in_array</span><span class="keyword">(</span><span class="default">25</span><span class="keyword">, </span><span class="default">$a</span><span class="keyword">)); </span><span class="comment">// true, one would expect false<br></span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">in_array</span><span class="keyword">(</span><span class="string">'ggg'</span><span class="keyword">, </span><span class="default">$a</span><span class="keyword">)); </span><span class="comment">// true, one would expect false<br><br></span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">in_array</span><span class="keyword">(</span><span class="default">0</span><span class="keyword">, </span><span class="default">$a</span><span class="keyword">)); </span><span class="comment">// false<br></span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">in_array</span><span class="keyword">(</span><span class="default">null</span><span class="keyword">, </span><span class="default">$a</span><span class="keyword">)); </span><span class="comment">// false<br></span><span class="default">?&gt;</span> <br><br>Such the best practice in our case is to use strict mode. Which was not so obvious.</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="116580">  
+  <a class="name">
+  <strong class="user"><em>Harry Willis</em></strong></a><div class="date" title="2015-01-24 11:39"><strong>6 years ago</strong></div>
+  <div class="text" id="Hcom116580">
+<div class="phpcode"><code><span class="html">
+Kelvin's case-insensitive in_arrayi is fine if you desire loose typing, but mapping strtolower onto the array will (attempt to) cast all array members to string. If you have an array of mixed types, and you wish to preserve the typing, the following will work:<br><br><span class="default">&lt;?php<br></span><span class="keyword">function </span><span class="default">in_array_ci</span><span class="keyword">(</span><span class="default">$needle</span><span class="keyword">, array </span><span class="default">$haystack</span><span class="keyword">, </span><span class="default">$strict </span><span class="keyword">= </span><span class="default">false</span><span class="keyword">) {<br>&nbsp; &nbsp; foreach (</span><span class="default">$haystack </span><span class="keyword">as </span><span class="default">$element</span><span class="keyword">) {<br>&nbsp; &nbsp; &nbsp; &nbsp; if (</span><span class="default">gettype</span><span class="keyword">(</span><span class="default">$needle</span><span class="keyword">) == </span><span class="string">'string' </span><span class="keyword">&amp;&amp; </span><span class="default">gettype</span><span class="keyword">(</span><span class="default">$element</span><span class="keyword">) == </span><span class="string">'string'</span><span class="keyword">) {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (!</span><span class="default">strcasecmp</span><span class="keyword">(</span><span class="default">$needle</span><span class="keyword">, </span><span class="default">$element</span><span class="keyword">)) {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return </span><span class="default">true</span><span class="keyword">;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; &nbsp; &nbsp; elseif (</span><span class="default">$strict</span><span class="keyword">) {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (</span><span class="default">$needle </span><span class="keyword">=== </span><span class="default">$element</span><span class="keyword">) {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return </span><span class="default">true</span><span class="keyword">;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; &nbsp; &nbsp; else {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (</span><span class="default">$needle </span><span class="keyword">== </span><span class="default">$element</span><span class="keyword">) {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return </span><span class="default">true</span><span class="keyword">;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; }<br><br>&nbsp; &nbsp; return </span><span class="default">false</span><span class="keyword">;<br>}<br></span><span class="default">?&gt;</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="107721">  
+  <a class="name">
+  <strong class="user"><em>janis dot janovskis at gmail dot com</em></strong></a><div class="date" title="2012-02-28 11:03"><strong>9 years ago</strong></div>
+  <div class="text" id="Hcom107721">
+<div class="phpcode"><code><span class="html">
+Since sometimes in_array returns strange results - see notes above.<br>I was able to find value in array by this quite a simple function;<br><span class="default">&lt;?php<br></span><span class="comment">/**<br>* $find &lt;mixed&gt; value to find<br>* $array&lt;array&gt; array to search in<br>*/<br><br></span><span class="keyword">function </span><span class="default">_value_in_array</span><span class="keyword">(</span><span class="default">$array</span><span class="keyword">, </span><span class="default">$find</span><span class="keyword">){<br> </span><span class="default">$exists </span><span class="keyword">= </span><span class="default">FALSE</span><span class="keyword">;<br> if(!</span><span class="default">is_array</span><span class="keyword">(</span><span class="default">$array</span><span class="keyword">)){<br>&nbsp;&nbsp; return;<br>}<br>foreach (</span><span class="default">$array </span><span class="keyword">as </span><span class="default">$key </span><span class="keyword">=&gt; </span><span class="default">$value</span><span class="keyword">) {<br>&nbsp; if(</span><span class="default">$find </span><span class="keyword">== </span><span class="default">$value</span><span class="keyword">){<br>&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$exists </span><span class="keyword">= </span><span class="default">TRUE</span><span class="keyword">;<br>&nbsp; }<br>}<br>&nbsp; return </span><span class="default">$exists</span><span class="keyword">;<br>}<br><br></span><span class="comment">// Note<br>// You can't use wildcards and it does not check variable type<br></span><span class="default">?&gt;</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="81593">  
+  <a class="name">
+  <strong class="user"><em>sick949 at hotmail dot com</em></strong></a><div class="date" title="2008-03-05 03:43"><strong>13 years ago</strong></div>
+  <div class="text" id="Hcom81593">
+<div class="phpcode"><code><span class="html">
+A first idea for a function that checks if a text is in a specific column of an array.<br>It does not use in_array function because it doesn't check via columns.<br>Its a test, could be much better. Do not use it without test.<br><br><span class="default">&lt;?php<br><br></span><span class="keyword">function </span><span class="default">in_array_column</span><span class="keyword">(</span><span class="default">$text</span><span class="keyword">, </span><span class="default">$column</span><span class="keyword">, </span><span class="default">$array</span><span class="keyword">)<br>{<br>&nbsp; &nbsp; if (!empty(</span><span class="default">$array</span><span class="keyword">) &amp;&amp; </span><span class="default">is_array</span><span class="keyword">(</span><span class="default">$array</span><span class="keyword">))<br>&nbsp; &nbsp; {<br>&nbsp; &nbsp; &nbsp; &nbsp; for (</span><span class="default">$i</span><span class="keyword">=</span><span class="default">0</span><span class="keyword">; </span><span class="default">$i </span><span class="keyword">&lt; </span><span class="default">count</span><span class="keyword">(</span><span class="default">$array</span><span class="keyword">); </span><span class="default">$i</span><span class="keyword">++)<br>&nbsp; &nbsp; &nbsp; &nbsp; {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (</span><span class="default">$array</span><span class="keyword">[</span><span class="default">$i</span><span class="keyword">][</span><span class="default">$column</span><span class="keyword">]==</span><span class="default">$text </span><span class="keyword">|| </span><span class="default">strcmp</span><span class="keyword">(</span><span class="default">$array</span><span class="keyword">[</span><span class="default">$i</span><span class="keyword">][</span><span class="default">$column</span><span class="keyword">],</span><span class="default">$text</span><span class="keyword">)==</span><span class="default">0</span><span class="keyword">) return </span><span class="default">true</span><span class="keyword">;<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; }<br>&nbsp; &nbsp; return </span><span class="default">false</span><span class="keyword">;<br>}<br><br></span><span class="default">?&gt;</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="112168">  
+  <a class="name">
+  <strong class="user"><em>Valerchik</em></strong></a><div class="date" title="2013-05-13 07:30"><strong>8 years ago</strong></div>
+  <div class="text" id="Hcom112168">
+<div class="phpcode"><code><span class="html">
+Beware when using this function to validate user input:<br><br>$a = array('0' =&gt; 'Opt 1', '1' =&gt; 'Opt 2', '2' =&gt; 'Opt 3');<br>$v = 'sql injection';<br>var_dump(in_array($v, array_keys($a)));<br><br>This will result : true;<br><br>array_keys($a) will cast array keys to int instead of string !<br>then when in_array will compare it will cast&nbsp; 'sql injection' to int 0 !<br>Beware of this!</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="125043">  
+  <a class="name">
+  <strong class="user"><em>fermar21 at gmail dot com</em></strong></a><div class="date" title="2020-05-25 02:51"><strong>1 year ago</strong></div>
+  <div class="text" id="Hcom125043">
+<div class="phpcode"><code><span class="html">
+If you need to find if a value in an array is in another array you can use the function:<br><br><span class="default">&lt;?php<br></span><span class="keyword">function </span><span class="default">array_in_array</span><span class="keyword">(</span><span class="default">$arr_needle</span><span class="keyword">,</span><span class="default">$arr_haystack</span><span class="keyword">){<br>&nbsp; &nbsp; </span><span class="default">$retorno </span><span class="keyword">= </span><span class="default">false</span><span class="keyword">;<br>&nbsp; &nbsp; foreach (</span><span class="default">$arr_needle </span><span class="keyword">as </span><span class="default">$value</span><span class="keyword">) {<br>&nbsp; &nbsp; &nbsp; &nbsp; if(</span><span class="default">in_array</span><span class="keyword">(</span><span class="default">$value</span><span class="keyword">, </span><span class="default">$arr_haystack</span><span class="keyword">)){<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$retorno </span><span class="keyword">= </span><span class="default">true</span><span class="keyword">;<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; }<br>&nbsp; &nbsp; return </span><span class="default">$retorno</span><span class="keyword">;<br>}<br></span><span class="default">?&gt;</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="125385">  
+  <a class="name">
+  <strong class="user"><em>reiji_nakama at yahoo dot com</em></strong></a><div class="date" title="2020-09-22 03:21"><strong>11 months ago</strong></div>
+  <div class="text" id="Hcom125385">
+<div class="phpcode"><code><span class="html">
+The top voted notes talked about creating strict comparison function, because in_array is insufficient, because it has very lenient type checking (which is PHP default behaviour).<br><br>The thing is, in_array is already sufficient. Because as a good programmer, you should never have an array which contains {true, false, 0, 1, '0', '1', null, '', 'hello world'}; all in one array anyway.<br><br>It's better to fix how you store data and retrieve data from user, rather than fixing in_array() which is not broken.</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="93880">  
+  <a class="name">
+  <strong class="user"><em>thomas dot sahlin at gmail dot com</em></strong></a><div class="date" title="2009-10-05 12:53"><strong>11 years ago</strong></div>
+  <div class="text" id="Hcom93880">
+<div class="phpcode"><code><span class="html">
+If you're creating an array yourself and then using in_array to search it, consider setting the keys of the array and using isset instead since it's much faster.<br><br><span class="default">&lt;?php<br><br>$slow </span><span class="keyword">= array(</span><span class="string">'apple'</span><span class="keyword">, </span><span class="string">'banana'</span><span class="keyword">, </span><span class="string">'orange'</span><span class="keyword">);<br><br>if (</span><span class="default">in_array</span><span class="keyword">(</span><span class="string">'banana'</span><span class="keyword">, </span><span class="default">$slow</span><span class="keyword">))<br>&nbsp; &nbsp; print(</span><span class="string">'Found it!'</span><span class="keyword">);<br><br></span><span class="default">$fast </span><span class="keyword">= array(</span><span class="string">'apple' </span><span class="keyword">=&gt; </span><span class="string">'apple'</span><span class="keyword">, </span><span class="string">'banana' </span><span class="keyword">=&gt; </span><span class="string">'banana'</span><span class="keyword">, </span><span class="string">'orange' </span><span class="keyword">=&gt; </span><span class="string">'orange'</span><span class="keyword">);<br><br>if (isset(</span><span class="default">$fast</span><span class="keyword">[</span><span class="string">'banana'</span><span class="keyword">]))<br>&nbsp; &nbsp; print(</span><span class="string">'Found it!'</span><span class="keyword">);<br><br></span><span class="default">?&gt;</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="84602">  
+  <a class="name">
+  <strong class="user"><em>crashrox at gmail dot com</em></strong></a><div class="date" title="2008-07-21 08:34"><strong>13 years ago</strong></div>
+  <div class="text" id="Hcom84602">
+<div class="phpcode"><code><span class="html">
+Recursive in array using SPL
+<br>
+<br><span class="default">&lt;?php
+<br></span><span class="keyword">function </span><span class="default">in_array_recursive</span><span class="keyword">(</span><span class="default">$needle</span><span class="keyword">, </span><span class="default">$haystack</span><span class="keyword">) {
+<br>
+<br>&nbsp; &nbsp; </span><span class="default">$it </span><span class="keyword">= new </span><span class="default">RecursiveIteratorIterator</span><span class="keyword">(new </span><span class="default">RecursiveArrayIterator</span><span class="keyword">(</span><span class="default">$haystack</span><span class="keyword">));
+<br>
+<br>&nbsp; &nbsp; foreach(</span><span class="default">$it </span><span class="keyword">AS </span><span class="default">$element</span><span class="keyword">) {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; if(</span><span class="default">$element </span><span class="keyword">== </span><span class="default">$needle</span><span class="keyword">) {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return </span><span class="default">true</span><span class="keyword">;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; }
+<br>&nbsp; &nbsp; }
+<br>
+<br>&nbsp; &nbsp; return </span><span class="default">false</span><span class="keyword">;
+<br>}
+<br></span><span class="default">?&gt;</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="123311">  
+  <a class="name">
+  <strong class="user"><em>roman dot varuta at gmail dot com</em></strong></a><div class="date" title="2018-11-06 01:53"><strong>2 years ago</strong></div>
+  <div class="text" id="Hcom123311">
+<div class="phpcode"><code><span class="html">
+If array contain at least one true value, in_array() will return true every times if it is not false or null<br><br>Use strict = true<br><br><span class="default">&lt;?php<br><br>$arr </span><span class="keyword">= array(</span><span class="default">true</span><span class="keyword">);<br><br></span><span class="default">in_array</span><span class="keyword">(</span><span class="default">$any</span><span class="keyword">, </span><span class="default">$arr</span><span class="keyword">); </span><span class="comment">// Will return true every time except null and false<br><br></span><span class="default">?&gt;</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="122955">  
+  <a class="name">
+  <strong class="user"><em>msegit post pl</em></strong></a><div class="date" title="2018-07-18 12:20"><strong>3 years ago</strong></div>
+  <div class="text" id="Hcom122955">
+<div class="phpcode"><code><span class="html">
+You can use my function inArray, to search:<br>- multidimensional arrays<br>- for substrings (case [in]sensitive)<br>- for sub-arrays<br>- get array of keys of found values<br>Look at github <a rel="nofollow" target="_blank">https://gist.github.com/msegu/80093a65316ded5b69558d5456f80ff9</a> (here is too long)</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="121479">  
+  <a class="name">
+  <strong class="user"><em>Geoffrey Hoffman</em></strong></a><div class="date" title="2017-08-04 04:00"><strong>4 years ago</strong></div>
+  <div class="text" id="Hcom121479">
+<div class="phpcode"><code><span class="html">
+Be careful to use the strict parameter with truth comparisons of specific strings like "false":<br><br><span class="default">&lt;?php<br><br>$truthy </span><span class="keyword">= [</span><span class="default">true</span><span class="keyword">, </span><span class="string">'true'</span><span class="keyword">, </span><span class="default">1</span><span class="keyword">, </span><span class="string">'1'</span><span class="keyword">, </span><span class="string">'y'</span><span class="keyword">, </span><span class="string">'Y'</span><span class="keyword">, </span><span class="string">'yes'</span><span class="keyword">, </span><span class="string">'YES'</span><span class="keyword">];<br><br>if (</span><span class="default">in_array</span><span class="keyword">(</span><span class="string">'false'</span><span class="keyword">, </span><span class="default">$truthy</span><span class="keyword">)) {<br>&nbsp;&nbsp; echo </span><span class="string">"False is truthy.\n"</span><span class="keyword">;<br>} else {<br>&nbsp;&nbsp; echo </span><span class="string">"False is not truthy.\n"</span><span class="keyword">;<br>}<br><br>if (</span><span class="default">in_array</span><span class="keyword">(</span><span class="string">'false'</span><span class="keyword">, </span><span class="default">$truthy</span><span class="keyword">, </span><span class="default">true</span><span class="keyword">)) {<br>&nbsp; &nbsp; echo </span><span class="string">"False is truthy.\n"</span><span class="keyword">;<br>} else {<br>&nbsp; &nbsp; echo </span><span class="string">"False is not truthy.\n"</span><span class="keyword">;<br>}<br><br></span><span class="default">?&gt;<br></span><br>The above example prints:<br><br>False is truthy.<br>False is not truthy.</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="118744">  
+  <a class="name">
+  <strong class="user"><em>tjamadeira at gmail dot com</em></strong></a><div class="date" title="2016-01-29 07:17"><strong>5 years ago</strong></div>
+  <div class="text" id="Hcom118744">
+<div class="phpcode"><code><span class="html">
+This function is for search a needle in a multidimensional haystack:<br><br><span class="default">&lt;?php<br></span><span class="comment">/**<br> * A special function for search in a multidimensional array a needle<br> *<br> * @param mixed needle The searched variable<br> * @param array haystack The array where search<br> * @param bool strict It is or it isn't a strict search?<br> *<br> * @return bool<br> **/<br></span><span class="keyword">function </span><span class="default">in_array_r</span><span class="keyword">(</span><span class="default">$needle</span><span class="keyword">, </span><span class="default">$haystack</span><span class="keyword">, </span><span class="default">$strict </span><span class="keyword">= </span><span class="default">false</span><span class="keyword">){<br> foreach(</span><span class="default">$haystack </span><span class="keyword">as </span><span class="default">$item</span><span class="keyword">){<br>&nbsp;&nbsp; if(</span><span class="default">is_array</span><span class="keyword">(</span><span class="default">$item</span><span class="keyword">)){<br>&nbsp; &nbsp;&nbsp; if(</span><span class="default">in_array_r</span><span class="keyword">(</span><span class="default">$needle</span><span class="keyword">, </span><span class="default">$item</span><span class="keyword">, </span><span class="default">$strict</span><span class="keyword">)){<br>&nbsp; &nbsp; &nbsp;&nbsp; return </span><span class="default">true</span><span class="keyword">;<br>&nbsp; &nbsp;&nbsp; }<br>&nbsp;&nbsp; }else{<br>&nbsp; &nbsp;&nbsp; if((</span><span class="default">$strict </span><span class="keyword">? </span><span class="default">$needle </span><span class="keyword">=== </span><span class="default">$item </span><span class="keyword">: </span><span class="default">$needle </span><span class="keyword">== </span><span class="default">$item</span><span class="keyword">)){<br>&nbsp; &nbsp; &nbsp;&nbsp; return </span><span class="default">true</span><span class="keyword">;<br>&nbsp; &nbsp;&nbsp; }<br>&nbsp;&nbsp; }<br> }<br> return </span><span class="default">false</span><span class="keyword">;<br>}<br></span><span class="default">?&gt;</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="83285">  
+  <a class="name">
+  <strong class="user"><em>Martijn Wieringa</em></strong></a><div class="date" title="2008-05-19 02:20"><strong>13 years ago</strong></div>
+  <div class="text" id="Hcom83285">
+<div class="phpcode"><code><span class="html">
+When using numbers as needle, it gets tricky:<br><br>Note this behaviour (3rd statement):<br><br>in_array(0, array(42)) = FALSE<br>in_array(0, array('42')) = FALSE<br>in_array(0, array('Foo')) = TRUE<br>in_array('0', array('Foo')) = FALSE</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="114117">  
+  <a class="name">
+  <strong class="user"><em>rolf dot dergham dot public at gmail dot com</em></strong></a><div class="date" title="2014-01-13 01:02"><strong>7 years ago</strong></div>
+  <div class="text" id="Hcom114117">
+<div class="phpcode"><code><span class="html">
+Watch out for this:<br><br>&lt;?<br><br>print_r( (int) in_array('hello',array( 0 =&gt; 0)) );<br><br>?&gt;<br><br>returns 1<br><br>Yes, it seems that is_array thinks that a random string and 0 are the same thing.<br>Excuse me, that's not loose checking, that's drunken logic.<br>Or maybe I found a bug?</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="58560">  
+  <a class="name">
+  <strong class="user"><em>adrian foeder</em></strong></a><div class="date" title="2005-11-08 01:21"><strong>15 years ago</strong></div>
+  <div class="text" id="Hcom58560">
+<div class="phpcode"><code><span class="html">
+hope this function may be useful to you, it checks an array recursively (if an array has sub-array-levels) and also the keys, if wanted:<br><br><span class="default">&lt;?php<br></span><span class="keyword">function </span><span class="default">rec_in_array</span><span class="keyword">(</span><span class="default">$needle</span><span class="keyword">, </span><span class="default">$haystack</span><span class="keyword">, </span><span class="default">$alsokeys</span><span class="keyword">=</span><span class="default">false</span><span class="keyword">)<br>&nbsp; &nbsp; {<br>&nbsp; &nbsp; &nbsp; &nbsp; if(!</span><span class="default">is_array</span><span class="keyword">(</span><span class="default">$haystack</span><span class="keyword">)) return </span><span class="default">false</span><span class="keyword">;<br>&nbsp; &nbsp; &nbsp; &nbsp; if(</span><span class="default">in_array</span><span class="keyword">(</span><span class="default">$needle</span><span class="keyword">, </span><span class="default">$haystack</span><span class="keyword">) || (</span><span class="default">$alsokeys </span><span class="keyword">&amp;&amp; </span><span class="default">in_array</span><span class="keyword">(</span><span class="default">$needle</span><span class="keyword">, </span><span class="default">array_keys</span><span class="keyword">(</span><span class="default">$haystack</span><span class="keyword">)) )) return </span><span class="default">true</span><span class="keyword">;<br>&nbsp; &nbsp; &nbsp; &nbsp; else {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; foreach(</span><span class="default">$haystack </span><span class="keyword">AS </span><span class="default">$element</span><span class="keyword">) {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$ret </span><span class="keyword">= </span><span class="default">rec_in_array</span><span class="keyword">(</span><span class="default">$needle</span><span class="keyword">, </span><span class="default">$element</span><span class="keyword">, </span><span class="default">$alsokeys</span><span class="keyword">);<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; &nbsp; &nbsp; <br>&nbsp; &nbsp; &nbsp; &nbsp; return </span><span class="default">$ret</span><span class="keyword">;<br>&nbsp; &nbsp; }<br></span><span class="default">?&gt;</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="53745">  
+  <a class="name">
+  <strong class="user"><em>Aragorn5551 at gmx dot de</em></strong></a><div class="date" title="2005-06-11 05:26"><strong>16 years ago</strong></div>
+  <div class="text" id="Hcom53745">
+<div class="phpcode"><code><span class="html">
+If you have a multidimensional array filled only with Boolean values like me, you need to use 'strict', otherwise in_array() will return an unexpected result.
+<br>
+<br>Example:
+<br>
+<br><span class="default">&lt;?php
+<br>$error_arr </span><span class="keyword">= array(</span><span class="string">'error_one' </span><span class="keyword">=&gt; </span><span class="default">FALSE</span><span class="keyword">, </span><span class="string">'error_two' </span><span class="keyword">=&gt; </span><span class="default">FALSE</span><span class="keyword">, array(</span><span class="string">'error_three' </span><span class="keyword">=&gt; </span><span class="default">FALSE</span><span class="keyword">, </span><span class="string">'error_four' </span><span class="keyword">=&gt; </span><span class="default">FALSE</span><span class="keyword">));
+<br>
+<br>if (</span><span class="default">in_array </span><span class="keyword">(</span><span class="default">TRUE</span><span class="keyword">, </span><span class="default">$error_arr</span><span class="keyword">)) { 
+<br>&nbsp;&nbsp; echo </span><span class="string">'An error occurred'</span><span class="keyword">;
+<br>}
+<br>else {
+<br>&nbsp;&nbsp; echo </span><span class="string">'No error occurred'</span><span class="keyword">;
+<br>}
+<br></span><span class="default">?&gt;
+<br></span>
+<br>This will return 'An error occurred' although theres no TRUE value inside the array in any dimension. With 'strict' the function will return the correct result 'No error occurred'.
+<br>
+<br>Hope this helps somebody, cause it took me some time to figure this out.</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="120146">  
+  <a class="name">
+  <strong class="user"><em>hoopyfroop at yahoo dot com</em></strong></a><div class="date" title="2016-11-11 02:14"><strong>4 years ago</strong></div>
+  <div class="text" id="Hcom120146">
+<div class="phpcode"><code><span class="html">
+If you search for numbers, in_array will convert any strings in your array to numbers, dropping any letters/characters, forcing a numbers-to-numbers comparison. So if you search for 1234, it will say that '1234abcd' is a match.&nbsp; Example:<br><br><span class="default">&lt;?php<br>$test_array </span><span class="keyword">= array(</span><span class="string">'test'</span><span class="keyword">, </span><span class="string">'1234abcd'</span><span class="keyword">);<br>if (</span><span class="default">in_array</span><span class="keyword">(</span><span class="default">1234</span><span class="keyword">, </span><span class="default">$test_array</span><span class="keyword">)) {<br>&nbsp; &nbsp; echo </span><span class="string">'1234 is a match!'</span><span class="keyword">;<br>}<br></span><span class="default">?&gt;</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="122393">  
+  <a class="name">
+  <strong class="user"><em>Carmen</em></strong></a><div class="date" title="2018-02-15 11:16"><strong>3 years ago</strong></div>
+  <div class="text" id="Hcom122393">
+<div class="phpcode"><code><span class="html">
+Esta función falla con las letras acentuadas y con las eñes. Por tanto, no sirve para los caracteres UTF-8. <br>El siguiente código falla para na cadena = "María Mañas", no reconoce ni la "í" ni la "ñ":<br><br>&nbsp; &nbsp; function validarNombreYApellidos ($cadena, $selector)<br>&nbsp; &nbsp; {<br>&nbsp; &nbsp; &nbsp; &nbsp; /* Se admiten las letras (he puesto sólo las mayusculas,<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; porque paso la cadena con el nombre o<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; el apellido a mayúscula antes de hacer la comparación), <br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; las vocales acentuadas, la diéresis,<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; las eñes, los espacios en blanco y el guión <br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; (para los apellidos compuestos)*/<br>&nbsp; &nbsp; &nbsp; &nbsp; $caracteresPermitidos = <br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; array ("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M",<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "N", "Ñ", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", <br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "Y",&nbsp; "Z", " ", "Á", "É", "Í", "Ó", "Ú", "Ü", "-");<br>&nbsp; &nbsp; &nbsp; &nbsp; <br>&nbsp; &nbsp; &nbsp; &nbsp; $correcto = true;<br><br>&nbsp; &nbsp; &nbsp; &nbsp; // ¿La cadena está vacía?<br>&nbsp; &nbsp; &nbsp; &nbsp; if (empty ($cadena))<br>&nbsp; &nbsp; &nbsp; &nbsp; {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $correcto = false;<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; &nbsp; &nbsp; else<br>&nbsp; &nbsp; &nbsp; &nbsp; {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $nombreOapellido = mb_strtoupper ($cadena, "utf-8");<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $longitudCadena = mb_strlen ($cadena, "utf-8");<br><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; for ($i = 0; ($i &lt; $longitudCadena) &amp;&amp; $correcto; $i++)<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (!in_array ($nombreOapellido [$i], <br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; $caracteresPermitidos))<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // Se ha encontrado un carácter no permitido<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $correcto = false;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return $correcto;<br>&nbsp; &nbsp;&nbsp; }</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="122392">  
+  <a class="name">
+  <strong class="user"><em>Carmen</em></strong></a><div class="date" title="2018-02-15 11:15"><strong>3 years ago</strong></div>
+  <div class="text" id="Hcom122392">
+<div class="phpcode"><code><span class="html">
+Esta función falla con las letras acentuadas y con las eñes. Por tanto, no sirve para los caracteres UTF-8. <br>El siguiente código falla para na cadena = "María Mañas", no reconoce ni la "í" ni la "ñ":<br><br>&nbsp; &nbsp; function validarNombreYApellidos ($cadena, $selector)<br>&nbsp; &nbsp; {<br>&nbsp; &nbsp; &nbsp; &nbsp; /* Se admiten las letras (he puesto sólo las mayusculas,<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; porque paso la cadena con el nombre o<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; el apellido a mayúscula antes de hacer la comparación), <br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; las vocales acentuadas, la diéresis,<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; las eñes, los espacios en blanco y el guión <br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; (para los apellidos compuestos)*/<br>&nbsp; &nbsp; &nbsp; &nbsp; $caracteresPermitidos = <br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; array ("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M",<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "N", "Ñ", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", <br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "Y",&nbsp; "Z", " ", "Á", "É", "Í", "Ó", "Ú", "Ü", "-");<br>&nbsp; &nbsp; &nbsp; &nbsp; <br>&nbsp; &nbsp; &nbsp; &nbsp; $correcto = true;<br><br>&nbsp; &nbsp; &nbsp; &nbsp; // ¿La cadena está vacía?<br>&nbsp; &nbsp; &nbsp; &nbsp; if (empty ($cadena))<br>&nbsp; &nbsp; &nbsp; &nbsp; {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $correcto = false;<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; &nbsp; &nbsp; else<br>&nbsp; &nbsp; &nbsp; &nbsp; {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $nombreOapellido = mb_strtoupper ($cadena, "utf-8");<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $longitudCadena = mb_strlen ($cadena, "utf-8");<br><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; for ($i = 0; ($i &lt; $longitudCadena) &amp;&amp; $correcto; $i++)<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (!in_array ($nombreOapellido [$i], <br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; $caracteresPermitidos))<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // Se ha encontrado un carácter no permitido<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $correcto = false;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return $correcto;<br>&nbsp; &nbsp;&nbsp; }</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="67159">  
+  <a class="name">
+  <strong class="user"><em>musik at krapplack dot de</em></strong></a><div class="date" title="2006-06-04 05:52"><strong>15 years ago</strong></div>
+  <div class="text" id="Hcom67159">
+<div class="phpcode"><code><span class="html">
+I needed a version of in_array() that supports wildcards in the haystack. Here it is:<br><br><span class="default">&lt;?php<br></span><span class="keyword">function </span><span class="default">my_inArray</span><span class="keyword">(</span><span class="default">$needle</span><span class="keyword">, </span><span class="default">$haystack</span><span class="keyword">) {<br>&nbsp; &nbsp; </span><span class="comment"># this function allows wildcards in the array to be searched<br>&nbsp; &nbsp; </span><span class="keyword">foreach (</span><span class="default">$haystack </span><span class="keyword">as </span><span class="default">$value</span><span class="keyword">) {<br>&nbsp; &nbsp; &nbsp; &nbsp; if (</span><span class="default">true </span><span class="keyword">=== </span><span class="default">fnmatch</span><span class="keyword">(</span><span class="default">$value</span><span class="keyword">, </span><span class="default">$needle</span><span class="keyword">)) {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return </span><span class="default">true</span><span class="keyword">;<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; }<br>&nbsp; &nbsp; return </span><span class="default">false</span><span class="keyword">;<br>}<br><br></span><span class="default">$haystack </span><span class="keyword">= array(</span><span class="string">'*krapplack.de'</span><span class="keyword">);<br></span><span class="default">$needle </span><span class="keyword">= </span><span class="string">'www.krapplack.de'</span><span class="keyword">;<br><br>echo </span><span class="default">my_inArray</span><span class="keyword">(</span><span class="default">$needle</span><span class="keyword">, </span><span class="default">$haystack</span><span class="keyword">); </span><span class="comment"># outputs "true"<br></span><span class="default">?&gt;<br></span><br>Unfortunately, fnmatch() is not available on Windows or other non-POSIX compliant systems.<br><br>Cheers,<br>Thomas</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="118268">  
+  <a class="name">
+  <strong class="user"><em>splogamurugan at gmail dot com</em></strong></a><div class="date" title="2015-11-06 11:49"><strong>5 years ago</strong></div>
+  <div class="text" id="Hcom118268">
+<div class="phpcode"><code><span class="html">
+var_dump(in_array('invalid', array(0,10,20))); <br>The above code gives true since the 'invalid' is getting converted to 0 and checked against the array(0,10,20)<br><br>but var_dump(in_array('invalid', array(10,20)));&nbsp; gives 'false' since 0 not there in the array</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="125568">  
+  <a class="name">
+  <strong class="user"><em>ethraza at gmail dot com</em></strong></a><div class="date" title="2020-12-04 02:53"><strong>9 months ago</strong></div>
+  <div class="text" id="Hcom125568">
+<div class="phpcode"><code><span class="html">
+A function to check an array of values within another array.<br><br><span class="default">&lt;?php<br></span><span class="comment">/**<br> * Return TRUE if any value in neddles exists in haystack (values or keys) or FALSE.<br> */<br></span><span class="keyword">function </span><span class="default">array_in_array_exists</span><span class="keyword">(</span><span class="default">$aNeedles</span><span class="keyword">, </span><span class="default">$aHaystack_values</span><span class="keyword">, </span><span class="default">$aHaystack_keys </span><span class="keyword">= </span><span class="default">null</span><span class="keyword">) {<br>&nbsp; &nbsp; </span><span class="default">$needles </span><span class="keyword">= (</span><span class="default">is_string</span><span class="keyword">(</span><span class="default">$aNeedles</span><span class="keyword">))? </span><span class="default">explode</span><span class="keyword">(</span><span class="string">','</span><span class="keyword">, </span><span class="default">$aNeedles</span><span class="keyword">) : </span><span class="default">$aNeedles</span><span class="keyword">;<br><br>&nbsp; &nbsp; if (</span><span class="default">is_array</span><span class="keyword">(</span><span class="default">$aHaystack_values</span><span class="keyword">)) {<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$search_func </span><span class="keyword">= </span><span class="string">'in_array'</span><span class="keyword">;<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$haystack </span><span class="keyword">= </span><span class="default">$aHaystack_values</span><span class="keyword">;<br>&nbsp; &nbsp; } else {&nbsp; &nbsp; <br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$search_func </span><span class="keyword">= </span><span class="string">'array_key_exists'</span><span class="keyword">;<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$haystack </span><span class="keyword">= </span><span class="default">$aHaystack_Keys</span><span class="keyword">;<br>&nbsp; &nbsp; }<br><br>&nbsp; &nbsp; return !empty(</span><span class="default">array_filter</span><span class="keyword">(</span><span class="default">$needles</span><span class="keyword">, function(</span><span class="default">$e</span><span class="keyword">) use (</span><span class="default">$search_func</span><span class="keyword">, </span><span class="default">$haystack</span><span class="keyword">) {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return </span><span class="default">call_user_func</span><span class="keyword">(</span><span class="default">$search_func</span><span class="keyword">, </span><span class="default">$e</span><span class="keyword">, </span><span class="default">$haystack</span><span class="keyword">);<br>&nbsp; &nbsp; } ));<br>}<br><br></span><span class="comment">// Usage example: <br></span><span class="default">var_dump</span><span class="keyword">( </span><span class="default">array_in_array_exists</span><span class="keyword">(array(</span><span class="string">'000'</span><span class="keyword">, </span><span class="string">'123'</span><span class="keyword">), array(</span><span class="string">'123'</span><span class="keyword">,</span><span class="string">'456'</span><span class="keyword">)) );<br></span><span class="default">?&gt;<br></span>bool(true)<br><br>Second element '123' of needles was found as first element of haystack, so it return TRUE.</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="123260">  
+  <a class="name">
+  <strong class="user"><em>iammanjil at gmail dot com</em></strong></a><div class="date" title="2018-10-25 08:00"><strong>2 years ago</strong></div>
+  <div class="text" id="Hcom123260">
+<div class="phpcode"><code><span class="html">
+If third parameter is not set to Strict then, the needle is found in haystack eventhought the values are not same. the limit behind the decimal seems to be 6 after which, the haystack and needle match no matter what is behind the 6th.<br><br>Wrong Response.<br>$os = array("652875063.10089021");<br>if (in_array("652875063.10089021", $os)) {<br>&nbsp; &nbsp; echo "In Array";<br>}<br><br>Correct Response<br>$os = array("652875063.1008902");<br>if (in_array("652875063.1008901", $os)) {<br>&nbsp; &nbsp; echo "In Array";<br>}</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="124214">  
+  <a class="name">
+  <strong class="user"><em>loordu</em></strong></a><div class="date" title="2019-09-20 11:16"><strong>1 year ago</strong></div>
+  <div class="text" id="Hcom124214">
+<div class="phpcode"><code><span class="html">
+In PHP array function the in_array() function mainly used to check the item are available or not in array.<br><br>In_array() Syntax:<br><br>in_array( 'search_item' , $array, boolean)<br><br>Where,<br>&nbsp; &nbsp;&nbsp; boolean - It is used to check strict validation. And this field is optional one. If you want the strict validation you can use this.<br><br>We using in_array() function to performing following following two function. That is ,<br><br>1. Non-strict validation<br>2. Strict validation<br><br>1. Non-strict validation:<br>&nbsp; &nbsp;&nbsp; This method to validate array with some negotiation. And it allow two parameters.<br><br>&nbsp; &nbsp;&nbsp; For example,<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $array_sample = array (&nbsp; 'key1' =&gt; 567 , 'key2' =&gt; 579);<br><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; in_array('key1', $array_sample);&nbsp;&nbsp; // output1:&nbsp; true<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; in_array('577', $array_sample, false);&nbsp;&nbsp; // output2:&nbsp; true<br><br>&nbsp; &nbsp; &nbsp; Note: the Example 1, we use only two parameter. Because we can't mention `false` value. Because In default the in_array() take `false` as a boolean value.<br><br>&nbsp; &nbsp; &nbsp; In above example, <br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; Example 1 : The `key1` is not value in the array.&nbsp; &nbsp; This is key of the array. So this scenario the in_array accept the search key as a value of the array.<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; Example 2: The value `577` is not in the value and key of the array. It is some similar to the value `579`. So this is also accepted.<br><br>&nbsp; &nbsp;&nbsp; So this reason this type is called non-strict function.<br><br>2. Strict validation<br>&nbsp; &nbsp;&nbsp; This method to validate array without any negotiation. And it have three parameters. If you only mention two parameter the `in_array()` function take as a non-strict validation.<br><br>&nbsp; &nbsp;&nbsp; For example,<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $array_sample = array (&nbsp; 'key1' =&gt; 567 , 'key2' =&gt; 579);<br><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; in_array('key1', $array_sample , true);&nbsp;&nbsp; // output1:&nbsp; false<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; in_array('577', $array_sample, true);&nbsp;&nbsp; // output2:&nbsp; false<br>&nbsp; &nbsp; &nbsp; &nbsp; <br>&nbsp; &nbsp; This is return `true` only the search string is match exactly with the array value with case sensitivity.<br><br>Thanks for your time.</span>
+</code></div>
+  </div>
+ </div></div>
+
+ 
+</section>    </section><!-- layout-content -->
+        
+
+
+  </div><!-- layout -->
+
+  
+
+    
+ <!-- External and third party libraries. -->
+ 
+
+
+
+
+
+
+
+<a id="toTop" href="javascript:;"><span id="toTopHover"></span><img width="40" height="40" alt="To Top" src="../../images/to-top%402x.png"></a>
+
+
+
+<!-- Mirrored from www.php.net/manual/en/function.in-array.php by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 11 Sep 2021 09:41:31 GMT -->
+
+</body></html>

@@ -1,0 +1,2085 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+
+<!-- Mirrored from developer.wordpress.org/reference/functions/get_permalink/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 31 Aug 2021 17:04:04 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<!--
+<meta property="fb:page_id" content="6427302910" />
+-->
+<meta name="google-site-verification" content="7VWES_-rcHBcmaQis9mSYamPfNwE03f4vyTj4pfuAw0" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>get_permalink()</title>
+<meta name="referrer" content="always">
+
+		<link href='../../../../fonts.googleapis.com/css.css?family=Open+Sans:300italic,400italic,600italic,400,300,600&amp;subset=latin,cyrillic-ext,greek-ext,greek,vietnamese,latin-ext,cyrillic' rel='stylesheet' type='text/css'>
+
+		<link rel="stylesheet" href="../../../../s.w.org/style/wp4.css?95" />
+
+<link rel="shortcut icon" href="../../../../s.w.org/favicon.ico?2" type="image/x-icon" />
+<link rel="pingback" href="../../../xmlrpc.php" /><meta name='robots' content='max-image-preview:large' />
+<link rel='dns-prefetch' href='../../../../fonts.googleapis.com/index.html' />
+<link rel='dns-prefetch' href='http://s.w.org/' />
+<link rel='dns-prefetch' href='http://www.googletagmanager.com/' />
+<link rel='dns-prefetch' href='http://fonts.gstatic.com/' />
+<link rel="alternate" type="application/rss+xml" title="WordPress Developer Resources &raquo; Feed" href="../../../feed/index.html" />
+<link rel="alternate" type="application/rss+xml" title="WordPress Developer Resources &raquo; Comments Feed" href="../../../comments/feed/index.html" />
+<meta property="og:title" content="get_permalink() | Function | WordPress Developer Resources" />
+<meta property="og:site_name" content="WordPress Developer Resources" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="../../../index.html" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@WordPress" />
+<meta name="description" content="Retrieves the full permalink for the current post or post ID." />
+<meta property="og:description" content="Retrieves the full permalink for the current post or post ID." />
+<link rel="alternate" type="application/rss+xml" title="WordPress Developer Resources &raquo; get_permalink Comments Feed" href="https://developer.wordpress.org/reference/functions/get_permalink/feed/" />
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'../../../../www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P24PF4B');</script>
+			<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/developer.wordpress.org\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.9-alpha-51701"}};
+			!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([10084,65039,8205,55357,56613],[10084,65039,8203,55357,56613])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel='stylesheet' id='dashicons-css'  href='../../../wp-includes/css/dashicons.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='admin-bar-css'  href='../../../wp-includes/css/admin-bar.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-block-library-css'  href='../../../wp-includes/css/dist/block-library/style.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='wporg-handbook-css-css'  href='../../../wp-content/plugins/handbook/stylesheets/callout-boxes.css?ver=20200121' type='text/css' media='all' />
+<link rel='stylesheet' id='open-sans-css'  href='../../../../fonts.googleapis.com/css-2.css?family=Open+Sans%3A300italic%2C400italic%2C600italic%2C300%2C400%2C600&amp;subset=latin%2Clatin-ext&amp;display=fallback&amp;ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='wporg-developer-style-css'  href='../../../wp-content/themes/pub/wporg-developer/style.css?ver=3' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-dev-sass-compiled-css'  href='../../../wp-content/themes/pub/wporg-developer/stylesheets/main.css?ver=20200713' type='text/css' media='all' />
+<link rel='stylesheet' id='awesomplete-css-css'  href='../../../wp-content/themes/pub/wporg-developer/stylesheets/awesomplete.css?ver=20160114' type='text/css' media='all' />
+<link rel='stylesheet' id='autocomplete-css-css'  href='../../../wp-content/themes/pub/wporg-developer/stylesheets/autocomplete.css?ver=20171220' type='text/css' media='all' />
+<link rel='stylesheet' id='syntaxhighlighter-core-css'  href='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shCore.css?ver=3.0.9b' type='text/css' media='all' />
+<link rel='stylesheet' id='syntaxhighlighter-theme-default-css'  href='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shThemeDefault.css?ver=3.0.9b' type='text/css' media='all' />
+<script type='text/javascript' src='../../../wp-includes/js/jquery/jquery.min.js?ver=3.6.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='../../../wp-content/plugins/handbook/scripts/handbook.js?ver=20150930' id='wporg-handbook-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/chapters.js?ver=20190603' id='wporg-developer-chapters-js'></script>
+<script type='text/javascript' src='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shCore.js?ver=3.0.9b' id='syntaxhighlighter-core-js'></script>
+<script type='text/javascript' src='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushPhp.js?ver=3.0.9b' id='syntaxhighlighter-brush-php-js'></script>
+<link rel="https://api.w.org/" href="https://developer.wordpress.org/wp-json/" /><link rel="alternate" type="application/json" href="https://developer.wordpress.org/wp-json/wp/v2/wp-parser-function/2066" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="../../../xmlrpc-2.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="../../../wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 5.9-alpha-51701" />
+<link rel='shortlink' href='https://developer.wordpress.org/?p=2066' />
+<link rel="alternate" type="application/json+oembed" href="https://developer.wordpress.org/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fget_permalink%2F" />
+<link rel="alternate" type="text/xml+oembed" href="https://developer.wordpress.org/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fget_permalink%2F&amp;format=xml" />
+<link rel="canonical" href="index.html">
+<!-- Stream WordPress user activity plugin v3.6.2 -->
+	<style>
+		@media screen and (max-width: 782px) {
+			#wpadminbar li#wp-admin-bar-log-in,
+			#wpadminbar li#wp-admin-bar-register {
+				display: block;
+			}
+
+			#wpadminbar li#wp-admin-bar-log-in a,
+			#wpadminbar li#wp-admin-bar-register a {
+				padding: 0 8px;
+			}
+		}
+	</style>
+		<style>
+			a.github-edit {
+				margin-left: .5em;
+				font-size: .5em;
+				vertical-align: top;
+				display: inline-block;
+				border: 1px solid #eeeeee;
+				border-radius: 2px;
+				background: #eeeeee;
+				padding: .5em .6em .4em;
+				color: black;
+				margin-top: 0.1em;
+			}
+			a.github-edit > * {
+				opacity: 0.6;
+			}
+			a.github-edit:hover > * {
+				opacity: 1;
+				color: black;
+			}
+			a.github-edit img {
+				height: .8em;
+			}
+		</style>
+		
+	<script type="text/javascript">
+		jQuery( '<style>.hide-if-js { display: none; }</style>' ).appendTo( 'head' );
+		jQuery( function($) {
+			$( 'body' ).addClass('js');
+		} );
+	</script>
+<style type="text/css" media="print">#wpadminbar { display:none; }</style>
+	<style type="text/css" media="screen">
+	</style>
+	<script>document.cookie='devicePixelRatio='+((window.devicePixelRatio === undefined) ? 1 : window.devicePixelRatio)+'; path=/';</script>
+
+</head>
+
+
+<body id="wordpress-org" class="wp-parser-function-template-default single single-wp-parser-function postid-2066 admin-bar no-customize-support">
+		<div id="wpadminbar" class="nojq nojs">
+						<div class="quicklinks" id="wp-toolbar" role="navigation" aria-label="Toolbar">
+				<ul id='wp-admin-bar-root-default' class="ab-top-menu"><li id='wp-admin-bar-wp-logo' class="menupop"><a class='ab-item' aria-haspopup="true" href='https://wordpress.org/about/'><span class="ab-icon" aria-hidden="true"></span><span class="screen-reader-text">About WordPress</span></a><div class="ab-sub-wrapper"><ul id='wp-admin-bar-wp-logo-default' class="ab-submenu"><li id='wp-admin-bar-about'><a class='ab-item' href='https://wordpress.org/about/'>About WordPress</a></li></ul><ul id='wp-admin-bar-wp-logo-external' class="ab-sub-secondary ab-submenu"><li id='wp-admin-bar-wporg'><a class='ab-item' href='https://wordpress.org/'>WordPress.org</a></li><li id='wp-admin-bar-documentation'><a class='ab-item' href='https://wordpress.org/support/'>Documentation</a></li><li id='wp-admin-bar-support-forums'><a class='ab-item' href='https://wordpress.org/support/forums/'>Support</a></li><li id='wp-admin-bar-feedback'><a class='ab-item' href='https://wordpress.org/support/forum/requests-and-feedback'>Feedback</a></li></ul></div></li></ul><ul id='wp-admin-bar-top-secondary' class="ab-top-secondary ab-top-menu"><li id='wp-admin-bar-search' class="admin-bar-search"><div class="ab-item ab-empty-item" tabindex="-1"><form action="https://developer.wordpress.org/" method="get" id="adminbarsearch"><input class="adminbar-input" name="s" id="adminbar-search" type="text" value="" maxlength="150" /><label for="adminbar-search" class="screen-reader-text">Search</label><input type="submit" class="adminbar-button" value="Search" /></form></div></li><li id='wp-admin-bar-log-in'><a class='ab-item' href='https://login.wordpress.org/?locale=en_US'>Log In</a></li><li id='wp-admin-bar-register'><a class='ab-item' href='https://login.wordpress.org/register?locale=en_US'>Register</a></li></ul>			</div>
+					</div>
+
+		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P24PF4B" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<div id="wporg-header">
+	<div class="wrapper">
+	<h1><a href="http://wordpress.org/">WordPress.org</a></h1>				<div id="head-search">
+		<form action="http://wordpress.org/search/do-search.php" method="get">
+			<label for="global-search" class="screen-reader-text">Search WordPress.org for:</label>
+			<input id="global-search" class="text" name="search" type="text" value="" maxlength="150" placeholder="Search WordPress.org" />
+			<button type="submit" class="button"><span class="screen-reader-text">Submit</span></button>
+		</form>
+		</div>
+				<div style="clear:both"></div>
+		<button id="mobile-menu-button" aria-expanded="false"><span class="screen-reader-text">Toggle Menu</span></button>
+		
+<nav aria-label="Main Menu">
+<ul id="wporg-header-menu">
+<li class="menu-item"><a href='http://wordpress.org/showcase/' data-title='See some of the sites built on WordPress.'>Showcase</a></li>
+<li class="menu-item"><a href='http://learn.wordpress.org/' data-title='Resources to help you learn more about WordPress and teach it to others.'>Learn</a></li>
+<li class="menu-item"><a href='http://wordpress.org/themes/' data-title='Find just the right look for your website.'>Themes</a></li>
+<li class="menu-item"><a href='http://wordpress.org/plugins/' data-title='Plugins can extend WordPress to do almost anything you can imagine.'>Plugins</a></li>
+<li class="menu-item"><a href='http://wordpress.org/mobile/' data-title='Take your website on the go!'>Mobile</a></li>
+<li class="menu-item"><a href='http://wordpress.org/support/' data-title='Forums, documentation, help.'>Support</a><ul class="nav-submenu"><li><a href='http://wordpress.org/support/' title='Documentation, tutorials, best practices.'>Documentation</a></li><li><a href='http://wordpress.org/support/forums/' title='Support and discussion forums.'>Forums</a></li></ul><div class="uparrow"></div></li>
+<li class="menu-item"><a href='http://make.wordpress.org/' data-title='Contribute your knowledge.'>Get Involved</a><ul class="nav-submenu"><li><a href='http://wordpress.org/five-for-the-future/' title='How five percent is powering the next generation of the web'>Five for the Future</a></li></ul><div class="uparrow"></div></li>
+<li class="menu-item"><a href='http://wordpress.org/about/' data-title='About the WordPress Organization, and where we&#039;re going.'>About</a></li>
+<li class="menu-item"><a href='http://wordpress.org/news/' data-title='Come here for the latest scoop.'>Blog</a></li>
+<li class="menu-item"><a href='http://wordpress.org/hosting/' data-title='Find a home for your blog.'>Hosting</a></li>
+<li id="download" class="button download-button menu-item"><a href='http://wordpress.org/download/' data-title='Get it. Got it? Good.'>Get WordPress</a></li>
+</ul>
+</nav>
+		<div style="clear:both"></div>
+	</div>
+</div>
+
+
+
+<header id="masthead" class="site-header" role="banner">
+		<div class="site-branding">
+		<h1 class="site-title">
+			<a href="../../index.html" rel="home">Code Reference</a>
+		</h1>
+
+		
+		<nav id="site-navigation" class="main-navigation" role="navigation">
+			<button class="menu-toggle dashicons dashicons-arrow-down-alt2" aria-controls="primary-menu" aria-expanded="false" aria-label="Primary Menu"></button>
+					</nav>
+	</div>
+</header><!-- #masthead -->
+
+<div id="page" class="hfeed site devhub-wrap">
+	<a href="#main" class="screen-reader-text">Skip to content</a>
+
+				<div id="inner-search">
+			<div class="search-section section clear hide-if-js">
+
+
+	
+	<form role="search" method="get" class="searchform searchform-filtered" action="https://developer.wordpress.org/">
+		<label for="search-field" class="screen-reader-text">Search for:</label>
+		<input type="text" id="search-field" class="search-field" placeholder="Search &hellip;" value="" name="s">
+		<button class="button button-primary button-search"><i class="dashicons dashicons-search"></i><span class="screen-reader-text">Search plugins</span></button>
+	
+		<div class="search-post-type">
+			<span>Filter by type:</span>
+									<label><input type="checkbox" name="post_type[]" value="wp-parser-function"
+						 /> Functions</label>
+									<label><input type="checkbox" name="post_type[]" value="wp-parser-hook"
+						 /> Hooks</label>
+									<label><input type="checkbox" name="post_type[]" value="wp-parser-class"
+						 /> Classes</label>
+									<label><input type="checkbox" name="post_type[]" value="wp-parser-method"
+						 /> Methods</label>
+					</div>
+
+	
+	</form>
+
+</div><!-- /search-guide -->
+			<div id="inner-search-icon-container">
+				<div id="inner-search-icon">
+					<div class="dashicons dashicons-search"><span class="screen-reader-text">Search</span></div>
+				</div>
+			</div>
+		</div>
+
+		<div id="content" class="site-content">
+
+	<div id="content-area" class="wp-parser-function-template-default single single-wp-parser-function postid-2066 admin-bar no-customize-support code-reference">
+
+		
+		<div class="breadcrumb-trail breadcrumbs" itemprop="breadcrumb">
+			<span class="trail-browse">Browse:</span> 
+			<span class="trail-begin"><a href="../../../index.html" title="WordPress Developer Resources" rel="home">Home</a></span> <span class="sep">&#47;</span> 
+			<span class="trail-inner"><a href="../../index.html" title="Reference">Reference</a></span> <span class="sep">&#47;</span> 
+			<span class="trail-inner"><a href="../index.html">Functions</a></span> <span class="sep">&#47;</span> <span class="trail-end">get_permalink()</span>
+		</div>
+		<main id="main" class="site-main" role="main">
+
+		
+			
+<article id="post-2066" class="post-2066 wp-parser-function type-wp-parser-function status-publish hentry wp-parser-source-file-wp-includes_link-template-php wp-parser-package-template wp-parser-package-wordpress wp-parser-since-1-0-0">
+
+	
+	
+	<h1>get_permalink( <span class="arg-type">int|WP_Post</span>&nbsp;<span class="arg-name">$post</span>,  <span class="arg-type">bool</span>&nbsp;<span class="arg-name">$leavename</span>&nbsp;=&nbsp;<span class="arg-default">false</span>&nbsp;)</h1>
+
+	<section class="summary">
+		<p>Retrieves the full permalink for the current post or post ID.</p>
+	</section>
+
+
+	
+	<div class="content-toc"><style> .toc-jump { text-align: right; font-size: 12px; } .page .toc-heading { margin-top: -50px; padding-top: 50px !important; }</style><div class="table-of-contents"><h2>Contents</h2><ul class="items"><li><a href="#parameters">Parameters</a></li>
+<li><a href="#return">Return</a></li>
+<li><a href="#more-information">More Information</a></li>
+<li><a href="#source">Source</a></li>
+<li><a href="#related">Related</a>
+<ul>
+<li><a href="#uses">Uses</a></li>
+<li><a href="#used-by">Used By</a>
+</ul></li>
+<li><a href="#changelog">Changelog</a></li>
+<li><a href="#user-contributed-notes">User Contributed Notes</a></ul>
+</div>
+	<hr />
+	<section class="parameters">
+		<h2 class="toc-heading" id="parameters" tabindex="-1">Parameters <a href="#parameters" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Parameters</span></a></h2>
+		<dl>
+												<dt>$post</dt>
+								<dd>
+					<p class="desc">
+													<span class="type">(<span class="int">int</span>|<span class="WP_Post"><a href="../../classes/wp_post/index.html">WP_Post</a></span>)</span>
+																			<span class="required">(Optional)</span>
+																			<span class="description"> Post ID or post object. Default is the global <code>$post</code>.</span>
+											</p>
+									</dd>
+												<dt>$leavename</dt>
+								<dd>
+					<p class="desc">
+													<span class="type">(<span class="bool">bool</span>)</span>
+																			<span class="required">(Optional)</span>
+																			<span class="description"> Whether to keep post name or page name. </span>
+											</p>
+											<p class="default">Default value: false</p>
+									</dd>
+					</dl>
+	</section>
+	<hr />
+	<section class="return">
+		<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="return" tabindex="-1">Return <a href="#return" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Return</span></a></h2>
+		<p><span class='return-type'>(string|false)</span> The permalink URL or false if post does not exist.</p>
+	</section>
+	<hr />
+	<section class="explanation">
+		<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="more-information" tabindex="-1">More Information <a href="#more-information" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">More Information</span></a></h2>
+
+		<p>In a Plugin or Theme, it can be used as early as the <code><a href="../../hooks/setup_theme/index.html">setup_theme</a></code> Action. Any earlier usage, including <code><a href="../../hooks/plugins_loaded/index.html">plugins_loaded</a></code>, generates a Fatal Error.</p>
+<p>Note that when used outside The Loop on a posts page (index, archive, etc.) without the ID parameter, it will return the URL of the last post in The Loop, <i>not</i> the permalink for the current page.</p>
+	</section>
+	<hr />
+	<section class="source-content">
+		<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="source" tabindex="-1">Source <a href="#source" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Source</span></a></h2>
+		<p>
+			File: <a href="../../files/wp-includes/link-template.php/index.html">wp-includes/link-template.php</a>		</p>
+
+					<div class="source-code-container">
+				<pre class="brush: php; toolbar: false; first-line: 170">function get_permalink( $post = 0, $leavename = false ) {
+	$rewritecode = array(
+		'%year%',
+		'%monthnum%',
+		'%day%',
+		'%hour%',
+		'%minute%',
+		'%second%',
+		$leavename ? '' : '%postname%',
+		'%post_id%',
+		'%category%',
+		'%author%',
+		$leavename ? '' : '%pagename%',
+	);
+
+	if ( is_object( $post ) &amp;&amp; isset( $post-&gt;filter ) &amp;&amp; 'sample' === $post-&gt;filter ) {
+		$sample = true;
+	} else {
+		$post   = get_post( $post );
+		$sample = false;
+	}
+
+	if ( empty( $post-&gt;ID ) ) {
+		return false;
+	}
+
+	if ( 'page' === $post-&gt;post_type ) {
+		return get_page_link( $post, $leavename, $sample );
+	} elseif ( 'attachment' === $post-&gt;post_type ) {
+		return get_attachment_link( $post, $leavename );
+	} elseif ( in_array( $post-&gt;post_type, get_post_types( array( '_builtin' =&gt; false ) ), true ) ) {
+		return get_post_permalink( $post, $leavename, $sample );
+	}
+
+	$permalink = get_option( 'permalink_structure' );
+
+	/**
+	 * Filters the permalink structure for a post before token replacement occurs.
+	 *
+	 * Only applies to posts with post_type of 'post'.
+	 *
+	 * @since 3.0.0
+	 *
+	 * @param string  $permalink The site's permalink structure.
+	 * @param WP_Post $post      The post in question.
+	 * @param bool    $leavename Whether to keep the post name.
+	 */
+	$permalink = apply_filters( 'pre_post_link', $permalink, $post, $leavename );
+
+	if (
+		$permalink &amp;&amp;
+		! wp_force_plain_post_permalink( $post )
+	) {
+
+		$category = '';
+		if ( strpos( $permalink, '%category%' ) !== false ) {
+			$cats = get_the_category( $post-&gt;ID );
+			if ( $cats ) {
+				$cats = wp_list_sort(
+					$cats,
+					array(
+						'term_id' =&gt; 'ASC',
+					)
+				);
+
+				/**
+				 * Filters the category that gets used in the %category% permalink token.
+				 *
+				 * @since 3.5.0
+				 *
+				 * @param WP_Term  $cat  The category to use in the permalink.
+				 * @param array    $cats Array of all categories (WP_Term objects) associated with the post.
+				 * @param WP_Post  $post The post in question.
+				 */
+				$category_object = apply_filters( 'post_link_category', $cats[0], $cats, $post );
+
+				$category_object = get_term( $category_object, 'category' );
+				$category        = $category_object-&gt;slug;
+				if ( $category_object-&gt;parent ) {
+					$category = get_category_parents( $category_object-&gt;parent, false, '/', true ) . $category;
+				}
+			}
+			// Show default category in permalinks,
+			// without having to assign it explicitly.
+			if ( empty( $category ) ) {
+				$default_category = get_term( get_option( 'default_category' ), 'category' );
+				if ( $default_category &amp;&amp; ! is_wp_error( $default_category ) ) {
+					$category = $default_category-&gt;slug;
+				}
+			}
+		}
+
+		$author = '';
+		if ( strpos( $permalink, '%author%' ) !== false ) {
+			$authordata = get_userdata( $post-&gt;post_author );
+			$author     = $authordata-&gt;user_nicename;
+		}
+
+		// This is not an API call because the permalink is based on the stored post_date value,
+		// which should be parsed as local time regardless of the default PHP timezone.
+		$date = explode( ' ', str_replace( array( '-', ':' ), ' ', $post-&gt;post_date ) );
+
+		$rewritereplace = array(
+			$date[0],
+			$date[1],
+			$date[2],
+			$date[3],
+			$date[4],
+			$date[5],
+			$post-&gt;post_name,
+			$post-&gt;ID,
+			$category,
+			$author,
+			$post-&gt;post_name,
+		);
+
+		$permalink = home_url( str_replace( $rewritecode, $rewritereplace, $permalink ) );
+		$permalink = user_trailingslashit( $permalink, 'single' );
+
+	} else { // If they're not using the fancy permalink option.
+		$permalink = home_url( '?p=' . $post-&gt;ID );
+	}
+
+	/**
+	 * Filters the permalink for a post.
+	 *
+	 * Only applies to posts with post_type of 'post'.
+	 *
+	 * @since 1.5.0
+	 *
+	 * @param string  $permalink The post's permalink.
+	 * @param WP_Post $post      The post in question.
+	 * @param bool    $leavename Whether to keep the post name.
+	 */
+	return apply_filters( 'post_link', $permalink, $post, $leavename );
+}
+</pre>
+			</div>
+			<p class="source-code-links">
+				<span>
+					<a href="#" class="show-complete-source">Expand full source code</a>
+					<a href="#" class="less-complete-source">Collapse full source code</a>
+				</span>
+				<span><a href="https://core.trac.wordpress.org/browser/tags/5.8/src/wp-includes/link-template.php#L170">View on Trac</a></span>
+			</p>
+			</section>
+	<hr />
+	<section class="related">
+		<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="related" tabindex="-1">Related <a href="#related" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Related</span></a></h2>
+
+					<article class="uses">
+				<h3 class="toc-heading" id="uses" tabindex="-1">Uses <a href="#uses" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Uses</span></a></h3>
+				<table id="uses-table">
+					<caption class="screen-reader-text">Uses</caption>
+					<thead>
+						<tr>
+							<th>Uses</th>
+							<th class="related-desc">Description</th>
+						</tr>
+					</thead>
+					<tbody>
+												<tr>
+							<td>
+								<span>wp-includes/link-template.php:</span>
+								<a href="../wp_force_plain_post_permalink/index.html">wp_force_plain_post_permalink()</a>
+							</td>
+							<td class="related-desc">
+								<p>Determine whether post should always use a plain permalink structure.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/functions.php:</span>
+								<a href="../wp_list_sort/index.html">wp_list_sort()</a>
+							</td>
+							<td class="related-desc">
+								<p>Sorts a list of objects, based on one or more orderby arguments.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/category-template.php:</span>
+								<a href="../get_the_category/index.html">get_the_category()</a>
+							</td>
+							<td class="related-desc">
+								<p>Retrieves post categories.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/category-template.php:</span>
+								<a href="../get_category_parents/index.html">get_category_parents()</a>
+							</td>
+							<td class="related-desc">
+								<p>Retrieves category parents with separator.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/pluggable.php:</span>
+								<a href="../get_userdata/index.html">get_userdata()</a>
+							</td>
+							<td class="related-desc">
+								<p>Retrieve user info by user ID.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/taxonomy.php:</span>
+								<a href="../get_term/index.html">get_term()</a>
+							</td>
+							<td class="related-desc">
+								<p>Get all Term data from database by Term ID.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/link-template.php:</span>
+								<a href="../home_url/index.html">home_url()</a>
+							</td>
+							<td class="related-desc">
+								<p>Retrieves the URL for the current site where the front end is accessible.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/link-template.php:</span>
+								<a href="../get_page_link/index.html">get_page_link()</a>
+							</td>
+							<td class="related-desc">
+								<p>Retrieves the permalink for the current page or page ID.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/link-template.php:</span>
+								<a href="../get_attachment_link/index.html">get_attachment_link()</a>
+							</td>
+							<td class="related-desc">
+								<p>Retrieves the permalink for an attachment.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/link-template.php:</span>
+								<a href="../get_post_permalink/index.html">get_post_permalink()</a>
+							</td>
+							<td class="related-desc">
+								<p>Retrieves the permalink for a post of a custom post type.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/link-template.php:</span>
+								<a href="../../hooks/pre_post_link/index.html">pre_post_link</a>
+							</td>
+							<td class="related-desc">
+								<p>Filters the permalink structure for a post before token replacement occurs.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/link-template.php:</span>
+								<a href="../../hooks/post_link_category/index.html">post_link_category</a>
+							</td>
+							<td class="related-desc">
+								<p>Filters the category that gets used in the %category% permalink token.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/link-template.php:</span>
+								<a href="../../hooks/post_link/index.html">post_link</a>
+							</td>
+							<td class="related-desc">
+								<p>Filters the permalink for a post.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/link-template.php:</span>
+								<a href="../user_trailingslashit/index.html">user_trailingslashit()</a>
+							</td>
+							<td class="related-desc">
+								<p>Retrieves a trailing-slashed string if the site is set for adding trailing slashes.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/plugin.php:</span>
+								<a href="../apply_filters/index.html">apply_filters()</a>
+							</td>
+							<td class="related-desc">
+								<p>Calls the callback functions that have been added to a filter hook.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/option.php:</span>
+								<a href="../get_option/index.html">get_option()</a>
+							</td>
+							<td class="related-desc">
+								<p>Retrieves an option value based on an option name.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/post.php:</span>
+								<a href="../get_post/index.html">get_post()</a>
+							</td>
+							<td class="related-desc">
+								<p>Retrieves post data given a post ID or post object.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/post.php:</span>
+								<a href="../get_post_types/index.html">get_post_types()</a>
+							</td>
+							<td class="related-desc">
+								<p>Get a list of all registered post type objects.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/load.php:</span>
+								<a href="../is_wp_error/index.html">is_wp_error()</a>
+							</td>
+							<td class="related-desc">
+								<p>Checks whether the given variable is a WordPress Error.</p>
+							</td>
+						</tr>
+											<tbody>
+				</table>
+
+								<a href="#" class="show-more">Show 14 more uses</a>
+				<a href="#" class="hide-more">Hide more uses</a>
+							</article>
+		
+					<hr />
+			<article class="used-by">
+				<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="used-by" tabindex="-1">Used By <a href="#used-by" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Used By</span></a></h3>
+				<table id="used-by-table">
+					<caption class="screen-reader-text">Used By</caption>
+					<thead>
+						<tr>
+							<th>Used By</th>
+							<th class="related-desc">Description</th>
+						</tr>
+					</thead>
+					<tbody>
+												<tr>
+							<td>
+								<span>wp-includes/sitemaps/providers/class-wp-sitemaps-posts.php:</span>
+								<a href="../../classes/wp_sitemaps_posts/get_url_list/index.html">WP_Sitemaps_Posts::get_url_list()</a>
+							</td>
+							<td class="related-desc">
+								<p>Gets a URL list for a post type sitemap.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/rest-api/search/class-wp-rest-post-search-handler.php:</span>
+								<a href="../../classes/wp_rest_post_search_handler/prepare_item/index.html">WP_REST_Post_Search_Handler::prepare_item()</a>
+							</td>
+							<td class="related-desc">
+								<p>Prepares the search result for a given ID.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/link-template.php:</span>
+								<a href="../get_privacy_policy_url/index.html">get_privacy_policy_url()</a>
+							</td>
+							<td class="related-desc">
+								<p>Retrieves the URL to the privacy policy page.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:</span>
+								<a href="../../classes/wp_rest_posts_controller/prepare_item_for_response/index.html">WP_REST_Posts_Controller::prepare_item_for_response()</a>
+							</td>
+							<td class="related-desc">
+								<p>Prepares a single post output for response.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:</span>
+								<a href="../../classes/wp_rest_posts_controller/get_item/index.html">WP_REST_Posts_Controller::get_item()</a>
+							</td>
+							<td class="related-desc">
+								<p>Retrieves a single post.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/class-wp-customize-nav-menus.php:</span>
+								<a href="../../classes/wp_customize_nav_menus/ajax_insert_auto_draft_post/index.html">WP_Customize_Nav_Menus::ajax_insert_auto_draft_post()</a>
+							</td>
+							<td class="related-desc">
+								<p>Ajax handler for adding a new auto-draft post.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/link-template.php:</span>
+								<a href="../wp_get_canonical_url/index.html">wp_get_canonical_url()</a>
+							</td>
+							<td class="related-desc">
+								<p>Returns the canonical URL for a post.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/embed.php:</span>
+								<a href="../wp_embed_excerpt_more/index.html">wp_embed_excerpt_more()</a>
+							</td>
+							<td class="related-desc">
+								<p>Filters the string in the &#8216;more&#8217; link displayed after a trimmed excerpt.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/embed.php:</span>
+								<a href="../wp_oembed_add_discovery_links/index.html">wp_oembed_add_discovery_links()</a>
+							</td>
+							<td class="related-desc">
+								<p>Adds oEmbed discovery links in the website .</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/embed.php:</span>
+								<a href="../get_post_embed_url/index.html">get_post_embed_url()</a>
+							</td>
+							<td class="related-desc">
+								<p>Retrieves the URL to embed a specific post in an iframe.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/embed.php:</span>
+								<a href="../get_post_embed_html/index.html">get_post_embed_html()</a>
+							</td>
+							<td class="related-desc">
+								<p>Retrieves the embed code for a specific post.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/link-template.php:</span>
+								<a href="../get_preview_post_link/index.html">get_preview_post_link()</a>
+							</td>
+							<td class="related-desc">
+								<p>Retrieves the URL used for the post preview.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/customize/class-wp-customize-nav-menu-item-setting.php:</span>
+								<a href="../../classes/wp_customize_nav_menu_item_setting/value_as_wp_post_nav_menu_item/index.html">WP_Customize_Nav_Menu_Item_Setting::value_as_wp_post_nav_menu_item()</a>
+							</td>
+							<td class="related-desc">
+								<p>Get the value emulated into a <a href="../../classes/wp_post/index.html">WP_Post</a> and set up as a nav_menu_item.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/class-wp-customize-nav-menus.php:</span>
+								<a href="../../classes/wp_customize_nav_menus/search_available_items_query/index.html">WP_Customize_Nav_Menus::search_available_items_query()</a>
+							</td>
+							<td class="related-desc">
+								<p>Performs post queries for available-item searching.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/class-wp-customize-nav-menus.php:</span>
+								<a href="../../classes/wp_customize_nav_menus/load_available_items_query/index.html">WP_Customize_Nav_Menus::load_available_items_query()</a>
+							</td>
+							<td class="related-desc">
+								<p>Performs the post_type and taxonomy queries for loading available menu items.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-admin/includes/class-wp-posts-list-table.php:</span>
+								<a href="../../classes/wp_posts_list_table/handle_row_actions/index.html">WP_Posts_List_Table::handle_row_actions()</a>
+							</td>
+							<td class="related-desc">
+								<p>Generates and displays row action links.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-admin/includes/upgrade.php:</span>
+								<a href="../wp_install_maybe_enable_pretty_permalinks/index.html">wp_install_maybe_enable_pretty_permalinks()</a>
+							</td>
+							<td class="related-desc">
+								<p>Maybe enable pretty permalinks on installation.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-admin/includes/dashboard.php:</span>
+								<a href="../wp_dashboard_recent_posts/index.html">wp_dashboard_recent_posts()</a>
+							</td>
+							<td class="related-desc">
+								<p>Generates Publishing Soon and Recently Published sections.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-admin/includes/media.php:</span>
+								<a href="../get_media_item/index.html">get_media_item()</a>
+							</td>
+							<td class="related-desc">
+								<p>Retrieve HTML form for modifying the image attachment.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-admin/includes/post.php:</span>
+								<a href="../get_sample_permalink_html/index.html">get_sample_permalink_html()</a>
+							</td>
+							<td class="related-desc">
+								<p>Returns the HTML of the sample permalink slug editor.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-admin/includes/post.php:</span>
+								<a href="../get_sample_permalink/index.html">get_sample_permalink()</a>
+							</td>
+							<td class="related-desc">
+								<p>Get a sample permalink based off of the post name.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-admin/includes/class-wp-media-list-table.php:</span>
+								<a href="../../classes/wp_media_list_table/_get_row_actions/index.html">WP_Media_List_Table::_get_row_actions()</a>
+							</td>
+							<td class="related-desc">
+															</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-admin/includes/class-wp-comments-list-table.php:</span>
+								<a href="../../classes/wp_comments_list_table/column_response/index.html">WP_Comments_List_Table::column_response()</a>
+							</td>
+							<td class="related-desc">
+															</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/category-template.php:</span>
+								<a href="../wp_list_categories/index.html">wp_list_categories()</a>
+							</td>
+							<td class="related-desc">
+								<p>Displays or retrieves the HTML list of categories.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/pluggable.php:</span>
+								<a href="../wp_notify_postauthor/index.html">wp_notify_postauthor()</a>
+							</td>
+							<td class="related-desc">
+								<p>Notify an author (and/or others) of a comment/trackback/pingback on a post.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/pluggable.php:</span>
+								<a href="../wp_notify_moderator/index.html">wp_notify_moderator()</a>
+							</td>
+							<td class="related-desc">
+								<p>Notifies the moderator of the site about a new comment that is awaiting approval.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/general-template.php:</span>
+								<a href="../wp_get_archives/index.html">wp_get_archives()</a>
+							</td>
+							<td class="related-desc">
+								<p>Display archive links based on type and format.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/deprecated.php:</span>
+								<a href="../get_boundary_post_rel_link/index.html">get_boundary_post_rel_link()</a>
+							</td>
+							<td class="related-desc">
+								<p>Get boundary post relational link.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/deprecated.php:</span>
+								<a href="../get_parent_post_rel_link/index.html">get_parent_post_rel_link()</a>
+							</td>
+							<td class="related-desc">
+								<p>Get parent post relational link.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/deprecated.php:</span>
+								<a href="../previous_post/index.html">previous_post()</a>
+							</td>
+							<td class="related-desc">
+								<p>Prints a link to the previous post.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/deprecated.php:</span>
+								<a href="../next_post/index.html">next_post()</a>
+							</td>
+							<td class="related-desc">
+								<p>Prints link to the next post.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/query.php:</span>
+								<a href="../wp_old_slug_redirect/index.html">wp_old_slug_redirect()</a>
+							</td>
+							<td class="related-desc">
+								<p>Redirect old slugs to the correct permalink.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/link-template.php:</span>
+								<a href="../get_comments_pagenum_link/index.html">get_comments_pagenum_link()</a>
+							</td>
+							<td class="related-desc">
+								<p>Retrieves the comments page number link.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/link-template.php:</span>
+								<a href="../paginate_comments_links/index.html">paginate_comments_links()</a>
+							</td>
+							<td class="related-desc">
+								<p>Displays or retrieves pagination links for the comments on the current post.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/link-template.php:</span>
+								<a href="../get_adjacent_post_link/index.html">get_adjacent_post_link()</a>
+							</td>
+							<td class="related-desc">
+								<p>Retrieves the adjacent post link.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/link-template.php:</span>
+								<a href="../get_adjacent_post_rel_link/index.html">get_adjacent_post_rel_link()</a>
+							</td>
+							<td class="related-desc">
+								<p>Retrieves the adjacent post relational link.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/link-template.php:</span>
+								<a href="../get_post_type_archive_link/index.html">get_post_type_archive_link()</a>
+							</td>
+							<td class="related-desc">
+								<p>Retrieves the permalink for a post type archive.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/link-template.php:</span>
+								<a href="../get_post_comments_feed_link/index.html">get_post_comments_feed_link()</a>
+							</td>
+							<td class="related-desc">
+								<p>Retrieves the permalink for the post comments feed.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/link-template.php:</span>
+								<a href="../get_the_permalink/index.html">get_the_permalink()</a>
+							</td>
+							<td class="related-desc">
+								<p>Retrieves the full permalink for the current post or post ID.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/link-template.php:</span>
+								<a href="../get_attachment_link/index.html">get_attachment_link()</a>
+							</td>
+							<td class="related-desc">
+								<p>Retrieves the permalink for an attachment.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/deprecated.php:</span>
+								<a href="../post_permalink/index.html">post_permalink()</a>
+							</td>
+							<td class="related-desc">
+								<p>Retrieve permalink from post ID.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/link-template.php:</span>
+								<a href="../the_permalink/index.html">the_permalink()</a>
+							</td>
+							<td class="related-desc">
+								<p>Displays the permalink for the current post.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/admin-bar.php:</span>
+								<a href="../wp_admin_bar_edit_menu/index.html">wp_admin_bar_edit_menu()</a>
+							</td>
+							<td class="related-desc">
+								<p>Provide an edit link for posts and terms.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/feed.php:</span>
+								<a href="../the_permalink_rss/index.html">the_permalink_rss()</a>
+							</td>
+							<td class="related-desc">
+								<p>Display the permalink to the post for use in feeds.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/class-walker-page.php:</span>
+								<a href="../../classes/walker_page/start_el/index.html">Walker_Page::start_el()</a>
+							</td>
+							<td class="related-desc">
+								<p>Outputs the beginning of the current element in the tree.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/post-template.php:</span>
+								<a href="../_wp_link_page/index.html">_wp_link_page()</a>
+							</td>
+							<td class="related-desc">
+								<p>Helper function for <a href="../wp_link_pages/index.html">wp_link_pages()</a>.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/post-template.php:</span>
+								<a href="../get_the_content/index.html">get_the_content()</a>
+							</td>
+							<td class="related-desc">
+								<p>Retrieve the post content.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/post.php:</span>
+								<a href="../_transition_post_status/index.html">_transition_post_status()</a>
+							</td>
+							<td class="related-desc">
+								<p>Hook for managing future post transitions to published.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/post.php:</span>
+								<a href="../wp_insert_post/index.html">wp_insert_post()</a>
+							</td>
+							<td class="related-desc">
+								<p>Insert or update a post.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/canonical.php:</span>
+								<a href="../redirect_guess_404_permalink/index.html">redirect_guess_404_permalink()</a>
+							</td>
+							<td class="related-desc">
+								<p>Attempts to guess the correct URL for a 404 request based on query vars.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/canonical.php:</span>
+								<a href="../redirect_canonical/index.html">redirect_canonical()</a>
+							</td>
+							<td class="related-desc">
+								<p>Redirects incoming links to the proper URL based on the site url.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/ms-functions.php:</span>
+								<a href="../get_blog_permalink/index.html">get_blog_permalink()</a>
+							</td>
+							<td class="related-desc">
+								<p>Get the permalink for a post on another blog.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/nav-menu.php:</span>
+								<a href="../wp_setup_nav_menu_item/index.html">wp_setup_nav_menu_item()</a>
+							</td>
+							<td class="related-desc">
+								<p>Decorates a menu item object with the shared navigation menu item properties.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/class-wp-xmlrpc-server.php:</span>
+								<a href="../../classes/wp_xmlrpc_server/mw_getpost/index.html">wp_xmlrpc_server::mw_getPost()</a>
+							</td>
+							<td class="related-desc">
+								<p>Retrieve post.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/class-wp-xmlrpc-server.php:</span>
+								<a href="../../classes/wp_xmlrpc_server/mw_getrecentposts/index.html">wp_xmlrpc_server::mw_getRecentPosts()</a>
+							</td>
+							<td class="related-desc">
+								<p>Retrieve list of recent posts.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/class-wp-xmlrpc-server.php:</span>
+								<a href="../../classes/wp_xmlrpc_server/_prepare_page/index.html">wp_xmlrpc_server::_prepare_page()</a>
+							</td>
+							<td class="related-desc">
+								<p>Prepares page data for return in an XML-RPC object.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/class-wp-xmlrpc-server.php:</span>
+								<a href="../../classes/wp_xmlrpc_server/_prepare_post/index.html">wp_xmlrpc_server::_prepare_post()</a>
+							</td>
+							<td class="related-desc">
+								<p>Prepares post data for return in an XML-RPC object.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/comment-template.php:</span>
+								<a href="../get_post_reply_link/index.html">get_post_reply_link()</a>
+							</td>
+							<td class="related-desc">
+								<p>Retrieves HTML content for reply to post link.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/comment-template.php:</span>
+								<a href="../comment_form/index.html">comment_form()</a>
+							</td>
+							<td class="related-desc">
+								<p>Outputs a complete commenting form for use within a template.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/comment-template.php:</span>
+								<a href="../get_trackback_url/index.html">get_trackback_url()</a>
+							</td>
+							<td class="related-desc">
+								<p>Retrieves the current post&#8217;s trackback URL.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/comment-template.php:</span>
+								<a href="../comments_popup_link/index.html">comments_popup_link()</a>
+							</td>
+							<td class="related-desc">
+								<p>Displays the link to the comments for the current post ID.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/comment-template.php:</span>
+								<a href="../get_comment_reply_link/index.html">get_comment_reply_link()</a>
+							</td>
+							<td class="related-desc">
+								<p>Retrieves HTML content for reply to comment link.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/comment-template.php:</span>
+								<a href="../get_comment_link/index.html">get_comment_link()</a>
+							</td>
+							<td class="related-desc">
+								<p>Retrieves the link to a given comment.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/comment-template.php:</span>
+								<a href="../get_comments_link/index.html">get_comments_link()</a>
+							</td>
+							<td class="related-desc">
+								<p>Retrieves the link to the current post comments.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/comment.php:</span>
+								<a href="../trackback/index.html">trackback()</a>
+							</td>
+							<td class="related-desc">
+								<p>Send a Trackback.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/comment.php:</span>
+								<a href="../pingback/index.html">pingback()</a>
+							</td>
+							<td class="related-desc">
+								<p>Pings back the links found in a post.</p>
+							</td>
+						</tr>
+												<tr>
+							<td>
+								<span>wp-includes/class-wp-editor.php:</span>
+								<a href="../../classes/_wp_editors/wp_link_query/index.html">_WP_Editors::wp_link_query()</a>
+							</td>
+							<td class="related-desc">
+								<p>Performs post queries for internal linking.</p>
+							</td>
+						</tr>
+											<tbody>
+				</table>
+
+								<a href="#" class="show-more">Show 62 more used by</a>
+				<a href="#" class="hide-more">Hide more used by</a>
+							</article>
+			</section>
+		<hr />
+	<section class="changelog">
+		<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="changelog" tabindex="-1">Changelog <a href="#changelog" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Changelog</span></a></h2>
+
+		<table>
+			<caption class="screen-reader-text">Changelog</caption>
+			<thead>
+				<tr>
+					<th class="changelog-version">Version</th>
+					<th class="changelog-desc">Description</th>
+				</tr>
+			</thead>
+
+			<tbody>
+									
+					<tr>
+						<td><a href="../../since/1.0.0/index.html" alt="WordPress 1.0.0">1.0.0</a></td>
+						<td>Introduced.</td>
+					</tr>
+							</tbody>
+		</table>
+	</section>
+
+	<hr />
+	<section class="user-notes">
+		<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="user-contributed-notes" tabindex="-1">User Contributed Notes <a href="#user-contributed-notes" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">User Contributed Notes</span></a></h2>
+		
+<div id="comments" class="comments-area">
+
+			
+		<ol class="comment-list">
+						<li id="comment-321" data-comment-id="321" class="comment byuser comment-author-codex even thread-even depth-1">
+			<article id="div-comment-321" class="comment-body">
+
+							<a href="#comment-content-321" class="screen-reader-text">Skip to note 1 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="8626964a6e"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="321" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fget_permalink%2F%23comment-321"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="83% like this"><span class="screen-reader-text">Vote results for this note: </span>8</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="321" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fget_permalink%2F%23comment-321"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/688ab6934b21bca68e0fe4fc54a66805?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/688ab6934b21bca68e0fe4fc54a66805?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/codex/" rel="external nofollow" class="url">Codex</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-321">
+							<time datetime="2015-06-28T17:03:19+00:00">
+							6 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-321">
+				<p><strong>Pass in a post object instead of an ID</strong><br />
+This shows how you can you can get the permalink with the page title instead of the ID.</p>
+<pre class="brush: php; title: ; notranslate" title="">
+&lt;a href=&quot;&lt;?php echo esc_url( get_permalink( get_page_by_title( 'Monthly Events' ) ) ); ?&gt;&quot;&gt;&lt;?php esc_html_e( 'Monthly Events', 'textdomain' ); ?&gt;&lt;/a&gt;
+</pre>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-321' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fget_permalink%2F%3Freplytocom%3D321%23feedback-editor-321" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-319" data-comment-id="319" class="comment byuser comment-author-codex odd alt thread-odd thread-alt depth-1">
+			<article id="div-comment-319" class="comment-body">
+
+							<a href="#comment-content-319" class="screen-reader-text">Skip to note 2 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="73f0774b42"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="319" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fget_permalink%2F%23comment-319"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="78% like this"><span class="screen-reader-text">Vote results for this note: </span>5</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="319" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fget_permalink%2F%23comment-319"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/688ab6934b21bca68e0fe4fc54a66805?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/688ab6934b21bca68e0fe4fc54a66805?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/codex/" rel="external nofollow" class="url">Codex</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-319">
+							<time datetime="2015-06-28T17:00:37+00:00">
+							6 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-319">
+				<p><strong>Default Usage</strong><br />
+The permalink for current post (used within The Loop). As the tag does not display the permalink, the example uses the PHP echo command.</p>
+<p>Permalink for this post:</p>
+<pre class="brush: php; title: ; notranslate" title="">
+echo get_permalink();
+</pre>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-319' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fget_permalink%2F%3Freplytocom%3D319%23feedback-editor-319" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-1711" data-comment-id="1711" class="comment byuser comment-author-stratboy even thread-even depth-1">
+			<article id="div-comment-1711" class="comment-body">
+
+							<a href="#comment-content-1711" class="screen-reader-text">Skip to note 3 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="580649b066"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="1711" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fget_permalink%2F%23comment-1711"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="100% like this"><span class="screen-reader-text">Vote results for this note: </span>5</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="1711" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fget_permalink%2F%23comment-1711"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/80f29c126bf635b4a6068806bb1dbd2a?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/80f29c126bf635b4a6068806bb1dbd2a?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/stratboy/" rel="external nofollow" class="url">stratboy</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-1711">
+							<time datetime="2016-07-14T08:48:05+00:00">
+							5 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-1711">
+				<p>Get post or page (or whatever) permalink by slug:</p>
+<pre class="brush: php; title: ; notranslate" title="">function get_link_by_slug($slug, $type = 'post'){
+  $post = get_page_by_path($slug, OBJECT, $type);
+  return get_permalink($post-&gt;ID);
+}</pre>
+<p>If you are using polylang (like I usually do), you can get the permalink starting from whichever language slug (I generally start from my language, usually the websites&#8217;s default):</p>
+<pre class="brush: php; title: ; notranslate" title="">function get_link_by_slug($slug, $lang_slug = null, $type = 'post'){
+  $post = get_page_by_path($slug, OBJECT, $type);
+  $id = ($lang_slug) ? pll_get_post($post-&gt;ID, $lang_slug) : $post-&gt;ID;
+  return get_permalink($id);
+}</pre>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-1711' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fget_permalink%2F%3Freplytocom%3D1711%23feedback-editor-1711" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-1819" data-comment-id="1819" class="comment byuser comment-author-stelaras1 odd alt thread-odd thread-alt depth-1">
+			<article id="div-comment-1819" class="comment-body">
+
+							<a href="#comment-content-1819" class="screen-reader-text">Skip to note 4 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="b8cff9e99b"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="1819" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fget_permalink%2F%23comment-1819"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="100% like this"><span class="screen-reader-text">Vote results for this note: </span>3</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="1819" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fget_permalink%2F%23comment-1819"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/b073fea9116e609cc76c61e40c0883b1?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/b073fea9116e609cc76c61e40c0883b1?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/stelaras1/" rel="external nofollow" class="url">stelaras1</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-1819">
+							<time datetime="2016-09-07T18:18:28+00:00">
+							5 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-1819">
+				<pre class="brush: php; title: ; notranslate" title="">&lt;?php echo str_replace(&quot;http://www.mysite.com/&quot;,&quot;http://www.yoursite.com/&quot;,get_permalink()); ?&gt;</pre>
+<p>Return the permalink of the post, then search for <a href="http://www.mysite.com/" rel="nofollow ugc">http://www.mysite.com/</a> and change it to <a href="http://www.yoursite.com/" rel="nofollow ugc">http://www.yoursite.com/</a></p>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-1819' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fget_permalink%2F%3Freplytocom%3D1819%23feedback-editor-1819" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-320" data-comment-id="320" class="comment byuser comment-author-codex even thread-even depth-1">
+			<article id="div-comment-320" class="comment-body">
+
+							<a href="#comment-content-320" class="screen-reader-text">Skip to note 5 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="52547c8a5b"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="320" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fget_permalink%2F%23comment-320"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="100% like this"><span class="screen-reader-text">Vote results for this note: </span>2</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="320" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fget_permalink%2F%23comment-320"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/688ab6934b21bca68e0fe4fc54a66805?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/688ab6934b21bca68e0fe4fc54a66805?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/codex/" rel="external nofollow" class="url">Codex</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-320">
+							<time datetime="2015-06-28T17:02:12+00:00">
+							6 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-320">
+				<p><strong>Link to Specific Post</strong><br />
+Returns the permalinks of two specific posts (post IDs 1 and 10) as hypertext links within an informational list.</p>
+<pre class="brush: php; title: ; notranslate" title="">
+&lt;ul&gt;
+	&lt;li&gt;&lt;?php esc_html_e( 'MyBlog info:', 'textdomain' ); ?&gt;
+		&lt;ul&gt;
+			&lt;li&gt;&lt;a href=&quot;&lt;?php echo esc_url( get_permalink(1) ); ?&gt;&quot;&gt;&lt;?php esc_html_e( 'About MyBlog', 'textdomain' ); ?&gt;&lt;/a&gt;&lt;/li&gt;
+			&lt;li&gt;&lt;a href=&quot;&lt;?php echo esc_url( get_permalink(10) ); ?&gt;&quot;&gt;&lt;?php esc_html_e( 'About the owner', 'textdomain' ); ?&gt;&lt;/a&gt;&lt;/li&gt;
+		&lt;/ul&gt;
+	&lt;/li&gt;
+&lt;/ul&gt;
+</pre>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-320' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fget_permalink%2F%3Freplytocom%3D320%23feedback-editor-320" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-1268" data-comment-id="1268" class="comment byuser comment-author-talentedaamer odd alt thread-odd thread-alt depth-1">
+			<article id="div-comment-1268" class="comment-body">
+
+							<a href="#comment-content-1268" class="screen-reader-text">Skip to note 6 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="63a4cf87fa"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="1268" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fget_permalink%2F%23comment-1268"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="63% like this"><span class="screen-reader-text">Vote results for this note: </span>2</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="1268" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fget_permalink%2F%23comment-1268"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/0616eca3c03a19eb672d55849febe79e?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/0616eca3c03a19eb672d55849febe79e?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/talentedaamer/" rel="external nofollow" class="url">Aamer Shahzad</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-1268">
+							<time datetime="2016-02-24T18:49:33+00:00">
+							6 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-1268">
+				<p>Get current post/page url outside loop. $post is a global variable.</p>
+<pre class="brush: php; title: ; notranslate" title="">
+&lt;?php echo get_permalink( $post-&gt;ID ); ?&gt;
+</pre>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-1268' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fget_permalink%2F%3Freplytocom%3D1268%23feedback-editor-1268" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-1780" data-comment-id="1780" class="comment byuser comment-author-iqbalbary even thread-even depth-1">
+			<article id="div-comment-1780" class="comment-body">
+
+							<a href="#comment-content-1780" class="screen-reader-text">Skip to note 7 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="0f14a14071"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="1780" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fget_permalink%2F%23comment-1780"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="60% like this"><span class="screen-reader-text">Vote results for this note: </span>1</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="1780" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fget_permalink%2F%23comment-1780"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/89487c667ddf9ced24156af8bac98d4b?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/89487c667ddf9ced24156af8bac98d4b?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/iqbalbary/" rel="external nofollow" class="url">iqbalbary</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-1780">
+							<time datetime="2016-08-22T04:49:18+00:00">
+							5 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-1780">
+				<p>Example: Woocommerce shop page permalink</p>
+<pre class="brush: php; title: ; notranslate" title="">&lt;?php echo get_permalink( wc_get_page_id( 'shop' ) ); ?&gt;</pre>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-1780' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fget_permalink%2F%3Freplytocom%3D1780%23feedback-editor-1780" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-3360" data-comment-id="3360" class="comment byuser comment-author-shossain571 odd alt thread-odd thread-alt depth-1">
+			<article id="div-comment-3360" class="comment-body">
+
+							<a href="#comment-content-3360" class="screen-reader-text">Skip to note 8 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="75e94f9744"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="3360" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fget_permalink%2F%23comment-3360"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="100% like this"><span class="screen-reader-text">Vote results for this note: </span>1</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="3360" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fget_permalink%2F%23comment-3360"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/a20b6c77909dbf63ff19ca1b5ea97347?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/a20b6c77909dbf63ff19ca1b5ea97347?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/shossain571/" rel="external nofollow" class="url">shossain571</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-3360">
+							<time datetime="2019-08-31T10:52:25+00:00">
+							2 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-3360">
+				<p>Redirect to a page with page ID:</p>
+<pre class="brush: php; title: ; notranslate" title="">wp_redirect( get_permalink(1443) ); exit;</pre>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-3360' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fget_permalink%2F%3Freplytocom%3D3360%23feedback-editor-3360" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-3378" data-comment-id="3378" class="comment byuser comment-author-hongtodd09 even thread-even depth-1">
+			<article id="div-comment-3378" class="comment-body">
+
+							<a href="#comment-content-3378" class="screen-reader-text">Skip to note 9 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="3ce95ceaf8"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="3378" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fget_permalink%2F%23comment-3378"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title=""><span class="screen-reader-text">Vote results for this note: </span>0</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="3378" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fget_permalink%2F%23comment-3378"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/3bb4f495120df57c8d8bbbdbcf784148?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/3bb4f495120df57c8d8bbbdbcf784148?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/hongtodd09/" rel="external nofollow" class="url">hongtodd09</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-3378">
+							<time datetime="2019-09-12T00:12:33+00:00">
+							2 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-3378">
+				<p>Get permalink for a page parent from current child page (using within the loop):</p>
+<pre class="brush: php; title: ; notranslate" title="">while( have_posts() ): the_post();
+	get_permalink( wp_get_post_parent_id( get_the_ID() ) );
+endwhile;
+</pre>
+<p><code>get_the_ID</code>: get id of current page.<br />
+<code>wp_get_post_parent_id</code>: get the parent page id of the current page.</p>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-3378' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fget_permalink%2F%3Freplytocom%3D3378%23feedback-editor-3378" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-4147" data-comment-id="4147" class="comment byuser comment-author-tolkodelo odd alt thread-odd thread-alt depth-1">
+			<article id="div-comment-4147" class="comment-body">
+
+							<a href="#comment-content-4147" class="screen-reader-text">Skip to note 10 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="fdf8d1c25a"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="4147" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fget_permalink%2F%23comment-4147"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title=""><span class="screen-reader-text">Vote results for this note: </span>0</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="4147" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fget_permalink%2F%23comment-4147"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/afda069c0e71ffa426405f8f2fd4dc05?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/afda069c0e71ffa426405f8f2fd4dc05?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/tolkodelo/" rel="external nofollow" class="url">tolkodelo</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-4147">
+							<time datetime="2020-08-16T03:07:33+00:00">
+							1 year ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-4147">
+				<p>Get page permalink by its template slug:</p>
+<section class="source-content">
+<div class="source-code-container">
+<pre class="brush: php; title: ; notranslate" title="">function wpdocs_wp_get_page_url_by_template_slug( $template_slug ) {
+    $url = null;
+    $template = 'page-' . $template_slug . '.php';
+
+    $pages = get_posts( array(
+        'post_type' =&gt; 'page',
+        'meta_query' =&gt; array(
+            array(
+                'key' =&gt; '_wp_page_template',
+                'value' =&gt; $template,
+                'compare' =&gt; '=',
+            )
+        )
+    ) );
+
+    if ( isset( $pages[0] ) ) {
+        $url = get_permalink( $pages[0]-&gt;ID );
+    }
+    return $url;
+}</pre>
+</div>
+<p class="source-code-links"><span><a href="#" class="show-complete-source">Expand full source code</a><a href="#" class="less-complete-source">Collapse full source code</a></span></p>
+</section>
+<p>You can call the function anywhere in your theme like this:</p>
+<pre class="brush: php; title: ; notranslate" title="">
+//outputs url like &quot;http(s)://(www.)(subdomain.)domain.com/shopping-cart-page-name__depends-on-permalink-settings/&quot;
+echo wpdocs_wp_get_page_url_by_template_slug( 'shopping_cart' );</pre>
+<p><strong>Note:</strong> the function only retreives the first page that uses the given template. I wrote it to get the url for my shopping cart, and the like, obviously these are used only once. I have modified my templates dropdown so that it won&#8217;t show certain templates if they have been used in any other post. If you want to get all the posts that use the given template, modify the function like this:</p>
+<section class="source-content">
+<div class="source-code-container">
+<pre class="brush: php; title: ; notranslate" title="">function wpdocs_wp_get_page_url_by_template_slug( $template_slug ) {
+    $urls = array();
+    $template = 'page-' . $template_slug . '.php';
+
+    $pages = get_posts( array(
+        'post_type' =&gt; 'page',
+        'meta_query' =&gt; array(
+            array(
+                'key' =&gt; '_wp_page_template',
+                'value' =&gt; $template,
+                'compare' =&gt; '=',
+            )
+        )
+    ) );
+
+    foreach ( $pages as $page ) {
+        $urls[] = get_permalink( $page-&gt;ID );
+    }
+
+    return !empty( $urls ) ? $urls : false;
+}</pre>
+</div>
+<p class="source-code-links"><span><a href="#" class="show-complete-source">Expand full source code</a><a href="#" class="less-complete-source">Collapse full source code</a></span></p>
+</section>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-4147' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fget_permalink%2F%3Freplytocom%3D4147%23feedback-editor-4147" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-5220" data-comment-id="5220" class="comment byuser comment-author-zaforiqbal even thread-even depth-1">
+			<article id="div-comment-5220" class="comment-body">
+
+							<a href="#comment-content-5220" class="screen-reader-text">Skip to note 11 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="efee8edfb6"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="5220" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fget_permalink%2F%23comment-5220"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title=""><span class="screen-reader-text">Vote results for this note: </span>0</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="5220" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fget_permalink%2F%23comment-5220"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/c9e0d1bb8183479ab6b2706d37622dd5?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/c9e0d1bb8183479ab6b2706d37622dd5?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/zaforiqbal/" rel="external nofollow" class="url">zaforiqbal</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-5220">
+							<time datetime="2021-07-24T02:18:20+00:00">
+							1 month ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-5220">
+				<p>Another use of permalink can be </p>
+<pre class="brush: jscript; title: ; notranslate" title="">echo &quot;&lt;script&gt;window.location = '&quot; . get_permalink($post_id) . &quot;'&lt;/script&gt;&quot;;</pre>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-5220' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fget_permalink%2F%3Freplytocom%3D5220%23feedback-editor-5220" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-4932" data-comment-id="4932" class="comment byuser comment-author-vanstoneonline odd alt thread-odd thread-alt depth-1">
+			<article id="div-comment-4932" class="comment-body">
+
+							<a href="#comment-content-4932" class="screen-reader-text">Skip to note 12 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="7e05da2aa2"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="4932" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fget_permalink%2F%23comment-4932"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="0% like this"><span class="screen-reader-text">Vote results for this note: </span>-1</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="4932" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fget_permalink%2F%23comment-4932"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/59983c4d46b75d0132a1f6d8ee23ce7f?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/59983c4d46b75d0132a1f6d8ee23ce7f?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/vanstoneonline/" rel="external nofollow" class="url">jvanstone</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-4932">
+							<time datetime="2021-03-18T15:01:13+00:00">
+							6 months ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-4932">
+				<p>For security measure be sure to use:   </p>
+<pre class="brush: php; title: ; notranslate" title="">esc_url( $url:string, $protocols:array|null, $_context:string );</pre>
+<p>Example:  </p>
+<pre class="brush: php; title: ; notranslate" title="">echo esc_url( get_permalink(), 'textdomain' );</pre>
+<p>See <a href="../../../plugins/security/securing-output/index.html" rel="nofollow ugc">https://developer.wordpress.org/plugins/security/securing-output/</a></p>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-4932' class='feedback hide-if-js'>
+<h4 class='feedback-title'>Feedback</h4>
+<ul class='children'>
+			<li id="comment-4948" data-comment-id="4948" class="comment byuser comment-author-crstauf even depth-2">
+			<article id="div-comment-4948" class="comment-body">
+
+			
+				<div class="comment-content" id="comment-content-4948">
+				<p>The parameters passed to <code>esc_url()</code> are incorrect in the example. The second parameter should be the allowed protocols (<code>http</code>, <code>https</code>, etc), and the third parameter is the context (ex: &#8216;display&#8217;), not the text domain. &mdash; By <cite class="fn"><a href="https://profiles.wordpress.org/crstauf/" rel="external nofollow" class="url">crstauf</a></cite> &mdash;  <a class="comment-date" href="index.html#comment-4948"><time datetime="2021-03-23T14:58:39+00:00">5 months ago</time></a></p>
+				</div><!-- .comment-content -->
+
+						</article>
+			</li>
+					</ul>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fget_permalink%2F%3Freplytocom%3D4932%23feedback-editor-4932" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+		</ol><!-- .comment-list -->
+
+		
+	
+	
+			<div id="respond" class="comment-respond">
+		<h3 id="reply-title" class="comment-reply-title"> <small></small></h3><p>You must <a href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Ffunctions%2Fget_permalink%2F%23comments">log in</a> before being able to contribute a note or feedback.</p>	</div><!-- #respond -->
+		
+	
+</div><!-- #comments -->
+	</section>
+</div>
+
+</article>
+
+			
+		
+		</main><!-- #main -->
+	</div><!-- #primary -->
+	</div><!-- #content -->
+
+</div><!-- #page -->
+
+
+<div id="wporg-footer">
+	<div class="wrapper">
+		<ul>
+			<li><a href="http://wordpress.org/about/" title="An introduction to the WordPress project">About</a></li>
+			<li><a href="http://wordpress.org/news/" title="News and Updates">Blog</a></li>
+			<li><a href="http://wordpress.org/hosting/" title="Recommended web hosting providers">Hosting</a></li>
+			<li><a href="https://wordpressfoundation.org/donate/" title="Donate to the WordPress Foundation">Donate</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://wordpress.org/support/" title="Forums, documentation, and other resources">Support</a></li>
+			<li><a href="../../../index.html" title="Resources for WordPress developers">Developers</a></li>
+			<li><a href="http://make.wordpress.org/" title="Give back to WordPress through code, support, translation and more">Get Involved</a></li>
+			<li><a href="http://learn.wordpress.org/" title="Workshops and training materials">Learn</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://wordpress.org/showcase/" title="Some of the best WordPress sites on the Web">Showcase</a></li>
+			<li><a href="http://wordpress.org/plugins/" title="Add extra functionality to WordPress">Plugins</a></li>
+			<li><a href="http://wordpress.org/themes/" title="Make your WordPress pretty">Themes</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://central.wordcamp.org/" title="Find a WordPress event near you">WordCamp</a></li>
+			<li><a href="http://wordpress.tv/" title="Videos, tutorials, and WordCamp sessions">WordPress.TV</a></li>
+			<li><a href="http://buddypress.org/" title="A set of plugins to transform your WordPress into a social network">BuddyPress</a></li>
+			<li><a href="http://bbpress.org/" title="Fast, slick forums built on WordPress">bbPress</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://wordpress.com/?ref=wporg-footer" title="Hassle-free WordPress hosting">WordPress.com</a></li>
+			<li><a href="http://ma.tt/" title="Co-founder of WordPress, an example of what WordPress can do">Matt</a></li>
+			<li><a href="http://wordpress.org/about/privacy/" title="WordPress.org Privacy Policy">Privacy</a></li>
+			<li><a href="https://publiccode.eu/" target="_blank">Public Code</a></li>
+		</ul>
+
+		<ul class="social-media-links">
+			<li><span class="dashicons dashicons-twitter"></span><a href="https://twitter.com/WordPress" title="Follow @WordPress on Twitter">@WordPress</a></li>
+			<li><span class="dashicons dashicons-facebook"></span><a href="https://www.facebook.com/WordPress/" title="Like WordPress on Facebook">WordPress</a></li>
+		</ul>
+	</div>
+
+		<p class="cip cip-image">Code is Poetry.</p>
+</div>
+
+<script src="../../../../s.w.org/style/js/navigation.min.js?20190128"></script>
+
+<script type='text/javascript' src='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushJScript.js?ver=3.0.9b' id='syntaxhighlighter-brush-jscript-js'></script>
+<script type='text/javascript'>
+	(function(){
+		var corecss = document.createElement('link');
+		var themecss = document.createElement('link');
+		var corecssurl = "../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shCore.css?ver=3.0.9b";
+		if ( corecss.setAttribute ) {
+				corecss.setAttribute( "rel", "stylesheet" );
+				corecss.setAttribute( "type", "text/css" );
+				corecss.setAttribute( "href", corecssurl );
+		} else {
+				corecss.rel = "stylesheet";
+				corecss.href = corecssurl;
+		}
+		document.head.appendChild( corecss );
+		var themecssurl = "../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shThemeDefault.css?ver=3.0.9b";
+		if ( themecss.setAttribute ) {
+				themecss.setAttribute( "rel", "stylesheet" );
+				themecss.setAttribute( "type", "text/css" );
+				themecss.setAttribute( "href", themecssurl );
+		} else {
+				themecss.rel = "stylesheet";
+				themecss.href = themecssurl;
+		}
+		document.head.appendChild( themecss );
+	})();
+	SyntaxHighlighter.config.strings.expandSource = '+ expand source';
+	SyntaxHighlighter.config.strings.help = '?';
+	SyntaxHighlighter.config.strings.alert = 'SyntaxHighlighter\n\n';
+	SyntaxHighlighter.config.strings.noBrush = 'Can\'t find brush for: ';
+	SyntaxHighlighter.config.strings.brushNotHtmlScript = 'Brush wasn\'t configured for html-script option: ';
+	SyntaxHighlighter.defaults['pad-line-numbers'] = false;
+	SyntaxHighlighter.defaults['toolbar'] = false;
+	SyntaxHighlighter.all();
+
+	// Infinite scroll support
+	if ( typeof( jQuery ) !== 'undefined' ) {
+		jQuery( function( $ ) {
+			$( document.body ).on( 'post-load', function() {
+				SyntaxHighlighter.highlight();
+			} );
+		} );
+	}
+</script>
+<link rel='stylesheet' id='buttons-css'  href='../../../wp-includes/css/buttons.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<script type='text/javascript' src='../../../wp-includes/js/hoverintent-js.min.js?ver=2.2.1' id='hoverintent-js-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/admin-bar.min.js?ver=5.9-alpha-51701' id='admin-bar-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/navigation.js?ver=20181209' id='wporg-developer-navigation-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/skip-link-focus-fix.js?ver=20130115' id='wporg-developer-skip-link-focus-fix-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/search.js?ver=20150430' id='wporg-developer-search-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/menu.js?ver=20180201' id='wporg-developer-menu-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/awesomplete.min.js?ver=20160322' id='awesomplete-js'></script>
+<script type='text/javascript' id='autocomplete-js-extra'>
+/* <![CDATA[ */
+var autocomplete = {"ajaxurl":"https:\/\/developer.wordpress.org\/wp-admin\/admin-ajax.php","nonce":"8a60f70c4b"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/autocomplete.js?ver=20160524' id='autocomplete-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/function-reference.js?ver=20180724' id='wporg-developer-function-reference-js'></script>
+<script type='text/javascript' id='quicktags-js-extra'>
+/* <![CDATA[ */
+var quicktagsL10n = {"closeAllOpenTags":"Close all open tags","closeTags":"close tags","enterURL":"Enter the URL","enterImageURL":"Enter the URL of the image","enterImageDescription":"Enter a description of the image","textdirection":"text direction","toggleTextdirection":"Toggle Editor Text Direction","dfw":"Distraction-free writing mode","strong":"Bold","strongClose":"Close bold tag","em":"Italic","emClose":"Close italic tag","link":"Insert link","blockquote":"Blockquote","blockquoteClose":"Close blockquote tag","del":"Deleted text (strikethrough)","delClose":"Close deleted text tag","ins":"Inserted text","insClose":"Close inserted text tag","image":"Insert image","ul":"Bulleted list","ulClose":"Close bulleted list tag","ol":"Numbered list","olClose":"Close numbered list tag","li":"List item","liClose":"Close list item tag","code":"Code","codeClose":"Close code tag","more":"Insert Read More tag"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-includes/js/quicktags.min.js?ver=5.9-alpha-51701' id='quicktags-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/user-notes.js?ver=20200110' id='wporg-developer-user-notes-js'></script>
+<script type='text/javascript' id='wporg-developer-user-notes-feedback-js-extra'>
+/* <![CDATA[ */
+var wporg_note_feedback = {"show":"Show Feedback","hide":"Hide Feedback"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/user-notes-feedback.js?ver=20181023' id='wporg-developer-user-notes-feedback-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/tabs.js?ver=20160824' id='wporg-developer-tabs-js'></script>
+<script type='text/javascript' id='wporg-developer-preview-js-extra'>
+/* <![CDATA[ */
+var wporg_note_preview = {"ajaxurl":"https:\/\/developer.wordpress.org\/wp-admin\/admin-ajax.php","nonce":"504933b60e","preview":"preview note","preview_empty":"Nothing to preview","is_admin":""};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/user-notes-preview.js?ver=20200111' id='wporg-developer-preview-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/wp-embed.min.js?ver=5.9-alpha-51701' id='wp-embed-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/vendor/regenerator-runtime.min.js?ver=0.13.7' id='regenerator-runtime-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/vendor/wp-polyfill.min.js?ver=3.15.0' id='wp-polyfill-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/dom-ready.min.js?ver=71883072590656bf22c74c7b887df3dd' id='wp-dom-ready-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/hooks.min.js?ver=a7edae857aab69d69fa10d5aef23a5de' id='wp-hooks-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/i18n.min.js?ver=5f1269854226b4dd90450db411a12b79' id='wp-i18n-js'></script>
+<script type='text/javascript' id='wp-i18n-js-after'>
+wp.i18n.setLocaleData( { 'text direction\u0004ltr': [ 'ltr' ] } );
+</script>
+<script type='text/javascript' id='wp-a11y-js-translations'>
+( function( domain, translations ) {
+	var localeData = translations.locale_data[ domain ] || translations.locale_data.messages;
+	localeData[""].domain = domain;
+	wp.i18n.setLocaleData( localeData, domain );
+} )( "default", { "locale_data": { "messages": { "": {} } } } );
+</script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/a11y.min.js?ver=0ac8327cc1c40dcfdf29716affd7ac63' id='wp-a11y-js'></script>
+<script type='text/javascript' id='wplink-js-extra'>
+/* <![CDATA[ */
+var wpLinkL10n = {"title":"Insert\/edit link","update":"Update","save":"Add Link","noTitle":"(no title)","noMatchesFound":"No results found.","linkSelected":"Link selected.","linkInserted":"Link inserted.","minInputLength":"3"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-includes/js/wplink.min.js?ver=5.9-alpha-51701' id='wplink-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/jquery/ui/core.min.js?ver=1.12.1' id='jquery-ui-core-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/jquery/ui/menu.min.js?ver=1.12.1' id='jquery-ui-menu-js'></script>
+<script type='text/javascript' id='jquery-ui-autocomplete-js-extra'>
+/* <![CDATA[ */
+var uiAutocompleteL10n = {"noResults":"No results found.","oneResult":"1 result found. Use up and down arrow keys to navigate.","manyResults":"%d results found. Use up and down arrow keys to navigate.","itemSelected":"Item selected."};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-includes/js/jquery/ui/autocomplete.min.js?ver=1.12.1' id='jquery-ui-autocomplete-js'></script>
+
+		<script type="text/javascript">
+		tinyMCEPreInit = {
+			baseURL: "https://developer.wordpress.org/wp-includes/js/tinymce",
+			suffix: ".min",
+						mceInit: {},
+			qtInit: {'comment':{id:"comment",buttons:"strong,em,ul,ol,li,link"}},
+			ref: {plugins:"",theme:"modern",language:""},
+			load_ext: function(url,lang){var sl=tinymce.ScriptLoader;sl.markDone(url+'/langs/'+lang+'.js');sl.markDone(url+'/langs/'+lang+'_dlg.js');}
+		};
+		</script>
+				<script type="text/javascript">
+		var ajaxurl = "../../../wp-admin/admin-ajax.html";
+		( function() {
+			var initialized = [];
+			var initialize  = function() {
+				var init, id, inPostbox, $wrap;
+				var readyState = document.readyState;
+
+				if ( readyState !== 'complete' && readyState !== 'interactive' ) {
+					return;
+				}
+
+				for ( id in tinyMCEPreInit.mceInit ) {
+					if ( initialized.indexOf( id ) > -1 ) {
+						continue;
+					}
+
+					init      = tinyMCEPreInit.mceInit[id];
+					$wrap     = tinymce.$( '#wp-' + id + '-wrap' );
+					inPostbox = $wrap.parents( '.postbox' ).length > 0;
+
+					if (
+						! init.wp_skip_init &&
+						( $wrap.hasClass( 'tmce-active' ) || ! tinyMCEPreInit.qtInit.hasOwnProperty( id ) ) &&
+						( readyState === 'complete' || ( ! inPostbox && readyState === 'interactive' ) )
+					) {
+						tinymce.init( init );
+						initialized.push( id );
+
+						if ( ! window.wpActiveEditor ) {
+							window.wpActiveEditor = id;
+						}
+					}
+				}
+			}
+
+			if ( typeof tinymce !== 'undefined' ) {
+				if ( tinymce.Env.ie && tinymce.Env.ie < 11 ) {
+					tinymce.$( '.wp-editor-wrap ' ).removeClass( 'tmce-active' ).addClass( 'html-active' );
+				} else {
+					if ( document.readyState === 'complete' ) {
+						initialize();
+					} else {
+						document.addEventListener( 'readystatechange', initialize );
+					}
+				}
+			}
+
+			if ( typeof quicktags !== 'undefined' ) {
+				for ( id in tinyMCEPreInit.qtInit ) {
+					quicktags( tinyMCEPreInit.qtInit[id] );
+
+					if ( ! window.wpActiveEditor ) {
+						window.wpActiveEditor = id;
+					}
+				}
+			}
+		}());
+		</script>
+				<div id="wp-link-backdrop" style="display: none"></div>
+		<div id="wp-link-wrap" class="wp-core-ui" style="display: none" role="dialog" aria-labelledby="link-modal-title">
+		<form id="wp-link" tabindex="-1">
+		<input type="hidden" id="_ajax_linking_nonce" name="_ajax_linking_nonce" value="86f5a0a85d" />		<h1 id="link-modal-title">Insert/edit link</h1>
+		<button type="button" id="wp-link-close"><span class="screen-reader-text">Close</span></button>
+		<div id="link-selector">
+			<div id="link-options">
+				<p class="howto" id="wplink-enter-url">Enter the destination URL</p>
+				<div>
+					<label><span>URL</span>
+					<input id="wp-link-url" type="text" aria-describedby="wplink-enter-url" /></label>
+				</div>
+				<div class="wp-link-text-field">
+					<label><span>Link Text</span>
+					<input id="wp-link-text" type="text" /></label>
+				</div>
+				<div class="link-target">
+					<label><span></span>
+					<input type="checkbox" id="wp-link-target" /> Open link in a new tab</label>
+				</div>
+			</div>
+			<p class="howto" id="wplink-link-existing-content">Or link to existing content</p>
+			<div id="search-panel">
+				<div class="link-search-wrapper">
+					<label>
+						<span class="search-label">Search</span>
+						<input type="search" id="wp-link-search" class="link-search-field" autocomplete="off" aria-describedby="wplink-link-existing-content" />
+						<span class="spinner"></span>
+					</label>
+				</div>
+				<div id="search-results" class="query-results" tabindex="0">
+					<ul></ul>
+					<div class="river-waiting">
+						<span class="spinner"></span>
+					</div>
+				</div>
+				<div id="most-recent-results" class="query-results" tabindex="0">
+					<div class="query-notice" id="query-notice-message">
+						<em class="query-notice-default">No search term specified. Showing recent items.</em>
+						<em class="query-notice-hint screen-reader-text">Search or use up and down arrow keys to select an item.</em>
+					</div>
+					<ul></ul>
+					<div class="river-waiting">
+						<span class="spinner"></span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="submitbox">
+			<div id="wp-link-cancel">
+				<button type="button" class="button">Cancel</button>
+			</div>
+			<div id="wp-link-update">
+				<input type="submit" value="Add Link" class="button button-primary" id="wp-link-submit" name="wp-link-submit">
+			</div>
+		</div>
+		</form>
+		</div>
+		</body>
+
+<!-- Mirrored from developer.wordpress.org/reference/functions/get_permalink/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 31 Aug 2021 17:04:04 GMT -->
+</html>

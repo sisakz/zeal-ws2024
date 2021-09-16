@@ -1,0 +1,672 @@
+<html><!-- Mirrored from www.php.net/manual/en/function.array-slice.php by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 11 Sep 2021 09:41:04 GMT --><!-- Added by HTTrack --><head><meta http-equiv="content-type" content="text/html;charset=utf-8"><!-- /Added by HTTrack -->
+
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>array_slice</title>
+
+ <link rel="shortcut icon" href="../../favicon.ico">
+ <link rel="search" type="application/opensearchdescription+xml" href="http://php.net/phpnetimprovedsearch.src" title="Add PHP.net search">
+ <link rel="alternate" type="application/atom+xml" href="https://www.php.net/releases/feed.php" title="PHP Release feed">
+ <link rel="alternate" type="application/atom+xml" href="https://www.php.net/feed.atom" title="PHP: Hypertext Preprocessor">
+
+ <link rel="canonical" href="function.array-slice.html">
+ <link rel="shorturl" href="https://www.php.net/array-slice">
+ <link rel="alternate" href="https://www.php.net/array-slice" hreflang="x-default">
+
+ <link rel="contents" href="index-2.html">
+ <link rel="index" href="ref.array.html">
+ <link rel="prev" href="function.array-shift.html">
+ <link rel="next" href="function.array-splice.html">
+
+ <link rel="alternate" href="function.array-slice.html" hreflang="en">
+ <link rel="alternate" href="https://www.php.net/manual/pt_BR/function.array-slice.php" hreflang="pt_BR">
+ <link rel="alternate" href="https://www.php.net/manual/zh/function.array-slice.php" hreflang="zh">
+ <link rel="alternate" href="https://www.php.net/manual/fr/function.array-slice.php" hreflang="fr">
+ <link rel="alternate" href="https://www.php.net/manual/de/function.array-slice.php" hreflang="de">
+ <link rel="alternate" href="https://www.php.net/manual/ja/function.array-slice.php" hreflang="ja">
+ <link rel="alternate" href="https://www.php.net/manual/ro/function.array-slice.php" hreflang="ro">
+ <link rel="alternate" href="https://www.php.net/manual/ru/function.array-slice.php" hreflang="ru">
+ <link rel="alternate" href="https://www.php.net/manual/es/function.array-slice.php" hreflang="es">
+ <link rel="alternate" href="https://www.php.net/manual/tr/function.array-slice.php" hreflang="tr">
+
+<link rel="stylesheet" type="text/css" href="../../cached0aba.css?t=1539771603&amp;f=/fonts/Fira/fira.css" media="screen">
+<link rel="stylesheet" type="text/css" href="../../cached2ecf.css?t=1539765004&amp;f=/fonts/Font-Awesome/css/fontello.css" media="screen">
+<link rel="stylesheet" type="text/css" href="../../cachedba57.css?t=1606338002&amp;f=/styles/theme-base.css" media="screen">
+<link rel="stylesheet" type="text/css" href="../../cached3afa.css?t=1627831203&amp;f=/styles/theme-medium.css" media="screen">
+
+ <!--[if lte IE 7]>
+ <link rel="stylesheet" type="text/css" href="https://www.php.net/styles/workarounds.ie7.css" media="screen">
+ <![endif]-->
+
+ <!--[if lte IE 8]>
+ <script>
+  window.brokenIE = true;
+ </script>
+ <![endif]-->
+
+ <!--[if lte IE 9]>
+ <link rel="stylesheet" type="text/css" href="https://www.php.net/styles/workarounds.ie9.css" media="screen">
+ <![endif]-->
+
+ <!--[if IE]>
+ <script src="https://www.php.net/js/ext/html5.js"></script>
+ <![endif]-->
+
+ <base>
+
+
+</head>
+<body class="docs " style="">
+
+
+<div class="headsup"><a href="https://www.php.net/conferences/index.php#id2021-09-08-1">Longhorn PHP 2021</a></div>
+<nav id="trick"><div><dl>
+<dt><a href="getting-started.html">Getting Started</a></dt>
+	<dd><a href="introduction.html">Introduction</a></dd>
+	<dd><a href="tutorial.html">A simple tutorial</a></dd>
+<dt><a href="langref.html">Language Reference</a></dt>
+	<dd><a href="language.basic-syntax.html">Basic syntax</a></dd>
+	<dd><a href="language.types.html">Types</a></dd>
+	<dd><a href="language.variables.html">Variables</a></dd>
+	<dd><a href="language.constants.html">Constants</a></dd>
+	<dd><a href="language.expressions.html">Expressions</a></dd>
+	<dd><a href="language.operators.html">Operators</a></dd>
+	<dd><a href="language.control-structures.html">Control Structures</a></dd>
+	<dd><a href="language.functions.html">Functions</a></dd>
+	<dd><a href="language.oop5.html">Classes and Objects</a></dd>
+	<dd><a href="language.namespaces.html">Namespaces</a></dd>
+	<dd><a href="language.errors.html">Errors</a></dd>
+	<dd><a href="language.exceptions.html">Exceptions</a></dd>
+	<dd><a href="language.generators.html">Generators</a></dd>
+	<dd><a href="language.attributes.html">Attributes</a></dd>
+	<dd><a href="language.references.html">References Explained</a></dd>
+	<dd><a href="reserved.variables.html">Predefined Variables</a></dd>
+	<dd><a href="reserved.exceptions.html">Predefined Exceptions</a></dd>
+	<dd><a href="reserved.interfaces.html">Predefined Interfaces and Classes</a></dd>
+	<dd><a href="context.html">Context options and parameters</a></dd>
+	<dd><a href="wrappers.html">Supported Protocols and Wrappers</a></dd>
+</dl>
+<dl>
+<dt><a href="security.html">Security</a></dt>
+	<dd><a href="security.intro.html">Introduction</a></dd>
+	<dd><a href="security.general.html">General considerations</a></dd>
+	<dd><a href="security.cgi-bin.html">Installed as CGI binary</a></dd>
+	<dd><a href="security.apache.html">Installed as an Apache module</a></dd>
+	<dd><a href="security.sessions.html">Session Security</a></dd>
+	<dd><a href="security.filesystem.html">Filesystem Security</a></dd>
+	<dd><a href="security.database.html">Database Security</a></dd>
+	<dd><a href="security.errors.html">Error Reporting</a></dd>
+	<dd><a href="security.variables.html">User Submitted Data</a></dd>
+	<dd><a href="security.hiding.html">Hiding PHP</a></dd>
+	<dd><a href="security.current.html">Keeping Current</a></dd>
+<dt><a href="features.html">Features</a></dt>
+	<dd><a href="features.http-auth.html">HTTP authentication with PHP</a></dd>
+	<dd><a href="features.cookies.html">Cookies</a></dd>
+	<dd><a href="features.sessions.html">Sessions</a></dd>
+	<dd><a href="features.xforms.html">Dealing with XForms</a></dd>
+	<dd><a href="features.file-upload.html">Handling file uploads</a></dd>
+	<dd><a href="features.remote-files.html">Using remote files</a></dd>
+	<dd><a href="features.connection-handling.html">Connection handling</a></dd>
+	<dd><a href="features.persistent-connections.html">Persistent Database Connections</a></dd>
+	<dd><a href="features.commandline.html">Command line usage</a></dd>
+	<dd><a href="features.gc.html">Garbage Collection</a></dd>
+	<dd><a href="features.dtrace.html">DTrace Dynamic Tracing</a></dd>
+</dl>
+<dl>
+<dt><a href="funcref.html">Function Reference</a></dt>
+	<dd><a href="refs.basic.php.html">Affecting PHP's Behaviour</a></dd>
+	<dd><a href="refs.utilspec.audio.html">Audio Formats Manipulation</a></dd>
+	<dd><a href="refs.remote.auth.html">Authentication Services</a></dd>
+	<dd><a href="refs.utilspec.cmdline.html">Command Line Specific Extensions</a></dd>
+	<dd><a href="refs.compression.html">Compression and Archive Extensions</a></dd>
+	<dd><a href="refs.crypto.html">Cryptography Extensions</a></dd>
+	<dd><a href="refs.database.html">Database Extensions</a></dd>
+	<dd><a href="refs.calendar.html">Date and Time Related Extensions</a></dd>
+	<dd><a href="refs.fileprocess.file.html">File System Related Extensions</a></dd>
+	<dd><a href="refs.international.html">Human Language and Character Encoding Support</a></dd>
+	<dd><a href="refs.utilspec.image.html">Image Processing and Generation</a></dd>
+	<dd><a href="refs.remote.mail.html">Mail Related Extensions</a></dd>
+	<dd><a href="refs.math.html">Mathematical Extensions</a></dd>
+	<dd><a href="refs.utilspec.nontext.html">Non-Text MIME Output</a></dd>
+	<dd><a href="refs.fileprocess.process.html">Process Control Extensions</a></dd>
+	<dd><a href="refs.basic.other.html">Other Basic Extensions</a></dd>
+	<dd><a href="refs.remote.other.html">Other Services</a></dd>
+	<dd><a href="refs.search.html">Search Engine Extensions</a></dd>
+	<dd><a href="refs.utilspec.server.html">Server Specific Extensions</a></dd>
+	<dd><a href="refs.basic.session.html">Session Extensions</a></dd>
+	<dd><a href="refs.basic.text.html">Text Processing</a></dd>
+	<dd><a href="refs.basic.vartype.html">Variable and Type Related Extensions</a></dd>
+	<dd><a href="refs.webservice.html">Web Services</a></dd>
+	<dd><a href="refs.utilspec.windows.html">Windows Only Extensions</a></dd>
+	<dd><a href="refs.xml.html">XML Manipulation</a></dd>
+	<dd><a href="refs.ui.html">GUI Extensions</a></dd>
+</dl>
+<dl>
+<dt>Keyboard Shortcuts</dt><dt>?</dt>
+<dd>This help</dd>
+<dt>j</dt>
+<dd>Next menu item</dd>
+<dt>k</dt>
+<dd>Previous menu item</dd>
+<dt>g p</dt>
+<dd>Previous man page</dd>
+<dt>g n</dt>
+<dd>Next man page</dd>
+<dt>G</dt>
+<dd>Scroll to bottom</dd>
+<dt>g g</dt>
+<dd>Scroll to top</dd>
+<dt>g h</dt>
+<dd>Goto homepage</dd>
+<dt>g s</dt>
+<dd>Goto search<br>(current page)</dd>
+<dt>/</dt>
+<dd>Focus search box</dd>
+</dl></div></nav>
+<div id="goto">
+    <div class="search">
+         <div class="text"></div>
+         <div class="results"><ul></ul></div>
+   </div>
+</div>
+
+  <div id="breadcrumbs" class="row-fluid">
+    <div id="breadcrumbs-inner">
+          
+              
+          <ul>
+            <li><a href="index-2.html">PHP Manual</a></li>      <li><a href="funcref.html">Function Reference</a></li>      <li><a href="refs.basic.vartype.html">Variable and Type Related Extensions</a></li>      <li><a href="book.array.html">Arrays</a></li>      <li><a href="ref.array.html">Array Functions</a></li>      </ul>
+    </div>
+  </div>
+
+
+
+
+<div id="layout" class="clearfix">
+  <section id="layout-content">
+  <div id="function.array-slice" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">array_slice</h1>
+  <p class="verinfo">(PHP 4, PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">array_slice</span> — <span class="dc-title">Extract a slice of the array</span></p>
+
+ </div>
+ <div class="refsect1 description" id="refsect1-function.array-slice-description">
+  <h3 class="title">Description</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>array_slice</strong></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">array</span> <code class="parameter">$array</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">int</span> <code class="parameter">$offset</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">?</span><span class="type"><span class="type">int</span><span class="type"></span></span> <code class="parameter">$length</code><span class="initializer"> = <strong><code>null</code></strong></span></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">bool</span> <code class="parameter">$preserve_keys</code><span class="initializer"> = <strong><code>false</code></strong></span></span><br>): <span class="type">array</span></div>
+
+  <p class="para rdfs-comment">
+   <span class="function"><strong>array_slice()</strong></span> returns the sequence of elements
+   from the array <code class="parameter">array</code> as specified by the
+   <code class="parameter">offset</code> and <code class="parameter">length</code>
+   parameters.
+  </p>
+ </div>
+
+ <div class="refsect1 parameters" id="refsect1-function.array-slice-parameters">
+  <h3 class="title">Parameters</h3>
+  <p class="para">
+   </p><dl>
+    
+     <dt>
+<code class="parameter">array</code></dt>
+
+     <dd>
+
+      <p class="para">
+       The input array.
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">offset</code></dt>
+
+     <dd>
+
+      <p class="para">
+       If <code class="parameter">offset</code> is non-negative, the sequence will
+       start at that offset in the <code class="parameter">array</code>.
+      </p>
+      <p class="para">
+       If <code class="parameter">offset</code> is negative, the sequence will
+       start that far from the end of the <code class="parameter">array</code>.
+      </p>
+      <blockquote class="note"><p><strong class="note">Note</strong>: 
+       </p><p class="para">
+        The <code class="parameter">offset</code> parameter denotes the position
+        in the array, not the key.
+       </p>
+      <p></p></blockquote>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">length</code></dt>
+
+     <dd>
+
+      <p class="para">
+       If <code class="parameter">length</code> is given and is positive,
+       then the sequence will have up to that many elements in it.
+      </p>
+      <p class="para">
+       If the array is shorter than the <code class="parameter">length</code>,
+       then only the available array elements will be present.
+      </p>
+      <p class="para">
+       If <code class="parameter">length</code> is given and is negative then the
+       sequence will stop that many elements from the end of the array.
+      </p>
+      <p class="para">
+       If it is omitted, then the sequence will have everything
+       from <code class="parameter">offset</code> up until the end of the
+       <code class="parameter">array</code>.
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">preserve_keys</code></dt>
+
+     <dd>
+
+      <blockquote class="note"><p><strong class="note">Note</strong>: 
+       </p><p class="para">
+        <span class="function"><strong>array_slice()</strong></span> will reorder and reset the
+        integer array indices by default. This behaviour can be changed
+        by setting <code class="parameter">preserve_keys</code> to <strong><code>true</code></strong>.
+        String keys are always preserved, regardless of this parameter.
+       </p>
+      <p></p></blockquote>
+     </dd>
+
+    
+   </dl>
+
+  <p></p>
+ </div>
+
+ <div class="refsect1 returnvalues" id="refsect1-function.array-slice-returnvalues">
+  <h3 class="title">Return Values</h3>
+  <p class="para">
+   Returns the slice. If the offset is larger than the size of the array,
+   an empty array is returned.
+  </p>
+ </div>
+
+ <div class="refsect1 examples" id="refsect1-function.array-slice-examples">
+  <h3 class="title">Examples</h3>
+  <p class="para">
+   </p><div class="example" id="example-4915">
+    <p><strong>Example #1 <span class="function"><strong>array_slice()</strong></span> examples</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br>$input&nbsp;</span><span style="color: #007700">=&nbsp;array(</span><span style="color: #DD0000">"a"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"b"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"c"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"d"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"e"</span><span style="color: #007700">);<br><br></span><span style="color: #0000BB">$output&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">array_slice</span><span style="color: #007700">(</span><span style="color: #0000BB">$input</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">2</span><span style="color: #007700">);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;returns&nbsp;"c",&nbsp;"d",&nbsp;and&nbsp;"e"<br></span><span style="color: #0000BB">$output&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">array_slice</span><span style="color: #007700">(</span><span style="color: #0000BB">$input</span><span style="color: #007700">,&nbsp;-</span><span style="color: #0000BB">2</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">1</span><span style="color: #007700">);&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;returns&nbsp;"d"<br></span><span style="color: #0000BB">$output&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">array_slice</span><span style="color: #007700">(</span><span style="color: #0000BB">$input</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">3</span><span style="color: #007700">);&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;returns&nbsp;"a",&nbsp;"b",&nbsp;and&nbsp;"c"<br><br>//&nbsp;note&nbsp;the&nbsp;differences&nbsp;in&nbsp;the&nbsp;array&nbsp;keys<br></span><span style="color: #0000BB">print_r</span><span style="color: #007700">(</span><span style="color: #0000BB">array_slice</span><span style="color: #007700">(</span><span style="color: #0000BB">$input</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">2</span><span style="color: #007700">,&nbsp;-</span><span style="color: #0000BB">1</span><span style="color: #007700">));<br></span><span style="color: #0000BB">print_r</span><span style="color: #007700">(</span><span style="color: #0000BB">array_slice</span><span style="color: #007700">(</span><span style="color: #0000BB">$input</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">2</span><span style="color: #007700">,&nbsp;-</span><span style="color: #0000BB">1</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">true</span><span style="color: #007700">));<br></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+    <div class="example-contents"><p>The above example will output:</p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>Array
+(
+    [0] =&gt; c
+    [1] =&gt; d
+)
+Array
+(
+    [2] =&gt; c
+    [3] =&gt; d
+)
+</pre></div>
+    </div>
+   </div>
+  <p></p>
+  <p class="para">
+   </p><div class="example" id="example-4916">
+    <p><strong>Example #2 <span class="function"><strong>array_slice()</strong></span> and one-based array</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br>$input&nbsp;</span><span style="color: #007700">=&nbsp;array(</span><span style="color: #0000BB">1&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">"a"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"b"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"c"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"d"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"e"</span><span style="color: #007700">);<br></span><span style="color: #0000BB">print_r</span><span style="color: #007700">(</span><span style="color: #0000BB">array_slice</span><span style="color: #007700">(</span><span style="color: #0000BB">$input</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">1</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">2</span><span style="color: #007700">));<br></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+    <div class="example-contents"><p>The above example will output:</p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>Array
+(
+    [0] =&gt; b
+    [1] =&gt; c
+)
+</pre></div>
+    </div>
+   </div>
+  <p></p>
+  <p class="para">
+   </p><div class="example" id="example-4917">
+    <p><strong>Example #3 <span class="function"><strong>array_slice()</strong></span> and array with mixed keys</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br>$ar&nbsp;</span><span style="color: #007700">=&nbsp;array(</span><span style="color: #DD0000">'a'</span><span style="color: #007700">=&gt;</span><span style="color: #DD0000">'apple'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'b'</span><span style="color: #007700">=&gt;</span><span style="color: #DD0000">'banana'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'42'</span><span style="color: #007700">=&gt;</span><span style="color: #DD0000">'pear'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'d'</span><span style="color: #007700">=&gt;</span><span style="color: #DD0000">'orange'</span><span style="color: #007700">);<br></span><span style="color: #0000BB">print_r</span><span style="color: #007700">(</span><span style="color: #0000BB">array_slice</span><span style="color: #007700">(</span><span style="color: #0000BB">$ar</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">3</span><span style="color: #007700">));<br></span><span style="color: #0000BB">print_r</span><span style="color: #007700">(</span><span style="color: #0000BB">array_slice</span><span style="color: #007700">(</span><span style="color: #0000BB">$ar</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">3</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">true</span><span style="color: #007700">));<br></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+    <div class="example-contents"><p>The above example will output:</p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>Array
+(
+    [a] =&gt; apple
+    [b] =&gt; banana
+    [0] =&gt; pear
+)
+Array
+(
+    [a] =&gt; apple
+    [b] =&gt; banana
+    [42] =&gt; pear
+)
+</pre></div>
+    </div>
+   </div>
+  <p></p>
+ </div>
+
+ <div class="refsect1 seealso" id="refsect1-function.array-slice-seealso">
+  <h3 class="title">See Also</h3>
+  <p class="para">
+   </p><ul class="simplelist">
+    <li class="member"><span class="function"><a href="function.array-chunk.html" class="function" rel="rdfs-seeAlso">array_chunk()</a> - Split an array into chunks</span></li>
+    <li class="member"><span class="function"><a href="function.array-splice.html" class="function" rel="rdfs-seeAlso">array_splice()</a> - Remove a portion of the array and replace it with something else</span></li>
+    <li class="member"><span class="function"><a href="function.unset.html" class="function" rel="rdfs-seeAlso">unset()</a> - Unset a given variable</span></li>
+   </ul>
+  <p></p>
+ </div>
+
+</div>
+<section id="usernotes">
+ <div class="head"><h3 class="title">User Contributed Notes</h3></div><div id="allnotes">
+  <div class="note" id="64122">  
+  <a class="name">
+  <strong class="user"><em>taylorbarstow at the google mail service</em></strong></a><div class="date" title="2006-04-07 02:01"><strong>15 years ago</strong></div>
+  <div class="text" id="Hcom64122">
+<div class="phpcode"><code><span class="html">
+Array slice function that works with associative arrays (keys):<br><br>function array_slice_assoc($array,$keys) {<br>&nbsp; &nbsp; return array_intersect_key($array,array_flip($keys));<br>}</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="81973">  
+  <a class="name">
+  <strong class="user"><em>worldclimb at 99gmail99 dot com</em></strong></a><div class="date" title="2008-03-21 12:51"><strong>13 years ago</strong></div>
+  <div class="text" id="Hcom81973">
+<div class="phpcode"><code><span class="html">
+array_slice can be used to remove elements from an array but it's pretty simple to use a custom function.<br><br>One day array_remove() might become part of PHP and will likely be a reserved function name, hence the unobvious choice for this function's names.<br><br>&lt;?<br>function arem($array,$value){<br>&nbsp; &nbsp; $holding=array();<br>&nbsp; &nbsp; foreach($array as $k =&gt; $v){<br>&nbsp; &nbsp; &nbsp; &nbsp; if($value!=$v){<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $holding[$k]=$v;<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; }&nbsp; &nbsp; <br>&nbsp; &nbsp; return $holding;<br>}<br><br>function akrem($array,$key){<br>&nbsp; &nbsp; $holding=array();<br>&nbsp; &nbsp; foreach($array as $k =&gt; $v){<br>&nbsp; &nbsp; &nbsp; &nbsp; if($key!=$k){<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $holding[$k]=$v;<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; }&nbsp; &nbsp; <br>&nbsp; &nbsp; return $holding;<br>}<br><br>$lunch = array('sandwich' =&gt; 'cheese', 'cookie'=&gt;'oatmeal','drink' =&gt; 'tea','fruit' =&gt; 'apple');<br>echo '&lt;pre&gt;';<br>print_r($lunch);<br>$lunch=arem($lunch,'apple');<br>print_r($lunch);<br>$lunch=akrem($lunch,'sandwich');<br>print_r($lunch);<br>echo '&lt;/pre&gt;';<br>?&gt;<br><br>(remove 9's in email)</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="18741">  
+  <a class="name">
+  <strong class="user"><em>developer at i-space dot org</em></strong></a><div class="date" title="2002-02-03 08:22"><strong>19 years ago</strong></div>
+  <div class="text" id="Hcom18741">
+<div class="phpcode"><code><span class="html">
+remember that array_slice returns an array with the current element. you must use array_slice($array, $index+1) if you want to get the next elements.</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="112359">  
+  <a class="name">
+  <strong class="user"><em>Ray.Paseur often uses Gmail</em></strong></a><div class="date" title="2013-06-06 02:44"><strong>8 years ago</strong></div>
+  <div class="text" id="Hcom112359">
+<div class="phpcode"><code><span class="html">
+<span class="default">&lt;?php<br></span><span class="comment">// CHOP $num ELEMENTS OFF THE FRONT OF AN ARRAY<br>// RETURN THE CHOP, SHORTENING THE SUBJECT ARRAY<br></span><span class="keyword">function </span><span class="default">array_chop</span><span class="keyword">(&amp;</span><span class="default">$arr</span><span class="keyword">, </span><span class="default">$num</span><span class="keyword">)<br>{<br>&nbsp; &nbsp; </span><span class="default">$ret </span><span class="keyword">= </span><span class="default">array_slice</span><span class="keyword">(</span><span class="default">$arr</span><span class="keyword">, </span><span class="default">0</span><span class="keyword">, </span><span class="default">$num</span><span class="keyword">);<br>&nbsp; &nbsp; </span><span class="default">$arr </span><span class="keyword">= </span><span class="default">array_slice</span><span class="keyword">(</span><span class="default">$arr</span><span class="keyword">, </span><span class="default">$num</span><span class="keyword">);<br>&nbsp; &nbsp; return </span><span class="default">$ret</span><span class="keyword">;<br>}</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="85695">  
+  <a class="name">
+  <strong class="user"><em>s0i0m at dreamevilconcepts dot com</em></strong></a><div class="date" title="2008-09-12 07:53"><strong>12 years ago</strong></div>
+  <div class="text" id="Hcom85695">
+<div class="phpcode"><code><span class="html">
+Using the varname function referenced from the array_search page, submitted by dcez at land dot ru. I created a multi-dimensional array splice function. It's usage is like so:<br><br>$array['admin'] = array('blah1', 'blah2');<br>$array['voice'] = array('blah3', 'blah4');<br>array_cut('blah4', $array);<br><br>...Would strip blah4 from the array, no matter where the position of it was in the array ^^ Returning this...<br><br>Array ( [admin] =&gt; Array ( [0] =&gt; blah1 [1] =&gt; blah2 ) [voice] =&gt; Array ( [0] =&gt; blah3 ) ) <br><br>Here is the code...<br><br><span class="default">&lt;?php<br><br>&nbsp; </span><span class="keyword">function </span><span class="default">varname </span><span class="keyword">(</span><span class="default">$var</span><span class="keyword">)<br>&nbsp; {<br>&nbsp; &nbsp; </span><span class="comment">// varname function by dcez at land dot ru<br>&nbsp; &nbsp; </span><span class="keyword">return (isset(</span><span class="default">$var</span><span class="keyword">)) ? </span><span class="default">array_search</span><span class="keyword">(</span><span class="default">$var</span><span class="keyword">, </span><span class="default">$GLOBALS</span><span class="keyword">) : </span><span class="default">false</span><span class="keyword">;<br>&nbsp; }<br><br>&nbsp; function </span><span class="default">array_cut</span><span class="keyword">(</span><span class="default">$needle</span><span class="keyword">, </span><span class="default">$haystack</span><span class="keyword">)<br>&nbsp; {<br>&nbsp; &nbsp; foreach (</span><span class="default">$haystack </span><span class="keyword">as </span><span class="default">$k </span><span class="keyword">=&gt; </span><span class="default">$v</span><span class="keyword">)<br>&nbsp; &nbsp; {<br>&nbsp; &nbsp; &nbsp; for (</span><span class="default">$i</span><span class="keyword">=</span><span class="default">0</span><span class="keyword">; </span><span class="default">$i</span><span class="keyword">&lt;</span><span class="default">count</span><span class="keyword">(</span><span class="default">$v</span><span class="keyword">); </span><span class="default">$i</span><span class="keyword">++)<br>&nbsp; &nbsp; &nbsp; &nbsp; if (</span><span class="default">$v</span><span class="keyword">[</span><span class="default">$i</span><span class="keyword">] === </span><span class="default">$needle</span><span class="keyword">)<br>&nbsp; &nbsp; &nbsp; &nbsp; {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return </span><span class="default">array_splice</span><span class="keyword">(</span><span class="default">$GLOBALS</span><span class="keyword">[</span><span class="default">varname</span><span class="keyword">(</span><span class="default">$haystack</span><span class="keyword">)][</span><span class="default">$k</span><span class="keyword">], </span><span class="default">$i</span><span class="keyword">, </span><span class="default">1</span><span class="keyword">);<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; break; break;<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; }<br><br></span><span class="default">?&gt;<br></span><br>Check out dreamevilconcept's forum for more innovative creations!</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="82950">  
+  <a class="name">
+  <strong class="user"><em>ted.devito at 9gmail9 dot 99com</em></strong></a><div class="date" title="2008-05-02 09:21"><strong>13 years ago</strong></div>
+  <div class="text" id="Hcom82950">
+<div class="phpcode"><code><span class="html">
+based on worldclimb's arem(), here is a recursive array value removal tool that can work with multidimensional arrays.<br><br>function remove_from_array($array,$value){<br>&nbsp; &nbsp; $clear = true;<br>&nbsp; &nbsp; $holding=array();<br>&nbsp;&nbsp; <br>&nbsp; &nbsp; foreach($array as $k =&gt; $v){<br>&nbsp; &nbsp; &nbsp; &nbsp; if (is_array($v)) {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $holding [$k] = remove_from_array ($v, $value);<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; &nbsp; &nbsp; elseif ($value == $v) {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $clear = false;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; &nbsp; &nbsp; elseif($value != $v){<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $holding[$k]=$v; // removes an item by combing through the array in order and saving the good stuff<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; }&nbsp;&nbsp; <br>&nbsp; &nbsp; if ($clear) return $holding; // only pass back the holding array if we didn't find the value <br>}</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="122200">  
+  <a class="name">
+  <strong class="user"><em>nathan dot fiscaletti at gmail dot com</em></strong></a><div class="date" title="2017-12-30 01:46"><strong>3 years ago</strong></div>
+  <div class="text" id="Hcom122200">
+<div class="phpcode"><code><span class="html">
+If you want an associative version of this you can do the following:<br><br>function array_slice_assoc($array,$keys) {<br>&nbsp; &nbsp; return array_intersect_key($array,array_flip($keys));<br>}<br><br>However, if you want an inverse associative version of this, just use array_diff_key instead of array_intersect_key. <br><br>function array_slice_assoc_inverse($array,$keys) {<br>&nbsp; &nbsp; return array_diff_key($array,array_flip($keys));<br>}<br><br>Example:<br><br>$arr = [<br>&nbsp; &nbsp; 'name' =&gt; 'Nathan',<br>&nbsp; &nbsp; 'age' =&gt; 20,<br>&nbsp; &nbsp; 'height' =&gt; 6<br>];<br><br>array_slice_assoc($arr, ['name','age']);<br><br>will return <br><br>Array (<br>&nbsp; &nbsp;&nbsp; 'name' = 'Nathan',<br>&nbsp; &nbsp;&nbsp; 'age' = 20<br>)<br><br>Where as<br><br>array_slice_assoc_inverse($arr, ['name']);<br><br>will return <br><br>Array (<br>&nbsp; &nbsp; 'age' = 20,<br>&nbsp; &nbsp; 'height' = 6<br>)</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="117802">  
+  <a class="name">
+  <strong class="user"><em>kansey</em></strong></a><div class="date" title="2015-08-12 09:32"><strong>6 years ago</strong></div>
+  <div class="text" id="Hcom117802">
+<div class="phpcode"><code><span class="html">
+To save the sort order of a numeric index in the array. Version php =&gt;5.5.26<br>/*<br>Example<br>*/<br><br>$arr = array( "1" =&gt;2, "2" =&gt;3 , "3" =&gt;5 );<br><br>print_r(array_slice($arr,1,null,true));<br><br>/*<br>Result<br><br>Array<br>(<br>[2] =&gt; 3<br>[3] =&gt; 5<br>)<br>*/</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="102215">  
+  <a class="name">
+  <strong class="user"><em>xananax at yelostudio dot com</em></strong></a><div class="date" title="2011-02-02 07:23"><strong>10 years ago</strong></div>
+  <div class="text" id="Hcom102215">
+<div class="phpcode"><code><span class="html">
+<span class="default">&lt;?php<br></span><span class="comment">/**<br> * Reorders an array by keys according to a list of values.<br> * @param array $array the array to reorder. Passed by reference<br> * @param array $list the list to reorder by<br> * @param boolean $keepRest if set to FALSE, anything not in the $list array will be removed.<br> * @param boolean $prepend if set to TRUE, will prepend the remaining values instead of appending them<br> * @author xananax AT yelostudio DOT com<br> */<br></span><span class="keyword">function </span><span class="default">array_reorder</span><span class="keyword">(array &amp;</span><span class="default">$array</span><span class="keyword">,array </span><span class="default">$list</span><span class="keyword">,</span><span class="default">$keepRest</span><span class="keyword">=</span><span class="default">TRUE</span><span class="keyword">,</span><span class="default">$prepend</span><span class="keyword">=</span><span class="default">FALSE</span><span class="keyword">,</span><span class="default">$preserveKeys</span><span class="keyword">=</span><span class="default">TRUE</span><span class="keyword">){<br>&nbsp; &nbsp; </span><span class="default">$temp </span><span class="keyword">= array();<br>&nbsp; &nbsp; foreach(</span><span class="default">$list </span><span class="keyword">as </span><span class="default">$i</span><span class="keyword">){<br>&nbsp; &nbsp; &nbsp; &nbsp; if(isset(</span><span class="default">$array</span><span class="keyword">[</span><span class="default">$i</span><span class="keyword">])){<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$tempValue </span><span class="keyword">= </span><span class="default">array_slice</span><span class="keyword">(<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$array</span><span class="keyword">,<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">array_search</span><span class="keyword">(</span><span class="default">$i</span><span class="keyword">,</span><span class="default">array_keys</span><span class="keyword">(</span><span class="default">$array</span><span class="keyword">)),<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">1</span><span class="keyword">,<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$preserveKeys<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="keyword">);<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$temp</span><span class="keyword">[</span><span class="default">$i</span><span class="keyword">] = </span><span class="default">array_shift</span><span class="keyword">(</span><span class="default">$tempValue</span><span class="keyword">);<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; unset(</span><span class="default">$array</span><span class="keyword">[</span><span class="default">$i</span><span class="keyword">]);<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; }<br>&nbsp; &nbsp; </span><span class="default">$array </span><span class="keyword">= </span><span class="default">$keepRest </span><span class="keyword">?<br>&nbsp; &nbsp; &nbsp; &nbsp; (</span><span class="default">$prepend</span><span class="keyword">? <br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$array</span><span class="keyword">+</span><span class="default">$temp<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="keyword">:</span><span class="default">$temp</span><span class="keyword">+</span><span class="default">$array<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="keyword">)<br>&nbsp; &nbsp; &nbsp; &nbsp; : </span><span class="default">$temp</span><span class="keyword">;<br>}<br><br></span><span class="comment">/** exemple ** /<br>$a = array(<br>&nbsp; &nbsp; 'a'&nbsp; &nbsp; =&gt;&nbsp; &nbsp; 'a',<br>&nbsp; &nbsp; 'b'&nbsp; &nbsp; =&gt;&nbsp; &nbsp; 'b',<br>&nbsp; &nbsp; 'c'&nbsp; &nbsp; =&gt;&nbsp; &nbsp; 'c',<br>&nbsp; &nbsp; 'd'&nbsp; &nbsp; =&gt;&nbsp; &nbsp; 'd',<br>&nbsp; &nbsp; 'e'&nbsp; &nbsp; =&gt;&nbsp; &nbsp; 'e'<br>);<br>$order = array('c','b','a');<br><br>array_reorder($a,$order,TRUE);<br>echo '&lt;pre&gt;';<br>print_r($a);<br>echo '&lt;/pre&gt;';<br>/** exemple end **/<br></span><span class="default">?&gt;</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="78257">  
+  <a class="name">
+  <strong class="user"><em>aexchecker at yahoo dot com</em></strong></a><div class="date" title="2007-10-04 08:39"><strong>13 years ago</strong></div>
+  <div class="text" id="Hcom78257">
+<div class="phpcode"><code><span class="html">
+<span class="default">&lt;?php<br></span><span class="comment">/**<br> * @desc<br> * Combines two arrays by inserting one into the other at a given position then<br> * returns the result.<br> *<br> * @since&nbsp;&nbsp; 2007/10/04<br> * @version v0.7 2007/10/04 18:47:52<br> * @author&nbsp; AexChecker &lt;AexChecker@yahoo.com&gt;<br> * @param&nbsp;&nbsp; array $source<br> * @param&nbsp;&nbsp; array $destination<br> * @param&nbsp;&nbsp; int [optional] $offset<br> * @param&nbsp;&nbsp; int [optional] $length<br> * @return&nbsp; array<br> */<br></span><span class="keyword">function </span><span class="default">array_insert</span><span class="keyword">(</span><span class="default">$source</span><span class="keyword">, </span><span class="default">$destination</span><span class="keyword">, </span><span class="default">$offset </span><span class="keyword">= </span><span class="default">NULL</span><span class="keyword">, </span><span class="default">$length </span><span class="keyword">= </span><span class="default">NULL</span><span class="keyword">) {<br>&nbsp; &nbsp; if (!</span><span class="default">is_array</span><span class="keyword">(</span><span class="default">$source</span><span class="keyword">) || empty(</span><span class="default">$source</span><span class="keyword">)) {<br>&nbsp; &nbsp; &nbsp; &nbsp; if (</span><span class="default">is_array</span><span class="keyword">(</span><span class="default">$destination</span><span class="keyword">) &amp;&amp; !empty(</span><span class="default">$destination</span><span class="keyword">)) {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return </span><span class="default">$destination</span><span class="keyword">;<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; &nbsp; &nbsp; return array();<br>&nbsp; &nbsp; }<br>&nbsp; &nbsp; if (</span><span class="default">is_null</span><span class="keyword">(</span><span class="default">$offset</span><span class="keyword">)) {<br>&nbsp; &nbsp; &nbsp; &nbsp; return </span><span class="default">array_merge</span><span class="keyword">(</span><span class="default">$destination</span><span class="keyword">, </span><span class="default">$source</span><span class="keyword">);<br>&nbsp; &nbsp; }<br>&nbsp; &nbsp; </span><span class="default">$offset </span><span class="keyword">= </span><span class="default">var2int</span><span class="keyword">(</span><span class="default">$offset</span><span class="keyword">);<br>&nbsp; &nbsp; if (</span><span class="default">is_null</span><span class="keyword">(</span><span class="default">$length</span><span class="keyword">)) {<br>&nbsp; &nbsp; &nbsp; &nbsp; if (</span><span class="default">$offset </span><span class="keyword">=== </span><span class="default">0</span><span class="keyword">) {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return </span><span class="default">array_merge</span><span class="keyword">(</span><span class="default">$source</span><span class="keyword">, </span><span class="default">array_slice</span><span class="keyword">(</span><span class="default">$destination</span><span class="keyword">, </span><span class="default">1</span><span class="keyword">));<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; &nbsp; &nbsp; if (</span><span class="default">$offset </span><span class="keyword">=== -</span><span class="default">1</span><span class="keyword">) {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return </span><span class="default">array_merge</span><span class="keyword">(</span><span class="default">array_slice</span><span class="keyword">(</span><span class="default">$destination</span><span class="keyword">, </span><span class="default">0</span><span class="keyword">, -</span><span class="default">1</span><span class="keyword">), </span><span class="default">$source</span><span class="keyword">);<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; &nbsp; &nbsp; return </span><span class="default">array_merge</span><span class="keyword">(<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">array_slice</span><span class="keyword">(</span><span class="default">$destination</span><span class="keyword">, </span><span class="default">0</span><span class="keyword">, </span><span class="default">$offset</span><span class="keyword">),<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$source</span><span class="keyword">,<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">array_slice</span><span class="keyword">(</span><span class="default">$destination</span><span class="keyword">, ++</span><span class="default">$offset</span><span class="keyword">)<br>&nbsp; &nbsp; &nbsp; &nbsp; );<br>&nbsp; &nbsp; }<br>&nbsp; &nbsp; if (</span><span class="default">$offset </span><span class="keyword">=== </span><span class="default">0</span><span class="keyword">) {<br>&nbsp; &nbsp; &nbsp; &nbsp; return </span><span class="default">array_merge</span><span class="keyword">(</span><span class="default">$source</span><span class="keyword">, </span><span class="default">array_slice</span><span class="keyword">(</span><span class="default">$destination</span><span class="keyword">, </span><span class="default">$length</span><span class="keyword">));<br>&nbsp; &nbsp; }<br>&nbsp; &nbsp; </span><span class="default">$destination_count </span><span class="keyword">= </span><span class="default">count</span><span class="keyword">(</span><span class="default">$destination</span><span class="keyword">);<br>&nbsp; &nbsp; </span><span class="default">$length </span><span class="keyword">= </span><span class="default">var2int</span><span class="keyword">(</span><span class="default">$length</span><span class="keyword">);<br>&nbsp; &nbsp; if (</span><span class="default">$offset </span><span class="keyword">&gt; </span><span class="default">0</span><span class="keyword">) {<br>&nbsp; &nbsp; &nbsp; &nbsp; if (</span><span class="default">$destination_count </span><span class="keyword">- </span><span class="default">$offset </span><span class="keyword">&lt; </span><span class="default">1</span><span class="keyword">) {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return </span><span class="default">array_merge</span><span class="keyword">(</span><span class="default">$destination</span><span class="keyword">, </span><span class="default">$source</span><span class="keyword">);<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; } else{<br>&nbsp; &nbsp; &nbsp; &nbsp; if ((</span><span class="default">$t </span><span class="keyword">= </span><span class="default">$destination_count </span><span class="keyword">+ </span><span class="default">$offset</span><span class="keyword">) &lt; </span><span class="default">1</span><span class="keyword">) {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return </span><span class="default">array_merge</span><span class="keyword">(</span><span class="default">$source</span><span class="keyword">, </span><span class="default">$destination</span><span class="keyword">);<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$offset </span><span class="keyword">= </span><span class="default">$t</span><span class="keyword">;<br>&nbsp; &nbsp; }<br>&nbsp; &nbsp; if (</span><span class="default">$length </span><span class="keyword">&gt; </span><span class="default">0</span><span class="keyword">) {<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$length</span><span class="keyword">+= </span><span class="default">$offset</span><span class="keyword">;<br>&nbsp; &nbsp; } elseif (</span><span class="default">$length </span><span class="keyword">&lt; </span><span class="default">0 </span><span class="keyword">&amp;&amp; !(</span><span class="default">$length </span><span class="keyword">* -</span><span class="default">1 </span><span class="keyword">&lt; </span><span class="default">$destination_count</span><span class="keyword">)) {<br>&nbsp; &nbsp; &nbsp; &nbsp; return </span><span class="default">$source</span><span class="keyword">;<br>&nbsp; &nbsp; } else {<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$length </span><span class="keyword">= </span><span class="default">$offset</span><span class="keyword">;<br>&nbsp; &nbsp; }<br>&nbsp; &nbsp; return </span><span class="default">array_merge</span><span class="keyword">(<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">array_slice</span><span class="keyword">(</span><span class="default">$destination</span><span class="keyword">, </span><span class="default">0</span><span class="keyword">, </span><span class="default">$offset</span><span class="keyword">),<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$source</span><span class="keyword">,<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">array_slice</span><span class="keyword">(</span><span class="default">$destination</span><span class="keyword">, </span><span class="default">$length</span><span class="keyword">)<br>&nbsp; &nbsp; );<br>}<br></span><span class="default">?&gt;</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="103162">  
+  <a class="name">
+  <strong class="user"><em>Nathan - thefiscster510 at gmail dot com</em></strong></a><div class="date" title="2011-03-29 10:38"><strong>10 years ago</strong></div>
+  <div class="text" id="Hcom103162">
+<div class="phpcode"><code><span class="html">
+If you want to remove a specified entry from an array i made this mwethod...<br><br><span class="default">&lt;?php<br>$array </span><span class="keyword">= array(</span><span class="string">"Entry1"</span><span class="keyword">,</span><span class="string">"entry2"</span><span class="keyword">,</span><span class="string">"entry3"</span><span class="keyword">);<br><br></span><span class="default">$int </span><span class="keyword">= </span><span class="default">3</span><span class="keyword">; </span><span class="comment">//Number of entries in the array<br></span><span class="default">$int2 </span><span class="keyword">= </span><span class="default">0</span><span class="keyword">; </span><span class="comment">//Starter array spot... it will begine its search at 0.<br></span><span class="default">$del_num </span><span class="keyword">= </span><span class="default">1</span><span class="keyword">; </span><span class="comment">//Represents the second entry in the array... which is the one we will happen to remove this time... i.e. 0 = first entry, 1 = second entry, 2 = third...........<br><br></span><span class="default">$newarray </span><span class="keyword">= array(); </span><span class="comment">//Empty array that will be the new array minus the specified entry...<br></span><span class="default">print_r</span><span class="keyword">(</span><span class="default">$array</span><span class="keyword">) . </span><span class="string">"&lt;br&gt;"</span><span class="keyword">;&nbsp; &nbsp; </span><span class="comment">//print original array contents<br></span><span class="default">print_r</span><span class="keyword">(</span><span class="default">$newarray</span><span class="keyword">). </span><span class="string">"&lt;br&gt;"</span><span class="keyword">; </span><span class="comment">//print the new empty array<br><br></span><span class="keyword">do<br>{<br></span><span class="default">$user </span><span class="keyword">= </span><span class="default">$array</span><span class="keyword">[</span><span class="default">$int2</span><span class="keyword">];<br></span><span class="default">$key </span><span class="keyword">= </span><span class="default">array_search</span><span class="keyword">(</span><span class="default">$user</span><span class="keyword">, </span><span class="default">$array</span><span class="keyword">);<br>if (</span><span class="default">$key </span><span class="keyword">== </span><span class="default">$del_num</span><span class="keyword">)<br>{<br><br>}<br>else<br>{<br></span><span class="default">$newarray</span><span class="keyword">[] = </span><span class="default">$array</span><span class="keyword">[</span><span class="default">$int2</span><span class="keyword">];<br>}<br><br></span><span class="default">$int2 </span><span class="keyword">= </span><span class="default">$int2 </span><span class="keyword">+ </span><span class="default">1</span><span class="keyword">;<br>} while (</span><span class="default">$int2 </span><span class="keyword">&lt; </span><span class="default">$int</span><span class="keyword">);<br><br></span><span class="default">print_r</span><span class="keyword">(</span><span class="default">$newarray</span><span class="keyword">). </span><span class="string">"&lt;br&gt;"</span><span class="keyword">; </span><span class="comment">//print the new array<br><br></span><span class="default">?&gt;</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="73572">  
+  <a class="name">
+  <strong class="user"><em>aflavio at gmail dot com</em></strong></a><div class="date" title="2007-03-01 01:43"><strong>14 years ago</strong></div>
+  <div class="text" id="Hcom73572">
+<div class="phpcode"><code><span class="html">
+/**<br>&nbsp; &nbsp; * Remove a value from a array<br>&nbsp; &nbsp; * @param string $val<br>&nbsp; &nbsp; * @param array $arr<br>&nbsp; &nbsp; * @return array $array_remval<br>&nbsp; &nbsp; */<br>&nbsp; &nbsp; function array_remval($val, &amp;$arr)<br>&nbsp; &nbsp; {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $array_remval = $arr;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; for($x=0;$x&lt;count($array_remval);$x++)<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $i=array_search($val,$array_remval);<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (is_numeric($i)) {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $array_temp&nbsp; = array_slice($array_remval, 0, $i );<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $array_temp2 = array_slice($array_remval, $i+1, count($array_remval)-1 );<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $array_remval = array_merge($array_temp, $array_temp2);<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return $array_remval;<br>&nbsp; &nbsp; }<br><br>$stack=Array('apple','banana','pear','apple', 'cherry', 'apple');<br>array_remval("apple", $stack);<br><br>//output: Array('banana','pear', 'cherry')</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="90224">  
+  <a class="name">
+  <strong class="user"><em>jamon at clearsightdesign dot com</em></strong></a><div class="date" title="2009-04-10 05:46"><strong>12 years ago</strong></div>
+  <div class="text" id="Hcom90224">
+<div class="phpcode"><code><span class="html">
+I was trying to find a good way to find the previous several and next several results from an array created in a MySQL query. I found that most MySQL solutions to this problem were complex. Here is a simple function that returns the previous and next rows from the array.
+<br>
+<br><span class="default">&lt;?php
+<br>
+<br></span><span class="comment">/*
+<br>** function array_surround by Jamon Holmgren of ClearSight Design
+<br>** Version 1.0 - 4/10/2009
+<br>** Please direct comments and questions to my first name at symbol clearsightdesign.com
+<br>**
+<br>** Returns an array with only the $before and $after number of results
+<br>** This is set to work best with MySQL data results
+<br>** Use this to find the rows immediately before and after a particular row, as many as you want
+<br>**
+<br>** Example usage:
+<br>**&nbsp;&nbsp; $mysql_ar is an array of results from a MySQL query and the current id is $cur_id
+<br>**&nbsp;&nbsp; We want to get the row before this one and five rows afterward
+<br>**
+<br>** $near_rows = array_surround($mysql_ar, "id", $cur_id, 1, 5)
+<br>**
+<br>**&nbsp;&nbsp; Previous row is now $near_rows[-1]
+<br>**&nbsp;&nbsp; Current row is now $near_rows[0]
+<br>**&nbsp;&nbsp; Next row is $near_rows[1] ... etc
+<br>**&nbsp;&nbsp; If there is no previous row, $near_rows[-1] will not be set...test for it with is_array($near_rows[-1])
+<br>**
+<br>*/
+<br></span><span class="keyword">function </span><span class="default">array_surround</span><span class="keyword">(</span><span class="default">$src_array</span><span class="keyword">, </span><span class="default">$field</span><span class="keyword">, </span><span class="default">$value</span><span class="keyword">, </span><span class="default">$before </span><span class="keyword">= </span><span class="default">1</span><span class="keyword">, </span><span class="default">$after </span><span class="keyword">= </span><span class="default">1</span><span class="keyword">) {
+<br>&nbsp; &nbsp; if(</span><span class="default">is_array</span><span class="keyword">(</span><span class="default">$src_array</span><span class="keyword">)) {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="comment">// reset all the keys to 0 through whatever in case they aren't sequential
+<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$new_array </span><span class="keyword">= </span><span class="default">array_values</span><span class="keyword">(</span><span class="default">$src_array</span><span class="keyword">);
+<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="comment">// now loop through and find the key in array that matches the criteria in $field and $value
+<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="keyword">foreach(</span><span class="default">$new_array </span><span class="keyword">as </span><span class="default">$k </span><span class="keyword">=&gt; </span><span class="default">$s</span><span class="keyword">) {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if(</span><span class="default">$s</span><span class="keyword">[</span><span class="default">$field</span><span class="keyword">] == </span><span class="default">$value</span><span class="keyword">) {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="comment">// Found the one we wanted
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$ck </span><span class="keyword">= </span><span class="default">$k</span><span class="keyword">; </span><span class="comment">// put the key in the $ck (current key)
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="keyword">break;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }
+<br>&nbsp; &nbsp; &nbsp; &nbsp; }
+<br>&nbsp; &nbsp; &nbsp; &nbsp; if(isset(</span><span class="default">$ck</span><span class="keyword">)) { </span><span class="comment">// Found it!
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$result_start </span><span class="keyword">= </span><span class="default">$ck </span><span class="keyword">- </span><span class="default">$before</span><span class="keyword">; </span><span class="comment">// Set the start key
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$result_length </span><span class="keyword">= </span><span class="default">$before </span><span class="keyword">+ </span><span class="default">1 </span><span class="keyword">+ </span><span class="default">$after</span><span class="keyword">; </span><span class="comment">// Set the number of keys to return
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="keyword">if(</span><span class="default">$result_start </span><span class="keyword">&lt; </span><span class="default">0</span><span class="keyword">) { </span><span class="comment">// Oops, start key is before first result
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$result_length </span><span class="keyword">= </span><span class="default">$result_length </span><span class="keyword">+ </span><span class="default">$result_start</span><span class="keyword">; </span><span class="comment">// Reduce the number of keys to return
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$result_start </span><span class="keyword">= </span><span class="default">0</span><span class="keyword">; </span><span class="comment">// Set the start key to the first result
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="keyword">}
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$result_temp </span><span class="keyword">= </span><span class="default">array_slice</span><span class="keyword">(</span><span class="default">$new_array</span><span class="keyword">, </span><span class="default">$result_start</span><span class="keyword">, </span><span class="default">$result_length</span><span class="keyword">); </span><span class="comment">// Slice out the results we want
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // Now we have an array, but we want array[-$before] to array[$after] not 0 to whatever.
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="keyword">foreach(</span><span class="default">$result_temp </span><span class="keyword">as </span><span class="default">$rk </span><span class="keyword">=&gt; </span><span class="default">$rt</span><span class="keyword">) { </span><span class="comment">// set all the keys to -$before to +$after
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$result</span><span class="keyword">[</span><span class="default">$result_start </span><span class="keyword">- </span><span class="default">$ck </span><span class="keyword">+ </span><span class="default">$rk</span><span class="keyword">] = </span><span class="default">$rt</span><span class="keyword">;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return </span><span class="default">$result</span><span class="keyword">;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; } else { </span><span class="comment">// didn't find it!
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="keyword">return </span><span class="default">false</span><span class="keyword">;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; }
+<br>&nbsp; &nbsp; } else { </span><span class="comment">// They didn't send an array
+<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="keyword">return </span><span class="default">false</span><span class="keyword">;
+<br>&nbsp; &nbsp; }
+<br>}
+<br>
+<br></span><span class="default">?&gt;
+<br></span>
+<br>I hope you find this useful! I welcome constructive criticism or comments or of course praise ;) -- just e-mail me.
+<br>
+<br>- Jamon Holmgren</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="56535">  
+  <a class="name">
+  <strong class="user"><em>andreasblixt (at) msn (dot) com</em></strong></a><div class="date" title="2005-09-06 09:53"><strong>16 years ago</strong></div>
+  <div class="text" id="Hcom56535">
+<div class="phpcode"><code><span class="html">
+<span class="default">&lt;?php<br>&nbsp; &nbsp; </span><span class="comment">// Combines two arrays by inserting one into the other at a given position then returns the result<br>&nbsp; &nbsp; </span><span class="keyword">function </span><span class="default">array_insert</span><span class="keyword">(</span><span class="default">$src</span><span class="keyword">, </span><span class="default">$dest</span><span class="keyword">, </span><span class="default">$pos</span><span class="keyword">) {<br>&nbsp; &nbsp; &nbsp; &nbsp; if (!</span><span class="default">is_array</span><span class="keyword">(</span><span class="default">$src</span><span class="keyword">) || !</span><span class="default">is_array</span><span class="keyword">(</span><span class="default">$dest</span><span class="keyword">) || </span><span class="default">$pos </span><span class="keyword">&lt;= </span><span class="default">0</span><span class="keyword">) return </span><span class="default">FALSE</span><span class="keyword">;<br>&nbsp; &nbsp; &nbsp; &nbsp; return </span><span class="default">array_merge</span><span class="keyword">(</span><span class="default">array_slice</span><span class="keyword">(</span><span class="default">$dest</span><span class="keyword">, </span><span class="default">0</span><span class="keyword">, </span><span class="default">$pos</span><span class="keyword">), </span><span class="default">$src</span><span class="keyword">, </span><span class="default">array_slice</span><span class="keyword">(</span><span class="default">$dest</span><span class="keyword">, </span><span class="default">$pos</span><span class="keyword">));<br>&nbsp; &nbsp; }<br></span><span class="default">?&gt;</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="48006">  
+  <a class="name">
+  <strong class="user"><em>bishop</em></strong></a><div class="date" title="2004-12-08 01:58"><strong>16 years ago</strong></div>
+  <div class="text" id="Hcom48006">
+<div class="phpcode"><code><span class="html">
+Sometimes you need to pick certain non-integer and/or non-sequential keys out of an array. Consider using the array_pick() implementation below to pull specific keys, in a specific order, out of a source array:<br><br><span class="default">&lt;?php<br><br>$a </span><span class="keyword">= array (</span><span class="string">'a' </span><span class="keyword">=&gt; </span><span class="default">1</span><span class="keyword">, </span><span class="string">'b' </span><span class="keyword">=&gt; </span><span class="default">2</span><span class="keyword">, </span><span class="string">'c' </span><span class="keyword">=&gt; </span><span class="default">3</span><span class="keyword">, </span><span class="string">'d' </span><span class="keyword">=&gt; </span><span class="default">4</span><span class="keyword">);<br></span><span class="default">$b </span><span class="keyword">= </span><span class="default">array_pick</span><span class="keyword">(</span><span class="default">$a</span><span class="keyword">, array (</span><span class="string">'d'</span><span class="keyword">, </span><span class="string">'b'</span><span class="keyword">));<br><br></span><span class="comment">// now:<br>// $a = array ('a' =&gt; 1, 'c' =&gt; '3');<br>// $b = array ('d' =&gt; 4, 'b' =&gt; '2');<br><br></span><span class="keyword">function &amp;</span><span class="default">array_pick</span><span class="keyword">(&amp;</span><span class="default">$array</span><span class="keyword">, </span><span class="default">$keys</span><span class="keyword">)<br>{<br>&nbsp; &nbsp; if (! </span><span class="default">is_array</span><span class="keyword">(</span><span class="default">$array</span><span class="keyword">)) {<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">trigger_error</span><span class="keyword">(</span><span class="string">'First parameter must be an array'</span><span class="keyword">, </span><span class="default">E_USER_ERROR</span><span class="keyword">);<br>&nbsp; &nbsp; &nbsp; &nbsp; return </span><span class="default">false</span><span class="keyword">;<br>&nbsp; &nbsp; }<br><br>&nbsp; &nbsp; if (! (</span><span class="default">is_array</span><span class="keyword">(</span><span class="default">$keys</span><span class="keyword">) || </span><span class="default">is_scalar</span><span class="keyword">(</span><span class="default">$keys</span><span class="keyword">))) {<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">trigger_error</span><span class="keyword">(</span><span class="string">'Second parameter must be an array of keys or a scalar key'</span><span class="keyword">, </span><span class="default">E_USER_ERROR</span><span class="keyword">);<br>&nbsp; &nbsp; &nbsp; &nbsp; return </span><span class="default">false</span><span class="keyword">;<br>&nbsp; &nbsp; }<br><br>&nbsp; &nbsp; if (</span><span class="default">is_array</span><span class="keyword">(</span><span class="default">$keys</span><span class="keyword">)) {<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="comment">// nothing to do<br>&nbsp; &nbsp; </span><span class="keyword">} else if (</span><span class="default">is_scalar</span><span class="keyword">(</span><span class="default">$keys</span><span class="keyword">)) {<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$keys </span><span class="keyword">= array (</span><span class="default">$keys</span><span class="keyword">);<br>&nbsp; &nbsp; }<br><br>&nbsp; &nbsp; </span><span class="default">$resultArray </span><span class="keyword">= array ();<br>&nbsp; &nbsp; foreach (</span><span class="default">$keys </span><span class="keyword">as </span><span class="default">$key</span><span class="keyword">) {<br>&nbsp; &nbsp; &nbsp; &nbsp; if (</span><span class="default">is_scalar</span><span class="keyword">(</span><span class="default">$key</span><span class="keyword">)) {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (</span><span class="default">array_key_exists</span><span class="keyword">(</span><span class="default">$key</span><span class="keyword">, </span><span class="default">$array</span><span class="keyword">)) {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$resultArray</span><span class="keyword">[</span><span class="default">$key</span><span class="keyword">] = </span><span class="default">$array</span><span class="keyword">[</span><span class="default">$key</span><span class="keyword">];<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; unset(</span><span class="default">$array</span><span class="keyword">[</span><span class="default">$key</span><span class="keyword">]);<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; &nbsp; &nbsp; } else {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">trigger_error</span><span class="keyword">(</span><span class="string">'Supplied key is not scalar'</span><span class="keyword">, </span><span class="default">E_USER_ERROR</span><span class="keyword">);<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return </span><span class="default">false</span><span class="keyword">;<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; }<br><br>&nbsp; &nbsp; return </span><span class="default">$resultArray</span><span class="keyword">;<br>}<br><br></span><span class="default">?&gt;</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="102383">  
+  <a class="name">
+  <strong class="user"><em>delew</em></strong></a><div class="date" title="2011-02-11 01:17"><strong>10 years ago</strong></div>
+  <div class="text" id="Hcom102383">
+<div class="phpcode"><code><span class="html">
+just a little tip.<br>to preserve keys without providing length: use NULL<br><br>array_slice($array, $my_offset, NULL, true);</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="87002">  
+  <a class="name">
+  <strong class="user"><em>Mr. P</em></strong></a><div class="date" title="2008-11-14 02:11"><strong>12 years ago</strong></div>
+  <div class="text" id="Hcom87002">
+<div class="phpcode"><code><span class="html">
+Note that offset is not the same thing as key. Offset always starts at 0, while keys might be any number.
+<br>
+<br>So this:
+<br>
+<br><span class="default">&lt;?php print_r</span><span class="keyword">(</span><span class="default">array_slice</span><span class="keyword">(array(</span><span class="default">0 </span><span class="keyword">=&gt; </span><span class="default">0</span><span class="keyword">, </span><span class="default">5 </span><span class="keyword">=&gt; </span><span class="default">5</span><span class="keyword">, </span><span class="default">13 </span><span class="keyword">=&gt; </span><span class="default">13</span><span class="keyword">),</span><span class="default">1</span><span class="keyword">)); </span><span class="default">?&gt;
+<br></span>
+<br>will result in this:
+<br>Array
+<br>(
+<br>&nbsp; &nbsp; [0] =&gt; 5
+<br>&nbsp; &nbsp; [1] =&gt; 13
+<br>)</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="119508">  
+  <a class="name">
+  <strong class="user"><em>SomeGuy</em></strong></a><div class="date" title="2016-06-24 09:17"><strong>5 years ago</strong></div>
+  <div class="text" id="Hcom119508">
+<div class="phpcode"><code><span class="html">
+Thank to taylorbarstow here the function with the unset feature.<br><span class="default">&lt;?php<br></span><span class="keyword">function </span><span class="default">array_slice_assoc</span><span class="keyword">(&amp;</span><span class="default">$array</span><span class="keyword">,</span><span class="default">$keys</span><span class="keyword">,</span><span class="default">$unset </span><span class="keyword">= </span><span class="default">true</span><span class="keyword">) {<br>&nbsp; &nbsp; </span><span class="default">$return </span><span class="keyword">= </span><span class="default">array_intersect_key</span><span class="keyword">(</span><span class="default">$array</span><span class="keyword">, </span><span class="default">array_flip</span><span class="keyword">(</span><span class="default">$keys</span><span class="keyword">));<br>&nbsp; &nbsp; if (</span><span class="default">$unset</span><span class="keyword">) {<br>&nbsp; &nbsp; &nbsp; &nbsp; foreach (</span><span class="default">$keys </span><span class="keyword">as </span><span class="default">$value</span><span class="keyword">) {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; unset(</span><span class="default">$array</span><span class="keyword">[</span><span class="default">$value</span><span class="keyword">]);<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; }<br>&nbsp; &nbsp; return </span><span class="default">$return</span><span class="keyword">;<br>}<br></span><span class="default">?&gt;</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="65711">  
+  <a class="name"><strong class="user"><em>Anonymous</em></strong></a><div class="date" title="2006-05-06 12:21"><strong>15 years ago</strong></div>
+  <div class="text" id="Hcom65711">
+<div class="phpcode"><code><span class="html">
+If you specify the fourth argument (to not reassign the keys), then there appears to be no way to get the function to return all values to the end of the array. Assigning -0 or NULL or just putting two commas in a row won't return any results.</span>
+</code></div>
+  </div>
+ </div></div>
+
+ 
+</section>    </section><!-- layout-content -->
+        
+
+
+  </div><!-- layout -->
+
+  
+
+    
+ <!-- External and third party libraries. -->
+ 
+
+
+
+
+
+
+
+<a id="toTop" href="javascript:;"><span id="toTopHover"></span><img width="40" height="40" alt="To Top" src="../../images/to-top%402x.png"></a>
+
+
+
+<!-- Mirrored from www.php.net/manual/en/function.array-slice.php by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 11 Sep 2021 09:41:04 GMT -->
+
+</body></html>

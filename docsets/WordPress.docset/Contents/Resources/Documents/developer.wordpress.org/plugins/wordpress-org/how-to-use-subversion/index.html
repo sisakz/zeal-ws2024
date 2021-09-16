@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+
+<!-- Mirrored from developer.wordpress.org/plugins/wordpress-org/how-to-use-subversion/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 31 Aug 2021 16:22:55 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<!--
+<meta property="fb:page_id" content="6427302910" />
+-->
+<meta name="google-site-verification" content="7VWES_-rcHBcmaQis9mSYamPfNwE03f4vyTj4pfuAw0" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Using Subversion</title>
+<meta name="referrer" content="always">
+
+		<link href='../../../../fonts.googleapis.com/css.css?family=Open+Sans:300italic,400italic,600italic,400,300,600&amp;subset=latin,cyrillic-ext,greek-ext,greek,vietnamese,latin-ext,cyrillic' rel='stylesheet' type='text/css'>
+
+		<link rel="stylesheet" href="../../../../s.w.org/style/wp4.css?95" />
+
+<link rel="shortcut icon" href="../../../../s.w.org/favicon.ico?2" type="image/x-icon" />
+<link rel="pingback" href="../../../xmlrpc.php" /><meta name='robots' content='max-image-preview:large' />
+<link rel='dns-prefetch' href='../../../../fonts.googleapis.com/index.html' />
+<link rel='dns-prefetch' href='http://s.w.org/' />
+<link rel='dns-prefetch' href='http://www.googletagmanager.com/' />
+<link rel='dns-prefetch' href='http://fonts.gstatic.com/' />
+<link rel="alternate" type="application/rss+xml" title="WordPress Developer Resources &raquo; Feed" href="../../../feed/index.html" />
+<link rel="alternate" type="application/rss+xml" title="WordPress Developer Resources &raquo; Comments Feed" href="../../../comments/feed/index.html" />
+<meta property="og:title" content="Using Subversion | Plugin Developer Handbook | WordPress Developer Resources" />
+<meta property="og:site_name" content="WordPress Developer Resources" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="../../../index.html" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@WordPress" />
+<meta name="description" content="SVN, or Subversion, is a version control system similar to Git. It can be used via command line, or one of numerous GUI applications, such&hellip;" />
+<meta property="og:description" content="SVN, or Subversion, is a version control system similar to Git. It can be used via command line, or one of numerous GUI applications, such&hellip;" />
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'../../../../www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P24PF4B');</script>
+			<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/developer.wordpress.org\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.9-alpha-51701"}};
+			!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([10084,65039,8205,55357,56613],[10084,65039,8203,55357,56613])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel='stylesheet' id='dashicons-css'  href='../../../wp-includes/css/dashicons.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='admin-bar-css'  href='../../../wp-includes/css/admin-bar.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-block-library-css'  href='../../../wp-includes/css/dist/block-library/style.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='wporg-handbook-css-css'  href='../../../wp-content/plugins/handbook/stylesheets/callout-boxes.css?ver=20200121' type='text/css' media='all' />
+<link rel='stylesheet' id='open-sans-css'  href='../../../../fonts.googleapis.com/css-2.css?family=Open+Sans%3A300italic%2C400italic%2C600italic%2C300%2C400%2C600&amp;subset=latin%2Clatin-ext&amp;display=fallback&amp;ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='wporg-developer-style-css'  href='../../../wp-content/themes/pub/wporg-developer/style.css?ver=3' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-dev-sass-compiled-css'  href='../../../wp-content/themes/pub/wporg-developer/stylesheets/main.css?ver=20200713' type='text/css' media='all' />
+<link rel='stylesheet' id='awesomplete-css-css'  href='../../../wp-content/themes/pub/wporg-developer/stylesheets/awesomplete.css?ver=20160114' type='text/css' media='all' />
+<link rel='stylesheet' id='autocomplete-css-css'  href='../../../wp-content/themes/pub/wporg-developer/stylesheets/autocomplete.css?ver=20171220' type='text/css' media='all' />
+<link rel='stylesheet' id='syntaxhighlighter-core-css'  href='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shCore.css?ver=3.0.9b' type='text/css' media='all' />
+<link rel='stylesheet' id='syntaxhighlighter-theme-default-css'  href='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shThemeDefault.css?ver=3.0.9b' type='text/css' media='all' />
+<script type='text/javascript' src='../../../wp-includes/js/jquery/jquery.min.js?ver=3.6.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='../../../wp-content/plugins/handbook/scripts/handbook.js?ver=20150930' id='wporg-handbook-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/chapters.js?ver=20190603' id='wporg-developer-chapters-js'></script>
+<script type='text/javascript' src='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shCore.js?ver=3.0.9b' id='syntaxhighlighter-core-js'></script>
+<script type='text/javascript' src='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushPhp.js?ver=3.0.9b' id='syntaxhighlighter-brush-php-js'></script>
+<link rel="https://api.w.org/" href="https://developer.wordpress.org/wp-json/" /><link rel="alternate" type="application/json" href="https://developer.wordpress.org/wp-json/wp/v2/plugin-handbook/15268" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="../../../xmlrpc-2.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="../../../wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 5.9-alpha-51701" />
+<link rel='shortlink' href='https://developer.wordpress.org/?p=15268' />
+<link rel="alternate" type="application/json+oembed" href="https://developer.wordpress.org/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fdeveloper.wordpress.org%2Fplugins%2Fwordpress-org%2Fhow-to-use-subversion%2F" />
+<link rel="alternate" type="text/xml+oembed" href="https://developer.wordpress.org/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fdeveloper.wordpress.org%2Fplugins%2Fwordpress-org%2Fhow-to-use-subversion%2F&amp;format=xml" />
+<link rel="canonical" href="index.html">
+<!-- Stream WordPress user activity plugin v3.6.2 -->
+	<style>
+		@media screen and (max-width: 782px) {
+			#wpadminbar li#wp-admin-bar-log-in,
+			#wpadminbar li#wp-admin-bar-register {
+				display: block;
+			}
+
+			#wpadminbar li#wp-admin-bar-log-in a,
+			#wpadminbar li#wp-admin-bar-register a {
+				padding: 0 8px;
+			}
+		}
+	</style>
+		<style>
+			a.github-edit {
+				margin-left: .5em;
+				font-size: .5em;
+				vertical-align: top;
+				display: inline-block;
+				border: 1px solid #eeeeee;
+				border-radius: 2px;
+				background: #eeeeee;
+				padding: .5em .6em .4em;
+				color: black;
+				margin-top: 0.1em;
+			}
+			a.github-edit > * {
+				opacity: 0.6;
+			}
+			a.github-edit:hover > * {
+				opacity: 1;
+				color: black;
+			}
+			a.github-edit img {
+				height: .8em;
+			}
+		</style>
+		
+	<script type="text/javascript">
+		jQuery( '<style>.hide-if-js { display: none; }</style>' ).appendTo( 'head' );
+		jQuery( function($) {
+			$( 'body' ).addClass('js');
+		} );
+	</script>
+<style type="text/css" media="print">#wpadminbar { display:none; }</style>
+	<style type="text/css" media="screen">
+	</style>
+	<script>document.cookie='devicePixelRatio='+((window.devicePixelRatio === undefined) ? 1 : window.devicePixelRatio)+'; path=/';</script>
+
+</head>
+
+
+<body id="wordpress-org" class="plugin-handbook-template-default single single-plugin-handbook postid-15268 admin-bar no-customize-support single-handbook">
+		<div id="wpadminbar" class="nojq nojs">
+						<div class="quicklinks" id="wp-toolbar" role="navigation" aria-label="Toolbar">
+				<ul id='wp-admin-bar-root-default' class="ab-top-menu"><li id='wp-admin-bar-wp-logo' class="menupop"><a class='ab-item' aria-haspopup="true" href='https://wordpress.org/about/'><span class="ab-icon" aria-hidden="true"></span><span class="screen-reader-text">About WordPress</span></a><div class="ab-sub-wrapper"><ul id='wp-admin-bar-wp-logo-default' class="ab-submenu"><li id='wp-admin-bar-about'><a class='ab-item' href='https://wordpress.org/about/'>About WordPress</a></li></ul><ul id='wp-admin-bar-wp-logo-external' class="ab-sub-secondary ab-submenu"><li id='wp-admin-bar-wporg'><a class='ab-item' href='https://wordpress.org/'>WordPress.org</a></li><li id='wp-admin-bar-documentation'><a class='ab-item' href='https://wordpress.org/support/'>Documentation</a></li><li id='wp-admin-bar-support-forums'><a class='ab-item' href='https://wordpress.org/support/forums/'>Support</a></li><li id='wp-admin-bar-feedback'><a class='ab-item' href='https://wordpress.org/support/forum/requests-and-feedback'>Feedback</a></li></ul></div></li></ul><ul id='wp-admin-bar-top-secondary' class="ab-top-secondary ab-top-menu"><li id='wp-admin-bar-search' class="admin-bar-search"><div class="ab-item ab-empty-item" tabindex="-1"><form action="https://developer.wordpress.org/" method="get" id="adminbarsearch"><input class="adminbar-input" name="s" id="adminbar-search" type="text" value="" maxlength="150" /><label for="adminbar-search" class="screen-reader-text">Search</label><input type="submit" class="adminbar-button" value="Search" /></form></div></li><li id='wp-admin-bar-log-in'><a class='ab-item' href='https://login.wordpress.org/?locale=en_US'>Log In</a></li><li id='wp-admin-bar-register'><a class='ab-item' href='https://login.wordpress.org/register?locale=en_US'>Register</a></li></ul>			</div>
+					</div>
+
+		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P24PF4B" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<div id="wporg-header">
+	<div class="wrapper">
+	<h1><a href="http://wordpress.org/">WordPress.org</a></h1>				<div id="head-search">
+		<form action="http://wordpress.org/search/do-search.php" method="get">
+			<label for="global-search" class="screen-reader-text">Search WordPress.org for:</label>
+			<input id="global-search" class="text" name="search" type="text" value="" maxlength="150" placeholder="Search WordPress.org" />
+			<button type="submit" class="button"><span class="screen-reader-text">Submit</span></button>
+		</form>
+		</div>
+				<div style="clear:both"></div>
+		<button id="mobile-menu-button" aria-expanded="false"><span class="screen-reader-text">Toggle Menu</span></button>
+		
+<nav aria-label="Main Menu">
+<ul id="wporg-header-menu">
+<li class="menu-item"><a href='http://wordpress.org/showcase/' data-title='See some of the sites built on WordPress.'>Showcase</a></li>
+<li class="menu-item"><a href='http://learn.wordpress.org/' data-title='Resources to help you learn more about WordPress and teach it to others.'>Learn</a></li>
+<li class="menu-item"><a href='http://wordpress.org/themes/' data-title='Find just the right look for your website.'>Themes</a></li>
+<li class="menu-item"><a href='http://wordpress.org/plugins/' data-title='Plugins can extend WordPress to do almost anything you can imagine.'>Plugins</a></li>
+<li class="menu-item"><a href='http://wordpress.org/mobile/' data-title='Take your website on the go!'>Mobile</a></li>
+<li class="menu-item"><a href='http://wordpress.org/support/' data-title='Forums, documentation, help.'>Support</a><ul class="nav-submenu"><li><a href='http://wordpress.org/support/' title='Documentation, tutorials, best practices.'>Documentation</a></li><li><a href='http://wordpress.org/support/forums/' title='Support and discussion forums.'>Forums</a></li></ul><div class="uparrow"></div></li>
+<li class="menu-item"><a href='http://make.wordpress.org/' data-title='Contribute your knowledge.'>Get Involved</a><ul class="nav-submenu"><li><a href='http://wordpress.org/five-for-the-future/' title='How five percent is powering the next generation of the web'>Five for the Future</a></li></ul><div class="uparrow"></div></li>
+<li class="menu-item"><a href='http://wordpress.org/about/' data-title='About the WordPress Organization, and where we&#039;re going.'>About</a></li>
+<li class="menu-item"><a href='http://wordpress.org/news/' data-title='Come here for the latest scoop.'>Blog</a></li>
+<li class="menu-item"><a href='http://wordpress.org/hosting/' data-title='Find a home for your blog.'>Hosting</a></li>
+<li id="download" class="button download-button menu-item"><a href='http://wordpress.org/download/' data-title='Get it. Got it? Good.'>Get WordPress</a></li>
+</ul>
+</nav>
+		<div style="clear:both"></div>
+	</div>
+</div>
+
+
+
+<header id="masthead" class="site-header" role="banner">
+			<a href="#" id="secondary-toggle" onclick="return false;"><strong>Menu</strong></a>
+		<div class="site-branding">
+		<h1 class="site-title">
+			<a href="../../index.html" rel="home">Plugin Handbook</a>
+		</h1>
+
+		
+		<nav id="site-navigation" class="main-navigation" role="navigation">
+			<button class="menu-toggle dashicons dashicons-arrow-down-alt2" aria-controls="primary-menu" aria-expanded="false" aria-label="Primary Menu"></button>
+					</nav>
+	</div>
+</header><!-- #masthead -->
+
+<div id="page" class="hfeed site devhub-wrap">
+	<a href="#main" class="screen-reader-text">Skip to content</a>
+
+			<div id="content" class="site-content">
+
+
+	<div id="secondary" class="widget-area" role="complementary">
+		<a href="#" id="secondary-toggle"></a>
+		<div id="secondary-content">
+						<aside id="search-4" class="widget widget_search"><div class="search-section section clear hide-if-js">
+
+
+	
+	<form role="search" method="get" class="searchform searchform-handbook" action="https://developer.wordpress.org/plugins/">
+		<label for="search-field" class="screen-reader-text">Search for:</label>
+		<input type="text" id="search-field" class="search-field" placeholder="Search &hellip;" value="" name="s">
+		<button class="button button-primary button-search"><i class="dashicons dashicons-search"></i><span class="screen-reader-text">Search plugins</span></button>
+	
+	</form>
+
+</div><!-- /search-guide -->
+</aside><aside id="nav_menu-3" class="widget widget_nav_menu"><h2 class="widget-title">Chapters</h2><div class="menu-plugin-table-of-contents-container"><ul id="menu-plugin-table-of-contents" class="menu"><li id="menu-item-5791" class="menu-item menu-item-type-post_type menu-item-object-plugin-handbook menu-item-has-children menu-item-5791"><a href="../../intro/index.html">Introduction to Plugin Development</a>
+<ul class="sub-menu">
+	<li id="menu-item-5792" class="menu-item menu-item-type-post_type menu-item-object-plugin-handbook menu-item-5792"><a href="../../intro/what-is-a-plugin/index.html">What is a Plugin?</a></li>
+</ul>
+</li>
+<li id="menu-item-10905" class="menu-item menu-item-type-post_type menu-item-object-plugin-handbook menu-item-has-children menu-item-10905"><a href="../../plugin-basics/index.html">Plugin Basics</a>
+<ul class="sub-menu">
+	<li id="menu-item-10916" class="menu-item menu-item-type-post_type menu-item-object-plugin-handbook menu-item-10916"><a href="../../plugin-basics/header-requirements/index.html">Header Requirements</a></li>
+	<li id="menu-item-10915" class="menu-item menu-item-type-post_type menu-item-object-plugin-handbook menu-item-10915"><a href="../../plugin-basics/including-a-software-license/index.html">Including a Software License</a></li>
+	<li id="menu-item-10927" class="menu-item menu-item-type-post_type menu-item-object-plugin-handbook menu-item-10927"><a href="../../plugin-basics/activation-deactivation-hooks/index.html">Activation / Deactivation Hooks</a></li>
+	<li id="menu-item-10926" class="menu-item menu-item-type-post_type menu-item-object-plugin-handbook menu-item-10926"><a href="../../plugin-basics/uninstall-methods/index.html">Uninstall Methods</a></li>
+	<li id="menu-item-10925" class="menu-item menu-item-type-post_type menu-item-object-plugin-handbook menu-item-10925"><a href="../../plugin-basics/best-practices/index.html">Best Practices</a></li>
+	<li id="menu-item-41303" class="menu-item menu-item-type-post_type menu-item-object-plugin-handbook menu-item-41303"><a href="../../plugin-basics/determining-plugin-and-content-directories/index.html">Determining Plugin and Content Directories</a></li>
+</ul>
+</li>
+<li id="menu-item-10935" class="menu-item menu-item-type-post_type menu-item-object-plugin-handbook menu-item-has-children menu-item-10935"><a href="../../security/index.html">Plugin Security</a>
+<ul class="sub-menu">
+	<li id="menu-item-11232" class="menu-item menu-item-type-post_type menu-item-object-plugin-handbook menu-item-11232"><a href="../../security/checking-user-capabilities/index.html">Checking User Capabilities</a></li>
+	<li id="menu-item-11231" class="menu-item menu-item-type-post_type menu-item-object-plugin-handbook menu-item-11231"><a href="../../security/data-validation/index.html">Data Validation</a></li>
+	<li id="menu-item-11230" class="menu-item menu-item-type-post_type menu-item-object-plugin-handbook menu-item-11230"><a href="../../security/securing-input/index.html">Securing (sanitizing) Input</a></li>
+	<li id="menu-item-11572" class="menu-item menu-item-type-post_type menu-item-object-plugin-handbook menu-item-11572"><a href="../../security/securing-output/index.html">Securing (escaping) Output</a></li>
+	<li id="menu-item-11229" class="menu-item menu-item-type-post_type menu-item-object-plugin-handbook menu-item-11229"><a href="../../security/nonces/index.html">Nonces</a></li>
+</ul>
+</li>
+<li id="menu-item-10939" class="menu-item menu-item-type-post_type menu-item-object-plugin-handbook menu-item-has-children menu-item-10939"><a href="../../hooks/index.html">Hooks</a>
+<ul class="sub-menu">
+	<li id="menu-item-10951" class="menu-item menu-item-type-post_type menu-item-object-plugin-handbook menu-item-10951"><a href="../../hooks/actions/index.html">Actions</a></li>
+	<li id="menu-item-10950" class="menu-item menu-item-type-post_type menu-item-object-plugin-handbook menu-item-10950"><a href="../../hooks/filters/index.html">Filters</a></li>
+	<li id="menu-item-10949" class="menu-item menu-item-type-post_type menu-item-object-plugin-handbook menu-item-10949"><a href="../../hooks/custom-hooks/index.html">Custom Hooks</a></li>
+	<li id="menu-item-10948" class="menu-item menu-item-type-post_type menu-item-object-plugin-handbook menu-item-10948"><a href="../../hooks/advanced-topics/index.html">Advanced Topics</a></li>
+</ul>
+</li>
+<li id="menu-item-37669" class="menu-item menu-item-type-post_type menu-item-object-plugin-handbook menu-item-has-children menu-item-37669"><a href="../../privacy/index.html">Privacy</a>
+<ul class="sub-menu">
+	<li id="menu-item-37670" class="menu-item menu-item-type-post_type menu-item-object-plugin-handbook menu-item-37670"><a href="../../privacy/suggesting-text-for-the-site-privacy-policy/index.html">Policy Content</a></li>
+	<li id="menu-item-37671" class="menu-item menu-item-type-post_type menu-item-object-plugin-handbook menu-item-37671"><a href="../../privacy/adding-the-personal-data-exporter-to-your-plugin/index.html">Personal Data Export</a></li>
+	<li id="menu-item-37672" class="menu-item menu-item-type-post_type menu-item-object-plugin-handbook menu-item-37672"><a href="../../privacy/adding-the-personal-data-eraser-to-your-plugin/index.html">Personal Data Erasure</a></li>
+	<li id="menu-item-37673" class="menu-item menu-item-type-post_type menu-item-object-plugin-handbook menu-item-37673"><a href="../../privacy/privacy-related-options-hooks-and-capabilities/index.html">Advanced Topics</a></li>
+</ul>
+</li>
+<li id="menu-item-10963" class="menu-item menu-item-type-post_type menu-item-object-plugin-handbook menu-item-has-children menu-item-10963"><a href="../../administration-menus/index.html">Administration Menus</a>
+<ul class="sub-menu">
+	<li id="menu-item-10965" class="menu-item menu-item-type-post_type menu-item-object-plugin-handbook menu-item-10965"><a href="../../administration-menus/top-level-menus/index.html">Top-Level Menus</a></li>
+	<li id="menu-item-10964" class="menu-item menu-item-type-post_type menu-item-object-plugin-handbook menu-item-10964"><a href="../../administration-menus/sub-menus/index.html">Sub-Menus</a></li>
+</ul>
+</li>
+<li id="menu-item-10995" class="menu-item menu-item-type-post_type menu-item-object-plugin-handbook menu-item-has-children menu-item-10995"><a href="../../shortcodes/index.html">Shortcodes</a>
+<ul class="sub-menu">
+	<li id="menu-item-10999" class="menu-item menu-item-type-post_type menu-item-object-plugin-handbook menu-item-10999"><a href="../../shortcodes/basic-shortcodes/index.html">Basic Shortcodes</a></li>
+	<li id="menu-item-10998" class="menu-item menu-item-type-post_type menu-item-object-plugin-handbook menu-item-10998"><a href="../../shortcodes/enclosing-shortcodes/index.html">Enclosing Shortcodes</a></li>
+	<li id="menu-item-10997" class="menu-item menu-item-type-post_type menu-item-object-plugin-handbook menu-item-10997"><a href="../../shortcodes/shortcodes-with-parameters/index.html">Shortcodes with Parameters</a></li>
+	<li id="menu-item-10996" class="menu-item menu-item-type-post_type menu-item-object-plugin-handbook menu-item-10996"><a href="../../shortcodes/tinymce-enhanced-shortcodes/index.html">TinyMCE Enhanced Shortcodes</a></li>
+</ul>
+</li>
+<li id="menu-item-11038" class="menu-item menu-item-type-post_type menu-item-object-plugin-handbook menu-item-has-children menu-item-11038"><a href="../../settings/index.html">Settings</a>
+<ul class="sub-menu">
+	<li id="menu-item-11041" class="menu-item menu-item-type-post_type menu-item-object-plugin-handbook menu-item-11041"><a href="../../settings/settings-api/index.html">Settings API</a></li>
+	<li id="menu-item-11043" class="menu-item menu-item-type-post_type menu-item-object-plugin-handbook menu-item-11043"><a href="../../settings/using-settings-api/index.html">Using Settings API</a></li>
+	<li id="menu-item-11042" class="menu-item menu-item-type-post_type menu-item-object-plugin-handbook menu-item-11042"><a href="../../settings/options-api/index.html">Options API</a></li>
+	<li id="menu-item-11040" class="menu-item menu-item-type-post_type menu-item-object-plugin-handbook menu-item-11040"><a href="../../settings/custom-settings-page/index.html">Custom Settings Page</a></li>
+</ul>
+</li>
+<li id="menu-item-11054" class="menu-item menu-item-type-post_type menu-item-object-plugin-handbook menu-item-has-children menu-item-11054"><a href="../../metadata/index.html">Metadata</a>
+<ul class="sub-menu">
+	<li id="menu-item-11057" class="menu-item menu-item-type-post_type menu-item-object-plugin-handbook menu-item-11057"><a href="../../metadata/managing-post-metadata/index.html">Managing Post Metadata</a></li>
+	<li id="menu-item-11056" class="menu-item menu-item-type-post_type menu-item-object-plugin-handbook menu-item-11056"><a href="../../metadata/custom-meta-boxes/index.html">Custom Meta Boxes</a></li>
+	<li id="menu-item-11055" class="menu-item menu-item-type-post_type menu-item-object-plugin-handbook menu-item-11055"><a href="../../metadata/rendering-post-metadata/index.html">Rendering Post Metadata</a></li>
+</ul>
+</li>
+<li id="menu-item-11075" class="menu-item menu-item-type-post_type menu-item-object-plugin-handbook menu-item-has-children menu-item-11075"><a href="../../post-types/index.html">Custom Post Types</a>
+<ul class="sub-menu">
+	<li id="menu-item-11078" class="menu-item menu-item-type-post_type menu-item-object-plugin-handbook menu-item-11078"><a href="../../post-types/registering-custom-post-types/index.html">Registering Custom Post Types</a></li>
+	<li id="menu-item-11077" class="menu-item menu-item-type-post_type menu-item-object-plugin-handbook menu-item-11077"><a href="../../post-types/working-with-custom-post-types/index.html">Working with Custom Post Types</a></li>
+</ul>
+</li>
+<li id="menu-item-15127" class="menu-item menu-item-type-post_type menu-item-object-plugin-handbook menu-item-has-children menu-item-15127"><a href="../../taxonomies/index.html">Taxonomies</a>
+<ul class="sub-menu">
+	<li id="menu-item-11076" class="menu-item menu-item-type-post_type menu-item-object-plugin-handbook menu-item-11076"><a href="../../taxonomies/working-with-custom-taxonomies/index.html">Working with Custom Taxonomies</a></li>
+	<li id="menu-item-15128" class="menu-item menu-item-type-post_type menu-item-object-plugin-handbook menu-item-15128"><a href="../../taxonomies/split-terms-wp-4-2/index.html">Term Splitting (WP 4.2)</a></li>
+</ul>
+</li>
+<li id="menu-item-11095" class="menu-item menu-item-type-post_type menu-item-object-plugin-handbook menu-item-has-children menu-item-11095"><a href="../../users/index.html">Users</a>
+<ul class="sub-menu">
+	<li id="menu-item-11098" class="menu-item menu-item-type-post_type menu-item-object-plugin-handbook menu-item-11098"><a href="../../users/working-with-users/index.html">Working with Users</a></li>
+	<li id="menu-item-11097" class="menu-item menu-item-type-post_type menu-item-object-plugin-handbook menu-item-11097"><a href="../../users/working-with-user-metadata/index.html">Working with User Metadata</a></li>
+	<li id="menu-item-11096" class="menu-item menu-item-type-post_type menu-item-object-plugin-handbook menu-item-11096"><a href="../../users/roles-and-capabilities/index.html">Roles and Capabilities</a></li>
+</ul>
+</li>
+<li id="menu-item-11094" class="menu-item menu-item-type-post_type menu-item-object-plugin-handbook menu-item-11094"><a href="../../http-api/index.html">HTTP API</a></li>
+<li id="menu-item-11155" class="menu-item menu-item-type-post_type menu-item-object-plugin-handbook menu-item-has-children menu-item-11155"><a href="../../javascript/index.html">JavaScript, Ajax, &amp; jQuery</a>
+<ul class="sub-menu">
+	<li id="menu-item-11662" class="menu-item menu-item-type-post_type menu-item-object-plugin-handbook menu-item-11662"><a href="../../javascript/jquery/index.html">jQuery</a></li>
+	<li id="menu-item-11661" class="menu-item menu-item-type-post_type menu-item-object-plugin-handbook menu-item-11661"><a href="../../javascript/ajax/index.html">AJAX</a></li>
+	<li id="menu-item-11156" class="menu-item menu-item-type-post_type menu-item-object-plugin-handbook menu-item-11156"><a href="../../javascript/enqueuing/index.html">Server Side PHP and Enqueuing</a></li>
+	<li id="menu-item-25267" class="menu-item menu-item-type-post_type menu-item-object-plugin-handbook menu-item-25267"><a href="../../javascript/heartbeat-api/index.html">Heartbeat API</a></li>
+	<li id="menu-item-11663" class="menu-item menu-item-type-post_type menu-item-object-plugin-handbook menu-item-11663"><a href="../../javascript/summary/index.html">Summary</a></li>
+</ul>
+</li>
+<li id="menu-item-11168" class="menu-item menu-item-type-post_type menu-item-object-plugin-handbook menu-item-has-children menu-item-11168"><a href="../../cron/index.html">Cron</a>
+<ul class="sub-menu">
+	<li id="menu-item-11172" class="menu-item menu-item-type-post_type menu-item-object-plugin-handbook menu-item-11172"><a href="../../cron/understanding-wp-cron-scheduling/index.html">Understanding WP-Cron Scheduling</a></li>
+	<li id="menu-item-11171" class="menu-item menu-item-type-post_type menu-item-object-plugin-handbook menu-item-11171"><a href="../../cron/scheduling-wp-cron-events/index.html">Scheduling WP Cron Events</a></li>
+	<li id="menu-item-11170" class="menu-item menu-item-type-post_type menu-item-object-plugin-handbook menu-item-11170"><a href="../../cron/hooking-wp-cron-into-the-system-task-scheduler/index.html">Hooking WP-Cron Into the System Task Scheduler</a></li>
+	<li id="menu-item-11169" class="menu-item menu-item-type-post_type menu-item-object-plugin-handbook menu-item-11169"><a href="../../cron/simple-testing/index.html">Simple Testing of WP-Cron</a></li>
+</ul>
+</li>
+<li id="menu-item-11182" class="menu-item menu-item-type-post_type menu-item-object-plugin-handbook menu-item-has-children menu-item-11182"><a href="../../internationalization/index.html">Internationalization</a>
+<ul class="sub-menu">
+	<li id="menu-item-11183" class="menu-item menu-item-type-post_type menu-item-object-plugin-handbook menu-item-11183"><a href="../../internationalization/localization/index.html">Localization</a></li>
+	<li id="menu-item-11184" class="menu-item menu-item-type-post_type menu-item-object-plugin-handbook menu-item-11184"><a href="../../internationalization/how-to-internationalize-your-plugin/index.html">How to Internationalize Your Plugin</a></li>
+	<li id="menu-item-15321" class="menu-item menu-item-type-post_type menu-item-object-plugin-handbook menu-item-15321"><a href="../../internationalization/security/index.html">Internationalization Security</a></li>
+</ul>
+</li>
+<li id="menu-item-11194" class="menu-item menu-item-type-post_type menu-item-object-plugin-handbook current-plugin-handbook-ancestor current-menu-ancestor current-menu-parent current-plugin-handbook-parent menu-item-has-children menu-item-11194"><a href="../index.html">The Plugin Directory</a>
+<ul class="sub-menu">
+	<li id="menu-item-15320" class="menu-item menu-item-type-post_type menu-item-object-plugin-handbook menu-item-15320"><a href="../detailed-plugin-guidelines/index.html">Detailed Plugin Guidelines</a></li>
+	<li id="menu-item-11197" class="menu-item menu-item-type-post_type menu-item-object-plugin-handbook menu-item-11197"><a href="../planning-your-plugin/index.html">Planning Plugins</a></li>
+	<li id="menu-item-15317" class="menu-item menu-item-type-post_type menu-item-object-plugin-handbook current-menu-item menu-item-15317"><a href="index.html" aria-current="page">Using Subversion</a></li>
+	<li id="menu-item-37546" class="menu-item menu-item-type-post_type menu-item-object-plugin-handbook menu-item-37546"><a href="../alerts-and-warnings/index.html">Alerts and Warnings</a></li>
+	<li id="menu-item-15319" class="menu-item menu-item-type-post_type menu-item-object-plugin-handbook menu-item-15319"><a href="../plugin-developer-faq/index.html">Developer FAQ</a></li>
+</ul>
+</li>
+<li id="menu-item-11204" class="menu-item menu-item-type-post_type menu-item-object-plugin-handbook menu-item-has-children menu-item-11204"><a href="../../developer-tools/index.html">Developer Tools</a>
+<ul class="sub-menu">
+	<li id="menu-item-11206" class="menu-item menu-item-type-post_type menu-item-object-plugin-handbook menu-item-11206"><a href="../../developer-tools/debug-bar-and-add-ons/index.html">Debug Bar and Add-Ons</a></li>
+	<li id="menu-item-11205" class="menu-item menu-item-type-post_type menu-item-object-plugin-handbook menu-item-11205"><a href="../../developer-tools/helper-plugins/index.html">Helper Plugins</a></li>
+</ul>
+</li>
+<li id="menu-item-10906" class="menu-item menu-item-type-post_type menu-item-object-plugin-handbook menu-item-10906"><a href="../../credits/index.html">Credits</a></li>
+</ul></div></aside>		</div>
+	</div><!-- #secondary -->
+
+
+		<main id="primary" class="site-main post-15268 plugin-handbook type-plugin-handbook status-publish hentry type-handbook" role="main">
+
+		
+		<div class="breadcrumb-trail breadcrumbs" itemprop="breadcrumb">
+			<span class="trail-browse">Browse:</span> 
+			<span class="trail-begin"><a href="../../../index.html" title="WordPress Developer Resources" rel="home">Home</a></span> <span class="sep">&#47;</span> 
+			<span class="trail-inner"><a href="../../index.html">Plugin Handbook</a></span> <span class="sep">&#47;</span> 
+			<span class="trail-inner"><a href="../index.html" title="The WordPress.org Plugin Directory">The WordPress.org Plugin Directory</a></span> <span class="sep">&#47;</span> <span class="trail-end">Using Subversion</span>
+		</div>
+		
+			
+<h1>Using Subversion</h1>
+
+
+<style> .toc-jump { text-align: right; font-size: 12px; } .page .toc-heading { margin-top: -50px; padding-top: 50px !important; }</style><div class="table-of-contents"><h2>Topics</h2><ul class="items"><li><a href="#overview">Overview</a></li>
+<li><a href="#your-account">Your Account</a></li>
+<li><a href="#svn-folders">SVN Folders</a>
+<ul>
+<li><a href="#trunk">Trunk</a></li>
+<li><a href="#tags">Tags</a></li>
+<li><a href="#assets">Assets</a></li>
+<li><a href="#branches">Branches</a>
+</ul></li>
+<li><a href="#best-practices">Best Practices</a>
+<ul>
+<li><a href="#dont-use-svn-for-development">Don&#8217;t use SVN for development</a></li>
+<li><a href="#use-the-trunk-folder-for-code">Use the trunk folder for code</a></li>
+<li><a href="#always-tag-releases">Always Tag Releases</a></li>
+<li><a href="#create-tags-from-trunk">Create tags from trunk</a></li>
+<li><a href="#delete-old-versions">Delete old versions</a>
+</ul></li>
+<li><a href="#examples">Examples</a>
+<ul>
+<li><a href="#starting-a-new-plugin">Starting a New Plugin</a></li>
+<li><a href="#editing-existing-files">Editing Existing Files</a></li>
+<li><a href="#tagging-new-versions">&#8220;Tagging&#8221; New Versions</a>
+</ul></li>
+<li><a href="#notes">Notes</a>
+<ul>
+<li><a href="#see-also">See Also</a></ul>
+</div>
+
+<p>SVN, or Subversion, is a&nbsp;version control system similar to Git. It can be used via command line, or one of numerous GUI applications, such as <a href="https://tortoisesvn.net/">Tortoise SVN</a>, <a href="https://www.smartsvn.com/">SmartSVN</a>, and more. If you&#8217;re new to SVN, we recommend reviewing a <a href="https://en.wikipedia.org/wiki/Comparison_of_Subversion_clients">comparison of SVN clients</a> before deciding which is best for you.</p>
+
+
+
+<p>This document is <em>not</em> a complete and robust explanation for using SVN, but more a quick primer to get started with plugins on WordPress.org. For more comprehensive documentation, see <a href="http://svnbook.red-bean.com/">The SVN Book</a>.</p>
+
+
+
+<p>We&#8217;ll describe here some of the basics about using SVN as it relates to WordPress.org hosting. The basic concepts of SVN, and nearly all code repository services, remain the same. </p>
+
+
+
+<p>For additional information, please see these documents:</p>
+
+
+
+<ul><li><a href="../how-your-readme-txt-works/index.html">How the readme.txt works</a></li><li><a href="../plugin-assets/index.html">How plugin assets (header images and icons) work</a></li></ul>
+
+
+<div class='callout callout-warning'><span class="screen-reader-text">Warning:</span> SVN and the Plugin Directory are a <em>release</em> repository. Unlike Git, you shouldn&#8217;t commit every small change, as doing so can degrade performance. Please only push <strong>finished</strong> changes to your SVN repository.</div>
+
+
+
+<h2 class="toc-heading" id="overview" tabindex="-1">Overview <a href="#overview" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Overview</span></a></h2>
+
+
+
+<p>All your files will be centrally stored in the <strong>svn&nbsp;repository</strong> on our servers. From that repository, anyone can <strong>check out</strong> a copy of your plugin files onto their local machine, but, as a plugin author, only you have the authority to <strong>check in</strong>. That means you can make changes to the files, add new files, and delete files on your local machine and upload those changes back to the central server. It&#8217;s this process of checking in that updates both the files in the repository and also the information displayed in the WordPress.org Plugin Directory.</p>
+
+
+
+<p>Subversion keeps track of all these changes so that you can go back and look at old versions or <strong>revisions</strong> later if you ever need to. In addition to remembering each individual revision, you can tell subversion to <strong>tag</strong> certain revisions of the repository for easy reference. Tags are great for <a href="#task-3">labeling different releases of your plugin</a> and are the only fully supported method of ensuring the correct versions are seen on WordPress.org and updated for users.</p>
+
+
+
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="your-account" tabindex="-1">Your Account <a href="#your-account" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Your Account</span></a></h2>
+
+
+
+<p>Your account for SVN will be the same username (not the email) of the account you used when you submitted the plugin. This is the user ID you use for the WordPress forums as well.</p>
+
+
+
+<p>Remember, <em>capitalization matters</em> &#8212; if your username is JaneDoe, then you must use the capital J and D or else SVN will fail. You can see the specific capitalization of your name at <code>&nbsp;<a rel="noreferrer noopener" target="_blank" href="https://profiles.wordpress.org/me/profile/edit/group/1/">https://profiles.wordpress.org/me/profile/edit/group/1/</a></code></p>
+
+
+
+<p>If you need to reset your password, go to <a href="https://login.wordpress.org/">login.wordpress.org</a></p>
+
+
+
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="svn-folders" tabindex="-1">SVN Folders <a href="#svn-folders" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">SVN Folders</span></a></h2>
+
+
+
+<p>There are three directories created by default in all SVN repositories.</p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><pre class="brush: php; gutter: false; title: ; notranslate" title="">
+/assets/
+/tags/
+/trunk/
+</pre></div>
+
+
+<p><em>The /branches/ directory is no longer created by default, as it was unused.</em></p>
+
+
+
+<ul><li>Use <code>assets</code>&nbsp;for <a href="../plugin-assets/index.html">screenshots, plugin headers, and plugin icons</a>.</li><li>Development work belongs in <code>trunk</code>.</li><li>Releases go in <code>tags</code>.</li><li>Divergent branches of code go into <code>branches</code>.</li></ul>
+
+
+
+<h3 class="toc-heading" id="trunk" tabindex="-1">Trunk <a href="#trunk" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Trunk</span></a></h3>
+
+
+<div class='callout callout-warning'><p><span class="screen-reader-text">Warning:</span> Do not put your <em>main</em> plugin file in a subfolder of trunk, like <code>/trunk/my-plugin/my-plugin.php</code>&nbsp;as that will break downloads. You may&nbsp;use subfolders for included files.</p>
+</div>
+
+
+
+<p>The <code>/trunk</code> directory is where your plugin code should live. The trunk can be considered to be the latest and greatest code, however this is not necessarily the latest <em>stable</em> code. Trunk is for&nbsp;the development version. Hopefully, the code in trunk should always be working code, but it may be buggy from time to time because it&#8217;s not necessarily the &#8220;stable&#8221; version. For simple plugins, the trunk may be the only version of the code that exists, and that&#8217;s fine as well.</p>
+
+
+
+<p>Even if you do your development work elsewhere (like a git repository), we recommend you keep the trunk folder up to date with your code for easy SVN compares.</p>
+
+
+
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="tags" tabindex="-1">Tags <a href="#tags" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Tags</span></a></h3>
+
+
+
+<p>The <code>/tags</code> directory is where you put versions of the plugin. You will use the same version numbers for the sub-directories here as you do for your plugin versioning. It is important that you always use tag folders and proper versioning to ensure your users get the correct code.</p>
+
+
+
+<p>Version 1.0 of the plugin will be in <code>/tags/1.0</code>, version 1.1 would be in <code>/tags/1.1</code>, and so forth. </p>
+
+
+
+<p>We <strong>strongly</strong> encourage the use of <a href="https://en.wikipedia.org/wiki/Software_versioning">semantic software versioning</a>.</p>
+
+
+
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="assets" tabindex="-1">Assets <a href="#assets" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Assets</span></a></h3>
+
+
+<div class='callout callout-info'><p><span class="screen-reader-text">Note:</span> See also: <a href="../plugin-assets/index.html">How Your Plugin Assets Work</a></p>
+</div>
+
+
+
+<p>Assets is where your screenshots, header images, and plugin icons reside. Some older plugins in the directory may have screenshot files in /trunk instead, however this is not recommended. All new plugins should put their screenshots in /assets. This keeps the filesizes of plugins small, as it is not necessary to send screenshots to WordPress installations along with the plugin itself.</p>
+
+
+
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="branches" tabindex="-1">Branches <a href="#branches" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Branches</span></a></h3>
+
+
+
+<p><em>The /branches/ directory is no longer created by default, as it was largely unused. This section can be considered deprecated and is available only for informational purposes.</em></p>
+
+
+
+<p>The <code>/branches</code> directory is a place that you can use to store branches of the plugin. Perhaps versions that are in development, or test code, etc. </p>
+
+
+
+<p>The WordPress.org system <strong>does not</strong> use the branches directory for anything at all, it&#8217;s considered to be strictly for developers to use as they need it. As it is no longer created by default, you can ignore it as you do not need it any longer.</p>
+
+
+
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="best-practices" tabindex="-1">Best Practices <a href="#best-practices" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Best Practices</span></a></h2>
+
+
+
+<p>In order to make your code the most accessible for other developers, the following practices are considered to be optimum.</p>
+
+
+
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="dont-use-svn-for-development" tabindex="-1">Don&#8217;t use SVN for development <a href="#dont-use-svn-for-development" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Don&#8217;t use SVN for development</span></a></h3>
+
+
+
+<p>This is often confusing. Unlike GitHub, SVN is meant to be a <em>release</em> system, not a development system. You don&#8217;t need to commit and push every small change, and in fact doing so is detrimental to the system. Every time you push code to SVN, it rebuilds <em>all</em> your zip files for all versions in SVN. This is why sometimes your plugin updates don&#8217;t show for up to 6 hours. Instead, you should push one time, when you&#8217;re ready to go.</p>
+
+
+
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="use-the-trunk-folder-for-code" tabindex="-1">Use the trunk folder for code <a href="#use-the-trunk-folder-for-code" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Use the trunk folder for code</span></a></h3>
+
+
+
+<p>Many people use <code>trunk</code> as a placeholder. While it&#8217;s possible to simply update the <code>readme.txt</code> file in trunk and put everything in tag folders, doing so makes it more difficult to compare any changes in your code. Instead, trunk should contain the latest version of your code, even if that version is a beta.</p>
+
+
+
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="always-tag-releases" tabindex="-1">Always Tag Releases <a href="#always-tag-releases" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Always Tag Releases</span></a></h3>
+
+
+
+<p>While it&#8217;s possible to use trunk as a stable tag for plugins, this feature is not actually supported nor recommended. Instead, releases should be properly tagged an iterated. This will ensure full compatibility with any automatic updater, as well as allow for rollbacks should there be an issue with your code.</p>
+
+
+
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="create-tags-from-trunk" tabindex="-1">Create tags from trunk <a href="#create-tags-from-trunk" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Create tags from trunk</span></a></h3>
+
+
+
+<p>Instead of pushing your code directly to a tag folder, you should edit  the code in trunk, complete with the stable version in the readme, and <em>then</em> copy the code from trunk to the new tag.</p>
+
+
+
+<p>Not only will this make it easier see any changes, you will be making smaller commits as SVN will only update the changed code. This will save you time and reduce potential errors (such as updating to the wrong stable tag and pushing bad code to users).</p>
+
+
+
+<p>Don&#8217;t worry about the tag folder not existing for a short while. You can use <code>svn cp</code> to copy trunk to the tag and then push them up to SVN at the same time.</p>
+
+
+
+<p>If you are operating locally, then you can update trunk and create tags from it all in one go. Checkout the root of your repository, update the files in /trunk, then <code>svn copy /trunk /tags/1.2.3</code> (or whatever the version number is) and then commit the whole thing in one go. SVN is a system based on differences, and as long as you use svn to do the copy operation, then it preserves history and makes everything easy for others to follow along with.</p>
+
+
+
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="delete-old-versions" tabindex="-1">Delete old versions <a href="#delete-old-versions" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Delete old versions</span></a></h3>
+
+
+
+<p>Since SVN is a release repository, many developers chose to remove older (non-supported) versions of their plugins. As of 2019, this no longer speeds up releases, as the build process only addresses tags with changed files.</p>
+
+
+
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="examples" tabindex="-1">Examples <a href="#examples" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Examples</span></a></h2>
+
+
+
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="starting-a-new-plugin" tabindex="-1">Starting a New Plugin <a href="#starting-a-new-plugin" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Starting a New Plugin</span></a></h3>
+
+
+
+<p>To start your plugin, you need to add the files you already have to your new SVN repository.</p>
+
+
+
+<p>First create a local directory on your machine to house a copy of the SVN repository:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><pre class="brush: php; gutter: false; title: ; notranslate" title="">
+$ mkdir my-local-dir
+</pre></div>
+
+
+<p>Next, check out the pre-built&nbsp;repository</p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><pre class="brush: php; title: ; notranslate" title="">
+$ svn co https://plugins.svn.wordpress.org/your-plugin-name my-local-dir
+&gt; A my-local-dir/trunk
+&gt; A my-local-dir/branches
+&gt; A my-local-dir/tags
+&gt; Checked out revision 11325.
+</pre></div>
+
+
+<p>In our example, subversion has added ( &#8220;A&#8221; for &#8220;add&#8221; ) all of the directories from the central SVN repository to your local copy.</p>
+
+
+
+<p>To add your code, navigate into the <code>my-local-dir</code>&nbsp;folder: <code>$ cd my-local-dir</code></p>
+
+
+
+<p>Now you can add your files to the <code>trunk/</code> directory of your local copy of the repository using copy/paste commands via command line, or dragging and dropping. Whatever you&#8217;re comfortable with.</p>
+
+
+<div class='callout callout-warning'><p><span class="screen-reader-text">Warning:</span> Do not put your <em>main</em> plugin file in a subfolder of trunk, like <code>/trunk/my-plugin/my-plugin.php</code>&nbsp;as that will break downloads. You may&nbsp;use subfolders for included files.</p>
+</div>
+
+
+
+<p>Once your files are in the trunk folder, you must let subversion know you want to add those new files back into the central repository.</p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><pre class="brush: php; title: ; notranslate" title="">
+$ cd my-local-dir
+my-local-dir/ $ svn add trunk/*
+&gt; A trunk/my-plugin.php
+&gt; A trunk/readme.txt
+</pre></div>
+
+
+<p>After you add all your files, you&#8217;ll check in the changes back to the central repository.</p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><pre class="brush: php; title: ; notranslate" title="">
+my-local-dir/ $ svn ci -m 'Adding first version of my plugin'
+&gt; Adding trunk/my-plugin.php
+&gt; Adding trunk/readme.txt
+&gt; Transmitting file data .
+&gt; Committed revision 11326.
+</pre></div>
+
+
+<p>It&#8217;s required to include a commit message for all checkins.</p>
+
+
+
+<p>If the commit fails because of &#8216;Access forbidden&#8217; and you <strong>know</strong> you have commit access, add your username and password to the check-in command.</p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><pre class="brush: php; title: ; notranslate" title="">
+my-local-dir/ $ svn ci -m 'Adding first version of my plugin' --username your_username --password your_password
+</pre></div>
+
+
+<p>Remember your username is <em>case sensitive</em>.</p>
+
+
+
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="editing-existing-files" tabindex="-1">Editing Existing Files <a href="#editing-existing-files" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Editing Existing Files</span></a></h3>
+
+
+
+<p>Once your plugin is in the directory, you will likely need to edit the code at some point.</p>
+
+
+
+<p>First go into your your local copy of the repository and make sure it&#8217;s up to date.</p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><pre class="brush: php; title: ; notranslate" title="">
+$ cd my-local-dir/
+my-local-dir/ $ svn up
+&gt; At revision 11326.
+</pre></div>
+
+
+<p>In the above example, we&#8217;re all up to date. If there had been changes in the central repository, they would have been downloaded and merged into your local copy.</p>
+
+
+
+<p>Now you can edit the file that needs changing using whatever editor you prefer.</p>
+
+
+
+<p>If you&#8217;re not using an SVN GUI tool (like SubVersion or Coda) you can still check and see what&#8217;s different between your local copy and the central repository after you make changes. First we check the status of the local copy:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><pre class="brush: php; title: ; notranslate" title="">
+my-local-dir/ $ svn stat
+&gt; M trunk/my-plugin.php
+</pre></div>
+
+
+<p>This tells us that our local <code>trunk/my-plugin.php</code> is different from the copy we downloaded from the central repository ( &#8220;M&#8221; for &#8220;modified&#8221; ).</p>
+
+
+
+<p>Let&#8217;s see what exactly has changed in that file, so we can check it over and make sure things look right.</p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><pre class="brush: php; title: ; notranslate" title="">
+my-local-dir/ $ svn diff
+&gt; * What comes out is essentially the result of a
+  * standard `diff -u` between your local copy and the
+  * original copy you downloaded.
+</pre></div>
+
+
+<p>If it all looks good then it&#8217;s time to check in those changes to the central repository.</p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><pre class="brush: php; title: ; notranslate" title="">
+my-local-dir/ $ svn ci -m &quot;fancy new feature: now you can foo *and* bar at the same time&quot;
+&gt; Sending trunk/my-plugin.php
+&gt; Transmitting file data .
+&gt; Committed revision 11327.
+</pre></div>
+
+
+<p>And now you&#8217;ve successfully updated trunk.</p>
+
+
+
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="tagging-new-versions" tabindex="-1">&#8220;Tagging&#8221; New Versions <a href="#tagging-new-versions" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">&#8220;Tagging&#8221; New Versions</span></a></h3>
+
+
+
+<p>Each time you make a formal release of your plugin, you should tag a copy of that release&#8217;s code. This lets your users easily grab the latest (or an older) version, it lets you keep track of changes more easily, and lets the WordPress.org Plugin Directory know what version of your plugin it should tell people to download.</p>
+
+
+
+<p>First copy your code to a subdirectory in the <code>tags/</code> directory. For the sake of the WordPress.org plugin browser, the new subdirectory should always look like a version number. <code>2.0.1.3</code> is good. <code>Cool hotness tag</code> is <strong>bad</strong>.</p>
+
+
+
+<p>We want to use <code>svn cp</code> instead of the regular <code>cp</code> in order to take advantage of SVN&#8217;s features.</p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><pre class="brush: php; title: ; notranslate" title="">
+my-local-dir/ $ svn cp trunk tags/2.0
+&gt; A tags/2.0
+</pre></div>
+
+
+<p>As always, check in the changes.</p>
+
+
+<div class="wp-block-syntaxhighlighter-code "><pre class="brush: php; title: ; notranslate" title="">
+my-local-dir/ $ svn ci -m &quot;tagging version 2.0&quot;
+&gt; Adding         tags/2.0
+&gt; Adding         tags/2.0/my-plugin.php
+&gt; Adding         tags/2.0/readme.txt
+&gt; Committed revision 11328.
+</pre></div>
+
+
+<p>When tagging a new version, <strong>remember to update</strong> the <code>Stable Tag</code> field in <a href="https://wordpress.org/plugins/developers/#readme"><code>trunk/readme.txt</code></a> to the new version.</p>
+
+
+
+<p>Congratulations! You&#8217;ve updated your code!</p>
+
+
+
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="notes" tabindex="-1">Notes <a href="#notes" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Notes</span></a></h2>
+
+
+
+<p>Don&#8217;t put anything in SVN that you&#8217;re not willing and prepared to have deployed to everyone who uses your plugin. This&nbsp;<em>includes</em> vendor files, <code>.gitignore</code>&nbsp;and everything else.</p>
+
+
+
+<p>You also should never upload zip files. Like most code repository systems, SVN expects you to upload individual files.</p>
+
+
+
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="see-also" tabindex="-1">See Also <a href="#see-also" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">See Also</span></a></h3>
+
+
+
+<ul><li><a href="../how-your-readme-txt-works/index.html">How the readme.txt works</a></li><li><a href="../plugin-assets/index.html">How plugin assets (header images and icons) work</a></li><li><a href="http://svnbook.red-bean.com/">The SVN Book</a></li></ul>
+
+
+<div class="bottom-of-entry">&nbsp;</div>
+
+			
+		<nav class="handbook-navigation" role="navigation">
+			<h1 class="screen-reader-text">Handbook navigation</h1>
+			<div class="nav-links">
+
+			<a href="../planning-your-plugin/index.html" rel="previous"><span class="meta-nav">&larr;</span> Planning Plugins</a><a href="../alerts-and-warnings/index.html" rel="next">Alerts and Warnings <span class="meta-nav">&rarr;</span></a>
+			</div>
+			<!-- .nav-links -->
+		</nav><!-- .navigation -->
+	
+		
+		</main><!-- #main -->
+
+	</div><!-- #content -->
+
+</div><!-- #page -->
+
+
+<div id="wporg-footer">
+	<div class="wrapper">
+		<ul>
+			<li><a href="http://wordpress.org/about/" title="An introduction to the WordPress project">About</a></li>
+			<li><a href="http://wordpress.org/news/" title="News and Updates">Blog</a></li>
+			<li><a href="http://wordpress.org/hosting/" title="Recommended web hosting providers">Hosting</a></li>
+			<li><a href="https://wordpressfoundation.org/donate/" title="Donate to the WordPress Foundation">Donate</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://wordpress.org/support/" title="Forums, documentation, and other resources">Support</a></li>
+			<li><a href="../../../index.html" title="Resources for WordPress developers">Developers</a></li>
+			<li><a href="http://make.wordpress.org/" title="Give back to WordPress through code, support, translation and more">Get Involved</a></li>
+			<li><a href="http://learn.wordpress.org/" title="Workshops and training materials">Learn</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://wordpress.org/showcase/" title="Some of the best WordPress sites on the Web">Showcase</a></li>
+			<li><a href="http://wordpress.org/plugins/" title="Add extra functionality to WordPress">Plugins</a></li>
+			<li><a href="http://wordpress.org/themes/" title="Make your WordPress pretty">Themes</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://central.wordcamp.org/" title="Find a WordPress event near you">WordCamp</a></li>
+			<li><a href="http://wordpress.tv/" title="Videos, tutorials, and WordCamp sessions">WordPress.TV</a></li>
+			<li><a href="http://buddypress.org/" title="A set of plugins to transform your WordPress into a social network">BuddyPress</a></li>
+			<li><a href="http://bbpress.org/" title="Fast, slick forums built on WordPress">bbPress</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://wordpress.com/?ref=wporg-footer" title="Hassle-free WordPress hosting">WordPress.com</a></li>
+			<li><a href="http://ma.tt/" title="Co-founder of WordPress, an example of what WordPress can do">Matt</a></li>
+			<li><a href="http://wordpress.org/about/privacy/" title="WordPress.org Privacy Policy">Privacy</a></li>
+			<li><a href="https://publiccode.eu/" target="_blank">Public Code</a></li>
+		</ul>
+
+		<ul class="social-media-links">
+			<li><span class="dashicons dashicons-twitter"></span><a href="https://twitter.com/WordPress" title="Follow @WordPress on Twitter">@WordPress</a></li>
+			<li><span class="dashicons dashicons-facebook"></span><a href="https://www.facebook.com/WordPress/" title="Like WordPress on Facebook">WordPress</a></li>
+		</ul>
+	</div>
+
+		<p class="cip cip-image">Code is Poetry.</p>
+</div>
+
+<script src="../../../../s.w.org/style/js/navigation.min.js?20190128"></script>
+
+<script type='text/javascript' src='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushBash.js?ver=3.0.9b' id='syntaxhighlighter-brush-bash-js'></script>
+<script type='text/javascript'>
+	(function(){
+		var corecss = document.createElement('link');
+		var themecss = document.createElement('link');
+		var corecssurl = "../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shCore.css?ver=3.0.9b";
+		if ( corecss.setAttribute ) {
+				corecss.setAttribute( "rel", "stylesheet" );
+				corecss.setAttribute( "type", "text/css" );
+				corecss.setAttribute( "href", corecssurl );
+		} else {
+				corecss.rel = "stylesheet";
+				corecss.href = corecssurl;
+		}
+		document.head.appendChild( corecss );
+		var themecssurl = "../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shThemeDefault.css?ver=3.0.9b";
+		if ( themecss.setAttribute ) {
+				themecss.setAttribute( "rel", "stylesheet" );
+				themecss.setAttribute( "type", "text/css" );
+				themecss.setAttribute( "href", themecssurl );
+		} else {
+				themecss.rel = "stylesheet";
+				themecss.href = themecssurl;
+		}
+		document.head.appendChild( themecss );
+	})();
+	SyntaxHighlighter.config.strings.expandSource = '+ expand source';
+	SyntaxHighlighter.config.strings.help = '?';
+	SyntaxHighlighter.config.strings.alert = 'SyntaxHighlighter\n\n';
+	SyntaxHighlighter.config.strings.noBrush = 'Can\'t find brush for: ';
+	SyntaxHighlighter.config.strings.brushNotHtmlScript = 'Brush wasn\'t configured for html-script option: ';
+	SyntaxHighlighter.defaults['pad-line-numbers'] = false;
+	SyntaxHighlighter.defaults['toolbar'] = false;
+	SyntaxHighlighter.all();
+
+	// Infinite scroll support
+	if ( typeof( jQuery ) !== 'undefined' ) {
+		jQuery( function( $ ) {
+			$( document.body ).on( 'post-load', function() {
+				SyntaxHighlighter.highlight();
+			} );
+		} );
+	}
+</script>
+<script type='text/javascript' src='../../../wp-includes/js/hoverintent-js.min.js?ver=2.2.1' id='hoverintent-js-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/admin-bar.min.js?ver=5.9-alpha-51701' id='admin-bar-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/navigation.js?ver=20181209' id='wporg-developer-navigation-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/skip-link-focus-fix.js?ver=20130115' id='wporg-developer-skip-link-focus-fix-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/search.js?ver=20150430' id='wporg-developer-search-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/menu.js?ver=20180201' id='wporg-developer-menu-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/awesomplete.min.js?ver=20160322' id='awesomplete-js'></script>
+<script type='text/javascript' id='autocomplete-js-extra'>
+/* <![CDATA[ */
+var autocomplete = {"ajaxurl":"https:\/\/developer.wordpress.org\/wp-admin\/admin-ajax.php","nonce":"8a60f70c4b"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/autocomplete.js?ver=20160524' id='autocomplete-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/function-reference.js?ver=20180724' id='wporg-developer-function-reference-js'></script>
+<script type='text/javascript' id='quicktags-js-extra'>
+/* <![CDATA[ */
+var quicktagsL10n = {"closeAllOpenTags":"Close all open tags","closeTags":"close tags","enterURL":"Enter the URL","enterImageURL":"Enter the URL of the image","enterImageDescription":"Enter a description of the image","textdirection":"text direction","toggleTextdirection":"Toggle Editor Text Direction","dfw":"Distraction-free writing mode","strong":"Bold","strongClose":"Close bold tag","em":"Italic","emClose":"Close italic tag","link":"Insert link","blockquote":"Blockquote","blockquoteClose":"Close blockquote tag","del":"Deleted text (strikethrough)","delClose":"Close deleted text tag","ins":"Inserted text","insClose":"Close inserted text tag","image":"Insert image","ul":"Bulleted list","ulClose":"Close bulleted list tag","ol":"Numbered list","olClose":"Close numbered list tag","li":"List item","liClose":"Close list item tag","code":"Code","codeClose":"Close code tag","more":"Insert Read More tag"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-includes/js/quicktags.min.js?ver=5.9-alpha-51701' id='quicktags-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/user-notes.js?ver=20200110' id='wporg-developer-user-notes-js'></script>
+<script type='text/javascript' id='wporg-developer-user-notes-feedback-js-extra'>
+/* <![CDATA[ */
+var wporg_note_feedback = {"show":"Show Feedback","hide":"Hide Feedback"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/user-notes-feedback.js?ver=20181023' id='wporg-developer-user-notes-feedback-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/tabs.js?ver=20160824' id='wporg-developer-tabs-js'></script>
+<script type='text/javascript' id='wporg-developer-preview-js-extra'>
+/* <![CDATA[ */
+var wporg_note_preview = {"ajaxurl":"https:\/\/developer.wordpress.org\/wp-admin\/admin-ajax.php","nonce":"504933b60e","preview":"preview note","preview_empty":"Nothing to preview","is_admin":""};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/user-notes-preview.js?ver=20200111' id='wporg-developer-preview-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/wp-embed.min.js?ver=5.9-alpha-51701' id='wp-embed-js'></script>
+</body>
+
+<!-- Mirrored from developer.wordpress.org/plugins/wordpress-org/how-to-use-subversion/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 31 Aug 2021 16:22:55 GMT -->
+</html>

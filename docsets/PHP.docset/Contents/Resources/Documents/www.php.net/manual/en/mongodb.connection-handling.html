@@ -1,0 +1,334 @@
+<html><!-- Mirrored from www.php.net/manual/en/mongodb.connection-handling.php by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 11 Sep 2021 10:11:28 GMT --><!-- Added by HTTrack --><head><meta http-equiv="content-type" content="text/html;charset=utf-8"><!-- /Added by HTTrack -->
+
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Connections</title>
+
+ <link rel="shortcut icon" href="../../favicon.ico">
+ <link rel="search" type="application/opensearchdescription+xml" href="http://php.net/phpnetimprovedsearch.src" title="Add PHP.net search">
+ <link rel="alternate" type="application/atom+xml" href="https://www.php.net/releases/feed.php" title="PHP Release feed">
+ <link rel="alternate" type="application/atom+xml" href="https://www.php.net/feed.atom" title="PHP: Hypertext Preprocessor">
+
+ <link rel="canonical" href="mongodb.connection-handling.html">
+ <link rel="shorturl" href="mongodb.connection-handling.html">
+ <link rel="alternate" href="mongodb.connection-handling.html" hreflang="x-default">
+
+ <link rel="contents" href="index-2.html">
+ <link rel="index" href="mongodb.architecture.html">
+ <link rel="prev" href="mongodb.overview.html">
+ <link rel="next" href="mongodb.persistence.html">
+
+ <link rel="alternate" href="mongodb.connection-handling.html" hreflang="en">
+ <link rel="alternate" href="https://www.php.net/manual/pt_BR/mongodb.connection-handling.php" hreflang="pt_BR">
+ <link rel="alternate" href="https://www.php.net/manual/zh/mongodb.connection-handling.php" hreflang="zh">
+ <link rel="alternate" href="https://www.php.net/manual/fr/mongodb.connection-handling.php" hreflang="fr">
+ <link rel="alternate" href="https://www.php.net/manual/de/mongodb.connection-handling.php" hreflang="de">
+ <link rel="alternate" href="https://www.php.net/manual/ja/mongodb.connection-handling.php" hreflang="ja">
+ <link rel="alternate" href="https://www.php.net/manual/ro/mongodb.connection-handling.php" hreflang="ro">
+ <link rel="alternate" href="https://www.php.net/manual/ru/mongodb.connection-handling.php" hreflang="ru">
+ <link rel="alternate" href="https://www.php.net/manual/es/mongodb.connection-handling.php" hreflang="es">
+ <link rel="alternate" href="https://www.php.net/manual/tr/mongodb.connection-handling.php" hreflang="tr">
+
+<link rel="stylesheet" type="text/css" href="../../cached0aba.css?t=1539771603&amp;f=/fonts/Fira/fira.css" media="screen">
+<link rel="stylesheet" type="text/css" href="../../cached2ecf.css?t=1539765004&amp;f=/fonts/Font-Awesome/css/fontello.css" media="screen">
+<link rel="stylesheet" type="text/css" href="../../cachedba57.css?t=1606338002&amp;f=/styles/theme-base.css" media="screen">
+<link rel="stylesheet" type="text/css" href="../../cached3afa.css?t=1627831203&amp;f=/styles/theme-medium.css" media="screen">
+
+ <!--[if lte IE 7]>
+ <link rel="stylesheet" type="text/css" href="https://www.php.net/styles/workarounds.ie7.css" media="screen">
+ <![endif]-->
+
+ <!--[if lte IE 8]>
+ <script>
+  window.brokenIE = true;
+ </script>
+ <![endif]-->
+
+ <!--[if lte IE 9]>
+ <link rel="stylesheet" type="text/css" href="https://www.php.net/styles/workarounds.ie9.css" media="screen">
+ <![endif]-->
+
+ <!--[if IE]>
+ <script src="https://www.php.net/js/ext/html5.js"></script>
+ <![endif]-->
+
+ <base>
+
+
+</head>
+<body class="docs " style="">
+
+
+<div class="headsup"><a href="https://www.php.net/conferences/index.php#id2021-09-08-1">Longhorn PHP 2021</a></div>
+<nav id="trick"><div><dl>
+<dt><a href="getting-started.html">Getting Started</a></dt>
+	<dd><a href="introduction.html">Introduction</a></dd>
+	<dd><a href="tutorial.html">A simple tutorial</a></dd>
+<dt><a href="langref.html">Language Reference</a></dt>
+	<dd><a href="language.basic-syntax.html">Basic syntax</a></dd>
+	<dd><a href="language.types.html">Types</a></dd>
+	<dd><a href="language.variables.html">Variables</a></dd>
+	<dd><a href="language.constants.html">Constants</a></dd>
+	<dd><a href="language.expressions.html">Expressions</a></dd>
+	<dd><a href="language.operators.html">Operators</a></dd>
+	<dd><a href="language.control-structures.html">Control Structures</a></dd>
+	<dd><a href="language.functions.html">Functions</a></dd>
+	<dd><a href="language.oop5.html">Classes and Objects</a></dd>
+	<dd><a href="language.namespaces.html">Namespaces</a></dd>
+	<dd><a href="language.errors.html">Errors</a></dd>
+	<dd><a href="language.exceptions.html">Exceptions</a></dd>
+	<dd><a href="language.generators.html">Generators</a></dd>
+	<dd><a href="language.attributes.html">Attributes</a></dd>
+	<dd><a href="language.references.html">References Explained</a></dd>
+	<dd><a href="reserved.variables.html">Predefined Variables</a></dd>
+	<dd><a href="reserved.exceptions.html">Predefined Exceptions</a></dd>
+	<dd><a href="reserved.interfaces.html">Predefined Interfaces and Classes</a></dd>
+	<dd><a href="context.html">Context options and parameters</a></dd>
+	<dd><a href="wrappers.html">Supported Protocols and Wrappers</a></dd>
+</dl>
+<dl>
+<dt><a href="security.html">Security</a></dt>
+	<dd><a href="security.intro.html">Introduction</a></dd>
+	<dd><a href="security.general.html">General considerations</a></dd>
+	<dd><a href="security.cgi-bin.html">Installed as CGI binary</a></dd>
+	<dd><a href="security.apache.html">Installed as an Apache module</a></dd>
+	<dd><a href="security.sessions.html">Session Security</a></dd>
+	<dd><a href="security.filesystem.html">Filesystem Security</a></dd>
+	<dd><a href="security.database.html">Database Security</a></dd>
+	<dd><a href="security.errors.html">Error Reporting</a></dd>
+	<dd><a href="security.variables.html">User Submitted Data</a></dd>
+	<dd><a href="security.hiding.html">Hiding PHP</a></dd>
+	<dd><a href="security.current.html">Keeping Current</a></dd>
+<dt><a href="features.html">Features</a></dt>
+	<dd><a href="features.http-auth.html">HTTP authentication with PHP</a></dd>
+	<dd><a href="features.cookies.html">Cookies</a></dd>
+	<dd><a href="features.sessions.html">Sessions</a></dd>
+	<dd><a href="features.xforms.html">Dealing with XForms</a></dd>
+	<dd><a href="features.file-upload.html">Handling file uploads</a></dd>
+	<dd><a href="features.remote-files.html">Using remote files</a></dd>
+	<dd><a href="features.connection-handling.html">Connection handling</a></dd>
+	<dd><a href="features.persistent-connections.html">Persistent Database Connections</a></dd>
+	<dd><a href="features.commandline.html">Command line usage</a></dd>
+	<dd><a href="features.gc.html">Garbage Collection</a></dd>
+	<dd><a href="features.dtrace.html">DTrace Dynamic Tracing</a></dd>
+</dl>
+<dl>
+<dt><a href="funcref.html">Function Reference</a></dt>
+	<dd><a href="refs.basic.php.html">Affecting PHP's Behaviour</a></dd>
+	<dd><a href="refs.utilspec.audio.html">Audio Formats Manipulation</a></dd>
+	<dd><a href="refs.remote.auth.html">Authentication Services</a></dd>
+	<dd><a href="refs.utilspec.cmdline.html">Command Line Specific Extensions</a></dd>
+	<dd><a href="refs.compression.html">Compression and Archive Extensions</a></dd>
+	<dd><a href="refs.crypto.html">Cryptography Extensions</a></dd>
+	<dd><a href="refs.database.html">Database Extensions</a></dd>
+	<dd><a href="refs.calendar.html">Date and Time Related Extensions</a></dd>
+	<dd><a href="refs.fileprocess.file.html">File System Related Extensions</a></dd>
+	<dd><a href="refs.international.html">Human Language and Character Encoding Support</a></dd>
+	<dd><a href="refs.utilspec.image.html">Image Processing and Generation</a></dd>
+	<dd><a href="refs.remote.mail.html">Mail Related Extensions</a></dd>
+	<dd><a href="refs.math.html">Mathematical Extensions</a></dd>
+	<dd><a href="refs.utilspec.nontext.html">Non-Text MIME Output</a></dd>
+	<dd><a href="refs.fileprocess.process.html">Process Control Extensions</a></dd>
+	<dd><a href="refs.basic.other.html">Other Basic Extensions</a></dd>
+	<dd><a href="refs.remote.other.html">Other Services</a></dd>
+	<dd><a href="refs.search.html">Search Engine Extensions</a></dd>
+	<dd><a href="refs.utilspec.server.html">Server Specific Extensions</a></dd>
+	<dd><a href="refs.basic.session.html">Session Extensions</a></dd>
+	<dd><a href="refs.basic.text.html">Text Processing</a></dd>
+	<dd><a href="refs.basic.vartype.html">Variable and Type Related Extensions</a></dd>
+	<dd><a href="refs.webservice.html">Web Services</a></dd>
+	<dd><a href="refs.utilspec.windows.html">Windows Only Extensions</a></dd>
+	<dd><a href="refs.xml.html">XML Manipulation</a></dd>
+	<dd><a href="refs.ui.html">GUI Extensions</a></dd>
+</dl>
+<dl>
+<dt>Keyboard Shortcuts</dt><dt>?</dt>
+<dd>This help</dd>
+<dt>j</dt>
+<dd>Next menu item</dd>
+<dt>k</dt>
+<dd>Previous menu item</dd>
+<dt>g p</dt>
+<dd>Previous man page</dd>
+<dt>g n</dt>
+<dd>Next man page</dd>
+<dt>G</dt>
+<dd>Scroll to bottom</dd>
+<dt>g g</dt>
+<dd>Scroll to top</dd>
+<dt>g h</dt>
+<dd>Goto homepage</dd>
+<dt>g s</dt>
+<dd>Goto search<br>(current page)</dd>
+<dt>/</dt>
+<dd>Focus search box</dd>
+</dl></div></nav>
+<div id="goto">
+    <div class="search">
+         <div class="text"></div>
+         <div class="results"><ul></ul></div>
+   </div>
+</div>
+
+  <div id="breadcrumbs" class="row-fluid">
+    <div id="breadcrumbs-inner">
+          
+              
+          <ul>
+            <li><a href="index-2.html">PHP Manual</a></li>      <li><a href="funcref.html">Function Reference</a></li>      <li><a href="refs.database.html">Database Extensions</a></li>      <li><a href="refs.database.vendors.html">Vendor Specific Database Extensions</a></li>      <li><a href="set.mongodb.html">MongoDB</a></li>      <li><a href="mongodb.architecture.html">Driver Architecture and Internals</a></li>      </ul>
+    </div>
+  </div>
+
+
+
+
+<div id="layout" class="clearfix">
+  <section id="layout-content">
+  <div id="mongodb.connection-handling" class="article">
+  
+  <h1>Connection handling and persistence</h1>
+
+
+  
+   <blockquote class="note"><p><strong class="note">Note</strong>: 
+    <span class="simpara">
+     On Unix platforms, the MongoDB driver is sensitive to scripts that use the
+     fork() system call without also calling exec(). Users are advised not to
+     re-use <span class="classname"><a href="class.mongodb-driver-manager.html" class="classname">MongoDB\Driver\Manager</a></span> instances in a forked
+     child process.
+    </span>
+   </p></blockquote>
+
+
+  <div class="section">
+   <h2 class="title">Connection and topology persistence (PHP version since 1.2.0)</h2>
+
+   <p class="para">
+    All versions of the driver since 1.2.0 persist the
+    <a href="https://github.com/mongodb/mongo-c-driver" class="link external">»&nbsp;libmongoc</a> client object in
+    the PHP worker process, which allows it to re-use database connections,
+    authentication states, <em class="emphasis">and</em> topology information across
+    multiple requests.
+   </p>
+
+   <p class="para">
+    When <span class="methodname"><a href="mongodb-driver-manager.construct.html" class="methodname">MongoDB\Driver\Manager::__construct()</a></span> is
+    invoked, a hash is created from its arguments (i.e. URI string and array
+    options). The driver will attempt to find a previously persisted
+    <a href="https://github.com/mongodb/mongo-c-driver" class="link external">»&nbsp;libmongoc</a> client object for
+    that hash. If an existing client cannot be found for the hash, a new client
+    will be created (and persisted for future use).
+   </p>
+
+   <p class="para">
+    Each client contains its own database connections and a view of the server
+    topology (e.g. standalone, replica set, shard cluster). By persisting the
+    client between PHP requests, the driver is able to re-use established
+    database connections and remove the need for
+    <a href="https://github.com/mongodb/specifications/blob/master/source/server-discovery-and-monitoring/server-discovery-and-monitoring.rst" class="link external">»&nbsp;discovering the server topology</a>
+    on each request.
+   </p>
+
+   <p class="para">
+    Consider the following example:
+   </p>
+
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br><br>$managers&nbsp;</span><span style="color: #007700">=&nbsp;[<br>&nbsp;&nbsp;&nbsp;&nbsp;new&nbsp;</span><span style="color: #0000BB">MongoDB</span><span style="color: #007700">\</span><span style="color: #0000BB">Driver</span><span style="color: #007700">\</span><span style="color: #0000BB">Manager</span><span style="color: #007700">(</span><span style="color: #DD0000">'mongodb://127.0.0.1'</span><span style="color: #007700">),<br>&nbsp;&nbsp;&nbsp;&nbsp;new&nbsp;</span><span style="color: #0000BB">MongoDB</span><span style="color: #007700">\</span><span style="color: #0000BB">Driver</span><span style="color: #007700">\</span><span style="color: #0000BB">Manager</span><span style="color: #007700">(</span><span style="color: #DD0000">'mongodb://127.0.0.1'</span><span style="color: #007700">),<br>&nbsp;&nbsp;&nbsp;&nbsp;new&nbsp;</span><span style="color: #0000BB">MongoDB</span><span style="color: #007700">\</span><span style="color: #0000BB">Driver</span><span style="color: #007700">\</span><span style="color: #0000BB">Manager</span><span style="color: #007700">(</span><span style="color: #DD0000">'mongodb://127.0.0.1:27017'</span><span style="color: #007700">),<br>&nbsp;&nbsp;&nbsp;&nbsp;new&nbsp;</span><span style="color: #0000BB">MongoDB</span><span style="color: #007700">\</span><span style="color: #0000BB">Driver</span><span style="color: #007700">\</span><span style="color: #0000BB">Manager</span><span style="color: #007700">(</span><span style="color: #DD0000">'mongodb://rs1.example.com,rs2.example.com/'</span><span style="color: #007700">,&nbsp;[</span><span style="color: #DD0000">'replicaSet'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">'myReplicaSet'</span><span style="color: #007700">]),<br>];<br><br>foreach&nbsp;(</span><span style="color: #0000BB">$managers&nbsp;</span><span style="color: #007700">as&nbsp;</span><span style="color: #0000BB">$manager</span><span style="color: #007700">)&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$manager</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">executeCommand</span><span style="color: #007700">(</span><span style="color: #DD0000">'test'</span><span style="color: #007700">,&nbsp;new&nbsp;</span><span style="color: #0000BB">MongoDB</span><span style="color: #007700">\</span><span style="color: #0000BB">Driver</span><span style="color: #007700">\</span><span style="color: #0000BB">Command</span><span style="color: #007700">([</span><span style="color: #DD0000">'ping'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">1</span><span style="color: #007700">]));<br>}<br><br></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+   </div>
+
+
+   <p class="para">
+    The first two Manager objects will share the same
+    <a href="https://github.com/mongodb/mongo-c-driver" class="link external">»&nbsp;libmongoc</a> client since
+    their constructor arguments are identical. The third and fourth objects will
+    each use their own client. In total, three clients will be created and the
+    PHP worker executing this script will open two connections to
+    <code class="literal">127.0.0.1</code> and one connection to each of
+    <code class="literal">rs1.example.com</code> and <code class="literal">rs2.example.com</code>.
+    If the driver discovers additional members of the replica set after issuing
+    <code class="literal">hello</code> commands, it will open additional connections to
+    those servers as well.
+   </p>
+
+   <p class="para">
+    If the same worker executes the script again in a second request, the three
+    clients will be re-used and no new connections should be made. Depending on
+    how long ago the previous request was served, the driver may need to issue
+    additional <code class="literal">hello</code> commands to update its view of the
+    topologies.
+   </p>
+  </div>
+
+  <div class="section">
+   <h2 class="title">Socket persistence (PHP versions before 1.2.0)</h2>
+
+   <p class="para">
+    Versions of the PHP driver before 1.2.0 utilize PHP's Streams API for
+    database connections, using an API within
+    <a href="https://github.com/mongodb/mongo-c-driver" class="link external">»&nbsp;libmongoc</a> to designate
+    custom handlers for socket communication; however, a new libmongoc client is
+    created for each <span class="classname"><a href="class.mongodb-driver-manager.html" class="classname">MongoDB\Driver\Manager</a></span>. As a result,
+    the driver persists individual database connections but not authentication
+    state or topology information. This means that the driver needs to issue
+    commands at the start of each request to authenticate and
+    <a href="https://github.com/mongodb/specifications/blob/master/source/server-discovery-and-monitoring/server-discovery-and-monitoring.rst" class="link external">»&nbsp;discover the server topology</a>.
+   </p>
+
+   <p class="para">
+    Database connections are persisted by a hash derived from the server's
+    host, port, and the URI string used to construct the
+    <span class="classname"><a href="class.mongodb-driver-manager.html" class="classname">MongoDB\Driver\Manager</a></span>. The constructor's array
+    options are not included in this hash.
+   </p>
+
+   <blockquote class="note"><p><strong class="note">Note</strong>: 
+    <span class="simpara">
+     Versions of the driver &gt;= 1.1.8 and &lt; 1.2.0 do not persist sockets
+     for SSL connections. See
+     <a href="https://jira.mongodb.org/browse/PHPC-720" class="link external">»&nbsp;PHPC-720</a> for
+     additional information.
+    </span>
+   </p></blockquote>
+
+   <p class="para">
+    Despite its shortcomings with persisting SSL connections when and topology
+    information, this version of the driver supports all
+    <a href="context.ssl.html" class="link">SSL context options</a> since it uses
+    PHP's Streams API.
+   </p>
+  </div>
+ </div>
+
+<section id="usernotes">
+ <div class="head"><h3 class="title">User Contributed Notes</h3></div>
+ <div class="note">There are no user contributed notes for this page.</div></section>    </section><!-- layout-content -->
+        
+
+
+  </div><!-- layout -->
+
+  
+
+    
+ <!-- External and third party libraries. -->
+ 
+
+
+
+
+
+
+
+<a id="toTop" href="javascript:;"><span id="toTopHover"></span><img width="40" height="40" alt="To Top" src="../../images/to-top%402x.png"></a>
+
+
+
+<!-- Mirrored from www.php.net/manual/en/mongodb.connection-handling.php by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 11 Sep 2021 10:11:28 GMT -->
+
+</body></html>

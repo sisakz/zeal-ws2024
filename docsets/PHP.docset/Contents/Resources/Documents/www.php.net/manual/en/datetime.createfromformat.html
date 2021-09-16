@@ -1,0 +1,990 @@
+<html><!-- Mirrored from www.php.net/manual/en/datetime.createfromformat.php by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 11 Sep 2021 06:44:48 GMT --><!-- Added by HTTrack --><head><meta http-equiv="content-type" content="text/html;charset=utf-8"><!-- /Added by HTTrack -->
+
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>DateTime::createFromFormat</title>
+
+ <link rel="shortcut icon" href="../../favicon.ico">
+ <link rel="search" type="application/opensearchdescription+xml" href="http://php.net/phpnetimprovedsearch.src" title="Add PHP.net search">
+ <link rel="alternate" type="application/atom+xml" href="https://www.php.net/releases/feed.php" title="PHP Release feed">
+ <link rel="alternate" type="application/atom+xml" href="https://www.php.net/feed.atom" title="PHP: Hypertext Preprocessor">
+
+ <link rel="canonical" href="datetime.createfromformat.html">
+ <link rel="shorturl" href="datetime.createfromformat.html">
+ <link rel="alternate" href="datetime.createfromformat.html" hreflang="x-default">
+
+ <link rel="contents" href="index-2.html">
+ <link rel="index" href="class.datetime.html">
+ <link rel="prev" href="datetime.construct.html">
+ <link rel="next" href="datetime.createfromimmutable.html">
+
+ <link rel="alternate" href="datetime.createfromformat.html" hreflang="en">
+ <link rel="alternate" href="https://www.php.net/manual/pt_BR/datetime.createfromformat.php" hreflang="pt_BR">
+ <link rel="alternate" href="https://www.php.net/manual/zh/datetime.createfromformat.php" hreflang="zh">
+ <link rel="alternate" href="https://www.php.net/manual/fr/datetime.createfromformat.php" hreflang="fr">
+ <link rel="alternate" href="https://www.php.net/manual/de/datetime.createfromformat.php" hreflang="de">
+ <link rel="alternate" href="https://www.php.net/manual/ja/datetime.createfromformat.php" hreflang="ja">
+ <link rel="alternate" href="https://www.php.net/manual/ro/datetime.createfromformat.php" hreflang="ro">
+ <link rel="alternate" href="https://www.php.net/manual/ru/datetime.createfromformat.php" hreflang="ru">
+ <link rel="alternate" href="https://www.php.net/manual/es/datetime.createfromformat.php" hreflang="es">
+ <link rel="alternate" href="https://www.php.net/manual/tr/datetime.createfromformat.php" hreflang="tr">
+
+<link rel="stylesheet" type="text/css" href="../../cached0aba.css?t=1539771603&amp;f=/fonts/Fira/fira.css" media="screen">
+<link rel="stylesheet" type="text/css" href="../../cached2ecf.css?t=1539765004&amp;f=/fonts/Font-Awesome/css/fontello.css" media="screen">
+<link rel="stylesheet" type="text/css" href="../../cachedba57.css?t=1606338002&amp;f=/styles/theme-base.css" media="screen">
+<link rel="stylesheet" type="text/css" href="../../cached3afa.css?t=1627831203&amp;f=/styles/theme-medium.css" media="screen">
+
+ <!--[if lte IE 7]>
+ <link rel="stylesheet" type="text/css" href="https://www.php.net/styles/workarounds.ie7.css" media="screen">
+ <![endif]-->
+
+ <!--[if lte IE 8]>
+ <script>
+  window.brokenIE = true;
+ </script>
+ <![endif]-->
+
+ <!--[if lte IE 9]>
+ <link rel="stylesheet" type="text/css" href="https://www.php.net/styles/workarounds.ie9.css" media="screen">
+ <![endif]-->
+
+ <!--[if IE]>
+ <script src="https://www.php.net/js/ext/html5.js"></script>
+ <![endif]-->
+
+ <base>
+
+
+</head>
+<body class="docs " style="">
+
+
+<div class="headsup"><a href="https://www.php.net/conferences/index.php#id2021-09-08-1">Longhorn PHP 2021</a></div>
+<nav id="trick"><div><dl>
+<dt><a href="getting-started.html">Getting Started</a></dt>
+	<dd><a href="introduction.html">Introduction</a></dd>
+	<dd><a href="tutorial.html">A simple tutorial</a></dd>
+<dt><a href="langref.html">Language Reference</a></dt>
+	<dd><a href="language.basic-syntax.html">Basic syntax</a></dd>
+	<dd><a href="language.types.html">Types</a></dd>
+	<dd><a href="language.variables.html">Variables</a></dd>
+	<dd><a href="language.constants.html">Constants</a></dd>
+	<dd><a href="language.expressions.html">Expressions</a></dd>
+	<dd><a href="language.operators.html">Operators</a></dd>
+	<dd><a href="language.control-structures.html">Control Structures</a></dd>
+	<dd><a href="language.functions.html">Functions</a></dd>
+	<dd><a href="language.oop5.html">Classes and Objects</a></dd>
+	<dd><a href="language.namespaces.html">Namespaces</a></dd>
+	<dd><a href="language.errors.html">Errors</a></dd>
+	<dd><a href="language.exceptions.html">Exceptions</a></dd>
+	<dd><a href="language.generators.html">Generators</a></dd>
+	<dd><a href="language.attributes.html">Attributes</a></dd>
+	<dd><a href="language.references.html">References Explained</a></dd>
+	<dd><a href="reserved.variables.html">Predefined Variables</a></dd>
+	<dd><a href="reserved.exceptions.html">Predefined Exceptions</a></dd>
+	<dd><a href="reserved.interfaces.html">Predefined Interfaces and Classes</a></dd>
+	<dd><a href="context.html">Context options and parameters</a></dd>
+	<dd><a href="wrappers.html">Supported Protocols and Wrappers</a></dd>
+</dl>
+<dl>
+<dt><a href="security.html">Security</a></dt>
+	<dd><a href="security.intro.html">Introduction</a></dd>
+	<dd><a href="security.general.html">General considerations</a></dd>
+	<dd><a href="security.cgi-bin.html">Installed as CGI binary</a></dd>
+	<dd><a href="security.apache.html">Installed as an Apache module</a></dd>
+	<dd><a href="security.sessions.html">Session Security</a></dd>
+	<dd><a href="security.filesystem.html">Filesystem Security</a></dd>
+	<dd><a href="security.database.html">Database Security</a></dd>
+	<dd><a href="security.errors.html">Error Reporting</a></dd>
+	<dd><a href="security.variables.html">User Submitted Data</a></dd>
+	<dd><a href="security.hiding.html">Hiding PHP</a></dd>
+	<dd><a href="security.current.html">Keeping Current</a></dd>
+<dt><a href="features.html">Features</a></dt>
+	<dd><a href="features.http-auth.html">HTTP authentication with PHP</a></dd>
+	<dd><a href="features.cookies.html">Cookies</a></dd>
+	<dd><a href="features.sessions.html">Sessions</a></dd>
+	<dd><a href="features.xforms.html">Dealing with XForms</a></dd>
+	<dd><a href="features.file-upload.html">Handling file uploads</a></dd>
+	<dd><a href="features.remote-files.html">Using remote files</a></dd>
+	<dd><a href="features.connection-handling.html">Connection handling</a></dd>
+	<dd><a href="features.persistent-connections.html">Persistent Database Connections</a></dd>
+	<dd><a href="features.commandline.html">Command line usage</a></dd>
+	<dd><a href="features.gc.html">Garbage Collection</a></dd>
+	<dd><a href="features.dtrace.html">DTrace Dynamic Tracing</a></dd>
+</dl>
+<dl>
+<dt><a href="funcref.html">Function Reference</a></dt>
+	<dd><a href="refs.basic.php.html">Affecting PHP's Behaviour</a></dd>
+	<dd><a href="refs.utilspec.audio.html">Audio Formats Manipulation</a></dd>
+	<dd><a href="refs.remote.auth.html">Authentication Services</a></dd>
+	<dd><a href="refs.utilspec.cmdline.html">Command Line Specific Extensions</a></dd>
+	<dd><a href="refs.compression.html">Compression and Archive Extensions</a></dd>
+	<dd><a href="refs.crypto.html">Cryptography Extensions</a></dd>
+	<dd><a href="refs.database.html">Database Extensions</a></dd>
+	<dd><a href="refs.calendar.html">Date and Time Related Extensions</a></dd>
+	<dd><a href="refs.fileprocess.file.html">File System Related Extensions</a></dd>
+	<dd><a href="refs.international.html">Human Language and Character Encoding Support</a></dd>
+	<dd><a href="refs.utilspec.image.html">Image Processing and Generation</a></dd>
+	<dd><a href="refs.remote.mail.html">Mail Related Extensions</a></dd>
+	<dd><a href="refs.math.html">Mathematical Extensions</a></dd>
+	<dd><a href="refs.utilspec.nontext.html">Non-Text MIME Output</a></dd>
+	<dd><a href="refs.fileprocess.process.html">Process Control Extensions</a></dd>
+	<dd><a href="refs.basic.other.html">Other Basic Extensions</a></dd>
+	<dd><a href="refs.remote.other.html">Other Services</a></dd>
+	<dd><a href="refs.search.html">Search Engine Extensions</a></dd>
+	<dd><a href="refs.utilspec.server.html">Server Specific Extensions</a></dd>
+	<dd><a href="refs.basic.session.html">Session Extensions</a></dd>
+	<dd><a href="refs.basic.text.html">Text Processing</a></dd>
+	<dd><a href="refs.basic.vartype.html">Variable and Type Related Extensions</a></dd>
+	<dd><a href="refs.webservice.html">Web Services</a></dd>
+	<dd><a href="refs.utilspec.windows.html">Windows Only Extensions</a></dd>
+	<dd><a href="refs.xml.html">XML Manipulation</a></dd>
+	<dd><a href="refs.ui.html">GUI Extensions</a></dd>
+</dl>
+<dl>
+<dt>Keyboard Shortcuts</dt><dt>?</dt>
+<dd>This help</dd>
+<dt>j</dt>
+<dd>Next menu item</dd>
+<dt>k</dt>
+<dd>Previous menu item</dd>
+<dt>g p</dt>
+<dd>Previous man page</dd>
+<dt>g n</dt>
+<dd>Next man page</dd>
+<dt>G</dt>
+<dd>Scroll to bottom</dd>
+<dt>g g</dt>
+<dd>Scroll to top</dd>
+<dt>g h</dt>
+<dd>Goto homepage</dd>
+<dt>g s</dt>
+<dd>Goto search<br>(current page)</dd>
+<dt>/</dt>
+<dd>Focus search box</dd>
+</dl></div></nav>
+<div id="goto">
+    <div class="search">
+         <div class="text"></div>
+         <div class="results"><ul></ul></div>
+   </div>
+</div>
+
+  <div id="breadcrumbs" class="row-fluid">
+    <div id="breadcrumbs-inner">
+          
+              
+          <ul>
+            <li><a href="index-2.html">PHP Manual</a></li>      <li><a href="funcref.html">Function Reference</a></li>      <li><a href="refs.calendar.html">Date and Time Related Extensions</a></li>      <li><a href="book.datetime.html">Date/Time</a></li>      <li><a href="class.datetime.html">DateTime</a></li>      </ul>
+    </div>
+  </div>
+
+
+
+
+<div id="layout" class="clearfix">
+  <section id="layout-content">
+  <div id="datetime.createfromformat" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">DateTime::createFromFormat</h1>
+  <h1 class="refname">date_create_from_format</h1>
+  <p class="verinfo">(PHP 5 &gt;= 5.3.0, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">DateTime::createFromFormat</span> -- <span class="refname">date_create_from_format</span> — <span class="dc-title">Parses a time string according to a specified format</span></p>
+
+ </div>
+
+ <div class="refsect1 description" id="refsect1-datetime.createfromformat-description">
+  <h3 class="title">Description</h3>
+  <p class="para">Object-oriented style</p>
+  <div class="methodsynopsis dc-description">
+   <span class="modifier">public</span> <span class="modifier">static</span> <span class="methodname"><strong>DateTime::createFromFormat</strong></span>(<span class="methodparam"><span class="type">string</span> <code class="parameter">$format</code></span>, <span class="methodparam"><span class="type">string</span> <code class="parameter">$datetime</code></span>, <span class="methodparam"><span class="type">?</span><span class="type"><span class="type"><a href="class.datetimezone.html" class="type DateTimeZone">DateTimeZone</a></span><span class="type"></span></span> <code class="parameter">$timezone</code><span class="initializer"> = <strong><code>null</code></strong></span></span>): <span class="type"><span class="type"><a href="class.datetime.html" class="type DateTime">DateTime</a></span>|<span class="type"><span class="type false">false</span></span></span></div>
+
+  <p class="para rdfs-comment">Procedural style</p>
+  <div class="methodsynopsis dc-description"><span class="methodname"><a href="function.date-create-from-format.html" class="methodname">date_create_from_format</a></span>(<span class="methodparam"><span class="type">string</span> <code class="parameter">$format</code></span>, <span class="methodparam"><span class="type">string</span> <code class="parameter">$datetime</code></span>, <span class="methodparam"><span class="type">?</span><span class="type"><span class="type"><a href="class.datetimezone.html" class="type DateTimeZone">DateTimeZone</a></span><span class="type"></span></span> <code class="parameter">$timezone</code><span class="initializer"> = <strong><code>null</code></strong></span></span>): <span class="type"><span class="type"><a href="class.datetime.html" class="type DateTime">DateTime</a></span>|<span class="type"><span class="type false">false</span></span></span></div>
+
+  <p class="para rdfs-comment">
+   Returns a new DateTime object representing the date and time specified by the
+   <code class="parameter">datetime</code> string, which was formatted in the given
+   <code class="parameter">format</code>.
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-datetime.createfromformat-parameters">
+  <h3 class="title">Parameters</h3>
+  <dl>
+   
+    <dt>
+<code class="parameter">format</code></dt>
+
+    <dd>
+
+     <p class="para">
+      The format that the passed in <span class="type">string</span> should be in. See the
+      formatting options below. In most cases, the same letters as for the
+      <span class="function"><a href="function.date.html" class="function">date()</a></span> can be used.
+     </p>
+     <p class="para">
+      </p><table class="doctable table">
+       <caption><strong>The following characters are recognized in the
+       <code class="parameter">format</code> parameter string</strong></caption>
+       
+        <thead>
+         <tr>
+          <th><code class="parameter">format</code> character</th>
+          <th>Description</th>
+          <th>Example parsable values</th>
+         </tr>
+
+        </thead>
+
+        <tbody class="tbody">
+         <tr>
+          <td style="text-align: center;"><em class="emphasis">Day</em></td>
+          <td>---</td>
+          <td>---</td>
+         </tr>
+
+         <tr>
+          <td><code class="literal">d</code> and <code class="literal">j</code></td>
+          <td>Day of the month, 2 digits with or without leading zeros</td>
+          <td>
+           <code class="literal">01</code> to <code class="literal">31</code> or
+           <code class="literal">1</code> to <code class="literal">31</code>
+          </td>
+         </tr>
+
+         <tr>
+          <td><code class="literal">D</code> and <code class="literal">l</code></td>
+          <td>A textual representation of a day</td>
+          <td>
+           <code class="literal">Mon</code> through <code class="literal">Sun</code> or
+           <code class="literal">Sunday</code> through <code class="literal">Saturday</code>
+          </td>
+         </tr>
+
+         <tr>
+          <td><code class="literal">S</code></td>
+          <td>English ordinal suffix for the day of the month, 2
+          characters. It's ignored while processing.</td>
+          <td>
+           <code class="literal">st</code>, <code class="literal">nd</code>, <code class="literal">rd</code> or
+           <code class="literal">th</code>.
+          </td>
+         </tr>
+
+         <tr>
+          <td><code class="literal">z</code></td>
+          <td>The day of the year (starting from 0)</td>
+          <td><code class="literal">0</code> through <code class="literal">365</code></td>
+         </tr>
+
+         <tr>
+          <td style="text-align: center;"><em class="emphasis">Month</em></td>
+          <td>---</td>
+          <td>---</td>
+         </tr>
+
+         <tr>
+          <td><code class="literal">F</code> and <code class="literal">M</code></td>
+          <td>A textual representation of a month, such as January or Sept</td>
+          <td>
+           <code class="literal">January</code> through <code class="literal">December</code> or
+           <code class="literal">Jan</code> through <code class="literal">Dec</code>
+          </td>
+         </tr>
+
+         <tr>
+          <td><code class="literal">m</code> and <code class="literal">n</code></td>
+          <td>Numeric representation of a month, with or without leading zeros</td>
+          <td>
+           <code class="literal">01</code> through <code class="literal">12</code> or
+           <code class="literal">1</code> through <code class="literal">12</code>
+          </td>
+         </tr>
+
+         <tr>
+          <td style="text-align: center;"><em class="emphasis">Year</em></td>
+          <td>---</td>
+          <td>---</td>
+         </tr>
+
+         <tr>
+          <td><code class="literal">Y</code></td>
+          <td>A full numeric representation of a year, 4 digits</td>
+          <td>Examples: <code class="literal">1999</code> or <code class="literal">2003</code></td>
+         </tr>
+
+         <tr>
+          <td><code class="literal">y</code></td>
+          <td>
+           A two digit representation of a year (which is assumed to be in the
+           range 1970-2069, inclusive)
+          </td>
+          <td>
+           Examples:
+           <code class="literal">99</code> or <code class="literal">03</code>
+           (which will be interpreted as <code class="literal">1999</code> and
+           <code class="literal">2003</code>, respectively)
+          </td>
+         </tr>
+
+         <tr>
+          <td style="text-align: center;"><em class="emphasis">Time</em></td>
+          <td>---</td>
+          <td>---</td>
+         </tr>
+
+         <tr>
+          <td><code class="literal">a</code> and <code class="literal">A</code></td>
+          <td>Ante meridiem and Post meridiem</td>
+          <td><code class="literal">am</code> or <code class="literal">pm</code></td>
+         </tr>
+
+         <tr>
+          <td><code class="literal">g</code> and <code class="literal">h</code></td>
+          <td>12-hour format of an hour with or without leading zero</td>
+          <td>
+           <code class="literal">1</code> through <code class="literal">12</code> or
+           <code class="literal">01</code> through <code class="literal">12</code>
+          </td>
+         </tr>
+
+         <tr>
+          <td><code class="literal">G</code> and <code class="literal">H</code></td>
+          <td>24-hour format of an hour with or without leading zeros</td>
+          <td>
+           <code class="literal">0</code> through <code class="literal">23</code> or
+           <code class="literal">00</code> through <code class="literal">23</code>
+          </td>
+         </tr>
+
+         <tr>
+          <td><code class="literal">i</code></td>
+          <td>Minutes with leading zeros</td>
+          <td><code class="literal">00</code> to <code class="literal">59</code></td>
+         </tr>
+
+         <tr>
+          <td><code class="literal">s</code></td>
+          <td>Seconds, with leading zeros</td>
+          <td><code class="literal">00</code> through <code class="literal">59</code></td>
+         </tr>
+
+         <tr>
+          <td><code class="literal">v</code></td>
+          <td>Milliseconds (up to three digits)</td>
+          <td>Example: <code class="literal">12</code>, <code class="literal">345</code></td>
+         </tr>
+
+         <tr>
+          <td><code class="literal">u</code></td>
+          <td>Microseconds (up to six digits)</td>
+          <td>Example: <code class="literal">45</code>, <code class="literal">654321</code></td>
+         </tr>
+
+         <tr>
+          <td style="text-align: center;"><em class="emphasis">Timezone</em></td>
+          <td>---</td>
+          <td>---</td>
+         </tr>
+
+         <tr>
+          <td>
+           <code class="literal">e</code>, <code class="literal">O</code>,
+           <code class="literal">P</code> and <code class="literal">T</code>
+          </td>
+          <td>Timezone identifier, or difference to UTC in hours, or
+          difference to UTC with colon between hours and minutes, or timezone
+          abbreviation</td>
+          <td>Examples: <code class="literal">UTC</code>, <code class="literal">GMT</code>,
+           <code class="literal">Atlantic/Azores</code> or 
+           <code class="literal">+0200</code> or <code class="literal">+02:00</code> or
+           <code class="literal">EST</code>, <code class="literal">MDT</code>
+          </td>
+         </tr>
+
+         <tr>
+          <td style="text-align: center;"><em class="emphasis">Full Date/Time</em></td>
+          <td>---</td>
+          <td>---</td>
+         </tr>
+
+         <tr>
+          <td><code class="literal">U</code></td>
+          <td>Seconds since the Unix Epoch (January 1 1970 00:00:00 GMT)</td>
+          <td>Example: <code class="literal">1292177455</code></td>
+         </tr>
+
+         <tr>
+          <td style="text-align: center;"><em class="emphasis">Whitespace and Separators</em></td>
+          <td>---</td>
+          <td>---</td>
+         </tr>
+
+         <tr>
+          <td><code class="literal"> </code> (space)</td>
+          <td>One space or one tab</td>
+          <td>Example: <code class="literal"> </code></td>
+         </tr>
+
+         <tr>
+          <td><code class="literal">#</code></td>
+          <td>
+           One of the following separation symbol: <code class="literal">;</code>,
+           <code class="literal">:</code>, <code class="literal">/</code>, <code class="literal">.</code>,
+           <code class="literal">,</code>, <code class="literal">-</code>, <code class="literal">(</code> or
+           <code class="literal">)</code>
+          </td>
+          <td>Example: <code class="literal">/</code></td>
+         </tr>
+
+         <tr>
+          <td>
+           <code class="literal">;</code>,
+           <code class="literal">:</code>, <code class="literal">/</code>, <code class="literal">.</code>,
+           <code class="literal">,</code>, <code class="literal">-</code>, <code class="literal">(</code> or
+           <code class="literal">)</code>
+          </td>
+          <td>The specified character.</td>
+          <td>Example: <code class="literal">-</code></td>
+         </tr>
+
+         <tr>
+          <td><code class="literal">?</code></td>
+          <td>A random byte</td>
+          <td>Example: <code class="literal">^</code> (Be aware that for UTF-8
+          characters you might need more than one <code class="literal">?</code>.
+          In this case, using <code class="literal">*</code> is probably what you want
+          instead)</td>
+         </tr>
+
+         <tr>
+          <td><code class="literal">*</code></td>
+          <td>Random bytes until the next separator or digit</td>
+          <td>Example: <code class="literal">*</code> in <code class="literal">Y-*-d</code> with
+          the string <code class="literal">2009-aWord-08</code> will match
+          <code class="literal">aWord</code></td>
+         </tr>
+
+         <tr>
+          <td><code class="literal">!</code></td>
+          <td>Resets all fields (year, month, day, hour, minute, second,
+          fraction and timezone information) to the Unix Epoch</td>
+          <td>Without <code class="literal">!,</code> all fields will be set to the
+          current date and time.</td>
+         </tr>
+
+         <tr>
+          <td><code class="literal">|</code></td>
+          <td>Resets all fields (year, month, day, hour, minute, second,
+          fraction and timezone information) to the Unix Epoch if they have
+          not been parsed yet</td>
+          <td><code class="literal">Y-m-d|</code> will set the year, month and day
+          to the information found in the string to parse, and sets the hour,
+          minute and second to 0.</td>
+         </tr>
+
+         <tr>
+          <td><code class="literal">+</code></td>
+          <td>If this format specifier is present, trailing data in the
+          string will not cause an error, but a warning instead</td>
+          <td>Use <span class="methodname"><a href="datetime.getlasterrors.html" class="methodname">DateTime::getLastErrors()</a></span> to find out
+          whether trailing data was present.</td>
+         </tr>
+
+        </tbody>
+       
+      </table>
+
+     <p></p>
+     <p class="para">
+      Unrecognized characters in the format string will cause the
+      parsing to fail and an error message is appended to the returned
+      structure. You can query error messages with
+      <span class="methodname"><a href="datetime.getlasterrors.html" class="methodname">DateTime::getLastErrors()</a></span>.
+     </p>       
+     <p class="para">
+      To include literal characters in <code class="parameter">format</code>, you have
+      to escape them with a backslash (<code class="literal">\</code>).
+     </p>
+     <p class="para">
+      If <code class="parameter">format</code> does not contain the character
+      <code class="literal">!</code> then portions of the generated time which are not
+      specified in <code class="parameter">format</code> will be set to the current
+      system time.
+     </p>
+     <p class="para">
+      If <code class="parameter">format</code> contains the
+      character <code class="literal">!</code>, then portions of the generated
+      time not provided in <code class="parameter">format</code>, as well as
+      values to the left-hand side of the <code class="literal">!</code>, will
+      be set to corresponding values from the Unix epoch.
+     </p>
+     <p class="para">
+      The Unix epoch is 1970-01-01 00:00:00 UTC.
+     </p>
+    </dd>
+
+   
+   
+    <dt>
+<code class="parameter">datetime</code></dt>
+
+    <dd>
+
+     <p class="para">
+      String representing the time.
+     </p>
+    </dd>
+
+   
+   
+    <dt>
+<code class="parameter">timezone</code></dt>
+
+    <dd>
+
+     <p class="para">
+      A <span class="classname"><a href="class.datetimezone.html" class="classname">DateTimeZone</a></span> object representing the
+      desired time zone.
+     </p>
+     <p class="para">
+      If <code class="parameter">timezone</code> is omitted or <strong><code>null</code></strong> and
+      <code class="parameter">datetime</code> contains no timezone,
+      the current timezone will be used.
+     </p>
+     <blockquote class="note"><p><strong class="note">Note</strong>: 
+      </p><p class="para">
+       The <code class="parameter">timezone</code> parameter
+       and the current timezone are ignored when the
+       <code class="parameter">datetime</code> parameter either
+       contains a UNIX timestamp (e.g. <code class="literal">946684800</code>)
+       or specifies a timezone
+       (e.g. <code class="literal">2010-01-28T15:00:00+02:00</code>).
+      </p>
+     <p></p></blockquote>
+    </dd>
+
+   
+  </dl>
+
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-datetime.createfromformat-returnvalues">
+  <h3 class="title">Return Values</h3>
+  <p class="para">
+   Returns a new DateTime instance or <strong><code>false</code></strong> on failure.
+  </p>
+ </div>
+
+
+ <div class="refsect1 changelog" id="refsect1-datetime.createfromformat-changelog">
+  <h3 class="title">Changelog</h3>
+  <p class="para">
+   </p><table class="doctable informaltable">
+    
+     <thead>
+      <tr>
+       <th>Version</th>
+       <th>Description</th>
+      </tr>
+
+     </thead>
+
+     <tbody class="tbody">
+      <tr>
+       <td>7.3.0</td>
+       <td>
+        The <code class="literal">v</code> <code class="parameter">format</code> specifier has been added.
+       </td>
+      </tr>
+
+     </tbody>
+    
+   </table>
+
+  <p></p>
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-datetime.createfromformat-examples">
+  <h3 class="title">Examples</h3>
+  <div class="example" id="example-1976">
+   <p><strong>Example #1 <span class="function"><strong>DateTime::createFromFormat()</strong></span> example</strong></p>
+   <div class="example-contents"><p>Object-oriented style</p></div>
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br>$date&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">DateTime</span><span style="color: #007700">::</span><span style="color: #0000BB">createFromFormat</span><span style="color: #007700">(</span><span style="color: #DD0000">'j-M-Y'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'15-Feb-2009'</span><span style="color: #007700">);<br>echo&nbsp;</span><span style="color: #0000BB">$date</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">format</span><span style="color: #007700">(</span><span style="color: #DD0000">'Y-m-d'</span><span style="color: #007700">);<br></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+   </div>
+
+   <div class="example-contents"><p>Procedural style</p></div>
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br>$date&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">date_create_from_format</span><span style="color: #007700">(</span><span style="color: #DD0000">'j-M-Y'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'15-Feb-2009'</span><span style="color: #007700">);<br>echo&nbsp;</span><span style="color: #0000BB">date_format</span><span style="color: #007700">(</span><span style="color: #0000BB">$date</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'Y-m-d'</span><span style="color: #007700">);<br></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+   </div>
+
+   <div class="example-contents"><p>The above examples will output:</p></div>
+   <div class="example-contents screen">
+<div class="cdata"><pre>2009-02-15
+</pre></div>
+   </div>
+  </div>
+  <div class="example" id="example-1977">
+   <p><strong>Example #2 Intricacies of <span class="function"><strong>DateTime::createFromFormat()</strong></span></strong></p>
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br></span><span style="color: #007700">echo&nbsp;</span><span style="color: #DD0000">'Current&nbsp;time:&nbsp;'&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">date</span><span style="color: #007700">(</span><span style="color: #DD0000">'Y-m-d&nbsp;H:i:s'</span><span style="color: #007700">)&nbsp;.&nbsp;</span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br><br></span><span style="color: #0000BB">$format&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">'Y-m-d'</span><span style="color: #007700">;<br></span><span style="color: #0000BB">$date&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">DateTime</span><span style="color: #007700">::</span><span style="color: #0000BB">createFromFormat</span><span style="color: #007700">(</span><span style="color: #0000BB">$format</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'2009-02-15'</span><span style="color: #007700">);<br>echo&nbsp;</span><span style="color: #DD0000">"Format:&nbsp;</span><span style="color: #0000BB">$format</span><span style="color: #DD0000">;&nbsp;"&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$date</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">format</span><span style="color: #007700">(</span><span style="color: #DD0000">'Y-m-d&nbsp;H:i:s'</span><span style="color: #007700">)&nbsp;.&nbsp;</span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br><br></span><span style="color: #0000BB">$format&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">'Y-m-d&nbsp;H:i:s'</span><span style="color: #007700">;<br></span><span style="color: #0000BB">$date&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">DateTime</span><span style="color: #007700">::</span><span style="color: #0000BB">createFromFormat</span><span style="color: #007700">(</span><span style="color: #0000BB">$format</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'2009-02-15&nbsp;15:16:17'</span><span style="color: #007700">);<br>echo&nbsp;</span><span style="color: #DD0000">"Format:&nbsp;</span><span style="color: #0000BB">$format</span><span style="color: #DD0000">;&nbsp;"&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$date</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">format</span><span style="color: #007700">(</span><span style="color: #DD0000">'Y-m-d&nbsp;H:i:s'</span><span style="color: #007700">)&nbsp;.&nbsp;</span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br><br></span><span style="color: #0000BB">$format&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">'Y-m-!d&nbsp;H:i:s'</span><span style="color: #007700">;<br></span><span style="color: #0000BB">$date&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">DateTime</span><span style="color: #007700">::</span><span style="color: #0000BB">createFromFormat</span><span style="color: #007700">(</span><span style="color: #0000BB">$format</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'2009-02-15&nbsp;15:16:17'</span><span style="color: #007700">);<br>echo&nbsp;</span><span style="color: #DD0000">"Format:&nbsp;</span><span style="color: #0000BB">$format</span><span style="color: #DD0000">;&nbsp;"&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$date</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">format</span><span style="color: #007700">(</span><span style="color: #DD0000">'Y-m-d&nbsp;H:i:s'</span><span style="color: #007700">)&nbsp;.&nbsp;</span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br><br></span><span style="color: #0000BB">$format&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">'!d'</span><span style="color: #007700">;<br></span><span style="color: #0000BB">$date&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">DateTime</span><span style="color: #007700">::</span><span style="color: #0000BB">createFromFormat</span><span style="color: #007700">(</span><span style="color: #0000BB">$format</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'15'</span><span style="color: #007700">);<br>echo&nbsp;</span><span style="color: #DD0000">"Format:&nbsp;</span><span style="color: #0000BB">$format</span><span style="color: #DD0000">;&nbsp;"&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$date</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">format</span><span style="color: #007700">(</span><span style="color: #DD0000">'Y-m-d&nbsp;H:i:s'</span><span style="color: #007700">)&nbsp;.&nbsp;</span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+   </div>
+
+   <div class="example-contents"><p>The above example will output
+something similar to:</p></div>
+   <div class="example-contents screen">
+<div class="cdata"><pre>Current time: 2010-04-23 10:29:35
+Format: Y-m-d; 2009-02-15 10:29:35
+Format: Y-m-d H:i:s; 2009-02-15 15:16:17
+Format: Y-m-!d H:i:s; 1970-01-15 15:16:17
+Format: !d; 1970-01-15 00:00:00
+</pre></div>
+   </div>
+  </div>
+  <div class="example" id="example-1978">
+   <p><strong>Example #3 Format string with literal characters</strong></p>
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br></span><span style="color: #007700">echo&nbsp;</span><span style="color: #0000BB">DateTime</span><span style="color: #007700">::</span><span style="color: #0000BB">createFromFormat</span><span style="color: #007700">(</span><span style="color: #DD0000">'H\h&nbsp;i\m&nbsp;s\s'</span><span style="color: #007700">,</span><span style="color: #DD0000">'23h&nbsp;15m&nbsp;03s'</span><span style="color: #007700">)-&gt;</span><span style="color: #0000BB">format</span><span style="color: #007700">(</span><span style="color: #DD0000">'H:i:s'</span><span style="color: #007700">);<br></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+   </div>
+
+   <div class="example-contents"><p>The above example will output
+something similar to:</p></div>
+   <div class="example-contents screen">
+<div class="cdata"><pre>23:15:03
+</pre></div>
+   </div>
+  </div>
+ </div>
+
+
+ <div class="refsect1 seealso" id="refsect1-datetime.createfromformat-seealso">
+  <h3 class="title">See Also</h3>
+  <ul class="simplelist">
+   <li class="member"><span class="function"><a href="datetime.construct.html" class="function" rel="rdfs-seeAlso">DateTime::__construct()</a> - Returns new DateTime object</span></li>
+   <li class="member"><span class="function"><a href="datetime.getlasterrors.html" class="function" rel="rdfs-seeAlso">DateTime::getLastErrors()</a> - Returns the warnings and errors</span></li>
+   <li class="member"><span class="function"><a href="function.checkdate.html" class="function" rel="rdfs-seeAlso">checkdate()</a> - Validate a Gregorian date</span></li>
+   <li class="member"><span class="function"><a href="function.strptime.html" class="function" rel="rdfs-seeAlso">strptime()</a> - Parse a time/date generated with strftime</span></li>
+  </ul>
+ </div>
+
+</div>
+<section id="usernotes">
+ <div class="head"><h3 class="title">User Contributed Notes</h3></div><div id="allnotes">
+  <div class="note" id="110385">  
+  <a class="name">
+  <strong class="user"><em>falundir at gmail dot com</em></strong></a><div class="date" title="2012-10-17 12:03"><strong>8 years ago</strong></div>
+  <div class="text" id="Hcom110385">
+<div class="phpcode"><code><span class="html">
+Be warned that DateTime object created without explicitely providing the time portion will have the current time set instead of 00:00:00.<br><br><span class="default">&lt;?php<br>$date </span><span class="keyword">= </span><span class="default">DateTime</span><span class="keyword">::</span><span class="default">createFromFormat</span><span class="keyword">(</span><span class="string">'Y-m-d'</span><span class="keyword">, </span><span class="string">'2012-10-17'</span><span class="keyword">);<br></span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">$date</span><span class="keyword">-&gt;</span><span class="default">format</span><span class="keyword">(</span><span class="string">'Y-m-d H:i:s'</span><span class="keyword">)); </span><span class="comment">//will print 2012-10-17 13:57:34 (the current time)<br></span><span class="default">?&gt;<br></span><br>That's also why you can't safely compare equality of such DateTime objects:<br><br><span class="default">&lt;?php<br>$date1 </span><span class="keyword">= </span><span class="default">DateTime</span><span class="keyword">::</span><span class="default">createFromFormat</span><span class="keyword">(</span><span class="string">'Y-m-d'</span><span class="keyword">, </span><span class="string">'2012-10-17'</span><span class="keyword">);<br></span><span class="default">sleep</span><span class="keyword">(</span><span class="default">2</span><span class="keyword">);<br></span><span class="default">$date2 </span><span class="keyword">= </span><span class="default">DateTime</span><span class="keyword">::</span><span class="default">createFromFormat</span><span class="keyword">(</span><span class="string">'Y-m-d'</span><span class="keyword">, </span><span class="string">'2012-10-17'</span><span class="keyword">);<br></span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">$date1 </span><span class="keyword">== </span><span class="default">$date2</span><span class="keyword">); </span><span class="comment">//will be false<br></span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">$date1 </span><span class="keyword">&gt;= </span><span class="default">$date2</span><span class="keyword">); </span><span class="comment">//will be false<br></span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">$date1 </span><span class="keyword">&lt; </span><span class="default">$date2</span><span class="keyword">); </span><span class="comment">//will be true<br></span><span class="default">?&gt;</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="118358">  
+  <a class="name">
+  <strong class="user"><em>Albie at aveit dot org</em></strong></a><div class="date" title="2015-11-22 06:58"><strong>5 years ago</strong></div>
+  <div class="text" id="Hcom118358">
+<div class="phpcode"><code><span class="html">
+If you want to safely compare equality of a DateTime object without explicitly providing the time portion make use of the ! format character.<br><br><span class="default">&lt;?php<br>$date1 </span><span class="keyword">= </span><span class="default">DateTime</span><span class="keyword">::</span><span class="default">createFromFormat</span><span class="keyword">(</span><span class="string">'!Y-m-d'</span><span class="keyword">, </span><span class="string">'2012-10-17'</span><span class="keyword">);<br></span><span class="default">sleep</span><span class="keyword">(</span><span class="default">2</span><span class="keyword">);<br></span><span class="default">$date2 </span><span class="keyword">= </span><span class="default">DateTime</span><span class="keyword">::</span><span class="default">createFromFormat</span><span class="keyword">(</span><span class="string">'!Y-m-d'</span><span class="keyword">, </span><span class="string">'2012-10-17'</span><span class="keyword">);<br></span><span class="comment">/* <br> $date1 and $date2 will both be set to a timestamp of "2012-10-17 00:00:00"<br> var_dump($date1 == $date2); //will be true<br> var_dump($date1 &gt; $date2); //will be false<br> var_dump($date1 &lt; $date2); //will be false<br>*/<br></span><span class="default">?&gt;<br></span><br>If you omit the ! format character without explicitly providing the time portion your timestamp which will include the current system time in the stamp.<br><br><span class="default">&lt;?php<br>$date1 </span><span class="keyword">= </span><span class="default">DateTime</span><span class="keyword">::</span><span class="default">createFromFormat</span><span class="keyword">(</span><span class="string">'Y-m-d'</span><span class="keyword">, </span><span class="string">'2012-10-17'</span><span class="keyword">);<br></span><span class="default">sleep</span><span class="keyword">(</span><span class="default">2</span><span class="keyword">);<br></span><span class="default">$date2 </span><span class="keyword">= </span><span class="default">DateTime</span><span class="keyword">::</span><span class="default">createFromFormat</span><span class="keyword">(</span><span class="string">'Y-m-d'</span><span class="keyword">, </span><span class="string">'2012-10-17'</span><span class="keyword">);<br></span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">$date1 </span><span class="keyword">== </span><span class="default">$date2</span><span class="keyword">); </span><span class="comment">//will be false<br></span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">$date1 </span><span class="keyword">&gt;= </span><span class="default">$date2</span><span class="keyword">); </span><span class="comment">//will be false<br></span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">$date1 </span><span class="keyword">&lt; </span><span class="default">$date2</span><span class="keyword">); </span><span class="comment">//will be true<br></span><span class="default">?&gt;</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="124160">  
+  <a class="name">
+  <strong class="user"><em>e dot fortmeyer01 at gmail dot com</em></strong></a><div class="date" title="2019-09-01 09:46"><strong>2 years ago</strong></div>
+  <div class="text" id="Hcom124160">
+<div class="phpcode"><code><span class="html">
+Be aware:<br>If the day of the month is not provided, creating a DateTime object will produce different results depending on what the current day of the year is.<br>This is because the current system date will be used where values are not provided.<br><br><span class="default">&lt;?php<br></span><span class="keyword">function </span><span class="default">printMonth</span><span class="keyword">(</span><span class="default">$month</span><span class="keyword">) {<br>&nbsp; &nbsp; echo </span><span class="default">DateTime</span><span class="keyword">::</span><span class="default">createFromFormat</span><span class="keyword">(</span><span class="string">"F"</span><span class="keyword">, </span><span class="string">"April"</span><span class="keyword">)-&gt;</span><span class="default">format</span><span class="keyword">(</span><span class="string">"F"</span><span class="keyword">);<br>}<br><br></span><span class="comment">// on August 1st<br></span><span class="default">printMonth</span><span class="keyword">(</span><span class="string">"April"</span><span class="keyword">);<br></span><span class="comment">// outputs April<br><br>// on August 31st<br></span><span class="default">printMonth</span><span class="keyword">(</span><span class="string">"April"</span><span class="keyword">);<br></span><span class="comment">// outputs May<br></span><span class="default">?&gt;</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="114697">  
+  <a class="name">
+  <strong class="user"><em>d dot shankarnarayana at gmail dot com</em></strong></a><div class="date" title="2014-03-24 06:46"><strong>7 years ago</strong></div>
+  <div class="text" id="Hcom114697">
+<div class="phpcode"><code><span class="html">
+Say if there is a string with&nbsp; $date = "today is 2014 January 1";&nbsp;&nbsp; and you need to extract "2014 January" using DateTime::createFromFormat().&nbsp; As you can see in the string there is something odd like "today is" .Since that string (today is) does not correspond to a date format, we need to escape that. <br><br>In this case, each and every character on that string has to be escaped as shown below.<br><br>The code.<br><br><span class="default">&lt;?php<br>$paragraph </span><span class="keyword">= </span><span class="string">"today is 2014 January 1"</span><span class="keyword">;<br></span><span class="default">$date </span><span class="keyword">= </span><span class="default">DateTime</span><span class="keyword">::</span><span class="default">createFromFormat</span><span class="keyword">(</span><span class="string">'\t\o\d\a\y \i\s Y F j'</span><span class="keyword">, </span><span class="default">$paragraph</span><span class="keyword">);<br>echo </span><span class="default">$date</span><span class="keyword">-&gt;</span><span class="default">format</span><span class="keyword">(</span><span class="string">'Y F'</span><span class="keyword">); </span><span class="comment">//"prints" 2014 January<br><br></span><span class="keyword">- </span><span class="default">Shankar Damodaran</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="120552">  
+  <a class="name">
+  <strong class="user"><em>thflori</em></strong></a><div class="date" title="2017-01-30 08:42"><strong>4 years ago</strong></div>
+  <div class="text" id="Hcom120552">
+<div class="phpcode"><code><span class="html">
+createFromFormat('U') has a strange behaviour: it ignores the datetimezone and the resulting DateTime object will always have GMT+0000 timezone.<br><br><span class="default">&lt;?php<br><br>$dt </span><span class="keyword">= </span><span class="default">DateTime</span><span class="keyword">::</span><span class="default">createFromFormat</span><span class="keyword">(</span><span class="string">'U'</span><span class="keyword">, </span><span class="default">time</span><span class="keyword">(), new </span><span class="default">DateTimeZone</span><span class="keyword">(</span><span class="string">'CET'</span><span class="keyword">));<br></span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">$dt</span><span class="keyword">-&gt;</span><span class="default">format</span><span class="keyword">(</span><span class="string">'Y-m-d H:i:s (T)'</span><span class="keyword">), </span><span class="default">date</span><span class="keyword">(</span><span class="string">'Y-m-d H:i:s (T)'</span><span class="keyword">, </span><span class="default">time</span><span class="keyword">()));<br><br></span><span class="default">?&gt;<br></span><br>The problem is microtime() and time() returning the timestamp in current timezone.&nbsp; Instead of using time you can use 'now' but to get a DateTimeObject with microseconds you have to write it this way to be sure to get the correct datetime:<br><br><span class="default">&lt;?php<br><br>$dt </span><span class="keyword">= \</span><span class="default">DateTime</span><span class="keyword">::</span><span class="default">createFromFormat</span><span class="keyword">(</span><span class="string">'U.u'</span><span class="keyword">, </span><span class="default">microtime</span><span class="keyword">(</span><span class="default">true</span><span class="keyword">))-&gt;</span><span class="default">setTimezone</span><span class="keyword">(new \</span><span class="default">DateTimeZone</span><span class="keyword">(</span><span class="default">date</span><span class="keyword">(</span><span class="string">'T'</span><span class="keyword">)));<br><br></span><span class="default">?&gt;</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="121431">  
+  <a class="name">
+  <strong class="user"><em>Fabian</em></strong></a><div class="date" title="2017-07-25 02:11"><strong>4 years ago</strong></div>
+  <div class="text" id="Hcom121431">
+<div class="phpcode"><code><span class="html">
+Parsing RFC3339 strings can be very tricky when their are microseconds in the date string.<br><br>Since PHP 7 there is the undocumented constant DateTime::RFC3339_EXTENDED (value: Y-m-d\TH:i:s.vP), which can be used to output an RFC3339 string with microseconds:<br><br><span class="default">&lt;?php<br>$d </span><span class="keyword">= new </span><span class="default">DateTime</span><span class="keyword">();<br></span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">$d</span><span class="keyword">-&gt;</span><span class="default">format</span><span class="keyword">(</span><span class="default">DateTime</span><span class="keyword">::</span><span class="default">RFC3339_EXTENDED</span><span class="keyword">)); </span><span class="comment">// 2017-07-25T13:47:12.000+00:00<br></span><span class="default">?&gt;<br></span><br>But the same constant can't be used for parsing an RFC3339 string with microseconds, instead do:<br><br><span class="default">&lt;?php<br>$date </span><span class="keyword">= </span><span class="default">DateTime</span><span class="keyword">::</span><span class="default">createFromFormat</span><span class="keyword">(</span><span class="string">"Y-m-d\TH:i:s.uP"</span><span class="keyword">, </span><span class="string">"2017-07-25T15:25:16.123456+02:00"</span><span class="keyword">)<br></span><span class="default">?&gt;<br></span><br>But "u" can only parse microseconds up to 6 digits, but some language (like Go) return more than 6 digits for the microseconds, e.g.: "2017-07-25T15:50:42.456430712+02:00" (when turning time.Time to JSON with json.Marshal()). Currently there is no other solution than using a separate parsing library to get correct dates.<br><br>Note: the difference between "v" and "u" is just 3 digits vs. 6 digits.</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="123108">  
+  <a class="name">
+  <strong class="user"><em>call4hemant at gmail dot com</em></strong></a><div class="date" title="2018-09-05 09:02"><strong>3 years ago</strong></div>
+  <div class="text" id="Hcom123108">
+<div class="phpcode"><code><span class="html">
+<span class="default">&lt;?php <br><br></span><span class="comment">// case 1: 13 as month will be converted to month=01 with Year=Year+1<br></span><span class="default">$oDateTime1 </span><span class="keyword">= </span><span class="default">DateTime</span><span class="keyword">::</span><span class="default">createFromFormat</span><span class="keyword">( </span><span class="string">'Y-m-d'</span><span class="keyword">, </span><span class="string">'2018-13-10'</span><span class="keyword">);<br>echo </span><span class="default">$oDateTime1</span><span class="keyword">-&gt;</span><span class="default">format</span><span class="keyword">(</span><span class="string">'Y-m-d'</span><span class="keyword">);<br></span><span class="comment">// "2019-01-10"&nbsp; <br><br>// case 2: 32 as date will convert date-01 and month=month+1<br></span><span class="default">$oDateTime2</span><span class="keyword">= </span><span class="default">DateTime</span><span class="keyword">::</span><span class="default">createFromFormat</span><span class="keyword">( </span><span class="string">'Y-m-d'</span><span class="keyword">, </span><span class="string">'2018-12-32'</span><span class="keyword">);<br>echo </span><span class="default">$oDateTime2</span><span class="keyword">-&gt;</span><span class="default">format</span><span class="keyword">(</span><span class="string">'Y-m-d'</span><span class="keyword">);<br></span><span class="comment">// "2019-01-10"&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; <br><br></span><span class="keyword">echo </span><span class="default">phpversion</span><span class="keyword">(); <br></span><span class="comment">// 7.2.7-1+ubuntu16.04.1+deb.sury.org+12019-01-102019-01-01<br><br></span><span class="default">?&gt;</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="119362">  
+  <a class="name">
+  <strong class="user"><em>lsloan-php dot net at umich dot edu</em></strong></a><div class="date" title="2016-05-20 07:37"><strong>5 years ago</strong></div>
+  <div class="text" id="Hcom119362">
+<div class="phpcode"><code><span class="html">
+Reportedly, microtime() may return a timestamp number without a fractional part if the microseconds are exactly zero.&nbsp; I.e., "1463772747" instead of the expected "1463772747.000000".&nbsp; number_format() can create a correct string representation of the microsecond timestamp every time, which can be useful for creating DateTime objects when used with DateTime::createFromFormat():<br><br><span class="default">&lt;?php<br>$now </span><span class="keyword">= </span><span class="default">DateTime</span><span class="keyword">::</span><span class="default">createFromFormat</span><span class="keyword">(</span><span class="string">'U.u'</span><span class="keyword">, </span><span class="default">number_format</span><span class="keyword">(</span><span class="default">microtime</span><span class="keyword">(</span><span class="default">true</span><span class="keyword">), </span><span class="default">6</span><span class="keyword">, </span><span class="string">'.'</span><span class="keyword">, </span><span class="string">''</span><span class="keyword">));<br></span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">$now</span><span class="keyword">-&gt;</span><span class="default">format</span><span class="keyword">(</span><span class="string">'Y-m-d H:i:s.u'</span><span class="keyword">)); </span><span class="comment">// E.g., string(26) "2016-05-20 19:36:26.900794"</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="119225">  
+  <a class="name">
+  <strong class="user"><em>tuxedobob</em></strong></a><div class="date" title="2016-04-21 07:06"><strong>5 years ago</strong></div>
+  <div class="text" id="Hcom119225">
+<div class="phpcode"><code><span class="html">
+If you're here because you're trying to create a date from a week number, you want to be using setISODate, as I discovered here:<br><br><a rel="nofollow" target="_blank">http://www.lornajane.net/posts/2011/getting-dates-from-week-numbers-in-php</a></span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="116027">  
+  <a class="name">
+  <strong class="user"><em>ELPI</em></strong></a><div class="date" title="2014-10-31 10:04"><strong>6 years ago</strong></div>
+  <div class="text" id="Hcom116027">
+<div class="phpcode"><code><span class="html">
+It can be confusing creating new DateTime from timestamp when your default timezone (date.timezone) is different from UTC and you are used to date()-function.<br><br>date()-function automatically uses your current timezone setting but DateTime::createFromFormat (or DateTime constructor) does not (it ignores tz-parameter).<br><br>You can get same results as date() by setting the timezone after object creation.<br><br><span class="default">&lt;?php<br>$ts </span><span class="keyword">= </span><span class="default">1414706400</span><span class="keyword">;<br></span><span class="default">$date1 </span><span class="keyword">= </span><span class="default">date</span><span class="keyword">(</span><span class="string">"Y-m-d H:i"</span><span class="keyword">, </span><span class="default">$ts</span><span class="keyword">);<br></span><span class="default">$date2 </span><span class="keyword">= </span><span class="default">DateTime</span><span class="keyword">::</span><span class="default">createFromFormat</span><span class="keyword">(</span><span class="string">"U"</span><span class="keyword">, </span><span class="default">$ts</span><span class="keyword">)-&gt;</span><span class="default">setTimeZone</span><span class="keyword">(new </span><span class="default">DateTimeZone</span><span class="keyword">(</span><span class="default">date_default_timezone_get</span><span class="keyword">()))-&gt;</span><span class="default">format</span><span class="keyword">(</span><span class="string">"Y-m-d H:i"</span><span class="keyword">);<br></span><span class="comment">//$date1===$date2<br></span><span class="default">?&gt;</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="122612">  
+  <a class="name">
+  <strong class="user"><em>labs at stronghold dot KILLIT dot media dot eu</em></strong></a><div class="date" title="2018-04-12 04:36"><strong>3 years ago</strong></div>
+  <div class="text" id="Hcom122612">
+<div class="phpcode"><code><span class="html">
+Please note that several points here are wrong.<br>When using microseconds:<br><br>- The createFromFormat DOES NOT accept the ".v" modifier, unlike the formatting ones.<br><br>- When you provide microseconds to this function, YOU MUST LEFT PAD THEM to SIX digits with ZEROES.<br>If you don't, anything below 100000 will be RIGHT PADDED with zeroes.<br>(So that 999 becomes 9990000, while 1234 becomes 123400. (Also 0510 becomes 051000.)<br>But at least you can use milliseconds as microseconds. But then again, REMEMBER TO LEFT PAD them to 3 digits if necessary..<br><br>- WHAT?? Go provides SEVEN digits of MICROSECONDS?? Something there must definitely be wrong. Micro is, by definition, one millionth, so anything above 999999 is odd.</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="122593">  
+  <a class="name">
+  <strong class="user"><em>c dot m dot tatro+php dot net at gmail dot com</em></strong></a><div class="date" title="2018-04-06 05:49"><strong>3 years ago</strong></div>
+  <div class="text" id="Hcom122593">
+<div class="phpcode"><code><span class="html">
+Be aware that using this method when calling an invalid date still generates a date. For instance<br><br>DateTime::createFromFormat('Y F j', '2016 February 40');<br><br>generates a date like such: 2016-03-11</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="120343">  
+  <a class="name">
+  <strong class="user"><em>vijaycs85 at gmail dot com</em></strong></a><div class="date" title="2016-12-16 12:31"><strong>4 years ago</strong></div>
+  <div class="text" id="Hcom120343">
+<div class="phpcode"><code><span class="html">
+There is no option to specify date format 'c' (e.g. 2004-02-12T15:19:21+00:00) directly. work around is to use Y-m-d\TH:i:sT</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="116624">  
+  <a class="name">
+  <strong class="user"><em>SeliusX</em></strong></a><div class="date" title="2015-01-30 02:37"><strong>6 years ago</strong></div>
+  <div class="text" id="Hcom116624">
+<div class="phpcode"><code><span class="html">
+Creating timestamps to the day can result in hidden bugs cause hours are taken from now:<br><br>Example:<br>$newDateTime = DateTime::createFromFormat('Y-m-d', '2014-12-10');<br>$newDateTime-&gt;format('H') != '00';<br><br>Better use time too or erase the values later on:<br>$newDateTime = DateTime::createFromFormat('Y-m-d h:i', '2014-12-10 00:00');<br>or:<br>$newDateTime = DateTime::createFromFormat(''Y-m-d', '2014-12-10');<br>$newDateTime-&gt;setTime(0, 0);</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="115270">  
+  <a class="name">
+  <strong class="user"><em>nicodoggie at gmail dot com</em></strong></a><div class="date" title="2014-06-25 01:20"><strong>7 years ago</strong></div>
+  <div class="text" id="Hcom115270">
+<div class="phpcode"><code><span class="html">
+I've found that on PHP 5.5.13 (not sure if it happens on other versions) if you enter a month larger than 12 on a format that takes numeric months, the result will be a DateTime object with its month equal to the number modulo 12 instead of returning false.<br><br><span class="default">&lt;?php<br>var_dump</span><span class="keyword">(</span><span class="default">DateTime</span><span class="keyword">::</span><span class="default">createFromFormat</span><span class="keyword">(</span><span class="string">'Y-m-d'</span><span class="keyword">, </span><span class="string">'2013-22-01'</span><span class="keyword">));<br></span><span class="default">?&gt;<br></span><br>results in:<br>class DateTime#4 (3) {<br>&nbsp; public $date =&gt;<br>&nbsp; string(19) "2014-10-01 13:05:05"<br>&nbsp; public $timezone_type =&gt;<br>&nbsp; int(3)<br>&nbsp; public $timezone =&gt;<br>&nbsp; string(3) "UTC"<br>}</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="109881">  
+  <a class="name">
+  <strong class="user"><em>thomas dot ribiere at allgoob dot com</em></strong></a><div class="date" title="2012-08-30 03:46"><strong>9 years ago</strong></div>
+  <div class="text" id="Hcom109881">
+<div class="phpcode"><code><span class="html">
+Not a bug, but a strange issue today 2012-08-30 :<br><br><span class="default">&lt;?php<br>$date </span><span class="keyword">= </span><span class="string">"2011-02"</span><span class="keyword">;<br>echo </span><span class="default">$date</span><span class="keyword">.</span><span class="string">"\n"</span><span class="keyword">;<br></span><span class="default">$d </span><span class="keyword">= </span><span class="default">DateTime</span><span class="keyword">::</span><span class="default">createFromFormat</span><span class="keyword">(</span><span class="string">"Y-m"</span><span class="keyword">,</span><span class="default">$date</span><span class="keyword">);<br>echo </span><span class="default">$d</span><span class="keyword">-&gt;</span><span class="default">format</span><span class="keyword">(</span><span class="string">"Y-m"</span><span class="keyword">);<br></span><span class="default">?&gt;<br></span>will display : <br>2011-02<br>2011-03<br><br>It's because there is no 2011-02-30, so datetime will take march insteed of february ...<br><br>To fix it :<br><span class="default">&lt;?php <br>$date </span><span class="keyword">= </span><span class="string">"2011-02"</span><span class="keyword">;<br>echo </span><span class="default">$date</span><span class="keyword">.</span><span class="string">"\n"</span><span class="keyword">;<br></span><span class="default">$d </span><span class="keyword">= </span><span class="default">DateTime</span><span class="keyword">::</span><span class="default">createFromFormat</span><span class="keyword">(</span><span class="string">"Y-m-d"</span><span class="keyword">,</span><span class="default">$date</span><span class="keyword">.</span><span class="string">"-01"</span><span class="keyword">);<br>echo </span><span class="default">$d</span><span class="keyword">-&gt;</span><span class="default">format</span><span class="keyword">(</span><span class="string">"Y-m"</span><span class="keyword">);<br></span><span class="default">?&gt;</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="120475">  
+  <a class="name">
+  <strong class="user"><em>joereynolds952 at gmail dot com</em></strong></a><div class="date" title="2017-01-17 11:11"><strong>4 years ago</strong></div>
+  <div class="text" id="Hcom120475">
+<div class="phpcode"><code><span class="html">
+Just a note that it is possible to call createFromFormat non statically.<br><br><span class="default">&lt;?php<br>$today </span><span class="keyword">= new </span><span class="default">DateTime</span><span class="keyword">();<br></span><span class="default">$today</span><span class="keyword">-&gt;</span><span class="default">createFromFormat</span><span class="keyword">(</span><span class="string">'Y-m-d'</span><span class="keyword">, </span><span class="string">'2016-11-04'</span><span class="keyword">));<br></span><span class="default">?&gt;<br></span><br>Is perfectly valid.<br><br>We had to do this once we started using PHPMD which would complain about static methods.</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="111123">  
+  <a class="name">
+  <strong class="user"><em>mail at marcel-juenemann dot de</em></strong></a><div class="date" title="2013-01-17 05:24"><strong>8 years ago</strong></div>
+  <div class="text" id="Hcom111123">
+<div class="phpcode"><code><span class="html">
+Note that the U option does not support negative timestamps (before 1970). You have to use date for that.</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="102910">  
+  <a class="name">
+  <strong class="user"><em>klugg at tlen dot pl</em></strong></a><div class="date" title="2011-03-14 09:52"><strong>10 years ago</strong></div>
+  <div class="text" id="Hcom102910">
+<div class="phpcode"><code><span class="html">
+In order to use a DateTimeZone, don't enter one of the DateTimeZone::Europe, DateTimeZone::Asia etc. constants, but create a DateTimeZone object with verbal timezone name passed as a string:<br><span class="default">&lt;?php<br>$eventDate </span><span class="keyword">= </span><span class="default">DateTime</span><span class="keyword">::</span><span class="default">createFromFormat</span><span class="keyword">(</span><span class="string">'m/d/y h:i'</span><span class="keyword">, </span><span class="string">'02/26/11 08:00'</span><span class="keyword">, new </span><span class="default">DateTimeZone</span><span class="keyword">(</span><span class="string">'Europe/Warsaw'</span><span class="keyword">));<br>echo </span><span class="default">date_format</span><span class="keyword">(</span><span class="default">$eventDate</span><span class="keyword">, </span><span class="string">'Y-m-d'</span><span class="keyword">); </span><span class="comment">//prints "2011-02-26"<br><br></span><span class="default">?&gt;</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="107452">  
+  <a class="name">
+  <strong class="user"><em>kamil dot wegrzynowicz at baobaz dot com</em></strong></a><div class="date" title="2012-02-10 08:05"><strong>9 years ago</strong></div>
+  <div class="text" id="Hcom107452">
+<div class="phpcode"><code><span class="html">
+It seems that a pipe ('|') option in formating string works only with PHP version 5.3.7 and newer. We had an issue with it on versions 5.3.2, 5.3.3, 5.3.6. Yet it was fine with 5.3.8 and 5.3.10.
+<br>
+<br>By short example:
+<br><span class="default">&lt;?php
+<br>$timezone </span><span class="keyword">= new </span><span class="default">DateTimeZone</span><span class="keyword">(</span><span class="string">'UTC'</span><span class="keyword">);
+<br></span><span class="default">$dateTime </span><span class="keyword">= </span><span class="default">DateTime</span><span class="keyword">::</span><span class="default">createFromFormat</span><span class="keyword">(</span><span class="string">'dmY|'</span><span class="keyword">, </span><span class="string">'01011972'</span><span class="keyword">, </span><span class="default">$timezone</span><span class="keyword">);
+<br></span><span class="comment">//$dateTime is FALSE in PHP v &lt;5.3.8
+<br></span><span class="default">?&gt;
+<br></span>
+<br>Instead we used a workaround:
+<br><span class="default">&lt;?php
+<br>$dateTime </span><span class="keyword">= </span><span class="default">DateTime</span><span class="keyword">::</span><span class="default">createFromFormat</span><span class="keyword">(</span><span class="string">'dmY'</span><span class="keyword">, </span><span class="string">'01011972'</span><span class="keyword">, </span><span class="default">$timezone</span><span class="keyword">);
+<br></span><span class="default">$dateTime</span><span class="keyword">-&gt;</span><span class="default">format</span><span class="keyword">(</span><span class="string">'Y-m-d 00:00:00'</span><span class="keyword">);
+<br></span><span class="default">?&gt;
+<br></span>which works fine.
+<br>
+<br>====
+<br>
+<br>Modified by admin to correct for version (5.3.7 not 5.3.8)</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="122472">  
+  <a class="name">
+  <strong class="user"><em>Salman A</em></strong></a><div class="date" title="2018-03-05 11:32"><strong>3 years ago</strong></div>
+  <div class="text" id="Hcom122472">
+<div class="phpcode"><code><span class="html">
+Seems like setting the hours to any value resets the remaining time portion (minute, second and milliseconds) to zero:<br><br><span class="default">&lt;?php<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="comment">// 2018-03-05 16:19:35.000000 &lt;- now<br></span><span class="default">DateTime</span><span class="keyword">::</span><span class="default">createFromFormat</span><span class="keyword">(</span><span class="string">"Y-m-d"</span><span class="keyword">,&nbsp; &nbsp;&nbsp; </span><span class="string">"2000-01-01"&nbsp; &nbsp; &nbsp; </span><span class="keyword">); </span><span class="comment">// 2000-01-01 16:19:35.000000<br></span><span class="default">DateTime</span><span class="keyword">::</span><span class="default">createFromFormat</span><span class="keyword">(</span><span class="string">"Y-m-d H"</span><span class="keyword">,&nbsp;&nbsp; </span><span class="string">"2000-01-01 00"&nbsp;&nbsp; </span><span class="keyword">); </span><span class="comment">// 2000-01-01 00:00:00.000000<br></span><span class="default">DateTime</span><span class="keyword">::</span><span class="default">createFromFormat</span><span class="keyword">(</span><span class="string">"Y-m-d H"</span><span class="keyword">,&nbsp;&nbsp; </span><span class="string">"2000-01-01 01"&nbsp;&nbsp; </span><span class="keyword">); </span><span class="comment">// 2000-01-01 01:00:00.000000<br></span><span class="default">DateTime</span><span class="keyword">::</span><span class="default">createFromFormat</span><span class="keyword">(</span><span class="string">"Y-m-d H:i"</span><span class="keyword">, </span><span class="string">"2000-01-01 01:30"</span><span class="keyword">); </span><span class="comment">// 2000-01-01 01:30:00.000000<br></span><span class="default">?&gt;<br></span><br>This is different from how missing year, month and dates are handled:<br><br><span class="default">&lt;?php<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="comment">// 2018-03-05 16:19:35.000000 &lt;- now<br></span><span class="default">DateTime</span><span class="keyword">::</span><span class="default">createFromFormat</span><span class="keyword">(</span><span class="string">"Y-m H:i"</span><span class="keyword">, </span><span class="string">"2000-01 01:30"</span><span class="keyword">);&nbsp; &nbsp; &nbsp; </span><span class="comment">// 2000-01-05 01:30:00.000000<br></span><span class="default">DateTime</span><span class="keyword">::</span><span class="default">createFromFormat</span><span class="keyword">(</span><span class="string">"Y-d H:i"</span><span class="keyword">, </span><span class="string">"2000-01 01:30"</span><span class="keyword">);&nbsp; &nbsp; &nbsp; </span><span class="comment">// 2000-03-01 01:30:00.000000<br></span><span class="default">?&gt;</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="118341">  
+  <a class="name">
+  <strong class="user"><em>chernomyrdin at gmail dot com</em></strong></a><div class="date" title="2015-11-19 11:39"><strong>5 years ago</strong></div>
+  <div class="text" id="Hcom118341">
+<div class="phpcode"><code><span class="html">
+<span class="default">&lt;?php<br>$date </span><span class="keyword">= </span><span class="default">DateTime</span><span class="keyword">::</span><span class="default">createFromFormat</span><span class="keyword">(</span><span class="string">'U.u'</span><span class="keyword">, </span><span class="default">microtime</span><span class="keyword">(</span><span class="default">TRUE</span><span class="keyword">));<br></span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">$date</span><span class="keyword">-&gt;</span><span class="default">format</span><span class="keyword">(</span><span class="string">'Y-m-d H:i:s.u'</span><span class="keyword">)); <br></span><span class="default">?&gt;<br></span>will print: 2015-11-19 11:37:29.125300 (the current time with microseconds)</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="124812">  
+  <a class="name">
+  <strong class="user"><em>parmonov98 at yandex dot ru</em></strong></a><div class="date" title="2020-03-10 11:16"><strong>1 year ago</strong></div>
+  <div class="text" id="Hcom124812">
+<div class="phpcode"><code><span class="html">
+sometimes we want unixtime rather than string date .<br>to get it from a string date,&nbsp; do this.<br>$format = 'Y-m-d';<br>$date = DateTime::createFromFormat($format, '2009-02-15');<br>$date-&gt;format("U"); // will print unixtime.<br><br>I thought this would be helpful.</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="124993">  
+  <a class="name">
+  <strong class="user"><em>mcab at acm dot org</em></strong></a><div class="date" title="2020-05-11 03:15"><strong>1 year ago</strong></div>
+  <div class="text" id="Hcom124993">
+<div class="phpcode"><code><span class="html">
+When using format "z Y" the function may return an incorrect date (as of 7.2.30).<br>I understand that this bug is being worked on but a simple solution that works now is to supply the year value first. i.e. always specify format "Y z".</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="117462">  
+  <a class="name">
+  <strong class="user"><em>jplevene</em></strong></a><div class="date" title="2015-06-12 03:09"><strong>6 years ago</strong></div>
+  <div class="text" id="Hcom117462">
+<div class="phpcode"><code><span class="html">
+To convert an email header date use the following (important, notice the * at the end)<br><br>$date = DateTime::createFromFormat('D, d M Y H:i:s O *', $email_date);<br><br>Some dates in email headers can be formatted as:<br>Fri, 12 Jun 2015 13:53:37 +0000 (UTC)<br><br>The "(UTC)" at the end of the date causes an error and will return a result of false unless the * is at the end.</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="103158">  
+  <a class="name">
+  <strong class="user"><em>Aurelien Marchand</em></strong></a><div class="date" title="2011-03-29 07:13"><strong>10 years ago</strong></div>
+  <div class="text" id="Hcom103158">
+<div class="phpcode"><code><span class="html">
+Beware specifying a timezone in the format as it will take precedence over the DateTimeZone object.<br><br><span class="default">&lt;?php<br>$timezone </span><span class="keyword">= </span><span class="string">"UTC"</span><span class="keyword">; </span><span class="comment">// or any other valid name for a timezone<br></span><span class="default">$d</span><span class="keyword">= </span><span class="default">DateTime</span><span class="keyword">::</span><span class="default">createFromFormat</span><span class="keyword">(</span><span class="string">"Y-m-d H:i:s T"</span><span class="keyword">,</span><span class="string">"2011-11-06 00:00:00 EDT"</span><span class="keyword">,new </span><span class="default">DateTimeZone</span><span class="keyword">(</span><span class="default">$timezone</span><span class="keyword">));<br>echo </span><span class="default">$d</span><span class="keyword">-&gt;</span><span class="default">format</span><span class="keyword">(</span><span class="string">"Y-m-d H:i:s T - U"</span><span class="keyword">);<br></span><span class="comment">// returns "2011-11-06 00:00:00 EDT - 1320552000"<br>// specifying $timezone = "Pacific/Honolulu"; would return the same string<br></span><span class="default">?&gt;<br></span><br>This gets hairy when you are playing with transition from summer time to winter time! For instance, in Toronto, the time change happens on 2011-11-06. One second after 01:59:59 (EDT), the time becomes 01:00:00 (EST), or 1320559200 in Unix timestamp.<br><br>However, notice the following:<br><span class="default">&lt;?php<br>$d </span><span class="keyword">= </span><span class="default">DateTime</span><span class="keyword">::</span><span class="default">createFromFormat</span><span class="keyword">(</span><span class="string">"Y-m-d H:i:s"</span><span class="keyword">,</span><span class="string">"2011-11-06 01:00:00"</span><span class="keyword">,new </span><span class="default">DateTimeZone</span><span class="keyword">(</span><span class="string">"EST"</span><span class="keyword">));<br>echo </span><span class="default">$d</span><span class="keyword">-&gt;</span><span class="default">format</span><span class="keyword">(</span><span class="string">"Y-m-d H:i:s T U"</span><span class="keyword">);<br></span><span class="comment">// returns "2011-11-06 01:00:00 EDT 1320555600" instead of "2011-11-06 01:00:00 EST 1320559200"<br><br>// so the correct way is to do:<br></span><span class="default">$d </span><span class="keyword">= </span><span class="default">DateTime</span><span class="keyword">::</span><span class="default">createFromFormat</span><span class="keyword">(</span><span class="string">"Y-m-d H:i:s T"</span><span class="keyword">,</span><span class="string">"2011-11-06 01:00:00 EST"</span><span class="keyword">,new </span><span class="default">DateTimeZone</span><span class="keyword">(</span><span class="default">$timezone</span><span class="keyword">)); </span><span class="comment">// set $timezone to any valid string for DateTimeZone, it doesn't matter<br></span><span class="keyword">echo </span><span class="default">$d</span><span class="keyword">-&gt;</span><span class="default">format</span><span class="keyword">(</span><span class="string">"Y-m-d H:i:s T U"</span><span class="keyword">);<br></span><span class="comment">// returns "2011-11-06 01:00:00 EST - 1320559200" as wanted<br><br></span><span class="default">?&gt;</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="120046">  
+  <a class="name">
+  <strong class="user"><em>rasmus at mindplay dot dk</em></strong></a><div class="date" title="2016-10-14 12:50"><strong>4 years ago</strong></div>
+  <div class="text" id="Hcom120046">
+<div class="phpcode"><code><span class="html">
+Note a weird and surprising inconsistency in `DateTime::createFromFormat()` and `DateTimeImmutable::createFromFormat()` when the format is `"U"` and these factory-functions are called with a Unix timestamp - in this case, the timezone argument is not only ignored (as per the documentation) but also *NOT APPLIED* the constructed object!<br><br>In other words, the timezone argument has no effect in this case, at all, which I found pretty surprising. Of course the timezone argument cannot be used in this case to parse the value, since it's a timezone-neutral Unix timestamp, but I was definitely expecting the factory-function to apply the specified timezone to the created object - this is especially surprising when it comes to `DateTimeImmutable`, since this behavior of the factory-function makes it impossible to create an instance from a timestamp and initialize the timezone with a single call; you will need a subsequent call to `setTimezone()` discarding the original object.<br><br>Very strange and confusing design :-*</span>
+</code></div>
+  </div>
+ </div></div>
+
+ 
+</section>    </section><!-- layout-content -->
+        
+
+
+  </div><!-- layout -->
+
+  
+
+    
+ <!-- External and third party libraries. -->
+ 
+
+
+
+
+
+
+
+<a id="toTop" href="javascript:;"><span id="toTopHover"></span><img width="40" height="40" alt="To Top" src="../../images/to-top%402x.png"></a>
+
+
+
+<!-- Mirrored from www.php.net/manual/en/datetime.createfromformat.php by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 11 Sep 2021 06:44:48 GMT -->
+
+</body></html>

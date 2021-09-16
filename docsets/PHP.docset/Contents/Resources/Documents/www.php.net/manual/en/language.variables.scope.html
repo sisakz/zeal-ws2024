@@ -1,0 +1,1071 @@
+<html><!-- Mirrored from www.php.net/manual/en/language.variables.scope.php by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 11 Sep 2021 02:29:35 GMT --><!-- Added by HTTrack --><head><meta http-equiv="content-type" content="text/html;charset=utf-8"><!-- /Added by HTTrack -->
+
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Variable scope</title>
+
+ <link rel="shortcut icon" href="../../favicon.ico">
+ <link rel="search" type="application/opensearchdescription+xml" href="http://php.net/phpnetimprovedsearch.src" title="Add PHP.net search">
+ <link rel="alternate" type="application/atom+xml" href="https://www.php.net/releases/feed.php" title="PHP Release feed">
+ <link rel="alternate" type="application/atom+xml" href="https://www.php.net/feed.atom" title="PHP: Hypertext Preprocessor">
+
+ <link rel="canonical" href="language.variables.scope.html">
+ <link rel="shorturl" href="https://www.php.net/variables.scope">
+ <link rel="alternate" href="https://www.php.net/variables.scope" hreflang="x-default">
+
+ <link rel="contents" href="index-2.html">
+ <link rel="index" href="language.variables.html">
+ <link rel="prev" href="language.variables.predefined.html">
+ <link rel="next" href="language.variables.variable.html">
+
+ <link rel="alternate" href="language.variables.scope.html" hreflang="en">
+ <link rel="alternate" href="https://www.php.net/manual/pt_BR/language.variables.scope.php" hreflang="pt_BR">
+ <link rel="alternate" href="https://www.php.net/manual/zh/language.variables.scope.php" hreflang="zh">
+ <link rel="alternate" href="https://www.php.net/manual/fr/language.variables.scope.php" hreflang="fr">
+ <link rel="alternate" href="https://www.php.net/manual/de/language.variables.scope.php" hreflang="de">
+ <link rel="alternate" href="https://www.php.net/manual/ja/language.variables.scope.php" hreflang="ja">
+ <link rel="alternate" href="https://www.php.net/manual/ro/language.variables.scope.php" hreflang="ro">
+ <link rel="alternate" href="https://www.php.net/manual/ru/language.variables.scope.php" hreflang="ru">
+ <link rel="alternate" href="https://www.php.net/manual/es/language.variables.scope.php" hreflang="es">
+ <link rel="alternate" href="https://www.php.net/manual/tr/language.variables.scope.php" hreflang="tr">
+
+<link rel="stylesheet" type="text/css" href="../../cached0aba.css?t=1539771603&amp;f=/fonts/Fira/fira.css" media="screen">
+<link rel="stylesheet" type="text/css" href="../../cached2ecf.css?t=1539765004&amp;f=/fonts/Font-Awesome/css/fontello.css" media="screen">
+<link rel="stylesheet" type="text/css" href="../../cachedba57.css?t=1606338002&amp;f=/styles/theme-base.css" media="screen">
+<link rel="stylesheet" type="text/css" href="../../cached3afa.css?t=1627831203&amp;f=/styles/theme-medium.css" media="screen">
+
+ <!--[if lte IE 7]>
+ <link rel="stylesheet" type="text/css" href="https://www.php.net/styles/workarounds.ie7.css" media="screen">
+ <![endif]-->
+
+ <!--[if lte IE 8]>
+ <script>
+  window.brokenIE = true;
+ </script>
+ <![endif]-->
+
+ <!--[if lte IE 9]>
+ <link rel="stylesheet" type="text/css" href="https://www.php.net/styles/workarounds.ie9.css" media="screen">
+ <![endif]-->
+
+ <!--[if IE]>
+ <script src="https://www.php.net/js/ext/html5.js"></script>
+ <![endif]-->
+
+ <base>
+
+
+</head>
+<body class="docs " style="">
+
+
+<div class="headsup"><a href="https://www.php.net/conferences/index.php#id2021-09-08-1">Longhorn PHP 2021</a></div>
+<nav id="trick"><div><dl>
+<dt><a href="getting-started.html">Getting Started</a></dt>
+	<dd><a href="introduction.html">Introduction</a></dd>
+	<dd><a href="tutorial.html">A simple tutorial</a></dd>
+<dt><a href="langref.html">Language Reference</a></dt>
+	<dd><a href="language.basic-syntax.html">Basic syntax</a></dd>
+	<dd><a href="language.types.html">Types</a></dd>
+	<dd><a href="language.variables.html">Variables</a></dd>
+	<dd><a href="language.constants.html">Constants</a></dd>
+	<dd><a href="language.expressions.html">Expressions</a></dd>
+	<dd><a href="language.operators.html">Operators</a></dd>
+	<dd><a href="language.control-structures.html">Control Structures</a></dd>
+	<dd><a href="language.functions.html">Functions</a></dd>
+	<dd><a href="language.oop5.html">Classes and Objects</a></dd>
+	<dd><a href="language.namespaces.html">Namespaces</a></dd>
+	<dd><a href="language.errors.html">Errors</a></dd>
+	<dd><a href="language.exceptions.html">Exceptions</a></dd>
+	<dd><a href="language.generators.html">Generators</a></dd>
+	<dd><a href="language.attributes.html">Attributes</a></dd>
+	<dd><a href="language.references.html">References Explained</a></dd>
+	<dd><a href="reserved.variables.html">Predefined Variables</a></dd>
+	<dd><a href="reserved.exceptions.html">Predefined Exceptions</a></dd>
+	<dd><a href="reserved.interfaces.html">Predefined Interfaces and Classes</a></dd>
+	<dd><a href="context.html">Context options and parameters</a></dd>
+	<dd><a href="wrappers.html">Supported Protocols and Wrappers</a></dd>
+</dl>
+<dl>
+<dt><a href="security.html">Security</a></dt>
+	<dd><a href="security.intro.html">Introduction</a></dd>
+	<dd><a href="security.general.html">General considerations</a></dd>
+	<dd><a href="security.cgi-bin.html">Installed as CGI binary</a></dd>
+	<dd><a href="security.apache.html">Installed as an Apache module</a></dd>
+	<dd><a href="security.sessions.html">Session Security</a></dd>
+	<dd><a href="security.filesystem.html">Filesystem Security</a></dd>
+	<dd><a href="security.database.html">Database Security</a></dd>
+	<dd><a href="security.errors.html">Error Reporting</a></dd>
+	<dd><a href="security.variables.html">User Submitted Data</a></dd>
+	<dd><a href="security.hiding.html">Hiding PHP</a></dd>
+	<dd><a href="security.current.html">Keeping Current</a></dd>
+<dt><a href="features.html">Features</a></dt>
+	<dd><a href="features.http-auth.html">HTTP authentication with PHP</a></dd>
+	<dd><a href="features.cookies.html">Cookies</a></dd>
+	<dd><a href="features.sessions.html">Sessions</a></dd>
+	<dd><a href="features.xforms.html">Dealing with XForms</a></dd>
+	<dd><a href="features.file-upload.html">Handling file uploads</a></dd>
+	<dd><a href="features.remote-files.html">Using remote files</a></dd>
+	<dd><a href="features.connection-handling.html">Connection handling</a></dd>
+	<dd><a href="features.persistent-connections.html">Persistent Database Connections</a></dd>
+	<dd><a href="features.commandline.html">Command line usage</a></dd>
+	<dd><a href="features.gc.html">Garbage Collection</a></dd>
+	<dd><a href="features.dtrace.html">DTrace Dynamic Tracing</a></dd>
+</dl>
+<dl>
+<dt><a href="funcref.html">Function Reference</a></dt>
+	<dd><a href="refs.basic.php.html">Affecting PHP's Behaviour</a></dd>
+	<dd><a href="refs.utilspec.audio.html">Audio Formats Manipulation</a></dd>
+	<dd><a href="refs.remote.auth.html">Authentication Services</a></dd>
+	<dd><a href="refs.utilspec.cmdline.html">Command Line Specific Extensions</a></dd>
+	<dd><a href="refs.compression.html">Compression and Archive Extensions</a></dd>
+	<dd><a href="refs.crypto.html">Cryptography Extensions</a></dd>
+	<dd><a href="refs.database.html">Database Extensions</a></dd>
+	<dd><a href="refs.calendar.html">Date and Time Related Extensions</a></dd>
+	<dd><a href="refs.fileprocess.file.html">File System Related Extensions</a></dd>
+	<dd><a href="refs.international.html">Human Language and Character Encoding Support</a></dd>
+	<dd><a href="refs.utilspec.image.html">Image Processing and Generation</a></dd>
+	<dd><a href="refs.remote.mail.html">Mail Related Extensions</a></dd>
+	<dd><a href="refs.math.html">Mathematical Extensions</a></dd>
+	<dd><a href="refs.utilspec.nontext.html">Non-Text MIME Output</a></dd>
+	<dd><a href="refs.fileprocess.process.html">Process Control Extensions</a></dd>
+	<dd><a href="refs.basic.other.html">Other Basic Extensions</a></dd>
+	<dd><a href="refs.remote.other.html">Other Services</a></dd>
+	<dd><a href="refs.search.html">Search Engine Extensions</a></dd>
+	<dd><a href="refs.utilspec.server.html">Server Specific Extensions</a></dd>
+	<dd><a href="refs.basic.session.html">Session Extensions</a></dd>
+	<dd><a href="refs.basic.text.html">Text Processing</a></dd>
+	<dd><a href="refs.basic.vartype.html">Variable and Type Related Extensions</a></dd>
+	<dd><a href="refs.webservice.html">Web Services</a></dd>
+	<dd><a href="refs.utilspec.windows.html">Windows Only Extensions</a></dd>
+	<dd><a href="refs.xml.html">XML Manipulation</a></dd>
+	<dd><a href="refs.ui.html">GUI Extensions</a></dd>
+</dl>
+<dl>
+<dt>Keyboard Shortcuts</dt><dt>?</dt>
+<dd>This help</dd>
+<dt>j</dt>
+<dd>Next menu item</dd>
+<dt>k</dt>
+<dd>Previous menu item</dd>
+<dt>g p</dt>
+<dd>Previous man page</dd>
+<dt>g n</dt>
+<dd>Next man page</dd>
+<dt>G</dt>
+<dd>Scroll to bottom</dd>
+<dt>g g</dt>
+<dd>Scroll to top</dd>
+<dt>g h</dt>
+<dd>Goto homepage</dd>
+<dt>g s</dt>
+<dd>Goto search<br>(current page)</dd>
+<dt>/</dt>
+<dd>Focus search box</dd>
+</dl></div></nav>
+<div id="goto">
+    <div class="search">
+         <div class="text"></div>
+         <div class="results"><ul></ul></div>
+   </div>
+</div>
+
+  <div id="breadcrumbs" class="row-fluid">
+    <div id="breadcrumbs-inner">
+          
+              
+          <ul>
+            <li><a href="index-2.html">PHP Manual</a></li>      <li><a href="langref.html">Language Reference</a></li>      <li><a href="language.variables.html">Variables</a></li>      </ul>
+    </div>
+  </div>
+
+
+
+
+<div id="layout" class="clearfix">
+  <section id="layout-content">
+  <div id="language.variables.scope" class="sect1">
+   <h2 class="title">Variable scope</h2>
+
+   <p class="simpara">
+    The scope of a variable is the context within which it is defined.
+    For the most part all PHP variables only have a single scope.
+    This single scope spans included and required files as well.  For
+    example:
+   </p>
+   <div class="informalexample">
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br>$a&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">1</span><span style="color: #007700">;<br>include&nbsp;</span><span style="color: #DD0000">'b.inc'</span><span style="color: #007700">;<br></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+   <p class="simpara">
+    Here the <var class="varname">$a</var> variable will be available within
+    the included <var class="filename">b.inc</var> script.  However, within
+    user-defined functions a local function scope is introduced.  Any
+    variable used inside a function is by default limited to the local
+    function scope.  For example:
+   </p>
+    
+   <div class="informalexample">
+    <div class="example-contents"> 
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br>$a&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">1</span><span style="color: #007700">;&nbsp;</span><span style="color: #FF8000">/*&nbsp;global&nbsp;scope&nbsp;*/&nbsp;<br><br></span><span style="color: #007700">function&nbsp;</span><span style="color: #0000BB">test</span><span style="color: #007700">()<br>{&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #0000BB">$a</span><span style="color: #007700">;&nbsp;</span><span style="color: #FF8000">/*&nbsp;reference&nbsp;to&nbsp;local&nbsp;scope&nbsp;variable&nbsp;*/&nbsp;<br></span><span style="color: #007700">}&nbsp;<br><br></span><span style="color: #0000BB">test</span><span style="color: #007700">();<br></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+
+   <p class="simpara">
+    This script will not produce any output because the echo statement
+    refers to a local version of the <var class="varname">$a</var> variable,
+    and it has not been assigned a value within this scope.  You may
+    notice that this is a little bit different from the C language in
+    that global variables in C are automatically available to
+    functions unless specifically overridden by a local definition.
+    This can cause some problems in that people may inadvertently
+    change a global variable.  In PHP global variables must be
+    declared global inside a function if they are going to be used in
+    that function.
+   </p>
+       
+   <div class="sect2" id="language.variables.scope.global">
+    <h3 class="title">The <code class="literal">global</code> keyword</h3>
+    <p class="simpara">
+     First, an example use of <code class="literal">global</code>:
+    </p>
+    <p class="para">
+     </p><div class="example" id="example-78">
+      <p><strong>Example #1 Using <code class="literal">global</code></strong></p>
+      <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br>$a&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">1</span><span style="color: #007700">;<br></span><span style="color: #0000BB">$b&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">2</span><span style="color: #007700">;<br><br>function&nbsp;</span><span style="color: #0000BB">Sum</span><span style="color: #007700">()<br>{<br>&nbsp;&nbsp;&nbsp;&nbsp;global&nbsp;</span><span style="color: #0000BB">$a</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$b</span><span style="color: #007700">;<br><br>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$b&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$a&nbsp;</span><span style="color: #007700">+&nbsp;</span><span style="color: #0000BB">$b</span><span style="color: #007700">;<br>}&nbsp;<br><br></span><span style="color: #0000BB">Sum</span><span style="color: #007700">();<br>echo&nbsp;</span><span style="color: #0000BB">$b</span><span style="color: #007700">;<br></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+      </div>
+
+     </div>
+    <p></p>
+
+   <p class="simpara">
+    The above script will output <code class="literal">3</code>.  By declaring
+    <var class="varname">$a</var> and <var class="varname">$b</var> global within the
+    function, all references to either variable will refer to the
+    global version.  There is no limit to the number of global
+    variables that can be manipulated by a function.
+   </p>
+
+   <p class="simpara">
+    A second way to access variables from the global scope is to use
+    the special PHP-defined <var class="varname"><a href="reserved.variables.globals.html" class="classname">$GLOBALS</a></var> array.  The
+    previous example can be rewritten as:
+   </p>
+   <p class="para">
+    </p><div class="example" id="example-79">
+     <p><strong>Example #2 Using <var class="varname"><a href="reserved.variables.globals.html" class="classname">$GLOBALS</a></var> instead of global</strong></p>
+     <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br>$a&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">1</span><span style="color: #007700">;<br></span><span style="color: #0000BB">$b&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">2</span><span style="color: #007700">;<br><br>function&nbsp;</span><span style="color: #0000BB">Sum</span><span style="color: #007700">()<br>{<br>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$GLOBALS</span><span style="color: #007700">[</span><span style="color: #DD0000">'b'</span><span style="color: #007700">]&nbsp;=&nbsp;</span><span style="color: #0000BB">$GLOBALS</span><span style="color: #007700">[</span><span style="color: #DD0000">'a'</span><span style="color: #007700">]&nbsp;+&nbsp;</span><span style="color: #0000BB">$GLOBALS</span><span style="color: #007700">[</span><span style="color: #DD0000">'b'</span><span style="color: #007700">];<br>}&nbsp;<br><br></span><span style="color: #0000BB">Sum</span><span style="color: #007700">();<br>echo&nbsp;</span><span style="color: #0000BB">$b</span><span style="color: #007700">;<br></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+     </div>
+
+    </div>
+   <p></p>
+
+   <p class="simpara">
+    The <var class="varname"><a href="reserved.variables.globals.html" class="classname">$GLOBALS</a></var> array is an associative array with
+    the name of the global variable being the key and the contents of
+    that variable being the value of the array element.
+    Notice how <var class="varname"><a href="reserved.variables.globals.html" class="classname">$GLOBALS</a></var> exists in any scope, this 
+    is because <var class="varname"><a href="reserved.variables.globals.html" class="classname">$GLOBALS</a></var> is a <a href="language.variables.superglobals.html" class="link">superglobal</a>.
+    Here's an example demonstrating the power of superglobals: 
+   </p>
+   <p class="para">
+    </p><div class="example" id="example-80">
+     <p><strong>Example #3 Example demonstrating superglobals and scope</strong></p>
+     <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br></span><span style="color: #007700">function&nbsp;</span><span style="color: #0000BB">test_superglobal</span><span style="color: #007700">()<br>{<br>&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #0000BB">$_POST</span><span style="color: #007700">[</span><span style="color: #DD0000">'name'</span><span style="color: #007700">];<br>}<br></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+     </div>
+
+    </div>
+   <p></p>
+   <blockquote class="note"><p><strong class="note">Note</strong>: 
+    </p><p class="para">
+     Using <code class="literal">global</code> keyword outside a function is not an
+     error. It can be used if the file is included from inside a function.
+    </p>
+   <p></p></blockquote>
+  </div>
+ 
+  <div class="sect2" id="language.variables.scope.static">
+   <h3 class="title">Using <code class="literal">static</code> variables</h3>
+   <p class="simpara">
+    Another important feature of variable scoping is the
+    <em class="emphasis">static</em> variable.  A static variable exists
+    only in a local function scope, but it does not lose its value
+    when program execution leaves this scope.  Consider the following
+    example:
+   </p>
+   <p class="para">
+    </p><div class="example" id="example-81">
+     <p><strong>Example #4 Example demonstrating need for static variables</strong></p>
+     <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br></span><span style="color: #007700">function&nbsp;</span><span style="color: #0000BB">test</span><span style="color: #007700">()<br>{<br>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$a&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">;<br>&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #0000BB">$a</span><span style="color: #007700">;<br>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$a</span><span style="color: #007700">++;<br>}<br></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+     </div>
+
+    </div>
+   <p></p>
+   <p class="simpara">
+    This function is quite useless since every time it is called it
+    sets <var class="varname">$a</var> to <code class="literal">0</code> and prints
+    <code class="literal">0</code>.  The <var class="varname">$a</var>++ which increments the
+    variable serves no purpose since as soon as the function exits the
+    <var class="varname">$a</var> variable disappears.  To make a useful
+    counting function which will not lose track of the current count,
+    the <var class="varname">$a</var> variable is declared static:
+   </p>
+   <p class="para">
+    </p><div class="example" id="example-82">
+     <p><strong>Example #5 Example use of static variables</strong></p>
+     <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br></span><span style="color: #007700">function&nbsp;</span><span style="color: #0000BB">test</span><span style="color: #007700">()<br>{<br>&nbsp;&nbsp;&nbsp;&nbsp;static&nbsp;</span><span style="color: #0000BB">$a&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">;<br>&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #0000BB">$a</span><span style="color: #007700">;<br>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$a</span><span style="color: #007700">++;<br>}<br></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+     </div>
+
+    </div>
+   <p></p>
+   <p class="simpara">
+    Now, <var class="varname">$a</var> is initialized only in first call of function
+    and every time the <code class="literal">test()</code> function is called it will print the
+    value of <var class="varname">$a</var> and increment it.
+   </p>
+
+   <p class="simpara">
+    Static variables also provide one way to deal with recursive
+    functions. A recursive function is one which calls itself.  Care
+    must be taken when writing a recursive function because it is
+    possible to make it recurse indefinitely.  You must make sure you
+    have an adequate way of terminating the recursion.  The following
+    simple function recursively counts to 10, using the static
+    variable <var class="varname">$count</var> to know when to stop:
+   </p>
+   <p class="para">
+    </p><div class="example" id="example-83">
+     <p><strong>Example #6 Static variables with recursive functions</strong></p>
+     <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br></span><span style="color: #007700">function&nbsp;</span><span style="color: #0000BB">test</span><span style="color: #007700">()<br>{<br>&nbsp;&nbsp;&nbsp;&nbsp;static&nbsp;</span><span style="color: #0000BB">$count&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">;<br><br>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$count</span><span style="color: #007700">++;<br>&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #0000BB">$count</span><span style="color: #007700">;<br>&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">$count&nbsp;</span><span style="color: #007700">&lt;&nbsp;</span><span style="color: #0000BB">10</span><span style="color: #007700">)&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">test</span><span style="color: #007700">();<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$count</span><span style="color: #007700">--;<br>}<br></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+     </div>
+
+    </div>
+   <p></p>
+
+   <p class="para">
+    Static variables can be assigned values which are the
+    result of constant expressions, but dynamic expressions, such as function
+    calls, will cause a parse error.
+   </p>
+   <p class="para">
+    </p><div class="example" id="example-84">
+     <p><strong>Example #7 Declaring static variables</strong></p>
+     <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br></span><span style="color: #007700">function&nbsp;</span><span style="color: #0000BB">foo</span><span style="color: #007700">(){<br>&nbsp;&nbsp;&nbsp;&nbsp;static&nbsp;</span><span style="color: #0000BB">$int&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;correct&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">static&nbsp;</span><span style="color: #0000BB">$int&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">1</span><span style="color: #007700">+</span><span style="color: #0000BB">2</span><span style="color: #007700">;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;correct<br>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">static&nbsp;</span><span style="color: #0000BB">$int&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">sqrt</span><span style="color: #007700">(</span><span style="color: #0000BB">121</span><span style="color: #007700">);&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;wrong&nbsp;&nbsp;(as&nbsp;it&nbsp;is&nbsp;a&nbsp;function)<br><br>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$int</span><span style="color: #007700">++;<br>&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #0000BB">$int</span><span style="color: #007700">;<br>}<br></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+     </div>
+
+    </div>
+   <p></p> 
+
+   <blockquote class="note"><p><strong class="note">Note</strong>: 
+    </p><p class="para">
+     Static declarations are resolved in compile-time.
+    </p>
+   <p></p></blockquote>
+  </div>
+
+  <div class="sect2" id="language.variables.scope.references">
+   <h3 class="title">References with <code class="literal">global</code> and <code class="literal">static</code> variables</h3>
+   <p class="simpara">
+    PHP implements the
+    <a href="language.variables.scope.html#language.variables.scope.static" class="link">static</a> and 
+    <a href="language.variables.scope.html#language.variables.scope.global" class="link">global</a> modifier 
+    for variables in terms of <a href="language.references.html" class="link">
+    references</a>. For example, a true global variable
+    imported inside a function scope with the <code class="literal">global</code>
+    statement actually creates a reference to the global variable. This can
+    lead to unexpected behaviour which the following example addresses:
+   </p>
+
+   <div class="informalexample">
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br></span><span style="color: #007700">function&nbsp;</span><span style="color: #0000BB">test_global_ref</span><span style="color: #007700">()&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;global&nbsp;</span><span style="color: #0000BB">$obj</span><span style="color: #007700">;<br>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$new&nbsp;</span><span style="color: #007700">=&nbsp;new&nbsp;</span><span style="color: #0000BB">stdclass</span><span style="color: #007700">;<br>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$obj&nbsp;</span><span style="color: #007700">=&nbsp;&amp;</span><span style="color: #0000BB">$new</span><span style="color: #007700">;<br>}<br><br>function&nbsp;</span><span style="color: #0000BB">test_global_noref</span><span style="color: #007700">()&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;global&nbsp;</span><span style="color: #0000BB">$obj</span><span style="color: #007700">;<br>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$new&nbsp;</span><span style="color: #007700">=&nbsp;new&nbsp;</span><span style="color: #0000BB">stdclass</span><span style="color: #007700">;<br>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$obj&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$new</span><span style="color: #007700">;<br>}<br><br></span><span style="color: #0000BB">test_global_ref</span><span style="color: #007700">();<br></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">$obj</span><span style="color: #007700">);<br></span><span style="color: #0000BB">test_global_noref</span><span style="color: #007700">();<br></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">$obj</span><span style="color: #007700">);<br></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+
+   <p class="para">The above example will output:</p>
+
+   <div class="example-contents screen">
+<div class="cdata"><pre>NULL
+object(stdClass)#1 (0) {
+}
+</pre></div>
+   </div>
+
+   <p class="simpara">
+    A similar behaviour applies to the <code class="literal">static</code> statement.
+    References are not stored statically:
+   </p>
+   
+   <div class="informalexample">
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br></span><span style="color: #007700">function&nbsp;&amp;</span><span style="color: #0000BB">get_instance_ref</span><span style="color: #007700">()&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;static&nbsp;</span><span style="color: #0000BB">$obj</span><span style="color: #007700">;<br><br>&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">'Static&nbsp;object:&nbsp;'</span><span style="color: #007700">;<br>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">$obj</span><span style="color: #007700">);<br>&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(!isset(</span><span style="color: #0000BB">$obj</span><span style="color: #007700">))&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$new&nbsp;</span><span style="color: #007700">=&nbsp;new&nbsp;</span><span style="color: #0000BB">stdclass</span><span style="color: #007700">;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;Assign&nbsp;a&nbsp;reference&nbsp;to&nbsp;the&nbsp;static&nbsp;variable<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$obj&nbsp;</span><span style="color: #007700">=&nbsp;&amp;</span><span style="color: #0000BB">$new</span><span style="color: #007700">;<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(!isset(</span><span style="color: #0000BB">$obj</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">property</span><span style="color: #007700">))&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$obj</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">property&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">1</span><span style="color: #007700">;<br>&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;else&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$obj</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">property</span><span style="color: #007700">++;<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">$obj</span><span style="color: #007700">;<br>}<br><br>function&nbsp;&amp;</span><span style="color: #0000BB">get_instance_noref</span><span style="color: #007700">()&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;static&nbsp;</span><span style="color: #0000BB">$obj</span><span style="color: #007700">;<br><br>&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">'Static&nbsp;object:&nbsp;'</span><span style="color: #007700">;<br>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">$obj</span><span style="color: #007700">);<br>&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(!isset(</span><span style="color: #0000BB">$obj</span><span style="color: #007700">))&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$new&nbsp;</span><span style="color: #007700">=&nbsp;new&nbsp;</span><span style="color: #0000BB">stdclass</span><span style="color: #007700">;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;Assign&nbsp;the&nbsp;object&nbsp;to&nbsp;the&nbsp;static&nbsp;variable<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$obj&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$new</span><span style="color: #007700">;<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(!isset(</span><span style="color: #0000BB">$obj</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">property</span><span style="color: #007700">))&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$obj</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">property&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">1</span><span style="color: #007700">;<br>&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;else&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$obj</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">property</span><span style="color: #007700">++;<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">$obj</span><span style="color: #007700">;<br>}<br><br></span><span style="color: #0000BB">$obj1&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">get_instance_ref</span><span style="color: #007700">();<br></span><span style="color: #0000BB">$still_obj1&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">get_instance_ref</span><span style="color: #007700">();<br>echo&nbsp;</span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br></span><span style="color: #0000BB">$obj2&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">get_instance_noref</span><span style="color: #007700">();<br></span><span style="color: #0000BB">$still_obj2&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">get_instance_noref</span><span style="color: #007700">();<br></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+   <p class="para">The above example will output:</p>
+   <div class="example-contents screen">
+<div class="cdata"><pre>Static object: NULL
+Static object: NULL
+
+Static object: NULL
+Static object: object(stdClass)#3 (1) {
+  ["property"]=&gt;
+  int(1)
+}
+</pre></div>
+   </div>
+
+   <p class="simpara">
+    This example demonstrates that when assigning a reference to a static
+    variable, it's not <em class="emphasis">remembered</em> when you call the
+    <code class="literal">&amp;get_instance_ref()</code> function a second time.
+   </p>
+   </div>
+  </div>
+<section id="usernotes">
+ <div class="head"><h3 class="title">User Contributed Notes</h3></div><div id="allnotes">
+  <div class="note" id="59676">  
+  <a class="name">
+  <strong class="user"><em>warhog at warhog dot net</em></strong></a><div class="date" title="2005-12-13 12:22"><strong>15 years ago</strong></div>
+  <div class="text" id="Hcom59676">
+<div class="phpcode"><code><span class="html">
+Some interesting behavior (tested with PHP5), using the static-scope-keyword inside of class-methods.<br><br><span class="default">&lt;?php<br><br></span><span class="keyword">class </span><span class="default">sample_class<br></span><span class="keyword">{<br>&nbsp; public function </span><span class="default">func_having_static_var</span><span class="keyword">(</span><span class="default">$x </span><span class="keyword">= </span><span class="default">NULL</span><span class="keyword">)<br>&nbsp; {<br>&nbsp; &nbsp; static </span><span class="default">$var </span><span class="keyword">= </span><span class="default">0</span><span class="keyword">;<br>&nbsp; &nbsp; if (</span><span class="default">$x </span><span class="keyword">=== </span><span class="default">NULL</span><span class="keyword">)<br>&nbsp; &nbsp; { return </span><span class="default">$var</span><span class="keyword">; }<br>&nbsp; &nbsp; </span><span class="default">$var </span><span class="keyword">= </span><span class="default">$x</span><span class="keyword">;<br>&nbsp; }<br>}<br><br></span><span class="default">$a </span><span class="keyword">= new </span><span class="default">sample_class</span><span class="keyword">();<br></span><span class="default">$b </span><span class="keyword">= new </span><span class="default">sample_class</span><span class="keyword">();<br><br>echo </span><span class="default">$a</span><span class="keyword">-&gt;</span><span class="default">func_having_static_var</span><span class="keyword">().</span><span class="string">"\n"</span><span class="keyword">;<br>echo </span><span class="default">$b</span><span class="keyword">-&gt;</span><span class="default">func_having_static_var</span><span class="keyword">().</span><span class="string">"\n"</span><span class="keyword">;<br></span><span class="comment">// this will output (as expected):<br>//&nbsp; 0<br>//&nbsp; 0<br><br></span><span class="default">$a</span><span class="keyword">-&gt;</span><span class="default">func_having_static_var</span><span class="keyword">(</span><span class="default">3</span><span class="keyword">);<br><br>echo </span><span class="default">$a</span><span class="keyword">-&gt;</span><span class="default">func_having_static_var</span><span class="keyword">().</span><span class="string">"\n"</span><span class="keyword">;<br>echo </span><span class="default">$b</span><span class="keyword">-&gt;</span><span class="default">func_having_static_var</span><span class="keyword">().</span><span class="string">"\n"</span><span class="keyword">;<br></span><span class="comment">// this will output:<br>//&nbsp; 3<br>//&nbsp; 3<br>// maybe you expected:<br>//&nbsp; 3<br>//&nbsp; 0<br><br></span><span class="default">?&gt;<br></span><br>One could expect "3 0" to be outputted, as you might think that $a-&gt;func_having_static_var(3); only alters the value of the static $var of the function "in" $a - but as the name says, these are class-methods. Having an object is just a collection of properties, the functions remain at the class. So if you declare a variable as static inside a function, it's static for the whole class and all of its instances, not for each object.<br><br>Maybe it's senseless to post that.. cause if you want to have the behaviour that I expected, you can simply use a variable of the object itself:<br><br><span class="default">&lt;?php<br></span><span class="keyword">class </span><span class="default">sample_class<br></span><span class="keyword">{ protected </span><span class="default">$var </span><span class="keyword">= </span><span class="default">0</span><span class="keyword">; <br>&nbsp; function </span><span class="default">func</span><span class="keyword">(</span><span class="default">$x </span><span class="keyword">= </span><span class="default">NULL</span><span class="keyword">)<br>&nbsp; { </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">var </span><span class="keyword">= </span><span class="default">$x</span><span class="keyword">; }<br>} </span><span class="default">?&gt;<br></span><br>I believe that all normal-thinking people would never even try to make this work with the static-keyword, for those who try (like me), this note maybe helpfull.</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="105925">  
+  <a class="name">
+  <strong class="user"><em>dodothedreamer at gmail dot com</em></strong></a><div class="date" title="2011-09-25 11:56"><strong>9 years ago</strong></div>
+  <div class="text" id="Hcom105925">
+<div class="phpcode"><code><span class="html">
+Note that unlike Java and C++, variables declared inside blocks such as loops or if's, will also be recognized and accessible outside of the block, so:<br><span class="default">&lt;?php<br></span><span class="keyword">for(</span><span class="default">$j</span><span class="keyword">=</span><span class="default">0</span><span class="keyword">; </span><span class="default">$j</span><span class="keyword">&lt;</span><span class="default">3</span><span class="keyword">; </span><span class="default">$j</span><span class="keyword">++)<br>{<br>&nbsp; &nbsp;&nbsp; if(</span><span class="default">$j </span><span class="keyword">== </span><span class="default">1</span><span class="keyword">)<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$a </span><span class="keyword">= </span><span class="default">4</span><span class="keyword">;<br>}<br>echo </span><span class="default">$a</span><span class="keyword">;<br></span><span class="default">?&gt;<br></span><br>Would print 4.</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="98811">  
+  <a class="name">
+  <strong class="user"><em>HOSSEIN doesn&amp;#39;t want spam at TAKI.IR</em></strong></a><div class="date" title="2010-07-09 12:26"><strong>11 years ago</strong></div>
+  <div class="text" id="Hcom98811">
+<div class="phpcode"><code><span class="html">
+Please note for using global variable in child functions:
+<br>
+<br>This won't work correctly...
+<br>
+<br><span class="default">&lt;?php
+<br></span><span class="keyword">function </span><span class="default">foo</span><span class="keyword">(){
+<br>&nbsp; &nbsp; </span><span class="default">$f_a </span><span class="keyword">= </span><span class="string">'a'</span><span class="keyword">;
+<br>&nbsp; &nbsp; 
+<br>&nbsp; &nbsp; function </span><span class="default">bar</span><span class="keyword">(){
+<br>&nbsp; &nbsp; &nbsp; &nbsp; global </span><span class="default">$f_a</span><span class="keyword">;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; echo </span><span class="string">'"f_a" in BAR is: ' </span><span class="keyword">. </span><span class="default">$f_a </span><span class="keyword">. </span><span class="string">'&lt;br /&gt;'</span><span class="keyword">;&nbsp; </span><span class="comment">// doesn't work, var is empty!
+<br>&nbsp; &nbsp; </span><span class="keyword">}
+<br>&nbsp; &nbsp; 
+<br>&nbsp; &nbsp; </span><span class="default">bar</span><span class="keyword">();
+<br>&nbsp; &nbsp; echo </span><span class="string">'"f_a" in FOO is: ' </span><span class="keyword">. </span><span class="default">$f_a </span><span class="keyword">. </span><span class="string">'&lt;br /&gt;'</span><span class="keyword">;
+<br>}
+<br></span><span class="default">?&gt;
+<br></span>
+<br>This will...
+<br>
+<br><span class="default">&lt;?php
+<br></span><span class="keyword">function </span><span class="default">foo</span><span class="keyword">(){
+<br>&nbsp; &nbsp; global </span><span class="default">$f_a</span><span class="keyword">;&nbsp;&nbsp; </span><span class="comment">// &lt;- Notice to this
+<br>&nbsp; &nbsp; </span><span class="default">$f_a </span><span class="keyword">= </span><span class="string">'a'</span><span class="keyword">;
+<br>&nbsp; &nbsp; 
+<br>&nbsp; &nbsp; function </span><span class="default">bar</span><span class="keyword">(){
+<br>&nbsp; &nbsp; &nbsp; &nbsp; global </span><span class="default">$f_a</span><span class="keyword">;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; echo </span><span class="string">'"f_a" in BAR is: ' </span><span class="keyword">. </span><span class="default">$f_a </span><span class="keyword">. </span><span class="string">'&lt;br /&gt;'</span><span class="keyword">;&nbsp; </span><span class="comment">// work!, var is 'a'
+<br>&nbsp; &nbsp; </span><span class="keyword">}
+<br>&nbsp; &nbsp; 
+<br>&nbsp; &nbsp; </span><span class="default">bar</span><span class="keyword">();
+<br>&nbsp; &nbsp; echo </span><span class="string">'"f_a" in FOO is: ' </span><span class="keyword">. </span><span class="default">$f_a </span><span class="keyword">. </span><span class="string">'&lt;br /&gt;'</span><span class="keyword">;
+<br>}
+<br></span><span class="default">?&gt;</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="42955">  
+  <a class="name">
+  <strong class="user"><em>Michael Bailey (jinxidoru at byu dot net)</em></strong></a><div class="date" title="2004-06-04 11:43"><strong>17 years ago</strong></div>
+  <div class="text" id="Hcom42955">
+<div class="phpcode"><code><span class="html">
+Static variables do not hold through inheritance.&nbsp; Let class A have a function Z with a static variable.&nbsp; Let class B extend class A in which function Z is not overwritten.&nbsp; Two static variables will be created, one for class A and one for class B.<br><br>Look at this example:<br><br><span class="default">&lt;?php<br></span><span class="keyword">class </span><span class="default">A </span><span class="keyword">{<br>&nbsp; &nbsp; function </span><span class="default">Z</span><span class="keyword">() {<br>&nbsp; &nbsp; &nbsp; &nbsp; static </span><span class="default">$count </span><span class="keyword">= </span><span class="default">0</span><span class="keyword">;&nbsp; &nbsp; &nbsp; &nbsp; <br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">printf</span><span class="keyword">(</span><span class="string">"%s: %d\n"</span><span class="keyword">, </span><span class="default">get_class</span><span class="keyword">(</span><span class="default">$this</span><span class="keyword">), ++</span><span class="default">$count</span><span class="keyword">);<br>&nbsp; &nbsp; }<br>}<br><br>class </span><span class="default">B </span><span class="keyword">extends </span><span class="default">A </span><span class="keyword">{}<br><br></span><span class="default">$a </span><span class="keyword">= new </span><span class="default">A</span><span class="keyword">();<br></span><span class="default">$b </span><span class="keyword">= new </span><span class="default">B</span><span class="keyword">();<br></span><span class="default">$a</span><span class="keyword">-&gt;</span><span class="default">Z</span><span class="keyword">();<br></span><span class="default">$a</span><span class="keyword">-&gt;</span><span class="default">Z</span><span class="keyword">();<br></span><span class="default">$b</span><span class="keyword">-&gt;</span><span class="default">Z</span><span class="keyword">();<br></span><span class="default">$a</span><span class="keyword">-&gt;</span><span class="default">Z</span><span class="keyword">();<br></span><span class="default">?&gt;<br></span><br>This code returns:<br><br>A: 1<br>A: 2<br>B: 1<br>A: 3<br><br>As you can see, class A and B are using different static variables even though the same function was being used.</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="88689">  
+  <a class="name">
+  <strong class="user"><em>andrew at planetubh dot com</em></strong></a><div class="date" title="2009-02-03 12:16"><strong>12 years ago</strong></div>
+  <div class="text" id="Hcom88689">
+<div class="phpcode"><code><span class="html">
+Took me longer than I expected to figure this out, and thought others might find it useful.<br><br>I created a function (safeinclude), which I use to include files; it does processing before the file is actually included (determine full path, check it exists, etc).<br><br>Problem: Because the include was occurring inside the function, all of the variables inside the included file were inheriting the variable scope of the function; since the included files may or may not require global variables that are declared else where, it creates a problem.<br><br>Most places (including here) seem to address this issue by something such as:<br><span class="default">&lt;?php<br></span><span class="comment">//declare this before include<br></span><span class="keyword">global </span><span class="default">$myVar</span><span class="keyword">;<br></span><span class="comment">//or declare this inside the include file<br></span><span class="default">$nowglobal </span><span class="keyword">= </span><span class="default">$GLOBALS</span><span class="keyword">[</span><span class="string">'myVar'</span><span class="keyword">];<br></span><span class="default">?&gt;<br></span><br>But, to make this work in this situation (where a standard PHP file is included within a function, being called from another PHP script; where it is important to have access to whatever global variables there may be)... it is not practical to employ the above method for EVERY variable in every PHP file being included by 'safeinclude', nor is it practical to staticly name every possible variable in the "global $this" approach. (namely because the code is modulized, and 'safeinclude' is meant to be generic)<br><br>My solution: Thus, to make all my global variables available to the files included with my safeinclude function, I had to add the following code to my safeinclude function (before variables are used or file is included)<br><br><span class="default">&lt;?php<br></span><span class="keyword">foreach (</span><span class="default">$GLOBALS </span><span class="keyword">as </span><span class="default">$key </span><span class="keyword">=&gt; </span><span class="default">$val</span><span class="keyword">) { global $</span><span class="default">$key</span><span class="keyword">; }<br></span><span class="default">?&gt;<br></span><br>Thus, complete code looks something like the following (very basic model):<br><br><span class="default">&lt;?php<br></span><span class="keyword">function </span><span class="default">safeinclude</span><span class="keyword">(</span><span class="default">$filename</span><span class="keyword">)<br>{<br>&nbsp; &nbsp; </span><span class="comment">//This line takes all the global variables, and sets their scope within the function:<br>&nbsp; &nbsp; </span><span class="keyword">foreach (</span><span class="default">$GLOBALS </span><span class="keyword">as </span><span class="default">$key </span><span class="keyword">=&gt; </span><span class="default">$val</span><span class="keyword">) { global $</span><span class="default">$key</span><span class="keyword">; }<br>&nbsp; &nbsp; </span><span class="comment">/* Pre-Processing here: validate filename input, determine full path<br>&nbsp; &nbsp; &nbsp; &nbsp; of file, check that file exists, etc. This is obviously not<br>&nbsp; &nbsp; &nbsp; &nbsp; necessary, but steps I found useful. */<br>&nbsp; &nbsp; </span><span class="keyword">if (</span><span class="default">$exists</span><span class="keyword">==</span><span class="default">true</span><span class="keyword">) { include(</span><span class="string">"</span><span class="default">$file</span><span class="string">"</span><span class="keyword">); }<br>&nbsp; &nbsp; return </span><span class="default">$exists</span><span class="keyword">;<br>}<br></span><span class="default">?&gt;<br></span><br>In the above, 'exists' &amp; 'file' are determined in the pre-processing. File is the full server path to the file, and exists is set to true if the file exists. This basic model can be expanded of course.&nbsp; In my own, I added additional optional parameters so that I can call safeinclude to see if a file exists without actually including it (to take advantage of my path/etc preprocessing, verses just calling the file exists function).<br><br>Pretty simple approach that I could not find anywhere online; only other approach I could find was using PHP's eval().</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="117267">  
+  <a class="name">
+  <strong class="user"><em>zweibieren at yahoo dot com</em></strong></a><div class="date" title="2015-05-12 06:32"><strong>6 years ago</strong></div>
+  <div class="text" id="Hcom117267">
+<div class="phpcode"><code><span class="html">
+Take to heart this hard-won rule:<br>&nbsp; &nbsp; &nbsp; &nbsp; Declare AT THE TOP any variable that is to be global. <br>&nbsp; &nbsp; &nbsp; &nbsp; Both at the top of the FILE <br>&nbsp; &nbsp; &nbsp; &nbsp; AND at the top of any FUNCTION where it appears.<br><br>Why AT THE TOP? So it is sure to be declared before use. Otherwise a non-global version of the variable will be created and your code will fail.<br><br>Why at the top of a FUNCTION? Because otherwise the function will refer only to its local version of the variable and your code will fail.<br><br>Why at the top of the FILE? Because someday--a day that you cannot now imagine--you will want to "include" the file. And when you do, instances of the variable outside functions will not go in the global scope and your code will fail. (When the "include" is inside a calling function, variables in the included file go into the scope of the calling function.)<br> <br>Example file where variable $x is used outside and inside functions:<br>&nbsp; &nbsp; |&lt;!DOCTYPE html ...&gt;<br>&nbsp; &nbsp; |&lt;html xmlns ...&gt;<br>&nbsp; &nbsp; |&nbsp; &nbsp; <span class="default">&lt;?php </span><span class="keyword">global </span><span class="default">$x</span><span class="keyword">; </span><span class="default">?&gt;<br></span>&nbsp; &nbsp; |&lt;head&gt; <br>&nbsp; &nbsp; |&nbsp; &nbsp; Some html headers<br>&nbsp; &nbsp; |&nbsp; &nbsp; <span class="default">&lt;?php<br>&nbsp; &nbsp; </span><span class="keyword">|&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$x </span><span class="keyword">= </span><span class="default">1</span><span class="keyword">;<br>&nbsp; &nbsp; |&nbsp; &nbsp; &nbsp; &nbsp; function </span><span class="default">bump_x</span><span class="keyword">() {<br>&nbsp; &nbsp; |&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; global </span><span class="default">$x</span><span class="keyword">;<br>&nbsp; &nbsp; |&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$x </span><span class="keyword">+= </span><span class="default">1</span><span class="keyword">;<br>&nbsp; &nbsp; |&nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; |&nbsp; &nbsp; </span><span class="default">?&gt;<br></span>&nbsp; &nbsp; |&lt;/head&gt;<br>&nbsp; &nbsp; |&lt;body&gt;<br>&nbsp; &nbsp; |&nbsp; &nbsp; More html <br>&nbsp; &nbsp; |&nbsp; &nbsp; <span class="default">&lt;?php </span><span class="keyword">echo </span><span class="default">$x</span><span class="keyword">; </span><span class="default">bump_x</span><span class="keyword">(); </span><span class="default">?&gt;<br></span>&nbsp; &nbsp; |&nbsp; &nbsp; Yet more html.<br>&nbsp; &nbsp; |&lt;/body&gt;<br>&lt;/html&gt;</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="63500">  
+  <a class="name">
+  <strong class="user"><em>larax at o2 dot pl</em></strong></a><div class="date" title="2006-03-22 03:38"><strong>15 years ago</strong></div>
+  <div class="text" id="Hcom63500">
+<div class="phpcode"><code><span class="html">
+About more complex situation using global variables..<br><br>Let's say we have two files:<br>a.php<br><span class="default">&lt;?php <br>&nbsp; &nbsp; </span><span class="keyword">function </span><span class="default">a</span><span class="keyword">() { <br>&nbsp; &nbsp; &nbsp; &nbsp; include(</span><span class="string">"b.php"</span><span class="keyword">); <br>&nbsp; &nbsp; }<br>&nbsp; &nbsp; </span><span class="default">a</span><span class="keyword">();<br></span><span class="default">?&gt;<br></span><br>b.php<br><span class="default">&lt;?php<br>&nbsp; &nbsp; $b </span><span class="keyword">= </span><span class="string">"something"</span><span class="keyword">;<br>&nbsp; &nbsp; function </span><span class="default">b</span><span class="keyword">() {<br>&nbsp; &nbsp; &nbsp; &nbsp; global </span><span class="default">$b</span><span class="keyword">;<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$b </span><span class="keyword">= </span><span class="string">"something new"</span><span class="keyword">;<br>&nbsp; &nbsp; }<br>&nbsp; &nbsp; </span><span class="default">b</span><span class="keyword">();<br>&nbsp; &nbsp; echo </span><span class="default">$b</span><span class="keyword">;<br></span><span class="default">?&gt;<br></span><br>You could expect that this script will return "something new" but no, it will return "something". To make it working properly, you must add global keyword in $b definition, in above example it will be:<br><br>global $b;<br>$b = "something";</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="85203">  
+  <a class="name">
+  <strong class="user"><em>ddarjany at yahoo dot com</em></strong></a><div class="date" title="2008-08-19 08:15"><strong>13 years ago</strong></div>
+  <div class="text" id="Hcom85203">
+<div class="phpcode"><code><span class="html">
+Note that if you declare a variable in a function, then set it as global in that function, its value will not be retained outside of that function.&nbsp; This was tripping me up for a while so I thought it would be worth noting.<br><br><span class="default">&lt;?PHP<br><br>foo</span><span class="keyword">();<br>echo </span><span class="default">$a</span><span class="keyword">; </span><span class="comment">// echoes nothing<br><br></span><span class="default">bar</span><span class="keyword">();<br>echo </span><span class="default">$b</span><span class="keyword">; </span><span class="comment">//echoes "b";<br><br></span><span class="keyword">function </span><span class="default">foo</span><span class="keyword">() {<br>&nbsp; </span><span class="default">$a </span><span class="keyword">= </span><span class="string">"a"</span><span class="keyword">; <br>&nbsp; global </span><span class="default">$a</span><span class="keyword">;<br>}<br><br>function </span><span class="default">bar</span><span class="keyword">() {<br>&nbsp; global </span><span class="default">$b</span><span class="keyword">;<br>&nbsp; </span><span class="default">$b </span><span class="keyword">= </span><span class="string">"b"</span><span class="keyword">;<br>}<br><br></span><span class="default">?&gt;</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="100884">  
+  <a class="name">
+  <strong class="user"><em>php at keith tyler dot com</em></strong></a><div class="date" title="2010-11-12 10:37"><strong>10 years ago</strong></div>
+  <div class="text" id="Hcom100884">
+<div class="phpcode"><code><span class="html">
+Sometimes a variable available in global scope is not accessible via the 'global' keyword or the $GLOBALS superglobal array. I have not been able to replicate it in original code, but it occurs when a script is run under PHPUnit.<br><br>PHPUnit provides a variable "$filename" that reflects the name of the file loaded on its command line. This is available in global scope, but not in object scope. For example, the following phpUnit script (call it GlobalScope.php):<br><br><span class="default">&lt;?php<br></span><span class="keyword">print </span><span class="string">"Global scope FILENAME [</span><span class="default">$filename</span><span class="string">]\n"</span><span class="keyword">;<br>class </span><span class="default">MyTestClass </span><span class="keyword">extends </span><span class="default">PHPUnit_Framework_TestCase </span><span class="keyword">{<br>&nbsp; function </span><span class="default">testMyTest</span><span class="keyword">() {<br>&nbsp; &nbsp; global </span><span class="default">$filename</span><span class="keyword">;<br>&nbsp; &nbsp; print </span><span class="string">"Method scope global FILENAME [</span><span class="default">$filename</span><span class="string">]\n"</span><span class="keyword">;<br>&nbsp; &nbsp; print </span><span class="string">"Method scope GLOBALS[FILENAME] ["</span><span class="keyword">.</span><span class="default">$GLOBALS</span><span class="keyword">[</span><span class="string">"filename"</span><span class="keyword">].</span><span class="string">"]\n"</span><span class="keyword">;<br>&nbsp; }<br>}<br></span><span class="default">?&gt;<br></span><br>If you run this script via "phpunit GlobalScope.php", you will get:<br><br>Global scope FILENAME [/home/ktyler/GlobalScope.php]<br>PHPUnit 3.4.5 by Sebastian Bergmann.<br><br>Method scope global FILENAME []<br>Method scope GLOBALS[FILENAME] []<br>.<br><br>You have to -- strange as it seems -- do the following:<br><br><span class="default">&lt;?php<br>$GLOBALS</span><span class="keyword">[</span><span class="string">"filename"</span><span class="keyword">]=</span><span class="default">$filename</span><span class="keyword">;<br>print </span><span class="string">"Global scope FILENAME [</span><span class="default">$filename</span><span class="string">]\n"</span><span class="keyword">;<br>class </span><span class="default">MyTestClass </span><span class="keyword">extends </span><span class="default">PHPUnit_Framework_TestCase </span><span class="keyword">{<br>&nbsp; function </span><span class="default">testMyTest</span><span class="keyword">() {<br>&nbsp; &nbsp; global </span><span class="default">$filename</span><span class="keyword">;<br>&nbsp; &nbsp; print </span><span class="string">"Method scope global FILENAME [</span><span class="default">$filename</span><span class="string">]\n"</span><span class="keyword">;<br>&nbsp; &nbsp; print </span><span class="string">"Method scope GLOBALS[FILENAME] ["</span><span class="keyword">.</span><span class="default">$GLOBALS</span><span class="keyword">[</span><span class="string">"filename"</span><span class="keyword">].</span><span class="string">"]\n"</span><span class="keyword">;<br>&nbsp; }<br>}<br></span><span class="default">?&gt;<br></span><br>By doing this, both "global" and $GLOBALS work!<br><br>I don't know what it is that PHPUnit does (I know it uses Reflection) that causes a globally available variable to be implicitly unavailable via "global" or $GLOBALS. But there it is.</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="120750">  
+  <a class="name">
+  <strong class="user"><em>dexen dot devries at gmail dot com</em></strong></a><div class="date" title="2017-03-06 03:54"><strong>4 years ago</strong></div>
+  <div class="text" id="Hcom120750">
+<div class="phpcode"><code><span class="html">
+If you have a static variable in a method of a class, all DIRECT instances of that class share that one static variable.<br><br>However if you create a derived class, all DIRECT instances of that derived class will share one, but DISTINCT, copy of that static variable in method.<br><br>To put it the other way around, a static variable in a method is bound to a class (not to instance). Each subclass has own copy of that variable, to be shared among its instances.<br><br>To put it yet another way around, when you create a derived class, it 'seems&nbsp; to' create a copy of methods from the base class, and thusly create copy of the static variables in those methods.<br><br>Tested with PHP 7.0.16.<br><br><span class="default">&lt;?php<br><br></span><span class="keyword">require </span><span class="string">'libs.php'</span><span class="keyword">;<br>require </span><span class="string">'setup.php'</span><span class="keyword">;<br><br>class </span><span class="default">Base </span><span class="keyword">{<br>&nbsp; &nbsp; function </span><span class="default">test</span><span class="keyword">(</span><span class="default">$delta </span><span class="keyword">= </span><span class="default">0</span><span class="keyword">) {<br>&nbsp; &nbsp; &nbsp; &nbsp; static </span><span class="default">$v </span><span class="keyword">= </span><span class="default">0</span><span class="keyword">;<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$v </span><span class="keyword">+= </span><span class="default">$delta</span><span class="keyword">;<br>&nbsp; &nbsp; &nbsp; &nbsp; return </span><span class="default">$v</span><span class="keyword">;<br>&nbsp; &nbsp; }<br>}<br><br>class </span><span class="default">Derived </span><span class="keyword">extends </span><span class="default">Base </span><span class="keyword">{}<br><br></span><span class="default">$base1 </span><span class="keyword">= new </span><span class="default">Base</span><span class="keyword">();<br></span><span class="default">$base2 </span><span class="keyword">= new </span><span class="default">Base</span><span class="keyword">();<br></span><span class="default">$derived1 </span><span class="keyword">= new </span><span class="default">Derived</span><span class="keyword">();<br></span><span class="default">$derived2 </span><span class="keyword">= new </span><span class="default">Derived</span><span class="keyword">();<br><br></span><span class="default">$base1</span><span class="keyword">-&gt;</span><span class="default">test</span><span class="keyword">(</span><span class="default">3</span><span class="keyword">);<br></span><span class="default">$base2</span><span class="keyword">-&gt;</span><span class="default">test</span><span class="keyword">(</span><span class="default">4</span><span class="keyword">);<br></span><span class="default">$derived1</span><span class="keyword">-&gt;</span><span class="default">test</span><span class="keyword">(</span><span class="default">5</span><span class="keyword">);<br></span><span class="default">$derived2</span><span class="keyword">-&gt;</span><span class="default">test</span><span class="keyword">(</span><span class="default">6</span><span class="keyword">);<br><br></span><span class="default">var_dump</span><span class="keyword">([ </span><span class="default">$base1</span><span class="keyword">-&gt;</span><span class="default">test</span><span class="keyword">(), </span><span class="default">$base2</span><span class="keyword">-&gt;</span><span class="default">test</span><span class="keyword">(), </span><span class="default">$derived1</span><span class="keyword">-&gt;</span><span class="default">test</span><span class="keyword">(), </span><span class="default">$derived2</span><span class="keyword">-&gt;</span><span class="default">test</span><span class="keyword">() ]);<br><br></span><span class="comment"># =&gt; array(4) { [0]=&gt; int(7) [1]=&gt; int(7) [2]=&gt; int(11) [3]=&gt; int(11) }<br><br># $base1 and $base2 share one copy of static variable $v<br># derived1 and $derived2 share another copy of static variable $v</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="14251">  
+  <a class="name">
+  <strong class="user"><em>danno at wpi dot edu</em></strong></a><div class="date" title="2001-07-24 12:28"><strong>20 years ago</strong></div>
+  <div class="text" id="Hcom14251">
+<div class="phpcode"><code><span class="html">
+WARNING!&nbsp; If you create a local variable in a function and then within that function assign it to a global variable by reference the object will be destroyed when the function exits and the global var will contain NOTHING!&nbsp; This main sound obvious but it can be quite tricky you have a large script (like a phpgtk-based gui app ;-) ).
+<br>
+<br>example:
+<br>
+<br><span class="default">&lt;?php
+<br></span><span class="keyword">function </span><span class="default">foo </span><span class="keyword">()
+<br>{
+<br>&nbsp;&nbsp; global </span><span class="default">$testvar</span><span class="keyword">;
+<br>
+<br>&nbsp;&nbsp; </span><span class="default">$localvar </span><span class="keyword">= new </span><span class="default">Object </span><span class="keyword">();
+<br>&nbsp;&nbsp; </span><span class="default">$testvar </span><span class="keyword">= &amp;</span><span class="default">$localvar</span><span class="keyword">;
+<br>}
+<br>
+<br></span><span class="default">foo </span><span class="keyword">();
+<br></span><span class="default">print_r </span><span class="keyword">(</span><span class="default">$testvar</span><span class="keyword">);&nbsp;&nbsp; </span><span class="comment">// produces NOTHING!!!!
+<br></span><span class="default">?&gt;
+<br></span>
+<br>hope this helps someone before they lose all their hair</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="109310">  
+  <a class="name">
+  <strong class="user"><em>Anonymous</em></strong></a><div class="date" title="2012-07-04 11:54"><strong>9 years ago</strong></div>
+  <div class="text" id="Hcom109310">
+<div class="phpcode"><code><span class="html">
+It will be obvious for most of you: changing value of a static in one instance changes value in all instances.<br><br><span class="default">&lt;?php<br><br>&nbsp; &nbsp; </span><span class="keyword">class </span><span class="default">example </span><span class="keyword">{<br>&nbsp; &nbsp; &nbsp; &nbsp; public static </span><span class="default">$s </span><span class="keyword">= </span><span class="string">'unchanged'</span><span class="keyword">;<br>&nbsp; &nbsp; &nbsp; &nbsp; <br>&nbsp; &nbsp; &nbsp; &nbsp; public function </span><span class="default">set</span><span class="keyword">() {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$this</span><span class="keyword">::</span><span class="default">$s </span><span class="keyword">= </span><span class="string">'changed'</span><span class="keyword">;<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; }<br><br>&nbsp; &nbsp; </span><span class="default">$o </span><span class="keyword">= new </span><span class="default">example</span><span class="keyword">;<br>&nbsp; &nbsp; </span><span class="default">$p </span><span class="keyword">= new </span><span class="default">example</span><span class="keyword">;<br><br>&nbsp; &nbsp; </span><span class="default">$o</span><span class="keyword">-&gt;</span><span class="default">set</span><span class="keyword">();<br><br>&nbsp; &nbsp; print </span><span class="string">"</span><span class="default">$o</span><span class="string"> static: </span><span class="keyword">{</span><span class="default">$o</span><span class="keyword">::</span><span class="default">$i</span><span class="keyword">}</span><span class="string">\n</span><span class="default">$p</span><span class="string"> static: </span><span class="keyword">{</span><span class="default">$p</span><span class="keyword">::</span><span class="default">$i</span><span class="keyword">}</span><span class="string">"</span><span class="keyword">;<br><br></span><span class="default">?&gt;<br></span><br>Output will be:<br><br>$o static: changed<br>$p static: changed</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="119913">  
+  <a class="name">
+  <strong class="user"><em>pogregoire##live.fr</em></strong></a><div class="date" title="2016-09-19 03:36"><strong>4 years ago</strong></div>
+  <div class="text" id="Hcom119913">
+<div class="phpcode"><code><span class="html">
+writing : global $var; is exactely the samething that writing : $var =&amp; $GLOBALS['var'];<br>It creates a reference on $GLOBALS['var'];<br><br><span class="default">&lt;?php<br>$var </span><span class="keyword">=</span><span class="default">1</span><span class="keyword">;<br>function </span><span class="default">teste_global</span><span class="keyword">(){<br>&nbsp; &nbsp; global </span><span class="default">$var</span><span class="keyword">;<br>&nbsp; &nbsp; for (</span><span class="default">$var</span><span class="keyword">=</span><span class="default">0</span><span class="keyword">; </span><span class="default">$var</span><span class="keyword">&lt;</span><span class="default">5</span><span class="keyword">; </span><span class="default">$var</span><span class="keyword">++){<br><br>&nbsp; &nbsp; }<br>}<br><br></span><span class="default">teste_global</span><span class="keyword">();<br></span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">$var</span><span class="keyword">);</span><span class="comment">// return : int(5).<br></span><span class="default">?&gt;</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="124421">  
+  <a class="name">
+  <strong class="user"><em>shaman_master at list dot ru</em></strong></a><div class="date" title="2019-11-22 08:58"><strong>1 year ago</strong></div>
+  <div class="text" id="Hcom124421">
+<div class="phpcode"><code><span class="html">
+Cycle not create inner scope:<br><span class="default">&lt;?php<br></span><span class="keyword">foreach (</span><span class="default">range</span><span class="keyword">(</span><span class="default">1</span><span class="keyword">, </span><span class="default">3</span><span class="keyword">) as </span><span class="default">$step</span><span class="keyword">) {<br>&nbsp; &nbsp; echo </span><span class="default">sprintf</span><span class="keyword">(</span><span class="string">'%d: %s&nbsp; '</span><span class="keyword">, </span><span class="default">$step</span><span class="keyword">, isset(</span><span class="default">$a</span><span class="keyword">) ? </span><span class="string">'yes' </span><span class="keyword">: </span><span class="string">'no'</span><span class="keyword">);<br>&nbsp; &nbsp; if (! isset(</span><span class="default">$a</span><span class="keyword">)) {<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$a </span><span class="keyword">= </span><span class="default">1</span><span class="keyword">;<br>&nbsp; &nbsp; }<br>}<br></span><span class="comment">// 1: no 2: yes 3: yes<br></span><span class="default">?&gt;</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="41213">  
+  <a class="name">
+  <strong class="user"><em>Randolpho</em></strong></a><div class="date" title="2004-04-02 12:53"><strong>17 years ago</strong></div>
+  <div class="text" id="Hcom41213">
+<div class="phpcode"><code><span class="html">
+More on static variables:
+<br>
+<br>A static variable does not retain it's value after the script's execution. Don't count on it being available from one page request to the next; you'll have to use a database for that. 
+<br>
+<br>Second, here's a good pattern to use for declaring a static variable based on some complex logic:
+<br>
+<br><span class="default">&lt;?php
+<br>&nbsp; </span><span class="keyword">function </span><span class="default">buildStaticVariable</span><span class="keyword">()
+<br>&nbsp; {
+<br>&nbsp; &nbsp; &nbsp; </span><span class="default">$foo </span><span class="keyword">= </span><span class="default">null</span><span class="keyword">;
+<br>&nbsp; &nbsp; &nbsp; </span><span class="comment">// some complex expression or set of
+<br>&nbsp; &nbsp; &nbsp; // expressions/statements to build
+<br>&nbsp; &nbsp; &nbsp; // the return variable.
+<br>&nbsp; &nbsp; &nbsp; </span><span class="keyword">return </span><span class="default">$foo</span><span class="keyword">;
+<br>&nbsp; }
+<br>
+<br>&nbsp; function </span><span class="default">functionWhichUsesStaticVar</span><span class="keyword">()
+<br>&nbsp; {
+<br>&nbsp; &nbsp; &nbsp; static </span><span class="default">$foo </span><span class="keyword">= </span><span class="default">null</span><span class="keyword">;
+<br>&nbsp; &nbsp; &nbsp; if(</span><span class="default">$foo </span><span class="keyword">=== </span><span class="default">null</span><span class="keyword">) </span><span class="default">$foo </span><span class="keyword">= </span><span class="default">buildStaticVariable</span><span class="keyword">();
+<br>&nbsp; &nbsp; &nbsp; </span><span class="comment">// the rest of your code goes here.
+<br>&nbsp; </span><span class="keyword">}
+<br></span><span class="default">?&gt;
+<br></span>
+<br>Using such a pattern allows you to separate the code that creates your default static variable value from the function that uses it. Easier to maintain code is good. :)</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="118666">  
+  <a class="name">
+  <strong class="user"><em>gried at NOSPAM dot nsys dot by</em></strong></a><div class="date" title="2016-01-16 09:12"><strong>5 years ago</strong></div>
+  <div class="text" id="Hcom118666">
+<div class="phpcode"><code><span class="html">
+In fact all variables represent pointers that hold address of memory area with data that was assigned to this variable. When you assign some variable value by reference you in fact write address of source variable to recepient variable. Same happens when you declare some variable as global in function, it receives same address as global variable outside of function. If you consider forementioned explanation it's obvious that mixing usage of same variable declared with keyword global and via superglobal array at the same time is very bad idea. In some cases they can point to different memory areas, giving you headache. Consider code below:<br><br><span class="default">&lt;?php<br><br>error_reporting</span><span class="keyword">(</span><span class="default">E_ALL</span><span class="keyword">);<br><br></span><span class="default">$GLOB </span><span class="keyword">= </span><span class="default">0</span><span class="keyword">;<br><br>function </span><span class="default">test_references</span><span class="keyword">() {<br>&nbsp; &nbsp; global </span><span class="default">$GLOB</span><span class="keyword">; </span><span class="comment">// get reference to global variable using keyword global, at this point local variable $GLOB points to same address as global variable $GLOB<br>&nbsp; &nbsp; </span><span class="default">$test </span><span class="keyword">= </span><span class="default">1</span><span class="keyword">; </span><span class="comment">// declare some local var<br>&nbsp; &nbsp; </span><span class="default">$GLOBALS</span><span class="keyword">[</span><span class="string">'GLOB'</span><span class="keyword">] = &amp;</span><span class="default">$test</span><span class="keyword">; </span><span class="comment">// make global variable reference to this local variable using superglobal array, at this point global variable $GLOB points to new memory address, same as local variable $test<br><br>&nbsp; &nbsp; </span><span class="default">$GLOB </span><span class="keyword">= </span><span class="default">2</span><span class="keyword">; </span><span class="comment">// set new value to global variable via earlier set local representation, write to old address<br><br>&nbsp; &nbsp; </span><span class="keyword">echo </span><span class="string">"Value of global variable (via local representation set by keyword global): </span><span class="default">$GLOB</span><span class="string"> &lt;hr&gt;"</span><span class="keyword">;<br>&nbsp; &nbsp; </span><span class="comment">// check global variable via local representation =&gt; 2 (OK, got value that was just written to it, cause old address was used to get value) <br><br>&nbsp; &nbsp; </span><span class="keyword">echo </span><span class="string">"Value of global variable (via superglobal array GLOBALS): </span><span class="default">$GLOBALS</span><span class="keyword">[</span><span class="default">GLOB</span><span class="keyword">]</span><span class="string"> &lt;hr&gt;"</span><span class="keyword">;<br>&nbsp; &nbsp; </span><span class="comment">// check global variable using superglobal array =&gt; 1 (got value of local variable $test, new address was used)<br>&nbsp; &nbsp; <br>&nbsp; &nbsp; </span><span class="keyword">echo </span><span class="string">"Value ol local variable \$test: </span><span class="default">$test</span><span class="string"> &lt;hr&gt;"</span><span class="keyword">; <br>&nbsp; &nbsp; </span><span class="comment">// check local variable that was linked with global using superglobal array =&gt; 1 (its value was not affected)<br>&nbsp; &nbsp; <br>&nbsp; &nbsp; </span><span class="keyword">global </span><span class="default">$GLOB</span><span class="keyword">; </span><span class="comment">// update reference to global variable using keyword global, at this point we update address that held in local variable $GLOB and it gets same address as local variable $test<br>&nbsp; &nbsp; </span><span class="keyword">echo </span><span class="string">"Value of global variable (via updated local representation set by keyword global): </span><span class="default">$GLOB</span><span class="string"> &lt;hr&gt;"</span><span class="keyword">;<br>&nbsp; &nbsp; </span><span class="comment">// check global variable via local representation =&gt; 1 (also value of local variable $test, new address was used) <br></span><span class="keyword">}<br><br></span><span class="default">test_references</span><span class="keyword">();<br>echo </span><span class="string">"Value of global variable outside of function: </span><span class="default">$GLOB</span><span class="string"> &lt;hr&gt;"</span><span class="keyword">;<br></span><span class="comment">// check global variable outside function =&gt; 1 (equal to value of local variable $test from function, global variable also points to new address)<br></span><span class="default">?&gt;</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="113913">  
+  <a class="name">
+  <strong class="user"><em>Jonathan Kenigson</em></strong></a><div class="date" title="2013-12-16 11:09"><strong>7 years ago</strong></div>
+  <div class="text" id="Hcom113913">
+<div class="phpcode"><code><span class="html">
+Just a note about static properties declared at class level:<br><br>class Test_Class {<br>&nbsp; static $a = 0;<br>&nbsp; public function ReturnVar(){<br>&nbsp; &nbsp; return $this-&gt;a;<br>&nbsp; }<br>&nbsp; }<br>&nbsp; $b = new Test_Class();<br>&nbsp; echo $b-&gt;ReturnVar();<br><br>Will not output "0"&nbsp; because $a is declared static. Changing "static" to "public" or "private" will produce the output "0".</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="52343">  
+  <a class="name">
+  <strong class="user"><em>kouber at php dot net</em></strong></a><div class="date" title="2005-04-28 05:36"><strong>16 years ago</strong></div>
+  <div class="text" id="Hcom52343">
+<div class="phpcode"><code><span class="html">
+If you need all your global variables available in a function, you can use this:
+<br>
+<br><span class="default">&lt;?php
+<br></span><span class="keyword">function </span><span class="default">foo</span><span class="keyword">() {
+<br>&nbsp; </span><span class="default">extract</span><span class="keyword">(</span><span class="default">$GLOBALS</span><span class="keyword">);
+<br>&nbsp; </span><span class="comment">// here you have all global variables
+<br>
+<br></span><span class="keyword">}
+<br></span><span class="default">?&gt;</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="92868">  
+  <a class="name">
+  <strong class="user"><em>Stephen Dewey</em></strong></a><div class="date" title="2009-08-12 08:06"><strong>12 years ago</strong></div>
+  <div class="text" id="Hcom92868">
+<div class="phpcode"><code><span class="html">
+For nested functions:<br><br>This is probably obvious to most people, but global always refers to the variable in the global (top level) variable of that name, not just a variable in a higher-level scope. So this will not work:<br><span class="default">&lt;?php<br><br></span><span class="comment">// $var1 is not declared in the global scope<br><br></span><span class="keyword">function </span><span class="default">a</span><span class="keyword">(</span><span class="default">$var1</span><span class="keyword">){<br><br>&nbsp; &nbsp; function </span><span class="default">b</span><span class="keyword">(){<br>&nbsp; &nbsp; &nbsp; &nbsp; global </span><span class="default">$var1</span><span class="keyword">;<br>&nbsp; &nbsp; &nbsp; &nbsp; echo </span><span class="default">$var1</span><span class="keyword">; </span><span class="comment">// there is no var1 in the global scope so nothing to echo<br>&nbsp; &nbsp; <br>&nbsp; &nbsp; </span><span class="keyword">}<br><br>&nbsp; &nbsp; </span><span class="default">b</span><span class="keyword">();<br>}<br><br></span><span class="default">a</span><span class="keyword">(</span><span class="string">'hello'</span><span class="keyword">);<br><br></span><span class="default">?&gt;</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="100312">  
+  <a class="name">
+  <strong class="user"><em>eduardo dot ferron at zeion dot net</em></strong></a><div class="date" title="2010-10-07 06:02"><strong>10 years ago</strong></div>
+  <div class="text" id="Hcom100312">
+<div class="phpcode"><code><span class="html">
+There're times when global variables comes in handy, like universal read only resources you just need to create once in your application and share to the rest of your scripts. But it may become quite hard to track with "variables".</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="94259">  
+  <a class="name">
+  <strong class="user"><em>moraesdno at gmail dot com</em></strong></a><div class="date" title="2009-10-25 05:17"><strong>11 years ago</strong></div>
+  <div class="text" id="Hcom94259">
+<div class="phpcode"><code><span class="html">
+Use the superglobal array $GLOBALS is faster than the global keyword. See:
+<br>
+<br><span class="default">&lt;?php
+<br></span><span class="comment">//Using the keyword global
+<br></span><span class="default">$a</span><span class="keyword">=</span><span class="default">1</span><span class="keyword">;
+<br></span><span class="default">$b</span><span class="keyword">=</span><span class="default">2</span><span class="keyword">;
+<br>function </span><span class="default">sum</span><span class="keyword">() {
+<br>&nbsp; &nbsp; global </span><span class="default">$a</span><span class="keyword">, </span><span class="default">$b</span><span class="keyword">;
+<br>&nbsp; &nbsp; </span><span class="default">$a </span><span class="keyword">+= </span><span class="default">$b</span><span class="keyword">;
+<br>}
+<br>
+<br> </span><span class="default">$t </span><span class="keyword">= </span><span class="default">microtime</span><span class="keyword">(</span><span class="default">true</span><span class="keyword">);
+<br> for(</span><span class="default">$i</span><span class="keyword">=</span><span class="default">0</span><span class="keyword">; </span><span class="default">$i</span><span class="keyword">&lt;</span><span class="default">1000</span><span class="keyword">; </span><span class="default">$i</span><span class="keyword">++) {
+<br>&nbsp; &nbsp;&nbsp; </span><span class="default">sum</span><span class="keyword">();
+<br> }
+<br> echo </span><span class="default">microtime</span><span class="keyword">(</span><span class="default">true</span><span class="keyword">)-</span><span class="default">$t</span><span class="keyword">;
+<br> echo </span><span class="string">" -- "</span><span class="keyword">.</span><span class="default">$a</span><span class="keyword">.</span><span class="string">"&lt;br&gt;"</span><span class="keyword">;
+<br>
+<br></span><span class="comment">//Using the superglobal array
+<br></span><span class="default">$a</span><span class="keyword">=</span><span class="default">1</span><span class="keyword">;
+<br></span><span class="default">$b</span><span class="keyword">=</span><span class="default">2</span><span class="keyword">;
+<br>function </span><span class="default">sum2</span><span class="keyword">() {
+<br>&nbsp; &nbsp; </span><span class="default">$GLOBALS</span><span class="keyword">[</span><span class="string">'a'</span><span class="keyword">] += </span><span class="default">$GLOBALS</span><span class="keyword">[</span><span class="string">'b'</span><span class="keyword">];
+<br>}
+<br>
+<br>&nbsp; </span><span class="default">$t </span><span class="keyword">= </span><span class="default">microtime</span><span class="keyword">(</span><span class="default">true</span><span class="keyword">);
+<br> for(</span><span class="default">$i</span><span class="keyword">=</span><span class="default">0</span><span class="keyword">; </span><span class="default">$i</span><span class="keyword">&lt;</span><span class="default">1000</span><span class="keyword">; </span><span class="default">$i</span><span class="keyword">++) {
+<br>&nbsp; &nbsp;&nbsp; </span><span class="default">sum2</span><span class="keyword">();
+<br> }
+<br> echo </span><span class="default">microtime</span><span class="keyword">(</span><span class="default">true</span><span class="keyword">)-</span><span class="default">$t</span><span class="keyword">;
+<br> echo </span><span class="string">" -- "</span><span class="keyword">.</span><span class="default">$a</span><span class="keyword">.</span><span class="string">"&lt;br&gt;"</span><span class="keyword">;
+<br></span><span class="default">?&gt;</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="98577">  
+  <a class="name">
+  <strong class="user"><em>jakub dot lopuszanski at nasza-klasa dot pl</em></strong></a><div class="date" title="2010-06-24 02:59"><strong>11 years ago</strong></div>
+  <div class="text" id="Hcom98577">
+<div class="phpcode"><code><span class="html">
+If you use __autoload function to load classes' definitons, beware that "static local variables are resolved at compile time" (whatever it really means) and the order in which autoloads occur may impact the semantic.<br><br>For example if you have:<br><span class="default">&lt;?php<br></span><span class="keyword">class </span><span class="default">Singleton</span><span class="keyword">{<br>&nbsp; static public function </span><span class="default">get_instance</span><span class="keyword">(){<br>&nbsp; &nbsp;&nbsp; static </span><span class="default">$instance </span><span class="keyword">= </span><span class="default">null</span><span class="keyword">;<br>&nbsp; &nbsp;&nbsp; if(</span><span class="default">$instance </span><span class="keyword">=== </span><span class="default">null</span><span class="keyword">){<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$instance </span><span class="keyword">= new static();<br>&nbsp; &nbsp;&nbsp; }<br>&nbsp; &nbsp;&nbsp; return </span><span class="default">$instance</span><span class="keyword">;<br>&nbsp; }<br>}<br></span><span class="default">?&gt;<br></span><br>and two separate files A.php and B.php:<br>class A extends Singleton{}<br>class B extends A{}<br><br>then depending on the order in which you access those two classes, and consequently, the order in which __autoload includes them, you can get strange results of calling B::get_instance() and A::get_instance().<br><br>It seems that static local variables are alocated in as many copies as there are classes that inherit a method at the time of inclusion of parsing Singleton.</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="120112">  
+  <a class="name">
+  <strong class="user"><em>simon dot barotte at gmail dot com</em></strong></a><div class="date" title="2016-11-03 10:46"><strong>4 years ago</strong></div>
+  <div class="text" id="Hcom120112">
+<div class="phpcode"><code><span class="html">
+To be vigilant, unlike Java or C++, variables declared inside blocks such as loops (for, while,...) or if's, will also be recognized and accessible outside of the block, the only valid block is the BLOCK function so:<br><br><span class="default">&lt;?php<br></span><span class="keyword">for(</span><span class="default">$j</span><span class="keyword">=</span><span class="default">0</span><span class="keyword">; </span><span class="default">$j</span><span class="keyword">&lt;</span><span class="default">5</span><span class="keyword">; </span><span class="default">$j</span><span class="keyword">++)<br>{<br>&nbsp; &nbsp;&nbsp; if(</span><span class="default">$j </span><span class="keyword">== </span><span class="default">1</span><span class="keyword">){<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$a </span><span class="keyword">= </span><span class="default">6</span><span class="keyword">;<br>&nbsp; &nbsp;&nbsp; }<br>}<br><br>echo </span><span class="default">$a</span><span class="keyword">;<br></span><span class="default">?&gt;<br></span><br>Would print 6.</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="45282">  
+  <a class="name">
+  <strong class="user"><em>info AT SyPlex DOT net</em></strong></a><div class="date" title="2004-08-31 05:35"><strong>17 years ago</strong></div>
+  <div class="text" id="Hcom45282">
+<div class="phpcode"><code><span class="html">
+Some times you need to access the same static in more than one function. There is an easy way to solve this problem:<br><br><span class="default">&lt;?php<br>&nbsp; </span><span class="comment">// We need a way to get a reference of our static<br>&nbsp; </span><span class="keyword">function &amp;</span><span class="default">getStatic</span><span class="keyword">() {<br>&nbsp; &nbsp; static </span><span class="default">$staticVar</span><span class="keyword">;<br>&nbsp; &nbsp; return </span><span class="default">$staticVar</span><span class="keyword">;<br>&nbsp; }<br><br>&nbsp; </span><span class="comment">// Now we can access the static in any method by using it's reference<br>&nbsp; </span><span class="keyword">function </span><span class="default">fooCount</span><span class="keyword">() {<br>&nbsp; &nbsp; </span><span class="default">$ref2static </span><span class="keyword">= &amp; </span><span class="default">getStatic</span><span class="keyword">();<br>&nbsp; &nbsp; echo </span><span class="default">$ref2static</span><span class="keyword">++;<br>&nbsp; }<br><br>&nbsp; </span><span class="default">fooCount</span><span class="keyword">(); </span><span class="comment">// 0<br>&nbsp; </span><span class="default">fooCount</span><span class="keyword">(); </span><span class="comment">// 1<br>&nbsp; </span><span class="default">fooCount</span><span class="keyword">(); </span><span class="comment">// 2<br></span><span class="default">?&gt;</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="126217">  
+  <a class="name">
+  <strong class="user"><em>admin at shenjinpeng dot cn</em></strong></a><div class="date" title="2021-07-05 03:57"><strong>2 months ago</strong></div>
+  <div class="text" id="Hcom126217">
+<div class="phpcode"><code><span class="html">
+<span class="default">&lt;?php <br><br></span><span class="keyword">function </span><span class="default">foo</span><span class="keyword">(){<br>&nbsp; &nbsp; static </span><span class="default">$a</span><span class="keyword">= </span><span class="default">0</span><span class="keyword">;<br>&nbsp; &nbsp; </span><span class="default">$bar </span><span class="keyword">= function(){<br>&nbsp; &nbsp; &nbsp; &nbsp; global </span><span class="default">$a </span><span class="keyword">;<br>&nbsp; &nbsp; &nbsp; &nbsp; return ++</span><span class="default">$a</span><span class="keyword">;<br>&nbsp; &nbsp; };<br>&nbsp; &nbsp; <br>&nbsp; &nbsp; return </span><span class="default">$bar</span><span class="keyword">();<br>}<br><br>echo </span><span class="default">foo</span><span class="keyword">(); </span><span class="comment">// 1<br></span><span class="keyword">echo </span><span class="default">foo</span><span class="keyword">(); </span><span class="comment">// 2<br><br></span><span class="keyword">function </span><span class="default">foo1</span><span class="keyword">(){<br>&nbsp; &nbsp; </span><span class="default">$bar </span><span class="keyword">= function(){<br>&nbsp; &nbsp; &nbsp; &nbsp; static </span><span class="default">$a </span><span class="keyword">= </span><span class="default">0</span><span class="keyword">;<br>&nbsp; &nbsp; &nbsp; &nbsp; return ++</span><span class="default">$a</span><span class="keyword">;<br>&nbsp; &nbsp; };<br>&nbsp; &nbsp; <br>&nbsp; &nbsp; return </span><span class="default">$bar</span><span class="keyword">();<br>}<br><br>echo </span><span class="default">foo1</span><span class="keyword">() ; </span><span class="comment">// 1<br></span><span class="keyword">echo </span><span class="default">foo1</span><span class="keyword">() ; </span><span class="comment">// 1<br><br></span><span class="keyword">function </span><span class="default">foo2</span><span class="keyword">(){<br>&nbsp; &nbsp; static </span><span class="default">$a </span><span class="keyword">= </span><span class="default">0</span><span class="keyword">;<br>&nbsp; &nbsp; </span><span class="default">$bar </span><span class="keyword">= function() use (&amp;</span><span class="default">$a</span><span class="keyword">){<br>&nbsp; &nbsp; &nbsp; &nbsp; return ++</span><span class="default">$a</span><span class="keyword">;<br>&nbsp; &nbsp; };<br>&nbsp; &nbsp; <br>&nbsp; &nbsp; return </span><span class="default">$bar</span><span class="keyword">();<br>}<br><br>echo </span><span class="default">foo2</span><span class="keyword">() ; </span><span class="comment">// 1<br></span><span class="keyword">echo </span><span class="default">foo2</span><span class="keyword">() ; </span><span class="comment">// 2<br><br></span><span class="keyword">function </span><span class="default">foo3</span><span class="keyword">(</span><span class="default">$func</span><span class="keyword">){<br>&nbsp; &nbsp; static </span><span class="default">$a </span><span class="keyword">= </span><span class="default">0</span><span class="keyword">;<br>&nbsp; &nbsp; return </span><span class="default">$func</span><span class="keyword">(</span><span class="default">$a</span><span class="keyword">);<br>}<br><br>echo </span><span class="default">foo3</span><span class="keyword">(</span><span class="default">fn</span><span class="keyword">(&amp;</span><span class="default">$a</span><span class="keyword">) =&gt; ++</span><span class="default">$a </span><span class="keyword">); </span><span class="comment">// 1<br></span><span class="keyword">echo </span><span class="default">foo3</span><span class="keyword">(</span><span class="default">fn</span><span class="keyword">(&amp;</span><span class="default">$a</span><span class="keyword">) =&gt; ++</span><span class="default">$a </span><span class="keyword">); </span><span class="comment">// 2<br><br></span><span class="default">?&gt;</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="126139">  
+  <a class="name">
+  <strong class="user"><em>2505036090 at qq dot com</em></strong></a><div class="date" title="2021-06-05 01:59"><strong>3 months ago</strong></div>
+  <div class="text" id="Hcom126139">
+<div class="phpcode"><code><span class="html">
+About assignment of object:<br>```php<br><span class="default">&lt;?php<br></span><span class="keyword">function </span><span class="default">aaa</span><span class="keyword">() {<br>&nbsp; &nbsp; global </span><span class="default">$obj</span><span class="keyword">;<br>&nbsp; &nbsp; </span><span class="default">$cl </span><span class="keyword">= new </span><span class="default">stdclass</span><span class="keyword">;<br>&nbsp; &nbsp; </span><span class="default">$obj </span><span class="keyword">= &amp;</span><span class="default">$cl</span><span class="keyword">; </span><span class="comment">//&nbsp; assign By Ref<br>&nbsp; &nbsp; </span><span class="default">$obj</span><span class="keyword">-&gt;</span><span class="default">name </span><span class="keyword">= </span><span class="string">'jack'</span><span class="keyword">;<br>&nbsp; &nbsp; </span><span class="default">$obj </span><span class="keyword">= </span><span class="default">NULL</span><span class="keyword">; </span><span class="comment">// the change of $obj leads to the change of $cl<br>&nbsp; &nbsp; </span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">$cl</span><span class="keyword">); </span><span class="comment">// output: NULL<br></span><span class="keyword">}<br></span><span class="default">aaa</span><span class="keyword">();<br></span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">$obj</span><span class="keyword">); </span><span class="comment">// output: NULL<br><br></span><span class="keyword">function </span><span class="default">bbb</span><span class="keyword">() {<br>&nbsp; &nbsp; global </span><span class="default">$obj</span><span class="keyword">;<br>&nbsp; &nbsp; </span><span class="default">$cl </span><span class="keyword">= new </span><span class="default">stdclass</span><span class="keyword">;<br>&nbsp; &nbsp; </span><span class="default">$obj </span><span class="keyword">= </span><span class="default">$cl</span><span class="keyword">; </span><span class="comment">// general assignment of object<br>&nbsp; &nbsp; </span><span class="default">$obj</span><span class="keyword">-&gt;</span><span class="default">name </span><span class="keyword">= </span><span class="string">'jack'</span><span class="keyword">;<br>&nbsp; &nbsp; </span><span class="default">$obj </span><span class="keyword">= </span><span class="default">NULL</span><span class="keyword">; </span><span class="comment">// the value of $obj changes to NULL, but the value of $cl&nbsp; is still original; <br>&nbsp; &nbsp; </span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">$cl</span><span class="keyword">); </span><span class="comment">//output:&nbsp; object(stdClass)#2 (1) { ["name"]=&gt; string(4) "jack" }<br></span><span class="keyword">}<br></span><span class="default">bbb</span><span class="keyword">();<br></span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">$obj</span><span class="keyword">); </span><span class="comment">// output: NULL<br></span><span class="default">?&gt;<br></span>```</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="125888">  
+  <a class="name">
+  <strong class="user"><em>atesin () 6m4i1 ! c0m</em></strong></a><div class="date" title="2021-03-08 03:07"><strong>6 months ago</strong></div>
+  <div class="text" id="Hcom125888">
+<div class="phpcode"><code><span class="html">
+i hadn't found info on this so i had to make some tests...<br><br>inside a function, when globalling a variable that doesn't exist in the parent scope, it will set to null... i mean...<br><br><span class="default">&lt;?php<br><br></span><span class="keyword">function </span><span class="default">f</span><span class="keyword">()<br>{<br>&nbsp; global </span><span class="default">$g</span><span class="keyword">;<br>&nbsp; </span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">$g</span><span class="keyword">); </span><span class="comment">// prints 'NULL' with no log message, means if $g is unset globally then here IS SET to NULL (*)<br>&nbsp; </span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">$l</span><span class="keyword">); </span><span class="comment">// prints 'NULL' and logs the 'undefined variable l' notice in this line<br>&nbsp; <br>&nbsp; // (*) notice until the variable $g IS SET to null here, isset($g) will still return false<br>&nbsp; //&nbsp; &nbsp;&nbsp; because for isset() the var has to be set and not null (see doc for details)...<br>&nbsp; //&nbsp; &nbsp;&nbsp; maybe the only way to find if a variable is actually unset is throught the log warnings<br></span><span class="keyword">}<br><br></span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">$g</span><span class="keyword">); </span><span class="comment">// prints 'NULL' and logs the 'undefined variable g' in this line<br></span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">$g</span><span class="keyword">); </span><span class="comment">// same as above but in this line, means the variable is still unset<br></span><span class="default">f</span><span class="keyword">();<br><br></span><span class="default">?&gt;<br></span><br>.<br>knowing this could be useful in a case like mine... consider something like this...<br><br><span class="default">&lt;?php<br><br></span><span class="comment">//--- account.php ---<br><br></span><span class="default">$user </span><span class="keyword">= </span><span class="string">'john doe'</span><span class="keyword">;<br><br></span><span class="comment">//--- main.php ---<br><br></span><span class="keyword">function </span><span class="default">welcome</span><span class="keyword">()<br>{<br>&nbsp; global </span><span class="default">$user</span><span class="keyword">;<br>&nbsp; echo </span><span class="string">"welcome </span><span class="default">$user</span><span class="string">"</span><span class="keyword">; </span><span class="comment">// if $user is not set in parent scope it just prints "welcome "<br><br>&nbsp; // the right way afaik<br>&nbsp; </span><span class="keyword">if ( isset(</span><span class="default">$user</span><span class="keyword">) )<br>&nbsp; &nbsp; echo </span><span class="string">"welcome </span><span class="default">$user</span><span class="string">"</span><span class="keyword">;<br>}<br><br>if ( </span><span class="default">login_ok</span><span class="keyword">() )<br>&nbsp; </span><span class="default">incude </span><span class="string">'account.php'</span><span class="keyword">;<br><br></span><span class="default">welcome</span><span class="keyword">();<br><br></span><span class="default">?&gt;</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="125806">  
+  <a class="name">
+  <strong class="user"><em>Duke dot Bouvier at NOPSAM dot Gmail dot com</em></strong></a><div class="date" title="2021-02-11 11:20"><strong>6 months ago</strong></div>
+  <div class="text" id="Hcom125806">
+<div class="phpcode"><code><span class="html">
+The recursion example has some excess code:<br><br>"$count--" is superfluous.<br>"$count++" can be built into the loop (but be sure to use pre-increment not a post-incremenet<br><br>Thus:<br><br><span class="default">&lt;?php<br></span><span class="keyword">function </span><span class="default">test</span><span class="keyword">()<br>{<br>&nbsp; &nbsp; static </span><span class="default">$count </span><span class="keyword">= </span><span class="default">1</span><span class="keyword">;<br><br>&nbsp; &nbsp; echo </span><span class="default">$count</span><span class="keyword">.</span><span class="string">" "</span><span class="keyword">;<br><br>&nbsp; &nbsp; if (++</span><span class="default">$count </span><span class="keyword">&lt; </span><span class="default">10</span><span class="keyword">) {<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">test</span><span class="keyword">();<br>&nbsp; &nbsp; }<br>}<br></span><span class="default">?&gt;<br></span><br>Though with a static, all you are really doing is creating a loop but with lots of function calls pushed onto the stack.<br><br>A great things about recursive functions is that you don't actually have to have any static data.&nbsp; You simply supply an argument to pass the value (and can use a default value for the argument for your initialisation if desired.)<br><br><span class="default">&lt;?php<br></span><span class="keyword">function </span><span class="default">test</span><span class="keyword">(</span><span class="default">$count </span><span class="keyword">= </span><span class="default">1</span><span class="keyword">)<br>{<br>&nbsp; &nbsp; echo </span><span class="default">$count</span><span class="keyword">.</span><span class="string">" "</span><span class="keyword">;<br><br>&nbsp; &nbsp; if (</span><span class="default">$count </span><span class="keyword">&lt; </span><span class="default">10</span><span class="keyword">) {<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">test</span><span class="keyword">(++</span><span class="default">$count</span><span class="keyword">);<br>&nbsp; &nbsp; }<br><br>}<br></span><span class="default">test</span><span class="keyword">()<br></span><span class="default">?&gt;</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="125622">  
+  <a class="name">
+  <strong class="user"><em>jtunaley at gmail dot com</em></strong></a><div class="date" title="2020-12-20 10:52"><strong>8 months ago</strong></div>
+  <div class="text" id="Hcom125622">
+<div class="phpcode"><code><span class="html">
+It's worth noting that block statements without a control structure also don't affect variable scope.<br><br><span class="default">&lt;?php<br></span><span class="keyword">{<br>&nbsp; &nbsp; </span><span class="default">$a </span><span class="keyword">= </span><span class="default">4</span><span class="keyword">;<br>}<br>echo </span><span class="default">$a</span><span class="keyword">; </span><span class="comment">// Outputs "4"</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="123497">  
+  <a class="name">
+  <strong class="user"><em>jake dot tunaley at berkeleyit dot com</em></strong></a><div class="date" title="2019-01-07 05:02"><strong>2 years ago</strong></div>
+  <div class="text" id="Hcom123497">
+<div class="phpcode"><code><span class="html">
+Beware of using $this in anonymous functions assigned to a static variable.<br><br><span class="default">&lt;?php<br></span><span class="keyword">class </span><span class="default">Foo </span><span class="keyword">{<br>&nbsp; &nbsp; public function </span><span class="default">bar</span><span class="keyword">() {<br>&nbsp; &nbsp; &nbsp; &nbsp; static </span><span class="default">$anonymous </span><span class="keyword">= </span><span class="default">null</span><span class="keyword">;<br>&nbsp; &nbsp; &nbsp; &nbsp; if (</span><span class="default">$anonymous </span><span class="keyword">=== </span><span class="default">null</span><span class="keyword">) {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="comment">// Expression is not allowed as static initializer workaround<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$anonymous </span><span class="keyword">= function () {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return </span><span class="default">$this</span><span class="keyword">;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; };<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; &nbsp; &nbsp; return </span><span class="default">$anonymous</span><span class="keyword">();<br>&nbsp; &nbsp; }<br>}<br><br></span><span class="default">$a </span><span class="keyword">= new </span><span class="default">Foo</span><span class="keyword">();<br></span><span class="default">$b </span><span class="keyword">= new </span><span class="default">Foo</span><span class="keyword">();<br></span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">$a</span><span class="keyword">-&gt;</span><span class="default">bar</span><span class="keyword">() === </span><span class="default">$a</span><span class="keyword">); </span><span class="comment">// True<br></span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">$b</span><span class="keyword">-&gt;</span><span class="default">bar</span><span class="keyword">() === </span><span class="default">$a</span><span class="keyword">); </span><span class="comment">// Also true<br></span><span class="default">?&gt;<br></span><br>In a static anonymous function, $this will be the value of whatever object instance that method was called on first.<br><br>To get the behaviour you're probably expecting, you need to pass the $this context into the function.<br><br><span class="default">&lt;?php<br></span><span class="keyword">class </span><span class="default">Foo </span><span class="keyword">{<br>&nbsp; &nbsp; public function </span><span class="default">bar</span><span class="keyword">() {<br>&nbsp; &nbsp; &nbsp; &nbsp; static </span><span class="default">$anonymous </span><span class="keyword">= </span><span class="default">null</span><span class="keyword">;<br>&nbsp; &nbsp; &nbsp; &nbsp; if (</span><span class="default">$anonymous </span><span class="keyword">=== </span><span class="default">null</span><span class="keyword">) {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="comment">// Expression is not allowed as static initializer workaround<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$anonymous </span><span class="keyword">= function (</span><span class="default">self $thisObj</span><span class="keyword">) {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return </span><span class="default">$thisObj</span><span class="keyword">;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; };<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; &nbsp; &nbsp; return </span><span class="default">$anonymous</span><span class="keyword">(</span><span class="default">$this</span><span class="keyword">);<br>&nbsp; &nbsp; }<br>}<br><br></span><span class="default">$a </span><span class="keyword">= new </span><span class="default">Foo</span><span class="keyword">();<br></span><span class="default">$b </span><span class="keyword">= new </span><span class="default">Foo</span><span class="keyword">();<br></span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">$a</span><span class="keyword">-&gt;</span><span class="default">bar</span><span class="keyword">() === </span><span class="default">$a</span><span class="keyword">); </span><span class="comment">// True<br></span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">$b</span><span class="keyword">-&gt;</span><span class="default">bar</span><span class="keyword">() === </span><span class="default">$a</span><span class="keyword">); </span><span class="comment">// False<br></span><span class="default">?&gt;</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="81506">  
+  <a class="name">
+  <strong class="user"><em>Anonymous</em></strong></a><div class="date" title="2008-03-01 11:10"><strong>13 years ago</strong></div>
+  <div class="text" id="Hcom81506">
+<div class="phpcode"><code><span class="html">
+I was pondering a little something regarding caching classes within a function in order to prevent the need to initiate them multiple times and not clutter the caching function's class properties with more values.<br><br>I came here because I remembered something about references being lost. So I made a test to see if I could pull what I wanted to off anyway. Here's and example of how to get around the references lost issue. I hope it is helpful to someone else!<br><br><span class="default">&lt;?php<br></span><span class="keyword">class </span><span class="default">test1</span><span class="keyword">{}<br>class </span><span class="default">test2</span><span class="keyword">{}<br>class </span><span class="default">test3</span><span class="keyword">{}<br><br>function </span><span class="default">cache</span><span class="keyword">( </span><span class="default">$class </span><span class="keyword">)<br>{<br>&nbsp; &nbsp; static </span><span class="default">$loaders </span><span class="keyword">= array();<br>&nbsp; &nbsp; <br>&nbsp; &nbsp; </span><span class="default">$loaders</span><span class="keyword">[ </span><span class="default">$class </span><span class="keyword">] = new </span><span class="default">$class</span><span class="keyword">();<br><br>&nbsp; &nbsp; </span><span class="default">var_dump</span><span class="keyword">( </span><span class="default">$loaders </span><span class="keyword">);<br>}<br>print </span><span class="string">'&lt;pre&gt;'</span><span class="keyword">;<br></span><span class="default">cache</span><span class="keyword">( </span><span class="string">'test1' </span><span class="keyword">);<br></span><span class="default">cache</span><span class="keyword">( </span><span class="string">'test2' </span><span class="keyword">);<br></span><span class="default">cache</span><span class="keyword">( </span><span class="string">'test3' </span><span class="keyword">);<br><br></span><span class="default">?&gt;</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="124708">  
+  <a class="name">
+  <strong class="user"><em>iphstich at gmail dot com</em></strong></a><div class="date" title="2020-02-12 04:32"><strong>1 year ago</strong></div>
+  <div class="text" id="Hcom124708">
+<div class="phpcode"><code><span class="html">
+It seems that static variables defined within a class method or static function are stored separately for the class and each extended class of it.<br><br>It's sort of like, every time you extend a class, functions with static variables are re-writen, and the static variable re-created. Even if the function is defined as final!<br><br><span class="default">&lt;?php<br><br></span><span class="keyword">class </span><span class="default">A </span><span class="keyword">{<br>&nbsp; &nbsp; function </span><span class="default">x </span><span class="keyword">() { static </span><span class="default">$x </span><span class="keyword">= </span><span class="default">0</span><span class="keyword">; return ++</span><span class="default">$x</span><span class="keyword">; }<br>&nbsp; &nbsp; static function </span><span class="default">y </span><span class="keyword">() { static </span><span class="default">$y </span><span class="keyword">= </span><span class="default">0</span><span class="keyword">; return ++</span><span class="default">$y</span><span class="keyword">; }<br>&nbsp; &nbsp; final static function </span><span class="default">z </span><span class="keyword">() { static </span><span class="default">$z </span><span class="keyword">= </span><span class="default">0</span><span class="keyword">; return ++</span><span class="default">$z</span><span class="keyword">; }<br>}<br><br>class </span><span class="default">B </span><span class="keyword">extends </span><span class="default">A </span><span class="keyword">{ }<br>class </span><span class="default">C </span><span class="keyword">extends </span><span class="default">B </span><span class="keyword">{ }<br><br></span><span class="comment">// As methods, A and B have different values for x<br></span><span class="default">$a </span><span class="keyword">= new </span><span class="default">A</span><span class="keyword">();<br>echo </span><span class="default">$a</span><span class="keyword">-&gt;</span><span class="default">x</span><span class="keyword">(); </span><span class="comment">// 1<br></span><span class="default">$b </span><span class="keyword">= new </span><span class="default">B</span><span class="keyword">();<br>echo </span><span class="default">$b</span><span class="keyword">-&gt;</span><span class="default">x</span><span class="keyword">(); </span><span class="comment">// 1<br></span><span class="keyword">echo </span><span class="default">$b</span><span class="keyword">-&gt;</span><span class="default">x</span><span class="keyword">(); </span><span class="comment">// 2<br><br>// And different instances of C will have the same values for x<br></span><span class="default">$c1 </span><span class="keyword">= new </span><span class="default">C</span><span class="keyword">();<br></span><span class="default">$c2 </span><span class="keyword">= new </span><span class="default">C</span><span class="keyword">();<br></span><span class="default">$c3 </span><span class="keyword">= new </span><span class="default">C</span><span class="keyword">();<br>echo </span><span class="default">$c1</span><span class="keyword">-&gt;</span><span class="default">x</span><span class="keyword">(); </span><span class="comment">// 1<br></span><span class="keyword">echo </span><span class="default">$c2</span><span class="keyword">-&gt;</span><span class="default">x</span><span class="keyword">(); </span><span class="comment">// 2<br></span><span class="keyword">echo </span><span class="default">$c3</span><span class="keyword">-&gt;</span><span class="default">x</span><span class="keyword">(); </span><span class="comment">// 3<br><br>// The same behavior applies to static functions<br></span><span class="keyword">echo </span><span class="default">A</span><span class="keyword">::</span><span class="default">y</span><span class="keyword">(); </span><span class="comment">// 1<br></span><span class="keyword">echo </span><span class="default">B</span><span class="keyword">::</span><span class="default">y</span><span class="keyword">(); </span><span class="comment">// 1<br></span><span class="keyword">echo </span><span class="default">B</span><span class="keyword">::</span><span class="default">y</span><span class="keyword">(); </span><span class="comment">// 2<br></span><span class="keyword">echo </span><span class="default">C</span><span class="keyword">::</span><span class="default">y</span><span class="keyword">(); </span><span class="comment">// 1<br></span><span class="keyword">echo </span><span class="default">C</span><span class="keyword">::</span><span class="default">y</span><span class="keyword">(); </span><span class="comment">// 2<br></span><span class="keyword">echo </span><span class="default">C</span><span class="keyword">::</span><span class="default">y</span><span class="keyword">(); </span><span class="comment">// 3<br><br>// The same behavior still applies to FINAL static functions<br></span><span class="keyword">echo </span><span class="default">A</span><span class="keyword">::</span><span class="default">z</span><span class="keyword">(); </span><span class="comment">// 1<br></span><span class="keyword">echo </span><span class="default">B</span><span class="keyword">::</span><span class="default">z</span><span class="keyword">(); </span><span class="comment">// 1<br></span><span class="keyword">echo </span><span class="default">B</span><span class="keyword">::</span><span class="default">z</span><span class="keyword">(); </span><span class="comment">// 2<br></span><span class="keyword">echo </span><span class="default">C</span><span class="keyword">::</span><span class="default">z</span><span class="keyword">(); </span><span class="comment">// 1<br></span><span class="keyword">echo </span><span class="default">C</span><span class="keyword">::</span><span class="default">z</span><span class="keyword">(); </span><span class="comment">// 2<br></span><span class="keyword">echo </span><span class="default">C</span><span class="keyword">::</span><span class="default">z</span><span class="keyword">(); </span><span class="comment">// 3<br></span><span class="default">?&gt;<br></span><br>Tested with version 7.0.13</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="118079">  
+  <a class="name">
+  <strong class="user"><em>nino dot skopac at gmail dot com</em></strong></a><div class="date" title="2015-09-30 08:01"><strong>5 years ago</strong></div>
+  <div class="text" id="Hcom118079">
+<div class="phpcode"><code><span class="html">
+Interesting behavior in PHP 5.6.12 and PHP 7 RC3:<br><br><span class="default">&lt;?php<br></span><span class="keyword">class </span><span class="default">Foo </span><span class="keyword">{<br>&nbsp; &nbsp; public function </span><span class="default">Bar</span><span class="keyword">() {<br>&nbsp; &nbsp; &nbsp; &nbsp; static </span><span class="default">$var </span><span class="keyword">= </span><span class="default">0</span><span class="keyword">;<br>&nbsp; &nbsp; &nbsp; &nbsp; <br>&nbsp; &nbsp; &nbsp; &nbsp; return ++</span><span class="default">$var</span><span class="keyword">;<br>&nbsp; &nbsp; }<br>}<br><br></span><span class="default">$Foo_instance </span><span class="keyword">= new </span><span class="default">Foo</span><span class="keyword">;<br><br>print </span><span class="default">$Foo_instance</span><span class="keyword">-&gt;</span><span class="default">Bar</span><span class="keyword">(); </span><span class="comment">// prints 1<br></span><span class="keyword">print </span><span class="default">PHP_EOL</span><span class="keyword">;<br><br>unset(</span><span class="default">$Foo_instance</span><span class="keyword">);<br><br></span><span class="default">$Foo_instance2 </span><span class="keyword">= new </span><span class="default">Foo</span><span class="keyword">;<br><br>print </span><span class="default">$Foo_instance2</span><span class="keyword">-&gt;</span><span class="default">Bar</span><span class="keyword">(); </span><span class="comment">// prints 2<br></span><span class="keyword">print </span><span class="default">PHP_EOL</span><span class="keyword">;<br></span><span class="default">?&gt;<br></span><br>How can a 2 be printed, since we unseted the whole instance before?<br><br>Consider a similar example:<br><br><span class="default">&lt;?php<br></span><span class="keyword">class </span><span class="default">Foo </span><span class="keyword">{<br>&nbsp; &nbsp; public static </span><span class="default">$var </span><span class="keyword">= </span><span class="default">0</span><span class="keyword">;<br>&nbsp; &nbsp; <br>&nbsp; &nbsp; public static function </span><span class="default">Bar</span><span class="keyword">() {<br>&nbsp; &nbsp; &nbsp; &nbsp; return ++</span><span class="default">self</span><span class="keyword">::</span><span class="default">$var</span><span class="keyword">;<br>&nbsp; &nbsp; }<br>}<br><br></span><span class="default">$Foo_instance </span><span class="keyword">= new </span><span class="default">Foo</span><span class="keyword">;<br><br>print </span><span class="default">$Foo_instance</span><span class="keyword">-&gt;</span><span class="default">Bar</span><span class="keyword">(); </span><span class="comment">// prints 1<br></span><span class="keyword">print </span><span class="default">PHP_EOL</span><span class="keyword">;<br><br>unset(</span><span class="default">$Foo_instance</span><span class="keyword">);<br><br></span><span class="default">$Foo_instance2 </span><span class="keyword">= new </span><span class="default">Foo</span><span class="keyword">;<br><br>print </span><span class="default">$Foo_instance2</span><span class="keyword">-&gt;</span><span class="default">Bar</span><span class="keyword">(); </span><span class="comment">// prints 2<br></span><span class="keyword">print </span><span class="default">PHP_EOL</span><span class="keyword">;<br></span><span class="default">?&gt;<br></span><br>No idea why is this happening.</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="69611">  
+  <a class="name">
+  <strong class="user"><em>alan</em></strong></a><div class="date" title="2006-09-12 10:53"><strong>14 years ago</strong></div>
+  <div class="text" id="Hcom69611">
+<div class="phpcode"><code><span class="html">
+Using the global keyword inside a function to define a variable is essentially the same as passing the variable by reference as a parameter:
+<br>
+<br><span class="default">&lt;?php
+<br>somefunction</span><span class="keyword">(){
+<br>&nbsp;&nbsp; global </span><span class="default">$var</span><span class="keyword">;
+<br>}
+<br></span><span class="default">?&gt;
+<br></span>
+<br>is the same as:
+<br>
+<br><span class="default">&lt;?php
+<br>somefunction</span><span class="keyword">(&amp; </span><span class="default">$a</span><span class="keyword">) {
+<br>
+<br>}
+<br></span><span class="default">?&gt;
+<br></span>
+<br>The advantage to using the keyword is if you have a long list of variables&nbsp; needed by the function - you dont have to pass them every time you call the function.</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="53915">  
+  <a class="name">
+  <strong class="user"><em>jameslee at cs dot nmt dot edu</em></strong></a><div class="date" title="2005-06-16 02:33"><strong>16 years ago</strong></div>
+  <div class="text" id="Hcom53915">
+<div class="phpcode"><code><span class="html">
+It should be noted that a static variable inside a method is static across all instances of that class, i.e., all objects of that class share the same static variable.&nbsp; For example the code:<br><br><span class="default">&lt;?php<br></span><span class="keyword">class </span><span class="default">test </span><span class="keyword">{<br>&nbsp; &nbsp; function </span><span class="default">z</span><span class="keyword">() {<br>&nbsp; &nbsp; &nbsp; &nbsp; static </span><span class="default">$n </span><span class="keyword">= </span><span class="default">0</span><span class="keyword">;<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$n</span><span class="keyword">++;<br>&nbsp; &nbsp; &nbsp; &nbsp; return </span><span class="default">$n</span><span class="keyword">;<br>&nbsp; &nbsp; }<br>}<br><br></span><span class="default">$a </span><span class="keyword">=&amp; new </span><span class="default">test</span><span class="keyword">();<br></span><span class="default">$b </span><span class="keyword">=&amp; new </span><span class="default">test</span><span class="keyword">();<br>print </span><span class="default">$a</span><span class="keyword">-&gt;</span><span class="default">z</span><span class="keyword">();&nbsp; </span><span class="comment">// prints 1, as it should<br></span><span class="keyword">print </span><span class="default">$b</span><span class="keyword">-&gt;</span><span class="default">z</span><span class="keyword">();&nbsp; </span><span class="comment">// prints 2 because $a and $b have the same $n<br></span><span class="default">?&gt;<br></span><br>somewhat unexpectedly prints:<br>1<br>2</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="113836">  
+  <a class="name">
+  <strong class="user"><em>Ray.Paseur often uses Gmail</em></strong></a><div class="date" title="2013-12-06 04:32"><strong>7 years ago</strong></div>
+  <div class="text" id="Hcom113836">
+<div class="phpcode"><code><span class="html">
+Variable "Visibility" in PHP Object Oriented Programming is documented here:<br><a rel="nofollow" target="_blank">http://php.net/manual/en/language.oop5.visibility.php</a></span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="99074">  
+  <a class="name">
+  <strong class="user"><em>pedro at worcel dot com</em></strong></a><div class="date" title="2010-07-26 06:34"><strong>11 years ago</strong></div>
+  <div class="text" id="Hcom99074">
+<div class="phpcode"><code><span class="html">
+Another way of working with a large ammount of global variables could be the following.<br><br><span class="default">&lt;?php<br><br>$var </span><span class="keyword">= </span><span class="string">"3"</span><span class="keyword">;<br></span><span class="default">$smarty </span><span class="keyword">= new </span><span class="default">Smarty</span><span class="keyword">();<br><br>function </span><span class="default">headers_set_404</span><span class="keyword">() {<br></span><span class="default">extract</span><span class="keyword">(</span><span class="default">$globals</span><span class="keyword">);<br><br>echo </span><span class="default">$var </span><span class="keyword">. </span><span class="string">"&lt;br /&gt;"</span><span class="keyword">;<br></span><span class="default">print_r</span><span class="keyword">(</span><span class="default">$smarty</span><span class="keyword">);<br><br>return;<br><br>}<br><br></span><span class="default">?&gt;<br></span><br>Regards,<br>Droope</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="121882">  
+  <a class="name">
+  <strong class="user"><em>Hayley Watson</em></strong></a><div class="date" title="2017-11-18 10:05"><strong>3 years ago</strong></div>
+  <div class="text" id="Hcom121882">
+<div class="phpcode"><code><span class="html">
+static variables are implicitly initialised to NULL if no explicit initialisation is made.<br><br><span class="default">&lt;?php<br></span><span class="keyword">function </span><span class="default">foo</span><span class="keyword">()<br>{<br>&nbsp; static </span><span class="default">$v</span><span class="keyword">;<br>&nbsp; echo </span><span class="default">gettype</span><span class="keyword">(</span><span class="default">$v</span><span class="keyword">);<br>}<br><br></span><span class="default">foo</span><span class="keyword">();<br></span><span class="default">?&gt;<br></span><br>will echo NULL without complaining that $v is undefined.<br><br>In short: "static $v;" is equivalent to "static $v = null;".</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="88570">  
+  <a class="name">
+  <strong class="user"><em>nullhility at gmail dot com</em></strong></a><div class="date" title="2009-01-29 07:17"><strong>12 years ago</strong></div>
+  <div class="text" id="Hcom88570">
+<div class="phpcode"><code><span class="html">
+Like functions, if you declare a variable in a class, then set it as global in that class, its value will not be retained outside of that class either.
+<br>
+<br><span class="default">&lt;?php
+<br></span><span class="keyword">class </span><span class="default">global_reference
+<br></span><span class="keyword">{
+<br>&nbsp; &nbsp; public </span><span class="default">$val</span><span class="keyword">;
+<br>&nbsp; &nbsp; 
+<br>&nbsp; &nbsp; public function </span><span class="default">__construct </span><span class="keyword">() {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; global </span><span class="default">$var</span><span class="keyword">;
+<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">val </span><span class="keyword">= </span><span class="default">$var</span><span class="keyword">;
+<br>&nbsp; &nbsp; }
+<br>&nbsp; &nbsp; 
+<br>&nbsp; &nbsp; public function </span><span class="default">dump_it </span><span class="keyword">()
+<br>&nbsp; &nbsp; {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">debug_zval_dump</span><span class="keyword">(</span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">val</span><span class="keyword">);
+<br>&nbsp; &nbsp; }
+<br>&nbsp; &nbsp; 
+<br>&nbsp; &nbsp; public function </span><span class="default">type_cast </span><span class="keyword">() 
+<br>&nbsp; &nbsp; {
+<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">val </span><span class="keyword">= (int) </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">val</span><span class="keyword">;
+<br>&nbsp; &nbsp; }
+<br>}
+<br></span><span class="default">$var </span><span class="keyword">= </span><span class="string">"x"</span><span class="keyword">;
+<br></span><span class="default">$obj </span><span class="keyword">= new </span><span class="default">global_reference</span><span class="keyword">();
+<br></span><span class="default">$obj</span><span class="keyword">-&gt;</span><span class="default">dump_it</span><span class="keyword">();
+<br></span><span class="default">$obj</span><span class="keyword">-&gt;</span><span class="default">type_cast</span><span class="keyword">();
+<br>echo </span><span class="string">"after change "</span><span class="keyword">;
+<br></span><span class="default">$obj</span><span class="keyword">-&gt;</span><span class="default">dump_it</span><span class="keyword">();
+<br>echo </span><span class="string">"original </span><span class="default">$var</span><span class="string">\n"</span><span class="keyword">;
+<br></span><span class="default">?&gt;
+<br></span>
+<br>The work-around is of course changing the assignment in the constructor to a reference assignment as such:
+<br>
+<br><span class="default">&lt;?php
+<br>&nbsp; &nbsp; </span><span class="comment">//....
+<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">val </span><span class="keyword">= &amp;var;
+<br>&nbsp; &nbsp; </span><span class="comment">//....
+<br></span><span class="default">?&gt;
+<br></span>
+<br>If the global you're setting is an object then no reference is necessary because of the way PHP deals with objects. If you don't want to reference to the same object however you can use the clone keyword.
+<br>
+<br><span class="default">&lt;?php
+<br></span><span class="comment">//...
+<br>&nbsp; &nbsp; </span><span class="keyword">global </span><span class="default">$Obj</span><span class="keyword">;
+<br>&nbsp; &nbsp; </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">obj_copy </span><span class="keyword">= clone </span><span class="default">$Obj</span><span class="keyword">;
+<br></span><span class="comment">//...
+<br></span><span class="default">?&gt;
+<br></span>
+<br>[EDIT BY danbrown AT php DOT net:&nbsp; Merged all thoughts and notes by this author into a single note.]</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="119366">  
+  <a class="name">
+  <strong class="user"><em>Ganlv</em></strong></a><div class="date" title="2016-05-21 04:50"><strong>5 years ago</strong></div>
+  <div class="text" id="Hcom119366">
+<div class="phpcode"><code><span class="html">
+<span class="default">&lt;?php<br>$var </span><span class="keyword">= </span><span class="default">1</span><span class="keyword">;<br>function </span><span class="default">foo</span><span class="keyword">() {<br>&nbsp; &nbsp; </span><span class="default">$var </span><span class="keyword">= &amp;</span><span class="default">$GLOBALS</span><span class="keyword">[</span><span class="string">'var'</span><span class="keyword">];<br>&nbsp; &nbsp; </span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">$var</span><span class="keyword">);<br>}<br>function </span><span class="default">bar</span><span class="keyword">() {<br>&nbsp; &nbsp; global </span><span class="default">$var</span><span class="keyword">; </span><span class="comment">// they are the same.<br>&nbsp; &nbsp; </span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">$var</span><span class="keyword">);<br>}<br></span><span class="default">foo</span><span class="keyword">();<br></span><span class="default">bar</span><span class="keyword">();<br></span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">$var</span><span class="keyword">);<br></span><span class="default">?&gt;<br></span><br>In a function, 'global $var;' is to declare a local variant, and the local $var has the same reference to the global $var.<br><br><span class="default">&lt;?php<br>$var </span><span class="keyword">= </span><span class="default">1</span><span class="keyword">;<br>function </span><span class="default">foo</span><span class="keyword">() {<br>&nbsp; &nbsp; global </span><span class="default">$var</span><span class="keyword">;<br>&nbsp; &nbsp; unset(</span><span class="default">$var</span><span class="keyword">);&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="comment">// unset local $a, the global $a is still there.<br>&nbsp; &nbsp; </span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">$var</span><span class="keyword">);&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="comment">// Undefined variable: var<br>&nbsp; &nbsp; </span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">$GLOBALS</span><span class="keyword">[</span><span class="string">'var'</span><span class="keyword">]); </span><span class="comment">// this is ok.<br></span><span class="keyword">}<br></span><span class="default">foo</span><span class="keyword">();<br></span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">$var</span><span class="keyword">);&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="comment">// this is ok.<br></span><span class="default">?&gt;<br></span><br><span class="default">&lt;?php<br>$var </span><span class="keyword">= </span><span class="default">1</span><span class="keyword">;<br>function </span><span class="default">bar</span><span class="keyword">() {<br>&nbsp; &nbsp; global </span><span class="default">$var</span><span class="keyword">;<br>&nbsp; &nbsp; unset(</span><span class="default">$GLOBALS</span><span class="keyword">[</span><span class="string">'var'</span><span class="keyword">]);&nbsp; &nbsp; </span><span class="comment">// unset global $a, the local $a is still here.<br>&nbsp; &nbsp; </span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">$var</span><span class="keyword">);&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="comment">// this is ok.<br>&nbsp; &nbsp; </span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">$GLOBALS</span><span class="keyword">[</span><span class="string">'var'</span><span class="keyword">]); </span><span class="comment">// Undefined index: var<br></span><span class="keyword">}<br></span><span class="default">foo</span><span class="keyword">();<br></span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">$var</span><span class="keyword">);&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="comment">// Undefined variable: var<br></span><span class="default">?&gt;<br></span><br>'unset($var);' is like 'var = NULL;'(var is a pointer) in the C language, instead of 'free(var);'</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="124750">  
+  <a class="name">
+  <strong class="user"><em>ketansheladiya1</em></strong></a><div class="date" title="2020-02-24 04:54"><strong>1 year ago</strong></div>
+  <div class="text" id="Hcom124750">
+<div class="phpcode"><code><span class="html">
+As per PHP standards <br>The new operator returns a reference automatically, so assigning the result of new by reference is not allowed as of PHP 7.0.0, results in an E_DEPRECATED message as of PHP 5.3.0, and an E_STRICT message in earlier versions.<br><a rel="nofollow" target="_blank">https://www.php.net/manual/en/language.operators.assignment.php</a><br><br>so you can use following code to check <br><br><span class="default">&lt;?php<br></span><span class="keyword">function &amp;</span><span class="default">get_instance_ref</span><span class="keyword">() {<br>&nbsp; &nbsp; static </span><span class="default">$obj</span><span class="keyword">;<br><br>&nbsp; &nbsp; echo </span><span class="string">'Static object: '</span><span class="keyword">;<br>&nbsp; &nbsp; </span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">$obj</span><span class="keyword">);<br>&nbsp; &nbsp; if (!isset(</span><span class="default">$obj</span><span class="keyword">)) {<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="comment">// Assign a reference to the static variable<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$obj </span><span class="keyword">= new </span><span class="default">stdclass</span><span class="keyword">;<br>&nbsp; &nbsp; }<br>&nbsp; &nbsp; </span><span class="default">$obj</span><span class="keyword">-&gt;</span><span class="default">property</span><span class="keyword">++;<br>&nbsp; &nbsp; return </span><span class="default">$obj</span><span class="keyword">;<br>}<br><br>function &amp;</span><span class="default">get_instance_noref</span><span class="keyword">() {<br>&nbsp; &nbsp; static </span><span class="default">$obj</span><span class="keyword">;<br><br>&nbsp; &nbsp; echo </span><span class="string">'Static object: '</span><span class="keyword">;<br>&nbsp; &nbsp; </span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">$obj</span><span class="keyword">);<br>&nbsp; &nbsp; if (!isset(</span><span class="default">$obj</span><span class="keyword">)) {<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="comment">// Assign the object to the static variable<br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$obj </span><span class="keyword">= new </span><span class="default">stdclass</span><span class="keyword">;<br>&nbsp; &nbsp; }<br>&nbsp; &nbsp; </span><span class="default">$obj</span><span class="keyword">-&gt;</span><span class="default">property</span><span class="keyword">++;<br>&nbsp; &nbsp; return </span><span class="default">$obj</span><span class="keyword">;<br>}<br><br></span><span class="default">$obj1 </span><span class="keyword">= </span><span class="default">get_instance_ref</span><span class="keyword">();<br></span><span class="default">$still_obj1 </span><span class="keyword">= </span><span class="default">get_instance_ref</span><span class="keyword">();<br>echo </span><span class="string">"\n"</span><span class="keyword">;<br></span><span class="default">$obj2 </span><span class="keyword">= </span><span class="default">get_instance_noref</span><span class="keyword">();<br></span><span class="default">$still_obj2 </span><span class="keyword">= </span><span class="default">get_instance_noref</span><span class="keyword">();<br></span><span class="default">?&gt;</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="121398">  
+  <a class="name">
+  <strong class="user"><em>Semyon Naitur</em></strong></a><div class="date" title="2017-07-19 09:12"><strong>4 years ago</strong></div>
+  <div class="text" id="Hcom121398">
+<div class="phpcode"><code><span class="html">
+function f(){<br>&nbsp; &nbsp; global $a; // global $a is declared, local reference is created<br>&nbsp; &nbsp; $a = 'a';&nbsp; // global $a is set<br>&nbsp; &nbsp; unset($a); // local reference is unset, global $a remains set<br>&nbsp; &nbsp; $a = 'b';&nbsp; // local $a is declared and set<br>}<br>f();<br>echo $a; // prints 'a'<br><br>function f(){<br>&nbsp; &nbsp; global $a; // global $a is declared, local reference is created<br>&nbsp; &nbsp; $a = 'a';&nbsp; // global $a is set<br>&nbsp; &nbsp; unset($a); // local reference $a is unset, global var $a remains set<br>&nbsp; &nbsp; global $a; // local reference is created again<br>&nbsp; &nbsp; $a .= 'b';<br>}<br>f();<br>echo $a; // prints 'ab'</span>
+</code></div>
+  </div>
+ </div></div>
+
+ 
+</section>    </section><!-- layout-content -->
+        
+
+
+  </div><!-- layout -->
+
+  
+
+    
+ <!-- External and third party libraries. -->
+ 
+
+
+
+
+
+
+
+<a id="toTop" href="javascript:;"><span id="toTopHover"></span><img width="40" height="40" alt="To Top" src="../../images/to-top%402x.png"></a>
+
+
+
+<!-- Mirrored from www.php.net/manual/en/language.variables.scope.php by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 11 Sep 2021 02:29:35 GMT -->
+
+</body></html>

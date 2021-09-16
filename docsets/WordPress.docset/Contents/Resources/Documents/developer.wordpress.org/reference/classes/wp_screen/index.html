@@ -1,0 +1,2228 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+
+<!-- Mirrored from developer.wordpress.org/reference/classes/wp_screen/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 31 Aug 2021 17:14:38 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<!--
+<meta property="fb:page_id" content="6427302910" />
+-->
+<meta name="google-site-verification" content="7VWES_-rcHBcmaQis9mSYamPfNwE03f4vyTj4pfuAw0" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WP_Screen</title>
+<meta name="referrer" content="always">
+
+		<link href='../../../../fonts.googleapis.com/css.css?family=Open+Sans:300italic,400italic,600italic,400,300,600&amp;subset=latin,cyrillic-ext,greek-ext,greek,vietnamese,latin-ext,cyrillic' rel='stylesheet' type='text/css'>
+
+		<link rel="stylesheet" href="../../../../s.w.org/style/wp4.css?95" />
+
+<link rel="shortcut icon" href="../../../../s.w.org/favicon.ico?2" type="image/x-icon" />
+<link rel="pingback" href="../../../xmlrpc.php" /><meta name='robots' content='max-image-preview:large' />
+<link rel='dns-prefetch' href='../../../../fonts.googleapis.com/index.html' />
+<link rel='dns-prefetch' href='http://s.w.org/' />
+<link rel='dns-prefetch' href='http://www.googletagmanager.com/' />
+<link rel='dns-prefetch' href='http://fonts.gstatic.com/' />
+<link rel="alternate" type="application/rss+xml" title="WordPress Developer Resources &raquo; Feed" href="../../../feed/index.html" />
+<link rel="alternate" type="application/rss+xml" title="WordPress Developer Resources &raquo; Comments Feed" href="../../../comments/feed/index.html" />
+<meta property="og:title" content="WP_Screen | Class | WordPress Developer Resources" />
+<meta property="og:site_name" content="WordPress Developer Resources" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="../../../index.html" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@WordPress" />
+<meta name="description" content="Core class used to implement an admin screen API." />
+<meta property="og:description" content="Core class used to implement an admin screen API." />
+<link rel="alternate" type="application/rss+xml" title="WordPress Developer Resources &raquo; WP_Screen Comments Feed" href="https://developer.wordpress.org/reference/classes/wp_screen/feed/" />
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'../../../../www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P24PF4B');</script>
+			<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/developer.wordpress.org\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.9-alpha-51701"}};
+			!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([10084,65039,8205,55357,56613],[10084,65039,8203,55357,56613])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel='stylesheet' id='dashicons-css'  href='../../../wp-includes/css/dashicons.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='admin-bar-css'  href='../../../wp-includes/css/admin-bar.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-block-library-css'  href='../../../wp-includes/css/dist/block-library/style.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='wporg-handbook-css-css'  href='../../../wp-content/plugins/handbook/stylesheets/callout-boxes.css?ver=20200121' type='text/css' media='all' />
+<link rel='stylesheet' id='open-sans-css'  href='../../../../fonts.googleapis.com/css-2.css?family=Open+Sans%3A300italic%2C400italic%2C600italic%2C300%2C400%2C600&amp;subset=latin%2Clatin-ext&amp;display=fallback&amp;ver=5.9-alpha-51701' type='text/css' media='all' />
+<link rel='stylesheet' id='wporg-developer-style-css'  href='../../../wp-content/themes/pub/wporg-developer/style.css?ver=3' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-dev-sass-compiled-css'  href='../../../wp-content/themes/pub/wporg-developer/stylesheets/main.css?ver=20200713' type='text/css' media='all' />
+<link rel='stylesheet' id='awesomplete-css-css'  href='../../../wp-content/themes/pub/wporg-developer/stylesheets/awesomplete.css?ver=20160114' type='text/css' media='all' />
+<link rel='stylesheet' id='autocomplete-css-css'  href='../../../wp-content/themes/pub/wporg-developer/stylesheets/autocomplete.css?ver=20171220' type='text/css' media='all' />
+<link rel='stylesheet' id='syntaxhighlighter-core-css'  href='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shCore.css?ver=3.0.9b' type='text/css' media='all' />
+<link rel='stylesheet' id='syntaxhighlighter-theme-default-css'  href='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shThemeDefault.css?ver=3.0.9b' type='text/css' media='all' />
+<script type='text/javascript' src='../../../wp-includes/js/jquery/jquery.min.js?ver=3.6.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='../../../wp-content/plugins/handbook/scripts/handbook.js?ver=20150930' id='wporg-handbook-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/chapters.js?ver=20190603' id='wporg-developer-chapters-js'></script>
+<script type='text/javascript' src='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shCore.js?ver=3.0.9b' id='syntaxhighlighter-core-js'></script>
+<script type='text/javascript' src='../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushPhp.js?ver=3.0.9b' id='syntaxhighlighter-brush-php-js'></script>
+<link rel="https://api.w.org/" href="https://developer.wordpress.org/wp-json/" /><link rel="alternate" type="application/json" href="https://developer.wordpress.org/wp-json/wp/v2/wp-parser-class/5458" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="../../../xmlrpc-2.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="../../../wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 5.9-alpha-51701" />
+<link rel='shortlink' href='https://developer.wordpress.org/?p=5458' />
+<link rel="alternate" type="application/json+oembed" href="https://developer.wordpress.org/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Fclasses%2Fwp_screen%2F" />
+<link rel="alternate" type="text/xml+oembed" href="https://developer.wordpress.org/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Fclasses%2Fwp_screen%2F&amp;format=xml" />
+<link rel="canonical" href="index.html">
+<!-- Stream WordPress user activity plugin v3.6.2 -->
+	<style>
+		@media screen and (max-width: 782px) {
+			#wpadminbar li#wp-admin-bar-log-in,
+			#wpadminbar li#wp-admin-bar-register {
+				display: block;
+			}
+
+			#wpadminbar li#wp-admin-bar-log-in a,
+			#wpadminbar li#wp-admin-bar-register a {
+				padding: 0 8px;
+			}
+		}
+	</style>
+		<style>
+			a.github-edit {
+				margin-left: .5em;
+				font-size: .5em;
+				vertical-align: top;
+				display: inline-block;
+				border: 1px solid #eeeeee;
+				border-radius: 2px;
+				background: #eeeeee;
+				padding: .5em .6em .4em;
+				color: black;
+				margin-top: 0.1em;
+			}
+			a.github-edit > * {
+				opacity: 0.6;
+			}
+			a.github-edit:hover > * {
+				opacity: 1;
+				color: black;
+			}
+			a.github-edit img {
+				height: .8em;
+			}
+		</style>
+		
+	<script type="text/javascript">
+		jQuery( '<style>.hide-if-js { display: none; }</style>' ).appendTo( 'head' );
+		jQuery( function($) {
+			$( 'body' ).addClass('js');
+		} );
+	</script>
+<style type="text/css" media="print">#wpadminbar { display:none; }</style>
+	<style type="text/css" media="screen">
+	</style>
+	<script>document.cookie='devicePixelRatio='+((window.devicePixelRatio === undefined) ? 1 : window.devicePixelRatio)+'; path=/';</script>
+
+</head>
+
+
+<body id="wordpress-org" class="wp-parser-class-template-default single single-wp-parser-class postid-5458 admin-bar no-customize-support">
+		<div id="wpadminbar" class="nojq nojs">
+						<div class="quicklinks" id="wp-toolbar" role="navigation" aria-label="Toolbar">
+				<ul id='wp-admin-bar-root-default' class="ab-top-menu"><li id='wp-admin-bar-wp-logo' class="menupop"><a class='ab-item' aria-haspopup="true" href='https://wordpress.org/about/'><span class="ab-icon" aria-hidden="true"></span><span class="screen-reader-text">About WordPress</span></a><div class="ab-sub-wrapper"><ul id='wp-admin-bar-wp-logo-default' class="ab-submenu"><li id='wp-admin-bar-about'><a class='ab-item' href='https://wordpress.org/about/'>About WordPress</a></li></ul><ul id='wp-admin-bar-wp-logo-external' class="ab-sub-secondary ab-submenu"><li id='wp-admin-bar-wporg'><a class='ab-item' href='https://wordpress.org/'>WordPress.org</a></li><li id='wp-admin-bar-documentation'><a class='ab-item' href='https://wordpress.org/support/'>Documentation</a></li><li id='wp-admin-bar-support-forums'><a class='ab-item' href='https://wordpress.org/support/forums/'>Support</a></li><li id='wp-admin-bar-feedback'><a class='ab-item' href='https://wordpress.org/support/forum/requests-and-feedback'>Feedback</a></li></ul></div></li></ul><ul id='wp-admin-bar-top-secondary' class="ab-top-secondary ab-top-menu"><li id='wp-admin-bar-search' class="admin-bar-search"><div class="ab-item ab-empty-item" tabindex="-1"><form action="https://developer.wordpress.org/" method="get" id="adminbarsearch"><input class="adminbar-input" name="s" id="adminbar-search" type="text" value="" maxlength="150" /><label for="adminbar-search" class="screen-reader-text">Search</label><input type="submit" class="adminbar-button" value="Search" /></form></div></li><li id='wp-admin-bar-log-in'><a class='ab-item' href='https://login.wordpress.org/?locale=en_US'>Log In</a></li><li id='wp-admin-bar-register'><a class='ab-item' href='https://login.wordpress.org/register?locale=en_US'>Register</a></li></ul>			</div>
+					</div>
+
+		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P24PF4B" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<div id="wporg-header">
+	<div class="wrapper">
+	<h1><a href="http://wordpress.org/">WordPress.org</a></h1>				<div id="head-search">
+		<form action="http://wordpress.org/search/do-search.php" method="get">
+			<label for="global-search" class="screen-reader-text">Search WordPress.org for:</label>
+			<input id="global-search" class="text" name="search" type="text" value="" maxlength="150" placeholder="Search WordPress.org" />
+			<button type="submit" class="button"><span class="screen-reader-text">Submit</span></button>
+		</form>
+		</div>
+				<div style="clear:both"></div>
+		<button id="mobile-menu-button" aria-expanded="false"><span class="screen-reader-text">Toggle Menu</span></button>
+		
+<nav aria-label="Main Menu">
+<ul id="wporg-header-menu">
+<li class="menu-item"><a href='http://wordpress.org/showcase/' data-title='See some of the sites built on WordPress.'>Showcase</a></li>
+<li class="menu-item"><a href='http://learn.wordpress.org/' data-title='Resources to help you learn more about WordPress and teach it to others.'>Learn</a></li>
+<li class="menu-item"><a href='http://wordpress.org/themes/' data-title='Find just the right look for your website.'>Themes</a></li>
+<li class="menu-item"><a href='http://wordpress.org/plugins/' data-title='Plugins can extend WordPress to do almost anything you can imagine.'>Plugins</a></li>
+<li class="menu-item"><a href='http://wordpress.org/mobile/' data-title='Take your website on the go!'>Mobile</a></li>
+<li class="menu-item"><a href='http://wordpress.org/support/' data-title='Forums, documentation, help.'>Support</a><ul class="nav-submenu"><li><a href='http://wordpress.org/support/' title='Documentation, tutorials, best practices.'>Documentation</a></li><li><a href='http://wordpress.org/support/forums/' title='Support and discussion forums.'>Forums</a></li></ul><div class="uparrow"></div></li>
+<li class="menu-item"><a href='http://make.wordpress.org/' data-title='Contribute your knowledge.'>Get Involved</a><ul class="nav-submenu"><li><a href='http://wordpress.org/five-for-the-future/' title='How five percent is powering the next generation of the web'>Five for the Future</a></li></ul><div class="uparrow"></div></li>
+<li class="menu-item"><a href='http://wordpress.org/about/' data-title='About the WordPress Organization, and where we&#039;re going.'>About</a></li>
+<li class="menu-item"><a href='http://wordpress.org/news/' data-title='Come here for the latest scoop.'>Blog</a></li>
+<li class="menu-item"><a href='http://wordpress.org/hosting/' data-title='Find a home for your blog.'>Hosting</a></li>
+<li id="download" class="button download-button menu-item"><a href='http://wordpress.org/download/' data-title='Get it. Got it? Good.'>Get WordPress</a></li>
+</ul>
+</nav>
+		<div style="clear:both"></div>
+	</div>
+</div>
+
+
+
+<header id="masthead" class="site-header" role="banner">
+		<div class="site-branding">
+		<h1 class="site-title">
+			<a href="../../index.html" rel="home">Code Reference</a>
+		</h1>
+
+		
+		<nav id="site-navigation" class="main-navigation" role="navigation">
+			<button class="menu-toggle dashicons dashicons-arrow-down-alt2" aria-controls="primary-menu" aria-expanded="false" aria-label="Primary Menu"></button>
+					</nav>
+	</div>
+</header><!-- #masthead -->
+
+<div id="page" class="hfeed site devhub-wrap">
+	<a href="#main" class="screen-reader-text">Skip to content</a>
+
+				<div id="inner-search">
+			<div class="search-section section clear hide-if-js">
+
+
+	
+	<form role="search" method="get" class="searchform searchform-filtered" action="https://developer.wordpress.org/">
+		<label for="search-field" class="screen-reader-text">Search for:</label>
+		<input type="text" id="search-field" class="search-field" placeholder="Search &hellip;" value="" name="s">
+		<button class="button button-primary button-search"><i class="dashicons dashicons-search"></i><span class="screen-reader-text">Search plugins</span></button>
+	
+		<div class="search-post-type">
+			<span>Filter by type:</span>
+									<label><input type="checkbox" name="post_type[]" value="wp-parser-function"
+						 /> Functions</label>
+									<label><input type="checkbox" name="post_type[]" value="wp-parser-hook"
+						 /> Hooks</label>
+									<label><input type="checkbox" name="post_type[]" value="wp-parser-class"
+						 /> Classes</label>
+									<label><input type="checkbox" name="post_type[]" value="wp-parser-method"
+						 /> Methods</label>
+					</div>
+
+	
+	</form>
+
+</div><!-- /search-guide -->
+			<div id="inner-search-icon-container">
+				<div id="inner-search-icon">
+					<div class="dashicons dashicons-search"><span class="screen-reader-text">Search</span></div>
+				</div>
+			</div>
+		</div>
+
+		<div id="content" class="site-content">
+
+	<div id="content-area" class="wp-parser-class-template-default single single-wp-parser-class postid-5458 admin-bar no-customize-support code-reference">
+
+		
+		<div class="breadcrumb-trail breadcrumbs" itemprop="breadcrumb">
+			<span class="trail-browse">Browse:</span> 
+			<span class="trail-begin"><a href="../../../index.html" title="WordPress Developer Resources" rel="home">Home</a></span> <span class="sep">&#47;</span> 
+			<span class="trail-inner"><a href="../../index.html" title="Reference">Reference</a></span> <span class="sep">&#47;</span> 
+			<span class="trail-inner"><a href="../index.html">Classes</a></span> <span class="sep">&#47;</span> <span class="trail-end">WP_Screen</span>
+		</div>
+		<main id="main" class="site-main" role="main">
+
+		
+			
+<article id="post-5458" class="post-5458 wp-parser-class type-wp-parser-class status-publish hentry wp-parser-source-file-wp-admin_includes_class-wp-screen-php wp-parser-package-administration wp-parser-package-wordpress wp-parser-since-3-3-0">
+
+	
+	
+	<h1>WP_Screen</h1>
+
+	<section class="summary">
+		<p>Core class used to implement an admin screen API.</p>
+	</section>
+
+
+	
+	<div class="content-toc"><style> .toc-jump { text-align: right; font-size: 12px; } .page .toc-heading { margin-top: -50px; padding-top: 50px !important; }</style><div class="table-of-contents"><h2>Contents</h2><ul class="items"><li><a href="#more-information">More Information</a></li>
+<li><a href="#role-of-wp_screen"><span id="Role_of_WP_Screen" class="mw-headline">Role of <a href="index.html">WP_Screen</a></span></a></li>
+<li><a href="#properties">Properties</a>
+<ul>
+<li><a href="#public-properties"><span id="Public_Properties" class="mw-headline">Public Properties</span></a></li>
+<li><a href="#private-properties"><span id="Private_Properties" class="mw-headline">Private Properties</span></a>
+</ul></li>
+<li><a href="#source">Source</a></li>
+<li><a href="#methods">Methods</a></li>
+<li><a href="#changelog">Changelog</a></li>
+<li><a href="#user-contributed-notes">User Contributed Notes</a></ul>
+</div>
+	<hr />
+	<section class="explanation">
+		<h2 class="toc-heading" id="more-information" tabindex="-1">More Information <a href="#more-information" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">More Information</span></a></h2>
+
+		<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="role-of-wp_screen" tabindex="-1"><span id="Role_of_WP_Screen" class="mw-headline">Role of <a href="index.html">WP_Screen</a></span> <a href="#role-of-wp_screen" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text"><span id="Role_of_WP_Screen" class="mw-headline">Role of <a href="index.html">WP_Screen</a></span></span></a></h2>
+<p>This is a concrete class that is instantiated in the WordPress <tt>$screen</tt> global. It is primarily used to create and customize WordPress admin screens (as of WordPress 3.3).</p>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="properties" tabindex="-1">Properties <a href="#properties" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Properties</span></a></h2>
+<p>Note: Please refer source code for the complete list of properties.</p>
+<h3 class="toc-heading" id="public-properties" tabindex="-1"><span id="Public_Properties" class="mw-headline">Public Properties</span> <a href="#public-properties" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text"><span id="Public_Properties" class="mw-headline">Public Properties</span></span></a></h3>
+<p>The following properties are built into the <tt><a href="index.html">WP_Screen</a></tt> class.</p>
+<dl>
+<dt><tt>$action</tt></dt>
+<dd>Any action associated with the screen. <tt>'add'</tt> for <tt>*-add.php</tt> and <tt>*-new.php</tt> screens. Empty otherwise.</dd>
+<dt><tt>$base</tt></dt>
+<dd>The base type of the screen. This is typically the same as <tt>$id</tt> but with any post types and taxonomies stripped. For example, for an <tt>$id</tt> of <tt>'edit-post'</tt> the base is <tt>'edit'</tt>.</dd>
+<dt><tt>$id</tt></dt>
+<dd>The unique ID of the screen.</dd>
+<dt><tt>$is_network</tt></dt>
+<dd>Whether the screen is in the network admin.</dd>
+<dt><tt>$is_user</tt></dt>
+<dd>Whether the screen is in the user admin.</dd>
+<dt><tt>$parent_base</tt></dt>
+<dd>The base menu parent. This is derived from <tt>$parent_file</tt> by removing the query string and any .php extension. <tt>$parent_file</tt> values of <tt>'edit.php?post_type=page'</tt> and <tt>'edit.php?post_type=post'</tt> have a <tt>$parent_base</tt> of <tt>'edit'</tt>.</dd>
+<dt><tt>$parent_file</tt></dt>
+<dd>The <tt>$parent_file</tt> for the screen per the admin menu system. Some <tt>$parent_file</tt> values are <tt>'edit.php?post_type=page'</tt>, <tt>'edit.php'</tt>, and <tt>'options-general.php'</tt>.</dd>
+<dt><tt>$post_type</tt></dt>
+<dd>The post type associated with the screen, if any. The <tt>'edit.php?post_type=page'</tt> screen has a post type of <tt>'page'</tt>. The <tt>'edit-tags.php?taxonomy=$taxonomy&amp;post_type=page'</tt> screen has a post type of <tt>'page'</tt>.</dd>
+<dt><tt>$taxonomy</tt></dt>
+<dd>The taxonomy associated with the screen, if any. The <tt>'edit-tags.php?taxonomy=category'</tt> screen has a taxonomy of <tt>'category'</tt>.</dd>
+</dl>
+<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h3 class="toc-heading" id="private-properties" tabindex="-1"><span id="Private_Properties" class="mw-headline">Private Properties</span> <a href="#private-properties" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text"><span id="Private_Properties" class="mw-headline">Private Properties</span></span></a></h3>
+<p>The following properties are built into the <tt><a href="index.html">WP_Screen</a></tt> class.</p>
+<dl>
+<dt><tt>$_help_tabs</tt></dt>
+<dd>Private. The help tab data associated with the screen, if any.</dd>
+<dt><tt>$_help_sidebar</tt></dt>
+<dd>Private. The help sidebar data associated with screen, if any.</dd>
+<dt><tt>$_old_compat_help</tt></dt>
+<dd>Private. Stores old string-based help.</dd>
+<dt><tt>$_options</tt></dt>
+<dd>Private. The screen options associated with screen, if any.</dd>
+<dt><tt>$_registry</tt></dt>
+<dd>Private. The screen object registry.</dd>
+<dt><tt>$_show_screen_options</tt></dt>
+<dd>Private. Stores the result of the public <tt>show_screen_options()</tt> function.</dd>
+<dt><tt>$_screen_settings</tt></dt>
+<dd>Private. Stores the <tt>'screen_settings'</tt> section of screen options.</dd>
+<dt></dt>
+</dl>
+	</section>
+	<hr />
+	<section class="source-content">
+		<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="source" tabindex="-1">Source <a href="#source" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Source</span></a></h2>
+		<p>
+			File: <a href="../../files/wp-admin/includes/class-wp-screen.php/index.html">wp-admin/includes/class-wp-screen.php</a>		</p>
+
+					<div class="source-code-container">
+				<pre class="brush: php; toolbar: false; first-line: 15">final class WP_Screen {
+	/**
+	 * Any action associated with the screen.
+	 *
+	 * 'add' for *-add.php and *-new.php screens. Empty otherwise.
+	 *
+	 * @since 3.3.0
+	 * @var string
+	 */
+	public $action;
+
+	/**
+	 * The base type of the screen.
+	 *
+	 * This is typically the same as `$id` but with any post types and taxonomies stripped.
+	 * For example, for an `$id` of 'edit-post' the base is 'edit'.
+	 *
+	 * @since 3.3.0
+	 * @var string
+	 */
+	public $base;
+
+	/**
+	 * The number of columns to display. Access with get_columns().
+	 *
+	 * @since 3.4.0
+	 * @var int
+	 */
+	private $columns = 0;
+
+	/**
+	 * The unique ID of the screen.
+	 *
+	 * @since 3.3.0
+	 * @var string
+	 */
+	public $id;
+
+	/**
+	 * Which admin the screen is in. network | user | site | false
+	 *
+	 * @since 3.5.0
+	 * @var string
+	 */
+	protected $in_admin;
+
+	/**
+	 * Whether the screen is in the network admin.
+	 *
+	 * Deprecated. Use in_admin() instead.
+	 *
+	 * @since 3.3.0
+	 * @deprecated 3.5.0
+	 * @var bool
+	 */
+	public $is_network;
+
+	/**
+	 * Whether the screen is in the user admin.
+	 *
+	 * Deprecated. Use in_admin() instead.
+	 *
+	 * @since 3.3.0
+	 * @deprecated 3.5.0
+	 * @var bool
+	 */
+	public $is_user;
+
+	/**
+	 * The base menu parent.
+	 *
+	 * This is derived from `$parent_file` by removing the query string and any .php extension.
+	 * `$parent_file` values of 'edit.php?post_type=page' and 'edit.php?post_type=post'
+	 * have a `$parent_base` of 'edit'.
+	 *
+	 * @since 3.3.0
+	 * @var string
+	 */
+	public $parent_base;
+
+	/**
+	 * The parent_file for the screen per the admin menu system.
+	 *
+	 * Some `$parent_file` values are 'edit.php?post_type=page', 'edit.php', and 'options-general.php'.
+	 *
+	 * @since 3.3.0
+	 * @var string
+	 */
+	public $parent_file;
+
+	/**
+	 * The post type associated with the screen, if any.
+	 *
+	 * The 'edit.php?post_type=page' screen has a post type of 'page'.
+	 * The 'edit-tags.php?taxonomy=$taxonomy&amp;post_type=page' screen has a post type of 'page'.
+	 *
+	 * @since 3.3.0
+	 * @var string
+	 */
+	public $post_type;
+
+	/**
+	 * The taxonomy associated with the screen, if any.
+	 *
+	 * The 'edit-tags.php?taxonomy=category' screen has a taxonomy of 'category'.
+	 *
+	 * @since 3.3.0
+	 * @var string
+	 */
+	public $taxonomy;
+
+	/**
+	 * The help tab data associated with the screen, if any.
+	 *
+	 * @since 3.3.0
+	 * @var array
+	 */
+	private $_help_tabs = array();
+
+	/**
+	 * The help sidebar data associated with screen, if any.
+	 *
+	 * @since 3.3.0
+	 * @var string
+	 */
+	private $_help_sidebar = '';
+
+	/**
+	 * The accessible hidden headings and text associated with the screen, if any.
+	 *
+	 * @since 4.4.0
+	 * @var array
+	 */
+	private $_screen_reader_content = array();
+
+	/**
+	 * Stores old string-based help.
+	 *
+	 * @var array
+	 */
+	private static $_old_compat_help = array();
+
+	/**
+	 * The screen options associated with screen, if any.
+	 *
+	 * @since 3.3.0
+	 * @var array
+	 */
+	private $_options = array();
+
+	/**
+	 * The screen object registry.
+	 *
+	 * @since 3.3.0
+	 *
+	 * @var array
+	 */
+	private static $_registry = array();
+
+	/**
+	 * Stores the result of the public show_screen_options function.
+	 *
+	 * @since 3.3.0
+	 * @var bool
+	 */
+	private $_show_screen_options;
+
+	/**
+	 * Stores the 'screen_settings' section of screen options.
+	 *
+	 * @since 3.3.0
+	 * @var string
+	 */
+	private $_screen_settings;
+
+	/**
+	 * Whether the screen is using the block editor.
+	 *
+	 * @since 5.0.0
+	 * @var bool
+	 */
+	public $is_block_editor = false;
+
+	/**
+	 * Fetches a screen object.
+	 *
+	 * @since 3.3.0
+	 *
+	 * @global string $hook_suffix
+	 *
+	 * @param string|WP_Screen $hook_name Optional. The hook name (also known as the hook suffix) used to determine the screen.
+	 *                                    Defaults to the current $hook_suffix global.
+	 * @return WP_Screen Screen object.
+	 */
+	public static function get( $hook_name = '' ) {
+		if ( $hook_name instanceof WP_Screen ) {
+			return $hook_name;
+		}
+
+		$post_type       = null;
+		$taxonomy        = null;
+		$in_admin        = false;
+		$action          = '';
+		$is_block_editor = false;
+
+		if ( $hook_name ) {
+			$id = $hook_name;
+		} else {
+			$id = $GLOBALS['hook_suffix'];
+		}
+
+		// For those pesky meta boxes.
+		if ( $hook_name &amp;&amp; post_type_exists( $hook_name ) ) {
+			$post_type = $id;
+			$id        = 'post'; // Changes later. Ends up being $base.
+		} else {
+			if ( '.php' === substr( $id, -4 ) ) {
+				$id = substr( $id, 0, -4 );
+			}
+
+			if ( in_array( $id, array( 'post-new', 'link-add', 'media-new', 'user-new' ), true ) ) {
+				$id     = substr( $id, 0, -4 );
+				$action = 'add';
+			}
+		}
+
+		if ( ! $post_type &amp;&amp; $hook_name ) {
+			if ( '-network' === substr( $id, -8 ) ) {
+				$id       = substr( $id, 0, -8 );
+				$in_admin = 'network';
+			} elseif ( '-user' === substr( $id, -5 ) ) {
+				$id       = substr( $id, 0, -5 );
+				$in_admin = 'user';
+			}
+
+			$id = sanitize_key( $id );
+			if ( 'edit-comments' !== $id &amp;&amp; 'edit-tags' !== $id &amp;&amp; 'edit-' === substr( $id, 0, 5 ) ) {
+				$maybe = substr( $id, 5 );
+				if ( taxonomy_exists( $maybe ) ) {
+					$id       = 'edit-tags';
+					$taxonomy = $maybe;
+				} elseif ( post_type_exists( $maybe ) ) {
+					$id        = 'edit';
+					$post_type = $maybe;
+				}
+			}
+
+			if ( ! $in_admin ) {
+				$in_admin = 'site';
+			}
+		} else {
+			if ( defined( 'WP_NETWORK_ADMIN' ) &amp;&amp; WP_NETWORK_ADMIN ) {
+				$in_admin = 'network';
+			} elseif ( defined( 'WP_USER_ADMIN' ) &amp;&amp; WP_USER_ADMIN ) {
+				$in_admin = 'user';
+			} else {
+				$in_admin = 'site';
+			}
+		}
+
+		if ( 'index' === $id ) {
+			$id = 'dashboard';
+		} elseif ( 'front' === $id ) {
+			$in_admin = false;
+		}
+
+		$base = $id;
+
+		// If this is the current screen, see if we can be more accurate for post types and taxonomies.
+		if ( ! $hook_name ) {
+			if ( isset( $_REQUEST['post_type'] ) ) {
+				$post_type = post_type_exists( $_REQUEST['post_type'] ) ? $_REQUEST['post_type'] : false;
+			}
+			if ( isset( $_REQUEST['taxonomy'] ) ) {
+				$taxonomy = taxonomy_exists( $_REQUEST['taxonomy'] ) ? $_REQUEST['taxonomy'] : false;
+			}
+
+			switch ( $base ) {
+				case 'post':
+					if ( isset( $_GET['post'] ) &amp;&amp; isset( $_POST['post_ID'] ) &amp;&amp; (int) $_GET['post'] !== (int) $_POST['post_ID'] ) {
+						wp_die( __( 'A post ID mismatch has been detected.' ), __( 'Sorry, you are not allowed to edit this item.' ), 400 );
+					} elseif ( isset( $_GET['post'] ) ) {
+						$post_id = (int) $_GET['post'];
+					} elseif ( isset( $_POST['post_ID'] ) ) {
+						$post_id = (int) $_POST['post_ID'];
+					} else {
+						$post_id = 0;
+					}
+
+					if ( $post_id ) {
+						$post = get_post( $post_id );
+						if ( $post ) {
+							$post_type = $post-&gt;post_type;
+
+							/** This filter is documented in wp-admin/post.php */
+							$replace_editor = apply_filters( 'replace_editor', false, $post );
+
+							if ( ! $replace_editor ) {
+								$is_block_editor = use_block_editor_for_post( $post );
+							}
+						}
+					}
+					break;
+				case 'edit-tags':
+				case 'term':
+					if ( null === $post_type &amp;&amp; is_object_in_taxonomy( 'post', $taxonomy ? $taxonomy : 'post_tag' ) ) {
+						$post_type = 'post';
+					}
+					break;
+				case 'upload':
+					$post_type = 'attachment';
+					break;
+			}
+		}
+
+		switch ( $base ) {
+			case 'post':
+				if ( null === $post_type ) {
+					$post_type = 'post';
+				}
+
+				// When creating a new post, use the default block editor support value for the post type.
+				if ( empty( $post_id ) ) {
+					$is_block_editor = use_block_editor_for_post_type( $post_type );
+				}
+
+				$id = $post_type;
+				break;
+			case 'edit':
+				if ( null === $post_type ) {
+					$post_type = 'post';
+				}
+				$id .= '-' . $post_type;
+				break;
+			case 'edit-tags':
+			case 'term':
+				if ( null === $taxonomy ) {
+					$taxonomy = 'post_tag';
+				}
+				// The edit-tags ID does not contain the post type. Look for it in the request.
+				if ( null === $post_type ) {
+					$post_type = 'post';
+					if ( isset( $_REQUEST['post_type'] ) &amp;&amp; post_type_exists( $_REQUEST['post_type'] ) ) {
+						$post_type = $_REQUEST['post_type'];
+					}
+				}
+
+				$id = 'edit-' . $taxonomy;
+				break;
+		}
+
+		if ( 'network' === $in_admin ) {
+			$id   .= '-network';
+			$base .= '-network';
+		} elseif ( 'user' === $in_admin ) {
+			$id   .= '-user';
+			$base .= '-user';
+		}
+
+		if ( isset( self::$_registry[ $id ] ) ) {
+			$screen = self::$_registry[ $id ];
+			if ( get_current_screen() === $screen ) {
+				return $screen;
+			}
+		} else {
+			$screen     = new self();
+			$screen-&gt;id = $id;
+		}
+
+		$screen-&gt;base            = $base;
+		$screen-&gt;action          = $action;
+		$screen-&gt;post_type       = (string) $post_type;
+		$screen-&gt;taxonomy        = (string) $taxonomy;
+		$screen-&gt;is_user         = ( 'user' === $in_admin );
+		$screen-&gt;is_network      = ( 'network' === $in_admin );
+		$screen-&gt;in_admin        = $in_admin;
+		$screen-&gt;is_block_editor = $is_block_editor;
+
+		self::$_registry[ $id ] = $screen;
+
+		return $screen;
+	}
+
+	/**
+	 * Makes the screen object the current screen.
+	 *
+	 * @see set_current_screen()
+	 * @since 3.3.0
+	 *
+	 * @global WP_Screen $current_screen WordPress current screen object.
+	 * @global string    $taxnow
+	 * @global string    $typenow
+	 */
+	public function set_current_screen() {
+		global $current_screen, $taxnow, $typenow;
+		$current_screen = $this;
+		$taxnow         = $this-&gt;taxonomy;
+		$typenow        = $this-&gt;post_type;
+
+		/**
+		 * Fires after the current screen has been set.
+		 *
+		 * @since 3.0.0
+		 *
+		 * @param WP_Screen $current_screen Current WP_Screen object.
+		 */
+		do_action( 'current_screen', $current_screen );
+	}
+
+	/**
+	 * Constructor
+	 *
+	 * @since 3.3.0
+	 */
+	private function __construct() {}
+
+	/**
+	 * Indicates whether the screen is in a particular admin
+	 *
+	 * @since 3.5.0
+	 *
+	 * @param string $admin The admin to check against (network | user | site).
+	 *                      If empty any of the three admins will result in true.
+	 * @return bool True if the screen is in the indicated admin, false otherwise.
+	 */
+	public function in_admin( $admin = null ) {
+		if ( empty( $admin ) ) {
+			return (bool) $this-&gt;in_admin;
+		}
+
+		return ( $admin === $this-&gt;in_admin );
+	}
+
+	/**
+	 * Sets or returns whether the block editor is loading on the current screen.
+	 *
+	 * @since 5.0.0
+	 *
+	 * @param bool $set Optional. Sets whether the block editor is loading on the current screen or not.
+	 * @return bool True if the block editor is being loaded, false otherwise.
+	 */
+	public function is_block_editor( $set = null ) {
+		if ( null !== $set ) {
+			$this-&gt;is_block_editor = (bool) $set;
+		}
+
+		return $this-&gt;is_block_editor;
+	}
+
+	/**
+	 * Sets the old string-based contextual help for the screen for backward compatibility.
+	 *
+	 * @since 3.3.0
+	 *
+	 * @param WP_Screen $screen A screen object.
+	 * @param string    $help   Help text.
+	 */
+	public static function add_old_compat_help( $screen, $help ) {
+		self::$_old_compat_help[ $screen-&gt;id ] = $help;
+	}
+
+	/**
+	 * Set the parent information for the screen.
+	 *
+	 * This is called in admin-header.php after the menu parent for the screen has been determined.
+	 *
+	 * @since 3.3.0
+	 *
+	 * @param string $parent_file The parent file of the screen. Typically the $parent_file global.
+	 */
+	public function set_parentage( $parent_file ) {
+		$this-&gt;parent_file         = $parent_file;
+		list( $this-&gt;parent_base ) = explode( '?', $parent_file );
+		$this-&gt;parent_base         = str_replace( '.php', '', $this-&gt;parent_base );
+	}
+
+	/**
+	 * Adds an option for the screen.
+	 *
+	 * Call this in template files after admin.php is loaded and before admin-header.php is loaded
+	 * to add screen options.
+	 *
+	 * @since 3.3.0
+	 *
+	 * @param string $option Option ID.
+	 * @param mixed  $args   Option-dependent arguments.
+	 */
+	public function add_option( $option, $args = array() ) {
+		$this-&gt;_options[ $option ] = $args;
+	}
+
+	/**
+	 * Remove an option from the screen.
+	 *
+	 * @since 3.8.0
+	 *
+	 * @param string $option Option ID.
+	 */
+	public function remove_option( $option ) {
+		unset( $this-&gt;_options[ $option ] );
+	}
+
+	/**
+	 * Remove all options from the screen.
+	 *
+	 * @since 3.8.0
+	 */
+	public function remove_options() {
+		$this-&gt;_options = array();
+	}
+
+	/**
+	 * Get the options registered for the screen.
+	 *
+	 * @since 3.8.0
+	 *
+	 * @return array Options with arguments.
+	 */
+	public function get_options() {
+		return $this-&gt;_options;
+	}
+
+	/**
+	 * Gets the arguments for an option for the screen.
+	 *
+	 * @since 3.3.0
+	 *
+	 * @param string       $option Option name.
+	 * @param string|false $key    Optional. Specific array key for when the option is an array.
+	 *                             Default false.
+	 * @return string The option value if set, null otherwise.
+	 */
+	public function get_option( $option, $key = false ) {
+		if ( ! isset( $this-&gt;_options[ $option ] ) ) {
+			return null;
+		}
+		if ( $key ) {
+			if ( isset( $this-&gt;_options[ $option ][ $key ] ) ) {
+				return $this-&gt;_options[ $option ][ $key ];
+			}
+			return null;
+		}
+		return $this-&gt;_options[ $option ];
+	}
+
+	/**
+	 * Gets the help tabs registered for the screen.
+	 *
+	 * @since 3.4.0
+	 * @since 4.4.0 Help tabs are ordered by their priority.
+	 *
+	 * @return array Help tabs with arguments.
+	 */
+	public function get_help_tabs() {
+		$help_tabs = $this-&gt;_help_tabs;
+
+		$priorities = array();
+		foreach ( $help_tabs as $help_tab ) {
+			if ( isset( $priorities[ $help_tab['priority'] ] ) ) {
+				$priorities[ $help_tab['priority'] ][] = $help_tab;
+			} else {
+				$priorities[ $help_tab['priority'] ] = array( $help_tab );
+			}
+		}
+
+		ksort( $priorities );
+
+		$sorted = array();
+		foreach ( $priorities as $list ) {
+			foreach ( $list as $tab ) {
+				$sorted[ $tab['id'] ] = $tab;
+			}
+		}
+
+		return $sorted;
+	}
+
+	/**
+	 * Gets the arguments for a help tab.
+	 *
+	 * @since 3.4.0
+	 *
+	 * @param string $id Help Tab ID.
+	 * @return array Help tab arguments.
+	 */
+	public function get_help_tab( $id ) {
+		if ( ! isset( $this-&gt;_help_tabs[ $id ] ) ) {
+			return null;
+		}
+		return $this-&gt;_help_tabs[ $id ];
+	}
+
+	/**
+	 * Add a help tab to the contextual help for the screen.
+	 *
+	 * Call this on the `load-$pagenow` hook for the relevant screen,
+	 * or fetch the `$current_screen` object, or use get_current_screen()
+	 * and then call the method from the object.
+	 *
+	 * You may need to filter `$current_screen` using an if or switch statement
+	 * to prevent new help tabs from being added to ALL admin screens.
+	 *
+	 * @since 3.3.0
+	 * @since 4.4.0 The `$priority` argument was added.
+	 *
+	 * @param array $args {
+	 *     Array of arguments used to display the help tab.
+	 *
+	 *     @type string   $title    Title for the tab. Default false.
+	 *     @type string   $id       Tab ID. Must be HTML-safe and should be unique for this menu.
+	 *                              It is NOT allowed to contain any empty spaces. Default false.
+	 *     @type string   $content  Optional. Help tab content in plain text or HTML. Default empty string.
+	 *     @type callable $callback Optional. A callback to generate the tab content. Default false.
+	 *     @type int      $priority Optional. The priority of the tab, used for ordering. Default 10.
+	 * }
+	 */
+	public function add_help_tab( $args ) {
+		$defaults = array(
+			'title'    =&gt; false,
+			'id'       =&gt; false,
+			'content'  =&gt; '',
+			'callback' =&gt; false,
+			'priority' =&gt; 10,
+		);
+		$args     = wp_parse_args( $args, $defaults );
+
+		$args['id'] = sanitize_html_class( $args['id'] );
+
+		// Ensure we have an ID and title.
+		if ( ! $args['id'] || ! $args['title'] ) {
+			return;
+		}
+
+		// Allows for overriding an existing tab with that ID.
+		$this-&gt;_help_tabs[ $args['id'] ] = $args;
+	}
+
+	/**
+	 * Removes a help tab from the contextual help for the screen.
+	 *
+	 * @since 3.3.0
+	 *
+	 * @param string $id The help tab ID.
+	 */
+	public function remove_help_tab( $id ) {
+		unset( $this-&gt;_help_tabs[ $id ] );
+	}
+
+	/**
+	 * Removes all help tabs from the contextual help for the screen.
+	 *
+	 * @since 3.3.0
+	 */
+	public function remove_help_tabs() {
+		$this-&gt;_help_tabs = array();
+	}
+
+	/**
+	 * Gets the content from a contextual help sidebar.
+	 *
+	 * @since 3.4.0
+	 *
+	 * @return string Contents of the help sidebar.
+	 */
+	public function get_help_sidebar() {
+		return $this-&gt;_help_sidebar;
+	}
+
+	/**
+	 * Add a sidebar to the contextual help for the screen.
+	 *
+	 * Call this in template files after admin.php is loaded and before admin-header.php is loaded
+	 * to add a sidebar to the contextual help.
+	 *
+	 * @since 3.3.0
+	 *
+	 * @param string $content Sidebar content in plain text or HTML.
+	 */
+	public function set_help_sidebar( $content ) {
+		$this-&gt;_help_sidebar = $content;
+	}
+
+	/**
+	 * Gets the number of layout columns the user has selected.
+	 *
+	 * The layout_columns option controls the max number and default number of
+	 * columns. This method returns the number of columns within that range selected
+	 * by the user via Screen Options. If no selection has been made, the default
+	 * provisioned in layout_columns is returned. If the screen does not support
+	 * selecting the number of layout columns, 0 is returned.
+	 *
+	 * @since 3.4.0
+	 *
+	 * @return int Number of columns to display.
+	 */
+	public function get_columns() {
+		return $this-&gt;columns;
+	}
+
+	/**
+	 * Get the accessible hidden headings and text used in the screen.
+	 *
+	 * @since 4.4.0
+	 *
+	 * @see set_screen_reader_content() For more information on the array format.
+	 *
+	 * @return array An associative array of screen reader text strings.
+	 */
+	public function get_screen_reader_content() {
+		return $this-&gt;_screen_reader_content;
+	}
+
+	/**
+	 * Get a screen reader text string.
+	 *
+	 * @since 4.4.0
+	 *
+	 * @param string $key Screen reader text array named key.
+	 * @return string Screen reader text string.
+	 */
+	public function get_screen_reader_text( $key ) {
+		if ( ! isset( $this-&gt;_screen_reader_content[ $key ] ) ) {
+			return null;
+		}
+		return $this-&gt;_screen_reader_content[ $key ];
+	}
+
+	/**
+	 * Add accessible hidden headings and text for the screen.
+	 *
+	 * @since 4.4.0
+	 *
+	 * @param array $content {
+	 *     An associative array of screen reader text strings.
+	 *
+	 *     @type string $heading_views      Screen reader text for the filter links heading.
+	 *                                      Default 'Filter items list'.
+	 *     @type string $heading_pagination Screen reader text for the pagination heading.
+	 *                                      Default 'Items list navigation'.
+	 *     @type string $heading_list       Screen reader text for the items list heading.
+	 *                                      Default 'Items list'.
+	 * }
+	 */
+	public function set_screen_reader_content( $content = array() ) {
+		$defaults = array(
+			'heading_views'      =&gt; __( 'Filter items list' ),
+			'heading_pagination' =&gt; __( 'Items list navigation' ),
+			'heading_list'       =&gt; __( 'Items list' ),
+		);
+		$content  = wp_parse_args( $content, $defaults );
+
+		$this-&gt;_screen_reader_content = $content;
+	}
+
+	/**
+	 * Remove all the accessible hidden headings and text for the screen.
+	 *
+	 * @since 4.4.0
+	 */
+	public function remove_screen_reader_content() {
+		$this-&gt;_screen_reader_content = array();
+	}
+
+	/**
+	 * Render the screen's help section.
+	 *
+	 * This will trigger the deprecated filters for backward compatibility.
+	 *
+	 * @since 3.3.0
+	 *
+	 * @global string $screen_layout_columns
+	 */
+	public function render_screen_meta() {
+
+		/**
+		 * Filters the legacy contextual help list.
+		 *
+		 * @since 2.7.0
+		 * @deprecated 3.3.0 Use {@see get_current_screen()-&gt;add_help_tab()} or
+		 *                   {@see get_current_screen()-&gt;remove_help_tab()} instead.
+		 *
+		 * @param array     $old_compat_help Old contextual help.
+		 * @param WP_Screen $screen          Current WP_Screen instance.
+		 */
+		self::$_old_compat_help = apply_filters_deprecated(
+			'contextual_help_list',
+			array( self::$_old_compat_help, $this ),
+			'3.3.0',
+			'get_current_screen()-&gt;add_help_tab(), get_current_screen()-&gt;remove_help_tab()'
+		);
+
+		$old_help = isset( self::$_old_compat_help[ $this-&gt;id ] ) ? self::$_old_compat_help[ $this-&gt;id ] : '';
+
+		/**
+		 * Filters the legacy contextual help text.
+		 *
+		 * @since 2.7.0
+		 * @deprecated 3.3.0 Use {@see get_current_screen()-&gt;add_help_tab()} or
+		 *                   {@see get_current_screen()-&gt;remove_help_tab()} instead.
+		 *
+		 * @param string    $old_help  Help text that appears on the screen.
+		 * @param string    $screen_id Screen ID.
+		 * @param WP_Screen $screen    Current WP_Screen instance.
+		 */
+		$old_help = apply_filters_deprecated(
+			'contextual_help',
+			array( $old_help, $this-&gt;id, $this ),
+			'3.3.0',
+			'get_current_screen()-&gt;add_help_tab(), get_current_screen()-&gt;remove_help_tab()'
+		);
+
+		// Default help only if there is no old-style block of text and no new-style help tabs.
+		if ( empty( $old_help ) &amp;&amp; ! $this-&gt;get_help_tabs() ) {
+
+			/**
+			 * Filters the default legacy contextual help text.
+			 *
+			 * @since 2.8.0
+			 * @deprecated 3.3.0 Use {@see get_current_screen()-&gt;add_help_tab()} or
+			 *                   {@see get_current_screen()-&gt;remove_help_tab()} instead.
+			 *
+			 * @param string $old_help_default Default contextual help text.
+			 */
+			$default_help = apply_filters_deprecated(
+				'default_contextual_help',
+				array( '' ),
+				'3.3.0',
+				'get_current_screen()-&gt;add_help_tab(), get_current_screen()-&gt;remove_help_tab()'
+			);
+			if ( $default_help ) {
+				$old_help = '&lt;p&gt;' . $default_help . '&lt;/p&gt;';
+			}
+		}
+
+		if ( $old_help ) {
+			$this-&gt;add_help_tab(
+				array(
+					'id'      =&gt; 'old-contextual-help',
+					'title'   =&gt; __( 'Overview' ),
+					'content' =&gt; $old_help,
+				)
+			);
+		}
+
+		$help_sidebar = $this-&gt;get_help_sidebar();
+
+		$help_class = 'hidden';
+		if ( ! $help_sidebar ) {
+			$help_class .= ' no-sidebar';
+		}
+
+		// Time to render!
+		?&gt;
+		&lt;div id=&quot;screen-meta&quot; class=&quot;metabox-prefs&quot;&gt;
+
+			&lt;div id=&quot;contextual-help-wrap&quot; class=&quot;&lt;?php echo esc_attr( $help_class ); ?&gt;&quot; tabindex=&quot;-1&quot; aria-label=&quot;&lt;?php esc_attr_e( 'Contextual Help Tab' ); ?&gt;&quot;&gt;
+				&lt;div id=&quot;contextual-help-back&quot;&gt;&lt;/div&gt;
+				&lt;div id=&quot;contextual-help-columns&quot;&gt;
+					&lt;div class=&quot;contextual-help-tabs&quot;&gt;
+						&lt;ul&gt;
+						&lt;?php
+						$class = ' class=&quot;active&quot;';
+						foreach ( $this-&gt;get_help_tabs() as $tab ) :
+							$link_id  = &quot;tab-link-{$tab['id']}&quot;;
+							$panel_id = &quot;tab-panel-{$tab['id']}&quot;;
+							?&gt;
+
+							&lt;li id=&quot;&lt;?php echo esc_attr( $link_id ); ?&gt;&quot;&lt;?php echo $class; ?&gt;&gt;
+								&lt;a href=&quot;&lt;?php echo esc_url( &quot;#$panel_id&quot; ); ?&gt;&quot; aria-controls=&quot;&lt;?php echo esc_attr( $panel_id ); ?&gt;&quot;&gt;
+									&lt;?php echo esc_html( $tab['title'] ); ?&gt;
+								&lt;/a&gt;
+							&lt;/li&gt;
+							&lt;?php
+							$class = '';
+						endforeach;
+						?&gt;
+						&lt;/ul&gt;
+					&lt;/div&gt;
+
+					&lt;?php if ( $help_sidebar ) : ?&gt;
+					&lt;div class=&quot;contextual-help-sidebar&quot;&gt;
+						&lt;?php echo $help_sidebar; ?&gt;
+					&lt;/div&gt;
+					&lt;?php endif; ?&gt;
+
+					&lt;div class=&quot;contextual-help-tabs-wrap&quot;&gt;
+						&lt;?php
+						$classes = 'help-tab-content active';
+						foreach ( $this-&gt;get_help_tabs() as $tab ) :
+							$panel_id = &quot;tab-panel-{$tab['id']}&quot;;
+							?&gt;
+
+							&lt;div id=&quot;&lt;?php echo esc_attr( $panel_id ); ?&gt;&quot; class=&quot;&lt;?php echo $classes; ?&gt;&quot;&gt;
+								&lt;?php
+								// Print tab content.
+								echo $tab['content'];
+
+								// If it exists, fire tab callback.
+								if ( ! empty( $tab['callback'] ) ) {
+									call_user_func_array( $tab['callback'], array( $this, $tab ) );
+								}
+								?&gt;
+							&lt;/div&gt;
+							&lt;?php
+							$classes = 'help-tab-content';
+						endforeach;
+						?&gt;
+					&lt;/div&gt;
+				&lt;/div&gt;
+			&lt;/div&gt;
+		&lt;?php
+		// Setup layout columns.
+
+		/**
+		 * Filters the array of screen layout columns.
+		 *
+		 * This hook provides back-compat for plugins using the back-compat
+		 * Filters instead of add_screen_option().
+		 *
+		 * @since 2.8.0
+		 *
+		 * @param array     $empty_columns Empty array.
+		 * @param string    $screen_id     Screen ID.
+		 * @param WP_Screen $screen        Current WP_Screen instance.
+		 */
+		$columns = apply_filters( 'screen_layout_columns', array(), $this-&gt;id, $this );
+
+		if ( ! empty( $columns ) &amp;&amp; isset( $columns[ $this-&gt;id ] ) ) {
+			$this-&gt;add_option( 'layout_columns', array( 'max' =&gt; $columns[ $this-&gt;id ] ) );
+		}
+
+		if ( $this-&gt;get_option( 'layout_columns' ) ) {
+			$this-&gt;columns = (int) get_user_option( &quot;screen_layout_$this-&gt;id&quot; );
+
+			if ( ! $this-&gt;columns &amp;&amp; $this-&gt;get_option( 'layout_columns', 'default' ) ) {
+				$this-&gt;columns = $this-&gt;get_option( 'layout_columns', 'default' );
+			}
+		}
+		$GLOBALS['screen_layout_columns'] = $this-&gt;columns; // Set the global for back-compat.
+
+		// Add screen options.
+		if ( $this-&gt;show_screen_options() ) {
+			$this-&gt;render_screen_options();
+		}
+		?&gt;
+		&lt;/div&gt;
+		&lt;?php
+		if ( ! $this-&gt;get_help_tabs() &amp;&amp; ! $this-&gt;show_screen_options() ) {
+			return;
+		}
+		?&gt;
+		&lt;div id=&quot;screen-meta-links&quot;&gt;
+		&lt;?php if ( $this-&gt;show_screen_options() ) : ?&gt;
+			&lt;div id=&quot;screen-options-link-wrap&quot; class=&quot;hide-if-no-js screen-meta-toggle&quot;&gt;
+			&lt;button type=&quot;button&quot; id=&quot;show-settings-link&quot; class=&quot;button show-settings&quot; aria-controls=&quot;screen-options-wrap&quot; aria-expanded=&quot;false&quot;&gt;&lt;?php _e( 'Screen Options' ); ?&gt;&lt;/button&gt;
+			&lt;/div&gt;
+			&lt;?php
+		endif;
+		if ( $this-&gt;get_help_tabs() ) :
+			?&gt;
+			&lt;div id=&quot;contextual-help-link-wrap&quot; class=&quot;hide-if-no-js screen-meta-toggle&quot;&gt;
+			&lt;button type=&quot;button&quot; id=&quot;contextual-help-link&quot; class=&quot;button show-settings&quot; aria-controls=&quot;contextual-help-wrap&quot; aria-expanded=&quot;false&quot;&gt;&lt;?php _e( 'Help' ); ?&gt;&lt;/button&gt;
+			&lt;/div&gt;
+		&lt;?php endif; ?&gt;
+		&lt;/div&gt;
+		&lt;?php
+	}
+
+	/**
+	 * @global array $wp_meta_boxes
+	 *
+	 * @return bool
+	 */
+	public function show_screen_options() {
+		global $wp_meta_boxes;
+
+		if ( is_bool( $this-&gt;_show_screen_options ) ) {
+			return $this-&gt;_show_screen_options;
+		}
+
+		$columns = get_column_headers( $this );
+
+		$show_screen = ! empty( $wp_meta_boxes[ $this-&gt;id ] ) || $columns || $this-&gt;get_option( 'per_page' );
+
+		$this-&gt;_screen_settings = '';
+
+		if ( 'post' === $this-&gt;base ) {
+			$expand                 = '&lt;fieldset class=&quot;editor-expand hidden&quot;&gt;&lt;legend&gt;' . __( 'Additional settings' ) . '&lt;/legend&gt;&lt;label for=&quot;editor-expand-toggle&quot;&gt;';
+			$expand                .= '&lt;input type=&quot;checkbox&quot; id=&quot;editor-expand-toggle&quot;' . checked( get_user_setting( 'editor_expand', 'on' ), 'on', false ) . ' /&gt;';
+			$expand                .= __( 'Enable full-height editor and distraction-free functionality.' ) . '&lt;/label&gt;&lt;/fieldset&gt;';
+			$this-&gt;_screen_settings = $expand;
+		}
+
+		/**
+		 * Filters the screen settings text displayed in the Screen Options tab.
+		 *
+		 * This filter is currently only used on the Widgets screen to enable
+		 * accessibility mode.
+		 *
+		 * @since 3.0.0
+		 *
+		 * @param string    $screen_settings Screen settings.
+		 * @param WP_Screen $this            WP_Screen object.
+		 */
+		$this-&gt;_screen_settings = apply_filters( 'screen_settings', $this-&gt;_screen_settings, $this );
+
+		if ( $this-&gt;_screen_settings || $this-&gt;_options ) {
+			$show_screen = true;
+		}
+
+		/**
+		 * Filters whether to show the Screen Options tab.
+		 *
+		 * @since 3.2.0
+		 *
+		 * @param bool      $show_screen Whether to show Screen Options tab.
+		 *                               Default true.
+		 * @param WP_Screen $this        Current WP_Screen instance.
+		 */
+		$this-&gt;_show_screen_options = apply_filters( 'screen_options_show_screen', $show_screen, $this );
+		return $this-&gt;_show_screen_options;
+	}
+
+	/**
+	 * Render the screen options tab.
+	 *
+	 * @since 3.3.0
+	 *
+	 * @param array $options {
+	 *     Options for the tab.
+	 *
+	 *     @type bool $wrap Whether the screen-options-wrap div will be included. Defaults to true.
+	 * }
+	 */
+	public function render_screen_options( $options = array() ) {
+		$options = wp_parse_args(
+			$options,
+			array(
+				'wrap' =&gt; true,
+			)
+		);
+
+		$wrapper_start = '';
+		$wrapper_end   = '';
+		$form_start    = '';
+		$form_end      = '';
+
+		// Output optional wrapper.
+		if ( $options['wrap'] ) {
+			$wrapper_start = '&lt;div id=&quot;screen-options-wrap&quot; class=&quot;hidden&quot; tabindex=&quot;-1&quot; aria-label=&quot;' . esc_attr__( 'Screen Options Tab' ) . '&quot;&gt;';
+			$wrapper_end   = '&lt;/div&gt;';
+		}
+
+		// Don't output the form and nonce for the widgets accessibility mode links.
+		if ( 'widgets' !== $this-&gt;base ) {
+			$form_start = &quot;\n&lt;form id='adv-settings' method='post'&gt;\n&quot;;
+			$form_end   = &quot;\n&quot; . wp_nonce_field( 'screen-options-nonce', 'screenoptionnonce', false, false ) . &quot;\n&lt;/form&gt;\n&quot;;
+		}
+
+		echo $wrapper_start . $form_start;
+
+		$this-&gt;render_meta_boxes_preferences();
+		$this-&gt;render_list_table_columns_preferences();
+		$this-&gt;render_screen_layout();
+		$this-&gt;render_per_page_options();
+		$this-&gt;render_view_mode();
+		echo $this-&gt;_screen_settings;
+
+		/**
+		 * Filters whether to show the Screen Options submit button.
+		 *
+		 * @since 4.4.0
+		 *
+		 * @param bool      $show_button Whether to show Screen Options submit button.
+		 *                               Default false.
+		 * @param WP_Screen $screen      Current WP_Screen instance.
+		 */
+		$show_button = apply_filters( 'screen_options_show_submit', false, $this );
+
+		if ( $show_button ) {
+			submit_button( __( 'Apply' ), 'primary', 'screen-options-apply', true );
+		}
+
+		echo $form_end . $wrapper_end;
+	}
+
+	/**
+	 * Render the meta boxes preferences.
+	 *
+	 * @since 4.4.0
+	 *
+	 * @global array $wp_meta_boxes
+	 */
+	public function render_meta_boxes_preferences() {
+		global $wp_meta_boxes;
+
+		if ( ! isset( $wp_meta_boxes[ $this-&gt;id ] ) ) {
+			return;
+		}
+		?&gt;
+		&lt;fieldset class=&quot;metabox-prefs&quot;&gt;
+		&lt;legend&gt;&lt;?php _e( 'Screen elements' ); ?&gt;&lt;/legend&gt;
+		&lt;p&gt;
+			&lt;?php _e( 'Some screen elements can be shown or hidden by using the checkboxes.' ); ?&gt;
+			&lt;?php _e( 'They can be expanded and collapsed by clickling on their headings, and arranged by dragging their headings or by clicking on the up and down arrows.' ); ?&gt;
+		&lt;/p&gt;
+		&lt;?php
+
+		meta_box_prefs( $this );
+
+		if ( 'dashboard' === $this-&gt;id &amp;&amp; has_action( 'welcome_panel' ) &amp;&amp; current_user_can( 'edit_theme_options' ) ) {
+			if ( isset( $_GET['welcome'] ) ) {
+				$welcome_checked = empty( $_GET['welcome'] ) ? 0 : 1;
+				update_user_meta( get_current_user_id(), 'show_welcome_panel', $welcome_checked );
+			} else {
+				$welcome_checked = (int) get_user_meta( get_current_user_id(), 'show_welcome_panel', true );
+				if ( 2 === $welcome_checked &amp;&amp; wp_get_current_user()-&gt;user_email !== get_option( 'admin_email' ) ) {
+					$welcome_checked = false;
+				}
+			}
+			echo '&lt;label for=&quot;wp_welcome_panel-hide&quot;&gt;';
+			echo '&lt;input type=&quot;checkbox&quot; id=&quot;wp_welcome_panel-hide&quot;' . checked( (bool) $welcome_checked, true, false ) . ' /&gt;';
+			echo _x( 'Welcome', 'Welcome panel' ) . &quot;&lt;/label&gt;\n&quot;;
+		}
+		?&gt;
+		&lt;/fieldset&gt;
+		&lt;?php
+	}
+
+	/**
+	 * Render the list table columns preferences.
+	 *
+	 * @since 4.4.0
+	 */
+	public function render_list_table_columns_preferences() {
+
+		$columns = get_column_headers( $this );
+		$hidden  = get_hidden_columns( $this );
+
+		if ( ! $columns ) {
+			return;
+		}
+
+		$legend = ! empty( $columns['_title'] ) ? $columns['_title'] : __( 'Columns' );
+		?&gt;
+		&lt;fieldset class=&quot;metabox-prefs&quot;&gt;
+		&lt;legend&gt;&lt;?php echo $legend; ?&gt;&lt;/legend&gt;
+		&lt;?php
+		$special = array( '_title', 'cb', 'comment', 'media', 'name', 'title', 'username', 'blogname' );
+
+		foreach ( $columns as $column =&gt; $title ) {
+			// Can't hide these for they are special.
+			if ( in_array( $column, $special, true ) ) {
+				continue;
+			}
+
+			if ( empty( $title ) ) {
+				continue;
+			}
+
+			/*
+			 * The Comments column uses HTML in the display name with some screen
+			 * reader text. Make sure to strip tags from the Comments column
+			 * title and any other custom column title plugins might add.
+			 */
+			$title = wp_strip_all_tags( $title );
+
+			$id = &quot;$column-hide&quot;;
+			echo '&lt;label&gt;';
+			echo '&lt;input class=&quot;hide-column-tog&quot; name=&quot;' . $id . '&quot; type=&quot;checkbox&quot; id=&quot;' . $id . '&quot; value=&quot;' . $column . '&quot;' . checked( ! in_array( $column, $hidden, true ), true, false ) . ' /&gt;';
+			echo &quot;$title&lt;/label&gt;\n&quot;;
+		}
+		?&gt;
+		&lt;/fieldset&gt;
+		&lt;?php
+	}
+
+	/**
+	 * Render the option for number of columns on the page
+	 *
+	 * @since 3.3.0
+	 */
+	public function render_screen_layout() {
+		if ( ! $this-&gt;get_option( 'layout_columns' ) ) {
+			return;
+		}
+
+		$screen_layout_columns = $this-&gt;get_columns();
+		$num                   = $this-&gt;get_option( 'layout_columns', 'max' );
+
+		?&gt;
+		&lt;fieldset class='columns-prefs'&gt;
+		&lt;legend class=&quot;screen-layout&quot;&gt;&lt;?php _e( 'Layout' ); ?&gt;&lt;/legend&gt;
+		&lt;?php for ( $i = 1; $i &lt;= $num; ++$i ) : ?&gt;
+			&lt;label class=&quot;columns-prefs-&lt;?php echo $i; ?&gt;&quot;&gt;
+			&lt;input type='radio' name='screen_columns' value='&lt;?php echo esc_attr( $i ); ?&gt;' &lt;?php checked( $screen_layout_columns, $i ); ?&gt; /&gt;
+			&lt;?php
+				printf(
+					/* translators: %s: Number of columns on the page. */
+					_n( '%s column', '%s columns', $i ),
+					number_format_i18n( $i )
+				);
+			?&gt;
+			&lt;/label&gt;
+		&lt;?php endfor; ?&gt;
+		&lt;/fieldset&gt;
+		&lt;?php
+	}
+
+	/**
+	 * Render the items per page option
+	 *
+	 * @since 3.3.0
+	 */
+	public function render_per_page_options() {
+		if ( null === $this-&gt;get_option( 'per_page' ) ) {
+			return;
+		}
+
+		$per_page_label = $this-&gt;get_option( 'per_page', 'label' );
+		if ( null === $per_page_label ) {
+			$per_page_label = __( 'Number of items per page:' );
+		}
+
+		$option = $this-&gt;get_option( 'per_page', 'option' );
+		if ( ! $option ) {
+			$option = str_replace( '-', '_', &quot;{$this-&gt;id}_per_page&quot; );
+		}
+
+		$per_page = (int) get_user_option( $option );
+		if ( empty( $per_page ) || $per_page &lt; 1 ) {
+			$per_page = $this-&gt;get_option( 'per_page', 'default' );
+			if ( ! $per_page ) {
+				$per_page = 20;
+			}
+		}
+
+		if ( 'edit_comments_per_page' === $option ) {
+			$comment_status = isset( $_REQUEST['comment_status'] ) ? $_REQUEST['comment_status'] : 'all';
+
+			/** This filter is documented in wp-admin/includes/class-wp-comments-list-table.php */
+			$per_page = apply_filters( 'comments_per_page', $per_page, $comment_status );
+		} elseif ( 'categories_per_page' === $option ) {
+			/** This filter is documented in wp-admin/includes/class-wp-terms-list-table.php */
+			$per_page = apply_filters( 'edit_categories_per_page', $per_page );
+		} else {
+			/** This filter is documented in wp-admin/includes/class-wp-list-table.php */
+			$per_page = apply_filters( &quot;{$option}&quot;, $per_page );
+		}
+
+		// Back compat.
+		if ( isset( $this-&gt;post_type ) ) {
+			/** This filter is documented in wp-admin/includes/post.php */
+			$per_page = apply_filters( 'edit_posts_per_page', $per_page, $this-&gt;post_type );
+		}
+
+		// This needs a submit button.
+		add_filter( 'screen_options_show_submit', '__return_true' );
+
+		?&gt;
+		&lt;fieldset class=&quot;screen-options&quot;&gt;
+		&lt;legend&gt;&lt;?php _e( 'Pagination' ); ?&gt;&lt;/legend&gt;
+			&lt;?php if ( $per_page_label ) : ?&gt;
+				&lt;label for=&quot;&lt;?php echo esc_attr( $option ); ?&gt;&quot;&gt;&lt;?php echo $per_page_label; ?&gt;&lt;/label&gt;
+				&lt;input type=&quot;number&quot; step=&quot;1&quot; min=&quot;1&quot; max=&quot;999&quot; class=&quot;screen-per-page&quot; name=&quot;wp_screen_options[value]&quot;
+					id=&quot;&lt;?php echo esc_attr( $option ); ?&gt;&quot; maxlength=&quot;3&quot;
+					value=&quot;&lt;?php echo esc_attr( $per_page ); ?&gt;&quot; /&gt;
+			&lt;?php endif; ?&gt;
+				&lt;input type=&quot;hidden&quot; name=&quot;wp_screen_options[option]&quot; value=&quot;&lt;?php echo esc_attr( $option ); ?&gt;&quot; /&gt;
+		&lt;/fieldset&gt;
+		&lt;?php
+	}
+
+	/**
+	 * Render the list table view mode preferences.
+	 *
+	 * @since 4.4.0
+	 *
+	 * @global string $mode List table view mode.
+	 */
+	public function render_view_mode() {
+		global $mode;
+
+		$screen = get_current_screen();
+
+		// Currently only enabled for posts and comments lists.
+		if ( 'edit' !== $screen-&gt;base &amp;&amp; 'edit-comments' !== $screen-&gt;base ) {
+			return;
+		}
+
+		$view_mode_post_types = get_post_types( array( 'show_ui' =&gt; true ) );
+
+		/**
+		 * Filters the post types that have different view mode options.
+		 *
+		 * @since 4.4.0
+		 *
+		 * @param string[] $view_mode_post_types Array of post types that can change view modes.
+		 *                                       Default post types with show_ui on.
+		 */
+		$view_mode_post_types = apply_filters( 'view_mode_post_types', $view_mode_post_types );
+
+		if ( 'edit' === $screen-&gt;base &amp;&amp; ! in_array( $this-&gt;post_type, $view_mode_post_types, true ) ) {
+			return;
+		}
+
+		if ( ! isset( $mode ) ) {
+			$mode = get_user_setting( 'posts_list_mode', 'list' );
+		}
+
+		// This needs a submit button.
+		add_filter( 'screen_options_show_submit', '__return_true' );
+		?&gt;
+		&lt;fieldset class=&quot;metabox-prefs view-mode&quot;&gt;
+			&lt;legend&gt;&lt;?php _e( 'View mode' ); ?&gt;&lt;/legend&gt;
+			&lt;label for=&quot;list-view-mode&quot;&gt;
+				&lt;input id=&quot;list-view-mode&quot; type=&quot;radio&quot; name=&quot;mode&quot; value=&quot;list&quot; &lt;?php checked( 'list', $mode ); ?&gt; /&gt;
+				&lt;?php _e( 'Compact view' ); ?&gt;
+			&lt;/label&gt;
+			&lt;label for=&quot;excerpt-view-mode&quot;&gt;
+				&lt;input id=&quot;excerpt-view-mode&quot; type=&quot;radio&quot; name=&quot;mode&quot; value=&quot;excerpt&quot; &lt;?php checked( 'excerpt', $mode ); ?&gt; /&gt;
+				&lt;?php _e( 'Extended view' ); ?&gt;
+			&lt;/label&gt;
+		&lt;/fieldset&gt;
+		&lt;?php
+	}
+
+	/**
+	 * Render screen reader text.
+	 *
+	 * @since 4.4.0
+	 *
+	 * @param string $key The screen reader text array named key.
+	 * @param string $tag Optional. The HTML tag to wrap the screen reader text. Default h2.
+	 */
+	public function render_screen_reader_content( $key = '', $tag = 'h2' ) {
+
+		if ( ! isset( $this-&gt;_screen_reader_content[ $key ] ) ) {
+			return;
+		}
+		echo &quot;&lt;$tag class='screen-reader-text'&gt;&quot; . $this-&gt;_screen_reader_content[ $key ] . &quot;&lt;/$tag&gt;&quot;;
+	}
+}
+</pre>
+			</div>
+			<p class="source-code-links">
+				<span>
+					<a href="#" class="show-complete-source">Expand full source code</a>
+					<a href="#" class="less-complete-source">Collapse full source code</a>
+				</span>
+				<span><a href="https://core.trac.wordpress.org/browser/tags/5.8/src/wp-admin/includes/class-wp-screen.php#L15">View on Trac</a></span>
+			</p>
+			</section>
+		<hr />
+		<section class="class-methods">
+			<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="methods" tabindex="-1">Methods <a href="#methods" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Methods</span></a></h2>
+			<ul>
+									<li><a href="__construct/index.html">
+							__construct</a>
+						&mdash; Constructor											</li>
+									<li><a href="add_help_tab/index.html">
+							add_help_tab</a>
+						&mdash; Add a help tab to the contextual help for the screen.											</li>
+									<li><a href="add_old_compat_help/index.html">
+							add_old_compat_help</a>
+						&mdash; Sets the old string-based contextual help for the screen for backward compatibility.											</li>
+									<li><a href="add_option/index.html">
+							add_option</a>
+						&mdash; Adds an option for the screen.											</li>
+									<li><a href="get/index.html">
+							get</a>
+						&mdash; Fetches a screen object.											</li>
+									<li><a href="get_columns/index.html">
+							get_columns</a>
+						&mdash; Gets the number of layout columns the user has selected.											</li>
+									<li><a href="get_help_sidebar/index.html">
+							get_help_sidebar</a>
+						&mdash; Gets the content from a contextual help sidebar.											</li>
+									<li><a href="get_help_tab/index.html">
+							get_help_tab</a>
+						&mdash; Gets the arguments for a help tab.											</li>
+									<li><a href="get_help_tabs/index.html">
+							get_help_tabs</a>
+						&mdash; Gets the help tabs registered for the screen.											</li>
+									<li><a href="get_option/index.html">
+							get_option</a>
+						&mdash; Gets the arguments for an option for the screen.											</li>
+									<li><a href="get_options/index.html">
+							get_options</a>
+						&mdash; Get the options registered for the screen.											</li>
+									<li><a href="get_screen_reader_content/index.html">
+							get_screen_reader_content</a>
+						&mdash; Get the accessible hidden headings and text used in the screen.											</li>
+									<li><a href="get_screen_reader_text/index.html">
+							get_screen_reader_text</a>
+						&mdash; Get a screen reader text string.											</li>
+									<li><a href="in_admin/index.html">
+							in_admin</a>
+						&mdash; Indicates whether the screen is in a particular admin											</li>
+									<li><a href="is_block_editor/index.html">
+							is_block_editor</a>
+						&mdash; Sets or returns whether the block editor is loading on the current screen.											</li>
+									<li><a href="remove_help_tab/index.html">
+							remove_help_tab</a>
+						&mdash; Removes a help tab from the contextual help for the screen.											</li>
+									<li><a href="remove_help_tabs/index.html">
+							remove_help_tabs</a>
+						&mdash; Removes all help tabs from the contextual help for the screen.											</li>
+									<li><a href="remove_option/index.html">
+							remove_option</a>
+						&mdash; Remove an option from the screen.											</li>
+									<li><a href="remove_options/index.html">
+							remove_options</a>
+						&mdash; Remove all options from the screen.											</li>
+									<li><a href="remove_screen_reader_content/index.html">
+							remove_screen_reader_content</a>
+						&mdash; Remove all the accessible hidden headings and text for the screen.											</li>
+									<li><a href="render_list_table_columns_preferences/index.html">
+							render_list_table_columns_preferences</a>
+						&mdash; Render the list table columns preferences.											</li>
+									<li><a href="render_meta_boxes_preferences/index.html">
+							render_meta_boxes_preferences</a>
+						&mdash; Render the meta boxes preferences.											</li>
+									<li><a href="render_per_page_options/index.html">
+							render_per_page_options</a>
+						&mdash; Render the items per page option											</li>
+									<li><a href="render_screen_layout/index.html">
+							render_screen_layout</a>
+						&mdash; Render the option for number of columns on the page											</li>
+									<li><a href="render_screen_meta/index.html">
+							render_screen_meta</a>
+						&mdash; Render the screen's help section.											</li>
+									<li><a href="render_screen_options/index.html">
+							render_screen_options</a>
+						&mdash; Render the screen options tab.											</li>
+									<li><a href="render_screen_reader_content/index.html">
+							render_screen_reader_content</a>
+						&mdash; Render screen reader text.											</li>
+									<li><a href="render_view_mode/index.html">
+							render_view_mode</a>
+						&mdash; Render the list table view mode preferences.											</li>
+									<li><a href="set_current_screen/index.html">
+							set_current_screen</a>
+						&mdash; Makes the screen object the current screen.											</li>
+									<li><a href="set_help_sidebar/index.html">
+							set_help_sidebar</a>
+						&mdash; Add a sidebar to the contextual help for the screen.											</li>
+									<li><a href="set_parentage/index.html">
+							set_parentage</a>
+						&mdash; Set the parent information for the screen.											</li>
+									<li><a href="set_screen_reader_content/index.html">
+							set_screen_reader_content</a>
+						&mdash; Add accessible hidden headings and text for the screen.											</li>
+									<li><a href="show_screen_options/index.html">
+							show_screen_options</a>
+																	</li>
+							</ul>
+		</section>
+		<hr />
+	<section class="changelog">
+		<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="changelog" tabindex="-1">Changelog <a href="#changelog" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">Changelog</span></a></h2>
+
+		<table>
+			<caption class="screen-reader-text">Changelog</caption>
+			<thead>
+				<tr>
+					<th class="changelog-version">Version</th>
+					<th class="changelog-desc">Description</th>
+				</tr>
+			</thead>
+
+			<tbody>
+									
+					<tr>
+						<td><a href="../../since/3.3.0/index.html" alt="WordPress 3.3.0">3.3.0</a></td>
+						<td>Introduced.</td>
+					</tr>
+							</tbody>
+		</table>
+	</section>
+
+	<hr />
+	<section class="user-notes">
+		<p class="toc-jump"><a href="#top">Top &uarr;</a></p><h2 class="toc-heading" id="user-contributed-notes" tabindex="-1">User Contributed Notes <a href="#user-contributed-notes" class="anchor"><span aria-hidden="true">#</span><span class="screen-reader-text">User Contributed Notes</span></a></h2>
+		
+<div id="comments" class="comments-area">
+
+			
+		<ol class="comment-list">
+						<li id="comment-1985" data-comment-id="1985" class="comment byuser comment-author-aurovrata even thread-even depth-1">
+			<article id="div-comment-1985" class="comment-body">
+
+							<a href="#comment-content-1985" class="screen-reader-text">Skip to note 1 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="cc41fd0702"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="1985" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Fclasses%2Fwp_screen%2F%23comment-1985"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title="100% like this"><span class="screen-reader-text">Vote results for this note: </span>2</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="1985" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Fclasses%2Fwp_screen%2F%23comment-1985"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/ecd4288fedcf565267a5807b7d604e57?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/ecd4288fedcf565267a5807b7d604e57?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/aurovrata/" rel="external nofollow" class="url">Aurovrata Venet</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-1985">
+							<time datetime="2016-12-22T13:12:14+00:00">
+							5 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-1985">
+				<p>Some additional notes from the old codex pages which are useful for implementing <code>get_current_screen()</code> functionality, the <code>WP_Screen</code> object returned will be <strong>null</strong> if called from the <code>admin_init</code> hook.</p>
+<p>A successful call will return an object with the following fields,</p>
+<ul>
+<li><strong>id</strong> (string) The unique ID of the screen </li>
+<li><strong>action</strong>  (string) Any action associated with the screen. &#8216;add&#8217; for *-new.php screens. Empty otherwise.  </li>
+<li><strong>base</strong>  (string) The base type of the screen. For example, for a page &#8216;post-new.php&#8217; the base is &#8216;post&#8217;.</li>
+<li><strong>parent_base</strong> (string) The base menu parent. This is derived from $parent_file by removing the query string and any .php extension. For example, parent_file values of &#8216;edit.php?post_type=page&#8217; and &#8216;edit.php?post_type=post&#8217; have a parent_base of &#8216;edit&#8217;</li>
+<li><strong>parent_file</strong> (string) The parent_file for the screen per the admin menu system. Some parent_file values are &#8216;edit.php?post_type=page&#8217;, &#8216;edit.php&#8217;, and &#8216;options-general.php&#8217;</li>
+<li><strong>post_type</strong> (string) The post type associated with the screen, if any. For example, the &#8216;edit.php?post_type=page&#8217; screen has a post type of &#8216;page&#8217;</li>
+<li><strong>taxonomy</strong> (string) The taxonomy associated with the screen, if any. For example, the &#8216;edit-tags.php?taxonomy=category&#8217; screen has a taxonomy of &#8216;category&#8217;</li>
+</ul>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-1985' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Fclasses%2Fwp_screen%2F%3Freplytocom%3D1985%23feedback-editor-1985" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+			<li id="comment-3037" data-comment-id="3037" class="comment byuser comment-author-johnzenith odd alt thread-odd thread-alt depth-1">
+			<article id="div-comment-3037" class="comment-body">
+
+							<a href="#comment-content-3037" class="screen-reader-text">Skip to note 2 content</a>
+				<header class="comment-meta">
+
+				<div class="user-note-voting" data-nonce="737bba4f37"><a class="user-note-voting-up" title="You must log in to vote on the helpfulness of this note" data-id="3037" data-vote="up" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Fclasses%2Fwp_screen%2F%23comment-3037"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a><span class="user-note-voting-count " title=""><span class="screen-reader-text">Vote results for this note: </span>0</span><a class="user-note-voting-down" title="You must log in to vote on the helpfulness of this note" data-id="3037" data-vote="down" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Fclasses%2Fwp_screen%2F%23comment-3037"><span class="dashicons dashicons-arrow-down" aria-hidden="true"></span><span class="screen-reader-text">You must log in to vote on the helpfulness of this note</span></a></div>					<div class="comment-author vcard">
+						<span class="comment-author-attribution">
+						<img alt='' src='https://secure.gravatar.com/avatar/c976a3f5e57bcfe9b0beb3a61bc11faf?s=32&amp;d=mm&amp;r=g' srcset='https://secure.gravatar.com/avatar/c976a3f5e57bcfe9b0beb3a61bc11faf?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy'/>Contributed by <cite class="fn"><a href="https://profiles.wordpress.org/johnzenith/" rel="external nofollow" class="url">johnzenith</a></cite>
+						</span>
+						&mdash;
+						<a class="comment-date" href="index.html#comment-3037">
+							<time datetime="2019-01-11T17:32:44+00:00">
+							3 years ago							</time>
+						</a>
+
+																													</div>
+				</header>
+				<!-- .comment-metadata -->
+			
+				<div class="comment-content" id="comment-content-3037">
+				<p><strong>How to configure the current screen &#8216;layout_columns&#8217; and &#8216;per_page&#8217; options:</strong></p>
+<section class="source-content">
+<div class="source-code-container">
+<pre class="brush: php; title: ; notranslate" title="">
+// Set the default screen layout columns
+add_screen_option( 'layout_columns', array(
+    'max'     =&gt; 2,
+    'default' =&gt; 2,
+) );
+
+// Set screen per page option
+add_screen_option( 'per_page', array(
+    'default' =&gt; 10,
+    'label'   =&gt; __( 'Items Per Page', 'uexplorer' ),
+    
+    /** 
+     * Note:
+     *
+     * The 'option' argument specify what [name] to use to save the 'per_page' option
+     * For example, if 'option' =&gt; 'my_per_page_option', then to retrieve the option value do: 
+     *    $screen-&gt;get_option( 'per_page', 'option' )
+     *
+     * But when the 'option' argument is set to false or omitted, the current screen ID will be 
+     * used and suffixed with '_per_page' as the current screen 'per_page' option name:
+     *
+     * This is how the 'per_page' option name is set when omitted or set to false:
+     * $option = str_replace( '-', '_', &quot;{$screen-&gt;id}_per_page&quot; );
+     *
+     * Then to retrieve it, do: 
+     * $per_page = $screen-&gt;get_option( 'per_page', str_replace( '-', '_', &quot;{$screen-&gt;id}_per_page&quot; ) );
+     */
+    'option'  =&gt; false, // use the current screen ID and append '_per_page' to it. Also replace '-' with '_'
+) );
+</pre>
+</div>
+<p class="source-code-links"><span><a href="#" class="show-complete-source">Expand full source code</a><a href="#" class="less-complete-source">Collapse full source code</a></span></p>
+</section>
+				</div><!-- .comment-content -->
+
+					<section id='feedback-3037' class='feedback hide-if-js'>
+</section><!-- .feedback -->
+<footer class='feedback-links' >
+<a role="button" class="feedback-login" href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Fclasses%2Fwp_screen%2F%3Freplytocom%3D3037%23feedback-editor-3037" rel="nofollow">Log in to add feedback</a></footer>
+</article><!-- .comment-body -->
+</li>
+		</ol><!-- .comment-list -->
+
+		
+	
+	
+			<div id="respond" class="comment-respond">
+		<h3 id="reply-title" class="comment-reply-title"> <small></small></h3><p>You must <a href="https://login.wordpress.org/?redirect_to=https%3A%2F%2Fdeveloper.wordpress.org%2Freference%2Fclasses%2Fwp_screen%2F%23comments">log in</a> before being able to contribute a note or feedback.</p>	</div><!-- #respond -->
+		
+	
+</div><!-- #comments -->
+	</section>
+</div>
+
+</article>
+
+			
+		
+		</main><!-- #main -->
+	</div><!-- #primary -->
+	</div><!-- #content -->
+
+</div><!-- #page -->
+
+
+<div id="wporg-footer">
+	<div class="wrapper">
+		<ul>
+			<li><a href="http://wordpress.org/about/" title="An introduction to the WordPress project">About</a></li>
+			<li><a href="http://wordpress.org/news/" title="News and Updates">Blog</a></li>
+			<li><a href="http://wordpress.org/hosting/" title="Recommended web hosting providers">Hosting</a></li>
+			<li><a href="https://wordpressfoundation.org/donate/" title="Donate to the WordPress Foundation">Donate</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://wordpress.org/support/" title="Forums, documentation, and other resources">Support</a></li>
+			<li><a href="../../../index.html" title="Resources for WordPress developers">Developers</a></li>
+			<li><a href="http://make.wordpress.org/" title="Give back to WordPress through code, support, translation and more">Get Involved</a></li>
+			<li><a href="http://learn.wordpress.org/" title="Workshops and training materials">Learn</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://wordpress.org/showcase/" title="Some of the best WordPress sites on the Web">Showcase</a></li>
+			<li><a href="http://wordpress.org/plugins/" title="Add extra functionality to WordPress">Plugins</a></li>
+			<li><a href="http://wordpress.org/themes/" title="Make your WordPress pretty">Themes</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://central.wordcamp.org/" title="Find a WordPress event near you">WordCamp</a></li>
+			<li><a href="http://wordpress.tv/" title="Videos, tutorials, and WordCamp sessions">WordPress.TV</a></li>
+			<li><a href="http://buddypress.org/" title="A set of plugins to transform your WordPress into a social network">BuddyPress</a></li>
+			<li><a href="http://bbpress.org/" title="Fast, slick forums built on WordPress">bbPress</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://wordpress.com/?ref=wporg-footer" title="Hassle-free WordPress hosting">WordPress.com</a></li>
+			<li><a href="http://ma.tt/" title="Co-founder of WordPress, an example of what WordPress can do">Matt</a></li>
+			<li><a href="http://wordpress.org/about/privacy/" title="WordPress.org Privacy Policy">Privacy</a></li>
+			<li><a href="https://publiccode.eu/" target="_blank">Public Code</a></li>
+		</ul>
+
+		<ul class="social-media-links">
+			<li><span class="dashicons dashicons-twitter"></span><a href="https://twitter.com/WordPress" title="Follow @WordPress on Twitter">@WordPress</a></li>
+			<li><span class="dashicons dashicons-facebook"></span><a href="https://www.facebook.com/WordPress/" title="Like WordPress on Facebook">WordPress</a></li>
+		</ul>
+	</div>
+
+		<p class="cip cip-image">Code is Poetry.</p>
+</div>
+
+<script src="../../../../s.w.org/style/js/navigation.min.js?20190128"></script>
+
+<script type='text/javascript'>
+	(function(){
+		var corecss = document.createElement('link');
+		var themecss = document.createElement('link');
+		var corecssurl = "../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shCore.css?ver=3.0.9b";
+		if ( corecss.setAttribute ) {
+				corecss.setAttribute( "rel", "stylesheet" );
+				corecss.setAttribute( "type", "text/css" );
+				corecss.setAttribute( "href", corecssurl );
+		} else {
+				corecss.rel = "stylesheet";
+				corecss.href = corecssurl;
+		}
+		document.head.appendChild( corecss );
+		var themecssurl = "../../../wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shThemeDefault.css?ver=3.0.9b";
+		if ( themecss.setAttribute ) {
+				themecss.setAttribute( "rel", "stylesheet" );
+				themecss.setAttribute( "type", "text/css" );
+				themecss.setAttribute( "href", themecssurl );
+		} else {
+				themecss.rel = "stylesheet";
+				themecss.href = themecssurl;
+		}
+		document.head.appendChild( themecss );
+	})();
+	SyntaxHighlighter.config.strings.expandSource = '+ expand source';
+	SyntaxHighlighter.config.strings.help = '?';
+	SyntaxHighlighter.config.strings.alert = 'SyntaxHighlighter\n\n';
+	SyntaxHighlighter.config.strings.noBrush = 'Can\'t find brush for: ';
+	SyntaxHighlighter.config.strings.brushNotHtmlScript = 'Brush wasn\'t configured for html-script option: ';
+	SyntaxHighlighter.defaults['pad-line-numbers'] = false;
+	SyntaxHighlighter.defaults['toolbar'] = false;
+	SyntaxHighlighter.all();
+
+	// Infinite scroll support
+	if ( typeof( jQuery ) !== 'undefined' ) {
+		jQuery( function( $ ) {
+			$( document.body ).on( 'post-load', function() {
+				SyntaxHighlighter.highlight();
+			} );
+		} );
+	}
+</script>
+<link rel='stylesheet' id='buttons-css'  href='../../../wp-includes/css/buttons.min.css?ver=5.9-alpha-51701' type='text/css' media='all' />
+<script type='text/javascript' src='../../../wp-includes/js/hoverintent-js.min.js?ver=2.2.1' id='hoverintent-js-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/admin-bar.min.js?ver=5.9-alpha-51701' id='admin-bar-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/navigation.js?ver=20181209' id='wporg-developer-navigation-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/skip-link-focus-fix.js?ver=20130115' id='wporg-developer-skip-link-focus-fix-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/search.js?ver=20150430' id='wporg-developer-search-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/menu.js?ver=20180201' id='wporg-developer-menu-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/awesomplete.min.js?ver=20160322' id='awesomplete-js'></script>
+<script type='text/javascript' id='autocomplete-js-extra'>
+/* <![CDATA[ */
+var autocomplete = {"ajaxurl":"https:\/\/developer.wordpress.org\/wp-admin\/admin-ajax.php","nonce":"8a60f70c4b"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/autocomplete.js?ver=20160524' id='autocomplete-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/function-reference.js?ver=20180724' id='wporg-developer-function-reference-js'></script>
+<script type='text/javascript' id='quicktags-js-extra'>
+/* <![CDATA[ */
+var quicktagsL10n = {"closeAllOpenTags":"Close all open tags","closeTags":"close tags","enterURL":"Enter the URL","enterImageURL":"Enter the URL of the image","enterImageDescription":"Enter a description of the image","textdirection":"text direction","toggleTextdirection":"Toggle Editor Text Direction","dfw":"Distraction-free writing mode","strong":"Bold","strongClose":"Close bold tag","em":"Italic","emClose":"Close italic tag","link":"Insert link","blockquote":"Blockquote","blockquoteClose":"Close blockquote tag","del":"Deleted text (strikethrough)","delClose":"Close deleted text tag","ins":"Inserted text","insClose":"Close inserted text tag","image":"Insert image","ul":"Bulleted list","ulClose":"Close bulleted list tag","ol":"Numbered list","olClose":"Close numbered list tag","li":"List item","liClose":"Close list item tag","code":"Code","codeClose":"Close code tag","more":"Insert Read More tag"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-includes/js/quicktags.min.js?ver=5.9-alpha-51701' id='quicktags-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/user-notes.js?ver=20200110' id='wporg-developer-user-notes-js'></script>
+<script type='text/javascript' id='wporg-developer-user-notes-feedback-js-extra'>
+/* <![CDATA[ */
+var wporg_note_feedback = {"show":"Show Feedback","hide":"Hide Feedback"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/user-notes-feedback.js?ver=20181023' id='wporg-developer-user-notes-feedback-js'></script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/tabs.js?ver=20160824' id='wporg-developer-tabs-js'></script>
+<script type='text/javascript' id='wporg-developer-preview-js-extra'>
+/* <![CDATA[ */
+var wporg_note_preview = {"ajaxurl":"https:\/\/developer.wordpress.org\/wp-admin\/admin-ajax.php","nonce":"504933b60e","preview":"preview note","preview_empty":"Nothing to preview","is_admin":""};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-content/themes/pub/wporg-developer/js/user-notes-preview.js?ver=20200111' id='wporg-developer-preview-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/wp-embed.min.js?ver=5.9-alpha-51701' id='wp-embed-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/vendor/regenerator-runtime.min.js?ver=0.13.7' id='regenerator-runtime-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/vendor/wp-polyfill.min.js?ver=3.15.0' id='wp-polyfill-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/dom-ready.min.js?ver=71883072590656bf22c74c7b887df3dd' id='wp-dom-ready-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/hooks.min.js?ver=a7edae857aab69d69fa10d5aef23a5de' id='wp-hooks-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/i18n.min.js?ver=5f1269854226b4dd90450db411a12b79' id='wp-i18n-js'></script>
+<script type='text/javascript' id='wp-i18n-js-after'>
+wp.i18n.setLocaleData( { 'text direction\u0004ltr': [ 'ltr' ] } );
+</script>
+<script type='text/javascript' id='wp-a11y-js-translations'>
+( function( domain, translations ) {
+	var localeData = translations.locale_data[ domain ] || translations.locale_data.messages;
+	localeData[""].domain = domain;
+	wp.i18n.setLocaleData( localeData, domain );
+} )( "default", { "locale_data": { "messages": { "": {} } } } );
+</script>
+<script type='text/javascript' src='../../../wp-includes/js/dist/a11y.min.js?ver=0ac8327cc1c40dcfdf29716affd7ac63' id='wp-a11y-js'></script>
+<script type='text/javascript' id='wplink-js-extra'>
+/* <![CDATA[ */
+var wpLinkL10n = {"title":"Insert\/edit link","update":"Update","save":"Add Link","noTitle":"(no title)","noMatchesFound":"No results found.","linkSelected":"Link selected.","linkInserted":"Link inserted.","minInputLength":"3"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-includes/js/wplink.min.js?ver=5.9-alpha-51701' id='wplink-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/jquery/ui/core.min.js?ver=1.12.1' id='jquery-ui-core-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/jquery/ui/menu.min.js?ver=1.12.1' id='jquery-ui-menu-js'></script>
+<script type='text/javascript' id='jquery-ui-autocomplete-js-extra'>
+/* <![CDATA[ */
+var uiAutocompleteL10n = {"noResults":"No results found.","oneResult":"1 result found. Use up and down arrow keys to navigate.","manyResults":"%d results found. Use up and down arrow keys to navigate.","itemSelected":"Item selected."};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-includes/js/jquery/ui/autocomplete.min.js?ver=1.12.1' id='jquery-ui-autocomplete-js'></script>
+
+		<script type="text/javascript">
+		tinyMCEPreInit = {
+			baseURL: "https://developer.wordpress.org/wp-includes/js/tinymce",
+			suffix: ".min",
+						mceInit: {},
+			qtInit: {'comment':{id:"comment",buttons:"strong,em,ul,ol,li,link"}},
+			ref: {plugins:"",theme:"modern",language:""},
+			load_ext: function(url,lang){var sl=tinymce.ScriptLoader;sl.markDone(url+'/langs/'+lang+'.js');sl.markDone(url+'/langs/'+lang+'_dlg.js');}
+		};
+		</script>
+				<script type="text/javascript">
+		var ajaxurl = "../../../wp-admin/admin-ajax.html";
+		( function() {
+			var initialized = [];
+			var initialize  = function() {
+				var init, id, inPostbox, $wrap;
+				var readyState = document.readyState;
+
+				if ( readyState !== 'complete' && readyState !== 'interactive' ) {
+					return;
+				}
+
+				for ( id in tinyMCEPreInit.mceInit ) {
+					if ( initialized.indexOf( id ) > -1 ) {
+						continue;
+					}
+
+					init      = tinyMCEPreInit.mceInit[id];
+					$wrap     = tinymce.$( '#wp-' + id + '-wrap' );
+					inPostbox = $wrap.parents( '.postbox' ).length > 0;
+
+					if (
+						! init.wp_skip_init &&
+						( $wrap.hasClass( 'tmce-active' ) || ! tinyMCEPreInit.qtInit.hasOwnProperty( id ) ) &&
+						( readyState === 'complete' || ( ! inPostbox && readyState === 'interactive' ) )
+					) {
+						tinymce.init( init );
+						initialized.push( id );
+
+						if ( ! window.wpActiveEditor ) {
+							window.wpActiveEditor = id;
+						}
+					}
+				}
+			}
+
+			if ( typeof tinymce !== 'undefined' ) {
+				if ( tinymce.Env.ie && tinymce.Env.ie < 11 ) {
+					tinymce.$( '.wp-editor-wrap ' ).removeClass( 'tmce-active' ).addClass( 'html-active' );
+				} else {
+					if ( document.readyState === 'complete' ) {
+						initialize();
+					} else {
+						document.addEventListener( 'readystatechange', initialize );
+					}
+				}
+			}
+
+			if ( typeof quicktags !== 'undefined' ) {
+				for ( id in tinyMCEPreInit.qtInit ) {
+					quicktags( tinyMCEPreInit.qtInit[id] );
+
+					if ( ! window.wpActiveEditor ) {
+						window.wpActiveEditor = id;
+					}
+				}
+			}
+		}());
+		</script>
+				<div id="wp-link-backdrop" style="display: none"></div>
+		<div id="wp-link-wrap" class="wp-core-ui" style="display: none" role="dialog" aria-labelledby="link-modal-title">
+		<form id="wp-link" tabindex="-1">
+		<input type="hidden" id="_ajax_linking_nonce" name="_ajax_linking_nonce" value="86f5a0a85d" />		<h1 id="link-modal-title">Insert/edit link</h1>
+		<button type="button" id="wp-link-close"><span class="screen-reader-text">Close</span></button>
+		<div id="link-selector">
+			<div id="link-options">
+				<p class="howto" id="wplink-enter-url">Enter the destination URL</p>
+				<div>
+					<label><span>URL</span>
+					<input id="wp-link-url" type="text" aria-describedby="wplink-enter-url" /></label>
+				</div>
+				<div class="wp-link-text-field">
+					<label><span>Link Text</span>
+					<input id="wp-link-text" type="text" /></label>
+				</div>
+				<div class="link-target">
+					<label><span></span>
+					<input type="checkbox" id="wp-link-target" /> Open link in a new tab</label>
+				</div>
+			</div>
+			<p class="howto" id="wplink-link-existing-content">Or link to existing content</p>
+			<div id="search-panel">
+				<div class="link-search-wrapper">
+					<label>
+						<span class="search-label">Search</span>
+						<input type="search" id="wp-link-search" class="link-search-field" autocomplete="off" aria-describedby="wplink-link-existing-content" />
+						<span class="spinner"></span>
+					</label>
+				</div>
+				<div id="search-results" class="query-results" tabindex="0">
+					<ul></ul>
+					<div class="river-waiting">
+						<span class="spinner"></span>
+					</div>
+				</div>
+				<div id="most-recent-results" class="query-results" tabindex="0">
+					<div class="query-notice" id="query-notice-message">
+						<em class="query-notice-default">No search term specified. Showing recent items.</em>
+						<em class="query-notice-hint screen-reader-text">Search or use up and down arrow keys to select an item.</em>
+					</div>
+					<ul></ul>
+					<div class="river-waiting">
+						<span class="spinner"></span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="submitbox">
+			<div id="wp-link-cancel">
+				<button type="button" class="button">Cancel</button>
+			</div>
+			<div id="wp-link-update">
+				<input type="submit" value="Add Link" class="button button-primary" id="wp-link-submit" name="wp-link-submit">
+			</div>
+		</div>
+		</form>
+		</div>
+		</body>
+
+<!-- Mirrored from developer.wordpress.org/reference/classes/wp_screen/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 31 Aug 2021 17:14:38 GMT -->
+</html>

@@ -1,0 +1,773 @@
+<html><!-- Mirrored from www.php.net/manual/en/function.odbc-connect.php by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 11 Sep 2021 06:26:30 GMT --><!-- Added by HTTrack --><head><meta http-equiv="content-type" content="text/html;charset=utf-8"><!-- /Added by HTTrack -->
+
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>odbc_connect</title>
+
+ <link rel="shortcut icon" href="../../favicon.ico">
+ <link rel="search" type="application/opensearchdescription+xml" href="http://php.net/phpnetimprovedsearch.src" title="Add PHP.net search">
+ <link rel="alternate" type="application/atom+xml" href="https://www.php.net/releases/feed.php" title="PHP Release feed">
+ <link rel="alternate" type="application/atom+xml" href="https://www.php.net/feed.atom" title="PHP: Hypertext Preprocessor">
+
+ <link rel="canonical" href="function.odbc-connect.html">
+ <link rel="shorturl" href="https://www.php.net/odbc-connect">
+ <link rel="alternate" href="https://www.php.net/odbc-connect" hreflang="x-default">
+
+ <link rel="contents" href="index-2.html">
+ <link rel="index" href="ref.uodbc.html">
+ <link rel="prev" href="function.odbc-commit.html">
+ <link rel="next" href="function.odbc-cursor.html">
+
+ <link rel="alternate" href="function.odbc-connect.html" hreflang="en">
+ <link rel="alternate" href="https://www.php.net/manual/pt_BR/function.odbc-connect.php" hreflang="pt_BR">
+ <link rel="alternate" href="https://www.php.net/manual/zh/function.odbc-connect.php" hreflang="zh">
+ <link rel="alternate" href="https://www.php.net/manual/fr/function.odbc-connect.php" hreflang="fr">
+ <link rel="alternate" href="https://www.php.net/manual/de/function.odbc-connect.php" hreflang="de">
+ <link rel="alternate" href="https://www.php.net/manual/ja/function.odbc-connect.php" hreflang="ja">
+ <link rel="alternate" href="https://www.php.net/manual/ro/function.odbc-connect.php" hreflang="ro">
+ <link rel="alternate" href="https://www.php.net/manual/ru/function.odbc-connect.php" hreflang="ru">
+ <link rel="alternate" href="https://www.php.net/manual/es/function.odbc-connect.php" hreflang="es">
+ <link rel="alternate" href="https://www.php.net/manual/tr/function.odbc-connect.php" hreflang="tr">
+
+<link rel="stylesheet" type="text/css" href="../../cached0aba.css?t=1539771603&amp;f=/fonts/Fira/fira.css" media="screen">
+<link rel="stylesheet" type="text/css" href="../../cached2ecf.css?t=1539765004&amp;f=/fonts/Font-Awesome/css/fontello.css" media="screen">
+<link rel="stylesheet" type="text/css" href="../../cachedba57.css?t=1606338002&amp;f=/styles/theme-base.css" media="screen">
+<link rel="stylesheet" type="text/css" href="../../cached3afa.css?t=1627831203&amp;f=/styles/theme-medium.css" media="screen">
+
+ <!--[if lte IE 7]>
+ <link rel="stylesheet" type="text/css" href="https://www.php.net/styles/workarounds.ie7.css" media="screen">
+ <![endif]-->
+
+ <!--[if lte IE 8]>
+ <script>
+  window.brokenIE = true;
+ </script>
+ <![endif]-->
+
+ <!--[if lte IE 9]>
+ <link rel="stylesheet" type="text/css" href="https://www.php.net/styles/workarounds.ie9.css" media="screen">
+ <![endif]-->
+
+ <!--[if IE]>
+ <script src="https://www.php.net/js/ext/html5.js"></script>
+ <![endif]-->
+
+ <base>
+
+
+</head>
+<body class="docs " style="">
+
+
+<div class="headsup"><a href="https://www.php.net/conferences/index.php#id2021-09-08-1">Longhorn PHP 2021</a></div>
+<nav id="trick"><div><dl>
+<dt><a href="getting-started.html">Getting Started</a></dt>
+	<dd><a href="introduction.html">Introduction</a></dd>
+	<dd><a href="tutorial.html">A simple tutorial</a></dd>
+<dt><a href="langref.html">Language Reference</a></dt>
+	<dd><a href="language.basic-syntax.html">Basic syntax</a></dd>
+	<dd><a href="language.types.html">Types</a></dd>
+	<dd><a href="language.variables.html">Variables</a></dd>
+	<dd><a href="language.constants.html">Constants</a></dd>
+	<dd><a href="language.expressions.html">Expressions</a></dd>
+	<dd><a href="language.operators.html">Operators</a></dd>
+	<dd><a href="language.control-structures.html">Control Structures</a></dd>
+	<dd><a href="language.functions.html">Functions</a></dd>
+	<dd><a href="language.oop5.html">Classes and Objects</a></dd>
+	<dd><a href="language.namespaces.html">Namespaces</a></dd>
+	<dd><a href="language.errors.html">Errors</a></dd>
+	<dd><a href="language.exceptions.html">Exceptions</a></dd>
+	<dd><a href="language.generators.html">Generators</a></dd>
+	<dd><a href="language.attributes.html">Attributes</a></dd>
+	<dd><a href="language.references.html">References Explained</a></dd>
+	<dd><a href="reserved.variables.html">Predefined Variables</a></dd>
+	<dd><a href="reserved.exceptions.html">Predefined Exceptions</a></dd>
+	<dd><a href="reserved.interfaces.html">Predefined Interfaces and Classes</a></dd>
+	<dd><a href="context.html">Context options and parameters</a></dd>
+	<dd><a href="wrappers.html">Supported Protocols and Wrappers</a></dd>
+</dl>
+<dl>
+<dt><a href="security.html">Security</a></dt>
+	<dd><a href="security.intro.html">Introduction</a></dd>
+	<dd><a href="security.general.html">General considerations</a></dd>
+	<dd><a href="security.cgi-bin.html">Installed as CGI binary</a></dd>
+	<dd><a href="security.apache.html">Installed as an Apache module</a></dd>
+	<dd><a href="security.sessions.html">Session Security</a></dd>
+	<dd><a href="security.filesystem.html">Filesystem Security</a></dd>
+	<dd><a href="security.database.html">Database Security</a></dd>
+	<dd><a href="security.errors.html">Error Reporting</a></dd>
+	<dd><a href="security.variables.html">User Submitted Data</a></dd>
+	<dd><a href="security.hiding.html">Hiding PHP</a></dd>
+	<dd><a href="security.current.html">Keeping Current</a></dd>
+<dt><a href="features.html">Features</a></dt>
+	<dd><a href="features.http-auth.html">HTTP authentication with PHP</a></dd>
+	<dd><a href="features.cookies.html">Cookies</a></dd>
+	<dd><a href="features.sessions.html">Sessions</a></dd>
+	<dd><a href="features.xforms.html">Dealing with XForms</a></dd>
+	<dd><a href="features.file-upload.html">Handling file uploads</a></dd>
+	<dd><a href="features.remote-files.html">Using remote files</a></dd>
+	<dd><a href="features.connection-handling.html">Connection handling</a></dd>
+	<dd><a href="features.persistent-connections.html">Persistent Database Connections</a></dd>
+	<dd><a href="features.commandline.html">Command line usage</a></dd>
+	<dd><a href="features.gc.html">Garbage Collection</a></dd>
+	<dd><a href="features.dtrace.html">DTrace Dynamic Tracing</a></dd>
+</dl>
+<dl>
+<dt><a href="funcref.html">Function Reference</a></dt>
+	<dd><a href="refs.basic.php.html">Affecting PHP's Behaviour</a></dd>
+	<dd><a href="refs.utilspec.audio.html">Audio Formats Manipulation</a></dd>
+	<dd><a href="refs.remote.auth.html">Authentication Services</a></dd>
+	<dd><a href="refs.utilspec.cmdline.html">Command Line Specific Extensions</a></dd>
+	<dd><a href="refs.compression.html">Compression and Archive Extensions</a></dd>
+	<dd><a href="refs.crypto.html">Cryptography Extensions</a></dd>
+	<dd><a href="refs.database.html">Database Extensions</a></dd>
+	<dd><a href="refs.calendar.html">Date and Time Related Extensions</a></dd>
+	<dd><a href="refs.fileprocess.file.html">File System Related Extensions</a></dd>
+	<dd><a href="refs.international.html">Human Language and Character Encoding Support</a></dd>
+	<dd><a href="refs.utilspec.image.html">Image Processing and Generation</a></dd>
+	<dd><a href="refs.remote.mail.html">Mail Related Extensions</a></dd>
+	<dd><a href="refs.math.html">Mathematical Extensions</a></dd>
+	<dd><a href="refs.utilspec.nontext.html">Non-Text MIME Output</a></dd>
+	<dd><a href="refs.fileprocess.process.html">Process Control Extensions</a></dd>
+	<dd><a href="refs.basic.other.html">Other Basic Extensions</a></dd>
+	<dd><a href="refs.remote.other.html">Other Services</a></dd>
+	<dd><a href="refs.search.html">Search Engine Extensions</a></dd>
+	<dd><a href="refs.utilspec.server.html">Server Specific Extensions</a></dd>
+	<dd><a href="refs.basic.session.html">Session Extensions</a></dd>
+	<dd><a href="refs.basic.text.html">Text Processing</a></dd>
+	<dd><a href="refs.basic.vartype.html">Variable and Type Related Extensions</a></dd>
+	<dd><a href="refs.webservice.html">Web Services</a></dd>
+	<dd><a href="refs.utilspec.windows.html">Windows Only Extensions</a></dd>
+	<dd><a href="refs.xml.html">XML Manipulation</a></dd>
+	<dd><a href="refs.ui.html">GUI Extensions</a></dd>
+</dl>
+<dl>
+<dt>Keyboard Shortcuts</dt><dt>?</dt>
+<dd>This help</dd>
+<dt>j</dt>
+<dd>Next menu item</dd>
+<dt>k</dt>
+<dd>Previous menu item</dd>
+<dt>g p</dt>
+<dd>Previous man page</dd>
+<dt>g n</dt>
+<dd>Next man page</dd>
+<dt>G</dt>
+<dd>Scroll to bottom</dd>
+<dt>g g</dt>
+<dd>Scroll to top</dd>
+<dt>g h</dt>
+<dd>Goto homepage</dd>
+<dt>g s</dt>
+<dd>Goto search<br>(current page)</dd>
+<dt>/</dt>
+<dd>Focus search box</dd>
+</dl></div></nav>
+<div id="goto">
+    <div class="search">
+         <div class="text"></div>
+         <div class="results"><ul></ul></div>
+   </div>
+</div>
+
+  <div id="breadcrumbs" class="row-fluid">
+    <div id="breadcrumbs-inner">
+          
+              
+          <ul>
+            <li><a href="index-2.html">PHP Manual</a></li>      <li><a href="funcref.html">Function Reference</a></li>      <li><a href="refs.database.html">Database Extensions</a></li>      <li><a href="refs.database.abstract.html">Abstraction Layers</a></li>      <li><a href="book.uodbc.html">ODBC</a></li>      <li><a href="ref.uodbc.html">ODBC Functions</a></li>      </ul>
+    </div>
+  </div>
+
+
+
+
+<div id="layout" class="clearfix">
+  <section id="layout-content">
+  <div id="function.odbc-connect" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">odbc_connect</h1>
+  <p class="verinfo">(PHP 4, PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">odbc_connect</span> — <span class="dc-title">Connect to a datasource</span></p>
+
+ </div>
+ 
+ <div class="refsect1 description" id="refsect1-function.odbc-connect-description">
+  <h3 class="title">Description</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>odbc_connect</strong></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">string</span> <code class="parameter">$dsn</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">string</span> <code class="parameter">$user</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">string</span> <code class="parameter">$password</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">int</span> <code class="parameter">$cursor_option</code><span class="initializer"> = <strong><code>SQL_CUR_USE_DRIVER</code></strong></span></span><br>): <span class="type"><span class="type">resource</span>|<span class="type"><span class="type false">false</span></span></span></div>
+
+  <p class="simpara">
+   The connection id returned by this functions is needed by other
+   ODBC functions. You can have multiple connections open at once as long as
+   they either use different db or different credentials.
+  </p>
+  <p class="simpara">
+   With some ODBC drivers, executing a complex stored procedure may
+   fail with an error similar to: "Cannot open a cursor on a stored
+   procedure that has anything other than a single select statement
+   in it".  Using SQL_CUR_USE_ODBC may avoid that error. Also, some
+   drivers don't support the optional row_number parameter in
+   <span class="function"><a href="function.odbc-fetch-row.html" class="function">odbc_fetch_row()</a></span>. SQL_CUR_USE_ODBC might help
+   in that case, too.
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-function.odbc-connect-parameters">
+  <h3 class="title">Parameters</h3>
+  <p class="para">
+   </p><dl>
+    
+     <dt>
+<code class="parameter">dsn</code></dt>
+
+     <dd>
+
+      <p class="para">
+       The database source name for the connection. Alternatively, a
+       DSN-less connection string can be used.
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">user</code></dt>
+
+     <dd>
+
+      <p class="para">
+       The username.
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">password</code></dt>
+
+     <dd>
+
+      <p class="para">
+       The password.
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">cursor_option</code></dt>
+
+     <dd>
+
+      <p class="para">
+       This sets the type of cursor to be used
+       for this connection. This parameter is not normally needed, but
+       can be useful for working around problems with some ODBC drivers.
+      </p>
+      <span class="simpara">
+       The following constants are defined for cursortype:
+      </span>
+      <p class="para">
+       </p><ul class="itemizedlist">
+        <li class="listitem">
+         <span class="simpara">
+          SQL_CUR_USE_IF_NEEDED
+         </span>
+        </li>
+        <li class="listitem">
+         <span class="simpara">
+          SQL_CUR_USE_ODBC
+         </span>
+        </li>
+        <li class="listitem">
+         <span class="simpara">
+          SQL_CUR_USE_DRIVER
+         </span>
+        </li>
+       </ul>
+      <p></p>
+     </dd>
+
+    
+   </dl>
+
+  <p></p>
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-function.odbc-connect-returnvalues">
+  <h3 class="title">Return Values</h3>
+  <p class="para">
+   Returns an ODBC connection,  or <strong><code>false</code></strong> on failure.
+  </p>
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-function.odbc-connect-examples">
+  <h3 class="title">Examples</h3>
+  <p class="para">
+   </p><div class="example" id="sodium-crypto-box-seal-open.example.basic">
+    <p><strong>Example #1 DSN-less connections</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br></span><span style="color: #FF8000">//&nbsp;Microsoft&nbsp;SQL&nbsp;Server&nbsp;using&nbsp;the&nbsp;SQL&nbsp;Native&nbsp;Client&nbsp;10.0&nbsp;ODBC&nbsp;Driver&nbsp;-&nbsp;allows&nbsp;connection&nbsp;to&nbsp;SQL&nbsp;7,&nbsp;2000,&nbsp;2005&nbsp;and&nbsp;2008<br></span><span style="color: #0000BB">$connection&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">odbc_connect</span><span style="color: #007700">(</span><span style="color: #DD0000">"Driver={SQL&nbsp;Server&nbsp;Native&nbsp;Client&nbsp;10.0};Server=</span><span style="color: #0000BB">$server</span><span style="color: #DD0000">;Database=</span><span style="color: #0000BB">$database</span><span style="color: #DD0000">;"</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$user</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$password</span><span style="color: #007700">);<br><br></span><span style="color: #FF8000">//&nbsp;Microsoft&nbsp;Access<br></span><span style="color: #0000BB">$connection&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">odbc_connect</span><span style="color: #007700">(</span><span style="color: #DD0000">"Driver={Microsoft&nbsp;Access&nbsp;Driver&nbsp;(*.mdb)};Dbq=</span><span style="color: #0000BB">$mdbFilename</span><span style="color: #DD0000">"</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$user</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$password</span><span style="color: #007700">);<br><br></span><span style="color: #FF8000">//&nbsp;Microsoft&nbsp;Excel<br></span><span style="color: #0000BB">$excelFile&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">realpath</span><span style="color: #007700">(</span><span style="color: #DD0000">'C:/ExcelData.xls'</span><span style="color: #007700">);<br></span><span style="color: #0000BB">$excelDir&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">dirname</span><span style="color: #007700">(</span><span style="color: #0000BB">$excelFile</span><span style="color: #007700">);<br></span><span style="color: #0000BB">$connection&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">odbc_connect</span><span style="color: #007700">(</span><span style="color: #DD0000">"Driver={Microsoft&nbsp;Excel&nbsp;Driver&nbsp;(*.xls)};DriverId=790;Dbq=</span><span style="color: #0000BB">$excelFile</span><span style="color: #DD0000">;DefaultDir=</span><span style="color: #0000BB">$excelDir</span><span style="color: #DD0000">"&nbsp;</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">''</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">''</span><span style="color: #007700">);<br></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+  <p></p>
+ </div>
+
+
+ <div class="refsect1 seealso" id="refsect1-function.odbc-connect-seealso">
+  <h3 class="title">See Also</h3>
+  <p class="para">
+   </p><ul class="simplelist">
+    <li class="member">For persistent connections: <span class="function"><a href="function.odbc-pconnect.html" class="function" rel="rdfs-seeAlso">odbc_pconnect()</a> - Open a persistent database connection</span></li>
+   </ul>
+  <p></p>
+ </div>
+
+
+</div>
+<section id="usernotes">
+ <div class="head"><h3 class="title">User Contributed Notes</h3></div><div id="allnotes">
+  <div class="note" id="124662">  
+  <a class="name">
+  <strong class="user"><em>nunya at damn dot biz</em></strong></a><div class="date" title="2020-01-29 07:38"><strong>1 year ago</strong></div>
+  <div class="text" id="Hcom124662">
+<div class="phpcode"><code><span class="html">
+One additional note regarding odbc_pconnect&nbsp; and possibly other variations of pconnect:<br><br>If the connection encounters an error (bad SQL, incorrect request, etc), that error will return with&nbsp; be present in odbc_errormsg for every subsequent action on that connection, even if subsequent actions don't cause another error.<br><br>For example:<br><br>A script connects with odbc_pconnect.<br>The connection is created on it's first use.<br>The script calls a query "Select * FROM Table1".<br>Table1 doesn't exist and odbc_errormsg contains that error.<br><br>Later(days, perhaps), a different script is called using the same parameters to odbc_pconnect.<br>The connection already exists, so it is reused.<br>The script calls a query "Select * FROM Table0".<br>The query runs fine, but odbc_errormsg still returns the error about Table1 not existing.<br><br>I'm not seeing a way to clear that error using odbc_ functions, so keep your eyes open for this gotcha or use odbc_connect instead.</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="123797">  
+  <a class="name">
+  <strong class="user"><em>fr at freedom2ct dot com</em></strong></a><div class="date" title="2019-04-24 01:14"><strong>2 years ago</strong></div>
+  <div class="text" id="Hcom123797">
+<div class="phpcode"><code><span class="html">
+Under Windows odbc_connect (and PDO ODBC) apparently uses the Windows locale to handle input and output from e.g. MS access and MS SQL Server databases.<br><br>This causes lots of headaches if one is using other than ASCII characters.<br><br>Work-round solutions like utf8_encode and mb_convert both fails.<br><br>The solution I fund working is to perform the following changes to Windows<br><br>Control Panel &gt; Region &gt; Administrative &gt; Change system locale<br>&gt;Check '&lt;i&gt;Use Unicode UTF-8 for worldwide language support.&lt;/i&gt;'</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="17204">  
+  <a class="name">
+  <strong class="user"><em>Mahmoud at iastate dot edu</em></strong></a><div class="date" title="2001-11-29 12:35"><strong>19 years ago</strong></div>
+  <div class="text" id="Hcom17204">
+<div class="phpcode"><code><span class="html">
+WINNT 4 Workstation, PHP4
+<br>
+<br>odbc_connect() kept giving me weird errors when trying to connect to a MSaccess DSN(Microsoft Jet engine couldn't open the database 'Unknow'. Another user is using it exclusively, or you dont have permission to use it).
+<br>
+<br>After going nuts for a while, I realized that my database name had a space in it (course surveys.mdb), I shortened the name to eliminate the space .. and everything worked fine.</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="52556">  
+  <a class="name">
+  <strong class="user"><em>webmaster at dzconnexion dot com</em></strong></a><div class="date" title="2005-05-05 08:44"><strong>16 years ago</strong></div>
+  <div class="text" id="Hcom52556">
+<div class="phpcode"><code><span class="html">
+Concerning the note posted by Grisu on the 23-Dec-2003 11:51: Connect to an MS-Access Database on the Network via ODBC,<br><br>PLEASE dont forget to put double slashes as follows:<br><br>"\\\\Server\\folder\\database.mdb" <br><br>when setting up the registry key as indicated...</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="35331">  
+  <a class="name">
+  <strong class="user"><em>lffranco at dco.pemex.com</em></strong></a><div class="date" title="2003-08-27 06:08"><strong>18 years ago</strong></div>
+  <div class="text" id="Hcom35331">
+<div class="phpcode"><code><span class="html">
+As always Microsoft is clueless... I've been trying to connect to an Access database on a W2K on the network (not a local file, but mapped on the V: drive), via ODBC.<br><br>All I got is this message:<br>Warning: SQL error: [Microsoft][ODBC Microsoft Access Driver] '(unknown)' is not a valid path. Make sure that the path name is spelled correctly and that you are connected to the server on which the file resides., SQL state S1009 in SQLConnect in d:\apache\cm\creaart.php on line 13<br><br>So... I started looking al around and looks like the ODBC driver has some severe problems:<br><br>1. It cannot access a Access database via a mapped drive. And this is for ANY application, name it PHP, Coldfusion, whatever<br>2. You cannot make a system DSN with a UNC (\\Server\resource), so you must map the drive<br><br>Cute isn't it?<br><br>So... I quit on ODBC and went via ADO, this is the code that works:<br><br>=== CODE ===<br><br>$db = '\\\\server\\resource\\db.mdb';<br>$conn = new COM('ADODB.Connection');<br>$conn-&gt;Open("DRIVER={Driver do Microsoft Access (*.mdb)}; DBQ=$db");<br><br>// Driver do Microsoft Access (*.mdb)<br>// must be the name in your odbc drivers, the one you get<br>// from the Data Sources (ODBC).<br>// In this case, I'm in Mexico but the driver name is in portuguese, thanks Microsoft.<br><br>$sql = 'SELECT username FROM tblUsuarios';<br>$res = $conn-&gt;Execute($sql);<br>while (!$res-&gt;EOF)<br>{<br>&nbsp; &nbsp; print $res-&gt;Fields['username']-&gt;Value . "&lt;br&gt;";<br>&nbsp; &nbsp; $res-&gt;MoveNext();<br>}<br><br>$res-&gt;Close(); <br>$conn-&gt;Close(); <br>$res = null; <br>$conn = null;<br><br>=== /CODE ===</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="42854">  
+  <a class="name">
+  <strong class="user"><em>simonr at no2sp at m dot cogapp dot com</em></strong></a><div class="date" title="2004-06-01 05:26"><strong>17 years ago</strong></div>
+  <div class="text" id="Hcom42854">
+<div class="phpcode"><code><span class="html">
+To make a DSN-less connection using ODBC to MS-SQL:
+<br>
+<br><span class="default">&lt;?php
+<br>
+<br>$connection_string </span><span class="keyword">= </span><span class="string">'DRIVER={SQL Server};SERVER=&lt;servername&gt;;DATABASE=&lt;databasename&gt;'</span><span class="keyword">;
+<br>
+<br></span><span class="default">$user </span><span class="keyword">= </span><span class="string">'username'</span><span class="keyword">;
+<br></span><span class="default">$pass </span><span class="keyword">= </span><span class="string">'password'</span><span class="keyword">;
+<br>
+<br></span><span class="default">$connection </span><span class="keyword">= </span><span class="default">odbc_connect</span><span class="keyword">( </span><span class="default">$connection_string</span><span class="keyword">, </span><span class="default">$user</span><span class="keyword">, </span><span class="default">$pass </span><span class="keyword">);
+<br>
+<br></span><span class="default">?&gt;
+<br></span>
+<br>servername is the name of the database server
+<br>
+<br>databasename is the name of the database
+<br>
+<br>Note, I've only tried this from a windows box using the Microsoft ODBC drivers.</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="85675">  
+  <a class="name">
+  <strong class="user"><em>Anonymous</em></strong></a><div class="date" title="2008-09-11 01:16"><strong>12 years ago</strong></div>
+  <div class="text" id="Hcom85675">
+<div class="phpcode"><code><span class="html">
+This might be obvious to some, but here is a quick tidbit that might save you some time if you're using FreeTDS in Linux:<br><br>Be sure that you have these two lines in freetds.conf:<br>dump file = /tmp/freetds.log<br>dump file append = yes<br><br>so you can tail -f it in the background of debugging the problem.&nbsp; This helped me find my issue on on CentOS Linux:&nbsp; <br> <br>1) tsql test works<br>2) isql test works<br>3) odbc connection in php also works WHEN RUN FROM THE SHELL<br>4) running PHP through apache does NOT work.<br><br>my /tmp/freetds.log file told me: <br>net.c:168:Connecting to MYDBSERVER port MYDBPORT<br>net.c:237:tds_open_socket: MYDBSERVER:MYDBPORT: Permission denied<br><br>and the answer was my firewall/SELinux was denying the Apache processes access to connect to the remote MSSQL DB port, but my shell accounts were fine.</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="71570">  
+  <a class="name">
+  <strong class="user"><em>harald dot angel at gmail dot com</em></strong></a><div class="date" title="2006-12-06 06:12"><strong>14 years ago</strong></div>
+  <div class="text" id="Hcom71570">
+<div class="phpcode"><code><span class="html">
+- Windows - OS<br>- Apache<br>- ODBC-Connction to MS-Access DB on a:<br>- Network Share<br><br>After many hours searching here´s how it works:<br><br>- Map the Network Drive where the mdb is located<br>- Setup System DSN in Control Panel with mapped Drive<br>- Open Registry at:<br>HKEY_LOCAL_MACHINE\SOFTWARE\ODBC\ODBC_INI<br>- Edit the for example "M:\" to "\\server\..."<br>- Close Regedit<br>- The Apache-Service must run with a Domain (network)-User!!<br>- After that you can connect using:<br><br>$conn = odbc_connect('your-dsn-name','',''); <br><br>hope that makes someone happy :)<br>bye</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="50571">  
+  <a class="name">
+  <strong class="user"><em>aamaral at 0kbps dot net</em></strong></a><div class="date" title="2005-03-03 10:16"><strong>16 years ago</strong></div>
+  <div class="text" id="Hcom50571">
+<div class="phpcode"><code><span class="html">
+Two additional notes regarding ODBC connections to a Network Sybase SQL Anywhere 8 Server..<br><br>I wrote a script using the PHP5 CLI binary that monitors a directory for changes, then updates a Network Server SQL Anywhere 8 database when a change was detected. Idealy, my program would run indefinately, and issue odbc_connect()/odbc_close() when appropriate. However, it seems that once connected, your odbc session is limited to 30 seconds of active time, after which, the connection becomes stale, and no further queries can be executed.&nbsp; Instead, it returns a generic "Authentication violation"&nbsp; error from the odbc driver.<br><br>Here's an example:<br><br><span class="default">&lt;?php<br>&nbsp; $conn</span><span class="keyword">=</span><span class="default">odbc_connect</span><span class="keyword">(</span><span class="default">$connect_string</span><span class="keyword">,</span><span class="string">''</span><span class="keyword">,</span><span class="string">''</span><span class="keyword">);<br>&nbsp; </span><span class="default">$result</span><span class="keyword">=</span><span class="default">odbc_exec</span><span class="keyword">(</span><span class="default">$qry</span><span class="keyword">,</span><span class="default">$conn</span><span class="keyword">);&nbsp; </span><span class="comment">//returns data<br>&nbsp; </span><span class="default">sleep</span><span class="keyword">(</span><span class="default">31</span><span class="keyword">);<br>&nbsp; </span><span class="default">$result</span><span class="keyword">=</span><span class="default">odbc_exec</span><span class="keyword">(</span><span class="default">$qry</span><span class="keyword">,</span><span class="default">$conn</span><span class="keyword">);&nbsp; </span><span class="comment">//"Authentication Violation"<br></span><span class="default">?&gt;<br></span><br>Additionally, it seems that odbc_close() doesn't truely close the connection (at least not using Network SQL Anywhere 8). The resource is no longer usable after the odbc_close() is issued, but as far as the server is concerned, there is still a connection present. The connection doesn't truely close until after the php script has ended, which is unfortunate, because a subsequent odbc_connect() commands appear to reuse the existing stale connection, which was supposedly closed.<br><br>My workaround was to design my script exit entirely after a the database update had completed.&nbsp; I then called my script whithin a batch file and put it inside an endless loop.<br><br>I'm not sure if this is a bug with PHP or what, but I thought I'd share in case someone else is pulling their hair out trying to figure this one out...</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="29924">  
+  <a class="name">
+  <strong class="user"><em>jeremy at austin.ibm.com</em></strong></a><div class="date" title="2003-02-28 02:20"><strong>18 years ago</strong></div>
+  <div class="text" id="Hcom29924">
+<div class="phpcode"><code><span class="html">
+here's a quick note about using php and db2 that cost me a couple of hours and several recompiles trying to figure out why it didn't work.<br><br>put the below line in any script<br><br>&nbsp; &nbsp;&nbsp; putenv("DB2INSTANCE=db2inst1");<br><br>Or, set that in your webserver environment somehow.</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="23666">  
+  <a class="name">
+  <strong class="user"><em>osiris at rich-howard dot co dot uk</em></strong></a><div class="date" title="2002-07-24 10:34"><strong>19 years ago</strong></div>
+  <div class="text" id="Hcom23666">
+<div class="phpcode"><code><span class="html">
+Thought I'd add a note here on this. I'm using Apache 2.0.39 on Windows XP and PHP 4.2.2.<br><br>It helps a lot if you don't use capital letters in your dsn string.<br><br>Thought I also comment on the posts about using system dsns over file dsns. There are lots of posts saying use systems not files, but none (that I have seen) which explain why.<br><br>Essentially: File DSNs are specific to the current user, therefore the Internet Guest User Account doesn't have rights to them. Systems are available to everyone.<br><br>Regards<br><br>Osiris :)</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="13928">  
+  <a class="name">
+  <strong class="user"><em>cs at coolspot dot de</em></strong></a><div class="date" title="2001-07-10 01:01"><strong>20 years ago</strong></div>
+  <div class="text" id="Hcom13928">
+<div class="phpcode"><code><span class="html">
+We've tried hard to connect from php to our IBM DB2 RS/6000 Server. It worked after we compiled with --ibm-db2= option, but it was unbelievable
+<br>slow.
+<br>
+<br>No, just testing some options, we found out that it went from very slow (getting 100 records lasts 1 till 10 seconds) to fast access (almost same speed as with using JDBC from Servlets) to 0.2 till 0.3 seconds.
+<br>
+<br>We simply added the optional parameter Cursortype to odbc_connect, and with the cursortype SQL_CUR_USE_ODBC it changed in that way!
+<br>
+<br>Hope this helps anybody who must connect to db2 ;)</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="38471">  
+  <a class="name">
+  <strong class="user"><em>Grisu</em></strong></a><div class="date" title="2003-12-23 03:51"><strong>17 years ago</strong></div>
+  <div class="text" id="Hcom38471">
+<div class="phpcode"><code><span class="html">
+Connect to an MS-Access Database on the Network via ODBC<br><br>Apache 2.0.47 with PHP 4.3.4 running on Windows XP Pro<br><br>If you encounter the error<br>"[Microsoft][ODBC Driver Manager] Data source name not found and no default driver specified, SQL state IM002 in SQLConnect"<br><br>you should make sure to have the following done:<br><br>The ODBC-link must be a System-DNS and not a User-DNS. Configure your ODBC-link and then modify your configuration with regedt32. Go to HKEY_LOCAL_MACHINE\SOFTWARE\ODBC\ODBC_INI and open your ODBC-link. The field DBQ contains the path to your database. This path must be without Drive-names (e. g. "M:") so change it to "\\Server\folder\database.mdb". This setting is changed each time you modify your ODBC-configuration using the Windows-tool, so make sure you do this afterwards.<br><br>Then you go to the Services-Section in your Systemmanagement. Select the properties of your Apache module. In the login-section you have to make sure you login with a valid User-Account for your Network-Server.<br><br>Please note that this way you still have no permission to access linked tables within the linked database<br><br>Funny enough all this is not necessary on Win98.</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="83792">  
+  <a class="name">
+  <strong class="user"><em>Anonymous</em></strong></a><div class="date" title="2008-06-11 08:08"><strong>13 years ago</strong></div>
+  <div class="text" id="Hcom83792">
+<div class="phpcode"><code><span class="html">
+I have used mdbtools to access .mdb file on my ubuntu box, as ODBC driver (and PHP)<br>It has very few features, and practically unusable.</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="52401">  
+  <a class="name">
+  <strong class="user"><em>rotwhiler at hotmail dot com</em></strong></a><div class="date" title="2005-04-29 08:42"><strong>16 years ago</strong></div>
+  <div class="text" id="Hcom52401">
+<div class="phpcode"><code><span class="html">
+For anyone having problems with WHERE clauses in their MS Access ODBC requests here?s what I found: SQL requests sent to Access must include quotes around the criteria.<br><br>$sel = "SELECT * FROM table1 WHERE cust_id = 'cust1'";<br>outputs:<br>SELECT * FROM table1 WHERE cust_id = 'cust1'<br>And works.<br><br>$sel = ?SELECT * FROM table1 WHERE cust_id = cust1?;<br>outputs:<br>SELECT * FROM table1 WHERE cust_id = cust1<br>And doesn?t work.<br><br>Here?s the whole block of code:<br>$conn = odbc_connect("database1","","");<br>$sel = "SELECT * FROM table1 WHERE cust_id = 'cust1'";<br>$exec = odbc_exec($conn,$sel);<br>while($row = (odbc_fetch_array($exec)))<br> $serv[odbc_result($exec,'label')] = $row;<br>print_r($serv);</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="91967">  
+  <a class="name">
+  <strong class="user"><em>drew at pixelburn dot net</em></strong></a><div class="date" title="2009-07-02 05:32"><strong>12 years ago</strong></div>
+  <div class="text" id="Hcom91967">
+<div class="phpcode"><code><span class="html">
+[Microsoft][ODBC Driver Manager] Data source name not found and no default driver specified<br><br>If you keep running&nbsp; into this on the 64 bit versions of windows, ie server 2008,&nbsp; and none of the other solutions helped.<br><br>In a 64 bit windows server operating system, there are TWO odbc managers. When you pull up the usual menu for the odbc / dsn system, it is for the 64 bit odbc manager, and 32 bit applications (vb 6.0, PHP 5) will not work using these dsn's. <br><br>This is where the 32 bit odbc manager is:<br><br>C:\Windows\SysWOW64\odbcad32.exe</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="107783">  
+  <a class="name">
+  <strong class="user"><em>Abhinav</em></strong></a><div class="date" title="2012-03-04 02:13"><strong>9 years ago</strong></div>
+  <div class="text" id="Hcom107783">
+<div class="phpcode"><code><span class="html">
+Pls ensure that the MSAccess database format is ".mdb".<br>If it is ".accdb" it will not work!</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="96265">  
+  <a class="name">
+  <strong class="user"><em>ewilde aht bsmdevelopment dawt com</em></strong></a><div class="date" title="2010-02-17 01:08"><strong>11 years ago</strong></div>
+  <div class="text" id="Hcom96265">
+<div class="phpcode"><code><span class="html">
+Once you've set up a UnixODBC connection to Informix (as described elsewhere, for example in <a rel="nofollow" target="_blank">http://www.unixodbc.org/</a>), the following PHP code will access a database via its DSN:<br><br><span class="default">&lt;?php<br></span><span class="comment">// We must set these environment variables for Informix to work.&nbsp; Either<br>// do it here or in php.ini.<br></span><span class="default">putenv</span><span class="keyword">(</span><span class="string">"INFORMIXDIR=/usr/share/informix"</span><span class="keyword">);<br></span><span class="default">putenv</span><span class="keyword">(</span><span class="string">"ODBCINI=/usr/local/unixODBC/etc/odbc.ini"</span><span class="keyword">);<br><br></span><span class="comment">// Open up a connection to the database.<br></span><span class="keyword">if (!(</span><span class="default">$con </span><span class="keyword">= </span><span class="default">odbc_connect</span><span class="keyword">(</span><span class="string">"CollectOh"</span><span class="keyword">, </span><span class="string">""</span><span class="keyword">, </span><span class="string">""</span><span class="keyword">)))<br>&nbsp; echo </span><span class="string">"&lt;p&gt;Connection to CollectOh failed.&lt;/p&gt;\n"</span><span class="keyword">;<br>else<br>&nbsp; {<br>&nbsp; </span><span class="comment">// Let's try enumerating all of the tables in the database (there ain't<br>&nbsp; // no "show tables" here).<br>&nbsp; </span><span class="keyword">if ((</span><span class="default">$res </span><span class="keyword">= </span><span class="default">odbc_exec</span><span class="keyword">(</span><span class="default">$con</span><span class="keyword">, </span><span class="string">"select * from SYSTABLES"</span><span class="keyword">)))<br>&nbsp; &nbsp; {<br>&nbsp; &nbsp; echo </span><span class="string">"&lt;p&gt;\n"</span><span class="keyword">;<br>&nbsp; &nbsp; </span><span class="default">odbc_result_all</span><span class="keyword">(</span><span class="default">$res</span><span class="keyword">);<br>&nbsp; &nbsp; echo </span><span class="string">"&lt;/p&gt;\n"</span><span class="keyword">;<br>&nbsp; &nbsp; }<br><br>&nbsp; </span><span class="comment">// Close up shop, like good dobies.<br>&nbsp; </span><span class="default">odbc_close</span><span class="keyword">(</span><span class="default">$con</span><span class="keyword">);<br>&nbsp; }<br></span><span class="default">?&gt;</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="17056">  
+  <a class="name">
+  <strong class="user"><em>lomaky at yahoo dot com</em></strong></a><div class="date" title="2001-11-23 02:30"><strong>19 years ago</strong></div>
+  <div class="text" id="Hcom17056">
+<div class="phpcode"><code><span class="html">
+// simple conection
+<br>
+<br>
+<br>$cnx = odbc_connect('cliente','Administrador','');&nbsp; 
+<br>//query
+<br>$SQL_Exec_String =&nbsp; "select * from Clientes";&nbsp; &nbsp; 
+<br>//ejecucion query
+<br>$cur= odbc_exec( $cnx, $SQL_Exec_String );&nbsp; 
+<br>echo&nbsp; "&lt;table border=1&gt;&lt;tr&gt;&lt;th&gt;Dni&lt;/th&gt;&lt;th&gt;Nombre&lt;/th&gt;".&nbsp; 
+<br>&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; "&lt;th&gt;codigo&lt;/th&gt;&lt;th&gt;ciudad&lt;/th&gt;&lt;/tr&gt;\n";&nbsp; 
+<br>&nbsp; &nbsp; while( odbc_fetch_row( $cur ) ) {&nbsp; 
+<br>&nbsp; &nbsp; &nbsp;&nbsp; $Dni= odbc_result( $cur, 1 );&nbsp; 
+<br>&nbsp; &nbsp; &nbsp;&nbsp; $Nombre= odbc_result( $cur, 2 );&nbsp; 
+<br>&nbsp; &nbsp; &nbsp;&nbsp; $codigo= odbc_result( $cur, 3 ); 
+<br>&nbsp; &nbsp; &nbsp;&nbsp; $ciudad= odbc_result( $cur, 4 ); 
+<br>&nbsp; &nbsp; &nbsp; &nbsp; echo&nbsp; "&lt;tr&gt;&lt;td&gt;$Dni&lt;/td&gt;&lt;td&gt;$Nombre&lt;/td&gt;".&nbsp; 
+<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; "&lt;td&gt;$codigo&lt;/td&gt;&lt;td&gt;$ciudad&lt;/td&gt;&lt;/tr&gt;\n";&nbsp; 
+<br>&nbsp; &nbsp; }&nbsp; 
+<br>&nbsp; &nbsp; echo&nbsp; "&lt;/table&gt;";</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="16919">  
+  <a class="name">
+  <strong class="user"><em>root at mediamonks dot net</em></strong></a><div class="date" title="2001-11-19 04:03"><strong>19 years ago</strong></div>
+  <div class="text" id="Hcom16919">
+<div class="phpcode"><code><span class="html">
+Due to multiple requests, more for DSN-less connections:
+<br>
+<br><span class="default">&lt;?php
+<br>$db_connection </span><span class="keyword">= new </span><span class="default">COM</span><span class="keyword">(</span><span class="string">"ADODB.Connection"</span><span class="keyword">); 
+<br>
+<br></span><span class="default">$db_connstr </span><span class="keyword">= </span><span class="string">"DRIVER={Microsoft Access Driver (*.mdb)}; DBQ="</span><span class="keyword">. </span><span class="default">realpath</span><span class="keyword">(</span><span class="string">"../databases/database.mdb"</span><span class="keyword">) .</span><span class="string">" ;DefaultDir="</span><span class="keyword">. </span><span class="default">realpath</span><span class="keyword">(</span><span class="string">"../databases"</span><span class="keyword">); 
+<br></span><span class="default">$db_connection</span><span class="keyword">-&gt;</span><span class="default">open</span><span class="keyword">(</span><span class="default">$db_connstr</span><span class="keyword">); 
+<br></span><span class="default">$rs </span><span class="keyword">= </span><span class="default">$db_connection</span><span class="keyword">-&gt;</span><span class="default">execute</span><span class="keyword">(</span><span class="string">"SELECT * FROM Table"</span><span class="keyword">);
+<br></span><span class="default">$rs_fld0 </span><span class="keyword">= </span><span class="default">$rs</span><span class="keyword">-&gt;</span><span class="default">Fields</span><span class="keyword">(</span><span class="default">0</span><span class="keyword">);
+<br></span><span class="default">$rs_fld1 </span><span class="keyword">= </span><span class="default">$rs</span><span class="keyword">-&gt;</span><span class="default">Fields</span><span class="keyword">(</span><span class="default">1</span><span class="keyword">);
+<br>while (!</span><span class="default">$rs</span><span class="keyword">-&gt;</span><span class="default">EOF</span><span class="keyword">) {
+<br>&nbsp; print </span><span class="string">"</span><span class="default">$rs_fld0</span><span class="keyword">-&gt;</span><span class="default">value</span><span class="string"> </span><span class="default">$rs_fld1</span><span class="keyword">-&gt;</span><span class="default">value</span><span class="string">\n"</span><span class="keyword">;
+<br>&nbsp; </span><span class="default">$rs</span><span class="keyword">-&gt;</span><span class="default">MoveNext</span><span class="keyword">(); </span><span class="comment">/* updates fields! */
+<br></span><span class="keyword">}
+<br></span><span class="default">$rs</span><span class="keyword">-&gt;</span><span class="default">Close</span><span class="keyword">();
+<br></span><span class="default">$db_connection</span><span class="keyword">-&gt;</span><span class="default">Close</span><span class="keyword">();
+<br></span><span class="default">?&gt;
+<br></span>
+<br>(Prints first 2 columns for each row.)</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="9415">  
+  <a class="name">
+  <strong class="user"><em>phobo_AT_paradise.net.nz</em></strong></a><div class="date" title="2000-11-02 06:01"><strong>20 years ago</strong></div>
+  <div class="text" id="Hcom9415">
+<div class="phpcode"><code><span class="html">
+If using Openlink to connect to a Microsoft Access database, you will most likely fine tha odbd_connect() works fine, but discover that ANY query will produce odd results; with SELECT queries failing with "[OpenLink][ODBC][Driver]Driver not capable, SQL state
+<br>S1C00 in SQLExecDirect in xxxx.php on line xx" and INSERT / DELETE queries warning "No tuples available at this result index".
+<br>
+<br>In this case, use the SQL_CUR_USE_ODBC cursor!
+<br>
+<br>This had me stumped for quite some time; because it was the odbc_exec() which was seemingly at fault... :)
+<br>
+<br>Siggy</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="5900">  
+  <a class="name">
+  <strong class="user"><em>cnewbill at onewest dot net</em></strong></a><div class="date" title="2000-05-18 05:55"><strong>21 years ago</strong></div>
+  <div class="text" id="Hcom5900">
+<div class="phpcode"><code><span class="html">
+Alot of people share the same kind of problems getting this setup on linux.&nbsp; I was assigned this problem 2 days ago and I was successful.&nbsp; My combination was PHP4 RC2, Easysoft OOB, and unixODBC.&nbsp; These three products work very well together and are real easy to install.&nbsp; More info <a rel="nofollow" target="_blank">http://www.easysoft.com/products/oob/main.phtml.</a> ps also works good with Perl's DBI.</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="116802">  
+  <a class="name">
+  <strong class="user"><em>Luis [from] redcodestudio [dot] com</em></strong></a><div class="date" title="2015-03-02 05:48"><strong>6 years ago</strong></div>
+  <div class="text" id="Hcom116802">
+<div class="phpcode"><code><span class="html">
+Following&nbsp; simonr at no2sp at m dot cogapp dot com contribution (thank you), I tried to connect to a local MS SQL Server 2014 Express database by creating a DSN-less connection using ODBC. It worked, here's the code.<br><br><span class="default">&lt;?php<br></span><span class="comment">// Replace the value of these variables with your own data<br></span><span class="default">$user </span><span class="keyword">= </span><span class="string">'username'</span><span class="keyword">;<br></span><span class="default">$pass </span><span class="keyword">= </span><span class="string">'password'</span><span class="keyword">;<br></span><span class="default">$server </span><span class="keyword">= </span><span class="string">'serverName\instanceName'</span><span class="keyword">;<br></span><span class="default">$database </span><span class="keyword">= </span><span class="string">'database'</span><span class="keyword">;<br><br></span><span class="comment">// No changes needed from now on<br></span><span class="default">$connection_string </span><span class="keyword">= </span><span class="string">"DRIVER={SQL Server};SERVER=</span><span class="default">$server</span><span class="string">;DATABASE=</span><span class="default">$database</span><span class="string">"</span><span class="keyword">; <br></span><span class="default">$conn </span><span class="keyword">= </span><span class="default">odbc_connect</span><span class="keyword">(</span><span class="default">$connection_string</span><span class="keyword">,</span><span class="default">$user</span><span class="keyword">,</span><span class="default">$pass</span><span class="keyword">);<br><br>if (</span><span class="default">$conn</span><span class="keyword">) {<br>&nbsp; &nbsp; echo </span><span class="string">"Connection established."</span><span class="keyword">;<br>} else{<br>&nbsp; &nbsp; die(</span><span class="string">"Connection could not be established."</span><span class="keyword">);<br>}<br></span><span class="default">?&gt;</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="50063">  
+  <a class="name">
+  <strong class="user"><em>aamaral at 0kbps dot net</em></strong></a><div class="date" title="2005-02-16 12:29"><strong>16 years ago</strong></div>
+  <div class="text" id="Hcom50063">
+<div class="phpcode"><code><span class="html">
+To connect to Sybase SQL Server Anywhere 8.0 on Windows use the following:<br><br><span class="default">&lt;?php<br></span><span class="comment">//================================================================<br><br>&nbsp; // Configure connection parameters<br>&nbsp; </span><span class="default">$db_host&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="keyword">= </span><span class="string">"server.mynetwork"</span><span class="keyword">;<br>&nbsp; </span><span class="default">$db_server_name </span><span class="keyword">= </span><span class="string">"Dev_Server"</span><span class="keyword">;<br>&nbsp; </span><span class="default">$db_name&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="keyword">= </span><span class="string">"Dev_Data"</span><span class="keyword">;<br>&nbsp; </span><span class="default">$db_file&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="keyword">= </span><span class="string">'c:\dbstorage\dev.db'</span><span class="keyword">;<br>&nbsp; </span><span class="default">$db_conn_name&nbsp;&nbsp; </span><span class="keyword">= </span><span class="string">"php_script"</span><span class="keyword">;<br>&nbsp; </span><span class="default">$db_user&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="keyword">= </span><span class="string">"dbuser"</span><span class="keyword">;<br>&nbsp; </span><span class="default">$db_pass&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="keyword">= </span><span class="string">"dbpass"</span><span class="keyword">;<br><br></span><span class="comment">//================================================================<br>&nbsp; </span><span class="default">$connect_string </span><span class="keyword">= </span><span class="string">"Driver={Adaptive Server Anywhere 8.0};"</span><span class="keyword">.<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="string">"CommLinks=tcpip(Host=</span><span class="default">$db_host</span><span class="string">);"</span><span class="keyword">.<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="string">"ServerName=</span><span class="default">$db_server_name</span><span class="string">;"</span><span class="keyword">.<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="string">"DatabaseName=</span><span class="default">$db_name</span><span class="string">;"</span><span class="keyword">.<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="string">"DatabaseFile=</span><span class="default">$db_file</span><span class="string">;"</span><span class="keyword">.<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="string">"ConnectionName=</span><span class="default">$db_conn_name</span><span class="string">;"</span><span class="keyword">.<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="string">"uid=</span><span class="default">$db_user</span><span class="string">;pwd=</span><span class="default">$db_pass</span><span class="string">"</span><span class="keyword">;<br><br>&nbsp; </span><span class="comment">// Connect to DB<br>&nbsp; </span><span class="default">$conn </span><span class="keyword">= </span><span class="default">odbc_connect</span><span class="keyword">(</span><span class="default">$connect_string</span><span class="keyword">,</span><span class="string">''</span><span class="keyword">,</span><span class="string">''</span><span class="keyword">);<br><br>&nbsp; </span><span class="comment">// Query<br>&nbsp; </span><span class="default">$qry </span><span class="keyword">= </span><span class="string">"SELECT * FROM my_table"</span><span class="keyword">;<br><br>&nbsp; </span><span class="comment">// Get Result<br>&nbsp; </span><span class="default">$result </span><span class="keyword">= </span><span class="default">odbc_exec</span><span class="keyword">(</span><span class="default">$conn</span><span class="keyword">,</span><span class="default">$qry</span><span class="keyword">);<br><br>&nbsp; </span><span class="comment">// Get Data From Result<br>&nbsp; </span><span class="keyword">while (</span><span class="default">$data</span><span class="keyword">[] = </span><span class="default">odbc_fetch_array</span><span class="keyword">(</span><span class="default">$result</span><span class="keyword">));<br><br>&nbsp; </span><span class="comment">// Free Result<br>&nbsp; </span><span class="default">odbc_free_result</span><span class="keyword">(</span><span class="default">$result</span><span class="keyword">);<br><br>&nbsp; </span><span class="comment">// Close Connection<br>&nbsp; </span><span class="default">odbc_close</span><span class="keyword">(</span><span class="default">$conn</span><span class="keyword">);<br><br>&nbsp; </span><span class="comment">// Show data<br>&nbsp; </span><span class="default">print_r</span><span class="keyword">(</span><span class="default">$data</span><span class="keyword">);<br><br></span><span class="comment">//================================================================<br></span><span class="default">?&gt;</span>
+</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="117937">  
+  <a class="name">
+  <strong class="user"><em>Matt</em></strong></a><div class="date" title="2015-09-03 03:00"><strong>6 years ago</strong></div>
+  <div class="text" id="Hcom117937">
+<div class="phpcode"><code><span class="html">
+In newer versions you may need: odbc_connect("Driver={Microsoft Access Driver (*.mdb, *.accdb)};Dbq=C:/Folder/database.mdb", "", "");</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="94257">  
+  <a class="name">
+  <strong class="user"><em>Shyam Hazari</em></strong></a><div class="date" title="2009-10-25 03:43"><strong>11 years ago</strong></div>
+  <div class="text" id="Hcom94257">
+<div class="phpcode"><code><span class="html">
+Here is my successful odbc_connect with mysql on Ubuntu. It took me a while to figure this out. <br><br>Installed following packages using apt-get.<br><br>apache2<br>apache2-mpm-prefork<br>apache2-utils<br>apache2.2-common<br>libapache2-mod-php5<br>libdbd-mysql-perl<br>libmyodbc<br>libmysqlclient15off<br>mysql-client-5.0<br>mysql-common<br>mysql-server-5.0<br>mysql-server-core-5.0<br>odbcinst1debian1<br>php5<br>php5-cli<br>php5-common<br>php5-odbc<br>unixodbc<br><br>/etc/odbc.ini<br>------------<br>myodbc3&nbsp; &nbsp; &nbsp; = MySQL ODBC 3.51 Driver<br><br>[myodbc3]<br>Driver&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; = /usr/lib/odbc/libmyodbc.so<br>Description&nbsp; = MySQL ODBC 3.51 Driver<br>Server&nbsp; &nbsp; &nbsp; &nbsp; = localhost<br>Port&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; = 3306<br>User&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; = shyam<br>Password&nbsp; &nbsp; = mypass<br>Database&nbsp; &nbsp; = mysql<br>Option&nbsp; &nbsp; &nbsp; &nbsp; = 3&nbsp;&nbsp; <br>Socket&nbsp; &nbsp; &nbsp;&nbsp; = /var/run/mysqld/mysqld.sock<br><br>/etc/odbcinst.ini<br>----------------<br>[MySQL ODBC 3.51 Driver]<br>Description&nbsp; &nbsp; = MySQL driver<br>Driver&nbsp; &nbsp; &nbsp; &nbsp; = /usr/lib/odbc/libmyodbc.so<br>Setup&nbsp; &nbsp; &nbsp; &nbsp; = /usr/lib/odbc/libodbcmyS.so<br>CPTimeout&nbsp; &nbsp; = <br>CPReuse&nbsp; &nbsp; = <br>UsageCount&nbsp; &nbsp; = 1<br><br>my php script<br>------------<br><br>&lt;html&gt;<br>&lt;body&gt;<br>&lt;?<br>$conn = odbc_connect("DRIVER={MySQL ODBC 3.51 Driver};Server=localhost;Database=mysql", "shyam", "mypass");<br><br>$sql = "SELECT user from user";<br>$rs = odbc_exec($conn,$sql);<br>echo "&lt;table&gt;&lt;tr&gt;";<br>echo "&lt;th&gt;User Name&lt;/th&gt;&lt;/tr&gt;";<br>while (odbc_fetch_row($rs))<br> {<br> $user = odbc_result($rs,"user");<br> echo "&lt;tr&gt;&lt;td&gt;$user&lt;/td&gt;&lt;/tr&gt;";<br>}<br>odbc_close($conn);<br>echo "&lt;/table&gt;";<br>?&gt;<br><br>&lt;/body&gt;<br>&lt;/html&gt;</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="47431">  
+  <a class="name">
+  <strong class="user"><em>manuel dot vecino at steria dot es</em></strong></a><div class="date" title="2004-11-16 03:04"><strong>16 years ago</strong></div>
+  <div class="text" id="Hcom47431">
+<div class="phpcode"><code><span class="html">
+Hi Mario, I changed a bit your script to suit my configuration,<br>I also included a lines to close the connection.<br>Thanks for the script<br>I am running apache 2.0.52 and PHP 5.0.2. Windows 2000<br>SQL 2000<br><br>&lt;head&gt;<br>&lt;title&gt;Untitled Document&lt;/title&gt;<br>&lt;meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"&gt;<br>&lt;/head&gt;<br><br>&lt;body bgcolor="#FFFFFF"&gt;<br>&lt;table width="75%" border="1" cellspacing="1" cellpadding="1" bgcolor="#FFFFFF"&gt;<br>&nbsp; &lt;tr bgcolor="#CCFFFF"&gt; <br>&nbsp; &nbsp; &lt;td height="22"&gt;&lt;b&gt;Tipo&lt;/b&gt;&lt;/td&gt;<br>&nbsp; &nbsp; &lt;td height="22"&gt;&lt;b&gt;Marca&lt;/b&gt;&lt;/td&gt;<br>&nbsp; &nbsp; &lt;td height="22"&gt;&lt;b&gt;Modelo&lt;/b&gt;&lt;/td&gt;<br>&nbsp; &lt;/tr&gt;<br><br><span class="default">&lt;?php <br>$cx</span><span class="keyword">=</span><span class="default">odbc_pconnect</span><span class="keyword">(</span><span class="string">"RAMPANT"</span><span class="keyword">,</span><span class="string">"Invent"</span><span class="keyword">,</span><span class="string">"pass"</span><span class="keyword">,</span><span class="string">""</span><span class="keyword">); <br></span><span class="default">$cur</span><span class="keyword">=</span><span class="default">odbc_exec</span><span class="keyword">(</span><span class="default">$cx</span><span class="keyword">,</span><span class="string">"select tipo,marca,modelo from inv_equipos"</span><span class="keyword">); <br>while(</span><span class="default">odbc_fetch_row</span><span class="keyword">(</span><span class="default">$cur</span><span class="keyword">))<br>{ <br></span><span class="comment">//collect results<br></span><span class="default">$tipo</span><span class="keyword">=</span><span class="default">odbc_result</span><span class="keyword">(</span><span class="default">$cur</span><span class="keyword">,</span><span class="default">1</span><span class="keyword">); <br></span><span class="default">$marca</span><span class="keyword">=</span><span class="default">odbc_result</span><span class="keyword">(</span><span class="default">$cur</span><span class="keyword">,</span><span class="default">2</span><span class="keyword">); <br></span><span class="default">$modelo</span><span class="keyword">=</span><span class="default">odbc_result</span><span class="keyword">(</span><span class="default">$cur</span><span class="keyword">,</span><span class="default">3</span><span class="keyword">);<br></span><span class="comment">//format and display results<br>&nbsp; &nbsp; </span><span class="keyword">print (</span><span class="string">"&lt;tr&gt;"</span><span class="keyword">);<br>&nbsp; &nbsp; print (</span><span class="string">"&lt;td&gt;</span><span class="default">$tipo</span><span class="string">&lt;/td&gt;"</span><span class="keyword">);<br>&nbsp; &nbsp; print (</span><span class="string">"&lt;td&gt;</span><span class="default">$marca</span><span class="string">&lt;/td&gt;"</span><span class="keyword">);<br>&nbsp; &nbsp; print (</span><span class="string">"&lt;td&gt;</span><span class="default">$modelo</span><span class="string">&lt;/td&gt;"</span><span class="keyword">);<br>&nbsp; &nbsp; print (</span><span class="string">"&lt;/tr&gt;"</span><span class="keyword">);<br>&nbsp; &nbsp; }<br><br></span><span class="comment">//disconnect from database<br>&nbsp; &nbsp; </span><span class="default">odbc_close</span><span class="keyword">(</span><span class="default">$cx</span><span class="keyword">);<br><br>&nbsp; &nbsp; </span><span class="default">?&gt;<br></span>&nbsp; &nbsp; <br>&nbsp; <br>&lt;/table&gt;<br>&lt;/body&gt;<br>&lt;/html&gt;</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="39618">  
+  <a class="name">
+  <strong class="user"><em>atze at o2o dot com dot au</em></strong></a><div class="date" title="2004-02-04 03:41"><strong>17 years ago</strong></div>
+  <div class="text" id="Hcom39618">
+<div class="phpcode"><code><span class="html">
+To connect to a SQL DB on a unix srv via odbc one can use one of the following solutions.<br><br>1. having an odbc.ini (~/.odbc.ini)<br><br>[PostgreSQL]<br>Description&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; = PostgreSQL template1<br>Driver&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; = PostgreSQL<br>Trace&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; = Yes<br>TraceFile&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; = /tmp/odbc.log<br>Database&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; = PerfTest<br>Servername&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; = localhost<br>UserName&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; = boss<br>Password&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; = BigBoss<br>Port&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; = 5432<br>Protocol&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; = 6.4<br>ReadOnly&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; = Yes<br>ConnSettings&nbsp; &nbsp; &nbsp; &nbsp; =<br><br>[Default]<br>Driver = /local/lib/libodbc.so<br><br>2. specifying a DSN <br><br>function DBCALL($SQL)<br>{&nbsp; &nbsp; &nbsp; &nbsp; <br>$U = "boss";<br>$DB = "PerfTest";<br>$P = "BigBoss";<br>$Srv = "llocalhost";<br>$DSN = "Driver=PostgreSQL;Server=$Srv;Database=$DB";<br>&nbsp; &nbsp; &nbsp; &nbsp; <br>echo "Trying to connect to $DSN\n";&nbsp; &nbsp; <br>if ($CID = odbc_connect ("$DSN","$U","$P",SQL_CUR_USE_ODBC))<br>{<br>&nbsp; &nbsp; echo "still trying CID = $CID\n";<br>&nbsp; &nbsp; if ($RES = odbc_exec($CID, $SQL))<br>&nbsp; &nbsp; {<br>&nbsp; &nbsp; &nbsp; &nbsp; echo "RES = $RES\n";<br>&nbsp; &nbsp; &nbsp; &nbsp; print_r($RES);<br>&nbsp; &nbsp; &nbsp; &nbsp; echo "\n";<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br>&nbsp; &nbsp; &nbsp; &nbsp; $NR = odbc_num_rows($RES);<br><br>&lt;snip&gt;<br><br>Hope this helps.</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="10934">  
+  <a class="name">
+  <strong class="user"><em>fc99 at smm dot de</em></strong></a><div class="date" title="2001-01-26 06:23"><strong>20 years ago</strong></div>
+  <div class="text" id="Hcom10934">
+<div class="phpcode"><code><span class="html">
+If you don't want to specify your login credentials on your web server, you can leave the login fields blank to use the integrated windows security like here:
+<br>
+<br>odbc_connect("DSN=DataSource","",""); 
+<br>
+<br>Make sure you have switched your system dsn to integrated security, too !
+<br>
+<br>(works on windows machines only, of course)
+<br>
+<br>flo.</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="68752">  
+  <a class="name">
+  <strong class="user"><em>sven dot delmeiren at cac dot be</em></strong></a><div class="date" title="2006-08-09 07:39"><strong>15 years ago</strong></div>
+  <div class="text" id="Hcom68752">
+<div class="phpcode"><code><span class="html">
+Hi,<br><br>Instructions on how to connect to a Progress database on Linux using the Merant ODBC driver can be found at <a rel="nofollow" target="_blank">http://www.progteg.com/english/documents.html.</a> <br><br>Kind regards,<br><br>Sven Delmeiren<br>Computers &amp; Communications NV</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="59413">  
+  <a class="name">
+  <strong class="user"><em>gekkeprutser at gmail dot com</em></strong></a><div class="date" title="2005-12-06 06:35"><strong>15 years ago</strong></div>
+  <div class="text" id="Hcom59413">
+<div class="phpcode"><code><span class="html">
+I also had a problem with this message: ([ODBC SQL Server driver]Allocation of a Sybase Open Client Context failed). The message only appeared after the server had run for a few hours, so I expected resource starvation. However it was a settings problem and I thought this might benefit others too.<br><br>In addition to putting a <span class="default">&lt;?php putenv </span><span class="keyword">(</span><span class="string">"SYBASE=c:\sybase"</span><span class="keyword">); </span><span class="default">?&gt;</span>&nbsp; as described by oottavi above, I also had so specify a locale by setting <span class="default">&lt;?php putenv </span><span class="keyword">(</span><span class="string">"LC_ALL=default"</span><span class="keyword">); </span><span class="default">?&gt;</span>.<br><br>Even though my locale was already set to a valid one (en_US) I had to set this environment variable to make it work anyhow.</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="51420">  
+  <a class="name">
+  <strong class="user"><em>aurelien marchand</em></strong></a><div class="date" title="2005-03-30 07:54"><strong>16 years ago</strong></div>
+  <div class="text" id="Hcom51420">
+<div class="phpcode"><code><span class="html">
+For three days I fought to be able to connect our Linux intranet server to our AS400 database through ODBC and PHP on Mandrake. I installed everything I thought would work but I still got a: odbc_connect(): SQL error: Missing server name, port, or database name in call to CC_connect., SQL state IM002 in SQLConnect<br><br>Note that isql was working great but php was failing to connect.<br><br>The solution:<br>I located and found a PHP module called php-unixODBC (to oppose with php-odbc). Once installed (even though it wasn't for the right version of PHP), I realised it didn't place the file properly. The ini file was in /etc/php/ instead of /etc/php.d/, so I moved it there and renamed the old /etc/php.d/36_odbc.ini to /etc/php.d/36_odbc.ini.sav, so that I now had /etc/php.d/36_unixodbc.ini. I restarted the httpd server and now I was able to access the as400.<br><br>If you have questions, email _artaxerxes2_at_iname_dot_com (sans the underscore).</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="10930">  
+  <a class="name">
+  <strong class="user"><em>SilencerX at optidynamic dot com</em></strong></a><div class="date" title="2001-01-26 03:31"><strong>20 years ago</strong></div>
+  <div class="text" id="Hcom10930">
+<div class="phpcode"><code><span class="html">
+If like me you are using openlink from unix to access an MS Access database on an NT/Win2k machine and find out that your INSERT queries don't do anything and don't report any errors, use odbc_pconnect().
+<br>
+<br>I couldn't understand what was going on and after a bit of research I found out that with MySQL they recommended using mysql_pconnect() for INSERT queries. I tried the same thing with odbc and it worked.</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="80873">  
+  <a class="name">
+  <strong class="user"><em>Ceeclipse</em></strong></a><div class="date" title="2008-02-05 01:36"><strong>13 years ago</strong></div>
+  <div class="text" id="Hcom80873">
+<div class="phpcode"><code><span class="html">
+"Returns an ODBC connection id or 0 (FALSE) on error."<br><br>Keep in mind that the following code in PHP5 will not work properly:<br><br><span class="default">&lt;?php<br><br></span><span class="keyword">if( </span><span class="default">odbc_connect</span><span class="keyword">(</span><span class="string">"test"</span><span class="keyword">, </span><span class="string">"test"</span><span class="keyword">, </span><span class="string">"test"</span><span class="keyword">) === </span><span class="default">false </span><span class="keyword">) {<br>&nbsp; &nbsp; </span><span class="comment">// Your error reporting/handling here..<br></span><span class="keyword">}<br><br></span><span class="default">?&gt;<br></span><br>odbc_connect() returns an integer, and not a PHP5 boolean!</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="71438">  
+  <a class="name">
+  <strong class="user"><em>Ray.Paseur sometimes uses GMail</em></strong></a><div class="date" title="2006-11-28 07:48"><strong>14 years ago</strong></div>
+  <div class="text" id="Hcom71438">
+<div class="phpcode"><code><span class="html">
+To connect and show tables in a Microsoft Access data base (created in *.asp pages)...<br><br>$dbq&nbsp; &nbsp; =&nbsp; &nbsp; str_replace("/", "\\", $_SERVER["DOCUMENT_ROOT"]) . "\\path\\to\\database.mdb";<br>if&nbsp; &nbsp; (!file_exists($dbq)) { echo "Crap!&lt;br /&gt;No such file as $dbq"; }<br><br>$db_connection = odbc_connect("DRIVER={Microsoft Access Driver (*.mdb)}; DBQ=$dbq", "ADODB.Connection", "password", "SQL_CUR_USE_ODBC");<br><br>$result = odbc_tables($db_connection);<br><br>while (odbc_fetch_row($result)) {<br>&nbsp; &nbsp; if(odbc_result($result,"TABLE_TYPE")=="TABLE") {<br>&nbsp; &nbsp; &nbsp; &nbsp; echo "&lt;br /&gt;" . odbc_result($result,"TABLE_NAME");<br>&nbsp; &nbsp; }<br>}</span>
+</code></div>
+  </div>
+ </div>
+  <div class="note" id="117326">  
+  <a class="name">
+  <strong class="user"><em>cjbauer2 at hotmail dot com</em></strong></a><div class="date" title="2015-05-21 08:52"><strong>6 years ago</strong></div>
+  <div class="text" id="Hcom117326">
+<div class="phpcode"><code><span class="html">
+/* Connecting to Microsoft Access with PHP<br>&nbsp;&nbsp; $conn = odbc_connect("Driver={Microsoft Access Driver (*.mdb)};<br>&nbsp;&nbsp; Dbq=$mdb_Filename", $user, $password);<br>&nbsp;&nbsp; <br>This does NOT work on Windows servers.<br>Instead, it needs<br>&nbsp;&nbsp; $conn-&gt;Open("Provider=Microsoft,.Jet.OLEDB.4.0; Data Source=......<br><br>Point the variable $mdb_Filename to...<br>&nbsp;&nbsp; Data Source=C:\inetpub\wwwroot\php\mdb_Filename<br>&nbsp;&nbsp; or wherever the virtual directory points.</span>
+</code></div>
+  </div>
+ </div></div>
+
+ 
+</section>    </section><!-- layout-content -->
+        
+
+
+  </div><!-- layout -->
+
+  
+
+    
+ <!-- External and third party libraries. -->
+ 
+
+
+
+
+
+
+
+<a id="toTop" href="javascript:;"><span id="toTopHover"></span><img width="40" height="40" alt="To Top" src="../../images/to-top%402x.png"></a>
+
+
+
+<!-- Mirrored from www.php.net/manual/en/function.odbc-connect.php by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 11 Sep 2021 06:26:30 GMT -->
+
+</body></html>

@@ -1,0 +1,1556 @@
+<html><!--<![endif]--><!-- Mirrored from phpunit.readthedocs.io/en/7.1/test-doubles.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 14 Jul 2018 16:54:09 GMT --><head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>9. Test Doubles</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css">
+  <link rel="stylesheet" href="../../../media.readthedocs.org/css/sphinx_rtd_theme.css" type="text/css">
+    <link rel="index" title="Index" href="genindex.html">
+    <link rel="search" title="Search" href="search.html">
+    <link rel="copyright" title="Copyright" href="copyright.html">
+    <link rel="next" title="10. Code Coverage Analysis" href="code-coverage-analysis.html">
+    <link rel="prev" title="8. Database Testing" href="database.html"> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+
+<!-- RTD Extra Head -->
+
+<!-- 
+Always link to the latest version, as canonical.
+http://docs.readthedocs.org/en/latest/canonical.html
+-->
+<link rel="canonical" href="test-doubles.html">
+
+<link rel="stylesheet" href="../../../media.readthedocs.org/css/readthedocs-doc-embed.css" type="text/css">
+
+<script type="text/javascript" src="_static/readthedocs-data.js"></script>
+
+<!-- Add page-specific data, which must exist in the page js, not global -->
+<script type="text/javascript">
+READTHEDOCS_DATA['page'] = 'test-doubles'
+READTHEDOCS_DATA['source_suffix'] = '.rst'
+</script>
+
+<script type="text/javascript" src="../../../media.readthedocs.org/javascript/readthedocs-analytics.js"></script>
+
+<!-- end RTD <extrahead> -->
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index-2.html" class="icon icon-home"> PHPUnit
+          
+
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="https://phpunit.readthedocs.io/en/7.1/search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs">
+    <input type="hidden" name="check_keywords" value="yes">
+    <input type="hidden" name="area" value="default">
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">1. Installing PHPUnit</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#php-archive-phar">PHP Archive (PHAR)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="installation.html#windows">Windows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="installation.html#verifying-phpunit-phar-releases">Verifying PHPUnit PHAR Releases</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#composer">Composer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#optional-packages">Optional packages</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="writing-tests-for-phpunit.html">2. Writing Tests for PHPUnit</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="writing-tests-for-phpunit.html#test-dependencies">Test Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writing-tests-for-phpunit.html#data-providers">Data Providers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writing-tests-for-phpunit.html#testing-exceptions">Testing Exceptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writing-tests-for-phpunit.html#testing-php-errors">Testing PHP Errors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writing-tests-for-phpunit.html#testing-output">Testing Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writing-tests-for-phpunit.html#error-output">Error output</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="writing-tests-for-phpunit.html#edge-cases">Edge cases</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="textui.html">3. The Command-Line Test Runner</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="textui.html#command-line-options">Command-Line Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="textui.html#testdox">TestDox</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="fixtures.html">4. Fixtures</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="fixtures.html#more-setup-than-teardown">More setUp() than tearDown()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fixtures.html#variations">Variations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fixtures.html#sharing-fixture">Sharing Fixture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fixtures.html#global-state">Global State</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="organizing-tests.html">5. Organizing Tests</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="organizing-tests.html#composing-a-test-suite-using-the-filesystem">Composing a Test Suite Using the Filesystem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="organizing-tests.html#composing-a-test-suite-using-xml-configuration">Composing a Test Suite Using XML Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="risky-tests.html">6. Risky Tests</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="risky-tests.html#useless-tests">Useless Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="risky-tests.html#unintentionally-covered-code">Unintentionally Covered Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="risky-tests.html#output-during-test-execution">Output During Test Execution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="risky-tests.html#test-execution-timeout">Test Execution Timeout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="risky-tests.html#global-state-manipulation">Global State Manipulation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="incomplete-and-skipped-tests.html">7. Incomplete and Skipped Tests</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="incomplete-and-skipped-tests.html#incomplete-tests">Incomplete Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="incomplete-and-skipped-tests.html#skipping-tests">Skipping Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="incomplete-and-skipped-tests.html#skipping-tests-using-requires">Skipping Tests using @requires</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="database.html">8. Database Testing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="database.html#supported-vendors-for-database-testing">Supported Vendors for Database Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="database.html#difficulties-in-database-testing">Difficulties in Database Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="database.html#the-four-stages-of-a-database-test">The four stages of a database test</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="database.html#clean-up-database">1. Clean-Up Database</a></li>
+<li class="toctree-l3"><a class="reference internal" href="database.html#set-up-fixture">2. Set up fixture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="database.html#run-test-verify-outcome-and-teardown">3–5. Run Test, Verify outcome and Teardown</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="database.html#configuration-of-a-phpunit-database-testcase">Configuration of a PHPUnit Database TestCase</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="database.html#implementing-getconnection">Implementing getConnection()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="database.html#implementing-getdataset">Implementing getDataSet()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="database.html#what-about-the-database-schema-ddl">What about the Database Schema (DDL)?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="database.html#tip-use-your-own-abstract-database-testcase">Tip: Use your own Abstract Database TestCase</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="database.html#understanding-datasets-and-datatables">Understanding DataSets and DataTables</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="database.html#available-implementations">Available Implementations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="database.html#flat-xml-dataset">Flat XML DataSet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="database.html#xml-dataset">XML DataSet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="database.html#mysql-xml-dataset">MySQL XML DataSet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="database.html#yaml-dataset">YAML DataSet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="database.html#csv-dataset">CSV DataSet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="database.html#array-dataset">Array DataSet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="database.html#query-sql-dataset">Query (SQL) DataSet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="database.html#database-db-dataset">Database (DB) Dataset</a></li>
+<li class="toctree-l4"><a class="reference internal" href="database.html#replacement-dataset">Replacement DataSet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="database.html#dataset-filter">DataSet Filter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="database.html#composite-dataset">Composite DataSet</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="database.html#beware-of-foreign-keys">Beware of Foreign Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="database.html#implementing-your-own-datasets-datatables">Implementing your own DataSets/DataTables</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="database.html#using-the-database-connection-api">Using the Database Connection API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="database.html#database-assertions-api">Database Assertions API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="database.html#asserting-the-row-count-of-a-table">Asserting the Row-Count of a Table</a></li>
+<li class="toctree-l3"><a class="reference internal" href="database.html#asserting-the-state-of-a-table">Asserting the State of a Table</a></li>
+<li class="toctree-l3"><a class="reference internal" href="database.html#asserting-the-result-of-a-query">Asserting the Result of a Query</a></li>
+<li class="toctree-l3"><a class="reference internal" href="database.html#asserting-the-state-of-multiple-tables">Asserting the State of Multiple Tables</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="database.html#frequently-asked-questions">Frequently Asked Questions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="database.html#will-phpunit-re-create-the-database-schema-for-each-test">Will PHPUnit (re-)create the database schema for each test?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="database.html#am-i-required-to-use-pdo-in-my-application-for-the-database-extension-to-work">Am I required to use PDO in my application for the Database Extension to work?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="database.html#what-can-i-do-when-i-get-a-too-much-connections-error">What can I do, when I get a “Too much Connections“ Error?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="database.html#how-to-handle-null-with-flat-xml-csv-datasets">How to handle NULL with Flat XML / CSV Datasets?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">9. Test Doubles</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#stubs">Stubs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mock-objects">Mock Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#prophecy">Prophecy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mocking-traits-and-abstract-classes">Mocking Traits and Abstract Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#stubbing-and-mocking-web-services">Stubbing and Mocking Web Services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mocking-the-filesystem">Mocking the Filesystem</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="code-coverage-analysis.html">10. Code Coverage Analysis</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="code-coverage-analysis.html#software-metrics-for-code-coverage">Software Metrics for Code Coverage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code-coverage-analysis.html#whitelisting-files">Whitelisting Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code-coverage-analysis.html#ignoring-code-blocks">Ignoring Code Blocks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code-coverage-analysis.html#specifying-covered-methods">Specifying Covered Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code-coverage-analysis.html#edge-cases">Edge Cases</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="logging.html">11. Logging</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="logging.html#test-results-xml">Test Results (XML)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="logging.html#code-coverage-xml">Code Coverage (XML)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="logging.html#code-coverage-text">Code Coverage (TEXT)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="extending-phpunit.html">12. Extending PHPUnit</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="extending-phpunit.html#subclass-phpunit-framework-testcase">Subclass PHPUnit\Framework\TestCase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="extending-phpunit.html#write-custom-assertions">Write custom assertions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="extending-phpunit.html#implement-phpunit-framework-testlistener">Implement PHPUnit\Framework\TestListener</a></li>
+<li class="toctree-l2"><a class="reference internal" href="extending-phpunit.html#implement-phpunitframeworktest">Implement PHPUnitFrameworkTest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="extending-phpunit.html#extending-the-testrunner">Extending the TestRunner</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="extending-phpunit.html#available-hook-interfaces">Available Hook Interfaces</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="assertions.html">1. Assertions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#static-vs-non-static-usage-of-assertion-methods">Static vs. Non-Static Usage of Assertion Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertarrayhaskey">assertArrayHasKey()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertclasshasattribute">assertClassHasAttribute()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertarraysubset">assertArraySubset()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertclasshasstaticattribute">assertClassHasStaticAttribute()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertcontains">assertContains()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertcontainsonly">assertContainsOnly()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertcontainsonlyinstancesof">assertContainsOnlyInstancesOf()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertcount">assertCount()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertdirectoryexists">assertDirectoryExists()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertdirectoryisreadable">assertDirectoryIsReadable()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertdirectoryiswritable">assertDirectoryIsWritable()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertempty">assertEmpty()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertequalxmlstructure">assertEqualXMLStructure()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertequals">assertEquals()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertfalse">assertFalse()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertfileequals">assertFileEquals()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertfileexists">assertFileExists()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertfileisreadable">assertFileIsReadable()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertfileiswritable">assertFileIsWritable()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertgreaterthan">assertGreaterThan()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertgreaterthanorequal">assertGreaterThanOrEqual()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertinfinite">assertInfinite()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertinstanceof">assertInstanceOf()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertinternaltype">assertInternalType()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertisreadable">assertIsReadable()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertiswritable">assertIsWritable()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertjsonfileequalsjsonfile">assertJsonFileEqualsJsonFile()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertjsonstringequalsjsonfile">assertJsonStringEqualsJsonFile()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertjsonstringequalsjsonstring">assertJsonStringEqualsJsonString()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertlessthan">assertLessThan()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertlessthanorequal">assertLessThanOrEqual()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertnan">assertNan()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertnull">assertNull()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertobjecthasattribute">assertObjectHasAttribute()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertregexp">assertRegExp()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertstringmatchesformat">assertStringMatchesFormat()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertstringmatchesformatfile">assertStringMatchesFormatFile()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertsame">assertSame()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertstringendswith">assertStringEndsWith()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertstringequalsfile">assertStringEqualsFile()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertstringstartswith">assertStringStartsWith()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertthat">assertThat()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#asserttrue">assertTrue()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertxmlfileequalsxmlfile">assertXmlFileEqualsXmlFile()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertxmlstringequalsxmlfile">assertXmlStringEqualsXmlFile()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertxmlstringequalsxmlstring">assertXmlStringEqualsXmlString()</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="annotations.html">2. Annotations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#author">@author</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#after">@after</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#afterclass">@afterClass</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#backupglobals">@backupGlobals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#backupstaticattributes">@backupStaticAttributes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#before">@before</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#beforeclass">@beforeClass</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#codecoverageignore">@codeCoverageIgnore*</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#covers">@covers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#coversdefaultclass">@coversDefaultClass</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#coversnothing">@coversNothing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#dataprovider">@dataProvider</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#depends">@depends</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#doesnotperformassertions">@doesNotPerformAssertions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#expectedexception">@expectedException</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#expectedexceptioncode">@expectedExceptionCode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#expectedexceptionmessage">@expectedExceptionMessage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#expectedexceptionmessageregexp">@expectedExceptionMessageRegExp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#group">@group</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#large">@large</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#medium">@medium</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#preserveglobalstate">@preserveGlobalState</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#requires">@requires</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#runtestsinseparateprocesses">@runTestsInSeparateProcesses</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#runinseparateprocess">@runInSeparateProcess</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#small">@small</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#test">@test</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#testdox">@testdox</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#testwith">@testWith</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#ticket">@ticket</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotations.html#uses">@uses</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">3. The XML Configuration File</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#phpunit">PHPUnit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#test-suites">Test Suites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#groups">Groups</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#whitelisting-files-for-code-coverage">Whitelisting Files for Code Coverage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#logging">Logging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#test-listeners">Test Listeners</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#registering-testrunner-extensions">Registering TestRunner Extensions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#setting-php-ini-settings-constants-and-global-variables">Setting PHP INI settings, Constants and Global Variables</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">4. Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="copyright.html">5. Copyright</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index-2.html">PHPUnit</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index-2.html">Docs</a> »</li>
+        
+      <li>9. Test Doubles</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/sebastianbergmann/phpunit-documentation-english//7.1/src/test-doubles.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="test-doubles">
+<span id="id1"></span><h1>9. Test Doubles</h1>
+<p>Gerard Meszaros introduces the concept of Test Doubles in
+<span class="xref std std-ref">Meszaros2007</span> like this:</p>
+<blockquote>
+<div><p><em>Gerard Meszaros</em>:</p>
+<p>Sometimes it is just plain hard to test the system under test (SUT)
+because it depends on other components that cannot be used in the test
+environment. This could be because they aren’t available, they will not
+return the results needed for the test or because executing them would
+have undesirable side effects. In other cases, our test strategy requires
+us to have more control or visibility of the internal behavior of the SUT.</p>
+<p>When we are writing a test in which we cannot (or chose not to) use a real
+depended-on component (DOC), we can replace it with a Test Double. The
+Test Double doesn’t have to behave exactly like the real DOC; it merely
+has to provide the same API as the real one so that the SUT thinks it is
+the real one!</p>
+</div></blockquote>
+<p>The <code class="docutils literal"><span class="pre">createMock($type)</span></code> and
+<code class="docutils literal"><span class="pre">getMockBuilder($type)</span></code> methods provided by PHPUnit can be
+used in a test to automatically generate an object that can act as a test
+double for the specified original type (interface or class name). This test
+double object can be used in every context where an object of the original
+type is expected or required.</p>
+<p>The <code class="docutils literal"><span class="pre">createMock($type)</span></code> method immediately returns a test
+double object for the specified type (interface or class). The creation of
+this test double is performed using best practice defaults. The
+<code class="docutils literal"><span class="pre">__construct()</span></code> and <code class="docutils literal"><span class="pre">__clone()</span></code> methods of
+the original class are not executed and the arguments passed to a method of
+the test double will not be cloned. If these defaults are not what you need
+then you can use the <code class="docutils literal"><span class="pre">getMockBuilder($type)</span></code> method to
+customize the test double generation using a fluent interface.</p>
+<p>By default, all methods of the original class are replaced with a dummy
+implementation that just returns <code class="docutils literal"><span class="pre">null</span></code> (without calling
+the original method). Using the <code class="docutils literal"><span class="pre">will($this-&gt;returnValue())</span></code>
+method, for instance, you can configure these dummy implementations to
+return a value when called.</p>
+<div class="admonition-limitation-final-private-and-static-methods admonition">
+<p class="first admonition-title">Limitation: final, private, and static methods</p>
+<p class="last">Please note that <code class="docutils literal"><span class="pre">final</span></code>, <code class="docutils literal"><span class="pre">private</span></code>,
+<code class="docutils literal"><span class="pre">protected</span></code>, and <code class="docutils literal"><span class="pre">static</span></code> methods cannot
+be stubbed or mocked. They are ignored by PHPUnit’s test double
+functionality and retain their original behavior except for <code class="docutils literal"><span class="pre">static</span></code>
+methods that will be replaced by a method throwing a
+<code class="docutils literal"><span class="pre">\PHPUnit\Framework\MockObject\BadMethodCallException</span></code> exception.</p>
+</div>
+<div class="section" id="stubs">
+<a class="dashAnchor" name="//apple_ref/Section/Stubs"></a><span id="test-doubles-stubs"></span><h2>Stubs</h2>
+<p>The practice of replacing an object with a test double that (optionally)
+returns configured return values is referred to as
+<em>stubbing</em>. You can use a <em>stub</em> to
+“replace a real component on which the SUT depends so that the test has a
+control point for the indirect inputs of the SUT. This allows the test to
+force the SUT down paths it might not otherwise execute”.</p>
+<p><a class="reference internal" href="#test-doubles-stubs-examples-stubtest-php"><span class="std std-numref">Example 9.2</span></a> shows how
+to stub method calls and set up return values. We first use the
+<code class="docutils literal"><span class="pre">createMock()</span></code> method that is provided by the
+<code class="docutils literal"><span class="pre">PHPUnit\Framework\TestCase</span></code> class to set up a stub
+object that looks like an object of <code class="docutils literal"><span class="pre">SomeClass</span></code>
+(<a class="reference internal" href="#test-doubles-stubs-examples-someclass-php"><span class="std std-numref">Example 9.1</span></a>). We then
+use the <a class="reference external" href="http://martinfowler.com/bliki/FluentInterface.html">Fluent Interface</a>
+that PHPUnit provides to specify the behavior for the stub. In essence,
+this means that you do not need to create several temporary objects and
+wire them together afterwards. Instead, you chain method calls as shown in
+the example. This leads to more readable and “fluent” code.</p>
+<div class="literal-block-wrapper docutils container" id="test-doubles-stubs-examples-someclass-php">
+<div class="code-block-caption"><span class="caption-number">Example 9.1 </span><span class="caption-text">The class we want to stub</span></div>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="k">class</span> <span class="nc">SomeClass</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">doSomething</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="c1">// Do something.</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="test-doubles-stubs-examples-stubtest-php">
+<div class="code-block-caption"><span class="caption-number">Example 9.2 </span><span class="caption-text">Stubbing a method call to return a fixed value</span></div>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="k">use</span> <span class="nx">PHPUnit\Framework\TestCase</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">StubTest</span> <span class="k">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testStub</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="c1">// Create a stub for the SomeClass class.</span>
+        <span class="nv">$stub</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">createMock</span><span class="p">(</span><span class="nx">SomeClass</span><span class="o">::</span><span class="na">class</span><span class="p">);</span>
+
+        <span class="c1">// Configure the stub.</span>
+        <span class="nv">$stub</span><span class="o">-&gt;</span><span class="na">method</span><span class="p">(</span><span class="s1">'doSomething'</span><span class="p">)</span>
+             <span class="o">-&gt;</span><span class="na">willReturn</span><span class="p">(</span><span class="s1">'foo'</span><span class="p">);</span>
+
+        <span class="c1">// Calling $stub-&gt;doSomething() will now return</span>
+        <span class="c1">// 'foo'.</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertSame</span><span class="p">(</span><span class="s1">'foo'</span><span class="p">,</span> <span class="nv">$stub</span><span class="o">-&gt;</span><span class="na">doSomething</span><span class="p">());</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="admonition-limitation-methods-named-method admonition">
+<p class="first admonition-title">Limitation: Methods named “method”</p>
+<p>The example shown above only works when the original class does not
+declare a method named “method”.</p>
+<p class="last">If the original class does declare a method named “method” then <code class="docutils literal"><span class="pre">$stub-&gt;expects($this-&gt;any())-&gt;method('doSomething')-&gt;willReturn('foo');</span></code> has to be used.</p>
+</div>
+<p>“Behind the scenes”, PHPUnit automatically generates a new PHP class that
+implements the desired behavior when the <code class="docutils literal"><span class="pre">createMock()</span></code>
+method is used.</p>
+<p><a class="reference internal" href="#test-doubles-stubs-examples-stubtest2-php"><span class="std std-numref">Example 9.3</span></a> shows an
+example of how to use the Mock Builder’s fluent interface to configure the
+creation of the test double. The configuration of this test double uses
+the same best practice defaults used by <code class="docutils literal"><span class="pre">createMock()</span></code>.</p>
+<div class="literal-block-wrapper docutils container" id="test-doubles-stubs-examples-stubtest2-php">
+<div class="code-block-caption"><span class="caption-number">Example 9.3 </span><span class="caption-text">Using the Mock Builder API can be used to configure the generated test double class</span></div>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="k">use</span> <span class="nx">PHPUnit\Framework\TestCase</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">StubTest</span> <span class="k">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testStub</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="c1">// Create a stub for the SomeClass class.</span>
+        <span class="nv">$stub</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getMockBuilder</span><span class="p">(</span><span class="nx">SomeClass</span><span class="o">::</span><span class="na">class</span><span class="p">)</span>
+                     <span class="o">-&gt;</span><span class="na">disableOriginalConstructor</span><span class="p">()</span>
+                     <span class="o">-&gt;</span><span class="na">disableOriginalClone</span><span class="p">()</span>
+                     <span class="o">-&gt;</span><span class="na">disableArgumentCloning</span><span class="p">()</span>
+                     <span class="o">-&gt;</span><span class="na">disallowMockingUnknownTypes</span><span class="p">()</span>
+                     <span class="o">-&gt;</span><span class="na">getMock</span><span class="p">();</span>
+
+        <span class="c1">// Configure the stub.</span>
+        <span class="nv">$stub</span><span class="o">-&gt;</span><span class="na">method</span><span class="p">(</span><span class="s1">'doSomething'</span><span class="p">)</span>
+             <span class="o">-&gt;</span><span class="na">willReturn</span><span class="p">(</span><span class="s1">'foo'</span><span class="p">);</span>
+
+        <span class="c1">// Calling $stub-&gt;doSomething() will now return</span>
+        <span class="c1">// 'foo'.</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertSame</span><span class="p">(</span><span class="s1">'foo'</span><span class="p">,</span> <span class="nv">$stub</span><span class="o">-&gt;</span><span class="na">doSomething</span><span class="p">());</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<p>In the examples so far we have been returning simple values using
+<code class="docutils literal"><span class="pre">willReturn($value)</span></code>. This short syntax is the same as
+<code class="docutils literal"><span class="pre">will($this-&gt;returnValue($value))</span></code>. We can use variations
+on this longer syntax to achieve more complex stubbing behaviour.</p>
+<p>Sometimes you want to return one of the arguments of a method call
+(unchanged) as the result of a stubbed method call.
+<a class="reference internal" href="#test-doubles-stubs-examples-stubtest3-php"><span class="std std-numref">Example 9.4</span></a> shows how you
+can achieve this using <code class="docutils literal"><span class="pre">returnArgument()</span></code> instead of
+<code class="docutils literal"><span class="pre">returnValue()</span></code>.</p>
+<div class="literal-block-wrapper docutils container" id="test-doubles-stubs-examples-stubtest3-php">
+<div class="code-block-caption"><span class="caption-number">Example 9.4 </span><span class="caption-text">Stubbing a method call to return one of the arguments</span></div>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="k">use</span> <span class="nx">PHPUnit\Framework\TestCase</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">StubTest</span> <span class="k">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testReturnArgumentStub</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="c1">// Create a stub for the SomeClass class.</span>
+        <span class="nv">$stub</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">createMock</span><span class="p">(</span><span class="nx">SomeClass</span><span class="o">::</span><span class="na">class</span><span class="p">);</span>
+
+        <span class="c1">// Configure the stub.</span>
+        <span class="nv">$stub</span><span class="o">-&gt;</span><span class="na">method</span><span class="p">(</span><span class="s1">'doSomething'</span><span class="p">)</span>
+             <span class="o">-&gt;</span><span class="na">will</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">returnArgument</span><span class="p">(</span><span class="mi">0</span><span class="p">));</span>
+
+        <span class="c1">// $stub-&gt;doSomething('foo') returns 'foo'</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertSame</span><span class="p">(</span><span class="s1">'foo'</span><span class="p">,</span> <span class="nv">$stub</span><span class="o">-&gt;</span><span class="na">doSomething</span><span class="p">(</span><span class="s1">'foo'</span><span class="p">));</span>
+
+        <span class="c1">// $stub-&gt;doSomething('bar') returns 'bar'</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertSame</span><span class="p">(</span><span class="s1">'bar'</span><span class="p">,</span> <span class="nv">$stub</span><span class="o">-&gt;</span><span class="na">doSomething</span><span class="p">(</span><span class="s1">'bar'</span><span class="p">));</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<p>When testing a fluent interface, it is sometimes useful to have a stubbed
+method return a reference to the stubbed object.
+<a class="reference internal" href="#test-doubles-stubs-examples-stubtest4-php"><span class="std std-numref">Example 9.5</span></a> shows how you
+can use <code class="docutils literal"><span class="pre">returnSelf()</span></code> to achieve this.</p>
+<div class="literal-block-wrapper docutils container" id="test-doubles-stubs-examples-stubtest4-php">
+<div class="code-block-caption"><span class="caption-number">Example 9.5 </span><span class="caption-text">Stubbing a method call to return a reference to the stub object</span></div>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="k">use</span> <span class="nx">PHPUnit\Framework\TestCase</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">StubTest</span> <span class="k">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testReturnSelf</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="c1">// Create a stub for the SomeClass class.</span>
+        <span class="nv">$stub</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">createMock</span><span class="p">(</span><span class="nx">SomeClass</span><span class="o">::</span><span class="na">class</span><span class="p">);</span>
+
+        <span class="c1">// Configure the stub.</span>
+        <span class="nv">$stub</span><span class="o">-&gt;</span><span class="na">method</span><span class="p">(</span><span class="s1">'doSomething'</span><span class="p">)</span>
+             <span class="o">-&gt;</span><span class="na">will</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">returnSelf</span><span class="p">());</span>
+
+        <span class="c1">// $stub-&gt;doSomething() returns $stub</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertSame</span><span class="p">(</span><span class="nv">$stub</span><span class="p">,</span> <span class="nv">$stub</span><span class="o">-&gt;</span><span class="na">doSomething</span><span class="p">());</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<p>Sometimes a stubbed method should return different values depending on
+a predefined list of arguments.  You can use
+<code class="docutils literal"><span class="pre">returnValueMap()</span></code> to create a map that associates
+arguments with corresponding return values. See
+<a class="reference internal" href="#test-doubles-stubs-examples-stubtest5-php"><span class="std std-numref">Example 9.6</span></a> for
+an example.</p>
+<div class="literal-block-wrapper docutils container" id="test-doubles-stubs-examples-stubtest5-php">
+<div class="code-block-caption"><span class="caption-number">Example 9.6 </span><span class="caption-text">Stubbing a method call to return the value from a map</span></div>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="k">use</span> <span class="nx">PHPUnit\Framework\TestCase</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">StubTest</span> <span class="k">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testReturnValueMapStub</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="c1">// Create a stub for the SomeClass class.</span>
+        <span class="nv">$stub</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">createMock</span><span class="p">(</span><span class="nx">SomeClass</span><span class="o">::</span><span class="na">class</span><span class="p">);</span>
+
+        <span class="c1">// Create a map of arguments to return values.</span>
+        <span class="nv">$map</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">[</span><span class="s1">'a'</span><span class="p">,</span> <span class="s1">'b'</span><span class="p">,</span> <span class="s1">'c'</span><span class="p">,</span> <span class="s1">'d'</span><span class="p">],</span>
+            <span class="p">[</span><span class="s1">'e'</span><span class="p">,</span> <span class="s1">'f'</span><span class="p">,</span> <span class="s1">'g'</span><span class="p">,</span> <span class="s1">'h'</span><span class="p">]</span>
+        <span class="p">];</span>
+
+        <span class="c1">// Configure the stub.</span>
+        <span class="nv">$stub</span><span class="o">-&gt;</span><span class="na">method</span><span class="p">(</span><span class="s1">'doSomething'</span><span class="p">)</span>
+             <span class="o">-&gt;</span><span class="na">will</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">returnValueMap</span><span class="p">(</span><span class="nv">$map</span><span class="p">));</span>
+
+        <span class="c1">// $stub-&gt;doSomething() returns different values depending on</span>
+        <span class="c1">// the provided arguments.</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertSame</span><span class="p">(</span><span class="s1">'d'</span><span class="p">,</span> <span class="nv">$stub</span><span class="o">-&gt;</span><span class="na">doSomething</span><span class="p">(</span><span class="s1">'a'</span><span class="p">,</span> <span class="s1">'b'</span><span class="p">,</span> <span class="s1">'c'</span><span class="p">));</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertSame</span><span class="p">(</span><span class="s1">'h'</span><span class="p">,</span> <span class="nv">$stub</span><span class="o">-&gt;</span><span class="na">doSomething</span><span class="p">(</span><span class="s1">'e'</span><span class="p">,</span> <span class="s1">'f'</span><span class="p">,</span> <span class="s1">'g'</span><span class="p">));</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<p>When the stubbed method call should return a calculated value instead of
+a fixed one (see <code class="docutils literal"><span class="pre">returnValue()</span></code>) or an (unchanged)
+argument (see <code class="docutils literal"><span class="pre">returnArgument()</span></code>), you can use
+<code class="docutils literal"><span class="pre">returnCallback()</span></code> to have the stubbed method return the
+result of a callback function or method. See
+<a class="reference internal" href="#test-doubles-stubs-examples-stubtest6-php"><span class="std std-numref">Example 9.7</span></a> for an example.</p>
+<div class="literal-block-wrapper docutils container" id="test-doubles-stubs-examples-stubtest6-php">
+<div class="code-block-caption"><span class="caption-number">Example 9.7 </span><span class="caption-text">Stubbing a method call to return a value from a callback</span></div>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="k">use</span> <span class="nx">PHPUnit\Framework\TestCase</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">StubTest</span> <span class="k">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testReturnCallbackStub</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="c1">// Create a stub for the SomeClass class.</span>
+        <span class="nv">$stub</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">createMock</span><span class="p">(</span><span class="nx">SomeClass</span><span class="o">::</span><span class="na">class</span><span class="p">);</span>
+
+        <span class="c1">// Configure the stub.</span>
+        <span class="nv">$stub</span><span class="o">-&gt;</span><span class="na">method</span><span class="p">(</span><span class="s1">'doSomething'</span><span class="p">)</span>
+             <span class="o">-&gt;</span><span class="na">will</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">returnCallback</span><span class="p">(</span><span class="s1">'str_rot13'</span><span class="p">));</span>
+
+        <span class="c1">// $stub-&gt;doSomething($argument) returns str_rot13($argument)</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertSame</span><span class="p">(</span><span class="s1">'fbzrguvat'</span><span class="p">,</span> <span class="nv">$stub</span><span class="o">-&gt;</span><span class="na">doSomething</span><span class="p">(</span><span class="s1">'something'</span><span class="p">));</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<p>A simpler alternative to setting up a callback method may be to
+specify a list of desired return values. You can do this with
+the <code class="docutils literal"><span class="pre">onConsecutiveCalls()</span></code> method. See
+<a class="reference internal" href="#test-doubles-stubs-examples-stubtest7-php"><span class="std std-numref">Example 9.8</span></a> for
+an example.</p>
+<div class="literal-block-wrapper docutils container" id="test-doubles-stubs-examples-stubtest7-php">
+<div class="code-block-caption"><span class="caption-number">Example 9.8 </span><span class="caption-text">Stubbing a method call to return a list of values in the specified order</span></div>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="k">use</span> <span class="nx">PHPUnit\Framework\TestCase</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">StubTest</span> <span class="k">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testOnConsecutiveCallsStub</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="c1">// Create a stub for the SomeClass class.</span>
+        <span class="nv">$stub</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">createMock</span><span class="p">(</span><span class="nx">SomeClass</span><span class="o">::</span><span class="na">class</span><span class="p">);</span>
+
+        <span class="c1">// Configure the stub.</span>
+        <span class="nv">$stub</span><span class="o">-&gt;</span><span class="na">method</span><span class="p">(</span><span class="s1">'doSomething'</span><span class="p">)</span>
+             <span class="o">-&gt;</span><span class="na">will</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">onConsecutiveCalls</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">));</span>
+
+        <span class="c1">// $stub-&gt;doSomething() returns a different value each time</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertSame</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nv">$stub</span><span class="o">-&gt;</span><span class="na">doSomething</span><span class="p">());</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertSame</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="nv">$stub</span><span class="o">-&gt;</span><span class="na">doSomething</span><span class="p">());</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertSame</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="nv">$stub</span><span class="o">-&gt;</span><span class="na">doSomething</span><span class="p">());</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<p>Instead of returning a value, a stubbed method can also raise an
+exception. <a class="reference internal" href="#test-doubles-stubs-examples-stubtest8-php"><span class="std std-numref">Example 9.9</span></a>
+shows how to use <code class="docutils literal"><span class="pre">throwException()</span></code> to do this.</p>
+<div class="literal-block-wrapper docutils container" id="test-doubles-stubs-examples-stubtest8-php">
+<div class="code-block-caption"><span class="caption-number">Example 9.9 </span><span class="caption-text">Stubbing a method call to throw an exception</span></div>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="k">use</span> <span class="nx">PHPUnit\Framework\TestCase</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">StubTest</span> <span class="k">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testThrowExceptionStub</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="c1">// Create a stub for the SomeClass class.</span>
+        <span class="nv">$stub</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">createMock</span><span class="p">(</span><span class="nx">SomeClass</span><span class="o">::</span><span class="na">class</span><span class="p">);</span>
+
+        <span class="c1">// Configure the stub.</span>
+        <span class="nv">$stub</span><span class="o">-&gt;</span><span class="na">method</span><span class="p">(</span><span class="s1">'doSomething'</span><span class="p">)</span>
+             <span class="o">-&gt;</span><span class="na">will</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">throwException</span><span class="p">(</span><span class="k">new</span> <span class="nx">Exception</span><span class="p">));</span>
+
+        <span class="c1">// $stub-&gt;doSomething() throws Exception</span>
+        <span class="nv">$stub</span><span class="o">-&gt;</span><span class="na">doSomething</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<p>Alternatively, you can write the stub yourself and improve your design
+along the way. Widely used resources are accessed through a single façade,
+so you can easily replace the resource with the stub. For example,
+instead of having direct database calls scattered throughout the code,
+you have a single <code class="docutils literal"><span class="pre">Database</span></code> object, an implementor of
+the <code class="docutils literal"><span class="pre">IDatabase</span></code> interface. Then, you can create a stub
+implementation of <code class="docutils literal"><span class="pre">IDatabase</span></code> and use it for your
+tests. You can even create an option for running the tests with the
+stub database or the real database, so you can use your tests for both
+local testing during development and integration testing with the real
+database.</p>
+<p>Functionality that needs to be stubbed out tends to cluster in the same
+object, improving cohesion. By presenting the functionality with a
+single, coherent interface you reduce the coupling with the rest of the
+system.</p>
+</div>
+<div class="section" id="mock-objects">
+<a class="dashAnchor" name="//apple_ref/Section/Mock%20Objects"></a><span id="test-doubles-mock-objects"></span><h2>Mock Objects</h2>
+<p>The practice of replacing an object with a test double that verifies
+expectations, for instance asserting that a method has been called, is
+referred to as <em>mocking</em>.</p>
+<p>You can use a <em>mock object</em> “as an observation point
+that is used to verify the indirect outputs of the SUT as it is exercised.
+Typically, the mock object also includes the functionality of a test stub
+in that it must return values to the SUT if it hasn’t already failed the
+tests but the emphasis is on the verification of the indirect outputs.
+Therefore, a mock object is a lot more than just a test stub plus
+assertions; it is used in a fundamentally different way” (Gerard Meszaros).</p>
+<div class="admonition-limitation-automatic-verification-of-expectations admonition">
+<p class="first admonition-title">Limitation: Automatic verification of expectations</p>
+<p class="last">Only mock objects generated within the scope of a test will be verified
+automatically by PHPUnit. Mock objects generated in data providers, for
+instance, or injected into the test using the <code class="docutils literal"><span class="pre">@depends</span></code>
+annotation will not be verified automatically by PHPUnit.</p>
+</div>
+<p>Here is an example: suppose we want to test that the correct method,
+<code class="docutils literal"><span class="pre">update()</span></code> in our example, is called on an object that
+observes another object. <a class="reference internal" href="#test-doubles-mock-objects-examples-sut-php"><span class="std std-numref">Example 9.10</span></a>
+shows the code for the <code class="docutils literal"><span class="pre">Subject</span></code> and <code class="docutils literal"><span class="pre">Observer</span></code>
+classes that are part of the System under Test (SUT).</p>
+<div class="literal-block-wrapper docutils container" id="test-doubles-mock-objects-examples-sut-php">
+<div class="code-block-caption"><span class="caption-number">Example 9.10 </span><span class="caption-text">The Subject and Observer classes that are part of the System under Test (SUT)</span></div>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="k">use</span> <span class="nx">PHPUnit\Framework\TestCase</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">Subject</span>
+<span class="p">{</span>
+    <span class="k">protected</span> <span class="nv">$observers</span> <span class="o">=</span> <span class="p">[];</span>
+    <span class="k">protected</span> <span class="nv">$name</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span><span class="nv">$name</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">name</span> <span class="o">=</span> <span class="nv">$name</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getName</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">name</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">attach</span><span class="p">(</span><span class="nx">Observer</span> <span class="nv">$observer</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">observers</span><span class="p">[]</span> <span class="o">=</span> <span class="nv">$observer</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">doSomething</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="c1">// Do something.</span>
+        <span class="c1">// ...</span>
+
+        <span class="c1">// Notify observers that we did something.</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">notify</span><span class="p">(</span><span class="s1">'something'</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">doSomethingBad</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">foreach</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">observers</span> <span class="k">as</span> <span class="nv">$observer</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$observer</span><span class="o">-&gt;</span><span class="na">reportError</span><span class="p">(</span><span class="mi">42</span><span class="p">,</span> <span class="s1">'Something bad happened'</span><span class="p">,</span> <span class="nv">$this</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">protected</span> <span class="k">function</span> <span class="nf">notify</span><span class="p">(</span><span class="nv">$argument</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">foreach</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">observers</span> <span class="k">as</span> <span class="nv">$observer</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$observer</span><span class="o">-&gt;</span><span class="na">update</span><span class="p">(</span><span class="nv">$argument</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Other methods.</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">Observer</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">update</span><span class="p">(</span><span class="nv">$argument</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// Do something.</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">reportError</span><span class="p">(</span><span class="nv">$errorCode</span><span class="p">,</span> <span class="nv">$errorMessage</span><span class="p">,</span> <span class="nx">Subject</span> <span class="nv">$subject</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// Do something</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Other methods.</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<p><a class="reference internal" href="#test-doubles-mock-objects-examples-subjecttest-php"><span class="std std-numref">Example 9.11</span></a>
+shows how to use a mock object to test the interaction between
+<code class="docutils literal"><span class="pre">Subject</span></code> and <code class="docutils literal"><span class="pre">Observer</span></code> objects.</p>
+<p>We first use the <code class="docutils literal"><span class="pre">getMockBuilder()</span></code> method that is provided by
+the <code class="docutils literal"><span class="pre">PHPUnit\Framework\TestCase</span></code> class to set up a mock
+object for the <code class="docutils literal"><span class="pre">Observer</span></code>. Since we give an array as the
+second (optional) parameter for the <code class="docutils literal"><span class="pre">getMock()</span></code> method,
+only the <code class="docutils literal"><span class="pre">update()</span></code> method of the
+<code class="docutils literal"><span class="pre">Observer</span></code> class is replaced by a mock implementation.</p>
+<p>Because we are interested in verifying that a method is called, and which
+arguments it is called with, we introduce the <code class="docutils literal"><span class="pre">expects()</span></code> and
+<code class="docutils literal"><span class="pre">with()</span></code> methods to specify how this interaction should look.</p>
+<div class="literal-block-wrapper docutils container" id="test-doubles-mock-objects-examples-subjecttest-php">
+<div class="code-block-caption"><span class="caption-number">Example 9.11 </span><span class="caption-text">Testing that a method gets called once and with a specified argument</span></div>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="k">use</span> <span class="nx">PHPUnit\Framework\TestCase</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">SubjectTest</span> <span class="k">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testObserversAreUpdated</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="c1">// Create a mock for the Observer class,</span>
+        <span class="c1">// only mock the update() method.</span>
+        <span class="nv">$observer</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getMockBuilder</span><span class="p">(</span><span class="nx">Observer</span><span class="o">::</span><span class="na">class</span><span class="p">)</span>
+                         <span class="o">-&gt;</span><span class="na">setMethods</span><span class="p">([</span><span class="s1">'update'</span><span class="p">])</span>
+                         <span class="o">-&gt;</span><span class="na">getMock</span><span class="p">();</span>
+
+        <span class="c1">// Set up the expectation for the update() method</span>
+        <span class="c1">// to be called only once and with the string 'something'</span>
+        <span class="c1">// as its parameter.</span>
+        <span class="nv">$observer</span><span class="o">-&gt;</span><span class="na">expects</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">once</span><span class="p">())</span>
+                 <span class="o">-&gt;</span><span class="na">method</span><span class="p">(</span><span class="s1">'update'</span><span class="p">)</span>
+                 <span class="o">-&gt;</span><span class="na">with</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">equalTo</span><span class="p">(</span><span class="s1">'something'</span><span class="p">));</span>
+
+        <span class="c1">// Create a Subject object and attach the mocked</span>
+        <span class="c1">// Observer object to it.</span>
+        <span class="nv">$subject</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Subject</span><span class="p">(</span><span class="s1">'My subject'</span><span class="p">);</span>
+        <span class="nv">$subject</span><span class="o">-&gt;</span><span class="na">attach</span><span class="p">(</span><span class="nv">$observer</span><span class="p">);</span>
+
+        <span class="c1">// Call the doSomething() method on the $subject object</span>
+        <span class="c1">// which we expect to call the mocked Observer object's</span>
+        <span class="c1">// update() method with the string 'something'.</span>
+        <span class="nv">$subject</span><span class="o">-&gt;</span><span class="na">doSomething</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">with()</span></code> method can take any number of
+arguments, corresponding to the number of arguments to the
+method being mocked. You can specify more advanced constraints
+on the method’s arguments than a simple match.</p>
+<div class="literal-block-wrapper docutils container" id="test-doubles-mock-objects-examples-subjecttest2-php">
+<div class="code-block-caption"><span class="caption-number">Example 9.12 </span><span class="caption-text">Testing that a method gets called with a number of arguments constrained in different ways</span></div>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="k">use</span> <span class="nx">PHPUnit\Framework\TestCase</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">SubjectTest</span> <span class="k">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testErrorReported</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="c1">// Create a mock for the Observer class, mocking the</span>
+        <span class="c1">// reportError() method</span>
+        <span class="nv">$observer</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getMockBuilder</span><span class="p">(</span><span class="nx">Observer</span><span class="o">::</span><span class="na">class</span><span class="p">)</span>
+                         <span class="o">-&gt;</span><span class="na">setMethods</span><span class="p">([</span><span class="s1">'reportError'</span><span class="p">])</span>
+                         <span class="o">-&gt;</span><span class="na">getMock</span><span class="p">();</span>
+
+        <span class="nv">$observer</span><span class="o">-&gt;</span><span class="na">expects</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">once</span><span class="p">())</span>
+                 <span class="o">-&gt;</span><span class="na">method</span><span class="p">(</span><span class="s1">'reportError'</span><span class="p">)</span>
+                 <span class="o">-&gt;</span><span class="na">with</span><span class="p">(</span>
+                       <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">greaterThan</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span>
+                       <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">stringContains</span><span class="p">(</span><span class="s1">'Something'</span><span class="p">),</span>
+                       <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">anything</span><span class="p">()</span>
+                   <span class="p">);</span>
+
+        <span class="nv">$subject</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Subject</span><span class="p">(</span><span class="s1">'My subject'</span><span class="p">);</span>
+        <span class="nv">$subject</span><span class="o">-&gt;</span><span class="na">attach</span><span class="p">(</span><span class="nv">$observer</span><span class="p">);</span>
+
+        <span class="c1">// The doSomethingBad() method should report an error to the observer</span>
+        <span class="c1">// via the reportError() method</span>
+        <span class="nv">$subject</span><span class="o">-&gt;</span><span class="na">doSomethingBad</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">withConsecutive()</span></code> method can take any number of
+arrays of arguments, depending on the calls you want to test against.
+Each array is a list of constraints corresponding to the arguments of the
+method being mocked, like in <code class="docutils literal"><span class="pre">with()</span></code>.</p>
+<div class="literal-block-wrapper docutils container" id="test-doubles-mock-objects-examples-with-consecutive-php">
+<div class="code-block-caption"><span class="caption-number">Example 9.13 </span><span class="caption-text">Testing that a method gets called two times with specific arguments.</span></div>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="k">use</span> <span class="nx">PHPUnit\Framework\TestCase</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">FooTest</span> <span class="k">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testFunctionCalledTwoTimesWithSpecificArguments</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$mock</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getMockBuilder</span><span class="p">(</span><span class="k">stdClass</span><span class="o">::</span><span class="na">class</span><span class="p">)</span>
+                     <span class="o">-&gt;</span><span class="na">setMethods</span><span class="p">([</span><span class="s1">'set'</span><span class="p">])</span>
+                     <span class="o">-&gt;</span><span class="na">getMock</span><span class="p">();</span>
+
+        <span class="nv">$mock</span><span class="o">-&gt;</span><span class="na">expects</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">exactly</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+             <span class="o">-&gt;</span><span class="na">method</span><span class="p">(</span><span class="s1">'set'</span><span class="p">)</span>
+             <span class="o">-&gt;</span><span class="na">withConsecutive</span><span class="p">(</span>
+                 <span class="p">[</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">equalTo</span><span class="p">(</span><span class="s1">'foo'</span><span class="p">),</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">greaterThan</span><span class="p">(</span><span class="mi">0</span><span class="p">)],</span>
+                 <span class="p">[</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">equalTo</span><span class="p">(</span><span class="s1">'bar'</span><span class="p">),</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">greaterThan</span><span class="p">(</span><span class="mi">0</span><span class="p">)]</span>
+             <span class="p">);</span>
+
+        <span class="nv">$mock</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">'foo'</span><span class="p">,</span> <span class="mi">21</span><span class="p">);</span>
+        <span class="nv">$mock</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">'bar'</span><span class="p">,</span> <span class="mi">48</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">callback()</span></code> constraint can be used for more complex
+argument verification. This constraint takes a PHP callback as its only
+argument. The PHP callback will receive the argument to be verified as
+its only argument and should return <code class="docutils literal"><span class="pre">true</span></code> if the
+argument passes verification and <code class="docutils literal"><span class="pre">false</span></code> otherwise.</p>
+<div class="literal-block-wrapper docutils container" id="test-doubles-mock-objects-examples-subjecttest3-php">
+<div class="code-block-caption"><span class="caption-number">Example 9.14 </span><span class="caption-text">More complex argument verification</span></div>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="k">use</span> <span class="nx">PHPUnit\Framework\TestCase</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">SubjectTest</span> <span class="k">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testErrorReported</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="c1">// Create a mock for the Observer class, mocking the</span>
+        <span class="c1">// reportError() method</span>
+        <span class="nv">$observer</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getMockBuilder</span><span class="p">(</span><span class="nx">Observer</span><span class="o">::</span><span class="na">class</span><span class="p">)</span>
+                         <span class="o">-&gt;</span><span class="na">setMethods</span><span class="p">([</span><span class="s1">'reportError'</span><span class="p">])</span>
+                         <span class="o">-&gt;</span><span class="na">getMock</span><span class="p">();</span>
+
+        <span class="nv">$observer</span><span class="o">-&gt;</span><span class="na">expects</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">once</span><span class="p">())</span>
+                 <span class="o">-&gt;</span><span class="na">method</span><span class="p">(</span><span class="s1">'reportError'</span><span class="p">)</span>
+                 <span class="o">-&gt;</span><span class="na">with</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">greaterThan</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span>
+                        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">stringContains</span><span class="p">(</span><span class="s1">'Something'</span><span class="p">),</span>
+                        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">callback</span><span class="p">(</span><span class="k">function</span><span class="p">(</span><span class="nv">$subject</span><span class="p">){</span>
+                          <span class="k">return</span> <span class="nb">is_callable</span><span class="p">([</span><span class="nv">$subject</span><span class="p">,</span> <span class="s1">'getName'</span><span class="p">])</span> <span class="o">&amp;&amp;</span>
+                                 <span class="nv">$subject</span><span class="o">-&gt;</span><span class="na">getName</span><span class="p">()</span> <span class="o">==</span> <span class="s1">'My subject'</span><span class="p">;</span>
+                        <span class="p">}));</span>
+
+        <span class="nv">$subject</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Subject</span><span class="p">(</span><span class="s1">'My subject'</span><span class="p">);</span>
+        <span class="nv">$subject</span><span class="o">-&gt;</span><span class="na">attach</span><span class="p">(</span><span class="nv">$observer</span><span class="p">);</span>
+
+        <span class="c1">// The doSomethingBad() method should report an error to the observer</span>
+        <span class="c1">// via the reportError() method</span>
+        <span class="nv">$subject</span><span class="o">-&gt;</span><span class="na">doSomethingBad</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="test-doubles-mock-objects-examples-clone-object-parameters-usecase-php">
+<div class="code-block-caption"><span class="caption-number">Example 9.15 </span><span class="caption-text">Testing that a method gets called once and with the identical object as was passed</span></div>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="k">use</span> <span class="nx">PHPUnit\Framework\TestCase</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">FooTest</span> <span class="k">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testIdenticalObjectPassed</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$expectedObject</span> <span class="o">=</span> <span class="k">new</span> <span class="k">stdClass</span><span class="p">;</span>
+
+        <span class="nv">$mock</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getMockBuilder</span><span class="p">(</span><span class="k">stdClass</span><span class="o">::</span><span class="na">class</span><span class="p">)</span>
+                     <span class="o">-&gt;</span><span class="na">setMethods</span><span class="p">([</span><span class="s1">'foo'</span><span class="p">])</span>
+                     <span class="o">-&gt;</span><span class="na">getMock</span><span class="p">();</span>
+
+        <span class="nv">$mock</span><span class="o">-&gt;</span><span class="na">expects</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">once</span><span class="p">())</span>
+             <span class="o">-&gt;</span><span class="na">method</span><span class="p">(</span><span class="s1">'foo'</span><span class="p">)</span>
+             <span class="o">-&gt;</span><span class="na">with</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">identicalTo</span><span class="p">(</span><span class="nv">$expectedObject</span><span class="p">));</span>
+
+        <span class="nv">$mock</span><span class="o">-&gt;</span><span class="na">foo</span><span class="p">(</span><span class="nv">$expectedObject</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="test-doubles-mock-objects-examples-enable-clone-object-parameters-php">
+<div class="code-block-caption"><span class="caption-number">Example 9.16 </span><span class="caption-text">Create a mock object with cloning parameters enabled</span></div>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="k">use</span> <span class="nx">PHPUnit\Framework\TestCase</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">FooTest</span> <span class="k">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testIdenticalObjectPassed</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$cloneArguments</span> <span class="o">=</span> <span class="k">true</span><span class="p">;</span>
+
+        <span class="nv">$mock</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getMockBuilder</span><span class="p">(</span><span class="k">stdClass</span><span class="o">::</span><span class="na">class</span><span class="p">)</span>
+                     <span class="o">-&gt;</span><span class="na">enableArgumentCloning</span><span class="p">()</span>
+                     <span class="o">-&gt;</span><span class="na">getMock</span><span class="p">();</span>
+
+        <span class="c1">// now your mock clones parameters so the identicalTo constraint</span>
+        <span class="c1">// will fail.</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<p><a class="reference internal" href="assertions.html#appendixes-assertions-assertthat-tables-constraints"><span class="std std-ref">Constraints</span></a>
+shows the constraints that can be applied to method arguments and
+<a class="reference internal" href="#test-doubles-mock-objects-tables-matchers"><span class="std std-numref">Table 9.1</span></a>
+shows the matchers that are available to specify the number of
+invocations.</p>
+<table border="1" class="table docutils" id="test-doubles-mock-objects-tables-matchers">
+<caption><span class="caption-number">Table 9.1 </span><span class="caption-text">Matchers</span></caption>
+<colgroup>
+<col width="50%">
+<col width="50%">
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Matcher</th>
+<th class="head">Meaning</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">PHPUnit\Framework\MockObject\Matcher\AnyInvokedCount</span> <span class="pre">any()</span></code></td>
+<td>Returns a matcher that matches when the method it is evaluated for is executed zero or more times.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">PHPUnit\Framework\MockObject\Matcher\InvokedCount</span> <span class="pre">never()</span></code></td>
+<td>Returns a matcher that matches when the method it is evaluated for is never executed.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">PHPUnit\Framework\MockObject\Matcher\InvokedAtLeastOnce</span> <span class="pre">atLeastOnce()</span></code></td>
+<td>Returns a matcher that matches when the method it is evaluated for is executed at least once.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">PHPUnit\Framework\MockObject\Matcher\InvokedCount</span> <span class="pre">once()</span></code></td>
+<td>Returns a matcher that matches when the method it is evaluated for is executed exactly once.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">PHPUnit\Framework\MockObject\Matcher\InvokedCount</span> <span class="pre">exactly(int</span> <span class="pre">$count)</span></code></td>
+<td>Returns a matcher that matches when the method it is evaluated for is executed exactly <code class="docutils literal"><span class="pre">$count</span></code> times.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">PHPUnit\Framework\MockObject\Matcher\InvokedAtIndex</span> <span class="pre">at(int</span> <span class="pre">$index)</span></code></td>
+<td>Returns a matcher that matches when the method it is evaluated for is invoked at the given <code class="docutils literal"><span class="pre">$index</span></code>.</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition-note admonition">
+<p class="first admonition-title">Note</p>
+<p class="last">The <code class="docutils literal"><span class="pre">$index</span></code> parameter for the <code class="docutils literal"><span class="pre">at()</span></code>
+matcher refers to the index, starting at zero, in <em>all method
+invocations</em> for a given mock object. Exercise caution when
+using this matcher as it can lead to brittle tests which are too
+closely tied to specific implementation details.</p>
+</div>
+<p>As mentioned in the beginning, when the defaults used by the
+<code class="docutils literal"><span class="pre">createMock()</span></code> method to generate the test double do not
+match your needs then you can use the <code class="docutils literal"><span class="pre">getMockBuilder($type)</span></code>
+method to customize the test double generation using a fluent interface.
+Here is a list of methods provided by the Mock Builder:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">setMethods(array</span> <span class="pre">$methods)</span></code> can be called on the Mock Builder object to specify the methods that are to be replaced with a configurable test double. The behavior of the other methods is not changed. If you call <code class="docutils literal"><span class="pre">setMethods(null)</span></code>, then no methods will be replaced.</li>
+<li><code class="docutils literal"><span class="pre">setMethodsExcept(array</span> <span class="pre">$methods)</span></code> can be called on the Mock Builder object to specify the methods that will not be replaced with a configurable test double while replacing all other public methods. This works inverse to <code class="docutils literal"><span class="pre">setMethods()</span></code>.</li>
+<li><code class="docutils literal"><span class="pre">setConstructorArgs(array</span> <span class="pre">$args)</span></code> can be called to provide a parameter array that is passed to the original class’ constructor (which is not replaced with a dummy implementation by default).</li>
+<li><code class="docutils literal"><span class="pre">setMockClassName($name)</span></code> can be used to specify a class name for the generated test double class.</li>
+<li><code class="docutils literal"><span class="pre">disableOriginalConstructor()</span></code> can be used to disable the call to the original class’ constructor.</li>
+<li><code class="docutils literal"><span class="pre">disableOriginalClone()</span></code> can be used to disable the call to the original class’ clone constructor.</li>
+<li><code class="docutils literal"><span class="pre">disableAutoload()</span></code> can be used to disable <code class="docutils literal"><span class="pre">__autoload()</span></code> during the generation of the test double class.</li>
+</ul>
+</div>
+<div class="section" id="prophecy">
+<a class="dashAnchor" name="//apple_ref/Section/Prophecy"></a><span id="test-doubles-prophecy"></span><h2>Prophecy</h2>
+<p><a class="reference external" href="https://github.com/phpspec/prophecy">Prophecy</a> is a
+“highly opinionated yet very powerful and flexible PHP object mocking
+framework. Though initially it was created to fulfil phpspec2 needs, it is
+flexible enough to be used inside any testing framework out there with
+minimal effort”.</p>
+<p>PHPUnit has built-in support for using Prophecy to create test doubles.
+<a class="reference internal" href="#test-doubles-prophecy-examples-subjecttest-php"><span class="std std-numref">Example 9.17</span></a>
+shows how the same test shown in <a class="reference internal" href="#test-doubles-mock-objects-examples-subjecttest-php"><span class="std std-numref">Example 9.11</span></a>
+can be expressed using Prophecy’s philosophy of prophecies and
+revelations:</p>
+<div class="literal-block-wrapper docutils container" id="test-doubles-prophecy-examples-subjecttest-php">
+<div class="code-block-caption"><span class="caption-number">Example 9.17 </span><span class="caption-text">Testing that a method gets called once and with a specified argument</span></div>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="k">use</span> <span class="nx">PHPUnit\Framework\TestCase</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">SubjectTest</span> <span class="k">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testObserversAreUpdated</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$subject</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Subject</span><span class="p">(</span><span class="s1">'My subject'</span><span class="p">);</span>
+
+        <span class="c1">// Create a prophecy for the Observer class.</span>
+        <span class="nv">$observer</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">prophesize</span><span class="p">(</span><span class="nx">Observer</span><span class="o">::</span><span class="na">class</span><span class="p">);</span>
+
+        <span class="c1">// Set up the expectation for the update() method</span>
+        <span class="c1">// to be called only once and with the string 'something'</span>
+        <span class="c1">// as its parameter.</span>
+        <span class="nv">$observer</span><span class="o">-&gt;</span><span class="na">update</span><span class="p">(</span><span class="s1">'something'</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">shouldBeCalled</span><span class="p">();</span>
+
+        <span class="c1">// Reveal the prophecy and attach the mock object</span>
+        <span class="c1">// to the Subject.</span>
+        <span class="nv">$subject</span><span class="o">-&gt;</span><span class="na">attach</span><span class="p">(</span><span class="nv">$observer</span><span class="o">-&gt;</span><span class="na">reveal</span><span class="p">());</span>
+
+        <span class="c1">// Call the doSomething() method on the $subject object</span>
+        <span class="c1">// which we expect to call the mocked Observer object's</span>
+        <span class="c1">// update() method with the string 'something'.</span>
+        <span class="nv">$subject</span><span class="o">-&gt;</span><span class="na">doSomething</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<p>Please refer to the <a class="reference external" href="https://github.com/phpspec/prophecy#how-to-use-it">documentation</a>
+for Prophecy for further details on how to create, configure, and use
+stubs, spies, and mocks using this alternative test double framework.</p>
+</div>
+<div class="section" id="mocking-traits-and-abstract-classes">
+<a class="dashAnchor" name="//apple_ref/Section/Mocking%20Traits%20and%20Abstract%20Classes"></a><span id="test-doubles-mocking-traits-and-abstract-classes"></span><h2>Mocking Traits and Abstract Classes</h2>
+<p>The <code class="docutils literal"><span class="pre">getMockForTrait()</span></code> method returns a mock object
+that uses a specified trait. All abstract methods of the given trait
+are mocked. This allows for testing the concrete methods of a trait.</p>
+<div class="literal-block-wrapper docutils container" id="test-doubles-mock-objects-examples-traitclasstest-php">
+<div class="code-block-caption"><span class="caption-number">Example 9.18 </span><span class="caption-text">Testing the concrete methods of a trait</span></div>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="k">use</span> <span class="nx">PHPUnit\Framework\TestCase</span><span class="p">;</span>
+
+<span class="k">trait</span> <span class="nx">AbstractTrait</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">concreteMethod</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">abstractMethod</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">abstract</span> <span class="k">function</span> <span class="nf">abstractMethod</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">TraitClassTest</span> <span class="k">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testConcreteMethod</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$mock</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getMockForTrait</span><span class="p">(</span><span class="nx">AbstractTrait</span><span class="o">::</span><span class="na">class</span><span class="p">);</span>
+
+        <span class="nv">$mock</span><span class="o">-&gt;</span><span class="na">expects</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">any</span><span class="p">())</span>
+             <span class="o">-&gt;</span><span class="na">method</span><span class="p">(</span><span class="s1">'abstractMethod'</span><span class="p">)</span>
+             <span class="o">-&gt;</span><span class="na">will</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">returnValue</span><span class="p">(</span><span class="k">true</span><span class="p">));</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertTrue</span><span class="p">(</span><span class="nv">$mock</span><span class="o">-&gt;</span><span class="na">concreteMethod</span><span class="p">());</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">getMockForAbstractClass()</span></code> method returns a mock
+object for an abstract class. All abstract methods of the given abstract
+class are mocked. This allows for testing the concrete methods of an
+abstract class.</p>
+<div class="literal-block-wrapper docutils container" id="test-doubles-mock-objects-examples-abstractclasstest-php">
+<div class="code-block-caption"><span class="caption-number">Example 9.19 </span><span class="caption-text">Testing the concrete methods of an abstract class</span></div>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="k">use</span> <span class="nx">PHPUnit\Framework\TestCase</span><span class="p">;</span>
+
+<span class="k">abstract</span> <span class="k">class</span> <span class="nc">AbstractClass</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">concreteMethod</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">abstractMethod</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">abstract</span> <span class="k">function</span> <span class="nf">abstractMethod</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">AbstractClassTest</span> <span class="k">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testConcreteMethod</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$stub</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getMockForAbstractClass</span><span class="p">(</span><span class="nx">AbstractClass</span><span class="o">::</span><span class="na">class</span><span class="p">);</span>
+
+        <span class="nv">$stub</span><span class="o">-&gt;</span><span class="na">expects</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">any</span><span class="p">())</span>
+             <span class="o">-&gt;</span><span class="na">method</span><span class="p">(</span><span class="s1">'abstractMethod'</span><span class="p">)</span>
+             <span class="o">-&gt;</span><span class="na">will</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">returnValue</span><span class="p">(</span><span class="k">true</span><span class="p">));</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertTrue</span><span class="p">(</span><span class="nv">$stub</span><span class="o">-&gt;</span><span class="na">concreteMethod</span><span class="p">());</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="stubbing-and-mocking-web-services">
+<a class="dashAnchor" name="//apple_ref/Section/Stubbing%20and%20Mocking%20Web%20Services"></a><span id="test-doubles-stubbing-and-mocking-web-services"></span><h2>Stubbing and Mocking Web Services</h2>
+<p>When your application interacts with a web service you want to test it
+without actually interacting with the web service. To make the stubbing
+and mocking of web services easy, the <code class="docutils literal"><span class="pre">getMockFromWsdl()</span></code>
+can be used just like <code class="docutils literal"><span class="pre">getMock()</span></code> (see above). The only
+difference is that <code class="docutils literal"><span class="pre">getMockFromWsdl()</span></code> returns a stub or
+mock based on a web service description in WSDL and <code class="docutils literal"><span class="pre">getMock()</span></code>
+returns a stub or mock based on a PHP class or interface.</p>
+<p><a class="reference internal" href="#test-doubles-stubbing-and-mocking-web-services-examples-googletest-php"><span class="std std-numref">Example 9.20</span></a>
+shows how <code class="docutils literal"><span class="pre">getMockFromWsdl()</span></code> can be used to stub, for
+example, the web service described in <code class="file docutils literal"><span class="pre">GoogleSearch.wsdl</span></code>.</p>
+<div class="literal-block-wrapper docutils container" id="test-doubles-stubbing-and-mocking-web-services-examples-googletest-php">
+<div class="code-block-caption"><span class="caption-number">Example 9.20 </span><span class="caption-text">Stubbing a web service</span></div>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="k">use</span> <span class="nx">PHPUnit\Framework\TestCase</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">GoogleTest</span> <span class="k">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testSearch</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$googleSearch</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getMockFromWsdl</span><span class="p">(</span>
+          <span class="s1">'GoogleSearch.wsdl'</span><span class="p">,</span> <span class="s1">'GoogleSearch'</span>
+        <span class="p">);</span>
+
+        <span class="nv">$directoryCategory</span> <span class="o">=</span> <span class="k">new</span> <span class="k">stdClass</span><span class="p">;</span>
+        <span class="nv">$directoryCategory</span><span class="o">-&gt;</span><span class="na">fullViewableName</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
+        <span class="nv">$directoryCategory</span><span class="o">-&gt;</span><span class="na">specialEncoding</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
+
+        <span class="nv">$element</span> <span class="o">=</span> <span class="k">new</span> <span class="k">stdClass</span><span class="p">;</span>
+        <span class="nv">$element</span><span class="o">-&gt;</span><span class="na">summary</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
+        <span class="nv">$element</span><span class="o">-&gt;</span><span class="na">URL</span> <span class="o">=</span> <span class="s1">'https://phpunit.de/'</span><span class="p">;</span>
+        <span class="nv">$element</span><span class="o">-&gt;</span><span class="na">snippet</span> <span class="o">=</span> <span class="s1">'...'</span><span class="p">;</span>
+        <span class="nv">$element</span><span class="o">-&gt;</span><span class="na">title</span> <span class="o">=</span> <span class="s1">'&lt;b&gt;PHPUnit&lt;/b&gt;'</span><span class="p">;</span>
+        <span class="nv">$element</span><span class="o">-&gt;</span><span class="na">cachedSize</span> <span class="o">=</span> <span class="s1">'11k'</span><span class="p">;</span>
+        <span class="nv">$element</span><span class="o">-&gt;</span><span class="na">relatedInformationPresent</span> <span class="o">=</span> <span class="k">true</span><span class="p">;</span>
+        <span class="nv">$element</span><span class="o">-&gt;</span><span class="na">hostName</span> <span class="o">=</span> <span class="s1">'phpunit.de'</span><span class="p">;</span>
+        <span class="nv">$element</span><span class="o">-&gt;</span><span class="na">directoryCategory</span> <span class="o">=</span> <span class="nv">$directoryCategory</span><span class="p">;</span>
+        <span class="nv">$element</span><span class="o">-&gt;</span><span class="na">directoryTitle</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
+
+        <span class="nv">$result</span> <span class="o">=</span> <span class="k">new</span> <span class="k">stdClass</span><span class="p">;</span>
+        <span class="nv">$result</span><span class="o">-&gt;</span><span class="na">documentFiltering</span> <span class="o">=</span> <span class="k">false</span><span class="p">;</span>
+        <span class="nv">$result</span><span class="o">-&gt;</span><span class="na">searchComments</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
+        <span class="nv">$result</span><span class="o">-&gt;</span><span class="na">estimatedTotalResultsCount</span> <span class="o">=</span> <span class="mf">3.9000</span><span class="p">;</span>
+        <span class="nv">$result</span><span class="o">-&gt;</span><span class="na">estimateIsExact</span> <span class="o">=</span> <span class="k">false</span><span class="p">;</span>
+        <span class="nv">$result</span><span class="o">-&gt;</span><span class="na">resultElements</span> <span class="o">=</span> <span class="p">[</span><span class="nv">$element</span><span class="p">];</span>
+        <span class="nv">$result</span><span class="o">-&gt;</span><span class="na">searchQuery</span> <span class="o">=</span> <span class="s1">'PHPUnit'</span><span class="p">;</span>
+        <span class="nv">$result</span><span class="o">-&gt;</span><span class="na">startIndex</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="nv">$result</span><span class="o">-&gt;</span><span class="na">endIndex</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="nv">$result</span><span class="o">-&gt;</span><span class="na">searchTips</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
+        <span class="nv">$result</span><span class="o">-&gt;</span><span class="na">directoryCategories</span> <span class="o">=</span> <span class="p">[];</span>
+        <span class="nv">$result</span><span class="o">-&gt;</span><span class="na">searchTime</span> <span class="o">=</span> <span class="mf">0.248822</span><span class="p">;</span>
+
+        <span class="nv">$googleSearch</span><span class="o">-&gt;</span><span class="na">expects</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">any</span><span class="p">())</span>
+                     <span class="o">-&gt;</span><span class="na">method</span><span class="p">(</span><span class="s1">'doGoogleSearch'</span><span class="p">)</span>
+                     <span class="o">-&gt;</span><span class="na">will</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">returnValue</span><span class="p">(</span><span class="nv">$result</span><span class="p">));</span>
+
+        <span class="sd">/**</span>
+<span class="sd">         * $googleSearch-&gt;doGoogleSearch() will now return a stubbed result and</span>
+<span class="sd">         * the web service's doGoogleSearch() method will not be invoked.</span>
+<span class="sd">         */</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertEquals</span><span class="p">(</span>
+          <span class="nv">$result</span><span class="p">,</span>
+          <span class="nv">$googleSearch</span><span class="o">-&gt;</span><span class="na">doGoogleSearch</span><span class="p">(</span>
+            <span class="s1">'00000000000000000000000000000000'</span><span class="p">,</span>
+            <span class="s1">'PHPUnit'</span><span class="p">,</span>
+            <span class="mi">0</span><span class="p">,</span>
+            <span class="mi">1</span><span class="p">,</span>
+            <span class="k">false</span><span class="p">,</span>
+            <span class="s1">''</span><span class="p">,</span>
+            <span class="k">false</span><span class="p">,</span>
+            <span class="s1">''</span><span class="p">,</span>
+            <span class="s1">''</span><span class="p">,</span>
+            <span class="s1">''</span>
+          <span class="p">)</span>
+        <span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="mocking-the-filesystem">
+<a class="dashAnchor" name="//apple_ref/Section/Mocking%20the%20Filesystem"></a><span id="test-doubles-mocking-the-filesystem"></span><h2>Mocking the Filesystem</h2>
+<p><a class="reference external" href="https://github.com/mikey179/vfsStream">vfsStream</a>
+is a <a class="reference external" href="http://www.php.net/streams">stream wrapper</a> for a
+<a class="reference external" href="http://en.wikipedia.org/wiki/Virtual_file_system">virtual
+filesystem</a> that may be helpful in unit tests to mock the real
+filesystem.</p>
+<p>Simply add a dependency on <code class="docutils literal"><span class="pre">mikey179/vfsStream</span></code> to your
+project’s <code class="docutils literal"><span class="pre">composer.json</span></code> file if you use
+<a class="reference external" href="https://getcomposer.org/">Composer</a> to manage the
+dependencies of your project. Here is a minimal example of a
+<code class="docutils literal"><span class="pre">composer.json</span></code> file that just defines a development-time
+dependency on PHPUnit 4.6 and vfsStream:</p>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">"require-dev"</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">"phpunit/phpunit"</span><span class="o">:</span> <span class="s2">"~4.6"</span><span class="p">,</span>
+        <span class="s2">"mikey179/vfsStream"</span><span class="o">:</span> <span class="s2">"~1"</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="#test-doubles-mocking-the-filesystem-examples-example-php"><span class="std std-numref">Example 9.21</span></a>
+shows a class that interacts with the filesystem.</p>
+<div class="literal-block-wrapper docutils container" id="test-doubles-mocking-the-filesystem-examples-example-php">
+<div class="code-block-caption"><span class="caption-number">Example 9.21 </span><span class="caption-text">A class that interacts with the filesystem</span></div>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="k">use</span> <span class="nx">PHPUnit\Framework\TestCase</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">Example</span>
+<span class="p">{</span>
+    <span class="k">protected</span> <span class="nv">$id</span><span class="p">;</span>
+    <span class="k">protected</span> <span class="nv">$directory</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span><span class="nv">$id</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">id</span> <span class="o">=</span> <span class="nv">$id</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">setDirectory</span><span class="p">(</span><span class="nv">$directory</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">directory</span> <span class="o">=</span> <span class="nv">$directory</span> <span class="o">.</span> <span class="nx">DIRECTORY_SEPARATOR</span> <span class="o">.</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">id</span><span class="p">;</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nb">file_exists</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">directory</span><span class="p">))</span> <span class="p">{</span>
+            <span class="nb">mkdir</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">directory</span><span class="p">,</span> <span class="mo">0700</span><span class="p">,</span> <span class="k">true</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<p>Without a virtual filesystem such as vfsStream we cannot test the
+<code class="docutils literal"><span class="pre">setDirectory()</span></code> method in isolation from external
+influence (see <a class="reference internal" href="#test-doubles-mocking-the-filesystem-examples-exampletest-php"><span class="std std-numref">Example 9.22</span></a>).</p>
+<div class="literal-block-wrapper docutils container" id="test-doubles-mocking-the-filesystem-examples-exampletest-php">
+<div class="code-block-caption"><span class="caption-number">Example 9.22 </span><span class="caption-text">Testing a class that interacts with the filesystem</span></div>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="k">use</span> <span class="nx">PHPUnit\Framework\TestCase</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">ExampleTest</span> <span class="k">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="k">protected</span> <span class="k">function</span> <span class="nf">setUp</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nb">file_exists</span><span class="p">(</span><span class="nb">dirname</span><span class="p">(</span><span class="no">__FILE__</span><span class="p">)</span> <span class="o">.</span> <span class="s1">'/id'</span><span class="p">))</span> <span class="p">{</span>
+            <span class="nb">rmdir</span><span class="p">(</span><span class="nb">dirname</span><span class="p">(</span><span class="no">__FILE__</span><span class="p">)</span> <span class="o">.</span> <span class="s1">'/id'</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testDirectoryIsCreated</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$example</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Example</span><span class="p">(</span><span class="s1">'id'</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertFalse</span><span class="p">(</span><span class="nb">file_exists</span><span class="p">(</span><span class="nb">dirname</span><span class="p">(</span><span class="no">__FILE__</span><span class="p">)</span> <span class="o">.</span> <span class="s1">'/id'</span><span class="p">));</span>
+
+        <span class="nv">$example</span><span class="o">-&gt;</span><span class="na">setDirectory</span><span class="p">(</span><span class="nb">dirname</span><span class="p">(</span><span class="no">__FILE__</span><span class="p">));</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertTrue</span><span class="p">(</span><span class="nb">file_exists</span><span class="p">(</span><span class="nb">dirname</span><span class="p">(</span><span class="no">__FILE__</span><span class="p">)</span> <span class="o">.</span> <span class="s1">'/id'</span><span class="p">));</span>
+    <span class="p">}</span>
+
+    <span class="k">protected</span> <span class="k">function</span> <span class="nf">tearDown</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nb">file_exists</span><span class="p">(</span><span class="nb">dirname</span><span class="p">(</span><span class="no">__FILE__</span><span class="p">)</span> <span class="o">.</span> <span class="s1">'/id'</span><span class="p">))</span> <span class="p">{</span>
+            <span class="nb">rmdir</span><span class="p">(</span><span class="nb">dirname</span><span class="p">(</span><span class="no">__FILE__</span><span class="p">)</span> <span class="o">.</span> <span class="s1">'/id'</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<p>The approach above has several drawbacks:</p>
+<ul class="simple">
+<li>As with any external resource, there might be intermittent problems with the filesystem. This makes tests interacting with it flaky.</li>
+<li>In the <code class="docutils literal"><span class="pre">setUp()</span></code> and <code class="docutils literal"><span class="pre">tearDown()</span></code> methods we have to ensure that the directory does not exist before and after the test.</li>
+<li>When the test execution terminates before the <code class="docutils literal"><span class="pre">tearDown()</span></code> method is invoked the directory will stay in the filesystem.</li>
+</ul>
+<p><a class="reference internal" href="#test-doubles-mocking-the-filesystem-examples-exampletest2-php"><span class="std std-numref">Example 9.23</span></a>
+shows how vfsStream can be used to mock the filesystem in a test for a
+class that interacts with the filesystem.</p>
+<div class="literal-block-wrapper docutils container" id="test-doubles-mocking-the-filesystem-examples-exampletest2-php">
+<div class="code-block-caption"><span class="caption-number">Example 9.23 </span><span class="caption-text">Mocking the filesystem in a test for a class that interacts with the filesystem</span></div>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="k">use</span> <span class="nx">PHPUnit\Framework\TestCase</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">ExampleTest</span> <span class="k">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">setUp</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nx">vfsStreamWrapper</span><span class="o">::</span><span class="na">register</span><span class="p">();</span>
+        <span class="nx">vfsStreamWrapper</span><span class="o">::</span><span class="na">setRoot</span><span class="p">(</span><span class="k">new</span> <span class="nx">vfsStreamDirectory</span><span class="p">(</span><span class="s1">'exampleDir'</span><span class="p">));</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testDirectoryIsCreated</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$example</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Example</span><span class="p">(</span><span class="s1">'id'</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertFalse</span><span class="p">(</span><span class="nx">vfsStreamWrapper</span><span class="o">::</span><span class="na">getRoot</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">hasChild</span><span class="p">(</span><span class="s1">'id'</span><span class="p">));</span>
+
+        <span class="nv">$example</span><span class="o">-&gt;</span><span class="na">setDirectory</span><span class="p">(</span><span class="nx">vfsStream</span><span class="o">::</span><span class="na">url</span><span class="p">(</span><span class="s1">'exampleDir'</span><span class="p">));</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertTrue</span><span class="p">(</span><span class="nx">vfsStreamWrapper</span><span class="o">::</span><span class="na">getRoot</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">hasChild</span><span class="p">(</span><span class="s1">'id'</span><span class="p">));</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<p>This has several advantages:</p>
+<ul class="simple">
+<li>The test itself is more concise.</li>
+<li>vfsStream gives the test developer full control over what the filesystem environment looks like to the tested code.</li>
+<li>Since the filesystem operations do not operate on the real filesystem anymore, cleanup operations in a <code class="docutils literal"><span class="pre">tearDown()</span></code> method are no longer required.</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="code-coverage-analysis.html" class="btn btn-neutral float-right" title="10. Code Coverage Analysis" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="database.html" class="btn btn-neutral" title="8. Database Testing" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr>
+
+  <div role="contentinfo">
+    <p>
+        © <a href="copyright.html">Copyright</a> 2018, Sebastian Bergmann.
+      
+        <span class="commit">
+          Revision <code>25b86e5f</code>.
+        </span>
+      
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Read the Docs</span>
+      v: 7.1
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt>Versions</dt>
+        
+          <dd><a href="https://phpunit.readthedocs.io/en/latest/">latest</a></dd>
+        
+          <dd><a href="index.html">7.1</a></dd>
+        
+          <dd><a href="https://phpunit.readthedocs.io/en/7.0/">7.0</a></dd>
+        
+          <dd><a href="https://phpunit.readthedocs.io/en/master/">master</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>Downloads</dt>
+        
+          <dd><a href="http://readthedocs.org/projects/phpunit/downloads/pdf/7.1/">pdf</a></dd>
+        
+          <dd><a href="http://readthedocs.org/projects/phpunit/downloads/htmlzip/7.1/">htmlzip</a></dd>
+        
+          <dd><a href="http://readthedocs.org/projects/phpunit/downloads/epub/7.1/">epub</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>On Read the Docs</dt>
+          <dd>
+            <a href="http://readthedocs.org/projects/phpunit/?fromdocs=phpunit">Project Home</a>
+          </dd>
+          <dd>
+            <a href="http://readthedocs.org/builds/phpunit/?fromdocs=phpunit">Builds</a>
+          </dd>
+      </dl>
+      <hr>
+      Free document hosting provided by <a href="http://www.readthedocs.org/">Read the Docs</a>.
+
+    </div>
+  </div>
+
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'7.1',
+            LANGUAGE:'en',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../media.readthedocs.org/javascript/jquery/jquery-2.0.3.min.js"></script>
+      <script type="text/javascript" src="../../../media.readthedocs.org/javascript/jquery/jquery-migrate-1.2.1.min.js"></script>
+      <script type="text/javascript" src="../../../media.readthedocs.org/javascript/underscore.js"></script>
+      <script type="text/javascript" src="../../../media.readthedocs.org/javascript/doctools.js"></script>
+      <script type="text/javascript" src="../../../media.readthedocs.org/javascript/readthedocs-doc-embed.js"></script>
+
+  
+
+  
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          
+          SphinxRtdTheme.Navigation.enableSticky();
+          
+      });
+  </script> 
+
+
+
+<!-- Mirrored from phpunit.readthedocs.io/en/7.1/test-doubles.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 14 Jul 2018 16:54:09 GMT -->
+</body></html>

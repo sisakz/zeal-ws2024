@@ -1,0 +1,90 @@
+<html><!-- Online page at https://rx-angular.io/web/state/howtos/partial-updates --><head><meta charset="utf-8"><title>RxAngular</title><link rel="stylesheet" href="../../../../angular.io/css_36.css" type="text/css"><link rel="stylesheet" href="../../../../angular.io/css_37.css" type="text/css"><link rel="stylesheet" href="../../../../angular.io/css_38.css" type="text/css"><link rel="stylesheet" href="../../../../angular.io/css_39.css" type="text/css"><link rel="stylesheet" href="../../../../angular.io/css_40.css" type="text/css"><link rel="stylesheet" href="../../../../angular.io/css_41.css" type="text/css"><script type="text/javascript" src="../../../../angular.io/js_1.js"></script><script type="text/javascript" src="../../../../angular.io/js_21.js"></script><script type="text/javascript" src="../../../../angular.io/js_22.js"></script><script type="text/javascript" src="../../../../angular.io/js_23.js"></script><script type="text/javascript" src="../../../../angular.io/js_24.js"></script><script type="text/javascript" src="../../../../angular.io/js_25.js"></script><script type="text/javascript" src="../../../../angular.io/js_26.js"></script><script type="text/javascript" src="../../../../angular.io/js_27.js"></script><script type="text/javascript" src="../../../../angular.io/js_28.js"></script></head><body data-page="/web/state/howtos/partial-updates.md" class="ready">
+    <section class="cover" style="background: linear-gradient(to left bottom, hsl(107, 100%, 85%) 0%,hsl(92, 100%, 85%) 100%)"><div class="mask"></div><div class="cover-main"><!--cover--></div></section><main><button class="sidebar-toggle" aria-label="Menu"><div class="sidebar-toggle-button"><span></span><span></span><span></span></div></button><aside class="sidebar"><div class="search"><div class="input-wrap">
+      <input type="search" value="" aria-label="Search text" placeholder="Type to search">
+      <div class="clear-button">
+        <svg width="26" height="24">
+          <circle cx="12" cy="12" r="11" fill="#ccc"></circle>
+          <path stroke="white" stroke-width="2" d="M8.25,8.25,15.75,15.75"></path>
+          <path stroke="white" stroke-width="2" d="M8.25,15.75,15.75,8.25"></path>
+        </svg>
+      </div>
+    </div>
+    <div class="results-panel"></div>
+    </div><h1 class="app-name"><a class="app-name-link" data-nosearch="" href="./partial-updates.html">@rx-angular</a></h1><div class="sidebar-nav"><!-- - @rx-angular/template [BETA]
+
+  - Getting started
+
+    - [Overview](/template/overview.md)
+    - [Setup](/template/basic-setup.md)
+
+  - Theory
+
+    - [Rendering issues in Angular](/template/theory/rendering-issues.md)
+    - [Concepts](/template/theory/concepts.md)
+
+  - Features
+
+    - [LetDirective](/template/features/let.md)
+    - [PushPipe](/template/features/push.md)
+    - [RenderStrategies](/template/features/render-strategies.md)
+
+  - Experimental
+
+    - [Unpatch directive](/template/experimental/unpatch.md) -->
+
+<ul><li><p><strong>@rx-angular/state</strong></p><ul><li><p>Getting started</p><ul><li><a href="../general/overview.html" title="Overview">Overview</a></li><li><a href="../general/basic-setup.html" title="Setup">Setup</a></li></ul></li><li><p>API</p><ul><li><a href="../api/rx-state.html" title="RxState">RxState</a></li><li><a href="../api/rxjs-operators.html" title="RxJS Operators">RxJS Operators</a></li><li><a href="../api/transformation-helpers.html" title="Transformation helpers">Transformation helpers</a></li><li><a href="../api/interfaces.html" title="Interfaces">Interfaces</a></li></ul></li><li><p>Tutorials</p><ul><li><a href="../tutorials/basic-tutorial.html" title="Basic tutorial">Basic tutorial</a></li><li><a href="../tutorials/incrementing-value.html" title="Incrementing a value">Incrementing a value</a></li><li><a href="../tutorials/from-imperative-to-reactive.html" title="Migrating to RxState">Migrating to RxState</a></li><li><a href="../tutorials/passing-observables.html" title="Passing observables directly">Passing observables directly</a></li></ul></li><li><p>Recipes</p><ul><li><a href="./determine-state.html" title="Determine state type">Determine state type</a></li><li><a href="./manage-viewmodel.html" title="Manage ViewModel">Manage ViewModel</a></li><li class="active"><a href="./partial-updates.html" title="Run partial updates">Run partial updates</a></li><li><a href="./load-data-on-route-change.html" title="Load data on route change">Load data on route change</a></li><li><a href="./hostbindings.html" title="Work with HostBindings">Work with HostBindings</a></li><li><a href="./rx-state-as-global-state.html" title="Use RxState as Global State">Use RxState as Global State</a></li></ul></li><li><p>Integrations</p><ul><li><a href="../integrations/compose-state-using-ngrx-selectors.html" title="Reuse ngrx selectors to compose state">Reuse ngrx selectors to compose state</a></li><li><a href="../integrations/manage-entities-ngrx.html" title="Manage entities using @ngrx/entity">Manage entities using <code>@ngrx/entity</code></a></li></ul></li></ul></li></ul><hr>
+<ul><li><p><strong>Links</strong></p></li><li><p><a href="https://github.com/rx-angular/rx-angular" target="_blank" rel="noopener" title=" Github"><img src="../../../../icongr.am/simple/github.svg" data-origin="https://icongr.am/simple/github.svg?color=808080&amp;size=24" alt="Github"> Github</a></p></li><li><p><a href="https://discord.com/invite/XWWGZsQ" target="_blank" rel="noopener" title=" Discord"><img src="../../../../icongr.am/material/discord.svg" data-origin="https://icongr.am/material/discord.svg?size=24&amp;color=7289da" alt="Discord"> Discord</a></p></li></ul></div></aside><section class="content"><article class="markdown-section" id="main"><h1 id="how-can-i-run-partial-updates"><a href="./partial-updates.html" data-id="how-can-i-run-partial-updates" class="anchor"><span>How can I run partial updates?</span></a></h1><p><code>RxState</code> has partial updates built in. Every change sent to the state over <code>set</code> or <code>connect</code> is treated as partial update.
+An instance of <code>RxState</code> typed with <code>T</code> accepts <code>Partial&lt;T&gt;</code> in the <code>set</code> and <code>connect</code> method.</p><p>The partial update can happen directly by providing a <code>Partial&lt;T&gt;</code> or over a reduce function <code>(oldState, change) =&gt; newState</code>.</p><pre v-pre="" data-lang="typescript"><code class="lang-typescript"><span class="token keyword">import</span> <span class="token punctuation">{</span> RxState <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">rx-angular/state</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+<span class="token keyword">interface</span> <span class="token class-name">ComponentState</span> <span class="token punctuation">{</span>
+  title<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
+  list<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+  loading<span class="token operator">:</span> <span class="token builtin">boolean</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">class</span> <span class="token class-name">AnyComponent</span> <span class="token keyword">extends</span> <span class="token class-name">RxState<span class="token operator">&lt;</span>ComponentState<span class="token operator">&gt;</span></span> <span class="token punctuation">{</span>
+  <span class="token function">updateTitle</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token keyword">set</span><span class="token punctuation">(</span><span class="token punctuation">{</span> title<span class="token operator">:</span> <span class="token string">'Hello!'</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token function">resetList</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">connect</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>globalState$<span class="token punctuation">.</span><span class="token function">list$</span><span class="token punctuation">(</span><span class="token punctuation">{</span> list<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> loading<span class="token operator">:</span> <span class="token boolean">false</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code><button class="docsify-copy-code-button"><span class="label">Copy to clipboard</span><span class="error">Error</span><span class="success">Copied</span></button></pre><p>Internally the state update looks like this:</p><pre v-pre="" data-lang="typescript"><code class="lang-typescript">newState$<span class="token punctuation">.</span><span class="token function">pipe</span><span class="token punctuation">(</span>
+    <span class="token function">scan</span><span class="token punctuation">(</span><span class="token punctuation">(</span>oldState<span class="token punctuation">,</span> newPartialState<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token operator">...</span>oldState<span class="token punctuation">,</span> <span class="token operator">...</span>newPartialState<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">)</span></code><button class="docsify-copy-code-button"><span class="label">Copy to clipboard</span><span class="error">Error</span><span class="success">Copied</span></button></pre></article></section></main>
+    <!-- Settings -->
+    <script>
+      window.$docsify = {
+        search: 'auto',
+        // Name that will be displayed in sidebar
+        name: '@rx-angular',
+        // Takes only # & ## as sidebar links
+        subMaxLevel: 2,
+        // Show sidebar
+        loadSidebar: true,
+        // Coverpage url
+        coverpage: './web/partials/_coverpage.md',
+        // Prevents multiple downloads of sidebar
+        alias: {
+          '/.*/_sidebar.md': './web/partials/_sidebar.md',
+          '/_sidebar.md': './web/partials/_sidebar.md',
+        },
+        routerMode: 'history',
+        // Autoscroll content to the top when changing page
+        auto2top: true,
+        relativePath: true,
+      };
+    </script>
+    <!-- Main script -->
+    <script src="../../../../cdn.jsdelivr.net/npm/docsify/lib/docsify.min.js"></script>
+    <!-- Typescript highlight -->
+    <script src="../../../../cdn.jsdelivr.net/npm/prismjs@1.21.0/components/prism-typescript.min.js"></script>
+    <!-- Search -->
+    <script src="../../../../cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
+    <!-- Zoom image -->
+    <script src="../../../../cdn.jsdelivr.net/npm/docsify/lib/plugins/zoom-image.min.js"></script>
+    <!-- Copy code plugin -->
+    <script src="https://unpkg.com/docsify-copy-code@2"></script>
+  
+
+<div class="progress" style="opacity: 0; width: 0%;"></div></body></html>

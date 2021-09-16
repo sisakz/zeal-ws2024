@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+
+
+<!-- Mirrored from codex.wordpress.org/Installing_on_Microsoft_IIS by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 31 Aug 2021 17:03:19 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="utf-8" />
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'../www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P24PF4B');</script>
+<!--
+<meta property="fb:page_id" content="6427302910" />
+-->
+<link rel="dns-prefetch" href="http://s.w.org/" />
+<link rel="dns-prefetch" href="../fonts.googleapis.com/index.html" />
+<link rel="dns-prefetch" href="http://fonts.gstatic.com/" />
+<link rel="dns-prefetch" href="http://www.googletagmanager.com/" />
+<meta name="google-site-verification" content="7VWES_-rcHBcmaQis9mSYamPfNwE03f4vyTj4pfuAw0" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Installing on Microsoft IIS</title>
+<link rel="canonical" href="Installing_on_Microsoft_IIS.html" />
+
+<link rel="stylesheet" href="../s.w.org/style/codex-wp4.css?3" />
+<meta name="referrer" content="always">
+
+			<link href="../s.w.org/wp-includes/css/dashicons.min.css?20181204" rel="stylesheet" type="text/css" />
+		<link href='../fonts.googleapis.com/css.css?family=Open+Sans:300italic,400italic,600italic,400,300,600&amp;subset=latin,cyrillic-ext,greek-ext,greek,vietnamese,latin-ext,cyrillic' rel='stylesheet' type='text/css'>
+
+		<link rel="stylesheet" href="../s.w.org/style/wp4-2.css?92" />
+
+<link rel="shortcut icon" href="../s.w.org/favicon.ico?2" type="image/x-icon" />
+<script type="text/javascript" src="../s.w.org/wp-includes/js/jquery/jquery.js?v=1.11.1"></script>
+<script>document.cookie='devicePixelRatio='+((window.devicePixelRatio === undefined) ? 1 : window.devicePixelRatio)+'; path=/';</script>
+<!--[if IE]>
+    <script type="text/javascript" src="/skins/common/IEFixes.js"></script>
+    <meta http-equiv="imagetoolbar" content="no" />
+<![endif]-->
+
+<script type="text/javascript">wgBreakFrames=false;wgContentLanguage='en';</script>
+
+
+</head>
+
+
+<body id="wordpress-org" class="wporg-responsive wporg-codex">
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P24PF4B" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<div id="wporg-header">
+	<div class="wrapper">
+	<h1><a href="http://wordpress.org/">WordPress.org</a></h1>				<div id="head-search">
+		<form action="http://wordpress.org/search/do-search.php" method="get">
+			<label for="global-search" class="screen-reader-text">Search WordPress.org for:</label>
+			<input id="global-search" class="text" name="search" type="text" value="" maxlength="150" placeholder="Search WordPress.org" />
+			<button type="submit" class="button"><span class="screen-reader-text">Submit</span></button>
+		</form>
+		</div>
+				<div style="clear:both"></div>
+		<button id="mobile-menu-button" aria-expanded="false"><span class="screen-reader-text">Toggle Menu</span></button>
+		
+<nav aria-label="Main Menu">
+<ul id="wporg-header-menu">
+<li class="menu-item"><a href='http://wordpress.org/showcase/' data-title='See some of the sites built on WordPress.'>Showcase</a></li>
+<li class="menu-item"><a href='http://learn.wordpress.org/' data-title='Resources to help you learn more about WordPress and teach it to others.'>Learn</a></li>
+<li class="menu-item"><a href='http://wordpress.org/themes/' data-title='Find just the right look for your website.'>Themes</a></li>
+<li class="menu-item"><a href='http://wordpress.org/plugins/' data-title='Plugins can extend WordPress to do almost anything you can imagine.'>Plugins</a></li>
+<li class="menu-item"><a href='http://wordpress.org/mobile/' data-title='Take your website on the go!'>Mobile</a></li>
+<li class="menu-item"><a href='http://wordpress.org/support/' data-title='Forums, documentation, help.' aria-current="true" class="current">Support</a><ul class="nav-submenu"><li><a href='http://wordpress.org/support/' title='Documentation, tutorials, best practices.'>Documentation</a></li><li><a href='http://wordpress.org/support/forums/' title='Support and discussion forums.'>Forums</a></li></ul><div class="uparrow"></div></li>
+<li class="menu-item"><a href='http://make.wordpress.org/' data-title='Contribute your knowledge.'>Get Involved</a><ul class="nav-submenu"><li><a href='http://wordpress.org/five-for-the-future/' title='How five percent is powering the next generation of the web'>Five for the Future</a></li></ul><div class="uparrow"></div></li>
+<li class="menu-item"><a href='http://wordpress.org/about/' data-title='About the WordPress Organization, and where we&#039;re going.'>About</a></li>
+<li class="menu-item"><a href='http://wordpress.org/news/' data-title='Come here for the latest scoop.'>Blog</a></li>
+<li class="menu-item"><a href='http://wordpress.org/hosting/' data-title='Find a home for your blog.'>Hosting</a></li>
+<li id="download" class="button download-button menu-item"><a href='http://wordpress.org/download/' data-title='Get it. Got it? Good.'>Get WordPress</a></li>
+</ul>
+</nav>
+		<div style="clear:both"></div>
+	</div>
+</div>
+
+
+
+<div id="headline">
+	<div class="wrapper">
+		<h2><a href="index.html">Codex</a></h2>
+		
+		<div class="portlet" id="p-personal">
+		  <p class="login">Codex tools:
+		     <a href="https://codex.wordpress.org/index.php?title=Special:UserLogin&amp;returnto=Installing+on+Microsoft+IIS">Log in</a> 		  </p>
+		</div>
+	</div>
+</div>
+
+<div id="pagebody">
+	<div class="wrapper">	
+		<div class="col-10" id="bodyContent">
+			<div id="siteNotice"><div id="localNotice" lang="en" dir="ltr"><div style="clear:both; background-color:#e5f5fa; border-left:4px solid #00a0d2; padding:10px 12px 8px; margin:0.5em auto 1.5em auto;"><span class="dashicons dashicons-info" style="color:#00a0d2"></span> Interested in functions, hooks, classes, or methods? Check out the new <a rel="nofollow" class="external text" href="../developer.wordpress.org/reference/index.html">WordPress Code Reference</a>!</div>
+</div></div>			<h2 class="pagetitle">Installing on Microsoft IIS</h2>
+									<!-- start content -->
+				<div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr"><p class="LanguageLinks" style="border:1px solid #CCCCCC; line-height:1.5; text-align:left; color:#333333; font-size:90%; padding:10px;"><span style="white-space:nowrap;"><a href="Multilingual_Codex.html" title="Multilingual Codex" class="mw-redirect">Languages</a>:</span> 
+<strong class="selflink">English</strong> • 
+<a rel="nofollow" class="external text" href="https://wpdocs.osdn.jp/Microsoft">IIS サーバーへのインストール 日本語</a> 
+ <small>(<a href="Multilingual_Codex.html#Language_Cross_Reference" title="Multilingual Codex" class="mw-redirect">Add your language</a>)</small>
+</p>
+<div id="toc" class="toc"><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#Install_Internet_Information_Services_8.5_and_WordPress_3.x_by_Using_the_Microsoft_Web_Platform_Installer_5.0"><span class="tocnumber">1</span> <span class="toctext">Install Internet Information Services 8.5 and WordPress 3.x by Using the Microsoft Web Platform Installer 5.0</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="#Prerequisites"><span class="tocnumber">2</span> <span class="toctext">Prerequisites</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="#Step_1._Install_Microsoft_Web_Platform_Installer_5.0"><span class="tocnumber">3</span> <span class="toctext">Step 1. Install Microsoft Web Platform Installer 5.0</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="#Step_2._Select_the_products_and_applications_to_install"><span class="tocnumber">4</span> <span class="toctext">Step 2. Select the products and applications to install</span></a></li>
+<li class="toclevel-1 tocsection-5"><a href="#Step_3._Review_and_configure_the_selected_products_and_applications"><span class="tocnumber">5</span> <span class="toctext">Step 3. Review and configure the selected products and applications</span></a></li>
+<li class="toclevel-1 tocsection-6"><a href="#Step_4._Complete_the_installation_and_configuration"><span class="tocnumber">6</span> <span class="toctext">Step 4. Complete the installation and configuration</span></a></li>
+<li class="toclevel-1 tocsection-7"><a href="#Step_5._Enable_clean_URLs_.28Pretty_Permalinks.29"><span class="tocnumber">7</span> <span class="toctext">Step 5. Enable clean URLs (Pretty Permalinks)</span></a></li>
+<li class="toclevel-1 tocsection-8"><a href="#Step_6._Running_Microsoft_WebMatrix_with_WordPress"><span class="tocnumber">8</span> <span class="toctext">Step 6. Running Microsoft WebMatrix with WordPress</span></a></li>
+<li class="toclevel-1 tocsection-9"><a href="#Additional_Information"><span class="tocnumber">9</span> <span class="toctext">Additional Information</span></a></li>
+</ul>
+</div>
+
+<h2><span class="mw-headline" id="Install_Internet_Information_Services_8.5_and_WordPress_3.x_by_Using_the_Microsoft_Web_Platform_Installer_5.0">Install Internet Information Services 8.5 and WordPress 3.x by Using the Microsoft Web Platform Installer 5.0</span></h2>
+<p>NOTE: As of 12.02.2020. Microsoft WPI (5.1) does not install PHP support correctly on Windows 10, thus the Wordpress installation fails.
+</p><p>This article describes how to install and configure WordPress 3.x on Windows clients and servers (see Prerequisites) using the Microsoft Web Platform Installer (Web PI) version 5.0. As of May 28, 2014, the latest version of WordPress is 3.9.1.
+</p><p>The Web PI is a free tool that makes getting the latest components of the Microsoft Web Platform—including Internet Information Services (IIS), MySQL, PHP, the Microsoft .NET Framework, and Visual Web Developer—quick and easy. The Web PI also lets you install web applications such as WordPress with the built-in <a rel="nofollow" class="external text" href="http://www.microsoft.com/web/gallery/">Windows Web App Gallery</a>.
+</p><p>To install WordPress on IIS 8.5 by using the Web PI 5.0, follow these steps:
+</p><p><a href="Installing_on_Microsoft.html#Prerequisites" title="Installing on Microsoft" class="mw-redirect">Prerequisites</a>
+</p><p><a href="Installing_on_Microsoft.html#Step_1._Install_Microsoft_Web_Platform_Installer_5.0" title="Installing on Microsoft" class="mw-redirect">Step 1. Install Microsoft Web Platform Installer 5.0</a>
+</p><p><a href="Installing_on_Microsoft.html#Step_2._Select_the_products_and_applications_to_install" title="Installing on Microsoft" class="mw-redirect">Step 2. Select the products and applications to install</a>
+</p><p><a href="Installing_on_Microsoft.html#Step_3._Review_and_configure_the_selected_products_and_applications" title="Installing on Microsoft" class="mw-redirect">Step 3. Review and configure the selected products and applications</a>
+</p><p><a href="Installing_on_Microsoft.html#Step_4._Complete_the_installation_and_configuration" title="Installing on Microsoft" class="mw-redirect">Step 4. Complete the installation and configuration</a>
+</p><p><a href="Installing_on_Microsoft.html#Step_5._Enable_clean_URLs_.28Pretty_Permalinks.29" title="Installing on Microsoft" class="mw-redirect">Step 5. Enable clean URLs (Pretty Permalinks)</a>
+</p><p><a href="Installing_on_Microsoft.html#Step_6._Running_Microsoft_WebMatrix_with_WordPress" title="Installing on Microsoft" class="mw-redirect">Step 6. Running Microsoft WebMatrix with WordPress</a>
+</p>
+<h2><span class="mw-headline" id="Prerequisites">Prerequisites</span></h2>
+<p>The supported operating systems for the Microsoft Web Platform Installer (Web PI) 5.0 are Windows 8.1, Windows 8, Windows 7, Windows Vista Service Pack 1 (SP1), Windows Vista, Windows XP Service Pack 2 (SP2) and later versions, Windows Server 2012 R2, Windows Server 2012, Windows Server 2008 R2, Windows Server 2008, and Windows Server 2003 Service Pack 1 (SP1) and later versions.
+</p><p>For this guide, it is assumed that you have either Windows Server 2012 R2 or Windows 8.1 Pro client installed on your computer. You will also need an Internet connection and administrator privileges for your computer.
+</p><p>It is a good idea to confirm that your system meets the hardware requirements for IIS 8.5. See <a rel="nofollow" class="external free" href="http://technet.microsoft.com/en-us/library/dn303418.aspx">http://technet.microsoft.com/en-us/library/dn303418.aspx</a> for more information.
+</p>
+<h2><span class="mw-headline" id="Step_1._Install_Microsoft_Web_Platform_Installer_5.0">Step 1. Install Microsoft Web Platform Installer 5.0</span></h2>
+<p>In this step you download, install, and launch the MS Web Platform Installer (Web PI 5.0, which is a 1.4 MB download).
+</p>
+<ol><li> Log into your Windows machine as a user with administrative privileges.</li>
+<li> Launch Internet Explorer (other browsers work too).</li>
+<li> Go to <a rel="nofollow" class="external free" href="http://www.microsoft.com/web/downloads/platform.aspx">http://www.microsoft.com/web/downloads/platform.aspx</a>, and then click the <b>Free Download</b> button.<br /><a href="File_Microsoft_Web_Platform_install_5-0_WebPage.png" class="image" title="Microsoft Web Platform Installer 5.0 webpage"><img alt="Microsoft Web Platform Installer 5.0 webpage" src="images/2/28/Microsoft_Web_Platform_install_5-0_WebPage.png" width="974" height="826" /></a></li>
+<li> Click <b>Run</b>.<br /><a href="File_File_Download_Security_Warning_1.png" class="image" title="File download security warning"><img alt="File download security warning" src="images/3/3c/File_Download_Security_Warning_1.png" width="300" height="198" /></a></li>
+<li> Click <b>Run</b> again.<br /><a href="File_Internet_Explorer_Security_Warning_2.png" class="image" title="Internet Explorer security warning"><img alt="Internet Explorer security warning" src="images/a/a4/Internet_Explorer_Security_Warning_2.png" width="300" height="134" /></a></li>
+<li> Wait a few seconds for the Web PI 5.0 to start.</li></ol>
+<h2><span class="mw-headline" id="Step_2._Select_the_products_and_applications_to_install">Step 2. Select the products and applications to install</span></h2>
+<p>In this step, you select the version of WordPress that you want to install. WordPress 3.9.1 is used in this guide.
+</p>
+<ol><li> On the "Web Platform Installer" start screen click the <b>Applications</b> tab, and then click the <b>Add</b> button associated to the right with "WordPress".<br /><a href="File_WebPI_Installing_WordPress_Step1.png" class="image" title="List of apps on WebPI"><img alt="List of apps on WebPI" src="images/6/61/WebPI_Installing_WordPress_Step1.png" width="600" height="438" /></a></li>
+<li> Click <b>Install</b>.<br /><a href="File_WebPI_Installing_WordPress_Step2.png" class="image" title="Select WordPress on WebPI"><img alt="Select WordPress on WebPI" src="images/4/46/WebPI_Installing_WordPress_Step2.png" width="600" height="438" /></a></li></ol>
+<h2><span class="mw-headline" id="Step_3._Review_and_configure_the_selected_products_and_applications">Step 3. Review and configure the selected products and applications</span></h2>
+<p>In this step, you review and configure what you have added. Additionally, you add the database and configure the password for it.
+</p>
+<ol><li> When you are asked which type of database you want to use, leave <b>MySQL (Not installed)</b> selected.<br /><b>Note:</b> This will install MySQL 5.1 for Windows to handle all the database transactions that are required by WordPress.</li>
+<li> In password fields, type in a password for your database, and then click <b>Continue</b>.<br /><a href="File_WebPI_Installing_WordPress_Step3.png" class="image" title="Database engine configuration"><img alt="Database engine configuration" src="images/0/0c/WebPI_Installing_WordPress_Step3.png" width="600" height="375" /></a></li>
+<li> Review the files to be downloaded and installed, as well as the license agreements, and then click <b>I Accept</b>.<br /><a href="File_WebPI_Installing_WordPress_Step4.png" class="image" title="Application installation summary"><img alt="Application installation summary" src="images/2/23/WebPI_Installing_WordPress_Step4.png" width="600" height="375" /></a></li>
+<li> Allow the Web PI installation to complete.<br /><a href="File_WebPI_Installing_WordPress_Step5.png" class="image" title="WordPress Installation process"><img alt="WordPress Installation process" src="images/b/ba/WebPI_Installing_WordPress_Step5.png" width="600" height="375" /></a></li>
+<li> Configure Security Keys.<br />The WordPress <a href="Editing_wp-config.html#Security_Keys" title="Editing wp-config.php">Security Keys</a> section describes what these keys and how they're used.<br /><a href="File_WebPI5_Installing_WordPress_Step6.png" class="image" title="Configure Security Keys"><img alt="Configure Security Keys" src="images/5/5f/WebPI5_Installing_WordPress_Step6.png" width="695" height="474" /></a><br />The keys don't need to be remembered, they should just be long, random and complicated.  An easy way to generate the keys is to use the <a rel="nofollow" class="external text" href="https://api.wordpress.org/secret-key/1.1/salt/">online key generator</a>.  Each time you click browser refresh, the <a rel="nofollow" class="external text" href="https://api.wordpress.org/secret-key/1.1/salt/">online key generator</a> creates a new set of keys.<br /> <br /><i>Note:</i> The <a rel="nofollow" class="external text" href="https://api.wordpress.org/secret-key/1.1/salt/">online key generator</a> produces keys that may contain dollar signs ('$') which cannot be used with keys entered into Web-PI.  Until this Web-PI issue is resolved, a simple solution is to check for dollar sign characters and simply replace '$' with 'S' (any alpha character will work).<br /> <br />Here's an example set of keys - <i>don't use these, use the <a rel="nofollow" class="external text" href="https://api.wordpress.org/secret-key/1.1/salt/">online key generator</a> to create your own unique keys!</i><br /><a href="File_WebPI5_Step5B_Example-Security-Keys.png" class="image" title="Example Security Keys"><img alt="Example Security Keys" src="images/7/7d/WebPI5_Step5B_Example-Security-Keys.png" width="771" height="140" /></a></li>
+<li> Finish.<br />On the FINISH dialog click the <b>copy to clipboard</b> link (this copies your database settings and password to the clipboard), paste and save this information in a file for future reference, and then click the <b>Finish</b> button.<br /><a href="File_WebPI5_Installing_WordPress_Step7.png" class="image" title="Installation completed"><img alt="Installation completed" src="images/f/fe/WebPI5_Installing_WordPress_Step7.png" width="696" height="473" /></a></li>
+<li> Microsoft WebMatrix will open, allowing you to configure additional settings related to your WordPress site:<a href="File_WebPI_Installing_WordPress_WebMatrixSite.png" class="image" title="WebMatrix summary screen"><img alt="WebMatrix summary screen" src="images/d/d1/WebPI_Installing_WordPress_WebMatrixSite.png" width="600" height="313" /></a></li></ol>
+<h2><span class="mw-headline" id="Step_4._Complete_the_installation_and_configuration">Step 4. Complete the installation and configuration</span></h2>
+<p>In this step, you complete the installation.
+</p>
+<ol><li> Switch to Internet Explorer.</li>
+<li> Go to your WordPress website. For example, go to <a rel="nofollow" class="external free" href="http://localhost/myWordPress">http://localhost/myWordPress</a>.</li>
+<li> In the <b>Site Title</b> box, type the name of your site.</li>
+<li> In the <b>Password, twice</b> boxes, type a password for the admin account.<br /><a href="File_WordPress_site_configuration.png" class="image" title="WordPress site configuration"><img alt="WordPress site configuration" src="images/9/94/WordPress_site_configuration.png" width="600" height="457" /></a></li>
+<li> In the <b>Your E-mail</b> box, type the email address for the admin account.</li>
+<li> Click <b>Install WordPress</b>.<br /><a href="File_WordPress_Site_Configuration_continued.png" class="image" title="WordPress site configuration (continued)"><img alt="WordPress site configuration (continued)" src="images/e/e2/WordPress_Site_Configuration_continued.png" width="600" height="163" /></a></li>
+<li> Click <b>Log In</b>.<br /><a href="File_WordPress_Site_Configuration_completed.png" class="image" title="WordPress site configuration completed"><img alt="WordPress site configuration completed" src="images/2/28/WordPress_Site_Configuration_completed.png" width="600" height="290" /></a></li>
+<li> Type <b>admin</b>, type the password, and then click <b>Log In</b>.<br /><a href="File_WordPress_login.png" class="image" title="WordPress login"><img alt="WordPress login" src="images/1/15/WordPress_login.png" width="300" height="293" /></a></li></ol>
+<h2><span class="mw-headline" id="Step_5._Enable_clean_URLs_.28Pretty_Permalinks.29">Step 5. Enable clean URLs (Pretty Permalinks)</span></h2>
+<p>In this step, you enable Pretty Permalinks now that WordPress has been installed.
+</p>
+<ol><li> In the <b>Dashboard</b> menu, click <b>Settings</b>.<br /><a href="File_WordPress_Dashboard_menu.png" class="image" title="WordPress dashboard menu"><img alt="WordPress dashboard menu" src="images/2/21/WordPress_Dashboard_menu.png" width="150" height="414" /></a></li>
+<li> Scroll down, and then click <b>Permalinks</b>.<br /><a href="File_Settings.png" class="image" title="Settings"><img alt="Settings" src="images/9/91/Settings.png" width="150" height="187" /></a></li>
+<li> Under <b>Common settings</b>, select a common Permalink setting or select <b>Custom Structure</b> to create your own Permalink, and then click <b>Save Changes</b>.<br /><a href="File_Permalink_settings.png" class="image" title="Permalink settings"><img alt="Permalink settings" src="images/c/c5/Permalink_settings.png" width="600" height="433" /></a></li></ol>
+<p>The installation is now complete, and you are ready to use WordPress!
+</p>
+<h2><span class="mw-headline" id="Step_6._Running_Microsoft_WebMatrix_with_WordPress">Step 6. Running Microsoft WebMatrix with WordPress</span></h2>
+<p>The Microsoft Web Platform Installer (Web PI) installs WordPress to run in a localhost configuration in combination with Microsoft WebMatrix (which was also installed as part of the Web PI installation).  When WebMatrix is not running (e.g., after a reboot or if you terminate WebMatrix) you will not be able to access your localhost WordPress site until WebMatrix is restarted.  Use the following steps to start WebMatrix and launch your localhost WordPress site.
+</p>
+<ol><li> Click <b>Start</b>, click <b>All Programs</b>, click-open the <b>Microsoft WebMatrix</b> folder, and then click to launch the <b>Microsoft WebMatrix</b> app.<br /><a href="File_MS-Web-Matrix-1_Launch-Web-Matrix.png" class="image" title="Launch Microsoft WebMatrix"><img alt="Launch Microsoft WebMatrix" src="images/3/32/MS-Web-Matrix-1_Launch-Web-Matrix.png" width="242" height="246" /></a><br />&#160;</li>
+<li> On the WebMatrix start page, click the <b>My Sites</b> button to display the installed sites, and then click your <b>wordpress</b> site that displays in the pop-up context menu.<br /><a href="File_MS-Web-Matrix-2_Launch-My-Sites.png" class="image" title="Open your WordPress site"><img alt="Open your WordPress site" src="images/f/f0/MS-Web-Matrix-2_Launch-My-Sites.png" width="488" height="284" /></a><br />&#160;</li>
+<li> After the site opens, click the lower-left <b>Site</b> tab to display links for the WordPress launch URL and file Path.<br /><a href="File_MS-Web-Matrix-3_Select-Site-tab.png" class="image" title="Open the &quot;Site&quot; tab"><img alt="Open the &quot;Site&quot; tab" src="images/2/22/MS-Web-Matrix-3_Select-Site-tab.png" width="226" height="180" /></a><br />&#160;</li>
+<li> Click on the site URL link to launch your <b>localhost</b> WordPress site.<br /><a href="File_MS-Web-Matrix-4_Launch-Site-URL.png" class="image" title="Launch the localhost WordPress site"><img alt="Launch the localhost WordPress site" src="images/8/89/MS-Web-Matrix-4_Launch-Site-URL.png" width="263" height="92" /></a><br />&#160;</li>
+<li> At this point WebMatrix will open a browser window to your localhost WordPress site which you can customize and add content to.<br /><a href="File_MS-Web-Matrix-5_Browser-localhost.png" class="image" title="Browser window opens with your localhost WordPress site."><img alt="Browser window opens with your localhost WordPress site." src="images/1/12/MS-Web-Matrix-5_Browser-localhost.png" width="296" height="232" /></a></li></ol>
+<p><i>Remember:</i> WebMatrix must be left running while you interact with your localhost WordPress site.
+</p>
+<h2><span class="mw-headline" id="Additional_Information">Additional Information</span></h2>
+<ul><li> WordPress is free, open-source content management system (CMS) software that lets individuals or communities of users easily publish, manage, and organize a wide variety of content on a website. For more information about WordPress, visit these websites:
+<ul><li> <a rel="nofollow" class="external free" href="http://www.wordpress.org/">http://www.wordpress.org/</a></li>
+<li> <a rel="nofollow" class="external free" href="Main_Page.html">http://codex.wordpress.org/Main_Page</a></li></ul></li>
+<li> IIS URL Rewrite 2.0 lets you create powerful rules to implement URLs that are easier for users to remember and easier for search engines to find. For more information, visit these websites:
+<ul><li> <a rel="nofollow" class="external free" href="http://www.iis.net/download/urlrewrite">http://www.iis.net/download/urlrewrite</a></li>
+<li> <a rel="nofollow" class="external free" href="http://learn.iis.net/page.aspx/734/url-rewrite-module/">http://learn.iis.net/page.aspx/734/url-rewrite-module/</a></li></ul></li>
+<li> Windows Cache Extension for PHP is a PHP accelerator that is used to increase the speed of PHP applications that are running on Windows and on Windows Server. After Windows Cache Extension for PHP is enabled and loaded by the PHP engine, PHP applications can take advantage of the functionality without any code modifications. For more information, visit this website:
+<ul><li> <a rel="nofollow" class="external free" href="http://www.iis.net/download/wincacheforphp">http://www.iis.net/download/wincacheforphp</a></li></ul></li>
+<li> PHP Manager for IIS is a tool for managing one or many PHP installations on IIS 7.0 servers. For more information, visit these websites:
+<ul><li> <a rel="nofollow" class="external free" href="http://www.iis.net/community/default.aspx?tabid=34&amp;g=6&amp;i=2007">http://www.iis.net/community/default.aspx?tabid=34&amp;g=6&amp;i=2007</a></li>
+<li> <a rel="nofollow" class="external free" href="http://learn.iis.net/page.aspx/944/using-php-manager-for-iis-to-setup-and-configure-php/">http://learn.iis.net/page.aspx/944/using-php-manager-for-iis-to-setup-and-configure-php/</a></li></ul></li>
+<li> For more general information about PHP, visit these websites:
+<ul><li> <a rel="nofollow" class="external free" href="http://www.php.net/manual/en/install.windows.manual.php">http://www.php.net/manual/en/install.windows.manual.php</a></li>
+<li> <a rel="nofollow" class="external free" href="http://www.php.net/manual/en/install.windows.iis6.php">http://www.php.net/manual/en/install.windows.iis6.php</a></li>
+<li> <a rel="nofollow" class="external free" href="http://www.php.net/manual/en/install.windows.iis7.php">http://www.php.net/manual/en/install.windows.iis7.php</a></li></ul></li>
+<li> Other useful links:
+<ul><li> <a rel="nofollow" class="external free" href="http://php.iis.net/">http://php.iis.net/</a></li>
+<li> <a rel="nofollow" class="external free" href="http://windows.php.net/">http://windows.php.net/</a></li>
+<li> <a rel="nofollow" class="external free" href="http://forums.iis.net/1102.aspx">http://forums.iis.net/1102.aspx</a></li></ul></li>
+<li> For information on media upload permission errors, or 500 errors when loading uploaded images, visit these sites:
+<ul><li> <a rel="nofollow" class="external free" href="https://www.bluevalleytech.com/techtalk/blog/iis-500-errors-when-loading-a-static-image-in-wordpress.aspx">https://www.bluevalleytech.com/techtalk/blog/iis-500-errors-when-loading-a-static-image-in-wordpress.aspx</a></li>
+<li> <a rel="nofollow" class="external free" href="http://www.amixa.com/blog/2011/04/29/iis-wordpress-images-500-error/">http://www.amixa.com/blog/2011/04/29/iis-wordpress-images-500-error/</a></li></ul></li></ul>
+<div style="background-color:#EEEEFF; border:1px solid #CCCCCC; color:#000000; padding:7px; margin:0.5em auto 0.5em auto; vertical-align:middle; overflow:hidden;">This article is <a href="Category_Copyedits.html" title="Category:Copyedits" class="mw-redirect">marked</a> as in need of editing. You can <a href="https://codex.wordpress.org/Codex:Contributing" title="Codex:Contributing">help</a> Codex by <b><a rel="nofollow" class="external text" href="https://codex.wordpress.org/index.php?title=Installing_on_Microsoft_IIS&amp;action=edit">editing it</a></b>.</div>
+
+<!-- 
+NewPP limit report
+Cached time: 20210122073621
+Cache expiry: 86400
+Dynamic content: false
+CPU time usage: 0.036 seconds
+Real time usage: 0.044 seconds
+Preprocessor visited node count: 78/1000000
+Preprocessor generated node count: 287/1000000
+Post‐expand include size: 1469/2097152 bytes
+Template argument size: 449/2097152 bytes
+Highest expansion depth: 5/40
+Expensive parser function count: 0/100
+-->
+
+<!-- 
+Transclusion expansion time report (%,ms,calls,template)
+100.00%    6.108      1 - -total
+ 50.29%    3.072      1 - Template:Languages
+ 46.87%    2.863      1 - Template:Copyedit
+ 20.28%    1.239      1 - Template:Message
+ 16.06%    0.981      1 - Template:ja
+ 14.92%    0.911      1 - Template:en
+-->
+</div><div class="printfooter">
+Retrieved from "<a dir="ltr" href="https://codex.wordpress.org/index.php?title=Installing_on_Microsoft_IIS&amp;oldid=168619">https://codex.wordpress.org/index.php?title=Installing_on_Microsoft_IIS&amp;oldid=168619</a>"</div>
+				<div id="catlinks"><div id="catlinks" class="catlinks" data-mw="interface"><div id="mw-normal-catlinks" class="mw-normal-catlinks"><a href="https://codex.wordpress.org/Special:Categories" title="Special:Categories">Categories</a>: <ul><li><a href="Category_Copyedit.html" title="Category:Copyedit">Copyedit</a></li><li><a href="Category_Installation.html" title="Category:Installation">Installation</a></li></ul></div></div></div>			<!-- end content -->
+		</div>
+		<div class="col-2">
+			
+						
+			<ul class="submenu">
+				<li id="n-mainpage"><a href="Main_Page.html">Home Page</a></li>	
+				<li><a href="WordPress_Lessons.html">WordPress Lessons</a></li>
+				<li><a href="Getting_Started_with_WordPress.html">Getting Started</a></li>
+				<li><a href="Working_with_WordPress.html">Working with WordPress</a></li>
+				<li><a href="Blog_Design_and_Layout.html">Design and Layout</a></li>
+				<li><a href="Advanced_Topics.html">Advanced Topics</a></li>
+				<li><a href="Troubleshooting.html">Troubleshooting</a></li>
+				<li><a href="Developer_Documentation.html">Developer Docs</a></li>
+				<li><a href="About_WordPress.html">About WordPress</a></li>
+			</ul>
+
+			<h3>Codex Resources</h3>
+			<ul class="submenu">
+				<li id="n-portal"><a href="https://codex.wordpress.org/Codex:Community_Portal">Community portal</a></li>	      
+				<li id="n-currentevents"><a href="Current_events.html">Current events</a></li>	      
+				<li id="n-recentchanges"><a href="https://codex.wordpress.org/Special:RecentChanges">Recent changes</a></li>	      
+				<li id="n-randompage"><a href="https://codex.wordpress.org/Special:Random">Random page</a></li>	      
+				<li id="n-help"><a href="https://codex.wordpress.org/Help:Contents">Help</a></li>	
+			</ul>
+			
+		</div>
+	</div>
+</div>
+
+
+<div id="wporg-footer">
+	<div class="wrapper">
+		<ul>
+			<li><a href="http://wordpress.org/about/" title="An introduction to the WordPress project">About</a></li>
+			<li><a href="http://wordpress.org/news/" title="News and Updates">Blog</a></li>
+			<li><a href="http://wordpress.org/hosting/" title="Recommended web hosting providers">Hosting</a></li>
+			<li><a href="https://wordpressfoundation.org/donate/" title="Donate to the WordPress Foundation">Donate</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://wordpress.org/support/" title="Forums, documentation, and other resources">Support</a></li>
+			<li><a href="../developer.wordpress.org/index.html" title="Resources for WordPress developers">Developers</a></li>
+			<li><a href="http://make.wordpress.org/" title="Give back to WordPress through code, support, translation and more">Get Involved</a></li>
+			<li><a href="http://learn.wordpress.org/" title="Workshops and training materials">Learn</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://wordpress.org/showcase/" title="Some of the best WordPress sites on the Web">Showcase</a></li>
+			<li><a href="http://wordpress.org/plugins/" title="Add extra functionality to WordPress">Plugins</a></li>
+			<li><a href="http://wordpress.org/themes/" title="Make your WordPress pretty">Themes</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://central.wordcamp.org/" title="Find a WordPress event near you">WordCamp</a></li>
+			<li><a href="http://wordpress.tv/" title="Videos, tutorials, and WordCamp sessions">WordPress.TV</a></li>
+			<li><a href="http://buddypress.org/" title="A set of plugins to transform your WordPress into a social network">BuddyPress</a></li>
+			<li><a href="http://bbpress.org/" title="Fast, slick forums built on WordPress">bbPress</a></li>
+		</ul>
+
+		<ul>
+			<li><a href="http://wordpress.com/?ref=wporg-footer" title="Hassle-free WordPress hosting">WordPress.com</a></li>
+			<li><a href="http://ma.tt/" title="Co-founder of WordPress, an example of what WordPress can do">Matt</a></li>
+			<li><a href="http://wordpress.org/about/privacy/" title="WordPress.org Privacy Policy">Privacy</a></li>
+			<li><a href="https://publiccode.eu/" target="_blank">Public Code</a></li>
+		</ul>
+
+		<ul>
+			<li><span class="dashicons dashicons-twitter"></span><a href="https://twitter.com/WordPress" title="Follow @WordPress on Twitter">@WordPress</a></li>
+			<li><span class="dashicons dashicons-facebook"></span><a href="https://www.facebook.com/WordPress/" title="Like WordPress on Facebook">WordPress</a></li>
+		</ul>
+	</div>
+
+		<p class="cip cip-image">Code is Poetry.</p>
+</div>
+
+<script src="../s.w.org/style/js/navigation.min.js?20190128"></script>
+
+</body>
+<!-- Cached 20210122073621 -->
+
+<!-- Mirrored from codex.wordpress.org/Installing_on_Microsoft_IIS by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 31 Aug 2021 17:03:19 GMT -->
+</html>

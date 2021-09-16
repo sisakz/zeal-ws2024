@@ -1,0 +1,815 @@
+<html><!-- Mirrored from www.php.net/manual/en/mongodb-driver-query.construct.php by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 11 Sep 2021 10:29:50 GMT --><!-- Added by HTTrack --><head><meta http-equiv="content-type" content="text/html;charset=utf-8"><!-- /Added by HTTrack -->
+
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>MongoDB\Driver\Query::__construct</title>
+
+ <link rel="shortcut icon" href="../../favicon.ico">
+ <link rel="search" type="application/opensearchdescription+xml" href="http://php.net/phpnetimprovedsearch.src" title="Add PHP.net search">
+ <link rel="alternate" type="application/atom+xml" href="https://www.php.net/releases/feed.php" title="PHP Release feed">
+ <link rel="alternate" type="application/atom+xml" href="https://www.php.net/feed.atom" title="PHP: Hypertext Preprocessor">
+
+ <link rel="canonical" href="mongodb-driver-query.construct.html">
+ <link rel="shorturl" href="mongodb-driver-query.construct.html">
+ <link rel="alternate" href="mongodb-driver-query.construct.html" hreflang="x-default">
+
+ <link rel="contents" href="index-2.html">
+ <link rel="index" href="class.mongodb-driver-query.html">
+ <link rel="prev" href="class.mongodb-driver-query.html">
+ <link rel="next" href="class.mongodb-driver-bulkwrite.html">
+
+ <link rel="alternate" href="mongodb-driver-query.construct.html" hreflang="en">
+ <link rel="alternate" href="https://www.php.net/manual/pt_BR/mongodb-driver-query.construct.php" hreflang="pt_BR">
+ <link rel="alternate" href="https://www.php.net/manual/zh/mongodb-driver-query.construct.php" hreflang="zh">
+ <link rel="alternate" href="https://www.php.net/manual/fr/mongodb-driver-query.construct.php" hreflang="fr">
+ <link rel="alternate" href="https://www.php.net/manual/de/mongodb-driver-query.construct.php" hreflang="de">
+ <link rel="alternate" href="https://www.php.net/manual/ja/mongodb-driver-query.construct.php" hreflang="ja">
+ <link rel="alternate" href="https://www.php.net/manual/ro/mongodb-driver-query.construct.php" hreflang="ro">
+ <link rel="alternate" href="https://www.php.net/manual/ru/mongodb-driver-query.construct.php" hreflang="ru">
+ <link rel="alternate" href="https://www.php.net/manual/es/mongodb-driver-query.construct.php" hreflang="es">
+ <link rel="alternate" href="https://www.php.net/manual/tr/mongodb-driver-query.construct.php" hreflang="tr">
+
+<link rel="stylesheet" type="text/css" href="../../cached0aba.css?t=1539771603&amp;f=/fonts/Fira/fira.css" media="screen">
+<link rel="stylesheet" type="text/css" href="../../cached2ecf.css?t=1539765004&amp;f=/fonts/Font-Awesome/css/fontello.css" media="screen">
+<link rel="stylesheet" type="text/css" href="../../cachedba57.css?t=1606338002&amp;f=/styles/theme-base.css" media="screen">
+<link rel="stylesheet" type="text/css" href="../../cached3afa.css?t=1627831203&amp;f=/styles/theme-medium.css" media="screen">
+
+ <!--[if lte IE 7]>
+ <link rel="stylesheet" type="text/css" href="https://www.php.net/styles/workarounds.ie7.css" media="screen">
+ <![endif]-->
+
+ <!--[if lte IE 8]>
+ <script>
+  window.brokenIE = true;
+ </script>
+ <![endif]-->
+
+ <!--[if lte IE 9]>
+ <link rel="stylesheet" type="text/css" href="https://www.php.net/styles/workarounds.ie9.css" media="screen">
+ <![endif]-->
+
+ <!--[if IE]>
+ <script src="https://www.php.net/js/ext/html5.js"></script>
+ <![endif]-->
+
+ <base>
+
+
+</head>
+<body class="docs " style="">
+
+
+<div class="headsup"><a href="https://www.php.net/conferences/index.php#id2021-09-08-1">Longhorn PHP 2021</a></div>
+<nav id="trick"><div><dl>
+<dt><a href="getting-started.html">Getting Started</a></dt>
+	<dd><a href="introduction.html">Introduction</a></dd>
+	<dd><a href="tutorial.html">A simple tutorial</a></dd>
+<dt><a href="langref.html">Language Reference</a></dt>
+	<dd><a href="language.basic-syntax.html">Basic syntax</a></dd>
+	<dd><a href="language.types.html">Types</a></dd>
+	<dd><a href="language.variables.html">Variables</a></dd>
+	<dd><a href="language.constants.html">Constants</a></dd>
+	<dd><a href="language.expressions.html">Expressions</a></dd>
+	<dd><a href="language.operators.html">Operators</a></dd>
+	<dd><a href="language.control-structures.html">Control Structures</a></dd>
+	<dd><a href="language.functions.html">Functions</a></dd>
+	<dd><a href="language.oop5.html">Classes and Objects</a></dd>
+	<dd><a href="language.namespaces.html">Namespaces</a></dd>
+	<dd><a href="language.errors.html">Errors</a></dd>
+	<dd><a href="language.exceptions.html">Exceptions</a></dd>
+	<dd><a href="language.generators.html">Generators</a></dd>
+	<dd><a href="language.attributes.html">Attributes</a></dd>
+	<dd><a href="language.references.html">References Explained</a></dd>
+	<dd><a href="reserved.variables.html">Predefined Variables</a></dd>
+	<dd><a href="reserved.exceptions.html">Predefined Exceptions</a></dd>
+	<dd><a href="reserved.interfaces.html">Predefined Interfaces and Classes</a></dd>
+	<dd><a href="context.html">Context options and parameters</a></dd>
+	<dd><a href="wrappers.html">Supported Protocols and Wrappers</a></dd>
+</dl>
+<dl>
+<dt><a href="security.html">Security</a></dt>
+	<dd><a href="security.intro.html">Introduction</a></dd>
+	<dd><a href="security.general.html">General considerations</a></dd>
+	<dd><a href="security.cgi-bin.html">Installed as CGI binary</a></dd>
+	<dd><a href="security.apache.html">Installed as an Apache module</a></dd>
+	<dd><a href="security.sessions.html">Session Security</a></dd>
+	<dd><a href="security.filesystem.html">Filesystem Security</a></dd>
+	<dd><a href="security.database.html">Database Security</a></dd>
+	<dd><a href="security.errors.html">Error Reporting</a></dd>
+	<dd><a href="security.variables.html">User Submitted Data</a></dd>
+	<dd><a href="security.hiding.html">Hiding PHP</a></dd>
+	<dd><a href="security.current.html">Keeping Current</a></dd>
+<dt><a href="features.html">Features</a></dt>
+	<dd><a href="features.http-auth.html">HTTP authentication with PHP</a></dd>
+	<dd><a href="features.cookies.html">Cookies</a></dd>
+	<dd><a href="features.sessions.html">Sessions</a></dd>
+	<dd><a href="features.xforms.html">Dealing with XForms</a></dd>
+	<dd><a href="features.file-upload.html">Handling file uploads</a></dd>
+	<dd><a href="features.remote-files.html">Using remote files</a></dd>
+	<dd><a href="features.connection-handling.html">Connection handling</a></dd>
+	<dd><a href="features.persistent-connections.html">Persistent Database Connections</a></dd>
+	<dd><a href="features.commandline.html">Command line usage</a></dd>
+	<dd><a href="features.gc.html">Garbage Collection</a></dd>
+	<dd><a href="features.dtrace.html">DTrace Dynamic Tracing</a></dd>
+</dl>
+<dl>
+<dt><a href="funcref.html">Function Reference</a></dt>
+	<dd><a href="refs.basic.php.html">Affecting PHP's Behaviour</a></dd>
+	<dd><a href="refs.utilspec.audio.html">Audio Formats Manipulation</a></dd>
+	<dd><a href="refs.remote.auth.html">Authentication Services</a></dd>
+	<dd><a href="refs.utilspec.cmdline.html">Command Line Specific Extensions</a></dd>
+	<dd><a href="refs.compression.html">Compression and Archive Extensions</a></dd>
+	<dd><a href="refs.crypto.html">Cryptography Extensions</a></dd>
+	<dd><a href="refs.database.html">Database Extensions</a></dd>
+	<dd><a href="refs.calendar.html">Date and Time Related Extensions</a></dd>
+	<dd><a href="refs.fileprocess.file.html">File System Related Extensions</a></dd>
+	<dd><a href="refs.international.html">Human Language and Character Encoding Support</a></dd>
+	<dd><a href="refs.utilspec.image.html">Image Processing and Generation</a></dd>
+	<dd><a href="refs.remote.mail.html">Mail Related Extensions</a></dd>
+	<dd><a href="refs.math.html">Mathematical Extensions</a></dd>
+	<dd><a href="refs.utilspec.nontext.html">Non-Text MIME Output</a></dd>
+	<dd><a href="refs.fileprocess.process.html">Process Control Extensions</a></dd>
+	<dd><a href="refs.basic.other.html">Other Basic Extensions</a></dd>
+	<dd><a href="refs.remote.other.html">Other Services</a></dd>
+	<dd><a href="refs.search.html">Search Engine Extensions</a></dd>
+	<dd><a href="refs.utilspec.server.html">Server Specific Extensions</a></dd>
+	<dd><a href="refs.basic.session.html">Session Extensions</a></dd>
+	<dd><a href="refs.basic.text.html">Text Processing</a></dd>
+	<dd><a href="refs.basic.vartype.html">Variable and Type Related Extensions</a></dd>
+	<dd><a href="refs.webservice.html">Web Services</a></dd>
+	<dd><a href="refs.utilspec.windows.html">Windows Only Extensions</a></dd>
+	<dd><a href="refs.xml.html">XML Manipulation</a></dd>
+	<dd><a href="refs.ui.html">GUI Extensions</a></dd>
+</dl>
+<dl>
+<dt>Keyboard Shortcuts</dt><dt>?</dt>
+<dd>This help</dd>
+<dt>j</dt>
+<dd>Next menu item</dd>
+<dt>k</dt>
+<dd>Previous menu item</dd>
+<dt>g p</dt>
+<dd>Previous man page</dd>
+<dt>g n</dt>
+<dd>Next man page</dd>
+<dt>G</dt>
+<dd>Scroll to bottom</dd>
+<dt>g g</dt>
+<dd>Scroll to top</dd>
+<dt>g h</dt>
+<dd>Goto homepage</dd>
+<dt>g s</dt>
+<dd>Goto search<br>(current page)</dd>
+<dt>/</dt>
+<dd>Focus search box</dd>
+</dl></div></nav>
+<div id="goto">
+    <div class="search">
+         <div class="text"></div>
+         <div class="results"><ul></ul></div>
+   </div>
+</div>
+
+  <div id="breadcrumbs" class="row-fluid">
+    <div id="breadcrumbs-inner">
+          
+              
+          <ul>
+            <li><a href="index-2.html">PHP Manual</a></li>      <li><a href="funcref.html">Function Reference</a></li>      <li><a href="refs.database.html">Database Extensions</a></li>      <li><a href="refs.database.vendors.html">Vendor Specific Database Extensions</a></li>      <li><a href="set.mongodb.html">MongoDB</a></li>      <li><a href="book.mongodb.html">MongoDB\Driver</a></li>      <li><a href="class.mongodb-driver-query.html">MongoDB\Driver\Query</a></li>      </ul>
+    </div>
+  </div>
+
+
+
+
+<div id="layout" class="clearfix">
+  <section id="layout-content">
+  <div id="mongodb-driver-query.construct" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">MongoDB\Driver\Query::__construct</h1>
+  <p class="verinfo">(mongodb &gt;=1.0.0)</p><p class="refpurpose"><span class="refname">MongoDB\Driver\Query::__construct</span> — <span class="dc-title">Create a new Query</span></p>
+
+ </div>
+
+ <div class="refsect1 description" id="refsect1-mongodb-driver-query.construct-description">
+  <h3 class="title">Description</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="modifier">final</span> <span class="modifier">public</span> <span class="methodname"><strong>MongoDB\Driver\Query::__construct</strong></span>(<span class="methodparam"><span class="type"><span class="type">array</span>|<span class="type">object</span></span> <code class="parameter">$filter</code></span>, <span class="methodparam"><span class="type">array</span> <code class="parameter">$queryOptions</code><span class="initializer"> = ?</span></span>)</div>
+
+  <p class="para rdfs-comment">
+   Constructs a new <span class="classname"><a href="class.mongodb-driver-query.html" class="classname">MongoDB\Driver\Query</a></span>, which is an
+   immutable value object that represents a database query. The query may then
+   be executed with
+   <span class="methodname"><a href="mongodb-driver-manager.executequery.html" class="methodname">MongoDB\Driver\Manager::executeQuery()</a></span>.
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-mongodb-driver-query.construct-parameters">
+  <h3 class="title">Parameters</h3>
+  <dl>
+   
+   
+    <dt>
+<code class="parameter">filter</code> (<span class="type"><span class="type">array</span>|<span class="type">object</span></span>)</dt>
+
+    <dd>
+
+     <p class="para">
+      The <a href="https://docs.mongodb.com/manual/tutorial/query-documents/" class="link external">»&nbsp;query predicate</a>.
+      An empty predicate will match all documents in the collection.
+     </p>
+     <blockquote class="note"><p><strong class="note">Note</strong>: 
+      <span class="simpara">
+       When evaluating query criteria, MongoDB compares types and values according to its own <a href="https://docs.mongodb.com/manual/reference/bson-type-comparison-order/" class="link external">»&nbsp;comparison rules for BSON types</a>, which differs from PHP's <a href="types.comparisons.html" class="link">comparison</a> and <a href="language.types.type-juggling.html" class="link">type juggling</a> rules. When matching a special BSON type the query criteria should use the respective <a href="book.bson.html" class="link">BSON class</a> (e.g. use <span class="classname"><a href="class.mongodb-bson-objectid.html" class="classname">MongoDB\BSON\ObjectId</a></span> to match an <a href="https://docs.mongodb.com/manual/reference/object-id/" class="link external">»&nbsp;ObjectId</a>).
+      </span>
+     </p></blockquote>
+    </dd>
+
+   
+
+   
+    <dt>
+<code class="parameter">queryOptions</code></dt>
+
+    <dd>
+
+     <p class="para">
+      </p><table id="mongodb-driver-query.construct-queryOptions" class="doctable table">
+       <caption><strong>queryOptions</strong></caption>
+       
+        <thead>
+         <tr>
+          <th>Option</th>
+          <th>Type</th>
+          <th>Description</th>
+         </tr>
+
+        </thead>
+
+        <tbody class="tbody">
+         <tr>
+          <td>allowDiskUse</td>
+          <td><span class="type">bool</span></td>
+          <td>
+           <p class="para">
+            Allows MongoDB to use temporary disk files to store data exceeding
+            the 100 megabyte system memory limit while processing a blocking
+            sort operation.
+           </p>
+          </td>
+         </tr>
+
+         <tr>
+          <td>allowPartialResults</td>
+          <td><span class="type">bool</span></td>
+          <td>
+           <p class="para">
+            For queries against a sharded collection, returns partial results
+            from the mongos if some shards are unavailable instead of throwing
+            an error.
+           </p>
+           <p class="para">
+            Falls back to the deprecated <code class="literal">"partial"</code> option if
+            not specified.
+           </p>
+          </td>
+         </tr>
+
+         <tr>
+          <td>awaitData</td>
+          <td><span class="type">bool</span></td>
+          <td>
+           Use in conjunction with the <code class="literal">"tailable"</code> option to
+           block a getMore operation on the cursor temporarily if at the end of
+           data rather than returning no data. After a timeout period, the query
+           returns as normal.
+          </td>
+         </tr>
+
+         <tr>
+          <td>batchSize</td>
+          <td><span class="type">int</span></td>
+          <td>
+           <p class="para">
+            The number of documents to return in the first batch. Defaults to
+            101. A batch size of 0 means that the cursor will be established,
+            but no documents will be returned in the first batch.
+           </p>
+           <p class="para">
+            In versions of MongoDB before 3.2, where queries use the legacy wire
+            protocol OP_QUERY, a batch size of 1 will close the cursor
+            irrespective of the number of matched documents.
+           </p>
+          </td>
+         </tr>
+
+         
+         <tr>
+          <td>collation</td>
+          <td><span class="type"><span class="type">array</span>|<span class="type">object</span></span></td>
+          <td>
+           <p class="para">
+            <a href="https://docs.mongodb.com/master/reference/collation/" class="link external">»&nbsp;Collation</a> allows users to specify language-specific rules for string comparison, such as rules for lettercase and accent marks. When specifying collation, the <code class="literal">"locale"</code> field is mandatory; all other collation fields are optional. For descriptions of the fields, see <a href="https://docs.mongodb.com/master/reference/collation/#collation-document" class="link external">»&nbsp;Collation Document</a>.
+           </p>
+           <p class="para">
+            If the collation is unspecified but the collection has a default collation, the operation uses the collation specified for the collection. If no collation is specified for the collection or for the operation, MongoDB uses the simple binary comparison used in prior versions for string comparisons.
+           </p>
+           <p class="para">
+            This option is available in MongoDB 3.4+ and will result in an exception at execution time if specified for an older server version.
+           </p>
+          </td>
+         </tr>
+
+
+         <tr>
+          <td>comment</td>
+          <td><span class="type">string</span></td>
+          <td>
+           <p class="para">
+            A comment to attach to the query to help interpret and trace query
+            profile data.
+           </p>
+           <p class="para">
+            Falls back to the deprecated <code class="literal">"$comment"</code> modifier
+            if not specified.
+           </p>
+          </td>
+         </tr>
+
+         <tr>
+          <td>exhaust</td>
+          <td><span class="type">bool</span></td>
+          <td>
+           <p class="para">
+            Stream the data down full blast in multiple "more" packages, on the
+            assumption that the client will fully read all data queried. Faster
+            when you are pulling a lot of data and know you want to pull it all
+            down. Note: the client is not allowed to not read all the data
+            unless it closes the connection.
+           </p>
+           <p class="para">
+            This option is not supported by the find command in MongoDB 3.2+ and
+            will force the driver to use the legacy wire protocol version (i.e.
+            OP_QUERY).
+           </p>
+          </td>
+         </tr>
+
+         <tr>
+          <td>explain</td>
+          <td><span class="type">bool</span></td>
+          <td>
+           <p class="para">
+            If <strong><code>true</code></strong>, the returned <span class="classname"><a href="class.mongodb-driver-cursor.html" class="classname">MongoDB\Driver\Cursor</a></span>
+            will contain a single document that describes the process and
+            indexes used to return the query.
+           </p>
+           <p class="para">
+            Falls back to the deprecated <code class="literal">"$explain"</code> modifier
+            if not specified.
+           </p>
+           <p class="para">
+            This option is not supported by the find command in MongoDB 3.2+ and
+            will only be respected when using the legacy wire protocol version
+            (i.e. OP_QUERY). The
+            <a href="https://docs.mongodb.com/manual/reference/command/explain/" class="link external">»&nbsp;explain</a>
+            command should be used on MongoDB 3.0+.
+           </p>
+          </td>
+         </tr>
+
+         <tr>
+          <td>hint</td>
+          <td><span class="type"><span class="type">string</span>|<span class="type">array</span>|<span class="type">object</span></span></td>
+          <td>
+           <p class="para">
+            Index specification. Specify either the index name as a string or
+            the index key pattern. If specified, then the query system will only
+            consider plans using the hinted index.
+           </p>
+           <p class="para">
+            Falls back to the deprecated <code class="literal">"hint"</code> option if not
+            specified.
+           </p>
+          </td>
+         </tr>
+
+         <tr>
+          <td>limit</td>
+          <td><span class="type">int</span></td>
+          <td>
+           <p class="para">
+            The maximum number of documents to return. If unspecified, then
+            defaults to no limit. A limit of 0 is equivalent to setting no
+            limit.
+           </p>
+           <p class="para">
+            A negative limit is will be interpreted as a positive limit with the
+            <code class="literal">"singleBatch"</code> option set to <strong><code>true</code></strong>. This behavior
+            is supported for backwards compatibility, but should be considered
+            deprecated.
+           </p>
+          </td>
+         </tr>
+
+         <tr>
+          <td>max</td>
+          <td><span class="type"><span class="type">array</span>|<span class="type">object</span></span></td>
+          <td>
+           <p class="para">
+            The <em class="emphasis">exclusive</em> upper bound for a specific index.
+           </p>
+           <p class="para">
+            Falls back to the deprecated <code class="literal">"$max"</code> modifier if
+            not specified.
+           </p>
+          </td>
+         </tr>
+
+         <tr>
+          <td>maxAwaitTimeMS</td>
+          <td><span class="type">int</span></td>
+          <td>
+           <p class="para">
+            Positive integer denoting the time limit in milliseconds for the
+            server to block a getMore operation if no data is available. This
+            option should only be used in conjunction with the
+            <code class="literal">"tailable"</code> and <code class="literal">"awaitData"</code>
+            options.
+           </p>
+          </td>
+         </tr>
+
+         <tr>
+          <td>maxScan</td>
+          <td><span class="type">int</span></td>
+          <td>
+           <div class="warning"><strong class="warning">Warning</strong>
+            <p class="simpara">
+             This option is deprecated and should not be used.
+            </p>
+           </div>
+           <p class="para">
+            Positive integer denoting the maximum number of documents or index
+            keys to scan when executing the query.
+           </p>
+           <p class="para">
+            Falls back to the deprecated <code class="literal">"$maxScan"</code> modifier
+            if not specified.
+           </p>
+          </td>
+         </tr>
+
+         <tr>
+          <td>maxTimeMS</td>
+          <td><span class="type">int</span></td>
+          <td>
+           <p class="para">
+            The cumulative time limit in milliseconds for processing operations
+            on the cursor. MongoDB aborts the operation at the earliest
+            following interrupt point.
+           </p>
+           <p class="para">
+            Falls back to the deprecated <code class="literal">"$maxTimeMS"</code>
+            modifier if not specified.
+           </p>
+          </td>
+         </tr>
+
+         <tr>
+          <td>min</td>
+          <td><span class="type"><span class="type">array</span>|<span class="type">object</span></span></td>
+          <td>
+           <p class="para">
+            The <em class="emphasis">inclusive</em> lower bound for a specific index.
+           </p>
+           <p class="para">
+            Falls back to the deprecated <code class="literal">"$min"</code> modifier if
+            not specified.
+           </p>
+          </td>
+         </tr>
+
+         <tr>
+          <td>modifiers</td>
+          <td><span class="type">array</span></td>
+          <td>
+           <a href="https://docs.mongodb.com/manual/reference/operator/query-modifier/" class="link external">»&nbsp;Meta operators</a>
+           modifying the output or behavior of a query. Use of these operators
+           is deprecated in favor of named options.
+          </td>
+         </tr>
+
+         <tr>
+          <td>noCursorTimeout</td>
+          <td><span class="type">bool</span></td>
+          <td>
+           Prevents the server from timing out idle cursors after an inactivity
+           period (10 minutes).
+          </td>
+         </tr>
+
+         <tr>
+          <td>oplogReplay</td>
+          <td><span class="type">bool</span></td>
+          <td>
+           <p class="para">
+            Internal use for replica sets. To use oplogReplay, you must include
+            the following condition in the filter:
+           </p>
+           <p class="para">
+            </p><div class="example-contents">
+<div class="textcode"><pre class="textcode">[ 'ts' =&gt; [ '$gte' =&gt; &lt;timestamp&gt; ] ]</pre>
+</div>
+            </div>
+
+           <p></p>
+           <blockquote class="note"><p><strong class="note">Note</strong>: <span class="simpara">This option is deprecated as of the 1.8.0 release.</span></p></blockquote>
+          </td>
+         </tr>
+
+         <tr>
+          <td>projection</td>
+          <td><span class="type"><span class="type">array</span>|<span class="type">object</span></span></td>
+          <td>
+           <p class="para">
+            The <a href="https://docs.mongodb.com/manual/tutorial/project-fields-from-query-results/" class="link external">»&nbsp;projection specification</a>
+            to determine which fields to include in the returned documents.
+           </p>
+           <p class="para">
+            If you are using the <a href="mongodb.persistence.deserialization.html" class="link">ODM
+            functionality</a> to deserialise documents as their original
+            PHP class, make sure that you include the
+            <span class="property">__pclass</span> field in the projection. This is
+            required for the deserialization to work and without it, the
+            driver will return (by default) a <span class="classname"><strong class="classname">stdClass</strong></span>
+            object instead.
+           </p>
+          </td>
+         </tr>
+
+         <tr>
+          <td>readConcern</td>
+          <td><span class="classname"><a href="class.mongodb-driver-readconcern.html" class="classname">MongoDB\Driver\ReadConcern</a></span></td>
+          <td>
+           <p class="para">
+            A read concern to apply to the operation. By default, the read
+            concern from the
+            <a href="mongodb-driver-manager.construct.html#mongodb-driver-manager.construct-uri" class="link">MongoDB
+            Connection URI</a> will be used.
+           </p>
+           <p class="para">
+            This option is available in MongoDB 3.2+ and will result in an
+            exception at execution time if specified for an older server
+            version.
+           </p>
+          </td>
+         </tr>
+
+         <tr>
+          <td>returnKey</td>
+          <td><span class="type">bool</span></td>
+          <td>
+           <p class="para">
+            If <strong><code>true</code></strong>, returns only the index keys in the resulting documents.
+            Default value is <strong><code>false</code></strong>. If <strong><code>true</code></strong> and the find command does not
+            use an index, the returned documents will be empty.
+           </p>
+           <p class="para">
+            Falls back to the deprecated <code class="literal">"$returnKey"</code>
+            modifier if not specified.
+           </p>
+          </td>
+         </tr>
+
+         <tr>
+          <td>showRecordId</td>
+          <td><span class="type">bool</span></td>
+          <td>
+           <p class="para">
+            Determines whether to return the record identifier for each
+            document. If <strong><code>true</code></strong>, adds a top-level <code class="literal">"$recordId"</code>
+            field to the returned documents.
+           </p>
+           <p class="para">
+            Falls back to the deprecated <code class="literal">"$showDiskLoc"</code>
+            modifier if not specified.
+           </p>
+          </td>
+         </tr>
+
+         <tr>
+          <td>singleBatch</td>
+          <td><span class="type">bool</span></td>
+          <td>
+           Determines whether to close the cursor after the first batch.
+           Defaults to <strong><code>false</code></strong>.
+          </td>
+         </tr>
+
+         <tr>
+          <td>skip</td>
+          <td><span class="type">int</span></td>
+          <td>Number of documents to skip. Defaults to 0.</td>
+         </tr>
+
+         <tr>
+          <td>snapshot</td>
+          <td><span class="type">bool</span></td>
+          <td>
+           <div class="warning"><strong class="warning">Warning</strong>
+            <p class="simpara">
+             This option is deprecated and should not be used.
+            </p>
+           </div>
+           <p class="para">
+            Prevents the cursor from returning a document more than once because
+            of an intervening write operation.
+           </p>
+           <p class="para">
+            Falls back to the deprecated <code class="literal">"$snapshot"</code> modifier
+            if not specified.
+           </p>
+          </td>
+         </tr>
+
+         <tr>
+          <td>sort</td>
+          <td><span class="type"><span class="type">array</span>|<span class="type">object</span></span></td>
+          <td>
+           <p class="para">The sort specification for the ordering of the results.</p>
+           <p class="para">
+            Falls back to the deprecated <code class="literal">"$orderby"</code> modifier
+            if not specified.
+           </p>
+          </td>
+         </tr>
+
+         <tr>
+          <td>tailable</td>
+          <td><span class="type">bool</span></td>
+          <td>Returns a tailable cursor for a capped collection.</td>
+         </tr>
+
+        </tbody>
+       
+      </table>
+
+     <p></p>
+    </dd>
+
+   
+  </dl>
+
+ </div>
+
+
+ <div class="refsect1 errors" id="refsect1-mongodb-driver-query.construct-errors">
+  <h3 class="title">Errors/Exceptions</h3>
+  <ul class="simplelist">
+   <li class="member">Throws <span class="classname"><a href="class.mongodb-driver-exception-invalidargumentexception.html" class="classname">MongoDB\Driver\Exception\InvalidArgumentException</a></span> on argument parsing errors.</li>
+  </ul>
+ </div>
+
+
+ <div class="refsect1 changelog" id="refsect1-mongodb-driver-query.construct-changelog">
+  <h3 class="title">Changelog</h3>
+  <p class="para">
+   </p><table class="doctable informaltable">
+    
+     <thead>
+      <tr>
+       <th>Version</th>
+       <th>Description</th>
+      </tr>
+
+     </thead>
+
+     <tbody class="tbody">
+      <tr>
+       <td>PECL mongodb 1.8.0</td>
+       <td>
+        <p class="para">
+         Added the <code class="literal">"allowDiskUse"</code> option.
+        </p>
+        <p class="para">
+         The <code class="literal">"oplogReplay"</code> option is deprecated.
+        </p>
+       </td>
+      </tr>
+
+      <tr>
+       <td>PECL mongodb 1.5.0</td>
+       <td>
+        <p class="para">
+         The <code class="literal">"maxScan"</code> and <code class="literal">"snapshot"</code>
+         options are deprecated.
+        </p>
+       </td>
+      </tr>
+
+      <tr>
+       <td>PECL mongodb 1.3.0</td>
+       <td>
+        <p class="para">
+         Added the <code class="literal">"maxAwaitTimeMS"</code> option.
+        </p>
+       </td>
+      </tr>
+
+      <tr>
+       <td>PECL mongodb 1.2.0</td>
+       <td>
+        <p class="para">
+         Added the <code class="literal">"allowPartialResults"</code>,
+         <code class="literal">"collation"</code>, <code class="literal">"comment"</code>,
+         <code class="literal">"hint"</code>, <code class="literal">"max"</code>,
+         <code class="literal">"maxScan"</code>, <code class="literal">"maxTimeMS"</code>,
+         <code class="literal">"min"</code>, <code class="literal">"returnKey"</code>,
+         <code class="literal">"showRecordId"</code>, and <code class="literal">"snapshot"</code>
+         options.
+        </p>
+        <p class="para">
+         Renamed the <code class="literal">"partial"</code> option to
+         <code class="literal">"allowPartialResults"</code>. For backwards compatibility,
+         <code class="literal">"partial"</code> will still be read if
+         <code class="literal">"allowPartialResults"</code> is not specified.
+        </p>
+        <p class="para">
+         Removed the legacy <code class="literal">"secondaryOk"</code> option, which is
+         obsolete. For queries using the legacy wire protocol OP_QUERY, the
+         driver will set the <code class="literal">secondaryOk</code> bit as needed in
+         accordance with the
+         <a href="https://github.com/mongodb/specifications/blob/master/source/server-selection/server-selection.rst" class="link external">»&nbsp;Server Selection Specification</a>.
+        </p>
+       </td>
+      </tr>
+
+      <tr>
+       <td>PECL mongodb 1.1.0</td>
+       <td>Added the <code class="literal">"readConcern"</code> option.</td>
+      </tr>
+
+     </tbody>
+    
+   </table>
+
+  <p></p>
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-mongodb-driver-query.construct-examples">
+  <h3 class="title">Examples</h3>
+  <div class="example" id="example-1242">
+   <p><strong>Example #1 <span class="function"><strong>MongoDB\Driver\Query::__construct()</strong></span> example</strong></p>
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br></span><span style="color: #FF8000">/*&nbsp;Select&nbsp;only&nbsp;documents&nbsp;authord&nbsp;by&nbsp;"bjori"&nbsp;with&nbsp;at&nbsp;least&nbsp;100&nbsp;views&nbsp;*/<br></span><span style="color: #0000BB">$filter&nbsp;</span><span style="color: #007700">=&nbsp;[<br>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">'author'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">'bjori'</span><span style="color: #007700">,<br>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">'views'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;[<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">'$gte'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">100</span><span style="color: #007700">,<br>&nbsp;&nbsp;&nbsp;&nbsp;],<br>];<br><br></span><span style="color: #0000BB">$options&nbsp;</span><span style="color: #007700">=&nbsp;[<br>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">/*&nbsp;Only&nbsp;return&nbsp;the&nbsp;following&nbsp;fields&nbsp;in&nbsp;the&nbsp;matching&nbsp;documents&nbsp;*/<br>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">'projection'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;[<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">'title'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">1</span><span style="color: #007700">,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">'article'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">1</span><span style="color: #007700">,<br>&nbsp;&nbsp;&nbsp;&nbsp;],<br>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">/*&nbsp;Return&nbsp;the&nbsp;documents&nbsp;in&nbsp;descending&nbsp;order&nbsp;of&nbsp;views&nbsp;*/<br>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">'sort'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;[<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">'views'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;-</span><span style="color: #0000BB">1<br>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">],<br>];<br><br></span><span style="color: #0000BB">$query&nbsp;</span><span style="color: #007700">=&nbsp;new&nbsp;</span><span style="color: #0000BB">MongoDB</span><span style="color: #007700">\</span><span style="color: #0000BB">Driver</span><span style="color: #007700">\</span><span style="color: #0000BB">Query</span><span style="color: #007700">(</span><span style="color: #0000BB">$filter</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$options</span><span style="color: #007700">);<br><br></span><span style="color: #0000BB">$manager&nbsp;</span><span style="color: #007700">=&nbsp;new&nbsp;</span><span style="color: #0000BB">MongoDB</span><span style="color: #007700">\</span><span style="color: #0000BB">Driver</span><span style="color: #007700">\</span><span style="color: #0000BB">Manager</span><span style="color: #007700">(</span><span style="color: #DD0000">'mongodb://localhost:27017'</span><span style="color: #007700">);<br></span><span style="color: #0000BB">$readPreference&nbsp;</span><span style="color: #007700">=&nbsp;new&nbsp;</span><span style="color: #0000BB">MongoDB</span><span style="color: #007700">\</span><span style="color: #0000BB">Driver</span><span style="color: #007700">\</span><span style="color: #0000BB">ReadPreference</span><span style="color: #007700">(</span><span style="color: #0000BB">MongoDB</span><span style="color: #007700">\</span><span style="color: #0000BB">Driver</span><span style="color: #007700">\</span><span style="color: #0000BB">ReadPreference</span><span style="color: #007700">::</span><span style="color: #0000BB">RP_PRIMARY</span><span style="color: #007700">);<br></span><span style="color: #0000BB">$cursor&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$manager</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">executeQuery</span><span style="color: #007700">(</span><span style="color: #DD0000">'databaseName.collectionName'</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$query</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$readPreference</span><span style="color: #007700">);<br><br>foreach(</span><span style="color: #0000BB">$cursor&nbsp;</span><span style="color: #007700">as&nbsp;</span><span style="color: #0000BB">$document</span><span style="color: #007700">)&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">$document</span><span style="color: #007700">);<br>}<br><br></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+   </div>
+
+  </div>
+ </div>
+
+
+ <div class="refsect1 seealso" id="refsect1-mongodb-driver-query.construct-seealso">
+  <h3 class="title">See Also</h3>
+  <ul class="simplelist">
+   <li class="member"><span class="methodname"><a href="mongodb-driver-manager.executequery.html" class="methodname" rel="rdfs-seeAlso">MongoDB\Driver\Manager::executeQuery()</a> - Execute a database query</span></li>
+   <li class="member"><span class="classname"><a href="class.mongodb-driver-cursor.html" class="classname">MongoDB\Driver\Cursor</a></span></li>
+  </ul>
+ </div>
+
+
+</div>
+<section id="usernotes">
+ <div class="head"><h3 class="title">User Contributed Notes</h3></div>
+ <div class="note">There are no user contributed notes for this page.</div></section>    </section><!-- layout-content -->
+        
+
+
+  </div><!-- layout -->
+
+  
+
+    
+ <!-- External and third party libraries. -->
+ 
+
+
+
+
+
+
+
+<a id="toTop" href="javascript:;"><span id="toTopHover"></span><img width="40" height="40" alt="To Top" src="../../images/to-top%402x.png"></a>
+
+
+
+<!-- Mirrored from www.php.net/manual/en/mongodb-driver-query.construct.php by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 11 Sep 2021 10:29:50 GMT -->
+
+</body></html>

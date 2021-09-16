@@ -1,0 +1,1236 @@
+<html><!--<![endif]--><!-- Mirrored from phpunit.readthedocs.io/en/7.1/annotations.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 14 Jul 2018 16:54:12 GMT --><head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>2. Annotations</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css">
+  <link rel="stylesheet" href="../../../media.readthedocs.org/css/sphinx_rtd_theme.css" type="text/css">
+    <link rel="index" title="Index" href="genindex.html">
+    <link rel="search" title="Search" href="search.html">
+    <link rel="copyright" title="Copyright" href="copyright.html">
+    <link rel="next" title="3. The XML Configuration File" href="configuration.html">
+    <link rel="prev" title="1. Assertions" href="assertions.html"> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+
+<!-- RTD Extra Head -->
+
+<!-- 
+Always link to the latest version, as canonical.
+http://docs.readthedocs.org/en/latest/canonical.html
+-->
+<link rel="canonical" href="annotations.html">
+
+<link rel="stylesheet" href="../../../media.readthedocs.org/css/readthedocs-doc-embed.css" type="text/css">
+
+<script type="text/javascript" src="_static/readthedocs-data.js"></script>
+
+<!-- Add page-specific data, which must exist in the page js, not global -->
+<script type="text/javascript">
+READTHEDOCS_DATA['page'] = 'annotations'
+READTHEDOCS_DATA['source_suffix'] = '.rst'
+</script>
+
+<script type="text/javascript" src="../../../media.readthedocs.org/javascript/readthedocs-analytics.js"></script>
+
+<!-- end RTD <extrahead> -->
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index-2.html" class="icon icon-home"> PHPUnit
+          
+
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="https://phpunit.readthedocs.io/en/7.1/search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs">
+    <input type="hidden" name="check_keywords" value="yes">
+    <input type="hidden" name="area" value="default">
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">1. Installing PHPUnit</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#php-archive-phar">PHP Archive (PHAR)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="installation.html#windows">Windows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="installation.html#verifying-phpunit-phar-releases">Verifying PHPUnit PHAR Releases</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#composer">Composer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#optional-packages">Optional packages</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="writing-tests-for-phpunit.html">2. Writing Tests for PHPUnit</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="writing-tests-for-phpunit.html#test-dependencies">Test Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writing-tests-for-phpunit.html#data-providers">Data Providers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writing-tests-for-phpunit.html#testing-exceptions">Testing Exceptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writing-tests-for-phpunit.html#testing-php-errors">Testing PHP Errors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writing-tests-for-phpunit.html#testing-output">Testing Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writing-tests-for-phpunit.html#error-output">Error output</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="writing-tests-for-phpunit.html#edge-cases">Edge cases</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="textui.html">3. The Command-Line Test Runner</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="textui.html#command-line-options">Command-Line Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="textui.html#testdox">TestDox</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="fixtures.html">4. Fixtures</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="fixtures.html#more-setup-than-teardown">More setUp() than tearDown()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fixtures.html#variations">Variations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fixtures.html#sharing-fixture">Sharing Fixture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fixtures.html#global-state">Global State</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="organizing-tests.html">5. Organizing Tests</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="organizing-tests.html#composing-a-test-suite-using-the-filesystem">Composing a Test Suite Using the Filesystem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="organizing-tests.html#composing-a-test-suite-using-xml-configuration">Composing a Test Suite Using XML Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="risky-tests.html">6. Risky Tests</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="risky-tests.html#useless-tests">Useless Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="risky-tests.html#unintentionally-covered-code">Unintentionally Covered Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="risky-tests.html#output-during-test-execution">Output During Test Execution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="risky-tests.html#test-execution-timeout">Test Execution Timeout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="risky-tests.html#global-state-manipulation">Global State Manipulation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="incomplete-and-skipped-tests.html">7. Incomplete and Skipped Tests</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="incomplete-and-skipped-tests.html#incomplete-tests">Incomplete Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="incomplete-and-skipped-tests.html#skipping-tests">Skipping Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="incomplete-and-skipped-tests.html#skipping-tests-using-requires">Skipping Tests using @requires</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="database.html">8. Database Testing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="database.html#supported-vendors-for-database-testing">Supported Vendors for Database Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="database.html#difficulties-in-database-testing">Difficulties in Database Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="database.html#the-four-stages-of-a-database-test">The four stages of a database test</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="database.html#clean-up-database">1. Clean-Up Database</a></li>
+<li class="toctree-l3"><a class="reference internal" href="database.html#set-up-fixture">2. Set up fixture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="database.html#run-test-verify-outcome-and-teardown">3–5. Run Test, Verify outcome and Teardown</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="database.html#configuration-of-a-phpunit-database-testcase">Configuration of a PHPUnit Database TestCase</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="database.html#implementing-getconnection">Implementing getConnection()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="database.html#implementing-getdataset">Implementing getDataSet()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="database.html#what-about-the-database-schema-ddl">What about the Database Schema (DDL)?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="database.html#tip-use-your-own-abstract-database-testcase">Tip: Use your own Abstract Database TestCase</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="database.html#understanding-datasets-and-datatables">Understanding DataSets and DataTables</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="database.html#available-implementations">Available Implementations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="database.html#flat-xml-dataset">Flat XML DataSet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="database.html#xml-dataset">XML DataSet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="database.html#mysql-xml-dataset">MySQL XML DataSet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="database.html#yaml-dataset">YAML DataSet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="database.html#csv-dataset">CSV DataSet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="database.html#array-dataset">Array DataSet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="database.html#query-sql-dataset">Query (SQL) DataSet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="database.html#database-db-dataset">Database (DB) Dataset</a></li>
+<li class="toctree-l4"><a class="reference internal" href="database.html#replacement-dataset">Replacement DataSet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="database.html#dataset-filter">DataSet Filter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="database.html#composite-dataset">Composite DataSet</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="database.html#beware-of-foreign-keys">Beware of Foreign Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="database.html#implementing-your-own-datasets-datatables">Implementing your own DataSets/DataTables</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="database.html#using-the-database-connection-api">Using the Database Connection API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="database.html#database-assertions-api">Database Assertions API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="database.html#asserting-the-row-count-of-a-table">Asserting the Row-Count of a Table</a></li>
+<li class="toctree-l3"><a class="reference internal" href="database.html#asserting-the-state-of-a-table">Asserting the State of a Table</a></li>
+<li class="toctree-l3"><a class="reference internal" href="database.html#asserting-the-result-of-a-query">Asserting the Result of a Query</a></li>
+<li class="toctree-l3"><a class="reference internal" href="database.html#asserting-the-state-of-multiple-tables">Asserting the State of Multiple Tables</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="database.html#frequently-asked-questions">Frequently Asked Questions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="database.html#will-phpunit-re-create-the-database-schema-for-each-test">Will PHPUnit (re-)create the database schema for each test?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="database.html#am-i-required-to-use-pdo-in-my-application-for-the-database-extension-to-work">Am I required to use PDO in my application for the Database Extension to work?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="database.html#what-can-i-do-when-i-get-a-too-much-connections-error">What can I do, when I get a “Too much Connections“ Error?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="database.html#how-to-handle-null-with-flat-xml-csv-datasets">How to handle NULL with Flat XML / CSV Datasets?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="test-doubles.html">9. Test Doubles</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="test-doubles.html#stubs">Stubs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="test-doubles.html#mock-objects">Mock Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="test-doubles.html#prophecy">Prophecy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="test-doubles.html#mocking-traits-and-abstract-classes">Mocking Traits and Abstract Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="test-doubles.html#stubbing-and-mocking-web-services">Stubbing and Mocking Web Services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="test-doubles.html#mocking-the-filesystem">Mocking the Filesystem</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="code-coverage-analysis.html">10. Code Coverage Analysis</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="code-coverage-analysis.html#software-metrics-for-code-coverage">Software Metrics for Code Coverage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code-coverage-analysis.html#whitelisting-files">Whitelisting Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code-coverage-analysis.html#ignoring-code-blocks">Ignoring Code Blocks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code-coverage-analysis.html#specifying-covered-methods">Specifying Covered Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code-coverage-analysis.html#edge-cases">Edge Cases</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="logging.html">11. Logging</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="logging.html#test-results-xml">Test Results (XML)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="logging.html#code-coverage-xml">Code Coverage (XML)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="logging.html#code-coverage-text">Code Coverage (TEXT)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="extending-phpunit.html">12. Extending PHPUnit</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="extending-phpunit.html#subclass-phpunit-framework-testcase">Subclass PHPUnit\Framework\TestCase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="extending-phpunit.html#write-custom-assertions">Write custom assertions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="extending-phpunit.html#implement-phpunit-framework-testlistener">Implement PHPUnit\Framework\TestListener</a></li>
+<li class="toctree-l2"><a class="reference internal" href="extending-phpunit.html#implement-phpunitframeworktest">Implement PHPUnitFrameworkTest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="extending-phpunit.html#extending-the-testrunner">Extending the TestRunner</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="extending-phpunit.html#available-hook-interfaces">Available Hook Interfaces</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Appendix</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="assertions.html">1. Assertions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#static-vs-non-static-usage-of-assertion-methods">Static vs. Non-Static Usage of Assertion Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertarrayhaskey">assertArrayHasKey()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertclasshasattribute">assertClassHasAttribute()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertarraysubset">assertArraySubset()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertclasshasstaticattribute">assertClassHasStaticAttribute()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertcontains">assertContains()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertcontainsonly">assertContainsOnly()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertcontainsonlyinstancesof">assertContainsOnlyInstancesOf()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertcount">assertCount()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertdirectoryexists">assertDirectoryExists()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertdirectoryisreadable">assertDirectoryIsReadable()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertdirectoryiswritable">assertDirectoryIsWritable()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertempty">assertEmpty()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertequalxmlstructure">assertEqualXMLStructure()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertequals">assertEquals()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertfalse">assertFalse()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertfileequals">assertFileEquals()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertfileexists">assertFileExists()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertfileisreadable">assertFileIsReadable()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertfileiswritable">assertFileIsWritable()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertgreaterthan">assertGreaterThan()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertgreaterthanorequal">assertGreaterThanOrEqual()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertinfinite">assertInfinite()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertinstanceof">assertInstanceOf()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertinternaltype">assertInternalType()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertisreadable">assertIsReadable()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertiswritable">assertIsWritable()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertjsonfileequalsjsonfile">assertJsonFileEqualsJsonFile()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertjsonstringequalsjsonfile">assertJsonStringEqualsJsonFile()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertjsonstringequalsjsonstring">assertJsonStringEqualsJsonString()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertlessthan">assertLessThan()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertlessthanorequal">assertLessThanOrEqual()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertnan">assertNan()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertnull">assertNull()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertobjecthasattribute">assertObjectHasAttribute()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertregexp">assertRegExp()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertstringmatchesformat">assertStringMatchesFormat()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertstringmatchesformatfile">assertStringMatchesFormatFile()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertsame">assertSame()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertstringendswith">assertStringEndsWith()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertstringequalsfile">assertStringEqualsFile()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertstringstartswith">assertStringStartsWith()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertthat">assertThat()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#asserttrue">assertTrue()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertxmlfileequalsxmlfile">assertXmlFileEqualsXmlFile()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertxmlstringequalsxmlfile">assertXmlStringEqualsXmlFile()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assertions.html#assertxmlstringequalsxmlstring">assertXmlStringEqualsXmlString()</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">2. Annotations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#author">@author</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#after">@after</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#afterclass">@afterClass</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#backupglobals">@backupGlobals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#backupstaticattributes">@backupStaticAttributes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#before">@before</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#beforeclass">@beforeClass</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#codecoverageignore">@codeCoverageIgnore*</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#covers">@covers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#coversdefaultclass">@coversDefaultClass</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#coversnothing">@coversNothing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#dataprovider">@dataProvider</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#depends">@depends</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#doesnotperformassertions">@doesNotPerformAssertions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#expectedexception">@expectedException</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#expectedexceptioncode">@expectedExceptionCode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#expectedexceptionmessage">@expectedExceptionMessage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#expectedexceptionmessageregexp">@expectedExceptionMessageRegExp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#group">@group</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#large">@large</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#medium">@medium</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#preserveglobalstate">@preserveGlobalState</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#requires">@requires</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#runtestsinseparateprocesses">@runTestsInSeparateProcesses</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#runinseparateprocess">@runInSeparateProcess</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#small">@small</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#test">@test</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#testdox">@testdox</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#testwith">@testWith</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ticket">@ticket</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#uses">@uses</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">3. The XML Configuration File</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#phpunit">PHPUnit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#test-suites">Test Suites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#groups">Groups</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#whitelisting-files-for-code-coverage">Whitelisting Files for Code Coverage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#logging">Logging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#test-listeners">Test Listeners</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#registering-testrunner-extensions">Registering TestRunner Extensions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#setting-php-ini-settings-constants-and-global-variables">Setting PHP INI settings, Constants and Global Variables</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">4. Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="copyright.html">5. Copyright</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index-2.html">PHPUnit</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index-2.html">Docs</a> »</li>
+        
+      <li>2. Annotations</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/sebastianbergmann/phpunit-documentation-english//7.1/src/annotations.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="annotations">
+<span id="appendixes-annotations"></span><h1>2. Annotations</h1>
+<p>An annotation is a special form of syntactic metadata that can be added to
+the source code of some programming languages. While PHP has no dedicated
+language feature for annotating source code, the usage of tags such as
+<code class="docutils literal"><span class="pre">@annotation</span> <span class="pre">arguments</span></code> in a documentation block has been
+established in the PHP community to annotate source code. In PHP
+documentation blocks are reflective: they can be accessed through the
+Reflection API’s <code class="docutils literal"><span class="pre">getDocComment()</span></code> method on the function,
+class, method, and attribute level. Applications such as PHPUnit use this
+information at runtime to configure their behaviour.</p>
+<div class="admonition-note admonition">
+<p class="first admonition-title">Note</p>
+<p class="last">A doc comment in PHP must start with <code class="docutils literal"><span class="pre">/**</span></code> and end with
+<code class="docutils literal"><span class="pre">*/</span></code>. Annotations in any other style of comment will be
+ignored.</p>
+</div>
+<p>This appendix shows all the varieties of annotations supported by PHPUnit.</p>
+<div class="section" id="author">
+<a class="dashAnchor" name="//apple_ref/Annotation/@author"></a><span id="appendixes-annotations-author"></span><h2>@author</h2>
+<p>The <code class="docutils literal"><span class="pre">@author</span></code> annotation is an alias for the
+<code class="docutils literal"><span class="pre">@group</span></code> annotation (see <a class="reference internal" href="#appendixes-annotations-group"><span class="std std-ref">@group</span></a>) and allows to filter tests based
+on their authors.</p>
+</div>
+<div class="section" id="after">
+<a class="dashAnchor" name="//apple_ref/Annotation/@after"></a><span id="appendixes-annotations-after"></span><h2>@after</h2>
+<p>The <code class="docutils literal"><span class="pre">@after</span></code> annotation can be used to specify methods
+that should be called after each test method in a test case class.</p>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">PHPUnit\Framework\TestCase</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">MyTest</span> <span class="k">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="sd">/**</span>
+<span class="sd">     * @after</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">tearDownSomeFixtures</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * @after</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">tearDownSomeOtherFixtures</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="afterclass">
+<a class="dashAnchor" name="//apple_ref/Annotation/@afterClass"></a><span id="appendixes-annotations-afterclass"></span><h2>@afterClass</h2>
+<p>The <code class="docutils literal"><span class="pre">@afterClass</span></code> annotation can be used to specify
+static methods that should be called after all test methods in a test
+class have been run to clean up shared fixtures.</p>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">PHPUnit\Framework\TestCase</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">MyTest</span> <span class="k">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="sd">/**</span>
+<span class="sd">     * @afterClass</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">tearDownSomeSharedFixtures</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * @afterClass</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">tearDownSomeOtherSharedFixtures</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="backupglobals">
+<a class="dashAnchor" name="//apple_ref/Annotation/@backupGlobals"></a><span id="appendixes-annotations-backupglobals"></span><h2>@backupGlobals</h2>
+<p>The backup and restore operations for global variables can be completely
+disabled for all tests of a test case class like this</p>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">PHPUnit\Framework\TestCase</span><span class="p">;</span>
+
+<span class="sd">/**</span>
+<span class="sd"> * @backupGlobals disabled</span>
+<span class="sd"> */</span>
+<span class="k">class</span> <span class="nc">MyTest</span> <span class="k">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">@backupGlobals</span></code> annotation can also be used on the
+test method level. This allows for a fine-grained configuration of the
+backup and restore operations:</p>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">PHPUnit\Framework\TestCase</span><span class="p">;</span>
+
+<span class="sd">/**</span>
+<span class="sd"> * @backupGlobals disabled</span>
+<span class="sd"> */</span>
+<span class="k">class</span> <span class="nc">MyTest</span> <span class="k">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="sd">/**</span>
+<span class="sd">     * @backupGlobals enabled</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testThatInteractsWithGlobalVariables</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="backupstaticattributes">
+<a class="dashAnchor" name="//apple_ref/Annotation/@backupStaticAttributes"></a><span id="appendixes-annotations-backupstaticattributes"></span><h2>@backupStaticAttributes</h2>
+<p>The <code class="docutils literal"><span class="pre">@backupStaticAttributes</span></code> annotation can be used to
+back up all static property values in all declared classes before each
+test and restore them afterwards. It may be used at the test case class or
+test method level:</p>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">PHPUnit\Framework\TestCase</span><span class="p">;</span>
+
+<span class="sd">/**</span>
+<span class="sd"> * @backupStaticAttributes enabled</span>
+<span class="sd"> */</span>
+<span class="k">class</span> <span class="nc">MyTest</span> <span class="k">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="sd">/**</span>
+<span class="sd">     * @backupStaticAttributes disabled</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testThatInteractsWithStaticAttributes</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition-note admonition">
+<p class="first admonition-title">Note</p>
+<p><code class="docutils literal"><span class="pre">@backupStaticAttributes</span></code> is limited by PHP internals
+and may cause unintended static values to persist and leak into
+subsequent tests in some circumstances.</p>
+<p class="last">See <a class="reference internal" href="fixtures.html#fixtures-global-state"><span class="std std-ref">Global State</span></a> for details.</p>
+</div>
+</div>
+<div class="section" id="before">
+<a class="dashAnchor" name="//apple_ref/Annotation/@before"></a><span id="appendixes-annotations-before"></span><h2>@before</h2>
+<p>The <code class="docutils literal"><span class="pre">@before</span></code> annotation can be used to specify methods
+that should be called before each test method in a test case class.</p>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">PHPUnit\Framework\TestCase</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">MyTest</span> <span class="k">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="sd">/**</span>
+<span class="sd">     * @before</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">setupSomeFixtures</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * @before</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">setupSomeOtherFixtures</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="beforeclass">
+<a class="dashAnchor" name="//apple_ref/Annotation/@beforeClass"></a><span id="appendixes-annotations-beforeclass"></span><h2>@beforeClass</h2>
+<p>The <code class="docutils literal"><span class="pre">@beforeClass</span></code> annotation can be used to specify
+static methods that should be called before any test methods in a test
+class are run to set up shared fixtures.</p>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">PHPUnit\Framework\TestCase</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">MyTest</span> <span class="k">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="sd">/**</span>
+<span class="sd">     * @beforeClass</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">setUpSomeSharedFixtures</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * @beforeClass</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">setUpSomeOtherSharedFixtures</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="codecoverageignore">
+<a class="dashAnchor" name="//apple_ref/Annotation/@codeCoverageIgnore*"></a><span id="appendixes-annotations-codecoverageignore"></span><h2>@codeCoverageIgnore*</h2>
+<p>The <code class="docutils literal"><span class="pre">@codeCoverageIgnore</span></code>,
+<code class="docutils literal"><span class="pre">@codeCoverageIgnoreStart</span></code> and
+<code class="docutils literal"><span class="pre">@codeCoverageIgnoreEnd</span></code> annotations can be used
+to exclude lines of code from the coverage analysis.</p>
+<p>For usage see <a class="reference internal" href="code-coverage-analysis.html#code-coverage-analysis-ignoring-code-blocks"><span class="std std-ref">Ignoring Code Blocks</span></a>.</p>
+</div>
+<div class="section" id="covers">
+<a class="dashAnchor" name="//apple_ref/Annotation/@covers"></a><span id="appendixes-annotations-covers"></span><h2>@covers</h2>
+<p>The <code class="docutils literal"><span class="pre">@covers</span></code> annotation can be used in the test code to
+specify which method(s) a test method wants to test:</p>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="sd">/**</span>
+<span class="sd"> * @covers BankAccount::getBalance</span>
+<span class="sd"> */</span>
+<span class="k">public</span> <span class="k">function</span> <span class="nf">testBalanceIsInitiallyZero</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertSame</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">ba</span><span class="o">-&gt;</span><span class="na">getBalance</span><span class="p">());</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>If provided, only the code coverage information for the specified
+method(s) will be considered.</p>
+<p><a class="reference internal" href="#appendixes-annotations-covers-tables-annotations"><span class="std std-numref">Table 2.2</span></a> shows
+the syntax of the <code class="docutils literal"><span class="pre">@covers</span></code> annotation.</p>
+<table border="1" class="table docutils" id="appendixes-annotations-covers-tables-annotations">
+<caption><span class="caption-number">Table 2.2 </span><span class="caption-text">Annotations for specifying which methods are covered by a test</span></caption>
+<colgroup>
+<col width="50%">
+<col width="50%">
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Annotation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">@covers</span> <span class="pre">ClassName::methodName</span></code></td>
+<td>Specifies that the annotated test method covers the specified method.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">@covers</span> <span class="pre">ClassName</span></code></td>
+<td>Specifies that the annotated test method covers all methods of a given class.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">@covers</span> <span class="pre">ClassName&lt;extended&gt;</span></code></td>
+<td>Specifies that the annotated test method covers all methods of a given class and its parent class(es) and interface(s).</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">@covers</span> <span class="pre">ClassName::&lt;public&gt;</span></code></td>
+<td>Specifies that the annotated test method covers all public methods of a given class.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">@covers</span> <span class="pre">ClassName::&lt;protected&gt;</span></code></td>
+<td>Specifies that the annotated test method covers all protected methods of a given class.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">@covers</span> <span class="pre">ClassName::&lt;private&gt;</span></code></td>
+<td>Specifies that the annotated test method covers all private methods of a given class.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">@covers</span> <span class="pre">ClassName::&lt;!public&gt;</span></code></td>
+<td>Specifies that the annotated test method covers all methods of a given class that are not public.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">@covers</span> <span class="pre">ClassName::&lt;!protected&gt;</span></code></td>
+<td>Specifies that the annotated test method covers all methods of a given class that are not protected.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">@covers</span> <span class="pre">ClassName::&lt;!private&gt;</span></code></td>
+<td>Specifies that the annotated test method covers all methods of a given class that are not private.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">@covers</span> <span class="pre">::functionName</span></code></td>
+<td>Specifies that the annotated test method covers the specified global function.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="coversdefaultclass">
+<a class="dashAnchor" name="//apple_ref/Annotation/@coversDefaultClass"></a><span id="appendixes-annotations-coversdefaultclass"></span><h2>@coversDefaultClass</h2>
+<p>The <code class="docutils literal"><span class="pre">@coversDefaultClass</span></code> annotation can be used to
+specify a default namespace or class name. That way long names don’t need to be
+repeated for every <code class="docutils literal"><span class="pre">@covers</span></code> annotation. See
+<a class="reference internal" href="#appendixes-annotations-examples-coversdefaultclasstest-php"><span class="std std-numref">Example 2.19</span></a>.</p>
+<div class="literal-block-wrapper docutils container" id="appendixes-annotations-examples-coversdefaultclasstest-php">
+<div class="code-block-caption"><span class="caption-number">Example 2.19 </span><span class="caption-text">Using @coversDefaultClass to shorten annotations</span></div>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="k">use</span> <span class="nx">PHPUnit\Framework\TestCase</span><span class="p">;</span>
+
+<span class="sd">/**</span>
+<span class="sd"> * @coversDefaultClass \Foo\CoveredClass</span>
+<span class="sd"> */</span>
+<span class="k">class</span> <span class="nc">CoversDefaultClassTest</span> <span class="k">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="sd">/**</span>
+<span class="sd">     * @covers ::publicMethod</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testSomething</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$o</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Foo\CoveredClass</span><span class="p">;</span>
+        <span class="nv">$o</span><span class="o">-&gt;</span><span class="na">publicMethod</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="coversnothing">
+<a class="dashAnchor" name="//apple_ref/Annotation/@coversNothing"></a><span id="appendixes-annotations-coversnothing"></span><h2>@coversNothing</h2>
+<p>The <code class="docutils literal"><span class="pre">@coversNothing</span></code> annotation can be used in the
+test code to specify that no code coverage information will be
+recorded for the annotated test case.</p>
+<p>This can be used for integration testing. See
+<a class="reference internal" href="code-coverage-analysis.html#code-coverage-analysis-specifying-covered-methods-examples-guestbookintegrationtest-php"><span class="std std-ref">A test that specifies that no method should be covered</span></a>
+for an example.</p>
+<p>The annotation can be used on the class and the method level and
+will override any <code class="docutils literal"><span class="pre">@covers</span></code> tags.</p>
+</div>
+<div class="section" id="dataprovider">
+<a class="dashAnchor" name="//apple_ref/Annotation/@dataProvider"></a><span id="appendixes-annotations-dataprovider"></span><h2>@dataProvider</h2>
+<p>A test method can accept arbitrary arguments. These arguments are to be
+provided by one or more data provider methods (<code class="docutils literal"><span class="pre">provider()</span></code> in
+<a class="reference internal" href="writing-tests-for-phpunit.html#writing-tests-for-phpunit-data-providers-examples-datatest-php"><span class="std std-ref">Using a data provider that returns an array of arrays</span></a>).
+The data provider method to be used is specified using the
+<code class="docutils literal"><span class="pre">@dataProvider</span></code> annotation.</p>
+<p>See <a class="reference internal" href="writing-tests-for-phpunit.html#writing-tests-for-phpunit-data-providers"><span class="std std-ref">Data Providers</span></a> for more
+details.</p>
+</div>
+<div class="section" id="depends">
+<a class="dashAnchor" name="//apple_ref/Annotation/@depends"></a><span id="appendixes-annotations-depends"></span><h2>@depends</h2>
+<p>PHPUnit supports the declaration of explicit dependencies between test
+methods. Such dependencies do not define the order in which the test
+methods are to be executed but they allow the returning of an instance of
+the test fixture by a producer and passing it to the dependent consumers.
+<a class="reference internal" href="writing-tests-for-phpunit.html#writing-tests-for-phpunit-examples-stacktest2-php"><span class="std std-ref">Using the @depends annotation to express dependencies</span></a> shows
+how to use the <code class="docutils literal"><span class="pre">@depends</span></code> annotation to express
+dependencies between test methods.</p>
+<p>See <a class="reference internal" href="writing-tests-for-phpunit.html#writing-tests-for-phpunit-test-dependencies"><span class="std std-ref">Test Dependencies</span></a> for more
+details.</p>
+</div>
+<div class="section" id="doesnotperformassertions">
+<a class="dashAnchor" name="//apple_ref/Annotation/@doesNotPerformAssertions"></a><span id="appendixes-annotations-doesnotperformassertions"></span><h2>@doesNotPerformAssertions</h2>
+<p>Prevents a test that performs no assertions from being considered risky.</p>
+</div>
+<div class="section" id="expectedexception">
+<a class="dashAnchor" name="//apple_ref/Annotation/@expectedException"></a><span id="appendixes-annotations-expectedexception"></span><h2>@expectedException</h2>
+<p><a class="reference internal" href="writing-tests-for-phpunit.html#writing-tests-for-phpunit-exceptions-examples-exceptiontest-php"><span class="std std-ref">Using the expectException() method</span></a>
+shows how to use the <code class="docutils literal"><span class="pre">@expectedException</span></code> annotation to
+test whether an exception is thrown inside the tested code.</p>
+<p>See <a class="reference internal" href="writing-tests-for-phpunit.html#writing-tests-for-phpunit-exceptions"><span class="std std-ref">Testing Exceptions</span></a> for more
+details.</p>
+</div>
+<div class="section" id="expectedexceptioncode">
+<a class="dashAnchor" name="//apple_ref/Annotation/@expectedExceptionCode"></a><span id="appendixes-annotations-expectedexceptioncode"></span><h2>@expectedExceptionCode</h2>
+<p>The <code class="docutils literal"><span class="pre">@expectedExceptionCode</span></code> annotation, in conjunction
+with the <code class="docutils literal"><span class="pre">@expectedException</span></code> allows making assertions on
+the error code of a thrown exception thus being able to narrow down a
+specific exception.</p>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">PHPUnit\Framework\TestCase</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">MyTest</span> <span class="k">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="sd">/**</span>
+<span class="sd">     * @expectedException     MyException</span>
+<span class="sd">     * @expectedExceptionCode 20</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testExceptionHasErrorCode20</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nx">MyException</span><span class="p">(</span><span class="s1">'Some Message'</span><span class="p">,</span> <span class="mi">20</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>To ease testing and reduce duplication a shortcut can be used to
+specify a class constant as an
+<code class="docutils literal"><span class="pre">@expectedExceptionCode</span></code> using the
+“<code class="docutils literal"><span class="pre">@expectedExceptionCode</span> <span class="pre">ClassName::CONST</span></code>” syntax.</p>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">PHPUnit\Framework\TestCase</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">MyTest</span> <span class="k">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="sd">/**</span>
+<span class="sd">      * @expectedException     MyException</span>
+<span class="sd">      * @expectedExceptionCode MyClass::ERRORCODE</span>
+<span class="sd">      */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testExceptionHasErrorCode20</span><span class="p">()</span>
+    <span class="p">{</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nx">MyException</span><span class="p">(</span><span class="s1">'Some Message'</span><span class="p">,</span> <span class="mi">20</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="k">class</span> <span class="nc">MyClass</span>
+<span class="p">{</span>
+    <span class="k">const</span> <span class="no">ERRORCODE</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="expectedexceptionmessage">
+<a class="dashAnchor" name="//apple_ref/Annotation/@expectedExceptionMessage"></a><span id="appendixes-annotations-expectedexceptionmessage"></span><h2>@expectedExceptionMessage</h2>
+<p>The <code class="docutils literal"><span class="pre">@expectedExceptionMessage</span></code> annotation works similar
+to <code class="docutils literal"><span class="pre">@expectedExceptionCode</span></code> as it lets you make an
+assertion on the error message of an exception.</p>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">PHPUnit\Framework\TestCase</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">MyTest</span> <span class="k">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="sd">/**</span>
+<span class="sd">     * @expectedException        MyException</span>
+<span class="sd">     * @expectedExceptionMessage Some Message</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testExceptionHasRightMessage</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nx">MyException</span><span class="p">(</span><span class="s1">'Some Message'</span><span class="p">,</span> <span class="mi">20</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The expected message can be a substring of the exception Message.
+This can be useful to only assert that a certain name or parameter that
+was passed in shows up in the exception and not fixate the whole
+exception message in the test.</p>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">PHPUnit\Framework\TestCase</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">MyTest</span> <span class="k">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+     <span class="sd">/**</span>
+<span class="sd">      * @expectedException        MyException</span>
+<span class="sd">      * @expectedExceptionMessage broken</span>
+<span class="sd">      */</span>
+     <span class="k">public</span> <span class="k">function</span> <span class="nf">testExceptionHasRightMessage</span><span class="p">()</span>
+     <span class="p">{</span>
+         <span class="nv">$param</span> <span class="o">=</span> <span class="s2">"broken"</span><span class="p">;</span>
+         <span class="k">throw</span> <span class="k">new</span> <span class="nx">MyException</span><span class="p">(</span><span class="s1">'Invalid parameter "'</span><span class="o">.</span><span class="nv">$param</span><span class="o">.</span><span class="s1">'".'</span><span class="p">,</span> <span class="mi">20</span><span class="p">);</span>
+     <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>To ease testing and reduce duplication a shortcut can be used to
+specify a class constant as an
+<code class="docutils literal"><span class="pre">@expectedExceptionMessage</span></code> using the
+“<code class="docutils literal"><span class="pre">@expectedExceptionMessage</span> <span class="pre">ClassName::CONST</span></code>” syntax.
+A sample can be found in <a class="reference internal" href="#appendixes-annotations-expectedexceptioncode"><span class="std std-ref">@expectedExceptionCode</span></a>.</p>
+</div>
+<div class="section" id="expectedexceptionmessageregexp">
+<a class="dashAnchor" name="//apple_ref/Annotation/@expectedExceptionMessageRegExp"></a><span id="appendixes-annotations-expectedexceptionmessageregexp"></span><h2>@expectedExceptionMessageRegExp</h2>
+<p>The expected message can also be specified as a regular expression using
+the <code class="docutils literal"><span class="pre">@expectedExceptionMessageRegExp</span></code> annotation. This
+is helpful for situations where a substring is not adequate for matching
+a given message.</p>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">PHPUnit\Framework\TestCase</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">MyTest</span> <span class="k">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+     <span class="sd">/**</span>
+<span class="sd">      * @expectedException              MyException</span>
+<span class="sd">      * @expectedExceptionMessageRegExp /Argument \d+ can not be an? \w+/</span>
+<span class="sd">      */</span>
+     <span class="k">public</span> <span class="k">function</span> <span class="nf">testExceptionHasRightMessage</span><span class="p">()</span>
+     <span class="p">{</span>
+         <span class="k">throw</span> <span class="k">new</span> <span class="nx">MyException</span><span class="p">(</span><span class="s1">'Argument 2 can not be an integer'</span><span class="p">);</span>
+     <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="group">
+<a class="dashAnchor" name="//apple_ref/Annotation/@group"></a><span id="appendixes-annotations-group"></span><h2>@group</h2>
+<p>A test can be tagged as belonging to one or more groups using the
+<code class="docutils literal"><span class="pre">@group</span></code> annotation like this</p>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">PHPUnit\Framework\TestCase</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">MyTest</span> <span class="k">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="sd">/**</span>
+<span class="sd">     * @group specification</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testSomething</span><span class="p">()</span>
+    <span class="p">{</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * @group regresssion</span>
+<span class="sd">     * @group bug2204</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testSomethingElse</span><span class="p">()</span>
+    <span class="p">{</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">@group</span></code> annotation can also be provided for the test
+class. It is then “inherited” to all test methods of that test class.</p>
+<p>Tests can be selected for execution based on groups using the
+<code class="docutils literal"><span class="pre">--group</span></code> and <code class="docutils literal"><span class="pre">--exclude-group</span></code> options
+of the command-line test runner or using the respective directives of the
+XML configuration file.</p>
+</div>
+<div class="section" id="large">
+<a class="dashAnchor" name="//apple_ref/Annotation/@large"></a><span id="appendixes-annotations-large"></span><h2>@large</h2>
+<p>The <code class="docutils literal"><span class="pre">@large</span></code> annotation is an alias for
+<code class="docutils literal"><span class="pre">@group</span> <span class="pre">large</span></code>.</p>
+<p>If the <code class="docutils literal"><span class="pre">PHP_Invoker</span></code> package is installed and strict
+mode is enabled, a large test will fail if it takes longer than 60
+seconds to execute. This timeout is configurable via the
+<code class="docutils literal"><span class="pre">timeoutForLargeTests</span></code> attribute in the XML
+configuration file.</p>
+</div>
+<div class="section" id="medium">
+<a class="dashAnchor" name="//apple_ref/Annotation/@medium"></a><span id="appendixes-annotations-medium"></span><h2>@medium</h2>
+<p>The <code class="docutils literal"><span class="pre">@medium</span></code> annotation is an alias for
+<code class="docutils literal"><span class="pre">@group</span> <span class="pre">medium</span></code>. A medium test must not depend on a test
+marked as <code class="docutils literal"><span class="pre">@large</span></code>.</p>
+<p>If the <code class="docutils literal"><span class="pre">PHP_Invoker</span></code> package is installed and strict
+mode is enabled, a medium test will fail if it takes longer than 10
+seconds to execute. This timeout is configurable via the
+<code class="docutils literal"><span class="pre">timeoutForMediumTests</span></code> attribute in the XML
+configuration file.</p>
+</div>
+<div class="section" id="preserveglobalstate">
+<a class="dashAnchor" name="//apple_ref/Annotation/@preserveGlobalState"></a><span id="appendixes-annotations-preserveglobalstate"></span><h2>@preserveGlobalState</h2>
+<p>When a test is run in a separate process, PHPUnit will
+attempt to preserve the global state from the parent process by
+serializing all globals in the parent process and unserializing them
+in the child process. This can cause problems if the parent process
+contains globals that are not serializable. To fix this, you can prevent
+PHPUnit from preserving global state with the
+<code class="docutils literal"><span class="pre">@preserveGlobalState</span></code> annotation.</p>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">PHPUnit\Framework\TestCase</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">MyTest</span> <span class="k">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="sd">/**</span>
+<span class="sd">     * @runInSeparateProcess</span>
+<span class="sd">     * @preserveGlobalState disabled</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testInSeparateProcess</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="requires">
+<a class="dashAnchor" name="//apple_ref/Annotation/@requires"></a><span id="appendixes-annotations-requires"></span><h2>@requires</h2>
+<p>The <code class="docutils literal"><span class="pre">@requires</span></code> annotation can be used to skip tests when common
+preconditions, like the PHP Version or installed extensions, are not met.</p>
+<p>A complete list of possibilities and examples can be found at
+<a class="reference internal" href="incomplete-and-skipped-tests.html#incomplete-and-skipped-tests-requires-tables-api"><span class="std std-ref">Possible @requires usages</span></a></p>
+</div>
+<div class="section" id="runtestsinseparateprocesses">
+<a class="dashAnchor" name="//apple_ref/Annotation/@runTestsInSeparateProcesses"></a><span id="appendixes-annotations-runtestsinseparateprocesses"></span><h2>@runTestsInSeparateProcesses</h2>
+<p>Indicates that all tests in a test class should be run in a separate
+PHP process.</p>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">PHPUnit\Framework\TestCase</span><span class="p">;</span>
+
+<span class="sd">/**</span>
+<span class="sd"> * @runTestsInSeparateProcesses</span>
+<span class="sd"> */</span>
+<span class="k">class</span> <span class="nc">MyTest</span> <span class="k">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><em>Note:</em> By default, PHPUnit will
+attempt to preserve the global state from the parent process by
+serializing all globals in the parent process and unserializing them
+in the child process. This can cause problems if the parent process
+contains globals that are not serializable. See <a class="reference internal" href="#appendixes-annotations-preserveglobalstate"><span class="std std-ref">@preserveGlobalState</span></a> for information
+on how to fix this.</p>
+</div>
+<div class="section" id="runinseparateprocess">
+<a class="dashAnchor" name="//apple_ref/Annotation/@runInSeparateProcess"></a><span id="appendixes-annotations-runinseparateprocess"></span><h2>@runInSeparateProcess</h2>
+<p>Indicates that a test should be run in a separate PHP process.</p>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nx">PHPUnit\Framework\TestCase</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">MyTest</span> <span class="k">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="sd">/**</span>
+<span class="sd">     * @runInSeparateProcess</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testInSeparateProcess</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><em>Note:</em> By default, PHPUnit will
+attempt to preserve the global state from the parent process by
+serializing all globals in the parent process and unserializing them
+in the child process. This can cause problems if the parent process
+contains globals that are not serializable. See <a class="reference internal" href="#appendixes-annotations-preserveglobalstate"><span class="std std-ref">@preserveGlobalState</span></a> for information
+on how to fix this.</p>
+</div>
+<div class="section" id="small">
+<a class="dashAnchor" name="//apple_ref/Annotation/@small"></a><span id="appendixes-annotations-small"></span><h2>@small</h2>
+<p>The <code class="docutils literal"><span class="pre">@small</span></code> annotation is an alias for
+<code class="docutils literal"><span class="pre">@group</span> <span class="pre">small</span></code>. A small test must not depend on a test
+marked as <code class="docutils literal"><span class="pre">@medium</span></code> or <code class="docutils literal"><span class="pre">@large</span></code>.</p>
+<p>If the <code class="docutils literal"><span class="pre">PHP_Invoker</span></code> package is installed and strict
+mode is enabled, a small test will fail if it takes longer than 1
+second to execute. This timeout is configurable via the
+<code class="docutils literal"><span class="pre">timeoutForSmallTests</span></code> attribute in the XML
+configuration file.</p>
+<div class="admonition-note admonition">
+<p class="first admonition-title">Note</p>
+<p class="last">Tests need to be explicitly annotated by either <code class="docutils literal"><span class="pre">@small</span></code>,
+<code class="docutils literal"><span class="pre">@medium</span></code>, or <code class="docutils literal"><span class="pre">@large</span></code> to enable run time limits.</p>
+</div>
+</div>
+<div class="section" id="test">
+<a class="dashAnchor" name="//apple_ref/Annotation/@test"></a><span id="appendixes-annotations-test"></span><h2>@test</h2>
+<p>As an alternative to prefixing your test method names with
+<code class="docutils literal"><span class="pre">test</span></code>, you can use the <code class="docutils literal"><span class="pre">@test</span></code>
+annotation in a method’s DocBlock to mark it as a test method.</p>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="sd">/**</span>
+<span class="sd"> * @test</span>
+<span class="sd"> */</span>
+<span class="k">public</span> <span class="k">function</span> <span class="nf">initialBalanceShouldBe0</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertSame</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">ba</span><span class="o">-&gt;</span><span class="na">getBalance</span><span class="p">());</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="testdox">
+<a class="dashAnchor" name="//apple_ref/Annotation/@testdox"></a><span id="appendixes-annotations-testdox"></span><h2>@testdox</h2>
+<p>Specifies an alternative description used when generating the agile
+documentation sentences.</p>
+<p>The <code class="docutils literal"><span class="pre">@testdox</span></code> annotation can be applied to both test classes and test methods.</p>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="sd">/**</span>
+<span class="sd"> * @testdox A bank account</span>
+<span class="sd"> */</span>
+<span class="k">class</span> <span class="nc">BankAccountTest</span> <span class="k">extends</span> <span class="nx">TestCase</span>
+<span class="p">{</span>
+    <span class="sd">/**</span>
+<span class="sd">     * @testdox has an initial balance of zero</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">balanceIsInitiallyZero</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertSame</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">ba</span><span class="o">-&gt;</span><span class="na">getBalance</span><span class="p">());</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition-note admonition">
+<p class="first admonition-title">Note</p>
+<p class="last">Prior to PHPUnit 7.0 (due to a bug in the annotation parsing), using
+the <code class="docutils literal"><span class="pre">@testdox</span></code> annotation also activated the behaviour
+of the <code class="docutils literal"><span class="pre">@test</span></code> annotation.</p>
+</div>
+</div>
+<div class="section" id="testwith">
+<a class="dashAnchor" name="//apple_ref/Annotation/@testWith"></a><span id="appendixes-annotations-testwith"></span><h2>@testWith</h2>
+<p>Instead of implementing a method for use with <code class="docutils literal"><span class="pre">@dataProvider</span></code>,
+you can define a data set using the <code class="docutils literal"><span class="pre">@testWith</span></code> annotation.</p>
+<p>A data set consists of one or many elements. To define a data set
+with multiple elements, define each element in a separate line.
+Each element of the data set must be an array defined in JSON.</p>
+<p>See <a class="reference internal" href="writing-tests-for-phpunit.html#writing-tests-for-phpunit-data-providers"><span class="std std-ref">Data Providers</span></a> to learn
+more about passing a set of data to a test.</p>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="sd">/**</span>
+<span class="sd"> * @param string    $input</span>
+<span class="sd"> * @param int       $expectedLength</span>
+<span class="sd"> *</span>
+<span class="sd"> * @testWith        ["test", 4]</span>
+<span class="sd"> *                  ["longer-string", 13]</span>
+<span class="sd"> */</span>
+<span class="k">public</span> <span class="k">function</span> <span class="nf">testStringLength</span><span class="p">(</span><span class="nx">string</span> <span class="nv">$input</span><span class="p">,</span> <span class="nx">int</span> <span class="nv">$expectedLength</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertSame</span><span class="p">(</span><span class="nv">$expectedLength</span><span class="p">,</span> <span class="nb">strlen</span><span class="p">(</span><span class="nv">$input</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>An object representation in JSON will be converted into an associative array.</p>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="sd">/**</span>
+<span class="sd"> * @param array     $array</span>
+<span class="sd"> * @param array     $keys</span>
+<span class="sd"> *</span>
+<span class="sd"> * @testWith        [{"day": "monday", "conditions": "sunny"}, ["day", "conditions"]]</span>
+<span class="sd"> */</span>
+<span class="k">public</span> <span class="k">function</span> <span class="nf">testArrayKeys</span><span class="p">(</span><span class="nv">$array</span><span class="p">,</span> <span class="nv">$keys</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertSame</span><span class="p">(</span><span class="nv">$keys</span><span class="p">,</span> <span class="nb">array_keys</span><span class="p">(</span><span class="nv">$array</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="ticket">
+<a class="dashAnchor" name="//apple_ref/Annotation/@ticket"></a><span id="appendixes-annotations-ticket"></span><h2>@ticket</h2>
+<p>The <code class="docutils literal"><span class="pre">@ticket</span></code> annotation is an alias for the
+<code class="docutils literal"><span class="pre">@group</span></code> annotation (see <a class="reference internal" href="#appendixes-annotations-group"><span class="std std-ref">@group</span></a>) and allows to filter tests based
+on their ticket ID.</p>
+</div>
+<div class="section" id="uses">
+<a class="dashAnchor" name="//apple_ref/Annotation/@uses"></a><span id="appendixes-annotations-uses"></span><h2>@uses</h2>
+<p>The <code class="docutils literal"><span class="pre">@uses</span></code> annotation specifies code which will be
+executed by a test, but is not intended to be covered by the test. A good
+example is a value object which is necessary for testing a unit of code.</p>
+<div class="highlight-php"><div class="highlight"><pre><span></span><span class="sd">/**</span>
+<span class="sd"> * @covers BankAccount::deposit</span>
+<span class="sd"> * @uses   Money</span>
+<span class="sd"> */</span>
+<span class="k">public</span> <span class="k">function</span> <span class="nf">testMoneyCanBeDepositedInAccount</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This annotation is especially useful in strict coverage mode where
+unintentionally covered code will cause a test to fail. See
+<a class="reference internal" href="risky-tests.html#risky-tests-unintentionally-covered-code"><span class="std std-ref">Unintentionally Covered Code</span></a> for more
+information regarding strict coverage mode.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="configuration.html" class="btn btn-neutral float-right" title="3. The XML Configuration File" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="assertions.html" class="btn btn-neutral" title="1. Assertions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr>
+
+  <div role="contentinfo">
+    <p>
+        © <a href="copyright.html">Copyright</a> 2018, Sebastian Bergmann.
+      
+        <span class="commit">
+          Revision <code>25b86e5f</code>.
+        </span>
+      
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Read the Docs</span>
+      v: 7.1
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt>Versions</dt>
+        
+          <dd><a href="https://phpunit.readthedocs.io/en/latest/">latest</a></dd>
+        
+          <dd><a href="index.html">7.1</a></dd>
+        
+          <dd><a href="https://phpunit.readthedocs.io/en/7.0/">7.0</a></dd>
+        
+          <dd><a href="https://phpunit.readthedocs.io/en/master/">master</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>Downloads</dt>
+        
+          <dd><a href="http://readthedocs.org/projects/phpunit/downloads/pdf/7.1/">pdf</a></dd>
+        
+          <dd><a href="http://readthedocs.org/projects/phpunit/downloads/htmlzip/7.1/">htmlzip</a></dd>
+        
+          <dd><a href="http://readthedocs.org/projects/phpunit/downloads/epub/7.1/">epub</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>On Read the Docs</dt>
+          <dd>
+            <a href="http://readthedocs.org/projects/phpunit/?fromdocs=phpunit">Project Home</a>
+          </dd>
+          <dd>
+            <a href="http://readthedocs.org/builds/phpunit/?fromdocs=phpunit">Builds</a>
+          </dd>
+      </dl>
+      <hr>
+      Free document hosting provided by <a href="http://www.readthedocs.org/">Read the Docs</a>.
+
+    </div>
+  </div>
+
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'7.1',
+            LANGUAGE:'en',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../media.readthedocs.org/javascript/jquery/jquery-2.0.3.min.js"></script>
+      <script type="text/javascript" src="../../../media.readthedocs.org/javascript/jquery/jquery-migrate-1.2.1.min.js"></script>
+      <script type="text/javascript" src="../../../media.readthedocs.org/javascript/underscore.js"></script>
+      <script type="text/javascript" src="../../../media.readthedocs.org/javascript/doctools.js"></script>
+      <script type="text/javascript" src="../../../media.readthedocs.org/javascript/readthedocs-doc-embed.js"></script>
+
+  
+
+  
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          
+          SphinxRtdTheme.Navigation.enableSticky();
+          
+      });
+  </script> 
+
+
+
+<!-- Mirrored from phpunit.readthedocs.io/en/7.1/annotations.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 14 Jul 2018 16:54:12 GMT -->
+</body></html>
