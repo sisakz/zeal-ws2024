@@ -6,21 +6,38 @@ On Windws run cmd in Administrator mode  and issue the following command before 
 `git config --system core.longpaths true`
 
 DocSets:
- Angular 
+ Angular
+ 
  Apache HTTP Server 
+ 
  Bootstrap 4
+ 
  CSS
+ 
  Emmet
+ 
  HTML
+ 
  JavaScript
+ 
  jQuery
+ 
  jQuery UI
+ 
  Laravel
+ 
  MySQL
+ 
  NodeJS
+ 
  PHP
+ 
  PHPUnit
+ 
  React 
+ 
  Sass
+ 
  VueJS
+ 
  WordPress
