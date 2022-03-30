@@ -1,0 +1,2561 @@
+<html><!-- Mirrored from laravel.com/api/master/Illuminate/Queue/RedisQueue.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 24 Mar 2022 16:21:34 GMT --><!-- Added by HTTrack --><head><meta http-equiv="content-type" content="text/html;charset=utf-8"><!-- /Added by HTTrack -->
+
+    <meta charset="UTF-8">
+    <meta name="robots" content="index, follow, all">
+    <title>Illuminate\Queue\RedisQueue</title>
+
+            <link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="../../css/bootstrap-theme.min.css">
+        <link rel="stylesheet" type="text/css" href="../../css/doctum.css">
+        <link rel="stylesheet" type="text/css" href="../../fonts/doctum-font.css">
+        <script src="../../js/jquery-3.5.1.slim.min.js"></script>
+        <script async="" defer="" src="../../doctum.js"></script>
+        <script async="" defer="" src="../../js/bootstrap.min.js"></script>
+        <script async="" defer="" src="../../js/autocomplete.min.js"></script>
+        <meta name="MobileOptimized" content="width">
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+
+        <link rel="search" type="application/opensearchdescription+xml" href="https://laravel.com/api/5.5/opensearch.xml" title="Laravel API (5.5)">
+    <link rel="search" type="application/opensearchdescription+xml" href="https://laravel.com/api/5.8/opensearch.xml" title="Laravel API (5.8)">
+    <link rel="search" type="application/opensearchdescription+xml" href="https://laravel.com/api/6.x/opensearch.xml" title="Laravel API (6.x)">
+    <link rel="search" type="application/opensearchdescription+xml" href="https://laravel.com/api/7.x/opensearch.xml" title="Laravel API (7.x)">
+    <link rel="search" type="application/opensearchdescription+xml" href="https://laravel.com/api/8.x/opensearch.xml" title="Laravel API (8.x)">
+    <link rel="search" type="application/opensearchdescription+xml" href="../../../9.x/opensearch.xml" title="Laravel API (9.x)">
+    <link rel="search" type="application/opensearchdescription+xml" href="../../opensearch.xml" title="Laravel API (master)">
+    </head>
+
+    <body id="class" data-name="class:Illuminate_Queue_RedisQueue" data-root-path="../../" data-search-index-url="../../doctum-search.json">
+            <div id="content">
+        <div id="left-column">
+                <div id="control-panel">
+                    <form action="#">
+                <select class="form-control" id="version-switcher" name="version">
+                                            <option value="../../../5.5/index.html" data-version="5.5">Laravel 5.5</option>
+                                            <option value="../../../5.8/index.html" data-version="5.8">Laravel 5.8</option>
+                                            <option value="../../../6.x/index.html" data-version="6.x">Laravel 6.x</option>
+                                            <option value="../../../7.x/index.html" data-version="7.x">Laravel 7.x</option>
+                                            <option value="../../../8.x/index.html" data-version="8.x">Laravel 8.x</option>
+                                            <option value="../../../9.x/index.html" data-version="9.x">Laravel 9.x</option>
+                                            <option value="../../../master/index.html" data-version="master" selected="">Laravel Dev</option>
+                                    </select>
+            </form>
+                <div class="search-bar hidden" id="search-progress-bar-container">
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" id="search-progress-bar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
+            </div>
+        </div>
+        <form id="search-form" action="https://laravel.com/api/master/search.html">
+            <span class="icon icon-search"></span>
+            <input name="search" id="doctum-search-auto-complete" class="typeahead form-control" type="search" placeholder="Search" spellcheck="false" autocorrect="off" autocomplete="off" autocapitalize="off">
+            <div class="auto-complete-results" id="auto-complete-results"></div>
+        </form>
+    </div>
+
+                <div id="api-tree"></div>
+
+        </div>
+        <div id="right-column">
+                <nav id="site-nav" class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-elements">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="../../index.html">Laravel API</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-elements">
+                <ul class="nav navbar-nav">
+                                        <li role="presentation" class="dropdown visible-xs-block visible-sm-block">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Versions&nbsp;<span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                        <li><a href="https://laravel.com/api/5.5/index.html" data-version="5.5">Laravel 5.5</a></li>
+                        <li><a href="https://laravel.com/api/5.8/index.html" data-version="5.8">Laravel 5.8</a></li>
+                        <li><a href="https://laravel.com/api/6.x/index.html" data-version="6.x">Laravel 6.x</a></li>
+                        <li><a href="https://laravel.com/api/7.x/index.html" data-version="7.x">Laravel 7.x</a></li>
+                        <li><a href="https://laravel.com/api/8.x/index.html" data-version="8.x">Laravel 8.x</a></li>
+                        <li><a href="../../../9.x/index-2.html" data-version="9.x">Laravel 9.x</a></li>
+                        <li class="active"><a href="../../index.html" data-version="master">Laravel Dev</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="../../classes.html">Classes</a></li>
+                    <li><a href="../../namespaces.html">Namespaces</a></li>
+                    <li><a href="../../interfaces.html">Interfaces</a></li>
+                    <li><a href="../../traits.html">Traits</a></li>
+                    <li><a href="../../doc-index.html">Index</a></li>
+                    <li></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+                        <div class="namespace-breadcrumbs">
+            <ol class="breadcrumb">
+                <li><span class="label label-default">class</span></li>
+                        <li><a href="../../Illuminate.html">Illuminate</a></li><li class="backslash">\</li><li><a href="../Queue.html">Queue</a></li><li class="backslash">\</li><li>RedisQueue</li>
+            </ol>
+        </div>
+                <div id="page-content">
+    <div class="page-header">
+        <h1>RedisQueue    
+            </h1>
+    </div>
+
+    
+    <p>        class
+    <strong>RedisQueue</strong>        extends <a href="Queue.html"><abbr title="Illuminate\Queue\Queue">Queue</abbr></a>        implements        <a href="../Contracts/Queue/Queue.html"><abbr title="Illuminate\Contracts\Queue\Queue">Queue</abbr></a>, <a href="../Contracts/Queue/ClearableQueue.html"><abbr title="Illuminate\Contracts\Queue\ClearableQueue">ClearableQueue</abbr></a>        (<a href="https://github.com/laravel/framework/blob/master/src/Illuminate/Queue/RedisQueue.php">View source</a>)
+</p>
+
+        
+    
+        
+
+            
+                <h2>Traits</h2>
+
+        
+    <div class="container-fluid underlined">
+                    <div class="row">
+                <div class="col-md-6">
+                    <a href="../Support/InteractsWithTime.html"><abbr title="Illuminate\Support\InteractsWithTime">InteractsWithTime</abbr></a>    </div>
+                <div class="col-md-6"></div>
+            </div>
+            </div>
+    
+    
+            <h2>Properties</h2>
+
+            <table class="table table-condensed">
+                    <tbody><tr>
+                <td class="type" id="">
+                                        protected                                        <a href="../Container/Container.html"><abbr title="Illuminate\Container\Container">Container</abbr></a>
+                                                                                
+                                    </td>
+                <td id="property_container"><a class="dashAnchor" name="//apple_ref/Property/%24container"></a>$container</td>
+                <td class="last"><p>The IoC container instance.</p></td>
+                <td><small>from&nbsp;<a href="Queue.html#property_container">
+<abbr title="Illuminate\Queue\Queue">Queue</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type" id="">
+                                        protected                                        string
+                                                                                
+                                    </td>
+                <td id="property_connectionName"><a class="dashAnchor" name="//apple_ref/Property/%24connectionName"></a>$connectionName</td>
+                <td class="last"><p>The connection name for the queue.</p></td>
+                <td><small>from&nbsp;<a href="Queue.html#property_connectionName">
+<abbr title="Illuminate\Queue\Queue">Queue</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type" id="">
+                                        protected                                        
+                                                                                
+                                    </td>
+                <td id="property_dispatchAfterCommit"><a class="dashAnchor" name="//apple_ref/Property/%24dispatchAfterCommit"></a>$dispatchAfterCommit</td>
+                <td class="last"><p>Indicates that jobs should be dispatched after all database transactions have committed.</p></td>
+                <td><small>from&nbsp;<a href="Queue.html#property_dispatchAfterCommit">
+<abbr title="Illuminate\Queue\Queue">Queue</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type" id="">
+                    static                    protected                                        callable[]
+                                                                                
+                                    </td>
+                <td id="property_createPayloadCallbacks"><a class="dashAnchor" name="//apple_ref/Property/%24createPayloadCallbacks"></a>$createPayloadCallbacks</td>
+                <td class="last"><p>The create payload callbacks.</p></td>
+                <td><small>from&nbsp;<a href="Queue.html#property_createPayloadCallbacks">
+<abbr title="Illuminate\Queue\Queue">Queue</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type" id="">
+                                        protected                                        <a href="../Contracts/Redis/Factory.html"><abbr title="Illuminate\Contracts\Redis\Factory">Factory</abbr></a>
+                                                                                
+                                    </td>
+                <td id="property_redis"><a class="dashAnchor" name="//apple_ref/Property/%24redis"></a>$redis</td>
+                <td class="last"><p>The Redis factory implementation.</p></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="">
+                                        protected                                        string
+                                                                                
+                                    </td>
+                <td id="property_connection"><a class="dashAnchor" name="//apple_ref/Property/%24connection"></a>$connection</td>
+                <td class="last"><p>The connection name.</p></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="">
+                                        protected                                        string
+                                                                                
+                                    </td>
+                <td id="property_default"><a class="dashAnchor" name="//apple_ref/Property/%24default"></a>$default</td>
+                <td class="last"><p>The name of the default queue.</p></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="">
+                                        protected                                        int|null
+                                                                                
+                                    </td>
+                <td id="property_retryAfter"><a class="dashAnchor" name="//apple_ref/Property/%24retryAfter"></a>$retryAfter</td>
+                <td class="last"><p>The expiration time of a job.</p></td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="">
+                                        protected                                        int|null
+                                                                                
+                                    </td>
+                <td id="property_blockFor"><a class="dashAnchor" name="//apple_ref/Property/%24blockFor"></a>$blockFor</td>
+                <td class="last"><p>The maximum number of seconds to block for a job.</p></td>
+                <td></td>
+            </tr>
+            </tbody></table>
+
+    
+            <h2>Methods</h2>
+
+            <div class="container-fluid underlined">
+                    <div class="row">
+                <div class="col-md-2 type">
+                    int
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_secondsUntil">secondsUntil</a>(<a target="_blank" rel="noopener" href="https://www.php.net/DateTimeInterface">DateTimeInterface</a>|<a target="_blank" rel="noopener" href="https://www.php.net/DateInterval">DateInterval</a>|int $delay)
+        
+                                            <p></p><p>Get the number of seconds until the given DateTime.</p><p></p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../Support/InteractsWithTime.html#method_secondsUntil">
+<abbr title="Illuminate\Support\InteractsWithTime">InteractsWithTime</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    int
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_availableAt">availableAt</a>(<a target="_blank" rel="noopener" href="https://www.php.net/DateTimeInterface">DateTimeInterface</a>|<a target="_blank" rel="noopener" href="https://www.php.net/DateInterval">DateInterval</a>|int $delay = 0)
+        
+                                            <p></p><p>Get the "available at" UNIX timestamp.</p><p></p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../Support/InteractsWithTime.html#method_availableAt">
+<abbr title="Illuminate\Support\InteractsWithTime">InteractsWithTime</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a target="_blank" rel="noopener" href="https://www.php.net/DateTimeInterface">DateTimeInterface</a>|int
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_parseDateInterval">parseDateInterval</a>(<a target="_blank" rel="noopener" href="https://www.php.net/DateTimeInterface">DateTimeInterface</a>|<a target="_blank" rel="noopener" href="https://www.php.net/DateInterval">DateInterval</a>|int $delay)
+        
+                                            <p></p><p>If the given value is an interval, convert it to a DateTime instance.</p><p></p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../Support/InteractsWithTime.html#method_parseDateInterval">
+<abbr title="Illuminate\Support\InteractsWithTime">InteractsWithTime</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    int
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_currentTime">currentTime</a>()
+        
+                                            <p></p><p>Get the current system time as a UNIX timestamp.</p><p></p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../Support/InteractsWithTime.html#method_currentTime">
+<abbr title="Illuminate\Support\InteractsWithTime">InteractsWithTime</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    mixed
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_pushOn">pushOn</a>(string $queue, string $job, mixed $data = '')
+        
+                                            <p></p><p>Push a new job onto the queue.</p><p></p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="Queue.html#method_pushOn">
+<abbr title="Illuminate\Queue\Queue">Queue</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    mixed
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_laterOn">laterOn</a>(string $queue, <a target="_blank" rel="noopener" href="https://www.php.net/DateTimeInterface">DateTimeInterface</a>|<a target="_blank" rel="noopener" href="https://www.php.net/DateInterval">DateInterval</a>|int $delay, string $job, mixed $data = '')
+        
+                                            <p></p><p>Push a new job onto a specific queue after (n) seconds.</p><p></p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="Queue.html#method_laterOn">
+<abbr title="Illuminate\Queue\Queue">Queue</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    void
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_bulk">bulk</a>(array $jobs, mixed $data = '', string|null $queue = null)
+        
+                                            <p></p><p>Push an array of jobs onto the queue.</p><p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_createPayload">createPayload</a>(<a target="_blank" rel="noopener" href="https://www.php.net/Closure">Closure</a>|string|object $job, string $queue, mixed $data = '')
+        
+                                            <p></p><p>Create a payload string from the given job and data.</p><p></p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="Queue.html#method_createPayload">
+<abbr title="Illuminate\Queue\Queue">Queue</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    array
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_createPayloadArray">createPayloadArray</a>(string|object $job, string $queue, mixed $data = '')
+        
+                                            <p></p><p>Create a payload string from the given job and data.</p><p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    array
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_createObjectPayload">createObjectPayload</a>(object $job, string $queue)
+        
+                                            <p></p><p>Create a payload for an object-based queue handler.</p><p></p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="Queue.html#method_createObjectPayload">
+<abbr title="Illuminate\Queue\Queue">Queue</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_getDisplayName">getDisplayName</a>(object $job)
+        
+                                            <p></p><p>Get the display name for the given job.</p><p></p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="Queue.html#method_getDisplayName">
+<abbr title="Illuminate\Queue\Queue">Queue</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    mixed
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_getJobBackoff">getJobBackoff</a>(mixed $job)
+        
+                                            <p></p><p>Get the backoff for an object-based queue handler.</p><p></p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="Queue.html#method_getJobBackoff">
+<abbr title="Illuminate\Queue\Queue">Queue</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    mixed
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_getJobExpiration">getJobExpiration</a>(mixed $job)
+        
+                                            <p></p><p>Get the expiration timestamp for an object-based queue handler.</p><p></p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="Queue.html#method_getJobExpiration">
+<abbr title="Illuminate\Queue\Queue">Queue</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    bool
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_jobShouldBeEncrypted">jobShouldBeEncrypted</a>(object $job)
+        
+                                            <p></p><p>Determine if the job should be encrypted.</p><p></p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="Queue.html#method_jobShouldBeEncrypted">
+<abbr title="Illuminate\Queue\Queue">Queue</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    array
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_createStringPayload">createStringPayload</a>(string $job, string $queue, mixed $data)
+        
+                                            <p></p><p>Create a typical, string based queue payload array.</p><p></p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="Queue.html#method_createStringPayload">
+<abbr title="Illuminate\Queue\Queue">Queue</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    static&nbsp;void
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_createPayloadUsing">createPayloadUsing</a>(callable|null $callback)
+        
+                                            <p></p><p>Register a callback to be executed when creating job payloads.</p><p></p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="Queue.html#method_createPayloadUsing">
+<abbr title="Illuminate\Queue\Queue">Queue</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    array
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_withCreatePayloadHooks">withCreatePayloadHooks</a>(string $queue, array $payload)
+        
+                                            <p></p><p>Create the given payload using any registered payload hooks.</p><p></p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="Queue.html#method_withCreatePayloadHooks">
+<abbr title="Illuminate\Queue\Queue">Queue</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    mixed
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_enqueueUsing">enqueueUsing</a>(<a target="_blank" rel="noopener" href="https://www.php.net/Closure">Closure</a>|string|object $job, string $payload, string $queue, <a target="_blank" rel="noopener" href="https://www.php.net/DateTimeInterface">DateTimeInterface</a>|<a target="_blank" rel="noopener" href="https://www.php.net/DateInterval">DateInterval</a>|int|null $delay, callable $callback)
+        
+                                            <p></p><p>Enqueue a job using the given callback.</p><p></p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="Queue.html#method_enqueueUsing">
+<abbr title="Illuminate\Queue\Queue">Queue</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    bool
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_shouldDispatchAfterCommit">shouldDispatchAfterCommit</a>(<a target="_blank" rel="noopener" href="https://www.php.net/Closure">Closure</a>|string|object $job)
+        
+                                            <p></p><p>Determine if the job should be dispatched after all database transactions have committed.</p><p></p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="Queue.html#method_shouldDispatchAfterCommit">
+<abbr title="Illuminate\Queue\Queue">Queue</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    void
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_raiseJobQueuedEvent">raiseJobQueuedEvent</a>(string|int|null $jobId, <a target="_blank" rel="noopener" href="https://www.php.net/Closure">Closure</a>|string|object $job)
+        
+                                            <p></p><p>Raise the job queued event.</p><p></p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="Queue.html#method_raiseJobQueuedEvent">
+<abbr title="Illuminate\Queue\Queue">Queue</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_getConnectionName">getConnectionName</a>()
+        
+                                            <p></p><p>Get the connection name for the queue.</p><p></p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="Queue.html#method_getConnectionName">
+<abbr title="Illuminate\Queue\Queue">Queue</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    $this
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_setConnectionName">setConnectionName</a>(string $name)
+        
+                                            <p></p><p>Set the connection name for the queue.</p><p></p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="Queue.html#method_setConnectionName">
+<abbr title="Illuminate\Queue\Queue">Queue</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../Container/Container.html"><abbr title="Illuminate\Container\Container">Container</abbr></a>
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_getContainer">getContainer</a>()
+        
+                                            <p></p><p>Get the container instance being used by the connection.</p><p></p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="Queue.html#method_getContainer">
+<abbr title="Illuminate\Queue\Queue">Queue</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    void
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_setContainer">setContainer</a>(<a href="../Container/Container.html"><abbr title="Illuminate\Container\Container">Container</abbr></a> $container)
+        
+                                            <p></p><p>Set the IoC container instance.</p><p></p>                </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="Queue.html#method_setContainer">
+<abbr title="Illuminate\Queue\Queue">Queue</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    void
+                </div>
+                <div class="col-md-8">
+                    <a href="#method___construct">__construct</a>(<a href="../Contracts/Redis/Factory.html"><abbr title="Illuminate\Contracts\Redis\Factory">Factory</abbr></a> $redis, string $default = 'default', string|null $connection = null, int $retryAfter = 60, int|null $blockFor = null, bool $dispatchAfterCommit = false)
+        
+                                            <p></p><p>Create a new Redis queue instance.</p><p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    int
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_size">size</a>(string|null $queue = null)
+        
+                                            <p></p><p>Get the size of the queue.</p><p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    mixed
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_push">push</a>(string|object $job, mixed $data = '', string|null $queue = null)
+        
+                                            <p></p><p>Push a new job onto the queue.</p><p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    mixed
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_pushRaw">pushRaw</a>(string $payload, string|null $queue = null, array $options = [])
+        
+                                            <p></p><p>Push a raw payload onto the queue.</p><p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    mixed
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_later">later</a>(<a target="_blank" rel="noopener" href="https://www.php.net/DateTimeInterface">DateTimeInterface</a>|<a target="_blank" rel="noopener" href="https://www.php.net/DateInterval">DateInterval</a>|int $delay, string|object $job, mixed $data = '', string|null $queue = null)
+        
+                                            <p></p><p>Push a new job onto the queue after a delay.</p><p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    mixed
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_laterRaw">laterRaw</a>(<a target="_blank" rel="noopener" href="https://www.php.net/DateTimeInterface">DateTimeInterface</a>|<a target="_blank" rel="noopener" href="https://www.php.net/DateInterval">DateInterval</a>|int $delay, string $payload, string|null $queue = null)
+        
+                                            <p></p><p>Push a raw job onto the queue after (n) seconds.</p><p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../Contracts/Queue/Job.html"><abbr title="Illuminate\Contracts\Queue\Job">Job</abbr></a>|null
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_pop">pop</a>(string|null $queue = null)
+        
+                                            <p></p><p>Pop the next job off of the queue.</p><p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    void
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_migrate">migrate</a>(string $queue)
+        
+                                            <p></p><p>Migrate any delayed or expired jobs onto the primary queue.</p><p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    array
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_migrateExpiredJobs">migrateExpiredJobs</a>(string $from, string $to)
+        
+                                            <p></p><p>Migrate the delayed jobs that are ready to the regular queue.</p><p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    array
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_retrieveNextJob">retrieveNextJob</a>(string $queue, bool $block = true)
+        
+                                            <p></p><p>Retrieve the next job from the queue.</p><p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    void
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_deleteReserved">deleteReserved</a>(string $queue, <a href="Jobs/RedisJob.html"><abbr title="Illuminate\Queue\Jobs\RedisJob">RedisJob</abbr></a> $job)
+        
+                                            <p></p><p>Delete a reserved job from the queue.</p><p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    void
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_deleteAndRelease">deleteAndRelease</a>(string $queue, <a href="Jobs/RedisJob.html"><abbr title="Illuminate\Queue\Jobs\RedisJob">RedisJob</abbr></a> $job, int $delay)
+        
+                                            <p></p><p>Delete a reserved job from the reserved queue and release it.</p><p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    int
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_clear">clear</a>(string $queue)
+        
+                                            <p></p><p>Delete all of the jobs from the queue.</p><p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_getRandomId">getRandomId</a>()
+        
+                                            <p></p><p>Get a random ID string.</p><p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_getQueue">getQueue</a>(string|null $queue)
+        
+                                            <p></p><p>Get the queue or return the default.</p><p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../Redis/Connections/Connection.html"><abbr title="Illuminate\Redis\Connections\Connection">Connection</abbr></a>
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_getConnection">getConnection</a>()
+        
+                                            <p></p><p>Get the connection for the queue.</p><p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../Contracts/Redis/Factory.html"><abbr title="Illuminate\Contracts\Redis\Factory">Factory</abbr></a>
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_getRedis">getRedis</a>()
+        
+                                            <p></p><p>Get the underlying Redis instance.</p><p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+            </div>
+
+
+        <h2>Details</h2>
+
+            <div id="method-details">
+                    <div class="method-item">
+                    <a class="dashAnchor" name="//apple_ref/Method/secondsUntil"></a><h3 id="method_secondsUntil">
+        <div class="location">in <a href="../Support/InteractsWithTime.html#method_secondsUntil">
+<abbr title="Illuminate\Support\InteractsWithTime">InteractsWithTime</abbr></a> <a href="https://github.com/laravel/framework/blob/master/src/Illuminate/Support/InteractsWithTime.php#L16">at line 16</a></div>
+        <code>            protected        int
+    <strong>secondsUntil</strong>(<a target="_blank" rel="noopener" href="https://www.php.net/DateTimeInterface">DateTimeInterface</a>|<a target="_blank" rel="noopener" href="https://www.php.net/DateInterval">DateInterval</a>|int $delay)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p></p><p>Get the number of seconds until the given DateTime.</p><p></p>                        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tbody><tr>
+                <td><a target="_blank" rel="noopener" href="https://www.php.net/DateTimeInterface">DateTimeInterface</a>|<a target="_blank" rel="noopener" href="https://www.php.net/DateInterval">DateInterval</a>|int</td>
+                <td>$delay</td>
+                <td></td>
+            </tr>
+            </tbody></table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tbody><tr>
+            <td>int</td>
+            <td></td>
+        </tr>
+    </tbody></table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <a class="dashAnchor" name="//apple_ref/Method/availableAt"></a><h3 id="method_availableAt">
+        <div class="location">in <a href="../Support/InteractsWithTime.html#method_availableAt">
+<abbr title="Illuminate\Support\InteractsWithTime">InteractsWithTime</abbr></a> <a href="https://github.com/laravel/framework/blob/master/src/Illuminate/Support/InteractsWithTime.php#L31">at line 31</a></div>
+        <code>            protected        int
+    <strong>availableAt</strong>(<a target="_blank" rel="noopener" href="https://www.php.net/DateTimeInterface">DateTimeInterface</a>|<a target="_blank" rel="noopener" href="https://www.php.net/DateInterval">DateInterval</a>|int $delay = 0)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p></p><p>Get the "available at" UNIX timestamp.</p><p></p>                        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tbody><tr>
+                <td><a target="_blank" rel="noopener" href="https://www.php.net/DateTimeInterface">DateTimeInterface</a>|<a target="_blank" rel="noopener" href="https://www.php.net/DateInterval">DateInterval</a>|int</td>
+                <td>$delay</td>
+                <td></td>
+            </tr>
+            </tbody></table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tbody><tr>
+            <td>int</td>
+            <td></td>
+        </tr>
+    </tbody></table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <a class="dashAnchor" name="//apple_ref/Method/parseDateInterval"></a><h3 id="method_parseDateInterval">
+        <div class="location">in <a href="../Support/InteractsWithTime.html#method_parseDateInterval">
+<abbr title="Illuminate\Support\InteractsWithTime">InteractsWithTime</abbr></a> <a href="https://github.com/laravel/framework/blob/master/src/Illuminate/Support/InteractsWithTime.php#L46">at line 46</a></div>
+        <code>            protected        <a target="_blank" rel="noopener" href="https://www.php.net/DateTimeInterface">DateTimeInterface</a>|int
+    <strong>parseDateInterval</strong>(<a target="_blank" rel="noopener" href="https://www.php.net/DateTimeInterface">DateTimeInterface</a>|<a target="_blank" rel="noopener" href="https://www.php.net/DateInterval">DateInterval</a>|int $delay)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p></p><p>If the given value is an interval, convert it to a DateTime instance.</p><p></p>                        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tbody><tr>
+                <td><a target="_blank" rel="noopener" href="https://www.php.net/DateTimeInterface">DateTimeInterface</a>|<a target="_blank" rel="noopener" href="https://www.php.net/DateInterval">DateInterval</a>|int</td>
+                <td>$delay</td>
+                <td></td>
+            </tr>
+            </tbody></table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tbody><tr>
+            <td><a target="_blank" rel="noopener" href="https://www.php.net/DateTimeInterface">DateTimeInterface</a>|int</td>
+            <td></td>
+        </tr>
+    </tbody></table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <a class="dashAnchor" name="//apple_ref/Method/currentTime"></a><h3 id="method_currentTime">
+        <div class="location">in <a href="../Support/InteractsWithTime.html#method_currentTime">
+<abbr title="Illuminate\Support\InteractsWithTime">InteractsWithTime</abbr></a> <a href="https://github.com/laravel/framework/blob/master/src/Illuminate/Support/InteractsWithTime.php#L60">at line 60</a></div>
+        <code>            protected        int
+    <strong>currentTime</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p></p><p>Get the current system time as a UNIX timestamp.</p><p></p>                        
+        </div>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tbody><tr>
+            <td>int</td>
+            <td></td>
+        </tr>
+    </tbody></table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <a class="dashAnchor" name="//apple_ref/Method/pushOn"></a><h3 id="method_pushOn">
+        <div class="location">in <a href="Queue.html#method_pushOn">
+<abbr title="Illuminate\Queue\Queue">Queue</abbr></a> <a href="https://github.com/laravel/framework/blob/master/src/Illuminate/Queue/Queue.php#L55">at line 55</a></div>
+        <code>                    mixed
+    <strong>pushOn</strong>(string $queue, string $job, mixed $data = '')
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p></p><p>Push a new job onto the queue.</p><p></p>                        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tbody><tr>
+                <td>string</td>
+                <td>$queue</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$job</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>mixed</td>
+                <td>$data</td>
+                <td></td>
+            </tr>
+            </tbody></table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tbody><tr>
+            <td>mixed</td>
+            <td></td>
+        </tr>
+    </tbody></table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <a class="dashAnchor" name="//apple_ref/Method/laterOn"></a><h3 id="method_laterOn">
+        <div class="location">in <a href="Queue.html#method_laterOn">
+<abbr title="Illuminate\Queue\Queue">Queue</abbr></a> <a href="https://github.com/laravel/framework/blob/master/src/Illuminate/Queue/Queue.php#L69">at line 69</a></div>
+        <code>                    mixed
+    <strong>laterOn</strong>(string $queue, <a target="_blank" rel="noopener" href="https://www.php.net/DateTimeInterface">DateTimeInterface</a>|<a target="_blank" rel="noopener" href="https://www.php.net/DateInterval">DateInterval</a>|int $delay, string $job, mixed $data = '')
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p></p><p>Push a new job onto a specific queue after (n) seconds.</p><p></p>                        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tbody><tr>
+                <td>string</td>
+                <td>$queue</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td><a target="_blank" rel="noopener" href="https://www.php.net/DateTimeInterface">DateTimeInterface</a>|<a target="_blank" rel="noopener" href="https://www.php.net/DateInterval">DateInterval</a>|int</td>
+                <td>$delay</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$job</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>mixed</td>
+                <td>$data</td>
+                <td></td>
+            </tr>
+            </tbody></table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tbody><tr>
+            <td>mixed</td>
+            <td></td>
+        </tr>
+    </tbody></table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <a class="dashAnchor" name="//apple_ref/Method/bulk"></a><h3 id="method_bulk">
+        <div class="location"><a href="https://github.com/laravel/framework/blob/master/src/Illuminate/Queue/RedisQueue.php#L97">at line 97</a></div>
+        <code>                    void
+    <strong>bulk</strong>(array $jobs, mixed $data = '', string|null $queue = null)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p></p><p>Push an array of jobs onto the queue.</p><p></p>                        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tbody><tr>
+                <td>array</td>
+                <td>$jobs</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>mixed</td>
+                <td>$data</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$queue</td>
+                <td></td>
+            </tr>
+            </tbody></table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tbody><tr>
+            <td>void</td>
+            <td></td>
+        </tr>
+    </tbody></table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <a class="dashAnchor" name="//apple_ref/Method/createPayload"></a><h3 id="method_createPayload">
+        <div class="location">in <a href="Queue.html#method_createPayload">
+<abbr title="Illuminate\Queue\Queue">Queue</abbr></a> <a href="https://github.com/laravel/framework/blob/master/src/Illuminate/Queue/Queue.php#L99">at line 99</a></div>
+        <code>            protected        string
+    <strong>createPayload</strong>(<a target="_blank" rel="noopener" href="https://www.php.net/Closure">Closure</a>|string|object $job, string $queue, mixed $data = '')
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p></p><p>Create a payload string from the given job and data.</p><p></p>                        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tbody><tr>
+                <td><a target="_blank" rel="noopener" href="https://www.php.net/Closure">Closure</a>|string|object</td>
+                <td>$job</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$queue</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>mixed</td>
+                <td>$data</td>
+                <td></td>
+            </tr>
+            </tbody></table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tbody><tr>
+            <td>string</td>
+            <td></td>
+        </tr>
+    </tbody></table>
+
+            
+                            <h4>Exceptions</h4>
+
+                    <table class="table table-condensed">
+                    <tbody><tr>
+                <td><a href="InvalidPayloadException.html"><abbr title="Illuminate\Queue\InvalidPayloadException">InvalidPayloadException</abbr></a></td>
+                <td></td>
+            </tr>
+            </tbody></table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <a class="dashAnchor" name="//apple_ref/Method/createPayloadArray"></a><h3 id="method_createPayloadArray">
+        <div class="location"><a href="https://github.com/laravel/framework/blob/master/src/Illuminate/Queue/RedisQueue.php#L194">at line 194</a></div>
+        <code>            protected        array
+    <strong>createPayloadArray</strong>(string|object $job, string $queue, mixed $data = '')
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p></p><p>Create a payload string from the given job and data.</p><p></p>                        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tbody><tr>
+                <td>string|object</td>
+                <td>$job</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$queue</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>mixed</td>
+                <td>$data</td>
+                <td></td>
+            </tr>
+            </tbody></table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tbody><tr>
+            <td>array</td>
+            <td></td>
+        </tr>
+    </tbody></table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <a class="dashAnchor" name="//apple_ref/Method/createObjectPayload"></a><h3 id="method_createObjectPayload">
+        <div class="location">in <a href="Queue.html#method_createObjectPayload">
+<abbr title="Illuminate\Queue\Queue">Queue</abbr></a> <a href="https://github.com/laravel/framework/blob/master/src/Illuminate/Queue/Queue.php#L138">at line 138</a></div>
+        <code>            protected        array
+    <strong>createObjectPayload</strong>(object $job, string $queue)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p></p><p>Create a payload for an object-based queue handler.</p><p></p>                        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tbody><tr>
+                <td>object</td>
+                <td>$job</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$queue</td>
+                <td></td>
+            </tr>
+            </tbody></table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tbody><tr>
+            <td>array</td>
+            <td></td>
+        </tr>
+    </tbody></table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <a class="dashAnchor" name="//apple_ref/Method/getDisplayName"></a><h3 id="method_getDisplayName">
+        <div class="location">in <a href="Queue.html#method_getDisplayName">
+<abbr title="Illuminate\Queue\Queue">Queue</abbr></a> <a href="https://github.com/laravel/framework/blob/master/src/Illuminate/Queue/Queue.php#L174">at line 174</a></div>
+        <code>            protected        string
+    <strong>getDisplayName</strong>(object $job)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p></p><p>Get the display name for the given job.</p><p></p>                        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tbody><tr>
+                <td>object</td>
+                <td>$job</td>
+                <td></td>
+            </tr>
+            </tbody></table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tbody><tr>
+            <td>string</td>
+            <td></td>
+        </tr>
+    </tbody></table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <a class="dashAnchor" name="//apple_ref/Method/getJobBackoff"></a><h3 id="method_getJobBackoff">
+        <div class="location">in <a href="Queue.html#method_getJobBackoff">
+<abbr title="Illuminate\Queue\Queue">Queue</abbr></a> <a href="https://github.com/laravel/framework/blob/master/src/Illuminate/Queue/Queue.php#L186">at line 186</a></div>
+        <code>                    mixed
+    <strong>getJobBackoff</strong>(mixed $job)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p></p><p>Get the backoff for an object-based queue handler.</p><p></p>                        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tbody><tr>
+                <td>mixed</td>
+                <td>$job</td>
+                <td></td>
+            </tr>
+            </tbody></table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tbody><tr>
+            <td>mixed</td>
+            <td></td>
+        </tr>
+    </tbody></table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <a class="dashAnchor" name="//apple_ref/Method/getJobExpiration"></a><h3 id="method_getJobExpiration">
+        <div class="location">in <a href="Queue.html#method_getJobExpiration">
+<abbr title="Illuminate\Queue\Queue">Queue</abbr></a> <a href="https://github.com/laravel/framework/blob/master/src/Illuminate/Queue/Queue.php#L209">at line 209</a></div>
+        <code>                    mixed
+    <strong>getJobExpiration</strong>(mixed $job)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p></p><p>Get the expiration timestamp for an object-based queue handler.</p><p></p>                        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tbody><tr>
+                <td>mixed</td>
+                <td>$job</td>
+                <td></td>
+            </tr>
+            </tbody></table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tbody><tr>
+            <td>mixed</td>
+            <td></td>
+        </tr>
+    </tbody></table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <a class="dashAnchor" name="//apple_ref/Method/jobShouldBeEncrypted"></a><h3 id="method_jobShouldBeEncrypted">
+        <div class="location">in <a href="Queue.html#method_jobShouldBeEncrypted">
+<abbr title="Illuminate\Queue\Queue">Queue</abbr></a> <a href="https://github.com/laravel/framework/blob/master/src/Illuminate/Queue/Queue.php#L227">at line 227</a></div>
+        <code>            protected        bool
+    <strong>jobShouldBeEncrypted</strong>(object $job)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p></p><p>Determine if the job should be encrypted.</p><p></p>                        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tbody><tr>
+                <td>object</td>
+                <td>$job</td>
+                <td></td>
+            </tr>
+            </tbody></table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tbody><tr>
+            <td>bool</td>
+            <td></td>
+        </tr>
+    </tbody></table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <a class="dashAnchor" name="//apple_ref/Method/createStringPayload"></a><h3 id="method_createStringPayload">
+        <div class="location">in <a href="Queue.html#method_createStringPayload">
+<abbr title="Illuminate\Queue\Queue">Queue</abbr></a> <a href="https://github.com/laravel/framework/blob/master/src/Illuminate/Queue/Queue.php#L244">at line 244</a></div>
+        <code>            protected        array
+    <strong>createStringPayload</strong>(string $job, string $queue, mixed $data)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p></p><p>Create a typical, string based queue payload array.</p><p></p>                        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tbody><tr>
+                <td>string</td>
+                <td>$job</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$queue</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>mixed</td>
+                <td>$data</td>
+                <td></td>
+            </tr>
+            </tbody></table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tbody><tr>
+            <td>array</td>
+            <td></td>
+        </tr>
+    </tbody></table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <a class="dashAnchor" name="//apple_ref/Method/createPayloadUsing"></a><h3 id="method_createPayloadUsing">
+        <div class="location">in <a href="Queue.html#method_createPayloadUsing">
+<abbr title="Illuminate\Queue\Queue">Queue</abbr></a> <a href="https://github.com/laravel/framework/blob/master/src/Illuminate/Queue/Queue.php#L265">at line 265</a></div>
+        <code>        static            void
+    <strong>createPayloadUsing</strong>(callable|null $callback)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p></p><p>Register a callback to be executed when creating job payloads.</p><p></p>                        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tbody><tr>
+                <td>callable|null</td>
+                <td>$callback</td>
+                <td></td>
+            </tr>
+            </tbody></table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tbody><tr>
+            <td>void</td>
+            <td></td>
+        </tr>
+    </tbody></table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <a class="dashAnchor" name="//apple_ref/Method/withCreatePayloadHooks"></a><h3 id="method_withCreatePayloadHooks">
+        <div class="location">in <a href="Queue.html#method_withCreatePayloadHooks">
+<abbr title="Illuminate\Queue\Queue">Queue</abbr></a> <a href="https://github.com/laravel/framework/blob/master/src/Illuminate/Queue/Queue.php#L281">at line 281</a></div>
+        <code>            protected        array
+    <strong>withCreatePayloadHooks</strong>(string $queue, array $payload)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p></p><p>Create the given payload using any registered payload hooks.</p><p></p>                        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tbody><tr>
+                <td>string</td>
+                <td>$queue</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>array</td>
+                <td>$payload</td>
+                <td></td>
+            </tr>
+            </tbody></table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tbody><tr>
+            <td>array</td>
+            <td></td>
+        </tr>
+    </tbody></table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <a class="dashAnchor" name="//apple_ref/Method/enqueueUsing"></a><h3 id="method_enqueueUsing">
+        <div class="location">in <a href="Queue.html#method_enqueueUsing">
+<abbr title="Illuminate\Queue\Queue">Queue</abbr></a> <a href="https://github.com/laravel/framework/blob/master/src/Illuminate/Queue/Queue.php#L302">at line 302</a></div>
+        <code>            protected        mixed
+    <strong>enqueueUsing</strong>(<a target="_blank" rel="noopener" href="https://www.php.net/Closure">Closure</a>|string|object $job, string $payload, string $queue, <a target="_blank" rel="noopener" href="https://www.php.net/DateTimeInterface">DateTimeInterface</a>|<a target="_blank" rel="noopener" href="https://www.php.net/DateInterval">DateInterval</a>|int|null $delay, callable $callback)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p></p><p>Enqueue a job using the given callback.</p><p></p>                        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tbody><tr>
+                <td><a target="_blank" rel="noopener" href="https://www.php.net/Closure">Closure</a>|string|object</td>
+                <td>$job</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$payload</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$queue</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td><a target="_blank" rel="noopener" href="https://www.php.net/DateTimeInterface">DateTimeInterface</a>|<a target="_blank" rel="noopener" href="https://www.php.net/DateInterval">DateInterval</a>|int|null</td>
+                <td>$delay</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>callable</td>
+                <td>$callback</td>
+                <td></td>
+            </tr>
+            </tbody></table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tbody><tr>
+            <td>mixed</td>
+            <td></td>
+        </tr>
+    </tbody></table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <a class="dashAnchor" name="//apple_ref/Method/shouldDispatchAfterCommit"></a><h3 id="method_shouldDispatchAfterCommit">
+        <div class="location">in <a href="Queue.html#method_shouldDispatchAfterCommit">
+<abbr title="Illuminate\Queue\Queue">Queue</abbr></a> <a href="https://github.com/laravel/framework/blob/master/src/Illuminate/Queue/Queue.php#L326">at line 326</a></div>
+        <code>            protected        bool
+    <strong>shouldDispatchAfterCommit</strong>(<a target="_blank" rel="noopener" href="https://www.php.net/Closure">Closure</a>|string|object $job)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p></p><p>Determine if the job should be dispatched after all database transactions have committed.</p><p></p>                        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tbody><tr>
+                <td><a target="_blank" rel="noopener" href="https://www.php.net/Closure">Closure</a>|string|object</td>
+                <td>$job</td>
+                <td></td>
+            </tr>
+            </tbody></table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tbody><tr>
+            <td>bool</td>
+            <td></td>
+        </tr>
+    </tbody></table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <a class="dashAnchor" name="//apple_ref/Method/raiseJobQueuedEvent"></a><h3 id="method_raiseJobQueuedEvent">
+        <div class="location">in <a href="Queue.html#method_raiseJobQueuedEvent">
+<abbr title="Illuminate\Queue\Queue">Queue</abbr></a> <a href="https://github.com/laravel/framework/blob/master/src/Illuminate/Queue/Queue.php#L346">at line 346</a></div>
+        <code>            protected        void
+    <strong>raiseJobQueuedEvent</strong>(string|int|null $jobId, <a target="_blank" rel="noopener" href="https://www.php.net/Closure">Closure</a>|string|object $job)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p></p><p>Raise the job queued event.</p><p></p>                        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tbody><tr>
+                <td>string|int|null</td>
+                <td>$jobId</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td><a target="_blank" rel="noopener" href="https://www.php.net/Closure">Closure</a>|string|object</td>
+                <td>$job</td>
+                <td></td>
+            </tr>
+            </tbody></table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tbody><tr>
+            <td>void</td>
+            <td></td>
+        </tr>
+    </tbody></table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <a class="dashAnchor" name="//apple_ref/Method/getConnectionName"></a><h3 id="method_getConnectionName">
+        <div class="location">in <a href="Queue.html#method_getConnectionName">
+<abbr title="Illuminate\Queue\Queue">Queue</abbr></a> <a href="https://github.com/laravel/framework/blob/master/src/Illuminate/Queue/Queue.php#L358">at line 358</a></div>
+        <code>                    string
+    <strong>getConnectionName</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p></p><p>Get the connection name for the queue.</p><p></p>                        
+        </div>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tbody><tr>
+            <td>string</td>
+            <td></td>
+        </tr>
+    </tbody></table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <a class="dashAnchor" name="//apple_ref/Method/setConnectionName"></a><h3 id="method_setConnectionName">
+        <div class="location">in <a href="Queue.html#method_setConnectionName">
+<abbr title="Illuminate\Queue\Queue">Queue</abbr></a> <a href="https://github.com/laravel/framework/blob/master/src/Illuminate/Queue/Queue.php#L369">at line 369</a></div>
+        <code>                    $this
+    <strong>setConnectionName</strong>(string $name)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p></p><p>Set the connection name for the queue.</p><p></p>                        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tbody><tr>
+                <td>string</td>
+                <td>$name</td>
+                <td></td>
+            </tr>
+            </tbody></table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tbody><tr>
+            <td>$this</td>
+            <td></td>
+        </tr>
+    </tbody></table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <a class="dashAnchor" name="//apple_ref/Method/getContainer"></a><h3 id="method_getContainer">
+        <div class="location">in <a href="Queue.html#method_getContainer">
+<abbr title="Illuminate\Queue\Queue">Queue</abbr></a> <a href="https://github.com/laravel/framework/blob/master/src/Illuminate/Queue/Queue.php#L381">at line 381</a></div>
+        <code>                    <a href="../Container/Container.html"><abbr title="Illuminate\Container\Container">Container</abbr></a>
+    <strong>getContainer</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p></p><p>Get the container instance being used by the connection.</p><p></p>                        
+        </div>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tbody><tr>
+            <td><a href="../Container/Container.html"><abbr title="Illuminate\Container\Container">Container</abbr></a></td>
+            <td></td>
+        </tr>
+    </tbody></table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <a class="dashAnchor" name="//apple_ref/Method/setContainer"></a><h3 id="method_setContainer">
+        <div class="location">in <a href="Queue.html#method_setContainer">
+<abbr title="Illuminate\Queue\Queue">Queue</abbr></a> <a href="https://github.com/laravel/framework/blob/master/src/Illuminate/Queue/Queue.php#L392">at line 392</a></div>
+        <code>                    void
+    <strong>setContainer</strong>(<a href="../Container/Container.html"><abbr title="Illuminate\Container\Container">Container</abbr></a> $container)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p></p><p>Set the IoC container instance.</p><p></p>                        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tbody><tr>
+                <td><a href="../Container/Container.html"><abbr title="Illuminate\Container\Container">Container</abbr></a></td>
+                <td>$container</td>
+                <td></td>
+            </tr>
+            </tbody></table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tbody><tr>
+            <td>void</td>
+            <td></td>
+        </tr>
+    </tbody></table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <a class="dashAnchor" name="//apple_ref/Method/%5F%5Fconstruct"></a><h3 id="method___construct">
+        <div class="location"><a href="https://github.com/laravel/framework/blob/master/src/Illuminate/Queue/RedisQueue.php#L59">at line 59</a></div>
+        <code>                    void
+    <strong>__construct</strong>(<a href="../Contracts/Redis/Factory.html"><abbr title="Illuminate\Contracts\Redis\Factory">Factory</abbr></a> $redis, string $default = 'default', string|null $connection = null, int $retryAfter = 60, int|null $blockFor = null, bool $dispatchAfterCommit = false)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p></p><p>Create a new Redis queue instance.</p><p></p>                        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tbody><tr>
+                <td><a href="../Contracts/Redis/Factory.html"><abbr title="Illuminate\Contracts\Redis\Factory">Factory</abbr></a></td>
+                <td>$redis</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$default</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$connection</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>int</td>
+                <td>$retryAfter</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>int|null</td>
+                <td>$blockFor</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>bool</td>
+                <td>$dispatchAfterCommit</td>
+                <td></td>
+            </tr>
+            </tbody></table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tbody><tr>
+            <td>void</td>
+            <td></td>
+        </tr>
+    </tbody></table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <a class="dashAnchor" name="//apple_ref/Method/size"></a><h3 id="method_size">
+        <div class="location"><a href="https://github.com/laravel/framework/blob/master/src/Illuminate/Queue/RedisQueue.php#L80">at line 80</a></div>
+        <code>                    int
+    <strong>size</strong>(string|null $queue = null)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p></p><p>Get the size of the queue.</p><p></p>                        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tbody><tr>
+                <td>string|null</td>
+                <td>$queue</td>
+                <td></td>
+            </tr>
+            </tbody></table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tbody><tr>
+            <td>int</td>
+            <td></td>
+        </tr>
+    </tbody></table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <a class="dashAnchor" name="//apple_ref/Method/push"></a><h3 id="method_push">
+        <div class="location"><a href="https://github.com/laravel/framework/blob/master/src/Illuminate/Queue/RedisQueue.php#L116">at line 116</a></div>
+        <code>                    mixed
+    <strong>push</strong>(string|object $job, mixed $data = '', string|null $queue = null)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p></p><p>Push a new job onto the queue.</p><p></p>                        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tbody><tr>
+                <td>string|object</td>
+                <td>$job</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>mixed</td>
+                <td>$data</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$queue</td>
+                <td></td>
+            </tr>
+            </tbody></table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tbody><tr>
+            <td>mixed</td>
+            <td></td>
+        </tr>
+    </tbody></table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <a class="dashAnchor" name="//apple_ref/Method/pushRaw"></a><h3 id="method_pushRaw">
+        <div class="location"><a href="https://github.com/laravel/framework/blob/master/src/Illuminate/Queue/RedisQueue.php#L137">at line 137</a></div>
+        <code>                    mixed
+    <strong>pushRaw</strong>(string $payload, string|null $queue = null, array $options = [])
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p></p><p>Push a raw payload onto the queue.</p><p></p>                        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tbody><tr>
+                <td>string</td>
+                <td>$payload</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$queue</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>array</td>
+                <td>$options</td>
+                <td></td>
+            </tr>
+            </tbody></table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tbody><tr>
+            <td>mixed</td>
+            <td></td>
+        </tr>
+    </tbody></table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <a class="dashAnchor" name="//apple_ref/Method/later"></a><h3 id="method_later">
+        <div class="location"><a href="https://github.com/laravel/framework/blob/master/src/Illuminate/Queue/RedisQueue.php#L156">at line 156</a></div>
+        <code>                    mixed
+    <strong>later</strong>(<a target="_blank" rel="noopener" href="https://www.php.net/DateTimeInterface">DateTimeInterface</a>|<a target="_blank" rel="noopener" href="https://www.php.net/DateInterval">DateInterval</a>|int $delay, string|object $job, mixed $data = '', string|null $queue = null)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p></p><p>Push a new job onto the queue after a delay.</p><p></p>                        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tbody><tr>
+                <td><a target="_blank" rel="noopener" href="https://www.php.net/DateTimeInterface">DateTimeInterface</a>|<a target="_blank" rel="noopener" href="https://www.php.net/DateInterval">DateInterval</a>|int</td>
+                <td>$delay</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>string|object</td>
+                <td>$job</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>mixed</td>
+                <td>$data</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$queue</td>
+                <td></td>
+            </tr>
+            </tbody></table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tbody><tr>
+            <td>mixed</td>
+            <td></td>
+        </tr>
+    </tbody></table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <a class="dashAnchor" name="//apple_ref/Method/laterRaw"></a><h3 id="method_laterRaw">
+        <div class="location"><a href="https://github.com/laravel/framework/blob/master/src/Illuminate/Queue/RedisQueue.php#L177">at line 177</a></div>
+        <code>            protected        mixed
+    <strong>laterRaw</strong>(<a target="_blank" rel="noopener" href="https://www.php.net/DateTimeInterface">DateTimeInterface</a>|<a target="_blank" rel="noopener" href="https://www.php.net/DateInterval">DateInterval</a>|int $delay, string $payload, string|null $queue = null)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p></p><p>Push a raw job onto the queue after (n) seconds.</p><p></p>                        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tbody><tr>
+                <td><a target="_blank" rel="noopener" href="https://www.php.net/DateTimeInterface">DateTimeInterface</a>|<a target="_blank" rel="noopener" href="https://www.php.net/DateInterval">DateInterval</a>|int</td>
+                <td>$delay</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$payload</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$queue</td>
+                <td></td>
+            </tr>
+            </tbody></table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tbody><tr>
+            <td>mixed</td>
+            <td></td>
+        </tr>
+    </tbody></table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <a class="dashAnchor" name="//apple_ref/Method/pop"></a><h3 id="method_pop">
+        <div class="location"><a href="https://github.com/laravel/framework/blob/master/src/Illuminate/Queue/RedisQueue.php#L208">at line 208</a></div>
+        <code>                    <a href="../Contracts/Queue/Job.html"><abbr title="Illuminate\Contracts\Queue\Job">Job</abbr></a>|null
+    <strong>pop</strong>(string|null $queue = null)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p></p><p>Pop the next job off of the queue.</p><p></p>                        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tbody><tr>
+                <td>string|null</td>
+                <td>$queue</td>
+                <td></td>
+            </tr>
+            </tbody></table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tbody><tr>
+            <td><a href="../Contracts/Queue/Job.html"><abbr title="Illuminate\Contracts\Queue\Job">Job</abbr></a>|null</td>
+            <td></td>
+        </tr>
+    </tbody></table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <a class="dashAnchor" name="//apple_ref/Method/migrate"></a><h3 id="method_migrate">
+        <div class="location"><a href="https://github.com/laravel/framework/blob/master/src/Illuminate/Queue/RedisQueue.php#L228">at line 228</a></div>
+        <code>            protected        void
+    <strong>migrate</strong>(string $queue)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p></p><p>Migrate any delayed or expired jobs onto the primary queue.</p><p></p>                        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tbody><tr>
+                <td>string</td>
+                <td>$queue</td>
+                <td></td>
+            </tr>
+            </tbody></table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tbody><tr>
+            <td>void</td>
+            <td></td>
+        </tr>
+    </tbody></table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <a class="dashAnchor" name="//apple_ref/Method/migrateExpiredJobs"></a><h3 id="method_migrateExpiredJobs">
+        <div class="location"><a href="https://github.com/laravel/framework/blob/master/src/Illuminate/Queue/RedisQueue.php#L244">at line 244</a></div>
+        <code>                    array
+    <strong>migrateExpiredJobs</strong>(string $from, string $to)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p></p><p>Migrate the delayed jobs that are ready to the regular queue.</p><p></p>                        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tbody><tr>
+                <td>string</td>
+                <td>$from</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$to</td>
+                <td></td>
+            </tr>
+            </tbody></table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tbody><tr>
+            <td>array</td>
+            <td></td>
+        </tr>
+    </tbody></table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <a class="dashAnchor" name="//apple_ref/Method/retrieveNextJob"></a><h3 id="method_retrieveNextJob">
+        <div class="location"><a href="https://github.com/laravel/framework/blob/master/src/Illuminate/Queue/RedisQueue.php#L258">at line 258</a></div>
+        <code>            protected        array
+    <strong>retrieveNextJob</strong>(string $queue, bool $block = true)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p></p><p>Retrieve the next job from the queue.</p><p></p>                        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tbody><tr>
+                <td>string</td>
+                <td>$queue</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>bool</td>
+                <td>$block</td>
+                <td></td>
+            </tr>
+            </tbody></table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tbody><tr>
+            <td>array</td>
+            <td></td>
+        </tr>
+    </tbody></table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <a class="dashAnchor" name="//apple_ref/Method/deleteReserved"></a><h3 id="method_deleteReserved">
+        <div class="location"><a href="https://github.com/laravel/framework/blob/master/src/Illuminate/Queue/RedisQueue.php#L286">at line 286</a></div>
+        <code>                    void
+    <strong>deleteReserved</strong>(string $queue, <a href="Jobs/RedisJob.html"><abbr title="Illuminate\Queue\Jobs\RedisJob">RedisJob</abbr></a> $job)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p></p><p>Delete a reserved job from the queue.</p><p></p>                        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tbody><tr>
+                <td>string</td>
+                <td>$queue</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td><a href="Jobs/RedisJob.html"><abbr title="Illuminate\Queue\Jobs\RedisJob">RedisJob</abbr></a></td>
+                <td>$job</td>
+                <td></td>
+            </tr>
+            </tbody></table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tbody><tr>
+            <td>void</td>
+            <td></td>
+        </tr>
+    </tbody></table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <a class="dashAnchor" name="//apple_ref/Method/deleteAndRelease"></a><h3 id="method_deleteAndRelease">
+        <div class="location"><a href="https://github.com/laravel/framework/blob/master/src/Illuminate/Queue/RedisQueue.php#L299">at line 299</a></div>
+        <code>                    void
+    <strong>deleteAndRelease</strong>(string $queue, <a href="Jobs/RedisJob.html"><abbr title="Illuminate\Queue\Jobs\RedisJob">RedisJob</abbr></a> $job, int $delay)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p></p><p>Delete a reserved job from the reserved queue and release it.</p><p></p>                        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tbody><tr>
+                <td>string</td>
+                <td>$queue</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td><a href="Jobs/RedisJob.html"><abbr title="Illuminate\Queue\Jobs\RedisJob">RedisJob</abbr></a></td>
+                <td>$job</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>int</td>
+                <td>$delay</td>
+                <td></td>
+            </tr>
+            </tbody></table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tbody><tr>
+            <td>void</td>
+            <td></td>
+        </tr>
+    </tbody></table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <a class="dashAnchor" name="//apple_ref/Method/clear"></a><h3 id="method_clear">
+        <div class="location"><a href="https://github.com/laravel/framework/blob/master/src/Illuminate/Queue/RedisQueue.php#L315">at line 315</a></div>
+        <code>                    int
+    <strong>clear</strong>(string $queue)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p></p><p>Delete all of the jobs from the queue.</p><p></p>                        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tbody><tr>
+                <td>string</td>
+                <td>$queue</td>
+                <td></td>
+            </tr>
+            </tbody></table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tbody><tr>
+            <td>int</td>
+            <td></td>
+        </tr>
+    </tbody></table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <a class="dashAnchor" name="//apple_ref/Method/getRandomId"></a><h3 id="method_getRandomId">
+        <div class="location"><a href="https://github.com/laravel/framework/blob/master/src/Illuminate/Queue/RedisQueue.php#L330">at line 330</a></div>
+        <code>            protected        string
+    <strong>getRandomId</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p></p><p>Get a random ID string.</p><p></p>                        
+        </div>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tbody><tr>
+            <td>string</td>
+            <td></td>
+        </tr>
+    </tbody></table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <a class="dashAnchor" name="//apple_ref/Method/getQueue"></a><h3 id="method_getQueue">
+        <div class="location"><a href="https://github.com/laravel/framework/blob/master/src/Illuminate/Queue/RedisQueue.php#L341">at line 341</a></div>
+        <code>                    string
+    <strong>getQueue</strong>(string|null $queue)
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p></p><p>Get the queue or return the default.</p><p></p>                        
+        </div>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tbody><tr>
+                <td>string|null</td>
+                <td>$queue</td>
+                <td></td>
+            </tr>
+            </tbody></table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tbody><tr>
+            <td>string</td>
+            <td></td>
+        </tr>
+    </tbody></table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <a class="dashAnchor" name="//apple_ref/Method/getConnection"></a><h3 id="method_getConnection">
+        <div class="location"><a href="https://github.com/laravel/framework/blob/master/src/Illuminate/Queue/RedisQueue.php#L351">at line 351</a></div>
+        <code>                    <a href="../Redis/Connections/Connection.html"><abbr title="Illuminate\Redis\Connections\Connection">Connection</abbr></a>
+    <strong>getConnection</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p></p><p>Get the connection for the queue.</p><p></p>                        
+        </div>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tbody><tr>
+            <td><a href="../Redis/Connections/Connection.html"><abbr title="Illuminate\Redis\Connections\Connection">Connection</abbr></a></td>
+            <td></td>
+        </tr>
+    </tbody></table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <a class="dashAnchor" name="//apple_ref/Method/getRedis"></a><h3 id="method_getRedis">
+        <div class="location"><a href="https://github.com/laravel/framework/blob/master/src/Illuminate/Queue/RedisQueue.php#L361">at line 361</a></div>
+        <code>                    <a href="../Contracts/Redis/Factory.html"><abbr title="Illuminate\Contracts\Redis\Factory">Factory</abbr></a>
+    <strong>getRedis</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p></p><p>Get the underlying Redis instance.</p><p></p>                        
+        </div>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tbody><tr>
+            <td><a href="../Contracts/Redis/Factory.html"><abbr title="Illuminate\Contracts\Redis\Factory">Factory</abbr></a></td>
+            <td></td>
+        </tr>
+    </tbody></table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+            </div>
+
+    
+</div><div id="footer">
+        Generated by <a href="https://github.com/code-lts/doctum">Doctum, a API Documentation generator and fork of Sami</a>.</div></div>
+    </div>
+    
+
+
+<!-- Mirrored from laravel.com/api/master/Illuminate/Queue/RedisQueue.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 24 Mar 2022 16:21:34 GMT -->
+
+</body></html>

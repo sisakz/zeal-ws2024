@@ -1,7 +1,7 @@
 <html><head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
-  <meta name="nodejs.org:node-version" content="v16.9.1">
+  <meta name="nodejs.org:node-version" content="v17.8.0">
   <title>Performance measurement APIs</title>
   <link rel="stylesheet" href="googlefonts/googlefonts.css">
   <link rel="stylesheet" href="assets/style.css">
@@ -23,7 +23,7 @@
 <hr class="line">
 <ul>
 <li><a href="assert.html" class="nav-assert">Assertion testing</a></li>
-<li><a href="async_context.html" class="nav-async_context">Async_context</a></li>
+<li><a href="async_context.html" class="nav-async_context">Asynchronous context tracking</a></li>
 <li><a href="async_hooks.html" class="nav-async_hooks">Async hooks</a></li>
 <li><a href="buffer.html" class="nav-buffer">Buffer</a></li>
 <li><a href="addons.html" class="nav-addons">C++ addons</a></li>
@@ -88,9 +88,9 @@
     </div>
 
     <div id="column1" data-id="perf_hooks" class="interior">
-      <header>
+      <header class="header">
         <div class="header-container">
-          <h1>Node.js v16.9.1 documentation</h1>
+          <h1>Node.js v17.8.0 documentation</h1>
           <button class="theme-toggle-btn" id="theme-toggle-btn" title="Toggle dark mode/light mode" aria-label="Toggle dark mode/light mode" hidden="">
             <svg xmlns="http://www.w3.org/2000/svg" class="icon dark-icon" height="24" width="24">
               <path fill="none" d="M0 0h24v24H0z"></path>
@@ -105,19 +105,210 @@
         </div>
         <div id="gtoc">
           <ul>
-            <li>
-              <a href="index.html">Index</a>
-            </li>
-            <li>
-              <a href="all.html">View on single page</a>
-            </li>
-            <li>
-              <a href="perf_hooks.json">View as JSON</a>
-            </li>
             
-    <li class="version-picker">
-      <a href="#">View another version <span>▼</span></a>
-      <ol class="version-picker"><li><a href="https://nodejs.org/docs/latest-v16.x/api/perf_hooks.html">16.x</a></li>
+    <li class="picker-header">
+      <a href="#">
+        <span class="collapsed-arrow">►</span><span class="expanded-arrow">▼</span>
+        Table of contents
+      </a>
+
+      <div class="picker"><div class="toc"><ul>
+<li><span class="stability_2"><a href="#performance-measurement-apis">Performance measurement APIs</a></span>
+<ul>
+<li><a href="#perf_hooksperformance"><code>perf_hooks.performance</code></a>
+<ul>
+<li><a href="#performanceclearmarksname"><code>performance.clearMarks([name])</code></a></li>
+<li><a href="#performanceclearmeasuresname"><code>performance.clearMeasures([name])</code></a></li>
+<li><a href="#performanceeventlooputilizationutilization1-utilization2"><code>performance.eventLoopUtilization([utilization1[, utilization2]])</code></a></li>
+<li><a href="#performancegetentries"><code>performance.getEntries()</code></a></li>
+<li><a href="#performancegetentriesbynamename-type"><code>performance.getEntriesByName(name[, type])</code></a></li>
+<li><a href="#performancegetentriesbytypetype"><code>performance.getEntriesByType(type)</code></a></li>
+<li><a href="#performancemarkname-options"><code>performance.mark([name[, options]])</code></a></li>
+<li><a href="#performancemeasurename-startmarkoroptions-endmark"><code>performance.measure(name[, startMarkOrOptions[, endMark]])</code></a></li>
+<li><a href="#performancenodetiming"><code>performance.nodeTiming</code></a></li>
+<li><a href="#performancenow"><code>performance.now()</code></a></li>
+<li><a href="#performancetimeorigin"><code>performance.timeOrigin</code></a></li>
+<li><a href="#performancetimerifyfn-options"><code>performance.timerify(fn[, options])</code></a></li>
+<li><a href="#performancetojson"><code>performance.toJSON()</code></a></li>
+</ul>
+</li>
+<li><a href="#class-performanceentry">Class: <code>PerformanceEntry</code></a>
+<ul>
+<li><a href="#performanceentrydetail"><code>performanceEntry.detail</code></a></li>
+<li><a href="#performanceentryduration"><code>performanceEntry.duration</code></a></li>
+<li><a href="#performanceentryentrytype"><code>performanceEntry.entryType</code></a></li>
+<li><a href="#performanceentryflags"><code>performanceEntry.flags</code></a></li>
+<li><a href="#performanceentryname"><code>performanceEntry.name</code></a></li>
+<li><a href="#performanceentrykind"><code>performanceEntry.kind</code></a></li>
+<li><a href="#performanceentrystarttime"><code>performanceEntry.startTime</code></a></li>
+<li><a href="#garbage-collection-gc-details">Garbage Collection ('gc') Details</a></li>
+<li><a href="#http2-http2-details">HTTP/2 ('http2') Details</a></li>
+<li><a href="#timerify-function-details">Timerify ('function') Details</a></li>
+</ul>
+</li>
+<li><a href="#class-performancenodetiming">Class: <code>PerformanceNodeTiming</code></a>
+<ul>
+<li><a href="#performancenodetimingbootstrapcomplete"><code>performanceNodeTiming.bootstrapComplete</code></a></li>
+<li><a href="#performancenodetimingenvironment"><code>performanceNodeTiming.environment</code></a></li>
+<li><a href="#performancenodetimingidletime"><code>performanceNodeTiming.idleTime</code></a></li>
+<li><a href="#performancenodetimingloopexit"><code>performanceNodeTiming.loopExit</code></a></li>
+<li><a href="#performancenodetimingloopstart"><code>performanceNodeTiming.loopStart</code></a></li>
+<li><a href="#performancenodetimingnodestart"><code>performanceNodeTiming.nodeStart</code></a></li>
+<li><a href="#performancenodetimingv8start"><code>performanceNodeTiming.v8Start</code></a></li>
+</ul>
+</li>
+<li><a href="#class-perf_hooksperformanceobserver">Class: <code>perf_hooks.PerformanceObserver</code></a>
+<ul>
+<li><a href="#new-performanceobservercallback"><code>new PerformanceObserver(callback)</code></a></li>
+<li><a href="#performanceobserverdisconnect"><code>performanceObserver.disconnect()</code></a></li>
+<li><a href="#performanceobserverobserveoptions"><code>performanceObserver.observe(options)</code></a></li>
+</ul>
+</li>
+<li><a href="#class-performanceobserverentrylist">Class: <code>PerformanceObserverEntryList</code></a>
+<ul>
+<li><a href="#performanceobserverentrylistgetentries"><code>performanceObserverEntryList.getEntries()</code></a></li>
+<li><a href="#performanceobserverentrylistgetentriesbynamename-type"><code>performanceObserverEntryList.getEntriesByName(name[, type])</code></a></li>
+<li><a href="#performanceobserverentrylistgetentriesbytypetype"><code>performanceObserverEntryList.getEntriesByType(type)</code></a></li>
+</ul>
+</li>
+<li><a href="#perf_hookscreatehistogramoptions"><code>perf_hooks.createHistogram([options])</code></a></li>
+<li><a href="#perf_hooksmonitoreventloopdelayoptions"><code>perf_hooks.monitorEventLoopDelay([options])</code></a></li>
+<li><a href="#class-histogram">Class: <code>Histogram</code></a>
+<ul>
+<li><a href="#histogramcount"><code>histogram.count</code></a></li>
+<li><a href="#histogramcountbigint"><code>histogram.countBigInt</code></a></li>
+<li><a href="#histogramexceeds"><code>histogram.exceeds</code></a></li>
+<li><a href="#histogramexceedsbigint"><code>histogram.exceedsBigInt</code></a></li>
+<li><a href="#histogrammax"><code>histogram.max</code></a></li>
+<li><a href="#histogrammaxbigint"><code>histogram.maxBigInt</code></a></li>
+<li><a href="#histogrammean"><code>histogram.mean</code></a></li>
+<li><a href="#histogrammin"><code>histogram.min</code></a></li>
+<li><a href="#histogramminbigint"><code>histogram.minBigInt</code></a></li>
+<li><a href="#histogrampercentilepercentile"><code>histogram.percentile(percentile)</code></a></li>
+<li><a href="#histogrampercentilebigintpercentile"><code>histogram.percentileBigInt(percentile)</code></a></li>
+<li><a href="#histogrampercentiles"><code>histogram.percentiles</code></a></li>
+<li><a href="#histogrampercentilesbigint"><code>histogram.percentilesBigInt</code></a></li>
+<li><a href="#histogramreset"><code>histogram.reset()</code></a></li>
+<li><a href="#histogramstddev"><code>histogram.stddev</code></a></li>
+</ul>
+</li>
+<li><a href="#class-intervalhistogram-extends-histogram">Class: <code>IntervalHistogram extends Histogram</code></a>
+<ul>
+<li><a href="#histogramdisable"><code>histogram.disable()</code></a></li>
+<li><a href="#histogramenable"><code>histogram.enable()</code></a></li>
+<li><a href="#cloning-an-intervalhistogram">Cloning an <code>IntervalHistogram</code></a></li>
+</ul>
+</li>
+<li><a href="#class-recordablehistogram-extends-histogram">Class: <code>RecordableHistogram extends Histogram</code></a>
+<ul>
+<li><a href="#histogramaddother"><code>histogram.add(other)</code></a></li>
+<li><a href="#histogramrecordval"><code>histogram.record(val)</code></a></li>
+<li><a href="#histogramrecorddelta"><code>histogram.recordDelta()</code></a></li>
+</ul>
+</li>
+<li><a href="#examples">Examples</a>
+<ul>
+<li><a href="#measuring-the-duration-of-async-operations">Measuring the duration of async operations</a></li>
+<li><a href="#measuring-how-long-it-takes-to-load-dependencies">Measuring how long it takes to load dependencies</a></li>
+<li><a href="#measuring-how-long-one-http-round-trip-takes">Measuring how long one HTTP round-trip takes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul></div></div>
+    </li>
+  
+            
+    <li class="picker-header">
+      <a href="#">
+        <span class="collapsed-arrow">►</span><span class="expanded-arrow">▼</span>
+        Index
+      </a>
+
+      <div class="picker"><ul>
+<li><a href="documentation.html" class="nav-documentation">About this documentation</a></li>
+<li><a href="synopsis.html" class="nav-synopsis">Usage and example</a></li>
+
+      <li>
+        <a href="index.html">Index</a>
+      </li>
+    </ul>
+  
+<hr class="line">
+<ul>
+<li><a href="assert.html" class="nav-assert">Assertion testing</a></li>
+<li><a href="async_context.html" class="nav-async_context">Asynchronous context tracking</a></li>
+<li><a href="async_hooks.html" class="nav-async_hooks">Async hooks</a></li>
+<li><a href="buffer.html" class="nav-buffer">Buffer</a></li>
+<li><a href="addons.html" class="nav-addons">C++ addons</a></li>
+<li><a href="n-api.html" class="nav-n-api">C/C++ addons with Node-API</a></li>
+<li><a href="embedding.html" class="nav-embedding">C++ embedder API</a></li>
+<li><a href="child_process.html" class="nav-child_process">Child processes</a></li>
+<li><a href="cluster.html" class="nav-cluster">Cluster</a></li>
+<li><a href="cli.html" class="nav-cli">Command-line options</a></li>
+<li><a href="console.html" class="nav-console">Console</a></li>
+<li><a href="corepack.html" class="nav-corepack">Corepack</a></li>
+<li><a href="crypto.html" class="nav-crypto">Crypto</a></li>
+<li><a href="debugger.html" class="nav-debugger">Debugger</a></li>
+<li><a href="deprecations.html" class="nav-deprecations">Deprecated APIs</a></li>
+<li><a href="diagnostics_channel.html" class="nav-diagnostics_channel">Diagnostics Channel</a></li>
+<li><a href="dns.html" class="nav-dns">DNS</a></li>
+<li><a href="domain.html" class="nav-domain">Domain</a></li>
+<li><a href="errors.html" class="nav-errors">Errors</a></li>
+<li><a href="events.html" class="nav-events">Events</a></li>
+<li><a href="fs.html" class="nav-fs">File system</a></li>
+<li><a href="globals.html" class="nav-globals">Globals</a></li>
+<li><a href="http.html" class="nav-http">HTTP</a></li>
+<li><a href="http2.html" class="nav-http2">HTTP/2</a></li>
+<li><a href="https.html" class="nav-https">HTTPS</a></li>
+<li><a href="inspector.html" class="nav-inspector">Inspector</a></li>
+<li><a href="intl.html" class="nav-intl">Internationalization</a></li>
+<li><a href="modules.html" class="nav-modules">Modules: CommonJS modules</a></li>
+<li><a href="esm.html" class="nav-esm">Modules: ECMAScript modules</a></li>
+<li><a href="module.html" class="nav-module">Modules: <code>module</code> API</a></li>
+<li><a href="packages.html" class="nav-packages">Modules: Packages</a></li>
+<li><a href="net.html" class="nav-net">Net</a></li>
+<li><a href="os.html" class="nav-os">OS</a></li>
+<li><a href="path.html" class="nav-path">Path</a></li>
+<li><a href="perf_hooks.html" class="nav-perf_hooks active">Performance hooks</a></li>
+<li><a href="policy.html" class="nav-policy">Policies</a></li>
+<li><a href="process.html" class="nav-process">Process</a></li>
+<li><a href="punycode.html" class="nav-punycode">Punycode</a></li>
+<li><a href="querystring.html" class="nav-querystring">Query strings</a></li>
+<li><a href="readline.html" class="nav-readline">Readline</a></li>
+<li><a href="repl.html" class="nav-repl">REPL</a></li>
+<li><a href="report.html" class="nav-report">Report</a></li>
+<li><a href="stream.html" class="nav-stream">Stream</a></li>
+<li><a href="string_decoder.html" class="nav-string_decoder">String decoder</a></li>
+<li><a href="timers.html" class="nav-timers">Timers</a></li>
+<li><a href="tls.html" class="nav-tls">TLS/SSL</a></li>
+<li><a href="tracing.html" class="nav-tracing">Trace events</a></li>
+<li><a href="tty.html" class="nav-tty">TTY</a></li>
+<li><a href="dgram.html" class="nav-dgram">UDP/datagram</a></li>
+<li><a href="url.html" class="nav-url">URL</a></li>
+<li><a href="util.html" class="nav-util">Utilities</a></li>
+<li><a href="v8.html" class="nav-v8">V8</a></li>
+<li><a href="vm.html" class="nav-vm">VM</a></li>
+<li><a href="wasi.html" class="nav-wasi">WASI</a></li>
+<li><a href="webcrypto.html" class="nav-webcrypto">Web Crypto API</a></li>
+<li><a href="webstreams.html" class="nav-webstreams">Web Streams API</a></li>
+<li><a href="worker_threads.html" class="nav-worker_threads">Worker threads</a></li>
+<li><a href="zlib.html" class="nav-zlib">Zlib</a></li>
+</ul>
+<hr class="line">
+<ul>
+<li><a href="https://github.com/nodejs/node" class="nav-https-github-com-nodejs-node">Code repository and issue tracker</a></li>
+</ul></div>
+    </li>
+  
+            
+    <li class="picker-header">
+      <a href="#">
+        <span class="collapsed-arrow">►</span><span class="expanded-arrow">▼</span>
+        Other versions
+      </a>
+      <div class="picker"><ol id="alt-docs"><li><a href="https://nodejs.org/docs/latest-v17.x/api/perf_hooks.html">17.x</a></li>
+<li><a href="https://nodejs.org/docs/latest-v16.x/api/perf_hooks.html">16.x <b>LTS</b></a></li>
 <li><a href="https://nodejs.org/docs/latest-v15.x/api/perf_hooks.html">15.x</a></li>
 <li><a href="https://nodejs.org/docs/latest-v14.x/api/perf_hooks.html">14.x <b>LTS</b></a></li>
 <li><a href="https://nodejs.org/docs/latest-v13.x/api/perf_hooks.html">13.x</a></li>
@@ -125,101 +316,131 @@
 <li><a href="https://nodejs.org/docs/latest-v11.x/api/perf_hooks.html">11.x</a></li>
 <li><a href="https://nodejs.org/docs/latest-v10.x/api/perf_hooks.html">10.x</a></li>
 <li><a href="https://nodejs.org/docs/latest-v9.x/api/perf_hooks.html">9.x</a></li>
-<li><a href="https://nodejs.org/docs/latest-v8.x/api/perf_hooks.html">8.x</a></li></ol>
+<li><a href="https://nodejs.org/docs/latest-v8.x/api/perf_hooks.html">8.x</a></li></ol></div>
     </li>
   
-            <li class="edit_on_github"><a href="https://github.com/nodejs/node/edit/master/doc/api/perf_hooks.md">Edit on GitHub</a></li>
+            <li class="picker-header">
+              <a href="#">
+                <span class="collapsed-arrow">►</span><span class="expanded-arrow">▼</span>
+                Options
+              </a>
+        
+              <div class="picker">
+                <ul>
+                  <li>
+                    <a href="all.html">View on single page</a>
+                  </li>
+                  <li>
+                    <a href="perf_hooks.json">View as JSON</a>
+                  </li>
+                  <li class="edit_on_github"><a href="https://github.com/nodejs/node/edit/master/doc/api/perf_hooks.md">Edit on GitHub</a></li>    
+                </ul>
+              </div>
+            </li>
           </ul>
         </div>
         <hr>
       </header>
 
       <details id="toc" open=""><summary>Table of contents</summary><ul>
-<li><span class="stability_2"><a href="#perf_hooks_performance_measurement_apis">Performance measurement APIs</a></span>
+<li><span class="stability_2"><a href="#performance-measurement-apis">Performance measurement APIs</a></span>
 <ul>
-<li><a href="#perf_hooks_perf_hooks_performance"><code>perf_hooks.performance</code></a>
+<li><a href="#perf_hooksperformance"><code>perf_hooks.performance</code></a>
 <ul>
-<li><a href="#perf_hooks_performance_clearmarks_name"><code>performance.clearMarks([name])</code></a></li>
-<li><a href="#perf_hooks_performance_eventlooputilization_utilization1_utilization2"><code>performance.eventLoopUtilization([utilization1[, utilization2]])</code></a></li>
-<li><a href="#perf_hooks_performance_mark_name_options"><code>performance.mark([name[, options]])</code></a></li>
-<li><a href="#perf_hooks_performance_measure_name_startmarkoroptions_endmark"><code>performance.measure(name[, startMarkOrOptions[, endMark]])</code></a></li>
-<li><a href="#perf_hooks_performance_nodetiming"><code>performance.nodeTiming</code></a></li>
-<li><a href="#perf_hooks_performance_now"><code>performance.now()</code></a></li>
-<li><a href="#perf_hooks_performance_timeorigin"><code>performance.timeOrigin</code></a></li>
-<li><a href="#perf_hooks_performance_timerify_fn_options"><code>performance.timerify(fn[, options])</code></a></li>
-<li><a href="#perf_hooks_performance_tojson"><code>performance.toJSON()</code></a></li>
+<li><a href="#performanceclearmarksname"><code>performance.clearMarks([name])</code></a></li>
+<li><a href="#performanceclearmeasuresname"><code>performance.clearMeasures([name])</code></a></li>
+<li><a href="#performanceeventlooputilizationutilization1-utilization2"><code>performance.eventLoopUtilization([utilization1[, utilization2]])</code></a></li>
+<li><a href="#performancegetentries"><code>performance.getEntries()</code></a></li>
+<li><a href="#performancegetentriesbynamename-type"><code>performance.getEntriesByName(name[, type])</code></a></li>
+<li><a href="#performancegetentriesbytypetype"><code>performance.getEntriesByType(type)</code></a></li>
+<li><a href="#performancemarkname-options"><code>performance.mark([name[, options]])</code></a></li>
+<li><a href="#performancemeasurename-startmarkoroptions-endmark"><code>performance.measure(name[, startMarkOrOptions[, endMark]])</code></a></li>
+<li><a href="#performancenodetiming"><code>performance.nodeTiming</code></a></li>
+<li><a href="#performancenow"><code>performance.now()</code></a></li>
+<li><a href="#performancetimeorigin"><code>performance.timeOrigin</code></a></li>
+<li><a href="#performancetimerifyfn-options"><code>performance.timerify(fn[, options])</code></a></li>
+<li><a href="#performancetojson"><code>performance.toJSON()</code></a></li>
 </ul>
 </li>
-<li><a href="#perf_hooks_class_performanceentry">Class: <code>PerformanceEntry</code></a>
+<li><a href="#class-performanceentry">Class: <code>PerformanceEntry</code></a>
 <ul>
-<li><a href="#perf_hooks_performanceentry_details"><code>performanceEntry.details</code></a></li>
-<li><a href="#perf_hooks_performanceentry_duration"><code>performanceEntry.duration</code></a></li>
-<li><a href="#perf_hooks_performanceentry_entrytype"><code>performanceEntry.entryType</code></a></li>
-<li><a href="#perf_hooks_performanceentry_flags"><code>performanceEntry.flags</code></a></li>
-<li><a href="#perf_hooks_performanceentry_name"><code>performanceEntry.name</code></a></li>
-<li><a href="#perf_hooks_performanceentry_kind"><code>performanceEntry.kind</code></a></li>
-<li><a href="#perf_hooks_performanceentry_starttime"><code>performanceEntry.startTime</code></a></li>
-<li><a href="#perf_hooks_garbage_collection_gc_details">Garbage Collection ('gc') Details</a></li>
-<li><a href="#perf_hooks_http_2_http2_details">HTTP/2 ('http2') Details</a></li>
-<li><a href="#perf_hooks_timerify_function_details">Timerify ('function') Details</a></li>
+<li><a href="#performanceentrydetail"><code>performanceEntry.detail</code></a></li>
+<li><a href="#performanceentryduration"><code>performanceEntry.duration</code></a></li>
+<li><a href="#performanceentryentrytype"><code>performanceEntry.entryType</code></a></li>
+<li><a href="#performanceentryflags"><code>performanceEntry.flags</code></a></li>
+<li><a href="#performanceentryname"><code>performanceEntry.name</code></a></li>
+<li><a href="#performanceentrykind"><code>performanceEntry.kind</code></a></li>
+<li><a href="#performanceentrystarttime"><code>performanceEntry.startTime</code></a></li>
+<li><a href="#garbage-collection-gc-details">Garbage Collection ('gc') Details</a></li>
+<li><a href="#http2-http2-details">HTTP/2 ('http2') Details</a></li>
+<li><a href="#timerify-function-details">Timerify ('function') Details</a></li>
 </ul>
 </li>
-<li><a href="#perf_hooks_class_performancenodetiming">Class: <code>PerformanceNodeTiming</code></a>
+<li><a href="#class-performancenodetiming">Class: <code>PerformanceNodeTiming</code></a>
 <ul>
-<li><a href="#perf_hooks_performancenodetiming_bootstrapcomplete"><code>performanceNodeTiming.bootstrapComplete</code></a></li>
-<li><a href="#perf_hooks_performancenodetiming_environment"><code>performanceNodeTiming.environment</code></a></li>
-<li><a href="#perf_hooks_performancenodetiming_idletime"><code>performanceNodeTiming.idleTime</code></a></li>
-<li><a href="#perf_hooks_performancenodetiming_loopexit"><code>performanceNodeTiming.loopExit</code></a></li>
-<li><a href="#perf_hooks_performancenodetiming_loopstart"><code>performanceNodeTiming.loopStart</code></a></li>
-<li><a href="#perf_hooks_performancenodetiming_nodestart"><code>performanceNodeTiming.nodeStart</code></a></li>
-<li><a href="#perf_hooks_performancenodetiming_v8start"><code>performanceNodeTiming.v8Start</code></a></li>
+<li><a href="#performancenodetimingbootstrapcomplete"><code>performanceNodeTiming.bootstrapComplete</code></a></li>
+<li><a href="#performancenodetimingenvironment"><code>performanceNodeTiming.environment</code></a></li>
+<li><a href="#performancenodetimingidletime"><code>performanceNodeTiming.idleTime</code></a></li>
+<li><a href="#performancenodetimingloopexit"><code>performanceNodeTiming.loopExit</code></a></li>
+<li><a href="#performancenodetimingloopstart"><code>performanceNodeTiming.loopStart</code></a></li>
+<li><a href="#performancenodetimingnodestart"><code>performanceNodeTiming.nodeStart</code></a></li>
+<li><a href="#performancenodetimingv8start"><code>performanceNodeTiming.v8Start</code></a></li>
 </ul>
 </li>
-<li><a href="#perf_hooks_class_perf_hooks_performanceobserver">Class: <code>perf_hooks.PerformanceObserver</code></a>
+<li><a href="#class-perf_hooksperformanceobserver">Class: <code>perf_hooks.PerformanceObserver</code></a>
 <ul>
-<li><a href="#perf_hooks_new_performanceobserver_callback"><code>new PerformanceObserver(callback)</code></a></li>
-<li><a href="#perf_hooks_performanceobserver_disconnect"><code>performanceObserver.disconnect()</code></a></li>
-<li><a href="#perf_hooks_performanceobserver_observe_options"><code>performanceObserver.observe(options)</code></a></li>
+<li><a href="#new-performanceobservercallback"><code>new PerformanceObserver(callback)</code></a></li>
+<li><a href="#performanceobserverdisconnect"><code>performanceObserver.disconnect()</code></a></li>
+<li><a href="#performanceobserverobserveoptions"><code>performanceObserver.observe(options)</code></a></li>
 </ul>
 </li>
-<li><a href="#perf_hooks_class_performanceobserverentrylist">Class: <code>PerformanceObserverEntryList</code></a>
+<li><a href="#class-performanceobserverentrylist">Class: <code>PerformanceObserverEntryList</code></a>
 <ul>
-<li><a href="#perf_hooks_performanceobserverentrylist_getentries"><code>performanceObserverEntryList.getEntries()</code></a></li>
-<li><a href="#perf_hooks_performanceobserverentrylist_getentriesbyname_name_type"><code>performanceObserverEntryList.getEntriesByName(name[, type])</code></a></li>
-<li><a href="#perf_hooks_performanceobserverentrylist_getentriesbytype_type"><code>performanceObserverEntryList.getEntriesByType(type)</code></a></li>
+<li><a href="#performanceobserverentrylistgetentries"><code>performanceObserverEntryList.getEntries()</code></a></li>
+<li><a href="#performanceobserverentrylistgetentriesbynamename-type"><code>performanceObserverEntryList.getEntriesByName(name[, type])</code></a></li>
+<li><a href="#performanceobserverentrylistgetentriesbytypetype"><code>performanceObserverEntryList.getEntriesByType(type)</code></a></li>
 </ul>
 </li>
-<li><a href="#perf_hooks_perf_hooks_createhistogram_options"><code>perf_hooks.createHistogram([options])</code></a></li>
-<li><a href="#perf_hooks_perf_hooks_monitoreventloopdelay_options"><code>perf_hooks.monitorEventLoopDelay([options])</code></a></li>
-<li><a href="#perf_hooks_class_histogram">Class: <code>Histogram</code></a>
+<li><a href="#perf_hookscreatehistogramoptions"><code>perf_hooks.createHistogram([options])</code></a></li>
+<li><a href="#perf_hooksmonitoreventloopdelayoptions"><code>perf_hooks.monitorEventLoopDelay([options])</code></a></li>
+<li><a href="#class-histogram">Class: <code>Histogram</code></a>
 <ul>
-<li><a href="#perf_hooks_histogram_exceeds"><code>histogram.exceeds</code></a></li>
-<li><a href="#perf_hooks_histogram_max"><code>histogram.max</code></a></li>
-<li><a href="#perf_hooks_histogram_mean"><code>histogram.mean</code></a></li>
-<li><a href="#perf_hooks_histogram_min"><code>histogram.min</code></a></li>
-<li><a href="#perf_hooks_histogram_percentile_percentile"><code>histogram.percentile(percentile)</code></a></li>
-<li><a href="#perf_hooks_histogram_percentiles"><code>histogram.percentiles</code></a></li>
-<li><a href="#perf_hooks_histogram_reset"><code>histogram.reset()</code></a></li>
-<li><a href="#perf_hooks_histogram_stddev"><code>histogram.stddev</code></a></li>
+<li><a href="#histogramcount"><code>histogram.count</code></a></li>
+<li><a href="#histogramcountbigint"><code>histogram.countBigInt</code></a></li>
+<li><a href="#histogramexceeds"><code>histogram.exceeds</code></a></li>
+<li><a href="#histogramexceedsbigint"><code>histogram.exceedsBigInt</code></a></li>
+<li><a href="#histogrammax"><code>histogram.max</code></a></li>
+<li><a href="#histogrammaxbigint"><code>histogram.maxBigInt</code></a></li>
+<li><a href="#histogrammean"><code>histogram.mean</code></a></li>
+<li><a href="#histogrammin"><code>histogram.min</code></a></li>
+<li><a href="#histogramminbigint"><code>histogram.minBigInt</code></a></li>
+<li><a href="#histogrampercentilepercentile"><code>histogram.percentile(percentile)</code></a></li>
+<li><a href="#histogrampercentilebigintpercentile"><code>histogram.percentileBigInt(percentile)</code></a></li>
+<li><a href="#histogrampercentiles"><code>histogram.percentiles</code></a></li>
+<li><a href="#histogrampercentilesbigint"><code>histogram.percentilesBigInt</code></a></li>
+<li><a href="#histogramreset"><code>histogram.reset()</code></a></li>
+<li><a href="#histogramstddev"><code>histogram.stddev</code></a></li>
 </ul>
 </li>
-<li><a href="#perf_hooks_class_intervalhistogram_extends_histogram">Class: <code>IntervalHistogram extends Histogram</code></a>
+<li><a href="#class-intervalhistogram-extends-histogram">Class: <code>IntervalHistogram extends Histogram</code></a>
 <ul>
-<li><a href="#perf_hooks_histogram_disable"><code>histogram.disable()</code></a></li>
-<li><a href="#perf_hooks_histogram_enable"><code>histogram.enable()</code></a></li>
-<li><a href="#perf_hooks_cloning_an_intervalhistogram">Cloning an <code>IntervalHistogram</code></a></li>
+<li><a href="#histogramdisable"><code>histogram.disable()</code></a></li>
+<li><a href="#histogramenable"><code>histogram.enable()</code></a></li>
+<li><a href="#cloning-an-intervalhistogram">Cloning an <code>IntervalHistogram</code></a></li>
 </ul>
 </li>
-<li><a href="#perf_hooks_class_recordablehistogram_extends_histogram">Class: <code>RecordableHistogram extends Histogram</code></a>
+<li><a href="#class-recordablehistogram-extends-histogram">Class: <code>RecordableHistogram extends Histogram</code></a>
 <ul>
-<li><a href="#perf_hooks_histogram_record_val"><code>histogram.record(val)</code></a></li>
-<li><a href="#perf_hooks_histogram_recorddelta"><code>histogram.recordDelta()</code></a></li>
+<li><a href="#histogramaddother"><code>histogram.add(other)</code></a></li>
+<li><a href="#histogramrecordval"><code>histogram.record(val)</code></a></li>
+<li><a href="#histogramrecorddelta"><code>histogram.recordDelta()</code></a></li>
 </ul>
 </li>
-<li><a href="#perf_hooks_examples">Examples</a>
+<li><a href="#examples">Examples</a>
 <ul>
-<li><a href="#perf_hooks_measuring_the_duration_of_async_operations">Measuring the duration of async operations</a></li>
-<li><a href="#perf_hooks_measuring_how_long_it_takes_to_load_dependencies">Measuring how long it takes to load dependencies</a></li>
+<li><a href="#measuring-the-duration-of-async-operations">Measuring the duration of async operations</a></li>
+<li><a href="#measuring-how-long-it-takes-to-load-dependencies">Measuring how long it takes to load dependencies</a></li>
+<li><a href="#measuring-how-long-one-http-round-trip-takes">Measuring how long one HTTP round-trip takes</a></li>
 </ul>
 </li>
 </ul>
@@ -227,10 +448,10 @@
 </ul></details>
 
       <div id="apicontent">
-        <h2>Performance measurement APIs<span><a name="//apple_ref/Module/Performance%20measurement%20APIs"></a><a class="mark" href="#perf_hooks_performance_measurement_apis" id="perf_hooks_performance_measurement_apis">#</a></span></h2>
+        <h2>Performance measurement APIs<span><a name="//apple_ref/Module/Performance%20measurement%20APIs"></a><a class="mark" href="#performance-measurement-apis" id="performance-measurement-apis">#</a></span><a aria-hidden="true" class="legacy" id="perf_hooks_performance_measurement_apis"></a></h2>
 
-<p></p><div class="api_stability api_stability_2"><a href="documentation.html#documentation_stability_index">Stability: 2</a> - Stable</div><p></p>
-<p><strong>Source Code:</strong> <a href="https://github.com/nodejs/node/blob/v16.9.1/lib/perf_hooks.js">lib/perf_hooks.js</a></p>
+<p></p><div class="api_stability api_stability_2"><a href="documentation.html#stability-index">Stability: 2</a> - Stable</div><p></p>
+<p><strong>Source Code:</strong> <a href="https://github.com/nodejs/node/blob/v17.8.0/lib/perf_hooks.js">lib/perf_hooks.js</a></p>
 <p>This module provides an implementation of a subset of the W3C
 <a href="https://w3c.github.io/perf-timing-primer/">Web Performance APIs</a> as well as additional APIs for
 Node.js-specific performance measurements.</p>
@@ -256,13 +477,13 @@ performance.<span class="hljs-title function_">mark</span>(<span class="hljs-str
   performance.<span class="hljs-title function_">mark</span>(<span class="hljs-string">'B'</span>);
   performance.<span class="hljs-title function_">measure</span>(<span class="hljs-string">'A to B'</span>, <span class="hljs-string">'A'</span>, <span class="hljs-string">'B'</span>);
 });</code></pre>
-<section><h3><code>perf_hooks.performance</code><span><a name="//apple_ref/instp/perf%5Fhooks%2Eperformance"></a><a class="mark" href="#perf_hooks_perf_hooks_performance" id="perf_hooks_perf_hooks_performance">#</a></span></h3>
+<section><h3><code>perf_hooks.performance</code><span><a name="//apple_ref/instp/perf%5Fhooks%2Eperformance"></a><a class="mark" href="#perf_hooksperformance" id="perf_hooksperformance">#</a></span><a aria-hidden="true" class="legacy" id="perf_hooks_perf_hooks_performance"></a></h3>
 <div class="api_metadata">
 <span>Added in: v8.5.0</span>
 </div>
 <p>An object that can be used to collect performance metrics from the current
 Node.js instance. It is similar to <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/performance"><code>window.performance</code></a> in browsers.</p>
-<h4><code>performance.clearMarks([name])</code><span><a name="//apple_ref/clm/performance%2EclearMarks%28%5Bname%5D%29"></a><a class="mark" href="#perf_hooks_performance_clearmarks_name" id="perf_hooks_performance_clearmarks_name">#</a></span></h4>
+<h4><code>performance.clearMarks([name])</code><span><a name="//apple_ref/clm/performance%2EclearMarks%28%5Bname%5D%29"></a><a class="mark" href="#performanceclearmarksname" id="performanceclearmarksname">#</a></span><a aria-hidden="true" class="legacy" id="perf_hooks_performance_clearmarks_name"></a></h4>
 <div class="api_metadata">
 <span>Added in: v8.5.0</span>
 </div>
@@ -271,7 +492,16 @@ Node.js instance. It is similar to <a href="https://developer.mozilla.org/en-US/
 </ul>
 <p>If <code>name</code> is not provided, removes all <code>PerformanceMark</code> objects from the
 Performance Timeline. If <code>name</code> is provided, removes only the named mark.</p>
-<h4><code>performance.eventLoopUtilization([utilization1[, utilization2]])</code><span><a name="//apple_ref/clm/performance%2EeventLoopUtilization%28%5Butilization1%5B%2C%20utilization2%5D%5D%29"></a><a class="mark" href="#perf_hooks_performance_eventlooputilization_utilization1_utilization2" id="perf_hooks_performance_eventlooputilization_utilization1_utilization2">#</a></span></h4>
+<h4><code>performance.clearMeasures([name])</code><span><a name="//apple_ref/clm/performance%2EclearMeasures%28%5Bname%5D%29"></a><a class="mark" href="#performanceclearmeasuresname" id="performanceclearmeasuresname">#</a></span><a aria-hidden="true" class="legacy" id="perf_hooks_performance_clearmeasures_name"></a></h4>
+<div class="api_metadata">
+<span>Added in: v16.7.0</span>
+</div>
+<ul>
+<li><code>name</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a></li>
+</ul>
+<p>If <code>name</code> is not provided, removes all <code>PerformanceMeasure</code> objects from the
+Performance Timeline. If <code>name</code> is provided, removes only the named mark.</p>
+<h4><code>performance.eventLoopUtilization([utilization1[, utilization2]])</code><span><a name="//apple_ref/clm/performance%2EeventLoopUtilization%28%5Butilization1%5B%2C%20utilization2%5D%5D%29"></a><a class="mark" href="#performanceeventlooputilizationutilization1-utilization2" id="performanceeventlooputilizationutilization1-utilization2">#</a></span><a aria-hidden="true" class="legacy" id="perf_hooks_performance_eventlooputilization_utilization1_utilization2"></a></h4>
 <div class="api_metadata">
 <span>Added in: v14.10.0, v12.19.0</span>
 </div>
@@ -293,15 +523,15 @@ cumulative duration of time the event loop has been both idle and active as a
 high resolution milliseconds timer. The <code>utilization</code> value is the calculated
 Event Loop Utilization (ELU).</p>
 <p>If bootstrapping has not yet finished on the main thread the properties have
-the value of <code>0</code>. The ELU is immediately available on <a href="worker_threads.html#worker_threads_worker_threads">Worker threads</a> since
+the value of <code>0</code>. The ELU is immediately available on <a href="worker_threads.html#worker-threads">Worker threads</a> since
 bootstrap happens within the event loop.</p>
 <p>Both <code>utilization1</code> and <code>utilization2</code> are optional parameters.</p>
 <p>If <code>utilization1</code> is passed, then the delta between the current call's <code>active</code>
 and <code>idle</code> times, as well as the corresponding <code>utilization</code> value are
-calculated and returned (similar to <a href="process.html#process_process_hrtime_time"><code>process.hrtime()</code></a>).</p>
+calculated and returned (similar to <a href="process.html#processhrtimetime"><code>process.hrtime()</code></a>).</p>
 <p>If <code>utilization1</code> and <code>utilization2</code> are both passed, then the delta is
 calculated between the two arguments. This is a convenience option because,
-unlike <a href="process.html#process_process_hrtime_time"><code>process.hrtime()</code></a>, calculating the ELU is more complex than a
+unlike <a href="process.html#processhrtimetime"><code>process.hrtime()</code></a>, calculating the ELU is more complex than a
 single subtraction.</p>
 <p>ELU is similar to CPU utilization, except that it only measures event loop
 statistics and not CPU usage. It represents the percentage of time the event
@@ -319,11 +549,46 @@ of how a mostly idle process will have a high ELU.</p>
 });</code></pre>
 <p>Although the CPU is mostly idle while running this script, the value of
 <code>utilization</code> is <code>1</code>. This is because the call to
-<a href="child_process.html#child_process_child_process_spawnsync_command_args_options"><code>child_process.spawnSync()</code></a> blocks the event loop from proceeding.</p>
+<a href="child_process.html#child_processspawnsynccommand-args-options"><code>child_process.spawnSync()</code></a> blocks the event loop from proceeding.</p>
 <p>Passing in a user-defined object instead of the result of a previous call to
 <code>eventLoopUtilization()</code> will lead to undefined behavior. The return values
 are not guaranteed to reflect any correct state of the event loop.</p>
-<h4><code>performance.mark([name[, options]])</code><span><a name="//apple_ref/clm/performance%2Emark%28%5Bname%5B%2C%20options%5D%5D%29"></a><a class="mark" href="#perf_hooks_performance_mark_name_options" id="perf_hooks_performance_mark_name_options">#</a></span></h4>
+<h4><code>performance.getEntries()</code><span><a name="//apple_ref/clm/performance%2EgetEntries%28%29"></a><a class="mark" href="#performancegetentries" id="performancegetentries">#</a></span><a aria-hidden="true" class="legacy" id="perf_hooks_performance_getentries"></a></h4>
+<div class="api_metadata">
+<span>Added in: v16.7.0</span>
+</div>
+<ul>
+<li>Returns: <a href="perf_hooks.html#class-performanceentry" class="type">&lt;PerformanceEntry[]&gt;</a></li>
+</ul>
+<p>Returns a list of <code>PerformanceEntry</code> objects in chronological order with
+respect to <code>performanceEntry.startTime</code>. If you are only interested in
+performance entries of certain types or that have certain names, see
+<code>performance.getEntriesByType()</code> and <code>performance.getEntriesByName()</code>.</p>
+<h4><code>performance.getEntriesByName(name[, type])</code><span><a name="//apple_ref/clm/performance%2EgetEntriesByName%28name%5B%2C%20type%5D%29"></a><a class="mark" href="#performancegetentriesbynamename-type" id="performancegetentriesbynamename-type">#</a></span><a aria-hidden="true" class="legacy" id="perf_hooks_performance_getentriesbyname_name_type"></a></h4>
+<div class="api_metadata">
+<span>Added in: v16.7.0</span>
+</div>
+<ul>
+<li><code>name</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a></li>
+<li><code>type</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a></li>
+<li>Returns: <a href="perf_hooks.html#class-performanceentry" class="type">&lt;PerformanceEntry[]&gt;</a></li>
+</ul>
+<p>Returns a list of <code>PerformanceEntry</code> objects in chronological order
+with respect to <code>performanceEntry.startTime</code> whose <code>performanceEntry.name</code> is
+equal to <code>name</code>, and optionally, whose <code>performanceEntry.entryType</code> is equal to
+<code>type</code>.</p>
+<h4><code>performance.getEntriesByType(type)</code><span><a name="//apple_ref/clm/performance%2EgetEntriesByType%28type%29"></a><a class="mark" href="#performancegetentriesbytypetype" id="performancegetentriesbytypetype">#</a></span><a aria-hidden="true" class="legacy" id="perf_hooks_performance_getentriesbytype_type"></a></h4>
+<div class="api_metadata">
+<span>Added in: v16.7.0</span>
+</div>
+<ul>
+<li><code>type</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a></li>
+<li>Returns: <a href="perf_hooks.html#class-performanceentry" class="type">&lt;PerformanceEntry[]&gt;</a></li>
+</ul>
+<p>Returns a list of <code>PerformanceEntry</code> objects in chronological order
+with respect to <code>performanceEntry.startTime</code> whose <code>performanceEntry.entryType</code>
+is equal to <code>type</code>.</p>
+<h4><code>performance.mark([name[, options]])</code><span><a name="//apple_ref/clm/performance%2Emark%28%5Bname%5B%2C%20options%5D%5D%29"></a><a class="mark" href="#performancemarkname-options" id="performancemarkname-options">#</a></span><a aria-hidden="true" class="legacy" id="perf_hooks_performance_mark_name_options"></a></h4>
 <div class="api_metadata">
 <details class="changelog"><summary>History</summary>
 <table>
@@ -350,7 +615,12 @@ are not guaranteed to reflect any correct state of the event loop.</p>
 <code>performanceEntry.entryType</code> is always <code>'mark'</code>, and whose
 <code>performanceEntry.duration</code> is always <code>0</code>. Performance marks are used
 to mark specific significant moments in the Performance Timeline.</p>
-<h4><code>performance.measure(name[, startMarkOrOptions[, endMark]])</code><span><a name="//apple_ref/clm/performance%2Emeasure%28name%5B%2C%20startMarkOrOptions%5B%2C%20endMark%5D%5D%29"></a><a class="mark" href="#perf_hooks_performance_measure_name_startmarkoroptions_endmark" id="perf_hooks_performance_measure_name_startmarkoroptions_endmark">#</a></span></h4>
+<p>The created <code>PerformanceMark</code> entry is put in the global Performance Timeline
+and can be queried with <code>performance.getEntries</code>,
+<code>performance.getEntriesByName</code>, and <code>performance.getEntriesByType</code>. When the
+observation is performed, the entries should be cleared from the global
+Performance Timeline manually with <code>performance.clearMarks</code>.</p>
+<h4><code>performance.measure(name[, startMarkOrOptions[, endMark]])</code><span><a name="//apple_ref/clm/performance%2Emeasure%28name%5B%2C%20startMarkOrOptions%5B%2C%20endMark%5D%5D%29"></a><a class="mark" href="#performancemeasurename-startmarkoroptions-endmark" id="performancemeasurename-startmarkoroptions-endmark">#</a></span><a aria-hidden="true" class="legacy" id="perf_hooks_performance_measure_name_startmarkoroptions_endmark"></a></h4>
 <div class="api_metadata">
 <details class="changelog"><summary>History</summary>
 <table>
@@ -393,17 +663,22 @@ in the Performance Timeline or any of the timestamp properties provided by the
 <code>PerformanceNodeTiming</code> class. <code>endMark</code> will be <code>performance.now()</code>
 if no parameter is passed, otherwise if the named <code>endMark</code> does not exist, an
 error will be thrown.</p>
-<h4><code>performance.nodeTiming</code><span><a name="//apple_ref/instp/performance%2EnodeTiming"></a><a class="mark" href="#perf_hooks_performance_nodetiming" id="perf_hooks_performance_nodetiming">#</a></span></h4>
+<p>The created <code>PerformanceMeasure</code> entry is put in the global Performance Timeline
+and can be queried with <code>performance.getEntries</code>,
+<code>performance.getEntriesByName</code>, and <code>performance.getEntriesByType</code>. When the
+observation is performed, the entries should be cleared from the global
+Performance Timeline manually with <code>performance.clearMeasures</code>.</p>
+<h4><code>performance.nodeTiming</code><span><a name="//apple_ref/instp/performance%2EnodeTiming"></a><a class="mark" href="#performancenodetiming" id="performancenodetiming">#</a></span><a aria-hidden="true" class="legacy" id="perf_hooks_performance_nodetiming"></a></h4>
 <div class="api_metadata">
 <span>Added in: v8.5.0</span>
 </div>
 <ul>
-<li><a href="perf_hooks.html#perf_hooks_class_performancenodetiming" class="type">&lt;PerformanceNodeTiming&gt;</a></li>
+<li><a href="perf_hooks.html#class-performancenodetiming" class="type">&lt;PerformanceNodeTiming&gt;</a></li>
 </ul>
 <p><em>This property is an extension by Node.js. It is not available in Web browsers.</em></p>
 <p>An instance of the <code>PerformanceNodeTiming</code> class that provides performance
 metrics for specific Node.js operational milestones.</p>
-<h4><code>performance.now()</code><span><a name="//apple_ref/clm/performance%2Enow%28%29"></a><a class="mark" href="#perf_hooks_performance_now" id="perf_hooks_performance_now">#</a></span></h4>
+<h4><code>performance.now()</code><span><a name="//apple_ref/clm/performance%2Enow%28%29"></a><a class="mark" href="#performancenow" id="performancenow">#</a></span><a aria-hidden="true" class="legacy" id="perf_hooks_performance_now"></a></h4>
 <div class="api_metadata">
 <span>Added in: v8.5.0</span>
 </div>
@@ -412,7 +687,7 @@ metrics for specific Node.js operational milestones.</p>
 </ul>
 <p>Returns the current high resolution millisecond timestamp, where 0 represents
 the start of the current <code>node</code> process.</p>
-<h4><code>performance.timeOrigin</code><span><a name="//apple_ref/instp/performance%2EtimeOrigin"></a><a class="mark" href="#perf_hooks_performance_timeorigin" id="perf_hooks_performance_timeorigin">#</a></span></h4>
+<h4><code>performance.timeOrigin</code><span><a name="//apple_ref/instp/performance%2EtimeOrigin"></a><a class="mark" href="#performancetimeorigin" id="performancetimeorigin">#</a></span><a aria-hidden="true" class="legacy" id="perf_hooks_performance_timeorigin"></a></h4>
 <div class="api_metadata">
 <span>Added in: v8.5.0</span>
 </div>
@@ -421,7 +696,7 @@ the start of the current <code>node</code> process.</p>
 </ul>
 <p>The <a href="https://w3c.github.io/hr-time/#dom-performance-timeorigin"><code>timeOrigin</code></a> specifies the high resolution millisecond timestamp at
 which the current <code>node</code> process began, measured in Unix time.</p>
-<h4><code>performance.timerify(fn[, options])</code><span><a name="//apple_ref/clm/performance%2Etimerify%28fn%5B%2C%20options%5D%29"></a><a class="mark" href="#perf_hooks_performance_timerify_fn_options" id="perf_hooks_performance_timerify_fn_options">#</a></span></h4>
+<h4><code>performance.timerify(fn[, options])</code><span><a name="//apple_ref/clm/performance%2Etimerify%28fn%5B%2C%20options%5D%29"></a><a class="mark" href="#performancetimerifyfn-options" id="performancetimerifyfn-options">#</a></span><a aria-hidden="true" class="legacy" id="perf_hooks_performance_timerify_fn_options"></a></h4>
 <div class="api_metadata">
 <details class="changelog"><summary>History</summary>
 <table>
@@ -439,7 +714,7 @@ which the current <code>node</code> process began, measured in Unix time.</p>
 <li><code>fn</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
 <li><code>options</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a>
 <ul>
-<li><code>histogram</code> <a href="perf_hooks.html#perf_hooks_class_recordablehistogram_extends_histogram" class="type">&lt;RecordableHistogram&gt;</a> A histogram object created using
+<li><code>histogram</code> <a href="perf_hooks.html#class-recordablehistogram-extends-histogram" class="type">&lt;RecordableHistogram&gt;</a> A histogram object created using
 <code>perf_hooks.createHistogram()</code> that will record runtime durations in
 nanoseconds.</li>
 </ul>
@@ -462,6 +737,9 @@ event type in order for the timing details to be accessed.</p>
 
 <span class="hljs-keyword">const</span> obs = <span class="hljs-keyword">new</span> <span class="hljs-title class_">PerformanceObserver</span>(<span class="hljs-function">(<span class="hljs-params">list</span>) =&gt;</span> {
   <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(list.<span class="hljs-title function_">getEntries</span>()[<span class="hljs-number">0</span>].<span class="hljs-property">duration</span>);
+
+  performance.<span class="hljs-title function_">clearMarks</span>();
+  performance.<span class="hljs-title function_">clearMeasures</span>();
   obs.<span class="hljs-title function_">disconnect</span>();
 });
 obs.<span class="hljs-title function_">observe</span>({ <span class="hljs-attr">entryTypes</span>: [<span class="hljs-string">'function'</span>] });
@@ -471,17 +749,17 @@ obs.<span class="hljs-title function_">observe</span>({ <span class="hljs-attr">
 <p>If the wrapped function returns a promise, a finally handler will be attached
 to the promise and the duration will be reported once the finally handler is
 invoked.</p>
-<h4><code>performance.toJSON()</code><span><a name="//apple_ref/clm/performance%2EtoJSON%28%29"></a><a class="mark" href="#perf_hooks_performance_tojson" id="perf_hooks_performance_tojson">#</a></span></h4>
+<h4><code>performance.toJSON()</code><span><a name="//apple_ref/clm/performance%2EtoJSON%28%29"></a><a class="mark" href="#performancetojson" id="performancetojson">#</a></span><a aria-hidden="true" class="legacy" id="perf_hooks_performance_tojson"></a></h4>
 <div class="api_metadata">
 <span>Added in: v16.1.0</span>
 </div>
 <p>An object which is JSON representation of the <code>performance</code> object. It
 is similar to <a href="https://developer.mozilla.org/en-US/docs/Web/API/Performance/toJSON"><code>window.performance.toJSON</code></a> in browsers.</p>
-</section><section><h3>Class: <code>PerformanceEntry</code><span><a name="//apple_ref/cl/PerformanceEntry"></a><a class="mark" href="#perf_hooks_class_performanceentry" id="perf_hooks_class_performanceentry">#</a></span></h3>
+</section><section><h3>Class: <code>PerformanceEntry</code><span><a name="//apple_ref/cl/PerformanceEntry"></a><a class="mark" href="#class-performanceentry" id="class-performanceentry">#</a></span><a aria-hidden="true" class="legacy" id="perf_hooks_class_performanceentry"></a></h3>
 <div class="api_metadata">
 <span>Added in: v8.5.0</span>
 </div>
-<h4><code>performanceEntry.details</code><span><a name="//apple_ref/instp/performanceEntry%2Edetails"></a><a class="mark" href="#perf_hooks_performanceentry_details" id="perf_hooks_performanceentry_details">#</a></span></h4>
+<h4><code>performanceEntry.detail</code><span><a name="//apple_ref/instp/performanceEntry%2Edetail"></a><a class="mark" href="#performanceentrydetail" id="performanceentrydetail">#</a></span><a aria-hidden="true" class="legacy" id="perf_hooks_performanceentry_detail"></a></h4>
 <div class="api_metadata">
 <span>Added in: v16.0.0</span>
 </div>
@@ -489,7 +767,7 @@ is similar to <a href="https://developer.mozilla.org/en-US/docs/Web/API/Performa
 <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Data_types" class="type">&lt;any&gt;</a></li>
 </ul>
 <p>Additional detail specific to the <code>entryType</code>.</p>
-<h4><code>performanceEntry.duration</code><span><a name="//apple_ref/instp/performanceEntry%2Eduration"></a><a class="mark" href="#perf_hooks_performanceentry_duration" id="perf_hooks_performanceentry_duration">#</a></span></h4>
+<h4><code>performanceEntry.duration</code><span><a name="//apple_ref/instp/performanceEntry%2Eduration"></a><a class="mark" href="#performanceentryduration" id="performanceentryduration">#</a></span><a aria-hidden="true" class="legacy" id="perf_hooks_performanceentry_duration"></a></h4>
 <div class="api_metadata">
 <span>Added in: v8.5.0</span>
 </div>
@@ -498,7 +776,7 @@ is similar to <a href="https://developer.mozilla.org/en-US/docs/Web/API/Performa
 </ul>
 <p>The total number of milliseconds elapsed for this entry. This value will not
 be meaningful for all Performance Entry types.</p>
-<h4><code>performanceEntry.entryType</code><span><a name="//apple_ref/instp/performanceEntry%2EentryType"></a><a class="mark" href="#perf_hooks_performanceentry_entrytype" id="perf_hooks_performanceentry_entrytype">#</a></span></h4>
+<h4><code>performanceEntry.entryType</code><span><a name="//apple_ref/instp/performanceEntry%2EentryType"></a><a class="mark" href="#performanceentryentrytype" id="performanceentryentrytype">#</a></span><a aria-hidden="true" class="legacy" id="perf_hooks_performanceentry_entrytype"></a></h4>
 <div class="api_metadata">
 <span>Added in: v8.5.0</span>
 </div>
@@ -515,7 +793,7 @@ be meaningful for all Performance Entry types.</p>
 <li><code>'http2'</code> (Node.js only)</li>
 <li><code>'http'</code> (Node.js only)</li>
 </ul>
-<h4><code>performanceEntry.flags</code><span><a name="//apple_ref/instp/performanceEntry%2Eflags"></a><a class="mark" href="#perf_hooks_performanceentry_flags" id="perf_hooks_performanceentry_flags">#</a></span></h4>
+<h4><code>performanceEntry.flags</code><span><a name="//apple_ref/instp/performanceEntry%2Eflags"></a><a class="mark" href="#performanceentryflags" id="performanceentryflags">#</a></span><a aria-hidden="true" class="legacy" id="perf_hooks_performanceentry_flags"></a></h4>
 <div class="api_metadata">
 <details class="changelog"><summary>History</summary>
 <table>
@@ -543,7 +821,7 @@ The value may be one of:</p>
 <li><code>perf_hooks.constants.NODE_PERFORMANCE_GC_FLAGS_ALL_EXTERNAL_MEMORY</code></li>
 <li><code>perf_hooks.constants.NODE_PERFORMANCE_GC_FLAGS_SCHEDULE_IDLE</code></li>
 </ul>
-<h4><code>performanceEntry.name</code><span><a name="//apple_ref/instp/performanceEntry%2Ename"></a><a class="mark" href="#perf_hooks_performanceentry_name" id="perf_hooks_performanceentry_name">#</a></span></h4>
+<h4><code>performanceEntry.name</code><span><a name="//apple_ref/instp/performanceEntry%2Ename"></a><a class="mark" href="#performanceentryname" id="performanceentryname">#</a></span><a aria-hidden="true" class="legacy" id="perf_hooks_performanceentry_name"></a></h4>
 <div class="api_metadata">
 <span>Added in: v8.5.0</span>
 </div>
@@ -551,7 +829,7 @@ The value may be one of:</p>
 <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a></li>
 </ul>
 <p>The name of the performance entry.</p>
-<h4><code>performanceEntry.kind</code><span><a name="//apple_ref/instp/performanceEntry%2Ekind"></a><a class="mark" href="#perf_hooks_performanceentry_kind" id="perf_hooks_performanceentry_kind">#</a></span></h4>
+<h4><code>performanceEntry.kind</code><span><a name="//apple_ref/instp/performanceEntry%2Ekind"></a><a class="mark" href="#performanceentrykind" id="performanceentrykind">#</a></span><a aria-hidden="true" class="legacy" id="perf_hooks_performanceentry_kind"></a></h4>
 <div class="api_metadata">
 <details class="changelog"><summary>History</summary>
 <table>
@@ -576,7 +854,7 @@ The value may be one of:</p>
 <li><code>perf_hooks.constants.NODE_PERFORMANCE_GC_INCREMENTAL</code></li>
 <li><code>perf_hooks.constants.NODE_PERFORMANCE_GC_WEAKCB</code></li>
 </ul>
-<h4><code>performanceEntry.startTime</code><span><a name="//apple_ref/instp/performanceEntry%2EstartTime"></a><a class="mark" href="#perf_hooks_performanceentry_starttime" id="perf_hooks_performanceentry_starttime">#</a></span></h4>
+<h4><code>performanceEntry.startTime</code><span><a name="//apple_ref/instp/performanceEntry%2EstartTime"></a><a class="mark" href="#performanceentrystarttime" id="performanceentrystarttime">#</a></span><a aria-hidden="true" class="legacy" id="perf_hooks_performanceentry_starttime"></a></h4>
 <div class="api_metadata">
 <span>Added in: v8.5.0</span>
 </div>
@@ -585,8 +863,8 @@ The value may be one of:</p>
 </ul>
 <p>The high resolution millisecond timestamp marking the starting time of the
 Performance Entry.</p>
-<h4>Garbage Collection ('gc') Details<span><a name="//apple_ref/Section/Garbage%20Collection%20%28gc%29%20Details"></a><a class="mark" href="#perf_hooks_garbage_collection_gc_details" id="perf_hooks_garbage_collection_gc_details">#</a></span></h4>
-<p>When <code>performanceEntry.type</code> is equal to <code>'gc'</code>, the <code>performanceEntry.details</code>
+<h4>Garbage Collection ('gc') Details<span><a name="//apple_ref/Section/Garbage%20Collection%20%28gc%29%20Details"></a><a class="mark" href="#garbage-collection-gc-details" id="garbage-collection-gc-details">#</a></span><a aria-hidden="true" class="legacy" id="perf_hooks_garbage_collection_gc_details"></a></h4>
+<p>When <code>performanceEntry.type</code> is equal to <code>'gc'</code>, the <code>performanceEntry.detail</code>
 property will be an <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a> with two properties:</p>
 <ul>
 <li><code>kind</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a> One of:
@@ -609,11 +887,11 @@ property will be an <a href="https://developer.mozilla.org/en-US/docs/Web/JavaSc
 </ul>
 </li>
 </ul>
-<h4>HTTP/2 ('http2') Details<span><a name="//apple_ref/Section/HTTP%2F2%20%28http2%29%20Details"></a><a class="mark" href="#perf_hooks_http_2_http2_details" id="perf_hooks_http_2_http2_details">#</a></span></h4>
+<h4>HTTP/2 ('http2') Details<span><a name="//apple_ref/Section/HTTP%2F2%20%28http2%29%20Details"></a><a class="mark" href="#http2-http2-details" id="http2-http2-details">#</a></span><a aria-hidden="true" class="legacy" id="perf_hooks_http_2_http2_details"></a></h4>
 <p>When <code>performanceEntry.type</code> is equal to <code>'http2'</code>, the
-<code>performanceEntry.details</code> property will be an <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a> containing
+<code>performanceEntry.detail</code> property will be an <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a> containing
 additional performance information.</p>
-<p>If <code>performanceEntry.name</code> is equal to <code>Http2Stream</code>, the <code>details</code>
+<p>If <code>performanceEntry.name</code> is equal to <code>Http2Stream</code>, the <code>detail</code>
 will contain the following properties:</p>
 <ul>
 <li><code>bytesRead</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a> The number of <code>DATA</code> frame bytes received for this
@@ -628,7 +906,7 @@ the <code>PerformanceEntry</code> <code>startTime</code> and sending of the firs
 <li><code>timeToFirstHeader</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a> The number of milliseconds elapsed between the
 <code>PerformanceEntry</code> <code>startTime</code> and the reception of the first header.</li>
 </ul>
-<p>If <code>performanceEntry.name</code> is equal to <code>Http2Session</code>, the <code>details</code> will
+<p>If <code>performanceEntry.name</code> is equal to <code>Http2Session</code>, the <code>detail</code> will
 contain the following properties:</p>
 <ul>
 <li><code>bytesRead</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a> The number of bytes received for this <code>Http2Session</code>.</li>
@@ -648,21 +926,21 @@ the <code>Http2Session</code>.</li>
 <li><code>type</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> Either <code>'server'</code> or <code>'client'</code> to identify the type of
 <code>Http2Session</code>.</li>
 </ul>
-<h4>Timerify ('function') Details<span><a name="//apple_ref/Section/Timerify%20%28function%29%20Details"></a><a class="mark" href="#perf_hooks_timerify_function_details" id="perf_hooks_timerify_function_details">#</a></span></h4>
+<h4>Timerify ('function') Details<span><a name="//apple_ref/Section/Timerify%20%28function%29%20Details"></a><a class="mark" href="#timerify-function-details" id="timerify-function-details">#</a></span><a aria-hidden="true" class="legacy" id="perf_hooks_timerify_function_details"></a></h4>
 <p>When <code>performanceEntry.type</code> is equal to <code>'function'</code>, the
-<code>performanceEntry.details</code> property will be an <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type">&lt;Array&gt;</a> listing
+<code>performanceEntry.detail</code> property will be an <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type">&lt;Array&gt;</a> listing
 the input arguments to the timed function.</p>
-</section><section><h3>Class: <code>PerformanceNodeTiming</code><span><a name="//apple_ref/cl/PerformanceNodeTiming"></a><a class="mark" href="#perf_hooks_class_performancenodetiming" id="perf_hooks_class_performancenodetiming">#</a></span></h3>
+</section><section><h3>Class: <code>PerformanceNodeTiming</code><span><a name="//apple_ref/cl/PerformanceNodeTiming"></a><a class="mark" href="#class-performancenodetiming" id="class-performancenodetiming">#</a></span><a aria-hidden="true" class="legacy" id="perf_hooks_class_performancenodetiming"></a></h3>
 <div class="api_metadata">
 <span>Added in: v8.5.0</span>
 </div>
 <ul>
-<li>Extends: <a href="perf_hooks.html#perf_hooks_class_performanceentry" class="type">&lt;PerformanceEntry&gt;</a></li>
+<li>Extends: <a href="perf_hooks.html#class-performanceentry" class="type">&lt;PerformanceEntry&gt;</a></li>
 </ul>
 <p><em>This property is an extension by Node.js. It is not available in Web browsers.</em></p>
 <p>Provides timing details for Node.js itself. The constructor of this class
 is not exposed to users.</p>
-<h4><code>performanceNodeTiming.bootstrapComplete</code><span><a name="//apple_ref/instp/performanceNodeTiming%2EbootstrapComplete"></a><a class="mark" href="#perf_hooks_performancenodetiming_bootstrapcomplete" id="perf_hooks_performancenodetiming_bootstrapcomplete">#</a></span></h4>
+<h4><code>performanceNodeTiming.bootstrapComplete</code><span><a name="//apple_ref/instp/performanceNodeTiming%2EbootstrapComplete"></a><a class="mark" href="#performancenodetimingbootstrapcomplete" id="performancenodetimingbootstrapcomplete">#</a></span><a aria-hidden="true" class="legacy" id="perf_hooks_performancenodetiming_bootstrapcomplete"></a></h4>
 <div class="api_metadata">
 <span>Added in: v8.5.0</span>
 </div>
@@ -672,7 +950,7 @@ is not exposed to users.</p>
 <p>The high resolution millisecond timestamp at which the Node.js process
 completed bootstrapping. If bootstrapping has not yet finished, the property
 has the value of -1.</p>
-<h4><code>performanceNodeTiming.environment</code><span><a name="//apple_ref/instp/performanceNodeTiming%2Eenvironment"></a><a class="mark" href="#perf_hooks_performancenodetiming_environment" id="perf_hooks_performancenodetiming_environment">#</a></span></h4>
+<h4><code>performanceNodeTiming.environment</code><span><a name="//apple_ref/instp/performanceNodeTiming%2Eenvironment"></a><a class="mark" href="#performancenodetimingenvironment" id="performancenodetimingenvironment">#</a></span><a aria-hidden="true" class="legacy" id="perf_hooks_performancenodetiming_environment"></a></h4>
 <div class="api_metadata">
 <span>Added in: v8.5.0</span>
 </div>
@@ -681,7 +959,7 @@ has the value of -1.</p>
 </ul>
 <p>The high resolution millisecond timestamp at which the Node.js environment was
 initialized.</p>
-<h4><code>performanceNodeTiming.idleTime</code><span><a name="//apple_ref/instp/performanceNodeTiming%2EidleTime"></a><a class="mark" href="#perf_hooks_performancenodetiming_idletime" id="perf_hooks_performancenodetiming_idletime">#</a></span></h4>
+<h4><code>performanceNodeTiming.idleTime</code><span><a name="//apple_ref/instp/performanceNodeTiming%2EidleTime"></a><a class="mark" href="#performancenodetimingidletime" id="performancenodetimingidletime">#</a></span><a aria-hidden="true" class="legacy" id="perf_hooks_performancenodetiming_idletime"></a></h4>
 <div class="api_metadata">
 <span>Added in: v14.10.0, v12.19.0</span>
 </div>
@@ -693,7 +971,7 @@ has been idle within the event loop's event provider (e.g. <code>epoll_wait</cod
 does not take CPU usage into consideration. If the event loop has not yet
 started (e.g., in the first tick of the main script), the property has the
 value of 0.</p>
-<h4><code>performanceNodeTiming.loopExit</code><span><a name="//apple_ref/instp/performanceNodeTiming%2EloopExit"></a><a class="mark" href="#perf_hooks_performancenodetiming_loopexit" id="perf_hooks_performancenodetiming_loopexit">#</a></span></h4>
+<h4><code>performanceNodeTiming.loopExit</code><span><a name="//apple_ref/instp/performanceNodeTiming%2EloopExit"></a><a class="mark" href="#performancenodetimingloopexit" id="performancenodetimingloopexit">#</a></span><a aria-hidden="true" class="legacy" id="perf_hooks_performancenodetiming_loopexit"></a></h4>
 <div class="api_metadata">
 <span>Added in: v8.5.0</span>
 </div>
@@ -702,8 +980,8 @@ value of 0.</p>
 </ul>
 <p>The high resolution millisecond timestamp at which the Node.js event loop
 exited. If the event loop has not yet exited, the property has the value of -1.
-It can only have a value of not -1 in a handler of the <a href="process.html#process_event_exit"><code>'exit'</code></a> event.</p>
-<h4><code>performanceNodeTiming.loopStart</code><span><a name="//apple_ref/instp/performanceNodeTiming%2EloopStart"></a><a class="mark" href="#perf_hooks_performancenodetiming_loopstart" id="perf_hooks_performancenodetiming_loopstart">#</a></span></h4>
+It can only have a value of not -1 in a handler of the <a href="process.html#event-exit"><code>'exit'</code></a> event.</p>
+<h4><code>performanceNodeTiming.loopStart</code><span><a name="//apple_ref/instp/performanceNodeTiming%2EloopStart"></a><a class="mark" href="#performancenodetimingloopstart" id="performancenodetimingloopstart">#</a></span><a aria-hidden="true" class="legacy" id="perf_hooks_performancenodetiming_loopstart"></a></h4>
 <div class="api_metadata">
 <span>Added in: v8.5.0</span>
 </div>
@@ -713,7 +991,7 @@ It can only have a value of not -1 in a handler of the <a href="process.html#pro
 <p>The high resolution millisecond timestamp at which the Node.js event loop
 started. If the event loop has not yet started (e.g., in the first tick of the
 main script), the property has the value of -1.</p>
-<h4><code>performanceNodeTiming.nodeStart</code><span><a name="//apple_ref/instp/performanceNodeTiming%2EnodeStart"></a><a class="mark" href="#perf_hooks_performancenodetiming_nodestart" id="perf_hooks_performancenodetiming_nodestart">#</a></span></h4>
+<h4><code>performanceNodeTiming.nodeStart</code><span><a name="//apple_ref/instp/performanceNodeTiming%2EnodeStart"></a><a class="mark" href="#performancenodetimingnodestart" id="performancenodetimingnodestart">#</a></span><a aria-hidden="true" class="legacy" id="perf_hooks_performancenodetiming_nodestart"></a></h4>
 <div class="api_metadata">
 <span>Added in: v8.5.0</span>
 </div>
@@ -722,7 +1000,7 @@ main script), the property has the value of -1.</p>
 </ul>
 <p>The high resolution millisecond timestamp at which the Node.js process was
 initialized.</p>
-<h4><code>performanceNodeTiming.v8Start</code><span><a name="//apple_ref/instp/performanceNodeTiming%2Ev8Start"></a><a class="mark" href="#perf_hooks_performancenodetiming_v8start" id="perf_hooks_performancenodetiming_v8start">#</a></span></h4>
+<h4><code>performanceNodeTiming.v8Start</code><span><a name="//apple_ref/instp/performanceNodeTiming%2Ev8Start"></a><a class="mark" href="#performancenodetimingv8start" id="performancenodetimingv8start">#</a></span><a aria-hidden="true" class="legacy" id="perf_hooks_performancenodetiming_v8start"></a></h4>
 <div class="api_metadata">
 <span>Added in: v8.5.0</span>
 </div>
@@ -731,16 +1009,16 @@ initialized.</p>
 </ul>
 <p>The high resolution millisecond timestamp at which the V8 platform was
 initialized.</p>
-</section><section><h3>Class: <code>perf_hooks.PerformanceObserver</code><span><a name="//apple_ref/cl/perf%5Fhooks%2EPerformanceObserver"></a><a class="mark" href="#perf_hooks_class_perf_hooks_performanceobserver" id="perf_hooks_class_perf_hooks_performanceobserver">#</a></span></h3>
-<h4><code>new PerformanceObserver(callback)</code><span><a name="//apple_ref/clm/new%20PerformanceObserver%28callback%29"></a><a class="mark" href="#perf_hooks_new_performanceobserver_callback" id="perf_hooks_new_performanceobserver_callback">#</a></span></h4>
+</section><section><h3>Class: <code>perf_hooks.PerformanceObserver</code><span><a name="//apple_ref/cl/perf%5Fhooks%2EPerformanceObserver"></a><a class="mark" href="#class-perf_hooksperformanceobserver" id="class-perf_hooksperformanceobserver">#</a></span><a aria-hidden="true" class="legacy" id="perf_hooks_class_perf_hooks_performanceobserver"></a></h3>
+<h4><code>new PerformanceObserver(callback)</code><span><a name="//apple_ref/clm/new%20PerformanceObserver%28callback%29"></a><a class="mark" href="#new-performanceobservercallback" id="new-performanceobservercallback">#</a></span><a aria-hidden="true" class="legacy" id="perf_hooks_new_performanceobserver_callback"></a></h4>
 <div class="api_metadata">
 <span>Added in: v8.5.0</span>
 </div>
 <ul>
 <li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a>
 <ul>
-<li><code>list</code> <a href="perf_hooks.html#perf_hooks_class_performanceobserverentrylist" class="type">&lt;PerformanceObserverEntryList&gt;</a></li>
-<li><code>observer</code> <a href="perf_hooks.html#perf_hooks_class_perf_hooks_performanceobserver" class="type">&lt;PerformanceObserver&gt;</a></li>
+<li><code>list</code> <a href="perf_hooks.html#class-performanceobserverentrylist" class="type">&lt;PerformanceObserverEntryList&gt;</a></li>
+<li><code>observer</code> <a href="perf_hooks.html#class-perf_hooksperformanceobserver" class="type">&lt;PerformanceObserver&gt;</a></li>
 </ul>
 </li>
 </ul>
@@ -753,6 +1031,9 @@ initialized.</p>
 
 <span class="hljs-keyword">const</span> obs = <span class="hljs-keyword">new</span> <span class="hljs-title class_">PerformanceObserver</span>(<span class="hljs-function">(<span class="hljs-params">list, observer</span>) =&gt;</span> {
   <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(list.<span class="hljs-title function_">getEntries</span>());
+
+  performance.<span class="hljs-title function_">clearMarks</span>();
+  performance.<span class="hljs-title function_">clearMeasures</span>();
   observer.<span class="hljs-title function_">disconnect</span>();
 });
 obs.<span class="hljs-title function_">observe</span>({ <span class="hljs-attr">entryTypes</span>: [<span class="hljs-string">'mark'</span>], <span class="hljs-attr">buffered</span>: <span class="hljs-literal">true</span> });
@@ -766,12 +1047,12 @@ longer needed.</p>
 notified about new <code>PerformanceEntry</code> instances. The callback receives a
 <code>PerformanceObserverEntryList</code> instance and a reference to the
 <code>PerformanceObserver</code>.</p>
-<h4><code>performanceObserver.disconnect()</code><span><a name="//apple_ref/clm/performanceObserver%2Edisconnect%28%29"></a><a class="mark" href="#perf_hooks_performanceobserver_disconnect" id="perf_hooks_performanceobserver_disconnect">#</a></span></h4>
+<h4><code>performanceObserver.disconnect()</code><span><a name="//apple_ref/clm/performanceObserver%2Edisconnect%28%29"></a><a class="mark" href="#performanceobserverdisconnect" id="performanceobserverdisconnect">#</a></span><a aria-hidden="true" class="legacy" id="perf_hooks_performanceobserver_disconnect"></a></h4>
 <div class="api_metadata">
 <span>Added in: v8.5.0</span>
 </div>
 <p>Disconnects the <code>PerformanceObserver</code> instance from all notifications.</p>
-<h4><code>performanceObserver.observe(options)</code><span><a name="//apple_ref/clm/performanceObserver%2Eobserve%28options%29"></a><a class="mark" href="#perf_hooks_performanceobserver_observe_options" id="perf_hooks_performanceobserver_observe_options">#</a></span></h4>
+<h4><code>performanceObserver.observe(options)</code><span><a name="//apple_ref/clm/performanceObserver%2Eobserve%28options%29"></a><a class="mark" href="#performanceobserverobserveoptions" id="performanceobserverobserveoptions">#</a></span><a aria-hidden="true" class="legacy" id="perf_hooks_performanceobserver_observe_options"></a></h4>
 <div class="api_metadata">
 <details class="changelog"><summary>History</summary>
 <table>
@@ -788,10 +1069,10 @@ notified about new <code>PerformanceEntry</code> instances. The callback receive
 <ul>
 <li><code>options</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a>
 <ul>
-<li><code>type</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> A single <a href="perf_hooks.html#perf_hooks_class_performanceentry" class="type">&lt;PerformanceEntry&gt;</a> type. Must not be given
+<li><code>type</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a> A single <a href="perf_hooks.html#class-performanceentry" class="type">&lt;PerformanceEntry&gt;</a> type. Must not be given
 if <code>entryTypes</code> is already specified.</li>
 <li><code>entryTypes</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string[]&gt;</a> An array of strings identifying the types of
-<a href="perf_hooks.html#perf_hooks_class_performanceentry" class="type">&lt;PerformanceEntry&gt;</a> instances the observer is interested in. If not
+<a href="perf_hooks.html#class-performanceentry" class="type">&lt;PerformanceEntry&gt;</a> instances the observer is interested in. If not
 provided an error will be thrown.</li>
 <li><code>buffered</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;boolean&gt;</a> If true, the observer callback is called with a
 list global <code>PerformanceEntry</code> buffered entries. If false, only
@@ -800,8 +1081,8 @@ observer callback. <strong>Default:</strong> <code>false</code>.</li>
 </ul>
 </li>
 </ul>
-<p>Subscribes the <a href="perf_hooks.html#perf_hooks_class_perf_hooks_performanceobserver" class="type">&lt;PerformanceObserver&gt;</a> instance to notifications of new
-<a href="perf_hooks.html#perf_hooks_class_performanceentry" class="type">&lt;PerformanceEntry&gt;</a> instances identified either by <code>options.entryTypes</code>
+<p>Subscribes the <a href="perf_hooks.html#class-perf_hooksperformanceobserver" class="type">&lt;PerformanceObserver&gt;</a> instance to notifications of new
+<a href="perf_hooks.html#class-performanceentry" class="type">&lt;PerformanceEntry&gt;</a> instances identified either by <code>options.entryTypes</code>
 or <code>options.type</code>:</p>
 <pre><code class="language-js"><span class="hljs-keyword">const</span> {
   performance,
@@ -809,25 +1090,25 @@ or <code>options.type</code>:</p>
 } = <span class="hljs-built_in">require</span>(<span class="hljs-string">'perf_hooks'</span>);
 
 <span class="hljs-keyword">const</span> obs = <span class="hljs-keyword">new</span> <span class="hljs-title class_">PerformanceObserver</span>(<span class="hljs-function">(<span class="hljs-params">list, observer</span>) =&gt;</span> {
-  <span class="hljs-comment">// Called three times synchronously. `list` contains one item.</span>
+  <span class="hljs-comment">// Called once asynchronously. `list` contains three items.</span>
 });
 obs.<span class="hljs-title function_">observe</span>({ <span class="hljs-attr">type</span>: <span class="hljs-string">'mark'</span> });
 
 <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> n = <span class="hljs-number">0</span>; n &lt; <span class="hljs-number">3</span>; n++)
   performance.<span class="hljs-title function_">mark</span>(<span class="hljs-string">`test<span class="hljs-subst">${n}</span>`</span>);</code></pre>
-</section><section><h3>Class: <code>PerformanceObserverEntryList</code><span><a name="//apple_ref/cl/PerformanceObserverEntryList"></a><a class="mark" href="#perf_hooks_class_performanceobserverentrylist" id="perf_hooks_class_performanceobserverentrylist">#</a></span></h3>
+</section><section><h3>Class: <code>PerformanceObserverEntryList</code><span><a name="//apple_ref/cl/PerformanceObserverEntryList"></a><a class="mark" href="#class-performanceobserverentrylist" id="class-performanceobserverentrylist">#</a></span><a aria-hidden="true" class="legacy" id="perf_hooks_class_performanceobserverentrylist"></a></h3>
 <div class="api_metadata">
 <span>Added in: v8.5.0</span>
 </div>
 <p>The <code>PerformanceObserverEntryList</code> class is used to provide access to the
 <code>PerformanceEntry</code> instances passed to a <code>PerformanceObserver</code>.
 The constructor of this class is not exposed to users.</p>
-<h4><code>performanceObserverEntryList.getEntries()</code><span><a name="//apple_ref/clm/performanceObserverEntryList%2EgetEntries%28%29"></a><a class="mark" href="#perf_hooks_performanceobserverentrylist_getentries" id="perf_hooks_performanceobserverentrylist_getentries">#</a></span></h4>
+<h4><code>performanceObserverEntryList.getEntries()</code><span><a name="//apple_ref/clm/performanceObserverEntryList%2EgetEntries%28%29"></a><a class="mark" href="#performanceobserverentrylistgetentries" id="performanceobserverentrylistgetentries">#</a></span><a aria-hidden="true" class="legacy" id="perf_hooks_performanceobserverentrylist_getentries"></a></h4>
 <div class="api_metadata">
 <span>Added in: v8.5.0</span>
 </div>
 <ul>
-<li>Returns: <a href="perf_hooks.html#perf_hooks_class_performanceentry" class="type">&lt;PerformanceEntry[]&gt;</a></li>
+<li>Returns: <a href="perf_hooks.html#class-performanceentry" class="type">&lt;PerformanceEntry[]&gt;</a></li>
 </ul>
 <p>Returns a list of <code>PerformanceEntry</code> objects in chronological order
 with respect to <code>performanceEntry.startTime</code>.</p>
@@ -854,20 +1135,23 @@ with respect to <code>performanceEntry.startTime</code>.</p>
    *   }
    * ]
    */</span>
+
+  performance.<span class="hljs-title function_">clearMarks</span>();
+  performance.<span class="hljs-title function_">clearMeasures</span>();
   observer.<span class="hljs-title function_">disconnect</span>();
 });
 obs.<span class="hljs-title function_">observe</span>({ <span class="hljs-attr">type</span>: <span class="hljs-string">'mark'</span> });
 
 performance.<span class="hljs-title function_">mark</span>(<span class="hljs-string">'test'</span>);
 performance.<span class="hljs-title function_">mark</span>(<span class="hljs-string">'meow'</span>);</code></pre>
-<h4><code>performanceObserverEntryList.getEntriesByName(name[, type])</code><span><a name="//apple_ref/clm/performanceObserverEntryList%2EgetEntriesByName%28name%5B%2C%20type%5D%29"></a><a class="mark" href="#perf_hooks_performanceobserverentrylist_getentriesbyname_name_type" id="perf_hooks_performanceobserverentrylist_getentriesbyname_name_type">#</a></span></h4>
+<h4><code>performanceObserverEntryList.getEntriesByName(name[, type])</code><span><a name="//apple_ref/clm/performanceObserverEntryList%2EgetEntriesByName%28name%5B%2C%20type%5D%29"></a><a class="mark" href="#performanceobserverentrylistgetentriesbynamename-type" id="performanceobserverentrylistgetentriesbynamename-type">#</a></span><a aria-hidden="true" class="legacy" id="perf_hooks_performanceobserverentrylist_getentriesbyname_name_type"></a></h4>
 <div class="api_metadata">
 <span>Added in: v8.5.0</span>
 </div>
 <ul>
 <li><code>name</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a></li>
 <li><code>type</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a></li>
-<li>Returns: <a href="perf_hooks.html#perf_hooks_class_performanceentry" class="type">&lt;PerformanceEntry[]&gt;</a></li>
+<li>Returns: <a href="perf_hooks.html#class-performanceentry" class="type">&lt;PerformanceEntry[]&gt;</a></li>
 </ul>
 <p>Returns a list of <code>PerformanceEntry</code> objects in chronological order
 with respect to <code>performanceEntry.startTime</code> whose <code>performanceEntry.name</code> is
@@ -904,19 +1188,22 @@ equal to <code>name</code>, and optionally, whose <code>performanceEntry.entryTy
    * ]
    */</span>
   <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(perfObserverList.<span class="hljs-title function_">getEntriesByName</span>(<span class="hljs-string">'test'</span>, <span class="hljs-string">'measure'</span>)); <span class="hljs-comment">// []</span>
+
+  performance.<span class="hljs-title function_">clearMarks</span>();
+  performance.<span class="hljs-title function_">clearMeasures</span>();
   observer.<span class="hljs-title function_">disconnect</span>();
 });
 obs.<span class="hljs-title function_">observe</span>({ <span class="hljs-attr">entryTypes</span>: [<span class="hljs-string">'mark'</span>, <span class="hljs-string">'measure'</span>] });
 
 performance.<span class="hljs-title function_">mark</span>(<span class="hljs-string">'test'</span>);
 performance.<span class="hljs-title function_">mark</span>(<span class="hljs-string">'meow'</span>);</code></pre>
-<h4><code>performanceObserverEntryList.getEntriesByType(type)</code><span><a name="//apple_ref/clm/performanceObserverEntryList%2EgetEntriesByType%28type%29"></a><a class="mark" href="#perf_hooks_performanceobserverentrylist_getentriesbytype_type" id="perf_hooks_performanceobserverentrylist_getentriesbytype_type">#</a></span></h4>
+<h4><code>performanceObserverEntryList.getEntriesByType(type)</code><span><a name="//apple_ref/clm/performanceObserverEntryList%2EgetEntriesByType%28type%29"></a><a class="mark" href="#performanceobserverentrylistgetentriesbytypetype" id="performanceobserverentrylistgetentriesbytypetype">#</a></span><a aria-hidden="true" class="legacy" id="perf_hooks_performanceobserverentrylist_getentriesbytype_type"></a></h4>
 <div class="api_metadata">
 <span>Added in: v8.5.0</span>
 </div>
 <ul>
 <li><code>type</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;string&gt;</a></li>
-<li>Returns: <a href="perf_hooks.html#perf_hooks_class_performanceentry" class="type">&lt;PerformanceEntry[]&gt;</a></li>
+<li>Returns: <a href="perf_hooks.html#class-performanceentry" class="type">&lt;PerformanceEntry[]&gt;</a></li>
 </ul>
 <p>Returns a list of <code>PerformanceEntry</code> objects in chronological order
 with respect to <code>performanceEntry.startTime</code> whose <code>performanceEntry.entryType</code>
@@ -944,31 +1231,34 @@ is equal to <code>type</code>.</p>
    *   }
    * ]
    */</span>
+  performance.<span class="hljs-title function_">clearMarks</span>();
+  performance.<span class="hljs-title function_">clearMeasures</span>();
   observer.<span class="hljs-title function_">disconnect</span>();
 });
 obs.<span class="hljs-title function_">observe</span>({ <span class="hljs-attr">type</span>: <span class="hljs-string">'mark'</span> });
 
 performance.<span class="hljs-title function_">mark</span>(<span class="hljs-string">'test'</span>);
 performance.<span class="hljs-title function_">mark</span>(<span class="hljs-string">'meow'</span>);</code></pre>
-</section><section><h3><code>perf_hooks.createHistogram([options])</code><span><a name="//apple_ref/clm/perf%5Fhooks%2EcreateHistogram%28%5Boptions%5D%29"></a><a class="mark" href="#perf_hooks_perf_hooks_createhistogram_options" id="perf_hooks_perf_hooks_createhistogram_options">#</a></span></h3>
+</section><section><h3><code>perf_hooks.createHistogram([options])</code><span><a name="//apple_ref/clm/perf%5Fhooks%2EcreateHistogram%28%5Boptions%5D%29"></a><a class="mark" href="#perf_hookscreatehistogramoptions" id="perf_hookscreatehistogramoptions">#</a></span><a aria-hidden="true" class="legacy" id="perf_hooks_perf_hooks_createhistogram_options"></a></h3>
 <div class="api_metadata">
-<span>Added in: v15.9.0</span>
+<span>Added in: v15.9.0, v14.18.0</span>
 </div>
 <ul>
 <li><code>options</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a>
 <ul>
-<li><code>min</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt" class="type">&lt;bigint&gt;</a> The minimum recordable value. Must be an integer
+<li><code>lowest</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt" class="type">&lt;bigint&gt;</a> The lowest discernible value. Must be an integer
 value greater than 0. <strong>Default:</strong> <code>1</code>.</li>
-<li><code>max</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt" class="type">&lt;bigint&gt;</a> The maximum recordable value. Must be an integer
-value greater than <code>min</code>. <strong>Default:</strong> <code>Number.MAX_SAFE_INTEGER</code>.</li>
+<li><code>highest</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt" class="type">&lt;bigint&gt;</a> The highest recordable value. Must be an integer
+value that is equal to or greater than two times <code>min</code>.
+<strong>Default:</strong> <code>Number.MAX_SAFE_INTEGER</code>.</li>
 <li><code>figures</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a> The number of accuracy digits. Must be a number between
 <code>1</code> and <code>5</code>. <strong>Default:</strong> <code>3</code>.</li>
 </ul>
 </li>
-<li>Returns <a href="perf_hooks.html#perf_hooks_class_recordablehistogram_extends_histogram" class="type">&lt;RecordableHistogram&gt;</a></li>
+<li>Returns <a href="perf_hooks.html#class-recordablehistogram-extends-histogram" class="type">&lt;RecordableHistogram&gt;</a></li>
 </ul>
-<p>Returns a <a href="perf_hooks.html#perf_hooks_class_recordablehistogram_extends_histogram" class="type">&lt;RecordableHistogram&gt;</a>.</p>
-</section><section><h3><code>perf_hooks.monitorEventLoopDelay([options])</code><span><a name="//apple_ref/clm/perf%5Fhooks%2EmonitorEventLoopDelay%28%5Boptions%5D%29"></a><a class="mark" href="#perf_hooks_perf_hooks_monitoreventloopdelay_options" id="perf_hooks_perf_hooks_monitoreventloopdelay_options">#</a></span></h3>
+<p>Returns a <a href="perf_hooks.html#class-recordablehistogram-extends-histogram" class="type">&lt;RecordableHistogram&gt;</a>.</p>
+</section><section><h3><code>perf_hooks.monitorEventLoopDelay([options])</code><span><a name="//apple_ref/clm/perf%5Fhooks%2EmonitorEventLoopDelay%28%5Boptions%5D%29"></a><a class="mark" href="#perf_hooksmonitoreventloopdelayoptions" id="perf_hooksmonitoreventloopdelayoptions">#</a></span><a aria-hidden="true" class="legacy" id="perf_hooks_perf_hooks_monitoreventloopdelay_options"></a></h3>
 <div class="api_metadata">
 <span>Added in: v11.10.0</span>
 </div>
@@ -979,7 +1269,7 @@ value greater than <code>min</code>. <strong>Default:</strong> <code>Number.MAX_
 than zero. <strong>Default:</strong> <code>10</code>.</li>
 </ul>
 </li>
-<li>Returns: <a href="perf_hooks.html#perf_hooks_class_intervalhistogram_extends_histogram" class="type">&lt;IntervalHistogram&gt;</a></li>
+<li>Returns: <a href="perf_hooks.html#class-intervalhistogram-extends-histogram" class="type">&lt;IntervalHistogram&gt;</a></li>
 </ul>
 <p><em>This property is an extension by Node.js. It is not available in Web browsers.</em></p>
 <p>Creates an <code>IntervalHistogram</code> object that samples and reports the event loop
@@ -1001,11 +1291,27 @@ h.<span class="hljs-title function_">disable</span>();
 <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(h.<span class="hljs-property">percentiles</span>);
 <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(h.<span class="hljs-title function_">percentile</span>(<span class="hljs-number">50</span>));
 <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(h.<span class="hljs-title function_">percentile</span>(<span class="hljs-number">99</span>));</code></pre>
-</section><section><h3>Class: <code>Histogram</code><span><a name="//apple_ref/cl/Histogram"></a><a class="mark" href="#perf_hooks_class_histogram" id="perf_hooks_class_histogram">#</a></span></h3>
+</section><section><h3>Class: <code>Histogram</code><span><a name="//apple_ref/cl/Histogram"></a><a class="mark" href="#class-histogram" id="class-histogram">#</a></span><a aria-hidden="true" class="legacy" id="perf_hooks_class_histogram"></a></h3>
 <div class="api_metadata">
 <span>Added in: v11.10.0</span>
 </div>
-<h4><code>histogram.exceeds</code><span><a name="//apple_ref/instp/histogram%2Eexceeds"></a><a class="mark" href="#perf_hooks_histogram_exceeds" id="perf_hooks_histogram_exceeds">#</a></span></h4>
+<h4><code>histogram.count</code><span><a name="//apple_ref/instp/histogram%2Ecount"></a><a class="mark" href="#histogramcount" id="histogramcount">#</a></span><a aria-hidden="true" class="legacy" id="perf_hooks_histogram_count"></a></h4>
+<div class="api_metadata">
+<span>Added in: v17.4.0</span>
+</div>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a></li>
+</ul>
+<p>The number of samples recorded by the histogram.</p>
+<h4><code>histogram.countBigInt</code><span><a name="//apple_ref/instp/histogram%2EcountBigInt"></a><a class="mark" href="#histogramcountbigint" id="histogramcountbigint">#</a></span><a aria-hidden="true" class="legacy" id="perf_hooks_histogram_countbigint"></a></h4>
+<div class="api_metadata">
+<span>Added in: v17.4.0</span>
+</div>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt" class="type">&lt;bigint&gt;</a></li>
+</ul>
+<p>The number of samples recorded by the histogram.</p>
+<h4><code>histogram.exceeds</code><span><a name="//apple_ref/instp/histogram%2Eexceeds"></a><a class="mark" href="#histogramexceeds" id="histogramexceeds">#</a></span><a aria-hidden="true" class="legacy" id="perf_hooks_histogram_exceeds"></a></h4>
 <div class="api_metadata">
 <span>Added in: v11.10.0</span>
 </div>
@@ -1014,7 +1320,16 @@ h.<span class="hljs-title function_">disable</span>();
 </ul>
 <p>The number of times the event loop delay exceeded the maximum 1 hour event
 loop delay threshold.</p>
-<h4><code>histogram.max</code><span><a name="//apple_ref/instp/histogram%2Emax"></a><a class="mark" href="#perf_hooks_histogram_max" id="perf_hooks_histogram_max">#</a></span></h4>
+<h4><code>histogram.exceedsBigInt</code><span><a name="//apple_ref/instp/histogram%2EexceedsBigInt"></a><a class="mark" href="#histogramexceedsbigint" id="histogramexceedsbigint">#</a></span><a aria-hidden="true" class="legacy" id="perf_hooks_histogram_exceedsbigint"></a></h4>
+<div class="api_metadata">
+<span>Added in: v17.4.0</span>
+</div>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt" class="type">&lt;bigint&gt;</a></li>
+</ul>
+<p>The number of times the event loop delay exceeded the maximum 1 hour event
+loop delay threshold.</p>
+<h4><code>histogram.max</code><span><a name="//apple_ref/instp/histogram%2Emax"></a><a class="mark" href="#histogrammax" id="histogrammax">#</a></span><a aria-hidden="true" class="legacy" id="perf_hooks_histogram_max"></a></h4>
 <div class="api_metadata">
 <span>Added in: v11.10.0</span>
 </div>
@@ -1022,7 +1337,15 @@ loop delay threshold.</p>
 <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a></li>
 </ul>
 <p>The maximum recorded event loop delay.</p>
-<h4><code>histogram.mean</code><span><a name="//apple_ref/instp/histogram%2Emean"></a><a class="mark" href="#perf_hooks_histogram_mean" id="perf_hooks_histogram_mean">#</a></span></h4>
+<h4><code>histogram.maxBigInt</code><span><a name="//apple_ref/instp/histogram%2EmaxBigInt"></a><a class="mark" href="#histogrammaxbigint" id="histogrammaxbigint">#</a></span><a aria-hidden="true" class="legacy" id="perf_hooks_histogram_maxbigint"></a></h4>
+<div class="api_metadata">
+<span>Added in: v17.4.0</span>
+</div>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt" class="type">&lt;bigint&gt;</a></li>
+</ul>
+<p>The maximum recorded event loop delay.</p>
+<h4><code>histogram.mean</code><span><a name="//apple_ref/instp/histogram%2Emean"></a><a class="mark" href="#histogrammean" id="histogrammean">#</a></span><a aria-hidden="true" class="legacy" id="perf_hooks_histogram_mean"></a></h4>
 <div class="api_metadata">
 <span>Added in: v11.10.0</span>
 </div>
@@ -1030,7 +1353,7 @@ loop delay threshold.</p>
 <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a></li>
 </ul>
 <p>The mean of the recorded event loop delays.</p>
-<h4><code>histogram.min</code><span><a name="//apple_ref/instp/histogram%2Emin"></a><a class="mark" href="#perf_hooks_histogram_min" id="perf_hooks_histogram_min">#</a></span></h4>
+<h4><code>histogram.min</code><span><a name="//apple_ref/instp/histogram%2Emin"></a><a class="mark" href="#histogrammin" id="histogrammin">#</a></span><a aria-hidden="true" class="legacy" id="perf_hooks_histogram_min"></a></h4>
 <div class="api_metadata">
 <span>Added in: v11.10.0</span>
 </div>
@@ -1038,7 +1361,15 @@ loop delay threshold.</p>
 <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a></li>
 </ul>
 <p>The minimum recorded event loop delay.</p>
-<h4><code>histogram.percentile(percentile)</code><span><a name="//apple_ref/clm/histogram%2Epercentile%28percentile%29"></a><a class="mark" href="#perf_hooks_histogram_percentile_percentile" id="perf_hooks_histogram_percentile_percentile">#</a></span></h4>
+<h4><code>histogram.minBigInt</code><span><a name="//apple_ref/instp/histogram%2EminBigInt"></a><a class="mark" href="#histogramminbigint" id="histogramminbigint">#</a></span><a aria-hidden="true" class="legacy" id="perf_hooks_histogram_minbigint"></a></h4>
+<div class="api_metadata">
+<span>Added in: v17.4.0</span>
+</div>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt" class="type">&lt;bigint&gt;</a></li>
+</ul>
+<p>The minimum recorded event loop delay.</p>
+<h4><code>histogram.percentile(percentile)</code><span><a name="//apple_ref/clm/histogram%2Epercentile%28percentile%29"></a><a class="mark" href="#histogrampercentilepercentile" id="histogrampercentilepercentile">#</a></span><a aria-hidden="true" class="legacy" id="perf_hooks_histogram_percentile_percentile"></a></h4>
 <div class="api_metadata">
 <span>Added in: v11.10.0</span>
 </div>
@@ -1047,7 +1378,16 @@ loop delay threshold.</p>
 <li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a></li>
 </ul>
 <p>Returns the value at the given percentile.</p>
-<h4><code>histogram.percentiles</code><span><a name="//apple_ref/instp/histogram%2Epercentiles"></a><a class="mark" href="#perf_hooks_histogram_percentiles" id="perf_hooks_histogram_percentiles">#</a></span></h4>
+<h4><code>histogram.percentileBigInt(percentile)</code><span><a name="//apple_ref/clm/histogram%2EpercentileBigInt%28percentile%29"></a><a class="mark" href="#histogrampercentilebigintpercentile" id="histogrampercentilebigintpercentile">#</a></span><a aria-hidden="true" class="legacy" id="perf_hooks_histogram_percentilebigint_percentile"></a></h4>
+<div class="api_metadata">
+<span>Added in: v17.4.0</span>
+</div>
+<ul>
+<li><code>percentile</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a> A percentile value in the range (0, 100].</li>
+<li>Returns: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt" class="type">&lt;bigint&gt;</a></li>
+</ul>
+<p>Returns the value at the given percentile.</p>
+<h4><code>histogram.percentiles</code><span><a name="//apple_ref/instp/histogram%2Epercentiles"></a><a class="mark" href="#histogrampercentiles" id="histogrampercentiles">#</a></span><a aria-hidden="true" class="legacy" id="perf_hooks_histogram_percentiles"></a></h4>
 <div class="api_metadata">
 <span>Added in: v11.10.0</span>
 </div>
@@ -1055,12 +1395,20 @@ loop delay threshold.</p>
 <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map" class="type">&lt;Map&gt;</a></li>
 </ul>
 <p>Returns a <code>Map</code> object detailing the accumulated percentile distribution.</p>
-<h4><code>histogram.reset()</code><span><a name="//apple_ref/clm/histogram%2Ereset%28%29"></a><a class="mark" href="#perf_hooks_histogram_reset" id="perf_hooks_histogram_reset">#</a></span></h4>
+<h4><code>histogram.percentilesBigInt</code><span><a name="//apple_ref/instp/histogram%2EpercentilesBigInt"></a><a class="mark" href="#histogrampercentilesbigint" id="histogrampercentilesbigint">#</a></span><a aria-hidden="true" class="legacy" id="perf_hooks_histogram_percentilesbigint"></a></h4>
+<div class="api_metadata">
+<span>Added in: v17.4.0</span>
+</div>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map" class="type">&lt;Map&gt;</a></li>
+</ul>
+<p>Returns a <code>Map</code> object detailing the accumulated percentile distribution.</p>
+<h4><code>histogram.reset()</code><span><a name="//apple_ref/clm/histogram%2Ereset%28%29"></a><a class="mark" href="#histogramreset" id="histogramreset">#</a></span><a aria-hidden="true" class="legacy" id="perf_hooks_histogram_reset"></a></h4>
 <div class="api_metadata">
 <span>Added in: v11.10.0</span>
 </div>
 <p>Resets the collected histogram data.</p>
-<h4><code>histogram.stddev</code><span><a name="//apple_ref/instp/histogram%2Estddev"></a><a class="mark" href="#perf_hooks_histogram_stddev" id="perf_hooks_histogram_stddev">#</a></span></h4>
+<h4><code>histogram.stddev</code><span><a name="//apple_ref/instp/histogram%2Estddev"></a><a class="mark" href="#histogramstddev" id="histogramstddev">#</a></span><a aria-hidden="true" class="legacy" id="perf_hooks_histogram_stddev"></a></h4>
 <div class="api_metadata">
 <span>Added in: v11.10.0</span>
 </div>
@@ -1068,9 +1416,9 @@ loop delay threshold.</p>
 <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a></li>
 </ul>
 <p>The standard deviation of the recorded event loop delays.</p>
-</section><section><h3>Class: <code>IntervalHistogram extends Histogram</code><span><a name="//apple_ref/cl/IntervalHistogram%20extends%20Histogram"></a><a class="mark" href="#perf_hooks_class_intervalhistogram_extends_histogram" id="perf_hooks_class_intervalhistogram_extends_histogram">#</a></span></h3>
+</section><section><h3>Class: <code>IntervalHistogram extends Histogram</code><span><a name="//apple_ref/cl/IntervalHistogram%20extends%20Histogram"></a><a class="mark" href="#class-intervalhistogram-extends-histogram" id="class-intervalhistogram-extends-histogram">#</a></span><a aria-hidden="true" class="legacy" id="perf_hooks_class_intervalhistogram_extends_histogram"></a></h3>
 <p>A <code>Histogram</code> that is periodically updated on a given interval.</p>
-<h4><code>histogram.disable()</code><span><a name="//apple_ref/clm/histogram%2Edisable%28%29"></a><a class="mark" href="#perf_hooks_histogram_disable" id="perf_hooks_histogram_disable">#</a></span></h4>
+<h4><code>histogram.disable()</code><span><a name="//apple_ref/clm/histogram%2Edisable%28%29"></a><a class="mark" href="#histogramdisable" id="histogramdisable">#</a></span><a aria-hidden="true" class="legacy" id="perf_hooks_histogram_disable"></a></h4>
 <div class="api_metadata">
 <span>Added in: v11.10.0</span>
 </div>
@@ -1079,7 +1427,7 @@ loop delay threshold.</p>
 </ul>
 <p>Disables the update interval timer. Returns <code>true</code> if the timer was
 stopped, <code>false</code> if it was already stopped.</p>
-<h4><code>histogram.enable()</code><span><a name="//apple_ref/clm/histogram%2Eenable%28%29"></a><a class="mark" href="#perf_hooks_histogram_enable" id="perf_hooks_histogram_enable">#</a></span></h4>
+<h4><code>histogram.enable()</code><span><a name="//apple_ref/clm/histogram%2Eenable%28%29"></a><a class="mark" href="#histogramenable" id="histogramenable">#</a></span><a aria-hidden="true" class="legacy" id="perf_hooks_histogram_enable"></a></h4>
 <div class="api_metadata">
 <span>Added in: v11.10.0</span>
 </div>
@@ -1088,29 +1436,37 @@ stopped, <code>false</code> if it was already stopped.</p>
 </ul>
 <p>Enables the update interval timer. Returns <code>true</code> if the timer was
 started, <code>false</code> if it was already started.</p>
-<h4>Cloning an <code>IntervalHistogram</code><span><a name="//apple_ref/Section/Cloning%20an%20IntervalHistogram"></a><a class="mark" href="#perf_hooks_cloning_an_intervalhistogram" id="perf_hooks_cloning_an_intervalhistogram">#</a></span></h4>
-<p><a href="perf_hooks.html#perf_hooks_class_intervalhistogram_extends_histogram" class="type">&lt;IntervalHistogram&gt;</a> instances can be cloned via <a href="worker_threads.html#worker_threads_class_messageport" class="type">&lt;MessagePort&gt;</a>. On the receiving
-end, the histogram is cloned as a plain <a href="perf_hooks.html#perf_hooks_class_histogram" class="type">&lt;Histogram&gt;</a> object that does not
+<h4>Cloning an <code>IntervalHistogram</code><span><a name="//apple_ref/Section/Cloning%20an%20IntervalHistogram"></a><a class="mark" href="#cloning-an-intervalhistogram" id="cloning-an-intervalhistogram">#</a></span><a aria-hidden="true" class="legacy" id="perf_hooks_cloning_an_intervalhistogram"></a></h4>
+<p><a href="perf_hooks.html#class-intervalhistogram-extends-histogram" class="type">&lt;IntervalHistogram&gt;</a> instances can be cloned via <a href="worker_threads.html#class-messageport" class="type">&lt;MessagePort&gt;</a>. On the receiving
+end, the histogram is cloned as a plain <a href="perf_hooks.html#class-histogram" class="type">&lt;Histogram&gt;</a> object that does not
 implement the <code>enable()</code> and <code>disable()</code> methods.</p>
-</section><section><h3>Class: <code>RecordableHistogram extends Histogram</code><span><a name="//apple_ref/cl/RecordableHistogram%20extends%20Histogram"></a><a class="mark" href="#perf_hooks_class_recordablehistogram_extends_histogram" id="perf_hooks_class_recordablehistogram_extends_histogram">#</a></span></h3>
+</section><section><h3>Class: <code>RecordableHistogram extends Histogram</code><span><a name="//apple_ref/cl/RecordableHistogram%20extends%20Histogram"></a><a class="mark" href="#class-recordablehistogram-extends-histogram" id="class-recordablehistogram-extends-histogram">#</a></span><a aria-hidden="true" class="legacy" id="perf_hooks_class_recordablehistogram_extends_histogram"></a></h3>
 <div class="api_metadata">
-<span>Added in: v15.9.0</span>
+<span>Added in: v15.9.0, v14.18.0</span>
 </div>
-<h4><code>histogram.record(val)</code><span><a name="//apple_ref/clm/histogram%2Erecord%28val%29"></a><a class="mark" href="#perf_hooks_histogram_record_val" id="perf_hooks_histogram_record_val">#</a></span></h4>
+<h4><code>histogram.add(other)</code><span><a name="//apple_ref/clm/histogram%2Eadd%28other%29"></a><a class="mark" href="#histogramaddother" id="histogramaddother">#</a></span><a aria-hidden="true" class="legacy" id="perf_hooks_histogram_add_other"></a></h4>
 <div class="api_metadata">
-<span>Added in: v15.9.0</span>
+<span>Added in: v17.4.0</span>
+</div>
+<ul>
+<li><code>other</code> <a href="perf_hooks.html#class-recordablehistogram-extends-histogram" class="type">&lt;RecordableHistogram&gt;</a></li>
+</ul>
+<p>Adds the values from <code>other</code> to this histogram.</p>
+<h4><code>histogram.record(val)</code><span><a name="//apple_ref/clm/histogram%2Erecord%28val%29"></a><a class="mark" href="#histogramrecordval" id="histogramrecordval">#</a></span><a aria-hidden="true" class="legacy" id="perf_hooks_histogram_record_val"></a></h4>
+<div class="api_metadata">
+<span>Added in: v15.9.0, v14.18.0</span>
 </div>
 <ul>
 <li><code>val</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;number&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt" class="type">&lt;bigint&gt;</a> The amount to record in the histogram.</li>
 </ul>
-<h4><code>histogram.recordDelta()</code><span><a name="//apple_ref/clm/histogram%2ErecordDelta%28%29"></a><a class="mark" href="#perf_hooks_histogram_recorddelta" id="perf_hooks_histogram_recorddelta">#</a></span></h4>
+<h4><code>histogram.recordDelta()</code><span><a name="//apple_ref/clm/histogram%2ErecordDelta%28%29"></a><a class="mark" href="#histogramrecorddelta" id="histogramrecorddelta">#</a></span><a aria-hidden="true" class="legacy" id="perf_hooks_histogram_recorddelta"></a></h4>
 <div class="api_metadata">
-<span>Added in: v15.9.0</span>
+<span>Added in: v15.9.0, v14.18.0</span>
 </div>
 <p>Calculates the amount of time (in nanoseconds) that has passed since the
 previous call to <code>recordDelta()</code> and records that amount in the histogram.</p>
-</section><section><h3>Examples<span><a name="//apple_ref/Section/Measuring%20the%20duration%20of%20async%20operations"></a><a class="mark" href="#perf_hooks_examples" id="perf_hooks_examples">#</a></span></h3>
-<h4>Measuring the duration of async operations<span><a name="//apple_ref/Section/Measuring%20the%20duration%20of%20async%20operations"></a><a class="mark" href="#perf_hooks_measuring_the_duration_of_async_operations" id="perf_hooks_measuring_the_duration_of_async_operations">#</a></span></h4>
+</section><section><h3>Examples<span><a name="//apple_ref/Section/Measuring%20the%20duration%20of%20async%20operations"></a><a class="mark" href="#examples" id="examples">#</a></span><a aria-hidden="true" class="legacy" id="perf_hooks_examples"></a></h3>
+<h4>Measuring the duration of async operations<span><a name="//apple_ref/Section/Measuring%20the%20duration%20of%20async%20operations"></a><a class="mark" href="#measuring-the-duration-of-async-operations" id="measuring-the-duration-of-async-operations">#</a></span><a aria-hidden="true" class="legacy" id="perf_hooks_measuring_the_duration_of_async_operations"></a></h4>
 <p>The following example uses the <a href="async_hooks.html">Async Hooks</a> and Performance APIs to measure
 the actual duration of a Timeout operation (including the amount of time it took
 to execute the callback).</p>
@@ -1144,12 +1500,13 @@ hook.<span class="hljs-title function_">enable</span>();
 <span class="hljs-keyword">const</span> obs = <span class="hljs-keyword">new</span> <span class="hljs-title class_">PerformanceObserver</span>(<span class="hljs-function">(<span class="hljs-params">list, observer</span>) =&gt;</span> {
   <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(list.<span class="hljs-title function_">getEntries</span>()[<span class="hljs-number">0</span>]);
   performance.<span class="hljs-title function_">clearMarks</span>();
+  performance.<span class="hljs-title function_">clearMeasures</span>();
   observer.<span class="hljs-title function_">disconnect</span>();
 });
 obs.<span class="hljs-title function_">observe</span>({ <span class="hljs-attr">entryTypes</span>: [<span class="hljs-string">'measure'</span>], <span class="hljs-attr">buffered</span>: <span class="hljs-literal">true</span> });
 
 <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> {}, <span class="hljs-number">1000</span>);</code></pre>
-<h4>Measuring how long it takes to load dependencies<span><a name="//apple_ref/Section/Measuring%20how%20long%20it%20takes%20to%20load%20dependencies"></a><a class="mark" href="#perf_hooks_measuring_how_long_it_takes_to_load_dependencies" id="perf_hooks_measuring_how_long_it_takes_to_load_dependencies">#</a></span></h4>
+<h4>Measuring how long it takes to load dependencies<span><a name="//apple_ref/Section/Measuring%20how%20long%20it%20takes%20to%20load%20dependencies"></a><a class="mark" href="#measuring-how-long-it-takes-to-load-dependencies" id="measuring-how-long-it-takes-to-load-dependencies">#</a></span><a aria-hidden="true" class="legacy" id="perf_hooks_measuring_how_long_it_takes_to_load_dependencies"></a></h4>
 <p>The following example measures the duration of <code>require()</code> operations to load
 dependencies:</p>
 <!-- eslint-disable no-global-assign -->
@@ -1171,11 +1528,38 @@ mod.<span class="hljs-property">Module</span>.<span class="hljs-property"><span 
   entries.<span class="hljs-title function_">forEach</span>(<span class="hljs-function">(<span class="hljs-params">entry</span>) =&gt;</span> {
     <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`require('<span class="hljs-subst">${entry[<span class="hljs-number">0</span>]}</span>')`</span>, entry.<span class="hljs-property">duration</span>);
   });
+  performance.<span class="hljs-title function_">clearMarks</span>();
+  performance.<span class="hljs-title function_">clearMeasures</span>();
   obs.<span class="hljs-title function_">disconnect</span>();
 });
 obs.<span class="hljs-title function_">observe</span>({ <span class="hljs-attr">entryTypes</span>: [<span class="hljs-string">'function'</span>], <span class="hljs-attr">buffered</span>: <span class="hljs-literal">true</span> });
 
-<span class="hljs-built_in">require</span>(<span class="hljs-string">'some-module'</span>);</code></pre></section>
+<span class="hljs-built_in">require</span>(<span class="hljs-string">'some-module'</span>);</code></pre>
+<h4>Measuring how long one HTTP round-trip takes<span><a name="//apple_ref/Section/Measuring%20how%20long%20one%20HTTP%20round%2Dtrip%20takes"></a><a class="mark" href="#measuring-how-long-one-http-round-trip-takes" id="measuring-how-long-one-http-round-trip-takes">#</a></span><a aria-hidden="true" class="legacy" id="perf_hooks_measuring_how_long_one_http_round_trip_takes"></a></h4>
+<p>The following example is used to trace the time spent by HTTP client
+(<code>OutgoingMessage</code>) and HTTP request (<code>IncomingMessage</code>). For HTTP client,
+it means the time interval between starting the request and receiving the
+response, and for HTTP request, it means the time interval between receiving
+the request and sending the response:</p>
+<pre><code class="language-js"><span class="hljs-meta">'use strict'</span>;
+<span class="hljs-keyword">const</span> { <span class="hljs-title class_">PerformanceObserver</span> } = <span class="hljs-built_in">require</span>(<span class="hljs-string">'perf_hooks'</span>);
+<span class="hljs-keyword">const</span> http = <span class="hljs-built_in">require</span>(<span class="hljs-string">'http'</span>);
+
+<span class="hljs-keyword">const</span> obs = <span class="hljs-keyword">new</span> <span class="hljs-title class_">PerformanceObserver</span>(<span class="hljs-function">(<span class="hljs-params">items</span>) =&gt;</span> {
+  items.<span class="hljs-title function_">getEntries</span>().<span class="hljs-title function_">forEach</span>(<span class="hljs-function">(<span class="hljs-params">item</span>) =&gt;</span> {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(item);
+  });
+});
+
+obs.<span class="hljs-title function_">observe</span>({ <span class="hljs-attr">entryTypes</span>: [<span class="hljs-string">'http'</span>] });
+
+<span class="hljs-keyword">const</span> <span class="hljs-variable constant_">PORT</span> = <span class="hljs-number">8080</span>;
+
+http.<span class="hljs-title function_">createServer</span>(<span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
+  res.<span class="hljs-title function_">end</span>(<span class="hljs-string">'ok'</span>);
+}).<span class="hljs-title function_">listen</span>(<span class="hljs-variable constant_">PORT</span>, <span class="hljs-function">() =&gt;</span> {
+  http.<span class="hljs-title function_">get</span>(<span class="hljs-string">`http://127.0.0.1:<span class="hljs-subst">${PORT}</span>`</span>);
+});</code></pre></section>
         <!-- API END -->
       </div>
     </div>
@@ -1190,7 +1574,7 @@ obs.<span class="hljs-title function_">observe</span>({ <span class="hljs-attr">
         const mq = window.matchMedia('(prefers-color-scheme: dark-disabled)');
         if ('onchange' in mq) {
           function mqChangeListener(e) {
-            document.body.classList.toggle('dark-mode', e.matches);
+            document.documentElement.classList.toggle('dark-mode', e.matches);
           }
           mq.addEventListener('change', mqChangeListener);
           if (themeToggleButton) {
@@ -1200,17 +1584,17 @@ obs.<span class="hljs-title function_">observe</span>({ <span class="hljs-attr">
           }
         }
         if (mq.matches) {
-          document.body.classList.add('dark-mode');
+          document.documentElement.classList.add('dark-mode');
         }
       } else if (userSettings === 'true') {
-        document.body.classList.add('dark-mode');
+        document.documentElement.classList.add('dark-mode');
       }
       if (themeToggleButton) {
         themeToggleButton.hidden = false;
         themeToggleButton.addEventListener('click', function() {
           sessionStorage.setItem(
             kCustomPreference,
-            document.body.classList.toggle('dark-mode')
+            document.documentElement.classList.toggle('dark-mode')
           );
         });
       }

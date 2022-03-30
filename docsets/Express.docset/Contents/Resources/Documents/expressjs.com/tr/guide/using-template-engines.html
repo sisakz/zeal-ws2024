@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+
+<html lang="tr" prefix="og: http://ogp.me/ns#">
+
+<!-- Mirrored from expressjs.com/tr/guide/using-template-engines.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 10 Jul 2019 00:23:56 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+<title>Using template engines with Express</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="og:image" content="../../images/express-facebook-share.png">
+<link rel="icon" type="image/png" href="../../images/favicon.png" />
+<link rel="stylesheet" href="../../css/style.css">
+<link rel="stylesheet" href="../../css/dropit.css">
+<link rel="stylesheet" href="../../css/prism.css">
+<link rel="stylesheet" href="../../css/font-awesome.min.css">
+<link rel="stylesheet" href="../../../fonts.googleapis.com/css2a1d.css?family=Open+Sans:300,400,600,700&amp;amp;subset=latin,latin-ext">
+<link rel="stylesheet" href="../../css/tr.css">
+<link rel="stylesheet" href="../../css/nodeinteractive.css">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script data-cfasync="false" src="../../../ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script data-cfasync="false" src="../../js/ismobile.js"></script>
+<script data-cfasync="false" src="../../js/app.js"></script>
+<script data-cfasync="false" src="../../js/retina.js"></script>
+<script data-cfasync="false" src="../../js/dropit.js"></script>
+<script data-cfasync="false" src="../../js/prism.js"></script>
+<link rel="stylesheet" href="../../../cdn.jsdelivr.net/npm/docsearch.js%402/dist/cdn/docsearch.min.css" />
+</head>
+<body class="non-en-doc">
+<section class="page content">
+<header>
+<div id="mobile-menu">
+<div id="nav-button" class="fa fa-bars fa-2x button"></div>
+</div>
+<section id="logo"><a href="../../index.html" class="express">Express</a>
+</section>
+<div id="navbar">
+<input id="q" placeholder="🔎 search" />
+<ul id="navmenu">
+<li><a href="../../index.html" id="home-menu">Anasayfa</a></li>
+<li>
+<ul id="getting-started-menu" class="menu">
+<li><a href="../starter/installing.html">Buradan Başlayın</a>
+<ul>
+<li>
+<a href="../starter/installing.html">
+Kurulum
+</a>
+</li>
+<li>
+<a href="../starter/hello-world.html">
+Merhaba Dünya
+</a>
+</li>
+<li>
+<a href="../starter/generator.html">
+Express Oluşturucu
+</a>
+</li>
+<li>
+<a href="../starter/basic-routing.html">
+Basit Yönlendirme
+</a>
+</li>
+<li>
+<a href="../starter/static-files.html">
+Statik Dosyalar
+</a>
+</li>
+<li>
+<a href="../starter/faq.html">
+SSS
+</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<ul id="guide-menu" class="menu">
+<li><a href="routing.html" class="active">Kılavuz</a>
+<ul>
+<li><a href="routing.html">Yönlendirme</a>
+</li>
+<li><a href="writing-middleware.html"> Middleware yazma</a>
+</li>
+<li><a href="using-middleware.html">Middleware kullanma</a>
+</li>
+<li><a href="using-template-engines.html">Şablon motoru kullanma</a>
+</li>
+<li><a href="error-handling.html">Hata işleme</a>
+</li>
+<li><a href="debugging.html">Hata Ayıklama</a>
+</li>
+<li><a href="behind-proxies.html">Express behind proxies</a>
+</li>
+<li><a href="migrating-4.html">Express 4 geçiş</a>
+</li>
+<li><a href="migrating-5.html">Express 5 geçiş</a>
+</li>
+<li><a href="database-integration.html">Database Entegrasyonu</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<ul id="application-menu" class="menu">
+<li><a href="../4x/api.html">API Kaynak</a>
+<ul>
+<li><a href="../4x/api.html">4.x</a>
+</li>
+<li><a href="../3x/api.html">3.x (Kullanımdan kaldırıldı)</a>
+</li>
+<li><a href="../../2x/index.html">2.x (Kullanımdan kaldırıldı)</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<ul id="advanced-topics-menu" class="menu">
+<li><a href="../advanced/developing-template-engines.html">Gelişmiş konular</a>
+<ul>
+<li><a href="../advanced/developing-template-engines.html">Şablon motorları</a>
+</li>
+<li><a href="../advanced/pm.html">Proses yöneticisi kullanma</a>
+</li>
+<li><a href="../advanced/security-updates.html">Gğvenlik güncellemeleri</a>
+</li>
+<li><a href="../advanced/best-practice-security.html">En iyi güvenlik uygulamaları</a>
+</li>
+<li><a href="../advanced/best-practice-performance.html">En iyi performans uygulamaları</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<ul id="resources-menu" class="menu">
+<li><a href="../resources/glossary.html">Kaynaklar</a>
+<ul>
+<li>
+<a href="../resources/community.html">Topluluk</a>
+</li>
+<li>
+<a href="../resources/glossary.html">Terimler</a>
+</li>
+<li>
+<a href="../resources/middleware.html">Middleware</a>
+</li>
+<li>
+<a href="../resources/utils.html">Yardımcı Modüller</a>
+</li>
+<li>
+<a href="../resources/frameworks.html">Yapılar</a>
+</li>
+<li>
+<a href="../resources/books-blogs.html">Kitap ve Bloglar</a>
+</li>
+<li>
+<a href="../resources/companies-using-express.html">Express kullanan şirket</a>
+</li>
+<li>
+<a href="../resources/contributing.html">Express'e katkıda bulunmak</a>
+</li>
+<li>
+<a href="../changelog/4x.html">Sürüm Notları</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+
+</ul>
+</div>
+</header>
+<div id="overlay"></div>
+<div id="i18n-notice-box" class="doc-box doc-warn">
+<p>Bu doküman ingilizce dokümana göre eski olabilir. Son güncellemeler için lütfen <a href="../../index.html">İngilizce Dokümanı</a>. ziyaret edin
+</p>
+<div id="close-i18n-notice-box" title="Close">✖</div>
+</div>
+<div id="page-doc" markdown="1">
+<div id="page-doc">
+<h1 id="using-template-engines-with-express">Using template engines with Express</h1>
+<p>A <em>template engine</em> enables you to use static template files in your application. At runtime, the template engine replaces
+variables in a template file with actual values, and transforms the template into an HTML file sent to the client.
+This approach makes it easier to design an HTML page.</p>
+<p>Some popular template engines that work with Express are <a href="https://pugjs.org/api/getting-started.html">Pug</a>,
+<a href="https://www.npmjs.com/package/mustache">Mustache</a>, and <a href="https://www.npmjs.com/package/ejs">EJS</a>.
+The <a href="../starter/generator.html">Express application generator</a> uses <a href="https://www.npmjs.com/package/jade">Jade</a> as its default, but it also supports several others.</p>
+<p>See <a href="https://github.com/strongloop/express/wiki#template-engines">Template Engines (Express wiki)</a>
+for a list of template engines you can use with Express.
+See also <a href="https://strongloop.com/strongblog/compare-javascript-templates-jade-mustache-dust/">Comparing JavaScript Templating Engines: Jade, Mustache, Dust and More</a>.</p>
+<div class="doc-box doc-notice">
+<p><strong>Note</strong>: Jade has been renamed to <a href="https://www.npmjs.com/package/pug">Pug</a>. You can continue to use Jade in your app, and it will work just fine. However if you want the latest updates to the template engine, you must replace Jade with Pug in your app.</p>
+</div>
+<p>To render template files, set the following <a href="../4x/api.html#app.set">application setting properties</a>, set in <code>app.js</code> in the default app created by the generator:</p>
+<ul>
+<li><code>views</code>, the directory where the template files are located. Eg: <code>app.set('views', './views')</code>.
+This defaults to the <code>views</code> directory in the application root directory.</li>
+<li><code>view engine</code>, the template engine to use. For example, to use the Pug template engine: <code>app.set('view engine', 'pug')</code>.</li>
+</ul>
+<p>Then install the corresponding template engine npm package; for example to install Pug:</p>
+<pre><code class="language-sh">$ npm install pug --save
+</code></pre>
+<div class="doc-box doc-notice">
+<p>Express-compliant template engines such as Jade and Pug export a function named <code>__express(filePath, options, callback)</code>,
+which is called by the <code>res.render()</code> function to render the template code.</p>
+<p>Some template engines do not follow this convention. The <a href="https://www.npmjs.org/package/consolidate">Consolidate.js</a>
+library follows this convention by mapping all of the popular Node.js template engines, and therefore works seamlessly within Express.</p>
+</div>
+<p>After the view engine is set, you don’t have to specify the engine or load the template engine module in your app;
+Express loads the module internally, as shown below (for the above example).</p>
+<pre><code class="language-js">app.set('view engine', 'pug')
+</code></pre>
+<p>Create a Pug template file named <code>index.pug</code> in the <code>views</code> directory, with the following content:</p>
+<pre><code class="language-pug">html
+  head
+    title= title
+  body
+    h1= message
+</code></pre>
+<p>Then create a route to render the <code>index.pug</code> file. If the <code>view engine</code> property is not set,
+you must specify the extension of the <code>view</code> file. Otherwise, you can omit it.</p>
+<pre><code class="language-js">app.get('/', function (req, res) {
+  res.render('index', { title: 'Hey', message: 'Hello there!' })
+})
+</code></pre>
+<p>When you make a request to the home page, the <code>index.pug</code> file will be rendered as HTML.</p>
+<p>To learn more about how template engines work in Express, see:
+<a href="../advanced/developing-template-engines.html">“Developing template engines for Express”</a>.</p>
+</div>
+</div>
+</section>
+<noscript>
+    <iframe src="http://www.googletagmanager.com/ns.html?id=GTM-5XL76H" height="0" width="0" style="display: none; visibility: hidden;"></iframe>
+</noscript>
+<script type="127f91d170693fdfd178d5c2-text/javascript">
+(function(w, d, s, l, i) {
+    w[l] = w[l] || [];
+    w[l].push({
+        'gtm.start': new Date().getTime(),
+        event: 'gtm.js'
+    });
+    var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s),
+        dl = l != 'dataLayer' ? '&l=' + l : '';
+    j.async = true;
+    j.src =
+        '../../../www.googletagmanager.com/gtm5445.js?id=' + i + dl;
+    f.parentNode.insertBefore(j, f);
+})(window, document, 'script', 'dataLayer', 'GTM-5XL76H');
+</script>
+<a id="top" href="#"><img src="../../images/arrow.png"></a>
+<footer>
+<section id="doc-langs">
+<a href="http://strongloop.com/">StrongLoop/IBM</a> tarafından sağlanan belge çevirileri:
+<a href="../../fr/index.html">Fransızca</a>, <a href="../../de/index.html">Almanca</a>, <a href="../../es/index.html">İspanyolca</a>, <a href="../../it/index.html">İtalyanca</a>, <a href="../../ja/index.html">Japonca</a>, <a href="../../ru/index.html">Rusça</a>, <a href="../../zh-cn/index.html">Çince</a>, <a href="../../zh-tw/index.html">Klasik Çince</a>, <a href="../../ko/index.html">Korece</a>, <a href="../../pt-br/index.html">Portekizce</a>.
+<br>
+Topluluk çevirisi için: <a href="../../sk/index.html">Slovakça</a>, <a href="../../uk/index.html">Ukraynaca</a> and <a href="../../uz/index.html">Özbekçe</a>.
+</section>
+<div id="footer-content">
+<div id="github">
+<a class="github-button" href="https://github.com/expressjs/expressjs.com" data-icon="octicon-star" aria-label="Star expressjs/expressjs.com on GitHub">Star</a>
+</div>
+<div id="sponsor"><a href="https://github.com/expressjs/express/">Express</a> bir <a href="http://nodejs.org/foundation"></a>Node.js Vakfı</a> projesidir.</div>
+<div id="fork"><a href="https://github.com/expressjs/expressjs.com">Github'da Forkla</a>.
+</div>
+<div>Telif Hakkı &copy; 2017 StrongLoop, IBM, ve diğer expressjs.com katkıda bulunanlar.</div>
+</div>
+<div id="license">
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/us/"><img alt="Creative Commons License" style="border-width:0" src="../../../i.creativecommons.org/l/by-sa/3.0/us/80x15.png" /></a> Bu iş<a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/us/">Creative Commons Attribution-ShareAlike 3.0 United States License</a> lisansı altındadır.
+</div>
+</footer>
+<script async defer src="../../../buttons.github.io/buttons.js" type="127f91d170693fdfd178d5c2-text/javascript"></script>
+<script type="127f91d170693fdfd178d5c2-text/javascript" src="../../../cdn.jsdelivr.net/npm/docsearch.js%402/dist/cdn/docsearch.min.js" onload="docsearch({
+  apiKey: '7164e33055faa6ecddefd9e08fc59f5d',
+  indexName: 'expressjs',
+  inputSelector: '#q',
+  algoliaOptions: { 'facetFilters': ['lang:tr'] }
+})" async></script>
+<script src="../../../ajax.cloudflare.com/cdn-cgi/scripts/a2bd7673/cloudflare-static/rocket-loader.min.js" data-cf-settings="127f91d170693fdfd178d5c2-|49" defer=""></script></body>
+
+<!-- Mirrored from expressjs.com/tr/guide/using-template-engines.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 10 Jul 2019 00:23:56 GMT -->
+</html>

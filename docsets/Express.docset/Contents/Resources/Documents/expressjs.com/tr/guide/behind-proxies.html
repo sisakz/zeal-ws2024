@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+
+<html lang="tr" prefix="og: http://ogp.me/ns#">
+
+<!-- Mirrored from expressjs.com/tr/guide/behind-proxies.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 10 Jul 2019 00:23:56 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+<title>Express behind proxies</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="og:image" content="../../images/express-facebook-share.png">
+<link rel="icon" type="image/png" href="../../images/favicon.png" />
+<link rel="stylesheet" href="../../css/style.css">
+<link rel="stylesheet" href="../../css/dropit.css">
+<link rel="stylesheet" href="../../css/prism.css">
+<link rel="stylesheet" href="../../css/font-awesome.min.css">
+<link rel="stylesheet" href="../../../fonts.googleapis.com/css2a1d.css?family=Open+Sans:300,400,600,700&amp;amp;subset=latin,latin-ext">
+<link rel="stylesheet" href="../../css/tr.css">
+<link rel="stylesheet" href="../../css/nodeinteractive.css">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script data-cfasync="false" src="../../../ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script data-cfasync="false" src="../../js/ismobile.js"></script>
+<script data-cfasync="false" src="../../js/app.js"></script>
+<script data-cfasync="false" src="../../js/retina.js"></script>
+<script data-cfasync="false" src="../../js/dropit.js"></script>
+<script data-cfasync="false" src="../../js/prism.js"></script>
+<link rel="stylesheet" href="../../../cdn.jsdelivr.net/npm/docsearch.js%402/dist/cdn/docsearch.min.css" />
+</head>
+<body class="non-en-doc">
+<section class="page content">
+<header>
+<div id="mobile-menu">
+<div id="nav-button" class="fa fa-bars fa-2x button"></div>
+</div>
+<section id="logo"><a href="../../index.html" class="express">Express</a>
+</section>
+<div id="navbar">
+<input id="q" placeholder="🔎 search" />
+<ul id="navmenu">
+<li><a href="../../index.html" id="home-menu">Anasayfa</a></li>
+<li>
+<ul id="getting-started-menu" class="menu">
+<li><a href="../starter/installing.html">Buradan Başlayın</a>
+<ul>
+<li>
+<a href="../starter/installing.html">
+Kurulum
+</a>
+</li>
+<li>
+<a href="../starter/hello-world.html">
+Merhaba Dünya
+</a>
+</li>
+<li>
+<a href="../starter/generator.html">
+Express Oluşturucu
+</a>
+</li>
+<li>
+<a href="../starter/basic-routing.html">
+Basit Yönlendirme
+</a>
+</li>
+<li>
+<a href="../starter/static-files.html">
+Statik Dosyalar
+</a>
+</li>
+<li>
+<a href="../starter/faq.html">
+SSS
+</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<ul id="guide-menu" class="menu">
+<li><a href="routing.html" class="active">Kılavuz</a>
+<ul>
+<li><a href="routing.html">Yönlendirme</a>
+</li>
+<li><a href="writing-middleware.html"> Middleware yazma</a>
+</li>
+<li><a href="using-middleware.html">Middleware kullanma</a>
+</li>
+<li><a href="using-template-engines.html">Şablon motoru kullanma</a>
+</li>
+<li><a href="error-handling.html">Hata işleme</a>
+</li>
+<li><a href="debugging.html">Hata Ayıklama</a>
+</li>
+<li><a href="behind-proxies.html">Express behind proxies</a>
+</li>
+<li><a href="migrating-4.html">Express 4 geçiş</a>
+</li>
+<li><a href="migrating-5.html">Express 5 geçiş</a>
+</li>
+<li><a href="database-integration.html">Database Entegrasyonu</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<ul id="application-menu" class="menu">
+<li><a href="../4x/api.html">API Kaynak</a>
+<ul>
+<li><a href="../4x/api.html">4.x</a>
+</li>
+<li><a href="../3x/api.html">3.x (Kullanımdan kaldırıldı)</a>
+</li>
+<li><a href="../../2x/index.html">2.x (Kullanımdan kaldırıldı)</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<ul id="advanced-topics-menu" class="menu">
+<li><a href="../advanced/developing-template-engines.html">Gelişmiş konular</a>
+<ul>
+<li><a href="../advanced/developing-template-engines.html">Şablon motorları</a>
+</li>
+<li><a href="../advanced/pm.html">Proses yöneticisi kullanma</a>
+</li>
+<li><a href="../advanced/security-updates.html">Gğvenlik güncellemeleri</a>
+</li>
+<li><a href="../advanced/best-practice-security.html">En iyi güvenlik uygulamaları</a>
+</li>
+<li><a href="../advanced/best-practice-performance.html">En iyi performans uygulamaları</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<ul id="resources-menu" class="menu">
+<li><a href="../resources/glossary.html">Kaynaklar</a>
+<ul>
+<li>
+<a href="../resources/community.html">Topluluk</a>
+</li>
+<li>
+<a href="../resources/glossary.html">Terimler</a>
+</li>
+<li>
+<a href="../resources/middleware.html">Middleware</a>
+</li>
+<li>
+<a href="../resources/utils.html">Yardımcı Modüller</a>
+</li>
+<li>
+<a href="../resources/frameworks.html">Yapılar</a>
+</li>
+<li>
+<a href="../resources/books-blogs.html">Kitap ve Bloglar</a>
+</li>
+<li>
+<a href="../resources/companies-using-express.html">Express kullanan şirket</a>
+</li>
+<li>
+<a href="../resources/contributing.html">Express'e katkıda bulunmak</a>
+</li>
+<li>
+<a href="../changelog/4x.html">Sürüm Notları</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+
+</ul>
+</div>
+</header>
+<div id="overlay"></div>
+<div id="i18n-notice-box" class="doc-box doc-warn">
+<p>Bu doküman ingilizce dokümana göre eski olabilir. Son güncellemeler için lütfen <a href="../../index.html">İngilizce Dokümanı</a>. ziyaret edin
+</p>
+<div id="close-i18n-notice-box" title="Close">✖</div>
+</div>
+<div id="page-doc" markdown="1">
+<div id="page-doc">
+<h1 id="express-behind-proxies">Express behind proxies</h1>
+<p>When running an Express app behind a proxy, set (by using <a href="../4x/api.html#app.set">app.set()</a>) the application variable <code>trust proxy</code> to one of the values listed in the following table.</p>
+<div class="doc-box doc-info">
+<p>Although the app will not fail to run if the application variable <code>trust proxy</code> is not set, it will incorrectly register the proxy’s IP address as the client IP address unless <code>trust proxy</code> is configured.</p>
+</div>
+<table class="doctable" border="1">
+<thead><tr><th>Type</th><th>Value</th></tr></thead>
+<tbody>
+<tr>
+<td>Boolean</td>
+<td>
+<p>If <code>true</code>, the client’s IP address is understood as the left-most entry in the <code>X-Forwarded-*</code> header.</p>
+<p>If <code>false</code>, the app is understood as directly facing the Internet and the client’s IP address is derived from <code>req.connection.remoteAddress</code>. This is the default setting.</p>
+</td>
+</tr>
+<tr>
+<td>IP addresses</td>
+<td>
+<p>An IP address, subnet, or an array of IP addresses and subnets to trust. The following list shows the pre-configured subnet names:</p>
+<ul>
+<li>loopback - <code>127.0.0.1/8</code>, <code>::1/128</code></li>
+<li>linklocal - <code>169.254.0.0/16</code>, <code>fe80::/10</code></li>
+<li>uniquelocal - <code>10.0.0.0/8</code>, <code>172.16.0.0/12</code>, <code>192.168.0.0/16</code>, <code>fc00::/7</code></li>
+</ul>
+<p>You can set IP addresses in any of the following ways:</p>
+<pre><code class="language-js">app.set('trust proxy', 'loopback') // specify a single subnet
+app.set('trust proxy', 'loopback, 123.123.123.123') // specify a subnet and an address
+app.set('trust proxy', 'loopback, linklocal, uniquelocal') // specify multiple subnets as CSV
+app.set('trust proxy', ['loopback', 'linklocal', 'uniquelocal']) // specify multiple subnets as an array
+</code></pre>
+<p>When specified, the IP addresses or the subnets are excluded from the address determination process, and the untrusted IP address nearest to the application server is determined as the client’s IP address.</p>
+</td>
+</tr>
+<tr>
+<td>Number</td>
+<td>
+<p>Trust the <code>n</code>th hop from the front-facing proxy server as the client.</p>
+</td>
+</tr>
+<tr>
+<td>Function</td>
+<td>
+<p>Custom trust implementation. Use this only if you know what you are doing.</p>
+<pre><code class="language-js">app.set('trust proxy', function (ip) {
+  if (ip === '127.0.0.1' || ip === '123.123.123.123') return true // trusted IPs
+  else return false
+})
+</code></pre>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Setting a non-<code>false</code> <code>trust proxy</code> value results in three important changes:</p>
+<ul>
+<li>
+<p>The value of <a href="../api.html#req.hostname">req.hostname</a> is derived from the value set in the <code>X-Forwarded-Host</code> header, which can be set by the client or by the proxy.</p>
+</li>
+<li>
+<p><code>X-Forwarded-Proto</code> can be set by the reverse proxy to tell the app whether it is <code>https</code> or <code>http</code> or even an invalid name. This value is reflected by <a href="../api.html#req.protocol">req.protocol</a>.</p>
+</li>
+<li>
+<p>The <a href="../api.html#req.ip">req.ip</a> and <a href="../api.html#req.ips">req.ips</a> values are populated with the list of addresses from <code>X-Forwarded-For</code>.</p>
+</li>
+</ul>
+<p>The <code>trust proxy</code> setting is implemented using the <a href="https://www.npmjs.com/package/proxy-addr">proxy-addr</a> package. For more information, see its documentation.</p>
+</div>
+</div>
+</section>
+<noscript>
+    <iframe src="http://www.googletagmanager.com/ns.html?id=GTM-5XL76H" height="0" width="0" style="display: none; visibility: hidden;"></iframe>
+</noscript>
+<script type="df6ae62965eb10bcfe69a77b-text/javascript">
+(function(w, d, s, l, i) {
+    w[l] = w[l] || [];
+    w[l].push({
+        'gtm.start': new Date().getTime(),
+        event: 'gtm.js'
+    });
+    var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s),
+        dl = l != 'dataLayer' ? '&l=' + l : '';
+    j.async = true;
+    j.src =
+        '../../../www.googletagmanager.com/gtm5445.js?id=' + i + dl;
+    f.parentNode.insertBefore(j, f);
+})(window, document, 'script', 'dataLayer', 'GTM-5XL76H');
+</script>
+<a id="top" href="#"><img src="../../images/arrow.png"></a>
+<footer>
+<section id="doc-langs">
+<a href="http://strongloop.com/">StrongLoop/IBM</a> tarafından sağlanan belge çevirileri:
+<a href="../../fr/index.html">Fransızca</a>, <a href="../../de/index.html">Almanca</a>, <a href="../../es/index.html">İspanyolca</a>, <a href="../../it/index.html">İtalyanca</a>, <a href="../../ja/index.html">Japonca</a>, <a href="../../ru/index.html">Rusça</a>, <a href="../../zh-cn/index.html">Çince</a>, <a href="../../zh-tw/index.html">Klasik Çince</a>, <a href="../../ko/index.html">Korece</a>, <a href="../../pt-br/index.html">Portekizce</a>.
+<br>
+Topluluk çevirisi için: <a href="../../sk/index.html">Slovakça</a>, <a href="../../uk/index.html">Ukraynaca</a> and <a href="../../uz/index.html">Özbekçe</a>.
+</section>
+<div id="footer-content">
+<div id="github">
+<a class="github-button" href="https://github.com/expressjs/expressjs.com" data-icon="octicon-star" aria-label="Star expressjs/expressjs.com on GitHub">Star</a>
+</div>
+<div id="sponsor"><a href="https://github.com/expressjs/express/">Express</a> bir <a href="http://nodejs.org/foundation"></a>Node.js Vakfı</a> projesidir.</div>
+<div id="fork"><a href="https://github.com/expressjs/expressjs.com">Github'da Forkla</a>.
+</div>
+<div>Telif Hakkı &copy; 2017 StrongLoop, IBM, ve diğer expressjs.com katkıda bulunanlar.</div>
+</div>
+<div id="license">
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/us/"><img alt="Creative Commons License" style="border-width:0" src="../../../i.creativecommons.org/l/by-sa/3.0/us/80x15.png" /></a> Bu iş<a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/us/">Creative Commons Attribution-ShareAlike 3.0 United States License</a> lisansı altındadır.
+</div>
+</footer>
+<script async defer src="../../../buttons.github.io/buttons.js" type="df6ae62965eb10bcfe69a77b-text/javascript"></script>
+<script type="df6ae62965eb10bcfe69a77b-text/javascript" src="../../../cdn.jsdelivr.net/npm/docsearch.js%402/dist/cdn/docsearch.min.js" onload="docsearch({
+  apiKey: '7164e33055faa6ecddefd9e08fc59f5d',
+  indexName: 'expressjs',
+  inputSelector: '#q',
+  algoliaOptions: { 'facetFilters': ['lang:tr'] }
+})" async></script>
+<script src="../../../ajax.cloudflare.com/cdn-cgi/scripts/a2bd7673/cloudflare-static/rocket-loader.min.js" data-cf-settings="df6ae62965eb10bcfe69a77b-|49" defer=""></script></body>
+
+<!-- Mirrored from expressjs.com/tr/guide/behind-proxies.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 10 Jul 2019 00:23:56 GMT -->
+</html>

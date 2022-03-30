@@ -1,4 +1,4 @@
-<!--|13|1630429748|45.79.141.78|NONE|-->
+<!--|18|1646310798|45.79.141.78|NONE|-->
 <!-- content - Partner "default.partner" - File "error/error404.htm" -->
 
 
@@ -174,7 +174,7 @@
     </tr>
   </table>
   <p><div style="font-variant: small-caps; font-weight: bold;">MYSITE IS A UNITED ONLINE COMPANY</div>
-  <div style="margin:5px;">Copyright &copy; 2021 United Online Web Services, Inc. All rights reserved.</div>
+  <div style="margin:5px;">Copyright &copy; 2022 United Online Web Services, Inc. All rights reserved.</div>
   <p></div>
   
             <SCRIPT type="text/javascript" language="javascript"><!--

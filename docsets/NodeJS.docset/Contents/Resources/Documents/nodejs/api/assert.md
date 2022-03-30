@@ -10,6 +10,7 @@ The `assert` module provides a set of assertion functions for verifying
 invariants.
 
 ## Strict assertion mode
+
 <!-- YAML
 added: v9.9.0
 changes:
@@ -99,11 +100,11 @@ assert.deepEqual([[[1, 2, 3]], 4, 5], [[[1, 2, '3']], 4, 5]);
 To deactivate the colors, use the `NO_COLOR` or `NODE_DISABLE_COLORS`
 environment variables. This will also deactivate the colors in the REPL. For
 more on color support in terminal environments, read the tty
-[getColorDepth()](tty.md#tty_writestream_getcolordepth_env) documentation.
+[`getColorDepth()`][] documentation.
 
 ## Legacy assertion mode
 
-Legacy assertion mode uses the [Abstract Equality Comparison][] in:
+Legacy assertion mode uses the [`==` operator][] in:
 
 * [`assert.deepEqual()`][]
 * [`assert.equal()`][]
@@ -120,13 +121,11 @@ import assert from 'assert';
 const assert = require('assert');
 ```
 
-Whenever possible, use the [strict assertion mode][] instead. Otherwise, the
-[Abstract Equality Comparison][] may cause surprising results. This is
-especially true for [`assert.deepEqual()`][], where the comparison rules are
-lax:
+Legacy assertion mode may have surprising results, especially when using
+[`assert.deepEqual()`][]:
 
 ```cjs
-// WARNING: This does not throw an AssertionError!
+// WARNING: This does not throw an AssertionError in legacy assertion mode!
 assert.deepEqual(/a/gi, new Date());
 ```
 
@@ -138,6 +137,7 @@ Indicates the failure of an assertion. All errors thrown by the `assert` module
 will be instances of the `AssertionError` class.
 
 ### `new assert.AssertionError(options)`
+
 <!-- YAML
 added: v0.1.21
 -->
@@ -216,6 +216,7 @@ try {
 ```
 
 ## Class: `assert.CallTracker`
+
 <!-- YAML
 added:
   - v14.2.0
@@ -227,6 +228,7 @@ added:
 This feature is currently experimental and behavior might still change.
 
 ### `new assert.CallTracker()`
+
 <!-- YAML
 added:
   - v14.2.0
@@ -278,6 +280,7 @@ process.on('exit', () => {
 ```
 
 ### `tracker.calls([fn][, exact])`
+
 <!-- YAML
 added:
   - v14.2.0
@@ -320,6 +323,7 @@ const callsfunc = tracker.calls(func);
 ```
 
 ### `tracker.report()`
+
 <!-- YAML
 added:
   - v14.2.0
@@ -396,6 +400,7 @@ tracker.report();
 ```
 
 ### `tracker.verify()`
+
 <!-- YAML
 added:
   - v14.2.0
@@ -443,6 +448,7 @@ tracker.verify();
 ```
 
 ## `assert(value[, message])`
+
 <!-- YAML
 added: v0.5.9
 -->
@@ -453,16 +459,19 @@ added: v0.5.9
 An alias of [`assert.ok()`][].
 
 ## `assert.deepEqual(actual, expected[, message])`
+
 <!-- YAML
 added: v0.1.21
 changes:
-  - version: v16.0.0
+  - version:
+      - v16.0.0
+      - v14.18.0
     pr-url: https://github.com/nodejs/node/pull/38113
     description: In Legacy assertion mode, changed status from Deprecated to
                  Legacy.
   - version: v14.0.0
     pr-url: https://github.com/nodejs/node/pull/30766
-    description: NaN is now treated as being identical in case both sides are
+    description: NaN is now treated as being identical if both sides are
                  NaN.
   - version: v12.0.0
     pr-url: https://github.com/nodejs/node/pull/25008
@@ -475,18 +484,18 @@ changes:
     pr-url: https://github.com/nodejs/node/pull/12142
     description: The `Set` and `Map` content is also compared.
   - version:
-    - v6.4.0
-    - v4.7.1
+      - v6.4.0
+      - v4.7.1
     pr-url: https://github.com/nodejs/node/pull/8002
     description: Typed array slices are handled correctly now.
   - version:
-    - v6.1.0
-    - v4.5.0
+      - v6.1.0
+      - v4.5.0
     pr-url: https://github.com/nodejs/node/pull/6432
     description: Objects with circular references can be used as inputs now.
   - version:
-    - v5.10.1
-    - v4.4.3
+      - v5.10.1
+      - v4.4.3
     pr-url: https://github.com/nodejs/node/pull/5910
     description: Handle non-`Uint8Array` typed arrays correctly.
 -->
@@ -512,8 +521,8 @@ are also recursively evaluated by the following rules.
 
 ### Comparison details
 
-* Primitive values are compared with the [Abstract Equality Comparison][]
-  ( `==` ) with the exception of `NaN`. It is treated as being identical in case
+* Primitive values are compared with the [`==` operator][],
+  with the exception of `NaN`. It is treated as being identical in case
   both sides are `NaN`.
 * [Type tags][Object.prototype.toString()] of objects should be the same.
 * Only [enumerable "own" properties][] are considered.
@@ -530,8 +539,7 @@ are also recursively evaluated by the following rules.
 * [`WeakMap`][] and [`WeakSet`][] comparison does not rely on their values.
 
 The following example does not throw an [`AssertionError`][] because the
-primitives are considered equal by the [Abstract Equality Comparison][]
-( `==` ).
+primitives are compared using the [`==` operator][].
 
 ```mjs
 import assert from 'assert';
@@ -627,6 +635,7 @@ parameter is an instance of an [`Error`][] then it will be thrown instead of the
 [`AssertionError`][].
 
 ## `assert.deepStrictEqual(actual, expected[, message])`
+
 <!-- YAML
 added: v1.2.0
 changes:
@@ -669,11 +678,10 @@ are recursively evaluated also by the following rules.
 
 ### Comparison details
 
-* Primitive values are compared using the [SameValue Comparison][], used by
-  [`Object.is()`][].
+* Primitive values are compared using [`Object.is()`][].
 * [Type tags][Object.prototype.toString()] of objects should be the same.
 * [`[[Prototype]]`][prototype-spec] of objects are compared using
-  the [Strict Equality Comparison][].
+  the [`===` operator][].
 * Only [enumerable "own" properties][] are considered.
 * [`Error`][] names and messages are always compared, even if these are not
   enumerable properties.
@@ -690,7 +698,7 @@ are recursively evaluated also by the following rules.
 import assert from 'assert/strict';
 
 // This fails because 1 !== '1'.
-deepStrictEqual({ a: 1 }, { a: '1' });
+assert.deepStrictEqual({ a: 1 }, { a: '1' });
 // AssertionError: Expected inputs to be strictly deep-equal:
 // + actual - expected
 //
@@ -722,7 +730,7 @@ assert.deepStrictEqual(date, fakeDate);
 // - Date {}
 
 assert.deepStrictEqual(NaN, NaN);
-// OK, because of the SameValue comparison
+// OK because Object.is(NaN, NaN) is true.
 
 // Different unwrapped numbers:
 assert.deepStrictEqual(new Number(1), new Number(2));
@@ -738,7 +746,7 @@ assert.deepStrictEqual(new String('foo'), Object('foo'));
 assert.deepStrictEqual(-0, -0);
 // OK
 
-// Different zeros using the SameValue Comparison:
+// Different zeros:
 assert.deepStrictEqual(0, -0);
 // AssertionError: Expected inputs to be strictly deep-equal:
 // + actual - expected
@@ -814,7 +822,7 @@ assert.deepStrictEqual(date, fakeDate);
 // - Date {}
 
 assert.deepStrictEqual(NaN, NaN);
-// OK, because of the SameValue comparison
+// OK because Object.is(NaN, NaN) is true.
 
 // Different unwrapped numbers:
 assert.deepStrictEqual(new Number(1), new Number(2));
@@ -830,7 +838,7 @@ assert.deepStrictEqual(new String('foo'), Object('foo'));
 assert.deepStrictEqual(-0, -0);
 // OK
 
-// Different zeros using the SameValue Comparison:
+// Different zeros:
 assert.deepStrictEqual(0, -0);
 // AssertionError: Expected inputs to be strictly deep-equal:
 // + actual - expected
@@ -877,6 +885,7 @@ parameter is an instance of an [`Error`][] then it will be thrown instead of the
 `AssertionError`.
 
 ## `assert.doesNotMatch(string, regexp[, message])`
+
 <!-- YAML
 added:
   - v13.6.0
@@ -927,6 +936,7 @@ instance of an [`Error`][] then it will be thrown instead of the
 [`AssertionError`][].
 
 ## `assert.doesNotReject(asyncFn[, error][, message])`
+
 <!-- YAML
 added: v10.0.0
 -->
@@ -956,7 +966,6 @@ function. See [`assert.throws()`][] for more details.
 Besides the async nature to await the completion behaves identically to
 [`assert.doesNotThrow()`][].
 
-<!-- eslint-disable no-restricted-syntax -->
 ```mjs
 import assert from 'assert/strict';
 
@@ -981,7 +990,6 @@ const assert = require('assert/strict');
 })();
 ```
 
-<!-- eslint-disable no-restricted-syntax -->
 ```mjs
 import assert from 'assert/strict';
 
@@ -991,7 +999,6 @@ assert.doesNotReject(Promise.reject(new TypeError('Wrong value')))
   });
 ```
 
-<!-- eslint-disable no-restricted-syntax -->
 ```cjs
 const assert = require('assert/strict');
 
@@ -1002,6 +1009,7 @@ assert.doesNotReject(Promise.reject(new TypeError('Wrong value')))
 ```
 
 ## `assert.doesNotThrow(fn[, error][, message])`
+
 <!-- YAML
 added: v0.1.21
 changes:
@@ -1040,7 +1048,6 @@ function. See [`assert.throws()`][] for more details.
 The following, for instance, will throw the [`TypeError`][] because there is no
 matching error type in the assertion:
 
-<!-- eslint-disable no-restricted-syntax -->
 ```mjs
 import assert from 'assert/strict';
 
@@ -1052,7 +1059,6 @@ assert.doesNotThrow(
 );
 ```
 
-<!-- eslint-disable no-restricted-syntax -->
 ```cjs
 const assert = require('assert/strict');
 
@@ -1067,7 +1073,6 @@ assert.doesNotThrow(
 However, the following will result in an [`AssertionError`][] with the message
 'Got unwanted exception...':
 
-<!-- eslint-disable no-restricted-syntax -->
 ```mjs
 import assert from 'assert/strict';
 
@@ -1079,7 +1084,6 @@ assert.doesNotThrow(
 );
 ```
 
-<!-- eslint-disable no-restricted-syntax -->
 ```cjs
 const assert = require('assert/strict');
 
@@ -1095,7 +1099,6 @@ If an [`AssertionError`][] is thrown and a value is provided for the `message`
 parameter, the value of `message` will be appended to the [`AssertionError`][]
 message:
 
-<!-- eslint-disable no-restricted-syntax -->
 ```mjs
 import assert from 'assert/strict';
 
@@ -1109,7 +1112,6 @@ assert.doesNotThrow(
 // Throws: AssertionError: Got unwanted exception: Whoops
 ```
 
-<!-- eslint-disable no-restricted-syntax -->
 ```cjs
 const assert = require('assert/strict');
 
@@ -1124,16 +1126,19 @@ assert.doesNotThrow(
 ```
 
 ## `assert.equal(actual, expected[, message])`
+
 <!-- YAML
 added: v0.1.21
 changes:
-  - version: v16.0.0
+  - version:
+      - v16.0.0
+      - v14.18.0
     pr-url: https://github.com/nodejs/node/pull/38113
     description: In Legacy assertion mode, changed status from Deprecated to
                  Legacy.
   - version: v14.0.0
     pr-url: https://github.com/nodejs/node/pull/30766
-    description: NaN is now treated as being identical in case both sides are
+    description: NaN is now treated as being identical if both sides are
                  NaN.
 -->
 
@@ -1150,8 +1155,8 @@ An alias of [`assert.strictEqual()`][].
 > Stability: 3 - Legacy: Use [`assert.strictEqual()`][] instead.
 
 Tests shallow, coercive equality between the `actual` and `expected` parameters
-using the [Abstract Equality Comparison][] ( `==` ). `NaN` is special handled
-and treated as being identical in case both sides are `NaN`.
+using the [`==` operator][]. `NaN` is specially handled
+and treated as being identical if both sides are `NaN`.
 
 ```mjs
 import assert from 'assert';
@@ -1192,6 +1197,7 @@ parameter is an instance of an [`Error`][] then it will be thrown instead of the
 `AssertionError`.
 
 ## `assert.fail([message])`
+
 <!-- YAML
 added: v0.1.21
 -->
@@ -1232,6 +1238,7 @@ Using `assert.fail()` with more than two arguments is possible but deprecated.
 See below for further details.
 
 ## `assert.fail(actual, expected[, message[, operator[, stackStartFn]]])`
+
 <!-- YAML
 added: v0.1.21
 changes:
@@ -1329,6 +1336,7 @@ suppressFrame();
 ```
 
 ## `assert.ifError(value)`
+
 <!-- YAML
 added: v0.1.97
 changes:
@@ -1402,6 +1410,7 @@ let err;
 ```
 
 ## `assert.match(string, regexp[, message])`
+
 <!-- YAML
 added:
   - v13.6.0
@@ -1452,16 +1461,19 @@ instance of an [`Error`][] then it will be thrown instead of the
 [`AssertionError`][].
 
 ## `assert.notDeepEqual(actual, expected[, message])`
+
 <!-- YAML
 added: v0.1.21
 changes:
-  - version: v16.0.0
+  - version:
+      - v16.0.0
+      - v14.18.0
     pr-url: https://github.com/nodejs/node/pull/38113
     description: In Legacy assertion mode, changed status from Deprecated to
                  Legacy.
   - version: v14.0.0
     pr-url: https://github.com/nodejs/node/pull/30766
-    description: NaN is now treated as being identical in case both sides are
+    description: NaN is now treated as being identical if both sides are
                  NaN.
   - version: v9.0.0
     pr-url: https://github.com/nodejs/node/pull/15001
@@ -1470,18 +1482,18 @@ changes:
     pr-url: https://github.com/nodejs/node/pull/12142
     description: The `Set` and `Map` content is also compared.
   - version:
-    - v6.4.0
-    - v4.7.1
+      - v6.4.0
+      - v4.7.1
     pr-url: https://github.com/nodejs/node/pull/8002
     description: Typed array slices are handled correctly now.
   - version:
-    - v6.1.0
-    - v4.5.0
+      - v6.1.0
+      - v4.5.0
     pr-url: https://github.com/nodejs/node/pull/6432
     description: Objects with circular references can be used as inputs now.
   - version:
-    - v5.10.1
-    - v4.4.3
+      - v5.10.1
+      - v4.4.3
     pr-url: https://github.com/nodejs/node/pull/5910
     description: Handle non-`Uint8Array` typed arrays correctly.
 -->
@@ -1573,6 +1585,7 @@ If the values are deeply equal, an [`AssertionError`][] is thrown with a
 instead of the `AssertionError`.
 
 ## `assert.notDeepStrictEqual(actual, expected[, message])`
+
 <!-- YAML
 added: v1.2.0
 changes:
@@ -1632,16 +1645,19 @@ the `message` parameter is an instance of an [`Error`][] then it will be thrown
 instead of the [`AssertionError`][].
 
 ## `assert.notEqual(actual, expected[, message])`
+
 <!-- YAML
 added: v0.1.21
 changes:
-  - version: v16.0.0
+  - version:
+      - v16.0.0
+      - v14.18.0
     pr-url: https://github.com/nodejs/node/pull/38113
     description: In Legacy assertion mode, changed status from Deprecated to
                  Legacy.
   - version: v14.0.0
     pr-url: https://github.com/nodejs/node/pull/30766
-    description: NaN is now treated as being identical in case both sides are
+    description: NaN is now treated as being identical if both sides are
                  NaN.
 -->
 
@@ -1657,9 +1673,8 @@ An alias of [`assert.notStrictEqual()`][].
 
 > Stability: 3 - Legacy: Use [`assert.notStrictEqual()`][] instead.
 
-Tests shallow, coercive inequality with the [Abstract Equality Comparison][]
-(`!=` ). `NaN` is special handled and treated as being identical in case both
-sides are `NaN`.
+Tests shallow, coercive inequality with the [`!=` operator][]. `NaN` is
+specially handled and treated as being identical if both sides are `NaN`.
 
 ```mjs
 import assert from 'assert';
@@ -1694,6 +1709,7 @@ parameter is an instance of an [`Error`][] then it will be thrown instead of the
 `AssertionError`.
 
 ## `assert.notStrictEqual(actual, expected[, message])`
+
 <!-- YAML
 added: v0.1.21
 changes:
@@ -1707,7 +1723,7 @@ changes:
 * `message` {string|Error}
 
 Tests strict inequality between the `actual` and `expected` parameters as
-determined by the [SameValue Comparison][].
+determined by [`Object.is()`][].
 
 ```mjs
 import assert from 'assert/strict';
@@ -1746,6 +1762,7 @@ If the values are strictly equal, an [`AssertionError`][] is thrown with a
 instead of the `AssertionError`.
 
 ## `assert.ok(value[, message])`
+
 <!-- YAML
 added: v0.1.21
 changes:
@@ -1863,6 +1880,7 @@ assert(0);
 ```
 
 ## `assert.rejects(asyncFn[, error][, message])`
+
 <!-- YAML
 added: v10.0.0
 -->
@@ -1983,6 +2001,7 @@ example in [`assert.throws()`][] carefully if using a string as the second
 argument gets considered.
 
 ## `assert.strictEqual(actual, expected[, message])`
+
 <!-- YAML
 added: v0.1.21
 changes:
@@ -1996,7 +2015,7 @@ changes:
 * `message` {string|Error}
 
 Tests strict equality between the `actual` and `expected` parameters as
-determined by the [SameValue Comparison][].
+determined by [`Object.is()`][].
 
 ```mjs
 import assert from 'assert/strict';
@@ -2061,6 +2080,7 @@ If the values are not strictly equal, an [`AssertionError`][] is thrown with a
 instead of the [`AssertionError`][].
 
 ## `assert.throws(fn[, error][, message])`
+
 <!-- YAML
 added: v0.1.21
 changes:
@@ -2338,7 +2358,6 @@ message as the thrown error message is going to result in an
 `ERR_AMBIGUOUS_ARGUMENT` error. Please read the example below carefully if using
 a string as the second argument gets considered:
 
-<!-- eslint-disable no-restricted-syntax -->
 ```mjs
 import assert from 'assert/strict';
 
@@ -2375,7 +2394,6 @@ assert.throws(throwingFirst, /Second$/);
 // AssertionError [ERR_ASSERTION]
 ```
 
-<!-- eslint-disable no-restricted-syntax -->
 ```cjs
 const assert = require('assert/strict');
 
@@ -2415,39 +2433,39 @@ assert.throws(throwingFirst, /Second$/);
 Due to the confusing error-prone notation, avoid a string as the second
 argument.
 
-[Abstract Equality Comparison]: https://tc39.github.io/ecma262/#sec-abstract-equality-comparison
 [Object wrappers]: https://developer.mozilla.org/en-US/docs/Glossary/Primitive#Primitive_wrapper_objects_in_JavaScript
 [Object.prototype.toString()]: https://tc39.github.io/ecma262/#sec-object.prototype.tostring
-[SameValue Comparison]: https://tc39.github.io/ecma262/#sec-samevalue
-[Strict Equality Comparison]: https://tc39.github.io/ecma262/#sec-strict-equality-comparison
-[`AssertionError`]: #assert_class_assert_assertionerror
-[`CallTracker`]: #assert_class_assert_calltracker
+[`!=` operator]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Inequality
+[`===` operator]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Strict_equality
+[`==` operator]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Equality
+[`AssertionError`]: #class-assertassertionerror
+[`CallTracker`]: #class-assertcalltracker
 [`Class`]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes
-[`ERR_INVALID_RETURN_VALUE`]: errors.md#errors_err_invalid_return_value
-[`Error.captureStackTrace`]: errors.md#errors_error_capturestacktrace_targetobject_constructoropt
-[`Error`]: errors.md#errors_class_error
+[`ERR_INVALID_RETURN_VALUE`]: errors.md#err_invalid_return_value
+[`Error.captureStackTrace`]: errors.md#errorcapturestacktracetargetobject-constructoropt
+[`Error`]: errors.md#class-error
 [`Map`]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map
 [`Object.is()`]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is
 [`RegExp`]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
 [`Set`]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set
 [`Symbol`]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol
-[`TypeError`]: errors.md#errors_class_typeerror
+[`TypeError`]: errors.md#class-typeerror
 [`WeakMap`]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap
 [`WeakSet`]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakSet
-[`assert.deepEqual()`]: #assert_assert_deepequal_actual_expected_message
-[`assert.deepStrictEqual()`]: #assert_assert_deepstrictequal_actual_expected_message
-[`assert.doesNotThrow()`]: #assert_assert_doesnotthrow_fn_error_message
-[`assert.equal()`]: #assert_assert_equal_actual_expected_message
-[`assert.notDeepEqual()`]: #assert_assert_notdeepequal_actual_expected_message
-[`assert.notDeepStrictEqual()`]: #assert_assert_notdeepstrictequal_actual_expected_message
-[`assert.notEqual()`]: #assert_assert_notequal_actual_expected_message
-[`assert.notStrictEqual()`]: #assert_assert_notstrictequal_actual_expected_message
-[`assert.ok()`]: #assert_assert_ok_value_message
-[`assert.strictEqual()`]: #assert_assert_strictequal_actual_expected_message
-[`assert.throws()`]: #assert_assert_throws_fn_error_message
-[`process.on('exit')`]: process.md#process_event_exit
-[`tracker.calls()`]: #assert_tracker_calls_fn_exact
-[`tracker.verify()`]: #assert_tracker_verify
+[`assert.deepEqual()`]: #assertdeepequalactual-expected-message
+[`assert.deepStrictEqual()`]: #assertdeepstrictequalactual-expected-message
+[`assert.doesNotThrow()`]: #assertdoesnotthrowfn-error-message
+[`assert.equal()`]: #assertequalactual-expected-message
+[`assert.notDeepEqual()`]: #assertnotdeepequalactual-expected-message
+[`assert.notDeepStrictEqual()`]: #assertnotdeepstrictequalactual-expected-message
+[`assert.notEqual()`]: #assertnotequalactual-expected-message
+[`assert.notStrictEqual()`]: #assertnotstrictequalactual-expected-message
+[`assert.ok()`]: #assertokvalue-message
+[`assert.strictEqual()`]: #assertstrictequalactual-expected-message
+[`assert.throws()`]: #assertthrowsfn-error-message
+[`getColorDepth()`]: tty.md#writestreamgetcolordepthenv
+[`process.on('exit')`]: process.md#event-exit
+[`tracker.calls()`]: #trackercallsfn-exact
+[`tracker.verify()`]: #trackerverify
 [enumerable "own" properties]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Enumerability_and_ownership_of_properties
 [prototype-spec]: https://tc39.github.io/ecma262/#sec-ordinary-object-internal-methods-and-internal-slots
-[strict assertion mode]: #assert_strict_assertion_mode

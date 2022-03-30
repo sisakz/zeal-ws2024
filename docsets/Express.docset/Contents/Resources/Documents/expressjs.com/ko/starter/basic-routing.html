@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+
+<html lang="ko" prefix="og: http://ogp.me/ns#">
+
+<!-- Mirrored from expressjs.com/ko/starter/basic-routing.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 10 Jul 2019 00:23:50 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+<title>Express 기본 라우팅</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="og:image" content="../../images/express-facebook-share.png">
+<link rel="icon" type="image/png" href="../../images/favicon.png" />
+<link rel="stylesheet" href="../../css/style.css">
+<link rel="stylesheet" href="../../css/dropit.css">
+<link rel="stylesheet" href="../../css/prism.css">
+<link rel="stylesheet" href="../../css/font-awesome.min.css">
+<link rel="stylesheet" href="../../../fonts.googleapis.com/css2a1d.css?family=Open+Sans:300,400,600,700&amp;amp;subset=latin,latin-ext">
+<link rel="stylesheet" href="../../css/ko.css">
+<link rel="stylesheet" href="../../css/nodeinteractive.css">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script data-cfasync="false" src="../../../ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script data-cfasync="false" src="../../js/ismobile.js"></script>
+<script data-cfasync="false" src="../../js/app.js"></script>
+<script data-cfasync="false" src="../../js/retina.js"></script>
+<script data-cfasync="false" src="../../js/dropit.js"></script>
+<script data-cfasync="false" src="../../js/prism.js"></script>
+<link rel="stylesheet" href="../../../cdn.jsdelivr.net/npm/docsearch.js%402/dist/cdn/docsearch.min.css" />
+</head>
+<body class="non-en-doc">
+<section class="page content">
+<header>
+<div id="mobile-menu">
+<div id="nav-button" class="fa fa-bars fa-2x button"></div>
+</div>
+<section id="logo"><a href="../../index.html" class="express">Express</a>
+</section>
+<div id="navbar">
+<input id="q" placeholder="🔎 search">
+<ul id="navmenu">
+<li><a href="../index.html" id="home-menu">홈</a></li>
+<li>
+<ul id="getting-started-menu" class="menu">
+<li><a href="installing.html" class="active">시작하기</a>
+<ul>
+<li>
+<a href="installing.html">
+설치
+</a>
+</li>
+<li>
+<a href="hello-world.html">
+Hello world
+</a>
+</li>
+<li>
+<a href="generator.html">
+Express 생성기
+</a>
+</li>
+<li>
+<a href="basic-routing.html">
+기본 라우팅
+</a>
+</li>
+<li>
+<a href="static-files.html">
+정적 파일
+</a>
+</li>
+<li>
+<a href="faq.html">
+자주 묻는 질문(FAQ)
+</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<ul id="guide-menu" class="menu">
+<li><a href="../guide/routing.html">안내서</a>
+<ul>
+<li><a href="../guide/routing.html">라우팅</a>
+</li>
+<li><a href="../guide/writing-middleware.html">미들웨어 작성</a>
+</li>
+<li><a href="../guide/using-middleware.html">미들웨어 사용</a>
+</li>
+<li><a href="../guide/using-template-engines.html">템플리트 엔진 사용</a>
+</li>
+<li><a href="../guide/error-handling.html">오류 처리</a>
+</li>
+<li><a href="../guide/debugging.html">디버깅</a>
+</li>
+<li><a href="../guide/behind-proxies.html">프록시 환경에서 Express 사용</a>
+</li>
+<li><a href="../guide/migrating-4.html">Express 4로의 이전</a>
+</li>
+<li><a href="../guide/migrating-5.html">Express 5로의 이전</a>
+</li>
+<li><a href="../guide/database-integration.html">데이터베이스 통합</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<ul id="application-menu" class="menu">
+<li><a href="../4x/api.html">API 참조</a>
+<ul>
+<li><a href="../4x/api.html">4.x</a>
+</li>
+<li><a href="../3x/api.html">3.x(더 이상 사용되지 않음)</a>
+</li>
+<li><a href="../../2x/index.html">2.x(더 이상 사용되지 않음)</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<ul id="advanced-topics-menu" class="menu">
+<li><a href="../advanced/developing-template-engines.html">고급 주제</a>
+<ul>
+<li><a href="../advanced/developing-template-engines.html">템플리트 엔진</a>
+</li>
+<li><a href="../advanced/pm.html">프로세스 관리자 사용</a>
+</li>
+<li><a href="../advanced/security-updates.html">보안 업데이트</a>
+</li>
+<li><a href="../advanced/best-practice-security.html">보안 우수 사례</a>
+</li>
+<li><a href="../advanced/best-practice-performance.html">성능 우수 사례</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<ul id="resources-menu" class="menu">
+<li><a href="../resources/glossary.html">자원</a>
+<ul>
+<li><a href="../resources/glossary.html">용어집</a>
+</li>
+<li><a href="../resources/middleware.html">미들웨어</a>
+</li>
+<li><a href="../resources/community.html">커뮤니티</a>
+</li>
+<li><a href="../resources/books-blogs.html">서적 및 블로그</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</header>
+<div id="overlay"></div>
+<div id="i18n-notice-box" class="doc-box doc-warn">
+<p><p><a href="http://strongloop.com/">StrongLoop / IBM</a>에 의해 제공이 번역.</p>
+이 문서는 영문판 문서에 비해 더 오래된 버전일 수도 있습니다. 최신 업데이트를 확인하려면 <a href="../../index.html">영문판 문서</a>를 참조하십시오.
+</p>
+<div id="close-i18n-notice-box" title="Close">✖</div>
+</div>
+<div id="page-doc" markdown="1">
+<h1 id="기본-라우팅">기본 라우팅</h1>
+<p><em>라우팅</em>은 URI(또는 경로) 및 특정한 HTTP 요청 메소드(GET, POST 등)인 특정 엔드포인트에 대한 클라이언트 요청에 애플리케이션이 응답하는 방법을 결정하는 것을 말합니다.</p>
+<p>각 라우트는 하나 이상의 핸들러 함수를 가질 수 있으며, 이러한 함수는 라우트가 일치할 때 실행됩니다.</p>
+<p>라우트 정의에는 다음과 같은 구조가 필요합니다.</p>
+<pre><code class="language-javascript" translate="no">
+app.METHOD(PATH, HANDLER)
+</code>
+</pre>
+<p>여기서,</p>
+<ul>
+<li><code>app</code>은 <code>express</code>의 인스턴스입니다.</li>
+<li><code>METHOD</code>는 <a href="http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol">HTTP 요청 메소드</a>입니다.</li>
+<li><code>PATH</code>는 서버에서의 경로입니다.</li>
+<li><code>HANDLER</code>는 라우트가 일치할 때 실행되는 함수입니다.</li>
+</ul>
+<div class="doc-box doc-notice">
+<p>이 학습서에서는 <code>app</code>이라는 이름의 <code>express</code> 인스턴스가 작성되며 서버가 실행 중인 것으로 가정합니다. 앱의 작성 및 시작에 익숙하지 않은 경우에는 <a href="hello-world.html">Hello world 예제</a>를 참조하십시오.</p>
+</div>
+<p>다음 예에서는 간단한 라우트의 정의를 설명합니다.</p>
+<p>홈 페이지에서 <code>Hello World!</code>로 응답:</p>
+<pre><code class="language-javascript" translate="no">
+app.get('/', function (req, res) {
+  res.send('Hello World!');
+});
+</code>
+</pre>
+<p>애플리케이션의 홈 페이지인 루트 라우트(<code>/</code>)에서 POST 요청에 응답:</p>
+<pre><code class="language-javascript" translate="no">
+app.post('/', function (req, res) {
+  res.send('Got a POST request');
+});
+</code>
+</pre>
+<p><code>/user</code> 라우트에 대한 PUT 요청에 응답:</p>
+<pre><code class="language-javascript" translate="no">
+app.put('/user', function (req, res) {
+  res.send('Got a PUT request at /user');
+});
+</code>
+</pre>
+<p><code>/user</code> 라우트에 대한 DELETE 요청에 응답:</p>
+<pre><code class="language-javascript" translate="no">
+app.delete('/user', function (req, res) {
+  res.send('Got a DELETE request at /user');
+});
+</code>
+</pre>
+<p>라우팅에 대한 자세한 내용을 확인하려면 <a href="../guide/routing.html">라우팅 안내서</a>를 참조하십시오.</p>
+</div>
+</section>
+
+<noscript>
+    <iframe src="http://www.googletagmanager.com/ns.html?id=GTM-5XL76H" height="0" width="0" style="display: none; visibility: hidden;"></iframe>
+</noscript>
+<script type="03e31ba50f465eb19859dfa3-text/javascript">
+(function(w, d, s, l, i) {
+    w[l] = w[l] || [];
+    w[l].push({
+        'gtm.start': new Date().getTime(),
+        event: 'gtm.js'
+    });
+    var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s),
+        dl = l != 'dataLayer' ? '&l=' + l : '';
+    j.async = true;
+    j.src =
+        '../../../www.googletagmanager.com/gtm5445.js?id=' + i + dl;
+    f.parentNode.insertBefore(j, f);
+})(window, document, 'script', 'dataLayer', 'GTM-5XL76H');
+</script>
+<a id="top" href="#"><img src="../../images/arrow.png"></a>
+<footer>
+<div id="footer-content">
+<div id="github">
+<iframe src="http://ghbtns.com/github-btn.html?user=expressjs&amp;repo=express&amp;type=watch&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="110" height="20"></iframe>
+</div>
+<div id="sponsor"><a href="https://github.com/expressjs/express">Express</a>는 Node.js 기반의 프로젝트입니다.</div>
+<div id="fork"><a href="https://github.com/expressjs/expressjs.com">GitHub에서 웹사이트의 포크를 작성하십시오</a>.
+</div>
+<div>Copyright &copy; StrongLoop, Inc., and other expressjs.com contributors.</div>
+</div>
+<div id="license">
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/us/"><img alt="크리에이티브 커먼즈 라이선스" style="border-width:0" src="../../../i.creativecommons.org/l/by-sa/3.0/us/80x15.png" /></a> 이 저작물은 <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/us/">크리에이티브 커먼즈 저작자표시-동일조건변경허락 3.0 미국 라이선스</a>에 따라 이용할 수 있습니다.
+</div>
+</footer>
+<script type="03e31ba50f465eb19859dfa3-text/javascript" src="../../../cdn.jsdelivr.net/npm/docsearch.js%402/dist/cdn/docsearch.min.js" onload="docsearch({
+  apiKey: '7164e33055faa6ecddefd9e08fc59f5d',
+  indexName: 'expressjs',
+  inputSelector: '#q',
+  algoliaOptions: { 'facetFilters': ['lang:ko'] }
+})" async></script>
+<script src="../../../ajax.cloudflare.com/cdn-cgi/scripts/a2bd7673/cloudflare-static/rocket-loader.min.js" data-cf-settings="03e31ba50f465eb19859dfa3-|49" defer=""></script></body>
+
+<!-- Mirrored from expressjs.com/ko/starter/basic-routing.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 10 Jul 2019 00:23:50 GMT -->
+</html>

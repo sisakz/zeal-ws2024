@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+
+<html lang="th" prefix="og: http://ogp.me/ns#">
+
+<!-- Mirrored from expressjs.com/th/guide/database-integration.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 10 Jul 2019 00:24:00 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+<title>Express database integration</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="og:image" content="../../images/express-facebook-share.png">
+<link rel="icon" type="image/png" href="../../images/favicon.png" />
+<link rel="stylesheet" href="../../css/style.css">
+<link rel="stylesheet" href="../../css/dropit.css">
+<link rel="stylesheet" href="../../css/prism.css">
+<link rel="stylesheet" href="../../css/font-awesome.min.css">
+<link rel="stylesheet" href="../../../fonts.googleapis.com/css2a1d.css?family=Open+Sans:300,400,600,700&amp;amp;subset=latin,latin-ext">
+<link rel="stylesheet" href="../../css/th.css">
+<link rel="stylesheet" href="../../css/nodeinteractive.css">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script data-cfasync="false" src="../../../ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script data-cfasync="false" src="../../js/ismobile.js"></script>
+<script data-cfasync="false" src="../../js/app.js"></script>
+<script data-cfasync="false" src="../../js/retina.js"></script>
+<script data-cfasync="false" src="../../js/dropit.js"></script>
+<script data-cfasync="false" src="../../js/prism.js"></script>
+<link rel="stylesheet" href="../../../cdn.jsdelivr.net/npm/docsearch.js%402/dist/cdn/docsearch.min.css" />
+</head>
+<body class="non-en-doc">
+<section class="page content">
+<header>
+<div id="mobile-menu">
+<div id="nav-button" class="fa fa-bars fa-2x button"></div>
+</div>
+<section id="logo"><a href="../../index.html" class="express">Express</a>
+</section>
+<div id="navbar">
+<input id="q" placeholder="🔎 search">
+<ul id="navmenu">
+<li><a href="../index.html" id="home-menu">หน้าแรก</a></li>
+<li>
+<ul id="getting-started-menu" class="menu">
+<li><a href="../starter/installing.html">เริ่มกันเลย</a>
+<ul>
+<li>
+<a href="../starter/installing.html">
+การติดตั้ง
+</a>
+</li>
+<li>
+<a href="../starter/hello-world.html">
+Hello world
+</a>
+</li>
+<li>
+<a href="../starter/generator.html">
+เครื่องมือสร้าง Express
+</a>
+</li>
+<li>
+<a href="../starter/basic-routing.html">
+เส้นทางเบื้องต้น
+</a>
+</li>
+<li>
+<a href="../starter/static-files.html">
+บริการไฟล์คงที่
+</a>
+</li>
+<li>
+<a href="../starter/faq.html">
+คำถามที่พบบ่อย
+</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<ul id="guide-menu" class="menu">
+<li><a href="routing.html" class="active">แนะนำ</a>
+<ul>
+<li><a href="routing.html">การใช้งานเราเตอร์</a>
+</li>
+<li><a href="writing-middleware.html">การเขียนมิดเดิลแวร์</a>
+</li>
+<li><a href="using-middleware.html">การใช้งานมิดเดิลแวร์</a>
+</li>
+<li><a href="using-template-engines.html">การใช้งานเครื่องสร้างโครงแบบ</a>
+</li>
+<li><a href="error-handling.html">การจักการความผิดพลาด</a>
+</li>
+<li><a href="debugging.html">การแก้จุดบกพร่อง</a>
+</li>
+<li><a href="behind-proxies.html">Express เบื่องหลังพร็อกซี</a>
+</li>
+<li><a href="migrating-4.html">การย้ายไป Express 4</a>
+</li>
+<li><a href="migrating-5.html">การย้ายไป Express 5</a>
+</li>
+<li><a href="database-integration.html">การเชื่อมโยงกับฐานข้อมูล</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<ul id="application-menu" class="menu">
+<li><a href="../4x/api.html">การอ้างอิง API</a>
+<ul>
+<li><a href="../4x/api.html">4.x</a>
+</li>
+<li><a href="../3x/api.html">3.x (เลิกใช้)</a>
+</li>
+<li><a href="../../2x/index.html">2.x (เลิกใช้)</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<ul id="advanced-topics-menu" class="menu">
+<li><a href="../advanced/developing-template-engines.html">หัวข้อขั้นสูง</a>
+<ul>
+<li><a href="../advanced/developing-template-engines.html">เครื่องสร้างโครงแบบ</a>
+</li>
+<li><a href="../advanced/pm.html">การใช้กระบวนการจัดการ</a>
+</li>
+<li><a href="../advanced/security-updates.html">ความปลอดภัยล่าสุด</a>
+</li>
+<li><a href="../advanced/best-practice-security.html">แนวทางปฏิบัติความปลอดภัย</a>
+</li>
+<li><a href="../advanced/best-practice-performance.html">แนวทางปฏิบัติประสิทธิภาพ</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<ul id="resources-menu" class="menu">
+<li><a href="../resources/glossary.html">แหล่งข้อมูลอื่น</a>
+<ul>
+<li>
+<a href="../resources/community.html">ชุมชน</a>
+</li>
+<li>
+<a href="../resources/glossary.html">ศัพย์</a>
+</li>
+<li>
+<a href="../resources/middleware.html">มิลเดิลแวร์</a>
+</li>
+ <li>
+<a href="../resources/utils.html">โมดูลที่มีประโยชน์</a>
+</li>
+<li>
+<a href="../resources/frameworks.html">เฟรมเวอร์ค</a>
+</li>
+<li>
+<a href="../resources/books-blogs.html">หนังสือและบล็อก</a>
+</li>
+<li>
+<a href="../resources/companies-using-express.html">บริษัทที่ใช้ Express</a>
+</li>
+<li>
+<a href="../resources/contributing.html">มีส่วนร่วมกับ Express</a>
+</li>
+<li>
+<a href="../changelog/4x.html">บันทึกการเปลี่ยนแปลง</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+
+</ul>
+</div>
+</header>
+<div id="overlay"></div>
+<div id="i18n-notice-box" class="doc-box doc-warn">
+<p>ในเอกสารนี้อาจจะเก่าไปแล้วที่เกี่ยวเนื่องกับรุ่นของเอกสารในภาษาอังกฤษ สำหรับรุ่นล่าสุดโปรดอ้างอิงจาก <a href="../../index.html">เอกสารในภาษาอังกฤษ</a>.
+</p>
+<div id="close-i18n-notice-box" title="Close">✖</div>
+</div>
+<div id="page-doc" markdown="1">
+<h1 id="database-integration">Database integration</h1>
+<p>Adding the capability to connect databases to Express apps is just a matter of loading an appropriate Node.js driver for the database in your app. This document briefly explains how to add and use some of the most popular Node.js modules for database systems in your Express app:</p>
+<ul>
+<li><a href="#cassandra">Cassandra</a></li>
+<li><a href="#couchbase">Couchbase</a></li>
+<li><a href="#couchdb">CouchDB</a></li>
+<li><a href="#leveldb">LevelDB</a></li>
+<li><a href="#mysql">MySQL</a></li>
+<li><a href="#mongodb">MongoDB</a></li>
+<li><a href="#neo4j">Neo4j</a></li>
+<li><a href="#oracle">Oracle</a></li>
+<li><a href="#postgresql">PostgreSQL</a></li>
+<li><a href="#redis">Redis</a></li>
+<li><a href="#sql-server">SQL Server</a></li>
+<li><a href="#sqlite">SQLite</a></li>
+<li><a href="#elasticsearch">ElasticSearch</a></li>
+</ul>
+<div class="doc-box doc-notice">
+<p>These database drivers are among many that are available. For other options,
+search on the <a href="https://www.npmjs.com/">npm</a> site.</p>
+</div>
+<h2 id="cassandra">Cassandra</h2>
+<p><strong>Module</strong>: <a href="https://github.com/datastax/nodejs-driver">cassandra-driver</a></p>
+<h3 id="installation">Installation</h3>
+<pre><code class="language-sh">$ npm install cassandra-driver
+</code></pre>
+<h3 id="example">Example</h3>
+<pre><code class="language-js">var cassandra = require('cassandra-driver')
+var client = new cassandra.Client({ contactPoints: ['localhost'] })
+
+client.execute('select key from system.local', function (err, result) {
+  if (err) throw err
+  console.log(result.rows[0])
+})
+</code></pre>
+<h2 id="couchbase">Couchbase</h2>
+<p><strong>Module</strong>: <a href="https://github.com/couchbase/couchnode">couchnode</a></p>
+<h3 id="installation-1">Installation</h3>
+<pre><code class="language-sh">$ npm install couchbase
+</code></pre>
+<h3 id="example-1">Example</h3>
+<pre><code class="language-js">var couchbase = require('couchbase')
+var bucket = (new couchbase.Cluster('http://localhost:8091')).openBucket('bucketName')
+
+// add a document to a bucket
+bucket.insert('document-key', { name: 'Matt', shoeSize: 13 }, function (err, result) {
+  if (err) {
+    console.log(err)
+  } else {
+    console.log(result)
+  }
+})
+
+// get all documents with shoe size 13
+var n1ql = 'SELECT d.* FROM `bucketName` d WHERE shoeSize = $1'
+var query = N1qlQuery.fromString(n1ql)
+bucket.query(query, [13], function (err, result) {
+  if (err) {
+    console.log(err)
+  } else {
+    console.log(result)
+  }
+})
+</code></pre>
+<h2 id="couchdb">CouchDB</h2>
+<p><strong>Module</strong>: <a href="https://github.com/dscape/nano">nano</a></p>
+<h3 id="installation-2">Installation</h3>
+<pre><code class="language-sh">$ npm install nano
+</code></pre>
+<h3 id="example-2">Example</h3>
+<pre><code class="language-js">var nano = require('nano')('http://localhost:5984')
+nano.db.create('books')
+var books = nano.db.use('books')
+
+// Insert a book document in the books database
+books.insert({ name: 'The Art of war' }, null, function (err, body) {
+  if (err) {
+    console.log(err)
+  } else {
+    console.log(body)
+  }
+})
+
+// Get a list of all books
+books.list(function (err, body) {
+  if (err) {
+    console.log(err)
+  } else {
+    console.log(body.rows)
+  }
+})
+</code></pre>
+<h2 id="leveldb">LevelDB</h2>
+<p><strong>Module</strong>: <a href="https://github.com/rvagg/node-levelup">levelup</a></p>
+<h3 id="installation-3">Installation</h3>
+<pre><code class="language-sh">$ npm install level levelup leveldown
+</code></pre>
+<h3 id="example-3">Example</h3>
+<pre><code class="language-js">var levelup = require('levelup')
+var db = levelup('./mydb')
+
+db.put('name', 'LevelUP', function (err) {
+  if (err) return console.log('Ooops!', err)
+
+  db.get('name', function (err, value) {
+    if (err) return console.log('Ooops!', err)
+
+    console.log('name=' + value)
+  })
+})
+</code></pre>
+<h2 id="mysql">MySQL</h2>
+<p><strong>Module</strong>: <a href="https://github.com/felixge/node-mysql/">mysql</a></p>
+<h3 id="installation-4">Installation</h3>
+<pre><code class="language-sh">$ npm install mysql
+</code></pre>
+<h3 id="example-4">Example</h3>
+<pre><code class="language-js">var mysql = require('mysql')
+var connection = mysql.createConnection({
+  host: 'localhost',
+  user: 'dbuser',
+  password: 's3kreee7',
+  database: 'my_db'
+})
+
+connection.connect()
+
+connection.query('SELECT 1 + 1 AS solution', function (err, rows, fields) {
+  if (err) throw err
+
+  console.log('The solution is: ', rows[0].solution)
+})
+
+connection.end()
+</code></pre>
+<h2 id="mongodb">MongoDB</h2>
+<p><strong>Module</strong>: <a href="https://github.com/mongodb/node-mongodb-native">mongodb</a></p>
+<h3 id="installation-5">Installation</h3>
+<pre><code class="language-sh">$ npm install mongodb
+</code></pre>
+<h3 id="example-5">Example</h3>
+<pre><code class="language-js">var MongoClient = require('mongodb').MongoClient
+
+MongoClient.connect('mongodb://localhost:27017/animals', function (err, db) {
+  if (err) throw err
+
+  db.collection('mammals').find().toArray(function (err, result) {
+    if (err) throw err
+
+    console.log(result)
+  })
+})
+</code></pre>
+<p>If you want an object model driver for MongoDB, look at <a href="https://github.com/LearnBoost/mongoose">Mongoose</a>.</p>
+<h2 id="neo4j">Neo4j</h2>
+<p><strong>Module</strong>: <a href="https://github.com/hacksparrow/apoc">apoc</a></p>
+<h3 id="installation-6">Installation</h3>
+<pre><code class="language-sh">$ npm install apoc
+</code></pre>
+<h3 id="example-6">Example</h3>
+<pre><code class="language-js">var apoc = require('apoc')
+
+apoc.query('match (n) return n').exec().then(
+  function (response) {
+    console.log(response)
+  },
+  function (fail) {
+    console.log(fail)
+  }
+)
+</code></pre>
+<h2 id="oracle">Oracle</h2>
+<p><strong>Module</strong>: <a href="https://github.com/oracle/node-oracledb">oracledb</a></p>
+<h3 id="installation-7">Installation</h3>
+<p>NOTE: <a href="https://github.com/oracle/node-oracledb#-installation">See installation prerequisites</a>.</p>
+<pre><code class="language-sh">$ npm install oracledb
+</code></pre>
+<h3 id="example-7">Example</h3>
+<pre><code class="language-js">const oracledb = require('oracledb')
+const config = {
+  user: '&lt;your db user&gt;',
+  password: '&lt;your db password&gt;',
+  connectString: 'localhost:1521/orcl'
+}
+
+async function getEmployee (empId) {
+  let conn
+
+  try {
+    conn = await oracledb.getConnection(config)
+
+    const result = await conn.execute(
+      'select * from employees where employee_id = :id',
+      [empId]
+    )
+
+    console.log(result.rows[0])
+  } catch (err) {
+    console.log('Ouch!', err)
+  } finally {
+    if (conn) { // conn assignment worked, need to close
+      await conn.close()
+    }
+  }
+}
+
+getEmployee(101)
+</code></pre>
+<h2 id="postgresql">PostgreSQL</h2>
+<p><strong>Module</strong>: <a href="https://github.com/vitaly-t/pg-promise">pg-promise</a></p>
+<h3 id="installation-8">Installation</h3>
+<pre><code class="language-sh">$ npm install pg-promise
+</code></pre>
+<h3 id="example-8">Example</h3>
+<pre><code class="language-js">var pgp = require('pg-promise')(/* options */)
+var db = pgp('postgres://username:password@host:port/database')
+
+db.one('SELECT $1 AS value', 123)
+  .then(function (data) {
+    console.log('DATA:', data.value)
+  })
+  .catch(function (error) {
+    console.log('ERROR:', error)
+  })
+</code></pre>
+<h2 id="redis">Redis</h2>
+<p><strong>Module</strong>: <a href="https://github.com/mranney/node_redis">redis</a></p>
+<h3 id="installation-9">Installation</h3>
+<pre><code class="language-sh">$ npm install redis
+</code></pre>
+<h3 id="example-9">Example</h3>
+<pre><code class="language-js">var redis = require('redis')
+var client = redis.createClient()
+
+client.on('error', function (err) {
+  console.log('Error ' + err)
+})
+
+client.set('string key', 'string val', redis.print)
+client.hset('hash key', 'hashtest 1', 'some value', redis.print)
+client.hset(['hash key', 'hashtest 2', 'some other value'], redis.print)
+
+client.hkeys('hash key', function (err, replies) {
+  console.log(replies.length + ' replies:')
+
+  replies.forEach(function (reply, i) {
+    console.log('    ' + i + ': ' + reply)
+  })
+
+  client.quit()
+})
+</code></pre>
+<h2 id="sql-server">SQL Server</h2>
+<p><strong>Module</strong>: <a href="https://github.com/tediousjs/tedious">tedious</a></p>
+<h3 id="installation-10">Installation</h3>
+<pre><code class="language-sh">$ npm install tedious
+</code></pre>
+<h3 id="example-10">Example</h3>
+<pre><code class="language-js">var Connection = require('tedious').Connection
+var Request = require('tedious').Request
+
+var config = {
+  userName: 'your_username', // update me
+  password: 'your_password', // update me
+  server: 'localhost'
+}
+
+var connection = new Connection(config)
+
+connection.on('connect', function (err) {
+  if (err) {
+    console.log(err)
+  } else {
+    executeStatement()
+  }
+})
+
+function executeStatement () {
+  request = new Request("select 123, 'hello world'", function (err, rowCount) {
+    if (err) {
+      console.log(err)
+    } else {
+      console.log(rowCount + ' rows')
+    }
+    connection.close()
+  })
+
+  request.on('row', function (columns) {
+    columns.forEach(function (column) {
+      if (column.value === null) {
+        console.log('NULL')
+      } else {
+        console.log(column.value)
+      }
+    })
+  })
+
+  connection.execSql(request)
+}
+</code></pre>
+<h2 id="sqlite">SQLite</h2>
+<p><strong>Module</strong>: <a href="https://github.com/mapbox/node-sqlite3">sqlite3</a></p>
+<h3 id="installation-11">Installation</h3>
+<pre><code class="language-sh">$ npm install sqlite3
+</code></pre>
+<h3 id="example-11">Example</h3>
+<pre><code class="language-js">var sqlite3 = require('sqlite3').verbose()
+var db = new sqlite3.Database(':memory:')
+
+db.serialize(function () {
+  db.run('CREATE TABLE lorem (info TEXT)')
+  var stmt = db.prepare('INSERT INTO lorem VALUES (?)')
+
+  for (var i = 0; i &lt; 10; i++) {
+    stmt.run('Ipsum ' + i)
+  }
+
+  stmt.finalize()
+
+  db.each('SELECT rowid AS id, info FROM lorem', function (err, row) {
+    console.log(row.id + ': ' + row.info)
+  })
+})
+
+db.close()
+</code></pre>
+<h2 id="elasticsearch">ElasticSearch</h2>
+<p><strong>Module</strong>: <a href="https://github.com/elastic/elasticsearch-js">elasticsearch</a></p>
+<h3 id="installation-12">Installation</h3>
+<pre><code class="language-sh">$ npm install elasticsearch
+</code></pre>
+<h3 id="example-12">Example</h3>
+<pre><code class="language-js">var elasticsearch = require('elasticsearch')
+var client = elasticsearch.Client({
+  host: 'localhost:9200'
+})
+
+client.search({
+  index: 'books',
+  type: 'book',
+  body: {
+    query: {
+      multi_match: {
+        query: 'express js',
+        fields: ['title', 'description']
+      }
+    }
+  }
+}).then(function (response) {
+  var hits = response.hits.hits
+}, function (error) {
+  console.trace(error.message)
+})
+</code></pre>
+</div>
+</section>
+<noscript>
+    <iframe src="http://www.googletagmanager.com/ns.html?id=GTM-5XL76H" height="0" width="0" style="display: none; visibility: hidden;"></iframe>
+</noscript>
+<script type="a0f3a13e080f4d4d7ee7ef21-text/javascript">
+(function(w, d, s, l, i) {
+    w[l] = w[l] || [];
+    w[l].push({
+        'gtm.start': new Date().getTime(),
+        event: 'gtm.js'
+    });
+    var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s),
+        dl = l != 'dataLayer' ? '&l=' + l : '';
+    j.async = true;
+    j.src =
+        '../../../www.googletagmanager.com/gtm5445.js?id=' + i + dl;
+    f.parentNode.insertBefore(j, f);
+})(window, document, 'script', 'dataLayer', 'GTM-5XL76H');
+</script>
+<a id="top" href="#"><img src="../../images/arrow.png"></a>
+<footer>
+<div id="footer-content">
+<div id="github">
+<a class="github-button" href="https://github.com/expressjs/expressjs.com" data-icon="octicon-star" aria-label="Star expressjs/expressjs.com on GitHub">Star</a>
+</div>
+<div id="sponsor"><a href="https://github.com/expressjs/express/">Express</a>
+เป็นโครงการของ <a href="http://nodejs.org/foundation"></a>มูลนิธิ Node.js</a>.</div>
+<div id="fork"><a href="https://github.com/expressjs/expressjs.com">Fork เว็บไซต์บน GitHub</a>.
+</div>
+<div>Copyright &copy; 2017 StrongLoop, IBM, และผู้มีส่วนร่วมอื่นๆ ของ expressjs.com.</div>
+</div>
+<div id="license">
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/us/"><img alt="Creative Commons License" style="border-width:0" src="../../../i.creativecommons.org/l/by-sa/3.0/us/80x15.png" /></a> เว็บไซต์นี้อยู่ภายใต้สัญญาอนุญาตของ <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/us/">สัญญาอนุญาติครีเอทีฟคอมมอนส์ แบบแสดงที่มา-อนุญาตแบบเดียวกัน 3.0 สหรัฐอเมริกา</a>.
+</div>
+</footer>
+<script async defer src="../../../buttons.github.io/buttons.js" type="a0f3a13e080f4d4d7ee7ef21-text/javascript"></script>
+<script type="a0f3a13e080f4d4d7ee7ef21-text/javascript" src="../../../cdn.jsdelivr.net/npm/docsearch.js%402/dist/cdn/docsearch.min.js" onload="docsearch({
+  apiKey: '7164e33055faa6ecddefd9e08fc59f5d',
+  indexName: 'expressjs',
+  inputSelector: '#q',
+  algoliaOptions: { 'facetFilters': ['lang:th'] }
+})" async></script>
+<script src="../../../ajax.cloudflare.com/cdn-cgi/scripts/a2bd7673/cloudflare-static/rocket-loader.min.js" data-cf-settings="a0f3a13e080f4d4d7ee7ef21-|49" defer=""></script></body>
+
+<!-- Mirrored from expressjs.com/th/guide/database-integration.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 10 Jul 2019 00:24:00 GMT -->
+</html>

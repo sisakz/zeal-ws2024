@@ -1,7 +1,7 @@
 <html><head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
-  <meta name="nodejs.org:node-version" content="v16.9.1">
+  <meta name="nodejs.org:node-version" content="v17.8.0">
   <title>Index</title>
   <link rel="stylesheet" href="googlefonts/googlefonts.css">
   <link rel="stylesheet" href="assets/style.css">
@@ -23,7 +23,7 @@
 <hr class="line">
 <ul>
 <li><a href="assert.html" class="nav-assert">Assertion testing</a></li>
-<li><a href="async_context.html" class="nav-async_context">Async_context</a></li>
+<li><a href="async_context.html" class="nav-async_context">Asynchronous context tracking</a></li>
 <li><a href="async_hooks.html" class="nav-async_hooks">Async hooks</a></li>
 <li><a href="buffer.html" class="nav-buffer">Buffer</a></li>
 <li><a href="addons.html" class="nav-addons">C++ addons</a></li>
@@ -88,9 +88,9 @@
     </div>
 
     <div id="column1" data-id="index" class="interior">
-      <header>
+      <header class="header">
         <div class="header-container">
-          <h1>Node.js v16.9.1 documentation</h1>
+          <h1>Node.js v17.8.0 documentation</h1>
           <button class="theme-toggle-btn" id="theme-toggle-btn" title="Toggle dark mode/light mode" aria-label="Toggle dark mode/light mode" hidden="">
             <svg xmlns="http://www.w3.org/2000/svg" class="icon dark-icon" height="24" width="24">
               <path fill="none" d="M0 0h24v24H0z"></path>
@@ -105,19 +105,16 @@
         </div>
         <div id="gtoc">
           <ul>
-            <li>
-              <a href="index.html">Index</a>
-            </li>
-            <li>
-              <a href="all.html">View on single page</a>
-            </li>
-            <li>
-              <a href="index.json">View as JSON</a>
-            </li>
             
-    <li class="version-picker">
-      <a href="#">View another version <span>▼</span></a>
-      <ol class="version-picker"><li><a href="https://nodejs.org/docs/latest-v16.x/api/index.html">16.x</a></li>
+            
+            
+    <li class="picker-header">
+      <a href="#">
+        <span class="collapsed-arrow">►</span><span class="expanded-arrow">▼</span>
+        Other versions
+      </a>
+      <div class="picker"><ol id="alt-docs"><li><a href="https://nodejs.org/docs/latest-v17.x/api/index.html">17.x</a></li>
+<li><a href="https://nodejs.org/docs/latest-v16.x/api/index.html">16.x <b>LTS</b></a></li>
 <li><a href="https://nodejs.org/docs/latest-v15.x/api/index.html">15.x</a></li>
 <li><a href="https://nodejs.org/docs/latest-v14.x/api/index.html">14.x <b>LTS</b></a></li>
 <li><a href="https://nodejs.org/docs/latest-v13.x/api/index.html">13.x</a></li>
@@ -131,10 +128,27 @@
 <li><a href="https://nodejs.org/docs/latest-v5.x/api/index.html">5.x</a></li>
 <li><a href="https://nodejs.org/docs/latest-v4.x/api/index.html">4.x</a></li>
 <li><a href="https://nodejs.org/docs/latest-v0.12.x/api/index.html">0.12.x</a></li>
-<li><a href="https://nodejs.org/docs/latest-v0.10.x/api/index.html">0.10.x</a></li></ol>
+<li><a href="https://nodejs.org/docs/latest-v0.10.x/api/index.html">0.10.x</a></li></ol></div>
     </li>
   
-            <li class="edit_on_github"><a href="https://github.com/nodejs/node/edit/master/doc/api/index.md">Edit on GitHub</a></li>
+            <li class="picker-header">
+              <a href="#">
+                <span class="collapsed-arrow">►</span><span class="expanded-arrow">▼</span>
+                Options
+              </a>
+        
+              <div class="picker">
+                <ul>
+                  <li>
+                    <a href="all.html">View on single page</a>
+                  </li>
+                  <li>
+                    <a href="index.json">View as JSON</a>
+                  </li>
+                  <li class="edit_on_github"><a href="https://github.com/nodejs/node/edit/master/doc/api/index.md">Edit on GitHub</a></li>    
+                </ul>
+              </div>
+            </li>
           </ul>
         </div>
         <hr>
@@ -155,7 +169,7 @@
 <hr class="line">
 <ul>
 <li><a href="assert.html">Assertion testing</a></li>
-<li><a href="async_context.html">Async_context</a></li>
+<li><a href="async_context.html">Asynchronous context tracking</a></li>
 <li><a href="async_hooks.html">Async hooks</a></li>
 <li><a href="buffer.html">Buffer</a></li>
 <li><a href="addons.html">C++ addons</a></li>
@@ -231,7 +245,7 @@
         const mq = window.matchMedia('(prefers-color-scheme: dark-disabled)');
         if ('onchange' in mq) {
           function mqChangeListener(e) {
-            document.body.classList.toggle('dark-mode', e.matches);
+            document.documentElement.classList.toggle('dark-mode', e.matches);
           }
           mq.addEventListener('change', mqChangeListener);
           if (themeToggleButton) {
@@ -241,17 +255,17 @@
           }
         }
         if (mq.matches) {
-          document.body.classList.add('dark-mode');
+          document.documentElement.classList.add('dark-mode');
         }
       } else if (userSettings === 'true') {
-        document.body.classList.add('dark-mode');
+        document.documentElement.classList.add('dark-mode');
       }
       if (themeToggleButton) {
         themeToggleButton.hidden = false;
         themeToggleButton.addEventListener('click', function() {
           sessionStorage.setItem(
             kCustomPreference,
-            document.body.classList.toggle('dark-mode')
+            document.documentElement.classList.toggle('dark-mode')
           );
         });
       }

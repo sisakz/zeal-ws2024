@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+
+<html lang="zh-cn" prefix="og: http://ogp.me/ns#">
+
+<!-- Mirrored from expressjs.com/zh-cn/guide/behind-proxies.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 10 Jul 2019 00:23:49 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+<title>代理背后的 Express</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="og:image" content="../../images/express-facebook-share.png">
+<link rel="icon" type="image/png" href="../../images/favicon.png" />
+<link rel="stylesheet" href="../../css/style.css">
+<link rel="stylesheet" href="../../css/dropit.css">
+<link rel="stylesheet" href="../../css/prism.css">
+<link rel="stylesheet" href="../../css/font-awesome.min.css">
+<link rel="stylesheet" href="../../../fonts.googleapis.com/css2a1d.css?family=Open+Sans:300,400,600,700&amp;amp;subset=latin,latin-ext">
+<link rel="stylesheet" href="../../css/zh-cn.css">
+<link rel="stylesheet" href="../../css/nodeinteractive.css">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script data-cfasync="false" src="../../../ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script data-cfasync="false" src="../../js/ismobile.js"></script>
+<script data-cfasync="false" src="../../js/app.js"></script>
+<script data-cfasync="false" src="../../js/retina.js"></script>
+<script data-cfasync="false" src="../../js/dropit.js"></script>
+<script data-cfasync="false" src="../../js/prism.js"></script>
+<link rel="stylesheet" href="../../../cdn.jsdelivr.net/npm/docsearch.js%402/dist/cdn/docsearch.min.css" />
+</head>
+<body class="non-en-doc">
+<section class="page content">
+<header>
+<div id="mobile-menu">
+<div id="nav-button" class="fa fa-bars fa-2x button"></div>
+</div>
+<section id="logo"><a href="../../index.html" class="express">Express</a>
+</section>
+<div id="navbar">
+<input id="q" placeholder="🔎 search">
+<ul id="navmenu">
+<li><a href="../index.html" id="home-menu">主页</a></li>
+<li>
+<ul id="getting-started-menu" class="menu">
+<li><a href="../starter/installing.html">入门</a>
+<ul>
+ <li>
+<a href="../starter/installing.html">
+安装
+</a>
+</li>
+<li>
+<a href="../starter/hello-world.html">
+Hello world
+</a>
+</li>
+<li>
+<a href="../starter/generator.html">
+Express 生成器
+</a>
+</li>
+<li>
+<a href="../starter/basic-routing.html">
+基本路由
+</a>
+</li>
+<li>
+<a href="../starter/static-files.html">
+静态文件
+</a>
+</li>
+<li>
+<a href="../starter/faq.html">
+常见问题及解答
+</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<ul id="guide-menu" class="menu">
+<li><a href="routing.html" class="active">指南</a>
+<ul>
+<li><a href="routing.html">路由</a>
+</li>
+<li><a href="writing-middleware.html">编写中间件</a>
+</li>
+<li><a href="using-middleware.html">使用中间件</a>
+</li>
+<li><a href="using-template-engines.html">使用模板引擎</a>
+</li>
+<li><a href="error-handling.html">错误处理</a>
+</li>
+<li><a href="debugging.html">调试</a>
+</li>
+<li><a href="behind-proxies.html">代理背后的 Express</a>
+</li>
+<li><a href="migrating-4.html">迁移到 Express 4</a>
+</li>
+<li><a href="migrating-5.html">迁移到 Express 5</a>
+</li>
+<li><a href="database-integration.html">数据库集成</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<ul id="application-menu" class="menu">
+<li><a href="../4x/api.html">API 参考</a>
+<ul>
+<li><a href="../4x/api.html">4.x</a>
+</li>
+<li><a href="../3x/api.html">3.x（不推荐）</a>
+</li>
+<li><a href="../../2x/index.html">2.x（不推荐）</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<ul id="advanced-topics-menu" class="menu">
+<li><a href="../advanced/developing-template-engines.html">高级主题</a>
+<ul>
+<li><a href="../advanced/developing-template-engines.html">模板引擎</a>
+</li>
+<li><a href="../advanced/pm.html">使用进程管理器</a>
+</li>
+<li><a href="../advanced/security-updates.html">安全更新</a>
+</li>
+<li><a href="../advanced/best-practice-security.html">安全最佳实践</a>
+</li>
+<li><a href="../advanced/best-practice-performance.html">性能最佳实践</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<ul id="resources-menu" class="menu">
+<li><a href="../resources/glossary.html">资源</a>
+<ul>
+<li><a href="../resources/glossary.html">词汇表</a>
+</li>
+<li><a href="../resources/middleware.html">中间件</a>
+</li>
+<li><a href="../resources/community.html">社区</a>
+</li>
+<li><a href="../resources/books-blogs.html">书籍和博客</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</header>
+<div id="overlay"></div>
+<div id="i18n-notice-box" class="doc-box doc-warn">
+<p><p>这个翻译<a href="http://strongloop.com/">StrongLoop / IBM</a>提供.</p>
+相对于英文版的文档，本文档可能已过时。要了解最近的更新，请参阅<a href="../../index.html">英文版文档</a>。
+</p>
+<div id="close-i18n-notice-box" title="Close">✖</div>
+</div>
+<div id="page-doc" markdown="1">
+<h1 id="代理背后的-express">代理背后的 Express</h1>
+<p>在代理背后运行 Express 应用程序时，可使用 <a href="../4x/api.html#app.set">app.set()</a>) 将应用程序变量 <code>trust proxy</code> 设置为下表中所列的某个值。</p>
+<div class="doc-box doc-info">
+<p>尽管不设置应用程序变量 <code>trust proxy</code> 该应用程序也不会运行失败，但是它会误将代理的 IP 地址注册为客户机 IP 地址（除非配置了 <code>trust proxy</code>）。</p>
+</div>
+<table class="doctable" border="1">
+<thead><tr><th>类型</th><th>值</th></tr></thead>
+<tbody>
+<tr>
+<td>布尔</td>
+<td>
+<p>如果为 <code>true</code>，那么客户机的 IP 地址将用作 <code>X-Forwarded-*</code> 头中最左侧的条目。
+如果为 <code>false</code>，那么该应用程序将被视为直接面对因特网，而客户机的 IP 地址则派生自 <code>req.connection.remoteAddress</code>。这是缺省设置。</p>
+</td>
+</tr>
+<tr>
+<td>IP 地址</td>
+<td>
+<p>要信任的 IP 地址、子网或者一组 IP 地址与子网。以下列表显示预先配置的子网名称：</p>
+<ul>
+<li>loopback - <code>127.0.0.1/8</code> 或 <code>::1/128</code></li>
+<li>linklocal - <code>169.254.0.0/16</code> 或 <code>fe80::/10</code></li>
+<li>uniquelocal - <code>10.0.0.0/8</code>、<code>172.16.0.0/12</code>、<code>192.168.0.0/16</code> 或 <code>fc00::/7</code></li>
+</ul>
+<p>您可以按以下某种方法设置 IP 地址：</p>
+<pre><code class="language-js" translate="no">app.set('trust proxy', 'loopback') // specify a single subnet
+app.set('trust proxy', 'loopback, 123.123.123.123') // specify a subnet and an address
+app.set('trust proxy', 'loopback, linklocal, uniquelocal') // specify multiple subnets as CSV
+app.set('trust proxy', ['loopback', 'linklocal', 'uniquelocal']) // specify multiple subnets as an array</code>
+</pre>
+<p>如果指定 IP 地址或子网，那么会在地址确定过程中排除这些项，而将最接近应用程序服务器的不受信任的 IP 地址确定为客户机的 IP 地址。</p>
+</td>
+</tr>
+<tr>
+<td>数字</td>
+<td>
+<p>信任来自正面代理服务器的第 <code>n</code> 个中继段，以此作为客户机。</p>
+</td>
+</tr>
+<tr>
+<td>函数</td>
+<td>
+<p>定制信任实现。仅当您知道自己要做什么时，方可使用该选项。</p>
+<pre><code class="language-js" translate="no">app.set('trust proxy', function (ip) {
+  if (ip === '127.0.0.1' || ip === '123.123.123.123') return true; // trusted IPs
+  else return false;
+});</code>
+</pre>
+</td>
+</tr>
+</tbody>
+</table>
+<p>设置非 <code>false</code> <code>trust proxy</code> 值会导致三个重大变化：</p>
+<ul>
+<li>
+<p><a href="../api.html#req.hostname">req.hostname</a> 的值派生自 <code>X-Forwarded-Host</code> 头中设置的值（可以由客户机或代理设置此值）。</p>
+</li>
+<li>
+<p><code>X-Forwarded-Proto</code> 可以由逆向代理设置，以告知应用程序：它是 <code>https</code> 还是 <code>http</code>，或者甚至是无效名称。该值由 <a href="../api.html#req.protocol">req.protocol</a> 反映。</p>
+</li>
+<li>
+<p><a href="../api.html#req.ip">req.ip</a> 和 <a href="../api.html#req.ips">req.ips</a> 值由 <code>X-Forwarded-For</code> 的地址列表填充。</p>
+</li>
+</ul>
+<p><code>trust proxy</code> 设置由使用 <a href="https://www.npmjs.com/package/proxy-addr">proxy-addr</a> 包实现。有关更多信息，请参阅其文档。</p>
+</div>
+</section>
+
+<noscript>
+    <iframe src="http://www.googletagmanager.com/ns.html?id=GTM-5XL76H" height="0" width="0" style="display: none; visibility: hidden;"></iframe>
+</noscript>
+<script type="089f851945305bef692ba8a1-text/javascript">
+(function(w, d, s, l, i) {
+    w[l] = w[l] || [];
+    w[l].push({
+        'gtm.start': new Date().getTime(),
+        event: 'gtm.js'
+    });
+    var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s),
+        dl = l != 'dataLayer' ? '&l=' + l : '';
+    j.async = true;
+    j.src =
+        '../../../www.googletagmanager.com/gtm5445.js?id=' + i + dl;
+    f.parentNode.insertBefore(j, f);
+})(window, document, 'script', 'dataLayer', 'GTM-5XL76H');
+</script>
+<a id="top" href="#"><img src="../../images/arrow.png"></a>
+<footer>
+<div id="footer-content">
+<div id="github">
+<iframe src="http://ghbtns.com/github-btn.html?user=expressjs&amp;repo=express&amp;type=watch&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="110" height="20"></iframe>
+</div>
+<div id="sponsor"><a href="https://github.com/expressjs/express">Express</a>是Node.js的基金会的一个项目</div>
+<div id="fork"><a href="https://github.com/expressjs/expressjs.com">在 GitHub 上派生出网站</a>。</div>
+<div>Copyright &copy; StrongLoop, Inc., and other expressjs.com contributors.</div>
+</div>
+<div id="license">
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/us/"><img alt="知识共享许可协议" style="border-width:0" src="../../../i.creativecommons.org/l/by-sa/3.0/us/80x15.png" /></a> 本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/us/">知识共享署名-相同方式共享 3.0 美国许可协议</a>进行许可。
+</div>
+</footer>
+<script type="089f851945305bef692ba8a1-text/javascript" src="../../../cdn.jsdelivr.net/npm/docsearch.js%402/dist/cdn/docsearch.min.js" onload="docsearch({
+  apiKey: '7164e33055faa6ecddefd9e08fc59f5d',
+  indexName: 'expressjs',
+  inputSelector: '#q',
+  algoliaOptions: { 'facetFilters': ['lang:zh-cn'] }
+})" async></script>
+<script src="../../../ajax.cloudflare.com/cdn-cgi/scripts/a2bd7673/cloudflare-static/rocket-loader.min.js" data-cf-settings="089f851945305bef692ba8a1-|49" defer=""></script></body>
+
+<!-- Mirrored from expressjs.com/zh-cn/guide/behind-proxies.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 10 Jul 2019 00:23:49 GMT -->
+</html>

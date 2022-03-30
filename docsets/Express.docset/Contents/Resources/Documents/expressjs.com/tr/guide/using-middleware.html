@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+
+<html lang="tr" prefix="og: http://ogp.me/ns#">
+
+<!-- Mirrored from expressjs.com/tr/guide/using-middleware.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 10 Jul 2019 00:23:56 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+<title>Using Express middleware</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="og:image" content="../../images/express-facebook-share.png">
+<link rel="icon" type="image/png" href="../../images/favicon.png" />
+<link rel="stylesheet" href="../../css/style.css">
+<link rel="stylesheet" href="../../css/dropit.css">
+<link rel="stylesheet" href="../../css/prism.css">
+<link rel="stylesheet" href="../../css/font-awesome.min.css">
+<link rel="stylesheet" href="../../../fonts.googleapis.com/css2a1d.css?family=Open+Sans:300,400,600,700&amp;amp;subset=latin,latin-ext">
+<link rel="stylesheet" href="../../css/tr.css">
+<link rel="stylesheet" href="../../css/nodeinteractive.css">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script data-cfasync="false" src="../../../ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script data-cfasync="false" src="../../js/ismobile.js"></script>
+<script data-cfasync="false" src="../../js/app.js"></script>
+<script data-cfasync="false" src="../../js/retina.js"></script>
+<script data-cfasync="false" src="../../js/dropit.js"></script>
+<script data-cfasync="false" src="../../js/prism.js"></script>
+<link rel="stylesheet" href="../../../cdn.jsdelivr.net/npm/docsearch.js%402/dist/cdn/docsearch.min.css" />
+</head>
+<body class="non-en-doc">
+<section class="page content">
+<header>
+<div id="mobile-menu">
+<div id="nav-button" class="fa fa-bars fa-2x button"></div>
+</div>
+<section id="logo"><a href="../../index.html" class="express">Express</a>
+</section>
+<div id="navbar">
+<input id="q" placeholder="🔎 search" />
+<ul id="navmenu">
+<li><a href="../../index.html" id="home-menu">Anasayfa</a></li>
+<li>
+<ul id="getting-started-menu" class="menu">
+<li><a href="../starter/installing.html">Buradan Başlayın</a>
+<ul>
+<li>
+<a href="../starter/installing.html">
+Kurulum
+</a>
+</li>
+<li>
+<a href="../starter/hello-world.html">
+Merhaba Dünya
+</a>
+</li>
+<li>
+<a href="../starter/generator.html">
+Express Oluşturucu
+</a>
+</li>
+<li>
+<a href="../starter/basic-routing.html">
+Basit Yönlendirme
+</a>
+</li>
+<li>
+<a href="../starter/static-files.html">
+Statik Dosyalar
+</a>
+</li>
+<li>
+<a href="../starter/faq.html">
+SSS
+</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<ul id="guide-menu" class="menu">
+<li><a href="routing.html" class="active">Kılavuz</a>
+<ul>
+<li><a href="routing.html">Yönlendirme</a>
+</li>
+<li><a href="writing-middleware.html"> Middleware yazma</a>
+</li>
+<li><a href="using-middleware.html">Middleware kullanma</a>
+</li>
+<li><a href="using-template-engines.html">Şablon motoru kullanma</a>
+</li>
+<li><a href="error-handling.html">Hata işleme</a>
+</li>
+<li><a href="debugging.html">Hata Ayıklama</a>
+</li>
+<li><a href="behind-proxies.html">Express behind proxies</a>
+</li>
+<li><a href="migrating-4.html">Express 4 geçiş</a>
+</li>
+<li><a href="migrating-5.html">Express 5 geçiş</a>
+</li>
+<li><a href="database-integration.html">Database Entegrasyonu</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<ul id="application-menu" class="menu">
+<li><a href="../4x/api.html">API Kaynak</a>
+<ul>
+<li><a href="../4x/api.html">4.x</a>
+</li>
+<li><a href="../3x/api.html">3.x (Kullanımdan kaldırıldı)</a>
+</li>
+<li><a href="../../2x/index.html">2.x (Kullanımdan kaldırıldı)</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<ul id="advanced-topics-menu" class="menu">
+<li><a href="../advanced/developing-template-engines.html">Gelişmiş konular</a>
+<ul>
+<li><a href="../advanced/developing-template-engines.html">Şablon motorları</a>
+</li>
+<li><a href="../advanced/pm.html">Proses yöneticisi kullanma</a>
+</li>
+<li><a href="../advanced/security-updates.html">Gğvenlik güncellemeleri</a>
+</li>
+<li><a href="../advanced/best-practice-security.html">En iyi güvenlik uygulamaları</a>
+</li>
+<li><a href="../advanced/best-practice-performance.html">En iyi performans uygulamaları</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<ul id="resources-menu" class="menu">
+<li><a href="../resources/glossary.html">Kaynaklar</a>
+<ul>
+<li>
+<a href="../resources/community.html">Topluluk</a>
+</li>
+<li>
+<a href="../resources/glossary.html">Terimler</a>
+</li>
+<li>
+<a href="../resources/middleware.html">Middleware</a>
+</li>
+<li>
+<a href="../resources/utils.html">Yardımcı Modüller</a>
+</li>
+<li>
+<a href="../resources/frameworks.html">Yapılar</a>
+</li>
+<li>
+<a href="../resources/books-blogs.html">Kitap ve Bloglar</a>
+</li>
+<li>
+<a href="../resources/companies-using-express.html">Express kullanan şirket</a>
+</li>
+<li>
+<a href="../resources/contributing.html">Express'e katkıda bulunmak</a>
+</li>
+<li>
+<a href="../changelog/4x.html">Sürüm Notları</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+
+</ul>
+</div>
+</header>
+<div id="overlay"></div>
+<div id="i18n-notice-box" class="doc-box doc-warn">
+<p>Bu doküman ingilizce dokümana göre eski olabilir. Son güncellemeler için lütfen <a href="../../index.html">İngilizce Dokümanı</a>. ziyaret edin
+</p>
+<div id="close-i18n-notice-box" title="Close">✖</div>
+</div>
+<div id="page-doc" markdown="1">
+<div id="page-doc">
+<h1 id="using-middleware">Using middleware</h1>
+<p>Express is a routing and middleware web framework that has minimal functionality of its own: An Express application is essentially a series of middleware function calls.</p>
+<p><em>Middleware</em> functions are functions that have access to the <a href="../4x/api.html#req">request object</a> (<code>req</code>), the <a href="../4x/api.html#res">response object</a> (<code>res</code>), and the next middleware function in the application’s request-response cycle. The next middleware function is commonly denoted by a variable named <code>next</code>.</p>
+<p>Middleware functions can perform the following tasks:</p>
+<ul>
+<li>Execute any code.</li>
+<li>Make changes to the request and the response objects.</li>
+<li>End the request-response cycle.</li>
+<li>Call the next middleware function in the stack.</li>
+</ul>
+<p>If the current middleware function does not end the request-response cycle, it must call <code>next()</code> to pass control to the next middleware function. Otherwise, the request will be left hanging.</p>
+<p>An Express application can use the following types of middleware:</p>
+<ul>
+<li><a href="#middleware.application">Application-level middleware</a></li>
+<li><a href="#middleware.router">Router-level middleware</a></li>
+<li><a href="#middleware.error-handling">Error-handling middleware</a></li>
+<li><a href="#middleware.built-in">Built-in middleware</a></li>
+<li><a href="#middleware.third-party">Third-party middleware</a></li>
+</ul>
+<p>You can load application-level and router-level middleware with an optional mount path.
+You can also load a series of middleware functions together, which creates a sub-stack of the middleware system at a mount point.</p>
+<h2 id="middleware.application">Application-level middleware</h2>
+<p>Bind application-level middleware to an instance of the <a href="../4x/api.html#app">app object</a> by using the <code>app.use()</code> and <code>app.METHOD()</code> functions, where <code>METHOD</code> is the HTTP method of the request that the middleware function handles (such as GET, PUT, or POST) in lowercase.</p>
+<p>This example shows a middleware function with no mount path. The function is executed every time the app receives a request.</p>
+<pre><code class="language-js">var app = express()
+
+app.use(function (req, res, next) {
+  console.log('Time:', Date.now())
+  next()
+})
+</code></pre>
+<p>This example shows a middleware function mounted on the <code>/user/:id</code> path. The function is executed for any type of
+HTTP request on the <code>/user/:id</code> path.</p>
+<pre><code class="language-js">app.use('/user/:id', function (req, res, next) {
+  console.log('Request Type:', req.method)
+  next()
+})
+</code></pre>
+<p>This example shows a route and its handler function (middleware system). The function handles GET requests to the <code>/user/:id</code> path.</p>
+<pre><code class="language-js">app.get('/user/:id', function (req, res, next) {
+  res.send('USER')
+})
+</code></pre>
+<p>Here is an example of loading a series of middleware functions at a mount point, with a mount path.
+It illustrates a middleware sub-stack that prints request info for any type of HTTP request to the <code>/user/:id</code> path.</p>
+<pre><code class="language-js">app.use('/user/:id', function (req, res, next) {
+  console.log('Request URL:', req.originalUrl)
+  next()
+}, function (req, res, next) {
+  console.log('Request Type:', req.method)
+  next()
+})
+</code></pre>
+<p>Route handlers enable you to define multiple routes for a path. The example below defines two routes for GET requests to the <code>/user/:id</code> path. The second route will not cause any problems, but it will never get called because the first route ends the request-response cycle.</p>
+<p>This example shows a middleware sub-stack that handles GET requests to the <code>/user/:id</code> path.</p>
+<pre><code class="language-js">app.get('/user/:id', function (req, res, next) {
+  console.log('ID:', req.params.id)
+  next()
+}, function (req, res, next) {
+  res.send('User Info')
+})
+
+// handler for the /user/:id path, which prints the user ID
+app.get('/user/:id', function (req, res, next) {
+  res.end(req.params.id)
+})
+</code></pre>
+<p>To skip the rest of the middleware functions from a router middleware stack, call <code>next('route')</code> to pass control to the next route.
+<strong>NOTE</strong>: <code>next('route')</code> will work only in middleware functions that were loaded by using the <code>app.METHOD()</code> or <code>router.METHOD()</code> functions.</p>
+<p>This example shows a middleware sub-stack that handles GET requests to the <code>/user/:id</code> path.</p>
+<pre><code class="language-js">app.get('/user/:id', function (req, res, next) {
+  // if the user ID is 0, skip to the next route
+  if (req.params.id === '0') next('route')
+  // otherwise pass the control to the next middleware function in this stack
+  else next()
+}, function (req, res, next) {
+  // render a regular page
+  res.render('regular')
+})
+
+// handler for the /user/:id path, which renders a special page
+app.get('/user/:id', function (req, res, next) {
+  res.render('special')
+})
+</code></pre>
+<h2 id="middleware.router">Router-level middleware</h2>
+<p>Router-level middleware works in the same way as application-level middleware, except it is bound to an instance of <code>express.Router()</code>.</p>
+<pre><code class="language-js">var router = express.Router()
+</code></pre>
+<p>Load router-level middleware by using the <code>router.use()</code> and <code>router.METHOD()</code> functions.</p>
+<p>The following example code replicates the middleware system that is shown above for application-level middleware, by using router-level middleware:</p>
+<pre><code class="language-js">var app = express()
+var router = express.Router()
+
+// a middleware function with no mount path. This code is executed for every request to the router
+router.use(function (req, res, next) {
+  console.log('Time:', Date.now())
+  next()
+})
+
+// a middleware sub-stack shows request info for any type of HTTP request to the /user/:id path
+router.use('/user/:id', function (req, res, next) {
+  console.log('Request URL:', req.originalUrl)
+  next()
+}, function (req, res, next) {
+  console.log('Request Type:', req.method)
+  next()
+})
+
+// a middleware sub-stack that handles GET requests to the /user/:id path
+router.get('/user/:id', function (req, res, next) {
+  // if the user ID is 0, skip to the next router
+  if (req.params.id === '0') next('route')
+  // otherwise pass control to the next middleware function in this stack
+  else next()
+}, function (req, res, next) {
+  // render a regular page
+  res.render('regular')
+})
+
+// handler for the /user/:id path, which renders a special page
+router.get('/user/:id', function (req, res, next) {
+  console.log(req.params.id)
+  res.render('special')
+})
+
+// mount the router on the app
+app.use('/', router)
+</code></pre>
+<p>To skip the rest of the router’s middleware functions, call <code>next('router')</code>
+to pass control back out of the router instance.</p>
+<p>This example shows a middleware sub-stack that handles GET requests to the <code>/user/:id</code> path.</p>
+<pre><code class="language-js">var app = express()
+var router = express.Router()
+
+// predicate the router with a check and bail out when needed
+router.use(function (req, res, next) {
+  if (!req.headers['x-auth']) return next('router')
+  next()
+})
+
+router.get('/', function (req, res) {
+  res.send('hello, user!')
+})
+
+// use the router and 401 anything falling through
+app.use('/admin', router, function (req, res) {
+  res.sendStatus(401)
+})
+</code></pre>
+<h2 id="middleware.error-handling">Error-handling middleware</h2>
+<div class="doc-box doc-notice">
+<p>Error-handling middleware always takes <em>four</em> arguments. You must provide four arguments to identify it as an error-handling middleware function. Even if you don’t need to use the <code>next</code> object, you must specify it to maintain the signature. Otherwise, the <code>next</code> object will be interpreted as regular middleware and will fail to handle errors.</p>
+</div>
+<p>Define error-handling middleware functions in the same way as other middleware functions, except with four arguments instead of three, specifically with the signature <code>(err, req, res, next)</code>):</p>
+<pre><code class="language-js">app.use(function (err, req, res, next) {
+  console.error(err.stack)
+  res.status(500).send('Something broke!')
+})
+</code></pre>
+<p>For details about error-handling middleware, see: <a href="error-handling.html">Error handling</a>.</p>
+<h2 id="middleware.built-in">Built-in middleware</h2>
+<p>Starting with version 4.x, Express no longer depends on <a href="https://github.com/senchalabs/connect">Connect</a>. With the exception of <code>express.static</code>, all of the middleware
+functions that were previously included with Express’ are now in separate modules. Please view <a href="https://github.com/senchalabs/connect#middleware">the list of middleware functions</a>.</p>
+<p>The only built-in middleware function in Express is <code>express.static</code>. This function is based on <a href="https://github.com/expressjs/serve-static">serve-static</a>, and is responsible for serving static assets such as HTML files, images, and so on.</p>
+<p>The function signature is:</p>
+<pre><code class="language-js">express.static(root, [options])
+</code></pre>
+<p>The <code>root</code> argument specifies the root directory from which to serve static assets.</p>
+<p>For information on the <code>options</code> argument and more details on this middleware function, see <a href="../../en/4x/api.html#express.static">express.static</a>.</p>
+<p>Here is an example of using the <code>express.static</code> middleware function with an elaborate options object:</p>
+<pre><code class="language-js">var options = {
+  dotfiles: 'ignore',
+  etag: false,
+  extensions: ['htm', 'html'],
+  index: false,
+  maxAge: '1d',
+  redirect: false,
+  setHeaders: function (res, path, stat) {
+    res.set('x-timestamp', Date.now())
+  }
+}
+
+app.use(express.static('public', options))
+</code></pre>
+<p>You can have more than one static directory per app:</p>
+<pre><code class="language-js">app.use(express.static('public'))
+app.use(express.static('uploads'))
+app.use(express.static('files'))
+</code></pre>
+<p>For more details about the <code>serve-static</code> function and its options, see: <a href="https://github.com/expressjs/serve-static">serve-static</a> documentation.</p>
+<h2 id="middleware.third-party">Third-party middleware</h2>
+<p>Use third-party middleware to add functionality to Express apps.</p>
+<p>Install the Node.js module for the required functionality, then load it in your app at the application level or at the router level.</p>
+<p>The following example illustrates installing and loading the cookie-parsing middleware function <code>cookie-parser</code>.</p>
+<pre><code class="language-sh">$ npm install cookie-parser
+</code></pre>
+<pre><code class="language-js">var express = require('express')
+var app = express()
+var cookieParser = require('cookie-parser')
+
+// load the cookie-parsing middleware
+app.use(cookieParser())
+</code></pre>
+<p>For a partial list of third-party middleware functions that are commonly used with Express, see: <a href="../resources/middleware.html">Third-party middleware</a>.</p>
+</div>
+</div>
+</section>
+<noscript>
+    <iframe src="http://www.googletagmanager.com/ns.html?id=GTM-5XL76H" height="0" width="0" style="display: none; visibility: hidden;"></iframe>
+</noscript>
+<script type="1d9a2baaf700e39d7d1bd7e1-text/javascript">
+(function(w, d, s, l, i) {
+    w[l] = w[l] || [];
+    w[l].push({
+        'gtm.start': new Date().getTime(),
+        event: 'gtm.js'
+    });
+    var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s),
+        dl = l != 'dataLayer' ? '&l=' + l : '';
+    j.async = true;
+    j.src =
+        '../../../www.googletagmanager.com/gtm5445.js?id=' + i + dl;
+    f.parentNode.insertBefore(j, f);
+})(window, document, 'script', 'dataLayer', 'GTM-5XL76H');
+</script>
+<a id="top" href="#"><img src="../../images/arrow.png"></a>
+<footer>
+<section id="doc-langs">
+<a href="http://strongloop.com/">StrongLoop/IBM</a> tarafından sağlanan belge çevirileri:
+<a href="../../fr/index.html">Fransızca</a>, <a href="../../de/index.html">Almanca</a>, <a href="../../es/index.html">İspanyolca</a>, <a href="../../it/index.html">İtalyanca</a>, <a href="../../ja/index.html">Japonca</a>, <a href="../../ru/index.html">Rusça</a>, <a href="../../zh-cn/index.html">Çince</a>, <a href="../../zh-tw/index.html">Klasik Çince</a>, <a href="../../ko/index.html">Korece</a>, <a href="../../pt-br/index.html">Portekizce</a>.
+<br>
+Topluluk çevirisi için: <a href="../../sk/index.html">Slovakça</a>, <a href="../../uk/index.html">Ukraynaca</a> and <a href="../../uz/index.html">Özbekçe</a>.
+</section>
+<div id="footer-content">
+<div id="github">
+<a class="github-button" href="https://github.com/expressjs/expressjs.com" data-icon="octicon-star" aria-label="Star expressjs/expressjs.com on GitHub">Star</a>
+</div>
+<div id="sponsor"><a href="https://github.com/expressjs/express/">Express</a> bir <a href="http://nodejs.org/foundation"></a>Node.js Vakfı</a> projesidir.</div>
+<div id="fork"><a href="https://github.com/expressjs/expressjs.com">Github'da Forkla</a>.
+</div>
+<div>Telif Hakkı &copy; 2017 StrongLoop, IBM, ve diğer expressjs.com katkıda bulunanlar.</div>
+</div>
+<div id="license">
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/us/"><img alt="Creative Commons License" style="border-width:0" src="../../../i.creativecommons.org/l/by-sa/3.0/us/80x15.png" /></a> Bu iş<a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/us/">Creative Commons Attribution-ShareAlike 3.0 United States License</a> lisansı altındadır.
+</div>
+</footer>
+<script async defer src="../../../buttons.github.io/buttons.js" type="1d9a2baaf700e39d7d1bd7e1-text/javascript"></script>
+<script type="1d9a2baaf700e39d7d1bd7e1-text/javascript" src="../../../cdn.jsdelivr.net/npm/docsearch.js%402/dist/cdn/docsearch.min.js" onload="docsearch({
+  apiKey: '7164e33055faa6ecddefd9e08fc59f5d',
+  indexName: 'expressjs',
+  inputSelector: '#q',
+  algoliaOptions: { 'facetFilters': ['lang:tr'] }
+})" async></script>
+<script src="../../../ajax.cloudflare.com/cdn-cgi/scripts/a2bd7673/cloudflare-static/rocket-loader.min.js" data-cf-settings="1d9a2baaf700e39d7d1bd7e1-|49" defer=""></script></body>
+
+<!-- Mirrored from expressjs.com/tr/guide/using-middleware.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 10 Jul 2019 00:23:56 GMT -->
+</html>

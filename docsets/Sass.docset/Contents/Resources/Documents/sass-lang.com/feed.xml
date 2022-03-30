@@ -4,13 +4,136 @@
   <id>https://sass-lang.com/blog</id>
   <link href="https://sass-lang.com/blog"/>
   <link href="https://sass-lang.com/feed.xml" rel="self"/>
-  <updated>2021-08-05T23:30:00+00:00</updated>
+  <updated>2022-02-01T10:00:00+00:00</updated>
+  <entry>
+    <title>Embedded Sass is Live</title>
+    <link href="https://sass-lang.com/blog/embedded-sass-is-live" rel="alternate"/>
+    <id>https://sass-lang.com/blog/embedded-sass-is-live</id>
+    <published>2022-02-01T10:00:00+00:00</published>
+    <updated>2022-02-17T00:23:17+00:00</updated>
+    <author>
+      <name>Natalie Weizenbaum</name>
+    </author>
+    <content type="html">&lt;p&gt;After several years of planning and development, I&amp;rsquo;m excited to finally announce
+the stable release of Embedded Dart Sass along with its first official wrapper,
+the &lt;a href="https://www.npmjs.com/package/sass-embedded"&gt;&lt;code&gt;sass-embedded&lt;/code&gt;&lt;/a&gt; package available now on npm!&lt;/p&gt;
+
+&lt;p&gt;Embedded Sass is an ongoing effort to make a highly-performant Sass library
+available to as many different languages as possible, starting with Node.js.
+Although Node.js already has access to the pure-JS &lt;code&gt;sass&lt;/code&gt; package, the nature of
+JavaScript inherently limits how quickly this package can process large Sass
+files especially in asynchronous mode. We expect &lt;code&gt;sass-embedded&lt;/code&gt; to be a major
+boon to developers for whom compilation speed is a concern, particularly the
+remaining users of &lt;code&gt;node-sass&lt;/code&gt; for whom performance has been a major reason to
+avoid Dart Sass.&lt;/p&gt;
+
+&lt;p&gt;The &lt;code&gt;sass-embedded&lt;/code&gt; package fully supports the &lt;a href="https://sass-lang.com/documentation/js-api#usage"&gt;new JS API&lt;/a&gt; as well as the
+&lt;a href="https://sass-lang.com/documentation/js-api#legacy-api"&gt;legacy API&lt;/a&gt; other than a few cosmetic options. You can use it as a drop-in
+replacement for the &lt;code&gt;sass&lt;/code&gt; package, and it should work with all the same build
+plugins and libraries. Note that &lt;code&gt;sass-embedded&lt;/code&gt; is a bit faster in
+&lt;em&gt;asynchronous&lt;/em&gt; mode than it is in synchronous mode (whereas the &lt;code&gt;sass&lt;/code&gt; package
+was faster in synchronous mode). For substantial Sass files, running
+&lt;code&gt;sass-embedded&lt;/code&gt; in either mode will generally be much faster than &lt;code&gt;sass&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;In order to limit the confusion about which version of which package supports
+which feature, the &lt;code&gt;sass-embedded&lt;/code&gt; package will always have the same version as
+the &lt;code&gt;sass&lt;/code&gt; package. When new features are added to the JS API, they&amp;rsquo;ll be
+supported at the same time in both packages, and when new language features are
+added to Sass they&amp;rsquo;ll always be included in a new &lt;code&gt;sass-embedded&lt;/code&gt; release
+straight away.&lt;/p&gt;
+
+&lt;h2 id="how-it-works"&gt;
+&lt;a class="anchor" href="#how-it-works"&gt;&lt;span class="visuallyhidden"&gt;How it Works permalink&lt;/span&gt;&lt;/a&gt;How it Works&lt;/h2&gt;
+
+&lt;p&gt;Embedded Sass is composed of three parts:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href="https://github.com/sass/dart-sass-embedded"&gt;The compiler&lt;/a&gt;, a Dart executable that wraps Dart Sass and does the actual
+heavy lifting of parsing and compiling the files. Dart native executables are
+generally much faster than JavaScript, so using them for the
+computationally-intensive work of stylesheet evaluation is where Embedded
+Sass gets its speed.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href="https://github.com/sass/embedded-host-node"&gt;The host&lt;/a&gt;, a library in any language (in this case JavaScript) that provides a
+usable end-user API for invoking the compiler. The host provides callers with
+configuration options, including the ability to define custom importers and
+Sass functions that are used by the compilation.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href="https://github.com/sass/embedded-protocol"&gt;The protocol&lt;/a&gt;, a &lt;a href="https://en.wikipedia.org/wiki/Protocol_Buffers"&gt;protocol-buffer&lt;/a&gt;-based specification of how the host and
+the compiler communicate with one another. This communication happens over
+the standard input and output streams of the compiler executable, which is
+invoked by the host to perform each compilation.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id="other-languages"&gt;
+&lt;a class="anchor" href="#other-languages"&gt;&lt;span class="visuallyhidden"&gt;Other Languages permalink&lt;/span&gt;&lt;/a&gt;Other Languages&lt;/h2&gt;
+
+&lt;p&gt;Embedded Sass was designed in part as a way for languages other than JavaScript
+to have access to the full power of Sass compilation with custom importers and
+functions, similarly to how C++ wrappers for &lt;a href="https://sass-lang.com/libsass"&gt;LibSass&lt;/a&gt; worked in the past. We
+hope that community members will use this protocol to implement embedded hosts
+for many other popular frontend languages. If you end up doing so, message us
+&lt;a href="https://twitter.com/SassCSS"&gt;on Twitter&lt;/a&gt; or &lt;a href="https://gitter.im/sass/sass"&gt;Gitter&lt;/a&gt; and we&amp;rsquo;ll link it on this site!&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>New JS API Release Candidate is Live</title>
+    <link href="https://sass-lang.com/blog/new-js-api-release-candidate" rel="alternate"/>
+    <id>https://sass-lang.com/blog/new-js-api-release-candidate</id>
+    <published>2021-11-21T00:15:00+00:00</published>
+    <updated>2022-02-17T00:23:17+00:00</updated>
+    <author>
+      <name>Natalie Weizenbaum</name>
+    </author>
+    <content type="html">&lt;p&gt;The new JavaScript API that we &lt;a href="https://sass-lang.com/blog/request-for-comments-new-js-api"&gt;announced a few months ago&lt;/a&gt; is now fully
+implemented in Dart Sass and ready for you to try! The new API is designed to be
+more idiomatic, performant, and usable than the old one, and we hope it&amp;rsquo;ll be
+adopted swiftly by tooling packages.&lt;/p&gt;
+
+&lt;p&gt;Because this is such a substantial addition, we want to give users a chance to
+kick the tires a bit before we set it in stone, so we&amp;rsquo;ve released it as a release
+candidate in Dart Sass 1.45.0-rc.1. Download it, try it out, and let us know
+what you think by &lt;a href="https://github.com/sass/sass/issues/new"&gt;filing issues&lt;/a&gt; or &lt;a href="https://twitter.com/SassCSS"&gt;sending us a tweet&lt;/a&gt;. Unless major changes
+are necessary, we plan to make a stable release some time next week.&lt;/p&gt;
+
+&lt;h2 id="how-to-use-it"&gt;
+&lt;a class="anchor" href="#how-to-use-it"&gt;&lt;span class="visuallyhidden"&gt;How to use it permalink&lt;/span&gt;&lt;/a&gt;How to use it&lt;/h2&gt;
+
+&lt;p&gt;The new API comes with four new entrypoint functions: &lt;code&gt;compile()&lt;/code&gt; and
+&lt;code&gt;compileAsync()&lt;/code&gt; take Sass file paths and return the result of compiling them to
+CSS, while &lt;code&gt;compileString()&lt;/code&gt; and &lt;code&gt;compileStringAsync()&lt;/code&gt; take a
+string of Sass source and compile it to CSS. Unlike the old API, the async
+functions all return &lt;code&gt;Promise&lt;/code&gt;s. As with the old API, the synchronous functions
+are substantially faster than their async counterparts, so we recommend using
+them if at all possible.&lt;/p&gt;
+&lt;pre class="highlight javascript"&gt;&lt;code&gt;&lt;span class="kr"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;sass&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;require&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'sass'&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+
+&lt;span class="kr"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;sass&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;compileString&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;
+&lt;span class="nx"&gt;h1&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="nx"&gt;font&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nx"&gt;size&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;40&lt;/span&gt;&lt;span class="nx"&gt;px&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="nx"&gt;code&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="nx"&gt;font&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nx"&gt;face&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt; &lt;span class="nx"&gt;Roboto&lt;/span&gt; &lt;span class="nx"&gt;Mono&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;log&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;result&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;css&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Check out &lt;a href="/documentation/js-api"&gt;the API docs&lt;/a&gt; for more details on the API, including the brand-new
+importer and custom function APIs.&lt;/p&gt;
+
+&lt;h2 id="what-about-the-old-api"&gt;
+&lt;a class="anchor" href="#what-about-the-old-api"&gt;&lt;span class="visuallyhidden"&gt;What about the old API? permalink&lt;/span&gt;&lt;/a&gt;What about the old API?&lt;/h2&gt;
+
+&lt;p&gt;Once the new API has a stable release, we&amp;rsquo;ll officially consider the old API to
+be deprecated. Since it&amp;rsquo;s still widely-used, we&amp;rsquo;ll continue to maintain it for a
+good long while going forward. Expect it to start printing a deprecation warning
+in a year or so, and to be disabled for good once we release Dart Sass 2.0.0.&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>Request for Comments: New JS API</title>
     <link href="https://sass-lang.com/blog/request-for-comments-new-js-api" rel="alternate"/>
     <id>https://sass-lang.com/blog/request-for-comments-new-js-api</id>
     <published>2021-08-05T23:30:00+00:00</published>
-    <updated>2021-09-02T00:48:10+00:00</updated>
+    <updated>2022-02-17T00:23:17+00:00</updated>
     <author>
       <name>Natalie Weizenbaum</name>
     </author>
@@ -821,7 +944,7 @@ and possibly more depending on how lively the discussion around them is.&lt;/p&g
     <link href="https://sass-lang.com/blog/node-fibers-discontinued" rel="alternate"/>
     <id>https://sass-lang.com/blog/node-fibers-discontinued</id>
     <published>2021-03-26T23:00:00+00:00</published>
-    <updated>2021-09-02T00:48:10+00:00</updated>
+    <updated>2022-02-17T00:23:17+00:00</updated>
     <author>
       <name>Natalie Weizenbaum</name>
     </author>
@@ -980,7 +1103,7 @@ please don&amp;rsquo;t hesitate to &lt;a href="mailto:nweiz@google.com"&gt;reach
     <link href="https://sass-lang.com/blog/request-for-comments-first-class-calc" rel="alternate"/>
     <id>https://sass-lang.com/blog/request-for-comments-first-class-calc</id>
     <published>2021-03-15T09:35:00+00:00</published>
-    <updated>2021-09-02T00:48:10+00:00</updated>
+    <updated>2022-02-17T00:23:17+00:00</updated>
     <author>
       <name>Natalie Weizenbaum</name>
     </author>
@@ -1052,7 +1175,7 @@ like to see something change please &lt;a href="https://github.com/sass/sass/iss
     <link href="https://sass-lang.com/blog/libsass-is-deprecated" rel="alternate"/>
     <id>https://sass-lang.com/blog/libsass-is-deprecated</id>
     <published>2020-10-26T20:00:00+00:00</published>
-    <updated>2021-09-02T00:48:10+00:00</updated>
+    <updated>2022-02-17T00:23:17+00:00</updated>
     <author>
       <name>Natalie Weizenbaum</name>
     </author>
@@ -1174,212 +1297,6 @@ among all of those implementations managed to become fully-featured enough to
 provide real value for thousands if not millions of users. These maintainers
 deserve to be proud of that work, and I hope they&amp;rsquo;ll always consider themselves
 part of the Sass community going forward.&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Request for Comments: HWB Functions</title>
-    <link href="https://sass-lang.com/blog/request-for-comments-hwb-functions" rel="alternate"/>
-    <id>https://sass-lang.com/blog/request-for-comments-hwb-functions</id>
-    <published>2020-10-07T00:00:00+00:00</published>
-    <updated>2021-09-02T00:48:10+00:00</updated>
-    <author>
-      <name>Natalie Weizenbaum</name>
-    </author>
-    <content type="html">&lt;p&gt;The CSS working group has been up to all sorts of exciting stuff recently in the
-&lt;a href="https://www.w3.org/TR/css-color-4/"&gt;Color Level 4&lt;/a&gt; spec, and the Sass team is starting to think about how to
-integrate those cool new features into Sass&amp;rsquo;s color model. We need more time to
-hammer out exactly the right designs for complex features like the Lab color
-space, but that doesn&amp;rsquo;t mean we can&amp;rsquo;t add a few new color goodies.&lt;/p&gt;
-
-&lt;p&gt;Today we&amp;rsquo;re announcing a proposal for one such feature: built-in Sass functions
-for &lt;a href="https://www.w3.org/TR/css-color-4/#the-hwb-notation"&gt;HWB&lt;/a&gt; colors! Once this proposal (drafted by Sass core team member &lt;a href="https://www.miriamsuzanne.com/"&gt;Miriam
-Suzanne&lt;/a&gt;) is accepted and implemented, you&amp;rsquo;ll be able to write colors in HWB
-syntax and adjust their whiteness and blackness the same way you can adjust a
-color&amp;rsquo;s saturation and lightness today.&lt;/p&gt;
-
-&lt;h2 id="the-functions"&gt;
-&lt;a class="anchor" href="#the-functions"&gt;&lt;span class="visuallyhidden"&gt;The Functions permalink&lt;/span&gt;&lt;/a&gt;The Functions&lt;/h2&gt;
-
-&lt;p&gt;Here are the new and improved functions this proposal adds:&lt;/p&gt;
-
-&lt;h3 id="color-hwb"&gt;
-&lt;a class="anchor" href="#color-hwb"&gt;&lt;span class="visuallyhidden"&gt;color.hwb() permalink&lt;/span&gt;&lt;/a&gt;&lt;code&gt;color.hwb()&lt;/code&gt;
-&lt;/h3&gt;
-
-&lt;p&gt;The &lt;code&gt;color.hwb()&lt;/code&gt; function defines a color using its hue, whiteness, and
-blackness. Like the existing &lt;code&gt;rgb()&lt;/code&gt; and &lt;code&gt;hsl()&lt;/code&gt; functions, It can either use
-the space-separated syntax defined in &lt;a href="https://www.w3.org/TR/css-color-4/#the-hwb-notation"&gt;the spec&lt;/a&gt; (&lt;code&gt;hwb(270 20% 40%)&lt;/code&gt;) or
-the more Sass-y comma-separated syntax (&lt;code&gt;hwb(270, 20%, 40%)&lt;/code&gt;). Because HWB
-colors use the same sRGB colorspace as all other Sass color values, colors
-created this way are fully compatible with all existing Sass color functions and
-will be emitted as their RGB equivalents for maximum browser compatibility.&lt;/p&gt;
-
-&lt;p&gt;Note that &lt;em&gt;unlike&lt;/em&gt; &lt;code&gt;rgb()&lt;/code&gt; and &lt;code&gt;hsl()&lt;/code&gt;, the proposal doesn&amp;rsquo;t add this function
-to the global scope yet. This is because Sass has a policy of never adding
-support for new CSS syntax before at least one browser implements it. Specs have
-a tendency to change until they&amp;rsquo;re locked in by browsers, and if Sass ends up
-supporting something different than the browsers themselves that&amp;rsquo;s bad news!&lt;/p&gt;
-
-&lt;h3 id="color-whiteness-and-color-blackness"&gt;
-&lt;a class="anchor" href="#color-whiteness-and-color-blackness"&gt;&lt;span class="visuallyhidden"&gt;color.whiteness() and color.blackness() permalink&lt;/span&gt;&lt;/a&gt;&lt;code&gt;color.whiteness()&lt;/code&gt; and &lt;code&gt;color.blackness()&lt;/code&gt;
-&lt;/h3&gt;
-
-&lt;p&gt;These functions work like the &lt;code&gt;color.saturation()&lt;/code&gt; and &lt;code&gt;color.lightness()&lt;/code&gt;
-functions do for HSL colors. They even work for colors that weren&amp;rsquo;t created with
-&lt;code&gt;color.hwb()&lt;/code&gt;, so you can use them to check how pale or dark any color is.&lt;/p&gt;
-
-&lt;p&gt;Because HWB colors have the same notion of &amp;ldquo;hue&amp;rdquo; as HSL colors, the existing
-&lt;code&gt;color.hue()&lt;/code&gt; function already works perfectly!&lt;/p&gt;
-
-&lt;h3 id="color-scale-color-adjust-and-color-change"&gt;
-&lt;a class="anchor" href="#color-scale-color-adjust-and-color-change"&gt;&lt;span class="visuallyhidden"&gt;color.scale(), color.adjust(), and color.change() permalink&lt;/span&gt;&lt;/a&gt;&lt;code&gt;color.scale()&lt;/code&gt;, &lt;code&gt;color.adjust()&lt;/code&gt;, and &lt;code&gt;color.change()&lt;/code&gt;
-&lt;/h3&gt;
-
-&lt;p&gt;All three color modification functions now support &lt;code&gt;$whiteness&lt;/code&gt; and &lt;code&gt;$blackness&lt;/code&gt;
-arguments. If you want a color (again no matter how it was created) to be 20%
-whiter, just pass it to &lt;code&gt;color.scale($color, $whiteness: 20%)&lt;/code&gt; and there you go!&lt;/p&gt;
-
-&lt;h2 id="let-us-know-what-you-think"&gt;
-&lt;a class="anchor" href="#let-us-know-what-you-think"&gt;&lt;span class="visuallyhidden"&gt;Let us know what you think! permalink&lt;/span&gt;&lt;/a&gt;Let us know what you think!&lt;/h2&gt;
-
-&lt;p&gt;If you’re interested in learning more about this proposal, &lt;a href="https://github.com/sass/sass/tree/main/proposal/color-4-hwb.md"&gt;read it in full&lt;/a&gt; on
-GitHub. It’s open for comments and revisions for the next month, so if you’d
-like to see something change please &lt;a href="https://github.com/sass/sass/issues/new"&gt;file an issue&lt;/a&gt; and we can discuss it!&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Request for Comments: Nested Map Functions</title>
-    <link href="https://sass-lang.com/blog/request-for-comments-nested-map-functions" rel="alternate"/>
-    <id>https://sass-lang.com/blog/request-for-comments-nested-map-functions</id>
-    <published>2020-09-16T22:40:00+00:00</published>
-    <updated>2021-09-02T00:48:10+00:00</updated>
-    <author>
-      <name>Natalie Weizenbaum</name>
-    </author>
-    <content type="html">&lt;p&gt;As Sass libraries and design systems get more complex and have more users with
-different needs, they tend to develop the need to share and override
-configuration and design tokens. This configuration is often hierarchical, and
-ends up being represented as maps that contain maps that contain still more
-maps. Up until now, Sass&amp;rsquo;s map functions haven&amp;rsquo;t really made it easy to work
-with this sort of nested map structure. But that&amp;rsquo;s changing with the latest
-language proposal, written by Sass core team member &lt;a href="https://www.miriamsuzanne.com/"&gt;Miriam Suzanne&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;This proposal expands the existing map functions and adds a few new ones to make
-working with nested maps much easier than it was before. It&amp;rsquo;s based on helper
-functions that pop up in all sorts of Sass projects around the web,
-incorporating best practices back into the language itself.&lt;/p&gt;
-
-&lt;h2 id="the-functions"&gt;
-&lt;a class="anchor" href="#the-functions"&gt;&lt;span class="visuallyhidden"&gt;The Functions permalink&lt;/span&gt;&lt;/a&gt;The Functions&lt;/h2&gt;
-
-&lt;p&gt;Here are the new and improved functions this proposal adds:&lt;/p&gt;
-
-&lt;h3 id="map-get-and-map-has-key"&gt;
-&lt;a class="anchor" href="#map-get-and-map-has-key"&gt;&lt;span class="visuallyhidden"&gt;map.get() and map.has-key() permalink&lt;/span&gt;&lt;/a&gt;&lt;code&gt;map.get()&lt;/code&gt; and &lt;code&gt;map.has-key()&lt;/code&gt;
-&lt;/h3&gt;
-
-&lt;p&gt;The &lt;a href="https://sass-lang.com/documentation/modules/map#get"&gt;&lt;code&gt;map.get()&lt;/code&gt;&lt;/a&gt; and &lt;a href="https://sass-lang.com/documentation/modules/map#has-key"&gt;&lt;code&gt;map.has-key()&lt;/code&gt;&lt;/a&gt; functions both now take any number of
-keys as arguments. Each key drills deeper into a nested map, allowing you to
-easily inspect nested values without needing to chain a bunch of function calls
-together.&lt;/p&gt;
-
-&lt;p&gt;For example, let&amp;rsquo;s take the following simplified configuration map:&lt;/p&gt;
-&lt;pre class="highlight scss"&gt;&lt;code&gt;&lt;span class="nv"&gt;$config&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;
-  &lt;span class="s2"&gt;"colors"&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;
-    &lt;span class="s2"&gt;"primary"&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="no"&gt;red&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt;
-    &lt;span class="s2"&gt;"secondary"&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="no"&gt;blue&lt;/span&gt;
-  &lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;For this map, &lt;code&gt;map.get($config, &amp;quot;colors&amp;quot;, &amp;quot;primary&amp;quot;)&lt;/code&gt; gets the value of the
-&lt;code&gt;&amp;quot;colors&amp;quot;&lt;/code&gt; key (&lt;code&gt;(&amp;quot;primary&amp;quot;: red)&lt;/code&gt;) then the value of the &lt;code&gt;&amp;quot;primary&amp;quot;&lt;/code&gt; key and
-returns &lt;code&gt;red&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;Similarly, &lt;code&gt;map.has-key($config, &amp;quot;colors&amp;quot;, &amp;quot;primary&amp;quot;)&lt;/code&gt; returns &lt;code&gt;true&lt;/code&gt; while
-&lt;code&gt;map.has-key($config, &amp;quot;colors&amp;quot;, &amp;quot;tertiary&amp;quot;)&lt;/code&gt; returns &lt;code&gt;false&lt;/code&gt;.&lt;/p&gt;
-
-&lt;h3 id="map-merge"&gt;
-&lt;a class="anchor" href="#map-merge"&gt;&lt;span class="visuallyhidden"&gt;map.merge() permalink&lt;/span&gt;&lt;/a&gt;&lt;code&gt;map.merge()&lt;/code&gt;
-&lt;/h3&gt;
-
-&lt;p&gt;The &lt;a href="https://sass-lang.com/documentation/modules/map#merge"&gt;&lt;code&gt;map.merge()&lt;/code&gt;&lt;/a&gt; function can now be called as &lt;code&gt;map.merge($map1, $keys...,
-$map2)&lt;/code&gt;. This will merge &lt;code&gt;$map2&lt;/code&gt; with a child of &lt;code&gt;$map1&lt;/code&gt; at the location given
-by the keys, updating the parent maps as it goes.&lt;/p&gt;
-
-&lt;p&gt;For example, using the configuration map &lt;a href="#map-get-and-map-has-key"&gt;defined above&lt;/a&gt; &lt;code&gt;map.merge($config,
-&amp;quot;colors&amp;quot;, (&amp;quot;primary&amp;quot;: green))&lt;/code&gt; will return&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;(
-  "colors": (
-    "primary": green,
-    "secondary": blue
-  )
-)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id="map-set"&gt;
-&lt;a class="anchor" href="#map-set"&gt;&lt;span class="visuallyhidden"&gt;map.set() permalink&lt;/span&gt;&lt;/a&gt;&lt;code&gt;map.set()&lt;/code&gt;
-&lt;/h3&gt;
-
-&lt;p&gt;The &lt;code&gt;map.set($map, $keys..., $value)&lt;/code&gt; function is all-new. Although updating
-individual values in maps was always possible with &lt;code&gt;map.merge()&lt;/code&gt;, we&amp;rsquo;ve found
-that users get confused by the absence of a dedicated &lt;code&gt;set()&lt;/code&gt; function. This
-function not only fills that role, but makes it possible to set values within
-nested maps as well.&lt;/p&gt;
-
-&lt;p&gt;You can use &lt;code&gt;map.set()&lt;/code&gt; for normal single-layer maps by just passing one key.
-For example, &lt;code&gt;map.set((&amp;quot;wide&amp;quot;: 200px, &amp;quot;narrow&amp;quot;: 70px), &amp;quot;wide&amp;quot;, 180px)&lt;/code&gt; will
-return &lt;code&gt;(&amp;quot;wide&amp;quot;: 180px, &amp;quot;narrow&amp;quot;: 70px)&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;But you can also use it for nested maps. For example, &lt;code&gt;map.set($config,
-&amp;quot;colors&amp;quot;, &amp;quot;tertiary&amp;quot;, yellow)&lt;/code&gt; will return&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;(
-  "colors": (
-    "primary": red,
-    "secondary": blue,
-    "tertiary": yellow
-  )
-)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id="map-deep-remove"&gt;
-&lt;a class="anchor" href="#map-deep-remove"&gt;&lt;span class="visuallyhidden"&gt;map.deep-remove() permalink&lt;/span&gt;&lt;/a&gt;&lt;code&gt;map.deep-remove()&lt;/code&gt;
-&lt;/h3&gt;
-
-&lt;p&gt;Because the existing &lt;a href="https://sass-lang.com/documentation/modules/map#remove"&gt;&lt;code&gt;map.remove()&lt;/code&gt;&lt;/a&gt; function already takes any number of
-arguments, we couldn&amp;rsquo;t just update it to work with nested maps. Instead, we
-chose to add a new function just for nested maps, called &lt;code&gt;map.deep-remove($map,
-$keys...)&lt;/code&gt;. This function removes the value at the final key in the list, and
-updates all the parent maps accordingly.&lt;/p&gt;
-
-&lt;p&gt;For example, &lt;code&gt;map.deep-remove($config, &amp;quot;colors&amp;quot;, &amp;quot;secondary&amp;quot;)&lt;/code&gt; will return
-&lt;code&gt;(&amp;quot;colors&amp;quot;: (&amp;quot;primary&amp;quot;: red))&lt;/code&gt;.&lt;/p&gt;
-
-&lt;h3 id="map-deep-merge"&gt;
-&lt;a class="anchor" href="#map-deep-merge"&gt;&lt;span class="visuallyhidden"&gt;map.deep-merge() permalink&lt;/span&gt;&lt;/a&gt;&lt;code&gt;map.deep-merge()&lt;/code&gt;
-&lt;/h3&gt;
-
-&lt;p&gt;The final new function may be the most exciting. &lt;code&gt;map.deep-merge($map1, $map2)&lt;/code&gt;
-works just like &lt;code&gt;map.merge()&lt;/code&gt;, except that any nested maps are &lt;em&gt;also&lt;/em&gt; merged,
-including maps within those maps and so on. This makes it easy to combine two
-configuration maps that have the same structure without having to manually merge
-each level by hand.&lt;/p&gt;
-
-&lt;p&gt;For example, &lt;code&gt;map.deep-merge($config, (&amp;quot;colors&amp;quot;: (&amp;quot;secondary&amp;quot;: teal)))&lt;/code&gt; returns&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;(
-  "colors": (
-    "primary": red,
-    "secondary": teal
-  )
-)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id="let-us-know-what-you-think"&gt;
-&lt;a class="anchor" href="#let-us-know-what-you-think"&gt;&lt;span class="visuallyhidden"&gt;Let us know what you think! permalink&lt;/span&gt;&lt;/a&gt;Let us know what you think!&lt;/h2&gt;
-
-&lt;p&gt;If you&amp;rsquo;re interested in learning more about this proposal, &lt;a href="https://github.com/sass/sass/tree/main/accepted/nested-map-functions.md"&gt;read it in full&lt;/a&gt; on
-GitHub. It&amp;rsquo;s open for comments and revisions for the next month, so if you&amp;rsquo;d
-like to see something change please &lt;a href="https://github.com/sass/sass/issues/new"&gt;file an issue&lt;/a&gt; and we can discuss it!&lt;/p&gt;
 </content>
   </entry>
 </feed>

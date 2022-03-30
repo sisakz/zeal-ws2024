@@ -1,18 +1,13 @@
-
-    // Note this is a customised version of the GA tracking snippet
-    // See the comments below for more info
-    (function (i, s, o, g, r, a, m) {
-      if (i.trustedTypes) {
-        // Specify path as a TrustedScriptURL when Trusted Types are available
-        g = i.trustedTypes.createPolicy('aio#analytics', {
-          createScriptURL: function (s) { return s; }
-        }).createScriptURL(g);
+(function () {
+  if (!window.__SCRIPTS_LOADED__['main']) {
+    document.getElementById('ScriptLoadFailure').style.display = 'block';
+    var criticalScripts = ["polyfills","vendors~main","i18n","main"];
+    for (var i = 0; i < criticalScripts.length; i++) {
+      var criticalScript = criticalScripts[i];
+      if (!window.__SCRIPTS_LOADED__[criticalScript]) {
+        document.getElementsByName('failedScript')[0].value = criticalScript;
+        break;
       }
-      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-        (i[r].q = i[r].q || []).push(arguments)
-      }, i[r].l = 1 * new Date(); a = s.createElement(o),
-        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g;
-      ~i.name.indexOf('NG_DEFER_BOOTSTRAP') || // only load library if not running e2e tests
-        m.parentNode.insertBefore(a, m)
-    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-  
+    }
+  }
+})();
