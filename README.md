@@ -1,4 +1,4 @@
-# zeal-es2021
+# zeal-ws2024-s17-hu
 Zeal 0.6.1 portable with DocSets for EuroSkills Graz 2021 Skill 17
 
 On Windows run cmd in Administrator mode  and issue the following command before cloning:
